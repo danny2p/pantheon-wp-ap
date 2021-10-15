@@ -1,0 +1,6 @@
+.wprm-recipe-template-classic {
+	border-top-style: solid; /* wprm_border_style type=border */
+	border-top-width: 1px; /* wprm_border_top_width type=size */
+	border-top-color: #aaaaaa; /* wprm_border_top type=color */
+	padding: 10px;
+}

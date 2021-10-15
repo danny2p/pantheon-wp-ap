@@ -1,0 +1,117 @@
+.rtl {
+    #wprm-template-menu {
+        .wprm-template-menu-group {
+            .wprm-template-icon {
+                margin-right: 0;
+                margin-left: 2px;
+            }
+        }
+    }
+}
+
+#wprm-template-sidebar {
+    .wprm-template-menu-group {
+        padding: 6px;
+        border-bottom: 1px solid #ddd;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .wprm-template-properties {
+        padding: 0 5px;
+
+        p {
+            font-weight: bold;
+        }
+    }
+
+    > div {
+        margin-bottom: 20px;
+    }
+
+    .wprm-template-menu-header,
+    .wprm-template-properties-header {
+        padding: 10px;
+        padding-bottom: 5px;
+        text-align: center;
+        font-weight: 300;
+        font-size: 1.2em;
+    }
+
+    .wprm-template-menu-block {
+        padding: 3px 0;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+
+        &.wprm-template-menu-block-hover {
+            font-weight: bold;
+        }
+
+        &.wprm-template-menu-block-self {
+            cursor: default;
+            font-style: italic;
+            color: #999999;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .wprm-template-menu-block-details {
+        padding: 5px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .wprm-template-menu-block-quick-edit {
+        margin: 5px 0;
+        text-align: center;
+    }
+}
+
+#wprm-template-menu {
+
+    .wprm-template-menu-group {
+        display: block;
+        text-decoration: none;
+        color: #444;
+        cursor: pointer;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        &:last-child {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        &.active {
+            color: #444;
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        .wprm-template-icon {
+            vertical-align: middle;
+            margin-right: 2px;
+            position: relative;
+            top: 1px;
+
+            svg {
+                fill: #ddd;
+            }
+        }
+    }
+}
+#wprm-add-blocks {
+    .wprm-template-menu-add-block-group {
+        font-weight: bold;
+        margin-top: 30px;
+        margin-bottom: 2px;
+    }
+    p + .wprm-template-menu-add-block-group {
+        margin-top: 0;
+    }
+}

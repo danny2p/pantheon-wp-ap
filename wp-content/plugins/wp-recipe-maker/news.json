@@ -1,0 +1,82 @@
+{
+    "news": [
+        {
+            "date": "2021-09-15",
+            "label": "Release",
+            "title": "WP Recipe Maker 7.6.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-7-6-0/"
+        },
+        {
+            "date": "2021-08-17",
+            "label": "Release",
+            "title": "WP Recipe Maker 7.5.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-7-5-0/"
+        },
+        {
+            "date": "2021-07-26",
+            "label": "Blog",
+            "title": "Affiliate Marketing for Food Bloggers: What You Need to Know, Plus Do’s and Don’ts",
+            "url": "https://bootstrapped.ventures/affiliate-marketing-for-food-bloggers/"
+        },
+        {
+            "date": "2021-07-14",
+            "label": "Release",
+            "title": "WP Recipe Maker 7.4.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-7-4-0/"
+        },
+        {
+            "date": "2021-07-05",
+            "label": "Blog",
+            "title": "How to create a WordPress cookbook: a step-by-step guide",
+            "url": "https://bootstrapped.ventures/wordpress-cookbook/"
+        },
+        {
+            "date": "2021-06-29",
+            "label": "Blog",
+            "title": "Creative Ideas to Come Up With a Captivating Food Blog Name",
+            "url": "https://bootstrapped.ventures/best-food-blog-name-ideas/"
+        },
+        {
+            "date": "2021-06-28",
+            "label": "Partner",
+            "title": "Why Analytics Matter",
+            "url": "https://dailygrub.com/blog/why-analytics-matter"
+        },
+        {
+            "date": "2021-06-21",
+            "label": "Blog",
+            "title": "How to make money as a food blogger? Our tips to monetize your recipes",
+            "url": "https://bootstrapped.ventures/how-to-make-money-as-a-food-blogger/"
+        },
+        {
+            "date": "2021-06-14",
+            "label": "Blog",
+            "title": "Why Adding Recipe Schema Markup to Your Food Blog is Important",
+            "url": "https://bootstrapped.ventures/recipe-schema/"
+        },
+        {
+            "date": "2021-05-31",
+            "label": "Blog",
+            "title": "A full guide to SEO for food bloggers",
+            "url": "https://bootstrapped.ventures/seo-for-food-blogs/"
+        },
+        {
+            "date": "2021-05-27",
+            "label": "Release",
+            "title": "WP Recipe Maker 7.3.0",
+            "url": "https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog"
+        },
+        {
+            "date": "2021-05-25",
+            "label": "Blog",
+            "title": "How to choose a WordPress recipe plugin for your very first food blog",
+            "url": "https://bootstrapped.ventures/wordpress-recipe-plugin/"
+        },
+        {
+            "date": "2021-05-21",
+            "label": "Blog",
+            "title": "How to become a food blogger: essential tips for a hassle-free start",
+            "url": "https://bootstrapped.ventures/how-to-become-a-food-blogger/"
+        }
+    ]
+}

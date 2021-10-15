@@ -1,0 +1,265 @@
+.rtl .wprm-recipe-container .wprm-recipe-tastefully-simple,
+.rtl .wprm-print .wprm-recipe-tastefully-simple {
+	.wprm-recipe-image-container {
+		float: left;
+		text-align: left;
+
+		.wprm-recipe-image {
+			margin-left: 0;
+			margin-right: 10px;
+		}
+	}
+
+	.wprm-recipe-time-container {
+		float: right;
+	}
+
+	.wprm-clear-left {
+		clear: right;
+	}
+
+	.wprm-recipe-time-container {
+		border-left: none;
+		border-right: 1px solid #ccc;
+
+		&:first-child {
+			border-right: none;
+		}
+	}
+
+	.wprm-recipe-ingredients {
+		li {
+			margin-left: 0;
+			margin-right: 10px;
+		}
+	}
+
+	.wprm-recipe-instructions {
+		li {
+			margin-left: 0;
+			margin-right: 30px;
+		}
+	}
+
+	.wprm-recipe-notes-container {
+		ul li {
+			margin-left: 0;
+			margin-right: 10px;
+		}
+		ol li {
+			margin-left: 0;
+			margin-right: 30px;
+		}
+	}
+}
+
+.wprm-recipe-container .wprm-recipe-tastefully-simple,
+.wprm-print .wprm-recipe-tastefully-simple {
+	font: 12px Verdana, Arial, Geneva, sans-serif;
+	border: 1px dashed #666;
+	padding: 10px;
+
+	p, li {
+		font: 1em Verdana, Arial, Geneva, sans-serif;
+	}
+
+	li,
+	ol,
+	p,
+	span,
+	ul {
+		margin: 0;
+		padding: 0;
+		line-height: inherit;
+	}
+
+	*:before, *:after {
+		display: none;
+	}
+
+	svg {
+		vertical-align: middle;
+		width: 16px;
+		height: 16px;
+		margin: 0;
+	}
+
+	.wprm-clear-left {
+		clear: left;
+		line-height: 0;
+		height: 0;
+	}
+
+	.wprm-recipe-image-container {
+		float: right;
+		max-width: 40%;
+		text-align: right;
+		position: relative;
+		z-index: 1;
+
+		.wprm-recipe-rating {
+			margin-bottom: 5px;
+
+			.wprm-recipe-rating-details {
+				font-size: 0.8em;
+			}
+		}
+
+		.wprm-recipe-image {
+			margin-left: 10px;
+		}
+
+		.wprm-recipe-buttons {
+			margin-top: 10px;
+			text-align: center;
+
+			.wprm-recipe-print {
+				font-size: 11px;
+				cursor: pointer;
+				-webkit-border-radius: 5px 5px 5px 5px;
+				-moz-border-radius: 5px 5px 5px 5px;
+				border-radius: 5px 5px 5px 5px;
+				padding: 0.4em 1em;
+			}
+		}
+	}
+
+	.wprm-recipe-name {
+		font: 1.5em Verdana, Geneva, sans-serif;
+		margin-bottom: 15px;
+	}
+
+	.wprm-recipe-times-container {
+		border-top: 1px dotted #666;
+		border-bottom: 1px dotted #666;
+		width: 60%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-bottom: 10px;
+	}
+
+	.wprm-recipe-time-container {
+		width: 33%;
+		text-align: center;
+		float: left;
+		font-weight: bold;
+		border-left: 1px solid #ccc;
+
+		&:first-child {
+			border-left: none;
+		}
+
+		&:nth-child(4) {
+			border-left: none;
+			clear: left;
+			float: none;
+			margin: 0 auto;
+		}
+
+		.wprm-recipe-time-header {
+			margin-bottom: 4px;
+			word-break: break-all;
+		}
+
+		.wprm-recipe-time {
+			font-size: 0.8em;
+			font-weight: normal;
+		}
+	}
+
+	.wprm-recipe-summary {
+		margin-bottom: 10px;
+
+		p {
+			margin-bottom: 10px;
+		}
+	}
+
+	.wprm-recipe-details-container,
+	.wprm-recipe-ingredients-container {
+		margin-bottom: 10px;
+	}
+
+	.wprm-recipe-header {
+		font-size: 1.4em;
+		font-weight: 700;
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+
+	.wprm-recipe-group-name {
+		margin-top: 3px;
+		margin-bottom: 3px;
+		font-weight: 700;
+	}
+
+	.wprm-recipe-ingredients {
+		li {
+			list-style-position: inside;
+			margin-left: 10px;
+			line-height: inherit;
+			background: 0 0;
+		}
+	}
+
+	.wprm-unit-conversion-container {
+		margin-top: 10px;
+	}
+
+	.wprm-recipe-ingredients,
+	.wprm-recipe-instructions {
+		br {
+			display: none;
+		}
+	}
+
+	.wprm-recipe-instructions {
+		li {
+			margin-left: 30px;
+			line-height: inherit;
+			background: 0 0;
+		}
+	}
+
+	.wprm-recipe-notes-container {
+		ul li {
+			list-style: disc inside;
+			margin-left: 10px;
+		}
+		ol li {
+			list-style: decimal;
+			margin-left: 30px;
+		}
+	}
+
+	.wprm-nutrition-label {
+		margin-top: 20px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.wprm-recipe-container .wprm-recipe-tastefully-simple,
+	.rtl .wprm-recipe-container .wprm-recipe-tastefully-simple {
+		.wprm-recipe-image-container {
+			float: none;
+			width: 100%;
+			max-width: none;
+			text-align: center;
+			margin-bottom: 10px;
+
+			.wprm-recipe-image {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+		.wprm-recipe-times-container {
+			width: 100%;
+
+			.wprm-recipe-time-container {
+				border: none;
+				width: 100%;
+				float: none;
+			}
+		}
+	}
+}

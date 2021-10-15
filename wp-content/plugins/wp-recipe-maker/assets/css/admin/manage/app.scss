@@ -1,0 +1,104 @@
+#update-nag,
+.update-nag,
+.updated,
+.error,
+.is-dismissible {
+    display: none;
+}
+
+#wprm-admin-manage-content {
+    .wprm-admin-manage-header {
+        display: flex;
+        flex-wrap: wrap-reverse;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+
+        .wprm-admin-manage-header-buttons {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .button:not(.button-primary) {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .wprm-admin-manage-page {
+        .wprm-admin-manage-table-container {
+            .wprm-admin-manage-table {
+                height: calc(100vh - 50px);
+
+                .wprm-admin-manage-actions {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                }
+
+                .wprm-admin-manage-text-filter {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .wprm-admin-manage-requirement {
+        margin: 0 auto;
+        text-align: center;
+        
+        div {
+            font-weight: bold;
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {
+    #wprm-admin-manage-content {
+        .wprm-admin-manage-header {
+            flex-wrap: nowrap;
+            .wprm-admin-manage-header-buttons {
+                margin-bottom: 0;
+            }
+        }        
+    }
+}
+
+@media screen and (min-height: 768px) {
+    #wprm-admin-manage {
+        height: calc(100vh - 65px);
+        display: flex;
+        flex-direction: column;
+
+        #wprm-admin-manage-content {
+            flex: 1;
+
+            .wprm-admin-manage-page {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .wprm-admin-manage-table-container {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    .wprm-admin-manage-table-inner {
+                        flex: 1;
+                        position: relative;
+
+                        .wprm-admin-manage-table {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

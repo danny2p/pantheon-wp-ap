@@ -1,0 +1,140 @@
+.wprm-admin-manage-shortcode-container {
+    display: flex;
+    align-items: center;
+}
+
+.wprm-manage-recipes-nutrition-container {
+    width: 100%;
+
+    .wprm-manage-recipes-nutrition {
+        display: flex;
+        width: 100%;
+    
+        .wprm-manage-recipes-nutrition-label {
+            flex: auto;
+            margin-right: 5px;
+        }
+        .wprm-manage-recipes-nutrition-value-unit {
+            flex: 0 0 75px;
+    
+            .wprm-manage-recipes-nutrition-unit {
+                margin-left: 2px;
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+.wprm-admin-manage-image {
+    display: block;
+
+    max-width: 75px;
+    max-height: 75px;
+
+    margin: 0 auto;
+}
+
+.wprm-admin-manage-seo-indicator {
+    width: 100%;
+    height: 14px;
+
+    border: 1px solid #23282d;
+    border-radius: 4px;
+    background-color: white;
+
+    display: flex;
+    cursor: pointer;
+
+    .wprm-admin-manage-seo-indicator-block {
+        flex: 0 0 25%;
+        height: 100%;
+
+        &:nth-child(1) {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+        &:nth-child(4) {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    }
+
+    &.wprm-admin-manage-seo-indicator-other {
+        display: block;
+        font-size: 10px;
+        line-height: 10px;
+        text-align: center;
+    }
+    &.wprm-admin-manage-seo-indicator-bad {
+        border-color: darken( #e74c3c, 25% );
+        .wprm-admin-manage-seo-indicator-block {
+            &:nth-child(1) {
+                background-color: #e74c3c;
+            }
+        }
+    }
+    &.wprm-admin-manage-seo-indicator-warning {
+        border-color: darken( #e67e22, 25% );
+        .wprm-admin-manage-seo-indicator-block {
+            &:nth-child(1), &:nth-child(2) {
+                background-color: #e67e22;
+            }
+        }
+    }
+    &.wprm-admin-manage-seo-indicator-rating {
+        border-color: darken( #f1c40f, 25% );
+        .wprm-admin-manage-seo-indicator-block {
+            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                background-color: #f1c40f;
+            }
+        }
+    }
+    &.wprm-admin-manage-seo-indicator-good {
+        border-color: darken( #27ae60, 25% );
+        .wprm-admin-manage-seo-indicator-block {
+            background-color: #27ae60;
+        }
+    }
+}
+
+.wprm-admin-manage-recipes-parent-post-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .wprm-admin-icon {
+        margin-right: 5px;
+    }
+}
+
+.wprm-admin-manage-recipes-ratings-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .wprm-admin-manage-recipes-ratings-average {
+        flex: 0 0 40px;
+        margin-right: 10px;
+        text-align: right;
+        font-weight: bold;    
+    }
+    .wprm-admin-manage-recipes-ratings-details {
+        font-size: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .wprm-admin-manage-recipes-ratings-details-none {
+            opacity: 0.5;
+        }
+
+        a {
+            margin-left: 2px;
+            opacity: 0.7;
+            text-decoration: none;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

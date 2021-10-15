@@ -1,0 +1,7 @@
+.wprm-recipe-template-snippet-basic {
+    font-family: inherit; /* wprm_font_family type=font */
+    font-size: 1em; /* wprm_font_size type=font_size */
+    text-align: center; /* wprm_text_align type=align */
+    margin-top: 0px; /* wprm_margin_top type=size */
+    margin-bottom: 15px; /* wprm_margin_bottom type=size */
+}

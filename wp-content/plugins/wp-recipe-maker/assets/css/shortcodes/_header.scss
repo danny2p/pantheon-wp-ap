@@ -1,0 +1,21 @@
+.wprm-recipe-header {
+    .wprm-recipe-icon {
+        margin-right: 5px;
+    }
+    
+    &.wprm-header-has-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .wprm-unit-conversion-container,
+    .wprm-recipe-adjustable-servings-container,
+    .wprm-recipe-media-toggle-container {
+        text-transform: none;
+        font-style: normal;
+        font-weight: normal;
+        opacity: 1;
+        font-size: 16px;
+    }
+}

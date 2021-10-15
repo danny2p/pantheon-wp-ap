@@ -1,0 +1,10 @@
+.editor-styles-wrapper .wp-block-wp-recipe-maker-recipe,
+.editor-styles-wrapper .wp-block-wp-recipe-maker-recipe-roundup-item {
+    h1, h2, h3, h4, h5, h6 {
+        clear: none;
+    }
+}
+
+.editor-styles-wrapper .wp-block-wp-recipe-maker-recipe img {
+    max-width: 100% !important;
+}

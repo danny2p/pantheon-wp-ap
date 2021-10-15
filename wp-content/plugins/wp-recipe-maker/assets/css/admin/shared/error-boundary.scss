@@ -1,0 +1,15 @@
+.wprm-error-boundary {
+    overflow: scroll;
+    margin: 10px;
+    padding: 0 10px;
+    border: 1px dashed darkred;
+    border-radius: 4px;
+    
+    strong {
+        color: darkred;
+    }
+
+    pre {
+        white-space: pre-wrap;
+    }
+}

@@ -1,0 +1,18 @@
+#wprm-admin-modal-notes-placeholder {
+    display: none;
+}
+
+#wprm-admin-modal-field-tinymce-container {
+    max-width: 650px;
+    height: 100%;
+
+    * {
+        box-sizing: content-box;
+    }
+
+    textarea {
+        border-radius: 0;
+        box-sizing: border-box;
+        min-height: 350px;
+    }
+}

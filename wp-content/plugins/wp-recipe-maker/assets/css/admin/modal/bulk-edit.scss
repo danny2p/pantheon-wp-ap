@@ -1,0 +1,41 @@
+.wprm-admin-modal-bulk-edit {
+    max-width: 500px;
+
+    .wprm-admin-modal-bulk-edit-container {
+        overflow: scroll;
+        padding: 10px;
+    }
+
+    .wprm-admin-modal-bulk-edit-label {
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .wprm-admin-modal-bulk-edit-action {
+        margin-bottom: 5px;
+
+        input {
+            width: 16px;
+            height: 16px;
+            margin-top: 1px;
+            border-color: hsl(0,0%,80%);
+
+            &:checked:before {
+                margin: 3px;
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        label {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+}

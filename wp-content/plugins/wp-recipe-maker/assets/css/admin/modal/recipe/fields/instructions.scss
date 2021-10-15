@@ -1,0 +1,245 @@
+.wprm-admin-modal-field-instruction-show-name-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    input {
+        margin-right: 10px;
+    }
+}
+
+.wprm-admin-modal-field-instruction,
+.wprm-admin-modal-field-instruction-group {
+    margin-bottom: 5px;
+    background-color: white;
+
+    .wprm-admin-modal-field-instruction-main-container {
+        display: flex;
+        flex: auto;
+        align-items: center;
+
+        .wprm-admin-modal-field-instruction-handle {
+            flex-shrink: 0;
+    
+            .wprm-admin-icon {
+                margin: 0 5px;
+                cursor: move;
+            }
+        }
+    }
+}
+
+.wprm-admin-modal-field-instruction-group {
+    display: flex;
+    align-items: center;
+
+    .wprm-admin-modal-field-instruction-group-name-container {
+        flex: auto;
+
+        .wprm-admin-modal-field-richtext-singleline {
+            font-weight: bold;
+        }
+    }
+}
+
+.wprm-admin-modal-field-instruction {    
+    .wprm-admin-modal-field-instruction-text-container {
+        flex: auto;
+
+        .wprm-admin-modal-field-richtext,
+        .wprm-admin-modal-field-richtext-legacy {
+            flex: auto;
+        }
+        .wprm-admin-modal-field-instruction-text-name-container {
+            display: flex;
+
+            .wprm-admin-modal-field-instruction-name {
+                min-width: 126px;
+                flex-basis: 126px;
+                max-width: 126px;
+                margin-right: 2px;
+
+                p {
+                    margin: 1em 0;
+                    line-height: 1.5;
+                }
+            }
+        }
+        .wprm-admin-modal-field-instruction-video-container {
+            display: flex;
+            margin-top: 2px;
+            align-items: center;
+
+            input:nth-child(1),
+            input:nth-child(2) {
+                min-width: 62px;
+                max-width: 62px;
+                flex-basis: 62px;
+                flex-shrink: 0;
+                margin-right: 2px;
+            }
+            input:nth-child(3) {
+                flex: auto;
+            }
+            .wprm-admin-icon {
+                margin-left: 3px;
+            }
+        }
+    }
+    .wprm-admin-modal-field-instruction-after-container {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+}
+
+.wprm-admin-modal-field-instruction-after-container {
+    margin-left: 21px;
+
+    .wprm-admin-modal-field-instruction-after-container-icons {
+        margin: 5px;
+        flex-shrink: 0;
+
+        .wprm-admin-icon {
+            margin-right: 5px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    .wprm-admin-modal-field-instruction-after-container-ingredient,
+    .wprm-admin-modal-field-instruction-after-container-summary {
+        flex: 1;
+        flex-shrink: 0;
+
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .wprm-admin-modal-field-instruction-after-container-media {
+        margin: 5px;
+        flex-shrink: 0;
+
+        .wprm-admin-modal-field-instruction-after-container-media-icons {
+            margin-left: -5px;
+
+            .wprm-admin-icon {
+                margin-left: 5px;
+            }
+            .wprm-icon-spacer {
+                display: inline-block;
+                width: 16px;
+            }
+        }
+
+        .wprm-admin-modal-field-image-preview,
+        .wprm-admin-modal-field-video-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            img {
+                cursor: pointer;
+                max-width: 75px;
+                height: auto;
+                margin-top: 5px;
+            }
+        }
+
+        textarea {
+            margin-top: 5px;
+            width: auto;
+            font-size: 14px;
+        }
+    }
+}
+
+.wprm-admin-modal-field-instruction-unused-ingredients {
+    margin-left: 26px;
+    margin-top: 10px;
+
+    .wprm-admin-modal-field-instruction-unused-ingredients-info {
+        font-style: italic;
+    }
+}
+
+.wprm-admin-modal-field-instruction-actions {
+    margin-left: 26px;
+    margin-top: 10px;
+
+    .button {
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    p {
+        font-style: italic;
+    }
+}
+@media screen and (max-width: 640px) {
+    .wprm-admin-modal-field-instruction {    
+        .wprm-admin-modal-field-instruction-text-container {
+            .wprm-admin-modal-field-instruction-text-name-container {
+                display: block;
+    
+                .wprm-admin-modal-field-instruction-name {
+                    max-width: none;
+                    margin-right: 0;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-field-instruction,
+    .wprm-admin-modal-field-instruction-group {
+        .wprm-admin-modal-field-instruction-main-container {
+            flex: 0 0 60%;
+        }
+        .wprm-admin-modal-field-instruction-after-container {
+            flex: auto;
+        }
+    }
+
+    .wprm-admin-modal-field-instruction {
+        display: flex;
+        align-items: center;
+
+        .wprm-admin-modal-field-instruction-after-container {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+
+            .wprm-admin-modal-field-instruction-after-container-media {
+                text-align: right;
+
+                .wprm-admin-modal-field-image-preview,
+                .wprm-admin-modal-field-video-preview {
+                    align-items: flex-end;
+                    margin-right: 5px;
+                }
+
+                textarea {
+                    width: 165px;
+                }
+            }
+        }
+    }
+
+    .wprm-admin-modal-field-instruction-after-container {
+        .wprm-admin-modal-field-instruction-after-container-ingredient,
+        .wprm-admin-modal-field-instruction-after-container-summary {
+            margin-left: 10px;
+            margin-right: 0;
+        }
+    }
+
+    .wprm-admin-modal-field-instruction-unused-ingredients {
+        padding-left: 80px;
+        margin-left: 0;
+        width: 40%;
+        float: right;
+    }
+}

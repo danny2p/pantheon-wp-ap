@@ -1,0 +1,22 @@
+.wprm-spacer {
+    display: block !important;
+    background: none !important;
+    font-size: 0;
+    line-height: 0;
+
+    width: 100%;
+    height: 10px;
+}
+
+// Hide consecutive spacers.
+.wprm-spacer + .wprm-spacer {
+    display: none !important;
+}
+// But not in text using the clean_paragraphs function.
+.wprm-recipe-summary,
+.wprm-recipe-instruction-text,
+.wprm-recipe-notes { 
+    .wprm-spacer {
+        display: block !important;
+    }
+}

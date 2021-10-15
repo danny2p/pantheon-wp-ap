@@ -1,0 +1,17 @@
+.wprm-admin-loader {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid rgba(200, 200, 200, 0.3);
+    border-radius: 50%;
+    border-top-color: #444;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+  
+@keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}

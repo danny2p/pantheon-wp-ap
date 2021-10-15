@@ -1,0 +1,5559 @@
+# Copyright (C) 2016 WP Recipe Maker
+# This file is distributed under the same license as the WP Recipe Maker package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recipe Maker 1.10.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
+"POT-Creation-Date: 2021-09-15 10:03+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: templates/admin/menu/import/import-recipes.php:73
+#, php-format
+msgid "%d more recipe"
+msgid_plural "%d more recipes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/menu/import/import-overview.php:63 
+#: templates/admin/menu/import/import-search.php:29 
+#: templates/admin/menu/import/import-search.php:37
+#, php-format
+msgid "%d recipe found"
+msgid_plural "%d recipes found"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-wprm-marketing.php:106
+#, php-format
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-wprm-marketing.php:108
+#, php-format
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-wprm-marketing.php:110
+#, php-format
+msgid "%s minute"
+msgid_plural "%s minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/class-wprm-dashboard.php:213
+#, php-format
+msgid "%s new news item"
+msgid_plural "%s new news items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/public/comment-rating.php:16
+#, php-format
+msgid "%s star"
+msgid_plural "%s stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/public/class-wprm-metadata.php:637
+msgid "1 serving"
+msgstr ""
+
+#: templates/admin/translations.php:109
+msgid "1. Highlight text and click the corresponding button"
+msgstr ""
+
+#: templates/settings/group-analytics.php:32
+msgid "180 Days"
+msgstr ""
+
+#: templates/admin/translations.php:115
+msgid "2. Fine-tune selections"
+msgstr ""
+
+#: templates/settings/group-analytics.php:34
+msgid "30 Days"
+msgstr ""
+
+#: templates/settings/group-analytics.php:31
+msgid "365 Days"
+msgstr ""
+
+#: templates/settings/group-analytics.php:35
+msgid "7 Days"
+msgstr ""
+
+#: templates/settings/group-analytics.php:33
+msgid "90 Days"
+msgstr ""
+
+#: templates/settings/group-post-type.php:52
+msgid ""
+"A list of all recipes accessible at the /slug/ archive page. Flush your "
+"permalinks after changing this setting."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:114
+msgid "Above the comment"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:124
+msgid "Above the comment field"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:211
+msgid "Accent 2 Color"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:217
+msgid "Accent 2 Text Color"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:199 
+#: templates/settings/group-recipe-print.php:80
+msgid "Accent Color"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:205
+msgid "Accent Text Color"
+msgstr ""
+
+#: templates/settings/group-permissions.php:38
+msgid ""
+"Accepts one value only. Set the minimum capability required to access "
+"specific features. For example, set to edit_others_posts to provide access "
+"to editors and administrators."
+msgstr ""
+
+#: templates/settings/group-permissions.php:43
+msgid "Access to Dashboard Page"
+msgstr ""
+
+#: templates/settings/group-permissions.php:79
+msgid "Access to FAQ & Support Page"
+msgstr ""
+
+#: templates/settings/group-permissions.php:70
+msgid "Access to Import Page"
+msgstr ""
+
+#: templates/settings/group-permissions.php:52
+msgid "Access to Manage Page"
+msgstr ""
+
+#: templates/settings/group-permissions.php:61
+msgid "Access to Tools Page"
+msgstr ""
+
+#: templates/admin/translations.php:384
+msgid "Action"
+msgstr ""
+
+#: templates/admin/translations.php:469
+msgid "Action Details"
+msgstr ""
+
+#: templates/admin/translations.php:72
+msgid "Action options:"
+msgstr ""
+
+#: templates/admin/translations.php:93
+msgid "Actions"
+msgstr ""
+
+#: templates/admin/translations.php:129
+msgid "Active Time"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-recipecard.php:208
+msgid "Adapted from"
+msgstr ""
+
+#: templates/admin/translations.php:266
+msgid "Add Adjustable Shortcode"
+msgstr ""
+
+#: templates/admin/translations.php:274
+msgid "Add Affiliate Link"
+msgstr ""
+
+#: templates/admin/translations.php:83
+msgid "Add as Custom Nutrition Ingredient"
+msgstr ""
+
+#: templates/settings/group-integrations.php:68
+msgid "Add Carbon Label to your recipe template"
+msgstr ""
+
+#: templates/admin/translations.php:191
+msgid "Add Equipment"
+msgstr ""
+
+#: templates/settings/group-integrations.php:85
+msgid "Add extra Mediavine ad unit"
+msgstr ""
+
+#: templates/admin/translations.php:264
+msgid "Add HTML or Shortcode"
+msgstr ""
+
+#: templates/admin/translations.php:450
+msgid "Add Image"
+msgstr ""
+
+#: templates/admin/translations.php:153
+msgid "Add Ingredient"
+msgstr ""
+
+#: templates/admin/translations.php:155
+msgid "Add Ingredient Group"
+msgstr ""
+
+#: templates/admin/translations.php:163
+msgid "Add Instruction"
+msgstr ""
+
+#: templates/admin/translations.php:164
+msgid "Add Instruction Group"
+msgstr ""
+
+#: templates/admin/translations.php:279
+msgid "Add Instruction Image"
+msgstr ""
+
+#: templates/admin/translations.php:262
+msgid "Add Link"
+msgstr ""
+
+#: templates/admin/translations.php:152
+msgid "Add Material"
+msgstr ""
+
+#: templates/admin/translations.php:154
+msgid "Add Material Group"
+msgstr ""
+
+#: templates/admin/translations.php:303
+msgid "Add rel=\"nofollow\" to link"
+msgstr ""
+
+#: templates/admin/translations.php:61
+msgid "Add Terms"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:37
+msgid "Add the nopin attribute to the category images."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:44
+msgid "Add the nopin attribute to the equipment images."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:58
+msgid "Add the nopin attribute to the external recipe roundup item image."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:51
+msgid "Add the nopin attribute to the instruction images."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:30
+msgid "Add the nopin attribute to the recipe image."
+msgstr ""
+
+#: templates/admin/translations.php:267
+msgid "Add Timer Shortcode"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-collection.php:43
+msgid "Add to Collection"
+msgstr ""
+
+#: templates/admin/translations.php:245
+msgid ""
+"Add video start and end time (in seconds or minutes:seconds format) if this "
+"instruction step is part of the recipe video."
+msgstr ""
+
+#: templates/settings/group-analytics.php:72
+msgid ""
+"Add your DailyGrub tracking ID to enable syncing data with the platform."
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:44
+msgid "Adjust Servings"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:15 
+#: templates/settings/group-recipe-print.php:149
+msgid "Adjustable Servings"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:106 
+#: templates/settings/group-metadata.php:84 
+#: templates/settings/group-recipe-print.php:165 
+#: templates/settings/structure.php:91 
+#: templates/settings/group-recipe-snippets.php:157
+msgid "Advanced"
+msgstr ""
+
+#: templates/settings/group-analytics.php:60
+msgid "Advanced recipe and audience analytics."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:75
+msgid "Advanced Template Options"
+msgstr ""
+
+#: templates/admin/translations.php:460
+msgid "Affiliate HTML"
+msgstr ""
+
+#: templates/admin/translations.php:463
+msgid "Affiliate HTML Preview"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:95
+msgid ""
+"After doing so you can mark a recipe as checked to keep track of the recipes "
+"you still have to go through."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:41
+msgid "After first div container element"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:40
+msgid "After first image"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:39
+msgid "After first paragraph"
+msgstr ""
+
+#: templates/admin/translations.php:333
+msgid "All"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "all"
+msgstr ""
+
+#: templates/admin/translations.php:404
+msgid "All Authors"
+msgstr ""
+
+#: templates/admin/translations.php:406
+msgid "All Display Author Types"
+msgstr ""
+
+#: templates/admin/translations.php:17
+msgid "All features in action on our demo site"
+msgstr ""
+
+#: templates/admin/translations.php:208
+msgid "All fields are required."
+msgstr ""
+
+#: templates/admin/translations.php:161
+msgid "All ingredients are associated with a step!"
+msgstr ""
+
+#: templates/admin/translations.php:416
+msgid "All Languages"
+msgstr ""
+
+#: templates/admin/translations.php:120
+msgid ""
+"All of these will be imported. Use the checkbox to indicate group headers."
+msgstr ""
+
+#: templates/admin/translations.php:325
+msgid "All Ratings"
+msgstr ""
+
+#: templates/settings/group-media.php:70 templates/settings/group-media.php:83
+msgid "All recipe videos"
+msgstr ""
+
+#: templates/admin/translations.php:408
+msgid "All Statuses"
+msgstr ""
+
+#: templates/admin/translations.php:329
+msgid "All Types"
+msgstr ""
+
+#: templates/settings/group-metadata.php:42
+msgid "Allow setting of Suitable Diets for recipes."
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:16
+msgid "Allow visitors to adjust the serving size of your recipes."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:150
+msgid "Allow visitors to change servings on the print page."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:158
+msgid "Allow visitors to change unit systems (if set) on the print page."
+msgstr ""
+
+#: templates/settings/group-media.php:9
+msgid ""
+"Allow visitors to show/hide instruction images and videos with a toggle."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:38
+msgid "Allow visitors to vote on your recipes by simply clicking on the stars."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:29
+msgid "Allow visitors to vote on your recipes when commenting."
+msgstr ""
+
+#: templates/settings/group-recipe-submission.php:17
+msgid "Allow your visitors to submit their own recipes to your website."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:181
+msgid "Always redirect to the comment form"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:225
+msgid "American"
+msgstr ""
+
+#: templates/admin/translations.php:149
+msgid "Amount"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:94
+msgid "AMP Template"
+msgstr ""
+
+#: templates/admin/translations.php:453
+msgid ""
+"An Affiliate Link with this ID cannot be found. Try deleting and adding it "
+"again."
+msgstr ""
+
+#: templates/settings/group-analytics.php:15 
+#: templates/admin/translations.php:38
+msgid "Analytics"
+msgstr ""
+
+#: templates/admin/translations.php:427
+msgid "Any"
+msgstr ""
+
+#: templates/admin/translations.php:253
+msgid "any color"
+msgstr ""
+
+#: templates/admin/translations.php:459
+msgid "Any Nofollow"
+msgstr ""
+
+#: templates/admin/translations.php:418
+msgid "Any Rating"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:66 
+#: templates/settings/group-recipe-times.php:18 
+#: templates/settings/structure.php:59 
+#: templates/settings/group-recipe-ratings.php:46
+msgid "Appearance"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:208
+msgid "Appetizer"
+msgstr ""
+
+#: templates/admin/translations.php:332
+msgid "Approved"
+msgstr ""
+
+#: templates/admin/translations.php:311
+msgid "Archive"
+msgstr ""
+
+#: templates/settings/group-links.php:35
+msgid "Archive Page Links"
+msgstr ""
+
+#: templates/settings/group-post-type.php:102
+msgid "Archive Pages"
+msgstr ""
+
+#: templates/settings/group-post-type.php:113
+msgid "Archive Pages Template"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:84
+msgid "Archive Template"
+msgstr ""
+
+#: templates/admin/translations.php:122
+msgid "Are you sure you want to close without saving changes?"
+msgstr ""
+
+#: templates/admin/translations.php:310
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: templates/admin/translations.php:426
+msgid "Are you sure you want to delete the user ratings for"
+msgstr ""
+
+#: templates/admin/translations.php:468
+msgid "Are you sure you want to delete this action?"
+msgstr ""
+
+#: templates/admin/translations.php:454
+msgid "Are you sure you want to delete this link?"
+msgstr ""
+
+#: templates/admin/translations.php:322
+msgid "Are you sure you want to delete this rating?"
+msgstr ""
+
+#: templates/admin/translations.php:298
+msgid "Are you sure you want to leave this page?"
+msgstr ""
+
+#: templates/admin/translations.php:351
+msgid "Are you sure you want to merge"
+msgstr ""
+
+#: includes/public/class-wprm-assets.php:216
+msgid "Are you sure you want to remove this recipe?"
+msgstr ""
+
+#: templates/admin/translations.php:121
+msgid "Are you sure you want to stop calculating the nutrition facts?"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:114 
+#: templates/settings/group-template-legacy.php:140
+msgid "Armenian"
+msgstr ""
+
+#: templates/admin/translations.php:160
+msgid "Associated Ingredients"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:38
+msgid "At the start of the post content"
+msgstr ""
+
+#: templates/admin/translations.php:198 
+#: includes/public/deprecated/class-wprm-template-helper.php:53 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:337
+msgid "Author"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:70
+msgid "Author Link"
+msgstr ""
+
+#: templates/settings/group-links.php:59
+msgid "Author Links"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:60 
+#: templates/admin/translations.php:76
+msgid "Author Name"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:98
+msgid "Automatic Amount Fraction Symbols"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:27 
+#: templates/settings/group-recipe-snippets.php:100
+msgid "Automatically add snippets"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:28
+msgid ""
+"Automatically have the default snippet template appear at the start of posts "
+"that include a recipe."
+msgstr ""
+
+#: templates/settings/group-media.php:63
+msgid "Autoplay Video"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:77
+msgid "Back to start."
+msgstr ""
+
+#: templates/settings/structure.php:88
+msgid "Backend"
+msgstr ""
+
+#: templates/settings/group-permissions.php:37
+msgid "Backend Access"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:162 
+#: templates/settings/group-recipe-snippets.php:124
+msgid "Background Color"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:36
+msgid "Base Font Size"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:115
+msgid "Below the comment"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:125
+msgid "Below the comment field"
+msgstr ""
+
+#: templates/admin/translations.php:257
+msgid "Bold"
+msgstr ""
+
+#. Author of the plugin
+msgid "Bootstrapped Ventures"
+msgstr ""
+
+#: templates/admin/privacy.php:13
+msgid ""
+"Bootstrapped Ventures, the developer of WP Recipe Maker, does not have "
+"access to any of the data collected by the plugin. This is all stored in "
+"your local database and not communicated back to us. Take note of the "
+"following topics for your own privacy policy."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:168
+msgid "Border Color"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:207
+msgid "Breakfast"
+msgstr ""
+
+#: templates/admin/translations.php:100
+msgid "Bulk Edit"
+msgstr ""
+
+#: templates/settings/group-post-type.php:16
+msgid ""
+"By default a recipe only exists as part of a regular post. This ensures "
+"compatibility with most other plugins and themes. The advanced settings "
+"below allow you to fully customize things to your needs. Make sure you know "
+"what you are doing when changing these settings."
+msgstr ""
+
+#: templates/settings/group-performance.php:27
+msgid ""
+"By default only loads admin assets on edit post pages. Enable to increase "
+"compatibility."
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:208
+msgid "c"
+msgstr ""
+
+#: templates/admin/translations.php:190
+msgid "Calculate Nutrition Facts"
+msgstr ""
+
+#: includes/public/class-wprm-nutrition.php:29 
+#: includes/public/deprecated/class-wprm-template-helper.php:52
+msgid "Calories"
+msgstr ""
+
+#: templates/admin/translations.php:118
+msgid "Cancel"
+msgstr ""
+
+#: templates/admin/translations.php:202
+msgid "candles"
+msgstr ""
+
+#: templates/admin/translations.php:171
+msgid "Categories"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:88 
+#: templates/settings/group-recipe-snippets.php:117
+msgid "Center"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:191
+msgid "centiliter"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:190
+msgid "centiliters"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:233
+msgid "centimeter"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:232
+msgid "centimeters"
+msgstr ""
+
+#: templates/admin/translations.php:60
+msgid "Change"
+msgstr ""
+
+#: templates/admin/translations.php:462
+msgid "Change Affiliate HTML"
+msgstr ""
+
+#: templates/admin/translations.php:65
+msgid "Change Display Author"
+msgstr ""
+
+#: templates/admin/translations.php:445
+msgid "Change Group"
+msgstr ""
+
+#: templates/admin/translations.php:461
+msgid "Change HTML"
+msgstr ""
+
+#: templates/admin/translations.php:81
+msgid "Change Link"
+msgstr ""
+
+#: templates/admin/translations.php:82
+msgid "Change Link Nofollow"
+msgstr ""
+
+#: templates/admin/translations.php:443
+msgid "Change Plural"
+msgstr ""
+
+#: templates/admin/translations.php:63
+msgid "Change Recipe Status"
+msgstr ""
+
+#: templates/admin/translations.php:64
+msgid "Change Recipe Type"
+msgstr ""
+
+#: templates/admin/translations.php:66
+msgid "Change Servings"
+msgstr ""
+
+#: templates/admin/translations.php:80
+msgid "Change Shopping List Group"
+msgstr ""
+
+#: templates/admin/translations.php:438
+msgid "Change Slug"
+msgstr ""
+
+#: templates/settings/group-integrations.php:49
+msgid "Check API Key Status"
+msgstr ""
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:112
+msgid "Check out %link%!"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:115 
+#: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:115 
+#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:115
+msgid "Check out this recipe!"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:103 
+#: templates/settings/group-template-legacy.php:129
+msgid "Checkbox"
+msgstr ""
+
+#: templates/settings/group-permissions.php:30
+msgid ""
+"Checks if a recipe is in the post content of its parent post. Can be used in "
+"combination with membership plugins."
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:223
+msgid "Chinese"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:24
+msgid ""
+"Choose what rating features to enable. The average recipe rating will "
+"combine the different methods of rating."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:104 
+#: templates/settings/group-template-legacy.php:130
+msgid "Circle"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:192
+msgid "cl"
+msgstr ""
+
+#: templates/settings/group-integrations.php:37
+msgid ""
+"Click \"Save Changes\" in the top left before checking the API Key status."
+msgstr ""
+
+#: templates/elementor/widget.php:162
+msgid "Click and select a WP Recipe Maker recipe to display in the sidebar."
+msgstr ""
+
+#: templates/admin/translations.php:320
+msgid "Click on the stars to edit the rating."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:79
+msgid "Click on the stars to vote!"
+msgstr ""
+
+#: templates/admin/translations.php:328
+msgid "Click to change this rating to:"
+msgstr ""
+
+#: templates/admin/translations.php:181
+msgid "Click to copy the recipe to your clipboard."
+msgstr ""
+
+#: templates/settings/group-media.php:44
+msgid "Clickable Images Size"
+msgstr ""
+
+#: templates/settings/group-media.php:38
+msgid "Clickable Instruction Images"
+msgstr ""
+
+#: templates/settings/group-media.php:32
+msgid "Clickable Recipe Image"
+msgstr ""
+
+#: templates/admin/translations.php:222
+msgid "Clone Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:101
+msgid "Close"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:249
+msgid "clove"
+msgstr ""
+
+#. General.
+#: includes/public/class-wprm-recipe-parser.php:248
+msgid "cloves"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:234
+msgid "cm"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:89
+msgid "Color of the stars in the comment section, not in the recipe itself."
+msgstr ""
+
+#: templates/settings/group-import.php:51
+msgid "Comma or parentheses, whichever comes first"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:47
+msgid "Comment"
+msgstr ""
+
+#: templates/admin/translations.php:421
+msgid "comment"
+msgstr ""
+
+#: templates/admin/translations.php:338
+msgid "Comment ID"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:132 
+#: templates/admin/translations.php:331
+msgid "Comment Rating"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:28 
+#: templates/settings/group-recipe-ratings.php:84
+msgid "Comment Ratings"
+msgstr ""
+
+#: templates/settings/group-post-type.php:78
+msgid "Comments"
+msgstr ""
+
+#: templates/admin/translations.php:422
+msgid "comments"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:16
+msgid "Considerations Before Importing"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:66
+msgid "Convert decimal numbers to fractions after adjusting."
+msgstr ""
+
+#: templates/admin/tools.php:151
+msgid "Convert Reviews"
+msgstr ""
+
+#: templates/admin/tools.php:154
+msgid "Convert Reviews to Comments"
+msgstr ""
+
+#: templates/admin/translations.php:429
+msgid "Converted Ingredients"
+msgstr ""
+
+#: templates/admin/tools.php:156
+msgid ""
+"Converts MV Create reviews to regular comments with a comment rating. Will "
+"only do this after recipes have been imported to WPRM. Comments will be "
+"created for the parent post of the WPRM recipe."
+msgstr ""
+
+#: templates/admin/translations.php:130 
+#: includes/public/deprecated/class-wprm-template-helper.php:49 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:345
+msgid "Cook Time"
+msgstr ""
+
+#: templates/admin/translations.php:58
+msgid "Copied!"
+msgstr ""
+
+#: templates/admin/translations.php:59
+msgid "Copy to clipboard"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:338
+msgid "Cost"
+msgstr ""
+
+#: includes/public/deprecated/class-wprm-template-helper.php:45
+msgid "Course"
+msgstr ""
+
+#: templates/admin/translations.php:213
+msgid "course"
+msgstr ""
+
+#: templates/admin/translations.php:216 
+#: includes/admin/import/class-wprm-import-wpzoom.php:58
+msgid "Courses"
+msgstr ""
+
+#: templates/admin/translations.php:344
+msgid "Create"
+msgstr ""
+
+#: templates/admin/translations.php:221
+msgid "Create new from existing Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:218
+msgid "Create new Recipe"
+msgstr ""
+
+#: templates/elementor/widget.php:66
+msgid "Create new recipe"
+msgstr ""
+
+#: templates/admin/translations.php:29
+msgid "Create Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:211
+msgid "Creating new Custom Taxonomy"
+msgstr ""
+
+#: templates/admin/translations.php:177
+msgid "Creating new Recipe"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:207
+msgid "cu"
+msgstr ""
+
+#: includes/public/deprecated/class-wprm-template-helper.php:46
+msgid "Cuisine"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-wpzoom.php:59
+msgid "Cuisines"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:206
+msgid "cup"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:205
+msgid "cups"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:227
+msgid "Custom author name"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:43
+msgid "Custom author per recipe"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:106
+msgid "Custom Description"
+msgstr ""
+
+#: templates/admin/translations.php:372
+msgid "Custom Field"
+msgstr ""
+
+#: templates/admin/translations.php:174
+msgid "Custom Fields"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:168 
+#: templates/settings/group-recipe-snippets.php:189
+msgid "Custom Hash"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:76
+msgid "Custom Image if set, otherwise recipe image"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:75
+msgid "Custom Image per Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:375
+msgid "Custom Nutrient"
+msgstr ""
+
+#: templates/admin/translations.php:376
+msgid "Custom Nutrients"
+msgstr ""
+
+#: templates/admin/translations.php:374
+msgid "Custom Nutrition"
+msgstr ""
+
+#: templates/admin/translations.php:373
+msgid "Custom Nutrition Ingredient"
+msgstr ""
+
+#: templates/admin/translations.php:99
+msgid "Custom Nutrition Ingredients"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:15
+msgid "Custom Style"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:100
+msgid "Custom Text"
+msgstr ""
+
+#: templates/admin/translations.php:134 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:346
+msgid "Custom Time"
+msgstr ""
+
+#: templates/admin/translations.php:131
+msgid "Custom Time Label"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:46
+msgid "Customize"
+msgstr ""
+
+#: includes/public/deprecated/class-wprm-template-helper.php:145 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:111 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:111
+msgid "d"
+msgstr ""
+
+#: templates/admin/translations.php:45
+msgid "Daily Interaction"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:83
+msgid "Daily Values Disclaimer"
+msgstr ""
+
+#: templates/settings/group-analytics.php:59
+msgid "DailyGrub Integration"
+msgstr ""
+
+#: templates/admin/translations.php:21
+msgid "DailyGrub recipe analytics suite"
+msgstr ""
+
+#: templates/settings/group-analytics.php:83
+msgid "DailyGrub Tracking ID"
+msgstr ""
+
+#: includes/admin/class-wprm-dashboard.php:39
+msgid "Dashboard"
+msgstr ""
+
+#: templates/admin/translations.php:323
+msgid "Date"
+msgstr ""
+
+#: templates/admin/translations.php:49 
+#: includes/public/deprecated/class-wprm-template-helper.php:147 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
+msgid "day"
+msgstr ""
+
+#: templates/admin/translations.php:50 
+#: includes/public/deprecated/class-wprm-template-helper.php:147 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
+msgid "days"
+msgstr ""
+
+#: templates/settings/group-analytics.php:26
+msgid "Days to Keep"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:188
+msgid "deciliter"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:187
+msgid "deciliters"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:107 
+#: templates/settings/group-template-legacy.php:133
+msgid "Decimal"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:110
+msgid "Decimal Separator"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:111
+msgid "Decimal separator to use after adjusting values."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:108 
+#: templates/settings/group-template-legacy.php:134
+msgid "Decimal with leading zero"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:37
+msgid "Default Author"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:50
+msgid "Default Custom Author Name"
+msgstr ""
+
+#: templates/settings/group-links.php:110 
+#: templates/settings/group-links.php:137 
+#: templates/settings/group-links.php:164
+msgid "Default Nofollow Attribute"
+msgstr ""
+
+#: templates/settings/group-template-editor.php:31
+msgid "Default Preview Recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:18 
+#: templates/settings/group-recipe-print.php:70
+msgid "Default Print Template"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:52
+msgid ""
+"Default print template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:28
+msgid "Default print template to use for the food recipes on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:38
+msgid ""
+"Default print template to use for the how-to instructions on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:40 
+#: templates/settings/group-template-legacy.php:23
+msgid "Default Recipe Template"
+msgstr ""
+
+#: templates/settings/group-performance.php:51
+msgid "Default Recipe Templates in Footer"
+msgstr ""
+
+#: templates/settings/group-template-editor.php:32
+msgid "Default recipe to use for the Template Editor preview."
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:40
+msgid ""
+"Default roundup template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:22
+msgid "Default roundup template to use for the food recipes on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:29
+msgid ""
+"Default roundup template to use for the how-to instructions on your website."
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:69
+msgid "Default Serving Size Unit"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:141
+msgid "Default Show Instruction Images"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:134
+msgid "Default Show Recipe Image"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:52
+msgid "Default Snippet Template"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:80
+msgid ""
+"Default snippet template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:62
+msgid "Default snippet template to use for the food recipes on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:69
+msgid ""
+"Default snippet template to use for the how-to instructions on your website."
+msgstr ""
+
+#: templates/settings/group-performance.php:44
+msgid "Default Snippet Templates in Footer"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:95
+msgid "Default template to use for AMP pages."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:105
+msgid "Default template to use for RSS feeds."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:64
+msgid ""
+"Default template to use for the \"other (no metadata)\" recipes on your "
+"website."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:46
+msgid "Default template to use for the food recipes on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:53
+msgid "Default template to use for the how-to instructions on your website."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:24
+msgid "Default template to use for the recipes on your website."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:85
+msgid "Default template to use in archives (like home and category pages)."
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:70
+msgid "Default unit to use for the nutrition serving size."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:135 
+#: templates/settings/group-recipe-print.php:142
+msgid ""
+"Default value for the checkbox that allows visitors to toggle the image."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:38
+msgid "Default value for the Recipe Author field when creating a new recipe."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:18
+msgid "Defaults"
+msgstr ""
+
+#: templates/admin/translations.php:353
+msgid "Delete"
+msgstr ""
+
+#: templates/admin/translations.php:467
+msgid "Delete Action"
+msgstr ""
+
+#: templates/admin/translations.php:104
+msgid "Delete Actions"
+msgstr ""
+
+#: templates/admin/translations.php:91
+msgid "Delete Equipment"
+msgstr ""
+
+#: templates/admin/translations.php:85
+msgid "Delete Ingredients"
+msgstr ""
+
+#: templates/admin/translations.php:321
+msgid "Delete Rating"
+msgstr ""
+
+#: templates/admin/translations.php:103
+msgid "Delete Ratings"
+msgstr ""
+
+#: templates/admin/translations.php:389
+msgid "Delete Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:70
+msgid "Delete Recipes"
+msgstr ""
+
+#: templates/admin/translations.php:434
+msgid "Delete Revision"
+msgstr ""
+
+#: templates/admin/translations.php:102
+msgid "Delete Revisions"
+msgstr ""
+
+#: templates/admin/translations.php:309
+msgid "Delete Taxonomy"
+msgstr ""
+
+#: templates/admin/translations.php:89
+msgid "Delete Terms"
+msgstr ""
+
+#: templates/admin/translations.php:196
+msgid "Description"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:213
+msgid "Dessert"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:240
+msgid "Diabetic"
+msgstr ""
+
+#: templates/admin/translations.php:440
+msgid "Diet"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-wpzoom.php:60
+msgid "Difficulties"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:43
+msgid "Disable equipment image pinning"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:57
+msgid "Disable external recipe roundup image pinning"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:20
+msgid "Disable if you don't want to output inline CSS."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:50
+msgid "Disable instruction image pinning"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:186
+msgid "Disable pinning on print page"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:29
+msgid "Disable recipe image pinning"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:36
+msgid "Disable taxonomy term image pinning"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:105 
+#: templates/settings/group-template-legacy.php:131
+msgid "Disc"
+msgstr ""
+
+#: templates/admin/translations.php:407
+msgid "Display Author"
+msgstr ""
+
+#: templates/admin/translations.php:405
+msgid "Display Author Type"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:24
+msgid "Display Automatically"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:19
+msgid "Display Manually"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:33
+msgid ""
+"Display the nutrition label at its default location in the recipe template."
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:34
+msgid "Display Type"
+msgstr ""
+
+#: templates/admin/translations.php:224
+msgid "Displays default snippet template as set in the WPRM Settings"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:189
+msgid "dl"
+msgstr ""
+
+#: templates/settings/group-import.php:52
+msgid "Do not import to ingredient notes"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:58
+msgid ""
+"Do not output the ItemList metadata when there is already recipe metadata on "
+"the same page."
+msgstr ""
+
+#: templates/settings/group-analytics.php:46
+msgid ""
+"Do not track any analytics for these IP addresses. One address or range per "
+"line."
+msgstr ""
+
+#: templates/admin/translations.php:16
+msgid "Documentation in our knowledge base"
+msgstr ""
+
+#: templates/admin/translations.php:403
+msgid "Does not have a video"
+msgstr ""
+
+#: templates/admin/translations.php:399
+msgid "Does not have Custom Pin Image"
+msgstr ""
+
+#: templates/admin/translations.php:448
+msgid "Does not have Image"
+msgstr ""
+
+#: templates/admin/translations.php:412
+msgid "Does not have Parent Post"
+msgstr ""
+
+#: templates/admin/translations.php:397
+msgid "Does not have Recipe Image"
+msgstr ""
+
+#: templates/admin/translations.php:457
+msgid ""
+"does not start with http:// or https:// as we would expect for a link. Are "
+"you sure you want to use this? Regular HTML code will not work here."
+msgstr ""
+
+#: templates/public/comment-rating-form.php:55
+msgid "Don't rate this recipe"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:225 
+#: templates/settings/group-recipe-defaults.php:41 
+#: templates/settings/group-nutrition-label.php:36
+msgid "Don't show"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:259 
+#: includes/admin/class-wprm-modal.php:292 
+#: includes/admin/class-wprm-modal.php:325 
+#: templates/settings/group-links.php:114 
+#: templates/settings/group-links.php:141 
+#: templates/settings/group-links.php:168
+msgid "Don't Use Nofollow"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:215
+msgid "Drinks"
+msgstr ""
+
+#: templates/admin/translations.php:451
+msgid "Easy Affiliate Links"
+msgstr ""
+
+#: templates/admin/translations.php:273
+msgid "Edit Affiliate Link"
+msgstr ""
+
+#: templates/admin/translations.php:449
+msgid "Edit Image"
+msgstr ""
+
+#: templates/admin/translations.php:144
+msgid "Edit Ingredients"
+msgstr ""
+
+#: templates/admin/translations.php:452
+msgid "Edit Link"
+msgstr ""
+
+#: templates/admin/translations.php:143
+msgid "Edit Materials"
+msgstr ""
+
+#: templates/admin/translations.php:414
+msgid "Edit Parent Post"
+msgstr ""
+
+#: templates/admin/translations.php:31 
+#: includes/admin/classic-editor/class-wprm-button.php:53
+msgid "Edit Recipe"
+msgstr ""
+
+#: templates/elementor/widget.php:84
+msgid "Edit selected recipe"
+msgstr ""
+
+#: templates/admin/translations.php:308
+msgid "Edit Taxonomy"
+msgstr ""
+
+#: templates/admin/translations.php:210
+msgid "Editing Custom Taxonomy"
+msgstr ""
+
+#: templates/admin/translations.php:176
+msgid "Editing Recipe"
+msgstr ""
+
+#: templates/public/print.php:68
+msgid "Email Link"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:121
+msgid "Email Link Button"
+msgstr ""
+
+#: templates/admin/translations.php:24
+msgid "Email our support team"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:57
+msgid "Email Share"
+msgstr ""
+
+#: templates/admin/translations.php:282
+msgid "Embed Instruction Video"
+msgstr ""
+
+#: templates/admin/translations.php:294
+msgid "Embed Video"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:28
+msgid "Enable Adjustable Servings"
+msgstr ""
+
+#: templates/settings/group-analytics.php:19 
+#: templates/admin/translations.php:37
+msgid "Enable Analytics"
+msgstr ""
+
+#: templates/settings/group-post-type.php:79
+msgid "Enable comments for the recipe post type."
+msgstr ""
+
+#: templates/settings/group-links.php:46
+msgid "Enable for Equipment"
+msgstr ""
+
+#: templates/settings/group-links.php:40
+msgid "Enable for Ingredients"
+msgstr ""
+
+#: templates/settings/group-links.php:52
+msgid "Enable for other Taxonomies "
+msgstr ""
+
+#: templates/settings/group-media.php:57
+msgid ""
+"Enable if your embedded videos are not responsive or seem to be usign the "
+"wrong ratio. Some themes already have this functionality."
+msgstr ""
+
+#: templates/settings/group-links.php:36
+msgid ""
+"Enable links to automatic archive pages, if those have been enabled on the "
+"WP Recipe Maker Manage > Your Custom Fields > Recipe Taxonomies page."
+msgstr ""
+
+#: templates/settings/group-integrations.php:30
+msgid "Enable My Emissions Integration"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:187
+msgid ""
+"Enable this setting if you want to prevent people from pinning your print "
+"page to Pinterest."
+msgstr ""
+
+#: templates/settings/group-integrations.php:86
+msgid ""
+"Enable to automatically output an extra ad unit after the recipe ingredients "
+"block."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:33
+msgid "Enable to change the templates for archive, AMP or RSS feed pages."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:26
+msgid ""
+"Enable to change the templates for how-to instruction and other recipes as "
+"well as food recipes."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:162
+msgid ""
+"Enable to have the \"Jump to Recipe\" button in the snippet template jump to "
+"#recipe instead of something like #wprm-recipe-container-46783"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:183
+msgid ""
+"Enable to have the \"Jump to Video\" button in the snippet template jump to "
+"#recipe-video instead of something like #wprm-recipe-video-container-46783"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:170
+msgid "Enable to open links to the print page in a new tab."
+msgstr ""
+
+#: templates/settings/group-post-type.php:95
+msgid ""
+"Enable to show the default WordPress UI for any taxonomies that have their "
+"archive pages enabled on the WP Recipe Maker > Manage > Your Custom Fields "
+"page."
+msgstr ""
+
+#: templates/admin/translations.php:268
+msgid "Enter the URL of the link:"
+msgstr ""
+
+#: templates/admin/translations.php:98
+msgid "Equipment"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:40 
+#: templates/admin/translations.php:92
+msgid "Equipment Link"
+msgstr ""
+
+#: templates/settings/group-links.php:150
+msgid "Equipment Links"
+msgstr ""
+
+#: templates/settings/group-links.php:151
+msgid ""
+"Equipment links can be set on the WP Recipe Maker > Manage > Recipe Fields > "
+"Equipment page."
+msgstr ""
+
+#: templates/admin/translations.php:203
+msgid "Estimated Cost"
+msgstr ""
+
+#: templates/settings/group-post-type.php:68
+msgid "Even if there is a parent post, link to the recipe itself"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:94
+msgid "Every recipe on its own page"
+msgstr ""
+
+#: templates/settings/group-import.php:49
+msgid "Everything after the first comma"
+msgstr ""
+
+#: templates/settings/group-import.php:50
+msgid "Everything inside parentheses"
+msgstr ""
+
+#: templates/settings/group-analytics.php:45
+msgid "Exclude IPs"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:68 
+#: templates/admin/menu/import/import-search.php:32
+msgid "Explore import options"
+msgstr ""
+
+#: templates/admin/translations.php:90
+msgid "Export Equipment"
+msgstr ""
+
+#: templates/admin/translations.php:84
+msgid "Export Ingredients"
+msgstr ""
+
+#: templates/admin/translations.php:69
+msgid "Export Recipes"
+msgstr ""
+
+#: templates/admin/translations.php:88
+msgid "Export Terms"
+msgstr ""
+
+#: templates/admin/translations.php:305
+msgid "External image. Recommended:"
+msgstr ""
+
+#: templates/admin/translations.php:254
+msgid "extra virgin"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:54
+msgid "Facebook Share"
+msgstr ""
+
+#: includes/admin/menu/class-wprm-admin-menu-faq.php:51
+msgid "FAQ & Support"
+msgstr ""
+
+#: templates/admin/translations.php:377
+msgid "Features"
+msgstr ""
+
+#: templates/admin/translations.php:25
+msgid "Feedback"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:241
+msgid "feet"
+msgstr ""
+
+#: templates/divi/includes/modules/Recipe/Recipe.php:39
+msgid "Fill in the ID of the recipe to display."
+msgstr ""
+
+#: templates/admin/translations.php:317
+msgid "Filter"
+msgstr ""
+
+#: templates/admin/translations.php:319
+msgid "Filter:"
+msgstr ""
+
+#: templates/admin/translations.php:315
+msgid "filtered of"
+msgstr ""
+
+#: templates/admin/tools.php:64 templates/admin/tools.php:67 
+#: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38 
+#: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38
+msgid "Find Ingredient Units"
+msgstr ""
+
+#: templates/admin/translations.php:36
+msgid ""
+"Find out what recipes visitors are interacting with, what affiliate links "
+"are getting clicked on, and more..."
+msgstr ""
+
+#: templates/admin/tools.php:20 templates/admin/tools.php:23 
+#: templates/admin/menu/tools/finding-parents.php:15
+msgid "Find Parent Posts"
+msgstr ""
+
+#: templates/admin/tools.php:31 templates/admin/tools.php:34 
+#: templates/admin/menu/tools/finding-ratings.php:17
+msgid "Find Recipe Ratings"
+msgstr ""
+
+#: templates/divi/includes/modules/Recipe/Recipe.php:43
+msgid "Find the ID of the latest recipes"
+msgstr ""
+
+#: templates/admin/translations.php:237
+msgid ""
+"Find the saved collection ID on the WP Recipe Maker > Manage > Saved "
+"Collections page"
+msgstr ""
+
+#: templates/admin/menu/tools/find-ingredient-units.php:14
+msgid "Finding Ingredient Units"
+msgstr ""
+
+#: includes/admin/tools/class-wprm-tools-find-parents.php:38
+msgid "Finding Parents"
+msgstr ""
+
+#: includes/admin/tools/class-wprm-tools-find-ratings.php:38
+msgid "Finding Ratings"
+msgstr ""
+
+#: templates/admin/menu/tools/find-ingredient-units.php:19 
+#: templates/admin/menu/tools/create-reviews.php:20 
+#: templates/admin/menu/tools/finding-parents.php:20 
+#: templates/admin/menu/tools/refresh-video-metadata.php:19 
+#: templates/admin/menu/tools/wpurp-ingredients.php:31 
+#: templates/admin/menu/tools/finding-ratings.php:22 
+#: templates/admin/menu/tools/wpurp-nutrition.php:19
+msgid "Finished succesfully. Click here to continue."
+msgstr ""
+
+#: templates/admin/menu/tools/fixing-comment-ratings.php:19
+msgid ""
+"Finished succesfully. Use the \"Find Ratings\" tool to clear any rating "
+"caches."
+msgstr ""
+
+#: templates/admin/translations.php:297
+msgid "First recipe on page"
+msgstr ""
+
+#: templates/admin/tools.php:42 templates/admin/tools.php:45 
+#: includes/admin/tools/class-wprm-tools-fix-comment-ratings.php:38 
+#: includes/admin/tools/class-wprm-tools-fix-comment-ratings.php:38 
+#: templates/admin/menu/tools/fixing-comment-ratings.php:14
+msgid "Fix Comment Ratings"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:212
+msgid "fl ounce"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:211
+msgid "fl ounces"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:213
+msgid "floz"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:210
+msgid "fluid ounce"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:209
+msgid "fluid ounces"
+msgstr ""
+
+#: includes/public/api/class-wprm-api-manage-recipes.php:700
+msgid "Follow this link to print all of the selected recipes:"
+msgstr ""
+
+#: templates/admin/translations.php:391
+msgid "Food"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-wpzoom.php:62
+msgid "Food Labels"
+msgstr ""
+
+#: templates/admin/translations.php:73
+msgid "Food Recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:27
+msgid "Food Recipe Print Template"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:21
+msgid "Food Recipe Roundup Template"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:61
+msgid "Food Recipe Snippet Template"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:45
+msgid "Food Recipe Template"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:242
+msgid "foot"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:71 
+#: templates/settings/group-template-legacy.php:78 
+#: templates/settings/group-media.php:45
+msgid "For example:"
+msgstr ""
+
+#: templates/admin/translations.php:159
+msgid ""
+"For guided recipes, Google wants a short (usually 1 word) summary for each "
+"instruction step. This will be the \"name\" in the HowToStep metadata. This "
+"is not shown in the recipe template."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:194
+msgid ""
+"Force a redirect to the parent post of the recipe if someone lands directly "
+"on the print page."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:161
+msgid "Force people to leave a comment"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:65
+msgid "Force recipe links to your own site to open in a new tab as well."
+msgstr ""
+
+#: templates/settings/group-media.php:56
+msgid "Force video ratio"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:172
+msgid "Force visitors to leave a comment"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:61
+msgid "Fractions"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:219
+msgid "French"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:59 
+#: templates/settings/group-recipe-ratings.php:65 
+#: templates/admin/translations.php:420 
+#: includes/public/deprecated/class-wprm-template-helper.php:240
+msgid "from"
+msgstr ""
+
+#: templates/settings/group-permissions.php:18
+msgid "Frontend Access"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:243
+msgid "ft"
+msgstr ""
+
+#: templates/admin/translations.php:225
+msgid "Full Snippet Template"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:41 
+#: templates/settings/group-recipe-print.php:19 
+#: templates/settings/group-recipe-snippets.php:53
+msgid "Fully customize these templates in the Template Editor."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:117
+msgid "Functionality"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:172
+msgid "g"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:198
+msgid "gal"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:197
+msgid "gallon"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:196
+msgid "gallons"
+msgstr ""
+
+#: templates/settings/group-metadata.php:18 
+#: templates/settings/group-performance.php:8 
+#: templates/settings/group-links.php:18 templates/admin/translations.php:169
+msgid "General"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:115 
+#: templates/settings/group-template-legacy.php:141
+msgid "Georgian"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:118 
+#: templates/settings/group-template-legacy.php:227
+msgid "Get access to more recipe templates with WP Recipe Maker Premium."
+msgstr ""
+
+#: templates/admin/translations.php:22
+msgid "Get Help"
+msgstr ""
+
+#: templates/admin/translations.php:14
+msgid "Get the most out of WPRM"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:97
+msgid ""
+"Get the Pro Bundle to have our Nutrition API integration help calculate the "
+"nutrition facts for you."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:98
+msgid "Getting a lot of recipes without parent post?"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:241
+msgid "Gluten Free"
+msgstr ""
+
+#: templates/public/print.php:65
+msgid "Go Back"
+msgstr ""
+
+#: templates/admin/tools.php:47
+msgid ""
+"Go through all comment ratings and remove any rating where the associated "
+"comment does not exist anymore."
+msgstr ""
+
+#: templates/admin/tools.php:25
+msgid ""
+"Go through all posts and pages on your website to find and link recipes to "
+"their parent."
+msgstr ""
+
+#: templates/admin/tools.php:36
+msgid "Go through all recipes on your website to find any missing ratings."
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-collection.php:51
+msgid "Go to Collections"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:80
+msgid "Go to the next page."
+msgstr ""
+
+#: templates/elementor/widget.php:134
+msgid "Go to WPRM Manage page"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:171
+msgid "gr"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:170
+msgid "gram"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:169
+msgid "grams"
+msgstr ""
+
+#: templates/admin/translations.php:466
+msgid "Grid Image"
+msgstr ""
+
+#: templates/admin/translations.php:464
+msgid "Grid Link"
+msgstr ""
+
+#: templates/settings/group-metadata.php:58
+msgid "Guided Recipes"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:242
+msgid "Halal"
+msgstr ""
+
+#: templates/settings/group-post-type.php:106
+msgid "Handle Archive Pages Output"
+msgstr ""
+
+#: templates/admin/translations.php:402
+msgid "Has an embedded video"
+msgstr ""
+
+#: templates/admin/translations.php:401
+msgid "Has an uploaded video"
+msgstr ""
+
+#: templates/admin/translations.php:400
+msgid "Has any video"
+msgstr ""
+
+#: templates/admin/translations.php:217
+msgid "Has Archive Pages"
+msgstr ""
+
+#: templates/admin/translations.php:398
+msgid "Has Custom Pin Image"
+msgstr ""
+
+#: templates/admin/translations.php:447
+msgid "Has Image"
+msgstr ""
+
+#: templates/admin/translations.php:411
+msgid "Has Parent Post"
+msgstr ""
+
+#: templates/admin/translations.php:396
+msgid "Has Recipe Image"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:169
+msgid ""
+"Hash to use for the first recipe on the page. This will become part of the "
+"URL after clicking the \"Jump to Recipe\" button."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:190
+msgid ""
+"Hash to use for the first video on the page. This will become part of the "
+"URL after clicking the \"Jump to Recipe\" button."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:186
+msgid "Header Color"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:48
+msgid "Header Font"
+msgstr ""
+
+#: templates/settings/group-metadata.php:75
+msgid ""
+"Hide and ignore name field (this will get you warnings in Google Search "
+"Console)"
+msgstr ""
+
+#: templates/settings/group-media.php:19 
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:109
+msgid "Hide instruction media"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:95
+msgid ""
+"Highest denominator to use for fractions. Will round values to fit. For most "
+"purposes, 8 is recommended."
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:243
+msgid "Hindu"
+msgstr ""
+
+#: templates/admin/translations.php:51 
+#: includes/public/deprecated/class-wprm-template-helper.php:164 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
+msgid "hour"
+msgstr ""
+
+#: templates/admin/translations.php:52 
+#: includes/public/deprecated/class-wprm-template-helper.php:164 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
+msgid "hours"
+msgstr ""
+
+#: templates/settings/group-analytics.php:27
+msgid "How many days of data should stay stored in the database."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:47
+msgid ""
+"How the rating details will be displayed in a recipe. The following "
+"placeholders can be used:"
+msgstr ""
+
+#: templates/settings/group-post-type.php:25
+msgid "How the recipe post type should exist."
+msgstr ""
+
+#: templates/settings/group-metadata.php:71
+msgid ""
+"How to handle the name field that Google wants for every instruction step."
+msgstr ""
+
+#: templates/settings/group-import.php:46
+msgid "How to recognize if it should be part of the ingredient notes."
+msgstr ""
+
+#: templates/admin/translations.php:26
+msgid "How would you rate WP Recipe Maker?"
+msgstr ""
+
+#: templates/admin/translations.php:392
+msgid "How-to"
+msgstr ""
+
+#: templates/admin/translations.php:74
+msgid "How-to Instructions"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:37
+msgid "How-to Instructions Print Template"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:28
+msgid "How-to Instructions Roundup Template"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:68
+msgid "How-to Instructions Snippet Template"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:52
+msgid "How-to Instructions Template"
+msgstr ""
+
+#: templates/admin/translations.php:385 
+#: includes/public/deprecated/class-wprm-template-helper.php:162 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
+msgid "hr"
+msgstr ""
+
+#: templates/admin/translations.php:386 
+#: includes/public/deprecated/class-wprm-template-helper.php:162 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
+msgid "hrs"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:191
+msgid "HTML Element to scroll to"
+msgstr ""
+
+#: templates/admin/translations.php:269
+msgid "HTML or Shortcode:"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://bootstrapped.ventures/"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://bootstrapped.ventures/wp-recipe-maker/"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:119
+msgid "I found this recipe you might like:"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:192
+msgid "Icon Color"
+msgstr ""
+
+#: templates/admin/translations.php:343
+msgid "ID"
+msgstr ""
+
+#: templates/settings/group-post-type.php:67
+msgid "If there is a parent post for the recipe, link to that parent"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:177
+msgid "If they want to give 1 star"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:178
+msgid "If they want to give 2 stars or less"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:179
+msgid "If they want to give 3 stars or less"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:180
+msgid "If they want to give 4 stars or less"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:20
+msgid ""
+"If you do so, styling changes will have to be made elsewhere and not from "
+"this settings page."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:21
+msgid ""
+"If your current plugin uses custom post types and has different permalinks "
+"than regular posts you might want to use a redirection plugin to set up 301 "
+"redirects. Contact us if you need help!"
+msgstr ""
+
+#: templates/admin/translations.php:137
+msgid "Image"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:98
+msgid "Image Caption"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:99
+msgid "Image Description"
+msgstr ""
+
+#: templates/settings/group-media.php:45
+msgid "Image size to link to for the clickable images."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:97
+msgid "Image Title"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:70
+msgid "Image to use for the Pin Recipe shortcode."
+msgstr ""
+
+#: templates/settings/group-import.php:20 templates/admin/translations.php:166 
+#: templates/admin/menu/import/import-recipes.php:28 
+#: templates/admin/menu/import/importing.php:15
+msgid "Import"
+msgstr ""
+
+#: templates/admin/tools.php:109
+msgid "Import all ingredients that have a plural set."
+msgstr ""
+
+#: templates/admin/tools.php:120
+msgid ""
+"Import all ingredients that have a shopping list group set for use in the "
+"Recipe Collections feature."
+msgstr ""
+
+#: templates/admin/tools.php:98
+msgid "Import all ingredients that have ingredient links set."
+msgstr ""
+
+#: templates/admin/tools.php:132
+msgid ""
+"Import all ingredients that have nutrition facts set. These will become "
+"Custom Nutrition Ingredients"
+msgstr ""
+
+#: templates/admin/menu/import/importing.php:20
+msgid "Import finished succesfully. Click here to continue."
+msgstr ""
+
+#: templates/admin/translations.php:124
+msgid "Import from JSON"
+msgstr ""
+
+#: templates/admin/translations.php:108
+msgid "Import from Text"
+msgstr ""
+
+#: templates/admin/tools.php:93 templates/admin/tools.php:96
+msgid "Import Ingredient Links"
+msgstr ""
+
+#: templates/admin/tools.php:104 templates/admin/tools.php:107
+msgid "Import Ingredient Plural"
+msgstr ""
+
+#: templates/admin/tools.php:127 templates/admin/tools.php:130
+msgid "Import Nutrition Facts"
+msgstr ""
+
+#: includes/admin/class-wprm-import-manager.php:59 
+#: includes/admin/class-wprm-import-manager.php:60 
+#: includes/admin/class-wprm-import-manager.php:60 
+#: templates/admin/menu/import/import-overview.php:15
+msgid "Import Recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:36
+msgid "Import recipes from other plugins"
+msgstr ""
+
+#: templates/admin/menu/tools/create-reviews.php:15
+msgid "Import Reviews"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:85
+msgid "Import Selected Recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:42
+msgid "Import Settings"
+msgstr ""
+
+#: templates/admin/tools.php:115 templates/admin/tools.php:118
+msgid "Import Shopping List Groups"
+msgstr ""
+
+#: templates/settings/group-import.php:34
+msgid "Import Units"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:24
+msgid "Import WP Recipe Maker recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:73
+msgid "Imported Recipes to Check"
+msgstr ""
+
+#: templates/admin/menu/import/importing.php:16
+#, php-format
+msgid "Importing %d recipe"
+msgid_plural "Importing %d recipes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/tools/class-wprm-tools-wpurp-ingredients.php:38
+msgid "Importing Ingredients"
+msgstr ""
+
+#: includes/admin/tools/class-wprm-tools-wpurp-nutrition.php:38
+msgid "Importing Nutrition"
+msgstr ""
+
+#: includes/admin/class-wprm-import-manager.php:62
+msgid "Importing Recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:18
+msgid ""
+"Importing recipes will convert them to our format and they won't be "
+"available in the old plugin anymore. We recommend backing up before starting "
+"the process and trying to import 1 single recipe first to make sure "
+"everything converts properly."
+msgstr ""
+
+#: includes/admin/tools/class-wprm-tools-create-reviews.php:38
+msgid "Importing Reviews"
+msgstr ""
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:26 
+#: templates/admin/menu/tools/wpurp-nutrition.php:14
+msgid "Importing WP Ultimate Recipe Ingredients"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:246
+msgid "in"
+msgstr ""
+
+#: templates/settings/group-metadata.php:92
+msgid "In HTML head element"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-cookbook.php:152
+msgid "Inactive Time"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:245
+msgid "inch"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:244
+msgid "inches"
+msgstr ""
+
+#: templates/settings/group-metadata.php:34
+msgid "Include Ingredient Notes"
+msgstr ""
+
+#: templates/settings/group-metadata.php:35
+msgid "Include the ingredient notes field in the recipeIngredient metadata."
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:222
+msgid "Indian"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:41
+msgid "Ingedient Link"
+msgstr ""
+
+#: templates/admin/translations.php:358
+msgid "Ingredient"
+msgstr ""
+
+#: templates/admin/translations.php:248
+msgid "Ingredient Group Header"
+msgstr ""
+
+#: templates/admin/translations.php:87
+msgid "Ingredient Link"
+msgstr ""
+
+#: templates/settings/group-links.php:123 templates/admin/translations.php:146 
+#: templates/admin/menu/tools/wpurp-ingredients.php:14
+msgid "Ingredient Links"
+msgstr ""
+
+#: templates/settings/group-links.php:124
+msgid ""
+"Ingredient links can be set when editing a recipe or through the WP Recipe "
+"Maker > Manage > Recipe Fields > Ingredients page."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:99
+msgid "Ingredient List Style"
+msgstr ""
+
+#: templates/settings/group-import.php:45
+msgid "Ingredient Notes Identifier"
+msgstr ""
+
+#: templates/settings/group-import.php:23
+msgid "Ingredient Parsing"
+msgstr ""
+
+#: templates/admin/translations.php:361
+msgid "Ingredient Unit"
+msgstr ""
+
+#: includes/admin/class-wprm-notices.php:76 
+#: templates/admin/translations.php:362
+msgid "Ingredient Units"
+msgstr ""
+
+#: templates/admin/translations.php:97 
+#: includes/public/deprecated/class-wprm-template-helper.php:54
+msgid "Ingredients"
+msgstr ""
+
+#: templates/admin/translations.php:220
+msgid "Insert"
+msgstr ""
+
+#: templates/admin/translations.php:242
+msgid "Insert After"
+msgstr ""
+
+#: templates/admin/translations.php:219
+msgid "Insert existing Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:241
+msgid "Instruction Group Header"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:84
+msgid "Instruction Image Alignment"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:77
+msgid "Instruction Image Size"
+msgstr ""
+
+#: includes/public/class-wprm-print.php:300
+msgid "Instruction Images"
+msgstr ""
+
+#: templates/admin/translations.php:284
+msgid "Instruction is part of the main video"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:42
+msgid "Instruction Link"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:125
+msgid "Instruction List Style"
+msgstr ""
+
+#: templates/admin/translations.php:157
+msgid "Instruction Media"
+msgstr ""
+
+#: templates/settings/group-media.php:8
+msgid "Instruction Media Toggle"
+msgstr ""
+
+#: templates/settings/group-metadata.php:70
+msgid "Instruction Name Field"
+msgstr ""
+
+#: templates/admin/translations.php:285
+msgid "Instruction video URL or embed code"
+msgstr ""
+
+#: templates/admin/translations.php:112 
+#: includes/public/deprecated/class-wprm-template-helper.php:55
+msgid "Instructions"
+msgstr ""
+
+#: templates/settings/group-metadata.php:22
+msgid "Integrate with Yoast SEO"
+msgstr ""
+
+#: templates/settings/group-metadata.php:23
+msgid "Integrate with Yoast SEO Schema (version 11+) when enabled."
+msgstr ""
+
+#: templates/settings/group-integrations.php:21
+msgid "Integrations"
+msgstr ""
+
+#: templates/admin/translations.php:46
+msgid "Interactions"
+msgstr ""
+
+#: templates/admin/translations.php:43
+msgid "Interactions (last 7 days)"
+msgstr ""
+
+#: templates/settings/structure.php:75
+msgid "Interactivity"
+msgstr ""
+
+#: templates/admin/translations.php:39
+msgid "Interested in more data?"
+msgstr ""
+
+#: templates/admin/translations.php:350
+msgid "into"
+msgstr ""
+
+#: templates/admin/translations.php:337
+msgid "IP"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:220
+msgid "Italian"
+msgstr ""
+
+#: templates/admin/translations.php:258
+msgid "Italic"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:224
+msgid "Japanese"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:50 
+#: includes/public/class-wprm-blocks.php:181 
+#: templates/admin/translations.php:226 
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43
+msgid "Jump to Recipe"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:51 
+#: includes/public/class-wprm-blocks.php:196 
+#: templates/admin/translations.php:227 
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43
+msgid "Jump to Video"
+msgstr ""
+
+#: includes/public/class-wprm-metadata.php:626 
+#: includes/public/shortcodes/recipe/class-wprm-sc-nutrition.php:81 
+#: templates/recipe/legacy/simple/simple.php:87 
+#: templates/recipe/legacy/clean/clean.php:83 
+#: templates/recipe/legacy/tastefully-simple/tastefully-simple.php:92
+msgid "kcal"
+msgstr ""
+
+#: templates/admin/translations.php:212
+msgid "Key"
+msgstr ""
+
+#: includes/public/deprecated/class-wprm-template-helper.php:47
+msgid "Keyword"
+msgstr ""
+
+#: templates/settings/group-import.php:29
+msgid ""
+"Keyword used when defining quantity ranges. For example: to when using 1 to "
+"2."
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-wpzoom.php:61
+msgid "Keywords"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:168
+msgid "kg"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:167
+msgid "kilogram"
+msgstr ""
+
+#. Weight.
+#: includes/public/class-wprm-recipe-parser.php:166
+msgid "kilograms"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:244
+msgid "Kosher"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:186
+msgid "l"
+msgstr ""
+
+#: templates/admin/translations.php:441
+msgid "Label"
+msgstr ""
+
+#: templates/settings/group-template-legacy-labels.php:29 
+#: templates/settings/group-recipe-ratings.php:134
+msgid "Label used in the comment form."
+msgstr ""
+
+#: templates/admin/translations.php:28
+msgid "Latest Recipes"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:179
+msgid "lb"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:178
+msgid "lbs"
+msgstr ""
+
+#: templates/admin/translations.php:15
+msgid "Learn More"
+msgstr ""
+
+#: templates/admin/translations.php:47
+msgid "Learn more about the sale"
+msgstr ""
+
+#: templates/settings/group-template-mode.php:24
+msgid "Learn more in the Migration Guide"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:251
+msgid "leave"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:71
+msgid "Leave blank to not use a link."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:37 
+#: templates/settings/group-template-legacy.php:49 
+#: templates/settings/group-template-legacy.php:60 
+#: templates/settings/group-template-legacy.php:71 
+#: templates/settings/group-template-legacy.php:78
+msgid "Leave blank to use the template default."
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:250
+msgid "leaves"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:87 
+#: templates/settings/group-recipe-snippets.php:116
+msgid "Left"
+msgstr ""
+
+#: templates/admin/translations.php:57
+msgid "left to grab the discount!"
+msgstr ""
+
+#: templates/settings/group-template-mode.php:32 
+#: templates/settings/group-legacy.php:24
+msgid "Legacy"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:126
+msgid "Legacy mode"
+msgstr ""
+
+#: templates/settings/group-legacy.php:15
+msgid "Legacy Settings"
+msgstr ""
+
+#: templates/settings/group-media.php:26
+msgid "Lightbox"
+msgstr ""
+
+#: templates/admin/translations.php:199
+msgid "Link"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:180
+msgid "Link Color"
+msgstr ""
+
+#: templates/admin/translations.php:458
+msgid "Link Nofollow"
+msgstr ""
+
+#: templates/settings/group-links.php:75
+msgid "Link to the archive page for this user"
+msgstr ""
+
+#: templates/settings/group-links.php:71
+msgid "Link to use for Post Author"
+msgstr ""
+
+#: templates/settings/group-links.php:15
+msgid "Links"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:185
+msgid "liter"
+msgstr ""
+
+#. Volume.
+#: includes/public/class-wprm-recipe-parser.php:184
+msgid "liters"
+msgstr ""
+
+#: templates/settings/group-performance.php:26
+msgid "Load admin assets everywhere"
+msgstr ""
+
+#: templates/settings/group-performance.php:35
+msgid ""
+"Load template assets in footer to improve page loading speeds (recommended). "
+"Disabling can prevent CLS issues but also cause compatibility styling "
+"problems. When disabling, consider disabling \"Only load Assets when "
+"needed\" as well."
+msgstr ""
+
+#: templates/settings/group-performance.php:52
+msgid "Load the default recipe templates in the footer to improve performance."
+msgstr ""
+
+#: templates/settings/group-performance.php:45
+msgid ""
+"Load the default snippet templates in the footer to improve performance."
+msgstr ""
+
+#: templates/admin/translations.php:175
+msgid "Loading Recipe..."
+msgstr ""
+
+#: templates/settings/group-media.php:76
+msgid "Loop Video"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:245
+msgid "Low Calorie"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:246
+msgid "Low Fat"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:247
+msgid "Low Lactose"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:248
+msgid "Low Salt"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:113 
+#: templates/settings/group-template-legacy.php:139
+msgid "Lower Greek"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:111 
+#: templates/settings/group-template-legacy.php:137
+msgid "Lower Latin"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:109 
+#: templates/settings/group-template-legacy.php:135
+msgid "Lower Roman"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:231
+msgid "m"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:210
+msgid "Main Course"
+msgstr ""
+
+#: templates/admin/translations.php:116
+msgid "Make a selection using the buttons above first."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:53
+msgid ""
+"Make sure to pick a snippet template or the full recipe might get displayed "
+"twice."
+msgstr ""
+
+#: templates/admin/translations.php:474
+msgid ""
+"Make sure to pick the right recipe type to ensure we include the correct "
+"metadata."
+msgstr ""
+
+#: includes/admin/class-wprm-manage.php:39
+msgid "Manage"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:128
+msgid "Mark Selected Recipes as Checked"
+msgstr ""
+
+#: templates/admin/translations.php:247
+msgid "Material Group Header"
+msgstr ""
+
+#: templates/admin/translations.php:145
+msgid "Material Links"
+msgstr ""
+
+#: templates/admin/translations.php:172
+msgid "Materials"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:94
+msgid "Max Denominator"
+msgstr ""
+
+#: templates/settings/group-media.php:5 templates/admin/translations.php:167
+msgid "Media"
+msgstr ""
+
+#: templates/admin/tools.php:146
+msgid "Mediavine Create Migration"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:221
+msgid "Mediterranean"
+msgstr ""
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:85
+msgid "Mention %handle% or tag %tag%!"
+msgstr ""
+
+#: templates/admin/translations.php:348
+msgid "Merge into another"
+msgstr ""
+
+#: templates/admin/translations.php:158
+msgid "Metadata"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:230
+msgid "meter"
+msgstr ""
+
+#. Length.
+#: includes/public/class-wprm-recipe-parser.php:229
+msgid "meters"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:226
+msgid "Mexican"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:175 
+#: includes/public/class-wprm-metadata.php:628
+msgid "mg"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:174
+msgid "milligram"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:173
+msgid "milligrams"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:194
+msgid "milliliter"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:193
+msgid "milliliters"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:236
+msgid "millimeter"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:235
+msgid "millimeters"
+msgstr ""
+
+#: templates/admin/translations.php:387 
+#: includes/public/deprecated/class-wprm-template-helper.php:179 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
+msgid "min"
+msgstr ""
+
+#: templates/admin/translations.php:388 
+#: includes/public/deprecated/class-wprm-template-helper.php:179 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
+msgid "mins"
+msgstr ""
+
+#: templates/admin/translations.php:53 
+#: includes/public/deprecated/class-wprm-template-helper.php:181 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
+msgid "minute"
+msgstr ""
+
+#: templates/admin/translations.php:54 
+#: includes/public/deprecated/class-wprm-template-helper.php:181 
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
+msgid "minutes"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:195
+msgid "ml"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:237
+msgid "mm"
+msgstr ""
+
+#: templates/settings/group-template-mode.php:33 
+#: templates/settings/group-legacy.php:25
+msgid "Modern"
+msgstr ""
+
+#: templates/admin/translations.php:189
+msgid "More nutrients are available in"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:63
+msgid "Multiple Ratings"
+msgstr ""
+
+#: templates/settings/group-integrations.php:46
+msgid "My Emissions API Key Status"
+msgstr ""
+
+#: templates/admin/translations.php:20
+msgid "My Emissions carbon footprint labels"
+msgstr ""
+
+#: templates/admin/translations.php:204
+msgid "My Emissions Label"
+msgstr ""
+
+#: includes/public/class-wprm-recipe.php:159 
+#: templates/admin/translations.php:336
+msgid "n/a"
+msgstr ""
+
+#: templates/admin/translations.php:110
+msgid "Name"
+msgstr ""
+
+#: templates/admin/translations.php:244
+msgid "Name for this video part"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:226 
+#: templates/settings/group-recipe-defaults.php:42
+msgid "Name of post author"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:176
+msgid "Never, allow any user rating"
+msgstr ""
+
+#: templates/admin/translations.php:27
+msgid "News"
+msgstr ""
+
+#: templates/settings/group-metadata.php:93
+msgid "Next to recipe in HTML body element"
+msgstr ""
+
+#: templates/admin/translations.php:313
+msgid "No"
+msgstr ""
+
+#: templates/admin/translations.php:40
+msgid ""
+"No actions found for the last 7 days. If you just enabled analytics they "
+"should start showing up soon."
+msgstr ""
+
+#: templates/admin/translations.php:419
+msgid "no comment ratings"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:57
+msgid "No metadata when there is recipe metadata"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:62 
+#: templates/admin/menu/import/import-overview.php:121
+msgid "no parent post found"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:51 
+#: templates/admin/translations.php:417
+msgid "No Ratings"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:53
+msgid "No ratings yet"
+msgstr ""
+
+#: templates/settings/group-media.php:67 templates/settings/group-media.php:80
+msgid "No recipe videos"
+msgstr ""
+
+#: templates/admin/translations.php:296
+msgid "No recipes found"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:52 
+#: templates/admin/menu/import/import-overview.php:88
+msgid "No recipes found."
+msgstr ""
+
+#: templates/admin/translations.php:255
+msgid "No suggestions found."
+msgstr ""
+
+#: templates/admin/translations.php:423
+msgid "no user ratings"
+msgstr ""
+
+#: templates/admin/translations.php:127
+msgid "No valid recipe found."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:102 
+#: templates/settings/group-template-legacy.php:128
+msgid "None"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "none"
+msgstr ""
+
+#: templates/admin/translations.php:334
+msgid "Not Approved"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:32
+msgid "Note: not all options will affect every recipe template."
+msgstr ""
+
+#: templates/admin/translations.php:113
+msgid "Notes"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:53
+msgid ""
+"Number of decimals to round a quantity to after adjusting the serving size."
+msgstr ""
+
+#: templates/settings/group-nutrition-calculation.php:23
+msgid ""
+"Number of decimals to round a quantity to when calculating nutrition facts."
+msgstr ""
+
+#: templates/admin/translations.php:173
+msgid "Nutrition"
+msgstr ""
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:20 
+#: templates/admin/menu/tools/wpurp-nutrition.php:14
+msgid "Nutrition Facts"
+msgstr ""
+
+#: templates/settings/group-nutrition-calculation.php:15
+msgid "Nutrition Facts Calculation"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:15 
+#: templates/admin/translations.php:230
+msgid "Nutrition Label"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:32
+msgid "Nutrition Label in template"
+msgstr ""
+
+#: templates/admin/translations.php:252
+msgid "olive oil"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:57
+msgid "One Rating"
+msgstr ""
+
+#: templates/settings/group-performance.php:19
+msgid "Only load Assets when needed"
+msgstr ""
+
+#: templates/settings/group-performance.php:20
+msgid ""
+"Only load JS and CSS files when a recipe is found on the page. Disable to "
+"always load WPRM assets."
+msgstr ""
+
+#: templates/settings/group-metadata.php:99
+msgid "Only show metadata for first recipe"
+msgstr ""
+
+#: templates/settings/group-metadata.php:77
+msgid "Only use in metadata when explicitely set in recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:82
+msgid "Open Author Link in New Tab"
+msgstr ""
+
+#: templates/settings/group-links.php:158
+msgid "Open custom equipment links in a new tab."
+msgstr ""
+
+#: templates/settings/group-links.php:131
+msgid "Open custom ingredient links in a new tab."
+msgstr ""
+
+#: templates/settings/group-links.php:104
+msgid "Open custom term links in a new tab."
+msgstr ""
+
+#: templates/settings/group-links.php:103 
+#: templates/settings/group-links.php:130 
+#: templates/settings/group-links.php:157
+msgid "Open in New Tab"
+msgstr ""
+
+#: templates/settings/group-links.php:85 templates/admin/translations.php:270
+msgid "Open in new tab"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:64
+msgid "Open internal links in a new tab"
+msgstr ""
+
+#: templates/admin/translations.php:304
+msgid "Open link in new tab"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:169
+msgid "Open Print links in New Tab"
+msgstr ""
+
+#: templates/settings/group-links.php:86
+msgid "Open the Post Author link in a new tab."
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:52 
+#: templates/settings/group-integrations.php:71 
+#: templates/settings/group-template-editor.php:26
+msgid "Open the Template Editor"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:22
+msgid "Opt out of Rich Pins"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:109
+msgid ""
+"Optional ad to show in the footer of the print page. Does not get printed. "
+"Use any HTML code."
+msgstr ""
+
+#: templates/admin/translations.php:132
+msgid ""
+"Optional extra time field that you can label yourself. Examples: Resting "
+"Time, Baking Time"
+msgstr ""
+
+#: templates/settings/group-links.php:111 
+#: templates/settings/group-links.php:138 
+#: templates/settings/group-links.php:165
+msgid "Optional rel attribute to add to custom links by default."
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:102
+msgid ""
+"Optional text to show at the bottom of the print page. You can use HTML and "
+"the following placeholders:"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:192
+msgid ""
+"Optionally set a custom HTML element to scroll to. Can be useful when using "
+"lazy loading your comments, for example."
+msgstr ""
+
+#: templates/admin/translations.php:140
+msgid "Optionally set a different image to use for the \"Pin Recipe\" button."
+msgstr ""
+
+#: templates/settings/group-metadata.php:107
+msgid ""
+"Optionally set your own API key for retrieving the YouTube video metadata. "
+"Leave the setting blank to use the default shared key."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:94 
+#: templates/admin/translations.php:393
+msgid "Other"
+msgstr ""
+
+#: templates/admin/translations.php:75
+msgid "Other (no metadata)"
+msgstr ""
+
+#: templates/admin/translations.php:232
+msgid "Other Features"
+msgstr ""
+
+#: templates/settings/group-integrations.php:81
+msgid "Other Integrations"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:51
+msgid "Other Recipe Print Template"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:39
+msgid "Other Recipe Roundup Template"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:79
+msgid "Other Recipe Snippet Template"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:63
+msgid "Other Recipe Template"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:181
+msgid "ounce"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:180
+msgid "ounces"
+msgstr ""
+
+#: templates/settings/group-nutrition-calculation.php:17
+msgid "Our API integration helps calculate the nutition facts for you."
+msgstr ""
+
+#: templates/admin/privacy.php:24
+msgid "Our cookies are stored for 30 days."
+msgstr ""
+
+#: templates/admin/translations.php:19
+msgid "Our Partners"
+msgstr ""
+
+#: templates/settings/group-performance.php:12
+msgid "Output Combined Stars in Comments"
+msgstr ""
+
+#: templates/settings/group-metadata.php:88
+msgid "Output Recipe Metadata"
+msgstr ""
+
+#: templates/admin/translations.php:354
+msgid "Overview"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:182
+msgid "oz"
+msgstr ""
+
+#: templates/admin/translations.php:276
+msgid "Pair of scissors"
+msgstr ""
+
+#: templates/admin/translations.php:251
+msgid "paper"
+msgstr ""
+
+#: templates/admin/translations.php:409
+msgid "Parent ID"
+msgstr ""
+
+#: templates/admin/translations.php:415
+msgid "Parent Language"
+msgstr ""
+
+#: templates/admin/translations.php:410
+msgid "Parent Name"
+msgstr ""
+
+#: templates/admin/translations.php:340
+msgid "Parent Post ID"
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-wpultimaterecipe.php:198
+msgid "Passive Time"
+msgstr ""
+
+#: templates/admin/translations.php:114
+msgid "Paste or type recipe"
+msgstr ""
+
+#: templates/admin/translations.php:123
+msgid "Paste or type recipe to start..."
+msgstr ""
+
+#: templates/admin/translations.php:125
+msgid "Paste the recipe JSON data to import"
+msgstr ""
+
+#: templates/admin/translations.php:77
+msgid "people"
+msgstr ""
+
+#: templates/settings/group-performance.php:5
+msgid "Performance"
+msgstr ""
+
+#: templates/admin/translations.php:342
+msgid "Permanently Delete"
+msgstr ""
+
+#: templates/admin/translations.php:105
+msgid "Permanently Delete Recipes"
+msgstr ""
+
+#: templates/settings/group-permissions.php:15
+msgid "Permissions"
+msgstr ""
+
+#: templates/settings/group-metadata.php:106
+msgid "Personal YouTube Data API key"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:255 
+#: templates/admin/translations.php:249
+msgid "piece"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:254
+msgid "pieces"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:53
+msgid "Pin Button"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:91
+msgid "Pin Description"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:69 
+#: templates/admin/translations.php:139
+msgid "Pin Image"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-pin.php:43
+msgid "Pin Recipe"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:257
+msgid "pinch"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:256
+msgid "pinches"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:203
+msgid "pint"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:18
+msgid "Pinterest"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:65
+msgid "Pinterest - Pin Recipe button"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:202
+msgid "pints"
+msgstr ""
+
+#: templates/admin/translations.php:442
+msgid "Plural"
+msgstr ""
+
+#: templates/admin/translations.php:215
+msgid "Plural Name"
+msgstr ""
+
+#: templates/admin/translations.php:168
+msgid "Post Type"
+msgstr ""
+
+#: templates/settings/group-post-type.php:15
+msgid "Post Type & Taxonomies"
+msgstr ""
+
+#: includes/public/class-wprm-post-type.php:41
+msgctxt "post type general name"
+msgid "Recipes"
+msgstr ""
+
+#: includes/public/class-wprm-post-type.php:42
+msgctxt "post type singular name"
+msgid "Recipe"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:177
+msgid "pound"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:176
+msgid "pounds"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:35
+msgid ""
+"Preferred placement for the recipe snippets. Will default to start of the "
+"post content."
+msgstr ""
+
+#: templates/admin/translations.php:128 
+#: includes/public/deprecated/class-wprm-template-helper.php:48 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:344
+msgid "Prep Time"
+msgstr ""
+
+#: templates/admin/translations.php:277
+msgid "Pressure cooker"
+msgstr ""
+
+#: templates/settings/group-permissions.php:22
+msgid "Prevent printing of non-published recipes"
+msgstr ""
+
+#: templates/settings/group-permissions.php:29
+msgid "Prevent printing of restricted recipes"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:38 templates/public/print.php:74 
+#: includes/public/deprecated/class-wprm-template-helper.php:44
+msgid "Print"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:101
+msgid "Print Credit"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:108
+msgid "Print Footer Ad"
+msgstr ""
+
+#: includes/public/class-wprm-blocks.php:211 
+#: templates/admin/translations.php:228 
+#: includes/public/shortcodes/recipe/class-wprm-sc-print.php:43
+msgid "Print Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:68
+msgid "Print Recipes"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:176
+msgid "Print Slug"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:15
+msgid "Print Version"
+msgstr ""
+
+#: templates/settings/group-post-type.php:29
+msgid "Private - Recipes exist as part of their parent post only"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:204
+msgid "pt"
+msgstr ""
+
+#: templates/settings/group-post-type.php:30
+msgid "Public - Recipes have their own URL as a custom post type"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:201
+msgid "qt"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:200
+msgid "quart"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:199
+msgid "quarts"
+msgstr ""
+
+#: templates/admin/translations.php:32
+msgid "Quick Tips"
+msgstr ""
+
+#: templates/settings/group-import.php:27
+msgid "Range Keyword"
+msgstr ""
+
+#: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:44
+msgid "Rate this Recipe"
+msgstr ""
+
+#: templates/public/comment-rating-form.php:56
+msgid "Rate this recipe 1 out of 5 stars"
+msgstr ""
+
+#: templates/public/comment-rating-form.php:57
+msgid "Rate this recipe 2 out of 5 stars"
+msgstr ""
+
+#: templates/public/comment-rating-form.php:58
+msgid "Rate this recipe 3 out of 5 stars"
+msgstr ""
+
+#: templates/public/comment-rating-form.php:59
+msgid "Rate this recipe 4 out of 5 stars"
+msgstr ""
+
+#: templates/public/comment-rating-form.php:60
+msgid "Rate this recipe 5 out of 5 stars"
+msgstr ""
+
+#: templates/admin/translations.php:324
+msgid "Rating"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:23
+msgid "Rating Feature"
+msgstr ""
+
+#: templates/admin/translations.php:94
+msgid "Ratings"
+msgstr ""
+
+#: templates/settings/group-unit-conversion.php:17
+msgid ""
+"Reach an international audience by providing your recipes in both Metric and "
+"US Customary units."
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-roundup-link.php:43
+msgid "Read More"
+msgstr ""
+
+#: templates/admin/translations.php:67
+msgid "Recalculate Total Time"
+msgstr ""
+
+#: templates/admin/translations.php:42
+msgid "Recipe"
+msgstr ""
+
+#: templates/settings/group-post-type.php:51
+msgid "Recipe Archive Page"
+msgstr ""
+
+#: templates/settings/group-recipe-collections.php:15 
+#: templates/admin/translations.php:236
+msgid "Recipe Collections"
+msgstr ""
+
+#: templates/settings/group-recipe-collections.php:17
+msgid ""
+"Recipe Collections allow your visitors to save the recipes on your website "
+"in their own collections and then generate a shopping list for them. Can be "
+"used for collecting favorites, meal planning and much more!"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:26
+msgid "Recipe CSS"
+msgstr ""
+
+#: templates/admin/translations.php:436
+msgid "Recipe Data Size"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:15
+msgid "Recipe Editing"
+msgstr ""
+
+#: templates/settings/group-post-type.php:24
+msgid "Recipe Existence"
+msgstr ""
+
+#: templates/admin/translations.php:357
+msgid "Recipe Fields"
+msgstr ""
+
+#: templates/settings/group-metadata.php:30
+msgid "Recipe fields"
+msgstr ""
+
+#: templates/admin/translations.php:339
+msgid "Recipe ID"
+msgstr ""
+
+#: templates/divi/includes/modules/Recipe/Recipe.php:37
+msgid "Recipe ID (required)"
+msgstr ""
+
+#: includes/public/class-wprm-print.php:282 
+#: templates/settings/group-social-sharing.php:74
+msgid "Recipe Image"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:70
+msgid "Recipe Image Size"
+msgstr ""
+
+#: templates/settings/group-metadata.php:15
+msgid "Recipe Metadata"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:95 
+#: templates/admin/translations.php:195
+msgid "Recipe Name"
+msgstr ""
+
+#: templates/admin/translations.php:136 
+#: includes/public/deprecated/class-wprm-template-helper.php:57
+msgid "Recipe Notes"
+msgstr ""
+
+#: templates/admin/translations.php:229
+msgid "Recipe Parts"
+msgstr ""
+
+#: templates/settings/group-post-type.php:63
+msgid "Recipe Permalink"
+msgstr ""
+
+#: templates/settings/group-post-type.php:20
+msgid "Recipe Post Type"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:38
+msgid "Recipe Print CSS"
+msgstr ""
+
+#: includes/public/class-wprm-comment-rating.php:309 
+#: includes/public/class-wprm-comment-rating.php:340 
+#: includes/public/class-wprm-comment-rating.php:347 
+#: templates/settings/group-recipe-ratings.php:135 
+#: includes/public/deprecated/class-wprm-template-helper.php:58
+msgid "Recipe Rating"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:15
+msgid "Recipe Roundup"
+msgstr ""
+
+#: templates/admin/translations.php:234
+msgid "Recipe Roundup Item"
+msgstr ""
+
+#: templates/settings/group-post-type.php:36
+msgid "Recipe Slug"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:15 
+#: templates/admin/translations.php:223
+msgid "Recipe Snippets"
+msgstr ""
+
+#: templates/settings/group-recipe-submission.php:15 
+#: templates/admin/translations.php:383
+msgid "Recipe Submission"
+msgstr ""
+
+#: templates/admin/translations.php:235
+msgid "Recipe Submission Form"
+msgstr ""
+
+#: templates/admin/translations.php:430
+msgid "Recipe Submission User"
+msgstr ""
+
+#: templates/admin/translations.php:382
+msgid "Recipe Submissions"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:96
+msgid "Recipe Summary"
+msgstr ""
+
+#: templates/admin/translations.php:371
+msgid "Recipe Taxonomies"
+msgstr ""
+
+#: templates/admin/translations.php:370
+msgid "Recipe Taxonomy"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:15 
+#: templates/settings/group-template-legacy.php:15
+msgid "Recipe Template"
+msgstr ""
+
+#: templates/settings/group-recipe-times.php:15
+msgid "Recipe Times"
+msgstr ""
+
+#: templates/admin/translations.php:194
+msgid "Recipe Type"
+msgstr ""
+
+#: templates/admin/translations.php:231 
+#: includes/public/deprecated/class-wprm-template-helper.php:56
+msgid "Recipe Video"
+msgstr ""
+
+#: templates/admin/translations.php:206
+msgid "recipe-slug"
+msgstr ""
+
+#: templates/admin/translations.php:95
+msgid "Recipes"
+msgstr ""
+
+#: templates/admin/translations.php:78
+msgid "Recipes only"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:45
+msgid "Recipes to Import"
+msgstr ""
+
+#: templates/admin/translations.php:79
+msgid "Recipes with their parent post"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:193
+msgid "Redirect to parent post"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:173
+msgid ""
+"Redirect visitors to the comment form instead of allowing them to vote by "
+"just clicking."
+msgstr ""
+
+#: templates/settings/group-permissions.php:23
+msgid ""
+"Redirect visitors to the homepage when trying to print a recipe that has not "
+"been published yet. Can cause problems if the parent post is not set "
+"correctly."
+msgstr ""
+
+#: templates/settings/group-performance.php:13
+msgid ""
+"Reduce DOM nodes by using one image for stars in comments. Disable to be "
+"able to use the comment star color setting."
+msgstr ""
+
+#: templates/admin/tools.php:58
+msgid "Refresh the video metadata for all recipes on your website."
+msgstr ""
+
+#: templates/admin/tools.php:53 templates/admin/tools.php:56 
+#: includes/admin/tools/class-wprm-tools-refresh-video-metadata.php:38 
+#: includes/admin/tools/class-wprm-tools-refresh-video-metadata.php:38 
+#: templates/admin/menu/tools/refresh-video-metadata.php:14
+msgid "Refresh Video Metadata"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:59
+msgid "Regular Font"
+msgstr ""
+
+#: includes/admin/classic-editor/class-wprm-shortcode-preview.php:46
+msgid "remove"
+msgstr ""
+
+#: templates/admin/translations.php:275
+msgid "Remove Affiliate Link"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:88
+msgid "Remove any links inside the recipe."
+msgstr ""
+
+#: templates/admin/translations.php:265
+msgid "Remove HTML or Shortcode"
+msgstr ""
+
+#: templates/settings/group-import.php:58
+msgid "Remove Identifier"
+msgstr ""
+
+#: templates/admin/translations.php:278
+msgid "Remove Image"
+msgstr ""
+
+#: templates/admin/translations.php:263
+msgid "Remove Link"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:87
+msgid "Remove links"
+msgstr ""
+
+#: templates/admin/translations.php:437
+msgid "Remove Notice"
+msgstr ""
+
+#: templates/admin/translations.php:62
+msgid "Remove Terms"
+msgstr ""
+
+#: templates/settings/group-import.php:59
+msgid ""
+"Remove the above ingredient notes identifier from the notes after importing."
+msgstr ""
+
+#: templates/admin/translations.php:280
+msgid "Remove Video"
+msgstr ""
+
+#: templates/admin/translations.php:283
+msgid "Remove Video Part"
+msgstr ""
+
+#: templates/admin/translations.php:345
+msgid "Rename"
+msgstr ""
+
+#: templates/admin/translations.php:151
+msgid "required"
+msgstr ""
+
+#: templates/admin/tools.php:75
+msgid "Reset Settings"
+msgstr ""
+
+#: templates/admin/tools.php:78
+msgid "Reset Settings to Default"
+msgstr ""
+
+#: templates/admin/translations.php:133
+msgid "Resting Time"
+msgstr ""
+
+#: templates/admin/translations.php:341
+msgid "Restore Recipe"
+msgstr ""
+
+#: templates/settings/group-metadata.php:62
+msgid "Restrict Ingredient Length"
+msgstr ""
+
+#: templates/admin/translations.php:355
+msgid "Revision"
+msgstr ""
+
+#: templates/admin/translations.php:435
+msgid "Revision ID"
+msgstr ""
+
+#: templates/admin/translations.php:96
+msgid "Revisions"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:89 
+#: templates/settings/group-recipe-snippets.php:118
+msgid "Right"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:52 
+#: templates/settings/group-nutrition-calculation.php:22
+msgid "Round quantity to"
+msgstr ""
+
+#: templates/admin/translations.php:316
+msgid "rows"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:104
+msgid "RSS Feed Template"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:212
+msgid "Salad"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:228 
+#: templates/settings/group-recipe-defaults.php:44
+msgid "Same author for every recipe"
+msgstr ""
+
+#: templates/admin/translations.php:183 
+#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:43 
+#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:43
+msgid "Save"
+msgstr ""
+
+#: templates/admin/translations.php:184
+msgid "Save & Close"
+msgstr ""
+
+#: includes/public/class-wprm-comment-rating.php:394
+msgid "Save changed rating"
+msgstr ""
+
+#: templates/admin/translations.php:306
+msgid "Save image locally"
+msgstr ""
+
+#: templates/admin/translations.php:378
+msgid "Saved Collection"
+msgstr ""
+
+#: templates/admin/translations.php:379
+msgid "Saved Collections"
+msgstr ""
+
+#: templates/admin/translations.php:238
+msgid "Saved Recipe Collection"
+msgstr ""
+
+#: templates/admin/translations.php:182
+msgid "Saved successfully"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:51 
+#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:51
+msgid "Saved!"
+msgstr ""
+
+#: templates/admin/menu/import/import-search.php:27
+msgid "Search finished."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:58
+msgid "Search for recipes"
+msgstr ""
+
+#: includes/admin/class-wprm-import-manager.php:61
+msgid "Search Recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-search.php:15
+msgid "Search Results"
+msgstr ""
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:27 
+#: templates/admin/menu/tools/wpurp-nutrition.php:15
+#, php-format
+msgid "Searching %d ingredient"
+msgid_plural "Searching %d ingredients"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/menu/tools/finding-parents.php:16
+#, php-format
+msgid "Searching %d post"
+msgid_plural "Searching %d posts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/menu/tools/fixing-comment-ratings.php:15
+#, php-format
+msgid "Searching %d rating"
+msgid_plural "Searching %d ratings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/menu/tools/find-ingredient-units.php:15 
+#: templates/admin/menu/tools/create-reviews.php:16 
+#: templates/admin/menu/tools/refresh-video-metadata.php:15 
+#: templates/admin/menu/tools/finding-ratings.php:18
+#, php-format
+msgid "Searching %d recipe"
+msgid_plural "Searching %d recipes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/translations.php:55
+msgid "second"
+msgstr ""
+
+#: templates/admin/translations.php:56
+msgid "seconds"
+msgstr ""
+
+#: templates/admin/translations.php:107 
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "Select"
+msgstr ""
+
+#: templates/admin/translations.php:71
+msgid "Select an action to perform:"
+msgstr ""
+
+#: templates/admin/translations.php:286
+msgid "Select from list or type to create..."
+msgstr ""
+
+#: templates/admin/translations.php:287
+msgid "Select from list..."
+msgstr ""
+
+#: templates/admin/translations.php:291
+msgid "Select Image"
+msgstr ""
+
+#: templates/admin/translations.php:240
+msgid "Select ingredients..."
+msgstr ""
+
+#: templates/admin/translations.php:106
+msgid "Select Media"
+msgstr ""
+
+#: templates/admin/translations.php:295
+msgid "Select or search a recipe"
+msgstr ""
+
+#: templates/admin/translations.php:299
+msgid "Select Roundup Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:390
+msgid "SEO"
+msgstr ""
+
+#: templates/admin/translations.php:187
+msgid "Serving Size"
+msgstr ""
+
+#: templates/admin/translations.php:201 
+#: includes/public/deprecated/class-wprm-template-helper.php:51 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:339
+msgid "Servings"
+msgstr ""
+
+#: templates/admin/translations.php:455
+msgid "Set Affiliate Link"
+msgstr ""
+
+#: templates/settings/group-media.php:64
+msgid "Set the autoplay option for uploaded (not embedded) videos."
+msgstr ""
+
+#: templates/settings/group-media.php:77
+msgid "Set the loop option for uploaded (not embedded) videos."
+msgstr ""
+
+#: includes/public/class-wprm-settings.php:63
+msgid "Settings"
+msgstr ""
+
+#: templates/settings/group-settings-tools.php:15
+msgid "Settings Tools"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:43
+msgid "Share by Email"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:43
+msgid "Share by Text"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:43
+msgid "Share on Facebook"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:43
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates/admin/translations.php:86 
+#: templates/admin/menu/tools/wpurp-ingredients.php:17
+msgid "Shopping List Group"
+msgstr ""
+
+#: templates/admin/translations.php:197
+msgid "Short description of this recipe..."
+msgstr ""
+
+#: templates/admin/translations.php:394
+msgid "Shortcode"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:81
+msgid "Should work as a background for white text"
+msgstr ""
+
+#: templates/admin/translations.php:239
+msgid "Show \"0\" in template"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:38
+msgid "Show - Aligned Center"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:37
+msgid "Show - Aligned Left"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:39
+msgid "Show - Aligned Right"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:32
+msgid "Show advanced options"
+msgstr ""
+
+#: templates/admin/translations.php:395
+msgid "Show All"
+msgstr ""
+
+#: templates/settings/group-post-type.php:94
+msgid "Show default WordPress UI"
+msgstr ""
+
+#: templates/settings/group-media.php:18 
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:108
+msgid "Show instruction media"
+msgstr ""
+
+#: templates/settings/group-metadata.php:49
+msgid "Show keywords in template"
+msgstr ""
+
+#: templates/settings/group-metadata.php:50
+msgid "Show keywords in the recipe template as well as the metadata."
+msgstr ""
+
+#: templates/settings/group-integrations.php:58
+msgid "Show label for all recipes"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:25
+msgid "Show non-food recipe types"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:77
+msgid "Show nutrient in the nutrition label when it has a value of 0."
+msgstr ""
+
+#: templates/settings/group-recipe-times.php:23
+msgid "Show time when it has a value of 0."
+msgstr ""
+
+#: templates/settings/group-recipe-times.php:22 
+#: templates/settings/group-nutrition-label.php:76
+msgid "Show values when 0"
+msgstr ""
+
+#: templates/admin/translations.php:314
+msgid "Showing"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:211
+msgid "Side Dish"
+msgstr ""
+
+#: templates/settings/group-translate.php:17
+msgid ""
+"Simplify the nutrition facts and unit conversion API workflow for non-"
+"English sites by automatically translating ingredients."
+msgstr ""
+
+#: templates/admin/translations.php:214
+msgid "Singular Name"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:100
+msgid "Size of the stars in the comment section, not in the recipe itself."
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:253
+msgid "slice"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:252
+msgid "slices"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:37
+msgid "Slider in Tooltip"
+msgstr ""
+
+#: templates/admin/translations.php:205
+msgid "Slug"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:177
+msgid ""
+"Slug used in the URL for print pages. Make sure there is no conflict with "
+"other pages!"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:214
+msgid "Snack"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:113
+msgid "Snippet Alignment"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:34
+msgid "Snippet Placement"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:15
+msgid "Social Sharing"
+msgstr ""
+
+#: templates/admin/translations.php:13
+msgid "Something went wrong during saving."
+msgstr ""
+
+#: includes/admin/class-wprm-import-manager.php:121 
+#: includes/admin/class-wprm-import-manager.php:124 
+#: templates/admin/menu/import/import-recipes.php:21 
+#: templates/admin/menu/import/import-search.php:22
+msgid "Something went wrong."
+msgstr ""
+
+#: templates/admin/translations.php:209
+msgid "Something went wrong. Make sure this key does not exist yet."
+msgstr ""
+
+#: templates/admin/translations.php:179
+msgid "Something went wrong. Please contact support."
+msgstr ""
+
+#: templates/admin/translations.php:318
+msgid "Sort:"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:209
+msgid "Soup"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:106 
+#: templates/settings/group-template-legacy.php:132
+msgid "Square"
+msgstr ""
+
+#: templates/admin/translations.php:326
+msgid "star"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:20
+msgid "Star Ratings"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:99
+msgid "Star Size"
+msgstr ""
+
+#: templates/admin/translations.php:327
+msgid "stars"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:88
+msgid "Stars Color"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:121
+msgid "Stars Position in Comment Form"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:111
+msgid "Stars Position in Comments"
+msgstr ""
+
+#: templates/settings/group-media.php:14
+msgid "Starting State"
+msgstr ""
+
+#: templates/settings/group-media.php:15
+msgid "State of the instruction media toggle when the page loads."
+msgstr ""
+
+#: templates/admin/translations.php:207
+msgid "Status"
+msgstr ""
+
+#: templates/admin/translations.php:246
+msgid "Step Summary"
+msgstr ""
+
+#: templates/admin/menu/import/import-search.php:35
+msgid "Still searching, keep this page open."
+msgstr ""
+
+#: templates/admin/translations.php:260
+msgid "Subscript"
+msgstr ""
+
+#: templates/admin/translations.php:256
+msgid "Suggestions:"
+msgstr ""
+
+#: templates/admin/translations.php:111
+msgid "Summary"
+msgstr ""
+
+#: templates/admin/translations.php:261
+msgid "Superscript"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:221
+msgid "T"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:227
+msgid "t"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:215
+msgid "tablespoon"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:214
+msgid "tablespoons"
+msgstr ""
+
+#: templates/settings/group-post-type.php:107
+msgid ""
+"Take control of the output for recipe archive pages. Disable to let your "
+"theme handle things."
+msgstr ""
+
+#: templates/settings/group-post-type.php:90 
+#: includes/admin/menu/class-wprm-admin-menu.php:74 
+#: includes/admin/menu/class-wprm-admin-menu.php:74
+msgid "Taxonomies"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:99
+msgctxt "taxonomy general name"
+msgid "Courses"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:103
+msgctxt "taxonomy general name"
+msgid "Cuisines"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:107
+msgctxt "taxonomy general name"
+msgid "Diets"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:123
+msgctxt "taxonomy general name"
+msgid "Equipment"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:119
+msgctxt "taxonomy general name"
+msgid "Ingredient Units"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:115
+msgctxt "taxonomy general name"
+msgid "Ingredients"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:111
+msgctxt "taxonomy general name"
+msgid "Keywords"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:100
+msgctxt "taxonomy singular name"
+msgid "Course"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:104
+msgctxt "taxonomy singular name"
+msgid "Cuisine"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:108
+msgctxt "taxonomy singular name"
+msgid "Diet"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:124
+msgctxt "taxonomy singular name"
+msgid "Equipment"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:116
+msgctxt "taxonomy singular name"
+msgid "Ingredient"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:120
+msgctxt "taxonomy singular name"
+msgid "Ingredient Unit"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:112
+msgctxt "taxonomy singular name"
+msgid "Keyword"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:220
+msgid "tb"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:218
+msgid "tbls"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:219
+msgid "tbs"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:217 
+#: templates/admin/translations.php:250
+msgid "tbsp"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:216
+msgid "tbsps"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:223
+msgid "teaspoon"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:222
+msgid "teaspoons"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:23
+msgid "Tell Pinterest NOT to display pins as rich pins on recipe pages."
+msgstr ""
+
+#: templates/settings/group-performance.php:34
+msgid "Template Assets Location"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:152
+msgid "Template Colors"
+msgstr ""
+
+#: includes/public/class-wprm-template-editor.php:36 
+#: templates/settings/group-recipe-roundup.php:49 
+#: templates/settings/group-template-editor.php:15 
+#: templates/settings/group-template-editor.php:23
+msgid "Template Editor"
+msgstr ""
+
+#: templates/settings/group-template-mode.php:15 
+#: templates/settings/group-template-mode.php:29 
+#: templates/settings/group-legacy.php:20
+msgid "Template Mode"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:31
+msgid "Template Options"
+msgstr ""
+
+#: templates/settings/group-post-type.php:114
+msgid "Template to output on recipe archive pages."
+msgstr ""
+
+#: templates/settings/group-links.php:97
+msgid "Term Links"
+msgstr ""
+
+#: templates/settings/group-links.php:98
+msgid ""
+"Term links can be set through the WP Recipe Maker > Manage > Recipe Fields "
+"page."
+msgstr ""
+
+#: templates/admin/translations.php:428
+msgid "Terms"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:174 
+#: templates/settings/group-recipe-snippets.php:140
+msgid "Text Color"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:38
+msgid "Text Field"
+msgstr ""
+
+#: templates/settings/group-template-legacy-labels.php:38
+msgid "Text Labels"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:56
+msgid "Text Share"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:106
+msgid "Text to output"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:157
+msgid "Thank you for voting!"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:153
+msgid "Thank You Message"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:154
+msgid ""
+"Thank you message to show after clicking on the stars. Make empty to not "
+"show anything."
+msgstr ""
+
+#: templates/settings/group-template-mode.php:23 
+#: templates/settings/group-legacy.php:21
+msgid ""
+"The \"Modern\" template mode is highly recommended. Use \"Legacy\" for "
+"backwards compatibility only."
+msgstr ""
+
+#: templates/settings/group-template-mode.php:23
+msgid "The \"Template Editor\" feature can only work in \"Modern\" mode."
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD "
+"metadata for better SEO will get you more visitors!"
+msgstr ""
+
+#: templates/admin/translations.php:475
+msgid ""
+"The estimated cost of the materials consumed when performing instructions. "
+"Used in the metadata."
+msgstr ""
+
+#: templates/admin/translations.php:289
+msgid "The image should have at least this height:"
+msgstr ""
+
+#: templates/admin/translations.php:288
+msgid "The image should have at least this width:"
+msgstr ""
+
+#: templates/settings/group-media.php:69 templates/settings/group-media.php:82
+msgid "The instruction videos"
+msgstr ""
+
+#: templates/settings/group-analytics.php:75
+msgid "The integration is currently active."
+msgstr ""
+
+#: templates/settings/group-media.php:68 templates/settings/group-media.php:81
+msgid "The main recipe video"
+msgstr ""
+
+#: templates/admin/translations.php:178
+msgid ""
+"The recipe has been copied and can be used in the \"Import from JSON\" "
+"feature."
+msgstr ""
+
+#: templates/admin/translations.php:126
+msgid "The recipe has been imported."
+msgstr ""
+
+#: templates/admin/translations.php:188
+msgid "The weight of 1 serving. Does not affect the calculation."
+msgstr ""
+
+#: templates/settings/group-analytics.php:77
+msgid "There was a problem with activating the integration:"
+msgstr ""
+
+#: templates/settings/group-legacy.php:16
+msgid ""
+"These settings are around for backwards compatibility only. We highly "
+"recommend leaving them to their default values."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:19
+msgid ""
+"These settings change the default value when you start creating a new recipe."
+msgstr ""
+
+#: templates/admin/translations.php:185
+msgid "These should be the nutrition facts for 1 serving of your recipe."
+msgstr ""
+
+#: templates/settings/group-custom-style.php:39
+msgid "This custom styling will be output on the recipe print page."
+msgstr ""
+
+#: templates/settings/group-custom-style.php:27
+msgid "This custom styling will be output on your website."
+msgstr ""
+
+#: templates/admin/translations.php:147 
+#: templates/admin/menu/import/import-overview.php:28
+msgid "This feature is only available in"
+msgstr ""
+
+#: templates/admin/translations.php:243
+msgid "This is one step of the instructions."
+msgstr ""
+
+#: templates/admin/translations.php:180
+msgid "This is taking a long time. Maybe something went wrong?"
+msgstr ""
+
+#: templates/admin/translations.php:472
+msgid "This recipe doesn't have any ingredients."
+msgstr ""
+
+#: templates/settings/group-links.php:60
+msgid ""
+"This setting only applies when the recipe uses \"Post Author\". Check the WP "
+"Recipe Maker > Settings > Recipe Defaults page to change the default."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:77
+msgid ""
+"This will show up where the %not_voted% placeholder is used, if the user has "
+"no user ratings yet."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:70
+msgid ""
+"This will show up where the %voted% placeholder is used, if the user has a "
+"user ratings vote for this recipe."
+msgstr ""
+
+#: templates/admin/translations.php:347
+msgid ""
+"This will update the unit for all recipes using it. Take note that terms are "
+"case insensitive (t and T will be seen as the same unit and both get "
+"replaced)."
+msgstr ""
+
+#: templates/admin/translations.php:170
+msgid "Times"
+msgstr ""
+
+#: templates/admin/translations.php:192
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add equipment."
+msgstr ""
+
+#: templates/admin/translations.php:156
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add ingredients."
+msgstr ""
+
+#: templates/admin/translations.php:165
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add instructions."
+msgstr ""
+
+#: templates/settings/group-import.php:30
+msgid "to"
+msgstr ""
+
+#: includes/public/shortcodes/class-wprm-shortcode-helper.php:460
+msgid "Toggle switch"
+msgstr ""
+
+#: includes/admin/class-wprm-tools-manager.php:47
+msgid "Tools"
+msgstr ""
+
+#: templates/admin/translations.php:41
+msgid "Top Recipe Interactions (last 7 days)"
+msgstr ""
+
+#: templates/admin/translations.php:33
+msgid "Total"
+msgstr ""
+
+#: templates/admin/translations.php:186
+msgid "Total servings for this recipe:"
+msgstr ""
+
+#: templates/admin/translations.php:135 
+#: includes/public/deprecated/class-wprm-template-helper.php:50 
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:347
+msgid "Total Time"
+msgstr ""
+
+#: templates/admin/translations.php:35
+msgid "Track different visitor actions related to recipes."
+msgstr ""
+
+#: templates/settings/group-analytics.php:20
+msgid ""
+"Track different visitor actions related to recipes. Might require changes to "
+"your cookie or privacy policy!"
+msgstr ""
+
+#: templates/settings/group-translate.php:15
+msgid "Translation API"
+msgstr ""
+
+#: templates/admin/translations.php:356
+msgid "Trash"
+msgstr ""
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:70
+msgid "Tried this recipe?"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:95
+msgid "Try to force a page break after every recipe when printing."
+msgstr ""
+
+#: templates/admin/translations.php:302
+msgid "Try to load details from URL"
+msgstr ""
+
+#: templates/settings/group-metadata.php:63
+msgid ""
+"Try to prevent \"Invalid string length\" warning for ingredients by not "
+"including ingredient notes if they get too long."
+msgstr ""
+
+#: templates/admin/tools.php:80
+msgid "Try using this if the settings page is not working at all."
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:226
+msgid "ts"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:225
+msgid "tsp"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:224
+msgid "tsps"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:55
+msgid "Twitter Share"
+msgstr ""
+
+#: templates/admin/translations.php:44
+msgid "Type"
+msgstr ""
+
+#: templates/settings/group-nutrition-label.php:20
+msgid ""
+"Type the [wprm-nutrition-label] or [wprm-nutrition-label id=\"123\" "
+"align=\"center\"] shortcode where you want the label to appear."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:71 
+#: templates/settings/group-template-legacy.php:78 
+#: templates/settings/group-media.php:45
+msgid "Type the name of a thumbnail size or the exact size you want."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:49 
+#: templates/settings/group-template-legacy.php:60
+msgid ""
+"Type the name of the font you'd like to use. Make sure the font is already "
+"loaded."
+msgstr ""
+
+#: templates/admin/translations.php:259
+msgid "Underline"
+msgstr ""
+
+#: templates/admin/translations.php:34
+msgid "Unique"
+msgstr ""
+
+#: templates/admin/translations.php:150
+msgid "Unit"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:45 
+#: templates/settings/group-unit-conversion.php:15 
+#: templates/admin/translations.php:148
+msgid "Unit Conversion"
+msgstr ""
+
+#: templates/settings/group-recipe-print.php:157
+msgid "Unit conversion"
+msgstr ""
+
+#: templates/settings/group-import.php:35
+msgid "Units that will be recognized. One per line."
+msgstr ""
+
+#: includes/admin/import/class-wprm-import-json.php:98 
+#: includes/admin/import/class-wprm-import-easyrecipe.php:109 
+#: includes/admin/import/class-wprm-import-wordpress.php:98 
+#: includes/admin/import/class-wprm-import-wpzoom.php:126
+msgid "Unknown"
+msgstr ""
+
+#: templates/settings/group-analytics.php:30
+msgid "Unlimited (not recommended for database growth)"
+msgstr ""
+
+#: templates/elementor/widget.php:116
+msgid "Unset selected recipe"
+msgstr ""
+
+#: templates/admin/translations.php:162
+msgid "Unused ingredients:"
+msgstr ""
+
+#: templates/admin/menu/addons.php:15
+msgid "Upgrade WP Recipe Maker"
+msgstr ""
+
+#: includes/admin/menu/class-wprm-admin-menu-addons.php:37
+msgid "Upgrade WPRM"
+msgstr ""
+
+#: templates/admin/translations.php:281
+msgid "Upload Instruction Video"
+msgstr ""
+
+#: templates/admin/translations.php:293
+msgid "Upload Video"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:112 
+#: templates/settings/group-template-legacy.php:138
+msgid "Upper Latin"
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:110 
+#: templates/settings/group-template-legacy.php:136
+msgid "Upper Roman"
+msgstr ""
+
+#: templates/admin/translations.php:307
+msgid "Use"
+msgstr ""
+
+#: templates/settings/group-metadata.php:89
+msgid ""
+"Use \"Next to recipe in HTML body element\" when your recipe is not part of "
+"the post content but placed elsewhere using custom code."
+msgstr ""
+
+#: templates/settings/group-media.php:27
+msgid ""
+"Use a lightbox plugin and enable clickable images to have your recipe and/or "
+"instruction images open in a lightbox after clicking on them."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:161
+msgid "Use Custom Hash for First Recipe on Page"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:182
+msgid "Use Custom Hash for First Video on Page"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:19
+msgid "Use Custom Styling"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:115
+msgid "Use decimal comma - 0,5"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:114
+msgid "Use decimal point - 0.5"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:236 
+#: includes/admin/class-wprm-modal.php:269 
+#: includes/admin/class-wprm-modal.php:302 
+#: includes/admin/class-wprm-modal.php:335
+msgid "Use Default"
+msgstr ""
+
+#: templates/admin/translations.php:301
+msgid "Use external recipe from a different website"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:31
+msgid "Use featured image of parent post if no recipe image is set."
+msgstr ""
+
+#: templates/admin/translations.php:233
+msgid "Use for a list of existing recipes on your website"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:84
+msgid ""
+"Use fraction symbols like ¼ where possible. Recommended for accessibility."
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:65
+msgid "Use Fractions"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:30
+msgid "Use image from parent post"
+msgstr ""
+
+#: templates/settings/group-links.php:65
+msgid "Use link for Post Author"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:72
+msgid "Use Mixed Fractions"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:260 
+#: includes/admin/class-wprm-modal.php:293 
+#: includes/admin/class-wprm-modal.php:326 
+#: templates/settings/group-links.php:115 
+#: templates/settings/group-links.php:142 
+#: templates/settings/group-links.php:169
+msgid "Use Nofollow"
+msgstr ""
+
+#: templates/admin/translations.php:271
+msgid "Use nofollow"
+msgstr ""
+
+#: templates/settings/group-links.php:28
+msgid "Use noopener for external links"
+msgstr ""
+
+#: templates/settings/group-links.php:22
+msgid "Use noreferrer for external links"
+msgstr ""
+
+#: templates/admin/translations.php:300
+msgid "Use one of your own recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:98
+msgid "Use our Find Parents tool"
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:23
+msgid "Use Post Title for Recipe Name"
+msgstr ""
+
+#: templates/settings/group-metadata.php:76
+msgid "Use regular instruction text if name is not set"
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:88 
+#: templates/settings/group-recipe-template.php:98 
+#: templates/settings/group-recipe-template.php:108 
+#: templates/settings/group-recipe-print.php:31 
+#: templates/settings/group-recipe-print.php:41 
+#: templates/settings/group-recipe-print.php:55
+msgid "Use same as Default Recipe Template"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:46
+msgid "Use SHIFT-click to (un)check multiple recipes at once."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:107
+msgid "Use shortcodes where you want the snippets to appear."
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:261 
+#: includes/admin/class-wprm-modal.php:294 
+#: includes/admin/class-wprm-modal.php:327 
+#: templates/settings/group-links.php:116 
+#: templates/settings/group-links.php:143 
+#: templates/settings/group-links.php:170
+msgid "Use Sponsored"
+msgstr ""
+
+#: templates/admin/translations.php:272
+msgid "Use sponsored"
+msgstr ""
+
+#: templates/settings/group-metadata.php:41
+msgid "Use SuitableForDiet Metadata"
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:83
+msgid "Use Symbols"
+msgstr ""
+
+#: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:45
+msgid "Use the %comments% placeholder to show the number of comments."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:18 
+#: templates/settings/group-recipe-snippets.php:91
+msgid ""
+"Use the [wprm-recipe-snippet] shortcode or automatically add a snippet at "
+"the top of your post with the setting. Can be used for the Jump to Recipe "
+"and Print Recipe buttons, for example."
+msgstr ""
+
+#: templates/admin/translations.php:117
+msgid "Use the checkboxes to indicate group headers (like Frosting and Cake)"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-date.php:41
+msgid ""
+"Use the PHP date format. Leave empty to use default WordPress date format "
+"from the Settings > General page."
+msgstr ""
+
+#: templates/settings/group-template-editor.php:16
+msgid ""
+"Use the Template Editor to manage and customize all templates on your "
+"website. Use it to alter the recipe box, recipe snippets, print version, ... "
+"to match your style!"
+msgstr ""
+
+#: templates/settings/group-links.php:74
+msgid "Use the website link as set on the user's profile page"
+msgstr ""
+
+#: templates/admin/tools.php:88
+msgid "Use these buttons to migrate from our old WP Ultimate Recipe plugin."
+msgstr ""
+
+#: templates/settings/group-recipe-template.php:76
+msgid ""
+"Use these settings to change how the recipe looks in other parts of your "
+"website:"
+msgstr ""
+
+#: templates/admin/translations.php:119
+msgid "Use these Values"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:16
+msgid ""
+"Use this feature for your recipe roundup posts and we'll automatically "
+"output ItemList metadata allowing you to show up as a carousel in Google."
+msgstr ""
+
+#: templates/divi/includes/modules/Recipe/Recipe.php:46
+msgid ""
+"Use this select to quickly find the ID of the latest recipes. You still have "
+"to fill in the Recipe ID field above"
+msgstr ""
+
+#: templates/admin/tools.php:69
+msgid ""
+"Use to make sure the WP Recipe Maker > Manage > Recipe Fields > Ingredient "
+"Units page is up to date."
+msgstr ""
+
+#: templates/admin/translations.php:292
+msgid ""
+"Use URL to the video (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or "
+"the full embed code."
+msgstr ""
+
+#: templates/settings/group-post-type.php:37
+msgid ""
+"Used as part of the URL when accessing recipes directly. Flush your "
+"permalinks after changing this setting."
+msgstr ""
+
+#: templates/settings/group-template-legacy.php:193
+msgid "Used for the color of the star ratings and other icons."
+msgstr ""
+
+#: templates/admin/translations.php:142
+msgid ""
+"Used in the recipe metadata. Can be displayed elsewhere on the page using "
+"the [wprm-recipe-video] shortcode."
+msgstr ""
+
+#: templates/admin/translations.php:138
+msgid "Used in the recipe metadata. Should be an image of the completed dish."
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:191
+msgid ""
+"Used in the recipe metadata. Should describe the recipe, but not fit in "
+"\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:184
+msgid ""
+"Used in the recipe metadata. The region associated with your recipe. "
+"Examples: French, Mediterranean, American"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:181
+msgid ""
+"Used in the recipe metadata. The type of meal or course for this recipe. "
+"Examples: dinner, entree, snack"
+msgstr ""
+
+#: includes/admin/class-wprm-modal.php:187
+msgid ""
+"Used in the recipe metadata. This is a restricted list of diets whose label "
+"can be changed on the Manage > Recipe Fields page."
+msgstr ""
+
+#: templates/admin/translations.php:380
+msgid "User Collection"
+msgstr ""
+
+#: templates/admin/translations.php:381
+msgid "User Collections"
+msgstr ""
+
+#: templates/admin/translations.php:335
+msgid "User ID"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:76
+msgid "User Not Voted"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:48 
+#: templates/admin/translations.php:330
+msgid "User Rating"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:36 
+#: templates/settings/group-recipe-ratings.php:149
+msgid "User Ratings"
+msgstr ""
+
+#: templates/admin/privacy.php:24
+msgid "User submitted data is stored indefinitely in the local database."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:69
+msgid "User Voted"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:249
+msgid "Vegan"
+msgstr ""
+
+#: includes/public/class-wprm-taxonomies.php:250
+msgid "Vegetarian"
+msgstr ""
+
+#: templates/settings/group-media.php:52 templates/admin/translations.php:141
+msgid "Video"
+msgstr ""
+
+#: templates/admin/translations.php:18
+msgid "Video tutorials and walkthroughs"
+msgstr ""
+
+#: templates/admin/translations.php:413
+msgid "View Parent Post"
+msgstr ""
+
+#: templates/admin/translations.php:30
+msgid "View Recipe"
+msgstr ""
+
+#: templates/admin/translations.php:433
+msgid "View Revision"
+msgstr ""
+
+#: templates/admin/translations.php:471
+msgid "Visitor Details"
+msgstr ""
+
+#: templates/admin/translations.php:470
+msgid "Visitor UID"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:59 
+#: templates/settings/group-recipe-ratings.php:65 
+#: templates/admin/translations.php:424 
+#: includes/public/deprecated/class-wprm-template-helper.php:240
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/translations.php:425
+msgid "votes"
+msgstr ""
+
+#: templates/admin/translations.php:193
+msgid "Warning!"
+msgstr ""
+
+#: templates/admin/translations.php:290
+msgid ""
+"Warning! We recommend making sure the image meets the following requirements:"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:14
+msgid ""
+"Warning: comment ratings cannot work with the Jetpack Comments feature you "
+"have activated."
+msgstr ""
+
+#: templates/admin/translations.php:432
+msgid "Was not a Recipe Submission"
+msgstr ""
+
+#: templates/admin/translations.php:431
+msgid "Was Recipe Submission"
+msgstr ""
+
+#: templates/admin/translations.php:352
+msgid "We could not find a term with that ID."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:92
+msgid ""
+"We recommend going through all of these recipes to make sure the import "
+"process was successful. Pay attention to the different ingredient parts to "
+"be able to make use of all of our features."
+msgstr ""
+
+#: templates/admin/translations.php:366
+msgid ""
+"We were not able to create this equipment. Make sure it does not exist yet."
+msgstr ""
+
+#: templates/admin/translations.php:360
+msgid ""
+"We were not able to create this ingredient. Make sure it does not exist yet."
+msgstr ""
+
+#: templates/admin/translations.php:368
+msgid "We were not able to create this term. Make sure it does not exist yet."
+msgstr ""
+
+#: templates/admin/translations.php:364
+msgid "We were not able to create this unit. Make sure it does not exist yet."
+msgstr ""
+
+#: templates/admin/translations.php:444
+msgid "What do you want the plural to be for"
+msgstr ""
+
+#: templates/admin/translations.php:439
+msgid "What do you want the slug to be for"
+msgstr ""
+
+#: templates/admin/translations.php:365
+msgid "What do you want to be the name of this new equipment?"
+msgstr ""
+
+#: templates/admin/translations.php:359
+msgid "What do you want to be the name of this new ingredient?"
+msgstr ""
+
+#: templates/admin/translations.php:367
+msgid "What do you want to be the name of this new term?"
+msgstr ""
+
+#: templates/admin/translations.php:363
+msgid "What do you want to be the name of this new unit?"
+msgstr ""
+
+#: templates/admin/translations.php:465
+msgid "What do you want to be the new grid link for"
+msgstr ""
+
+#: templates/admin/translations.php:446
+msgid "What do you want to be the new group for"
+msgstr ""
+
+#: templates/admin/translations.php:456
+msgid "What do you want to be the new link for"
+msgstr ""
+
+#: templates/admin/translations.php:346
+msgid "What do you want to be the new name for"
+msgstr ""
+
+#: templates/admin/translations.php:349
+msgid "What is the ID of the term you want the merge"
+msgstr ""
+
+#: templates/settings/group-post-type.php:64
+msgid ""
+"What to link to for a recipe. This is relevant for the roundup feature, grid "
+"integration and other plugins that might link to a recipe."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:92
+msgid "What to use for the pin description."
+msgstr ""
+
+#: templates/admin/privacy.php:16
+msgid ""
+"When comment ratings are enabled we store the rating a user has given to a "
+"recipe along with the personal data WordPress core stores."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:24
+msgid ""
+"When creating a new recipe inside a post, use its title as the default name "
+"value."
+msgstr ""
+
+#: templates/settings/group-adjustable-servings.php:73
+msgid "When enabled it will use 1 1/4 instead of 5/4."
+msgstr ""
+
+#: templates/settings/group-metadata.php:100
+msgid ""
+"When enabled, only the metadata for the very first food recipe on the page "
+"well get added."
+msgstr ""
+
+#: templates/admin/privacy.php:18
+msgid ""
+"When user ratings are enabled we store a WPRM_User_Voted_%recipe% cookie "
+"(with %recipe% the ID of the recipe) that contains the rating this user has "
+"given to a particular recipe. This cookie is used as (one of the) measures "
+"to prevent rating spam."
+msgstr ""
+
+#: templates/admin/privacy.php:20
+msgid ""
+"When user ratings are enabled we store the IP address upon voting. This is "
+"used as (one of the) measures to prevent rating spam."
+msgstr ""
+
+#: templates/settings/group-recipe-defaults.php:99
+msgid ""
+"When using fractions in the ingredient amount field, automatically replace "
+"with their symbol if available. Recommended for accessibility."
+msgstr ""
+
+#: templates/admin/privacy.php:22
+msgid ""
+"With the Recipe Submission feature personal data can be collected, depending "
+"on the fields that were added to the form. This can include the user email "
+"and name. When using the reCAPTCHA feature you will be agreeing to their "
+"terms of use and privacy policy."
+msgstr ""
+
+#. Name of the plugin
+msgid "WP Recipe Maker"
+msgstr ""
+
+#: templates/admin/translations.php:23
+msgid "WP Recipe Maker Facebook Group"
+msgstr ""
+
+#: includes/public/class-wprm-template-shortcodes.php:213 
+#: templates/settings/structure.php:13
+msgid "WP Recipe Maker Premium only"
+msgstr ""
+
+#: templates/admin/tools.php:15
+msgid "WP Recipe Maker Tools"
+msgstr ""
+
+#: templates/admin/tools.php:87
+msgid "WP Ultimate Recipe Migration"
+msgstr ""
+
+#: includes/public/class-wprm-settings.php:63
+msgid "WPRM Settings"
+msgstr ""
+
+#: includes/public/class-wprm-template-editor.php:36
+msgid "WPRM Template Editor"
+msgstr ""
+
+#: includes/admin/class-wprm-tools-manager.php:47
+msgid "WPRM Tools"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:239
+msgid "yard"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:238
+msgid "yards"
+msgstr ""
+
+#: includes/public/class-wprm-recipe-parser.php:240
+msgid "yd"
+msgstr ""
+
+#: templates/admin/translations.php:312
+msgid "Yes"
+msgstr ""
+
+#: templates/admin/translations.php:200
+msgid "Yield"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:81
+msgid "You can set the pin image when editing a recipe."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:107
+msgid "You can use the following placeholders:"
+msgstr ""
+
+#: templates/admin/translations.php:473
+msgid ""
+"You don't have the servings field set for your recipe under \"General\"."
+msgstr ""
+
+#: templates/admin/translations.php:48
+msgid "You just missed the deadline!"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:162
+msgid "You need to enable the Comment Ratings feature to use this option."
+msgstr ""
+
+#: templates/admin/translations.php:369
+msgid "Your Custom Fields"
+msgstr ""
+
+#: templates/settings/group-integrations.php:36
+msgid "Your My Emissions API Key"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:72
+msgid "Your vote:"
+msgstr ""

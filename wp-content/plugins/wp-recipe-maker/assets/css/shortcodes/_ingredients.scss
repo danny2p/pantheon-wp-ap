@@ -1,0 +1,55 @@
+.wprm-recipe-ingredients-container {
+    .wprm-recipe-ingredient-group-name {
+        margin-top: 0.8em !important;
+    }
+    
+    .wprm-recipe-ingredient-notes-faded {
+        opacity: 0.7;
+    }
+    .wprm-recipe-ingredient-notes-smaller {
+        font-size: 0.8em;
+    }
+    .wprm-recipe-ingredient-notes-smaller-faded {
+        opacity: 0.7;
+        font-size: 0.8em;
+    }
+}
+
+.wprm-ingredient-style-table-2,
+.wprm-ingredient-style-table-2-align,
+.wprm-ingredient-style-table-3,
+.wprm-ingredient-style-table-3-align {
+    li.wprm-recipe-ingredient {
+        display: flex;
+
+        .wprm-recipe-ingredient-amount-unit {
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+    }
+}
+.wprm-ingredient-style-table-2-align,
+.wprm-ingredient-style-table-3-align {
+    .wprm-recipe-ingredient-amount-unit {
+        text-align: right;
+    }
+}
+.wprm-ingredient-style-table-2,
+.wprm-ingredient-style-table-2-align {
+    li.wprm-recipe-ingredient {
+        .wprm-recipe-ingredient-name-notes {
+            flex: 1;
+        }
+    }
+}
+.wprm-ingredient-style-table-3,
+.wprm-ingredient-style-table-3-align {
+    li.wprm-recipe-ingredient {
+        .wprm-recipe-ingredient-name {
+            margin-right: 10px;
+        }
+        .wprm-recipe-ingredient-notes {
+            flex: 1;
+        }
+    }
+}

@@ -1,0 +1,337 @@
+#wpbody-content > *:not(#wprm-settings),
+#wpfooter {
+    display: none;
+}
+
+#update-nag,
+.update-nag,
+.updated,
+.error,
+.is-dismissible {
+    display: none;
+}
+
+.rtl {
+    #wprm-settings-menu {
+        .wprm-settings-menu-group {
+            .wprm-settings-icon {
+                margin-right: 0;
+                margin-left: 2px;
+            }
+        }
+    }
+    
+    #wprm-settings-container {
+        .wprm-setting-required {
+            border-radius: 3px;
+            margin-left: 0;
+        }
+    }
+
+    .wprm-settings-scroll-to-top {
+        left: 20px;
+        right: initial;
+    }
+}
+
+#wprm-settings-buttons, {
+    margin-bottom: 20px;
+}
+
+#wprm-settings-menu,
+.wprm-settings-group {
+    background-color: white;
+    border-radius: 5px;
+
+    .wprm-settings-menu-group,
+    .wprm-settings-subgroup, {
+        padding: 6px;
+        border-bottom: 1px solid #ddd;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+#wprm-settings-menu {
+    .wprm-settings-menu-header {
+        padding: 10px;
+        padding-bottom: 5px;
+        text-align: center;
+        font-weight: 300;
+        font-size: 1.2em;
+    }
+
+    .wprm-settings-menu-group {
+        display: block;
+        text-decoration: none;
+        color: #444;
+        cursor: pointer;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        &:last-child {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        &.active {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+
+        .wprm-settings-noicon {
+            display: inline-block;
+            width: 18px;
+        }
+        .wprm-settings-icon {
+            vertical-align: middle;
+            margin-right: 2px;
+            position: relative;
+            top: 1px;
+
+            svg {
+                fill: #ddd;
+            }
+        }
+    }
+}
+
+#wprm-settings-buttons {
+    text-align: center;
+    padding-top: 10px;
+
+    background-color: white;
+    border-radius: 5px;
+
+    button {
+        display: inline-block;
+        margin: 0 3px;
+        margin-bottom: 10px;
+    }
+}
+
+#wprm-settings-container {
+    .wprm-settings-group {
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+
+        & > .wprm-setting-documentation,
+        & > .wprm-settings-group-container {
+            padding: 25px;
+            padding-bottom: 0;
+        }
+    }
+
+    .wprm-setting-required {
+        background-color: darkred;
+        color: white;
+
+        padding: 3px 5px;
+        margin-left: -10px;
+        margin-right: 5px;
+
+        border-radius: 3px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        text-decoration: none;
+        font-weight: normal;
+        font-size: 0.8em;
+    }
+
+    .wprm-settings-group > .wprm-setting-required {
+        display: block;
+        font-size: 1.2em;
+        border-radius: 3px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 6px 10px;
+        margin: 0;
+    }
+
+    .wprm-settings-group-name,
+    .wprm-settings-subgroup-name {
+        text-align: center;
+    }
+    .wprm-settings-group-name {
+        padding: 20px 10px 0 10px;
+        padding-bottom: 0;
+        margin: 5px 0;
+        font-size: 1.8em;
+        font-weight: 400;
+    }
+    .wprm-settings-subgroup-name {
+        margin: 5px 0 15px 0;
+        font-size: 1.6em;
+        font-weight: 300;
+    }
+
+    .wprm-settings-group-description {
+        padding: 10px 25px 0 25px;
+    }
+
+    .wprm-settings-group-description,
+    .wprm-settings-subgroup-description {
+        font-style: italic;
+    }
+
+    .wprm-settings-subgroup-description + .wprm-settings-group-container,
+    .wprm-settings-subgroup-description + .wprm-setting-documentation + .wprm-settings-group-container {
+        margin-top: 20px;
+    }
+
+    .wprm-setting-container {
+        margin-bottom: 25px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .wprm-setting-label {
+            display: block;
+            font-weight: bold;
+        }
+        .wprm-setting-description {
+            display: block;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        .wprm-setting-input-container {
+            margin-top: 5px;
+
+            input {
+                &[type=text],
+                &[type=email],
+                &[type=number] {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.wprm-settings-scroll-to-top {
+    background-color: #444;
+    border-radius: 100%;
+    
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 30px;
+    height: 30px;
+    text-align: center;
+
+    .wprm-settings-icon {
+        position: relative;
+        top: 7px;
+
+        path {
+            fill: white;
+            stroke: white;
+        }
+    }
+}
+
+.wprm-settings-error {
+    color: darkred;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 783px) {
+    .rtl {
+        #wprm-settings-container {
+            margin-right: 225px;
+            margin-left: 0;
+    
+            .wprm-settings-subgroup-name {
+                text-align: right;
+            }
+
+            .wprm-setting-required {
+                margin-right: 5px;
+                margin-left: 0;
+            }
+    
+            .wprm-setting-label-container {
+                margin-left: 5%;
+                margin-right: 0;
+            }
+        }
+    }
+
+    #wprm-settings-sidebar {
+        position: fixed;
+        width: 200px;
+        height: 100%;
+        max-height: calc(100% - 50px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    #wprm-settings-menu {
+        flex: 1;
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    #wprm-settings-container {
+        margin-left: 225px;
+        padding-bottom: 70%;
+
+        .wprm-settings-subgroup-name {
+            text-align: left;
+        }
+
+        .wprm-settings-subgroup {
+            padding: 25px;
+            padding-top: 10px;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+
+        .wprm-setting-required {
+            margin-left: -25px;
+        }
+
+        .wprm-setting-label-container,
+        .wprm-setting-input-container {
+            vertical-align: top;
+        }
+
+        .wprm-setting-label-container {
+            display: inline-block;
+            width: 45%;
+            margin-right: 5%;
+        }
+        .wprm-setting-input-container {
+            display: inline-block;
+            width: 50%;
+        }
+    }
+
+    .wprm-settings-scroll-to-top {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .rtl {
+        #wprm-settings-container {
+            margin-right: 275px;
+            margin-left: 0;
+        }
+    }
+    #wprm-settings-sidebar {
+        width: 250px;
+    }
+
+    #wprm-settings-container {
+        margin-left: 275px;
+    }
+}

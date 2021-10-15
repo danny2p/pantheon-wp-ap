@@ -1,0 +1,44 @@
+.wprm-admin-modal-field-image,
+.wprm-admin-modal-field-video {
+
+    .wprm-admin-modal-field-image-preview,
+    .wprm-admin-modal-field-video-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 150px;      
+
+        img {
+            cursor: pointer;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .button {
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    textarea {
+        min-height: 110px;
+    }
+}
+
+@media screen and (min-width: 782px) {
+    #wprm-admin-modal-fields-group-media {
+        .wprm-admin-modal-fields {
+            display: flex;
+
+            .wprm-admin-modal-field-container {
+                flex: 1;
+                flex-direction: column;
+
+                .wprm-admin-modal-field-label {
+                    width: auto;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

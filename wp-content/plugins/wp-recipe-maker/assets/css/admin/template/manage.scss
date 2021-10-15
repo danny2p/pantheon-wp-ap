@@ -1,0 +1,89 @@
+.wprm-manage-templates-type-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin: 20px -10px 0 -10px;
+
+    &:nth-of-type(2) {
+        margin-top: -10px;
+    }
+
+    .wprm-manage-templates-type {
+        padding: 10px 20px;
+        margin: 10px;
+        border: 1px dashed #999;
+        border-radius: 5px;
+
+        max-width: 200px;
+        text-align: center;
+        cursor: pointer;
+
+        &.wprm-manage-templates-type-selected,
+        &:hover {
+            border-style: solid;
+            border-color: #444;
+        }
+
+        &.wprm-manage-templates-type-selected {
+            background-color: #ddd;
+        }
+
+        .wprm-manage-templates-type-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .wprm-manage-templates-type-description {
+            font-style: italic;
+            font-size: 0.9em;
+        }
+    }
+}
+
+.wprm-manage-templates-import {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.wprm-manage-templates-template {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px dashed #999;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &.wprm-manage-templates-template-selected,
+    &:hover {
+        border-style: solid;
+        border-color: #444;
+    }
+
+    &.wprm-manage-templates-template-selected {
+        background-color: #ddd;
+        font-weight: bold;
+    }
+
+    &.wprm-manage-templates-template-premium {
+        color: darkred;
+        border-color: darkred;
+    }
+}
+
+.wprm-manage-templates-template-fields {
+    text-align: center;
+    margin: 10px 0;
+}
+.wprm-manage-templates-template-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+        margin: 0 5px !important;
+    }
+}

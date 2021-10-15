@@ -1,0 +1,38 @@
+.wprm-admin-onboarding-accordion-container {
+    .wprm-admin-onboarding-accordion {
+        border: 1px solid #ccc;
+
+        .accordion__item + .accordion__item {
+            border-top: 1px solid #ccc;
+        }
+
+        .accordion__button {
+            box-sizing: border-box;
+            background-color: white;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            font-size: 17px;
+
+            &[aria-expanded='true'],
+            &[aria-selected='true'] {
+                font-weight: bold;
+            }
+        }
+
+        .accordion__panel {
+            background-color: white;
+            padding: 10px;
+
+            p:first-child {
+                margin-top: 0 !important;
+            }
+            p:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}

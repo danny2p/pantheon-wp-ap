@@ -1,0 +1,18 @@
+.wprm-recipe-template-blend-in {
+	max-width: none; /* wprm_max_width type=size */
+	background-color: #ffffff; /* wprm_background type=color */
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 0px; /* wprm_border_width type=size */
+	border-color: #ffffff; /* wprm_border type=color */
+	border-radius: 0px; /* wprm_border_radius type=size */
+	padding: 0px;
+}
+.wprm-recipe-template-blend-in-name-stars-container {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 150px;
+    align-items: center;
+}
+.wprm-recipe-template-blend-in-name-stars-container .wprm-recipe-rating {
+	margin-left: 5px;
+}

@@ -1,0 +1,18 @@
+.wprm-recipe-template-snippet-basic-buttons {
+    font-family: inherit; /* wprm_font_family type=font */
+    font-size: 0.9em; /* wprm_font_size type=font_size */
+    text-align: center; /* wprm_text_align type=align */
+    margin-top: 0px; /* wprm_margin_top type=size */
+    margin-bottom: 10px; /* wprm_margin_bottom type=size */
+}
+.wprm-recipe-template-snippet-basic-buttons a  {
+    margin: 5px; /* wprm_margin_button type=size */
+    margin: 5px; /* wprm_margin_button type=size */
+}
+
+.wprm-recipe-template-snippet-basic-buttons a:first-child {
+    margin-left: 0;
+}
+.wprm-recipe-template-snippet-basic-buttons a:last-child {
+    margin-right: 0;
+}

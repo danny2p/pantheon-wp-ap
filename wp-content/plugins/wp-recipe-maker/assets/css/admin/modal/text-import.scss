@@ -1,0 +1,76 @@
+.wprm-admin-modal-field-text-import-container {
+    padding: 10px;
+    overflow: scroll;
+
+    h2 {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .wprm-admin-modal-field-text-import-selection {
+        .wprm-admin-modal-field-text-import-buttons {
+            margin: -2px;
+            margin-bottom: 7px;
+    
+            button {
+                margin: 2px;
+
+                &.wprm-selection-made {
+                    border-color: darkgreen;
+                    background-color: #bdffc2;
+                }
+            }
+        }
+    
+        textarea {
+            height: 400px;
+        }
+    }
+
+    .wprm-admin-modal-field-text-import-equipment-field {
+        margin: 5px 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .wprm-admin-modal-field-text-import-groups {
+        p {
+            margin-top: 10px;
+        }
+
+        .wprm-admin-modal-field-text-import-groups-field {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+
+            input[type="text"] {
+                flex: auto;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-field-text-import-container {
+        .wprm-admin-modal-field-text-import-selection {
+            display: flex;
+
+            .wprm-admin-modal-field-text-import-buttons {
+                display: flex;
+                flex-direction: column;
+
+                flex-shrink: 0;
+                width: 180px;
+                margin: 0;
+                padding-right: 20px;
+            }
+
+            textarea {
+                flex: auto;
+            }
+        }
+    }
+}

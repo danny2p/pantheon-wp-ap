@@ -1,0 +1,58 @@
+.wprm-admin-modal-field-edit-mode-container {
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+
+    .wprm-admin-modal-field-edit-mode {
+        display: block;
+        margin: 5px;
+        text-align: center;
+        text-decoration: none;
+        opacity: 0.7;
+
+        &:hover,
+        &.wprm-admin-modal-field-edit-mode-selected {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        &.wprm-admin-modal-field-edit-mode-selected {
+            font-weight: bold;
+        }
+    }
+}
+
+
+@media screen and (min-width: 500px) {
+    .wprm-admin-modal-field-edit-mode-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-field-edit-mode-container {
+        margin-top: 0;
+        justify-content: flex-start;
+        border-bottom: 1px solid #999;
+
+        .wprm-admin-modal-field-edit-mode {
+            padding: 5px 10px 3px;
+            margin-top: 0;
+            margin-bottom: -1px;
+    
+            &:hover,
+            &.wprm-admin-modal-field-edit-mode-selected {
+                text-decoration: none;
+            }
+    
+            &.wprm-admin-modal-field-edit-mode-selected {
+                border: 1px solid #999;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-bottom-color: white;
+            }
+        }
+    }
+}

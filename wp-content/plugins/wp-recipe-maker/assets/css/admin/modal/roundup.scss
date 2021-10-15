@@ -1,0 +1,29 @@
+.wprm-admin-modal-roundup {
+    max-width: 600px;
+
+    .wprm-admin-modal-roundup-container {
+        padding: 10px;
+        padding-top: 0;
+
+        &.wprm-admin-modal-roundup-container-external {
+            overflow: scroll;
+        }
+
+        .wprm-admin-modal-roundup-field-label {
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .wprm-admin-modal-roundup-field-load-details-container {
+            font-size: 12px;
+        }
+
+        .wprm-admin-modal-roundup-field-nofollow-container,
+        .wprm-admin-modal-roundup-field-new-tab-container {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

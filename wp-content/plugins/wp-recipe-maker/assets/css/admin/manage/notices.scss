@@ -1,0 +1,28 @@
+.wprm-admin-manage-notices {
+    .wprm-admin-notice {
+        margin-bottom: 15px;
+
+        background-color: white;
+        border: 1px solid #0073aa;
+        border-radius: 4px;
+        padding: 10px;
+
+        display: flex;
+        align-items: center;
+
+        .wprm-admin-notice-content {
+            flex: 1;
+
+            .wprm-admin-notice-title {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+        }
+
+        .wprm-admin-notice-dismiss {
+            .wprm-admin-icon {
+                opacity: 1;
+            }
+        }
+    }
+}

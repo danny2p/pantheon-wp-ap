@@ -1,0 +1,51 @@
+#wprm-template-main {
+    .wprm-main-container-preview {
+        max-width: 600px;
+        margin: 0 auto;
+
+        &, & > p {
+            font-size: 16px;
+        }
+
+        .wprm-main-container-preview-recipe {
+            font-size: 14px;
+            margin: 15px auto 0;
+            width: 100%;
+            max-width: 300px;
+            z-index: 99;
+        }
+
+        .wprm-preview-snippet-recipe-box {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #444;
+        }
+    }
+    .CodeMirror {
+        margin-top: 10px;
+        height: 350px;
+        border: 1px solid #ddd;
+    }
+
+    .wprm-template-block-hovering {
+        outline: 2px dashed blue;
+        outline-offset: 2px;
+    }
+
+    &.wprm-template-main-add {
+        .wprm-template-block-hovering {
+            outline-color: green;
+        }
+    }
+
+    &.wprm-template-main-remove {
+        .wprm-template-block-hovering {
+            outline-color: red;
+        }
+    }
+
+    .wprm-template-editor-premium-only {
+        color: darkred;
+        font-style: italic;
+    }
+}

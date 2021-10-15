@@ -1,0 +1,214 @@
+.wprm-recipe-block-container-inline {
+    display: inline-block;
+    margin-right: 1.2em;
+}
+
+.rtl .wprm-recipe-block-container-inline {
+    margin-right: 0;
+    margin-left: 1.2em;
+}
+
+.wprm-recipe-block-container-separate {
+    display: block;
+}
+.wprm-recipe-block-container-separated {
+	display: block;
+
+	.wprm-recipe-details-label {
+		display: block;
+	}
+}
+
+.wprm-recipe-block-container-columns {
+    display: block;
+
+    .wprm-recipe-details-label {
+        display: inline-block;
+        min-width: 130px;
+    }
+}
+
+.wprm-recipe-details-container-inline {
+	display: inline;
+}
+
+.wprm-recipe-details-container-table {
+	display: flex;
+
+	border: 1px dotted #666;
+	padding: 5px;
+	margin: 5px 0;
+
+	.wprm-recipe-block-container-table {
+		flex: 1;
+
+		display: flex;
+		flex-direction: column;
+
+		text-align: center;
+	}
+
+	&.wprm-recipe-table-borders-top-bottom {
+		border-left: none !important;
+		border-right: none !important;
+	}
+	&.wprm-recipe-table-borders-left-right {
+		border-top: none !important;
+		border-bottom: none !important;
+	}
+	&.wprm-recipe-table-borders-top {
+		border-left: none !important;
+		border-right: none !important;
+		border-bottom: none !important;
+	}
+	&.wprm-recipe-table-borders-bottom {
+		border-left: none !important;
+		border-right: none !important;
+		border-top: none !important;
+	}
+	&.wprm-recipe-table-borders-left {
+		border-right: none !important;
+		border-top: none !important;
+		border-bottom: none !important;
+	}
+	&.wprm-recipe-table-borders-right {
+		border-left: none !important;
+		border-top: none !important;
+		border-bottom: none !important;
+	}
+
+}
+
+@media all and (min-width: 451px) {
+	.wprm-recipe-table-borders-empty {
+		.wprm-recipe-block-container-table {
+			border-top: none !important;
+			border-bottom: none !important;
+			border-left: none !important;
+			border-right: none !important;
+		}
+	}
+
+	.wprm-recipe-table-borders-inside {
+		.wprm-recipe-block-container-table {
+			border-top: none !important;
+			border-bottom: none !important;
+			border-right: none !important;
+	
+			&:first-child {
+				border-left: none !important;
+			}
+		}
+	}
+
+	.rtl .wprm-recipe-table-borders-inside {
+		.wprm-recipe-block-container-table {
+			border-left: none !important;
+	
+			&:first-child {
+				border-right: none !important;
+			}
+		}
+	}
+}
+
+@media all and (max-width: 450px) {
+    .wprm-recipe-details-container-table {
+		display: block;	
+		border: none !important;
+		padding: 0;
+		margin: 5px 0;
+
+		&.wprm-recipe-table-borders-none {
+			display: flex;
+			flex-wrap: wrap;
+
+			.wprm-recipe-block-container-table {
+				min-width: 120px;
+				max-width: 100%;
+			}
+		}
+	
+		.wprm-recipe-block-container-table {
+			padding: 5px;
+		}
+
+		&.wprm-recipe-table-borders-all {
+			.wprm-recipe-block-container-table {
+				&:not(:first-child) {
+					border-top: none !important;
+				}
+			}
+		}
+
+		&.wprm-recipe-table-borders-top-bottom {
+			.wprm-recipe-block-container-table {
+				border-left: none !important;
+				border-right: none !important;
+		
+				&:not(:first-child) {
+					border-top: none !important;
+				}
+			}
+		}
+		&.wprm-recipe-table-borders-left-right {
+			.wprm-recipe-block-container-table {
+				border-top: none !important;
+				border-bottom: none !important;
+			}
+		}
+		&.wprm-recipe-table-borders-top {
+			.wprm-recipe-block-container-table {
+				border-bottom: none !important;
+				border-left: none !important;
+				border-right: none !important;
+
+				&:not(:first-child) {
+					border-top: none !important;
+				}
+			}
+		}
+		&.wprm-recipe-table-borders-bottom {
+			.wprm-recipe-block-container-table {
+				border-top: none !important;
+				border-left: none !important;
+				border-right: none !important;
+
+				&:not(:last-child) {
+					border-bottom: none !important;
+				}
+			}
+		}
+		&.wprm-recipe-table-borders-left {
+			.wprm-recipe-block-container-table {
+				border-top: none !important;
+				border-bottom: none !important;
+				border-right: none !important;
+			}
+		}
+		&.wprm-recipe-table-borders-right {
+			.wprm-recipe-block-container-table {
+				border-top: none !important;
+				border-bottom: none !important;
+				border-left: none !important;
+			}
+		}
+	}
+
+	.wprm-recipe-block-container-columns {	
+		.wprm-recipe-details-label {
+			min-width: 0;
+			margin-right: 0.4em;
+		}
+	}
+}
+
+.wprm-recipe-details-unit {
+	font-size: 0.8em;
+}
+
+@media only screen and (max-width: 600px) {
+	.wprm-recipe-details-unit {
+		font-size: 1em;
+	}
+}

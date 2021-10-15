@@ -1,0 +1,84 @@
+.wprm-admin-dashboard-tips-container {
+    margin: -10px;
+    padding-bottom: 13px;
+
+    display: flex;
+    align-items: center;
+
+    .wprm-admin-dashboard-tips-prev,
+    .wprm-admin-dashboard-tips-next {
+        width: 30px;
+
+        text-align: center;
+        font-size: 16px;
+        
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0.3;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+    }
+
+    .wprm-admin-dashboard-tips {
+        height: 100px;
+        flex: 1;
+
+        .wprm-admin-dashboard-tip-container {
+            display: none;
+            
+            &.wprm-admin-dashboard-tip-container-active {
+                display: flex;
+            }
+    
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .wprm-admin-dashboard-tip {
+            text-align: center;
+            
+            width: 80%;
+            max-width: 550px;
+
+            max-height: 90%;
+            overflow-y: scroll;
+        }
+    }
+}
+
+.wprm-admin-dashboard-tips-progress {
+    height: 2px;
+    margin: -10px;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+
+    .wprm-admin-dashboard-tips-progress-bar {
+        height: 100%;
+        background-color: #2271b1;        
+    }
+    .wprm-admin-dashboard-tips-progress-bar-odd {
+        animation: progressBarOdd 15s linear;
+    }
+    .wprm-admin-dashboard-tips-progress-bar-even {
+        animation: progressBarEven 15s linear;
+        float: right;
+    }
+}
+
+@keyframes progressBarOdd {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+@keyframes progressBarEven {
+    0% { width: 100% }
+    100% { width: 0; }
+}

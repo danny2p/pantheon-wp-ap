@@ -1,0 +1,32 @@
+.wprm-icon-decoration-line,
+.wprm-header-decoration-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.wprm-align-left {
+        .wprm-decoration-line {
+            margin-left: 15px;
+        }
+    }
+    &.wprm-align-right {
+        .wprm-decoration-line {
+            margin-right: 15px;
+        }
+    }
+    &.wprm-align-center {
+        .wprm-decoration-line:first-child {
+            margin-right: 15px;
+        }
+        .wprm-decoration-line:last-child {
+            margin-left: 15px;
+        }
+    }
+}
+
+.wprm-decoration-line {
+    flex: auto;
+    height: 1px;
+
+    border-bottom: 1px solid black
+}

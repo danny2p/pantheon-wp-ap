@@ -1,0 +1,1378 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recipe Maker v1.11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-14 13:51+0000\n"
+"PO-Revision-Date: 2017-01-29 10:30+0000\n"
+"Last-Translator: Navarro (http://navarradas.com)\n"
+"Language-Team: Spanish (Spain)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+"Language: es-ES\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: includes/admin/class-wprm-import-manager.php:50 
+#: includes/admin/class-wprm-import-manager.php:51 
+#: templates/admin/menu/import/import-overview.php:15
+msgid "Import Recipes"
+msgstr "Importar Recetas"
+
+#: includes/admin/class-wprm-import-manager.php:52
+msgid "Search Recipes"
+msgstr "Buscar Recetas"
+
+#: includes/admin/class-wprm-recipe-parser.php:148
+msgid "kilograms"
+msgstr "kilogramos"
+
+#: includes/admin/class-wprm-recipe-parser.php:149
+msgid "kilogram"
+msgstr "kilogramo"
+
+#: includes/admin/class-wprm-recipe-parser.php:150
+msgid "kg"
+msgstr "kg"
+
+#: includes/admin/class-wprm-recipe-parser.php:151
+msgid "grams"
+msgstr "gramos"
+
+#: includes/admin/class-wprm-recipe-parser.php:152
+msgid "gram"
+msgstr "gramo"
+
+#: includes/admin/class-wprm-recipe-parser.php:153
+msgid "gr"
+msgstr "gr"
+
+#: includes/admin/class-wprm-recipe-parser.php:154 
+#: includes/public/class-wprm-metadata.php:164
+msgid "g"
+msgstr "g"
+
+#: includes/admin/class-wprm-recipe-parser.php:155
+msgid "milligrams"
+msgstr "miligramos"
+
+#: includes/admin/class-wprm-recipe-parser.php:156
+msgid "milligram"
+msgstr "miligramo"
+
+#: includes/admin/class-wprm-recipe-parser.php:157 
+#: includes/public/class-wprm-metadata.php:169
+msgid "mg"
+msgstr "mg"
+
+#: includes/admin/class-wprm-recipe-parser.php:158
+msgid "pounds"
+msgstr "libras"
+
+#: includes/admin/class-wprm-recipe-parser.php:159
+msgid "pound"
+msgstr "libra"
+
+#: includes/admin/class-wprm-recipe-parser.php:160
+msgid "lbs"
+msgstr "lbs"
+
+#: includes/admin/class-wprm-recipe-parser.php:161
+msgid "lb"
+msgstr "lb"
+
+#: includes/admin/class-wprm-recipe-parser.php:162
+msgid "ounces"
+msgstr "onzas"
+
+#: includes/admin/class-wprm-recipe-parser.php:163
+msgid "ounce"
+msgstr "onza"
+
+#: includes/admin/class-wprm-recipe-parser.php:164
+msgid "oz"
+msgstr "oz"
+
+#: includes/admin/class-wprm-recipe-parser.php:166
+msgid "liters"
+msgstr "litros"
+
+#: includes/admin/class-wprm-recipe-parser.php:167
+msgid "liter"
+msgstr "litro"
+
+#: includes/admin/class-wprm-recipe-parser.php:168
+msgid "l"
+msgstr "l"
+
+#: includes/admin/class-wprm-recipe-parser.php:169
+msgid "deciliters"
+msgstr "decilitros"
+
+#: includes/admin/class-wprm-recipe-parser.php:170
+msgid "deciliter"
+msgstr "decilitro"
+
+#: includes/admin/class-wprm-recipe-parser.php:171
+msgid "dl"
+msgstr "dl"
+
+#: includes/admin/class-wprm-recipe-parser.php:172
+msgid "centiliters"
+msgstr "centilitros"
+
+#: includes/admin/class-wprm-recipe-parser.php:173
+msgid "centiliter"
+msgstr "centilitro"
+
+#: includes/admin/class-wprm-recipe-parser.php:174
+msgid "cl"
+msgstr "cl"
+
+#: includes/admin/class-wprm-recipe-parser.php:175
+msgid "milliliters"
+msgstr "mililitros"
+
+#: includes/admin/class-wprm-recipe-parser.php:176
+msgid "milliliter"
+msgstr "mililitro"
+
+#: includes/admin/class-wprm-recipe-parser.php:177
+msgid "ml"
+msgstr "ml"
+
+#: includes/admin/class-wprm-recipe-parser.php:178
+msgid "gallons"
+msgstr "galones"
+
+#: includes/admin/class-wprm-recipe-parser.php:179
+msgid "gallon"
+msgstr "galón"
+
+#: includes/admin/class-wprm-recipe-parser.php:180
+msgid "gal"
+msgstr "gal"
+
+#: includes/admin/class-wprm-recipe-parser.php:181
+msgid "quarts"
+msgstr "cuartos de galón"
+
+#: includes/admin/class-wprm-recipe-parser.php:182
+msgid "quart"
+msgstr "cuarto de galón"
+
+#: includes/admin/class-wprm-recipe-parser.php:183
+msgid "qt"
+msgstr "qt"
+
+#: includes/admin/class-wprm-recipe-parser.php:184
+msgid "pints"
+msgstr "pintas"
+
+#: includes/admin/class-wprm-recipe-parser.php:185
+msgid "pint"
+msgstr "pinta"
+
+#: includes/admin/class-wprm-recipe-parser.php:186
+msgid "pt"
+msgstr "pt"
+
+#: includes/admin/class-wprm-recipe-parser.php:187
+msgid "cups"
+msgstr "tazas"
+
+#: includes/admin/class-wprm-recipe-parser.php:188
+msgid "cup"
+msgstr "taza"
+
+#: includes/admin/class-wprm-recipe-parser.php:189
+msgid "cu"
+msgstr "tza"
+
+#: includes/admin/class-wprm-recipe-parser.php:190
+msgid "c"
+msgstr "tza"
+
+#: includes/admin/class-wprm-recipe-parser.php:191
+msgid "fluid ounces"
+msgstr "onzas líquidas"
+
+#: includes/admin/class-wprm-recipe-parser.php:192
+msgid "fluid ounce"
+msgstr "onza líquida"
+
+#: includes/admin/class-wprm-recipe-parser.php:193
+msgid "fl ounces"
+msgstr "oz líquidas"
+
+#: includes/admin/class-wprm-recipe-parser.php:194
+msgid "fl ounce"
+msgstr "oz líquida"
+
+#: includes/admin/class-wprm-recipe-parser.php:195
+msgid "floz"
+msgstr "oz líquidas"
+
+#: includes/admin/class-wprm-recipe-parser.php:196
+msgid "tablespoons"
+msgstr "cucharadas"
+
+#: includes/admin/class-wprm-recipe-parser.php:197
+msgid "tablespoon"
+msgstr "cucharada"
+
+#: includes/admin/class-wprm-recipe-parser.php:198
+msgid "tbsps"
+msgstr "cdas"
+
+#: includes/admin/class-wprm-recipe-parser.php:199 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:34
+msgid "tbsp"
+msgstr "cda"
+
+#: includes/admin/class-wprm-recipe-parser.php:200
+msgid "tbls"
+msgstr "cdas"
+
+#: includes/admin/class-wprm-recipe-parser.php:201
+msgid "tbs"
+msgstr "cda"
+
+#: includes/admin/class-wprm-recipe-parser.php:202
+msgid "tb"
+msgstr "cs"
+
+#: includes/admin/class-wprm-recipe-parser.php:203
+msgid "T"
+msgstr "Cda"
+
+#: includes/admin/class-wprm-recipe-parser.php:204
+msgid "teaspoons"
+msgstr "cucharaditas"
+
+#: includes/admin/class-wprm-recipe-parser.php:205
+msgid "teaspoon"
+msgstr "cucharadita"
+
+#: includes/admin/class-wprm-recipe-parser.php:206
+msgid "tsps"
+msgstr "cdtas"
+
+#: includes/admin/class-wprm-recipe-parser.php:207
+msgid "tsp"
+msgstr "cdta"
+
+#: includes/admin/class-wprm-recipe-parser.php:208
+msgid "ts"
+msgstr "cc"
+
+#: includes/admin/class-wprm-recipe-parser.php:209
+msgid "t"
+msgstr "cc"
+
+#: includes/admin/class-wprm-recipe-parser.php:211
+msgid "meters"
+msgstr "metros"
+
+#: includes/admin/class-wprm-recipe-parser.php:212
+msgid "meter"
+msgstr "metro"
+
+#: includes/admin/class-wprm-recipe-parser.php:213
+msgid "m"
+msgstr "m"
+
+#: includes/admin/class-wprm-recipe-parser.php:214
+msgid "centimeters"
+msgstr "centímetros"
+
+#: includes/admin/class-wprm-recipe-parser.php:215
+msgid "centimeter"
+msgstr "centímetro"
+
+#: includes/admin/class-wprm-recipe-parser.php:216
+msgid "cm"
+msgstr "cm"
+
+#: includes/admin/class-wprm-recipe-parser.php:217
+msgid "millimeters"
+msgstr "milímetros"
+
+#: includes/admin/class-wprm-recipe-parser.php:218
+msgid "millimeter"
+msgstr "milímetro"
+
+#: includes/admin/class-wprm-recipe-parser.php:219
+msgid "mm"
+msgstr "mm"
+
+#: includes/admin/class-wprm-recipe-parser.php:220
+msgid "yards"
+msgstr "yardas"
+
+#: includes/admin/class-wprm-recipe-parser.php:221
+msgid "yard"
+msgstr "yarda"
+
+#: includes/admin/class-wprm-recipe-parser.php:222
+msgid "yd"
+msgstr "yd"
+
+#: includes/admin/class-wprm-recipe-parser.php:223
+msgid "feet"
+msgstr "pies"
+
+#: includes/admin/class-wprm-recipe-parser.php:224
+msgid "foot"
+msgstr "pie"
+
+#: includes/admin/class-wprm-recipe-parser.php:225
+msgid "ft"
+msgstr "ft"
+
+#: includes/admin/class-wprm-recipe-parser.php:226
+msgid "inches"
+msgstr "pulgadas"
+
+#: includes/admin/class-wprm-recipe-parser.php:227
+msgid "inch"
+msgstr "pulgada"
+
+#: includes/admin/class-wprm-recipe-parser.php:228
+msgid "in"
+msgstr "in"
+
+#: includes/admin/class-wprm-recipe-parser.php:230
+msgid "cloves"
+msgstr "dientes"
+
+#: includes/admin/class-wprm-recipe-parser.php:231
+msgid "clove"
+msgstr "diente"
+
+#: includes/admin/class-wprm-recipe-parser.php:232
+msgid "leaves"
+msgstr "hojas"
+
+#: includes/admin/class-wprm-recipe-parser.php:233
+msgid "leave"
+msgstr "hoja"
+
+#: includes/admin/class-wprm-recipe-parser.php:234
+msgid "slices"
+msgstr "rebanadas"
+
+#: includes/admin/class-wprm-recipe-parser.php:235
+msgid "slice"
+msgstr "rebanada"
+
+#: includes/admin/class-wprm-recipe-parser.php:236
+msgid "pieces"
+msgstr "trozos"
+
+#: includes/admin/class-wprm-recipe-parser.php:237
+msgid "piece"
+msgstr "trozo"
+
+#: includes/admin/class-wprm-recipe-parser.php:238
+msgid "pinches"
+msgstr "pizcas"
+
+#: includes/admin/class-wprm-recipe-parser.php:239
+msgid "pinche"
+msgstr "pizca"
+
+#: includes/admin/import/class-wprm-import-easyrecipe.php:105
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: includes/admin/import/class-wprm-import-wpultimaterecipe.php:354 
+#: includes/public/class-wprm-template-helper.php:171
+msgid "hour"
+msgstr "hora"
+
+#: includes/admin/import/class-wprm-import-wpultimaterecipe.php:355 
+#: includes/public/class-wprm-template-helper.php:171
+msgid "hours"
+msgstr "horas"
+
+#: includes/admin/manage/class-wprm-manage-ingredients.php:57 
+#: includes/public/class-wprm-template-helper.php:83 
+#: templates/admin/manage.php:17 templates/admin/modal/tabs/import-text.php:40
+msgid "Ingredients"
+msgstr "Ingredientes"
+
+#: includes/admin/manage/class-wprm-manage.php:250 
+#: templates/admin/manage.php:26
+msgid "Manage"
+msgstr "Administrar"
+
+#: includes/admin/manage/class-wprm-manage.php:290 
+#: templates/admin/settings/features.php:43
+msgid "These features are only available in"
+msgstr "Estas funcionalidades solo están disponibles para"
+
+#: includes/admin/manage/class-wprm-manage.php:293
+msgid "Ingredient Links"
+msgstr "Enlaces de Ingredientes"
+
+#: includes/admin/menu/class-wprm-admin-menu-addons.php:47 
+#: templates/admin/menu/addons.php:15
+msgid "Add-Ons"
+msgstr "Extras"
+
+#: includes/admin/menu/class-wprm-admin-menu-faq.php:76
+msgid "FAQ & Support"
+msgstr "FAQ y Soporte"
+
+#: includes/admin/modal/class-wprm-modal.php:60
+msgid "Are you sure? You will lose any unsaved changes."
+msgstr "¿Estás seguro? Perderás todos los cambios que no se hayan guardado."
+
+#: includes/admin/modal/class-wprm-modal.php:61 
+#: templates/admin/modal/modal.php:61 templates/admin/modal/modal.php:97
+msgid "Insert"
+msgstr "Insertar"
+
+#: includes/admin/modal/class-wprm-modal.php:62
+msgid "Update"
+msgstr "Actualizar"
+
+#: includes/admin/modal/class-wprm-modal.php:63
+msgid "Select or Upload Image"
+msgstr "Seleccionar o subir imagen"
+
+#: includes/admin/modal/class-wprm-modal.php:64
+msgid "Use Image"
+msgstr "Usar imagen"
+
+#: includes/admin/modal/class-wprm-modal.php:65
+msgid "Are you sure you want to remove this recipe?"
+msgstr "¿Estás seguro de que quieres eliminar esta receta?"
+
+#: includes/admin/modal/class-wprm-modal.php:66
+msgid "Are you sure you want to start over with importing from text?"
+msgstr ""
+"¿Estás seguro de que quieras empezar de nuevo con la importación desde texto?"
+
+#: includes/admin/modal/class-wprm-modal.php:67 
+#: includes/admin/modal/class-wprm-modal.php:153 
+#: includes/admin/modal/class-wprm-modal.php:157
+msgid "Edit Recipe"
+msgstr "Editar Receta"
+
+#: includes/admin/modal/class-wprm-modal.php:68 
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:35 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:35
+msgid "First recipe on page"
+msgstr "Primera receta de la página"
+
+#: includes/admin/modal/class-wprm-modal.php:69
+msgid "Type here (select text for advanced styling options)"
+msgstr "Escribe aquí (selecciona \"texto\" para opciones avanzadas de estilo)"
+
+#: includes/admin/modal/class-wprm-modal.php:121
+msgid "New Recipe"
+msgstr "Nueva Receta"
+
+#: includes/admin/modal/class-wprm-modal.php:125
+msgid "Import from Text"
+msgstr "Importar desde texto"
+
+#: includes/admin/modal/class-wprm-modal.php:131
+msgid "Recipe Details"
+msgstr "Detalles de la Receta"
+
+#: includes/admin/modal/class-wprm-modal.php:138
+msgid "Ingredients & Instructions"
+msgstr "Ingredientes y Elaboración paso a paso"
+
+#: includes/admin/modal/class-wprm-modal.php:144 
+#: includes/public/class-wprm-template-helper.php:85
+msgid "Recipe Notes"
+msgstr "Notas de la Receta"
+
+#: includes/admin/modal/class-wprm-modal.php:160
+msgid "Edit"
+msgstr "Editar"
+
+#: includes/admin/modal/class-wprm-modal.php:167
+msgid "Recipe Snippets"
+msgstr "Fragmentos de la receta"
+
+#: includes/admin/modal/class-wprm-modal.php:171 
+#: includes/public/class-wprm-shortcode.php:158 
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:40
+msgid "Jump to Recipe"
+msgstr "Ir a la Receta"
+
+#: includes/admin/modal/class-wprm-modal.php:178 
+#: includes/public/class-wprm-shortcode.php:190 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:40
+msgid "Print Recipe"
+msgstr "Imprimir Receta"
+
+#: includes/admin/modal/class-wprm-shortcode-preview.php:46
+msgid "remove"
+msgstr "eliminar"
+
+#: includes/class-wp-recipe-maker.php:123
+msgid "Please update to at least the following plugin versions:"
+msgstr ""
+"Por favor, actualiza al menos hasta las siguientes versiones del plugin:"
+
+#: includes/public/class-wprm-comment-rating.php:114 
+#: templates/public/comment-rating-form.php:14
+msgid "Recipe Rating"
+msgstr "Calificación de la Receta"
+
+#: includes/public/class-wprm-metadata.php:167 
+#: templates/admin/modal/tabs/recipe-details.php:59 
+#: templates/recipe/clean-print/clean-print.php:67 
+#: templates/recipe/clean-print-with-image/clean-print-with-image.php:68 
+#: templates/recipe/simple/simple.php:84 
+#: templates/recipe/tastefully-simple/tastefully-simple.php:88
+msgid "kcal"
+msgstr "kcal"
+
+#: includes/public/class-wprm-metadata.php:178
+msgid "1 serving"
+msgstr "1 ración"
+
+#: includes/public/class-wprm-post-type.php:39
+msgctxt "post type general name"
+msgid "Recipes"
+msgstr "Recetas"
+
+#: includes/public/class-wprm-post-type.php:40
+msgctxt "post type singular name"
+msgid "Recipe"
+msgstr "Receta"
+
+#: includes/public/class-wprm-settings.php:92
+msgid "WPRM Settings"
+msgstr "Ajustes de WPRM"
+
+#: includes/public/class-wprm-settings.php:92
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/public/class-wprm-taxonomies.php:62
+msgctxt "taxonomy general name"
+msgid "Courses"
+msgstr "Platos"
+
+#: includes/public/class-wprm-taxonomies.php:63
+msgctxt "taxonomy singular name"
+msgid "Course"
+msgstr "Plato"
+
+#: includes/public/class-wprm-taxonomies.php:66
+msgctxt "taxonomy general name"
+msgid "Cuisines"
+msgstr "Cocinas"
+
+#: includes/public/class-wprm-taxonomies.php:67
+msgctxt "taxonomy singular name"
+msgid "Cuisine"
+msgstr "Cocina"
+
+#: includes/public/class-wprm-taxonomies.php:70
+msgctxt "taxonomy general name"
+msgid "Ingredients"
+msgstr "Ingredientes"
+
+#: includes/public/class-wprm-taxonomies.php:71
+msgctxt "taxonomy singular name"
+msgid "Ingredient"
+msgstr "Ingrediente"
+
+#: includes/public/class-wprm-taxonomies.php:97
+msgid "Breakfast"
+msgstr "Desayuno"
+
+#: includes/public/class-wprm-taxonomies.php:98
+msgid "Appetizer"
+msgstr "Aperitivo"
+
+#: includes/public/class-wprm-taxonomies.php:99
+msgid "Soup"
+msgstr "Sopa"
+
+#: includes/public/class-wprm-taxonomies.php:100
+msgid "Main Course"
+msgstr "Plato principal"
+
+#: includes/public/class-wprm-taxonomies.php:101
+msgid "Side Dish"
+msgstr "Acompañamiento"
+
+#: includes/public/class-wprm-taxonomies.php:102
+msgid "Salad"
+msgstr "Ensalada"
+
+#: includes/public/class-wprm-taxonomies.php:103
+msgid "Dessert"
+msgstr "Postre"
+
+#: includes/public/class-wprm-taxonomies.php:104
+msgid "Snack"
+msgstr "Tentempié"
+
+#: includes/public/class-wprm-taxonomies.php:105
+msgid "Drinks"
+msgstr "Bebidas"
+
+#: includes/public/class-wprm-taxonomies.php:109
+msgid "French"
+msgstr "Francesa"
+
+#: includes/public/class-wprm-taxonomies.php:110
+msgid "Italian"
+msgstr "Italiana"
+
+#: includes/public/class-wprm-taxonomies.php:111
+msgid "Mediterranean"
+msgstr "Mediterránea"
+
+#: includes/public/class-wprm-taxonomies.php:112
+msgid "Indian"
+msgstr "India"
+
+#: includes/public/class-wprm-taxonomies.php:113
+msgid "Chinese"
+msgstr "China"
+
+#: includes/public/class-wprm-taxonomies.php:114
+msgid "Japanese"
+msgstr "Japonesa"
+
+#: includes/public/class-wprm-taxonomies.php:115
+msgid "American"
+msgstr "Americana"
+
+#: includes/public/class-wprm-taxonomies.php:116
+msgid "Mexican"
+msgstr "Mexicana"
+
+#: includes/public/class-wprm-template-helper.php:74
+msgid "Print"
+msgstr "Imprimir"
+
+#: includes/public/class-wprm-template-helper.php:75
+msgid "Course"
+msgstr "Plato"
+
+#: includes/public/class-wprm-template-helper.php:76
+msgid "Cuisine"
+msgstr "Cocina"
+
+#: includes/public/class-wprm-template-helper.php:77 
+#: templates/admin/modal/tabs/recipe-details.php:63
+msgid "Prep Time"
+msgstr "Tiempo de preparación"
+
+#: includes/public/class-wprm-template-helper.php:78 
+#: templates/admin/modal/tabs/recipe-details.php:66
+msgid "Cook Time"
+msgstr "Tiempo de cocción"
+
+#: includes/public/class-wprm-template-helper.php:79 
+#: templates/admin/modal/tabs/recipe-details.php:69
+msgid "Total Time"
+msgstr "Tiempo total"
+
+#: includes/public/class-wprm-template-helper.php:80 
+#: templates/admin/modal/tabs/recipe-details.php:53
+msgid "Servings"
+msgstr "Raciones"
+
+#: includes/public/class-wprm-template-helper.php:81 
+#: templates/admin/modal/tabs/recipe-details.php:58
+msgid "Calories"
+msgstr "Calorías"
+
+#: includes/public/class-wprm-template-helper.php:82 
+#: templates/admin/modal/tabs/recipe-details.php:42
+msgid "Author"
+msgstr "Autor"
+
+#: includes/public/class-wprm-template-helper.php:84 
+#: templates/admin/modal/tabs/import-text.php:52
+msgid "Instructions"
+msgstr "Elaboración paso a paso"
+
+#: includes/public/class-wprm-template-helper.php:152
+msgid "d"
+msgstr "d"
+
+#: includes/public/class-wprm-template-helper.php:154
+msgid "days"
+msgstr "días"
+
+#: includes/public/class-wprm-template-helper.php:154
+msgid "day"
+msgstr "día"
+
+#: includes/public/class-wprm-template-helper.php:169
+msgid "hr"
+msgstr "h"
+
+#: includes/public/class-wprm-template-helper.php:169
+msgid "hrs"
+msgstr "h"
+
+#: includes/public/class-wprm-template-helper.php:186
+msgid "mins"
+msgstr "min"
+
+#: includes/public/class-wprm-template-helper.php:186
+msgid "min"
+msgstr "min"
+
+#: includes/public/class-wprm-template-helper.php:188 
+#: templates/admin/modal/tabs/recipe-details.php:64 
+#: templates/admin/modal/tabs/recipe-details.php:67 
+#: templates/admin/modal/tabs/recipe-details.php:70
+msgid "minutes"
+msgstr "minutos"
+
+#: includes/public/class-wprm-template-helper.php:188
+msgid "minute"
+msgstr "minuto"
+
+#: includes/public/class-wprm-template-helper.php:225
+msgid "from"
+msgstr "de"
+
+#: includes/public/class-wprm-template-helper.php:225
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] "voto"
+msgstr[1] "votos"
+
+#: templates/admin/manage.php:16
+msgid "Recipes"
+msgstr "Recetas"
+
+#: templates/admin/menu/import/import-overview.php:16
+msgid "Considerations Before Importing"
+msgstr "Consideraciones antes de importar"
+
+#: templates/admin/menu/import/import-overview.php:18
+msgid ""
+"Importing recipes will convert them to our format and they won't be "
+"available in the old plugin anymore. We recommend backing up before starting "
+"the process and trying to import 1 single recipe first to make sure "
+"everything converts properly."
+msgstr ""
+"Al importar recetas estas se convertirán a nuestro formato y no volverán a "
+"estar disponibles en el plugin antiguo. Recomendamos hacer una copia de "
+"seguridad antes de empezar el proceso e intentar importar primero una sola "
+"receta para asegurarse de que todo se convierte adecuadamente."
+
+#: templates/admin/menu/import/import-overview.php:21
+msgid ""
+"If your current plugin uses custom post types and has different permalinks "
+"than regular posts you might want to use a redirection plugin to set up 301 "
+"redirects. Contact us if you need help!"
+msgstr ""
+"Si tu plugin actual usa tipos de entrada personalizados y tiene enlaces "
+"permanentes diferentes de las entradas normales podrías necesitar usar algún "
+"plugin para establecer redirecciones 301. ¡Contáctanos si necesitas ayuda!"
+
+#: templates/admin/menu/import/import-overview.php:24
+msgid ""
+"Importing lots of recipes at once can cause a PHP timeout error. All recipes "
+"that were handled up until the error will have been imported correctly."
+msgstr ""
+"Importar muchas recetas de una vez podría causar un error de máximo tiempo "
+"de espera de PHP. Todas las recetas que se hayan procesado hasta el momento "
+"del error habrán sido importadas correctamente."
+
+#: templates/admin/menu/import/import-overview.php:27 
+#: templates/admin/menu/import/import-recipes.php:45
+msgid "Recipes to Import"
+msgstr "Recetas a importar"
+
+#: templates/admin/menu/import/import-overview.php:43 
+#: templates/admin/menu/import/import-overview.php:79
+msgid "No recipes found."
+msgstr "No se han encontrado recetas."
+
+#: templates/admin/menu/import/import-overview.php:49
+msgid "Search for recipes"
+msgstr "Buscar recetas"
+
+#: templates/admin/menu/import/import-overview.php:54 
+#: templates/admin/menu/import/import-search.php:29 
+#: templates/admin/menu/import/import-search.php:37
+msgid "%d recipe found"
+msgid_plural "%d recipes found"
+msgstr[0] "Se ha encontrado %d receta"
+msgstr[1] "Se han encontrado %d recetas"
+
+#: templates/admin/menu/import/import-overview.php:56
+msgid " recipes found"
+msgstr "recetas encontradas"
+
+#: templates/admin/menu/import/import-overview.php:59 
+#: templates/admin/menu/import/import-search.php:32
+msgid "Explore import options"
+msgstr "Ver opciones de importación"
+
+#: templates/admin/menu/import/import-overview.php:64
+msgid "Imported Recipes to Check"
+msgstr "Recetas importadas para revisar"
+
+#: templates/admin/menu/import/import-overview.php:83
+msgid ""
+"We recommend going through all of these recipes to make sure the import "
+"process was successful. Pay attention to the different ingredient parts to "
+"be able to make use of all of our features."
+msgstr ""
+"Recomendamos revisar todas estas recetas para asegurarse de que el proceso "
+"de importación ha sido satisfactorio. Fíjate en las diferentes partes de los "
+"ingredientes para poder hacer uso de todas nuestras funcionalidades."
+
+#: templates/admin/menu/import/import-overview.php:86
+msgid ""
+"After doing so you can mark a recipe as checked to keep track of the recipes "
+"you still have to go through."
+msgstr ""
+"Una vez hecho esto puedes marcar la receta como revisada para mantener un "
+"seguimiento de las recetas que todavía tienes que comprobar."
+
+#: templates/admin/menu/import/import-overview.php:106 
+#: templates/admin/menu/import/import-recipes.php:62
+msgid "no parent post found"
+msgstr "no se encontró entrada padre"
+
+#: templates/admin/menu/import/import-overview.php:113
+msgid "Mark Selected Recipes as Checked"
+msgstr "Marcar las recetas seleccionadas como revisadas"
+
+#: templates/admin/menu/import/import-recipes.php:21 
+#: templates/admin/menu/import/import-search.php:22
+msgid "Something went wrong."
+msgstr "Algo fue mal."
+
+#: templates/admin/menu/import/import-recipes.php:28
+msgid "Import from %s"
+msgstr "Importar desde %s"
+
+#: templates/admin/menu/import/import-recipes.php:42
+msgid "Import Settings"
+msgstr "Importar Ajustes"
+
+#: templates/admin/menu/import/import-recipes.php:46
+msgid "Use SHIFT-click to (un)check multiple recipes at once."
+msgstr "Usa MAYUS-clic para (des)marcar varias recetas al mismo tiempo."
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "Select"
+msgstr "Seleccionar"
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "all"
+msgstr "todas"
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "none"
+msgstr "ninguna"
+
+#: templates/admin/menu/import/import-recipes.php:73
+msgid "%d more recipe"
+msgid_plural "%d more recipes"
+msgstr[0] "%d receta más"
+msgstr[1] "%d recetas más"
+
+#: templates/admin/menu/import/import-recipes.php:77
+msgid "Try changing the \"p\" variable in the URL to find the other recipes."
+msgstr ""
+"Intenta cambiar la variable \"p\" en la URL para encontrar las demás recetas."
+
+#: templates/admin/menu/import/import-recipes.php:82
+msgid "Import Selected Recipes"
+msgstr "Importar recetas seleccionadas"
+
+#: templates/admin/menu/import/import-search.php:15
+msgid "Search Results"
+msgstr "Buscar resultados"
+
+#: templates/admin/menu/import/import-search.php:27
+msgid "Search finished."
+msgstr "Búsqueda terminada."
+
+#: templates/admin/menu/import/import-search.php:35
+msgid "Still searching, keep this page open."
+msgstr "Todavía buscando, mantén esta página abierta."
+
+#: templates/admin/modal/modal.php:16
+msgid "Close Modal"
+msgstr "Cerrar el diálogo modal"
+
+#: templates/admin/modal/modal.php:38
+msgid "You're currently editing a recipe."
+msgstr "Ahora mismo estás editando una receta."
+
+#: templates/admin/modal/modal.php:38
+msgid "Use the \"WP Recipe Maker\" button to access other features."
+msgstr "Usa el botón \"WP Recipe Maker\" para acceder a otras funcionalidades."
+
+#: templates/admin/modal/tabs/edit-recipe.php:15
+msgid "Select the recipe you would like to edit and click the \"Edit\" button."
+msgstr ""
+"Selecciona la receta que te gustaría editar y haz clic en el botón "
+"\"Editar\"."
+
+#: templates/admin/modal/tabs/edit-recipe.php:19 
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:33 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:33
+msgid "Recipe"
+msgstr "Receta"
+
+#: templates/admin/modal/tabs/edit-recipe.php:21
+msgid "Select a recipe"
+msgstr "Seleccionar una receta"
+
+#: templates/admin/modal/tabs/import-text.php:16
+msgid "Start Over"
+msgstr "Empezar de nuevo"
+
+#: templates/admin/modal/tabs/import-text.php:17
+msgid "Clear"
+msgstr "Limpiar"
+
+#: templates/admin/modal/tabs/import-text.php:18
+msgid "Next"
+msgstr "Siguiente"
+
+#: templates/admin/modal/tabs/import-text.php:22
+msgid ""
+"Paste the recipe you want to import in the textarea below to get started."
+msgstr ""
+"Para empezar pega la receta que quieres importar en el área de texto que hay "
+"debajo."
+
+#: templates/admin/modal/tabs/import-text.php:30 
+#: templates/admin/modal/tabs/import-text.php:35 
+#: templates/admin/modal/tabs/import-text.php:40 
+#: templates/admin/modal/tabs/import-text.php:52 
+#: templates/admin/modal/tabs/import-text.php:64
+msgid "Highlight this part of the recipe:"
+msgstr "Resalta esta parte de la receta:"
+
+#: templates/admin/modal/tabs/import-text.php:30 
+#: templates/admin/modal/tabs/recipe-details.php:30 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:21
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/admin/modal/tabs/import-text.php:35 
+#: templates/admin/modal/tabs/recipe-details.php:34
+msgid "Summary"
+msgstr "Resumen"
+
+#: templates/admin/modal/tabs/import-text.php:45
+msgid "Check any ingredient groups in this list:"
+msgstr "Échale un ojo a los ingredientes compuestos de esta lista:"
+
+#: templates/admin/modal/tabs/import-text.php:57
+msgid "Check any instruction groups in this list:"
+msgstr "Échale un ojo a los pasos para ingredientes compuestos de esta lista:"
+
+#: templates/admin/modal/tabs/import-text.php:64 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:22 
+#: templates/admin/modal/tabs/recipe-notes.php:16
+msgid "Notes"
+msgstr "Notas"
+
+#: templates/admin/modal/tabs/import-text.php:69
+msgid "Finished the text import."
+msgstr "Terminada la importación de texto."
+
+#: templates/admin/modal/tabs/recipe-details.php:23 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:54
+msgid "Image"
+msgstr "Imagen"
+
+#: templates/admin/modal/tabs/recipe-details.php:24 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:70
+msgid "Add Image"
+msgstr "Añadir imagen"
+
+#: templates/admin/modal/tabs/recipe-details.php:25 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:71
+msgid "Remove Image"
+msgstr "Eliminar imagen"
+
+#: templates/admin/modal/tabs/recipe-details.php:31
+msgid "Recipe Name"
+msgstr "Nombre de la receta"
+
+#: templates/admin/modal/tabs/recipe-details.php:38 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:87 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:91
+msgid "Hint"
+msgstr "Pista"
+
+#: templates/admin/modal/tabs/recipe-details.php:39 
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:92
+msgid "Select text to add styling or links."
+msgstr "Selecciona el texto para añadir estilos o enlaces."
+
+#: templates/admin/modal/tabs/recipe-details.php:44
+msgid "Don't show"
+msgstr "No mostrar"
+
+#: templates/admin/modal/tabs/recipe-details.php:45
+msgid "Name of post author"
+msgstr "Nombre del autor de la entrada"
+
+#: templates/admin/modal/tabs/recipe-details.php:46
+msgid "Custom author name"
+msgstr "Nombre del autor personalizado"
+
+#: templates/admin/modal/tabs/recipe-details.php:49
+msgid "Custom Author Name"
+msgstr "Nombre del autor personalizado"
+
+#: templates/admin/modal/tabs/recipe-details.php:50
+msgid "Author Name"
+msgstr "Nombre del autor"
+
+#: templates/admin/modal/tabs/recipe-details.php:54
+msgid "people"
+msgstr "personas"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:19
+msgid "Amount"
+msgstr "Cantidad"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:20
+msgid "Unit"
+msgstr "Unidad"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:28
+msgid "Ingredient Group"
+msgstr "Ingrediente compuesto"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:35
+msgid "olive oil"
+msgstr "aceite de oliva"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:36
+msgid "extra virgin"
+msgstr "virgen extra"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:44
+msgid "Add Ingredient"
+msgstr "Añadir ingrediente"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:45
+msgid "Add Ingredient Group"
+msgstr "Añadir ingrediente compuesto"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:53
+msgid "Instruction"
+msgstr "Paso"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:60
+msgid "Instruction Group"
+msgstr "Paso para ingrediente compuesto"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:81
+msgid "Add Instruction"
+msgstr "Añadir paso"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:82
+msgid "Add Instruction Group"
+msgstr "Añadir paso para ingrediente compuesto"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:88
+msgid ""
+"Use the TAB key to easily move from field to field and add "
+"ingredients/instructions without having to click the button."
+msgstr ""
+"Usa la tecla TAB para mover fácilmente de campo a capo y para añadir "
+"ingredientes/pasos sin tener que hacer clic en el botón."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:15
+msgid ""
+"The %s shortcode can be used to add a link that jumps your visitors to a "
+"recipe on the page."
+msgstr ""
+"El atajo %s puede usarse para añadir un enlace que lleve a tus visitantes a "
+"la receta que está en la página."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:17 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:17
+msgid "Shortcode Examples"
+msgstr "Exjemplos de atajos"
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:20
+msgid ""
+"Add a link that jumps to the first recipe found on the page with \"Jump to "
+"Recipe\" as the link text."
+msgstr ""
+"Añadir un enlace que lleve a la primera receta que se encuentre en la página "
+"con \"Ir a la Receta\" como texto para el enlace."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:24
+msgid ""
+"Add a link that jumps to the recipe with ID 123 with \"Jump to Recipe\" as "
+"the link text."
+msgstr ""
+"Añadir un enlace que lleve a la receta con el ID 123 con \"Ir a la Receta\" "
+"como texto para el enlace."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:28
+msgid ""
+"Add a link that jumps to the recipe with ID 123 with \"View Recipe\" as the "
+"link text."
+msgstr ""
+"Añadir un enlace que lleve a la receta con el ID 123 con \"Ver Receta\" como "
+"texto para el enlace."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:30 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:30
+msgid "Shortcode Builder"
+msgstr "Constructor de atajos"
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:39 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:39
+msgid "Text"
+msgstr "Texto"
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:41 
+#: templates/admin/modal/tabs/recipe-snippets-print.php:41
+msgid "Leave blank to use default"
+msgstr "Dejar en blanco para usar el predeterminado"
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:15
+msgid "The %s shortcode can be used to add a link for printing a recipe."
+msgstr "El atajo %s puede usarse para añadir un enlace que imprima una receta."
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:20
+msgid ""
+"Add a link that prints the first recipe found on the page with \"Print "
+"Recipe\" as the link text."
+msgstr ""
+"Añadir un enlace que imprima la primera receta encontrada en la página con "
+"\"Imprimir Receta\" como texto para el enlace."
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:24
+msgid ""
+"Add a link that prints the recipe with ID 123 with \"Print Recipe\" as the "
+"link text."
+msgstr ""
+"Añadir un enlace que imprima la receta con el ID 123 con \"Imprimir Receta\" "
+"como texto para el enlace."
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:28
+msgid ""
+"Add a link that prints the recipe with ID 123 with \"Print my new Recipe\" "
+"as the link text."
+msgstr ""
+"Añadir un enlace que imprima la receta con el ID 123 con \"Imprimir mi nueva "
+"Receta\" como texto para el enlace."
+
+#: templates/admin/settings/appearance.php:17
+msgid "Recipe Fields"
+msgstr "Campos de Receta"
+
+#: templates/admin/settings/appearance.php:22
+msgid "Recipe Image"
+msgstr "Imagen de Receta"
+
+#: templates/admin/settings/appearance.php:28
+msgid "Use featured image of parent post if no recipe image is set"
+msgstr ""
+"Usar la imagen destacada de la entrada padre si no se ha establecido una "
+"imagen para la receta"
+
+#: templates/admin/settings/appearance.php:34
+msgid "Nutrition Label"
+msgstr "Etiqueta de nutrición"
+
+#: templates/admin/settings/appearance.php:40
+msgid "Display in recipe template"
+msgstr "Mostrar en la plantilla de receta"
+
+#: templates/admin/settings/appearance.php:44
+msgid "Only available in"
+msgstr "Solo disponible para"
+
+#: templates/admin/settings/appearance.php:46
+msgid ""
+"Display the nutrition label at its default location in the recipe template."
+msgstr ""
+"Mostrar la etiqueta de nutrición en su posición predeterminada en la "
+"plantilla de receta."
+
+#: templates/admin/settings/appearance.php:53
+msgid "Recipe Template Options"
+msgstr "Opciones de Plantilla de Receta"
+
+#: templates/admin/settings/appearance.php:55
+msgid "Note: not all options will affect every recipe template."
+msgstr ""
+"Nota: no todas las opciones afectarán a todas las plantillas de receta."
+
+#: templates/admin/settings/appearance.php:61
+msgid "Background Color"
+msgstr "Color de fondo"
+
+#: templates/admin/settings/appearance.php:69
+msgid "Border Color"
+msgstr "Color del borde"
+
+#: templates/admin/settings/appearance.php:77
+msgid "Text Color"
+msgstr "Color del texto"
+
+#: templates/admin/settings/appearance.php:85
+msgid "Link Color"
+msgstr "Color de enlaces"
+
+#: templates/admin/settings/appearance.php:93
+msgid "Header Color"
+msgstr "Color de la cabecera"
+
+#: templates/admin/settings/appearance.php:101
+msgid "Icon Color"
+msgstr "Color de iconos"
+
+#: templates/admin/settings/appearance.php:109
+msgid "Accent Color"
+msgstr "Color de énfasis"
+
+#: templates/admin/settings/appearance.php:117
+msgid "Accent Text Color"
+msgstr "Color del texto resaltado"
+
+#: templates/admin/settings/appearance.php:125
+msgid "Accent 2 Color"
+msgstr "Color de énfasis 2"
+
+#: templates/admin/settings/appearance.php:133
+msgid "Accent 2 Text Color"
+msgstr "Color del texto resaltado 2"
+
+#: templates/admin/settings/appearance.php:141
+msgid "Recipe Template"
+msgstr "Plantilla de Receta"
+
+#: templates/admin/settings/appearance.php:143
+msgid "Change the look of recipes on your website."
+msgstr "Cambiar el aspecto de las recetas en tu página web."
+
+#: templates/admin/settings/appearance.php:152
+msgid "Default Recipe Template"
+msgstr "Plantilla predeterminada de Receta"
+
+#: templates/admin/settings/appearance.php:165
+msgid "The default template to use for recipes on your website."
+msgstr "La plantilla predeterminada a usar para las recetas de tu página web."
+
+#: templates/admin/settings/appearance.php:171
+msgid "Default Print Template"
+msgstr "Plantilla predeterminada para Imprimir"
+
+#: templates/admin/settings/appearance.php:184
+msgid "The default template to use when printing a recipe."
+msgstr "La plantilla predeterminada a usar cuando se imprima una receta."
+
+#: templates/admin/settings/appearance.php:210
+msgid "No Screenshot"
+msgstr "No hay captura de pantalla"
+
+#: templates/admin/settings/appearance.php:219 
+#: templates/admin/settings/features.php:67 
+#: templates/admin/settings/labels.php:42
+msgid "Save Changes"
+msgstr "Guardar cambios"
+
+#: templates/admin/settings/features.php:17 templates/admin/settings.php:18
+msgid "Features"
+msgstr "Funcionalidades"
+
+#: templates/admin/settings/features.php:19 
+#: templates/admin/settings/labels.php:19
+msgid "Choose the features you want to use on your website."
+msgstr "Elige las funcionalidades que quieras usar en tu página web."
+
+#: templates/admin/settings/features.php:25
+msgid "Comment Ratings"
+msgstr "Comentar valoraciones"
+
+#: templates/admin/settings/features.php:31
+msgid "Allow visitors to vote on your recipes when commenting"
+msgstr "Permitir a los visitantes votar tus recetas cuando comenten."
+
+#: templates/admin/settings/features.php:34 
+#: templates/admin/settings/features.php:61
+msgid "Learn more"
+msgstr "Saber más"
+
+#: templates/admin/settings/features.php:40
+msgid "Premium Features"
+msgstr "Funcionalidades Premium"
+
+#: templates/admin/settings/features.php:45
+msgid "Choose the Premium features you want to use on your website."
+msgstr "Elige las funcionalidades Premium que quieras usar en tu página web."
+
+#: templates/admin/settings/features.php:52
+msgid "Adjustable Servings"
+msgstr "Raciones ajustables"
+
+#: templates/admin/settings/features.php:58
+msgid "Visitors can adjust the serving size of your recipes"
+msgstr "Los visitantes pueden ajustar la cantidad de raciones de tus recetas."
+
+#: templates/admin/settings/labels.php:17 templates/admin/settings.php:17
+msgid "Labels"
+msgstr "Etiquetas"
+
+#: templates/admin/settings.php:16
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: templates/admin/settings.php:27
+msgid "WP Recipe Maker Settings"
+msgstr "Ajustes de WP Recipe Maker"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Recipe Maker"
+msgstr "WP Recipe Maker"
+
+#. Plugin URI of the plugin/theme
+msgid "http://bootstrapped.ventures/wp-recipe-maker/"
+msgstr "http://bootstrapped.ventures/wp-recipe-maker/"
+
+#. Description of the plugin/theme
+msgid ""
+"The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD "
+"metadata for better SEO will get you more visitors!"
+msgstr ""
+"Un plugin sencillo y fácil de usar para todo el mundo. ¡Metadatos JSON-LD "
+"automáticos para un mejor SEO que te conseguirá más visitantes!"
+
+#. Author of the plugin/theme
+msgid "Bootstrapped Ventures"
+msgstr "Bootstrapped Ventures"
+
+#. Author URI of the plugin/theme
+msgid "http://bootstrapped.ventures/"
+msgstr "http://bootstrapped.ventures/"

@@ -1,0 +1,4525 @@
+# Copyright (C) 2016 WP Recipe Maker
+# This file is distributed under the same license as the WP Recipe Maker package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recipe Maker 1.10.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
+"POT-Creation-Date: 2020-08-28 15:42+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-09-04 11:53+0300\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Language: tr_TR\n"
+
+#: includes/admin/class-wprm-marketing.php:90
+#, php-format
+msgid "%s day"
+msgid_plural "%s days"
+msgstr[0] "%s gün"
+msgstr[1] "%s gün"
+
+#: includes/admin/class-wprm-marketing.php:92
+#, php-format
+msgid "%s hour"
+msgid_plural "%s hours"
+msgstr[0] "%s saat"
+msgstr[1] "%s saat"
+
+#: includes/admin/class-wprm-marketing.php:94
+#, php-format
+msgid "%s minute"
+msgid_plural "%s minutes"
+msgstr[0] "%s dakika"
+msgstr[1] "%s dakika"
+
+#: includes/admin/class-wprm-modal.php:163
+msgid ""
+"Used in the recipe metadata. The type of meal or course for this recipe. "
+"Examples: dinner, entree, snack"
+msgstr ""
+"Tarifin meta verisinde kullanılır. Tarifin türü veya öğün tipi. Örneğin "
+"akşam yemeği, başlangıç, atıştırmalık"
+
+#: includes/admin/class-wprm-modal.php:166
+msgid ""
+"Used in the recipe metadata. The region associated with your recipe. "
+"Examples: French, Mediterranean, American"
+msgstr ""
+"Tarifin meta verisi olarak kullanılır. Tarifinizin ait olduğu bölge mutfağı. "
+"Örneğin: Fransız, Akeniz, Amerikan"
+
+#: includes/admin/class-wprm-modal.php:169
+msgid ""
+"Used in the recipe metadata. This is a restricted list of diets whose label "
+"can be changed on the Manage > Recipe Fields page."
+msgstr ""
+"Tarifin meta verisi olarak kullanılır. Bu kısıtlı bir beslenme tarzı "
+"listesidir ve listenin etiketi, Yönet > Tarif Alanları sayfasından "
+"değiştirlebilir."
+
+#: includes/admin/class-wprm-modal.php:173
+msgid ""
+"Used in the recipe metadata. Should describe the recipe, but not fit in "
+"\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
+msgstr ""
+"Tarifin meta verisi olarak kullanılır. Tarifi açıklamalıdır fakat "
+"\"Kategoriler\" veya \"Mutfaklar\" başlıklarına uymuyor olmalıdır. Örneğin: "
+"yaz, pratik, kremalı"
+
+#: includes/admin/class-wprm-modal.php:188
+#: templates/settings/group-recipe-defaults.php:30
+#: templates/settings/group-nutrition-label.php:36
+msgid "Don't show"
+msgstr "Gösterme"
+
+#: includes/admin/class-wprm-modal.php:189
+#: templates/settings/group-recipe-defaults.php:31
+msgid "Name of post author"
+msgstr "Yazarın adı"
+
+#: includes/admin/class-wprm-modal.php:190
+msgid "Custom author name"
+msgstr "Özel yazar adı"
+
+#: includes/admin/class-wprm-modal.php:191
+#: templates/settings/group-recipe-defaults.php:33
+msgid "Same author for every recipe"
+msgstr "Tüm tarifler için aynı yazar"
+
+#: includes/admin/class-wprm-modal.php:199
+#: includes/admin/class-wprm-modal.php:231
+#: includes/admin/class-wprm-modal.php:263
+#: includes/admin/class-wprm-modal.php:295
+msgid "Use Default"
+msgstr "Varsayılanı Kullan"
+
+#: includes/admin/class-wprm-modal.php:222
+#: includes/admin/class-wprm-modal.php:254
+#: includes/admin/class-wprm-modal.php:286
+msgid "Don't Use Nofollow"
+msgstr "Nofollow Kullanma"
+
+#: includes/admin/class-wprm-modal.php:223
+#: includes/admin/class-wprm-modal.php:255
+#: includes/admin/class-wprm-modal.php:287
+msgid "Use Nofollow"
+msgstr "Nofollow Kullan"
+
+#: includes/admin/class-wprm-manage.php:39
+msgid "Manage"
+msgstr "Yönet"
+
+#: includes/admin/class-wprm-import-manager.php:59
+#: includes/admin/class-wprm-import-manager.php:60
+#: templates/admin/menu/import/import-overview.php:15
+msgid "Import Recipes"
+msgstr "Tarifleri İçe Aktar"
+
+#: includes/admin/class-wprm-import-manager.php:61
+msgid "Search Recipes"
+msgstr "Tarif Ara"
+
+#: includes/admin/class-wprm-import-manager.php:62
+msgid "Importing Recipes"
+msgstr "Tarifler İçe Aktarılıyor"
+
+#: includes/admin/class-wprm-import-manager.php:121
+#: includes/admin/class-wprm-import-manager.php:124
+#: templates/admin/menu/import/import-recipes.php:21
+#: templates/admin/menu/import/import-search.php:22
+msgid "Something went wrong."
+msgstr "Bir şeyler yanlış gitti."
+
+#: includes/admin/class-wprm-tools-manager.php:47
+msgid "WPRM Tools"
+msgstr "WPRM Araçları"
+
+#: includes/admin/class-wprm-tools-manager.php:47
+msgid "Tools"
+msgstr "Araçlar"
+
+#: includes/public/class-wprm-assets.php:167
+msgid "Are you sure you want to remove this recipe?"
+msgstr "Bu tarifi kaldırmak istediğinizden emin misiniz?"
+
+#: includes/public/class-wprm-recipe.php:144
+#: templates/admin/translations.php:254
+msgid "n/a"
+msgstr "geçerli değil"
+
+#: includes/public/class-wprm-print.php:260
+#: templates/settings/group-social-sharing.php:67
+msgid "Recipe Image"
+msgstr "Tarif Fotoğrafı"
+
+#: includes/public/class-wprm-print.php:278
+msgid "Instruction Images"
+msgstr "Adım Fotoğrafları"
+
+#: includes/public/class-wprm-comment-rating.php:282
+#: templates/settings/group-recipe-ratings.php:97
+#: includes/public/deprecated/class-wprm-template-helper.php:58
+msgid "Recipe Rating"
+msgstr "Tarif Puanı"
+
+#: includes/public/class-wprm-nutrition.php:29
+#: includes/public/deprecated/class-wprm-template-helper.php:52
+msgid "Calories"
+msgstr "Kalori"
+
+#: includes/public/class-wprm-post-type.php:39
+msgctxt "post type general name"
+msgid "Recipes"
+msgstr "Tarifler"
+
+#: includes/public/class-wprm-post-type.php:40
+msgctxt "post type singular name"
+msgid "Recipe"
+msgstr "Tarif"
+
+#: includes/public/class-wprm-settings.php:63
+msgid "WPRM Settings"
+msgstr "WPRM Ayarları"
+
+#: includes/public/class-wprm-settings.php:63
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. Weight.
+#: includes/public/class-wprm-recipe-parser.php:147
+msgid "kilograms"
+msgstr "kilogram"
+
+#: includes/public/class-wprm-recipe-parser.php:148
+msgid "kilogram"
+msgstr "kilogram"
+
+#: includes/public/class-wprm-recipe-parser.php:149
+msgid "kg"
+msgstr "kg"
+
+#: includes/public/class-wprm-recipe-parser.php:150
+msgid "grams"
+msgstr "gram"
+
+#: includes/public/class-wprm-recipe-parser.php:151
+msgid "gram"
+msgstr "gram"
+
+#: includes/public/class-wprm-recipe-parser.php:152
+msgid "gr"
+msgstr "gr"
+
+#: includes/public/class-wprm-recipe-parser.php:153
+msgid "g"
+msgstr "g"
+
+#: includes/public/class-wprm-recipe-parser.php:154
+msgid "milligrams"
+msgstr "miligram"
+
+#: includes/public/class-wprm-recipe-parser.php:155
+msgid "milligram"
+msgstr "miligram"
+
+#: includes/public/class-wprm-recipe-parser.php:156
+#: includes/public/class-wprm-metadata.php:628
+msgid "mg"
+msgstr "mg"
+
+#: includes/public/class-wprm-recipe-parser.php:157
+msgid "pounds"
+msgstr "pound"
+
+#: includes/public/class-wprm-recipe-parser.php:158
+msgid "pound"
+msgstr "pound"
+
+#: includes/public/class-wprm-recipe-parser.php:159
+msgid "lbs"
+msgstr "lbs"
+
+#: includes/public/class-wprm-recipe-parser.php:160
+msgid "lb"
+msgstr "lb"
+
+#: includes/public/class-wprm-recipe-parser.php:161
+msgid "ounces"
+msgstr "ons"
+
+#: includes/public/class-wprm-recipe-parser.php:162
+msgid "ounce"
+msgstr "ons"
+
+#: includes/public/class-wprm-recipe-parser.php:163
+msgid "oz"
+msgstr "oz"
+
+#. Volume.
+#: includes/public/class-wprm-recipe-parser.php:165
+msgid "liters"
+msgstr "litre"
+
+#: includes/public/class-wprm-recipe-parser.php:166
+msgid "liter"
+msgstr "litre"
+
+#: includes/public/class-wprm-recipe-parser.php:167
+msgid "l"
+msgstr "l"
+
+#: includes/public/class-wprm-recipe-parser.php:168
+msgid "deciliters"
+msgstr "desilitre"
+
+#: includes/public/class-wprm-recipe-parser.php:169
+msgid "deciliter"
+msgstr "desilitre"
+
+#: includes/public/class-wprm-recipe-parser.php:170
+msgid "dl"
+msgstr "dl"
+
+#: includes/public/class-wprm-recipe-parser.php:171
+msgid "centiliters"
+msgstr "santilitre"
+
+#: includes/public/class-wprm-recipe-parser.php:172
+msgid "centiliter"
+msgstr "santilitre"
+
+#: includes/public/class-wprm-recipe-parser.php:173
+msgid "cl"
+msgstr "cl"
+
+#: includes/public/class-wprm-recipe-parser.php:174
+msgid "milliliters"
+msgstr "mililitre"
+
+#: includes/public/class-wprm-recipe-parser.php:175
+msgid "milliliter"
+msgstr "mililitre"
+
+#: includes/public/class-wprm-recipe-parser.php:176
+msgid "ml"
+msgstr "ml"
+
+#: includes/public/class-wprm-recipe-parser.php:177
+msgid "gallons"
+msgstr "galon"
+
+#: includes/public/class-wprm-recipe-parser.php:178
+msgid "gallon"
+msgstr "galon"
+
+#: includes/public/class-wprm-recipe-parser.php:179
+msgid "gal"
+msgstr "gal"
+
+#: includes/public/class-wprm-recipe-parser.php:180
+msgid "quarts"
+msgstr "kuart"
+
+#: includes/public/class-wprm-recipe-parser.php:181
+msgid "quart"
+msgstr "kuart"
+
+#: includes/public/class-wprm-recipe-parser.php:182
+msgid "qt"
+msgstr "qt"
+
+#: includes/public/class-wprm-recipe-parser.php:183
+msgid "pints"
+msgstr "pint"
+
+#: includes/public/class-wprm-recipe-parser.php:184
+msgid "pint"
+msgstr "pint"
+
+#: includes/public/class-wprm-recipe-parser.php:185
+msgid "pt"
+msgstr "pt"
+
+#: includes/public/class-wprm-recipe-parser.php:186
+msgid "cups"
+msgstr "cup"
+
+#: includes/public/class-wprm-recipe-parser.php:187
+msgid "cup"
+msgstr "cup"
+
+#: includes/public/class-wprm-recipe-parser.php:188
+msgid "cu"
+msgstr "cu"
+
+#: includes/public/class-wprm-recipe-parser.php:189
+msgid "c"
+msgstr "c"
+
+#: includes/public/class-wprm-recipe-parser.php:190
+msgid "fluid ounces"
+msgstr "sıvı ons"
+
+#: includes/public/class-wprm-recipe-parser.php:191
+msgid "fluid ounce"
+msgstr "sıvı ons"
+
+#: includes/public/class-wprm-recipe-parser.php:192
+msgid "fl ounces"
+msgstr "fl ons"
+
+#: includes/public/class-wprm-recipe-parser.php:193
+msgid "fl ounce"
+msgstr "fl ons"
+
+#: includes/public/class-wprm-recipe-parser.php:194
+msgid "floz"
+msgstr "floz"
+
+#: includes/public/class-wprm-recipe-parser.php:195
+msgid "tablespoons"
+msgstr "çorba kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:196
+msgid "tablespoon"
+msgstr "çorba kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:197
+msgid "tbsps"
+msgstr "çk"
+
+#: includes/public/class-wprm-recipe-parser.php:198
+#: templates/admin/translations.php:180
+msgid "tbsp"
+msgstr "çk"
+
+#: includes/public/class-wprm-recipe-parser.php:199
+msgid "tbls"
+msgstr "çk"
+
+#: includes/public/class-wprm-recipe-parser.php:200
+msgid "tbs"
+msgstr "çk"
+
+#: includes/public/class-wprm-recipe-parser.php:201
+msgid "tb"
+msgstr "çk"
+
+#: includes/public/class-wprm-recipe-parser.php:202
+msgid "T"
+msgstr "Çk"
+
+#: includes/public/class-wprm-recipe-parser.php:203
+msgid "teaspoons"
+msgstr "çay kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:204
+msgid "teaspoon"
+msgstr "çay kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:205
+msgid "tsps"
+msgstr "çay kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:206
+msgid "tsp"
+msgstr "çay kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:207
+msgid "ts"
+msgstr "çay kaşığı"
+
+#: includes/public/class-wprm-recipe-parser.php:208
+msgid "t"
+msgstr "çay kaşığı"
+
+#. Length.
+#: includes/public/class-wprm-recipe-parser.php:210
+msgid "meters"
+msgstr "metre"
+
+#: includes/public/class-wprm-recipe-parser.php:211
+msgid "meter"
+msgstr "metre"
+
+#: includes/public/class-wprm-recipe-parser.php:212
+msgid "m"
+msgstr "m"
+
+#: includes/public/class-wprm-recipe-parser.php:213
+msgid "centimeters"
+msgstr "santimetre"
+
+#: includes/public/class-wprm-recipe-parser.php:214
+msgid "centimeter"
+msgstr "santimetre"
+
+#: includes/public/class-wprm-recipe-parser.php:215
+msgid "cm"
+msgstr "cm"
+
+#: includes/public/class-wprm-recipe-parser.php:216
+msgid "millimeters"
+msgstr "milimetre"
+
+#: includes/public/class-wprm-recipe-parser.php:217
+msgid "millimeter"
+msgstr "milimetre"
+
+#: includes/public/class-wprm-recipe-parser.php:218
+msgid "mm"
+msgstr "mm"
+
+#: includes/public/class-wprm-recipe-parser.php:219
+msgid "yards"
+msgstr "yard"
+
+#: includes/public/class-wprm-recipe-parser.php:220
+msgid "yard"
+msgstr "yard"
+
+#: includes/public/class-wprm-recipe-parser.php:221
+msgid "yd"
+msgstr "yd"
+
+#: includes/public/class-wprm-recipe-parser.php:222
+msgid "feet"
+msgstr "fit"
+
+#: includes/public/class-wprm-recipe-parser.php:223
+msgid "foot"
+msgstr "fit"
+
+#: includes/public/class-wprm-recipe-parser.php:224
+msgid "ft"
+msgstr "ft"
+
+#: includes/public/class-wprm-recipe-parser.php:225
+msgid "inches"
+msgstr "inç"
+
+#: includes/public/class-wprm-recipe-parser.php:226
+msgid "inch"
+msgstr "inç"
+
+#: includes/public/class-wprm-recipe-parser.php:227
+msgid "in"
+msgstr "in"
+
+#. General.
+#: includes/public/class-wprm-recipe-parser.php:229
+msgid "cloves"
+msgstr "diş"
+
+#: includes/public/class-wprm-recipe-parser.php:230
+msgid "clove"
+msgstr "diş"
+
+#: includes/public/class-wprm-recipe-parser.php:231
+msgid "leaves"
+msgstr "yaprak"
+
+#: includes/public/class-wprm-recipe-parser.php:232
+msgid "leave"
+msgstr "yaprak"
+
+#: includes/public/class-wprm-recipe-parser.php:233
+msgid "slices"
+msgstr "dilim"
+
+#: includes/public/class-wprm-recipe-parser.php:234
+msgid "slice"
+msgstr "dilim"
+
+#: includes/public/class-wprm-recipe-parser.php:235
+msgid "pieces"
+msgstr "parça"
+
+#: includes/public/class-wprm-recipe-parser.php:236
+#: templates/admin/translations.php:179
+msgid "piece"
+msgstr "parça"
+
+#: includes/public/class-wprm-recipe-parser.php:237
+msgid "pinches"
+msgstr "tutam"
+
+#: includes/public/class-wprm-recipe-parser.php:238
+msgid "pinch"
+msgstr "tutam"
+
+#: includes/public/class-wprm-template-shortcodes.php:213
+#: templates/settings/structure.php:13
+msgid "WP Recipe Maker Premium only"
+msgstr "Yalnızca WP Recipe Maker Premium"
+
+#: includes/public/class-wprm-blocks.php:151
+#: templates/admin/translations.php:146
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43
+msgid "Jump to Recipe"
+msgstr "Tarife Atla"
+
+#: includes/public/class-wprm-blocks.php:166
+#: templates/admin/translations.php:147
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43
+msgid "Jump to Video"
+msgstr "Videoya Atla"
+
+#: includes/public/class-wprm-blocks.php:181
+#: templates/admin/translations.php:148
+#: includes/public/shortcodes/recipe/class-wprm-sc-print.php:43
+msgid "Print Recipe"
+msgstr "Tarifi Yazdır"
+
+#: includes/public/class-wprm-metadata.php:626
+#: includes/public/shortcodes/recipe/class-wprm-sc-nutrition.php:81
+#: templates/recipe/legacy/simple/simple.php:84
+#: templates/recipe/legacy/clean/clean.php:80
+#: templates/recipe/legacy/tastefully-simple/tastefully-simple.php:89
+msgid "kcal"
+msgstr "kcal"
+
+#: includes/public/class-wprm-metadata.php:637
+msgid "1 serving"
+msgstr "1 porsiyon"
+
+#: includes/public/class-wprm-taxonomies.php:67
+msgctxt "taxonomy general name"
+msgid "Courses"
+msgstr "Kategoriler"
+
+#: includes/public/class-wprm-taxonomies.php:68
+msgctxt "taxonomy singular name"
+msgid "Course"
+msgstr "Kategori"
+
+#: includes/public/class-wprm-taxonomies.php:71
+msgctxt "taxonomy general name"
+msgid "Cuisines"
+msgstr "Mutfaklar"
+
+#: includes/public/class-wprm-taxonomies.php:72
+msgctxt "taxonomy singular name"
+msgid "Cuisine"
+msgstr "Mutfak"
+
+#: includes/public/class-wprm-taxonomies.php:75
+msgctxt "taxonomy general name"
+msgid "Diets"
+msgstr "Diyetler"
+
+#: includes/public/class-wprm-taxonomies.php:76
+msgctxt "taxonomy singular name"
+msgid "Diet"
+msgstr "Diyet"
+
+#: includes/public/class-wprm-taxonomies.php:79
+msgctxt "taxonomy general name"
+msgid "Keywords"
+msgstr "Etiketler"
+
+#: includes/public/class-wprm-taxonomies.php:80
+msgctxt "taxonomy singular name"
+msgid "Keyword"
+msgstr "Etiket"
+
+#: includes/public/class-wprm-taxonomies.php:83
+msgctxt "taxonomy general name"
+msgid "Ingredients"
+msgstr "Malzemeler"
+
+#: includes/public/class-wprm-taxonomies.php:84
+msgctxt "taxonomy singular name"
+msgid "Ingredient"
+msgstr "Malzeme"
+
+#: includes/public/class-wprm-taxonomies.php:87
+msgctxt "taxonomy general name"
+msgid "Equipment"
+msgstr "Aletler"
+
+#: includes/public/class-wprm-taxonomies.php:88
+msgctxt "taxonomy singular name"
+msgid "Equipment"
+msgstr "Alet"
+
+#: includes/public/class-wprm-taxonomies.php:133
+msgid "Breakfast"
+msgstr "Kahvaltı"
+
+#: includes/public/class-wprm-taxonomies.php:134
+msgid "Appetizer"
+msgstr "Meze"
+
+#: includes/public/class-wprm-taxonomies.php:135
+msgid "Soup"
+msgstr "Çorba"
+
+#: includes/public/class-wprm-taxonomies.php:136
+msgid "Main Course"
+msgstr "Ana Yemek"
+
+#: includes/public/class-wprm-taxonomies.php:137
+msgid "Side Dish"
+msgstr "Ana Yemeğin Yanına"
+
+#: includes/public/class-wprm-taxonomies.php:138
+msgid "Salad"
+msgstr "Salata"
+
+#: includes/public/class-wprm-taxonomies.php:139
+msgid "Dessert"
+msgstr "Tatlı"
+
+#: includes/public/class-wprm-taxonomies.php:140
+msgid "Snack"
+msgstr "Atıştırmalık"
+
+#: includes/public/class-wprm-taxonomies.php:141
+msgid "Drinks"
+msgstr "İçecekler"
+
+#: includes/public/class-wprm-taxonomies.php:145
+msgid "French"
+msgstr "Fransız Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:146
+msgid "Italian"
+msgstr "İtalyan Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:147
+msgid "Mediterranean"
+msgstr "Akdeniz Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:148
+msgid "Indian"
+msgstr "Hindistan Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:149
+msgid "Chinese"
+msgstr "Çin Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:150
+msgid "Japanese"
+msgstr "Japon Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:151
+msgid "American"
+msgstr "Amerikan Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:152
+msgid "Mexican"
+msgstr "Meksika Mutfağı"
+
+#: includes/public/class-wprm-taxonomies.php:166
+msgid "Diabetic"
+msgstr "Diyabet"
+
+#: includes/public/class-wprm-taxonomies.php:167
+msgid "Gluten Free"
+msgstr "Glütensiz"
+
+#: includes/public/class-wprm-taxonomies.php:168
+msgid "Halal"
+msgstr "Helal"
+
+#: includes/public/class-wprm-taxonomies.php:169
+msgid "Hindu"
+msgstr "Hindu"
+
+#: includes/public/class-wprm-taxonomies.php:170
+msgid "Kosher"
+msgstr "Koşer"
+
+#: includes/public/class-wprm-taxonomies.php:171
+msgid "Low Calorie"
+msgstr "Düşük Kalori"
+
+#: includes/public/class-wprm-taxonomies.php:172
+msgid "Low Fat"
+msgstr "Düşük Yağ"
+
+#: includes/public/class-wprm-taxonomies.php:173
+msgid "Low Lactose"
+msgstr "Düşük Laktoz"
+
+#: includes/public/class-wprm-taxonomies.php:174
+msgid "Low Salt"
+msgstr "Düşük Tuz"
+
+#: includes/public/class-wprm-taxonomies.php:175
+msgid "Vegan"
+msgstr "Vegan"
+
+#: includes/public/class-wprm-taxonomies.php:176
+msgid "Vegetarian"
+msgstr "Vejetaryen"
+
+#: includes/public/class-wprm-template-editor.php:36
+msgid "WPRM Template Editor"
+msgstr "WPRM Şablon Düzenleyici"
+
+#: includes/public/class-wprm-template-editor.php:36
+#: templates/settings/group-recipe-roundup.php:49
+#: templates/settings/group-template-editor.php:15
+#: templates/settings/group-template-editor.php:23
+msgid "Template Editor"
+msgstr "Şablon Düzenleyici"
+
+#: templates/settings/group-recipe-defaults.php:15
+msgid "Recipe Defaults"
+msgstr "Tarif Varsayılanları"
+
+#: templates/settings/group-recipe-defaults.php:19
+msgid "Use image from parent post"
+msgstr "Ana yazı görselini kullan"
+
+#: templates/settings/group-recipe-defaults.php:20
+msgid "Use featured image of parent post if no recipe image is set."
+msgstr "Tarif görseli belirlenmemişse ana yazının öne çıkan görselini kulan."
+
+#: templates/settings/group-recipe-defaults.php:26
+msgid "Default Author"
+msgstr "Varsayılan Yazar"
+
+#: templates/settings/group-recipe-defaults.php:27
+msgid "Default value for the Recipe Author field when creating a new recipe."
+msgstr ""
+"Yeni bir tarif oluşturulurken Tarif Yazarı alanına yazılacak varsayılan "
+"değer."
+
+#: templates/settings/group-recipe-defaults.php:32
+msgid "Custom author per recipe"
+msgstr "Her tarif için özel yazar"
+
+#: templates/settings/group-recipe-defaults.php:39
+msgid "Default Custom Author Name"
+msgstr "Varsayılan Özel Yazar Adı"
+
+#: templates/settings/group-recipe-defaults.php:49
+#: templates/admin/translations.php:26
+msgid "Author Name"
+msgstr "Yazar Adı"
+
+#: templates/settings/group-recipe-defaults.php:59
+msgid "Author Link"
+msgstr "Yazar Bağlantısı"
+
+#: templates/settings/group-recipe-defaults.php:60
+msgid "Leave blank to not use a link."
+msgstr "Bağlantı kullanmak istemiyorsanız boş bırakın."
+
+#: templates/settings/group-recipe-defaults.php:71
+msgid "Open Author Link in New Tab"
+msgstr "Yazar Bağlantısını Yeni Sekmede Aç"
+
+#: templates/settings/group-permissions.php:15
+msgid "Permissions"
+msgstr "İzinler"
+
+#: templates/settings/group-permissions.php:18
+msgid "Frontend Access"
+msgstr "Önyüz Erişimi"
+
+#: templates/settings/group-permissions.php:22
+msgid "Prevent printing of non-published recipes"
+msgstr "Yayınlanmamış tariflerin yazdırılmasını önle"
+
+#: templates/settings/group-permissions.php:23
+msgid ""
+"Redirect visitors to the homepage when trying to print a recipe that has not "
+"been published yet. Can cause problems if the parent post is not set "
+"correctly."
+msgstr ""
+"Henüz yayınlanmış olmayan bir tarifi yazdırmaya çalışan ziyaretçileri ana "
+"sayfaya yönlendir. Ana yazı doğru ayarlanmamışsa problemlere neden olabilir."
+
+#: templates/settings/group-permissions.php:29
+msgid "Prevent printing of restricted recipes"
+msgstr "Kısıtlanmış tariflerin yazdırılmasını önle"
+
+#: templates/settings/group-permissions.php:30
+msgid ""
+"Checks if a recipe is in the post content of its parent post. Can be used in "
+"combination with membership plugins."
+msgstr ""
+"Tarifin ana yazının içeriğinde yer alıp almadığını kontrol eder. Üyelik "
+"eklentileri ile kombinasyon halinde kullanılabilir."
+
+#: templates/settings/group-permissions.php:37
+msgid "Backend Access"
+msgstr "Arya Yüz Erişimi"
+
+#: templates/settings/group-permissions.php:38
+msgid ""
+"Accepts one value only. Set the minimum capability required to access "
+"specific features. For example, set to edit_others_posts to provide access "
+"to editors and administrators."
+msgstr ""
+"Yalnızca bir değer kabul eder. Belirli özelliklere erişmek için gereken "
+"minimum yetkiyi belirleyin. Örneğin editörlere ve yöneticilere erişim vermek "
+"için edit_others_posts (başkalarının yazılarını düzenleyebilir) seçeneğini "
+"seçin."
+
+#: templates/settings/group-permissions.php:43
+msgid "Access to Manage Page"
+msgstr "Yönet Sayfasına Erişim"
+
+#: templates/settings/group-permissions.php:52
+msgid "Access to Tools Page"
+msgstr "Araçlar Sayfasına Erişim"
+
+#: templates/settings/group-permissions.php:61
+msgid "Access to Import Page"
+msgstr "İçeri Aktar Sayfasına Erişim"
+
+#: templates/settings/group-permissions.php:70
+msgid "Access to FAQ & Support Page"
+msgstr "SSS ve Destek Sayfasına Erişim"
+
+#: templates/settings/group-template-mode.php:15
+#: templates/settings/group-template-mode.php:29
+#: templates/settings/group-legacy.php:20
+msgid "Template Mode"
+msgstr "Şablon Modu"
+
+#: templates/settings/group-template-mode.php:23
+#: templates/settings/group-legacy.php:21
+msgid ""
+"The \"Modern\" template mode is highly recommended. Use \"Legacy\" for "
+"backwards compatibility only."
+msgstr ""
+"\"Modern\" şablon modunu kullanmanız önerilir. \"Klasik\" modunu yalnızca "
+"geriye dönük uyumluluk için kullanın."
+
+#: templates/settings/group-template-mode.php:23
+msgid "The \"Template Editor\" feature can only work in \"Modern\" mode."
+msgstr "\"Şablon Düzenleyici\" modu yalnızca \"Modern\" modda kullanılabilir."
+
+#: templates/settings/group-template-mode.php:24
+msgid "Learn more in the Migration Guide"
+msgstr "Daha fazlası için Taşınma Kılavuzuna bakın"
+
+#: templates/settings/group-template-mode.php:32
+#: templates/settings/group-legacy.php:24
+msgid "Legacy"
+msgstr "Klasik"
+
+#: templates/settings/group-template-mode.php:33
+#: templates/settings/group-legacy.php:25
+msgid "Modern"
+msgstr "Modern"
+
+#: templates/settings/group-settings-tools.php:15
+msgid "Settings Tools"
+msgstr "Ayarlama Araçları"
+
+#: templates/settings/group-adjustable-servings.php:15
+#: templates/settings/group-recipe-print.php:149
+msgid "Adjustable Servings"
+msgstr "Ayarlanabilir Porsiyonlar"
+
+#: templates/settings/group-adjustable-servings.php:16
+msgid "Allow visitors to adjust the serving size of your recipes."
+msgstr "Ziyaretçilerin tariflerinizin porsiyonlarını ayarlamasına izin verin."
+
+#: templates/settings/group-adjustable-servings.php:28
+msgid "Enable Adjustable Servings"
+msgstr "Ayarlanabilir Porsiyonları Etkinleştir"
+
+#: templates/settings/group-adjustable-servings.php:34
+msgid "Display Type"
+msgstr "Görüntüleme Tipi"
+
+#: templates/settings/group-adjustable-servings.php:37
+msgid "Slider in Tooltip"
+msgstr "Araç İpucundaki Kaydırma Çubuğu"
+
+#: templates/settings/group-adjustable-servings.php:38
+msgid "Text Field"
+msgstr "Metin Alanı"
+
+#: templates/settings/group-adjustable-servings.php:52
+#: templates/settings/group-nutrition-calculation.php:22
+msgid "Round quantity to"
+msgstr "Miktarı şu değere yuvarla"
+
+#: templates/settings/group-adjustable-servings.php:53
+msgid ""
+"Number of decimals to round a quantity to after adjusting the serving size."
+msgstr ""
+"Porsiyonun ayarlanmasının ardından miktarın yuvarlanacağı ondalık basamak "
+"sayısı."
+
+#: templates/settings/group-recipe-template.php:15
+#: templates/settings/group-template-legacy.php:15
+msgid "Recipe Template"
+msgstr "Tarif Şablonu"
+
+#: templates/settings/group-recipe-template.php:25
+msgid "Show non-food recipe types"
+msgstr "Yemek dışında kalan tarif tiplerini göster"
+
+#: templates/settings/group-recipe-template.php:26
+msgid ""
+"Enable to change the templates for how-to instruction and other recipes as "
+"well as food recipes."
+msgstr ""
+"Nasıl yapılır talimatlarına ve diğer tariflere ve yanı sıra yemek "
+"tariflerine ait şablonlarının değiştirilmesine olanak verir."
+
+#: templates/settings/group-recipe-template.php:32
+msgid "Show advanced options"
+msgstr "Gelişmiş seçenekleri göster"
+
+#: templates/settings/group-recipe-template.php:33
+msgid "Enable to change the templates for archive, AMP or RSS feed pages."
+msgstr ""
+"Arşiv, AMP veya RSS beslemesi sayfalarına ait şablonların değiştirilmesine "
+"olanak verir."
+
+#: templates/settings/group-recipe-template.php:40
+#: templates/settings/group-template-legacy.php:23
+msgid "Default Recipe Template"
+msgstr "Varsayılan Tarif Şablonu"
+
+#: templates/settings/group-recipe-template.php:41
+#: templates/settings/group-recipe-print.php:19
+#: templates/settings/group-recipe-snippets.php:36
+msgid "Fully customize these templates in the Template Editor."
+msgstr "Bu şablonları Şablon Düzenleyicide tamamen özelleştir."
+
+#: templates/settings/group-recipe-template.php:45
+msgid "Food Recipe Template"
+msgstr "Yemek Tarifi Şablonu"
+
+#: templates/settings/group-recipe-template.php:46
+msgid "Default template to use for the food recipes on your website."
+msgstr "Sitenizdeki yemek tarifleri için kullanılacak olan varsayılan şablon."
+
+#: templates/settings/group-recipe-template.php:52
+msgid "How-to Instructions Template"
+msgstr "Nasıl Yapılır Talimatları Şablonu"
+
+#: templates/settings/group-recipe-template.php:53
+msgid "Default template to use for the how-to instructions on your website."
+msgstr ""
+"Sitenizdeki nasıl yapılır talimatları için kullanılacak olan varsayılan "
+"şablon."
+
+#: templates/settings/group-recipe-template.php:63
+msgid "Other Recipe Template"
+msgstr "Diğer Tarifler için Şablon"
+
+#: templates/settings/group-recipe-template.php:64
+msgid ""
+"Default template to use for the \"other (no metadata)\" recipes on your "
+"website."
+msgstr ""
+"Sitenizdeki \"diğer (meta verisi içermeyen)\" tarifler için kullanılacak "
+"olan varsayılan şablon."
+
+#: templates/settings/group-recipe-template.php:75
+msgid "Advanced Template Options"
+msgstr "Gelişmiş Şablon Seçenekleri"
+
+#: templates/settings/group-recipe-template.php:76
+msgid ""
+"Use these settings to change how the recipe looks in other parts of your "
+"website:"
+msgstr ""
+"Tarifin sitenizin diğer bölümlerindeki görünümünü değiştirmek için bu "
+"ayarları kullanın:"
+
+#: templates/settings/group-recipe-template.php:84
+msgid "Archive Template"
+msgstr "Arşiv Şablonu"
+
+#: templates/settings/group-recipe-template.php:85
+msgid "Default template to use in archives (like home and category pages)."
+msgstr ""
+"Arşivlerde (örneğin ana sayfada ve kategori sayfalarında) kullanılacak olan "
+"varsayılan şablon."
+
+#: templates/settings/group-recipe-template.php:88
+#: templates/settings/group-recipe-template.php:98
+#: templates/settings/group-recipe-template.php:108
+#: templates/settings/group-recipe-print.php:31
+#: templates/settings/group-recipe-print.php:41
+#: templates/settings/group-recipe-print.php:55
+msgid "Use same as Default Recipe Template"
+msgstr "Varsayılan Tarif Şablonu ile aynısını kullan"
+
+#: templates/settings/group-recipe-template.php:94
+msgid "AMP Template"
+msgstr "AMP Şablonu"
+
+#: templates/settings/group-recipe-template.php:95
+msgid "Default template to use for AMP pages."
+msgstr "AMP sayfaları için kullanılacak olan varsayılan şablon."
+
+#: templates/settings/group-recipe-template.php:104
+msgid "RSS Feed Template"
+msgstr "RSS Beslemesi Şablonu"
+
+#: templates/settings/group-recipe-template.php:105
+msgid "Default template to use for RSS feeds."
+msgstr "RSS beslemelerinde kullanılacak olan varsayılan şablon."
+
+#: templates/settings/group-recipe-template.php:118
+#: templates/settings/group-template-legacy.php:227
+msgid "Get access to more recipe templates with WP Recipe Maker Premium."
+msgstr "WP Recipe Maker Premium ile daha fazla tarif şablonuna erişin."
+
+#: templates/settings/group-template-legacy-labels.php:29
+#: templates/settings/group-recipe-ratings.php:96
+msgid "Label used in the comment form."
+msgstr "Yorum formunda kullanılan etiket."
+
+#: templates/settings/group-template-legacy-labels.php:38
+msgid "Text Labels"
+msgstr "Metin Etiketleri"
+
+#: templates/settings/group-metadata.php:15
+msgid "Recipe Metadata"
+msgstr "Tarif Meta Verisi"
+
+#: templates/settings/group-metadata.php:18
+#: templates/admin/translations.php:103
+msgid "General"
+msgstr "Genel"
+
+#: templates/settings/group-metadata.php:22
+msgid "Integrate with Yoast SEO"
+msgstr "Yoast SEO ile Entegre Et"
+
+#: templates/settings/group-metadata.php:23
+msgid "Integrate with Yoast SEO Schema (version 11+) when enabled."
+msgstr ""
+"Devrede olduğunda Yoast SEO Schema (versiyon 11 ve üzeri) ile entegrasyon "
+"sağlar."
+
+#: templates/settings/group-metadata.php:30
+msgid "Recipe fields"
+msgstr "Tarif alanları"
+
+#: templates/settings/group-metadata.php:34
+msgid "Use SuitableForDiet Metadata"
+msgstr "SuitableForDiet Meta Verisini Kullan"
+
+#: templates/settings/group-metadata.php:35
+msgid "Allow setting of Suitable Diets for recipes."
+msgstr "Tarifler için Uygun Diyetler ayarı yapılmasına izin verir."
+
+#: templates/settings/group-metadata.php:42
+msgid "Show keywords in template"
+msgstr "Şablonda etiketleri göster"
+
+#: templates/settings/group-metadata.php:43
+msgid "Show keywords in the recipe template as well as the metadata."
+msgstr "Tarif şablonunda ve yanı sıra meta verilerinde etiketleri göster."
+
+#: templates/settings/group-metadata.php:51
+msgid "Guided Recipes"
+msgstr "Açıklamalı Yemek Tarifleri"
+
+#: templates/settings/group-metadata.php:55
+msgid "Restrict Ingredient Length"
+msgstr "Malzeme Uzunluğunu Kısıtla"
+
+#: templates/settings/group-metadata.php:56
+msgid ""
+"Try to prevent \"Invalid string length\" warning for ingredients by not "
+"including ingredient notes if they get too long."
+msgstr ""
+"\"Geçersiz dizi uzunluğu\" uyarısını önlemeye çalışmak için aşırı uzun "
+"oldukları takdirde malzeme notlarını alma."
+
+#: templates/settings/group-metadata.php:63
+msgid "Instruction Name Field"
+msgstr "Talimat İsmi Alanı"
+
+#: templates/settings/group-metadata.php:64
+msgid ""
+"How to handle the name field that Google wants for every instruction step."
+msgstr ""
+"Google'ın her talimat adımında istediği isim alanı ile ilgili yapılacak "
+"işlem."
+
+#: templates/settings/group-metadata.php:68
+msgid ""
+"Hide and ignore name field (this will get you warnings in Google Search "
+"Console)"
+msgstr ""
+"İsim alanını gizle ve yok say (bu durumda Google Search Console'da uyarılar "
+"alırsınız)"
+
+#: templates/settings/group-metadata.php:69
+msgid "Use regular instruction text if name is not set"
+msgstr "İsim belirtilmemişse normal talimat metnini kullan"
+
+#: templates/settings/group-metadata.php:70
+msgid "Only use in metadata when explicitely set in recipe"
+msgstr ""
+"Yalnızca tarifte özellikle belirtilmiş olduğu takdirde meta verilerinde "
+"kullan"
+
+#: templates/settings/group-metadata.php:77
+#: templates/settings/group-recipe-print.php:157
+#: templates/settings/structure.php:86
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: templates/settings/group-metadata.php:81
+msgid "Output Recipe Metadata"
+msgstr "Tarif Meta Verisi Çıktısı"
+
+#: templates/settings/group-metadata.php:82
+msgid ""
+"Use \"Next to recipe in HTML body element\" when your recipe is not part of "
+"the post content but placed elsewhere using custom code."
+msgstr ""
+"Tarifiniz yazı içeriğinin bir parçası değilse ve özel kod kullanılarak başka "
+"bir yere yerleştirilmişse \"HTML body öğesinde tarifin yanına\" seçeneğini "
+"kullanın."
+
+#: templates/settings/group-metadata.php:85
+msgid "In HTML head element"
+msgstr "HTML head öğesinde"
+
+#: templates/settings/group-metadata.php:86
+msgid "Next to recipe in HTML body element"
+msgstr "HTML body öğesinde tarifin yanına"
+
+#: templates/settings/group-metadata.php:92
+msgid "Only show metadata for first recipe"
+msgstr "Yalnızca ilk tarifin meta verisini göster"
+
+#: templates/settings/group-metadata.php:93
+msgid ""
+"When enabled, only the metadata for the very first food recipe on the page "
+"well get added."
+msgstr ""
+"Devrede olduğunda yalnızca sayfadaki ilk yemek tarifinin meta verisi "
+"eklenecektir."
+
+#: templates/settings/group-metadata.php:99
+msgid "Personal YouTube Data API key"
+msgstr "Kişisel YouTube Verisi API anahtarı"
+
+#: templates/settings/group-metadata.php:100
+msgid ""
+"Optionally set your own API key for retrieving the YouTube video metadata. "
+"Leave the setting blank to use the default shared key."
+msgstr ""
+"YouTube videolarına ait meta verilerini almak için opsiyonel olarak kendi "
+"API anahtarınızı girin. Varsayılan paylaşımlı anahtarı kullanmak için boş "
+"bırakın."
+
+#: templates/settings/group-recipe-roundup.php:15
+msgid "Recipe Roundup"
+msgstr "Özet Tarif"
+
+#: templates/settings/group-recipe-roundup.php:16
+msgid ""
+"Use this feature for your recipe roundup posts and we'll automatically "
+"output ItemList metadata allowing you to show up as a carousel in Google."
+msgstr ""
+"Bu özelliği tarif listesi niteliğindeki yazılarınız için kullanın. Google'da "
+"bant (carousel) formunda gösterilmenizi sağlayan ItemList meta verisini "
+"otomatik olarak oluşturacağız."
+
+#: templates/settings/group-recipe-roundup.php:21
+msgid "Food Recipe Roundup Template"
+msgstr "Yemek Tarifi Özet Şablonu"
+
+#: templates/settings/group-recipe-roundup.php:22
+msgid "Default roundup template to use for the food recipes on your website."
+msgstr ""
+"Sitenizdeki yemek tarifleri için kullanılacak olan varsayılan özet şablonu."
+
+#: templates/settings/group-recipe-roundup.php:28
+msgid "How-to Instructions Roundup Template"
+msgstr "Nasıl Yapılır Talimatları Özet Şablonu"
+
+#: templates/settings/group-recipe-roundup.php:29
+msgid ""
+"Default roundup template to use for the how-to instructions on your website."
+msgstr ""
+"Sitenizdeki nasıl yapılır talimatları için kullanılacak olan varsayılan özet "
+"şablonu."
+
+#: templates/settings/group-recipe-roundup.php:39
+msgid "Other Recipe Roundup Template"
+msgstr "Diğer Tarifler için Özet Şablonu"
+
+#: templates/settings/group-recipe-roundup.php:40
+msgid ""
+"Default roundup template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+"Sitenizdeki \"diğer (meta verisi içermeyen)\" tarifler için kullanılacak "
+"olan varsayılan özet şablonu."
+
+#: templates/settings/group-recipe-roundup.php:52
+#: templates/settings/group-template-editor.php:26
+msgid "Open the Template Editor"
+msgstr "Şablon Düzenleyiciyi Aç"
+
+#: templates/settings/group-recipe-roundup.php:57
+msgid "No metadata when there is recipe metadata"
+msgstr "Tarif meta verisi varsa meta verisi oluşturma"
+
+#: templates/settings/group-recipe-roundup.php:58
+msgid ""
+"Do not output the ItemList metadata when there is already recipe metadata on "
+"the same page."
+msgstr ""
+"Aynı sayfada halihazırda tarif meta verisi varsa ItemList meta verisi "
+"oluşturma."
+
+#: templates/settings/group-recipe-roundup.php:64
+msgid "Open internal links in a new tab"
+msgstr "İç linkleri yeni sekmede aç"
+
+#: templates/settings/group-recipe-roundup.php:65
+msgid "Force recipe links to your own site to open in a new tab as well."
+msgstr ""
+"Kendi sitenize verilmiş olan tarif linklerini de yeni sekmede açılmaya zorla."
+
+#: templates/settings/group-import.php:20 templates/admin/translations.php:101
+msgid "Import"
+msgstr "İçe Aktar"
+
+#: templates/settings/group-import.php:23
+msgid "Ingredient Parsing"
+msgstr "Malzeme Çözümlemesi"
+
+#: templates/settings/group-import.php:27
+msgid "Range Keyword"
+msgstr "Aralık Anahtar Kelimesi"
+
+#: templates/settings/group-import.php:29
+msgid ""
+"Keyword used when defining quantity ranges. For example: to when using 1 to "
+"2."
+msgstr ""
+"Miktar aralıkları tanımlanırken kullanılan anahtar kelime. Örneğin 1 ila 2 "
+"ifadesindeki ila."
+
+#: templates/settings/group-import.php:30
+msgid "to"
+msgstr "ila"
+
+#: templates/settings/group-import.php:34
+msgid "Import Units"
+msgstr "İçe Aktarım Birimleri"
+
+#: templates/settings/group-import.php:35
+msgid "Units that will be recognized. One per line."
+msgstr "Tanınacak olan birimler. Her satıra tek birim."
+
+#: templates/settings/group-import.php:45
+msgid "Ingredient Notes Identifier"
+msgstr "Malzeme Notları Tanımlayıcı"
+
+#: templates/settings/group-import.php:46
+msgid "How to recognize if it should be part of the ingredient notes."
+msgstr "Tarif notlarına dahil etmek gerekip gerekmediğini tespit etme yöntemi."
+
+#: templates/settings/group-import.php:49
+msgid "Everything after the first comma"
+msgstr "İlk virgülden sonraki her şey"
+
+#: templates/settings/group-import.php:50
+msgid "Everything inside parentheses"
+msgstr "Parantezler içindeki her şey"
+
+#: templates/settings/group-import.php:51
+msgid "Comma or parentheses, whichever comes first"
+msgstr "Virgül veya parantez, hangisi önceyse"
+
+#: templates/settings/group-import.php:52
+msgid "Do not import to ingredient notes"
+msgstr "Malzeme notları içine aktarma"
+
+#: templates/settings/group-import.php:58
+msgid "Remove Identifier"
+msgstr "Tanımlayıcıyı Kaldır"
+
+#: templates/settings/group-import.php:59
+msgid ""
+"Remove the above ingredient notes identifier from the notes after importing."
+msgstr ""
+"İçe aktardıktan sonra yukarıda belirtilen malzeme notları tanımlayıcıyı "
+"notlardan kaldır."
+
+#: templates/settings/group-social-sharing.php:15
+msgid "Social Sharing"
+msgstr "Sosyal Paylaşım"
+
+#: templates/settings/group-social-sharing.php:18
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: templates/settings/group-social-sharing.php:22
+msgid "Opt out of Rich Pins"
+msgstr "Zengin Pinler özelliğini kullanma"
+
+#: templates/settings/group-social-sharing.php:23
+msgid "Tell Pinterest NOT to display pins as rich pins on recipe pages."
+msgstr ""
+"Pinterest'e tarif sayfalarında pinleri zengin pinler şeklinde GÖSTERMEMESİNİ "
+"söyle."
+
+#: templates/settings/group-social-sharing.php:29
+msgid "Disable recipe image pinning"
+msgstr "Tarif görseli pinlemeyi devre dışı bırak"
+
+#: templates/settings/group-social-sharing.php:30
+msgid "Add the nopin attribute to the recipe image."
+msgstr "Tarif görseline nopin özelliği ekle."
+
+#: templates/settings/group-social-sharing.php:36
+msgid "Disable equipment image pinning"
+msgstr "Alet görseli pinlemeyi devre dışı bırak"
+
+#: templates/settings/group-social-sharing.php:37
+msgid "Add the nopin attribute to the equipment images."
+msgstr "Alet görseline \"nopin\" özelliği ekle."
+
+#: templates/settings/group-social-sharing.php:43
+msgid "Disable instruction image pinning"
+msgstr "Talimat görseli pinlemeyi devre dışı bırak"
+
+#: templates/settings/group-social-sharing.php:44
+msgid "Add the nopin attribute to the instruction images."
+msgstr "Talimat görseline \"nopin\" özelliği ekle."
+
+#: templates/settings/group-social-sharing.php:50
+msgid "Disable external recipe roundup image pinning"
+msgstr "Harici tarif özeti görseli pinlemeyi devre dışı bırak"
+
+#: templates/settings/group-social-sharing.php:51
+msgid "Add the nopin attribute to the external recipe roundup item image."
+msgstr "Harici tarif özeti görseline \"nopin\" özelliği ekle."
+
+#: templates/settings/group-social-sharing.php:58
+msgid "Pinterest - Pin Recipe button"
+msgstr "Pinterest - Tarifi Pinle düğmesi"
+
+#: templates/settings/group-social-sharing.php:62
+#: templates/admin/translations.php:78
+msgid "Pin Image"
+msgstr "Pin Görseli"
+
+#: templates/settings/group-social-sharing.php:63
+msgid "Image to use for the Pin Recipe shortcode."
+msgstr "Tarifi Pinle kısa kodu için kullanılacak görsel."
+
+#: templates/settings/group-social-sharing.php:68
+msgid "Custom Image per Recipe"
+msgstr "Her Tarif için Özel Görsel"
+
+#: templates/settings/group-social-sharing.php:69
+msgid "Custom Image if set, otherwise recipe image"
+msgstr ""
+"Özel görsel belirlenmişse kullan, belirlenmemişse tarif görselini kullan"
+
+#: templates/settings/group-social-sharing.php:74
+msgid "You can set the pin image when editing a recipe."
+msgstr "Bir tarifi düzenlerken pin görseli belirleyebilirsiniz."
+
+#: templates/settings/group-social-sharing.php:84
+msgid "Pin Description"
+msgstr "Pin Açıklaması"
+
+#: templates/settings/group-social-sharing.php:85
+msgid "What to use for the pin description."
+msgstr "Pin açıklaması için kullanılacak metin."
+
+#: templates/settings/group-social-sharing.php:88
+#: templates/admin/translations.php:128
+msgid "Recipe Name"
+msgstr "Tarifin Adı"
+
+#: templates/settings/group-social-sharing.php:89
+msgid "Recipe Summary"
+msgstr "Tarifin Özeti"
+
+#: templates/settings/group-social-sharing.php:90
+msgid "Image Title"
+msgstr "Görselin Adı"
+
+#: templates/settings/group-social-sharing.php:91
+msgid "Image Caption"
+msgstr "Görselin Altyazısı"
+
+#: templates/settings/group-social-sharing.php:92
+msgid "Image Description"
+msgstr "Görselin Açıklaması"
+
+#: templates/settings/group-social-sharing.php:93
+msgid "Custom Text"
+msgstr "Özel Metin"
+
+#: templates/settings/group-social-sharing.php:99
+msgid "Custom Description"
+msgstr "Özel Açıklama"
+
+#: templates/settings/group-social-sharing.php:100
+msgid "You can use the following placeholders:"
+msgstr "Şu yer tutucuları kullanabilirsiniz:"
+
+#: templates/settings/group-nutrition-calculation.php:15
+msgid "Nutrition Facts Calculation"
+msgstr "Besin Değeri Hesaplama"
+
+#: templates/settings/group-nutrition-calculation.php:17
+msgid "Our API integration helps calculate the nutition facts for you."
+msgstr ""
+"API entegrasyonumuz besin değerlerinin sizin için hesaplanmasına yardımcı "
+"olur."
+
+#: templates/settings/group-nutrition-calculation.php:23
+msgid ""
+"Number of decimals to round a quantity to when calculating nutrition facts."
+msgstr ""
+"Besin değerlerinin hesaplanması sırasında yuvarlama yapılırken kullanılacak "
+"ondalık basamak sayısı."
+
+#: templates/settings/group-recipe-submission.php:15
+#: templates/admin/translations.php:290
+msgid "Recipe Submission"
+msgstr "Tarif Gönderme"
+
+#: templates/settings/group-recipe-submission.php:17
+msgid "Allow your visitors to submit their own recipes to your website."
+msgstr "Ziyaretçilerinizin sitenize kendi tariflerini göndermesine izin verin."
+
+#: templates/settings/group-template-legacy.php:24
+msgid "Default template to use for the recipes on your website."
+msgstr "Sitenizdeki tarifler için kullanılacak varsayılan şablon."
+
+#: templates/settings/group-template-legacy.php:31
+msgid "Template Options"
+msgstr "Şablon Seçenekleri"
+
+#: templates/settings/group-template-legacy.php:32
+msgid "Note: not all options will affect every recipe template."
+msgstr "Not: tüm seçenekler tüm tarif şablonlarını etkilemeyecektir."
+
+#: templates/settings/group-template-legacy.php:36
+msgid "Base Font Size"
+msgstr "Baz Font Boyutu"
+
+#: templates/settings/group-template-legacy.php:37
+#: templates/settings/group-template-legacy.php:49
+#: templates/settings/group-template-legacy.php:60
+#: templates/settings/group-template-legacy.php:71
+#: templates/settings/group-template-legacy.php:78
+msgid "Leave blank to use the template default."
+msgstr "Şablonun varsayılan değerini kullanmak için boş bırakın."
+
+#: templates/settings/group-template-legacy.php:48
+msgid "Header Font"
+msgstr "Başlık Fontu"
+
+#: templates/settings/group-template-legacy.php:49
+#: templates/settings/group-template-legacy.php:60
+msgid ""
+"Type the name of the font you'd like to use. Make sure the font is already "
+"loaded."
+msgstr ""
+"Kullanmak istediğiniz fontun adını yazın. Fontun halihazırda yüklü "
+"olduğundan emin olun."
+
+#: templates/settings/group-template-legacy.php:59
+msgid "Regular Font"
+msgstr "Normal Font"
+
+#: templates/settings/group-template-legacy.php:70
+msgid "Recipe Image Size"
+msgstr "Tarif Görseli Boyutu"
+
+#: templates/settings/group-template-legacy.php:71
+#: templates/settings/group-template-legacy.php:78
+#: templates/settings/group-media.php:45
+msgid "Type the name of a thumbnail size or the exact size you want."
+msgstr "Bir küçük görsel boyutu ismi yazın veya istediğiniz tam boyutu girin."
+
+#: templates/settings/group-template-legacy.php:71
+#: templates/settings/group-template-legacy.php:78
+#: templates/settings/group-media.php:45
+msgid "For example:"
+msgstr "Örneğin:"
+
+#: templates/settings/group-template-legacy.php:77
+msgid "Instruction Image Size"
+msgstr "Talimat Görseli Boyutu"
+
+#: templates/settings/group-template-legacy.php:84
+msgid "Instruction Image Alignment"
+msgstr "Talimat Görseli Hizalaması"
+
+#: templates/settings/group-template-legacy.php:87
+#: templates/settings/group-recipe-snippets.php:99
+msgid "Left"
+msgstr "Sol"
+
+#: templates/settings/group-template-legacy.php:88
+#: templates/settings/group-recipe-snippets.php:100
+msgid "Center"
+msgstr "Orta"
+
+#: templates/settings/group-template-legacy.php:89
+#: templates/settings/group-recipe-snippets.php:101
+msgid "Right"
+msgstr "Sağ"
+
+#: templates/settings/group-template-legacy.php:99
+msgid "Ingredient List Style"
+msgstr "Malzeme Listesi Stili"
+
+#: templates/settings/group-template-legacy.php:102
+#: templates/settings/group-template-legacy.php:128
+msgid "None"
+msgstr "Yok"
+
+#: templates/settings/group-template-legacy.php:103
+#: templates/settings/group-template-legacy.php:129
+msgid "Checkbox"
+msgstr "Onay kutusu"
+
+#: templates/settings/group-template-legacy.php:104
+#: templates/settings/group-template-legacy.php:130
+msgid "Circle"
+msgstr "Daire"
+
+#: templates/settings/group-template-legacy.php:105
+#: templates/settings/group-template-legacy.php:131
+msgid "Disc"
+msgstr "Disk"
+
+#: templates/settings/group-template-legacy.php:106
+#: templates/settings/group-template-legacy.php:132
+msgid "Square"
+msgstr "Kare"
+
+#: templates/settings/group-template-legacy.php:107
+#: templates/settings/group-template-legacy.php:133
+msgid "Decimal"
+msgstr "Ondalık Sayı"
+
+#: templates/settings/group-template-legacy.php:108
+#: templates/settings/group-template-legacy.php:134
+msgid "Decimal with leading zero"
+msgstr "Önünde sıfır olan ondalık sayı"
+
+#: templates/settings/group-template-legacy.php:109
+#: templates/settings/group-template-legacy.php:135
+msgid "Lower Roman"
+msgstr "Küçük harf Roma"
+
+#: templates/settings/group-template-legacy.php:110
+#: templates/settings/group-template-legacy.php:136
+msgid "Upper Roman"
+msgstr "Büyük harf Roma"
+
+#: templates/settings/group-template-legacy.php:111
+#: templates/settings/group-template-legacy.php:137
+msgid "Lower Latin"
+msgstr "Küçük harf Latin"
+
+#: templates/settings/group-template-legacy.php:112
+#: templates/settings/group-template-legacy.php:138
+msgid "Upper Latin"
+msgstr "Büyük harf Latin"
+
+#: templates/settings/group-template-legacy.php:113
+#: templates/settings/group-template-legacy.php:139
+msgid "Lower Greek"
+msgstr "Küçük harf Yunan"
+
+#: templates/settings/group-template-legacy.php:114
+#: templates/settings/group-template-legacy.php:140
+msgid "Armenian"
+msgstr "Ermeni"
+
+#: templates/settings/group-template-legacy.php:115
+#: templates/settings/group-template-legacy.php:141
+msgid "Georgian"
+msgstr "Gürcü"
+
+#: templates/settings/group-template-legacy.php:125
+msgid "Instruction List Style"
+msgstr "Talimat Listesi Stili"
+
+#: templates/settings/group-template-legacy.php:152
+msgid "Template Colors"
+msgstr "Şablon Renkleri"
+
+#: templates/settings/group-template-legacy.php:162
+#: templates/settings/group-recipe-snippets.php:107
+msgid "Background Color"
+msgstr "Arka Plan Rengi"
+
+#: templates/settings/group-template-legacy.php:168
+msgid "Border Color"
+msgstr "Kenarlık Rengi"
+
+#: templates/settings/group-template-legacy.php:174
+#: templates/settings/group-recipe-snippets.php:123
+msgid "Text Color"
+msgstr "Metin Rengi"
+
+#: templates/settings/group-template-legacy.php:180
+msgid "Link Color"
+msgstr "Bağlantı Rengi"
+
+#: templates/settings/group-template-legacy.php:186
+msgid "Header Color"
+msgstr "Başlık Rengi"
+
+#: templates/settings/group-template-legacy.php:192
+msgid "Icon Color"
+msgstr "Simge Rengi"
+
+#: templates/settings/group-template-legacy.php:193
+msgid "Used for the color of the star ratings and other icons."
+msgstr "Yıldızlı puanlama ve diğer simgelerin rengi için kullanılır."
+
+#: templates/settings/group-template-legacy.php:199
+#: templates/settings/group-recipe-print.php:80
+msgid "Accent Color"
+msgstr "Yardımcı Renk"
+
+#: templates/settings/group-template-legacy.php:205
+msgid "Accent Text Color"
+msgstr "Yardımcı Metin Rengi"
+
+#: templates/settings/group-template-legacy.php:211
+msgid "Accent 2 Color"
+msgstr "Yardımcı 2 Rengi"
+
+#: templates/settings/group-template-legacy.php:217
+msgid "Accent 2 Text Color"
+msgstr "Yardımcı 2 Metin Rengi"
+
+#: templates/settings/group-custom-style.php:15
+msgid "Custom Style"
+msgstr "Özel Stil"
+
+#: templates/settings/group-custom-style.php:19
+msgid "Use Custom Styling"
+msgstr "Özel Stil Kullan"
+
+#: templates/settings/group-custom-style.php:20
+msgid "Disable if you don't want to output inline CSS."
+msgstr "Satır içi CSS kullanılmasını istemiyorsanız devre dışı bırakın."
+
+#: templates/settings/group-custom-style.php:20
+msgid ""
+"If you do so, styling changes will have to be made elsewhere and not from "
+"this settings page."
+msgstr ""
+"Devre dışı bırakmanız durumunda stil değişikliklerinin bu ayar sayfasından "
+"değil, başka bir yerden yapılması gerekecektir."
+
+#: templates/settings/group-custom-style.php:26
+msgid "Recipe CSS"
+msgstr "Tarif CSS'i"
+
+#: templates/settings/group-custom-style.php:27
+msgid "This custom styling will be output on your website."
+msgstr "Sitenizde bu özel stil kullanılacaktır."
+
+#: templates/settings/group-custom-style.php:38
+msgid "Recipe Print CSS"
+msgstr "Tarif yazdırma CSS'i"
+
+#: templates/settings/group-custom-style.php:39
+msgid "This custom styling will be output on the recipe recipe page."
+msgstr "Yazdırılan tarif sayfasında bu özel stil kullanılacaktır."
+
+#: templates/settings/group-term-links.php:15
+msgid "Term Links"
+msgstr "Terim Bağlantıları"
+
+#: templates/settings/group-term-links.php:19
+msgid "General Term Links"
+msgstr "Genel Terim Bağlantıları"
+
+#: templates/settings/group-term-links.php:20
+msgid ""
+"Term links can be set through the WP Recipe Maker > Manage > Recipe Fields "
+"page."
+msgstr ""
+"Terim bağlantıları WP Recipe Maker > Yönet > Tarif Alanları sayfasından "
+"ayarlanabilir."
+
+#: templates/settings/group-term-links.php:24
+#: templates/settings/group-term-links.php:45
+#: templates/settings/group-term-links.php:66
+msgid "Open in New Tab"
+msgstr "Yeni Sekmede Aç"
+
+#: templates/settings/group-term-links.php:25
+msgid "Open term links in a new tab."
+msgstr "Terim bağlantılarını yeni sekmede aç."
+
+#: templates/settings/group-term-links.php:31
+#: templates/settings/group-term-links.php:52
+#: templates/settings/group-term-links.php:73
+msgid "Default Use Nofollow"
+msgstr "Varsayılan Olarak Nofollow Kullan"
+
+#: templates/settings/group-term-links.php:32
+msgid "Add the nofollow attribute to term links by default."
+msgstr "Terim bağlantılarına varsayılan olarak nofollow özelliği ekle."
+
+#: templates/settings/group-term-links.php:39
+#: templates/admin/translations.php:85
+#: templates/admin/menu/tools/wpurp-ingredients.php:14
+msgid "Ingredient Links"
+msgstr "Malzeme Bağlantıları"
+
+#: templates/settings/group-term-links.php:40
+msgid ""
+"Ingredient links can be set when editing a recipe or through the WP Recipe "
+"Maker > Manage > Recipe Fields > Ingredients page."
+msgstr ""
+"Malzeme bağlantıları, tarif düzenlenirken veya WP Recipe Maker > Yönet > "
+"Tarif Alanları > Malzemeler sayfasından ayarlanabilir."
+
+#: templates/settings/group-term-links.php:46
+msgid "Open ingredient links in a new tab."
+msgstr "Malzeme bağlantılarını yeni sekmede aç."
+
+#: templates/settings/group-term-links.php:53
+msgid "Add the nofollow attribute to ingredient links by default."
+msgstr "Malzeme bağlantılarına varsayılan olarak nofollow özelliği ekle."
+
+#: templates/settings/group-term-links.php:60
+msgid "Equipment Links"
+msgstr "Alet Bağlantıları"
+
+#: templates/settings/group-term-links.php:61
+msgid ""
+"Equipment links can be set on the WP Recipe Maker > Manage > Recipe Fields > "
+"Equipment page."
+msgstr ""
+"Alet bağlantıları WP Recipe Maker > Yönet > Tarif Alanları > Aletler "
+"sayfasından ayarlanabilir."
+
+#: templates/settings/group-term-links.php:67
+msgid "Open equipment links in a new tab."
+msgstr "Alet bağlantılarını yeni sekmede aç."
+
+#: templates/settings/group-term-links.php:74
+msgid "Add the nofollow attribute to equipment links by default."
+msgstr "Alet bağlantılarına varsayılan olarak nofollow özelliği ekle."
+
+#: templates/settings/group-recipe-print.php:15
+msgid "Print Version"
+msgstr "Yazdırılan Versiyon"
+
+#: templates/settings/group-recipe-print.php:18
+#: templates/settings/group-recipe-print.php:70
+msgid "Default Print Template"
+msgstr "Varsayılan Yazdırma Şablonu"
+
+#: templates/settings/group-recipe-print.php:27
+msgid "Food Recipe Print Template"
+msgstr "Yemek Tarifi Yazdırma Şablonu"
+
+#: templates/settings/group-recipe-print.php:28
+msgid "Default print template to use for the food recipes on your website."
+msgstr ""
+"Sitenizdeki yemek tarifleri için kullanılacak olan varsayılan yazdırma "
+"şablonu."
+
+#: templates/settings/group-recipe-print.php:37
+msgid "How-to Instructions Print Template"
+msgstr "Nasıl Yapılır Talimatları Yazdırma Şablonu"
+
+#: templates/settings/group-recipe-print.php:38
+msgid ""
+"Default print template to use for the how-to instructions on your website."
+msgstr ""
+"Sitenizdeki nasıl yapılır talimatları için kullanılacak olan varsayılan "
+"yazdırma şablonu."
+
+#: templates/settings/group-recipe-print.php:51
+msgid "Other Recipe Print Template"
+msgstr "Diğer Tarifler için Yazdırma Şablonu"
+
+#: templates/settings/group-recipe-print.php:52
+msgid ""
+"Default print template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+"Sitenizdeki \"diğer (meta verisi içermeyen)\" tarifler için kullanılacak "
+"olan varsayılan yazdırma şablonu."
+
+#: templates/settings/group-recipe-print.php:66
+#: templates/settings/group-recipe-times.php:18
+#: templates/settings/structure.php:56
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: templates/settings/group-recipe-print.php:81
+msgid "Should work as a background for white text"
+msgstr "Beyaz metin için arka plan görevi görmelidir"
+
+#: templates/settings/group-recipe-print.php:87
+msgid "Remove links"
+msgstr "Bağlantıları kaldır"
+
+#: templates/settings/group-recipe-print.php:88
+msgid "Remove any links inside the recipe."
+msgstr "Tarif içindeki tüm bağlantıları kaldır."
+
+#: templates/settings/group-recipe-print.php:94
+msgid "Every recipe on its own page"
+msgstr "Her tarif kendi sayfasında"
+
+#: templates/settings/group-recipe-print.php:95
+msgid "Try to force a page break after every recipe when printing."
+msgstr "Yazdırırken her tariften sonra sayfa sonu vermeye çalış."
+
+#: templates/settings/group-recipe-print.php:101
+msgid "Print Credit"
+msgstr "İmza Yazdır"
+
+#: templates/settings/group-recipe-print.php:102
+msgid ""
+"Optional text to show at the bottom of the print page. You can use HTML and "
+"the following placeholders:"
+msgstr ""
+"Yazdırılan sayfanın sonunda gösterilecek isteğe bağlı metin. HTML ve şu yer "
+"tutucuları kullanabilirsiniz:"
+
+#: templates/settings/group-recipe-print.php:108
+msgid "Print Footer Ad"
+msgstr "Sayfa Altı Reklamı Yazdır"
+
+#: templates/settings/group-recipe-print.php:109
+msgid ""
+"Optional ad to show in the footer of the print page. Does not get printed. "
+"Use any HTML code."
+msgstr ""
+"Yazdırma sayfasının alt kısmında gösterilecek isteğe bağlı reklam. Yazıcı "
+"çıktısına yazılmaz. Herhangi bir HTML kodu kullanın."
+
+#: templates/settings/group-recipe-print.php:117
+msgid "Functionality"
+msgstr "İşlevsellik"
+
+#: templates/settings/group-recipe-print.php:121
+msgid "Email Link Button"
+msgstr "E-posta Bağlantı Düğmesi"
+
+#: templates/settings/group-recipe-print.php:134
+msgid "Default Show Recipe Image"
+msgstr "Tarif Görselini Göster Varsayılan Ayarı"
+
+#: templates/settings/group-recipe-print.php:135
+#: templates/settings/group-recipe-print.php:142
+msgid ""
+"Default value for the checkbox that allows visitors to toggle the image."
+msgstr ""
+"Ziyaretçilerin görseli kapatıp açmasına izin veren onay kutusunun varsayılan "
+"değeri."
+
+#: templates/settings/group-recipe-print.php:141
+msgid "Default Show Instruction Images"
+msgstr "Talimat Görsellerini Göster Varsayılan Ayarı"
+
+#: templates/settings/group-recipe-print.php:150
+msgid "Allow visitors to change servings on the print page."
+msgstr "Ziyaretçilerin yazdırılan sayfada porsiyonu değiştirmesine izin ver."
+
+#: templates/settings/group-recipe-print.php:161
+msgid "Print Slug"
+msgstr "Yazdır Kısa İsmi"
+
+#: templates/settings/group-recipe-print.php:162
+msgid ""
+"Slug used in the URL for print pages. Make sure there is no conflict with "
+"other pages!"
+msgstr ""
+"Yazdırılan sayfalar için URL'de kullanılan kısa isim. Diğer sayfalarla "
+"çakışmadığından emin olun!"
+
+#: templates/settings/group-recipe-print.php:171
+msgid "Disable pinning on print page"
+msgstr "Yazdırılan sayfada pinlemeyi devre dışı bırak"
+
+#: templates/settings/group-recipe-print.php:172
+msgid ""
+"Enable this setting if you want to prevent people from pinning your print "
+"page to Pinterest."
+msgstr ""
+"Kullanıcıların yazıcı sayfanızı Pinterest'e eklemesini önlemek istiyorsanız "
+"bu özelliği etkinleştirin."
+
+#: templates/settings/group-recipe-times.php:15
+msgid "Recipe Times"
+msgstr "Tarif Süreleri"
+
+#: templates/settings/group-recipe-times.php:22
+#: templates/settings/group-nutrition-label.php:57
+msgid "Show values when 0"
+msgstr "0 olduğunda değer göster"
+
+#: templates/settings/group-recipe-times.php:23
+msgid "Show time when it has a value of 0."
+msgstr "Değer 0 olduğunda süreyi göster."
+
+#: templates/settings/group-performance.php:5
+msgid "Performance"
+msgstr "Performans"
+
+#: templates/settings/group-performance.php:9
+msgid "Output Combined Stars in Comments"
+msgstr "Yorumlarda Yıldızları Birleştir"
+
+#: templates/settings/group-performance.php:10
+msgid ""
+"Reduce DOM nodes by using one image for stars in comments. Disable to be "
+"able to use the comment star color setting."
+msgstr ""
+"Yorumlarda yıldızlar için tek bir görsel kullanarak DOM nodlarının sayısını "
+"azalt. Yorum yıldızı renk ayarını kullanabilmek için devre dışı bırakın."
+
+#: templates/settings/group-performance.php:16
+msgid "Only load Assets when needed"
+msgstr "Değerleri yalnızca gerekli olduklarında yükle"
+
+#: templates/settings/group-performance.php:17
+msgid ""
+"Only load JS and CSS files when a recipe is found on the page. Disable to "
+"always load WPRM assets."
+msgstr ""
+"JS ve CSS dosyalarını yalnızca sayfada bir tarif bulunduğunda yükle. Her "
+"zaman WPRM değerlerini yüklemek için devre dışı bırakın."
+
+#: templates/settings/group-integrations.php:5
+msgid "Integrations"
+msgstr "Entegrasyonlar"
+
+#: templates/settings/group-integrations.php:9
+msgid "Add extra Mediavine ad unit"
+msgstr "İlave bir Mediavine reklam birimi ekle"
+
+#: templates/settings/group-integrations.php:10
+msgid ""
+"Enable to automatically output an extra ad unit after the recipe ingredients "
+"block."
+msgstr ""
+"Tarif malzemeleri bloğundan sonra otomatik olarak ilave bir reklam birimi "
+"eklemek için etkinleştirin."
+
+#: templates/settings/group-nutrition-label.php:15
+#: templates/admin/translations.php:150
+msgid "Nutrition Label"
+msgstr "Besin Değerleri Tablosu"
+
+#: templates/settings/group-nutrition-label.php:19
+msgid "Display Manually"
+msgstr "Manuel Göster"
+
+#: templates/settings/group-nutrition-label.php:20
+msgid ""
+"Type the [wprm-nutrition-label] or [wprm-nutrition-label id=\"123\" align="
+"\"center\"] shortcode where you want the label to appear."
+msgstr ""
+"Tablonun görünmesini istediğiniz yere [wprm-nutrition-label] veya [wprm-"
+"nutrition-label id=\"123\" align=\"center\"] kısa kodunu yazın."
+
+#: templates/settings/group-nutrition-label.php:24
+msgid "Display Automatically"
+msgstr "Otomatik Göster"
+
+#: templates/settings/group-nutrition-label.php:32
+msgid "Nutrition Label in template"
+msgstr "Şablonda Besin Değerleri Tablosu"
+
+#: templates/settings/group-nutrition-label.php:33
+msgid ""
+"Display the nutrition label at its default location in the recipe template."
+msgstr ""
+"Besin değerleri tablosunu tarif şablonundaki varsayılan konumunda göster."
+
+#: templates/settings/group-nutrition-label.php:37
+msgid "Show - Aligned Left"
+msgstr "Göster - Sola Yaslı"
+
+#: templates/settings/group-nutrition-label.php:38
+msgid "Show - Aligned Center"
+msgstr "Göster - Ortaya Yaslı"
+
+#: templates/settings/group-nutrition-label.php:39
+msgid "Show - Aligned Right"
+msgstr "Göster - Sağa Yaslı"
+
+#: templates/settings/group-nutrition-label.php:46
+msgid "Customize"
+msgstr "Özelleştir"
+
+#: templates/settings/group-nutrition-label.php:50
+msgid "Default Serving Size Unit"
+msgstr "Varsayılan Porsiyon Birimi"
+
+#: templates/settings/group-nutrition-label.php:51
+msgid "Default unit to use for the nutrition serving size."
+msgstr "Besin değerinin porsiyon boyutu için kullanılacak varsayılan birim."
+
+#: templates/settings/group-nutrition-label.php:58
+msgid "Show nutrient in the nutrition label when it has a value of 0."
+msgstr "Değer 0 olduğunda besin öğesini besin değerleri tablosunda göster."
+
+#: templates/settings/group-nutrition-label.php:64
+msgid "Daily Values Disclaimer"
+msgstr "Günlük Değerlere İlişkin Feragatname"
+
+#: templates/settings/group-nutrition-label.php:74
+msgid ""
+"Get the Pro Bundle to have our Nutrition API integration help calculate the "
+"nutrition facts for you."
+msgstr ""
+"Nutrition API entegrasyonumuzun besin değerlerinin sizin yerinize "
+"hesaplamasına yardımcı olması için Pro Paketi edinin."
+
+#: templates/settings/structure.php:72
+msgid "Interactivity"
+msgstr "Etkileşimlilik"
+
+#: templates/settings/structure.php:83
+msgid "Backend"
+msgstr "Arka Yüz"
+
+#: templates/settings/group-recipe-ratings.php:14
+msgid ""
+"Warning: comment ratings cannot work with the Jetpack Comments feature you "
+"have activated."
+msgstr ""
+"Uyarı: yorum puanları etkinleştirmiş olduğunuz Jetpack Comments özelliği ile "
+"birlikte çalışamaz."
+
+#: templates/settings/group-recipe-ratings.php:20
+msgid "Star Ratings"
+msgstr "Yıldız Puanlar"
+
+#: templates/settings/group-recipe-ratings.php:23
+msgid "Rating Feature"
+msgstr "Puanlama Özelliği"
+
+#: templates/settings/group-recipe-ratings.php:24
+msgid ""
+"Choose what rating features to enable. The average recipe rating will "
+"combine the different methods of rating."
+msgstr ""
+"Hangi puanlama özelliklerinin etkinleştirileceğini seçin. Ortalama tarif "
+"puanında farklı puanlama yöntemleri birleştirilecektir."
+
+#: templates/settings/group-recipe-ratings.php:28
+#: templates/settings/group-recipe-ratings.php:46
+msgid "Comment Ratings"
+msgstr "Yorum Puanları"
+
+#: templates/settings/group-recipe-ratings.php:29
+msgid "Allow visitors to vote on your recipes when commenting."
+msgstr "Ziyaretçilerin yorum yazarken tariflerinizi puanlamasına izin verin."
+
+#: templates/settings/group-recipe-ratings.php:36
+#: templates/settings/group-recipe-ratings.php:111
+msgid "User Ratings"
+msgstr "Kullanıcı Puanları"
+
+#: templates/settings/group-recipe-ratings.php:38
+msgid "Allow visitors to vote on your recipes by simply clicking on the stars."
+msgstr ""
+"Ziyaretçilerinizin yalnızca yıldızlara tıklayarak tariflerinizi oylamasına "
+"izin verin."
+
+#: templates/settings/group-recipe-ratings.php:50
+msgid "Stars Color"
+msgstr "Yıldız Rengi"
+
+#: templates/settings/group-recipe-ratings.php:51
+msgid "Color of the stars in the comment section, not in the recipe itself."
+msgstr "Tarifin kendisindeki değil, yorum bölümündeki yıldızların rengi."
+
+#: templates/settings/group-recipe-ratings.php:61
+msgid "Star Size"
+msgstr "Yıldız Boyutu"
+
+#: templates/settings/group-recipe-ratings.php:62
+msgid "Size of the stars in the comment section, not in the recipe itself."
+msgstr "Tarifin kendisindeki değil, yorum bölümündeki yıldızların boyutu."
+
+#: templates/settings/group-recipe-ratings.php:73
+msgid "Stars Position in Comments"
+msgstr "Yıldızların Yorumlardaki Konumu"
+
+#: templates/settings/group-recipe-ratings.php:76
+msgid "Above the comment"
+msgstr "Yorumun üstünde"
+
+#: templates/settings/group-recipe-ratings.php:77
+msgid "Below the comment"
+msgstr "Yorumun altında"
+
+#: templates/settings/group-recipe-ratings.php:83
+msgid "Stars Position in Comment Form"
+msgstr "Yıldızların Yorum Formundaki Konumu"
+
+#: templates/settings/group-recipe-ratings.php:86
+msgid "Above the comment field"
+msgstr "Yorum alanının üstünde"
+
+#: templates/settings/group-recipe-ratings.php:87
+msgid "Below the comment field"
+msgstr "Yorum alanının altında"
+
+#: templates/settings/group-recipe-ratings.php:88
+msgid "Legacy mode"
+msgstr "Klasik mod"
+
+#: templates/settings/group-recipe-ratings.php:94
+#: templates/admin/translations.php:247
+msgid "Comment Rating"
+msgstr "Yorum Puanı"
+
+#: templates/settings/group-recipe-ratings.php:115
+msgid "Force people to leave a comment"
+msgstr "Kullanıcıları yorum yazmaya zorla"
+
+#: templates/settings/group-recipe-ratings.php:116
+msgid "You need to enable the Comment Ratings feature to use this option."
+msgstr ""
+"Bu seçeneği kullanmak için Yorum Puanı özelliğini etkinleştirmelisiniz."
+
+#: templates/settings/group-recipe-ratings.php:126
+msgid "Force visitors to leave a comment"
+msgstr "Ziyaretçileri yorum yazmaya zorla"
+
+#: templates/settings/group-recipe-ratings.php:127
+msgid ""
+"Redirect visitors to the comment form instead of allowing them to vote by "
+"just clicking."
+msgstr ""
+"Ziyaretçilerin yalnızca tıklayarak oy vermesine izin vermek yerine onları "
+"yorum formuna yönlendir."
+
+#: templates/settings/group-recipe-ratings.php:130
+msgid "Never, allow any user rating"
+msgstr "Kullanıcı puanlamasına asla izin verme"
+
+#: templates/settings/group-recipe-ratings.php:131
+msgid "If they want to give 1 star"
+msgstr "Eğer 1 yıldız vermek isterlerse"
+
+#: templates/settings/group-recipe-ratings.php:132
+msgid "If they want to give 2 stars or less"
+msgstr "Eğer 2 veya daha az yıldız vermek isterlerse"
+
+#: templates/settings/group-recipe-ratings.php:133
+msgid "If they want to give 3 stars or less"
+msgstr "Eğer 3 veya daha az yıldız vermek isterlerse"
+
+#: templates/settings/group-recipe-ratings.php:134
+msgid "If they want to give 4 stars or less"
+msgstr "Eğer 4 veya daha az yıldız vermek isterlerse"
+
+#: templates/settings/group-recipe-ratings.php:135
+msgid "Always redirect to the comment form"
+msgstr "Her zaman yorum formuna yönlendir"
+
+#: templates/settings/group-recipe-ratings.php:145
+msgid "HTML Element to scroll to"
+msgstr "Kaydırma yapılacak HTML Öğesi"
+
+#: templates/settings/group-recipe-ratings.php:146
+msgid ""
+"Optionally set a custom HTML element to scroll to. Can be useful when using "
+"lazy loading your comments, for example."
+msgstr ""
+"İsteğe bağlı olarak, kaydırma yapılacak özel bir HTML öğesi belirle. Örneğin "
+"yorumlarınızda tembel yükleme aktifse kullanışlı olabilir."
+
+#: templates/settings/group-recipe-snippets.php:15
+#: templates/admin/translations.php:143
+msgid "Recipe Snippets"
+msgstr "Tarif Kodu Parçacıkları"
+
+#: templates/settings/group-recipe-snippets.php:18
+#: templates/settings/group-recipe-snippets.php:74
+msgid ""
+"Use the [wprm-recipe-snippet] shortcode or automatically add a snippet at "
+"the top of your post with the setting. Can be used for the Jump to Recipe "
+"and Print Recipe buttons, for example."
+msgstr ""
+"Bu kod parçacıklarını eklemek için [wprm-recipe-snippet] kısa kodunu "
+"kullanın veya bu ayarı kullanarak yazınızın baş tarafına otomatik olarak kod "
+"parçacığı ekleyin. Örneğin Tarife Git veya Tarifi Yazdır düğmeleri için "
+"kullanılabilir."
+
+#: templates/settings/group-recipe-snippets.php:27
+#: templates/settings/group-recipe-snippets.php:83
+msgid "Automatically add snippets"
+msgstr "Tarif kodu parçacıklarını otomatik olarak ekle"
+
+#: templates/settings/group-recipe-snippets.php:28
+msgid ""
+"Automatically have the default snippet template appear at the start of posts "
+"that include a recipe."
+msgstr ""
+"İçinde bir tarif bulunan yazıların baş kısmında varsayılan kod parçacığı "
+"şablonunun otomatik olarak görünmesini sağlayın."
+
+#: templates/settings/group-recipe-snippets.php:35
+msgid "Default Snippet Template"
+msgstr "Varsayılan Kod Parçacığı Şablonu"
+
+#: templates/settings/group-recipe-snippets.php:36
+msgid ""
+"Make sure to pick a snippet template or the full recipe might get displayed "
+"twice."
+msgstr ""
+"Bir kod parçacığı şablonu seçtiğinizden emin olun. Aksi takdirde tarifin "
+"tamamı iki defa gösterilebilir."
+
+#: templates/settings/group-recipe-snippets.php:44
+msgid "Food Recipe Snippet Template"
+msgstr "Yemek Tarifi Kod Parçacığı Şablonu"
+
+#: templates/settings/group-recipe-snippets.php:45
+msgid "Default snippet template to use for the food recipes on your website."
+msgstr ""
+"Sitenizdeki yemek tarifleri için kullanılacak olan varsayılan kod parçacığı "
+"şablonu."
+
+#: templates/settings/group-recipe-snippets.php:51
+msgid "How-to Instructions Snippet Template"
+msgstr "Nasıl Yapılır Talimatları Kod Parçacığı Şablonu"
+
+#: templates/settings/group-recipe-snippets.php:52
+msgid ""
+"Default snippet template to use for the how-to instructions on your website."
+msgstr ""
+"Sitenizdeki nasıl yapılır talimatları için kullanılacak olan varsayılan kod "
+"parçacığı şablonu."
+
+#: templates/settings/group-recipe-snippets.php:62
+msgid "Other Recipe Snippet Template"
+msgstr "Diğer Tarifler için Kod Parçacığı Şablonu"
+
+#: templates/settings/group-recipe-snippets.php:63
+msgid ""
+"Default snippet template to use for the \"other (no metadata)\" recipes on "
+"your website."
+msgstr ""
+"Sitenizdeki \"diğer (meta verisi içermeyen)\" tarifler için kullanılacak "
+"olan varsayılan kod parçacığı şablonu."
+
+#: templates/settings/group-recipe-snippets.php:89
+msgid "Text to output"
+msgstr "Gösterilecek metin"
+
+#: templates/settings/group-recipe-snippets.php:90
+msgid "Use shortcodes where you want the snippets to appear."
+msgstr "Kod parçacıklarının görünmesini istediğiniz yere kısa kodları yazın."
+
+#: templates/settings/group-recipe-snippets.php:96
+msgid "Snippet Alignment"
+msgstr "Kod Parçacığı Hizalaması"
+
+#: templates/settings/group-recipe-collections.php:15
+#: templates/admin/translations.php:156
+msgid "Recipe Collections"
+msgstr "Tarif Koleksiyonları"
+
+#: templates/settings/group-recipe-collections.php:17
+msgid ""
+"Recipe Collections allow your visitors to save the recipes on your website "
+"in their own collections and then generate a shopping list for them. Can be "
+"used for collecting favorites, meal planning and much more!"
+msgstr ""
+"Tarif Koleksiyonları, ziyaretçilerinizin sitenizdeki tarifleri kendi "
+"koleksiyonlarına eklemesine ve ardından bir alışveriş listesi oluşturmasına "
+"izin verir. Favorileri bir araya toplamak, menü planlaması yapmak ve çok "
+"daha fazlası için kullanılabilir!"
+
+#: templates/settings/group-unit-conversion.php:15
+#: templates/admin/translations.php:87
+msgid "Unit Conversion"
+msgstr "Birim Dönüştürme"
+
+#: templates/settings/group-unit-conversion.php:17
+msgid ""
+"Reach an international audience by providing your recipes in both Metric and "
+"US Customary units."
+msgstr ""
+"Tariflerinizi hem metrik birimlerle hem de Amerikan birimleriyle sunarak "
+"uluslararası bir ziyaretçi kitlesine erişin."
+
+#: templates/settings/group-template-editor.php:16
+msgid ""
+"Use the Template Editor to manage and customize all templates on your "
+"website. Use it to alter the recipe box, recipe snippets, print version, ... "
+"to match your style!"
+msgstr ""
+"Sitenizdeki tüm şablonları yönetmek ve özelleştirmek için Şablon "
+"Düzenleyiciyi kullanın. Düzenleyiciyi kullanarak tarif kutusunu, tarif kodu "
+"parçacıklarını, yazdırılan versiyonu vb. stilinize uyacak şekilde "
+"değiştirebilirsiniz!"
+
+#: templates/settings/group-template-editor.php:31
+msgid "Default Preview Recipe"
+msgstr "Ön İzlemede Kullanılacak Varsayılan Tarif"
+
+#: templates/settings/group-template-editor.php:32
+msgid "Default recipe to use for the Template Editor preview."
+msgstr ""
+"Şablon Düzenleyicinin ön izlemesinde kullanılacak olan varsayılan tarif."
+
+#: templates/settings/group-legacy.php:15
+msgid "Legacy Settings"
+msgstr "Klasik Ayarlar"
+
+#: templates/settings/group-legacy.php:16
+msgid ""
+"These settings are around for backwards compatibility only. We highly "
+"recommend leaving them to their default values."
+msgstr ""
+"Bu ayarlar yalnızca geriye dönük uyumluluğa yöneliktir. Varsayılan "
+"değerlerinde bırakmanızı şiddetle öneririz."
+
+#: templates/settings/group-media.php:5 templates/admin/translations.php:102
+msgid "Media"
+msgstr "Ortam"
+
+#: templates/settings/group-media.php:8
+msgid "Instruction Media Toggle"
+msgstr "Talimat Ortam Dosyalarını Aç/Kapat"
+
+#: templates/settings/group-media.php:9
+msgid ""
+"Allow visitors to show/hide instruction images and videos with a toggle."
+msgstr ""
+"Ziyaretçilerin talimatlardaki görselleri ve videoları açıp kapatmasına izin "
+"verir."
+
+#: templates/settings/group-media.php:14
+msgid "Starting State"
+msgstr "Başlangıç Durumu"
+
+#: templates/settings/group-media.php:15
+msgid "State of the instruction media toggle when the page loads."
+msgstr ""
+"Talimat ortam dosyasının sayfa yüklendiği zamanki açıklık/kapalılık durumu."
+
+#: templates/settings/group-media.php:18
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:108
+msgid "Show instruction media"
+msgstr "Talimat ortam dosyalarını göster"
+
+#: templates/settings/group-media.php:19
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:109
+msgid "Hide instruction media"
+msgstr "Talimat ortam dosyalarını gizle"
+
+#: templates/settings/group-media.php:26
+msgid "Lightbox"
+msgstr "Işık Kutusu"
+
+#: templates/settings/group-media.php:27
+msgid ""
+"Use a lightbox plugin and enable clickable images to have your recipe and/or "
+"instruction images open in a lightbox after clicking on them."
+msgstr ""
+"Bir ışık kutusu eklentisi kullanın ve tarif ve/veya talimat görsellerinizin "
+"üzerlerine tıklanınca bir ışık kutusu içinde açılmalarını sağlayın."
+
+#: templates/settings/group-media.php:32
+msgid "Clickable Recipe Image"
+msgstr "Tıklanabilir Tarif Görseli"
+
+#: templates/settings/group-media.php:38
+msgid "Clickable Instruction Images"
+msgstr "Tıklanabilir Talimat Görselleri"
+
+#: templates/settings/group-media.php:44
+msgid "Clickable Images Size"
+msgstr "Tıklanabilir Görsellerin Boyutu"
+
+#: templates/settings/group-media.php:45
+msgid "Image size to link to for the clickable images."
+msgstr "Tıklanabilir görseller için bağlantı verilecek görsel boyutu."
+
+#: templates/settings/group-media.php:52 templates/admin/translations.php:80
+msgid "Video"
+msgstr "Video"
+
+#: templates/settings/group-media.php:56
+msgid "Autoplay Video"
+msgstr "Videoyu Otomatik Oynat"
+
+#: templates/settings/group-media.php:57
+msgid "Set the autoplay option for uploaded (not embedded) videos."
+msgstr ""
+"Yüklenen (embed edilen değil) videolar için otomatik oynat seçeceğini "
+"ayarlayın."
+
+#: templates/settings/group-media.php:60 templates/settings/group-media.php:73
+msgid "No recipe videos"
+msgstr "Tarif videolarının hiçbiri"
+
+#: templates/settings/group-media.php:61 templates/settings/group-media.php:74
+msgid "The main recipe video"
+msgstr "Ana tarif videosu"
+
+#: templates/settings/group-media.php:62 templates/settings/group-media.php:75
+msgid "The instruction videos"
+msgstr "Talimat videoları"
+
+#: templates/settings/group-media.php:63 templates/settings/group-media.php:76
+msgid "All recipe videos"
+msgstr "Tüm tarif videoları"
+
+#: templates/settings/group-media.php:69
+msgid "Loop Video"
+msgstr "Videoyu Sürekli Oynat"
+
+#: templates/settings/group-media.php:70
+msgid "Set the loop option for uploaded (not embedded) videos."
+msgstr ""
+"Yüklenen (embed edilen değil) videolar için sürekli oynatma seçeceğini "
+"ayarlayın."
+
+#: templates/admin/tools.php:15
+msgid "WP Recipe Maker Tools"
+msgstr "WP Recipe Maker Araçları"
+
+#: templates/admin/tools.php:20 templates/admin/tools.php:23
+#: templates/admin/menu/tools/finding-parents.php:15
+msgid "Find Parent Posts"
+msgstr "Ana Yazıları Bul"
+
+#: templates/admin/tools.php:25
+msgid ""
+"Go through all posts and pages on your website to find and link recipes to "
+"their parent."
+msgstr ""
+"Tarifleri bulup ana yazıları ile bağlantılandırmak için sitedeki tüm "
+"yazıları ve sayfaları incele."
+
+#: templates/admin/tools.php:31 templates/admin/tools.php:34
+#: templates/admin/menu/tools/finding-ratings.php:17
+msgid "Find Recipe Ratings"
+msgstr "Tarif Puanlarını Bul"
+
+#: templates/admin/tools.php:36
+msgid "Go through all recipes on your website to find any missing ratings."
+msgstr "Eksik puanları bulmak için sitedeki tüm tarifleri incele."
+
+#: templates/admin/tools.php:42 templates/admin/tools.php:45
+#: includes/admin/tools/class-wprm-tools-fix-comment-ratings.php:38
+#: templates/admin/menu/tools/fixing-comment-ratings.php:14
+msgid "Fix Comment Ratings"
+msgstr "Yorum Puanlarını Düzelt"
+
+#: templates/admin/tools.php:47
+msgid ""
+"Go through all comment ratings and remove any rating where the associated "
+"comment does not exist anymore."
+msgstr ""
+"Tüm yorum puanlarını incele ve ilişkili yorumun artık mevcut olmadığı "
+"puanları kaldır."
+
+#: templates/admin/tools.php:53 templates/admin/tools.php:56
+#: includes/admin/tools/class-wprm-tools-refresh-video-metadata.php:38
+#: templates/admin/menu/tools/refresh-video-metadata.php:14
+msgid "Refresh Video Metadata"
+msgstr "Video Meta Verisini Yenile"
+
+#: templates/admin/tools.php:58
+msgid "Refresh the video metadata for all recipes on your website."
+msgstr "Sitenizdeki tüm tariflerin video meta verilerini yenileyin."
+
+#: templates/admin/tools.php:64
+msgid "Reset Settings"
+msgstr "Ayarları Sıfırla"
+
+#: templates/admin/tools.php:67
+msgid "Reset Settings to Default"
+msgstr "Ayarları Varsayılan Değerlere Sıfırla"
+
+#: templates/admin/tools.php:69
+msgid "Try using this if the settings page is not working at all."
+msgstr "Ayar sayfası artık çalışmıyorsa bunu kullanmayı deneyin."
+
+#: templates/admin/tools.php:76
+msgid "WP Ultimate Recipe Migration"
+msgstr "WP Ultimate Recipe Taşıma"
+
+#: templates/admin/tools.php:77
+msgid "Use these buttons to migrate from our old WP Ultimate Recipe plugin."
+msgstr ""
+"Eski WP Ultimate Recipe eklentimizden tariflerinizi taşımak için bu "
+"düğmeleri kullanın."
+
+#: templates/admin/tools.php:82 templates/admin/tools.php:85
+msgid "Import Ingredient Links"
+msgstr "Malzeme Bağlantılarını İçe Aktar"
+
+#: templates/admin/tools.php:87
+msgid "Import all ingredients that have ingredient links set."
+msgstr "Malzeme bağlantılarına sahip olan tüm malzemeleri içe aktarın."
+
+#: templates/admin/tools.php:93 templates/admin/tools.php:96
+msgid "Import Shopping List Groups"
+msgstr "Alışveriş Listesi Gruplarını İçe Aktar"
+
+#: templates/admin/tools.php:98
+msgid ""
+"Import all ingredients that have a shopping list group set for use in the "
+"Recipe Collections feature."
+msgstr ""
+"Tarif Koleksiyonları özelliğinde kullanmak için bir alışveriş listesi grubu "
+"belirlenmiş olan tüm malzemeleri içe aktarın."
+
+#: templates/admin/tools.php:105 templates/admin/tools.php:108
+msgid "Import Nutrition Facts"
+msgstr "Besin Değerlerini İçe Aktar"
+
+#: templates/admin/tools.php:110
+msgid ""
+"Import all ingredients that have nutrition facts set. These will become "
+"Custom Nutrition Ingredients"
+msgstr ""
+"Besin değerleri belirtilmiş olan tüm malzemeleri içeri aktarın. Bunlar Özel "
+"Besin Değerli Malzemeler haline gelecekler"
+
+#: templates/admin/privacy.php:13
+msgid ""
+"Bootstrapped Ventures, the developer of WP Recipe Maker, does not have "
+"access to any of the data collected by the plugin. This is all stored in "
+"your local database and not communicated back to us. Take note of the "
+"following topics for your own privacy policy."
+msgstr ""
+"WP Recipe Maker eklentisinin geliştiricisi olan Bootstrapped Ventures, "
+"eklentinin topladığı hiçbir veriye erişime sahip değildir. Bu verilerin "
+"tamamı yerel veri tabanınızda saklanır ve bize iletilmez. Kendi gizlilik "
+"politikanız açısından şu konuları dikkate alın."
+
+#: templates/admin/privacy.php:16
+msgid ""
+"When comment ratings are enabled we store the rating a user has given to a "
+"recipe along with the personal data WordPress core stores."
+msgstr ""
+"Yorum puanları etkinleştirildiğinde kullanıcının verdiği puanı ve "
+"beraberinde kişisel verileri WordPress çekirdek depolarında saklarız."
+
+#: templates/admin/privacy.php:18
+msgid ""
+"When user ratings are enabled we store a WPRM_User_Voted_%recipe% cookie "
+"(with %recipe% the ID of the recipe) that contains the rating this user has "
+"given to a particular recipe. This cookie is used as (one of the) measures "
+"to prevent rating spam."
+msgstr ""
+"Kullanıcı puanları etkinleştirildiğinde kullanıcının belirli bir tarife "
+"verdiği puanı içeren bir WPRM_User_Voted_%recipe% çerezi saklarız (%recipe% "
+"ilgili tarifin kimlik numarasını içerir). Bu çerez, puanlamada spam "
+"yapılmasının önlenmesine yönelik önlemlerden bir tanesidir."
+
+#: templates/admin/privacy.php:20
+msgid ""
+"When user ratings are enabled we store the IP address upon voting. This is "
+"used as (one of the) measures to prevent rating spam."
+msgstr ""
+"Kullanıcı puanları etkinleştirildiğinde puan verildiği anda IP adresini "
+"saklarız. Bu bilgi, puanlamada spam yapılmasının önlenmesine yönelik "
+"önlemlerden bir tanesidir."
+
+#: templates/admin/privacy.php:22
+msgid ""
+"With the Recipe Submission feature personal data can be collected, depending "
+"on the fields that were added to the form. This can include the user email "
+"and name. When using the reCAPTCHA feature you will be agreeing to their "
+"terms of use and privacy policy."
+msgstr ""
+"Tarif Gönderme özelliği ile forma eklenen alanlara bağlı olarak kişisel "
+"veriler toplanabilir. Söz konusu veriler kullanıcının eposta adresini ve "
+"adını içerebilir. Doğrulama için reCAPTCHA özelliğini kullanırken ilgili "
+"geliştiricinin kullanım koşullarını ve gizlilik politikasını kabul etmiş "
+"sayılacaksınız."
+
+#: templates/admin/privacy.php:24
+msgid "Our cookies are stored for 30 days."
+msgstr "Çerezlerimiz 30 gün süresince saklanır."
+
+#: templates/admin/privacy.php:24
+msgid "User submitted data is stored indefinitely in the local database."
+msgstr ""
+"Kullanıcı tarafından sağlanmış olan veriler yerel veri tabanında süresiz "
+"olarak saklanır."
+
+#: templates/admin/translations.php:13
+msgid "Change"
+msgstr "Değiştir"
+
+#: templates/admin/translations.php:14
+msgid "Add Terms"
+msgstr "Terim Ekle"
+
+#: templates/admin/translations.php:15
+msgid "Remove Terms"
+msgstr "Terim Sil"
+
+#: templates/admin/translations.php:16
+msgid "Change Recipe Type"
+msgstr "Tarif Tipini Değiştir"
+
+#: templates/admin/translations.php:17
+msgid "Change Display Author"
+msgstr "Görüntülenen Yazarı Değiştir"
+
+#: templates/admin/translations.php:18
+msgid "Print Recipes"
+msgstr "Tarifleri Yazdır"
+
+#: templates/admin/translations.php:19
+msgid "Export Recipes"
+msgstr "Tarifleri Dışa Aktar"
+
+#: templates/admin/translations.php:20
+msgid "Delete Recipes"
+msgstr "Tarifleri Sil"
+
+#: templates/admin/translations.php:21
+msgid "Select an action to perform:"
+msgstr "Gerçekleştirilecek işlemi seçin:"
+
+#: templates/admin/translations.php:22
+msgid "Action options:"
+msgstr "İşlem seçenekleri:"
+
+#: templates/admin/translations.php:23
+msgid "Food Recipe"
+msgstr "Yemek Tarifi"
+
+#: templates/admin/translations.php:24
+msgid "How-to Instructions"
+msgstr "Nasıl Yapılır Talimatları"
+
+#: templates/admin/translations.php:25
+msgid "Other (no metadata)"
+msgstr "Diğer (meta verisi yok)"
+
+#: templates/admin/translations.php:27
+msgid "Change Shopping List Group"
+msgstr "Alışveriş Listesi Grubunu Değiştir"
+
+#: templates/admin/translations.php:28
+msgid "Change Link"
+msgstr "Bağlantıyı Değiştir"
+
+#: templates/admin/translations.php:29
+msgid "Change Link Nofollow"
+msgstr "Bağlantı Nofollow Özelliğini Değiştir"
+
+#: templates/admin/translations.php:30
+msgid "Delete Ingredients"
+msgstr "Malzemeleri Sil"
+
+#: templates/admin/translations.php:31
+#: templates/admin/menu/tools/wpurp-ingredients.php:17
+msgid "Shopping List Group"
+msgstr "Alışveriş Listesi Grubu"
+
+#: templates/admin/translations.php:32
+msgid "Ingredient Link"
+msgstr "Malzeme Bağlantısı"
+
+#: templates/admin/translations.php:33
+msgid "Delete Terms"
+msgstr "Terimleri Sil"
+
+#: templates/admin/translations.php:34
+msgid "Delete Equipment"
+msgstr "Aletleri Sil"
+
+#: templates/admin/translations.php:35
+msgid "Equipment Link"
+msgstr "Alet Bağlantısı"
+
+#: templates/admin/translations.php:36
+msgid "Ratings"
+msgstr "Puanlar"
+
+#: templates/admin/translations.php:37
+msgid "Recipes"
+msgstr "Tarifler"
+
+#: templates/admin/translations.php:38
+#: includes/public/deprecated/class-wprm-template-helper.php:54
+msgid "Ingredients"
+msgstr "Malzemeler"
+
+#: templates/admin/translations.php:39
+msgid "Equipment"
+msgstr "Aletler"
+
+#: templates/admin/translations.php:40
+msgid "Bulk Edit"
+msgstr "Toplu Düzenle"
+
+#: templates/admin/translations.php:41
+msgid "Close"
+msgstr "Kapat"
+
+#: templates/admin/translations.php:42
+msgid "Delete Ratings"
+msgstr "Puanları Sil"
+
+#: templates/admin/translations.php:43
+msgid "Select Media"
+msgstr "Ortam Dosyası Seç"
+
+#: templates/admin/translations.php:44
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "Select"
+msgstr "Seç"
+
+#: templates/admin/translations.php:45
+msgid "Import from Text"
+msgstr "Metinden İçe Aktar"
+
+#: templates/admin/translations.php:46
+msgid "Recipe"
+msgstr "Tarif"
+
+#: templates/admin/translations.php:47
+msgid "1. Highlight text and click the corresponding button"
+msgstr "1. Metni seçili hale getirin ve ilgili düğmeye basın"
+
+#: templates/admin/translations.php:48
+msgid "Name"
+msgstr "İsim"
+
+#: templates/admin/translations.php:49
+msgid "Summary"
+msgstr "Özet"
+
+#: templates/admin/translations.php:50
+#: includes/public/deprecated/class-wprm-template-helper.php:55
+msgid "Instructions"
+msgstr "Talimatlar"
+
+#: templates/admin/translations.php:51
+msgid "Notes"
+msgstr "Notlar"
+
+#: templates/admin/translations.php:52
+msgid "Paste or type recipe"
+msgstr "Tarifi yapıştırın veya yazın"
+
+#: templates/admin/translations.php:53
+msgid "2. Fine-tune selections"
+msgstr "2. Seçimlerinize ince ayar yapın"
+
+#: templates/admin/translations.php:54
+msgid "Make a selection using the buttons above first."
+msgstr "İlk olarak yukarıdaki düğmeleri kullanarak bir seçim yapın."
+
+#: templates/admin/translations.php:55
+msgid "Use the checkboxes to indicate group headers (like Frosting and Cake)"
+msgstr ""
+"Grup başlıklarını (örneğin Krema ve Kek) belirtmek için onay kutularını "
+"kullanın"
+
+#: templates/admin/translations.php:56
+msgid "Cancel"
+msgstr "İptal"
+
+#: templates/admin/translations.php:57
+msgid "Use these Values"
+msgstr "Bu Değerleri Kullan"
+
+#: templates/admin/translations.php:58
+msgid ""
+"All of these will be imported. Use the checkbox to indicate group headers."
+msgstr ""
+"Bunların tümü içe aktarılacak. Grup başlıklarını belirtmek için onay "
+"kutusunu kullanın."
+
+#: templates/admin/translations.php:59
+msgid "Are you sure you want to stop calculating the nutrition facts?"
+msgstr "Besin değerlerini hesaplamaktan vazgeçmek istediğinize emin misiniz?"
+
+#: templates/admin/translations.php:60
+msgid "Are you sure you want to close without saving changes?"
+msgstr "Değişiklikleri kaydetmeden kapatmak istediğinizden emin misiniz?"
+
+#: templates/admin/translations.php:61
+msgid "Paste or type recipe to start..."
+msgstr "Başlamak için tarif yapıştırın veya yazın..."
+
+#: templates/admin/translations.php:62
+msgid "Import from JSON"
+msgstr "JSON verisinden içe aktar"
+
+#: templates/admin/translations.php:63
+msgid "Paste the recipe JSON data to import"
+msgstr "İçe aktarılacak tarif JSON verilerini yapıştırın"
+
+#: templates/admin/translations.php:64
+msgid "The recipe has been imported."
+msgstr "Tarif içe aktarıldı."
+
+#: templates/admin/translations.php:65
+msgid "No valid recipe found."
+msgstr "Geçerli tarif bulunamadı."
+
+#: templates/admin/translations.php:66
+#: includes/public/deprecated/class-wprm-template-helper.php:48
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:259
+msgid "Prep Time"
+msgstr "Hazırlama Süresi"
+
+#: templates/admin/translations.php:67
+msgid "Active Time"
+msgstr "Aktif Süre"
+
+#: templates/admin/translations.php:68
+#: includes/public/deprecated/class-wprm-template-helper.php:49
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:260
+msgid "Cook Time"
+msgstr "Pişirme Süresi"
+
+#: templates/admin/translations.php:69
+msgid "Custom Time Label"
+msgstr "Özel Süre Etiketi"
+
+#: templates/admin/translations.php:70
+msgid ""
+"Optional extra time field that you can label yourself. Examples: Resting "
+"Time, Baking Time"
+msgstr ""
+"İstediğiniz şekilde isimlendirebileceğiniz isteğe bağlı ekstra süre alanı. "
+"Örneğin: Bekletme Süresi, Fırınlama Süresi"
+
+#: templates/admin/translations.php:71
+msgid "Resting Time"
+msgstr "Bekletme Süresi"
+
+#: templates/admin/translations.php:72
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:261
+msgid "Custom Time"
+msgstr "Özel Süre"
+
+#: templates/admin/translations.php:73
+#: includes/public/deprecated/class-wprm-template-helper.php:50
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:262
+msgid "Total Time"
+msgstr "Toplam Süre"
+
+#: templates/admin/translations.php:74
+msgid "Recalculate Total Time"
+msgstr "Toplam Süreyi Tekrar Hesapla"
+
+#: templates/admin/translations.php:75
+#: includes/public/deprecated/class-wprm-template-helper.php:57
+msgid "Recipe Notes"
+msgstr "Tarif Notları"
+
+#: templates/admin/translations.php:76
+msgid "Image"
+msgstr "Görsel"
+
+#: templates/admin/translations.php:77
+msgid "Used in the recipe metadata. Should be an image of the completed dish."
+msgstr ""
+"Tarif meta verisinde kullanılır. Tarifin tamamlanmış halini göstermelidir."
+
+#: templates/admin/translations.php:79
+msgid "Optionally set a different image to use for the \"Pin Recipe\" button."
+msgstr ""
+"İsteğe bağlı olarak \"Tarifi Pinle\" düğmesi için farklı bir görsel kullanın."
+
+#: templates/admin/translations.php:81
+msgid ""
+"Used in the recipe metadata. Can be displayed elsewhere on the page using "
+"the [wprm-recipe-video] shortcode."
+msgstr ""
+"Tarif meta verisinde kullanılır. [wprm-recipe-video] kısa kodu kullanılarak "
+"sayfanın başka bir yerinde gösterilebilir."
+
+#: templates/admin/translations.php:82
+msgid "Edit Materials"
+msgstr "Materyalleri Düzenle"
+
+#: templates/admin/translations.php:83
+msgid "Edit Ingredients"
+msgstr "Malzemeleri Düzenle"
+
+#: templates/admin/translations.php:84
+msgid "Material Links"
+msgstr "Materyal Bağlantıları"
+
+#: templates/admin/translations.php:86
+#: templates/admin/menu/import/import-overview.php:28
+msgid "This feature is only available in"
+msgstr "Bu özelliğin kullanılabildiği versiyon:"
+
+#: templates/admin/translations.php:88
+msgid "Amount"
+msgstr "Miktar"
+
+#: templates/admin/translations.php:89
+msgid "Unit"
+msgstr "Birim"
+
+#: templates/admin/translations.php:90
+msgid "required"
+msgstr "gerekli"
+
+#: templates/admin/translations.php:91
+msgid "Add Material"
+msgstr "Materyal Ekle"
+
+#: templates/admin/translations.php:92
+msgid "Add Ingredient"
+msgstr "Malzeme Ekle"
+
+#: templates/admin/translations.php:93
+msgid "Add Material Group"
+msgstr "Materyal Grubu Ekle"
+
+#: templates/admin/translations.php:94
+msgid "Add Ingredient Group"
+msgstr "Malzeme Grubu Ekle"
+
+#: templates/admin/translations.php:95
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add ingredients."
+msgstr ""
+"İpucu: alanlar arasında hareket etmek ve malzemeleri kolayca eklemek için "
+"TAB tuşunu kullanın."
+
+#: templates/admin/translations.php:96
+msgid "Show the instruction summary field"
+msgstr "Talimat özeti alanını göster"
+
+#: templates/admin/translations.php:97
+msgid ""
+"For guided recipes, Google wants a short (usually 1 word) summary for each "
+"instruction step. This will be the \"name\" in the HowToStep metadata."
+msgstr ""
+"Açıklamalı yemek tarifleri için Google, her bir talimat adımının kısa "
+"(genellikle 1 kelimelik) bir özetini ister. Bu veri HowToStep meta "
+"verisindeki \"isim\" olacaktır."
+
+#: templates/admin/translations.php:98
+msgid "Add Instruction"
+msgstr "Talimat Ekle"
+
+#: templates/admin/translations.php:99
+msgid "Add Instruction Group"
+msgstr "Talimat Grubu Ekle"
+
+#: templates/admin/translations.php:100
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add instructions."
+msgstr ""
+"İpucu: alanlar arasında hareket etmek ve talimatları kolayca eklemek için "
+"TAB tuşunu kullanın."
+
+#: templates/admin/translations.php:104
+msgid "Times"
+msgstr "Süreler"
+
+#: templates/admin/translations.php:105
+msgid "Categories"
+msgstr "Kategoriler"
+
+#: templates/admin/translations.php:106
+msgid "Materials"
+msgstr "Materyaller"
+
+#: templates/admin/translations.php:107
+msgid "Nutrition"
+msgstr "Besin Değeri"
+
+#: templates/admin/translations.php:108
+msgid "Custom Fields"
+msgstr "Özel Alanlar"
+
+#: templates/admin/translations.php:109
+msgid "Loading Recipe..."
+msgstr "Tarif Yükleniyor..."
+
+#: templates/admin/translations.php:110
+msgid "Editing Recipe"
+msgstr "Tarif Düzenleme"
+
+#: templates/admin/translations.php:111
+msgid "Creating new Recipe"
+msgstr "Yeni Tarif Oluşturma"
+
+#: templates/admin/translations.php:112
+msgid ""
+"The recipe has been copied and can be used in the \"Import from JSON\" "
+"feature."
+msgstr ""
+"Tarif kopyalandı ve \"JSON verisinden içe aktar\" özelliği ile "
+"kullanılabilir."
+
+#: templates/admin/translations.php:113
+msgid "Something went wrong. Please contact support."
+msgstr "Bir şeyler yanlış gitti. Lütfen destek ekibi ile bağlantı kurun."
+
+#: templates/admin/translations.php:114
+msgid "Copy JSON to Clipboard"
+msgstr "JSON Verisini Panoya Kopyala"
+
+#: templates/admin/translations.php:115
+msgid "Saved successfully"
+msgstr "Başarılı şekilde kaydedildi"
+
+#: templates/admin/translations.php:116
+msgid "Save"
+msgstr "Kaydet"
+
+#: templates/admin/translations.php:117
+msgid "Save & Close"
+msgstr "Kaydet ve Kapat"
+
+#: templates/admin/translations.php:118
+msgid "These should be the nutrition facts for 1 serving of your recipe."
+msgstr ""
+"Burada belirtilen besin değerleri tarifinizin 1 porsiyonuna ait olmalıdır."
+
+#: templates/admin/translations.php:119
+msgid "Total servings for this recipe:"
+msgstr "Bu tarifin toplam porsiyonu:"
+
+#: templates/admin/translations.php:120
+msgid "Serving Size"
+msgstr "Porsiyon Boyutu"
+
+#: templates/admin/translations.php:121
+msgid "The weight of 1 serving. Does not affect the calculation."
+msgstr "1 porsiyonun ağırlığı. Hesaplamayı etkilemez."
+
+#: templates/admin/translations.php:122
+msgid "More nutrients are available in"
+msgstr "Daha fazla besin değeri için:"
+
+#: templates/admin/translations.php:123
+msgid "Calculate Nutrition Facts"
+msgstr "Besin Değerlerini Hesapla"
+
+#: templates/admin/translations.php:124
+msgid "Add Equipment"
+msgstr "Alet Ekle"
+
+#: templates/admin/translations.php:125
+msgid ""
+"Tip: use the TAB key to move from field to field and easily add equipment."
+msgstr ""
+"İpucu: alanlar arasında hareket etmek ve aletleri kolayca eklemek için TAB "
+"tuşunu kullanın."
+
+#: templates/admin/translations.php:126
+msgid "Warning!"
+msgstr "Uyarı!"
+
+#: templates/admin/translations.php:127
+msgid "Recipe Type"
+msgstr "Tarif Tipi"
+
+#: templates/admin/translations.php:129
+msgid "Description"
+msgstr "Açıklama"
+
+#: templates/admin/translations.php:130
+msgid "Short description of this recipe..."
+msgstr "Tarifin kısa açıklaması..."
+
+#: templates/admin/translations.php:131
+#: includes/public/deprecated/class-wprm-template-helper.php:53
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:252
+msgid "Author"
+msgstr "Yazar"
+
+#: templates/admin/translations.php:132
+msgid "Link"
+msgstr "Bağlantı"
+
+#: templates/admin/translations.php:133
+msgid "Yield"
+msgstr "Miktar"
+
+#: templates/admin/translations.php:134
+#: includes/public/deprecated/class-wprm-template-helper.php:51
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:254
+msgid "Servings"
+msgstr "Porsiyon"
+
+#: templates/admin/translations.php:135
+msgid "candles"
+msgstr "mum"
+
+#: templates/admin/translations.php:136
+msgid "people"
+msgstr "kişi"
+
+#: templates/admin/translations.php:137
+msgid "Estimated Cost"
+msgstr "Tahmini Maliyet"
+
+#: templates/admin/translations.php:138
+msgid "Create new Recipe"
+msgstr "Yeni Tarif Oluştur"
+
+#: templates/admin/translations.php:139
+msgid "Insert existing Recipe"
+msgstr "Var Olan bir Tarifi Ekle"
+
+#: templates/admin/translations.php:140
+msgid "Insert"
+msgstr "Ekle"
+
+#: templates/admin/translations.php:141
+msgid "Create new from existing Recipe"
+msgstr "Var olan bir tariften yeni tarif oluştur"
+
+#: templates/admin/translations.php:142
+msgid "Clone Recipe"
+msgstr "Tarifi Klonla"
+
+#: templates/admin/translations.php:144
+msgid "Displays default snippet template as set in the WPRM Settings"
+msgstr "WPRM Ayarlarında belirlenmiş olan varsayılan kod parçacığını gösterir"
+
+#: templates/admin/translations.php:145
+msgid "Full Snippet Template"
+msgstr "Tam Kod Parçacığı Şablonu"
+
+#: templates/admin/translations.php:149
+msgid "Recipe Parts"
+msgstr "Tarifin Bölümleri"
+
+#: templates/admin/translations.php:151
+#: includes/public/deprecated/class-wprm-template-helper.php:56
+msgid "Recipe Video"
+msgstr "Tarif Videosu"
+
+#: templates/admin/translations.php:152
+msgid "Other Features"
+msgstr "Diğer Özellikler"
+
+#: templates/admin/translations.php:153
+msgid "Use for a list of existing recipes on your website"
+msgstr "Sitenizde var olan tariflerin listesi için kullanın"
+
+#: templates/admin/translations.php:154
+msgid "Recipe Roundup Item"
+msgstr "Tarif Özeti Öğesi"
+
+#: templates/admin/translations.php:155
+msgid "Recipe Submission Form"
+msgstr "Tarif Gönderme Formu"
+
+#: templates/admin/translations.php:157
+msgid ""
+"Find the saved collection ID on the WP Recipe Maker > Manage > Saved "
+"Collections page"
+msgstr ""
+"Kaydedilmiş koleksiyonun numarasını WP Recipe Maker > Yönet > Kaydedilmiş "
+"Koleksiyonlar sayfasında bulabilirsiniz"
+
+#: templates/admin/translations.php:158
+msgid "Saved Recipe Collection"
+msgstr "Tarif Koleksiyonunu Kaydet"
+
+#: templates/admin/translations.php:159
+#: includes/public/deprecated/class-wprm-template-helper.php:139
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
+msgid "days"
+msgstr "gün"
+
+#: templates/admin/translations.php:160
+#: includes/public/deprecated/class-wprm-template-helper.php:156
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
+msgid "hours"
+msgstr "saat"
+
+#: templates/admin/translations.php:161
+#: includes/public/deprecated/class-wprm-template-helper.php:173
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
+msgid "minutes"
+msgstr "dakika"
+
+#: templates/admin/translations.php:162
+msgid "Show \"0\" in template"
+msgstr "Şablonda \"0\" göster"
+
+#: templates/admin/translations.php:163
+msgid "Instruction Group Header"
+msgstr "Talimat Grubu Başlığı"
+
+#: templates/admin/translations.php:164
+msgid "Insert After"
+msgstr "Sonrasına Ekle"
+
+#: templates/admin/translations.php:165
+msgid "Step Summary"
+msgstr "Adım Özeti"
+
+#: templates/admin/translations.php:166
+msgid "This is one step of the instructions."
+msgstr "Bu talimatların bir adımıdır."
+
+#: templates/admin/translations.php:167
+msgid "Name for this video part"
+msgstr "Bu video bölümünün adı"
+
+#: templates/admin/translations.php:168
+msgid ""
+"Add video start and end time (in seconds or minutes:seconds format) if this "
+"instruction step is part of the recipe video."
+msgstr ""
+"Bu talimat adımı bir tarif videosunun parçası ise video başlangıç ve bitiş "
+"zamanlarını ekleyin (saniye veya dakika:saniye formatında)."
+
+#: templates/admin/translations.php:169
+msgid "Remove Image"
+msgstr "Görseli Kaldır"
+
+#: templates/admin/translations.php:170
+msgid "Add Instruction Image"
+msgstr "Talimat Görseli Ekle"
+
+#: templates/admin/translations.php:171
+msgid "Remove Video"
+msgstr "Videoyu Kaldır"
+
+#: templates/admin/translations.php:172
+msgid "Upload Instruction Video"
+msgstr "Talimat Videosu Yükle"
+
+#: templates/admin/translations.php:173
+msgid "Embed Instruction Video"
+msgstr "Talimat Videosu Embed Et"
+
+#: templates/admin/translations.php:174
+msgid "Remove Video Part"
+msgstr "Video Bölümünü Kaldır"
+
+#: templates/admin/translations.php:175
+msgid "Instruction is part of the main video"
+msgstr "Talimat ana videonun parçası"
+
+#: templates/admin/translations.php:176
+msgid "Instruction video URL or embed code"
+msgstr "Talimat videosunun URL'si veya embed kodu"
+
+#: templates/admin/translations.php:177
+msgid "Material Group Header"
+msgstr "Materyal Grubu Başlığı"
+
+#: templates/admin/translations.php:178
+msgid "Ingredient Group Header"
+msgstr "Malzeme Grubu Başlığı"
+
+#: templates/admin/translations.php:181
+msgid "paper"
+msgstr "kağıt"
+
+#: templates/admin/translations.php:182
+msgid "olive oil"
+msgstr "zeytinyağı"
+
+#: templates/admin/translations.php:183
+msgid "any color"
+msgstr "herhangi bir renk"
+
+#: templates/admin/translations.php:184
+msgid "extra virgin"
+msgstr "sızma"
+
+#: templates/admin/translations.php:185
+msgid "No suggestions found."
+msgstr "Öneri bulunamadı."
+
+#: templates/admin/translations.php:186
+msgid "Suggestions:"
+msgstr "Öneriler:"
+
+#: templates/admin/translations.php:187
+msgid "Bold"
+msgstr "Kalın"
+
+#: templates/admin/translations.php:188
+msgid "Italic"
+msgstr "Eğik"
+
+#: templates/admin/translations.php:189
+msgid "Underline"
+msgstr "Altı Çizili"
+
+#: templates/admin/translations.php:190
+msgid "Subscript"
+msgstr "Alt Karakter"
+
+#: templates/admin/translations.php:191
+msgid "Superscript"
+msgstr "Üst Karakter"
+
+#: templates/admin/translations.php:192
+msgid "Add Link"
+msgstr "Bağlantı Ekle"
+
+#: templates/admin/translations.php:193
+msgid "Remove Link"
+msgstr "Bağlantıyı Kaldır"
+
+#: templates/admin/translations.php:194
+msgid "Add HTML or Shortcode"
+msgstr "HTML veya Kısa Kod Ekle"
+
+#: templates/admin/translations.php:195
+msgid "Remove HTML or Shortcode"
+msgstr "HTML veya Kısa Kodu Kaldır"
+
+#: templates/admin/translations.php:196
+msgid "Add Adjustable Shortcode"
+msgstr "Ayarlanabilir Kısa Kod Ekle"
+
+#: templates/admin/translations.php:197
+msgid "Add Timer Shortcode"
+msgstr "Zamanlayıcı Kısa Kodu Ekle"
+
+#: templates/admin/translations.php:198
+msgid "Enter the URL of the link:"
+msgstr "Bağlantının URL'sini gir:"
+
+#: templates/admin/translations.php:199
+msgid "HTML or Shortcode:"
+msgstr "HTML veya Kısa Kod:"
+
+#: templates/admin/translations.php:200
+msgid "Open in new tab"
+msgstr "Yeni sekmede aç"
+
+#: templates/admin/translations.php:201
+msgid "Use nofollow"
+msgstr "Nofollow kullan"
+
+#: templates/admin/translations.php:202
+msgid "Edit Affiliate Link"
+msgstr "Partner Bağlantısını Düzenle"
+
+#: templates/admin/translations.php:203
+msgid "Add Affiliate Link"
+msgstr "Partner Bağlantısı Ekle"
+
+#: templates/admin/translations.php:204
+msgid "Remove Affiliate Link"
+msgstr "Partner Bağlantısını Kaldır"
+
+#: templates/admin/translations.php:205
+msgid "Pair of scissors"
+msgstr "Makas"
+
+#: templates/admin/translations.php:206
+msgid "Pressure cooker"
+msgstr "Düdüklü tencere"
+
+#: templates/admin/translations.php:207
+msgid "Select from list or type to create..."
+msgstr "Listeden seç veya yazarak oluştur..."
+
+#: templates/admin/translations.php:208
+msgid "Select from list..."
+msgstr "Listeden seç..."
+
+#: templates/admin/translations.php:209
+msgid "The image should have at least this width:"
+msgstr "Görselin genişliği az şu kadar olmalıdır:"
+
+#: templates/admin/translations.php:210
+msgid "The image should have at least this height:"
+msgstr "Görselin uzunluğu en az şu kadar olmalıdır:"
+
+#: templates/admin/translations.php:211
+msgid ""
+"Warning! We recommend making sure the image meets the following requirements:"
+msgstr "Uyarı! Görselin şu gerekliliklere uyduğundan emin olmanızı öneririz:"
+
+#: templates/admin/translations.php:212
+msgid "Select Image"
+msgstr "Görsel Seç"
+
+#: templates/admin/translations.php:213
+msgid ""
+"Use URL to the video (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or "
+"the full embed code."
+msgstr ""
+"Videonun URL'sini (örneğin https://www.youtube.com/watch?v=dQw4w9WgXcQ) veya "
+"tam embed kodunu kullanın."
+
+#: templates/admin/translations.php:214
+msgid "Upload Video"
+msgstr "Video Yükle"
+
+#: templates/admin/translations.php:215
+msgid "Embed Video"
+msgstr "Video Embed Et"
+
+#: templates/admin/translations.php:216
+msgid "Select or search a recipe"
+msgstr "Tarif seç veya ara"
+
+#: templates/admin/translations.php:217
+msgid "No recipes found"
+msgstr "Tarif bulunamadı"
+
+#: templates/admin/translations.php:218
+msgid "First recipe on page"
+msgstr "Sayfadaki ilk tarif"
+
+#: templates/admin/translations.php:219
+msgid "Are you sure you want to leave this page?"
+msgstr "Bu sayfadan ayrılmak istediğinizden emin misiniz?"
+
+#: templates/admin/translations.php:220
+msgid "Select Roundup Recipe"
+msgstr "Özet Tarif Seçin"
+
+#: templates/admin/translations.php:221
+msgid "Type"
+msgstr "Tür"
+
+#: templates/admin/translations.php:222
+msgid "Use one of your own recipes"
+msgstr "Kendi tariflerinizden birini kullanın"
+
+#: templates/admin/translations.php:223
+msgid "Use external recipe from a different website"
+msgstr "Farklı bir sitede yayınlanan bir tarifi kullanın"
+
+#: templates/admin/translations.php:224
+msgid "Try to load details from URL"
+msgstr "Ayrıntıları URL'den yüklemeyi dene"
+
+#: templates/admin/translations.php:225
+msgid "Add rel=\"nofollow\" to link"
+msgstr "Bağlantıya rel=\"nofollow\" kodu ekle"
+
+#: templates/admin/translations.php:226
+msgid "Open link in new tab"
+msgstr "Bağlantıyı yeni sekmede aç"
+
+#: templates/admin/translations.php:227
+msgid "External image. Recommended:"
+msgstr "Harici görsel. Öneri:"
+
+#: templates/admin/translations.php:228
+msgid "Save image locally"
+msgstr "Görseli yerel sunucunuza kaydedin."
+
+#: templates/admin/translations.php:229
+msgid "Use"
+msgstr "Kullan"
+
+#: templates/admin/translations.php:230
+msgid "Showing"
+msgstr "Gösterilen"
+
+#: templates/admin/translations.php:231
+msgid "filtered of"
+msgstr "filtrelenen"
+
+#: templates/admin/translations.php:232
+msgid "total"
+msgstr "toplam"
+
+#: templates/admin/translations.php:233
+msgid "rows"
+msgstr "satır"
+
+#: templates/admin/translations.php:234
+msgid "Sort:"
+msgstr "Sırala:"
+
+#: templates/admin/translations.php:235
+msgid "Filter:"
+msgstr "Filtrele:"
+
+#: templates/admin/translations.php:236
+msgid "Click on the stars to edit the rating."
+msgstr "Puanı düzenlemek için yıldızlara tıklayın."
+
+#: templates/admin/translations.php:237
+msgid "Delete Rating"
+msgstr "Puanı Sil"
+
+#: templates/admin/translations.php:238
+msgid "Are you sure you want to delete this rating?"
+msgstr "Bu puanı silmek istediğinizden emin misiniz?"
+
+#: templates/admin/translations.php:239
+msgid "Date"
+msgstr "Tarih"
+
+#: templates/admin/translations.php:240
+msgid "Rating"
+msgstr "Puan"
+
+#: templates/admin/translations.php:241
+msgid "All Ratings"
+msgstr "Tüm Puanlar"
+
+#: templates/admin/translations.php:242
+msgid "star"
+msgstr "yıldız"
+
+#: templates/admin/translations.php:243
+msgid "stars"
+msgstr "yıldız"
+
+#: templates/admin/translations.php:244
+msgid "Click to change this rating to:"
+msgstr "Bu puanı değiştirmek için tıklayın:"
+
+#: templates/admin/translations.php:245
+msgid "All Types"
+msgstr "Tüm Tipler"
+
+#: templates/admin/translations.php:246
+msgid "User Rating"
+msgstr "Kullanıcı Puanı"
+
+#: templates/admin/translations.php:248
+msgid "Approved"
+msgstr "Onaylanmış"
+
+#: templates/admin/translations.php:249
+msgid "All"
+msgstr "Tümü"
+
+#: templates/admin/translations.php:250
+msgid "Not Approved"
+msgstr "Onaylanmamış"
+
+#: templates/admin/translations.php:251
+msgid "No"
+msgstr "Hayır"
+
+#: templates/admin/translations.php:252
+msgid "Yes"
+msgstr "Evet"
+
+#: templates/admin/translations.php:253
+msgid "User ID"
+msgstr "Kullanıcı No"
+
+#: templates/admin/translations.php:255
+msgid "IP"
+msgstr "IP"
+
+#: templates/admin/translations.php:256
+msgid "Comment ID"
+msgstr "Yorum No"
+
+#: templates/admin/translations.php:257
+msgid "Recipe ID"
+msgstr "Tarif No"
+
+#: templates/admin/translations.php:258
+msgid "Parent Post ID"
+msgstr "Ana Yazı No"
+
+#: templates/admin/translations.php:259
+msgid "Restore Recipe"
+msgstr "Tarifi Geri Yükle"
+
+#: templates/admin/translations.php:260
+msgid "Permanently Delete"
+msgstr "Kalıcı Olarak Sil"
+
+#: templates/admin/translations.php:261
+msgid "Are you sure you want to delete"
+msgstr "Silmek istediğinizden emin misiniz"
+
+#: templates/admin/translations.php:262
+msgid "ID"
+msgstr "No"
+
+#: templates/admin/translations.php:263
+msgid "Create"
+msgstr "Oluştur"
+
+#: templates/admin/translations.php:264
+msgid "Overview"
+msgstr "Genel Bakış"
+
+#: templates/admin/translations.php:265
+msgid "Revision"
+msgstr "Revizyon"
+
+#: templates/admin/translations.php:266
+msgid "Revisions"
+msgstr "Revizyon"
+
+#: templates/admin/translations.php:267
+msgid "Trash"
+msgstr "Çöp"
+
+#: templates/admin/translations.php:268
+msgid "Recipe Fields"
+msgstr "Tarif Alanları"
+
+#: templates/admin/translations.php:269
+msgid "Ingredient"
+msgstr "Malzeme"
+
+#: templates/admin/translations.php:270
+msgid "What do you want to be the name of this new ingredient?"
+msgstr "Bu yeni malzemenin adının ne olmasını istersiniz?"
+
+#: templates/admin/translations.php:271
+msgid ""
+"We were not able to create this ingredient. Make sure it does not exist yet."
+msgstr "Bu malzemeyi oluşturamadık. Zaten mevcut olmadığından emin olun."
+
+#: templates/admin/translations.php:272
+msgid "What do you want to be the name of this new equipment?"
+msgstr "Bu yeni aletin adının ne olmasını istersiniz?"
+
+#: templates/admin/translations.php:273
+msgid ""
+"We were not able to create this equipment. Make sure it does not exist yet."
+msgstr "Bu aleti oluşturamadık. Zaten mevcut olmadığından emin olun."
+
+#: templates/admin/translations.php:274
+msgid "What do you want to be the name of this new term?"
+msgstr "Bu yeni terimin adının ne olmasını istersiniz?"
+
+#: templates/admin/translations.php:275
+msgid "We were not able to create this term. Make sure it does not exist yet."
+msgstr "Bu terimi oluşturamadık. Zaten mevcut olmadığından emin olun."
+
+#: templates/admin/translations.php:276
+msgid "Your Custom Fields"
+msgstr "Özel Alanlarınız"
+
+#: templates/admin/translations.php:277
+msgid "Recipe Taxonomy"
+msgstr "Tarif Taksonomisi"
+
+#: templates/admin/translations.php:278
+msgid "Recipe Taxonomies"
+msgstr "Tarif Taksonomileri"
+
+#: templates/admin/translations.php:279
+msgid "Custom Field"
+msgstr "Özel Alan"
+
+#: templates/admin/translations.php:280
+msgid "Custom Nutrition Ingredient"
+msgstr "Özel Besin Değerli Malzeme"
+
+#: templates/admin/translations.php:281
+msgid "Custom Nutrition"
+msgstr "Özel Besin Değeri"
+
+#: templates/admin/translations.php:282
+msgid "Custom Nutrient"
+msgstr "Özel Besin Öğesi"
+
+#: templates/admin/translations.php:283
+msgid "Custom Nutrients"
+msgstr "Özel Besin Öğeleri"
+
+#: templates/admin/translations.php:284
+msgid "Features"
+msgstr "Özellikler"
+
+#: templates/admin/translations.php:285
+msgid "Saved Collection"
+msgstr "Kaydedilmiş Koleksiyon"
+
+#: templates/admin/translations.php:286
+msgid "Saved Collections"
+msgstr "Kaydedilmiş Koleksiyonlar"
+
+#: templates/admin/translations.php:287
+msgid "User Collection"
+msgstr "Kullanıcı Koleksiyonu"
+
+#: templates/admin/translations.php:288
+msgid "User Collections"
+msgstr "Kullanıcı Koleksiyonları"
+
+#: templates/admin/translations.php:289
+msgid "Recipe Submissions"
+msgstr "Gönderilen Tarifler"
+
+#: templates/admin/translations.php:291
+#: includes/public/deprecated/class-wprm-template-helper.php:139
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
+msgid "day"
+msgstr "gün"
+
+#: templates/admin/translations.php:292
+#: includes/public/deprecated/class-wprm-template-helper.php:154
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
+msgid "hr"
+msgstr "sa"
+
+#: templates/admin/translations.php:293
+#: includes/public/deprecated/class-wprm-template-helper.php:154
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
+msgid "hrs"
+msgstr "sa"
+
+#: templates/admin/translations.php:294
+#: includes/public/deprecated/class-wprm-template-helper.php:171
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
+msgid "min"
+msgstr "dk"
+
+#: templates/admin/translations.php:295
+#: includes/public/deprecated/class-wprm-template-helper.php:171
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
+msgid "mins"
+msgstr "dk"
+
+#: templates/admin/translations.php:296
+#: includes/admin/classic-editor/class-wprm-button.php:53
+msgid "Edit Recipe"
+msgstr "Tarifi Düzenle"
+
+#: templates/admin/translations.php:297
+msgid "Delete Recipe"
+msgstr "Tarifi Sil"
+
+#: templates/admin/translations.php:298
+msgid "SEO"
+msgstr "SEO"
+
+#: templates/admin/translations.php:299
+msgid "Food"
+msgstr "Yemek"
+
+#: templates/admin/translations.php:300
+msgid "How-to"
+msgstr "Nasıl Yapılır"
+
+#: templates/admin/translations.php:301
+msgid "Other"
+msgstr "Diğer"
+
+#: templates/admin/translations.php:302
+msgid "Show All"
+msgstr "Tümünü Göster"
+
+#: templates/admin/translations.php:303
+msgid "Has Recipe Image"
+msgstr "Tarif Görseli Var"
+
+#: templates/admin/translations.php:304
+msgid "Does not have Recipe Image"
+msgstr "Tarif Görseli Yok"
+
+#: templates/admin/translations.php:305
+msgid "All Authors"
+msgstr "Tüm Yazarlar"
+
+#: templates/admin/translations.php:306
+msgid "Display Author Type"
+msgstr "Görüntülenen Yazar Tipi"
+
+#: templates/admin/translations.php:307
+msgid "All Display Author Types"
+msgstr "Tüm Görüntülenen Yazar Tipleri"
+
+#: templates/admin/translations.php:308
+msgid "Display Author"
+msgstr "Görüntülenen Yazar"
+
+#: templates/admin/translations.php:309
+msgid "Status"
+msgstr "Durum"
+
+#: templates/admin/translations.php:310
+msgid "All Statuses"
+msgstr "Tüm Durumlar"
+
+#: templates/admin/translations.php:311
+msgid "Parent ID"
+msgstr "Ana Yazı No"
+
+#: templates/admin/translations.php:312
+msgid "Parent Name"
+msgstr "Ana Yazı İsmi"
+
+#: templates/admin/translations.php:313
+msgid "Has Parent Post"
+msgstr "Ana Yazısı Var"
+
+#: templates/admin/translations.php:314
+msgid "Does not have Parent Post"
+msgstr "Ana Yazısı Yok"
+
+#: templates/admin/translations.php:315
+msgid "No Ratings"
+msgstr "Puanı Yok"
+
+#: templates/admin/translations.php:316
+msgid "Any Rating"
+msgstr "Tüm Puanlar"
+
+#: templates/admin/translations.php:317
+msgid "no comment ratings"
+msgstr "yorum puanı yok"
+
+#: templates/admin/translations.php:318
+#: includes/public/deprecated/class-wprm-template-helper.php:224
+#: includes/public/shortcodes/recipe/class-wprm-sc-rating.php:151
+msgid "from"
+msgstr "ortalaması veren"
+
+#: templates/admin/translations.php:319
+msgid "comment"
+msgstr "yorum"
+
+#: templates/admin/translations.php:320
+msgid "comments"
+msgstr "yorum"
+
+#: templates/admin/translations.php:321
+msgid "no user ratings"
+msgstr "kullanıcı puanı yok"
+
+#: templates/admin/translations.php:322
+#: includes/public/deprecated/class-wprm-template-helper.php:224
+#: includes/public/shortcodes/recipe/class-wprm-sc-rating.php:151
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] "oy"
+msgstr[1] "oy"
+
+#: templates/admin/translations.php:323
+msgid "votes"
+msgstr "oy"
+
+#: templates/admin/translations.php:324
+msgid "Are you sure you want to delete the user ratings for"
+msgstr "Şuradaki puanlarını silmek istediğinizden emin misiniz:"
+
+#: templates/admin/translations.php:325
+msgid "Any"
+msgstr "Tümü"
+
+#: templates/admin/translations.php:326
+msgid "Terms"
+msgstr "Terimler"
+
+#: templates/admin/translations.php:327
+msgid "Converted Ingredients"
+msgstr "Dönüştürülen Malzemeler"
+
+#: templates/admin/translations.php:328
+msgid "Recipe Submission User"
+msgstr "Tarif Gönderen Kullanıcı"
+
+#: templates/admin/translations.php:329
+msgid "Was Recipe Submission"
+msgstr "Gönderilmiş Bir Tarifti"
+
+#: templates/admin/translations.php:330
+msgid "Was not a Recipe Submission"
+msgstr "Gönderilmiş Bir Tarif Değildi"
+
+#: templates/admin/translations.php:331
+msgid "View Revision"
+msgstr "Revizyonu Görüntüle"
+
+#: templates/admin/translations.php:332
+msgid "Delete Revision"
+msgstr "Revizyonu Sil"
+
+#: templates/admin/translations.php:333
+msgid "Revision ID"
+msgstr "Revizyon No"
+
+#: templates/admin/translations.php:334
+msgid "Recipe Data Size"
+msgstr "Tarif Verisi Boyutu"
+
+#: templates/admin/translations.php:335
+msgid "Remove Notice"
+msgstr "Notu Kaldır"
+
+#: templates/admin/translations.php:336
+msgid "Rename"
+msgstr "Yeniden Adlandır"
+
+#: templates/admin/translations.php:337
+msgid "What do you want to be the new name for"
+msgstr "Şu öğenin yeni adının ne olmasını istiyorsunuz"
+
+#: templates/admin/translations.php:338
+msgid "Diet"
+msgstr "Diyet"
+
+#: templates/admin/translations.php:339
+msgid "Label"
+msgstr "Etiket"
+
+#: templates/admin/translations.php:340
+msgid "Merge into another"
+msgstr "Şu nitelikte bir başka öğe ile birleştir:"
+
+#: templates/admin/translations.php:341
+msgid "What is the ID of the term you want the merge"
+msgstr "Birleştirmek istediğiniz terimin numarası nedir"
+
+#: templates/admin/translations.php:342
+msgid "into"
+msgstr "ile şunu birleştir"
+
+#: templates/admin/translations.php:343
+msgid "Are you sure you want to merge"
+msgstr "Birleştirmek istediğinizden emin misiniz"
+
+#: templates/admin/translations.php:344
+msgid "We could not find a term with that ID."
+msgstr "Bu numaraya sahip bir terim bulamadık."
+
+#: templates/admin/translations.php:345
+msgid "Delete"
+msgstr "Sil"
+
+#: templates/admin/translations.php:346
+msgid "Change Group"
+msgstr "Grubu Değiştir"
+
+#: templates/admin/translations.php:347
+msgid "What do you want to be the new group for"
+msgstr "Şu öğenin yeni grubunun ne olmasını istersiniz:"
+
+#: templates/admin/translations.php:348
+msgid "Easy Affiliate Links"
+msgstr "Kolay Partner Bağlantıları"
+
+#: templates/admin/translations.php:349
+msgid "Edit Link"
+msgstr "Bağlantıyı Düzenle"
+
+#: templates/admin/translations.php:350
+msgid ""
+"An Affiliate Link with this ID cannot be found. Try deleting and adding it "
+"again."
+msgstr ""
+"Bu numaraya sahip bir Partner Bağlantısı bulunamadı. Silip yeninden eklemeyi "
+"deneyin."
+
+#: templates/admin/translations.php:351
+msgid "Are you sure you want to delete this link?"
+msgstr "Bu bağlantıyı silmek istediğinizden emin misiniz?"
+
+#: templates/admin/translations.php:352
+msgid "Set Affiliate Link"
+msgstr "Partner Bağlantısı Oluştur"
+
+#: templates/admin/translations.php:353
+msgid "What do you want to be the new link for"
+msgstr "Şu öğenin yeni bağlantısının ne olmasını istersiniz:"
+
+#: templates/admin/translations.php:354
+msgid ""
+"does not start with http:// or https:// as we would expect for a link. Are "
+"you sure you want to use this? Regular HTML code will not work here."
+msgstr ""
+"bir bağlantıdan beklediğimiz şekilde http:// veya https:// ile başlamıyor. "
+"Bunu kullanmak istediğinizden emin misiniz? Normal HTML kodu burada "
+"çalışmayacaktır."
+
+#: templates/admin/translations.php:355
+msgid "Link Nofollow"
+msgstr "Bağlantı Nofollow"
+
+#: templates/admin/translations.php:356
+msgid "Any Nofollow"
+msgstr "Herhangi bir Nofollow"
+
+#: templates/admin/translations.php:357
+msgid "Has Image"
+msgstr "Görseli Var"
+
+#: templates/admin/translations.php:358
+msgid "Does not have Image"
+msgstr "Görseli Yok"
+
+#: templates/admin/translations.php:359
+msgid "Edit Image"
+msgstr "Görseli Düzenle"
+
+#: templates/admin/translations.php:360
+msgid "Add Image"
+msgstr "Görsel Ekle"
+
+#: templates/admin/translations.php:361
+msgid "Affiliate HTML"
+msgstr "Partner HTML Kodu"
+
+#: templates/admin/translations.php:362
+msgid "Change HTML"
+msgstr "HTML Kodunu Değiştir"
+
+#: templates/admin/translations.php:363
+msgid "Change Affiliate HTML"
+msgstr "Partner HTML Kodunu Değiştir"
+
+#: templates/admin/translations.php:364
+msgid ""
+"You don't have the servings field set for your recipe under \"General\"."
+msgstr ""
+"\"Genel\" bölümünde tarifinizin porsiyon alanı için bir değer belirtilmemiş."
+
+#: templates/admin/translations.php:365
+msgid ""
+"Make sure to pick the right recipe type to ensure we include the correct "
+"metadata."
+msgstr ""
+"Doğru meta verilerini eklediğimizden emin olmak için doğru tarif tipini "
+"seçtiğinizden emin olun."
+
+#: templates/admin/translations.php:366
+msgid ""
+"The estimated cost of the materials consumed when performing instructions. "
+"Used in the metadata."
+msgstr ""
+"Talimatlar yerine getirilirken tüketilecek olan materyallerin tahmini "
+"maliyeti. Meta verilerinde kullanılır."
+
+#: templates/elementor/widget.php:66
+msgid "Create or edit Recipe"
+msgstr "Tarif oluştur veya düzenle"
+
+#: templates/public/comment-rating-form.php:45
+msgid "Don't rate this recipe"
+msgstr "Bu tarifi puanlama"
+
+#: templates/public/comment-rating-form.php:48
+msgid "Rate this recipe 1 out of 5 stars"
+msgstr "Bu tarife 5 üzerinden 1 yıldız ver"
+
+#: templates/public/comment-rating-form.php:51
+msgid "Rate this recipe 2 out of 5 stars"
+msgstr "Bu tarife 5 üzerinden 2 yıldız ver"
+
+#: templates/public/comment-rating-form.php:54
+msgid "Rate this recipe 3 out of 5 stars"
+msgstr "Bu tarife 5 üzerinden 3 yıldız ver"
+
+#: templates/public/comment-rating-form.php:57
+msgid "Rate this recipe 4 out of 5 stars"
+msgstr "Bu tarife 5 üzerinden 4 yıldız ver"
+
+#: templates/public/comment-rating-form.php:60
+msgid "Rate this recipe 5 out of 5 stars"
+msgstr "Bu tarife 5 üzerinden 5 yıldız ver"
+
+#: templates/public/print.php:58
+msgid "Go Back"
+msgstr "Geri Dön"
+
+#: templates/public/print.php:61
+msgid "Email Link"
+msgstr "E-posta Bağlantısı"
+
+#: templates/public/print.php:67
+#: includes/public/deprecated/class-wprm-template-helper.php:44
+msgid "Print"
+msgstr "Yazdir"
+
+#: templates/public/comment-rating.php:16
+#, php-format
+msgid "%s star"
+msgid_plural "%s stars"
+msgstr[0] "%s yıldız"
+msgstr[1] "%s yıldız"
+
+#: includes/admin/tools/class-wprm-tools-wpurp-nutrition.php:38
+msgid "Importing Nutrition"
+msgstr "Besin Değerleri İçe Aktarılıyor"
+
+#: includes/admin/tools/class-wprm-tools-find-parents.php:38
+msgid "Finding Parents"
+msgstr "Ana Yazılar Bulunuyor"
+
+#: includes/admin/tools/class-wprm-tools-find-ratings.php:38
+msgid "Finding Ratings"
+msgstr "Puanlar Bulunuyor"
+
+#: includes/admin/tools/class-wprm-tools-wpurp-ingredients.php:38
+msgid "Importing Ingredients"
+msgstr "Malzemeler İçe Aktarılıyor"
+
+#: includes/admin/classic-editor/class-wprm-shortcode-preview.php:46
+msgid "remove"
+msgstr "kaldır"
+
+#: includes/admin/menu/class-wprm-admin-menu-addons.php:37
+msgid "Upgrade WPRM"
+msgstr "WPRM'yi Yükselt"
+
+#: includes/admin/menu/class-wprm-admin-menu-faq.php:51
+msgid "FAQ & Support"
+msgstr "SSS ve Destek"
+
+#: includes/admin/import/class-wprm-import-json.php:98
+#: includes/admin/import/class-wprm-import-easyrecipe.php:109
+#: includes/admin/import/class-wprm-import-wordpress.php:98
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: includes/admin/import/class-wprm-import-recipecard.php:208
+msgid "Adapted from"
+msgstr "Adapte edildiği kaynak"
+
+#: includes/public/api/class-wprm-api-manage-recipes.php:502
+msgid "Follow this link to print all of the selected recipes:"
+msgstr "Seçilen tüm tarifleri yazdırmak için bu bağlantıyı takip edin:"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:45
+msgid "Course"
+msgstr "Kategori"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:46
+msgid "Cuisine"
+msgstr "Mutfak"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:47
+msgid "Keyword"
+msgstr "Etiket"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:137
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:111
+msgid "d"
+msgstr "gün"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:156
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
+msgid "hour"
+msgstr "saat"
+
+#: includes/public/deprecated/class-wprm-template-helper.php:173
+#: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
+msgid "minute"
+msgstr "dakika"
+
+#: templates/admin/menu/addons.php:15
+msgid "Upgrade WP Recipe Maker"
+msgstr "WP Recipe Maker'ı Yükselt"
+
+#: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:44
+msgid "Rate this Recipe"
+msgstr "Bu Tarife Puan Ver"
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:70
+msgid "Tried this recipe?"
+msgstr "Bu tarifi denediniz mi?"
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:85
+msgid "Mention %handle% or tag %tag%!"
+msgstr "Mentionlayın %handle% veya etiketleyin %tag%!"
+
+#: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:112
+msgid "Check out %link%!"
+msgstr "Şuna bir göz atın: %link%!"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:253
+msgid "Cost"
+msgstr "Maliyet"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-pin.php:43
+msgid "Pin Recipe"
+msgstr "Tarifi Pinle"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-collection.php:43
+msgid "Add to Collection"
+msgstr "Koleksiyona Ekle"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-collection.php:51
+msgid "Go to Collections"
+msgstr "Koleksiyonlara Git"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-roundup-link.php:43
+msgid "Read More"
+msgstr "Devamını Oku"
+
+#: templates/admin/menu/tools/finding-parents.php:16
+#, php-format
+msgid "Searching %d post"
+msgid_plural "Searching %d posts"
+msgstr[0] "%d yazı aranıyor"
+msgstr[1] "%d yazı aranıyor"
+
+#: templates/admin/menu/tools/finding-parents.php:20
+#: templates/admin/menu/tools/refresh-video-metadata.php:19
+#: templates/admin/menu/tools/wpurp-ingredients.php:31
+#: templates/admin/menu/tools/finding-ratings.php:22
+#: templates/admin/menu/tools/wpurp-nutrition.php:19
+msgid "Finished succesfully. Click here to continue."
+msgstr "Başarılı şekilde tamamlandı. Devam etmek için buraya tıklayın."
+
+#: templates/admin/menu/tools/fixing-comment-ratings.php:15
+#, php-format
+msgid "Searching %d rating"
+msgid_plural "Searching %d ratings"
+msgstr[0] "%d puan aranıyor"
+msgstr[1] "%d puan aranıyor"
+
+#: templates/admin/menu/tools/fixing-comment-ratings.php:19
+msgid ""
+"Finished succesfully. Use the \"Find Ratings\" tool to clear any rating "
+"caches."
+msgstr ""
+"Başarılı şekilde tamamlandı. Puan önbelleklerini temizlemek için \"Puanları "
+"Bul\" özelliğini kullanın."
+
+#: templates/admin/menu/tools/refresh-video-metadata.php:15
+#: templates/admin/menu/tools/finding-ratings.php:18
+#, php-format
+msgid "Searching %d recipe"
+msgid_plural "Searching %d recipes"
+msgstr[0] "%d tarif aranıyor"
+msgstr[1] "%d tarif aranıyor"
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:20
+#: templates/admin/menu/tools/wpurp-nutrition.php:14
+msgid "Nutrition Facts"
+msgstr "Besin Değerleri"
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:26
+#: templates/admin/menu/tools/wpurp-nutrition.php:14
+msgid "Importing WP Ultimate Recipe Ingredients"
+msgstr "WP Ultimate Recipe Malzemeleri İçe Aktarılıyor"
+
+#: templates/admin/menu/tools/wpurp-ingredients.php:27
+#: templates/admin/menu/tools/wpurp-nutrition.php:15
+#, php-format
+msgid "Searching %d ingredient"
+msgid_plural "Searching %d ingredients"
+msgstr[0] "%d malzeme aranıyor"
+msgstr[1] "%d malzeme aranıyor"
+
+#: templates/admin/menu/import/import-recipes.php:28
+#: templates/admin/menu/import/importing.php:15
+#, php-format
+msgid "Import from %s"
+msgstr "%s kaynağından içe aktar"
+
+#: templates/admin/menu/import/import-recipes.php:42
+msgid "Import Settings"
+msgstr "İçe Aktarım Ayarları"
+
+#: templates/admin/menu/import/import-recipes.php:45
+msgid "Recipes to Import"
+msgstr "İçe Aktarılacak Tarifler"
+
+#: templates/admin/menu/import/import-recipes.php:46
+msgid "Use SHIFT-click to (un)check multiple recipes at once."
+msgstr ""
+"Bir seferde birden fazla tarif seçmek/seçimini kaldırmak için SHIFT ile "
+"birlikte tıklayın."
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "all"
+msgstr "tümü"
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "none"
+msgstr "hiçbiri"
+
+#: templates/admin/menu/import/import-recipes.php:62
+#: templates/admin/menu/import/import-overview.php:120
+msgid "no parent post found"
+msgstr "ana yazı bulunamadı"
+
+#: templates/admin/menu/import/import-recipes.php:73
+#, php-format
+msgid "%d more recipe"
+msgid_plural "%d more recipes"
+msgstr[0] "İlave %d tarif"
+msgstr[1] "İlave %d tarif"
+
+#: templates/admin/menu/import/import-recipes.php:77
+msgid "Back to start."
+msgstr "Başa dön."
+
+#: templates/admin/menu/import/import-recipes.php:80
+msgid "Go to the next page."
+msgstr "Sonraki sayfaya git."
+
+#: templates/admin/menu/import/import-recipes.php:85
+msgid "Import Selected Recipes"
+msgstr "Seçilen Tarifleri İçe Aktar"
+
+#: templates/admin/menu/import/import-overview.php:16
+msgid "Considerations Before Importing"
+msgstr "İçe Aktarım Öncesinde Göz Önünde Bulundurulması Gerekenler"
+
+#: templates/admin/menu/import/import-overview.php:18
+msgid ""
+"Importing recipes will convert them to our format and they won't be "
+"available in the old plugin anymore. We recommend backing up before starting "
+"the process and trying to import 1 single recipe first to make sure "
+"everything converts properly."
+msgstr ""
+"Tariflerin içe aktarılması onları bizim formatımıza dönüştürecektir ve bu "
+"tarifler eski eklentide artık görülemeyecektir. İşleme başlamadan önce yedek "
+"almanızı ve her şeyin düzgün şekilde dönüştürüldüğünden emin olmak için ilk "
+"önce sadece 1 tarifi içe aktarmayı denemenizi öneririz."
+
+#: templates/admin/menu/import/import-overview.php:21
+msgid ""
+"If your current plugin uses custom post types and has different permalinks "
+"than regular posts you might want to use a redirection plugin to set up 301 "
+"redirects. Contact us if you need help!"
+msgstr ""
+"Eğer mevcut eklentiniz normal yazılardan farklı kalıcı bağlantılara sahip "
+"olan özel yazı tipleri kullanıyorsa 301 yönlendirmeleri ayarlamak için bir "
+"yönlendirme eklentisi kullanmak isteyebilirsiniz. Yardıma ihtiyacınız varsa "
+"bizimle bağlantı kurun!"
+
+#: templates/admin/menu/import/import-overview.php:24
+msgid "Import WP Recipe Maker recipes"
+msgstr "WP Recipe Maker tariflerini içe aktar"
+
+#: templates/admin/menu/import/import-overview.php:35
+msgid "Import recipes from other plugins"
+msgstr "Başka eklentilere ait tarifleri içe aktar"
+
+#: templates/admin/menu/import/import-overview.php:51
+#: templates/admin/menu/import/import-overview.php:87
+msgid "No recipes found."
+msgstr "Tarif bulunamadı."
+
+#: templates/admin/menu/import/import-overview.php:57
+msgid "Search for recipes"
+msgstr "Tarif ara"
+
+#: templates/admin/menu/import/import-overview.php:62
+#: templates/admin/menu/import/import-search.php:29
+#: templates/admin/menu/import/import-search.php:37
+#, php-format
+msgid "%d recipe found"
+msgid_plural "%d recipes found"
+msgstr[0] "%d tarif bulundu"
+msgstr[1] "%d tarif bulundu"
+
+#: templates/admin/menu/import/import-overview.php:67
+#: templates/admin/menu/import/import-search.php:32
+msgid "Explore import options"
+msgstr "İçe aktarma seçeneklerine göz atın"
+
+#: templates/admin/menu/import/import-overview.php:72
+msgid "Imported Recipes to Check"
+msgstr "Kontrol Edilecek İçe Aktarılmış Tarifler"
+
+#: templates/admin/menu/import/import-overview.php:91
+msgid ""
+"We recommend going through all of these recipes to make sure the import "
+"process was successful. Pay attention to the different ingredient parts to "
+"be able to make use of all of our features."
+msgstr ""
+"İçe aktarma işleminin başarılı şekilde tamamlandığından emin olmak için tüm "
+"bu tarifleri incelemenizi öneririz. Tüm özelliklerimizden yararlanabilmek "
+"için farklı malzeme bölümlerine dikkat edin."
+
+#: templates/admin/menu/import/import-overview.php:94
+msgid ""
+"After doing so you can mark a recipe as checked to keep track of the recipes "
+"you still have to go through."
+msgstr ""
+"İnceledikten sonra ilgili tarifi kontrol edildi şeklinde "
+"işaretleyebilirsiniz ve böylece incelemeden geçirmiş olduğunuz tariflerin "
+"takibini yapabilirsiniz."
+
+#: templates/admin/menu/import/import-overview.php:97
+msgid "Getting a lot of recipes without parent post?"
+msgstr "Ana yazısı olmayan çok sayıda tarifiniz mi var?"
+
+#: templates/admin/menu/import/import-overview.php:97
+msgid "Use our Find Parents tool"
+msgstr "Ana Yazıları Bul aracımızı kullanın"
+
+#: templates/admin/menu/import/import-overview.php:127
+msgid "Mark Selected Recipes as Checked"
+msgstr "Seçili tarifleri Kontrol Edildi olarak işaretle"
+
+#: templates/admin/menu/import/import-search.php:15
+msgid "Search Results"
+msgstr "Arama Sonuçları"
+
+#: templates/admin/menu/import/import-search.php:27
+msgid "Search finished."
+msgstr "Arama tamamlandı."
+
+#: templates/admin/menu/import/import-search.php:35
+msgid "Still searching, keep this page open."
+msgstr "Arama devam ediyor, bu sayfayı açık tutun."
+
+#: templates/admin/menu/import/importing.php:16
+#, php-format
+msgid "Importing %d recipe"
+msgid_plural "Importing %d recipes"
+msgstr[0] "%d tarif içe aktarılıyor"
+msgstr[1] "%d tarif içe aktarılıyor"
+
+#: templates/admin/menu/import/importing.php:20
+msgid "Import finished succesfully. Click here to continue."
+msgstr ""
+"İçe aktarım başarılı şekilde tamamlandı. Devam etmek için buraya tıklayın."
+
+#. Name of the plugin
+msgid "WP Recipe Maker"
+msgstr "WP Recipe Maker"
+
+#. Description of the plugin
+msgid ""
+"The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD "
+"metadata for better SEO will get you more visitors!"
+msgstr ""
+"Herkes için kolay ve kullanıcı dostu bir tarif eklentisi. Daha iyi SEO'ya "
+"yönelik otomatik JSON-LD meta verileri size daha fazla ziyaretçi "
+"kazandıracak!"
+
+#. URI of the plugin
+msgid "http://bootstrapped.ventures/wp-recipe-maker/"
+msgstr "http://bootstrapped.ventures/wp-recipe-maker/"
+
+#. Author of the plugin
+msgid "Bootstrapped Ventures"
+msgstr "Bootstrapped Ventures"
+
+#. Author URI of the plugin
+msgid "http://bootstrapped.ventures/"
+msgstr "http://bootstrapped.ventures/"

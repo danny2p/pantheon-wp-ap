@@ -1,0 +1,40 @@
+.wprm-admin-dashboard-block-chart {
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+
+    &:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .wprm-admin-dashboard-block-chart-title {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+}
+
+table.wprm-admin-dashboard-block-chart-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th:nth-child(1) {
+        text-align: left;
+    }
+
+    td { 
+        padding: 3px 0;
+
+        &:nth-child(2),
+        &:nth-child(3) {
+            width: 75px;
+            text-align: center;
+        }
+    }
+
+    tbody {
+        tr:hover {
+            background-color: #eee;
+        }
+    }
+}

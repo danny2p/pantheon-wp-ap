@@ -1,0 +1,70 @@
+.wprm-recipe {
+    margin: 20px auto;
+    background-color: #fafafa; /* wprm_background type=color */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* wprm_main_font_family type=font */
+    font-size: 0.9em; /* wprm_main_font_size type=font_size */
+    line-height: 1.5em; /* wprm_main_line_height type=font_size */
+    color: #333333; /* wprm_main_text type=color */
+    max-width: 650px; /* wprm_max_width type=size */
+}
+.wprm-recipe a {
+    color: #3498db; /* wprm_link type=color */
+}
+.wprm-recipe p, .wprm-recipe li {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* wprm_main_font_family type=font */
+    font-size: 1em !important;
+    line-height: 1.5em !important; /* wprm_main_line_height type=font_size */
+}
+.wprm-recipe li {
+    margin: 0 0 0 32px !important;
+    padding: 0 !important;
+}
+.rtl .wprm-recipe li {
+    margin: 0 32px 0 0 !important;
+}
+.wprm-recipe ol, .wprm-recipe ul {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.wprm-recipe br {
+    display: none;
+}
+.wprm-recipe .wprm-recipe-name,
+.wprm-recipe .wprm-recipe-header {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* wprm_header_font_family type=font */
+    color: #000000; /* wprm_header_text type=color */
+    line-height: 1.3em; /* wprm_header_line_height type=font_size */
+}
+.wprm-recipe h1,
+.wprm-recipe h2,
+.wprm-recipe h3,
+.wprm-recipe h4,
+.wprm-recipe h5,
+.wprm-recipe h6 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* wprm_header_font_family type=font */
+    color: #212121; /* wprm_header_text type=color */
+    line-height: 1.3em; /* wprm_header_line_height type=font_size */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.wprm-recipe .wprm-recipe-header {
+    margin-top: 1.2em !important;
+}
+.wprm-recipe h1 {
+    font-size: 2em; /* wprm_h1_size type=font_size */
+}
+.wprm-recipe h2 {
+    font-size: 1.8em; /* wprm_h2_size type=font_size */
+}
+.wprm-recipe h3 {
+    font-size: 1.2em; /* wprm_h3_size type=font_size */
+}
+.wprm-recipe h4 {
+    font-size: 1em; /* wprm_h4_size type=font_size */
+}
+.wprm-recipe h5 {
+    font-size: 1em; /* wprm_h5_size type=font_size */
+}
+.wprm-recipe h6 {
+    font-size: 1em; /* wprm_h6_size type=font_size */
+}

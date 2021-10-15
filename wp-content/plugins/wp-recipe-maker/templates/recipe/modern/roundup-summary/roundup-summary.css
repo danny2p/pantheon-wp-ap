@@ -1,0 +1,42 @@
+
+.wprm-recipe-template-roundup-summary {
+    border-style: solid; /* wprm_border_style type=border */
+	border-width: 0px; /* wprm_border_width type=size */
+    border-color: #aaaaaa; /* wprm_border type=color */
+    border-radius: 5px; /* wprm_border_radius type=size */
+    background-color: #ededed; /* wprm_background type=color */
+
+    font-family: inherit; /* wprm_font_family type=font */
+    font-size: 0.9em; /* wprm_font_size type=font_size */
+    color: #333333; /* wprm_text_color type=color */
+    text-align: left;
+    margin-top: 0px; /* wprm_margin_top type=size */
+    margin-bottom: 15px; /* wprm_margin_bottom type=size */
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.wprm-recipe-roundup-summary-container {
+    padding: 10px;
+}
+
+.wprm-recipe-template-roundup-summary .wprm-recipe-name {
+    font-size: 1.1em;
+}
+
+.wprm-recipe-template-roundup-summary .wprm-recipe-image {
+    flex-shrink: 0;
+    padding: 10px; /* wprm_image_margin type=size */
+}
+
+@media only screen and (max-width: 640px) {
+	.wprm-recipe-template-roundup-summary {
+        flex-wrap: wrap-reverse;
+        text-align: center;
+    }
+    .wprm-recipe-template-roundup-summary .wprm-recipe-image {
+        margin: 0 auto;
+        flex-shrink: 1;
+    }
+}

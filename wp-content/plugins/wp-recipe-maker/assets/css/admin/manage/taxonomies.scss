@@ -1,0 +1,53 @@
+.wprm-manage-ingredients-group-container {
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-left: 5px;
+    }
+}
+
+.wprm-manage-ingredients-eafl-container {
+    display: flex;
+    align-items: center;
+
+    .wprm-manage-ingredients-eafl-details {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+}
+
+.wprm-manage-ingredients-link-container {
+    display: flex;
+    align-items: center;
+
+    a {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+}
+
+.wprm-manage-image-preview {
+    display: flex;
+
+    img {
+        max-width: 80px;
+        height: auto;
+        cursor: pointer;
+        margin-right: 2px;
+    }
+}
+
+.wprm-manage-equipment-affiliate-html-container {
+    display: flex;
+    align-items: center;
+
+    .wprm-manage-equipment-affiliate-html {
+        margin-left: 5px;
+        font-size: 12px;
+        line-height: 12px;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+    }
+}

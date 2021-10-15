@@ -1,0 +1,34 @@
+.wprm-recipe-template-cutout {
+	position: relative;
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #aaaaaa; /* wprm_border type=color */
+	border-radius: 10px; /* wprm_border_radius type=size */
+	margin: 120px auto 20px auto;
+	overflow: visible;
+}
+.wprm-recipe-template-cutout-container {
+	overflow: hidden;
+	padding: 0 10px 10px 10px;
+	border: 0;
+	border-radius: 7px; /* wprm_inner_border_radius type=size */
+}
+.wprm-recipe-template-cutout .wprm-recipe-image {
+	position: absolute;
+	margin-top: -100px;
+	margin-left: -100px;
+	left: 50%;
+}
+.wprm-recipe-template-cutout-header {
+	margin: 0 -10px 10px -10px;
+	padding: 110px 10px 10px 10px;
+	text-align: center;
+	background-color: #053f5e; /* wprm_top_header_background type=color */
+	color: #ffffff; /* wprm_top_header_text type=color */
+}
+.wprm-recipe-template-cutout-header a {
+	color: #3498db; /* wprm_top_header_link type=color */
+}
+.wprm-recipe-template-cutout-header .wprm-recipe-name {
+	color: #ffffff; /* wprm_top_header_text type=color */
+}

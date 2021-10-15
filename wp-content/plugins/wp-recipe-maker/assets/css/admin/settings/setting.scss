@@ -1,0 +1,38 @@
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+
+.wprm-setting-input {
+    .ql-editor p {
+        margin-bottom: 10px;
+    }
+
+    .CodeMirror {
+        height: 200px;
+        border: 1px solid #ddd;
+    }
+
+    &[type="number"] {
+        max-width: 100px;
+    }
+}
+
+textarea.wprm-setting-input {
+    width: 100%;
+}
+
+.wprm-setting-unit-conversion-units {
+    width: 100%;
+
+    th {
+        text-align: left;
+    }
+
+    input {
+        width: 95%;
+
+        &.wprm-setting-unit-conversion-units-singular,
+        &.wprm-setting-unit-conversion-units-plural {
+            max-width: 100px;
+        }
+    }
+}

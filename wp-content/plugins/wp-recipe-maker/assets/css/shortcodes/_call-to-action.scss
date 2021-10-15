@@ -1,0 +1,38 @@
+.wprm-call-to-action {
+    &.wprm-call-to-action-simple {
+        margin-top: 10px;
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: middle;
+
+        .wprm-call-to-action-icon {
+            font-size: 2.2em;
+            margin: 5px 0.5em 5px 0;
+
+            svg {
+                margin-top: 0;
+            }
+        }
+        .wprm-call-to-action-text-container {
+            margin: 5px 0;
+
+            .wprm-call-to-action-header {
+                display: block;
+                font-weight: bold;
+                font-size: 1.3em;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 450px) {
+    .wprm-call-to-action {
+        &.wprm-call-to-action-simple {
+            flex-wrap: wrap;
+            .wprm-call-to-action-text-container {
+                text-align: center;
+            }
+        }
+    }
+}

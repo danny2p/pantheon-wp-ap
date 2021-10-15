@@ -1,0 +1,1341 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Recipe Maker 1.10.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
+"POT-Creation-Date: 2016-12-28 19:06:23+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-04-02 15:44+0400\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"Last-Translator: \n"
+"Language-Team: Alaa Qashllan <http://www.wasfatzakia.com>\n"
+"Language: ar\n"
+"X-Generator: Poedit 1.8.12\n"
+
+#: includes/admin/class-wprm-import-manager.php:50
+#: includes/admin/class-wprm-import-manager.php:51
+#: templates/admin/menu/import/import-overview.php:15
+msgid "Import Recipes"
+msgstr "استيراد وصفة"
+
+#: includes/admin/class-wprm-import-manager.php:52
+msgid "Search Recipes"
+msgstr "بحث في الوصفات"
+
+#: includes/admin/class-wprm-recipe-parser.php:148
+msgid "kilograms"
+msgstr "كيلوجرامات"
+
+#: includes/admin/class-wprm-recipe-parser.php:149
+msgid "kilogram"
+msgstr "كيلوجرام"
+
+#: includes/admin/class-wprm-recipe-parser.php:150
+msgid "kg"
+msgstr "كج"
+
+#: includes/admin/class-wprm-recipe-parser.php:151
+msgid "grams"
+msgstr "جرامات"
+
+#: includes/admin/class-wprm-recipe-parser.php:152
+msgid "gram"
+msgstr "جرام"
+
+#: includes/admin/class-wprm-recipe-parser.php:153
+msgid "gr"
+msgstr "مج"
+
+#: includes/admin/class-wprm-recipe-parser.php:154
+#: includes/public/class-wprm-metadata.php:164
+msgid "g"
+msgstr "ج"
+
+#: includes/admin/class-wprm-recipe-parser.php:155
+msgid "milligrams"
+msgstr "ملليجرامات"
+
+#: includes/admin/class-wprm-recipe-parser.php:156
+msgid "milligram"
+msgstr "ملليجرام"
+
+#: includes/admin/class-wprm-recipe-parser.php:157
+#: includes/public/class-wprm-metadata.php:169
+msgid "mg"
+msgstr "ملجم"
+
+#: includes/admin/class-wprm-recipe-parser.php:158
+msgid "pounds"
+msgstr "باوندات"
+
+#: includes/admin/class-wprm-recipe-parser.php:159
+msgid "pound"
+msgstr "باوند"
+
+#: includes/admin/class-wprm-recipe-parser.php:160
+msgid "lbs"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:161
+msgid "lb"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:162
+msgid "ounces"
+msgstr "أونصات"
+
+#: includes/admin/class-wprm-recipe-parser.php:163
+msgid "ounce"
+msgstr "أونصة"
+
+#: includes/admin/class-wprm-recipe-parser.php:164
+msgid "oz"
+msgstr "أوز"
+
+#: includes/admin/class-wprm-recipe-parser.php:166
+msgid "liters"
+msgstr "ليترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:167
+msgid "liter"
+msgstr "ليتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:168
+msgid "l"
+msgstr "ل"
+
+#: includes/admin/class-wprm-recipe-parser.php:169
+msgid "deciliters"
+msgstr "ديسيلتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:170
+msgid "deciliter"
+msgstr "ديسيلترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:171
+msgid "dl"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:172
+msgid "centiliters"
+msgstr "سنتيليترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:173
+msgid "centiliter"
+msgstr "سنتيلتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:174
+msgid "cl"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:175
+msgid "milliliters"
+msgstr "ملليلترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:176
+msgid "milliliter"
+msgstr "ملليليتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:177
+msgid "ml"
+msgstr "مل"
+
+#: includes/admin/class-wprm-recipe-parser.php:178
+msgid "gallons"
+msgstr "جالونات"
+
+#: includes/admin/class-wprm-recipe-parser.php:179
+msgid "gallon"
+msgstr "جالون"
+
+#: includes/admin/class-wprm-recipe-parser.php:180
+msgid "gal"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:181
+msgid "quarts"
+msgstr "أرباع"
+
+#: includes/admin/class-wprm-recipe-parser.php:182
+msgid "quart"
+msgstr "ربع"
+
+#: includes/admin/class-wprm-recipe-parser.php:183
+msgid "qt"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:184
+msgid "pints"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:185
+msgid "pint"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:186
+msgid "pt"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:187
+msgid "cups"
+msgstr "كؤوس"
+
+#: includes/admin/class-wprm-recipe-parser.php:188
+msgid "cup"
+msgstr "كأس"
+
+#: includes/admin/class-wprm-recipe-parser.php:189
+msgid "cu"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:190
+msgid "c"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:191
+msgid "fluid ounces"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:192
+msgid "fluid ounce"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:193
+msgid "fl ounces"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:194
+msgid "fl ounce"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:195
+msgid "floz"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:196
+msgid "tablespoons"
+msgstr "ملاعق طعام"
+
+#: includes/admin/class-wprm-recipe-parser.php:197
+msgid "tablespoon"
+msgstr "ملعقة طعام"
+
+#: includes/admin/class-wprm-recipe-parser.php:198
+msgid "tbsps"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:199
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:34
+msgid "tbsp"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:200
+msgid "tbls"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:201
+msgid "tbs"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:202
+msgid "tb"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:203
+msgid "T"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:204
+msgid "teaspoons"
+msgstr "ملاعق شاي"
+
+#: includes/admin/class-wprm-recipe-parser.php:205
+msgid "teaspoon"
+msgstr "ملعقة شاي"
+
+#: includes/admin/class-wprm-recipe-parser.php:206
+msgid "tsps"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:207
+msgid "tsp"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:208
+msgid "ts"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:209
+msgid "t"
+msgstr ""
+
+#: includes/admin/class-wprm-recipe-parser.php:211
+msgid "meters"
+msgstr "مترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:212
+msgid "meter"
+msgstr "متر"
+
+#: includes/admin/class-wprm-recipe-parser.php:213
+msgid "m"
+msgstr "م"
+
+#: includes/admin/class-wprm-recipe-parser.php:214
+msgid "centimeters"
+msgstr "سنتيمترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:215
+msgid "centimeter"
+msgstr "سنتيمتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:216
+msgid "cm"
+msgstr "سم"
+
+#: includes/admin/class-wprm-recipe-parser.php:217
+msgid "millimeters"
+msgstr "ملليمترات"
+
+#: includes/admin/class-wprm-recipe-parser.php:218
+msgid "millimeter"
+msgstr "ملليمتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:219
+msgid "mm"
+msgstr "ملليمتر"
+
+#: includes/admin/class-wprm-recipe-parser.php:220
+msgid "yards"
+msgstr "ياردات"
+
+#: includes/admin/class-wprm-recipe-parser.php:221
+msgid "yard"
+msgstr "ياردة"
+
+#: includes/admin/class-wprm-recipe-parser.php:222
+msgid "yd"
+msgstr "ياردة"
+
+#: includes/admin/class-wprm-recipe-parser.php:223
+msgid "feet"
+msgstr "أقدام"
+
+#: includes/admin/class-wprm-recipe-parser.php:224
+msgid "foot"
+msgstr "قدم"
+
+#: includes/admin/class-wprm-recipe-parser.php:225
+msgid "ft"
+msgstr "قدم"
+
+#: includes/admin/class-wprm-recipe-parser.php:226
+msgid "inches"
+msgstr "انشات"
+
+#: includes/admin/class-wprm-recipe-parser.php:227
+msgid "inch"
+msgstr "انش"
+
+#: includes/admin/class-wprm-recipe-parser.php:228
+msgid "in"
+msgstr "انش"
+
+#: includes/admin/class-wprm-recipe-parser.php:230
+msgid "cloves"
+msgstr "فصوص"
+
+#: includes/admin/class-wprm-recipe-parser.php:231
+msgid "clove"
+msgstr "فص"
+
+#: includes/admin/class-wprm-recipe-parser.php:232
+msgid "leaves"
+msgstr "أوراق"
+
+#: includes/admin/class-wprm-recipe-parser.php:233
+msgid "leave"
+msgstr "ورقة"
+
+#: includes/admin/class-wprm-recipe-parser.php:234
+msgid "slices"
+msgstr "شرائح"
+
+#: includes/admin/class-wprm-recipe-parser.php:235
+msgid "slice"
+msgstr "شريحة"
+
+#: includes/admin/class-wprm-recipe-parser.php:236
+msgid "pieces"
+msgstr "قطع"
+
+#: includes/admin/class-wprm-recipe-parser.php:237
+msgid "piece"
+msgstr "قطع"
+
+#: includes/admin/class-wprm-recipe-parser.php:238
+msgid "pinches"
+msgstr "رشات"
+
+#: includes/admin/class-wprm-recipe-parser.php:239
+msgid "pinche"
+msgstr "رشة"
+
+#: includes/admin/import/class-wprm-import-easyrecipe.php:105
+msgid "Unknown"
+msgstr "غير معرف"
+
+#: includes/admin/import/class-wprm-import-wpultimaterecipe.php:354
+#: includes/public/class-wprm-template-helper.php:171
+msgid "hour"
+msgstr "ساعة"
+
+#: includes/admin/import/class-wprm-import-wpultimaterecipe.php:355
+#: includes/public/class-wprm-template-helper.php:171
+msgid "hours"
+msgstr "ساعات"
+
+#: includes/admin/manage/class-wprm-manage-ingredients.php:57
+#: includes/public/class-wprm-template-helper.php:83
+#: templates/admin/manage.php:17 templates/admin/modal/tabs/import-text.php:40
+msgid "Ingredients"
+msgstr "المقادير"
+
+#: includes/admin/manage/class-wprm-manage.php:250
+#: templates/admin/manage.php:26
+msgid "Manage"
+msgstr "إدارة"
+
+#: includes/admin/manage/class-wprm-manage.php:290
+#: templates/admin/settings/features.php:43
+msgid "These features are only available in"
+msgstr ""
+
+#: includes/admin/manage/class-wprm-manage.php:293
+msgid "Ingredient Links"
+msgstr "رابط المكون"
+
+#: includes/admin/menu/class-wprm-admin-menu-addons.php:47
+#: templates/admin/menu/addons.php:15
+msgid "Add-Ons"
+msgstr "الإضافات"
+
+#: includes/admin/menu/class-wprm-admin-menu-faq.php:76
+msgid "FAQ & Support"
+msgstr ""
+
+#: includes/admin/modal/class-wprm-modal.php:60
+msgid "Are you sure? You will lose any unsaved changes."
+msgstr "هل انت متأكد ؟ سوف تخسر أي تغييرات لم قم بحفظها"
+
+#: includes/admin/modal/class-wprm-modal.php:61
+#: templates/admin/modal/modal.php:61 templates/admin/modal/modal.php:97
+msgid "Insert"
+msgstr "إدخال"
+
+#: includes/admin/modal/class-wprm-modal.php:62
+msgid "Update"
+msgstr "تحديث"
+
+#: includes/admin/modal/class-wprm-modal.php:63
+msgid "Select or Upload Image"
+msgstr "اختر او ارفع صورة"
+
+#: includes/admin/modal/class-wprm-modal.php:64
+msgid "Use Image"
+msgstr "استخدم صورة"
+
+#: includes/admin/modal/class-wprm-modal.php:65
+msgid "Are you sure you want to remove this recipe?"
+msgstr "هل انت متاكد من ازالة هذه الوصفة ؟"
+
+#: includes/admin/modal/class-wprm-modal.php:66
+msgid "Are you sure you want to start over with importing from text?"
+msgstr "هل انت متاكد من انك ستبدأ باستيراد النص ؟"
+
+#: includes/admin/modal/class-wprm-modal.php:67
+#: includes/admin/modal/class-wprm-modal.php:153
+#: includes/admin/modal/class-wprm-modal.php:157
+msgid "Edit Recipe"
+msgstr "تحرير الوصفة"
+
+#: includes/admin/modal/class-wprm-modal.php:68
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:35
+#: templates/admin/modal/tabs/recipe-snippets-print.php:35
+msgid "First recipe on page"
+msgstr "أول وصفة بالصفحة"
+
+#: includes/admin/modal/class-wprm-modal.php:69
+msgid "Type here (select text for advanced styling options)"
+msgstr "اكتب هنا ( اختر النص لخيارات الستيلات المتقدمة)"
+
+#: includes/admin/modal/class-wprm-modal.php:121
+msgid "New Recipe"
+msgstr "وصفة جديدة"
+
+#: includes/admin/modal/class-wprm-modal.php:125
+msgid "Import from Text"
+msgstr "استيراد من نص"
+
+#: includes/admin/modal/class-wprm-modal.php:131
+msgid "Recipe Details"
+msgstr "تفاصيل الوصفة"
+
+#: includes/admin/modal/class-wprm-modal.php:138
+msgid "Ingredients & Instructions"
+msgstr "المقادير و الخطوات"
+
+#: includes/admin/modal/class-wprm-modal.php:144
+#: includes/public/class-wprm-template-helper.php:85
+msgid "Recipe Notes"
+msgstr "ملاحظات الوصفة"
+
+#: includes/admin/modal/class-wprm-modal.php:160
+msgid "Edit"
+msgstr "تحرير"
+
+#: includes/admin/modal/class-wprm-modal.php:167
+msgid "Recipe Snippets"
+msgstr "مقتطفات الوصفة"
+
+#: includes/admin/modal/class-wprm-modal.php:171
+#: includes/public/class-wprm-shortcode.php:158
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:40
+msgid "Jump to Recipe"
+msgstr "الذهاب للوصفة"
+
+#: includes/admin/modal/class-wprm-modal.php:178
+#: includes/public/class-wprm-shortcode.php:190
+#: templates/admin/modal/tabs/recipe-snippets-print.php:40
+msgid "Print Recipe"
+msgstr "طباعة الوصفة"
+
+#: includes/admin/modal/class-wprm-shortcode-preview.php:46
+msgid "remove"
+msgstr "ازالة"
+
+#: includes/class-wp-recipe-maker.php:123
+msgid "Please update to at least the following plugin versions:"
+msgstr ""
+
+#: includes/public/class-wprm-comment-rating.php:114
+#: templates/public/comment-rating-form.php:14
+msgid "Recipe Rating"
+msgstr "تقييم الوصفة"
+
+#: includes/public/class-wprm-metadata.php:167
+#: templates/admin/modal/tabs/recipe-details.php:59
+#: templates/recipe/clean-print/clean-print.php:67
+#: templates/recipe/clean-print-with-image/clean-print-with-image.php:68
+#: templates/recipe/simple/simple.php:84
+#: templates/recipe/tastefully-simple/tastefully-simple.php:88
+msgid "kcal"
+msgstr "كيلو كالوري"
+
+#: includes/public/class-wprm-metadata.php:178
+msgid "1 serving"
+msgstr "1 حصة"
+
+#: includes/public/class-wprm-post-type.php:39
+msgctxt "post type general name"
+msgid "Recipes"
+msgstr ""
+
+#: includes/public/class-wprm-post-type.php:40
+msgctxt "post type singular name"
+msgid "Recipe"
+msgstr ""
+
+#: includes/public/class-wprm-settings.php:92
+msgid "WPRM Settings"
+msgstr ""
+
+#: includes/public/class-wprm-settings.php:92
+msgid "Settings"
+msgstr "الاعدادات"
+
+#: includes/public/class-wprm-taxonomies.php:62
+msgctxt "taxonomy general name"
+msgid "Courses"
+msgstr "وجبات"
+
+#: includes/public/class-wprm-taxonomies.php:63
+msgctxt "taxonomy singular name"
+msgid "Course"
+msgstr "وجبة"
+
+#: includes/public/class-wprm-taxonomies.php:66
+msgctxt "taxonomy general name"
+msgid "Cuisines"
+msgstr "مطابخ"
+
+#: includes/public/class-wprm-taxonomies.php:67
+msgctxt "taxonomy singular name"
+msgid "Cuisine"
+msgstr "مطبخ"
+
+#: includes/public/class-wprm-taxonomies.php:70
+msgctxt "taxonomy general name"
+msgid "Ingredients"
+msgstr "المقادير"
+
+#: includes/public/class-wprm-taxonomies.php:71
+msgctxt "taxonomy singular name"
+msgid "Ingredient"
+msgstr "المقدار"
+
+#: includes/public/class-wprm-taxonomies.php:97
+msgid "Breakfast"
+msgstr "افطار"
+
+#: includes/public/class-wprm-taxonomies.php:98
+msgid "Appetizer"
+msgstr "مقبلات"
+
+#: includes/public/class-wprm-taxonomies.php:99
+msgid "Soup"
+msgstr "شوربة"
+
+#: includes/public/class-wprm-taxonomies.php:100
+msgid "Main Course"
+msgstr "طبق رئيسي"
+
+#: includes/public/class-wprm-taxonomies.php:101
+msgid "Side Dish"
+msgstr "طبق جانبي"
+
+#: includes/public/class-wprm-taxonomies.php:102
+msgid "Salad"
+msgstr "سلطة"
+
+#: includes/public/class-wprm-taxonomies.php:103
+msgid "Dessert"
+msgstr "تحلية"
+
+#: includes/public/class-wprm-taxonomies.php:104
+msgid "Snack"
+msgstr "تصبيرة"
+
+#: includes/public/class-wprm-taxonomies.php:105
+msgid "Drinks"
+msgstr "مشروبات"
+
+#: includes/public/class-wprm-taxonomies.php:109
+msgid "French"
+msgstr "فرنسي"
+
+#: includes/public/class-wprm-taxonomies.php:110
+msgid "Italian"
+msgstr "ايطالي"
+
+#: includes/public/class-wprm-taxonomies.php:111
+msgid "Mediterranean"
+msgstr "البحر المتوسط"
+
+#: includes/public/class-wprm-taxonomies.php:112
+msgid "Indian"
+msgstr "هندي"
+
+#: includes/public/class-wprm-taxonomies.php:113
+msgid "Chinese"
+msgstr "صيني"
+
+#: includes/public/class-wprm-taxonomies.php:114
+msgid "Japanese"
+msgstr "ياباني"
+
+#: includes/public/class-wprm-taxonomies.php:115
+msgid "American"
+msgstr "أمريكي"
+
+#: includes/public/class-wprm-taxonomies.php:116
+msgid "Mexican"
+msgstr "مكسيكي"
+
+#: includes/public/class-wprm-template-helper.php:74
+msgid "Print"
+msgstr "طباعة"
+
+#: includes/public/class-wprm-template-helper.php:75
+msgid "Course"
+msgstr "الوجبة"
+
+#: includes/public/class-wprm-template-helper.php:76
+msgid "Cuisine"
+msgstr "المطبخ"
+
+#: includes/public/class-wprm-template-helper.php:77
+#: templates/admin/modal/tabs/recipe-details.php:63
+msgid "Prep Time"
+msgstr "مدة الإعداد"
+
+#: includes/public/class-wprm-template-helper.php:78
+#: templates/admin/modal/tabs/recipe-details.php:66
+msgid "Cook Time"
+msgstr "مدة الطبخ"
+
+#: includes/public/class-wprm-template-helper.php:79
+#: templates/admin/modal/tabs/recipe-details.php:69
+msgid "Total Time"
+msgstr "الوقت الكلي"
+
+#: includes/public/class-wprm-template-helper.php:80
+#: templates/admin/modal/tabs/recipe-details.php:53
+msgid "Servings"
+msgstr "الحصص"
+
+#: includes/public/class-wprm-template-helper.php:81
+#: templates/admin/modal/tabs/recipe-details.php:58
+msgid "Calories"
+msgstr "الكالوري"
+
+#: includes/public/class-wprm-template-helper.php:82
+#: templates/admin/modal/tabs/recipe-details.php:42
+msgid "Author"
+msgstr "الشيف"
+
+#: includes/public/class-wprm-template-helper.php:84
+#: templates/admin/modal/tabs/import-text.php:52
+msgid "Instructions"
+msgstr "الخطوات"
+
+#: includes/public/class-wprm-template-helper.php:152
+msgid "d"
+msgstr "يوم"
+
+#: includes/public/class-wprm-template-helper.php:154
+msgid "days"
+msgstr "أيام"
+
+#: includes/public/class-wprm-template-helper.php:154
+msgid "day"
+msgstr "يوم"
+
+#: includes/public/class-wprm-template-helper.php:169
+msgid "hr"
+msgstr "ساعة"
+
+#: includes/public/class-wprm-template-helper.php:169
+msgid "hrs"
+msgstr "ساعات"
+
+#: includes/public/class-wprm-template-helper.php:186
+msgid "mins"
+msgstr "دقائق"
+
+#: includes/public/class-wprm-template-helper.php:186
+msgid "min"
+msgstr "دقيقة"
+
+#: includes/public/class-wprm-template-helper.php:188
+#: templates/admin/modal/tabs/recipe-details.php:64
+#: templates/admin/modal/tabs/recipe-details.php:67
+#: templates/admin/modal/tabs/recipe-details.php:70
+msgid "minutes"
+msgstr "دقائق"
+
+#: includes/public/class-wprm-template-helper.php:188
+msgid "minute"
+msgstr "دقيقة"
+
+#: includes/public/class-wprm-template-helper.php:225
+msgid "from"
+msgstr "من"
+
+#: includes/public/class-wprm-template-helper.php:225
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] "تصويت"
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: templates/admin/manage.php:16
+msgid "Recipes"
+msgstr "الوصفات"
+
+#: templates/admin/menu/import/import-overview.php:16
+msgid "Considerations Before Importing"
+msgstr "اعتبارات قبل الاستيراد"
+
+#: templates/admin/menu/import/import-overview.php:18
+msgid ""
+"Importing recipes will convert them to our format and they won't be "
+"available in the old plugin anymore. We recommend backing up before starting "
+"the process and trying to import 1 single recipe first to make sure "
+"everything converts properly."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:21
+msgid ""
+"If your current plugin uses custom post types and has different permalinks "
+"than regular posts you might want to use a redirection plugin to set up 301 "
+"redirects. Contact us if you need help!"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:24
+msgid ""
+"Importing lots of recipes at once can cause a PHP timeout error. All recipes "
+"that were handled up until the error will have been imported correctly."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:27
+#: templates/admin/menu/import/import-recipes.php:45
+msgid "Recipes to Import"
+msgstr "وصفات للاستيراد"
+
+#: templates/admin/menu/import/import-overview.php:43
+#: templates/admin/menu/import/import-overview.php:79
+msgid "No recipes found."
+msgstr "لا توجد وصفات"
+
+#: templates/admin/menu/import/import-overview.php:49
+msgid "Search for recipes"
+msgstr "بحث عن وصفات"
+
+#: templates/admin/menu/import/import-overview.php:54
+#: templates/admin/menu/import/import-search.php:29
+#: templates/admin/menu/import/import-search.php:37
+msgid "%d recipe found"
+msgid_plural "%d recipes found"
+msgstr[0] "%d وصفة موجودة  "
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: templates/admin/menu/import/import-overview.php:56
+msgid " recipes found"
+msgstr "وصفات موجودة"
+
+#: templates/admin/menu/import/import-overview.php:59
+#: templates/admin/menu/import/import-search.php:32
+msgid "Explore import options"
+msgstr "استكشاف خيارات الاستيراد"
+
+#: templates/admin/menu/import/import-overview.php:64
+msgid "Imported Recipes to Check"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:83
+msgid ""
+"We recommend going through all of these recipes to make sure the import "
+"process was successful. Pay attention to the different ingredient parts to "
+"be able to make use of all of our features."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:86
+msgid ""
+"After doing so you can mark a recipe as checked to keep track of the recipes "
+"you still have to go through."
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:106
+#: templates/admin/menu/import/import-recipes.php:62
+msgid "no parent post found"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:113
+msgid "Mark Selected Recipes as Checked"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:21
+#: templates/admin/menu/import/import-search.php:22
+msgid "Something went wrong."
+msgstr "حدث خطأ ما!"
+
+#: templates/admin/menu/import/import-recipes.php:28
+msgid "Import from %s"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:42
+msgid "Import Settings"
+msgstr "إعدادات الاستيراد"
+
+#: templates/admin/menu/import/import-recipes.php:46
+msgid "Use SHIFT-click to (un)check multiple recipes at once."
+msgstr "استخدام SHIFT-click لتحديد وصفات متعددة في وقت واحد."
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "Select"
+msgstr "اختر"
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "all"
+msgstr "الكل"
+
+#: templates/admin/menu/import/import-recipes.php:47
+msgid "none"
+msgstr "لا شيء"
+
+#: templates/admin/menu/import/import-recipes.php:73
+msgid "%d more recipe"
+msgid_plural "%d more recipes"
+msgstr[0] "%d وصفات اكثر "
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: templates/admin/menu/import/import-recipes.php:77
+msgid "Try changing the \"p\" variable in the URL to find the other recipes."
+msgstr "حاول تغيير المتغير \"p\" في عنوان URL للعثور على الوصفات الأخرى."
+
+#: templates/admin/menu/import/import-recipes.php:82
+msgid "Import Selected Recipes"
+msgstr "استيراد وصفات مختارة"
+
+#: templates/admin/menu/import/import-search.php:15
+msgid "Search Results"
+msgstr "نتائج البحث"
+
+#: templates/admin/menu/import/import-search.php:27
+msgid "Search finished."
+msgstr "اكتمل البحث."
+
+#: templates/admin/menu/import/import-search.php:35
+msgid "Still searching, keep this page open."
+msgstr "مازال البحث جارياً ، ابقي هذه الصفحة مفتوحة."
+
+#: templates/admin/modal/modal.php:16
+msgid "Close Modal"
+msgstr ""
+
+#: templates/admin/modal/modal.php:38
+msgid "You're currently editing a recipe."
+msgstr "أنت الآن تقوم بتعديل وصفة."
+
+#: templates/admin/modal/modal.php:38
+msgid "Use the \"WP Recipe Maker\" button to access other features."
+msgstr ""
+
+#: templates/admin/modal/tabs/edit-recipe.php:15
+msgid "Select the recipe you would like to edit and click the \"Edit\" button."
+msgstr ""
+
+#: templates/admin/modal/tabs/edit-recipe.php:19
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:33
+#: templates/admin/modal/tabs/recipe-snippets-print.php:33
+msgid "Recipe"
+msgstr "الوصفة"
+
+#: templates/admin/modal/tabs/edit-recipe.php:21
+msgid "Select a recipe"
+msgstr "اختر وصفة"
+
+#: templates/admin/modal/tabs/import-text.php:16
+msgid "Start Over"
+msgstr ""
+
+#: templates/admin/modal/tabs/import-text.php:17
+msgid "Clear"
+msgstr "مسح"
+
+#: templates/admin/modal/tabs/import-text.php:18
+msgid "Next"
+msgstr "التالي"
+
+#: templates/admin/modal/tabs/import-text.php:22
+msgid ""
+"Paste the recipe you want to import in the textarea below to get started."
+msgstr ""
+
+#: templates/admin/modal/tabs/import-text.php:30
+#: templates/admin/modal/tabs/import-text.php:35
+#: templates/admin/modal/tabs/import-text.php:40
+#: templates/admin/modal/tabs/import-text.php:52
+#: templates/admin/modal/tabs/import-text.php:64
+msgid "Highlight this part of the recipe:"
+msgstr "تسليط الضوء وتمييز هذا الجزء من الوصفة:"
+
+#: templates/admin/modal/tabs/import-text.php:30
+#: templates/admin/modal/tabs/recipe-details.php:30
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:21
+msgid "Name"
+msgstr "الاسم"
+
+#: templates/admin/modal/tabs/import-text.php:35
+#: templates/admin/modal/tabs/recipe-details.php:34
+msgid "Summary"
+msgstr "الملخص"
+
+#: templates/admin/modal/tabs/import-text.php:45
+msgid "Check any ingredient groups in this list:"
+msgstr ""
+
+#: templates/admin/modal/tabs/import-text.php:57
+msgid "Check any instruction groups in this list:"
+msgstr ""
+
+#: templates/admin/modal/tabs/import-text.php:64
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:22
+#: templates/admin/modal/tabs/recipe-notes.php:16
+msgid "Notes"
+msgstr "ملاحظات"
+
+#: templates/admin/modal/tabs/import-text.php:69
+msgid "Finished the text import."
+msgstr "انتهى استيراد النص."
+
+#: templates/admin/modal/tabs/recipe-details.php:23
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:54
+msgid "Image"
+msgstr "صورة"
+
+#: templates/admin/modal/tabs/recipe-details.php:24
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:70
+msgid "Add Image"
+msgstr "أضف صورة"
+
+#: templates/admin/modal/tabs/recipe-details.php:25
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:71
+msgid "Remove Image"
+msgstr "أزل الصورة"
+
+#: templates/admin/modal/tabs/recipe-details.php:31
+msgid "Recipe Name"
+msgstr "اسم الوصفة"
+
+#: templates/admin/modal/tabs/recipe-details.php:38
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:87
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:91
+msgid "Hint"
+msgstr "تلميح"
+
+#: templates/admin/modal/tabs/recipe-details.php:39
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:92
+msgid "Select text to add styling or links."
+msgstr "حدد نصا لإضافة التصميم أو الروابط."
+
+#: templates/admin/modal/tabs/recipe-details.php:44
+msgid "Don't show"
+msgstr "لا تظهر"
+
+#: templates/admin/modal/tabs/recipe-details.php:45
+msgid "Name of post author"
+msgstr "اسم مؤلف المقال"
+
+#: templates/admin/modal/tabs/recipe-details.php:46
+msgid "Custom author name"
+msgstr "اسم المؤلف المخصص"
+
+#: templates/admin/modal/tabs/recipe-details.php:49
+msgid "Custom Author Name"
+msgstr "اسم مؤلف مخصص"
+
+#: templates/admin/modal/tabs/recipe-details.php:50
+msgid "Author Name"
+msgstr "اسم المؤلف"
+
+#: templates/admin/modal/tabs/recipe-details.php:54
+msgid "people"
+msgstr "أشخاص"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:19
+msgid "Amount"
+msgstr "الكمية"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:20
+msgid "Unit"
+msgstr "الوحدة"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:28
+msgid "Ingredient Group"
+msgstr "مجموعة مقادير"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:35
+msgid "olive oil"
+msgstr "زيت زيتون"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:36
+msgid "extra virgin"
+msgstr "زيت الزيتون البكر"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:44
+msgid "Add Ingredient"
+msgstr "أضف مقدار"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:45
+msgid "Add Ingredient Group"
+msgstr "إضافة مجموعة مقادير"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:53
+msgid "Instruction"
+msgstr "خطوات"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:60
+msgid "Instruction Group"
+msgstr "إضافة مجموعة خطوات"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:81
+msgid "Add Instruction"
+msgstr "أضف خطوات"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:82
+msgid "Add Instruction Group"
+msgstr "أضف مجموعة خطوات"
+
+#: templates/admin/modal/tabs/recipe-ingredients-instructions.php:88
+msgid ""
+"Use the TAB key to easily move from field to field and add ingredients/"
+"instructions without having to click the button."
+msgstr ""
+"استخدم المفتاح تاب للانتقال بسهولة من حقل إلى حقل وإضافة المكونات / "
+"التعليمات دون الحاجة إلى النقر على الزر."
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:15
+msgid ""
+"The %s shortcode can be used to add a link that jumps your visitors to a "
+"recipe on the page."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:17
+#: templates/admin/modal/tabs/recipe-snippets-print.php:17
+msgid "Shortcode Examples"
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:20
+msgid ""
+"Add a link that jumps to the first recipe found on the page with \"Jump to "
+"Recipe\" as the link text."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:24
+msgid ""
+"Add a link that jumps to the recipe with ID 123 with \"Jump to Recipe\" as "
+"the link text."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:28
+msgid ""
+"Add a link that jumps to the recipe with ID 123 with \"View Recipe\" as the "
+"link text."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:30
+#: templates/admin/modal/tabs/recipe-snippets-print.php:30
+msgid "Shortcode Builder"
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:39
+#: templates/admin/modal/tabs/recipe-snippets-print.php:39
+msgid "Text"
+msgstr "نص"
+
+#: templates/admin/modal/tabs/recipe-snippets-jump.php:41
+#: templates/admin/modal/tabs/recipe-snippets-print.php:41
+msgid "Leave blank to use default"
+msgstr "اتركه فارغاً للاعدادات الافتراضية"
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:15
+msgid "The %s shortcode can be used to add a link for printing a recipe."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:20
+msgid ""
+"Add a link that prints the first recipe found on the page with \"Print Recipe"
+"\" as the link text."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:24
+msgid ""
+"Add a link that prints the recipe with ID 123 with \"Print Recipe\" as the "
+"link text."
+msgstr ""
+
+#: templates/admin/modal/tabs/recipe-snippets-print.php:28
+msgid ""
+"Add a link that prints the recipe with ID 123 with \"Print my new Recipe\" "
+"as the link text."
+msgstr ""
+
+#: templates/admin/settings/appearance.php:17
+msgid "Recipe Fields"
+msgstr "حقول الوصفة"
+
+#: templates/admin/settings/appearance.php:22
+msgid "Recipe Image"
+msgstr "صورة الوصفة"
+
+#: templates/admin/settings/appearance.php:28
+msgid "Use featured image of parent post if no recipe image is set"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:34
+msgid "Nutrition Label"
+msgstr "الملصق الغذائي"
+
+#: templates/admin/settings/appearance.php:40
+msgid "Display in recipe template"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:44
+msgid "Only available in"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:46
+msgid ""
+"Display the nutrition label at its default location in the recipe template."
+msgstr ""
+
+#: templates/admin/settings/appearance.php:53
+msgid "Recipe Template Options"
+msgstr "خيارات قالب الوصفة"
+
+#: templates/admin/settings/appearance.php:55
+msgid "Note: not all options will affect every recipe template."
+msgstr "ملاحظة: لن تؤثر جميع الخيارات على كل قوالب الوصفة."
+
+#: templates/admin/settings/appearance.php:61
+msgid "Background Color"
+msgstr "لون الخلفية"
+
+#: templates/admin/settings/appearance.php:69
+msgid "Border Color"
+msgstr "لون الحدود"
+
+#: templates/admin/settings/appearance.php:77
+msgid "Text Color"
+msgstr "لون النص"
+
+#: templates/admin/settings/appearance.php:85
+msgid "Link Color"
+msgstr "لون الرابط"
+
+#: templates/admin/settings/appearance.php:93
+msgid "Header Color"
+msgstr "لون الترويسة"
+
+#: templates/admin/settings/appearance.php:101
+msgid "Icon Color"
+msgstr "لون الايقونة"
+
+#: templates/admin/settings/appearance.php:109
+msgid "Accent Color"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:117
+msgid "Accent Text Color"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:125
+msgid "Accent 2 Color"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:133
+msgid "Accent 2 Text Color"
+msgstr ""
+
+#: templates/admin/settings/appearance.php:141
+msgid "Recipe Template"
+msgstr "قالب الوصفة"
+
+#: templates/admin/settings/appearance.php:143
+msgid "Change the look of recipes on your website."
+msgstr ""
+
+#: templates/admin/settings/appearance.php:152
+msgid "Default Recipe Template"
+msgstr "قالب الوصفة الافتراضي"
+
+#: templates/admin/settings/appearance.php:165
+msgid "The default template to use for recipes on your website."
+msgstr "القالب الافتراضي لاستخدامه للوصفات على موقعك الالكتروني."
+
+#: templates/admin/settings/appearance.php:171
+msgid "Default Print Template"
+msgstr "قالب الطباعة الافتراضي"
+
+#: templates/admin/settings/appearance.php:184
+msgid "The default template to use when printing a recipe."
+msgstr "القالب الافتراضي لاستخدامه لطباعة الوصفات."
+
+#: templates/admin/settings/appearance.php:210
+msgid "No Screenshot"
+msgstr "لا لقطة الشاشة"
+
+#: templates/admin/settings/appearance.php:219
+#: templates/admin/settings/features.php:67
+#: templates/admin/settings/labels.php:42
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#: templates/admin/settings/features.php:17 templates/admin/settings.php:18
+msgid "Features"
+msgstr "المميزات"
+
+#: templates/admin/settings/features.php:19
+#: templates/admin/settings/labels.php:19
+msgid "Choose the features you want to use on your website."
+msgstr "اختر الميزات التي تريد استخدامها على موقعك الإلكتروني."
+
+#: templates/admin/settings/features.php:25
+msgid "Comment Ratings"
+msgstr "تقييم التعليقات"
+
+#: templates/admin/settings/features.php:31
+msgid "Allow visitors to vote on your recipes when commenting"
+msgstr "السماح للزوار بالتصويت على الوصفة عند التعليق"
+
+#: templates/admin/settings/features.php:34
+#: templates/admin/settings/features.php:61
+msgid "Learn more"
+msgstr "أعرف أكثر"
+
+#: templates/admin/settings/features.php:40
+msgid "Premium Features"
+msgstr "الميزات البريميوم"
+
+#: templates/admin/settings/features.php:45
+msgid "Choose the Premium features you want to use on your website."
+msgstr "اختر المميزات البريميوم التي تريد استخدامها على موقعك الإلكتروني."
+
+#: templates/admin/settings/features.php:52
+msgid "Adjustable Servings"
+msgstr "حصص قابلة للتعديل"
+
+#: templates/admin/settings/features.php:58
+msgid "Visitors can adjust the serving size of your recipes"
+msgstr "السماح للمستخدمين بضبط الحصص في الوصفات."
+
+#: templates/admin/settings/labels.php:17 templates/admin/settings.php:17
+msgid "Labels"
+msgstr "التسميات"
+
+#: templates/admin/settings.php:16
+msgid "Appearance"
+msgstr "الظهور"
+
+#: templates/admin/settings.php:27
+msgid "WP Recipe Maker Settings"
+msgstr "الإعدادات"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Recipe Maker"
+msgstr "وردبريس صانع الوصفات"
+
+#. Plugin URI of the plugin/theme
+msgid "http://bootstrapped.ventures/wp-recipe-maker/"
+msgstr "http://bootstrapped.ventures/wp-recipe-maker/"
+
+#. Description of the plugin/theme
+msgid ""
+"The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD "
+"metadata for better SEO will get you more visitors!"
+msgstr ""
+"سهلة وصديقة للمستخدم .  البيانات الوصفية جسون-لد التلقائية لتحسين الظهور في "
+"محركات البحث و تحصل على المزيد من الزوار!"
+
+#. Author of the plugin/theme
+msgid "Bootstrapped Ventures"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://bootstrapped.ventures/"
+msgstr "http://bootstrapped.ventures/"

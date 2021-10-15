@@ -1,0 +1,81 @@
+.wprm-admin-manage-parent-menu,
+.wprm-admin-manage-child-menu {
+    margin-right: -12px;
+    margin-left: -10px;
+}
+
+.wprm-admin-manage-parent-menu {
+    background-color: #555;
+    margin-top: -10px;
+    margin-bottom: 0;
+
+    .wprm-admin-manage-menu-item {
+        display: block;
+        text-align: center;
+        margin: 0;
+        padding: 8px 15px;
+        font-size: 14px;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+            color: #00b9eb;
+        }
+
+        &.wprm-admin-manage-menu-item-active {
+            background-color: #32373c;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
+
+.wprm-admin-manage-child-menu {
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    .wprm-admin-manage-menu-item {
+        display: inline-block;
+        margin: 0;
+        padding: 5px 15px;
+        font-size: 12px;
+        
+        background-color: #23282d;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            color: #00b9eb;
+        }
+
+        &.wprm-admin-manage-menu-item-active {
+            background-color: #32373c;
+            border-bottom: 4px solid #0073aa;
+            padding-bottom: 1px;
+            color: white;
+        }
+
+        &.wprm-admin-manage-menu-item-requirement {
+            color: rgb(255, 206, 206) !important;
+        }
+    }
+}
+
+@media screen and (min-width: 350px) {    
+    .wprm-admin-manage-parent-menu {
+        .wprm-admin-manage-menu-item {
+            display: inline-block;
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {    
+    .wprm-admin-manage-parent-menu,
+    .wprm-admin-manage-child-menu {
+        margin-right: -20px;
+        margin-left: -22px;
+    }
+}

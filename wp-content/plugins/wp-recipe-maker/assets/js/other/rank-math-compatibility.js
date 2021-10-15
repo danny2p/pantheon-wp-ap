@@ -1,0 +1,2 @@
+// wp.hooks.addFilter( 'rank_math_title', 'plugin-name', callback_function_to_fetch_title ) // This will hook into title analysis data.
+// wp.hooks.addFilter( 'rank_math_content', 'plugin-name', callback_function_to_fetch_content ) // This will hook into content analysis data.

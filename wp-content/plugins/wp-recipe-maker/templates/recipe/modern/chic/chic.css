@@ -1,0 +1,33 @@
+.wprm-recipe-template-chic {
+    font-size: 1em; /* wprm_main_font_size type=font_size */
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #E0E0E0; /* wprm_border type=color */
+    padding: 10px;
+    background-color: #ffffff; /* wprm_background type=color */
+    max-width: 950px; /* wprm_max_width type=size */
+}
+.wprm-recipe-template-chic a {
+    color: #5A822B; /* wprm_link type=color */
+}
+.wprm-recipe-template-chic .wprm-recipe-name {
+    line-height: 1.3em;
+    font-weight: bold;
+}
+.wprm-recipe-template-chic .wprm-template-chic-buttons {
+	clear: both;
+    font-size: 0.9em;
+    text-align: center;
+}
+.wprm-recipe-template-chic .wprm-template-chic-buttons .wprm-recipe-icon {
+    margin-right: 5px;
+}
+.wprm-recipe-template-chic .wprm-recipe-header {
+	margin-bottom: 0.5em !important;
+}
+.wprm-recipe-template-chic .wprm-nutrition-label-container {
+	font-size: 0.9em;
+}
+.wprm-recipe-template-chic .wprm-call-to-action {
+	border-radius: 3px;
+}

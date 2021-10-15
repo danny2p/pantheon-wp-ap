@@ -1,0 +1,50 @@
+.wprm-recipe-template-columns {
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #aaaaaa; /* wprm_border type=color */
+	border-radius: 0px; /* wprm_border_radius type=size */
+	padding: 10px;
+}
+.wprm-recipe-template-columns-name-stars-container {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 150px;
+}
+.wprm-recipe-template-columns-name-stars-container .wprm-recipe-name {
+	margin-right: 5px;
+}
+.wprm-recipe-template-columns-main {
+	clear: both;
+	display: flex;
+
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #aaaaaa; /* wprm_border type=color */
+	border-left: 0;
+	border-right: 0;
+
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+.wprm-recipe-template-columns-left {
+	flex: 1;
+	margin-right: 10px;
+}
+.wprm-recipe-template-columns-right {
+	flex: 2;
+}
+
+.rtl .wprm-recipe-template-columns-name-stars-container .wprm-recipe-name {
+	margin-left: 5px;
+	margin-right: 0;
+}
+.rtl .wprm-recipe-template-columns-left { 
+	margin-left: 10px;
+	margin-right: 0;
+}
+
+@media only screen and (max-width: 640px) {
+	.wprm-recipe-template-columns-main {
+		display: block;
+	}
+}

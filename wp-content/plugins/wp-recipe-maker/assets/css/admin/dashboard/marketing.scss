@@ -1,0 +1,26 @@
+.wprm-admin-dashboard-marketing {
+    .wprm-admin-dashboard-block-container {
+        margin-bottom: 0;
+    }
+}
+
+.wprm-admin-dashboard-marketing-countdown {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .wprm-admin-dashboard-marketing-countdown-unit {
+        display: flex;
+        align-items: center;
+
+        margin-right: 10px;
+
+        .tick {
+            margin-right: 5px;
+        }
+    }
+
+    .wprm-admin-dashboard-marketing-countdown-label {
+        margin-left: -5px;
+    }
+}

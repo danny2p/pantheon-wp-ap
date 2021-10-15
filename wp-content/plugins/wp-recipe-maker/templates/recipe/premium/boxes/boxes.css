@@ -1,0 +1,96 @@
+.wprm-recipe-template-boxes {
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #2c3e50; /* wprm_header_background type=color */
+	border-radius: 0px; /* wprm_border_radius type=size */
+	padding: 0 10px 10px 10px;
+}
+.wprm-recipe-template-boxes .wprm-recipe-image {
+	float: left;
+	margin-right: 10px;
+}
+.wprm-recipe-template-boxes-name-stars-container {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 150px;
+}
+.wprm-recipe-template-boxes-name-stars-container .wprm-recipe-name {
+	margin-right: 5px;
+}
+.wprm-recipe-template-boxes-header {
+	margin: 0 -10px 10px -10px;
+	background-color: #2c3e50; /* wprm_header_background type=color */
+	color: #ffffff; /* wprm_header_text type=color */
+}
+.wprm-recipe-template-boxes-header a {
+	color: #3498db; /* wprm_header_link type=color */
+}
+.wprm-recipe-template-boxes-header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.wprm-recipe-template-boxes-header-text {
+	padding: 10px;
+}
+.wprm-recipe-template-boxes .wprm-recipe-header {
+	background-color: #2c3e50; /* wprm_header_background type=color */
+	color: #ffffff; /* wprm_header_text type=color */
+	text-align: center;
+	padding: 10px 0 !important;
+	margin: 10px -10px 10px -10px !important;
+}
+.wprm-recipe-template-boxes .wprm-recipe-name,
+.wprm-recipe-template-boxes .wprm-recipe-header h1,
+.wprm-recipe-template-boxes .wprm-recipe-header h2,
+.wprm-recipe-template-boxes .wprm-recipe-header h3,
+.wprm-recipe-template-boxes .wprm-recipe-header h4,
+.wprm-recipe-template-boxes .wprm-recipe-header h5,
+.wprm-recipe-template-boxes .wprm-recipe-header h6 {
+    color: #ffffff; /* wprm_header_text type=color */
+}
+.wprm-recipe-template-boxes .wprm-recipe-group-name,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h1,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h2,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h3,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h4,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h5,
+.wprm-recipe-template-boxes .wprm-recipe-group-name h6 {
+	color: #333333; /* wprm_main_text type=color */
+}
+.wprm-recipe-template-boxes-meta {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+.wprm-recipe-template-boxes-meta .wprm-recipe-block-container {
+	flex-grow: 1;
+	flex-basis: 100px; /* wprm_meta_box type=size */
+	background-color: #3498db; /* wprm_meta_background type=color */
+	color: #ffffff; /* wprm_meta_text type=color */
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+}
+
+.wprm-recipe-template-boxes-meta .wprm-recipe-block-container a {
+	color: #000000; /* wprm_meta_link type=color */
+}
+
+.rtl .wprm-recipe-template-boxes .wprm-recipe-image { 
+	float: right;
+	margin-left: 10px;
+	margin-right: 0;
+}
+.rtl .wprm-recipe-template-boxes-name-stars-container .wprm-recipe-name {
+	margin-left: 5px;
+	margin-right: 0;
+}
+
+@media only screen and (max-width: 640px) {
+	.wprm-recipe-template-boxes .wprm-recipe-image,
+	.rtl .wprm-recipe-template-boxes .wprm-recipe-image {
+		float: none;
+		margin: 0 auto;
+	}
+}

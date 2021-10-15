@@ -1,0 +1,53 @@
+.wprm-admin-modal-field-container-name {
+    input {
+        max-width: 500px;
+    }
+}
+
+.wprm-admin-modal-field-container-summary {
+    .wprm-admin-modal-field-richtext,
+    .wprm-admin-modal-field-richtext-legacy {
+        max-width: 650px;
+    }
+}
+
+.wprm-admin-modal-field-container-author-name,
+.wprm-admin-modal-field-container-author-link {
+    margin-top: -10px;
+
+    .wprm-admin-modal-field-label {
+        font-weight: normal;
+    }
+
+    .wprm-admin-modal-field {
+        margin-bottom: 5px;
+    }
+
+    input {
+        max-width: 300px;
+    }
+}
+.wprm-admin-modal-field-container-author-link {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    input {
+        max-width: 500px;
+    }
+}
+
+.wprm-admin-modal-field-container-servings {
+    input[type=number] {
+        max-width: 65px;
+        margin-right: 5px;
+    }
+    input[type=text] {
+        max-width: 130px;
+    }
+}
+
+.wprm-admin-modal-field-container-cost {
+    input {
+        max-width: 200px;
+    }
+}

@@ -1,0 +1,20 @@
+.wprm-automatic-recipe-snippets {
+    margin-bottom: 10px;
+
+    &.align-center {
+        text-align: center;
+    }
+
+    &.align-right {
+        text-align: right;
+    }
+
+    .wprm-jump-to-recipe-shortcode,
+    .wprm-jump-to-video-shortcode,
+    .wprm-print-recipe-shortcode {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 5px 10px;
+        text-decoration: none;
+    }
+}

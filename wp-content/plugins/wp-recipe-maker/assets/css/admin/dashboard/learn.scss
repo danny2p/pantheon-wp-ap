@@ -1,0 +1,33 @@
+.wprm-admin-dashboard-learn-container {
+    margin: -10px 0;
+
+    .wprm-admin-dashboard-learn-section-container {
+        padding: 10px 0;
+        border-top: 1px solid #ddd;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        .wprm-admin-dashboard-learn-section-title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .wprm-admin-dashboard-learn-section {
+            padding: 5px 0;
+        }
+        
+        .wprm-admin-dashboard-learn-section-item {
+            padding-top: 5px;
+
+            a {
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

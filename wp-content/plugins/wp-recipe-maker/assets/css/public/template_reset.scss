@@ -1,0 +1,95 @@
+.wprm-recipe-container {
+    outline: none;
+}
+
+.wprm-recipe {
+    // Clearfix
+    overflow: hidden;
+    zoom: 1;
+    text-align: left;
+    clear: both;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    ol, ul {
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        -webkit-padding-start: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        font-size: 1em;
+        margin: 0 0 0 32px;
+        padding: 0;
+    }
+
+    p {
+        font-size: 1em;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li,
+    li.wprm-recipe-instruction {
+        list-style-position: outside;
+    }
+
+    li:before {
+        display: none;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        clear: none;
+        font-variant: normal;
+        text-transform: none;
+        letter-spacing: normal;
+        margin: 0;
+        padding: 0;
+    }
+
+    a.wprm-recipe-link, a.wprm-recipe-link:hover {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .wprm-nutrition-label {
+        margin-top: 10px;
+    }
+}
+
+body:not(.wprm-print) .wprm-recipe {
+    p:first-letter {
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+        margin: inherit;
+        padding: inherit;
+        font-family: inherit;
+    }
+}
+
+.rtl .wprm-recipe {
+    text-align: right;
+
+    li {
+        margin: 0 32px 0 0;
+    }
+}
+
+.wprm-screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+}

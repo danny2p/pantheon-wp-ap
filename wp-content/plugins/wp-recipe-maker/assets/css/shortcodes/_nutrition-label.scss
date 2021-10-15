@@ -1,0 +1,23 @@
+.wprm-nutrition-label-container-simple {
+    .wprm-nutrition-label-text-nutrition-unit {
+        font-size: 0.85em;
+    }
+}
+
+.wprm-nutrition-label-container-grouped {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    
+    .wprm-nutrition-label-text-nutrition-container {
+        white-space: nowrap;
+        padding-right: 10px;
+    }
+}
+
+.rtl .wprm-nutrition-label-container-grouped {
+    .wprm-nutrition-label-text-nutrition-container {
+        padding-left: 10px;
+        padding-right: 0;
+    }
+}

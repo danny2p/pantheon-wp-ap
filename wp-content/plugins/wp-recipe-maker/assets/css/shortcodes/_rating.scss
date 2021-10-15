@@ -1,0 +1,22 @@
+.wprm-recipe-rating {
+    white-space: nowrap;
+
+    svg {
+        vertical-align: middle;
+        margin-top: -0.15em !important;
+        width: 1.1em;
+        height: 1.1em;
+        margin: 0;
+    }
+
+    &.wprm-recipe-rating-inline {
+        .wprm-recipe-rating-details {
+            display: inline-block;
+            margin-left: 10px;
+        }
+    }
+
+    .wprm-recipe-rating-details {
+        font-size: 0.8em;
+    }
+}

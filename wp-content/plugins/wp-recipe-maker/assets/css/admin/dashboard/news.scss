@@ -1,0 +1,71 @@
+.wprm-admin-dashboard-news-container {
+    max-height: 300px;
+    overflow-y: scroll;
+
+    margin: -10px 0;
+
+    a.wprm-admin-dashboard-news-item:hover {
+        .wprm-admin-dashboard-news-item-title {
+            text-decoration: underline;
+        }
+    }
+
+    .wprm-admin-dashboard-news-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 10px 0;
+        border-top: 1px solid #ddd;
+        text-decoration: none;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        .wprm-admin-dashboard-news-item-title-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            .wprm-admin-dashboard-news-item-date {
+                flex-basis: 60px;
+                flex-shrink: 0;
+                margin-right: 10px;
+
+                color: #777;
+                font-size: 0.9em;
+            }
+        }
+
+        &.wprm-admin-dashboard-news-item-new {
+            .wprm-admin-dashboard-news-item-title-container {
+                .wprm-admin-dashboard-news-item-date:after {
+                    content: ' \25CF';
+                    font-size: 6px;
+                    color: darkred;
+                    float: right;
+                }
+                .wprm-admin-dashboard-news-item-title {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .wprm-admin-dashboard-news-item-label {
+            flex-shrink: 0;
+            margin-left: 15px;
+
+            background-color: #2c3338;
+            color: white;
+            font-size: 0.9em;
+
+            padding: 2px 6px;
+            border-radius: 5px;
+
+            &.wprm-admin-dashboard-news-item-label-blog { background-color: #2271b1; }
+            &.wprm-admin-dashboard-news-item-label-release { background-color: darkgreen; }
+            &.wprm-admin-dashboard-news-item-label-partner { background-color: darkred; }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+.wprm-recipe-template-poster {
+	border-style: solid; /* wprm_border_style type=border */
+	border-width: 1px; /* wprm_border_width type=size */
+	border-color: #aaaaaa; /* wprm_border type=color */
+	border-radius: 0px; /* wprm_border_radius type=size */
+	padding: 0 10px 10px 10px;
+	max-width: 600px; /* wprm_max_width type=size */
+}
+.wprm-recipe-template-poster-image-container {
+	position: relative;
+	margin: 0 -10px 10px -10px;
+	background-color: black;
+}
+.wprm-recipe-template-poster-overlay-container {
+	position: absolute;
+	text-align: left; /* wprm_overlay_align type=align */
+	bottom: 5%; /* wprm_bottom_position type=percentage */
+	left: 5%; /* wprm_left_position type=percentage */
+	right: 5%; /* wprm_right_position type=percentage */
+}
+.wprm-recipe-template-poster-overlay-container .wprm-recipe-name {
+	display: inline-block;
+	padding: 5px 10px !important;
+	background-color: #ffffff; /* wprm_overlay_name_background type=color */
+	color: #000000; /* wprm_overlay_name_text type=color */
+}
+.wprm-recipe-template-poster-overlay-container > div,
+.wprm-recipe-template-poster-overlay-container > span {
+	display: inline-block;
+	padding: 5px 10px !important;
+	background-color: #000000; /* wprm_overlay_other_background type=color */
+	color: #ffffff; /* wprm_overlay_other_text type=color */
+}
+.wprm-recipe-template-poster-overlay-container a {
+	color: #3498db; /* wprm_overlay_other_link type=color */
+}
+
+@media only screen and (max-width: 480px) {
+	.wprm-recipe-template-poster-overlay-container {
+		position: relative;
+		left: 0;
+		right: 0;
+	}
+}

@@ -1,0 +1,18 @@
+.wprm-admin-modal-input-fields {
+    max-width: 600px;
+
+    .wprm-admin-modal-input-fields-container {
+        padding: 10px;
+        padding-top: 0;
+
+        .wprm-admin-modal-input-fields-field-label {
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            min-height: 150px;
+        }
+    }
+}

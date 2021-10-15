@@ -1,0 +1,90 @@
+// Try to hide nags by other plugins to not clutter our dashboard.
+#wpbody-content > *:not(#wprm-admin-dashboard, .wprm-wrap),
+#wpfooter,
+#wpbody-content #wprm-admin-dashboard .fs-notice {
+    display: none !important;
+}
+
+#wprm-admin-dashboard {
+    color: #444;
+}
+
+#wprm-admin-dashboard,
+#wprm-admin-dashboard p {
+    font-size: 14px;
+}
+
+.wprm-admin-dashboard-block-container {
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 5px;
+
+    .wprm-admin-dashboard-block-header {
+        height: 28px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        font-weight: bold;
+        font-size: 1.2em;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .wprm-admin-dashboard-block-header,
+    .wprm-admin-dashboard-block {
+        padding: 10px;
+    }
+    
+    .wprm-admin-dashboard-block {
+        p:first-child {
+            margin-top: 0;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.wprm-admin-dashboard-block-footer-container {
+    margin: 10px -10px -10px -10px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+
+    .wprm-admin-dashboard-block-footer-title {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+}
+
+// Needed for react-masonry-css
+.wprm-admin-dashboard-blocks-grid {
+    display: flex;
+    margin-left: -20px;
+    width: auto;
+}
+.wprm-admin-dashboard-blocks-grid-column {
+    padding-left: 20px;
+    background-clip: padding-box;
+}
+
+
+// .wprm-admin-dashboard-blocks {
+//     // display: flex;
+//     margin: -20px;
+//     margin-top: 0;
+//     // flex-wrap: wrap;
+
+    
+// }
+
+// @media all and (max-width: 600px) {
+//     .wprm-admin-dashboard-blocks {
+//         display: block;
+
+//         .wprm-admin-dashboard-block-container {
+//             min-width: 0;
+//         }
+//     }
+// }

@@ -1,0 +1,42 @@
+.wprm-admin-manage-select-columns-container {
+    h4 {
+        margin: 0 0 5px 0;
+    }
+}
+
+.wprm-admin-manage-select-columns {
+    margin: -3px;
+
+    .wprm-admin-manage-select-columns-column {
+        display: inline-flex;
+        align-items: center;
+        margin: 3px;
+        padding: 2px 4px;
+
+        border-radius: 4px;
+        border: 1px solid #23282d;
+
+        opacity: 0.5;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.wprm-admin-manage-select-columns-column-selected {
+            opacity: 1;
+            background-color: #23282d;
+            color: white;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        &.wprm-admin-manage-select-columns-column-filtered {
+            background-color: #0073aa;
+            border-color:#0073aa;
+            cursor: not-allowed;
+        }
+    }
+}

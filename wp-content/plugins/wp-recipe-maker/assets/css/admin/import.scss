@@ -1,0 +1,56 @@
+.wprm-import {
+	p {
+		max-width: 600px;
+	}
+
+	.wprm-import-error {
+		max-width: 600px;
+		border: 1px solid darkred;
+		background-color: #ff9f9f;
+		padding: 10px;
+	}
+
+	.wprm-import-recipes {
+		width: 100%;
+
+		input[type="checkbox"] {
+			vertical-align: top;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.dashicons.dashicons-visibility {
+			font-size: 18px;
+		}
+
+		td {
+			&:nth-child(1) {
+				width: 2%;
+			}
+			&:nth-child(2) {
+				width: 30%;
+			}
+		}
+	}
+
+	#wprm-import-progress-container {
+		width: 100%;
+		max-width: 300px;
+		height: 20px;
+		margin: 10px 0;
+		border: 1px solid black;
+		background-color: white;
+	}
+
+	#wprm-import-progress-bar {
+		width: 0%;
+		height: 100%;
+		background-color: #4484ce;
+	}
+
+	#wprm-import-finished {
+		display: none;
+	}
+}

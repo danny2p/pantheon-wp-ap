@@ -1,0 +1,35 @@
+.wprm-recipe-link {
+    cursor: pointer;
+    text-decoration: none;
+
+    &.wprm-recipe-link-inline-button {
+        display: inline-block;
+        margin: 0 5px 5px 0;
+    }
+
+    &.wprm-recipe-link-button {
+        display: table;
+        margin: 5px auto;
+    }
+
+    &.wprm-recipe-link-wide-button {
+        display: block;
+        width: auto;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    &.wprm-recipe-link-button,
+    &.wprm-recipe-link-inline-button,
+    &.wprm-recipe-link-wide-button {
+        border-width: 1px;
+        border-style: solid;
+        padding: 5px;
+    }
+}
+
+.rtl .wprm-recipe-link {
+    &.wprm-recipe-link-inline-button {
+        margin: 0 0 5px 5px;
+    }
+}

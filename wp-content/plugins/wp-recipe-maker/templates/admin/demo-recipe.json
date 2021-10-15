@@ -1,0 +1,252 @@
+{
+    "type": "food",
+    "name": "Amazing Vegetable Pizza",
+    "summary": "<p>Every night can be pizza night, if you ask me. Just throw whatever vegetable leftovers you have on there and enjoy!<\/p>",
+    "author_display": "custom",
+    "author_name": "Brecht",
+    "author_link": "",
+    "cost": "$5",
+    "servings": "2",
+    "servings_unit": "pizzas",
+    "prep_time": "15",
+    "prep_time_zero": "",
+    "cook_time": "15",
+    "cook_time_zero": "",
+    "total_time": "60",
+    "custom_time": "30",
+    "custom_time_zero": "",
+    "custom_time_label": "Resting Time",
+    "tags": {
+        "course": [
+            "Pizza"
+        ],
+        "cuisine": [
+            "Italian"
+        ],
+        "keyword": [
+            "Vegetarian"
+        ],
+        "difficulty": []
+    },
+    "equipment": [
+        {
+            "name": "Pizza Peel"
+        },
+        {
+            "name": "Rolling Pin"
+        },
+        {
+            "name": "Pizza Cutter"
+        }
+    ],
+    "ingredients_flat": [
+        {
+            "uid": 0,
+            "name": "Pizza Dough",
+            "type": "group"
+        },
+        {
+            "uid": 1,
+            "amount": "1",
+            "unit": "cup",
+            "name": "water",
+            "notes": "lukewarm",
+            "converted": {
+                "2": {
+                    "amount": "250",
+                    "unit": "ml"
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 2,
+            "amount": "2",
+            "unit": "cups",
+            "name": "all-purpose flour",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "500",
+                    "unit": "g"
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 3,
+            "amount": "1",
+            "unit": "tsp",
+            "name": "instant yeast",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "1",
+                    "unit": "tsp"
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 4,
+            "amount": "1",
+            "unit": "tsp",
+            "name": "salt",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "1",
+                    "unit": "tsp"
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 5,
+            "amount": "1",
+            "unit": "tsp",
+            "name": "sugar",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "1",
+                    "unit": "tsp"
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 6,
+            "name": "Pizza Toppings",
+            "type": "group"
+        },
+        {
+            "uid": 7,
+            "amount": "",
+            "unit": "",
+            "name": "red sauce",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "",
+                    "unit": ""
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 8,
+            "amount": "1\/4",
+            "unit": "",
+            "name": "red onion",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "0.25",
+                    "unit": ""
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 9,
+            "amount": "1\/4",
+            "unit": "",
+            "name": "green pepper",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "0.25",
+                    "unit": ""
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 10,
+            "amount": "1\/4",
+            "unit": "",
+            "name": "red pepper",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "0.25",
+                    "unit": ""
+                }
+            },
+            "type": "ingredient"
+        },
+        {
+            "uid": 11,
+            "amount": "",
+            "unit": "",
+            "name": "rosemary",
+            "notes": "",
+            "converted": {
+                "2": {
+                    "amount": "",
+                    "unit": ""
+                }
+            },
+            "type": "ingredient"
+        }
+    ],
+    "instructions_flat": [
+        {
+            "text": "<p>Combine the water, yeast and sugar in a bowl. Rest for 5 minutes.<\/p>",
+            "type": "instruction",
+            "image_url": "",
+            "ingredients": [1,3,5]
+        },
+        {
+            "text": "<p>Combine the flour and salt.<\/p>",
+            "type": "instruction",
+            "image_url": "",
+            "ingredients": [2,4]
+        },
+        {
+            "text": "<p>Add the yeast mixture and knead until you get a soft ball.<\/p>",
+            "type": "instruction",
+            "image_url": "",
+            "ingredients": []
+        },
+        {
+            "text": "<p>Place in a bowl and cover. Let rise for 30 minutes.<\/p>",
+            "type": "instruction",
+            "image_url": ""
+        },
+        {
+            "text": "<p>Divide the dough and form pizzas.<\/p>",
+            "type": "instruction",
+            "image_url": ""
+        },
+        {
+            "text": "<p>Top the pizzas with sauce and vegetables, cook for 15 minutes on the pizza stone.<\/p>",
+            "type": "instruction",
+            "image_url": "",
+            "ingredients": [7,8,9,10,11]
+        }
+    ],
+    "video_embed": "https://www.youtube.com/watch?v=AtvGLRtTQgg",
+    "notes": "<p>Feel free to swap any of the topping in the ingredient list with whatever you have lying around. It will probably taste just as amazing!<\/p>\n",
+    "nutrition": {
+        "calories": 482,
+        "carbohydrates": 101,
+        "protein": 14,
+        "fat": 1,
+        "saturated_fat": 0,
+        "cholesterol": 0,
+        "sodium": 1174,
+        "potassium": 230,
+        "fiber": 4,
+        "sugar": 4,
+        "vitamin_a": 520,
+        "vitamin_c": 32,
+        "calcium": 19,
+        "iron": 5.8
+    },
+    "custom_fields": {
+        "inspiration": ""
+    },
+    "ingredient_links_type": "global"
+}

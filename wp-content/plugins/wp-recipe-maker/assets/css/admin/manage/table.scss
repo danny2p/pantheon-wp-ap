@@ -1,0 +1,82 @@
+.wprm-admin-table-totals {
+    font-style: italic;
+
+    .wprm-admin-table-totals-filter {
+        color: darkred;
+    }
+}
+
+.ReactTable.wprm-admin-table {
+    border-color: #23282d;
+    border-radius: 4px;
+
+    .rt-thead,
+    .pagination-bottom {
+        background-color: #23282d;
+        color: white;
+        z-index: 3;
+    }
+
+    .rt-thead {
+        &.-header {
+            box-shadow: none;    
+        }
+
+        .rt-th {
+            font-weight: 500;
+
+            &.wprm-admin-table-help-text {
+                font-weight: 300;
+                font-size: 12px;
+                text-align: left;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .rt-th.-sort-asc,
+        .rt-td.-sort-asc {
+            box-shadow: inset 0 4px 0 0 #0073aa;
+            background-color: #32373c;
+        }
+
+        .rt-th.-sort-desc,
+        .rt-td.-sort-desc {
+            box-shadow: inset 0 -4px 0 0 #0073aa;
+            background-color: #32373c;
+        }
+    }
+
+    .wprm-admin-table-checkbox-container {
+        font-size: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input[type=checkbox] {
+            -webkit-appearance: checkbox;
+            appearance: checkbox;
+            margin-top: 2px;
+            
+            &:before {
+                display: none;
+            }
+        }
+    }
+
+    .rt-td {
+        display: flex;
+        align-items: center;
+        
+        overflow-wrap: break-word;
+        word-break: break-all;
+        white-space: normal
+    }
+
+    .pagination-bottom {
+        .-btn {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+    }
+}

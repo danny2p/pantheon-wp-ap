@@ -1,0 +1,23 @@
+.wprm-recipe-instructions-container {
+    .wprm-recipe-instruction-group-name {
+        margin-top: 0.8em !important;
+    }
+    .wprm-recipe-instruction-text {
+        font-size: 1em;
+    }
+    .wprm-recipe-instruction-media {
+        max-width: 100%;
+        margin: 5px 0 15px;
+    }
+    .wprm-recipe-instruction-video {
+        iframe {
+            max-width: 100%;
+        }
+    }
+}
+
+.wprm-recipe-instruction-ingredients-inline {
+    .wprm-recipe-instruction-ingredient {
+        display: inline-block;
+    }
+}

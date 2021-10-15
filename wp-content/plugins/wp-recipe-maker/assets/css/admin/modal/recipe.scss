@@ -1,0 +1,36 @@
+.wprm-admin-modal-recipe {
+    max-width: 1000px;
+
+    .wprm-admin-modal-recipe-quicklinks {
+        flex: none;
+        text-align: center;
+        padding: 5px 0;
+        background-color: #ebebeb;
+        border-bottom: 1px solid #999;
+
+        a {
+            display: inline-block;
+            margin: 2px 5px;
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.7;
+
+            &:hover, &.active {
+                text-decoration: underline;
+                opacity: 1;
+            }
+        }
+    }
+
+    #wprm-admin-modal-recipe-content {
+        position: relative;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .wprm-admin-modal-recipe {    
+        .wprm-admin-modal-recipe-quicklinks {
+            display: none;
+        }
+    }
+}

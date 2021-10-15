@@ -1,0 +1,133 @@
+.wprm-admin-modal-toolbar {
+    flex: none;
+    background-color: #ebebeb;
+    border-top: 1px solid #999;
+    padding: 2px;
+
+    .wprm-admin-modal-toolbar-link {
+        display: flex;
+        padding: 2px;
+
+        .wprm-admin-icon {
+            opacity: 1;
+            margin-right: 3px;
+        }
+        .wprm-admin-modal-toolbar-link-value {
+            cursor: pointer;
+        }
+    }
+
+    .wprm-admin-modal-toolbar-suggest {
+        padding: 0 2px;
+        min-height: 30px;
+        max-height: 85px;
+        overflow: scroll;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        strong {
+            margin-right: 5px;
+        }
+
+        .wprm-admin-modal-toolbar-suggestion {
+            display: inline-block;
+            padding: 2px 5px;
+            margin: 2px;
+
+            border: 1px solid #999;
+            border-radius: 4px;
+
+            background-color: white;
+
+            .wprm-admin-modal-toolbar-suggestion-text {
+                opacity: 0.5;
+                color: #111111;
+            }
+
+            &:hover {
+                cursor: pointer;
+                border-color: black;
+
+                .wprm-admin-modal-toolbar-suggestion-text {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .wprm-admin-modal-toolbar-buttons {
+        display: flex;
+        overflow: scroll;
+
+        & > span {
+            display: flex;
+        }
+    }
+
+    .wprm-admin-modal-toolbar-button {
+        flex-shrink: 0;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        margin: 2px;
+
+        border: 1px solid #999;
+        border-radius: 4px;
+
+        background-color: white;
+
+        .wprm-admin-modal-toolbar-button-character {
+            opacity: 0.5;
+            color: #111111;
+            font-size: 14px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border-color: black;
+
+            .wprm-admin-modal-toolbar-button-character,
+            .wprm-admin-icon {
+                opacity: 1;
+            }
+        }
+
+        &.wprm-admin-modal-toolbar-button-active {
+            border-color: black;
+
+            .wprm-admin-icon {
+                opacity: 1;
+            }
+        }
+    }
+    
+    .wprm-admin-modal-toolbar-spacer {
+        display: inline-block;
+        width: 10px;
+    }
+}
+
+.wprm-admin-modal-field-richtext {
+    border: 1px solid hsl(0,0%,80%);
+    border-radius: 4px;
+    padding: 0 10px;
+
+    p {
+        font-size: 14px;
+    }
+
+    wprm-code {
+        font-family: monospace !important;
+    }
+
+    &.wprm-admin-modal-field-richtext-singleline {
+        p {
+            margin: 10px 0;
+            line-height: 16px;
+        }
+    }
+}

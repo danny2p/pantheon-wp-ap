@@ -1,0 +1,52 @@
+.wprm-admin-dashboard-recipes-container {
+    margin: -10px 0;
+
+    .wprm-admin-dashboard-recipes-recipe {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        text-decoration: none;
+
+        .wprm-admin-dashboard-recipes-recipe-name-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            .wprm-admin-dashboard-recipes-recipe-date {
+                flex-basis: 60px;
+                flex-shrink: 0;
+                margin-right: 10px;
+
+                color: #777;
+                font-size: 0.9em;
+            }
+        }
+
+        .wprm-admin-dashboard-recipes-recipe-actions {
+            flex-shrink: 0;
+            margin-left: 5px;
+
+            display: flex;
+            align-items: center;
+
+            .wprm-admin-dashboard-recipes-recipe-action {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .wprm-admin-dashboard-recipes-all {
+        margin: 7px 0 10px 0;
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

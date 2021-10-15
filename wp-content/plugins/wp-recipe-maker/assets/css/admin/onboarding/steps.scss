@@ -1,0 +1,126 @@
+// Steps.
+.wprm-admin-onboarding-step-welcome {
+    .wprm-admin-onboarding-step-welcome-buttons {
+        text-align: center;
+        margin-top: 20px;
+        
+        a {
+            display: block;
+            margin-top: 5px;
+            font-size: 11px;
+        }
+    }
+
+    & + .footer-buttons {
+        display: none;
+    }
+}
+.wprm-admin-onboarding-step-snippet,
+.wprm-admin-onboarding-step-template {
+    .wprm-admin-onboarding-step-template-preview {
+        background-color: white;
+        padding: 20px;
+
+        font-size: 16px;
+        margin-bottom: 40px;
+
+        & > p {
+            &:first-child {
+                margin-top: 0 !important;
+            }
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+
+    & + .footer-buttons {
+        display: none;
+    }
+}
+
+// Progress bar.
+#wprm-admin-onboarding-steps ol.progtrckr {
+    text-align: center;
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    
+    li {
+        display: inline-block;
+        text-align: center;
+        line-height: 2.5rem;
+        position: relative;
+
+        span {
+            padding: 0 1.5rem;
+        }
+
+        &:before {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -10px;
+            margin-bottom: -10px;
+            line-height: 1.2em;
+            border-radius: 1.2em;
+        }
+
+        &.progtrckr-todo {
+            color: silver;
+            border-bottom: 4px solid #CCCCCC;
+        }
+        &.progtrckr-doing {
+            color: black;
+            border-bottom: 4px solid #CCCCCC;
+
+            &:before {
+                content: "\2022";
+                color: white;
+                background-color: #CCCCCC;
+                width: 1.2em;
+            }
+        }
+        &.progtrckr-done {
+            color: black;
+            border-bottom: 4px solid #0073aa;
+
+            &:before {
+                content: "\2713";
+                color: white;
+                background-color: #0073aa;
+                width: 1.2em;
+                line-height: 1.2em;
+                border-radius: 1.2em;
+            }
+        }
+    }
+
+    em {
+        display: none;
+        font-weight: 700;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 650px) {
+    #wprm-admin-onboarding-steps ol.progtrckr {
+        li span {
+            display: none;
+        }
+
+        em {
+            display: inline;
+        }
+    }
+}
+
+// Buttons.
+#wprm-admin-onboarding-steps .footer-buttons {
+    margin-top: 20px;
+    text-align: center;
+
+    button {
+        margin: 0 5px;
+    }
+}

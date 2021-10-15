@@ -1,0 +1,37 @@
+.wprm-addons {
+
+	.wprm-addons-bundle-container {
+		box-sizing: border-box;
+		width: 30%;
+		float: left;
+		margin-top: 15px;
+		margin-right: 1%;
+		padding: 0 20px 20px 20px;
+		border: 1px dashed gray;
+
+		ul {
+			list-style-type: square;
+			margin-left: 10px;
+		}
+
+		h2,
+		h3,
+		.wprm-addons-button-container {
+			text-align: center;
+		}
+
+		h3 {
+			font-size: 1.1em;
+		}
+	}
+}
+
+@media all and (max-width: 640px) {
+	.wprm-addons {
+		.wprm-addons-bundle-container {
+			width: 100%;
+			float: none;
+			margin-bottom: 20px;
+		}
+	}
+}

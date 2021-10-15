@@ -1,0 +1,93 @@
+.wprm-admin-modal-field-equipment,
+.wprm-admin-modal-field-equipment-group {
+    margin-bottom: 5px;
+    background-color: white;
+
+    .wprm-admin-modal-field-equipment-main-container {
+        display: flex;
+        flex: auto;
+        align-items: center;
+
+        .wprm-admin-modal-field-equipment-handle {
+            flex-shrink: 0;
+    
+            .wprm-admin-icon {
+                margin: 0 5px;
+                cursor: move;
+            }
+        }
+    }
+}
+
+.wprm-admin-modal-field-equipment {    
+    .wprm-admin-modal-field-equipment-name-container {
+        flex: auto;
+        display: flex;
+        align-items: center;
+
+        .wprm-admin-icon {
+            flex-shrink: 0;
+            margin: 0 5px;
+            cursor: move;
+        }
+
+        .wprm-admin-modal-field-richtext,
+        .wprm-admin-modal-field-richtext-legacy {
+            flex: auto;
+        }
+    }
+    .wprm-admin-modal-field-equipment-after-container {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+        .wprm-admin-modal-field-equipment-after-container-icons {
+            flex-shrink: 0;
+            margin: 5px;
+
+            .wprm-admin-icon {
+                margin-right: 5px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.wprm-admin-modal-field-equipment-actions {
+    margin-left: 26px;
+    margin-top: 10px;
+
+    .button {
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    p {
+        font-style: italic;
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-field-equipment {
+        .wprm-admin-modal-field-equipment-main-container {
+            flex: 0 0 60%;
+        }
+        .wprm-admin-modal-field-equipment-after-container {
+            flex: auto;
+        }
+    }
+
+    .wprm-admin-modal-field-equipment {
+        display: flex;
+        align-items: center;
+
+        .wprm-admin-modal-field-equipment-after-container {
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    }
+}
