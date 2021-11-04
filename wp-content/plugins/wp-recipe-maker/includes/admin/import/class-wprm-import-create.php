@@ -460,7 +460,7 @@ class WPRM_Import_Create extends WPRM_Import {
 						$attributes = json_decode( $block_attributes_json, true );
 
 						if ( ! is_null( $attributes ) ) {
-							if ( isset( $attributes['id'] ) && $id === $attributes['id'] ) {
+							if ( isset( $attributes['id'] ) && intval( $id ) === intval( $attributes['id'] ) ) {
 								$content = str_ireplace( $matches[0][ $index ], '<!-- wp:wp-recipe-maker/recipe {"id":' . $wprm_id . ',"updated":' . time() . '} -->[wprm-recipe id="' . $wprm_id . '"]<!-- /wp:wp-recipe-maker/recipe -->', $content );
 							}
 						}

@@ -243,8 +243,10 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 
 		/**
 		 * Site Identity.
+		 *
+		 * @param  string $device   Device name.
 		 */
-		public static function render_site_identity() {
+		public static function render_site_identity( $device ) {
 			?>
 				<?php
 				if ( is_customize_preview() ) {
@@ -261,7 +263,7 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 					);
 				?>
 				>
-					<?php astra_logo(); ?>
+					<?php astra_logo( $device ); ?>
 				</div>
 			<!-- .site-branding -->
 			<?php

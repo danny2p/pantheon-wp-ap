@@ -126,11 +126,13 @@ class WPRM_Modal {
 			'editor_uid' => 0,
 			'options' => array(
 				'post_status' => self::get_post_status_options(),
+				'post_author' => self::get_post_author_options(),
 				'author' => self::get_author_options(),
 				'equipment_link_nofollow' => self::get_equipment_link_nofollow_options(),
 				'ingredient_link_nofollow' => self::get_ingredient_link_nofollow_options(),
 				'term_link_nofollow' => self::get_term_link_nofollow_options(),
 			),
+			'multilingual' => WPRM_Compatibility::multilingual(),
 			'categories' => self::get_categories(),
 			'custom_fields' => false,
 			'nutrition' => WPRM_Nutrition::get_fields(),
@@ -210,6 +212,37 @@ class WPRM_Modal {
 				'value' => $value,
 				'label' => $label,
 			);
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Get all post author options.
+	 *
+	 * @since    7.8.0
+	 */
+	public static function get_post_author_options() {
+		$options = array();
+
+		// Only needed when the recipe post type is public.
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
+			$authors = get_users( array(
+				'who' => 'authors',
+			) );
+
+			foreach ( $authors as $author ) {
+				$label = $author->ID;
+
+				if ( $author->data->display_name ) {
+					$label .= ' - ' . $author->data->display_name;
+				}
+
+				$options[] = array(
+					'value' => $author->ID,
+					'label' => $label,
+				);
+			}
 		}
 
 		return $options;

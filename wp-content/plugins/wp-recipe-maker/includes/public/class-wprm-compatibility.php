@@ -235,6 +235,8 @@ class WPRM_Compatibility {
 	public static function multilingual() {
 		$plugin = false;
 		$languages = array();
+		$current_language = false;
+		$default_language = false;
 
 		// WPML.
 		$wpml_languages = apply_filters( 'wpml_active_languages', false );
@@ -248,6 +250,9 @@ class WPRM_Compatibility {
 					'label' => $options['native_name'],
 				);
 			}
+
+			$current_language = ICL_LANGUAGE_CODE;
+			$default_language = apply_filters( 'wpml_default_language', false );
 		}
 
 		// Polylang.
@@ -274,7 +279,74 @@ class WPRM_Compatibility {
 		return ! $plugin ? false : array(
 			'plugin' => $plugin,
 			'languages' => $languages,
+			'current' => $current_language,
+			'default' => $default_language,
 		);
+	}
+
+	/**
+	 * Get the language of a specific post ID.
+	 *
+	 * @since	7.7.0
+	 * @param	int $post_id Post ID to get the language for.
+	 */
+	public static function get_language_for( $post_id ) {
+		$language = false;
+
+		if ( $post_id ) {
+			$multilingual = self::multilingual();
+
+			if ( $multilingual ) {
+				// WPML.
+				if ( 'wpml' === $multilingual['plugin'] ) {
+					$wpml = apply_filters( 'wpml_post_language_details', false, $post_id );
+
+					if ( $wpml && is_array( $wpml ) ) {
+						$language = $wpml['language_code'];
+					}
+				}
+
+				// Polylang.
+				if ( 'polylang' === $multilingual['plugin'] ) {
+					$polylang = pll_get_post_language( $post_id, 'slug' );
+
+					if ( $polylang && ! is_wp_error( $polylang ) ) {
+						$language = $polylang;
+					}
+				}
+			}
+		}
+
+		// Use false instead of null.
+		if ( ! $language ) {
+			$language = false;
+		}
+
+		return $language;
+	}
+
+	/**
+	 * Set the language for a specific recipe ID.
+	 *
+	 * @since	7.7.0
+	 * @param	int 	$recipe_id	Recipe ID to set the language for.
+	 * @param	mixed 	$language	Language to set the recipe to.
+	 */
+	public static function set_language_for( $recipe_id, $language ) {
+		if ( $recipe_id ) {
+			$multilingual = self::multilingual();
+
+			if ( $multilingual ) {
+				// WPML.
+				if ( 'wpml' === $multilingual['plugin'] ) {
+					do_action( 'wpml_set_element_language_details', array(
+						'element_id' => $recipe_id,
+						'element_type' => 'post_' . WPRM_POST_TYPE,
+						'language_code' => $language ? $language : null,
+					) );
+				}
+			}
+		}
 	}
 
 	/**
@@ -293,6 +365,12 @@ class WPRM_Compatibility {
 		// Add trailing slash unless there are query parameters.
 		if ( false === strpos( $home_url, '?' ) ) {
 			$home_url = trailingslashit( $home_url );
+		}
+
+		// Add index.php if that's used in the permalinks.
+		$structure = get_option( 'permalink_structure' );
+		if ( '/index.php' === substr( $structure, 0, 10 ) && false === strpos( $home_url, '?' ) ) {
+			$home_url .= 'index.php/';
 		}
 
 		return $home_url;

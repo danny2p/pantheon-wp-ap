@@ -22,7 +22,7 @@ add_filter( 'astra_dynamic_theme_css', 'astra_pagination_css', 11 );
  */
 function astra_pagination_css( $dynamic_css ) {
 
-	if ( is_astra_pagination_enabled() || false !== apply_filters( 'astra_enable_pagination_css', false ) ) {
+	if ( astra_check_pagination_enabled() || false !== apply_filters( 'astra_enable_pagination_css', false ) ) {
 
 		$theme_color      = astra_get_option( 'theme-color' );
 		$link_color       = astra_get_option( 'link-color', $theme_color );

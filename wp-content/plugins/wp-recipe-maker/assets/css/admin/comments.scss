@@ -1,3 +1,8 @@
+.comments th#wprm_rating,
+.comments td.wprm_rating {
+    width: 130px;
+}
+
 .column-wprm_rating {
 	.comment-form-wprm-rating {
 		margin: 0;
@@ -6,4 +11,9 @@
 	.wprm-rating-change-save {
 		display: none;
 	}
+}
+
+// Make empty stars faded.
+fieldset.wprm-comment-ratings-container legend + input + span svg {
+    opacity: 0.3;
 }

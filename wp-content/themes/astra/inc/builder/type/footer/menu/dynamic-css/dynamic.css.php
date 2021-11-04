@@ -234,7 +234,7 @@ function astra_hb_footer_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered =
 	);
 
 	/* Parse CSS from array() */
-	$css_output  = footer_menu_static_css();
+	$css_output  = astra_footer_menu_static_css();
 	$css_output .= astra_parse_css( $css_output_desktop );
 	$css_output .= astra_parse_css( $css_output_tablet, '', astra_get_tablet_breakpoint() );
 	$css_output .= astra_parse_css( $css_output_mobile, '', astra_get_mobile_breakpoint() );
@@ -248,11 +248,11 @@ function astra_hb_footer_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered =
 
 /**
  * Footer menu static CSS
- * 
+ *
  * @since 3.5.0
  * @return string
  */
-function footer_menu_static_css() {
+function astra_footer_menu_static_css() {
 	$footer_menu_css = '
 	.footer-nav-wrap .astra-footer-vertical-menu {
 		display: grid;
@@ -264,7 +264,7 @@ function footer_menu_static_css() {
 		.footer-nav-wrap .astra-footer-horizontal-menu a {
 		  padding: 0 0.5em;
 		}
-	}'; 
+	}';
 
 	if ( is_rtl() ) {
 		$footer_menu_css .= '

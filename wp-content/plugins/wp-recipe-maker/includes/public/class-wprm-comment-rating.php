@@ -388,6 +388,16 @@ class WPRM_Comment_Rating {
 		if ( 'wprm_rating' === $column ) {
 			$rating = self::get_rating_for( $comment_id );
 
+			// If no rating, check if this post actually contains a recipe.
+			if ( ! $rating ) {
+				$comment = get_comment( $comment_id ); 
+				$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $comment_id_7->comment_post_ID );
+
+				if ( ! $recipe_ids ) {
+					return $column;
+				}
+			}
+
 			wp_nonce_field( 'wprm-comment-rating-nonce', 'wprm-comment-rating-nonce', false );
 			require( WPRM_DIR . 'templates/public/comment-rating-form.php' );
 

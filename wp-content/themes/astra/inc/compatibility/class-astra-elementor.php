@@ -5,7 +5,7 @@
  * @package Astra
  */
 
-namespace Elementor;// phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_namespaceFound
+namespace Elementor;// phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_namespaceFound, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 // @codingStandardsIgnoreStart PHPCompatibility.Keywords.NewKeywords.t_useFound
 use Astra_Global_Palette;
@@ -241,6 +241,9 @@ if ( ! class_exists( 'Astra_Elementor' ) ) :
 				.elementor-editor-active .elementor-element > .elementor-element-overlay {
 					z-index: 9999;
 				}
+				.elementor-element .elementor-widget-woocommerce-checkout-page #customer_details {
+					background: var(--checkout-sections-background-color, #ffffff);
+				}
 			</style>
 
 			<?php
@@ -288,6 +291,10 @@ if ( ! class_exists( 'Astra_Elementor' ) ) :
 
 			$route = $request->get_route();
 
+			if ( astra_maybe_disable_global_color_in_elementor() ) {
+				return $response;
+			}
+
 			if ( '/elementor/v1/globals' != $route ) {
 				return $response;
 			}
@@ -324,6 +331,10 @@ if ( ! class_exists( 'Astra_Elementor' ) ) :
 		 * @return object
 		 */
 		public function display_global_colors_front_end( $response, $handler, $request ) {
+			if ( astra_maybe_disable_global_color_in_elementor() ) {
+				return $response;
+			}
+
 			$route = $request->get_route();
 
 			if ( 0 !== strpos( $route, '/elementor/v1/globals' ) ) {
@@ -364,6 +375,9 @@ if ( ! class_exists( 'Astra_Elementor' ) ) :
 		 * @return object
 		 */
 		public function generate_global_elementor_style( $dynamic_css ) {
+			if ( astra_maybe_disable_global_color_in_elementor() ) {
+				return $dynamic_css;
+			}
 
 			$global_palette = astra_get_option( 'global-color-palette' );
 			$palette_style  = array();

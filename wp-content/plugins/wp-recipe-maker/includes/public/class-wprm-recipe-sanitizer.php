@@ -276,6 +276,14 @@ class WPRM_Recipe_Sanitizer {
 			if ( isset( $recipe['post_status'] ) && in_array( $recipe['post_status'], $options, true ) ) {
 				$sanitized_recipe['post_status'] = $recipe['post_status'];
 			}
+
+			if ( isset( $recipe['post_author'] ) ) {
+				$sanitized_recipe['post_author'] = intval( $recipe['post_author'] );
+			}
+
+			if ( isset( $recipe['language'] ) ) {
+				$sanitized_recipe['language'] = $recipe['language'] ? sanitize_text_field( $recipe['language'] ) : false;
+			}
 		}
 
 		// Other fields.

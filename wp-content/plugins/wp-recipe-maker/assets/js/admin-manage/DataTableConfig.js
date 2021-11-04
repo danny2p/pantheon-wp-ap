@@ -107,7 +107,10 @@ datatables.ingredientUnit = {
         singular: __wprm( 'Ingredient Unit' ),
         plural: __wprm( 'Ingredient Units' ),
     },
-    bulkEdit: false,
+    bulkEdit: {
+        route: 'taxonomy',
+        type: 'ingredient_unit',
+    },
     createButton: (datatable) => {
         let name = prompt( __wprm( 'What do you want to be the name of this new unit?' ) );
         if( name && name.trim() ) {

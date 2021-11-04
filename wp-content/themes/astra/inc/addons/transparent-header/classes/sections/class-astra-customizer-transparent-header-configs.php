@@ -465,7 +465,7 @@ if ( ! class_exists( 'Astra_Customizer_Transparent_Header_Configs' ) ) {
 						'default'    => astra_get_option( 'transparent-header-social-colors-content' ),
 						'type'       => 'control',
 						'control'    => 'ast-color-group',
-						'title'      => __( 'Text', 'astra' ),
+						'title'      => __( 'Text / Icon', 'astra' ),
 						'section'    => $_section,
 						'transport'  => 'postMessage',
 						'priority'   => 40,

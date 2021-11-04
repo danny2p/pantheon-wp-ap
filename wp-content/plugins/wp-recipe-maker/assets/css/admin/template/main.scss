@@ -1,10 +1,22 @@
 #wprm-template-main {
-    .wprm-main-container-preview {
-        max-width: 600px;
-        margin: 0 auto;
+    .wprm-main-container-name {
+        input {
+            display: inline-block;
+            width: 85px;
+            font-size: 18px;
+            margin-right: 5px;
+            padding-right: 0;
+        }
+    }
 
-        &, & > p {
-            font-size: 16px;
+    .wprm-main-container-preview {
+        .wprm-main-container-preview-content {
+            margin: 0 auto;
+            max-width: 100%;
+
+            &, & > p {
+                font-size: 16px;
+            }
         }
 
         .wprm-main-container-preview-recipe {

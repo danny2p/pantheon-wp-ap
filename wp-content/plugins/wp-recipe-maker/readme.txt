@@ -132,6 +132,28 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 7.7.2 =
+* Improvement: Allow changing of post author when having recipes as a public post type
+* Improvement: Change preview width in the template editor preview
+* Fix: Recipe block not working in older versions of WordPress
+* Fix: Make sure editing multiple times through the dashboard page loads the latest version
+
+= 7.7.1 =
+* Fix: Suggestions in toolbar at bottom of modal not clickable
+
+= 7.7.0 =
+* Feature: Set WPML language when using recipes as a public post type
+* Improvement: Smaller comment ratings column
+* Improvement: Only show quick edit comment rating for posts with recipes
+* Improvement: Bulk delete ingredient units on the manage page
+* Fix: Revisioned and scheduled posts losing parent post with Yoast Duplicate Post
+* Fix: Import from Create not always replacing block in post correctly
+* Fix: Comment rating compatibility with Lazy Load for Comments on non-recipe posts
+* Fix: Print URL when using index.php permalinks
+* Fix: Deprecation notice in block editor
+* Fix: Print page redirect when using non-standard HTTP port
+* Fix: Prevent cursor location problem in Firefox when clicking in rich text field
+
 = 7.6.1 =
 * Fix: Prevent PHP warning on manage page
 * Fix: Broken manage page in some cases with PHP 8
@@ -1280,6 +1302,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 7.7.2 =
+A few smaller fixes and improvements
+
+= 7.7.1 =
+Make sure the ingredient and equipment suggestions still work
+
+= 7.7.0 =
+Some great new improvements and fixes
+
 = 7.6.1 =
 Prevent PHP warnings or errors in some specific cases
 

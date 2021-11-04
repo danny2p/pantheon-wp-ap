@@ -12,6 +12,7 @@ import Footer from '../general/Footer';
 import ActionsAnalytics from './ActionsAnalytics';
 import ActionsEquipment from './ActionsEquipment';
 import ActionsIngredient from './ActionsIngredient';
+import ActionsIngredientUnit from './ActionsIngredientUnit';
 import ActionsRating from './ActionsRating';
 import ActionsRecipe from './ActionsRecipe';
 import ActionsRevision from './ActionsRevision';
@@ -38,6 +39,10 @@ let actions = {
     'ingredient': {
         label: __wprm( 'Ingredients' ),
         elem: ActionsIngredient,
+    },
+    'ingredient_unit': {
+        label: __wprm( 'Ingredient Units' ),
+        elem: ActionsIngredientUnit,
     },
     'equipment': {
         label: __wprm( 'Equipment' ),

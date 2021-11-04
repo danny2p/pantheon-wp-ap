@@ -1,0 +1,12 @@
+.wprm-admin-dashboard-health-check-container {    
+    .wprm-admin-dashboard-health-check-last-update {
+        float: right;
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+        &.wprm-admin-dashboard-health-check-last-update-ok  { color: darkgreen }
+        &.wprm-admin-dashboard-health-check-last-update-fair { color: darkblue }
+        &.wprm-admin-dashboard-health-check-last-update-bad { color: darkgoldenrod }
+        &.wprm-admin-dashboard-health-check-last-update-asap { color: darkred }
+    }
+}

@@ -104,13 +104,11 @@ class WPRM_SC_Tag extends WPRM_Template_Shortcode {
 			if ( 0 !== $index ) {
 				$output .= $atts['separator'];
 			}
-			$name = $term->name;
+			$name = is_object( $term ) ? $term->name : $term;
 
 			if ( is_object( $term ) && 'suitablefordiet' === $key ) {
 				$name = get_term_meta( $term->term_id, 'wprm_term_label', true );
 			}
-
-			$name = is_object( $term ) ? $name : $term;
 
 			$term_output = $name;
 			$term_output = apply_filters( 'wprm_recipe_tag_shortcode_term', $term_output, $term, $atts, $recipe );

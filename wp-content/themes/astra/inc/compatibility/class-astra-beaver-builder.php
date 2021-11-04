@@ -63,7 +63,7 @@ if ( ! class_exists( 'Astra_Beaver_Builder' ) ) :
 			global $post;
 			$id = astra_get_post_id();
 
-			$do_render = apply_filters( 'fl_builder_do_render_content', true, FLBuilderModel::get_post_id() );
+			$do_render = apply_filters( 'fl_builder_do_render_content', true, FLBuilderModel::get_post_id() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 			$page_builder_flag = get_post_meta( $id, '_astra_content_layout_flag', true );
 			if ( isset( $post ) && empty( $page_builder_flag ) && ( is_admin() || is_singular() ) ) {
@@ -98,7 +98,7 @@ if ( ! class_exists( 'Astra_Beaver_Builder' ) ) :
 		public function add_styles( $assets ) {
 
 			if ( ! empty( $assets['css'] ) ) {
-				$assets['css'] = array( 'astra-bb-builder' => 'compatibility/page-builder/bb-plugin' ) + $assets['css'];          
+				$assets['css'] = array( 'astra-bb-builder' => 'compatibility/page-builder/bb-plugin' ) + $assets['css'];
 			}
 			return $assets;
 		}

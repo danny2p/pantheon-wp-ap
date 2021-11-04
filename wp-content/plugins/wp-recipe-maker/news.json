@@ -1,6 +1,24 @@
 {
     "news": [
         {
+            "date": "2021-10-27",
+            "label": "Release",
+            "title": "WP Recipe Maker 7.7.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-7-7-0/"
+        },
+        {
+            "date": "2021-10-19",
+            "label": "Blog",
+            "title": "How to start a food blog with WordPress.com and publish stunning recipes with WP Recipe Maker",
+            "url": "https://bootstrapped.ventures/how-to-start-a-food-blog-with-wordpress-com-and-publish-stunning-recipes-with-wp-recipe-maker/"
+        },
+        {
+            "date": "2021-10-04",
+            "label": "Blog",
+            "title": "Food blog writing examples: What should food bloggers be writing about?",
+            "url": "https://bootstrapped.ventures/food-blog-writing-examples/"
+        },
+        {
             "date": "2021-09-15",
             "label": "Release",
             "title": "WP Recipe Maker 7.6.0",

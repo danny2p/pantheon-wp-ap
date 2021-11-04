@@ -27,7 +27,13 @@ class WPRM_Blocks {
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'register_recipe_block' ) );
 
-		add_filter( 'block_categories', array( __CLASS__, 'block_categories' ) );
+		// Deprecation notice after 5.8.0.
+		global $wp_version;
+		if ( $wp_version && version_compare( $wp_version, '5.8', '<' ) ) {
+			add_filter( 'block_categories', array( __CLASS__, 'block_categories' ) );
+		} else {
+			add_filter( 'block_categories_all', array( __CLASS__, 'block_categories' ) );
+		}
 	}
 
 	/**

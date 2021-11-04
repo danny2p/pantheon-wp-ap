@@ -22,7 +22,7 @@ add_filter( 'astra_dynamic_theme_css', 'astra_comments_css', 11 );
  */
 function astra_comments_css( $dynamic_css ) {
 
-	if ( is_current_post_comment_enabled() || 0 < get_comments_number() ) {
+	if ( astra_check_current_post_comment_enabled() || 0 < get_comments_number() ) {
 
 		$body_font_size = astra_get_option( 'font-size-body' );
 		$theme_color    = astra_get_option( 'theme-color' );

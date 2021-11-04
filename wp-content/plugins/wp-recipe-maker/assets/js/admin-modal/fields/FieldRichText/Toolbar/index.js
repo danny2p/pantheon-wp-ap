@@ -1,4 +1,5 @@
 import React from 'react';
+import { Editor, Transforms } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { serialize } from '../html';
 
@@ -66,10 +67,18 @@ const Toolbar = (props) => {
 				<ToolbarSuggest
 					value={ value }
 					onSelect={ (value) => {
-						props.setValue([{
-							type: 'paragraph',
-							children: [{ text: value }],
-						}]);
+						// Select all, delete and insert.
+						Transforms.deselect( editor );
+                        Transforms.select( editor, {
+                            path: [0,0],
+                            offset: 0,
+                        });
+                        Transforms.move( editor, {
+                            unit: 'line',
+                            edge: 'end',
+                        });
+						Transforms.delete(editor);
+						Editor.insertText( editor, value );
 					}}
 					type={ props.type }
 				/>

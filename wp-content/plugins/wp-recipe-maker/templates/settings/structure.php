@@ -35,6 +35,7 @@ require_once( 'group-media.php' );
 require_once( 'group-recipe-ratings.php' );
 require_once( 'group-adjustable-servings.php' );
 require_once( 'group-social-sharing.php' );
+require_once( 'group-private-notes.php' );
 require_once( 'group-links.php' );
 require_once( 'group-nutrition-calculation.php' );
 require_once( 'group-translate.php' );
@@ -78,6 +79,7 @@ $settings_structure = array(
 	$recipe_ratings,
 	$adjustable_servings,
 	$social_sharing,
+	$private_notes,
 	$links,
 	$nutrition_calculation,
 	$translate,

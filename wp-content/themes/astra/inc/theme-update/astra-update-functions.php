@@ -3165,27 +3165,6 @@ function astra_remove_elementor_toc_margin() {
 }
 
 /**
- * Link default color compatibility.
- *
- * @since 3.7.0
- * @return void
- */
-function astra_global_color_compatibility() {
-	$theme_options = get_option( 'astra-settings', array() );
-
-	if ( ! isset( $theme_options['support-global-color-format'] ) ) {
-		$theme_options['support-global-color-format'] = false;
-	}
-
-	// Set Footer copyright text color for existing users to #3a3a3a.
-	if ( ! isset( $theme_options['footer-copyright-color'] ) ) {
-		$theme_options['footer-copyright-color'] = '#3a3a3a';
-	}
-
-	update_option( 'astra-settings', $theme_options );
-}
-
-/**
  * Set flag to avoid direct reflections on live site & to maintain backward compatibility for existing users.
  * Use: Setting flag for removing widget specific design options when WordPress 5.8 & above activated on site.
  *
@@ -3258,4 +3237,40 @@ function astra_remove_responsive_account_menu_colors_support() {
 	}
 
 	update_option( 'astra-settings', $theme_options );
+}
+
+/**
+ * Link default color compatibility.
+ *
+ * @since 3.7.0
+ * @return void
+ */
+function astra_global_color_compatibility() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['support-global-color-format'] ) ) {
+		$theme_options['support-global-color-format'] = false;
+	}
+
+	// Set Footer copyright text color for existing users to #3a3a3a.
+	if ( ! isset( $theme_options['footer-copyright-color'] ) ) {
+		$theme_options['footer-copyright-color'] = '#3a3a3a';
+	}
+
+	update_option( 'astra-settings', $theme_options );
+}
+
+/**
+ * Set flag to avoid direct reflections on live site & to maintain backward compatibility for existing users.
+ *
+ * @since 3.7.4
+ * @return void
+ */
+function astra_improve_gutenberg_editor_ui() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['improve-gb-editor-ui'] ) ) {
+		$theme_options['improve-gb-editor-ui'] = false;
+		update_option( 'astra-settings', $theme_options );
+	}
 }

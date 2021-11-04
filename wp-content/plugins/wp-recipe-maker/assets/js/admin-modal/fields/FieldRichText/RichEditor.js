@@ -8,7 +8,7 @@ import isHotkey from 'is-hotkey'
 
 import FieldText from '../FieldText';
 import FieldTextarea from '../FieldTextarea';
-import { isProblemBrowser } from 'Shared/Browser';
+import { isProblemBrowser, isFirefox } from 'Shared/Browser';
 import Toolbar from './Toolbar';
 import { deserialize, serialize } from './html';
 import { Element, Leaf } from './nodes';
@@ -88,24 +88,24 @@ const RichEditor = (props) => {
                 type={ props.toolbar ? props.toolbar : 'all' }
                 isMarkActive={ isMarkActive }
                 toggleMark={ toggleMark }
-                setValue={ value => {
-                        setValue( value );
+                // setValue={ value => {
+                //         console.log( setValue( value ) );
                         
                         // Convoluted way to force immediate update.
-                        Transforms.deselect( editor );
-                        Transforms.select( editor, {
-                            path: [0,0],
-                            offset: 0,
-                        });
-                        Transforms.move( editor, {
-                            unit: 'line',
-                            edge: 'end',
-                        });
-                        Transforms.collapse( editor, {
-                            edge: 'end',
-                        });
-                    }
-                }
+                    //     Transforms.deselect( editor );
+                    //     Transforms.select( editor, {
+                    //         path: [0,0],
+                    //         offset: 0,
+                    //     });
+                    //     Transforms.move( editor, {
+                    //         unit: 'line',
+                    //         edge: 'end',
+                    //     });
+                    //     Transforms.collapse( editor, {
+                    //         edge: 'end',
+                    //     });
+                    // }
+                // }
             />
             <Editable
                 className={ `wprm-admin-modal-field-richtext${ props.className ? ` ${ props.className }` : ''}${ props.singleLine ? ` wprm-admin-modal-field-richtext-singleline` : ''}` }
@@ -113,14 +113,16 @@ const RichEditor = (props) => {
                 renderElement={ useCallback(props => <Element {...props} />, []) }
                 renderLeaf={ useCallback(props => <Leaf {...props} />, []) }
                 onFocus={() => {
-                    Transforms.deselect( editor );
-                    Transforms.select(editor, {
-                        anchor: Editor.start(editor, []),
-                        focus: Editor.end(editor, []),
-                    });
-                    Transforms.collapse( editor, {
-                        edge: 'end',
-                    });
+                    if ( ! isFirefox() ) {
+                        Transforms.deselect( editor );
+                        Transforms.select(editor, {
+                            anchor: Editor.start(editor, []),
+                            focus: Editor.end(editor, []),
+                        });
+                        Transforms.collapse( editor, {
+                            edge: 'end',
+                        });
+                    }
                 }}
                 onKeyDown={event => {
                     // Prevent ENTER key in singleLine mode.

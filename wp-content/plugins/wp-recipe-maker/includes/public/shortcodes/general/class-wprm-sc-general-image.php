@@ -84,7 +84,7 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 
 		$image_id = intval( $atts['image_id'] );
 		if ( ! $image_id ) {
-			// return '';
+			return '';
 		}
 
 		$size = $atts['size'];

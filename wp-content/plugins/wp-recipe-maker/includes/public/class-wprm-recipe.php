@@ -61,6 +61,8 @@ class WPRM_Recipe {
 		// Post Type.
 		$recipe['slug'] = $this->slug();
 		$recipe['post_status'] = $this->post_status();
+		$recipe['post_author'] = $this->post_author();
+		$recipe['language'] = $this->language();
 
 		// Recipe Details.
 		$recipe['type'] = $this->type();
@@ -148,7 +150,6 @@ class WPRM_Recipe {
 
 		// Authors.
 		$recipe['author'] = $this->author();
-		$recipe['post_author'] = $this->post_author();
 		$recipe['post_author_name'] = $this->post_author_name();
 		$recipe['post_author_link'] = $this->post_author() ? get_edit_user_link( $this->post_author() ) : '';
 
@@ -680,6 +681,23 @@ class WPRM_Recipe {
 	 */
 	public function post_status() {
 		return $this->post->post_status;
+	}
+
+	/**
+	 * Get the recipe language.
+	 *
+	 * @since    7.7.0
+	 */
+	public function language() {
+		$language = false;
+
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
+			$language = WPRM_Compatibility::get_language_for( $this->id() );
+		} else {
+			$language = self::parent_post_language();
+		}
+
+		return $language;
 	}
 
 	/**
@@ -1347,32 +1365,7 @@ class WPRM_Recipe {
 	 * @since    6.9.0
 	 */
 	public function parent_post_language() {
-		$language = false;
-
-		$parent_post_id = $this->parent_post_id();
-		$multilingual = WPRM_Compatibility::multilingual();
-
-		if ( $parent_post_id && $multilingual ) {
-			// WPML.
-			if ( 'wpml' === $multilingual['plugin'] ) {
-				$wpml = apply_filters( 'wpml_post_language_details', false, $parent_post_id );
-
-				if ( $wpml && is_array( $wpml ) ) {
-					$language = $wpml['language_code'];
-				}
-			}
-
-			// Polylang.
-			if ( 'polylang' === $multilingual['plugin'] ) {
-				$polylang = pll_get_post_language( $parent_post_id, 'slug' );
-
-				if ( $polylang && ! is_wp_error( $polylang ) ) {
-					$language = $polylang;
-				}
-			}
-		}
-
-		return $language;
+		return WPRM_Compatibility::get_language_for( $this->parent_post_id() );
 	}
 
 	/**

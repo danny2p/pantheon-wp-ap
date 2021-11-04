@@ -32,7 +32,7 @@ const Recipe = (props) => {
                         title={ __wprm( 'Edit Recipe' ) }
                         onClick={() => {
                             WPRM_Modal.open( 'recipe', {
-                                recipe,
+                                recipeId: recipe.id, // Make sure it loads the latest version to prevent issues after already making changes.
                                 saveCallback: ( savedRecipe ) => {
                                     let newRecipe = JSON.parse( JSON.stringify( recipe ) );
                                     newRecipe.name = savedRecipe.name;

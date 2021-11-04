@@ -7,3 +7,8 @@ export function isProblemBrowser() {
         ie: '>0',
     });
 }
+
+export function isFirefox() {
+    const browser = Bowser.getParser( window.navigator.userAgent );
+    return 'Firefox' === browser.parsedResult.browser.name;
+}

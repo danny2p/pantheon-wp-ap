@@ -510,7 +510,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				if ( $ingredient['id'] && '' === $ingredient['unit'] ) {
 					$ingredient_term = get_term( $ingredient['id'] );
 
-					if ( ! is_wp_error( $ingredient_term ) ) {
+					if ( $ingredient_term && ! is_wp_error( $ingredient_term ) ) {
 						$singular = $ingredient_term->name;
 						$plural = get_term_meta( $ingredient['id'], 'wprm_ingredient_plural', true );
 

@@ -134,3 +134,6 @@
 		}
 	}
 }
+.astra-color-picker-wrap.picker-open + span {
+    display: none;
+}
