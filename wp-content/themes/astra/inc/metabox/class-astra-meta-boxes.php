@@ -51,10 +51,36 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 		 * Constructor
 		 */
 		public function __construct() {
+			/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			global $pagenow;
+			/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
 			add_action( 'load-post.php', array( $this, 'init_metabox' ) );
 			add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
 			add_action( 'do_meta_boxes', array( $this, 'remove_metabox' ) );
+			add_filter( 'register_post_type_args', array( $this, 'custom_fields_support' ), 10, 2 );
+
+			add_action( 'init', array( $this, 'register_script' ) );
+			add_action( 'init', array( $this, 'register_meta_settings' ) );
+
+			if ( 'widgets.php' !== $pagenow && ! is_customize_preview() ) {
+				add_action( 'enqueue_block_editor_assets', array( $this, 'load_scripts' ) );
+			}
+		}
+
+		/**
+		 * Register Post Meta options support.
+		 *
+		 * @since 3.7.5
+		 * @param array|mixed $args the post type args.
+		 * @param string      $post_type the post type.
+		 */
+		public function custom_fields_support( $args, $post_type ) {
+			if ( is_array( $args ) && isset( $args['public'] ) && $args['public'] && isset( $args['supports'] ) && is_array( $args['supports'] ) && ! in_array( 'custom-fields', $args['supports'], true ) ) {
+				$args['supports'][] = 'custom-fields';
+			}
+
+			return $args;
 		}
 
 		/**
@@ -179,7 +205,10 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 						array( $this, 'markup_meta_box' ),      // Callback.
 						$type,                                  // Post_type.
 						'side',                                 // Context.
-						'default'                               // Priority.
+						'default',                               // Priority.
+						array(
+							'__back_compat_meta_box' => true,
+						)
 					);
 				}
 			}
@@ -425,6 +454,358 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 				}
 			}
 
+		}
+
+		/**
+		 * Register Script for Meta options
+		 */
+		public function register_script() {
+			$path = get_template_directory_uri() . '/inc/metabox/extend-metabox/build/index.js';
+			wp_register_script(
+				'astra-meta-settings',
+				$path,
+				array( 'wp-plugins', 'wp-edit-post', 'wp-i18n', 'wp-element' ),
+				ASTRA_THEME_VERSION,
+				true
+			);
+		}
+
+		/**
+		 * Enqueue Script for Meta settings.
+		 *
+		 * @return void
+		 */
+		public function load_scripts() {
+			$post_type = get_post_type();
+
+			if ( defined( 'ASTRA_ADVANCED_HOOKS_POST_TYPE' ) && ASTRA_ADVANCED_HOOKS_POST_TYPE === $post_type ) {
+				return;
+			}
+			
+			$metabox_name = sprintf(
+				// Translators: %s is the theme name.
+				__( '%s Settings', 'astra' ),
+				astra_get_theme_name()
+			);
+
+			$settings_title = $metabox_name;
+
+			/* Directory and Extension */
+			$file_prefix = ( true === SCRIPT_DEBUG ) ? '' : '.min';
+			$dir_name    = ( true === SCRIPT_DEBUG ) ? 'unminified' : 'minified';
+			$css_uri     = ASTRA_THEME_URI . '/inc/metabox/extend-metabox/css/' . $dir_name;
+
+			wp_enqueue_style( 'astra-meta-box', $css_uri . '/metabox' . $file_prefix . '.css', array(), ASTRA_THEME_VERSION );
+			wp_enqueue_script( 'astra-meta-settings' );
+			wp_localize_script(
+				'astra-meta-settings',
+				'astMetaParams',
+				array(
+					'post_type'                => $post_type,
+					'title'                    => $settings_title,
+					'sidebar_options'          => $this->get_sidebar_options(),
+					'sidebar_title'            => __( 'Sidebar', 'astra' ),
+					'content_layout'           => $this->get_content_layout_options(),
+					'content_layout_title'     => __( 'Content Layout', 'astra' ),
+					'disable_sections_title'   => __( 'Disable Sections', 'astra' ),
+					'disable_sections'         => $this->get_disable_section_fields(),
+					'sticky_header_title'      => __( 'Sticky Header', 'astra' ),
+					'sticky_header_options'    => $this->get_sticky_header_options(),
+					'transparent_header_title' => __( 'Transparent Header', 'astra' ),
+					'page_header_title'        => __( 'Page Header', 'astra' ),
+					'header_options'           => $this->get_header_enabled_options(),
+					'page_header_options'      => $this->get_page_header_options(),
+					'is_bb_themer_layout'      => ! astra_check_is_bb_themer_layout(), // Show page header option only when bb is not activated.
+					'is_addon_activated'       => defined( 'ASTRA_EXT_VER' ) ? true : false,
+				)
+			);
+		}
+
+		/**
+		 * Get all Sidebar Options.
+		 */
+		public function get_sidebar_options() {
+			return array(
+				'default'       => __( 'Customizer Setting', 'astra' ),
+				'left-sidebar'  => __( 'Left Sidebar', 'astra' ),
+				'right-sidebar' => __( 'Right Sidebar', 'astra' ),
+				'no-sidebar'    => __( 'No Sidebar', 'astra' ),
+			);
+		}
+
+		/**
+		 * Get Contenr Layout Options.
+		 */
+		public function get_content_layout_options() {
+			return array(
+				'default'                 => __( 'Customizer Setting', 'astra' ),
+				'boxed-container'         => __( 'Boxed', 'astra' ),
+				'content-boxed-container' => __( 'Content Boxed', 'astra' ),
+				'plain-container'         => __( 'Full Width / Contained', 'astra' ),
+				'page-builder'            => __( 'Full Width / Stretched', 'astra' ),
+			);
+		}
+
+		/**
+		 * Get disable section fields.
+		 */
+		public function get_disable_section_fields() {
+			return array(
+				array(
+					'key'   => 'ast-hfb-above-header-display',
+					'label' => __( 'Disable Above Header', 'astra' ),
+				),
+				array(
+					'key'   => 'ast-main-header-display',
+					'label' => __( 'Disable Primary Header', 'astra' ),
+				),
+				array(
+					'key'   => 'ast-hfb-below-header-display',
+					'label' => __( 'Disable Below Header', 'astra' ),
+				),
+				array(
+					'key'   => 'ast-hfb-mobile-header-display',
+					'label' => __( 'Disable Mobile Header', 'astra' ),
+				),
+				array(
+					'key'   => 'site-post-title',
+					'label' => __( 'Disable Title', 'astra' ),
+				),
+				array(
+					'key'   => 'ast-breadcrumbs-content',
+					'label' => __( 'Disable Breadcrumb', 'astra' ),
+				),
+				array(
+					'key'   => 'ast-featured-img',
+					'label' => __( 'Disable Featured Image', 'astra' ),
+				),
+				array(
+					'key'   => 'footer-sml-layout',
+					'label' => __( 'Disable Footer', 'astra' ),
+				),
+			);
+		}
+
+		/**
+		 * Get sticky header options.
+		 */
+		public function get_sticky_header_options() {
+			return array(
+				array(
+					'key'   => 'header-above-stick-meta',
+					'label' => __( 'Stick Above Header', 'astra' ),
+				),
+				array(
+					'key'   => 'header-main-stick-meta',
+					'label' => __( 'Disable Primary Header', 'astra' ),
+				),
+				array(
+					'key'   => 'header-below-stick-meta',
+					'label' => __( 'Stick Below Header', 'astra' ),
+				),
+			);
+		}
+
+		/**
+		 * Get all transparet and sticky header options.
+		 */
+		public function get_header_enabled_options() {
+			return array(
+				'default'  => __( 'Customizer Setting', 'astra' ),
+				'enabled'  => __( 'Enabled', 'astra' ),
+				'disabled' => __( 'Disabled', 'astra' ),
+			);
+		}
+
+		/**
+		 * Get page header Options.
+		 */
+		public function get_page_header_options() {
+			if ( ! defined( 'ASTRA_EXT_VER' ) ) {
+				return array();
+			}
+
+			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			$header_options = Astra_Target_Rules_Fields::get_post_selection( 'astra_adv_header' );
+			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			if ( empty( $header_options ) ) {
+				$header_options = array(
+					'' => __( 'No Page Headers Found', 'astra' ),
+				);
+			}
+
+			return $header_options;
+		}
+
+		/**
+		 * Register Post Meta options for react based fields.
+		 *
+		 * @since 3.7.4
+		 */
+		public function register_meta_settings() {
+			register_post_meta(
+				'', // Pass an empty string to register the meta key across all existing post types.
+				'site-sidebar-layout',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'site-content-layout',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-main-header-display',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-hfb-above-header-display',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-hfb-below-header-display',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-hfb-mobile-header-display',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'site-post-title',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-breadcrumbs-content',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'ast-featured-img',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'footer-sml-layout',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'theme-transparent-header-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'adv-header-id-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+			register_post_meta(
+				'',
+				'stick-header-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+
+			register_post_meta(
+				'',
+				'header-above-stick-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+
+			register_post_meta(
+				'',
+				'header-main-stick-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
+
+			register_post_meta(
+				'',
+				'header-below-stick-meta',
+				array(
+					'show_in_rest'  => true,
+					'single'        => true,
+					'type'          => 'string',
+					'auth_callback' => '__return_true',
+				)
+			);
 		}
 	}
 }

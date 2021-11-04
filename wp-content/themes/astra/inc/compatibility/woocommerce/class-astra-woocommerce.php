@@ -286,7 +286,7 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 						'src'     => $css_uri . 'woocommerce-smallscreen' . $file_prefix . '.css',
 						'deps'    => 'woocommerce-layout',
 						'version' => ASTRA_THEME_VERSION,
-						'media'   => 'only screen and (max-width: ' . apply_filters( 'woocommerce_style_smallscreen_breakpoint', astra_get_tablet_breakpoint() . 'px' ) . ')',
+						'media'   => 'only screen and (max-width: ' . apply_filters( 'woocommerce_style_smallscreen_breakpoint', astra_get_tablet_breakpoint() . 'px' ) . ')', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 						'has_rtl' => true,
 					),
 					'woocommerce-general'     => array(
@@ -310,7 +310,7 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 						'src'     => $css_uri . 'woocommerce-smallscreen-grid' . $file_prefix . '.css',
 						'deps'    => 'woocommerce-layout',
 						'version' => ASTRA_THEME_VERSION,
-						'media'   => 'only screen and (max-width: ' . apply_filters( 'woocommerce_style_smallscreen_breakpoint', astra_get_tablet_breakpoint() . 'px' ) . ')',
+						'media'   => 'only screen and (max-width: ' . apply_filters( 'woocommerce_style_smallscreen_breakpoint', astra_get_tablet_breakpoint() . 'px' ) . ')', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 						'has_rtl' => true,
 					),
 					'woocommerce-general'     => array(
@@ -359,7 +359,7 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 
 				if ( $attachment_ids ) {
 
-					$image_size = apply_filters( 'single_product_archive_thumbnail_size', 'shop_catalog' );
+					$image_size = apply_filters( 'single_product_archive_thumbnail_size', 'shop_catalog' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 
 					echo apply_filters( 'astra_woocommerce_product_flip_image', wp_get_attachment_image( reset( $attachment_ids ), $image_size, false, array( 'class' => 'show-on-hover' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
@@ -876,6 +876,32 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 			$btn_border_h_color               = astra_get_option( 'theme-button-border-group-border-h-color' );
 
 			$css_output = array(
+				'#customer_details h3:not(.elementor-widget-woocommerce-checkout-page h3)' => array(
+					'font-size'     => '1.2rem',
+					'padding'       => '20px 0 14px',
+					'margin'        => '0 0 20px',
+					'border-bottom' => '1px solid #ebebeb',
+				),
+				'form #order_review_heading:not(.elementor-widget-woocommerce-checkout-page #order_review_heading)' => array(
+					'border-width' => '2px 2px 0 2px',
+					'border-style' => 'solid',
+					'font-size'    => '1.2rem',
+					'margin'       => '0',
+					'padding'      => '1.5em 1.5em 1em',
+					'border-color' => '#ebebeb',
+				),
+				'form #order_review:not(.elementor-widget-woocommerce-checkout-page #order_review)' => array(
+					'padding'      => '0 2em',
+					'border-width' => '0 2px 2px',
+					'border-style' => 'solid',
+					'border-color' => '#ebebeb',
+				),
+				'ul#shipping_method li:not(.elementor-widget-woocommerce-cart #shipping_method li)' => array(
+					'margin'      => '0',
+					'padding'     => '0.25em 0 0.25em 22px',
+					'text-indent' => '-22px',
+					'list-style'  => 'none outside',
+				),
 				'.woocommerce span.onsale, .wc-block-grid__product .wc-block-grid__product-onsale' => array(
 					'background-color' => $theme_color,
 					'color'            => astra_get_foreground_color( $theme_color ),
@@ -1379,11 +1405,6 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 
 			if ( $is_site_rtl ) {
 				$global_button_mobile_lang_direction_css = array(
-					'.woocommerce[class*="columns-"].columns-3 > ul.products li.product, .woocommerce[class*="columns-"].columns-4 > ul.products li.product, .woocommerce[class*="columns-"].columns-5 > ul.products li.product, .woocommerce[class*="columns-"].columns-6 > ul.products li.product' => array(
-						'width'       => '46.1%',
-						'width'       => 'calc(50% - 10px)',
-						'margin-left' => '20px',
-					),
 					'.woocommerce ul.products a.button.loading::after, .woocommerce-page ul.products a.button.loading::after' => array(
 						'display'      => 'inline-block',
 						'margin-right' => '5px',
@@ -1399,6 +1420,10 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 				);
 
 				if ( ! Astra_Builder_Helper::apply_flex_based_css() ) {
+					$global_button_mobile_lang_direction_css['.woocommerce[class*="columns-"].columns-3 > ul.products li.product, .woocommerce[class*="columns-"].columns-4 > ul.products li.product, .woocommerce[class*="columns-"].columns-5 > ul.products li.product, .woocommerce[class*="columns-"].columns-6 > ul.products li.product'] = array(
+						'width'       => 'calc(50% - 10px)',
+						'margin-left' => '20px',
+					);
 					$global_button_mobile_lang_direction_css['.woocommerce[class*="columns-"] ul.products li.product:nth-child(n), .woocommerce-page[class*="columns-"] ul.products li.product:nth-child(n)'] = array(
 						'margin-left' => '20px',
 						'clear'       => 'none',
@@ -1424,11 +1449,6 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 				}
 			} else {
 				$global_button_mobile_lang_direction_css = array(
-					'.woocommerce[class*="columns-"].columns-3 > ul.products li.product, .woocommerce[class*="columns-"].columns-4 > ul.products li.product, .woocommerce[class*="columns-"].columns-5 > ul.products li.product, .woocommerce[class*="columns-"].columns-6 > ul.products li.product' => array(
-						'width'        => '46.1%',
-						'width'        => 'calc(50% - 10px)',
-						'margin-right' => '20px',
-					),
 					'.woocommerce ul.products a.button.loading::after, .woocommerce-page ul.products a.button.loading::after' => array(
 						'display'     => 'inline-block',
 						'margin-left' => '5px',
@@ -1444,6 +1464,10 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 				);
 
 				if ( ! Astra_Builder_Helper::apply_flex_based_css() ) {
+					$global_button_mobile_lang_direction_css['.woocommerce[class*="columns-"].columns-3 > ul.products li.product, .woocommerce[class*="columns-"].columns-4 > ul.products li.product, .woocommerce[class*="columns-"].columns-5 > ul.products li.product, .woocommerce[class*="columns-"].columns-6 > ul.products li.product'] = array(
+						'width'        => 'calc(50% - 10px)',
+						'margin-right' => '20px',
+					);
 					$global_button_mobile_lang_direction_css['.woocommerce[class*="columns-"] ul.products li.product:nth-child(n), .woocommerce-page[class*="columns-"] ul.products li.product:nth-child(n)'] = array(
 						'margin-right' => '20px',
 						'clear'        => 'none',

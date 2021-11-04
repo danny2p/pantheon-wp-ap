@@ -26,6 +26,10 @@
         border-style: solid;
         padding: 5px;
     }
+
+    &.wprm-recipe-link-disabled {
+        cursor: not-allowed;
+    }
 }
 
 .rtl .wprm-recipe-link {

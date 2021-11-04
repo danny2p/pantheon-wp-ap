@@ -74,7 +74,7 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 								array(
 									'text'  => __( 'Breadcrumb Overview', 'astra' ) . ' &#187;',
 									'attrs' => array(
-										'href' => astra_get_pro_url( 'https://wpastra.com/docs/add-breadcrumbs-with-astra/', 'customizer', 'sidebar', 'helpful-information' ),
+										'href' => astra_get_pro_url( 'https://wpastra.com/docs/add-breadcrumbs-with-astra/', 'customizer', 'helpful_information', 'astra_theme' ),
 									),
 								),
 							),
@@ -345,7 +345,6 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 				),
 			);
 
-
 			if ( $this->is_third_party_breadcrumb_active() ) {
 
 				$_configs[] = array(
@@ -459,6 +458,9 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 			} elseif ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
 				// Check if breadcrumb is turned on from Rank Math plugin.
 				return true;
+			} elseif ( function_exists( 'seopress_display_breadcrumbs' ) ) {
+				// Check if breadcrumb is turned on from SEOPress plugin.
+				return true;
 			} else {
 				return false;
 			}
@@ -492,6 +494,9 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 				return false;
 			} elseif ( function_exists( 'rank_math_the_breadcrumbs' ) && 'rank-math' === $selected_breadcrumb_source ) {
 				// Check if breadcrumb is turned on from Rank Math plugin.
+				return false;
+			} elseif ( function_exists( 'seopress_display_breadcrumbs' ) ) {
+				// Check if breadcrumb is turned on from SEOPress plugin.
 				return false;
 			} else {
 				return true;

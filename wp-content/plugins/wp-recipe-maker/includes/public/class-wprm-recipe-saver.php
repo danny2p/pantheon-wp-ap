@@ -187,6 +187,10 @@ class WPRM_Recipe_Saver {
 			if ( isset( $recipe['slug'] ) && $recipe['slug'] ) {
 				$post['post_name'] = $recipe['slug'];
 			}
+
+			if ( isset( $recipe['post_author'] ) && $recipe['post_author'] ) {
+				$post['post_author'] = $recipe['post_author'];
+			}
 	
 			if ( isset( $recipe['post_status'] ) && $recipe['post_status'] ) {
 				$post['post_status'] = $recipe['post_status'];
@@ -207,6 +211,10 @@ class WPRM_Recipe_Saver {
 					// Don't use wprm- in front by default for "public" recipe type.
 					$post['post_name'] = sanitize_title( $recipe['name'] );
 				}
+			}
+
+			if ( isset( $recipe['language'] ) ) {
+				WPRM_Compatibility::set_language_for( $id, $recipe['language'] );
 			}
 		}
 
@@ -307,6 +315,11 @@ class WPRM_Recipe_Saver {
 	 */
 	public static function update_recipes_in_post( $post_id, $recipe_ids ) {
 		$post = get_post( $post_id );
+
+		// Can happen when revision was scheduled and already removed.
+		if ( ! $post ) {
+			return;
+		}
 
 		// Skip Revisionize revisions.
 		$revisionize = get_post_meta( $post_id, '_post_revision_of', true );

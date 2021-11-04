@@ -40,7 +40,7 @@ export default class RecipeInstructions extends Component {
         if ( this.props.instructions.length > prevProps.instructions.length ) {
             const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-richtext:not(.wprm-admin-modal-field-instruction-name)');
 
-            if ( inputs.length ) {
+            if ( inputs.length && inputs[ this.lastAddedIndex ] ) {
                 inputs[ this.lastAddedIndex ].focus();
             }
         }

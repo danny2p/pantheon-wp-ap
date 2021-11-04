@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { __wprm } from 'Shared/Translations';
  
-const ActionsIngredient = (props) => {
+const ActionsTaxonomy = (props) => {
     const selectedAction = props.action ? props.action.type : false;
     const actionOptions = [
         { value: 'export', label: __wprm( 'Export Terms' ), default: false, required: 'premium' },
@@ -47,4 +47,4 @@ const ActionsIngredient = (props) => {
         </Fragment>
     );
 }
-export default ActionsIngredient;
+export default ActionsTaxonomy;

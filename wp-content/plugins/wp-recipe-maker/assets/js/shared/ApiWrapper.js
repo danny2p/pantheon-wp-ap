@@ -46,8 +46,32 @@ export default {
                 // Log errors in console and try to get as much debug information as possible.
                 console.log(endpoint, args);
                 console.log(response);
-                const message = "Something went wrong. Using a firewall like Cloudflare or Sucuri? Try whitelisting your IP. If that doesn't work, please contact support@bootstrapped.ventures with the following details:";
+
+                let message = '';
+
+                // Specific text per status.
+                const status = parseInt( response.status );
+                let hint = false;
+
+                if ( 300 <= status && status <= 399 ) {
+                    hint = 'A redirection is breaking the API endpoint. Are any redirections set up in the .htaccess file or using a plugin?';
+                } else if ( 401 === status || 403 === status ) {
+                    hint = 'Something is blocking access. Are you or your webhost using a firewall like Cloudflare WAF or Sucuri? Try whitelisting your own IP address or this specific action.';
+                } else if ( 404 === status ) {
+                    hint = 'The rest API endpoint could not be found. Are your permalinks set up correctly?';
+                } else if ( 500 <= status && status <= 599 ) {
+                    hint = 'The server is throwing an error. It could be hitting a memory or execution limit. Check with your webhost what the exact error is in the logs.';
+                }
+
+                if ( hint ) {
+                    message += `${hint}\r\n\r\n`;
+                }
+
+                message += 'Press OK to contact support@bootstrapped.ventures for support (opens an email popup).';
+
+                // Response details.
                 const responseDetails = `${response.url} ${response.redirected ? '(redirected)' : ''}- ${response.status} - ${response.statusText}`;
+                message += `\r\n\r\n${responseDetails}`;
 
                 try {
                     response.text().then(text => {
@@ -56,13 +80,22 @@ export default {
                         if ( -1 !== text.indexOf( 'rest_cookie_invalid_nonce' ) ) {
                             // Got logged out.
                             alert( 'You got logged out or your session expired. Please try logging out of WordPress and back in again.' );
+                            return false;
                         } else {
-                            alert( `${message}\r\n\r\n${responseDetails}\r\n\r\n${text}` );
+                            message += `\r\n\r\n${text}`;
                         }
                     })
                 } catch(e) {
                     console.log(e);
-                    alert( `${message}\r\n\r\n${responseDetails}\r\n\r\n${e}` );
+                    message += `\r\n\r\n${e}`;
+                }
+
+                if ( confirm( message ) ) {
+                    const email = 'support@bootstrapped.ventures';
+                    const subject = 'WP Recipe Maker Error Message';
+                    const body = `I received the error message below at ${ window.location.href }\r\n\r\n${ message }`;
+
+                    window.open( `mailto:${ encodeURIComponent( email ) }?subject=${ encodeURIComponent( subject ) }&body=${ encodeURIComponent( body ) }` );
                 }
 
                 return false;

@@ -23,7 +23,7 @@ export default class RecipeEquipment extends Component {
         if ( this.props.equipment.length > prevProps.equipment.length ) {
             const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-richtext');
 
-            if ( inputs.length ) {
+            if ( inputs.length && inputs[ this.lastAddedIndex ] ) {
                 inputs[ this.lastAddedIndex ].focus();
             }
         }

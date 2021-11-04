@@ -100,6 +100,14 @@ function astra_get_selected_breadcrumb( $echo = true ) {
 			return ob_get_clean();
 		}
 		rank_math_the_breadcrumbs();
+	} elseif ( function_exists( 'seopress_display_breadcrumbs' ) && $breadcrumb_source && 'seopress' == $breadcrumb_source ) {
+		// Check if breadcrumb is turned on from SEOPress plugin.
+		if ( ! $echo ) {
+			ob_start();
+			seopress_display_breadcrumbs( false );
+			return ob_get_clean();
+		}
+		seopress_display_breadcrumbs();
 	} else {
 		// Load default Astra breadcrumb if none selected.
 		return astra_get_breadcrumb_trail( $echo );

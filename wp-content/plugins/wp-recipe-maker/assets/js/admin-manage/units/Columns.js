@@ -15,6 +15,7 @@ import '../../../css/admin/manage/taxonomies.scss';
 export default {
     getColumns( datatable ) {
         let columns = [
+            bulkEditCheckbox( datatable, 'term_id' ),
             {
                 Header: __wprm( 'Sort:' ),
                 id: 'actions',

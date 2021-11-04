@@ -751,6 +751,9 @@ class WPRM_Api_Manage_Recipes {
 					case 'change-status':
 						$recipe_data['post_status'] = $action['options'];
 						break;
+					case 'change-language':
+						$recipe_data['language'] = $action['options'];
+						break;
 					case 'change-type':
 						$recipe_data['type'] = $action['options'];
 						break;

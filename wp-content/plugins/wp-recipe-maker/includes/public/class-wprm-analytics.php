@@ -38,7 +38,7 @@ class WPRM_Analytics {
 			'print' => __( 'Print', 'wp-recipe-maker' ),
 
 			'equipment-link' => __( 'Equipment Link', 'wp-recipe-maker' ),
-			'ingredient-link' => __( 'Ingedient Link', 'wp-recipe-maker' ),
+			'ingredient-link' => __( 'Ingredient Link', 'wp-recipe-maker' ),
 			'instruction-link' => __( 'Instruction Link', 'wp-recipe-maker' ),
 
 			'adjust-servings' => __( 'Adjust Servings', 'wp-recipe-maker' ),

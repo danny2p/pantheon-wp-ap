@@ -229,7 +229,7 @@ if ( ! class_exists( 'Astra_Site_Identity_Configs' ) ) {
 					),
 					'divider'           => array( 'ast_class' => 'ast-bottom-divider ast-top-divider' ),
 				),
-				
+
 				/**
 				 * Option: Display Title
 				 */
@@ -312,7 +312,7 @@ if ( ! class_exists( 'Astra_Site_Identity_Configs' ) ) {
 			 * @since 3.5.0
 			 */
 			$load_site_tagline_color_controls = true;
-			if ( is_astra_addon_3_5_0_version() ) {
+			if ( astra_addon_has_3_5_0_version() ) {
 				$load_site_tagline_color_controls = false;
 			}
 
@@ -410,7 +410,7 @@ if ( ! class_exists( 'Astra_Site_Identity_Configs' ) ) {
 							'link_text'       => '<u>' . __( 'Customize Transparent Header.', 'astra' ) . '</u>',
 							'active_callback' => array( $this, 'is_transparent_header_enabled' ),
 						),
-						
+
 						/**
 						* Link to the site icon.
 						*/

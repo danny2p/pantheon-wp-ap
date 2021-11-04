@@ -6,6 +6,13 @@ import FieldDropdown from '../../fields/FieldDropdown';
 import FieldText from '../../fields/FieldText';
 
 const RecipePostType = (props) => {
+    let languageOptions = [
+        { value: false, label: __wprm( 'No language set' ) }
+    ];
+    if ( 'wpml' === wprm_admin_modal.multilingual.plugin ) {
+        languageOptions = languageOptions.concat( Object.values( wprm_admin_modal.multilingual.languages ) );
+    }
+
     return (
         <Fragment>
             <FieldContainer id="slug" label={ __wprm( 'Slug' ) }>
@@ -28,6 +35,30 @@ const RecipePostType = (props) => {
                     width={ 300 }
                 />
             </FieldContainer>
+            <FieldContainer id="post_author" label={ __wprm( 'Post Author' ) }>
+                <FieldDropdown
+                    options={ wprm_admin_modal.options.post_author }
+                    value={ parseInt( props.post_author ) }
+                    onChange={ (post_author) => {
+                        props.onRecipeChange( { post_author } );
+                    }}
+                    width={ 300 }
+                />
+            </FieldContainer>
+            {
+                1 < languageOptions.length
+                &&
+                <FieldContainer id="language" label={ __wprm( 'Language' ) }>
+                    <FieldDropdown
+                        options={ languageOptions }
+                        value={ props.language }
+                        onChange={ (language) => {
+                            props.onRecipeChange( { language } );
+                        }}
+                        width={ 300 }
+                    />
+                </FieldContainer>
+            }
         </Fragment>
     );
 }

@@ -8,6 +8,7 @@ import Marketing from './Marketing';
 
 import Analytics from './blocks/Analytics';
 import Feedback from './blocks/Feedback';
+import HealthCheck from './blocks/HealthCheck';
 import Learn from './blocks/Learn';
 import News from './blocks/News';
 import Recipes from './blocks/Recipes';
@@ -16,6 +17,7 @@ import Tips from './blocks/Tips';
 let blocks = hooks.applyFilters( 'dashboardBlocks', [
     { id: 'recipes', block: Recipes },
     { id: 'news', block: News },
+    // { id: 'health', block: HealthCheck },
     { id: 'tips', block: Tips },
     { id: 'learn', block: Learn },
     { id: 'analytics', block: Analytics },

@@ -68,6 +68,8 @@ const EditRecipe = (props) => {
                 <RecipePostType
                     slug={ props.recipe.slug }
                     post_status={ props.recipe.post_status }
+                    post_author={ props.recipe.post_author }
+                    language={ props.recipe.language }
                     onRecipeChange={ props.onRecipeChange }
                 />
             )

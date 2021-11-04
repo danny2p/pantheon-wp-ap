@@ -74,6 +74,7 @@ class WPRM_Dashboard {
 				),
 				'news' => $news['items'],
 				'recipes' => WPRM_Recipe_Manager::get_latest_recipes( 5, 'manage' ),
+				'health' => WPRM_Health_Check::get_data(),
 				'today_formatted' => $today_formatted,
 				'marketing' => false,
 				'feedback' => WPRM_Feedback::show_feedback_request(),

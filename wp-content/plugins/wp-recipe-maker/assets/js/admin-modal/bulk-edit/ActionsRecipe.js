@@ -39,6 +39,12 @@ const ActionsRecipe = (props) => {
         actionOptions.push(
             { value: 'change-status', label: __wprm( 'Change Recipe Status' ), default: 'draft' }
         );
+
+        if ( wprm_admin_manage.multilingual && 'wpml' === wprm_admin_manage.multilingual.plugin ) {
+            actionOptions.push(
+                { value: 'change-language', label: __wprm( 'Change Language' ), default: wprm_admin_manage.multilingual.default }
+            );
+        }
     }
 
     // Default options.
@@ -94,6 +100,23 @@ const ActionsRecipe = (props) => {
                             <FieldRadio
                                 id="status"
                                 options={ wprm_admin_modal.options.post_status }
+                                value={props.action.options}
+                                onChange={(value) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: value,
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                            />
+                        }
+                        {
+                            'change-language' === selectedAction
+                            &&
+                            <FieldRadio
+                                id="language"
+                                options={ Object.values( wprm_admin_manage.multilingual.languages ) }
                                 value={props.action.options}
                                 onChange={(value) => {
                                     const newAction = {

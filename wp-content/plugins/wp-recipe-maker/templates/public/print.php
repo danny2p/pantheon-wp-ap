@@ -49,8 +49,11 @@
 				<?php
 				$back_link = isset( $output['url'] ) ? $output['url'] : home_url();
 				if ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] ) {
+					$host_parts = explode( ':', $_SERVER['HTTP_HOST'] );
+					$host_without_port = $host_parts[0];
+
 					// Check if same domain.
-					if ( $_SERVER['HTTP_HOST'] === parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_HOST ) ) {
+					if ( $host_without_port === parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_HOST ) ) {
 						$back_link = $_SERVER['HTTP_REFERER'];
 					} else if ( WPRM_Settings::get( 'print_page_redirect' ) && isset( $output['url'] ) ) {
 						echo '<script>window.location.replace("' . esc_url( $output['url'] ) . '");</script>';

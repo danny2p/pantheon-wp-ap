@@ -91,7 +91,7 @@ function astra_above_header_row_setting( $dynamic_css, $dynamic_css_filtered = '
 		);
 	}
 
-	if ( is_astra_addon_3_5_0_version() ) {
+	if ( astra_addon_has_3_5_0_version() ) {
 		$common_css_output['.ast-above-header-bar.ast-header-sticked'] = array(
 			'z-index' => 9,
 		);

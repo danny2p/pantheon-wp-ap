@@ -532,6 +532,10 @@
   top: 73px;
 }
 
+.astra-color-picker-wrap.picker-open + span {
+  display: none;
+}
+
 #customize-control-astra-color-palettes .ast-color-palette-wrap > div {
 	margin-bottom: 8px;
 	position: relative;
@@ -1221,7 +1225,6 @@
 .customize-control-ast-customizer-link .customizer-link {
   font-style: italic;
   text-decoration: none;
-  color: #2271b1;
 }
 
 .customize-control-ast-customizer-link:empty {

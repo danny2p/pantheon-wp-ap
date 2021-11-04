@@ -21,7 +21,7 @@ export default class IngredientsEdit extends Component {
         if ( this.props.ingredients.length > prevProps.ingredients.length ) {
             const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-ingredient-group-name, .wprm-admin-modal-field-ingredient-amount');
 
-            if ( inputs.length ) {
+            if ( inputs.length && inputs[ this.lastAddedIndex ] ) {
                 inputs[ this.lastAddedIndex ].focus();
             }
         }

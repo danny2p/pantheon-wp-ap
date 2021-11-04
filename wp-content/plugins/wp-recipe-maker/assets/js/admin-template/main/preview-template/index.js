@@ -46,6 +46,7 @@ export default class PreviewTemplate extends Component {
 
         this.state = {
             recipe,
+            width: 600,
             html: '',
             htmlMap: '',
             parsedHtml: '',
@@ -295,7 +296,7 @@ export default class PreviewTemplate extends Component {
         return (
             <Fragment>
                 <div className="wprm-main-container">
-                    <h2 className="wprm-main-container-name">Preview</h2>
+                    <h2 className="wprm-main-container-name">Preview at <input type="number" min="1" value={ this.state.width } onChange={ (e) => { this.setState({ width: e.target.value } ); } } />px</h2>
                     <div className="wprm-main-container-preview">
                         <PreviewRecipe
                             recipe={ this.state.recipe }
@@ -311,7 +312,12 @@ export default class PreviewTemplate extends Component {
                         {
                             this.state.recipe && this.state.recipe.id
                             ?
-                            <Fragment>
+                            <div
+                                className="wprm-main-container-preview-content"
+                                style={{
+                                    width: `${this.state.width}px`,
+                                }}
+                            >
                                 <style>{ Helpers.parseCSS( this.props.template ) }</style>
                                 {
                                     'recipe' === this.props.template.type
@@ -351,7 +357,7 @@ export default class PreviewTemplate extends Component {
                                         <p>...</p>
                                     </Fragment>
                                 }
-                            </Fragment>
+                            </div>
                             :
                             <p style={{color: 'darkred', textAlign: 'center'}}>You have to select a recipe to preview the template. Use the dropdown above or set a default recipe to use for the preview on the settings page.</p>
                         }

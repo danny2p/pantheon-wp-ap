@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2021-09-15 10:03+0000\n"
+"POT-Creation-Date: 2021-11-03 10:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +53,7 @@ msgid_plural "%s minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-dashboard.php:213
+#: includes/admin/class-wprm-dashboard.php:214
 #, php-format
 msgid "%s new news item"
 msgid_plural "%s new news items"
@@ -151,6 +151,10 @@ msgstr ""
 
 #: templates/settings/group-permissions.php:52
 msgid "Access to Manage Page"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:21
+msgid "Access to Private Notes"
 msgstr ""
 
 #: templates/settings/group-permissions.php:61
@@ -304,7 +308,7 @@ msgstr ""
 #: templates/settings/group-adjustable-servings.php:106 
 #: templates/settings/group-metadata.php:84 
 #: templates/settings/group-recipe-print.php:165 
-#: templates/settings/structure.php:91 
+#: templates/settings/structure.php:93 
 #: templates/settings/group-recipe-snippets.php:157
 msgid "Advanced"
 msgstr ""
@@ -400,6 +404,10 @@ msgstr ""
 msgid "Allow setting of Suitable Diets for recipes."
 msgstr ""
 
+#: templates/settings/group-private-notes.php:16
+msgid "Allow visitors to add their own private notes to your recipes."
+msgstr ""
+
 #: templates/settings/group-adjustable-servings.php:16
 msgid "Allow visitors to adjust the serving size of your recipes."
 msgstr ""
@@ -474,7 +482,7 @@ msgstr ""
 
 #: templates/settings/group-recipe-print.php:66 
 #: templates/settings/group-recipe-times.php:18 
-#: templates/settings/structure.php:59 
+#: templates/settings/structure.php:60 
 #: templates/settings/group-recipe-ratings.php:46
 msgid "Appearance"
 msgstr ""
@@ -602,7 +610,7 @@ msgstr ""
 msgid "Back to start."
 msgstr ""
 
-#: templates/settings/structure.php:88
+#: templates/settings/structure.php:90
 msgid "Backend"
 msgstr ""
 
@@ -820,6 +828,10 @@ msgstr ""
 msgid "Click and select a WP Recipe Maker recipe to display in the sidebar."
 msgstr ""
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-private-notes.php:29
+msgid "Click here to add your own private notes."
+msgstr ""
+
 #: templates/admin/translations.php:320
 msgid "Click on the stars to edit the rating."
 msgstr ""
@@ -1013,7 +1025,7 @@ msgstr ""
 msgid "cups"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:227
+#: includes/admin/class-wprm-modal.php:260
 msgid "Custom author name"
 msgstr ""
 
@@ -1500,15 +1512,15 @@ msgstr ""
 msgid "Don't rate this recipe"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:225 
+#: includes/admin/class-wprm-modal.php:258 
 #: templates/settings/group-recipe-defaults.php:41 
 #: templates/settings/group-nutrition-label.php:36
 msgid "Don't show"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:259 
 #: includes/admin/class-wprm-modal.php:292 
 #: includes/admin/class-wprm-modal.php:325 
+#: includes/admin/class-wprm-modal.php:358 
 #: templates/settings/group-links.php:114 
 #: templates/settings/group-links.php:141 
 #: templates/settings/group-links.php:168
@@ -1568,7 +1580,7 @@ msgstr ""
 msgid "Editing Recipe"
 msgstr ""
 
-#: templates/public/print.php:68
+#: templates/public/print.php:71
 msgid "Email Link"
 msgstr ""
 
@@ -1711,6 +1723,10 @@ msgstr ""
 
 #: templates/settings/group-recipe-print.php:94
 msgid "Every recipe on its own page"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:25
+msgid "Everyone"
 msgstr ""
 
 #: templates/settings/group-import.php:49
@@ -2043,7 +2059,7 @@ msgstr ""
 msgid "Gluten Free"
 msgstr ""
 
-#: templates/public/print.php:65
+#: templates/public/print.php:68
 msgid "Go Back"
 msgstr ""
 
@@ -2168,6 +2184,10 @@ msgstr ""
 #: templates/settings/group-media.php:19 
 #: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:109
 msgid "Hide instruction media"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:36
+msgid "Hide the section"
 msgstr ""
 
 #: templates/settings/group-adjustable-servings.php:95
@@ -2497,10 +2517,6 @@ msgstr ""
 msgid "Indian"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:41
-msgid "Ingedient Link"
-msgstr ""
-
 #: templates/admin/translations.php:358
 msgid "Ingredient"
 msgstr ""
@@ -2509,6 +2525,7 @@ msgstr ""
 msgid "Ingredient Group Header"
 msgstr ""
 
+#: includes/public/class-wprm-analytics.php:41 
 #: templates/admin/translations.php:87
 msgid "Ingredient Link"
 msgstr ""
@@ -2631,7 +2648,7 @@ msgstr ""
 msgid "Interactions (last 7 days)"
 msgstr ""
 
-#: templates/settings/structure.php:75
+#: templates/settings/structure.php:76
 msgid "Interactivity"
 msgstr ""
 
@@ -2660,14 +2677,14 @@ msgid "Japanese"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:50 
-#: includes/public/class-wprm-blocks.php:181 
+#: includes/public/class-wprm-blocks.php:187 
 #: templates/admin/translations.php:226 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43
 msgid "Jump to Recipe"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:51 
-#: includes/public/class-wprm-blocks.php:196 
+#: includes/public/class-wprm-blocks.php:202 
 #: templates/admin/translations.php:227 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43
 msgid "Jump to Video"
@@ -2857,6 +2874,10 @@ msgstr ""
 msgid "Loading Recipe..."
 msgstr ""
 
+#: templates/settings/group-private-notes.php:26
+msgid "Logged In Users"
+msgstr ""
+
 #: templates/settings/group-media.php:76
 msgid "Loop Video"
 msgstr ""
@@ -2958,6 +2979,14 @@ msgstr ""
 
 #: templates/admin/translations.php:348
 msgid "Merge into another"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:47
+msgid "Message to show"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:48
+msgid "Message to show when the visitor is not logged in."
 msgstr ""
 
 #: templates/admin/translations.php:158
@@ -3063,7 +3092,7 @@ msgstr ""
 msgid "My Emissions Label"
 msgstr ""
 
-#: includes/public/class-wprm-recipe.php:159 
+#: includes/public/class-wprm-recipe.php:160 
 #: templates/admin/translations.php:336
 msgid "n/a"
 msgstr ""
@@ -3076,9 +3105,13 @@ msgstr ""
 msgid "Name for this video part"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:226 
+#: includes/admin/class-wprm-modal.php:259 
 #: templates/settings/group-recipe-defaults.php:42
 msgid "Name of post author"
+msgstr ""
+
+#: includes/admin/class-wprm-health-check.php:37
+msgid "Never"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:176
@@ -3562,7 +3595,7 @@ msgstr ""
 msgid "Prevent printing of restricted recipes"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:38 templates/public/print.php:74 
+#: includes/public/class-wprm-analytics.php:38 templates/public/print.php:77 
 #: includes/public/deprecated/class-wprm-template-helper.php:44
 msgid "Print"
 msgstr ""
@@ -3575,7 +3608,7 @@ msgstr ""
 msgid "Print Footer Ad"
 msgstr ""
 
-#: includes/public/class-wprm-blocks.php:211 
+#: includes/public/class-wprm-blocks.php:217 
 #: templates/admin/translations.php:228 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:43
 msgid "Print Recipe"
@@ -3595,6 +3628,10 @@ msgstr ""
 
 #: templates/settings/group-post-type.php:29
 msgid "Private - Recipes exist as part of their parent post only"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:15
+msgid "Private Notes"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:204
@@ -4011,7 +4048,7 @@ msgstr ""
 msgid "Salad"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:228 
+#: includes/admin/class-wprm-modal.php:261 
 #: templates/settings/group-recipe-defaults.php:44
 msgid "Same author for every recipe"
 msgstr ""
@@ -4026,7 +4063,7 @@ msgstr ""
 msgid "Save & Close"
 msgstr ""
 
-#: includes/public/class-wprm-comment-rating.php:394
+#: includes/public/class-wprm-comment-rating.php:404
 msgid "Save changed rating"
 msgstr ""
 
@@ -4229,6 +4266,10 @@ msgstr ""
 
 #: templates/settings/group-nutrition-label.php:39
 msgid "Show - Aligned Right"
+msgstr ""
+
+#: templates/settings/group-private-notes.php:37
+msgid "Show a custom message"
 msgstr ""
 
 #: templates/settings/group-recipe-template.php:32
@@ -5003,10 +5044,10 @@ msgstr ""
 msgid "Use decimal point - 0.5"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:236 
 #: includes/admin/class-wprm-modal.php:269 
 #: includes/admin/class-wprm-modal.php:302 
-#: includes/admin/class-wprm-modal.php:335
+#: includes/admin/class-wprm-modal.php:335 
+#: includes/admin/class-wprm-modal.php:368
 msgid "Use Default"
 msgstr ""
 
@@ -5043,9 +5084,9 @@ msgstr ""
 msgid "Use Mixed Fractions"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:260 
 #: includes/admin/class-wprm-modal.php:293 
 #: includes/admin/class-wprm-modal.php:326 
+#: includes/admin/class-wprm-modal.php:359 
 #: templates/settings/group-links.php:115 
 #: templates/settings/group-links.php:142 
 #: templates/settings/group-links.php:169
@@ -5097,9 +5138,9 @@ msgstr ""
 msgid "Use shortcodes where you want the snippets to appear."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:261 
 #: includes/admin/class-wprm-modal.php:294 
 #: includes/admin/class-wprm-modal.php:327 
+#: includes/admin/class-wprm-modal.php:360 
 #: templates/settings/group-links.php:116 
 #: templates/settings/group-links.php:143 
 #: templates/settings/group-links.php:170
@@ -5209,25 +5250,25 @@ msgstr ""
 msgid "Used in the recipe metadata. Should be an image of the completed dish."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:191
+#: includes/admin/class-wprm-modal.php:193
 msgid ""
 "Used in the recipe metadata. Should describe the recipe, but not fit in "
 "\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:184
+#: includes/admin/class-wprm-modal.php:186
 msgid ""
 "Used in the recipe metadata. The region associated with your recipe. "
 "Examples: French, Mediterranean, American"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:181
+#: includes/admin/class-wprm-modal.php:183
 msgid ""
 "Used in the recipe metadata. The type of meal or course for this recipe. "
 "Examples: dinner, entree, snack"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:187
+#: includes/admin/class-wprm-modal.php:189
 msgid ""
 "Used in the recipe metadata. This is a restricted list of diets whose label "
 "can be changed on the Manage > Recipe Fields page."
@@ -5412,6 +5453,12 @@ msgstr ""
 msgid "What is the ID of the term you want the merge"
 msgstr ""
 
+#: templates/settings/group-private-notes.php:33
+msgid ""
+"What to do with the \"Private Notes\" section when the visitor is not logged "
+"in."
+msgstr ""
+
 #: templates/settings/group-post-type.php:64
 msgid ""
 "What to link to for a recipe. This is relevant for the roundup feature, grid "
@@ -5420,6 +5467,12 @@ msgstr ""
 
 #: templates/settings/group-social-sharing.php:92
 msgid "What to use for the pin description."
+msgstr ""
+
+#: templates/settings/group-private-notes.php:22
+msgid ""
+"When a visitor is not logged in the data is stored in their own browser's "
+"local storage. For users it gets stored in the database."
 msgstr ""
 
 #: templates/admin/privacy.php:16
@@ -5442,6 +5495,10 @@ msgstr ""
 msgid ""
 "When enabled, only the metadata for the very first food recipe on the page "
 "well get added."
+msgstr ""
+
+#: templates/settings/group-private-notes.php:32
+msgid "When not logged in"
 msgstr ""
 
 #: templates/admin/privacy.php:18

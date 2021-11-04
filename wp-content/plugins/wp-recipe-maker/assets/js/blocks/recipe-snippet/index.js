@@ -16,7 +16,7 @@ const {
 
 registerBlockType( 'wp-recipe-maker/recipe-snippet', {
     title: __( 'Recipe Snippet' ),
-    description: __( 'Display the recipe snippet' ),
+    description: __( 'Displays the recipe snippet template. Usually used for a Jump to Recipe button at the top of the post content.' ),
     icon: 'button',
     keywords: [],
     example: {

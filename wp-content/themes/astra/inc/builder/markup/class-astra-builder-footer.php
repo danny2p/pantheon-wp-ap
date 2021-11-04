@@ -135,7 +135,7 @@ if ( ! class_exists( 'Astra_Builder_Footer' ) ) {
 
 			$display_footer = get_post_meta( get_the_ID(), 'footer-sml-layout', true );
 
-			$display_footer = apply_filters( 'ast_footer_bar_display', $display_footer );
+			$display_footer = apply_filters( 'astra_footer_bar_display', $display_footer );
 
 			if ( 'disabled' !== $display_footer ) {
 

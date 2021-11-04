@@ -328,7 +328,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					$text_style = '';
 
 					if ( '0px' !== $atts['text_margin'] ) {
-						$text_style = 'style="margin-bottom: ' . $atts['text_margin'] . '";';
+						$text_style = ' style="margin-bottom: ' . $atts['text_margin'] . '";';
 					}
 
 					$instruction_text = '<div class="wprm-recipe-instruction-text"' . $text_style . '>' . $text . '</div>';

@@ -60,8 +60,79 @@ function astra_block_editor_compatibility_css( $dynamic_css ) {
 			vertical-align: middle;
 		}';
 
-		return $dynamic_css .= Astra_Enqueue_Scripts::trim_css( $compatibility_css );
+		$dynamic_css .= Astra_Enqueue_Scripts::trim_css( $compatibility_css );
 	}
+
+	/** @psalm-suppress InvalidScalarArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+	if ( astra_get_option( 'improve-gb-editor-ui', true ) ) {
+		/** @psalm-suppress InvalidScalarArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		$is_site_rtl = is_rtl();
+
+		$editor_improvement_css = '
+		body .wp-block-file .wp-block-file__button {
+			text-decoration: none;
+		}
+		blockquote {
+			padding: 0 1.2em 1.2em;
+		}
+		.wp-block-file {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+		.wp-block-pullquote {
+			border: none;
+		}
+		.wp-block-pullquote blockquote::before {
+			content: "\201D";
+			font-family: "Helvetica",sans-serif;
+			display: flex;
+			transform: rotate( 180deg );
+			font-size: 6rem;
+			font-style: normal;
+			line-height: 1;
+			font-weight: bold;
+			align-items: center;
+			justify-content: center;
+		}
+		figure.wp-block-pullquote.is-style-solid-color blockquote {
+			max-width: 100%;
+			text-align: inherit;
+		}
+		ul.wp-block-categories-list.wp-block-categories, ul.wp-block-archives-list.wp-block-archives {
+			list-style-type: none;
+		}
+		.wp-block-button__link {
+			border: 2px solid currentColor;
+		}';
+
+		if ( $is_site_rtl ) {
+			$editor_improvement_css .= '
+			ul, ol {
+				margin-right: 20px;
+			}
+			figure.alignright figcaption {
+				text-align: left;
+			}';
+		} else {
+			$editor_improvement_css .= '
+			ul, ol {
+				margin-left: 20px;
+			}
+			figure.alignright figcaption {
+				text-align: right;
+			}';
+		}
+	} else {
+		$editor_improvement_css = '
+			blockquote {
+				padding: 1.2em;
+			}
+		';
+	}
+
+	$dynamic_css .= Astra_Enqueue_Scripts::trim_css( $editor_improvement_css );
 
 	return $dynamic_css;
 }
