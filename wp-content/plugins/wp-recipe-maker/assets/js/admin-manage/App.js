@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 
 import Menu from './Menu';
 import Notices from './Notices';
@@ -46,6 +46,10 @@ export default class App extends Component {
                             <DataTable
                                 type={ type }
                                 filter={ filter }
+                                onRemoveFilter={ () => {
+                                    const history = useHistory();
+                                    history.push( `/${type}` );
+                                }}
                                 options={ datatables[ type ] }
                             />
                         )

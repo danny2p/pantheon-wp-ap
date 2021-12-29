@@ -70,7 +70,7 @@
 		<?php endforeach; // Each importer. ?>
 	<?php endif; // Recipes to import. ?>
 
-	<h3><?php esc_html_e( 'Imported Recipes to Check', 'wp-recipe-maker' ); ?></h3>
+	<h3><?php esc_html_e( 'After Importing', 'wp-recipe-maker' ); ?></h3>
 	<?php
 	$imported_recipes = array();
 	foreach ( self::$importers as $importer ) {
@@ -85,17 +85,17 @@
 	}
 
 	if ( 0 === count( $imported_recipes ) ) :
-		echo '<p>' . esc_html__( 'No recipes found.', 'wp-recipe-maker' ) . '</p>';
+		echo '<p>' . esc_html__( 'No imported recipes found.', 'wp-recipe-maker' ) . '</p>';
 	else :
 	?>
 	<p>
-		<?php esc_html_e( 'We recommend going through all of these recipes to make sure the import process was successful. Pay attention to the different ingredient parts to be able to make use of all of our features.', 'wp-recipe-maker' ); ?>
+		<?php esc_html_e( 'After importing your recipes, run a Health Check on the WP Recipe Maker > Dashboard page.', 'wp-recipe-maker' ); ?>
 	</p>
 	<p>
-		<?php esc_html_e( 'After doing so you can mark a recipe as checked to keep track of the recipes you still have to go through.', 'wp-recipe-maker' ); ?>
+		<?php esc_html_e( 'We recommend going through all of these recipes to make sure the import process was successful. Pay attention to the different ingredient parts to be able to make use of all of our features.', 'wp-recipe-maker' ); ?> <?php esc_html_e( 'After doing so you can mark a recipe as checked to keep track of the recipes you still have to go through.', 'wp-recipe-maker' ); ?>
 	</p>
 	<p>
-		<?php esc_html_e( 'Getting a lot of recipes without parent post?', 'wp-recipe-maker' ); ?> <a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_finding_parents' ) ); ?>"><?php esc_html_e( 'Use our Find Parents tool', 'wp-recipe-maker' ); ?></a>.
+		<?php esc_html_e( 'Getting a lot of recipes without parent post or are you missing any ratings?', 'wp-recipe-maker' ); ?> <a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_tools' ) ); ?>"><?php esc_html_e( 'Use our Find Parents tool first and Find Ratings afterwards', 'wp-recipe-maker' ); ?></a>.
 	</p>
 		<?php foreach ( $imported_recipes as $uid => $importer ) : ?>
 		<h4 style="margin-bottom: 0"><?php echo esc_html( $importer['name'] ); ?></h4>

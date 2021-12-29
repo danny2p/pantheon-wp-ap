@@ -138,29 +138,32 @@ class WPRM_Recipe_Saver {
 		}
 
 		// Meta Fields.
-		if ( isset( $recipe['type'] ) )						{ $meta['wprm_type'] = $recipe['type']; }
-		if ( isset( $recipe['pin_image_id'] ) )				{ $meta['wprm_pin_image_id'] = $recipe['pin_image_id']; }
-		if ( isset( $recipe['author_display'] ) )			{ $meta['wprm_author_display'] = $recipe['author_display']; }
-		if ( isset( $recipe['author_name'] ) )				{ $meta['wprm_author_name'] = $recipe['author_name']; }
-		if ( isset( $recipe['author_link'] ) )				{ $meta['wprm_author_link'] = $recipe['author_link']; }
-		if ( isset( $recipe['servings'] ) )					{ $meta['wprm_servings'] = $recipe['servings']; }
-		if ( isset( $recipe['servings_unit'] ) )			{ $meta['wprm_servings_unit'] = $recipe['servings_unit']; }
-		if ( isset( $recipe['cost'] ) )						{ $meta['wprm_cost'] = $recipe['cost']; }
-		if ( isset( $recipe['prep_time'] ) )				{ $meta['wprm_prep_time'] = $recipe['prep_time']; }
-		if ( isset( $recipe['prep_time_zero'] ) )			{ $meta['wprm_prep_time_zero'] = $recipe['prep_time_zero']; }
-		if ( isset( $recipe['cook_time'] ) )				{ $meta['wprm_cook_time'] = $recipe['cook_time']; }
-		if ( isset( $recipe['cook_time_zero'] ) )			{ $meta['wprm_cook_time_zero'] = $recipe['cook_time_zero']; }
-		if ( isset( $recipe['total_time'] ) )				{ $meta['wprm_total_time'] = $recipe['total_time']; }
-		if ( isset( $recipe['custom_time'] ) )				{ $meta['wprm_custom_time'] = $recipe['custom_time']; }
-		if ( isset( $recipe['custom_time_zero'] ) )			{ $meta['wprm_custom_time_zero'] = $recipe['custom_time_zero']; }
-		if ( isset( $recipe['custom_time_label'] ) )		{ $meta['wprm_custom_time_label'] = $recipe['custom_time_label']; }
-		if ( isset( $recipe['instructions'] ) )				{ $meta['wprm_instructions'] = $recipe['instructions']; }
-		if ( isset( $recipe['notes'] ) )					{ $meta['wprm_notes'] = $recipe['notes']; }
-		if ( isset( $recipe['ingredient_links_type'] ) )	{ $meta['wprm_ingredient_links_type'] = $recipe['ingredient_links_type']; }
-		if ( isset( $recipe['unit_system'] ) )				{ $meta['wprm_unit_system'] = $recipe['unit_system']; }
-		if ( isset( $recipe['my_emissions'] ) )				{ $meta['wprm_my_emissions'] = $recipe['my_emissions']; }
-		if ( isset( $recipe['import_source'] ) ) 			{ $meta['wprm_import_source'] = $recipe['import_source']; }
-		if ( isset( $recipe['import_backup'] ) ) 			{ $meta['wprm_import_backup'] = $recipe['import_backup']; }
+		if ( isset( $recipe['type'] ) )							{ $meta['wprm_type'] = $recipe['type']; }
+		if ( isset( $recipe['pin_image_id'] ) )					{ $meta['wprm_pin_image_id'] = $recipe['pin_image_id']; }
+		if ( isset( $recipe['pin_image_repin_id'] ) )			{ $meta['wprm_pin_image_repin_id'] = $recipe['pin_image_repin_id']; }
+		if ( isset( $recipe['author_display'] ) )				{ $meta['wprm_author_display'] = $recipe['author_display']; }
+		if ( isset( $recipe['author_name'] ) )					{ $meta['wprm_author_name'] = $recipe['author_name']; }
+		if ( isset( $recipe['author_link'] ) )					{ $meta['wprm_author_link'] = $recipe['author_link']; }
+		if ( isset( $recipe['servings'] ) )						{ $meta['wprm_servings'] = $recipe['servings']; }
+		if ( isset( $recipe['servings_unit'] ) )				{ $meta['wprm_servings_unit'] = $recipe['servings_unit']; }
+		if ( isset( $recipe['servings_advanced_enabled'] ) )	{ $meta['wprm_servings_advanced_enabled'] = $recipe['servings_advanced_enabled']; }
+		if ( isset( $recipe['servings_advanced'] ) )			{ $meta['wprm_servings_advanced'] = $recipe['servings_advanced']; }
+		if ( isset( $recipe['cost'] ) )							{ $meta['wprm_cost'] = $recipe['cost']; }
+		if ( isset( $recipe['prep_time'] ) )					{ $meta['wprm_prep_time'] = $recipe['prep_time']; }
+		if ( isset( $recipe['prep_time_zero'] ) )				{ $meta['wprm_prep_time_zero'] = $recipe['prep_time_zero']; }
+		if ( isset( $recipe['cook_time'] ) )					{ $meta['wprm_cook_time'] = $recipe['cook_time']; }
+		if ( isset( $recipe['cook_time_zero'] ) )				{ $meta['wprm_cook_time_zero'] = $recipe['cook_time_zero']; }
+		if ( isset( $recipe['total_time'] ) )					{ $meta['wprm_total_time'] = $recipe['total_time']; }
+		if ( isset( $recipe['custom_time'] ) )					{ $meta['wprm_custom_time'] = $recipe['custom_time']; }
+		if ( isset( $recipe['custom_time_zero'] ) )				{ $meta['wprm_custom_time_zero'] = $recipe['custom_time_zero']; }
+		if ( isset( $recipe['custom_time_label'] ) )			{ $meta['wprm_custom_time_label'] = $recipe['custom_time_label']; }
+		if ( isset( $recipe['instructions'] ) )					{ $meta['wprm_instructions'] = $recipe['instructions']; }
+		if ( isset( $recipe['notes'] ) )						{ $meta['wprm_notes'] = $recipe['notes']; }
+		if ( isset( $recipe['ingredient_links_type'] ) )		{ $meta['wprm_ingredient_links_type'] = $recipe['ingredient_links_type']; }
+		if ( isset( $recipe['unit_system'] ) )					{ $meta['wprm_unit_system'] = $recipe['unit_system']; }
+		if ( isset( $recipe['my_emissions'] ) )					{ $meta['wprm_my_emissions'] = $recipe['my_emissions']; }
+		if ( isset( $recipe['import_source'] ) ) 				{ $meta['wprm_import_source'] = $recipe['import_source']; }
+		if ( isset( $recipe['import_backup'] ) ) 				{ $meta['wprm_import_backup'] = $recipe['import_backup']; }
 
 		$meta = apply_filters( 'wprm_recipe_save_meta', $meta, $id, $recipe );
 
@@ -221,6 +224,9 @@ class WPRM_Recipe_Saver {
 		// Always update post to make sure revision gets made.
 		WPRM_Recipe_Manager::invalidate_recipe( $id );
 		wp_update_post( $post );
+
+		// Update recipe SEO values afterwards.
+		WPRM_Seo_Checker::update_seo_for( $id );
 	}
 
 	/**
@@ -345,6 +351,13 @@ class WPRM_Recipe_Saver {
 
 			// Don't use pending for recipe as we use that for Recipe Submissions.
 			$recipe_post_status = 'pending' === $post->post_status ? 'draft' : $post->post_status;
+
+			// Prevent recipes from taking over custom post statusses (and being excluded from the manage page).
+			$allowed_post_statusses = array( 'publish', 'future', 'draft', 'private' );
+			
+			if ( ! in_array( $recipe_post_status, $allowed_post_statusses ) ) {
+				$recipe_post_status = 'draft';
+			}
 
 			// Update recipes.
 			foreach ( $recipe_ids as $recipe_id ) {

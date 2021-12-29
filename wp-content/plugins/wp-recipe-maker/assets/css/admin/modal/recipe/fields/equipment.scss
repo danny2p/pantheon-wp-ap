@@ -1,56 +1,61 @@
 .wprm-admin-modal-field-equipment,
 .wprm-admin-modal-field-equipment-group {
-    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
     background-color: white;
 
-    .wprm-admin-modal-field-equipment-main-container {
-        display: flex;
-        flex: auto;
-        align-items: center;
+    .wprm-admin-modal-field-equipment-handle {
+        flex-shrink: 0;
 
-        .wprm-admin-modal-field-equipment-handle {
-            flex-shrink: 0;
-    
-            .wprm-admin-icon {
-                margin: 0 5px;
-                cursor: move;
-            }
+        .wprm-admin-icon {
+            margin: 0 5px;
+            cursor: move;
+        }
+    }
+}
+
+.wprm-admin-modal-field-equipment-header-container {
+    display: flex;
+    align-items: center;
+    margin: 0 26px 10px 26px;
+    font-weight: bold;
+
+    .wprm-admin-modal-field-equipment-header {
+        display: none;
+
+        .wprm-admin-modal-field-equipment-header-required {
+            font-size: 0.8em;
+            font-weight: normal;
+            color: darkred;
         }
     }
 }
 
 .wprm-admin-modal-field-equipment {    
-    .wprm-admin-modal-field-equipment-name-container {
-        flex: auto;
+    .wprm-admin-modal-field-equipment-text-container {
         display: flex;
+        flex: auto;
+        flex-wrap: wrap;
         align-items: center;
-
-        .wprm-admin-icon {
-            flex-shrink: 0;
-            margin: 0 5px;
-            cursor: move;
-        }
 
         .wprm-admin-modal-field-richtext,
         .wprm-admin-modal-field-richtext-legacy {
-            flex: auto;
+            flex: 0 0 100%;
         }
     }
-    .wprm-admin-modal-field-equipment-after-container {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
+}
 
-        .wprm-admin-modal-field-equipment-after-container-icons {
-            flex-shrink: 0;
-            margin: 5px;
+.wprm-admin-modal-field-equipment-after-container {
+    .wprm-admin-modal-field-equipment-after-container-icons {
+        flex-shrink: 0;
+        margin: 5px;
 
-            .wprm-admin-icon {
-                margin-right: 5px;
+        .wprm-admin-icon {
+            margin-right: 5px;
 
-                &:last-child {
-                    margin-right: 0;
-                }
+            &:last-child {
+                margin-right: 0;
             }
         }
     }
@@ -70,13 +75,57 @@
     }
 }
 
+@media screen and (min-width: 550px) {
+    .wprm-admin-modal-field-equipment-header-container {
+        .wprm-admin-modal-field-equipment-header {
+            display: block;
+
+            &:nth-child(1),
+            &:nth-child(3) {
+                flex: 0 0 25%;
+            }
+
+            &:nth-child(2) {
+                flex: 0 0 50%;
+            }
+        }
+    }
+
+    .wprm-admin-modal-field-equipment {    
+        .wprm-admin-modal-field-equipment-text-container {
+            .wprm-admin-modal-field-richtext,
+            .wprm-admin-modal-field-richtext-legacy {
+                &:nth-child(1),
+                &:nth-child(3) {
+                    flex: 0 0 25%;
+                }
+
+                &:nth-child(2) {
+                    flex: 0 0 50%;
+                }
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 782px) {
     .wprm-admin-modal-field-equipment {
-        .wprm-admin-modal-field-equipment-main-container {
-            flex: 0 0 60%;
-        }
-        .wprm-admin-modal-field-equipment-after-container {
-            flex: auto;
+        margin-bottom: 5px;
+    }
+
+    .wprm-admin-modal-field-equipment-header-container {
+        .wprm-admin-modal-field-equipment-header {
+            &:nth-child(1) {
+                flex: 0 0 75px;
+                margin-right: 5px;
+            }
+            &:nth-child(2) {
+                flex: 0 0 300px;
+                margin-right: 5px;
+            }
+            &:nth-child(3) {
+                flex: auto;
+            }
         }
     }
 
@@ -84,10 +133,23 @@
         display: flex;
         align-items: center;
 
-        .wprm-admin-modal-field-equipment-after-container {
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
+        .wprm-admin-modal-field-equipment-text-container {
+            flex-wrap: nowrap;
+
+            .wprm-admin-modal-field-richtext,
+            .wprm-admin-modal-field-richtext-legacy {
+                &:nth-child(1) {
+                    flex: 0 0 75px;
+                    margin-right: 5px;
+                }
+                &:nth-child(2) {
+                    flex: 0 0 300px;
+                    margin-right: 5px;
+                }
+                &:nth-child(3) {
+                    flex: auto;
+                }
+            }
         }
     }
 }

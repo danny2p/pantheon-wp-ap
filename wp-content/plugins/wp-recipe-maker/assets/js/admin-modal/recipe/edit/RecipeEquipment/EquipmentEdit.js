@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import '../../../../css/admin/modal/recipe/fields/equipment.scss';
+import '../../../../../css/admin/modal/recipe/fields/equipment.scss';
 
 import { __wprm } from 'Shared/Translations';
-import FieldEquipment from '../../fields/FieldEquipment';
+import FieldEquipment from '../../../fields/FieldEquipment';
 
-export default class RecipeEquipment extends Component {
+export default class EquipmentEdit extends Component {
     constructor(props) {
         super(props);
 
@@ -21,7 +21,7 @@ export default class RecipeEquipment extends Component {
 
     componentDidUpdate( prevProps ) {
         if ( this.props.equipment.length > prevProps.equipment.length ) {
-            const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-richtext');
+            const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-equipment-amount');
 
             if ( inputs.length && inputs[ this.lastAddedIndex ] ) {
                 inputs[ this.lastAddedIndex ].focus();
@@ -71,7 +71,7 @@ export default class RecipeEquipment extends Component {
     render() {
         return (
             <div
-                className="wprm-admin-modal-field-equipment-container"
+                className="wprm-admin-modal-field-equipment-edit-container"
                 ref={ this.container }
             >
                 <DragDropContext
@@ -86,6 +86,11 @@ export default class RecipeEquipment extends Component {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >
+                                <div className="wprm-admin-modal-field-equipment-header-container">
+                                    <div className="wprm-admin-modal-field-equipment-header">{ __wprm( 'Amount' ) }</div>
+                                    <div className="wprm-admin-modal-field-equipment-header">{ __wprm( 'Name' ) } <span className="wprm-admin-modal-field-equipment-header-required">({ __wprm( 'required' ) })</span></div>
+                                    <div className="wprm-admin-modal-field-equipment-header">{ __wprm( 'Notes' ) }</div>
+                                </div>
                                 {
                                     this.props.equipment.map((field, index) => (
                                         <FieldEquipment
@@ -106,9 +111,13 @@ export default class RecipeEquipment extends Component {
                                             onAdd={ () => {
                                                 this.addField(index);
                                             }}
-                                            onChangeName={ ( name ) => {
+                                            onChangeEquipment={ ( equipment ) => {
                                                 let newFields = JSON.parse( JSON.stringify( this.props.equipment ) );
-                                                newFields[index].name = name;
+
+                                                newFields[index] = {
+                                                    ...newFields[index],
+                                                    ...equipment,
+                                                }
                                                 
                                                 this.props.onRecipeChange({
                                                     equipment: newFields,

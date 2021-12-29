@@ -14,6 +14,7 @@ import IconDocApple from '../../../icons/settings/doc-apple.svg';
 import IconDoc from '../../../icons/settings/doc.svg';
 import IconEdit from '../../../icons/settings/edit.svg';
 import IconFiles from '../../../icons/settings/files.svg';
+import IconHealth from '../../../icons/settings/health.svg';
 import IconImport from '../../../icons/settings/import.svg';
 import IconKey from '../../../icons/settings/key.svg';
 import IconKnife from '../../../icons/settings/knife.svg';
@@ -51,6 +52,7 @@ const icons = {
     doc: IconDoc,
     edit: IconEdit,
     files: IconFiles,
+    health: IconHealth,
     import: IconImport,
     key: IconKey,
     knife: IconKnife,

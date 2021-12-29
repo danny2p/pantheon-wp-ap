@@ -20,6 +20,26 @@
 class WPRM_Seo_Checker {
 
 	/**
+	 * Update the SEO data for a recipe.
+	 *
+	 * @since    8.0.0
+	 * @param    mixed $recipe_id Recipe ID to update the SEO for.
+	 */
+	public static function update_seo_for( $recipe_id ) {
+		$result = false;
+		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+
+		if ( $recipe ) {
+			$result = self::check_recipe( $recipe );
+
+			update_post_meta( $recipe_id, 'wprm_seo', $result );
+			update_post_meta( $recipe_id, 'wprm_seo_priority', $result['priority'] );
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Perform an SEO check on a specific recipe.
 	 *
 	 * @since    1.15.0
@@ -37,7 +57,38 @@ class WPRM_Seo_Checker {
 			);
 		}
 
+		// Convert type to priority number.
+		switch ( $result['type'] ) {
+			case 'bad':
+				$result['priority'] = 5;
+				break;
+			case 'warning':
+				$result['priority'] = 10;
+				break;
+			case 'rating':
+				$result['priority'] = 15;
+				break;
+			case 'good':
+				$result['priority'] = 20;
+				break;
+			default:
+				$result['priority'] = 25;
+		}
+
 		return $result;
+	}
+
+	/**
+	 * Get SEO data for recipe where it hasn't been generated for.
+	 *
+	 * @since	8.0.0
+	 */
+	public static function missing_seo_data() {
+		return array(
+			'priority' => 0,
+			'type' => 'missing',
+			'message' => __( 'Run a Health Check through the WP Recipe Maker > Dashboard page to get SEO data', 'wp-recipe-maker' ),
+		);
 	}
 
 	/**

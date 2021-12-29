@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '7.7.2' );
+		define( 'WPRM_VERSION', '8.0.1' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_DIR', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -95,6 +95,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-utilities.php' );
 
 		// Public.
+		require_once( WPRM_DIR . 'includes/public/class-wprm-access.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-addons.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics-database.php' );
@@ -162,6 +163,7 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-find-parents.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-find-ratings.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-fix-comment-ratings.php' );
+			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-health-check.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-refresh-video-metadata.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-ingredients.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-nutrition.php' );
@@ -210,6 +212,7 @@ class WP_Recipe_Maker {
 		if ( ! WPRM_Addons::is_active( 'premium' ) ) {
 			return array_merge( array( '<a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Upgrade to Premium</a>' ), $links );
 		} else {
+			array_unshift( $links, '<span style="color: #32373c">' . __( 'Required by WP Recipe Maker Premium', 'wp-recipe-maker' ) . '</span>' );
 			return $links;
 		}
 	}

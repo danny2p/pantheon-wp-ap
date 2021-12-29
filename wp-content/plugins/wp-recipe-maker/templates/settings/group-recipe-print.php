@@ -97,11 +97,34 @@ $recipe_print = array(
 					'default' => true,
 				),
 				array(
+					'id' => 'print_credit_use_html',
+					'name' => __( 'Use HTML for Print Credit', 'wp-recipe-maker' ),
+					'description' => __( 'Enable for an advanced HTML editor for the Print Credit field.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
 					'id' => 'print_credit',
 					'name' => __( 'Print Credit', 'wp-recipe-maker' ),
-					'description' => __( 'Optional text to show at the bottom of the print page. You can use HTML and the following placeholders:', 'wp-recipe-maker' ) . ' %recipe_name% %recipe_url% %recipe_date%',
+					'description' => __( 'Optional text to show at the bottom of the print page. You can use the following placeholders:', 'wp-recipe-maker' ) . ' %recipe_name% %recipe_url% %recipe_date%',
 					'type' => 'richTextarea',
 					'default' => '',
+					'dependency' => array(
+						'id' => 'print_credit_use_html',
+						'value' => false,
+					),
+				),
+				array(
+					'id' => 'print_credit_html',
+					'name' => __( 'Print Credit', 'wp-recipe-maker' ),
+					'description' => __( 'Optional text to show at the bottom of the print page. You can use HTML code and the following placeholders:', 'wp-recipe-maker' ) . ' %recipe_name% %recipe_url% %recipe_date%',
+					'type' => 'code',
+					'code' => 'html',
+					'default' => '',
+					'dependency' => array(
+						'id' => 'print_credit_use_html',
+						'value' => true,
+					),
 				),
 				array(
 					'id' => 'print_footer_ad',

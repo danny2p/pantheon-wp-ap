@@ -50,7 +50,7 @@ class WPRM_Post_Type {
 			'capability_type'    => 'post',
 			'query_var'          => false,
 			'has_archive'        => false,
-			'supports' 			 => array( 'title', 'editor', 'author', 'revisions' ),
+			'supports' 			 => array( 'title', 'editor', 'author', 'revisions', 'thumbnail' ),
 		));
 
 		// Special case: public recipe post type.

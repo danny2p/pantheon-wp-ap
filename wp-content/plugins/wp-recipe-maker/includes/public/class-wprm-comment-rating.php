@@ -45,6 +45,8 @@ class WPRM_Comment_Rating {
 		add_action( 'spammed_comment', array( __CLASS__, 'update_comment_rating_on_change' ) );
 		add_action( 'unspammed_comment', array( __CLASS__, 'update_comment_rating_on_change' ) );
 
+		add_action( 'deleted_comment', array( __CLASS__, 'delete_comment_rating' ) );
+
 		// Different hooks before and after 5.5.
 		add_action( 'comment_unapproved_', array( __CLASS__, 'update_comment_rating_on_change' ) );
 		add_action( 'comment_approved_', array( __CLASS__, 'update_comment_rating_on_change' ) );
@@ -391,7 +393,7 @@ class WPRM_Comment_Rating {
 			// If no rating, check if this post actually contains a recipe.
 			if ( ! $rating ) {
 				$comment = get_comment( $comment_id ); 
-				$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $comment_id_7->comment_post_ID );
+				$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $comment->comment_post_ID );
 
 				if ( ! $recipe_ids ) {
 					return $column;
@@ -436,6 +438,23 @@ class WPRM_Comment_Rating {
 		) );
 
 		self::add_or_update_rating_for( $comment_id, $rating );
+	}
+
+	/**
+	 * Delete recipe rating when comment gets deleted.
+	 *
+	 * @since	8.0.0
+	 * @param	int $comment_id ID of the comment being deleted.
+	 */
+	public static function delete_comment_rating( $comment_id ) {
+		$comment_id = intval( $comment_id );
+
+		if ( $comment_id ) {
+			WPRM_Rating_Database::delete_ratings_for_comment( $comment_id );
+		}
+
+		// Recalculate recipe rating.
+		WPRM_Rating::update_recipe_rating_for_comment( $comment_id );
 	}
 
 	/**

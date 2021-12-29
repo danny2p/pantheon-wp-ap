@@ -49,6 +49,7 @@ const EditRecipe = (props) => {
                     pinImage={{
                         id: props.recipe.pin_image_id,
                         url: props.recipe.pin_image_url,
+                        repin: props.recipe.pin_image_repin_id,
                     }}
                     video={{
                         id: props.recipe.video_id,
@@ -92,6 +93,8 @@ const EditRecipe = (props) => {
                     amount: props.recipe.servings,
                     unit: props.recipe.servings_unit,
                 }}
+                servings_advanced_enabled={ props.recipe.servings_advanced_enabled }
+                servings_advanced={ props.recipe.servings_advanced }
                 cost={ props.recipe.cost }
                 my_emissions={ props.recipe.my_emissions }
                 onRecipeChange={ props.onRecipeChange }
@@ -140,6 +143,7 @@ const EditRecipe = (props) => {
                 type={ props.recipe.type }
                 equipment={ props.recipe.equipment }
                 onRecipeChange={ props.onRecipeChange }
+                onModeChange={ props.onModeChange }
             />
         )
     });

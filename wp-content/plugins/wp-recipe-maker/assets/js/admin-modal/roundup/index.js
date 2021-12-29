@@ -11,6 +11,7 @@ import Footer from '../general/Footer';
 import FieldImage from '../fields/FieldImage';
 import FieldRadio from '../fields/FieldRadio';
 import FieldText from '../fields/FieldText';
+import FieldRichText from '../fields/FieldRichText';
 import FieldTextarea from '../fields/FieldTextarea';
 import SelectRecipe from '../select/SelectRecipe';
 
@@ -19,42 +20,64 @@ export default class Roundup extends Component {
         super(props);
 
         let type = 'internal';
+        let recipe = false;
         let link = '';
         let nofollow = false;
         let newtab = true;
         let name = '';
         let summary = '';
+        let button = '';
         let image = {
             id: 0,
             url: '',
         }
 
+        // Fallback to classic textarea if summary existed before and wasn't created in rich editor.
+        let fallbackToTextarea = false;
+
         if ( props.args.fields && props.args.fields.roundup ) {
             const roundup = props.args.fields.roundup;
 
-            if ( ! roundup.id && roundup.link ) {
+            if ( roundup.id ) {
+                type = 'internal';
+                recipe = {
+                    id: roundup.id,
+                    text: `${ __wprm( 'Recipe' ) } #${ roundup.id }`,
+                };
+                name = roundup.name;
+                summary = roundup.summary.replaceAll( '%0A', '\n');
+                button = roundup.button;
+            } else if ( roundup.link ) {
                 type = 'external';
                 link = roundup.link;
                 nofollow = roundup.nofollow ? true : false;
                 newtab = roundup.newtab ? true : false;
                 name = roundup.name;
-                summary = roundup.summary;
+                summary = roundup.summary.replaceAll( '%0A', '\n');
+                button = roundup.button;
                 image.id = roundup.image;
                 image.url = roundup.image_url;
+
+                // Existing roundup summary that doesn't start with "<p>" => created as regular textarea.
+                if ( summary && '<p>' !== summary.substr( 0, 3 ) ) {
+                    fallbackToTextarea = true;
+                }
             }
         }
     
         this.state = {
             type,
-            recipe: false,
+            recipe,
             link,
             nofollow,
             newtab,
             name,
             summary,
             image,
+            button,
             loading: false,
             saving: false,
+            fallbackToTextarea,
         };
 
         this.loadDetailsFromURL = this.loadDetailsFromURL.bind(this);
@@ -280,28 +303,67 @@ export default class Roundup extends Component {
                                             }
                                         </Fragment>
                                     }
-                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Name' ) }</div>
-                                    <FieldText
-                                        name="recipe-name"
-                                        placeholder={ __wprm( 'Recipe Name' ) }
-                                        value={ this.state.name }
-                                        onChange={ (name) => {
-                                            this.setState({ name });
-                                        }}
-                                    />
-                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Summary' ) }</div>
-                                    <FieldTextarea
-                                        placeholder={ __wprm( 'Short description of this recipe...' ) }
-                                        value={ this.state.summary }
-                                        onChange={ (summary) => {
-                                            this.setState({ summary });
-                                        }}
-                                    />
                                 </Fragment>
                             }
                         </Fragment>
                     }
+                    {
+                        'internal' === this.state.type
+                        &&
+                        <p className="wprm-admin-modal-roundup-override">{ __wprm( 'Optionally fill in these fields to use instead of the recipe values:' ) }</p>
+                    }
+                    {
+                        /* Shared by internal and external */
+                        ! this.state.loading
+                        &&
+                        <Fragment>
+                            <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Name' ) }</div>
+                            <FieldText
+                                name="recipe-name"
+                                placeholder={ __wprm( 'Recipe Name' ) }
+                                value={ this.state.name }
+                                onChange={ (name) => {
+                                    this.setState({ name });
+                                }}
+                            />
+                            <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Summary' ) }</div>
+                            {
+                                this.state.fallbackToTextarea
+                                ?
+                                <FieldTextarea
+                                    placeholder={ __wprm( 'Short description of this recipe...' ) }
+                                    value={ this.state.summary }
+                                    onChange={ (summary) => {
+                                        this.setState({ summary });
+                                    }}
+                                />
+                                :
+                                <FieldRichText
+                                    toolbar="roundup"
+                                    placeholder={ __wprm( 'Short description of this recipe...' ) }
+                                    value={ this.state.summary }
+                                    onChange={ (summary) => {
+                                        // Remove empty lines before saving.
+                                        summary = summary.replaceAll( '<p></p>', '' );
+                                        summary = summary.replaceAll( '<p><br></p>', '' );
+                                        summary = summary.replaceAll( '<p><br/></p>', '' );
+
+                                        this.setState({ summary });
+                                    }}
+                                />
+                            }
+                            <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Custom Button Text' ) }</div>
+                            <FieldText
+                                placeholder={ __wprm( 'Leave blank to use default from template' ) }
+                                value={ this.state.button }
+                                onChange={ (button) => {
+                                    this.setState({ button });
+                                }}
+                            />
+                        </Fragment>
+                    }
                 </div>
+                <div id="wprm-admin-modal-toolbar-container"></div>
                 <Footer
                     savingChanges={ this.state.loading || this.state.saving }
                 >

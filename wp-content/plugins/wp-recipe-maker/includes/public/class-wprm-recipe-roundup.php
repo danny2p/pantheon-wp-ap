@@ -20,6 +20,15 @@
 class WPRM_Recipe_Roundup {
 
 	/**
+	 * Roundup overrides.
+	 *
+	 * @since	8.0.0
+	 * @access	private
+	 * @var		array $roundup_overrides Overrides to use for recipe values in the roundup.
+	 */
+	private static $roundup_overrides = array();
+
+	/**
 	 * Register actions and filters.
 	 *
 	 * @since    1.0.0
@@ -43,47 +52,107 @@ class WPRM_Recipe_Roundup {
 
 			// Need at least 2 items before outputting a list.
 			if ( 1 < count( $recipe_ids ) ) {
-				$metadata = array(
-					'@context' => 'http://schema.org',
-					'@type' => 'ItemList',
-					'url' => get_permalink( $post ),
-					'itemListElement' => array(),
-				);
-
 				$name = get_post_meta( get_the_ID(), 'wprm-recipe-roundup-name', true );
-				if ( $name ) {
-					$metadata['name'] = wp_strip_all_tags( $name );
-				}
-
 				$description = get_post_meta( get_the_ID(), 'wprm-recipe-roundup-description', true );
-				if ( $description ) {
-					$metadata['description'] = wp_strip_all_tags( $description );
-				}
 
-				$item_list_counter = 0;
-				foreach ( $recipe_ids as $recipe_id ) {
-					$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+				self::output_itemlist_metadata( get_permalink( $post ), $name, $description, $recipe_ids );
+			}
+		}
 
-					if ( $recipe ) {
-						$url = $recipe->permalink();
+		// Archive pages.
+		if ( is_archive() && WPRM_Settings::get( 'itemlist_metadata_archive_pages' ) ) {
+			self::list_metadata_for_archive_pages();	
+		}
+	}
 
-						if ( $url ) {
-							$item_list_counter++;
-							$metadata['itemListElement'][] = array(
-								'@type'    => 'ListItem',
-								'position' => $item_list_counter,
-								'url'      => $url,
-							);
+	/**
+	 * Output list metadata for archive pages.
+	 *
+	 * @since	8.0.0
+	 */
+	public static function list_metadata_for_archive_pages() {
+		global $wp_query;
+
+		$recipe_ids = array();
+		foreach ( $wp_query->posts as $post ) {
+			if ( WPRM_POST_TYPE === $post->post_type ) {
+				$recipe_ids[] = $post->ID;
+			} else if ( 'all' === WPRM_Settings::get( 'itemlist_metadata_archive_pages_post_types' ) ) {
+				$recipe_ids_in_post = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post->post_content );
+
+				if ( $recipe_ids_in_post ) {
+					if ( ! WPRM_Settings::get( 'metadata_only_show_for_first_recipe' ) ) {
+						// Output metadata for all recipes.
+						$recipe_ids = array_merge( $recipe_ids, $recipe_ids_in_post );
+					} else {
+						// Only add metadata for first food recipe on page.
+						foreach ( $recipe_ids_in_post as $recipe_id_in_post ) {
+							$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id_in_post );
+	
+							if ( $recipe && 'other' !== $recipe->type() ) {
+								$recipe_ids[] = $recipe_id_in_post;
+								break;
+							}
 						}
 					}
 				}
+			}
+		}
 
-				$metadata['numberOfItems'] = $item_list_counter;
+		if ( 1 < count( $recipe_ids ) ) {
+			// TODO term name.
+			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+			self::output_itemlist_metadata( $url, '', '', $recipe_ids );
+		}
+	}
 
-				if ( 1 < $item_list_counter ) {
-					echo '<script type="application/ld+json">' . wp_json_encode( $metadata ) . '</script>';
+	/**
+	 * Output ItemList metadata for a set of recipe ids.
+	 *
+	 * @since	8.0.0
+	 * @param	mixed $url			URL of the roundup page.
+	 * @param	mixed $name			Name for the ItemList.
+	 * @param	mixed $description	Description for the ItemList.
+	 * @param	mixed $recipe_ids 	IDs of the recipes to get the ItemList metadata for.
+	 */
+	public static function output_itemlist_metadata( $url, $name, $description, $recipe_ids ) {
+		$metadata = array(
+			'@context' => 'http://schema.org',
+			'@type' => 'ItemList',
+			'url' => $url,
+			'itemListElement' => array(),
+		);
+
+		if ( $name ) {
+			$metadata['name'] = wp_strip_all_tags( $name );
+		}
+
+		if ( $description ) {
+			$metadata['description'] = wp_strip_all_tags( $description );
+		}
+
+		$item_list_counter = 0;
+		foreach ( $recipe_ids as $recipe_id ) {
+			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+
+			if ( $recipe ) {
+				$url = $recipe->permalink();
+
+				if ( $url ) {
+					$item_list_counter++;
+					$metadata['itemListElement'][] = array(
+						'@type'    => 'ListItem',
+						'position' => $item_list_counter,
+						'url'      => $url,
+					);
 				}
 			}
+		}
+
+		$metadata['numberOfItems'] = $item_list_counter;
+
+		if ( 1 < $item_list_counter ) {
+			echo '<script type="application/ld+json">' . wp_json_encode( $metadata ) . '</script>';
 		}
 	}
 
@@ -144,6 +213,7 @@ class WPRM_Recipe_Roundup {
 				'image_url' => '',
 				'summary' => '',
 				'name' => '',
+				'button' => '',
 				'template' => '',
 				'nofollow' => false,
 				'newtab' => true,
@@ -155,19 +225,23 @@ class WPRM_Recipe_Roundup {
 		$recipe = false;
 		$recipe_template = trim( $atts['template'] );
 		$recipe_id = intval( $atts['id'] );
+		self::$roundup_overrides = array();
 
 		if ( $recipe_id ) {
 			$type = 'internal';
 			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+
+			if ( $atts['name'] ) 	{ self::$roundup_overrides['name'] = rawurldecode( $atts['name'] ); }
+			if ( $atts['summary'] ) { self::$roundup_overrides['summary'] = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ); }
 		} else {
 			$type = 'external';
 			$recipe_data = array(
 				'type' => 'food',
 				'parent_id' => true,
-				'parent_url' => urldecode( $atts['link'] ),
-				'permalink' => urldecode( $atts['link'] ),
-				'name' => urldecode( $atts['name'] ),
-				'summary' => urldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),
+				'parent_url' => rawurldecode( $atts['link'] ),
+				'permalink' => rawurldecode( $atts['link'] ),
+				'name' => rawurldecode( $atts['name'] ),
+				'summary' => rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),
 				'parent_url_new_tab' => $atts['newtab'] ? true : false,
 				'parent_url_nofollow' => $atts['nofollow'] ? true : false,
 			);
@@ -182,6 +256,9 @@ class WPRM_Recipe_Roundup {
 
 			$recipe = new WPRM_Recipe_Shell( $recipe_data );
 		}
+
+		// Both internal and external.
+		if ( $atts['button'] ) { self::$roundup_overrides['roundup_link_button_text'] = rawurldecode( $atts['button'] ); }
 
 		if ( $recipe ) {
 			$template = false;
@@ -206,15 +283,20 @@ class WPRM_Recipe_Roundup {
 
 				$output = '<div class="wprm-recipe wprm-recipe-roundup-item wprm-recipe-roundup-item-' . $recipe->id() . ' wprm-recipe-template-' . $template['slug'] . $align_class . '" data-servings="' . esc_attr( $recipe->servings() ). '">';
 
+				// Add filters for overrides and immediately remove after doing shortcode.
+				add_filter( 'wprm_recipe_roundup_link_text', array( __CLASS__, 'roundup_link_text_override' ) );
 				if ( 'internal' === $type ) {
+					add_filter( 'wprm_recipe_field', array( __CLASS__, 'recipe_field_overrides' ), 10, 2 );
 					WPRM_Template_Shortcodes::set_current_recipe_id( $recipe->id() );
 					$output .= do_shortcode( $template['html'] );
 					WPRM_Template_Shortcodes::set_current_recipe_id( false );
+					remove_filter( 'wprm_recipe_field', array( __CLASS__, 'recipe_field_overrides' ), 10, 2 );
 				} else {
 					WPRM_Template_Shortcodes::set_current_recipe_shell( $recipe );
 					$output .= do_shortcode( $template['html'] );
 					WPRM_Template_Shortcodes::set_current_recipe_shell( false );
 				}
+				remove_filter( 'wprm_recipe_roundup_link_text', array( __CLASS__, 'roundup_link_text_override' ) );
 
 				$output .= '</div>';
 
@@ -223,6 +305,37 @@ class WPRM_Recipe_Roundup {
 		}
 
 		return '';
+	}
+
+	/**
+	 * Maybe apply overrides to recipe fields.
+	 *
+	 * @since    8.0.0
+	 * @param    mixed $output	Current recipe field output.
+	 * @param    mixed $field	Current recipe field getting output.
+	 */
+	public static function recipe_field_overrides( $output, $field ) {
+		foreach ( self::$roundup_overrides as $key => $value ) {
+			if ( $value && $field === $key ) {
+				return $value;
+			}
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Maybe apply override to the roundup link text..
+	 *
+	 * @since    8.0.0
+	 * @param    mixed $output	Current roundup link text.
+	 */
+	public static function roundup_link_text_override( $output ) {
+		if ( isset( self::$roundup_overrides['roundup_link_button_text'] ) && self::$roundup_overrides['roundup_link_button_text'] ) {
+			return self::$roundup_overrides['roundup_link_button_text'];
+		}
+
+		return $output;
 	}
 }
 

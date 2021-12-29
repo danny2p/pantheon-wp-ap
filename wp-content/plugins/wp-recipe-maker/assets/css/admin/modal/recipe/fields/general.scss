@@ -46,6 +46,21 @@
     }
 }
 
+.wprm-admin-modal-field-advanced-servings-details {
+    display: flex;
+    align-items: center;
+
+    margin-top: 10px;
+
+    input[type="number"] {
+        max-width: 65px;
+    }
+
+    .wprm-admin-modal-field-advanced-servings-details-text {
+        margin: 0 5px;
+    }
+}
+
 .wprm-admin-modal-field-container-cost {
     input {
         max-width: 200px;

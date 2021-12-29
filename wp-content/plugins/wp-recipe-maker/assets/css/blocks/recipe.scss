@@ -8,3 +8,11 @@
 .editor-styles-wrapper .wp-block-wp-recipe-maker-recipe img {
     max-width: 100% !important;
 }
+
+.editor-styles-wrapper .wp-block-wp-recipe-maker-recipe .wprm-recipe-block-invalid {
+    padding: 10px;
+    border: 1px solid darkred;
+    color: darkred;
+    font-family: monospace;
+    font-size: 16px;
+}

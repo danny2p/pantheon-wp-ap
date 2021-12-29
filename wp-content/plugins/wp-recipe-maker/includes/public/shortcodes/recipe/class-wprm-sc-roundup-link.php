@@ -161,9 +161,11 @@ class WPRM_SC_Roundup_Link extends WPRM_Template_Shortcode {
 		$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 		$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-		$text = str_ireplace( '%recipe_name%', $recipe->name(), $atts['text'] );
+		$text = $recipe->replace_placeholders( $atts['text'] );
+		$text = __( $text, 'wp-recipe-maker' );
+		$text = apply_filters( 'wprm_recipe_roundup_link_text', $text );
 
-		$output = '<a href="' . esc_url( $recipe->permalink() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $target . $nofollow . ' aria-label="' . esc_attr( $recipe->name() ) . '">' . $icon . __( $text, 'wp-recipe-maker' ) . '</a>';
+		$output = '<a href="' . esc_url( $recipe->permalink() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $target . $nofollow . ' aria-label="' . esc_attr( $recipe->name() ) . '">' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

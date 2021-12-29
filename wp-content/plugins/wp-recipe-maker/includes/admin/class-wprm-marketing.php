@@ -123,7 +123,14 @@ class WPRM_Marketing {
 	 * @param	array $dashboard Data passed along to the dashboard.
 	 */
 	public static function dashboard_marketing( $dashboard ) {
-		$dashboard['marketing'] = self::$campaign;
+		$dashboard['marketing'] = false;
+
+		if ( false !== self::$campaign ) {
+			if ( ! WPRM_Notices::is_dismissed( 'dashboard_' . self::$campaign['id'] ) ) {
+				$dashboard['marketing'] = self::$campaign;
+			}
+		}
+
 		return $dashboard;
 	}
 

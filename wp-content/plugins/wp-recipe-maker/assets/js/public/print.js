@@ -50,7 +50,8 @@ window.WPRecipeMaker.print = {
 	},
 	recipeAsIs: ( id ) => {
 		let servings = false,
-			system = 1;
+			system = 1,
+			advancedServings = false;
 
 		// Get recipe servings.
 		if ( window.WPRecipeMaker.hasOwnProperty( 'quantities' ) ) {
@@ -66,9 +67,14 @@ window.WPRecipeMaker.print = {
 			}
 		}
 
-		WPRecipeMaker.print.recipe( id, servings, system );
+		// Get advanced servings.
+		if ( window.WPRecipeMaker.hasOwnProperty( 'advancedServings' ) ) {
+			advancedServings = WPRecipeMaker.advancedServings.getRecipe( id );
+		}
+
+		WPRecipeMaker.print.recipe( id, servings, system, advancedServings );
 	},
-	recipe: ( id, servings = false, system = 1 ) => {
+	recipe: ( id, servings = false, system = 1, advancedServings = false ) => {
 		const url = WPRecipeMaker.print.getUrl( id );
 		const target = wprm_public.settings.print_new_tab ? '_blank' : '_self';
 		const printWindow = window.open( url, target );
@@ -78,6 +84,7 @@ window.WPRecipeMaker.print = {
 			printWindow.WPRMPrint.setArgs({
 				system,
 				servings,
+				advancedServings,
 			});
 		};
 	},

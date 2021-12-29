@@ -410,16 +410,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$output .= '<div class="'. implode( ' ', $classes ) . '"' . $style . '>';
 				$tag = 'inline' === $atts['ingredients_display'] ? 'span' : 'div';
 
-				$skip_separator = true;
 				foreach ( $ingredients_to_output as $uid => $text ) {
-					if ( $skip_separator ) {
-						$skip_separator = false;
-					} else {
-						if ( 'inline' === $atts['ingredients_display'] ) {
-							$output .= $atts['ingredients_separator'];
-						}
-					}
-
 					$classes = array(
 						'wprm-recipe-instruction-ingredient',
 						'wprm-recipe-instruction-ingredient-' . esc_attr( $recipe->id() ) . '-' . esc_attr( $uid ),
@@ -432,7 +423,16 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 					$output .= '<' . $tag . ' class="'. implode( ' ', $classes ) . '"' . $style . '>';
 					$output .= wp_strip_all_tags( $text );
+
+					if ( $i + 1 !== count( $ingredients_to_output ) ) {
+						if ( 'inline' === $atts['ingredients_display'] ) {
+							$output .= $atts['ingredients_separator'];
+						}
+					}
+
 					$output .= '</' . $tag . '>';
+
+					$i++;
 				}
 
 				$output .= '</div>';

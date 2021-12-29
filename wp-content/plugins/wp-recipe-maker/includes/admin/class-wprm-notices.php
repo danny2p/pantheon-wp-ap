@@ -39,7 +39,6 @@ class WPRM_Notices {
 
 		if ( $current_user_id ) {
 			$notices = apply_filters( 'wprm_admin_notices', array() );
-			$dismissed_notices = get_user_meta( $current_user_id, 'wprm_dismissed_notices', false );
 
 			foreach ( $notices as $notice ) {
 				// Check capability.
@@ -48,7 +47,7 @@ class WPRM_Notices {
 				}
 
 				// Check if user has already dismissed notice.
-				if ( isset( $notice['id'] ) && in_array( $notice['id'], $dismissed_notices ) ) {
+				if ( isset( $notice['id'] ) && self::is_dismissed( $notice['id'] ) ) {
 					continue;
 				}
 
@@ -57,6 +56,26 @@ class WPRM_Notices {
 		}
 
 		return $notices_to_display;
+	}
+
+	/**
+	 * Check if notice has been dismissed.
+	 *
+	 * @since    8.0.0
+	 * @param	mixed $id Notice to check for dismissal.
+	 */
+	public static function is_dismissed( $id ) {
+		$current_user_id = get_current_user_id();
+
+		if ( $current_user_id ) {
+			$dismissed_notices = get_user_meta( $current_user_id, 'wprm_dismissed_notices', false );
+
+			if ( $id && in_array( $id, $dismissed_notices ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -70,7 +89,7 @@ class WPRM_Notices {
 
 		// Only load on manage page.
 		if ( 'wp-recipe-maker_page_wprm_manage' === $screen->id ) {
-			if ( 0 < WPRM_Version::migration_needed_to( '7.6.0' ) ) {
+			if ( WPRM_Version::migration_needed_to( '7.6.0' ) ) {
 				$notices[] = array(
 					'id' => 'ingredient_units',
 					'title' => __( 'Ingredient Units', 'wp-recipe-maker' ),

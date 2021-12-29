@@ -46,7 +46,7 @@ export default class Recipes extends Component {
                         0 === this.state.recipes.length
                         ?
                         <div className="wprm-admin-dashboard-recipes-all">
-                            { __wprm( 'No recipes found. Welcome to WP Recipe Maker!') }
+                            { __wprm( 'No recipes found. Welcome to WP Recipe Maker!' ) }
                         </div>
                         :
                         <Fragment>
@@ -72,7 +72,7 @@ export default class Recipes extends Component {
                         </Fragment>
                     }
                     <div className="wprm-admin-dashboard-recipes-all">
-                        <a href={ wprm_admin.manage_url }>{ __wprm( 'Manage all recipes...') }</a>
+                        <a href={ wprm_admin.manage_url }>{ __wprm( 'Manage all recipes...' ) }</a>
                     </div>
                 </div>
             </Block>

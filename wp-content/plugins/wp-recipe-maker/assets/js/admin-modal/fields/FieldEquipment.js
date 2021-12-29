@@ -23,6 +23,9 @@ export default class FieldEquipment extends Component {
     }
 
     render() {
+        const amount = this.props.amount ? this.props.amount : '';
+        const notes = this.props.notes ? this.props.notes : '';
+
         return (
             <Draggable
                 draggableId={ `equipment-${this.props.uid}` }
@@ -35,22 +38,35 @@ export default class FieldEquipment extends Component {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                         >
-                            <div className="wprm-admin-modal-field-equipment-main-container">
-                                { handle(provided) }
-                                <div className="wprm-admin-modal-field-equipment-name-container">
-                                    <FieldRichText
-                                        singleLine
-                                        toolbar="equipment"
-                                        value={ this.props.name }
-                                        placeholder={ 'howto' === this.props.recipeType ? __wprm( 'Pair of scissors' ) : __wprm( 'Pressure cooker' ) }
-                                        onChange={(value) => this.props.onChangeName(value)}
-                                        onKeyDown={(event) => {
-                                            if ( isTabHotkey(event) ) {
-                                                this.props.onTab(event);
-                                            }
-                                        }}
-                                    />
-                                </div>
+                            { handle(provided) }
+                            <div className="wprm-admin-modal-field-equipment-text-container">
+                                <FieldRichText
+                                    singleLine
+                                    toolbar={ wprm_admin.addons.premium ? 'all' : 'no-link' }
+                                    className="wprm-admin-modal-field-equipment-amount"
+                                    value={ amount }
+                                    placeholder="1"
+                                    onChange={ (amount) => this.props.onChangeEquipment( { amount } ) }
+                                />
+                                <FieldRichText
+                                    singleLine
+                                    toolbar="equipment"
+                                    value={ this.props.name }
+                                    placeholder={ 'howto' === this.props.recipeType ? __wprm( 'Pair of scissors' ) : __wprm( 'Pressure cooker' ) }
+                                    onChange={ (name) => this.props.onChangeEquipment( { name } ) }
+                                />
+                                <FieldRichText
+                                    singleLine
+                                    toolbar={ wprm_admin.addons.premium ? 'all' : 'no-link' }
+                                    value={ notes }
+                                    placeholder={ __wprm( 'optional' ) }
+                                    onChange={ (notes) => this.props.onChangeEquipment( { notes } ) }
+                                    onKeyDown={(event) => {
+                                        if ( isTabHotkey(event) ) {
+                                            this.props.onTab(event);
+                                        }
+                                    }}
+                                />
                             </div>
                             <div className="wprm-admin-modal-field-equipment-after-container">
                                 <div className="wprm-admin-modal-field-equipment-after-container-icons">

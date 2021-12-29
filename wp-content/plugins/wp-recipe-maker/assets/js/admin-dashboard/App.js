@@ -17,7 +17,7 @@ import Tips from './blocks/Tips';
 let blocks = hooks.applyFilters( 'dashboardBlocks', [
     { id: 'recipes', block: Recipes },
     { id: 'news', block: News },
-    // { id: 'health', block: HealthCheck },
+    { id: 'health', block: HealthCheck },
     { id: 'tips', block: Tips },
     { id: 'learn', block: Learn },
     { id: 'analytics', block: Analytics },

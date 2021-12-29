@@ -149,10 +149,16 @@ $recipe_ratings = array(
 			'name' => __( 'User Ratings', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
+					'id' => 'user_ratings_clear_cache',
+					'name' => __( 'Clear Cache after Rating', 'wp-recipe-maker' ),
+					'description' => __( 'Try to clear the site cache after a user rating. Makes sure the vote increases immediately after refreshing the page.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'user_ratings_thank_you_message',
 					'name' => __( 'Thank You Message', 'wp-recipe-maker' ),
 					'description' => __( 'Thank you message to show after clicking on the stars. Make empty to not show anything.', 'wp-recipe-maker' ),
-					'type' => 'toggle',
 					'type' => 'text',
 					'default' => __( 'Thank you for voting!', 'wp-recipe-maker' ),
 				),

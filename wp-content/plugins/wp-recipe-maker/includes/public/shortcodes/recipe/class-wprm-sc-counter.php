@@ -84,7 +84,7 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 		$GLOBALS['wprm_recipe_counter'] = $count;
 		
 		$text = str_ireplace( '%count%', $count, $text );
-		$text = WPRM_Template_Helper::recipe_placeholders( $recipe, $text );
+		$text = $recipe->replace_placeholders( $text );
 
 		if ( $atts['link'] && $recipe->permalink() ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';

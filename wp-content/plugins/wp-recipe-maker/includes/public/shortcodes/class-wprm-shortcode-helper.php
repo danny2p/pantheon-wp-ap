@@ -403,7 +403,7 @@ class WPRM_Shortcode_Helper {
 			if ( isset( $atts['id'] ) ) {
 				$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 				if ( $recipe ) {
-					$header_text = WPRM_Template_Helper::recipe_placeholders( $recipe, $header_text );
+					$header_text = $recipe->replace_placeholders( $header_text );
 				}
 			}
 

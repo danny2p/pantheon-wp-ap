@@ -96,6 +96,12 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                             return summary.replace( 'summary', '' );
                         },
                     },
+                    button: {
+                        type: 'string',
+                        shortcode: ( { named: { button = '' } } ) => {
+                            return button.replace( 'button', '' );
+                        },
+                    },
                     template: {
                         type: 'string',
                         shortcode: ( { named: { template = '' } } ) => {
@@ -118,6 +124,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                 image: parseInt( fields.image.id ),
                 image_url: fields.image.url,
                 name: fields.name,
+                button: fields.button,
                 summary: fields.summary.replace(/\r?\n|\r/gm, '%0A'),
             });
         }
@@ -179,6 +186,15 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
             if ( attributes.template ) {
                 shortcode += ` template="${attributes.template}"`;
             }
+            if ( attributes.name ) {
+                shortcode += ` name="${ cleanUpShortcodeAttribute( attributes.name ) }"`;
+            }
+            if ( attributes.summary ) {
+                shortcode += ` summary="${ cleanUpShortcodeAttribute( attributes.summary ) }"`;
+            }
+            if ( attributes.button ) {
+                shortcode += ` button="${ cleanUpShortcodeAttribute( attributes.button ) }"`;
+            }
             shortcode += ']';
             return shortcode;
         } else if ( attributes.link ) {
@@ -188,6 +204,10 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
             shortcode += attributes.newtab ? '' : ' newtab="0"';
             shortcode += ` name="${ cleanUpShortcodeAttribute( attributes.name ) }"`;
             shortcode += ` summary="${ cleanUpShortcodeAttribute( attributes.summary ) }"`;
+
+            if ( attributes.button ) {
+                shortcode += ` button="${ cleanUpShortcodeAttribute( attributes.button ) }"`;
+            }
 
             shortcode += attributes.image ? ` image="${ attributes.image }"` : '';
 

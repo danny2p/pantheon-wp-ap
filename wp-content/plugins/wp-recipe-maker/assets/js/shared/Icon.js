@@ -68,6 +68,7 @@ const icons = {
     superscript: IconSuperscript,
     trash: IconTrash,
     underline: IconUnderline,
+    unlink: IconUnlink,
     videoplayer: IconVideoplayer,
 };
 

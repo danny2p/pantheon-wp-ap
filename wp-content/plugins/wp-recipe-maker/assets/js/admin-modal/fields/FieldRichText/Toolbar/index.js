@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Editor, Transforms } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { serialize } from '../html';
@@ -111,36 +111,42 @@ const Toolbar = (props) => {
 					IconAdd={ () => <Icon type="code" title={ __wprm( 'Add HTML or Shortcode' ) } /> }
 					IconRemove={ () => <Icon type="code" title={ __wprm( 'Remove HTML or Shortcode' ) } /> }
 				/>
-				<ButtonWrap
-					before="[adjustable]"
-					after="[/adjustable]"
-					Icon={ () => <Icon type="adjustable" title={ __wprm( 'Add Adjustable Shortcode' ) } /> }
-				/>
-				<ButtonWrap
-					before="[timer minutes=0]"
-					after="[/timer]"
-					Icon={ () => <Icon type="clock" title={ __wprm( 'Add Timer Shortcode' ) } /> }
-				/>
-				<Spacer />
-				<ButtonCharacter character="½" />
-				<ButtonCharacter character="⅓" />
-				<ButtonCharacter character="⅔" />
-				<ButtonCharacter character="¼" />
-				<ButtonCharacter character="¾" />
-				<ButtonCharacter character="⅕" />
-				<ButtonCharacter character="⅖" />
-				<ButtonCharacter character="⅗" />
-				<ButtonCharacter character="⅘" />
-				<ButtonCharacter character="⅙" />
-				<ButtonCharacter character="⅚" />
-				<ButtonCharacter character="⅐" />
-				<ButtonCharacter character="⅛" />
-				<ButtonCharacter character="⅜" />
-				<ButtonCharacter character="⅝" />
-				<ButtonCharacter character="⅞" />
-				<Spacer />
-				<ButtonCharacter character="°" />
-				<ButtonCharacter character="Ø" />
+				{
+					'roundup' !== props.type
+					&&
+					<Fragment>
+						<ButtonWrap
+							before="[adjustable]"
+							after="[/adjustable]"
+							Icon={ () => <Icon type="adjustable" title={ __wprm( 'Add Adjustable Shortcode' ) } /> }
+						/>
+						<ButtonWrap
+							before="[timer minutes=0]"
+							after="[/timer]"
+							Icon={ () => <Icon type="clock" title={ __wprm( 'Add Timer Shortcode' ) } /> }
+						/>
+						<Spacer />
+						<ButtonCharacter character="½" />
+						<ButtonCharacter character="⅓" />
+						<ButtonCharacter character="⅔" />
+						<ButtonCharacter character="¼" />
+						<ButtonCharacter character="¾" />
+						<ButtonCharacter character="⅕" />
+						<ButtonCharacter character="⅖" />
+						<ButtonCharacter character="⅗" />
+						<ButtonCharacter character="⅘" />
+						<ButtonCharacter character="⅙" />
+						<ButtonCharacter character="⅚" />
+						<ButtonCharacter character="⅐" />
+						<ButtonCharacter character="⅛" />
+						<ButtonCharacter character="⅜" />
+						<ButtonCharacter character="⅝" />
+						<ButtonCharacter character="⅞" />
+						<Spacer />
+						<ButtonCharacter character="°" />
+						<ButtonCharacter character="Ø" />
+					</Fragment>
+				}
 			</div>
 		</ModalToolbar>
 	);

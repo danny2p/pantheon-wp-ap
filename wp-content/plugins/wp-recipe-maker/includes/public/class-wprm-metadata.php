@@ -354,10 +354,17 @@ class WPRM_Metadata {
 				$metadata_equipment = array();
 
 				foreach ( $equipment as $equipment_item ) {
-					if ( $equipment_item['name'] ) {
+					$name = $equipment_item['name'];
+					if ( $name ) {
+						if ( isset( $equipment_item['amount'] ) && $equipment_item['amount'] ) {
+							$name = $equipment_item['amount'] . ' ' . $name;
+						}
+						if ( isset( $equipment_item['notes'] ) && $equipment_item['notes'] ) {
+							$name = $name . ' ' . $equipment_item['notes'];
+						}
 						$metadata_equipment[] = array(
 							'@type' => 'HowToTool',
-							'name' => $equipment_item['name'],
+							'name' => $name,
 						);
 					}
 				}
@@ -422,8 +429,9 @@ class WPRM_Metadata {
 		$instruction_video_parts = array();
 		$url = $recipe->permalink();
 
+		$step_id = '#wprm-recipe-' . $recipe->id() . '-step';
 		if ( $url ) {
-			$url .= '#wprm-recipe-' . $recipe->id() . '-step';
+			$url .= $step_id;
 		}
 
 		$instruction_groups = $recipe->instructions();
@@ -487,7 +495,8 @@ class WPRM_Metadata {
 						$end = self::video_time_to_seconds( $instruction['video']['end'] );
 
 						if ( $end > $start ) {
-							$clip_id = 'Clip' . ( count( $instruction_video_parts ) + 1 );
+							$video_step_id = $step_id . '-' . $group_index . '-' . $index;
+							$clip_id = $video_step_id;
 
 							$video_part_metadata = array(
 								'@type' => 'Clip',
@@ -505,7 +514,7 @@ class WPRM_Metadata {
 							$instruction_video_parts[] = $video_part_metadata;
 
 							$metadata_instruction['video'] = array(
-								'@id' => $clip_id,
+								'@id' => $video_step_id,
 							);
 						}
 					}

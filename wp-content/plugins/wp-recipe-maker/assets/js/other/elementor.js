@@ -8,7 +8,6 @@ window.WPRecipeMaker.elementor = {
             }, true );
         });
         elementor.channels.editor.on( 'wprm:recipe:edit', function( view ) {
-            console.log( view );
             WPRM_Modal.open( 'recipe', {
                 recipeId: view.container.settings.attributes.wprm_recipe_id,
                 saveCallback: ( recipe ) => {

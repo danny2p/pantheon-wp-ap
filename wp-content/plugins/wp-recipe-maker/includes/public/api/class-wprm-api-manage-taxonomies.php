@@ -642,6 +642,12 @@ class WPRM_Api_Manage_Taxonomies {
 							update_term_meta( $term->term_id, 'wprmp_equipment_link_nofollow', $nofollow );
 						}
 						break;
+					case 'change-html':
+						if ( 'wprm_equipment' === $taxonomy ) {
+							$html = trim( $action['options'] );
+							update_term_meta( $term->term_id, 'wprmp_equipment_affiliate_html', $html );
+						}
+						break;
 					case 'create-nutrition':
 						// Sanitize name before lookup.
 						$name = WPRM_Recipe_Sanitizer::sanitize_html( $term->name );

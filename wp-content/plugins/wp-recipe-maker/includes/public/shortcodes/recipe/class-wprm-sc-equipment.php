@@ -31,6 +31,7 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 				'options' => array(
 					'list' => 'List',
 					'images' => 'Images',
+					'grid' => 'Grid',
 				),
 			),
 			'list_style' => array(
@@ -82,12 +83,27 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'value' => 'advanced',
 				),
 			),
+			'grid_columns' => array(
+				'default' => '3',
+				'type' => 'dropdown',
+				'options' => array(
+					'1' => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+				),
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'grid',
+				),
+			),
 			'image_size' => array(
 				'default' => '100x100',
 				'type' => 'image_size',
 				'dependency' => array(
 					'id' => 'display_style',
-					'value' => 'images',
+					'value' => 'list',
+					'type' => 'inverse',
 				),
 			),
 			'image_alignment' => array(
@@ -98,6 +114,10 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'center' => 'Centered',
 					'right' => 'Right',
 					'spaced' => 'Spaced Evenly',
+				),
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'images',
 				),
 			),
 		);
@@ -140,6 +160,14 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 
 				// Equipment link.
 				$name = apply_filters( 'wprm_recipe_equipment_shortcode_link', $equipment['name'], $equipment );
+
+				// Maybe add amount or notes.
+				if ( isset( $equipment['amount'] ) && $equipment['amount'] ) {
+					$name = $equipment['amount'] . ' ' . $name;
+				}
+				if ( isset( $equipment['notes'] ) && $equipment['notes'] ) {
+					$name = $name . ' ' . $equipment['notes'];
+				}
 
 				$equipment_output = '<div class="wprm-recipe-equipment-name">' . $name . '</div>';
 

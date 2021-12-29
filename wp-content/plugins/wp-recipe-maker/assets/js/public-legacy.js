@@ -6,6 +6,7 @@ import './public/analytics';
 import './public/comment-rating';
 import './public/grow';
 import './public/media-toggle';
+import './public/pinterest';
 import './public/print';
 import './public/slickstream';
 import './public/smooth-scroll';

@@ -53,10 +53,26 @@ const ActionsRecipe = (props) => {
         { value: 'change-author', label: __wprm( 'Change Display Author' ), default: { author: 'default', author_name: '', author_link: '' } },
         { value: 'change-servings', label: __wprm( 'Change Servings' ), default: { servings: '', servings_unit: '' } },
         { value: 'recalculate-time', label: __wprm( 'Recalculate Total Time' ), default: false },
+    );
+
+    if ( wprm_admin.addons.premium ) {
+        actionOptions.push(      
+            { value: 'custom-nutrition-ingredient', label: __wprm( 'Create Custom Nutrition Ingredient' ), default: false },
+        );
+    }
+    if ( wprm_admin.addons.pro ) {
+        actionOptions.push(      
+            { value: 'switch-unit-system', label: __wprm( 'Switch ingredient units with converted ones (does not change label)' ), default: false },
+            { value: 'change-unit-system', label: __wprm( 'Change unit system label (does not change ingredients)' ), default: 'default' },
+        );
+    }
+
+    // Default options (part 2).
+    actionOptions.push(
         { value: 'print', label: __wprm( 'Print Recipes' ), default: false },
         { value: 'export', label: __wprm( 'Export Recipes' ), default: 'recipe', required: 'premium' },
         { value: 'delete', label: __wprm( 'Delete Recipes' ), default: false },
-    )
+    );
 
     return (
         <form>
@@ -294,6 +310,36 @@ const ActionsRecipe = (props) => {
                                     }}
                                 />
                             </Fragment>
+                        }
+                        {
+                            'change-unit-system' === selectedAction
+                            &&
+                            <FieldRadio
+                                id="type"
+                                options={ [
+                                    {
+                                        value: 'default',
+                                        label: `${ __wprm( 'Use Default' ) } (${ wprm_admin_modal.unit_conversion.systems[ parseInt( wprm_admin_modal.unit_conversion.default_system ) ].label })`,
+                                    },
+                                    {
+                                        value: '1',
+                                        label: `${ __wprm( 'First Unit System' ) } (${ wprm_admin_modal.unit_conversion.systems[1].label })`,
+                                    },
+                                    {
+                                        value: '2',
+                                        label: `${ __wprm( 'Second Unit System' ) } (${ wprm_admin_modal.unit_conversion.systems[2].label })`,
+                                    },
+                                ] }
+                                value={props.action.options}
+                                onChange={(value) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: value,
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                            />
                         }
                         {
                             'export' === selectedAction

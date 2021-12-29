@@ -122,6 +122,10 @@ class WPRM_Blocks {
 						'type' => 'string',
 						'default' => '',
 					),
+					'button' => array(
+						'type' => 'string',
+						'default' => '',
+					),
 					'template' => array(
 						'type' => 'string',
 						'default' => '',
@@ -250,11 +254,17 @@ class WPRM_Blocks {
 
 		// Only do this for the Gutenberg Preview.
 		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+			$recipe = WPRM_Recipe_Manager::get_recipe( $atts['id'] );
+
+			// No recipe find? ID is incorrect => show warning.
+			if ( ! $recipe ) {
+				return '<div class="wprm-recipe-block-invalid">' . __( 'This is a "WPRM Recipe" block with a non-existing recipe ID.', 'wp-recipe-maker' ) . '</div>';
+			}
+
 			if ( isset( $atts['template'] ) && $atts['template'] ) {
 				$template = WPRM_Template_Manager::get_template_by_slug( $atts['template'] );
 			} else {
 				// Get recipe type.
-				$recipe = WPRM_Recipe_Manager::get_recipe( $atts['id'] );
 				$type = $recipe ? $recipe->type() : 'food';
 
 				// Use default single recipe template.

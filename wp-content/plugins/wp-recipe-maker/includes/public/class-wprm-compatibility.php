@@ -47,6 +47,10 @@ class WPRM_Compatibility {
 		add_filter( 'wpupg_unset_current_item', array( __CLASS__, 'wpupg_unset_recipe_id' ) );
 		add_filter( 'wpupg_template_editor_shortcodes', array( __CLASS__, 'wpupg_template_editor_shortcodes' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'wpupg_template_editor_styles' ) );
+
+		// WP Ultimate Post Grid & WP Extended Search combination.
+		add_filter( 'wpes_post_types', array( __CLASS__, 'wpupg_extended_search_post_types' ) );
+		add_filter( 'wpes_tax', array( __CLASS__, 'wpupg_extended_search_taxonomies' ) );
 	}
 
 	/**
@@ -211,6 +215,33 @@ class WPRM_Compatibility {
 		if ( 'grids_page_wpupg_template_editor' === $screen->id  ) {
 			wp_enqueue_style( 'wprm-admin-template', WPRM_URL . 'dist/admin-template.css', array(), WPRM_VERSION, 'all' );
 		}
+	}
+	
+	/**
+	 * Compatibility with WP Extended Search when WP Ultimate Post Grid is activated.
+	 *
+	 * @since	8.0.0
+	 */
+	public static function wpupg_extended_search_post_types( $post_types ) {
+		if ( class_exists( 'WP_Ultimate_Post_Grid' ) ) {
+			$post_types[ WPRM_POST_TYPE ] = get_post_type_object( WPRM_POST_TYPE );
+		}
+
+		return $post_types;
+	}
+
+	/**
+	 * Compatibility with WP Extended Search when WP Ultimate Post Grid is activated.
+	 *
+	 * @since	8.0.0
+	 */
+	public static function wpupg_extended_search_taxonomies( $taxonomies ) {
+		if ( class_exists( 'WP_Ultimate_Post_Grid' ) ) {
+			$wprm_taxonomies = get_object_taxonomies( WPRM_POST_TYPE, 'objects' );
+			$taxonomies = array_merge( $taxonomies, $wprm_taxonomies );
+		}
+
+		return $taxonomies;
 	}
 
 	/**

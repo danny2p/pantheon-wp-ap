@@ -9,6 +9,15 @@ const Totals = (props) => {
 
     const isFiltered = false !== props.filtered && props.filtered != props.total;
 
+    // Try to decode filter.
+    let decodedFilter = '';
+    if ( false !== props.filter ) {
+        decodedFilter = props.filter[1];
+        try {
+            decodedFilter = decodeURIComponent( props.filter[1] );
+        } catch(e) {}
+    }
+
     return (
         <div className="wprm-admin-table-totals">
             {
@@ -29,9 +38,15 @@ const Totals = (props) => {
             {
                 false !== props.filter
                 &&
-                <div className="wprm-admin-table-totals-filter">
-                    { `${__wprm( 'Filter' ) }: ${ props.filter[0] } = ${ props.filter[1] }` }
-                </div>
+                <Fragment>
+                    <div className="wprm-admin-table-totals-filter">
+                        { `${__wprm( 'Filter' ) }: ${ props.filter[0] } = ${ decodedFilter }` }
+                    </div>
+                    <a
+                        href="#"
+                        onClick={ () => props.onRemoveFilter() }
+                    >{ __wprm( 'Remove fixed filter' ) }</a>
+                </Fragment>
             }
         </div>
     );

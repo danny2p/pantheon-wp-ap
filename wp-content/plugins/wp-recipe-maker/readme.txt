@@ -94,6 +94,7 @@ Currently using another recipe plugin? No problem! You can easily migrate all yo
 *   Recipes by Simmer
 *   WordPress.com shortcode
 *   JSON-LD HTML Script
+*   Recipes Generator (JSON-LD embed code only)
 *   Multi Rating (ratings only)
 *   (Need anything else? Just ask!)
 
@@ -132,6 +133,39 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.0.1 =
+* Fix: Not showing space between associated ingredients
+* Fix: Not replacing Tasty Recipes correctly in backend during "Find Parents”
+* Fix: A few missing translations
+
+= 8.0.0 =
+* Feature: Health Check section on the dashboard page
+* Feature: Setting for automatic ItemList metadata for archive pages
+* Feature: Allow sorting and filtering by SEO on manage page
+* Feature: Rich text editor for the roundup item summary
+* Feature: Set custom name and summary for internal roundup item
+* Feature: Set custom button text for roundup item link
+* Feature: Import Recipes Generator embed code
+* Improvement: Further rate limiting of ingredient and equipment suggestions to prevent errors
+* Improvement: Setting to use HTML code for print credit
+* Improvement: Show warning in block editor preview if recipe block has an incorrect ID
+* Improvement: Recognizing JSON-LD HTML for import
+* Improvement: Better metadata for video clip IDs
+* Improvement: Ability to dismiss marketing notice on dashboard page
+* Improvement: Faster loading of manage page with 10,000+ recipes
+* Improvement: Ability to remove fixed filter on the manage page
+* Improvement: WP Extended Search compatibility when using WP Ultimate Post Grid
+* Fix: Prevent recipes from taking over custom post statusses
+* Fix: Problem with + in URL of external roundup links
+* Fix: Have separator inside span for ingredients associated with instructions
+* Fix: Prevent huge stars on comment overview page
+* Fix: Delete comment rating when associated comment gets permanently deleted
+* Fix: Bulk deleting comment ratings not removing stars from comment
+* Fix: PHP notice on comment overview page
+* Fix: Prevent error message in Visual Composer editor
+* Fix: Not always replacing Tasty Recipes block after importing
+* Fix: Elementor widget icon
+
 = 7.7.2 =
 * Improvement: Allow changing of post author when having recipes as a public post type
 * Improvement: Change preview width in the template editor preview
@@ -1302,6 +1336,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.0.1 =
+Fix a few small issues introduced in 8.0.0
+
+= 8.0.0 =
+Major update with plenty of new features, improvements and fixes
+
 = 7.7.2 =
 A few smaller fixes and improvements
 

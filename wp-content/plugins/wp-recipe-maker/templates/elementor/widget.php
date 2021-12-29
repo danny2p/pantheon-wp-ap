@@ -32,7 +32,7 @@ class WPRM_Elementor_Widget extends \Elementor\Widget_Base {
 	 * @since 5.0.0
 	 */
 	public function get_icon() {
-		return 'fa fa-cutlery';
+		return 'eicon-info-box';
 	}
 
 	/**

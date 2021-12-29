@@ -41,6 +41,7 @@ class WPRM_Recipe_Shell {
 			'image_url' => '',
 			'pin_image_id' => 0,
 			'pin_image_url' => '',
+			'pin_image_repin_id' => '',
 			'video_id' => 0,
 			'video_embed' => '',
 			'video_thumb_url' => '',
@@ -52,6 +53,7 @@ class WPRM_Recipe_Shell {
 			'rating' => false,
 			'servings' => 0,
 			'servings_unit' => '',
+			'servings_advanced_enabled' => false,
 			'cost' => '',
 			'my_emissions' => false,
 			'prep_time' => 0,
@@ -258,6 +260,21 @@ class WPRM_Recipe_Shell {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Replace placeholders in text with details from this recipe.
+	 *
+	 * @since	8.0.0
+	 * @param	string $text Text to replace the placeholders in.
+	 */
+	public function replace_placeholders( $text ) {
+		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
+		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
+		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
+		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
+
+		return $text;
 	}
 
 	/**

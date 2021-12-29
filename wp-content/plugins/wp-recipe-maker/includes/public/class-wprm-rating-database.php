@@ -312,9 +312,26 @@ class WPRM_Rating_Database {
 		$table_name = self::get_table_name();
 
 		if ( is_array( $ids ) && $ids ) {
-			// Delete all these rating IDs.
 			$ids = implode( ',', array_map( 'intval', $ids ) );
-			$wpdb->query( 'DELETE FROM ' . $table_name . ' WHERE ID IN (' . $ids . ')' );
+
+			// We need to make sure the cached ratings are deleted as well.
+			$query = self::get_ratings(array(
+				'where' => 'id IN (' . $ids . ')',
+			));
+
+			foreach ( $query['ratings'] as $rating ) {
+				$rating = (array) $rating;
+
+				if ( $rating['recipe_id'] ) {
+					WPRM_Rating::update_recipe_rating( $rating['recipe_id'] );
+				} else {
+					WPRM_Rating::update_recipe_rating_for_comment( $rating['comment_id'] );
+					WPRM_Comment_Rating::update_cached_rating( $rating['comment_id'], 0 );
+				}
+			}
+			
+			// Delete all these rating IDs.
+			$wpdb->query( 'DELETE FROM ' . $table_name . ' WHERE id IN (' . $ids . ')' );
 		}
 	}
 

@@ -367,6 +367,36 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'advanced_servings' => array(
+				'default' => 'after',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'before' => 'Show selector before the ingredients',
+					'after' => 'Show selector after the ingredients',
+				),
+			),
+			'advanced_servings_before' => array(
+				'default' => __( 'Makes:', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'advanced_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'advanced_servings_text_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'advanced_servings',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
@@ -416,6 +446,11 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'button_accent' => $atts['servings_button_accent'],
 			'button_radius' => $atts['servings_button_radius'],
 		);
+		$advanced_servings_atts = array(
+			'id' => $atts['id'],
+			'before_text' => $atts['advanced_servings_before'],
+			'text_style' => $atts['advanced_servings_text_style'],
+		);
 
 		$output = '<div class="' . implode( ' ', $classes ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'ingredients', array(
@@ -425,6 +460,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 
 		if ( 'before' === $atts['adjustable_servings'] ) {
 			$output .= WPRM_SC_Adjustable_Servings::shortcode( $adjustable_servings_atts );
+		}
+		if ( 'before' === $atts['advanced_servings'] ) {
+			$output .= WPRM_SC_Advanced_Adjustable_Servings::shortcode( $advanced_servings_atts );
 		}
 		if ( 'before' === $atts['unit_conversion'] ) {
 			$output .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
@@ -572,6 +610,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			$output .= '</div>';
 		}
 
+	 	if ( 'after' === $atts['advanced_servings'] ) {
+			$output .= WPRM_SC_Advanced_Adjustable_Servings::shortcode( $advanced_servings_atts );
+		}
 	 	if ( 'after' === $atts['unit_conversion'] ) {
 			$output .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
 		}

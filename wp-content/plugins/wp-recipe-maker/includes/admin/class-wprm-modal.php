@@ -50,6 +50,11 @@ class WPRM_Modal {
 				|| 'WishListMember' === $screen->parent_base ) {
 				return false;
 			}
+
+			// Visual composer.
+			if ( isset( $_GET['vcv-action'] ) && 'frontend' === $_GET['vcv-action'] ) {
+				return false;
+			}
 		}
 
 		return true;
@@ -220,7 +225,7 @@ class WPRM_Modal {
 	/**
 	 * Get all post author options.
 	 *
-	 * @since    7.8.0
+	 * @since    8.0.0
 	 */
 	public static function get_post_author_options() {
 		$options = array();

@@ -36,10 +36,10 @@ if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
 $label_id = is_admin() ? false : 'wprm-comment-rating-' . rand();
 
 // Name for the input element.
-$name = is_admin() && $comment_id ? 'wprm-comment-rating-' . $comment_id : 'wprm-comment-rating';
+$name = is_admin() && isset( $comment_id ) && $comment_id ? 'wprm-comment-rating-' . $comment_id : 'wprm-comment-rating';
 
 // Currently selected rating.
-$selected = $rating ? $rating : 0;
+$selected = isset( $rating ) && $rating ? $rating : 0;
 ?>
 <div class="comment-form-wprm-rating"<?php echo $hide_form; ?>>
 	<?php
