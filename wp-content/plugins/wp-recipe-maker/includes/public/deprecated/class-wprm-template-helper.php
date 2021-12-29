@@ -277,11 +277,7 @@ class WPRM_Template_Helper {
 	 * @param    mixed $text   Text to replace the placeholders in.
 	 */
 	public static function recipe_placeholders( $recipe, $text ) {
-		$text = str_ireplace( '%recipe_url%', $recipe->permalink(), $text );
-		$text = str_ireplace( '%recipe_name%', $recipe->name(), $text );
-		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $recipe->date() ) ), $text );
-
-		return $text;
+		return $recipe->replace_placeholders( $text );
 	}
 
 	/**

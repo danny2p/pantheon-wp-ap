@@ -109,11 +109,19 @@ class WPRM_Api_Manage_Recipes {
 			case 'date':
 				$args['orderby'] = 'date';
 				break;
+			case 'seo':
+				$args['orderby'] = 'meta_value_num';
+				$args['meta_key'] = 'wprm_seo_priority';
+				break;
 			case 'slug':
 				$args['orderby'] = 'post_name';
 				break;
 			case 'name':
 				$args['orderby'] = 'title';
+				break;
+			case 'pin_image_repin_id':
+				$args['orderby'] = 'meta_value';
+				$args['meta_key'] = 'wprm_pin_image_repin_id';
 				break;
 			case 'post_author':
 				$args['orderby'] = 'post_author';
@@ -171,392 +179,7 @@ class WPRM_Api_Manage_Recipes {
 		// Filter.
 		if ( $filtered ) {
 			foreach ( $filtered as $filter ) {
-				$value = $filter['value'];
-				switch( $filter['id'] ) {
-					case 'id':
-						$args['wprm_search_id'] = $value;
-						break;
-					case 'date':
-						$args['wprm_search_date'] = $value;
-						break;
-					case 'name':
-						$args['wprm_search_title'] = $value;
-						break;
-					case 'slug':
-						$args['wprm_search_slug'] = $value;
-						break;
-					case 'summary':
-						$args['wprm_search_content'] = $value;
-						break;
-					case 'post_author':
-						if ( 'all' !== $value ) {
-							$args['author'] = $value;
-						}
-						break;
-					case 'type':
-						if ( 'all' !== $value ) {
-							if ( 'other' === $value ) {
-								// Used non-food before other.
-								$args['meta_query'][] = array(
-									'key' => 'wprm_type',
-									'compare' => 'IN',
-									'value' => array( 'other', 'non-food' ),
-								);
-							} else {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_type',
-									'compare' => '=',
-									'value' => $value,
-								);
-							}
-						}
-						break;
-					case 'image':
-						if ( 'all' !== $value ) {
-							if ( 'yes' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => '_thumbnail_id',
-									'compare' => 'EXISTS'
-								);
-							} elseif ( 'no' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => '_thumbnail_id',
-									'compare' => 'NOT EXISTS'
-								);
-							}
-						}
-						break;
-					case 'pin_image':
-						if ( 'all' !== $value ) {
-							if ( 'yes' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_pin_image_id',
-								'compare' => '>',
-										'value' => '0',
-								);
-							} elseif ( 'no' === $value ) {
-								$args['meta_query'][] = array(
-									'relation' => 'OR',
-									array(
-										'key' => 'wprm_pin_image_id',
-										'compare' => '=',
-										'value' => '0',
-									),
-									array(
-										'key' => 'wprm_pin_image_id',
-										'compare' => 'NOT EXISTS'
-									),
-								);
-							}
-						}
-						break;
-					case 'video':
-						if ( 'all' !== $value ) {
-							if ( 'yes' === $value ) {
-								$args['meta_query'][] = array(
-									'relation' => 'OR',
-									array(
-										'key' => 'wprm_video_id',
-										'compare' => '>',
-										'value' => '0',
-									),
-									array(
-										'key' => 'wprm_video_embed',
-										'compare' => '!=',
-										'value' => '',
-									),
-								);
-							} elseif ( 'id' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_video_id',
-									'compare' => '>',
-									'value' => '0',
-								);
-							} elseif ( 'embed' === $value ) {
-								$args['meta_query'][] = array(
-									'relation' => 'OR',
-									array(
-										'key' => 'wprm_video_id',
-										'compare' => 'NOT EXISTS',
-									),
-									array(
-										'key' => 'wprm_video_id',
-										'compare' => '<=',
-										'value' => '0',
-									),
-								);
-								$args['meta_query'][] = array(
-									'key' => 'wprm_video_embed',
-									'compare' => '!=',
-									'value' => '',
-								);
-							} elseif ( 'no' === $value ) {
-								$args['meta_query'][] = array(
-									'relation' => 'OR',
-									array(
-										'key' => 'wprm_video_id',
-										'compare' => 'NOT EXISTS',
-									),
-									array(
-										'key' => 'wprm_video_id',
-										'compare' => '<=',
-										'value' => '0',
-									),
-								);
-								$args['meta_query'][] = array(
-									'relation' => 'OR',
-									array(
-										'key' => 'wprm_video_embed',
-										'compare' => 'NOT EXISTS',
-									),
-									array(
-										'key' => 'wprm_video_embed',
-										'compare' => '=',
-										'value' => '',
-									),
-								);
-							}
-						}
-						break;
-					case 'author_display':
-						if ( 'all' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_author_display',
-								'compare' => '=',
-								'value' => $value,
-							);
-						}
-						break;
-					case 'status':
-						if ( 'all' !== $value ) {
-							$args['post_status'] = $value;
-						}
-						break;
-					case 'parent_post_id':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_parent_post_id',
-								'compare' => 'LIKE',
-								'value' => $value,
-							);
-						}
-						break;
-					case 'parent_post':
-						if ( 'all' !== $value ) {
-							$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
-
-							$args['meta_query'][] = array(
-								'key' => 'wprm_parent_post_id',
-								'compare' => $compare,
-							);
-						}
-						break;
-					case 'parent_post_language':
-						if ( 'all' !== $value ) {
-							// Not directly related to recipe, so needs an extra query.
-							$multilingual = WPRM_Compatibility::multilingual();
-
-							if ( $multilingual ) {
-								if ( 'wpml' === $multilingual['plugin'] ) {
-									do_action( 'wpml_switch_language', $value ); 
-     
-									// Get all possible parent post IDs.
-									$parent_posts_query = new WP_Query( array(
-										'post_type' => 'any',
-										'posts_per_page' => -1,
-										'post_status' => 'any',
-										'suppress_filters' => false,
-										'fields' => 'ids',
-									) );
-								
-									$parent_posts_ids = $parent_posts_query->posts;
-
-									$args['meta_query'][] = array(
-										'key' => 'wprm_parent_post_id',
-										'compare' => 'IN',
-										'value' => $parent_posts_ids,
-									);
-								}
-
-								// Polylang.
-								if ( 'polylang' === $multilingual['plugin'] ) {
-									// Get all possible parent post IDs.
-									$parent_posts_query = new WP_Query( array(
-										'post_type' => 'any',
-										'posts_per_page' => -1,
-										'post_status' => 'any',
-										'lang' => $value,
-										'fields' => 'ids',
-									) );
-								
-									$parent_posts_ids = $parent_posts_query->posts;
-
-									$args['meta_query'][] = array(
-										'key' => 'wprm_parent_post_id',
-										'compare' => 'IN',
-										'value' => $parent_posts_ids,
-									);
-								}
-							}
-						}
-						break;
-					case 'rating':
-						if ( 'all' !== $value ) {
-							if ( 'none' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_rating_average',
-									'compare' => '=',
-									'value' => '0',
-								);
-							} elseif ( 'any' === $value ) {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_rating_average',
-									'compare' => '!=',
-									'value' => '0',
-								);
-							} else {
-								$stars = intval( $value );
-
-								$args['meta_query'][] = array(
-									'key' => 'wprm_rating_average',
-									'compare' => '>',
-									'value' => $value - 1,
-								);
-
-								$args['meta_query'][] = array(
-									'key' => 'wprm_rating_average',
-									'compare' => '<=',
-									'value' => $value,
-								);
-							}
-						}
-						break;
-					case 'prep_time':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_prep_time',
-								'compare' => '=',
-								'value' => self::parse_time( $value ),
-							);
-						}
-						break;
-					case 'cook_time':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_cook_time',
-								'compare' => '=',
-								'value' => self::parse_time( $value ),
-							);
-						}
-						break;
-					case 'custom_time':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_custom_time',
-								'compare' => '=',
-								'value' => self::parse_time( $value ),
-							);
-						}
-						break;
-					case 'total_time':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_total_time',
-								'compare' => '=',
-								'value' => self::parse_time( $value ),
-							);
-						}
-						break;
-					case 'servings':
-						if ( '' !== $value ) {
-							$args['meta_query'][] = array(
-								'key' => 'wprm_servings',
-								'compare' => 'LIKE',
-								'value' => $value,
-							);
-						}
-						break;
-					case 'equipment':
-						if ( '' !== $value ) {
-							$equipment_ids = get_terms(array(
-								'taxonomy' => 'wprm_equipment',
-								'name__like' => $value,
-								'hide_empty' => false,
-								'fields' => 'ids',
-							));
-
-							$args['tax_query'][] = array(
-								'taxonomy' => 'wprm_equipment',
-								'field' => 'term_id',
-								'terms' => $equipment_ids,
-								'operator' => 'IN',
-							);
-						}
-						break;
-					case 'ingredient':
-						if ( '' !== $value ) {
-							$ingredient_ids = get_terms(array(
-								'taxonomy' => 'wprm_ingredient',
-								'name__like' => $value,
-								'hide_empty' => false,
-								'fields' => 'ids',
-							));
-
-							$args['tax_query'][] = array(
-								'taxonomy' => 'wprm_ingredient',
-								'field' => 'term_id',
-								'terms' => $ingredient_ids,
-								'operator' => 'IN',
-							);
-						}
-						break;
-					case 'submission_author':
-						if ( 'all' !== $value ) {
-							$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
-
-							$args['meta_query'][] = array(
-								'key' => 'wprm_submission_user',
-								'compare' => $compare,
-							);
-						}
-						break;
-					default:
-						if ( 'custom_field_' === substr( $filter['id'], 0, 13 ) ) {
-							$custom_field_key = substr( $filter['id'], 13 );
-
-							if ( '' !== $value ) {
-								$args['meta_query'][] = array(
-									'key' => 'wprm_custom_field_' . $custom_field_key,
-									'compare' => 'LIKE',
-									'value' => $value,
-								);
-							}
-							break;
-						}
-
-						// Assume it's a taxonomy if it doesn't match anything else.
-						if ( 'all' !== $value ) {
-							$taxonomy = 'wprm_' . substr( $filter['id'], 4 ); // Starts with tag_
-
-							if ( 'none' === $value ) {
-								$args['tax_query'][] = array(
-									'taxonomy' => $taxonomy,
-									'operator' => 'NOT EXISTS',
-								);
-							} elseif ( 'any' === $value ) {
-								$args['tax_query'][] = array(
-									'taxonomy' => $taxonomy,
-									'operator' => 'EXISTS',
-								);
-							} else {
-								$args['tax_query'][] = array(
-									'taxonomy' => $taxonomy,
-									'field' => 'term_id',
-									'terms' => intval( $value ),
-								);
-							}
-						}
-				}
+				$args = self::update_args_for_filter( $args, $filter['id'], $filter['value'] );
 			}
 		}
 
@@ -571,6 +194,8 @@ class WPRM_Api_Manage_Recipes {
 					'field' => 'term_id',
 					'terms' => $term_id,
 				);
+			} else {
+				$args = self::update_args_for_filter( $args, $fixed_filter[0], urldecode( $fixed_filter[1] ) );
 			}
 		}
 
@@ -605,6 +230,423 @@ class WPRM_Api_Manage_Recipes {
 			'filtered' => intval( $query->found_posts ),
 			'pages' => ceil( $query->found_posts / $page_size ),
 		);
+	}
+
+	/**
+	 * Filter the where recipes query.
+	 *
+	 * @since    8.0.0
+	 */
+	public static function update_args_for_filter( $args, $filter, $value ) {
+		switch( $filter ) {
+			case 'seo':
+				$seo_types = array(
+					'bad' 		=> 5,
+					'warning' 	=> 10,
+					'rating' 	=> 15,
+					'good' 		=> 20,
+					'other' 	=> 25,
+				);
+				if ( 'all' !== $value && array_key_exists( $value, $seo_types ) ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_seo_priority',
+						'value' => $seo_types[ $value ],
+					);
+				}
+				break;
+			case 'id':
+				$args['wprm_search_id'] = $value;
+				break;
+			case 'date':
+				$args['wprm_search_date'] = $value;
+				break;
+			case 'name':
+				$args['wprm_search_title'] = $value;
+				break;
+			case 'slug':
+				$args['wprm_search_slug'] = $value;
+				break;
+			case 'summary':
+				$args['wprm_search_content'] = $value;
+				break;
+			case 'post_author':
+				if ( 'all' !== $value ) {
+					$args['author'] = $value;
+				}
+				break;
+			case 'type':
+				if ( 'all' !== $value ) {
+					if ( 'other' === $value ) {
+						// Used non-food before other.
+						$args['meta_query'][] = array(
+							'key' => 'wprm_type',
+							'compare' => 'IN',
+							'value' => array( 'other', 'non-food' ),
+						);
+					} else {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_type',
+							'compare' => '=',
+							'value' => $value,
+						);
+					}
+				}
+				break;
+			case 'image':
+				if ( 'all' !== $value ) {
+					if ( 'yes' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => '_thumbnail_id',
+							'compare' => 'EXISTS'
+						);
+					} elseif ( 'no' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => '_thumbnail_id',
+							'compare' => 'NOT EXISTS'
+						);
+					}
+				}
+				break;
+			case 'pin_image':
+				if ( 'all' !== $value ) {
+					if ( 'yes' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_pin_image_id',
+						'compare' => '>',
+								'value' => '0',
+						);
+					} elseif ( 'no' === $value ) {
+						$args['meta_query'][] = array(
+							'relation' => 'OR',
+							array(
+								'key' => 'wprm_pin_image_id',
+								'compare' => '=',
+								'value' => '0',
+							),
+							array(
+								'key' => 'wprm_pin_image_id',
+								'compare' => 'NOT EXISTS'
+							),
+						);
+					}
+				}
+				break;
+			case 'pin_image_repin_id':
+				$args['meta_query'][] = array(
+					'key' => 'wprm_pin_image_repin_id',
+					'compare' => 'LIKE',
+					'value' => $value,
+				);
+				break;
+			case 'video':
+				if ( 'all' !== $value ) {
+					if ( 'yes' === $value ) {
+						$args['meta_query'][] = array(
+							'relation' => 'OR',
+							array(
+								'key' => 'wprm_video_id',
+								'compare' => '>',
+								'value' => '0',
+							),
+							array(
+								'key' => 'wprm_video_embed',
+								'compare' => '!=',
+								'value' => '',
+							),
+						);
+					} elseif ( 'id' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_video_id',
+							'compare' => '>',
+							'value' => '0',
+						);
+					} elseif ( 'embed' === $value ) {
+						$args['meta_query'][] = array(
+							'relation' => 'OR',
+							array(
+								'key' => 'wprm_video_id',
+								'compare' => 'NOT EXISTS',
+							),
+							array(
+								'key' => 'wprm_video_id',
+								'compare' => '<=',
+								'value' => '0',
+							),
+						);
+						$args['meta_query'][] = array(
+							'key' => 'wprm_video_embed',
+							'compare' => '!=',
+							'value' => '',
+						);
+					} elseif ( 'no' === $value ) {
+						$args['meta_query'][] = array(
+							'relation' => 'OR',
+							array(
+								'key' => 'wprm_video_id',
+								'compare' => 'NOT EXISTS',
+							),
+							array(
+								'key' => 'wprm_video_id',
+								'compare' => '<=',
+								'value' => '0',
+							),
+						);
+						$args['meta_query'][] = array(
+							'relation' => 'OR',
+							array(
+								'key' => 'wprm_video_embed',
+								'compare' => 'NOT EXISTS',
+							),
+							array(
+								'key' => 'wprm_video_embed',
+								'compare' => '=',
+								'value' => '',
+							),
+						);
+					}
+				}
+				break;
+			case 'author_display':
+				if ( 'all' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_author_display',
+						'compare' => '=',
+						'value' => $value,
+					);
+				}
+				break;
+			case 'status':
+				if ( 'all' !== $value ) {
+					$args['post_status'] = $value;
+				}
+				break;
+			case 'parent_post_id':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_parent_post_id',
+						'compare' => 'LIKE',
+						'value' => $value,
+					);
+				}
+				break;
+			case 'parent_post':
+				if ( 'all' !== $value ) {
+					$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
+
+					$args['meta_query'][] = array(
+						'key' => 'wprm_parent_post_id',
+						'compare' => $compare,
+					);
+				}
+				break;
+			case 'parent_post_language':
+				if ( 'all' !== $value ) {
+					// Not directly related to recipe, so needs an extra query.
+					$multilingual = WPRM_Compatibility::multilingual();
+
+					if ( $multilingual ) {
+						if ( 'wpml' === $multilingual['plugin'] ) {
+							do_action( 'wpml_switch_language', $value ); 
+
+							// Get all possible parent post IDs.
+							$parent_posts_query = new WP_Query( array(
+								'post_type' => 'any',
+								'posts_per_page' => -1,
+								'post_status' => 'any',
+								'suppress_filters' => false,
+								'fields' => 'ids',
+							) );
+						
+							$parent_posts_ids = $parent_posts_query->posts;
+
+							$args['meta_query'][] = array(
+								'key' => 'wprm_parent_post_id',
+								'compare' => 'IN',
+								'value' => $parent_posts_ids,
+							);
+						}
+
+						// Polylang.
+						if ( 'polylang' === $multilingual['plugin'] ) {
+							// Get all possible parent post IDs.
+							$parent_posts_query = new WP_Query( array(
+								'post_type' => 'any',
+								'posts_per_page' => -1,
+								'post_status' => 'any',
+								'lang' => $value,
+								'fields' => 'ids',
+							) );
+						
+							$parent_posts_ids = $parent_posts_query->posts;
+
+							$args['meta_query'][] = array(
+								'key' => 'wprm_parent_post_id',
+								'compare' => 'IN',
+								'value' => $parent_posts_ids,
+							);
+						}
+					}
+				}
+				break;
+			case 'rating':
+				if ( 'all' !== $value ) {
+					if ( 'none' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_rating_average',
+							'compare' => '=',
+							'value' => '0',
+						);
+					} elseif ( 'any' === $value ) {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_rating_average',
+							'compare' => '!=',
+							'value' => '0',
+						);
+					} else {
+						$stars = intval( $value );
+
+						$args['meta_query'][] = array(
+							'key' => 'wprm_rating_average',
+							'compare' => '>',
+							'value' => $value - 1,
+						);
+
+						$args['meta_query'][] = array(
+							'key' => 'wprm_rating_average',
+							'compare' => '<=',
+							'value' => $value,
+						);
+					}
+				}
+				break;
+			case 'prep_time':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_prep_time',
+						'compare' => '=',
+						'value' => self::parse_time( $value ),
+					);
+				}
+				break;
+			case 'cook_time':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_cook_time',
+						'compare' => '=',
+						'value' => self::parse_time( $value ),
+					);
+				}
+				break;
+			case 'custom_time':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_custom_time',
+						'compare' => '=',
+						'value' => self::parse_time( $value ),
+					);
+				}
+				break;
+			case 'total_time':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_total_time',
+						'compare' => '=',
+						'value' => self::parse_time( $value ),
+					);
+				}
+				break;
+			case 'servings':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_servings',
+						'compare' => 'LIKE',
+						'value' => $value,
+					);
+				}
+				break;
+			case 'equipment':
+				if ( '' !== $value ) {
+					$equipment_ids = get_terms(array(
+						'taxonomy' => 'wprm_equipment',
+						'name__like' => $value,
+						'hide_empty' => false,
+						'fields' => 'ids',
+					));
+
+					$args['tax_query'][] = array(
+						'taxonomy' => 'wprm_equipment',
+						'field' => 'term_id',
+						'terms' => $equipment_ids,
+						'operator' => 'IN',
+					);
+				}
+				break;
+			case 'ingredient':
+				if ( '' !== $value ) {
+					$ingredient_ids = get_terms(array(
+						'taxonomy' => 'wprm_ingredient',
+						'name__like' => $value,
+						'hide_empty' => false,
+						'fields' => 'ids',
+					));
+
+					$args['tax_query'][] = array(
+						'taxonomy' => 'wprm_ingredient',
+						'field' => 'term_id',
+						'terms' => $ingredient_ids,
+						'operator' => 'IN',
+					);
+				}
+				break;
+			case 'submission_author':
+				if ( 'all' !== $value ) {
+					$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
+
+					$args['meta_query'][] = array(
+						'key' => 'wprm_submission_user',
+						'compare' => $compare,
+					);
+				}
+				break;
+			default:
+				if ( 'custom_field_' === substr( $filter, 0, 13 ) ) {
+					$custom_field_key = substr( $filter, 13 );
+
+					if ( '' !== $value ) {
+						$args['meta_query'][] = array(
+							'key' => 'wprm_custom_field_' . $custom_field_key,
+							'compare' => 'LIKE',
+							'value' => $value,
+						);
+					}
+					break;
+				}
+
+				// Assume it's a taxonomy if it doesn't match anything else.
+				if ( 'all' !== $value ) {
+					$taxonomy = 'wprm_' . substr( $filter, 4 ); // Starts with tag_
+
+					if ( 'none' === $value ) {
+						$args['tax_query'][] = array(
+							'taxonomy' => $taxonomy,
+							'operator' => 'NOT EXISTS',
+						);
+					} elseif ( 'any' === $value ) {
+						$args['tax_query'][] = array(
+							'taxonomy' => $taxonomy,
+							'operator' => 'EXISTS',
+						);
+					} else {
+						$args['tax_query'][] = array(
+							'taxonomy' => $taxonomy,
+							'field' => 'term_id',
+							'terms' => intval( $value ),
+						);
+					}
+				}
+		}
+
+		return $args;
 	}
 
 	/**
@@ -768,6 +810,73 @@ class WPRM_Api_Manage_Recipes {
 						break;
 					case 'recalculate-time':
 						$recipe_data['total_time'] = intval( $recipe_data['prep_time'] ) + intval( $recipe_data['cook_time'] ) + intval( $recipe_data['custom_time'] );
+						break;
+					case 'custom-nutrition-ingredient':
+						$recipe_data = false;
+
+						if ( class_exists( 'WPRMPN_Ingredient_Manager' ) ) {
+							$amount = 1;
+							$unit = '';
+							$name = $recipe->name();
+							$nutrients = array();
+
+							$recipe_nutrition = $recipe->nutrition();
+							$nutrition_fields = WPRM_Nutrition::get_fields();
+							unset( $nutrition_fields['serving_size'] );
+
+							foreach ( $nutrition_fields as $nutrient => $options ) {
+								if ( ! isset( $options['type'] ) || 'calculated' !== $options['type'] ) {
+									if ( isset( $recipe_nutrition[ $nutrient ] ) ) {
+										$nutrients[ $nutrient ] = $recipe_nutrition[ $nutrient ];
+									}
+								}
+							}
+
+							WPRMPN_Ingredient_Manager::save_ingredient( 0, $amount, $unit, $name, $nutrients );
+						}
+						break;
+					case 'switch-unit-system':
+						$new_ingredients = array();
+						foreach ( $recipe->ingredients() as $ingredient_group ) {
+							$new_ingredient_group = $ingredient_group;
+							$new_ingredient_group['ingredients'] = array();
+			
+							foreach ( $ingredient_group['ingredients'] as $ingredient ) {
+								// Make sure converted exists
+								if ( ! isset( $ingredient['converted'] ) ) {
+									$ingredient['converted'] = array();
+								}
+								if ( ! isset( $ingredient['converted'][2] ) ) {
+									$ingredient['converted'][2] = array(
+										'amount' => '',
+										'unit' => '',
+									);
+								}
+
+								// Store in temp variables.
+								$original_amount = $ingredient['amount'];
+								$original_unit = $ingredient['unit'];
+								$converted_amount = $ingredient['converted'][2]['amount'];
+								$converted_unit = $ingredient['converted'][2]['unit'];
+
+								// Switch around.
+								$ingredient['amount'] = $converted_amount;
+								$ingredient['unit'] = $converted_unit;
+								$ingredient['converted'][2]['amount'] = $original_amount;
+								$ingredient['converted'][2]['unit'] = $original_unit;
+
+								$new_ingredient_group['ingredients'][] = $ingredient;
+							}
+			
+							$new_ingredients[] = $new_ingredient_group;
+						}
+
+						// Store as new ingredients and make sure outdated ingredients_flat is ignored.
+						$recipe_data['ingredients'] = $new_ingredients;
+						unset( $recipe_data['ingredients_flat'] );
+						break;
+					case 'change-unit-system':
+						$recipe_data['unit_system'] = $action['options'];
 						break;
 					case 'delete':
 						$recipe_data = false;

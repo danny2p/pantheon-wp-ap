@@ -125,9 +125,12 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$atts = parent::get_attributes( $atts );
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
-		if ( ! $recipe || ! $recipe->pin_image_url() ) {
+		if ( ! $recipe || ( ! $recipe->pin_image_url() && ! $recipe->pin_image_repin_id() ) ) {
 			return '';
 		}
+
+		// Make sure pinit.js gets loaded.
+		add_filter( 'wprm_load_pinit', '__return_true' );
 
 		// Build pin URL.
 		$url = $recipe->permalink();
@@ -139,8 +142,6 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$pin_url .= '&media=' . urlencode( $recipe->pin_image_url() );
 		$pin_url .= '&description=' . urlencode( $recipe->pin_image_description() );
 		$pin_url .= '&is_video=false';
-
-		$pin_script = "onclick=\"window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=500,height=500'); return false;\"";
 
 		// Get optional icon.
 		$icon = '';
@@ -171,7 +172,19 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
-		$output = '<a href="' . $pin_url . '" ' . $pin_script .' data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow noopener">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		// Construct link attributes.
+		$attributes = '';
+		$attributes .= ' style="' . $style . '"';
+		$attributes .= ' class="' . implode( ' ', $classes ) . '';
+		$attributes .= ' target="_blank"';
+		$attributes .= ' rel="nofollow noopener"';
+		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
+		$attributes .= ' data-url="' . esc_attr( $url ) . '"';
+		$attributes .= ' data-media="' . esc_attr( $recipe->pin_image_url() ) . '"';
+		$attributes .= ' data-description="' . esc_attr( $recipe->pin_image_description() ) . '"';
+		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
+
+		$output = '<a href="' . $pin_url . '"' . $attributes . '>' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

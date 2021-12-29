@@ -59,11 +59,16 @@
         }
     }
 
-    &.wprm-admin-manage-seo-indicator-other {
+    &.wprm-admin-manage-seo-indicator-other,
+    &.wprm-admin-manage-seo-indicator-missing {
         display: block;
         font-size: 10px;
         line-height: 10px;
         text-align: center;
+    }
+    &.wprm-admin-manage-seo-indicator-missing {
+        border-color: darken( #e74c3c, 25% );
+        color: darken( #e74c3c, 25% );
     }
     &.wprm-admin-manage-seo-indicator-bad {
         border-color: darken( #e74c3c, 25% );

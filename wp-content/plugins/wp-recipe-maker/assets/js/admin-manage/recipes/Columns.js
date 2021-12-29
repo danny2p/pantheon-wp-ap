@@ -116,9 +116,21 @@ export default {
                 Header: __wprm( 'SEO' ),
                 id: 'seo',
                 accessor: 'seo',
-                width: 65,
-                sortable: false,
-                filterable: false,
+                width: 80,
+                Filter: ({ filter, onChange }) => (
+                    <select
+                        onChange={event => onChange(event.target.value)}
+                        style={{ width: '100%', fontSize: '1em' }}
+                        value={filter ? filter.value : 'all'}
+                    >
+                        <option value="all">{ __wprm( 'Show All' ) }</option>
+                        <option value="other">{ 'n/a' }</option>
+                        <option value="bad">{ __wprm( 'Bad' ) }</option>
+                        <option value="warning">{ __wprm( 'Warnings' ) }</option>
+                        <option value="rating">{ __wprm( 'No Ratings' ) }</option>
+                        <option value="good">{ __wprm( 'Good' ) }</option>
+                    </select>
+                ),
                 Cell: row => (
                     <SeoIndicator
                         seo={ row.value }
@@ -259,6 +271,12 @@ export default {
                         }
                     </div>
                 ),
+            },{
+                Header: __wprm( 'Repin ID' ),
+                id: 'pin_image_repin_id',
+                accessor: 'pin_image_repin_id',
+                width: 170,
+                Filter: (props) => (<TextFilter {...props}/>),
             },{
                 Header: __wprm( 'Video' ),
                 id: 'video',

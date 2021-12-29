@@ -68,7 +68,7 @@ class WPRM_Print {
 			);
 		}
 
-		if ( $print_args && 2 <= count( $print_args ) ) {
+		if ( $print_args && 1 <= count( $print_args ) && $print_args[0] ) {
 			WPRM_Context::set( 'print' );
 
 			// Get assets to output while making sure nothing gets output yet.
@@ -216,6 +216,7 @@ class WPRM_Print {
 	
 						$recipes[] = array(
 							'id' => $uid,
+							'recipe_id' => $unique_recipe['id'],
 							'original_servings' => $recipe->servings(),
 							'servings' => 0 < $unique_recipe['servings'] ? $unique_recipe['servings'] : $recipe->servings(),
 						);
@@ -230,6 +231,7 @@ class WPRM_Print {
 						// Update ID for adjustable servings.
 						$recipe_template = str_replace( 'wprm-recipe-servings-' . $unique_recipe['id'], 'wprm-recipe-servings-' . $uid, $recipe_template );
 						$recipe_template = str_replace( 'wprm-recipe-adjustable-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-adjustable-servings-' . $uid . '-container', $recipe_template );
+						$recipe_template = str_replace( 'wprm-recipe-advanced-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-advanced-servings-' . $uid . '-container', $recipe_template );
 
 						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '">' . $recipe_template . '</div>';
 						$uid++;
@@ -327,11 +329,15 @@ class WPRM_Print {
 
 			// Add optional print credit.
 			if ( 'recipe' === $args[0] && isset( $output['html'] ) ) {
-				$credit = WPRM_Settings::get( 'print_credit' );
+				if ( WPRM_Settings::get( 'print_credit_use_html' ) ) {
+					$credit = WPRM_Settings::get( 'print_credit_html' );
+				} else {
+					$credit = WPRM_Settings::get( 'print_credit' );
+				}
 
 				if ( $credit ) {
 					$recipe = WPRM_Recipe_Manager::get_recipe( intval( $args[1] ) );
-					$output['html'] .= '<div id="wprm-print-footer">' . WPRM_Template_Helper::recipe_placeholders( $recipe, $credit ) . '</div>';
+					$output['html'] .= '<div id="wprm-print-footer">' . $recipe->replace_placeholders( $credit ) . '</div>';
 
 					// Add class to indicate there's a print credit.
 					if ( ! isset( $output['classes'] ) ) {

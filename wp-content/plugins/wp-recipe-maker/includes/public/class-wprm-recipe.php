@@ -70,6 +70,7 @@ class WPRM_Recipe {
 		$recipe['image_url'] = $this->image_url( array( 150, 999 ) );
 		$recipe['pin_image_id'] = $this->pin_image_id( true );
 		$recipe['pin_image_url'] = $this->pin_image_url( array( 150, 999 ) );
+		$recipe['pin_image_repin_id'] = $this->pin_image_repin_id();
 		$recipe['name'] = $this->name();
 		$recipe['summary'] = str_ireplace( '<br>', '<br/>', $this->summary() ); // Otherwise new editor detects change.
 
@@ -79,6 +80,8 @@ class WPRM_Recipe {
 		$recipe['cost'] = $this->cost();
 		$recipe['servings'] = $this->servings();
 		$recipe['servings_unit'] = $this->servings_unit();
+		$recipe['servings_advanced_enabled'] = $this->servings_advanced_enabled();
+		$recipe['servings_advanced'] = $this->servings_advanced();
 		$recipe['prep_time'] = $this->prep_time();
 		$recipe['prep_time_zero'] = $this->prep_time_zero();
 		$recipe['cook_time'] = $this->cook_time();
@@ -136,7 +139,8 @@ class WPRM_Recipe {
 
 		$recipe['date'] = $this->date();
 		$recipe['date_formatted'] = $this->date_formatted();
-		$recipe['seo'] = WPRM_Seo_Checker::check_recipe( $this );
+		$recipe['seo'] = $this->seo();
+		$recipe['seo_priority'] = $this->seo_priority();
 		$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
 
 		$recipe['permalink'] = $this->permalink( true );
@@ -442,6 +446,31 @@ class WPRM_Recipe {
 	}
 
 	/**
+	 * Get the recipe seo state.
+	 *
+	 * @since    8.0.0
+	 */
+	public function seo() {
+		$seo = self::unserialize( $this->meta( 'wprm_seo', array() ) );
+
+		// Not calculated yet.
+		if ( empty( $seo ) ) {
+			$seo = WPRM_Seo_Checker::missing_seo_data();
+		}
+
+		return $seo;
+	}
+
+	/**
+	 * Get the recipe seo priority.
+	 *
+	 * @since    8.0.0
+	 */
+	public function seo_priority() {
+		return $this->meta( 'wprm_seo_priority', 0 );
+	}
+
+	/**
 	 * Get the recipe image HTML.
 	 *
 	 * @since	1.0.0
@@ -600,6 +629,15 @@ class WPRM_Recipe {
 	}
 
 	/**
+	 * Get the recipe pin image Repin ID.
+	 *
+	 * @since	8.0.0
+	 */
+	public function pin_image_repin_id() {
+		return $this->meta( 'wprm_pin_image_repin_id', '' );
+	}
+
+	/**
 	 * Get the recipe pin image url.
 	 *
 	 * @since	4.0.0
@@ -657,8 +695,7 @@ class WPRM_Recipe {
 				break;
 			case 'custom':
 				$description = WPRM_Settings::get( 'pinterest_custom_description' );
-				$description = str_ireplace( '%recipe_name%', $this->name(), $description );
-				$description = str_ireplace( '%recipe_summary%', $this->summary(), $description );
+				$description = $this->replace_placeholders( $description );
 				break;
 		}
 
@@ -876,7 +913,7 @@ class WPRM_Recipe {
 	 * @since    1.0.0
 	 */
 	public function name() {
-		return $this->post->post_title;
+		return apply_filters( 'wprm_recipe_field', $this->post->post_title, 'name', $this );
 	}
 
 	/**
@@ -970,7 +1007,7 @@ class WPRM_Recipe {
 	 * @since    1.0.0
 	 */
 	public function summary() {
-		return $this->post->post_content;
+		return apply_filters( 'wprm_recipe_field', $this->post->post_content, 'summary', $this );
 	}
 
 	/**
@@ -989,6 +1026,35 @@ class WPRM_Recipe {
 	 */
 	public function servings_unit() {
 		return $this->meta( 'wprm_servings_unit', '' );
+	}
+
+	/**
+	 * Get the recipe servings advanced enabled.
+	 *
+	 * @since	8.0.0
+	 */
+	public function servings_advanced_enabled() {
+		return $this->meta( 'wprm_servings_advanced_enabled', false );
+	}
+
+	/**
+	 * Get the recipe servings advanced.
+	 *
+	 * @since	8.0.0
+	 */
+	public function servings_advanced() {
+		$servings_advanced = self::unserialize( $this->meta( 'wprm_servings_advanced', array() ) );
+
+		$defaults = array(
+			'shape' => 'round',
+			'unit' => 'inch',
+			'diameter' => 0,
+			'width' => 0,
+			'length' => 0,
+			'height' => 0,
+		);
+
+		return array_replace_recursive( $defaults, $servings_advanced );
 	}
 
 	/**
@@ -1469,6 +1535,21 @@ class WPRM_Recipe {
 	 */
 	public function my_emissions() {
 		return $this->meta( 'wprm_my_emissions', false );
+	}
+
+	/**
+	 * Replace placeholders in text with details from this recipe.
+	 *
+	 * @since	8.0.0
+	 * @param	string $text Text to replace the placeholders in.
+	 */
+	public function replace_placeholders( $text ) {
+		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
+		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
+		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
+		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
+
+		return $text;
 	}
 
 	// DEPRECATED.

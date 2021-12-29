@@ -68,7 +68,7 @@ export default class Block extends Component {
 
         if (structure) {
             Object.entries(structure).forEach(([id, options]) => {
-                if(options.type) {
+                if ( options.type ) {
                     let name = options.name ? options.name : id.replace(/_/g, ' ').toLowerCase().replace(/\b[a-z]/g, function(letter) {
                         return letter.toUpperCase();
                     });

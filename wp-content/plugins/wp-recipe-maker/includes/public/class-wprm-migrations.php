@@ -119,6 +119,9 @@ class WPRM_Migrations {
 			if ( version_compare( $migrated_to_version, '7.6.0' ) < 0 ) {
 				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-7-6-0-nofollow-settings.php' );
 			}
+			if ( version_compare( $migrated_to_version, '8.0.0' ) < 0 ) {
+				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-8-0-0-collection-layout.php' );
+			}
 
 			// Specific migrations.
 			if ( ! self::is_migrated_to( 'ratings_db' ) ) {

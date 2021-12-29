@@ -72,6 +72,17 @@
 			</tr>
 			<tr>
 				<th scope="row">
+					<?php esc_html_e( 'Health Check', 'wp-recipe-maker' ); ?>
+				</th>
+				<td>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_health_check' ) ); ?>" class="button" id="tools_health_check"><?php esc_html_e( 'Run Health Check', 'wp-recipe-maker' ); ?></a>
+					<p class="description" id="tagline-tools_health_check">
+						<?php esc_html_e( 'Perform a health check of the plugin and your recipes.', 'wp-recipe-maker' ); ?>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">
 					<?php esc_html_e( 'Reset Settings', 'wp-recipe-maker' ); ?>
 				</th>
 				<td>

@@ -113,7 +113,10 @@ const RichEditor = (props) => {
                 renderElement={ useCallback(props => <Element {...props} />, []) }
                 renderLeaf={ useCallback(props => <Leaf {...props} />, []) }
                 onFocus={() => {
-                    if ( ! isFirefox() ) {
+                    // Firefox problems:
+                    // If used, cursor will always show up at the end of the content, even when clicking inside.
+                    // If not used, no cursor shows up when content is empty, so do apply in Firefox then as well.
+                    if ( ! isFirefox() || '' === props.value || '<p></p>' === props.value ) {
                         Transforms.deselect( editor );
                         Transforms.select(editor, {
                             anchor: Editor.start(editor, []),

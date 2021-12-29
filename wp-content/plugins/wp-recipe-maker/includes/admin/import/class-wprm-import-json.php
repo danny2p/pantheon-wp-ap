@@ -345,15 +345,21 @@ class WPRM_Import_Json extends WPRM_Import {
 	private function get_json_ld_recipes( $content ) {
 		$found_recipes = array();
 
-		if ( preg_match_all( '/<script type=\"application\/ld\+json\">(.*?)<\/script>/msi', $content, $matches ) && array_key_exists( 1, $matches ) ) {
+		if ( preg_match_all( '/<script([^>]*)>(.*?)<\/script>/msi', $content, $matches ) && array_key_exists( 1, $matches ) ) {
 			foreach ( $matches[1] as $key => $value ) {
-				$json = json_decode( $value, true );
+				if ( false !== stripos( $value, 'application/ld+json' ) ) {
+					$script_inner = $matches[2][ $key ];
+
+					if ( $script_inner ) {
+						$json = json_decode( $script_inner, true );
 				
-				if ( $json && isset( $json['@type'] ) && 'Recipe' === $json['@type' ] ) {
-					$found_recipes[] = array(
-						'html' => $matches[0][ $key ],
-						'json' => $json,
-					);
+						if ( $json && isset( $json['@type'] ) && 'recipe' === strtolower( $json['@type'] ) ) {
+							$found_recipes[] = array(
+								'html' => $matches[0][ $key ],
+								'json' => $json,
+							);
+						}
+					}
 				}
 			}
 		}

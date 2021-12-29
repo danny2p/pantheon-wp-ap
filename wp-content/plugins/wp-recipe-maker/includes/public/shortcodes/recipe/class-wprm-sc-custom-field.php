@@ -41,6 +41,144 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 				),
 				'dependency_compare' => 'OR',
 			),
+			'link_text' => array(
+				'default' => '',
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'key',
+						'value' => 'actual_values_set_in_parse_shortcode_below',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
+			'link_target' => array(
+				'default' => '_blank',
+				'type' => 'dropdown',
+				'options' => array(
+					'_self' => 'Open in same tab',
+					'_blank' => 'Open in new tab',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'key',
+						'value' => 'actual_values_set_in_parse_shortcode_below',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
+			'link_nofollow' => array(
+				'default' => 'nofollow',
+				'type' => 'dropdown',
+				'options' => array(
+					'dofollow' => 'Do not add nofollow attribute',
+					'nofollow' => 'Add nofollow attribute',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'key',
+						'value' => 'actual_values_set_in_parse_shortcode_below',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
+			'link_style' => array(
+				'default' => 'text',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Text',
+					'button' => 'Button',
+					'inline-button' => 'Inline Button',
+					'wide-button' => 'Full Width Button',
+				),
+				'dependency' => array(
+					'id' => 'link_text',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'link_icon' => array(
+				'default' => '',
+				'type' => 'icon',
+				'dependency' => array(
+					'id' => 'link_text',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'link_text_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'link_text',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'link_icon_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'link_icon',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'link_text_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'link_text',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'link_horizontal_padding' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'link_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
+			'link_vertical_padding' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'link_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
+			'link_button_color' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'link_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
+			'link_border_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'link_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
+			'link_border_radius' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'link_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
@@ -65,11 +203,20 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 			$custom_fields = class_exists( 'WPRM_Addons' ) && WPRM_Addons::is_active( 'custom-fields' ) ? WPRMPCF_Manager::get_custom_fields() : array();
 			
 			foreach ( $custom_fields as $key => $custom_field ) {
-				if ( 'image' === $custom_field['type'] ) {
-					$shortcodes[ $shortcode ]['image_size']['dependency'][] = array(
-						'id' => 'key',
-						'value' => $key,
-					);
+				$this_key_dependency = array(
+					'id' => 'key',
+					'value' => $key,
+				);
+
+				switch ( $custom_field['type'] ) {
+					case 'image':
+						$shortcodes[ $shortcode ]['image_size']['dependency'][] = $this_key_dependency;
+						break;
+					case 'link':
+						$shortcodes[ $shortcode ]['link_text']['dependency'][] = $this_key_dependency;
+						$shortcodes[ $shortcode ]['link_nofollow']['dependency'][] = $this_key_dependency;
+						$shortcodes[ $shortcode ]['link_target']['dependency'][] = $this_key_dependency;
+						break;
 				}
 			}
 		}

@@ -21,9 +21,25 @@ class WPRM_SC_Add_To_Collection extends WPRM_Template_Shortcode {
 	public static $shortcode = 'wprm-recipe-add-to-collection';
 
 	public static function init() {
-		self::$attributes = array(
+		$atts = array();
+
+		// Warning if setting not set.
+		if ( ! WPRM_Settings::get( 'recipe_collections_link' ) ) {
+			$atts['setting_not_set'] = array(
+				'type' => 'info',
+				'default' => '',
+				'text' => __( 'The button will only show up when a link to the collections feature is set on the WP Recipe Maker > Settings > Recipe Collections page', 'wp-recipe-maker' ),
+				'color' => 'darkred',
+			);
+		}
+
+		// Default attributes.
+		$atts = array_merge( $atts, array(
 			'id' => array(
 				'default' => '0',
+			),
+			'grid' => array(
+				'default' => '',
 			),
 			'style' => array(
 				'default' => 'text',
@@ -119,7 +135,9 @@ class WPRM_SC_Add_To_Collection extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
-		);
+		) );
+
+		self::$attributes = $atts;
 		parent::init();
 	}
 
@@ -134,10 +152,6 @@ class WPRM_SC_Add_To_Collection extends WPRM_Template_Shortcode {
 		$output = '';
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
-		if ( ! $recipe || ! $recipe->id() ) {
-			return '';
-		}
-
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

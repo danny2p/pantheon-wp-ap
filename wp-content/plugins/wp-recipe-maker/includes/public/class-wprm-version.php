@@ -45,7 +45,32 @@ class WPRM_Version {
 	 * @param	string $version Version number to check.
 	 */
 	public static function migration_needed_to( $version ) {
-		$version_to_check = self::convert_to_number( $version );
+		// If we checked it before and a migration wasn't necessary then, no need to check again.
+		$checked_versions = get_option( 'wprm_versions_checked', array() );
+		if ( in_array( $version, $checked_versions ) ) {
+			return false;
+		}
+
+		// Need to do an actual check (resource intensive, checks all recipes).
+		$migration_needed = self::check_if_all_recipes_migrated_to( $version );
+
+		// No migration needed? Store this result!
+		if ( ! $migration_needed ) {
+			$checked_versions[] = $version;
+			update_option( 'wprm_versions_checked', $checked_versions, false );
+		}
+
+		return $migration_needed;
+	}
+
+	/**
+	 * Check if all recipes have been migrated to a specific version.
+	 *
+	 * @since	8.0.0
+	 * @param	string $version Version number to check.
+	 */
+	public static function check_if_all_recipes_migrated_to( $version ) {
+		$version_as_number = self::convert_to_number( $version );
 
 		$args = array(
 			'post_type' => WPRM_POST_TYPE,
@@ -56,7 +81,7 @@ class WPRM_Version {
 				array(
 					'key'		=> 'wprm_version',
 					'compare'	=> '<',
-					'value' 	=> $version_to_check,
+					'value' 	=> $version_as_number,
 				),
 				array(
 					'key' => 'wprm_version',
@@ -67,6 +92,6 @@ class WPRM_Version {
 		);
 
 		$query = new WP_Query( $args );
-		return $query->found_posts;
+		return 0 < $query->found_posts;
 	}
 }

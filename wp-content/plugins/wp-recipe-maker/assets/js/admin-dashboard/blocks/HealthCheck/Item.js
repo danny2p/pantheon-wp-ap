@@ -1,7 +1,4 @@
-import React, {Component, Fragment } from 'react';
-
-import { __wprm } from 'Shared/Translations';
-import Icon from 'Shared/Icon';
+import React, { Component } from 'react';
 
 export default class Item extends Component {
     constructor(props) {
@@ -13,11 +10,25 @@ export default class Item extends Component {
     }
 
     render() {
-        const { item } = props;
-
         return (
             <div className="wprm-admin-dashboard-health-check-item">
-                This is it!
+                <div
+                    className="wprm-admin-dashboard-health-check-header"
+                    onClick={ () => {
+                        this.setState({
+                            open: ! this.state.open,
+                        });
+                    } }
+                >
+                    { this.props.header }
+                </div>
+                {
+                    this.state.open
+                    &&
+                    <div className="wprm-admin-dashboard-health-check-content">
+                        { this.props.children }
+                    </div>
+                }
             </div>
         );
     }

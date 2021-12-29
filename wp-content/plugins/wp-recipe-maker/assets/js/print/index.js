@@ -74,7 +74,11 @@ window.WPRMPrint = {
             elems = document.querySelectorAll( '.wprm-recipe-image' );
         } else if ( 'wprm-print-toggle-recipe-instruction-media' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-instruction-media' );
-        } else if ( 'wprm-print-toggle-collection' === toggle.id ) {
+        } else if ( 'wprm-print-toggle-collection-images' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-collection-item-image' );
+        } else if ( 'wprm-print-toggle-collection-servings' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-collection-item-servings' );
+        } else if ( 'wprm-print-toggle-shopping-list-collection' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-shopping-list-collection' );
         } else if ( 'wprm-print-toggle-shopping-list' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-shopping-list-list' );

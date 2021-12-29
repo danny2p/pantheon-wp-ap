@@ -36,10 +36,11 @@ class WPRM_Recipe_Sanitizer {
 		}
 
 		// Boolean fields.
-		if ( isset( $recipe['prep_time_zero'] ) )	{ $sanitized_recipe['prep_time_zero'] = $recipe['prep_time_zero'] ? true : false; }
-		if ( isset( $recipe['cook_time_zero'] ) )	{ $sanitized_recipe['cook_time_zero'] = $recipe['cook_time_zero'] ? true : false; }
-		if ( isset( $recipe['custom_time_zero'] ) )	{ $sanitized_recipe['custom_time_zero'] = $recipe['custom_time_zero'] ? true : false; }
-		if ( isset( $recipe['my_emissions'] ) )		{ $sanitized_recipe['my_emissions'] = $recipe['my_emissions'] ? true : false; }
+		if ( isset( $recipe['prep_time_zero'] ) )				{ $sanitized_recipe['prep_time_zero'] = $recipe['prep_time_zero'] ? true : false; }
+		if ( isset( $recipe['cook_time_zero'] ) )				{ $sanitized_recipe['cook_time_zero'] = $recipe['cook_time_zero'] ? true : false; }
+		if ( isset( $recipe['custom_time_zero'] ) )				{ $sanitized_recipe['custom_time_zero'] = $recipe['custom_time_zero'] ? true : false; }
+		if ( isset( $recipe['my_emissions'] ) )					{ $sanitized_recipe['my_emissions'] = $recipe['my_emissions'] ? true : false; }
+		if ( isset( $recipe['servings_advanced_enabled'] ) )	{ $sanitized_recipe['servings_advanced_enabled'] = $recipe['servings_advanced_enabled'] ? true : false; }
 
 		// Text fields.
 		if ( isset( $recipe['name'] ) )					{ $sanitized_recipe['name'] = sanitize_text_field( $recipe['name'] ); }
@@ -48,6 +49,9 @@ class WPRM_Recipe_Sanitizer {
 		if ( isset( $recipe['servings_unit'] ) )		{ $sanitized_recipe['servings_unit'] = sanitize_text_field( $recipe['servings_unit'] ); }
 		if ( isset( $recipe['cost'] ) )					{ $sanitized_recipe['cost'] = sanitize_text_field( $recipe['cost'] ); }
 		if ( isset( $recipe['custom_time_label'] ) )	{ $sanitized_recipe['custom_time_label'] = sanitize_text_field( $recipe['custom_time_label'] ); }
+
+		// Key fields.
+		if ( isset( $recipe['pin_image_repin_id'] ) ) 	{ $sanitized_recipe['pin_image_repin_id'] = sanitize_key( $recipe['pin_image_repin_id'] ); }
 
 		// HTML fields.
 		if ( isset( $recipe['summary'] ) )	{ $sanitized_recipe['summary'] = self::sanitize_html( $recipe['summary'] ); }
@@ -66,6 +70,27 @@ class WPRM_Recipe_Sanitizer {
 		if ( isset( $recipe['servings'] ) ) {
 			$servings = str_replace( ',', '.', $recipe['servings'] );
 			$sanitized_recipe['servings'] = floatval( $servings );
+		}
+
+		// Advanced Servings.
+		if ( isset( $recipe['servings_advanced'] ) ) {
+			$servings_advanced = array();
+
+			$options = array( 'round', 'rectangle' );
+			if ( isset( $recipe['servings_advanced']['shape'] ) && in_array( $recipe['servings_advanced']['shape'], $options, true ) ) {
+				$servings_advanced['shape'] = $recipe['servings_advanced']['shape'];
+			}
+			$options = array( 'inch', 'cm' );
+			if ( isset( $recipe['servings_advanced']['unit'] ) && in_array( $recipe['servings_advanced']['unit'], $options, true ) ) {
+				$servings_advanced['unit'] = $recipe['servings_advanced']['unit'];
+			}
+
+			if ( isset( $recipe['servings_advanced']['diameter'] ) )	{ $servings_advanced['diameter'] = floatval( str_replace( ',', '.', $recipe['servings_advanced']['diameter'] ) ); }
+			if ( isset( $recipe['servings_advanced']['width'] ) )		{ $servings_advanced['width'] = floatval( str_replace( ',', '.', $recipe['servings_advanced']['width'] ) ); }
+			if ( isset( $recipe['servings_advanced']['length'] ) )		{ $servings_advanced['length'] = floatval( str_replace( ',', '.', $recipe['servings_advanced']['length'] ) ); }
+			if ( isset( $recipe['servings_advanced']['height'] ) )		{ $servings_advanced['height'] = floatval( str_replace( ',', '.', $recipe['servings_advanced']['height'] ) ); }
+
+			$sanitized_recipe['servings_advanced'] = $servings_advanced;
 		}
 
 		// Limited options fields.
@@ -109,7 +134,9 @@ class WPRM_Recipe_Sanitizer {
 				if ( $name ) {
 					$sanitized_recipe['equipment'][] = array(
 						'id' => self::get_equipment_id( $name ),
+						'amount' => isset( $equipment['amount'] ) ? self::sanitize_html( $equipment['amount'] ) : '',
 						'name' => $name,
+						'notes' => isset( $equipment['notes'] ) ? self::sanitize_html( $equipment['notes'] ) : '',
 					);
 				}
 			}

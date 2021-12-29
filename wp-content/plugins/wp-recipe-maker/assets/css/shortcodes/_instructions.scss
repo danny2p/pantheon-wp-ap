@@ -19,5 +19,20 @@
 .wprm-recipe-instruction-ingredients-inline {
     .wprm-recipe-instruction-ingredient {
         display: inline-block;
+        padding-right: 5px;
+
+        &:last-child{ padding-right: 0; }
+    }
+}
+
+.rtl {
+    .wprm-recipe-instruction-ingredients-inline {
+        .wprm-recipe-instruction-ingredient {
+            display: inline-block;
+            padding-right: 0;
+            padding-left: 5px;
+    
+            &:first-child{ padding-left: 5px; }
+        }
     }
 }

@@ -81,6 +81,33 @@ $metadata = array(
 			),
 		),
 		array(
+			'name' => __( 'Archive Pages', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'itemlist_metadata_archive_pages',
+					'name' => __( 'Automatic ItemList Metadata', 'wp-recipe-maker' ),
+					'description' => __( 'Automatically output ItemList metadata on archive pages.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'itemlist_metadata_archive_pages_post_types',
+					'name' => __( 'Post Type Behaviour', 'wp-recipe-maker' ),
+					'description' => __( 'How to handle the name field that Google wants for every instruction step.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'wprm' => __( 'Only include metadata for the WPRM recipe post type (prevents searching the content)', 'wp-recipe-maker' ),
+						'all' => __( 'Search all post types for recipes inside of the post content to include in the metadata', 'wp-recipe-maker' ),
+					),
+					'default' => 'all',
+					'dependency' => array(
+						'id' => 'itemlist_metadata_archive_pages',
+						'value' => true,
+					),
+				),
+			),
+		),
+		array(
 			'name' => __( 'Advanced', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(

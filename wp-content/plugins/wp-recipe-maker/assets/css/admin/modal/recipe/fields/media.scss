@@ -20,8 +20,16 @@
         margin-right: 5px;
     }
 
+    input {
+        max-width: 200px;
+    }
+
     textarea {
         min-height: 110px;
+    }
+
+    a {
+        display: block;
     }
 }
 

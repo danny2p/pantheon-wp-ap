@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import '../../../css/admin/template/property.scss';
 
@@ -11,6 +11,7 @@ import PropertyFont from './properties/Font';
 import PropertyIcon from './properties/Icon';
 import PropertyImage from './properties/Image';
 import PropertyImageSize from './properties/ImageSize';
+import PropertyInfo from './properties/Info';
 import PropertyNumber from './properties/Number';
 import PropertySize from './properties/Size';
 import PropertyText from './properties/Text';
@@ -27,6 +28,7 @@ const propertyTypes = {
     icon: PropertyIcon,
     image: PropertyImage,
     image_size: PropertyImageSize,
+    info: PropertyInfo,
     percentage: PropertyNumber,
     number: PropertyNumber,
     size: PropertySize,
@@ -58,16 +60,24 @@ const Property = (props) => {
 
     return (
         <div className="wprm-template-property">
-            <div className="wprm-template-property-label">
-                { props.property.name } { helpIcon }
-            </div>
-            <div className={ `wprm-template-property-value wprm-template-property-value-${props.property.type}` }>
-                <PropertyComponent
-                    property={props.property}
-                    value={props.property.value}
-                    onValueChange={(value) => { props.onPropertyChange(props.property.id, value); } }
-                />
-            </div>
+            {
+                'info' === props.property.type
+                ?
+                <PropertyComponent property={props.property} />
+                :
+                <Fragment>
+                    <div className="wprm-template-property-label">
+                        { props.property.name } { helpIcon }
+                    </div>
+                    <div className={ `wprm-template-property-value wprm-template-property-value-${props.property.type}` }>
+                        <PropertyComponent
+                            property={props.property}
+                            value={props.property.value}
+                            onValueChange={(value) => { props.onPropertyChange(props.property.id, value); } }
+                        />
+                    </div>
+                </Fragment>
+            }
         </div>
     );
 }

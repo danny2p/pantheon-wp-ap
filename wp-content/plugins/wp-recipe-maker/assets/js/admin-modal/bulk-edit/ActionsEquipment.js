@@ -9,6 +9,7 @@ const ActionsEquipment = (props) => {
     const actionOptions = [
         { value: 'change-link', label: __wprm( 'Change Link' ), default: '' },
         { value: 'change-nofollow', label: __wprm( 'Change Link Nofollow' ), default: 'default' },
+        { value: 'change-html', label: __wprm( 'Change Affiliate HTML' ), default: '' },
         { value: 'export', label: __wprm( 'Export Equipment' ), default: false, required: 'premium' },
         { value: 'delete', label: __wprm( 'Delete Equipment' ), default: false },
     ];
@@ -73,6 +74,23 @@ const ActionsEquipment = (props) => {
                                     const newAction = {
                                         ...props.action,
                                         options: value,
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                            />
+                        }
+                        {
+                            'change-html' === selectedAction
+                            &&
+                            <FieldText
+                                name="equipment-html"
+                                value={props.action.options}
+                                placeholder={ __wprm( 'Affiliate HTML' ) }
+                                onChange={(group) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: group,
                                     }
                 
                                     props.onActionChange(newAction);

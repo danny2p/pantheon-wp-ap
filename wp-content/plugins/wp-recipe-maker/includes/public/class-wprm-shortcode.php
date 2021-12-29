@@ -36,8 +36,10 @@ class WPRM_Shortcode {
 		add_shortcode( 'wprm-recipe', array( __CLASS__, 'recipe_shortcode' ) );
 
 		add_filter( 'content_edit_pre', array( __CLASS__, 'replace_imported_shortcodes' ) );
-		add_filter( 'the_content', array( __CLASS__, 'replace_tasty_shortcode' ) );
+		add_filter( 'the_content', array( __CLASS__, 'replace_tasty_shortcode' ), 1 );
 		add_filter( 'the_content', array( __CLASS__, 'replace_ziplist_shortcode' ), 1 );
+
+		add_filter( 'render_block', array( __CLASS__, 'replace_blocks' ), 10, 2 );
 
 		add_filter( 'get_the_excerpt', array( __CLASS__, 'before_generating_excerpt' ), 9 );
 		add_filter( 'get_the_excerpt', array( __CLASS__, 'after_generating_excerpt' ), 11 );
@@ -229,6 +231,42 @@ class WPRM_Shortcode {
 			}
 		}
 
+		return $content;
+	}
+
+
+	/**
+	 * Replace blocks by other recipe plugins with ours, if they have been imported.
+	 *
+	 * @since    8.0.0
+	 * @param	 mixed $content Content we want to filter before it gets passed along.
+	 * @param	 mixed $block 	Block we're currently filtering.
+	 */
+	public static function replace_blocks( $content, $block ) {
+		// Tasty Recipes.
+		if ( 'wp-tasty/tasty-recipe' === $block['blockName'] ) {
+			$id = isset( $block['attrs']['id'] ) ? intval( $block['attrs']['id'] ) : false;
+
+			if ( $id && WPRM_POST_TYPE === get_post_type( $id ) ) {
+				$content = do_shortcode( '[wprm-recipe id="' . $id . '"]' );
+			}
+		}
+		
+		// Zip Recipes.
+		if ( 'zip-recipes/recipe-block' === $block['blockName'] ) {
+			$zl_id = isset( $block['attrs']['id'] ) ? intval( $block['attrs']['id'] ) : false;
+
+			if ( $zl_id ) {
+				global $wpdb;
+				$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $zl_id );
+				$post_id = $zl_recipe ? $zl_recipe->post_id : false;
+
+				if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {
+					$content = do_shortcode( '[wprm-recipe id="' . $post_id . '"]' );
+				}
+			}
+		}
+		
 		return $content;
 	}
 

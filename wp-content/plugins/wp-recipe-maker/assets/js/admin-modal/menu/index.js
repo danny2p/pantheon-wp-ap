@@ -212,12 +212,16 @@ export default class Menu extends Component {
                                 WPRM_Modal.open( 'roundup', {
                                     insertCallback: ( fields ) => {
                                         if ( 'function' === typeof this.props.args.insertCallback ) {
+                                            let shortcode = '[wprm-recipe-roundup-item';
+
                                             if ( ! fields.hasOwnProperty( 'type' ) || 'external' !== fields.type ) {
                                                 // Default to internal link.
-                                                this.props.args.insertCallback( `[wprm-recipe-roundup-item id="${ fields.recipe.id }"]` );
-                                            } else {
-                                                let shortcode = '[wprm-recipe-roundup-item';
+                                                shortcode += ` id="${ fields.recipe.id }"`;
 
+                                                // Optional override fields.
+                                                if ( fields.name ) { shortcode += ` name="${ cleanUpShortcodeAttribute( fields.name ) }"`; }
+                                                if ( fields.summary ) { shortcode += ` summary="${ cleanUpShortcodeAttribute( fields.summary ) }"`; }
+                                            } else {
                                                 shortcode += ` link="${ cleanUpShortcodeAttribute( fields.link ) }"`;
                                                 shortcode += fields.nofollow ? ' nofollow="1"' : '';
                                                 shortcode += fields.newtab ? '' : ' newtab="0"';
@@ -230,10 +234,14 @@ export default class Menu extends Component {
                                                 if ( -1 === fields.image.id && fields.image.url ) {
                                                     shortcode += fields.image.url ? ` image_url="${ fields.image.url }"` : '';
                                                 }
-
-                                                shortcode += ']';
-                                                this.props.args.insertCallback( shortcode );
                                             }
+
+                                            // Both internal and external.
+                                            if ( fields.button ) { shortcode += ` button="${ cleanUpShortcodeAttribute( fields.button ) }"`; }
+
+                                            // Close and insert shortcode.
+                                            shortcode += ']';
+                                            this.props.args.insertCallback( shortcode );
                                         }
                                     },
                                 }, true );

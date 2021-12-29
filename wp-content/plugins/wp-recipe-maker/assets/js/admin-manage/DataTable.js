@@ -46,7 +46,7 @@ export default class DataTable extends Component {
     }
 
     componentDidUpdate( prevProps ) {
-        if ( this.props.type !== prevProps.type ) {
+        if ( this.props.type !== prevProps.type || this.props.filter !== prevProps.filter ) {
             this.initDataTable( true );
         }
     }
@@ -272,6 +272,7 @@ export default class DataTable extends Component {
                             filtered={this.state.countFiltered}
                             total={this.state.countTotal}
                             filter={this.props.filter}
+                            onRemoveFilter={this.props.onRemoveFilter}
                         />
                         <div className="wprm-admin-manage-table-inner">
                             <ReactTable

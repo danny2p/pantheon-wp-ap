@@ -5,6 +5,7 @@ import '../../../../css/admin/modal/recipe/fields/media.scss';
 import { __wprm } from 'Shared/Translations';
 import FieldContainer from '../../fields/FieldContainer';
 import FieldImage from '../../fields/FieldImage';
+import FieldPinImage from '../../fields/FieldPinImage';
 import FieldVideo from '../../fields/FieldVideo';
  
 const RecipeMedia = (props) => {
@@ -30,17 +31,25 @@ const RecipeMedia = (props) => {
                 'recipe_image' !== wprm_admin.settings.pinterest_use_for_image
                 ?
                 <FieldContainer label={ __wprm( 'Pin Image' ) } help={ __wprm( 'Optionally set a different image to use for the "Pin Recipe" button.' ) }>
-                    <FieldImage
+                    <FieldPinImage
                         required="premium"
                         id={ props.pinImage.id }
                         url={ props.pinImage.url }
-                        onChange={ ( pin_image_id, pin_image_url ) => {
-                            props.onRecipeChange( {
+                        repin={ props.pinImage.repin }
+                        onChange={ ( pin_image_id, pin_image_url, pin_image_repin_id = false ) => {
+                            let image = {
                                 pin_image_id,
                                 pin_image_url,
-                            } );
+                            };
+
+                            if ( pin_image_repin_id !== false ) {
+                                image.pin_image_repin_id = pin_image_repin_id;
+                            }
+
+                            props.onRecipeChange( image );
                         }}
                     />
+                    
                 </FieldContainer>
                 :
                 null

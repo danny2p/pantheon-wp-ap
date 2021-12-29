@@ -10,6 +10,7 @@ import FieldDropdown from '../../fields/FieldDropdown';
 import FieldText from '../../fields/FieldText';
 import FieldRadio from '../../fields/FieldRadio';
 import FieldRichText from '../../fields/FieldRichText';
+import FieldAdvancedServings from '../../fields/FieldAdvancedServings';
 
 const RecipeGeneral = (props) => {
     const author = wprm_admin_modal.options.author.find((option) => option.value === props.author.display );
@@ -120,6 +121,22 @@ const RecipeGeneral = (props) => {
                     }}
                 />
             </FieldContainer>
+            <FieldContainer
+                    id="advanced-servings"
+                    label={ __wprm( 'Advanced Servings' ) }
+                    help={ __wprm( `Enable to have an advanced servings calculator, useful for different baking forms` ) }
+                >
+                    <FieldAdvancedServings
+                        enabled={ props.servings_advanced_enabled }
+                        onChangeEnabled={ (servings_advanced_enabled) => {
+                            props.onRecipeChange( { servings_advanced_enabled } );
+                        }}
+                        servings={ props.servings_advanced }
+                        onChangeServings={ (servings_advanced) => {
+                            props.onRecipeChange( { servings_advanced } );
+                        }}
+                    />
+                </FieldContainer>
             <FieldContainer
                 id="cost"
                 label={ __wprm( 'Estimated Cost' ) }

@@ -31,6 +31,7 @@ class WPRM_Assets {
 		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'block_assets' ) );
 
 		add_action( 'wp_head', array( __CLASS__, 'custom_css' ) );
+		add_action( 'wp_footer', array( __CLASS__, 'footer_assets' ) );
 	}
 
 	/**
@@ -273,6 +274,18 @@ class WPRM_Assets {
 		$css = str_ireplace( '!important', '', $css );
 
 		echo $css;
+	}
+
+	/**
+	 * Assets to output in the footer.
+	 *
+	 * @since    8.0.0
+	 */
+	public static function footer_assets() {
+		if ( apply_filters( 'wprm_load_pinit', false ) ) {
+			// Source: https://developers.pinterest.com/docs/add-ons/getting-started/
+			echo "<script type=\"text/javascript\">(function (d) {var f = d.getElementsByTagName('SCRIPT')[0],p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//assets.pinterest.com/js/pinit.js';f.parentNode.insertBefore(p, f);})(document);</script>";
+		}
 	}
 
 	/**

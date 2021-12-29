@@ -177,6 +177,9 @@ export default class Recipe extends Component {
                     this.onModeChange( 'recipe', 'nutrition' );
                 }
                 return false;
+            case 'equipment-affiliate':
+                this.onModeChange( 'recipe', 'equipment' );
+                return false;
             case 'ingredient-links':
                 this.onModeChange( 'recipe', 'ingredients' );
                 return false;
@@ -236,6 +239,22 @@ export default class Recipe extends Component {
                                 nutrition,
                             });
                             this.onModeChange( 'recipe', 'nutrition' );
+                        }}
+                    />
+                );
+            case 'equipment-affiliate':
+                return (
+                    <Content
+                        onCloseModal={ this.props.maybeCloseModal }
+                        onCancel={() => {
+                            this.onModeChange( 'recipe', 'equipment' );
+                        }}
+                        equipment={ this.state.recipe.equipment }
+                        onEquipmentChange={ (equipment) => {
+                            this.onRecipeChange({
+                                equipment,
+                            });
+                            this.onModeChange( 'recipe', 'equipment' );
                         }}
                     />
                 );

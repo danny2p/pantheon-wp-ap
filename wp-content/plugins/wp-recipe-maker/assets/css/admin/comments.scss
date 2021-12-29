@@ -13,6 +13,16 @@
 	}
 }
 
+// Prevent huge stars in backend.
+fieldset.wprm-comment-ratings-container input[type=radio] {
+	max-width: 16px;
+	max-height: 16px;
+}
+fieldset.wprm-comment-ratings-container span {
+	max-width: 80px;
+	max-height: 16px;
+}
+
 // Make empty stars faded.
 fieldset.wprm-comment-ratings-container legend + input + span svg {
     opacity: 0.3;

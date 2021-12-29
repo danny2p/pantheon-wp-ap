@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import Tooltip from 'Shared/Tooltip';
+import { __wprm } from 'Shared/Translations';
  
 const SeoIndicator = (props) => {
     if ( ! props.seo ) {
@@ -22,10 +23,18 @@ const SeoIndicator = (props) => {
                     'n/a'
                     :
                     <Fragment>
-                        <div className="wprm-admin-manage-seo-indicator-block"></div>
-                        <div className="wprm-admin-manage-seo-indicator-block"></div>
-                        <div className="wprm-admin-manage-seo-indicator-block"></div>
-                        <div className="wprm-admin-manage-seo-indicator-block"></div>
+                        {
+                            'missing' === props.seo.type
+                            ?
+                            __wprm( 'missing' )
+                            :
+                            <Fragment>
+                                <div className="wprm-admin-manage-seo-indicator-block"></div>
+                                <div className="wprm-admin-manage-seo-indicator-block"></div>
+                                <div className="wprm-admin-manage-seo-indicator-block"></div>
+                                <div className="wprm-admin-manage-seo-indicator-block"></div>
+                            </Fragment>
+                        }
                     </Fragment>
                 }
             </div>

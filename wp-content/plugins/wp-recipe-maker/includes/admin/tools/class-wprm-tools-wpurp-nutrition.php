@@ -119,6 +119,26 @@ class WPRM_Tools_WPURP_Nutrition {
 					'nutrients' => array(),
 				);
 
+				// Uses reference serving instead if requested.
+				$import_reference_servings = false;
+				
+				if ( $import_reference_servings ) {
+					$reference_servings = sanitize_text_field( $nutrition['_meta']['serving'] );
+
+					$match = preg_match( '/^\s*[\d\.\/-]+/', $reference_servings, $servings_array );
+					if ( 1 === $match ) {
+						$amount = str_replace( ' ','', $servings_array[0] );
+						$amount = WPRM_Recipe_Parser::format_quantity( WPRM_Recipe_Parser::parse_quantity( $amount ) );
+					} else {
+						$amount = '';
+					}
+
+					$unit = preg_replace( '/^\s*[\d\.\/-]+\s*/', '', $reference_servings );
+
+					$wprm_nutrition['amount'] = $amount;
+					$wprm_nutrition['unit'] = $unit;
+				}
+
 				$nutrition_mapping = array(
 					'calories'              => 'calories',
 					'carbohydrate'          => 'carbohydrates',
