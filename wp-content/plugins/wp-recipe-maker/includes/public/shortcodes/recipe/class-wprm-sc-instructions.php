@@ -407,6 +407,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					$style = ' style="margin-top: -' . $atts['text_margin'] . '; margin-bottom: ' . $atts['text_margin'] . ';"';
 				}
 
+				$i = 0;
 				$output .= '<div class="'. implode( ' ', $classes ) . '"' . $style . '>';
 				$tag = 'inline' === $atts['ingredients_display'] ? 'span' : 'div';
 

@@ -133,6 +133,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.0.2 =
+* Fix: PHP notice in instructions
+
 = 8.0.1 =
 * Fix: Not showing space between associated ingredients
 * Fix: Not replacing Tasty Recipes correctly in backend during "Find Parents”
@@ -1336,6 +1339,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.0.2 =
+Prevent a PHP notice from showing up in the instructions
+
 = 8.0.1 =
 Fix a few small issues introduced in 8.0.0
 
