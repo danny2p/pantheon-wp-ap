@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
+class ComposerStaticInit27e385d1c6153751a6c38ff0df3e04e2
 {
     public static $prefixLengthsPsr4 = array (
         'C' => 
@@ -377,6 +377,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\ClientException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/ClientException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\ConnectException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/ConnectException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\GuzzleException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/GuzzleException.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Exception\\InvalidArgumentException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/InvalidArgumentException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\RequestException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/RequestException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\SeekException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/SeekException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Exception\\ServerException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/Exception/ServerException.php',
@@ -398,8 +399,11 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/AggregateException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\CancellationException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/CancellationException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Coroutine' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Coroutine.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Create' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Create.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Each' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Each.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\EachPromise' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/EachPromise.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\FulfilledPromise' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/FulfilledPromise.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Is' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Is.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Promise' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Promise.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\PromiseInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/PromiseInterface.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\PromisorInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/PromisorInterface.php',
@@ -407,18 +411,23 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\RejectionException' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/RejectionException.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\TaskQueue' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/TaskQueue.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Promise\\TaskQueueInterface' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/TaskQueueInterface.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Promise\\Utils' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/promises/src/Utils.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/AppendStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/BufferStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/CachingStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\DroppingStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/DroppingStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\FnStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/FnStream.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Header' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Header.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\InflateStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/InflateStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\LazyOpenStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/LazyOpenStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\LimitStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/LimitStream.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Message' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Message.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\MessageTrait' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/MessageTrait.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\MimeType' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/MimeType.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\MultipartStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/MultipartStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\NoSeekStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/NoSeekStream.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\PumpStream' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/PumpStream.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Query' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Query.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Request' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Request.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Response' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Response.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Rfc7230' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Rfc7230.php',
@@ -430,6 +439,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Uri.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/UriNormalizer.php',
         'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/UriResolver.php',
+        'YoastSEO_Vendor\\GuzzleHttp\\Psr7\\Utils' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/psr7/src/Utils.php',
         'YoastSEO_Vendor\\GuzzleHttp\\RedirectMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RedirectMiddleware.php',
         'YoastSEO_Vendor\\GuzzleHttp\\RequestOptions' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RequestOptions.php',
         'YoastSEO_Vendor\\GuzzleHttp\\RetryMiddleware' => __DIR__ . '/../..' . '/vendor_prefixed/guzzlehttp/guzzle/src/RetryMiddleware.php',
@@ -580,6 +590,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'Yoast\\WP\\SEO\\Conditionals\\Get_Request_Conditional' => __DIR__ . '/../..' . '/src/conditionals/get-request-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Greek_Support_Conditional' => __DIR__ . '/../..' . '/src/deprecated/src/conditionals/greek-support-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Headless_Rest_Endpoints_Enabled_Conditional' => __DIR__ . '/../..' . '/src/conditionals/headless-rest-endpoints-enabled-conditional.php',
+        'Yoast\\WP\\SEO\\Conditionals\\Import_Tool_Selected_Conditional' => __DIR__ . '/../..' . '/src/conditionals/import-tool-selected-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Installation_Success_Conditional' => __DIR__ . '/../..' . '/src/conditionals/installation-success-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Japanese_Support_Conditional' => __DIR__ . '/../..' . '/src/deprecated/src/conditionals/japanese-support-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Jetpack_Conditional' => __DIR__ . '/../..' . '/src/conditionals/jetpack-conditional.php',
@@ -589,6 +600,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'Yoast\\WP\\SEO\\Conditionals\\No_Tool_Selected_Conditional' => __DIR__ . '/../..' . '/src/conditionals/no-tool-selected-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Non_Multisite_Conditional' => __DIR__ . '/../..' . '/src/conditionals/non-multisite-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Norwegian_Readability_Conditional' => __DIR__ . '/../..' . '/src/deprecated/src/conditionals/norwegian-readability-conditional.php',
+        'Yoast\\WP\\SEO\\Conditionals\\Not_Admin_Ajax_Conditional' => __DIR__ . '/../..' . '/src/conditionals/not-admin-ajax-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Open_Graph_Conditional' => __DIR__ . '/../..' . '/src/conditionals/open-graph-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Premium_Inactive_Conditional' => __DIR__ . '/../..' . '/src/conditionals/premium-inactive-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Primary_Category_Conditional' => __DIR__ . '/../..' . '/src/conditionals/primary-category-conditional.php',
@@ -601,6 +613,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'Yoast\\WP\\SEO\\Conditionals\\Third_Party\\W3_Total_Cache_Conditional' => __DIR__ . '/../..' . '/src/conditionals/third-party/w3-total-cache-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Third_Party\\WPML_Conditional' => __DIR__ . '/../..' . '/src/conditionals/third-party/wpml-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Third_Party\\WPML_WPSEO_Conditional' => __DIR__ . '/../..' . '/src/conditionals/third-party/wpml-wpseo-conditional.php',
+        'Yoast\\WP\\SEO\\Conditionals\\User_Can_Manage_Wpseo_Options_Conditional' => __DIR__ . '/../..' . '/src/conditionals/user-can-manage-wpseo-options-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\WP_Robots_Conditional' => __DIR__ . '/../..' . '/src/conditionals/wp-robots-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Web_Stories_Conditional' => __DIR__ . '/../..' . '/src/conditionals/web-stories-conditional.php',
         'Yoast\\WP\\SEO\\Conditionals\\Wincher_Automatically_Track_Conditional' => __DIR__ . '/../..' . '/src/conditionals/wincher-automatically-track-conditional.php',
@@ -740,6 +753,7 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Disable_Concatenate_Scripts_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/disable-concatenate-scripts-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Fix_News_Dependencies_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/fix-news-dependencies-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Admin\\HelpScout_Beacon' => __DIR__ . '/../..' . '/src/integrations/admin/helpscout-beacon.php',
+        'Yoast\\WP\\SEO\\Integrations\\Admin\\Import_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/import-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Indexation_Integration' => __DIR__ . '/../..' . '/src/deprecated/src/integrations/admin/indexation-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Indexing_Notification_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/indexing-notification-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Indexing_Tool_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/indexing-tool-integration.php',
@@ -963,9 +977,9 @@ class ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5872f17d2dfe666d2162bbc5c676a4dc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit27e385d1c6153751a6c38ff0df3e04e2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit27e385d1c6153751a6c38ff0df3e04e2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit27e385d1c6153751a6c38ff0df3e04e2::$classMap;
 
         }, null, ClassLoader::class);
     }
