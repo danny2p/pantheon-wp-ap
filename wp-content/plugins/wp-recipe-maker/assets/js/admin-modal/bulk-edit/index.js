@@ -10,6 +10,7 @@ import Header from '../general/Header';
 import Footer from '../general/Footer';
 
 import ActionsAnalytics from './ActionsAnalytics';
+import ActionsCollection from './ActionsCollection';
 import ActionsEquipment from './ActionsEquipment';
 import ActionsIngredient from './ActionsIngredient';
 import ActionsIngredientUnit from './ActionsIngredientUnit';
@@ -55,6 +56,10 @@ let actions = {
     'nutrition_ingredient': {
         label: __wprm( 'Custom Nutrition Ingredients' ),
         elem: ActionsTaxonomy,
+    },
+    'collection': {
+        label: __wprm( 'Saved Collections' ),
+        elem: ActionsCollection,
     },
 };
 

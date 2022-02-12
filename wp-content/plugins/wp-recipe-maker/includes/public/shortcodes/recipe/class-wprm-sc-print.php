@@ -25,6 +25,11 @@ class WPRM_SC_Print extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'template' => array(
+				'default' => '',
+				'type' => 'text',
+				'help' => __( 'Set a specific template to use for this print button. Use template slug. Leave blank for default print template as defined in the settings.', 'wp-recipe-maker' ),
+			),
 			'style' => array(
 				'default' => 'text',
 				'type' => 'dropdown',
@@ -164,13 +169,16 @@ class WPRM_SC_Print extends WPRM_Template_Shortcode {
 			$style = '';
 		}
 
+		// Optional print template.
+		$template = sanitize_key( $atts['template'] );
+
 		// Open links in new tab?
 		$target = '';
 		if ( WPRM_Settings::get( 'print_new_tab' ) ) {
 			$target = ' target="_blank"';
 		}
 
-		$output = '<a href="' . $recipe->print_url() . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $target . ' rel="nofollow">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		$output = '<a href="' . $recipe->print_url( $template ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-template="' . esc_attr( $template ) . '"' . $target . ' rel="nofollow">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

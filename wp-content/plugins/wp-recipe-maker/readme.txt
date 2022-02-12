@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 5.8
+Tested up to: 5.9
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -133,6 +133,29 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.1.1 =
+* Fix: Fatal error related to settings page
+
+= 8.1.0 =
+* Feature: Ability to manually set post author
+* Feature: Bulk edit post author on manage page
+* Feature: Set author image when using "Same author for every recipe" setting
+* Feature: Specify different print template to use in print button shortcode
+* Feature: Toggle notes on print page
+* Improvement: Setting to choose pin method for button
+* Improvement: Edit recipe button in block editor sidebar for easy access
+* Improvement: Placeholder for modified date
+* Improvement: Allow placeholders in link, text and jump to comments blocks
+* Improvement: Prevent recipes from getting cached in REST API
+* Improvement: Recognize metadata for YouTube shorts embed links
+* Fix: Make sure SEO metadata checker updates after receiving a rating
+* Fix: Spacing of Grow.me button on mobile in Chic template
+* Fix: Toggle buttons border issue for RTL languages
+* Fix: Allow dash in taxonomy archive slug
+* Fix: Rich text "HTML & Code" field for multi-line HTML
+* Fix: Prevent PHP notice on print page
+* Fix: Prevent deprecation notice in WordPress 5.9
+
 = 8.0.2 =
 * Fix: PHP notice in instructions
 
@@ -1339,6 +1362,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.1.1 =
+Update to prevent fatal error from happening in 8.1.0
+
+= 8.1.0 =
+Some great new features, improvements, fixes and better compatibility with WordPress 5.9
+
 = 8.0.2 =
 Prevent a PHP notice from showing up in the instructions
 

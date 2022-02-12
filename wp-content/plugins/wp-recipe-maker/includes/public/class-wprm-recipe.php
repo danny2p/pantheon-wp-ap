@@ -1500,7 +1500,7 @@ class WPRM_Recipe {
 	 *
 	 * @since    2.1.0
 	 */
-	public function print_url() {
+	public function print_url( $template = '' ) {
 		$home_url = WPRM_Compatibility::get_home_url();
 		$query_params = false;
 
@@ -1514,11 +1514,19 @@ class WPRM_Recipe {
 		if ( get_option( 'permalink_structure' ) ) {
 			$print_url = $home_url . WPRM_Print::slug() . '/recipe/' . $this->id();
 
+			if ( $template ) {
+				$print_url .= '/' . $template;
+			}
+
 			if ( $query_params ) {
 				$print_url .= '?' . $query_params;
 			}
 		} else {
 			$print_url = $home_url . '?' . WPRM_Print::slug() . '=' . $this->id();
+
+			if ( $template ) {
+				$print_url .= '/' . $template;
+			}
 
 			if ( $query_params ) {
 				$print_url .= '&' . $query_params;
@@ -1547,6 +1555,7 @@ class WPRM_Recipe {
 		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
 		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
+		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
 
 		return $text;

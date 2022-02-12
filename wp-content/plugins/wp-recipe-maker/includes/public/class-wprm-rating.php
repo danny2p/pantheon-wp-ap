@@ -86,6 +86,9 @@ class WPRM_Rating {
 		update_post_meta( $recipe->parent_post_id(), 'wprm_rating', $recipe_rating );
 		update_post_meta( $recipe->parent_post_id(), 'wprm_rating_average', $recipe_rating['average'] );
 
+		// Update SEO checker.
+		WPRM_Seo_Checker::update_seo_for( $recipe_id );
+
 		return $recipe_rating;
 	}
 

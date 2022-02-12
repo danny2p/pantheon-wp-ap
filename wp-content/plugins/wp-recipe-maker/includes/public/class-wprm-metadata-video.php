@@ -118,6 +118,7 @@ class WPRM_MetadataVideo {
 		$metadata = false;
 		$embed_code = trim( $embed_code );
 
+		$metadata = $metadata ? $metadata : self::check_for_youtube_embed( $embed_code );
 		$metadata = $metadata ? $metadata : self::check_for_mediavine_embed( $embed_code, $recipe );
 		$metadata = $metadata ? $metadata : self::check_for_adthrive_embed( $embed_code );
 		$metadata = $metadata ? $metadata : self::check_for_wp_youtube_lyte_embed( $embed_code );
@@ -202,6 +203,38 @@ class WPRM_MetadataVideo {
 					}
 				}
 			}
+		}
+
+		return $metadata;
+	}
+
+	/**
+	 * Check the embed code for a YouTube video.
+	 *
+	 * @since   8.1.0
+	 * @param	string $embed_code Embed code to check.
+	 */
+	private static function check_for_youtube_embed( $embed_code ) {
+		$metadata = false;
+
+		// oEmbed detects https://www.youtube.com/watch?v=123456789 videos by default, both not YouTube shorts or https://youtu.be URLs.
+		$found_youtube_id = false;
+
+		// Check for YT Shorts URL.
+		preg_match( '/www\.youtube\.com\/shorts\/(.*)$/i', $embed_code, $matches );
+		if ( $matches && isset( $matches[1] ) ) {
+			$found_youtube_id = $matches[1];
+		}
+
+		// Check for shortened URL.
+		preg_match( '/youtu\.be\/(.*)$/i', $embed_code, $matches );
+		if ( $matches && isset( $matches[1] ) ) {
+			$found_youtube_id = $matches[1];
+		}
+
+		// Try regular YT URL to get the metadata.
+		if ( $found_youtube_id ) {
+			$metadata = self::check_for_oembed( 'https://www.youtube.com/watch?v=' . $found_youtube_id );
 		}
 
 		return $metadata;

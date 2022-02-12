@@ -58,6 +58,20 @@ $adjustable_servings = array(
 			),
 		),
 		array(
+			'name' => __( 'Advanced Adjustable Servings', 'wp-recipe-maker' ),
+			'description' => __( 'Advanced Adjustable Servings for baking allows your visitors to change the size of the baking pan or sheet used for the recipe.', 'wp-recipe-maker' ),
+			'documentation' => 'https://help.bootstrapped.ventures/article/307-advanced-adjustable-servings-for-baking',
+			'settings' => array(
+				array(
+					'id' => 'advanced_adjustable_unit_conversion',
+					'name' => __( 'Unit Conversion', 'wp-recipe-maker' ),
+					'description' => __( 'Allow visitors to switch between cm and inch by clicking on the unit.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Fractions', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
@@ -105,6 +119,24 @@ $adjustable_servings = array(
 		array(
 			'name' => __( 'Advanced', 'wp-recipe-maker' ),
 			'settings' => array(
+				array(
+					'id' => 'adjustable_servings_url',
+					'name' => __( 'Set servings through URL', 'wp-recipe-maker' ),
+					'description' => __( 'Allow URL parameter to get passed along with the specific serving size to use.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'adjustable_servings_url_param',
+					'name' => __( 'URL Parameter', 'wp-recipe-maker' ),
+					'description' => __( 'URL Parameter to use to set a specific serving size', 'wp-recipe-maker' ) . ': https://www.yoursite.com/recipe/?servings=2',
+					'type' => 'text',
+					'default' => 'servings',
+					'dependency' => array(
+						'id' => 'adjustable_servings_url',
+						'value' => true,
+					),
+				),
 				array(
 					'id' => 'decimal_separator',
 					'name' => __( 'Decimal Separator', 'wp-recipe-maker' ),

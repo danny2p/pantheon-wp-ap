@@ -74,10 +74,16 @@ window.WPRMPrint = {
             elems = document.querySelectorAll( '.wprm-recipe-image' );
         } else if ( 'wprm-print-toggle-recipe-instruction-media' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-instruction-media' );
+        } else if ( 'wprm-print-toggle-recipe-notes' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprm-recipe-notes-container' );
+        } else if ( 'wprm-print-toggle-recipe-nutrition' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprm-recipe-nutrition-header, .wprm-nutrition-label-container' );
         } else if ( 'wprm-print-toggle-collection-images' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-collection-item-image' );
         } else if ( 'wprm-print-toggle-collection-servings' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-collection-item-servings' );
+        } else if ( 'wprm-print-toggle-collection-nutrition' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-collection-column-nutrition' );
         } else if ( 'wprm-print-toggle-shopping-list-collection' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-shopping-list-collection' );
         } else if ( 'wprm-print-toggle-shopping-list' === toggle.id ) {

@@ -62,10 +62,17 @@ class WPRM_Manage {
 
 			wp_enqueue_script( 'wprm-admin-manage', WPRM_URL . 'dist/admin-manage.js', array( 'wprm-admin', 'wprm-admin-modal' ), WPRM_VERSION, true );
 
+			$args = array();
+
+			// Prevent deprecation warning.
+			if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
+				$args['who'] = 'authors';
+			} else {
+				$args['capability'] = array( 'edit_posts' );
+			}
+
 			// Get Authors.
-			$authors = get_users( array(
-				'who' => 'authors',
-			) );
+			$authors = get_users( $args );
 
 			$post_statuses = get_post_statuses();
 			$post_statuses['future'] = __( 'Scheduled' );

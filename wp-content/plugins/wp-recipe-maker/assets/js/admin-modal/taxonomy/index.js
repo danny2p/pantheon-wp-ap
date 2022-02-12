@@ -40,12 +40,17 @@ export default class Menu extends Component {
         this.saveChanges = this.saveChanges.bind(this);
     }
 
-    sanitizeSlug(text) {
+    sanitizeSlug(text, isKey = false) {
         text = text.trim();
         text = text.toLowerCase();
 
-        const from = "àáäâèéëêìíïîòóöôùúüûñçěščřžýúůďťň·/-,:;";
-        const to   = "aaaaeeeeiiiioooouuuuncescrzyuudtn______";
+        let from = "àáäâèéëêìíïîòóöôùúüûñçěščřžýúůďťň·/,:;";
+        let to   = "aaaaeeeeiiiioooouuuuncescrzyuudtn_____";
+
+        if ( isKey ) {
+            from += '-';
+            to += '_';
+        }
 
         for ( let i=0, l=from.length ; i<l ; i++ )
         {
@@ -53,7 +58,7 @@ export default class Menu extends Component {
         }
 
         text = text.replace('.', '-')
-            .replace(/[^a-z0-9\s_]/g, '')
+            .replace(/[^a-z0-9\s_\-]/g, '')
             .replace(/\s+/g, '_')
             .replace(/_+/g, '_');
 
@@ -121,7 +126,7 @@ export default class Menu extends Component {
                             value={ `wprm_${this.state.taxonomy.key}` }
                             onChange={ (key) => {
                                 let sanitizedKey = key.substr(5);
-                                sanitizedKey = this.sanitizeSlug( sanitizedKey );
+                                sanitizedKey = this.sanitizeSlug( sanitizedKey, true );
 
                                 this.setState({
                                     taxonomy: {

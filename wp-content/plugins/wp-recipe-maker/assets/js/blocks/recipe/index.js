@@ -4,6 +4,7 @@ const {
     Button,
     ServerSideRender,
     PanelBody,
+    PanelRow,
     Toolbar,
     TextControl,
     SelectControl,
@@ -116,6 +117,18 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                                     updated: Date.now(),
                                 }) }
                             />
+                            <PanelRow>
+                                <Button
+                                    isDefault
+                                    onClick={ () => {
+                                        WPRM_Modal.open( 'recipe', {
+                                            recipeId: attributes.id,
+                                            saveCallback: modalCallback,
+                                        } );
+                                    }}>
+                                    { __( 'Edit Recipe' ) }
+                                </Button>
+                            </PanelRow>
                         </PanelBody>
                     </InspectorControls>
                     <ServerSideRender

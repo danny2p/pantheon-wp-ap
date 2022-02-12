@@ -167,6 +167,20 @@ $recipe_print = array(
 					'default' => false,
 				),
 				array(
+					'id' => 'print_show_notes',
+					'name' => __( 'Default Show Recipe Notes', 'wp-recipe-maker' ),
+					'description' => __( 'Default value for the checkbox that allows visitors to toggle the recipe notes.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
+					'id' => 'print_show_nutrition',
+					'name' => __( 'Default Show Nutrition', 'wp-recipe-maker' ),
+					'description' => __( 'Default value for the checkbox that allows visitors to toggle the nutrition facts.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'print_adjustable_servings',
 					'required' => 'premium',
 					'name' => __( 'Adjustable Servings', 'wp-recipe-maker' ),

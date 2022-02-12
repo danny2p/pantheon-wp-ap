@@ -20,6 +20,15 @@
 class WPRM_Assets {
 
 	/**
+	 * Data to pass along to JS.
+	 *
+	 * @since    8.1.0
+	 * @access   private
+	 * @var      array $js_data Data to pass along to JS.
+	 */
+	private static $js_data = array();
+
+	/**
 	 * Register actions and filters.
 	 *
 	 * @since    1.22.0
@@ -32,6 +41,7 @@ class WPRM_Assets {
 
 		add_action( 'wp_head', array( __CLASS__, 'custom_css' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'footer_assets' ) );
+		add_action( 'wp_footer', array( __CLASS__, 'output_js_data' ) );
 	}
 
 	/**
@@ -203,6 +213,7 @@ class WPRM_Assets {
 				'pinterest_use_for_image' => WPRM_Settings::get( 'pinterest_use_for_image' ),
 				'features_comment_ratings' => WPRM_Settings::get( 'features_comment_ratings' ),
 				'recipe_name_from_post_title' => WPRM_Settings::get( 'recipe_name_from_post_title' ),
+				'recipe_use_author' => WPRM_Settings::get( 'recipe_use_author' ),
 				'post_type_structure' => WPRM_Settings::get( 'post_type_structure' ),
 			),
 			'manage' => array(
@@ -277,14 +288,47 @@ class WPRM_Assets {
 	}
 
 	/**
+	 * Add data to pass along to JS.
+	 *
+	 * @since	8.1.0
+	 * @param	mixed $variable	Variable to use in JS.
+	 * @param	mixed $data		Data to pass along.
+	 */
+	public static function add_js_data( $variable, $data ) {
+		$variable = sanitize_key( $variable );
+		self::$js_data[ $variable ] = $data;
+	}
+
+	/**
+	 * Output data to pass along to JS.
+	 *
+	 * @since	8.1.0
+	 */
+	public static function output_js_data() {
+		$js = '';
+
+		foreach ( self::$js_data as $variable => $data ) {
+			if ( $data ) {
+				$js .= 'var ' . $variable . ' = ' . wp_json_encode( $data ) . ';';
+			}
+		}
+
+		if ( $js ) {
+			echo '<script type="text/javascript">' . $js . '</script>';
+		}
+	}
+
+	/**
 	 * Assets to output in the footer.
 	 *
 	 * @since    8.0.0
 	 */
 	public static function footer_assets() {
 		if ( apply_filters( 'wprm_load_pinit', false ) ) {
-			// Source: https://developers.pinterest.com/docs/add-ons/getting-started/
-			echo "<script type=\"text/javascript\">(function (d) {var f = d.getElementsByTagName('SCRIPT')[0],p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//assets.pinterest.com/js/pinit.js';f.parentNode.insertBefore(p, f);})(document);</script>";
+			if ( 'pinitjs' === WPRM_Settings::get( 'pinterest_pin_method' ) ) {
+				// Source: https://developers.pinterest.com/docs/add-ons/getting-started/
+				echo "<script type=\"text/javascript\">(function (d) {var f = d.getElementsByTagName('SCRIPT')[0],p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//assets.pinterest.com/js/pinit.js';f.parentNode.insertBefore(p, f);})(document);</script>";
+			}
 		}
 	}
 

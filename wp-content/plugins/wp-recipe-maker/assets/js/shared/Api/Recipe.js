@@ -4,7 +4,7 @@ import ApiWrapper from '../ApiWrapper';
 
 export default {
     get(id) {
-        return ApiWrapper.call( `${recipeEndpoint}/${id}` );
+        return ApiWrapper.call( `${recipeEndpoint}/${id}?t=${ Date.now() }` );
     },
     save(recipe) {
         const data = {

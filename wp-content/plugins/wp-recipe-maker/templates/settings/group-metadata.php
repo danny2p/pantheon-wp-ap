@@ -93,7 +93,7 @@ $metadata = array(
 				array(
 					'id' => 'itemlist_metadata_archive_pages_post_types',
 					'name' => __( 'Post Type Behaviour', 'wp-recipe-maker' ),
-					'description' => __( 'How to handle the name field that Google wants for every instruction step.', 'wp-recipe-maker' ),
+					'description' => __( 'Handle archive pages for all post types or just the recipe post type.', 'wp-recipe-maker' ),
 					'type' => 'dropdown',
 					'options' => array(
 						'wprm' => __( 'Only include metadata for the WPRM recipe post type (prevents searching the content)', 'wp-recipe-maker' ),

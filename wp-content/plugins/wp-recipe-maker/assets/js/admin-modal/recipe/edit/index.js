@@ -62,7 +62,7 @@ const EditRecipe = (props) => {
         }
     ];
 
-    if ( 'public' === wprm_admin.settings.post_type_structure ) {
+    if ( 'public' === wprm_admin.settings.post_type_structure || 'manual' === wprm_admin.settings.recipe_use_author ) {
         structure.push({
             id: 'postType', name: __wprm( 'Post Type' ),
             elem: (
