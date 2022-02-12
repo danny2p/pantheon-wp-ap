@@ -167,6 +167,14 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 			$text = $link;
 		}
 
+		// If inside of a recipe card, replace placeholders.
+		$recipe = WPRM_Template_Shortcodes::get_recipe( 0 );
+
+		if ( $recipe ) {
+			$link = $recipe->replace_placeholders( $link );
+			$text = $recipe->replace_placeholders( $text );
+		}
+
 		// Output.
 		$classes = array(
 			'wprm-link',

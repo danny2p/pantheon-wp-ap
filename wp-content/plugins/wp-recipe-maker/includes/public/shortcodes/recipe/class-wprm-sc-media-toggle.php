@@ -117,7 +117,8 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			$button_style .= 'color: ' . $atts['button_background'] . ';';
 
 			if ( 'on' !== $button ) {
-				$button_style .= 'border-left: 1px solid ' . $atts['button_accent'] . ';';
+				$border = is_rtl() ? 'border-right' : 'border-left';
+				$button_style .= $border . ': 1px solid ' . $atts['button_accent'] . ';';
 			}
 
 			// Get button text.

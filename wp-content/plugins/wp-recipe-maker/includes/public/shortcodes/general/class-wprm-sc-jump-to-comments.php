@@ -185,6 +185,13 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$text = str_ireplace( '%comments%', $nbr_comments, $text );
 		}
 
+		// If inside of a recipe card, replace placeholders.
+		$recipe = WPRM_Template_Shortcodes::get_recipe( 0 );
+
+		if ( $recipe ) {
+			$text = $recipe->replace_placeholders( $text );
+		}
+
 		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '">' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}

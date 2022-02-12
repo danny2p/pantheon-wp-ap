@@ -230,11 +230,18 @@ class WPRM_Modal {
 	public static function get_post_author_options() {
 		$options = array();
 
-		// Only needed when the recipe post type is public.
-		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
-			$authors = get_users( array(
-				'who' => 'authors',
-			) );
+		// Only needed when the recipe post type is public or manually setting post author.
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) || 'manual' === WPRM_Settings::get( 'recipe_use_author' ) ) {
+			$args = array();
+
+			// Prevent deprecation warning.
+			if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
+				$args['who'] = 'authors';
+			} else {
+				$args['capability'] = array( 'edit_posts' );
+			}
+
+			$authors = get_users( $args );
 
 			foreach ( $authors as $author ) {
 				$label = $author->ID;

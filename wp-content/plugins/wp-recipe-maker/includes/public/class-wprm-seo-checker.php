@@ -20,6 +20,15 @@
 class WPRM_Seo_Checker {
 
 	/**
+	 * Keep track of the recipes we're updating the SEO for.
+	 *
+	 * @since	8.1.0
+	 * @access  private
+	 * @var     array $updating_seo_for Recipes we're updating the SEO for.
+	 */
+	private static $updating_seo_for = array();
+
+	/**
 	 * Update the SEO data for a recipe.
 	 *
 	 * @since    8.0.0
@@ -27,13 +36,19 @@ class WPRM_Seo_Checker {
 	 */
 	public static function update_seo_for( $recipe_id ) {
 		$result = false;
-		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
-		if ( $recipe ) {
-			$result = self::check_recipe( $recipe );
+		// Prevent infinite loop.
+		if ( ! array_key_exists( $recipe_id, self::$updating_seo_for ) ) {
+			self::$updating_seo_for[ $recipe_id ] = true;
+			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
-			update_post_meta( $recipe_id, 'wprm_seo', $result );
-			update_post_meta( $recipe_id, 'wprm_seo_priority', $result['priority'] );
+			if ( $recipe ) {
+				$result = self::check_recipe( $recipe );
+
+				update_post_meta( $recipe_id, 'wprm_seo', $result );
+				update_post_meta( $recipe_id, 'wprm_seo_priority', $result['priority'] );
+			}
+			unset( self::$updating_seo_for[ $recipe_id ] );
 		}
 
 		return $result;

@@ -47,7 +47,7 @@ class WPRM_Compatibility_My_Emissions {
 	public static function load() {
 		if ( self::is_active() ) {
 			wp_enqueue_script( 'wprm-my-emissions' );
-			wp_localize_script( 'wprm-my-emissions', 'wprm_my_emissions', array(
+			WPRM_Assets::add_js_data( 'wprm_my_emissions', array(
 				'identifier' => get_option( 'wprm_my_emissions_identifier', '' ),
 			) );
 		}

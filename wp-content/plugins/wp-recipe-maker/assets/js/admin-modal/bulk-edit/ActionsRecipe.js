@@ -47,6 +47,13 @@ const ActionsRecipe = (props) => {
         }
     }
 
+    // Only for "public" recipe type or when manually setting post author.
+    if ( 'public' === wprm_admin.settings.post_type_structure || 'manual' === wprm_admin.settings.recipe_use_author ) {
+        actionOptions.push(
+            { value: 'change-post-author', label: __wprm( 'Change Post Author' ), default: 'parent' }
+        );
+    }
+
     // Default options.
     actionOptions.push(
         { value: 'change-type', label: __wprm( 'Change Recipe Type' ), default: 'food' },
@@ -141,6 +148,33 @@ const ActionsRecipe = (props) => {
                                     }
                 
                                     props.onActionChange(newAction);
+                                }}
+                            />
+                        }
+                        {
+                            'change-post-author' === selectedAction
+                            &&
+                            <FieldDropdown
+                                options={
+                                    wprm_admin_manage.authors.map( ( author ) => {
+                                        return {
+                                            value: author.data.ID,
+                                            label: `${author.data.ID}${ author.data.display_name ? ` - ${ author.data.display_name }` : '' }`,
+                                        }
+                                    })
+                                }
+                                value={ props.action.options }
+                                onChange={ (author) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: author,
+                                    }
+                                    props.onActionChange(newAction);
+                                }}
+                                width={ 300 }
+                                custom={{
+                                    menuPlacement: 'top',
+                                    maxMenuHeight: 150,
                                 }}
                             />
                         }

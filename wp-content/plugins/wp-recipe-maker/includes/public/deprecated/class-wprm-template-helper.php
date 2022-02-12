@@ -387,7 +387,7 @@ class WPRM_Template_Helper {
 
 				$output = '<div class="wprm-unit-conversion-container">' . implode( ' - ', $unit_systems_output ) . '</div>';
 
-				wp_localize_script( 'wprm-public', 'wprmpuc_recipe_' . $recipe->id(), array(
+				WPRM_Assets::add_js_data( 'wprmpuc_recipe_' . $recipe->id(), array(
 					'ingredients' => $ingredients,
 				));
 			}

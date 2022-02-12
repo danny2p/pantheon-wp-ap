@@ -19,6 +19,17 @@
 		& > * {
 			margin-left: 8px !important;
 			margin-right: 8px !important;
+
+			// Fix for grow.me button shortcode.
+			&.wprm-recipe-grow-container {
+				margin-left: 0 !important;
+				margin-right: 0 !important;
+
+				a {
+					margin-left: 8px !important;
+					margin-right: 8px !important;
+				}
+			}
 		}
 	}
 }
@@ -31,6 +42,15 @@
 		&.wprm-container-columns-gutter {
 			& > * {
 				margin-bottom: 16px !important;
+
+				// Fix for grow.me button shortcode.
+				&.wprm-recipe-grow-container {
+					margin-bottom: 0 !important;
+
+					a {
+						margin-bottom: 16px !important;
+					}
+				}
 			}
 		}
 	}

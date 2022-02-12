@@ -157,10 +157,22 @@ class WPRM_Print {
 					return $output;
 				}
 
+				// Get template to output.
+				$template = false;
+				if ( isset( $args[2] ) ) {
+					$template_slug = sanitize_key( $args[2] );
+					$template = WPRM_Template_Manager::get_template_by_slug( $template_slug );
+				}
+
+				// Use default print template if no specific template set.
+				if ( ! $template ) {
+					$template = WPRM_Template_Manager::get_template_by_type( 'print', $recipe->type() );
+				}
+
 				// Add styling for this recipe's print template.
 				$output['assets'][] = array(
 					'type' => 'custom',
-					'html' => WPRM_Template_Manager::get_template_styles( $recipe, 'print' ),
+					'html' => '<style type="text/css">' . WPRM_Template_Manager::get_template_css( $template ) . '</style>',
 				);
 
 				// Add options to header.
@@ -169,7 +181,7 @@ class WPRM_Print {
 				$output['recipe'] = $recipe;
 				$output['title'] = $recipe->name() . ' - ' . get_bloginfo( 'name' );
 				$output['url'] = $recipe->permalink();
-				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print' ) . '</div>';
+				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print', $template['slug'] ) . '</div>';
 			}
 		}
 
@@ -206,6 +218,7 @@ class WPRM_Print {
 				}
 
 				$uid = 1;
+				$output['html'] = '';
 				foreach ( $unique_recipes as $unique_recipe ) {
 					if ( WPRM_POST_TYPE === get_post_type( $unique_recipe['id'] ) ) {
 						$recipe = WPRM_Recipe_Manager::get_recipe( $unique_recipe['id'] );
@@ -277,6 +290,7 @@ class WPRM_Print {
 	public static function print_header_images( $recipe = false ) {
 		$header = '';
 
+		// Recipe image toggle.
 		if ( false === $recipe || $recipe->image() ) {
 			$checked = WPRM_Settings::get( 'print_show_recipe_image' ) ? 'checked="checked"' : '';
 
@@ -285,6 +299,7 @@ class WPRM_Print {
 			$header .= '</div>';
 		}
 
+		// Instruction images toggle.
 		$has_instructions_media = false;
 		$instructions_flat = $recipe ? $recipe->instructions_flat() : array();
 
@@ -300,6 +315,15 @@ class WPRM_Print {
 
 			$header .= '<div class="wprm-print-toggle-container">';
 			$header .= '<input type="checkbox" id="wprm-print-toggle-recipe-instruction-media" class="wprm-print-toggle" value="1" ' . $checked . '/><label for="wprm-print-toggle-recipe-instruction-media">' . __( 'Instruction Images', 'wp-recipe-maker' ) . '</label>';
+			$header .= '</div>';
+		}
+
+		// Recipe notes toggle.
+		if ( false === $recipe || $recipe->notes() ) {
+			$checked = WPRM_Settings::get( 'print_show_notes' ) ? ' checked="checked"' : '';
+
+			$header .= '<div class="wprm-print-toggle-container">';
+			$header .= '<input type="checkbox" id="wprm-print-toggle-recipe-notes" class="wprm-print-toggle" value="1" ' . $checked . '/><label for="wprm-print-toggle-recipe-notes">' . __( 'Notes', 'wp-recipe-maker' ) . '</label>';
 			$header .= '</div>';
 		}
 

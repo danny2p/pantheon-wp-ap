@@ -27,6 +27,7 @@ import IconPhoto from '../../icons/admin/photo.svg';
 import IconPlus from '../../icons/admin/plus.svg';
 import IconPrint from '../../icons/admin/print.svg';
 import IconQuestion from '../../icons/admin/question.svg';
+import IconReload from '../../icons/admin/reload.svg';
 import IconRestore from '../../icons/admin/restore.svg';
 import IconStarEmpty from '../../icons/admin/star-empty.svg';
 import IconStarFull from '../../icons/admin/star-full.svg';
@@ -61,6 +62,7 @@ const icons = {
     plus: IconPlus,
     print: IconPrint,
     question: IconQuestion,
+    reload: IconReload,
     restore: IconRestore,
     'star-empty': IconStarEmpty,
     'star-full': IconStarFull,

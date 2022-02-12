@@ -293,6 +293,13 @@ class WPRM_Recipe_Sanitizer {
 			$sanitized_recipe['nutrition']['serving_unit'] = $serving_unit;
 		}
 
+		// Only for "public" recipe type or when manually setting author.
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) || 'manual' === WPRM_Settings::get( 'recipe_use_author' ) ) {
+			if ( isset( $recipe['post_author'] ) ) {
+				$sanitized_recipe['post_author'] = intval( $recipe['post_author'] );
+			}
+		}
+
 		// Only for "public" recipe type.
 		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) { 
 			if ( isset( $recipe['slug'] ) ) {
@@ -302,10 +309,6 @@ class WPRM_Recipe_Sanitizer {
 			$options = array_keys( get_post_statuses() );
 			if ( isset( $recipe['post_status'] ) && in_array( $recipe['post_status'], $options, true ) ) {
 				$sanitized_recipe['post_status'] = $recipe['post_status'];
-			}
-
-			if ( isset( $recipe['post_author'] ) ) {
-				$sanitized_recipe['post_author'] = intval( $recipe['post_author'] );
 			}
 
 			if ( isset( $recipe['language'] ) ) {
@@ -498,7 +501,7 @@ class WPRM_Recipe_Sanitizer {
 		$text = str_replace( '<p><br/></p>', '', $text );
 
 		// WPRM Code in rich text.
-		preg_match_all( '/<wprm-code>(.*?)<\/wprm-code>/m', $text, $matches );
+		preg_match_all( '/<wprm-code>(.*?)<\/wprm-code>/ms', $text, $matches );
 		foreach ( $matches[1] as $key => $match ) {
 			$code = html_entity_decode( $match );
 			$text = str_replace( $match, $code, $text );

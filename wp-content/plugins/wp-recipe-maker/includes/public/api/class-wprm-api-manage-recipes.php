@@ -799,6 +799,13 @@ class WPRM_Api_Manage_Recipes {
 					case 'change-type':
 						$recipe_data['type'] = $action['options'];
 						break;
+					case 'change-post-author':
+						$author_id = intval( $action['options'] );
+
+						if ( $author_id ) {
+							$recipe_data['post_author'] = $author_id;
+						}
+						break;
 					case 'change-author':
 						$recipe_data['author_display'] = $action['options']['author'];
 						$recipe_data['author_name'] = $action['options']['author_name'];

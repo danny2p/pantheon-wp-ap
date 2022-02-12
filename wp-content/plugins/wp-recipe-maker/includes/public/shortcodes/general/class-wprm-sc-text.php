@@ -98,6 +98,13 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 			$classes[] = 'wprm-align-' . esc_attr( $atts['align'] );
 		}
 
+		// If inside of a recipe card, replace placeholders.
+		$recipe = WPRM_Template_Shortcodes::get_recipe( 0 );
+
+		if ( $recipe ) {
+			$text = $recipe->replace_placeholders( $text );
+		}
+
 		// Optional header.
 		$header = WPRM_Shortcode_Helper::get_section_header( $atts, 'text' );
 

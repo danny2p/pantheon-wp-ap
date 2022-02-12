@@ -65,6 +65,17 @@ $social_sharing = array(
 			'name' => __( 'Pinterest - Pin Recipe button', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
+					'id' => 'pinterest_pin_method',
+					'name' => __( 'Pin Method', 'wp-recipe-maker' ),
+					'description' => __( 'Choose the pin method to use when clicking the Pin Recipe button.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'pinitjs' => __( 'Load pinit.js (required for Repin ID pinning)', 'wp-recipe-maker' ),
+						'link' => __( 'Link only (no extra JavaScript loaded from Pinterest)', 'wp-recipe-maker' ),
+					),
+					'default' => 'pinitjs',
+				),
+				array(
 					'id' => 'pinterest_use_for_image',
 					'name' => __( 'Pin Image', 'wp-recipe-maker' ),
 					'description' => __( 'Image to use for the Pin Recipe shortcode.', 'wp-recipe-maker' ),

@@ -185,14 +185,17 @@ class WPRM_Recipe_Saver {
 			$post['post_content'] = $recipe['summary'];
 		}
 
+		// Only for "public" recipe type or when manually setting author.
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) || 'manual' === WPRM_Settings::get( 'recipe_use_author' ) ) {
+			if ( isset( $recipe['post_author'] ) && $recipe['post_author'] ) {
+				$post['post_author'] = $recipe['post_author'];
+			}
+		}
+
 		// Only for "public" recipe type.
 		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) { 
 			if ( isset( $recipe['slug'] ) && $recipe['slug'] ) {
 				$post['post_name'] = $recipe['slug'];
-			}
-
-			if ( isset( $recipe['post_author'] ) && $recipe['post_author'] ) {
-				$post['post_author'] = $recipe['post_author'];
 			}
 	
 			if ( isset( $recipe['post_status'] ) && $recipe['post_status'] ) {
@@ -364,12 +367,16 @@ class WPRM_Recipe_Saver {
 				$recipe = array(
 					'ID'          	=> $recipe_id,
 					'post_status' 	=> $recipe_post_status,
-					'post_author' 	=> $post->post_author,
 					'post_date' 	=> $post->post_date,
 					'post_date_gmt' => $post->post_date_gmt,
 					'post_modified' => $post->post_modified,
 					'edit_date'		=> true, // Required when going from draft to future.
 				);
+
+				if ( 'parent' === WPRM_Settings::get( 'recipe_use_author' ) ) {
+					$recipe['post_author'] = $post->post_author;
+				}
+
 				wp_update_post( $recipe );
 
 				update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );

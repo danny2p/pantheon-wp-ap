@@ -25,15 +25,18 @@ window.WPRecipeMaker.print = {
 		if ( recipeId ) {
 			e.preventDefault();
 			recipeId = parseInt( recipeId );
+
+			// Optional template to print.
+			const template = el.dataset.hasOwnProperty( 'template' ) ? el.dataset.template : '';
 			
 			// Analytics.
 			let location = 'other';
 
-			const template = el.closest( '.wprm-recipe' );
-			if ( template ) {
-				if ( template.classList.contains( 'wprm-recipe-snippet' ) ) {
+			const parent = el.closest( '.wprm-recipe' );
+			if ( parent ) {
+				if ( parent.classList.contains( 'wprm-recipe-snippet' ) ) {
 					location = 'snippet';
-				} else if ( template.classList.contains( 'wprm-recipe-roundup-item' ) ) {
+				} else if ( parent.classList.contains( 'wprm-recipe-roundup-item' ) ) {
 					location = 'roundup';
 				} else {
 					location = 'recipe';
@@ -45,10 +48,10 @@ window.WPRecipeMaker.print = {
 			});
 
 			// Actually print.
-			WPRecipeMaker.print.recipeAsIs( recipeId );
+			WPRecipeMaker.print.recipeAsIs( recipeId, template );
 		}
 	},
-	recipeAsIs: ( id ) => {
+	recipeAsIs: ( id, template = '' ) => {
 		let servings = false,
 			system = 1,
 			advancedServings = false;
@@ -72,10 +75,15 @@ window.WPRecipeMaker.print = {
 			advancedServings = WPRecipeMaker.advancedServings.getRecipe( id );
 		}
 
-		WPRecipeMaker.print.recipe( id, servings, system, advancedServings );
+		WPRecipeMaker.print.recipe( id, servings, system, advancedServings, template );
 	},
-	recipe: ( id, servings = false, system = 1, advancedServings = false ) => {
-		const url = WPRecipeMaker.print.getUrl( id );
+	recipe: ( id, servings = false, system = 1, advancedServings = false, template = '' ) => {
+		let urlArgs = id;
+		if ( template ) {
+			urlArgs += `/${template}`;
+		}
+
+		const url = WPRecipeMaker.print.getUrl( urlArgs );
 		const target = wprm_public.settings.print_new_tab ? '_blank' : '_self';
 		const printWindow = window.open( url, target );
 

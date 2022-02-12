@@ -272,6 +272,7 @@ class WPRM_Recipe_Shell {
 		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
 		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
+		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
 
 		return $text;
