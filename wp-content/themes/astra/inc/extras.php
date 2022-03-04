@@ -119,7 +119,7 @@ if ( ! function_exists( 'astra_get_content_layout' ) ) {
 	 * Return current content layout
 	 *
 	 * @since 1.0.0
-	 * @return boolean  content layout.
+	 * @return mixed content layout.
 	 */
 	function astra_get_content_layout() {
 
@@ -375,9 +375,8 @@ add_filter( 'astra_customizer_configurations', 'astra_remove_controls', 99 );
  * @return string The menu item.
  */
 function astra_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
-	$role     = 'presentation';
-	$tabindex = '0';
-	$icon     = '';
+	$role = 'presentation';
+	$icon = '';
 
 	/**
 	 * These menus are not overriden by the 'Astra_Custom_Nav_Walker' class present in Addon - Nav Menu module.
@@ -425,7 +424,7 @@ function astra_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
 	}
 	foreach ( $item->classes as $value ) {
 		if ( 'menu-item-has-children' === $value ) {
-			$title = $title . '<span role="' . esc_attr( $role ) . '" class="dropdown-menu-toggle" tabindex="' . esc_attr( $tabindex ) . '" >' . $icon . '</span>';
+			$title = $title . '<span role="' . esc_attr( $role ) . '" class="dropdown-menu-toggle" >' . $icon . '</span>';
 		}
 	}
 	if ( 0 < $depth ) {
@@ -799,4 +798,22 @@ function astra_check_elementor_pro_3_5_version() {
 		return true;
 	}
 	return false;
+}
+
+/**
+ * Should Content BG settings apply to Fullwidth Contained/Stretched layout or not?
+ *
+ * Do not apply content background to fullwidth layouts in following cases -
+ * 1. For backward compatibility.
+ * 2. When site layout is Max-width.
+ * 3. When site layout is Padded.
+ *
+ * @since 3.7.8
+ * @return boolean
+ */
+function astra_apply_content_background_fullwidth_layouts() {
+	$astra_site_layout              = astra_get_option( 'site-layout' );
+	$astra_apply_content_background = astra_get_option( 'apply-content-background-fullwidth-layouts', true );
+
+	return ( $astra_apply_content_background && 'ast-box-layout' !== $astra_site_layout && 'ast-padded-layout' !== $astra_site_layout );
 }

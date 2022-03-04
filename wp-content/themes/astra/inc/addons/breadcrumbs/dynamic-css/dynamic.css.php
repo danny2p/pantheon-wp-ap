@@ -88,6 +88,10 @@ function astra_breadcrumb_section_dynamic_css( $dynamic_css, $dynamic_css_filter
 
 	$breadcrumb_alignment = astra_get_option( 'breadcrumb-alignment' );
 
+	$breadcrumb_separator = astra_get_option( 'breadcrumb-separator' );
+
+	$breadcrumb_separator_selector = astra_get_option( 'breadcrumb-separator-selector' );
+
 	/**
 	 * Generate dynamic CSS based on the Breadcrumb Source option selected from the customizer.
 	 */
@@ -108,10 +112,22 @@ function astra_breadcrumb_section_dynamic_css( $dynamic_css, $dynamic_css_filter
 		);
 	}
 
+	/**
+	 * Breadcrumb Separator
+	 */
+	$current_selected_separator = '';
+
+	if ( 'unicode' === $breadcrumb_separator_selector ) {
+		$current_selected_separator = $breadcrumb_separator;
+	} else {
+		$current_selected_separator = $breadcrumb_separator_selector;
+	}
+
+
 	$css .= astra_parse_css(
 		array(
 			'.trail-items li::after' => array(
-				'content' => '"' . astra_get_option( 'breadcrumb-separator', '\00bb' ) . '"',
+				'content' => '"' . $current_selected_separator . '"',
 			),
 		),
 		'',
