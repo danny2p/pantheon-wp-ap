@@ -33,6 +33,7 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 		public static function fetch_svg_icon( $icon = '', $base = true ) {
 			$output = '<span class="ahfb-svg-iconset ast-inline-flex' . ( $base ? ' svg-baseline' : '' ) . '">';
 
+			/** @psalm-suppress DocblockTypeContradiction */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			if ( ! self::$ast_svgs ) {
 				ob_start();
 				include_once ASTRA_THEME_DIR . 'assets/svg/svgs.json'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
@@ -279,7 +280,7 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 			<div class="astra-mobile-cart-overlay"></div>
 			<div id="astra-mobile-cart-drawer" class="astra-cart-drawer open-right">
 				<div class="astra-cart-drawer-header">
-					<button type="button" class="astra-cart-drawer-close">
+					<button type="button" class="astra-cart-drawer-close" aria-label="<?php echo esc_attr__( 'Close Cart Drawer', 'astra' ); ?>">
 							<?php echo self::fetch_svg_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</button>
 					<div class="astra-cart-drawer-title">
@@ -331,11 +332,8 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 					self::render_customizer_edit_button();
 				}
 
-				?>
-
-				<?php if ( $is_logged_in && ( ( ( ( ! $logout_preview ) || ( 'none' === $logged_out_style && $logout_preview ) ) && $is_customizer ) || ( ! $is_customizer ) ) ) { ?>
-
-					<?php
+				/** @psalm-suppress RedundantConditionGivenDocblockType */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+				if ( $is_logged_in && ( ( ( ( ! $logout_preview ) || ( 'none' === $logged_out_style && $logout_preview ) ) && $is_customizer ) || ( ! $is_customizer ) ) ) {
 
 					$account_type = astra_get_option( 'header-account-type' );
 

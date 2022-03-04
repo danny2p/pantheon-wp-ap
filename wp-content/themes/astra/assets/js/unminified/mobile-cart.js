@@ -104,13 +104,13 @@
 
 			if( 0 < woo_carts.length ){
 				woo_carts.forEach(function callbackFn(woo_cart) {
-					if (undefined !== woo_cart && '' !== woo_cart && null !== woo_cart) {
+					if (undefined !== woo_cart && '' !== woo_cart && null !== woo_cart && cart_flyout) {
 						woo_cart.addEventListener("click", cartFlyoutOpen, false);
 						woo_cart.cart_type = 'woocommerce';
 					}
 				})
 			}
-			if (undefined !== edd_cart && '' !== edd_cart && null !== edd_cart) {
+			if (undefined !== edd_cart && '' !== edd_cart && null !== edd_cart && cart_flyout) {
 				edd_cart.addEventListener("click", cartFlyoutOpen, false);
 				edd_cart.cart_type = 'edd';
 			}
@@ -124,7 +124,7 @@
 	window.addEventListener('resize', function () {
 		// Close Cart
 		var cart_close = document.querySelector('.astra-cart-drawer-close');
-		if (undefined !== cart_close && '' !== cart_close && null !== cart_close && 'INPUT' !== document.activeElement.tagName ) {
+		if ( undefined !== cart_close && '' !== cart_close && null !== cart_close && 'INPUT' !== document.activeElement.tagName && cart_flyout.classList.contains( 'active' ) ) {
 			cart_close.click();
 		}
 	});

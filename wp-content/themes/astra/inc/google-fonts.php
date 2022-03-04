@@ -6634,6 +6634,12 @@ return array(
 		),
 	),
 	array(
+		'Roboto Serif' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
 		'Roboto Slab' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
 			'category' => 'serif', 
@@ -6912,7 +6918,7 @@ return array(
 	array(
 		'Sawarabi Mincho' => array(
 			'variants' => array( 'regular' ), 
-			'category' => 'sans-serif', 
+			'category' => 'serif', 
 		),
 	),
 	array(

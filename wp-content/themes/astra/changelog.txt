@@ -1,3 +1,26 @@
+v3.7.8
+- Improvement: Added a new filter 'astra_settings_metabox_register' to prevent loading of block based Astra Settings metabox. ( https://wpastra.com/docs/hide-astra-settings-for-user-roles/ )
+- Improvement: Introducing new breadcrumb separators.
+- Improvement: Site Background color will be applied as the background color for Full-Width - Contained/Stretched layouts instead of Content Background color. ( https://wpastra.com/docs/applying-content-background-to-full-width-layouts/ )
+- Fix: W3 validation - Removed an attribute tabindex for dropdown menu toggle.
+- Fix: W3 validation - legend HTML tag missing for comment section.
+- Fix: Related Posts - Post Query - Order by Random option not working as expected.
+- Fix: W3 validation - aria-label attribute is missing for cart off-canvas drawer.
+- Fix: Dropdown menu appearing when flyout/fullscreen header type is selected for mobile/tablet in the customizer preview.
+- Fix: W3 validation - Builder - Account - Duplicate IDs for account icons.
+- Fix: Elementor Pro - WooCommerce Grid layout support in WooCommerce Products Archive widget.
+- Fix: Accessibility - Tab navigation does not highlight slider search icon.
+- Fix: Console error on mobile devices for Safari browsers.
+- Fix: WooCommerce - Blank Flyout shopping cart appearing on checkout & cart page for mobile/tablet devices.
+- Fix: Gutenberg editor - Gutenberg Blocks jerk when users edit any blocks.
+- Fix: Gutenberg editor - Block Editor layout showing issue with heading block on page or post.
+- Fix: Astra meta settings are not getting saved when Classic editor is enabled.
+- Fix: Menu disappears on the Android mobile devices when Header Type is set as Dropdown.
+- Fix: Elementor Popup – Youtube video fullscreen not working when the cart element is added.
+- Fix: Submenus are misaligned with the old Astra header menu for specific cases.
+- Fix: WooCommerce - Product Categories widget's hierarchy layout is missing on the Frontend.
+- Fix: Column Block - Layout options missing when nested inside Group/Cover Blocks.
+
 v3.7.7
 - Improvement: Compatibility with WordPress 5.9.
 - Fix: var() colors code appearing in block editor theme palette picker.

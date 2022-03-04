@@ -370,14 +370,39 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 
 			if ( $this->is_selected_breadcrumb_active() ) {
 
+				/**
+				 * Option: Breadcrumb separator
+				 */
+
 				$_configs[] = array(
-					'name'     => ASTRA_THEME_SETTINGS . '[breadcrumb-separator-divider]',
-					'type'     => 'control',
-					'control'  => 'ast-divider',
-					'section'  => $_section,
-					'settings' => array(),
-					'priority' => 15,
-					'context'  => array(
+					'name'              => ASTRA_THEME_SETTINGS . '[breadcrumb-separator-selector]',
+					'type'              => 'control',
+					'control'           => 'ast-radio-image',
+					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_choices' ),
+					'default'           => astra_get_option( 'breadcrumb-separator-selector' ),
+					'priority'          => 15,
+					'title'             => __( 'Separator', 'astra' ),
+					'section'           => $_section,
+					'choices'           => array(
+						'\003E'   => array(
+							'label' => __( 'Type 1', 'astra' ),
+							'path'  => Astra_Builder_UI_Controller::fetch_svg_icon( 'breadcrumb-separator-1' ),
+						),
+						'\00BB'   => array(
+							'label' => __( 'Type 2', 'astra' ),
+							'path'  => Astra_Builder_UI_Controller::fetch_svg_icon( 'breadcrumb-separator-2' ),
+						),
+						'\002F'   => array(
+							'label' => __( 'Type 3', 'astra' ),
+							'path'  => Astra_Builder_UI_Controller::fetch_svg_icon( 'breadcrumb-separator-3' ),
+						),
+						'unicode' => array(
+							'label' => __( 'Custom unicode separator', 'astra' ),
+							'path'  => Astra_Builder_UI_Controller::fetch_svg_icon( 'breadcrumb-separator-unicode' ),
+						),
+					),
+					'transport'         => 'postMessage',
+					'context'           => array(
 						array(
 							'setting'  => ASTRA_THEME_SETTINGS . '[breadcrumb-position]',
 							'operator' => '!=',
@@ -386,19 +411,29 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Configs' ) ) {
 						Astra_Builder_Helper::$general_tab_config,
 					),
 				);
+
+				/**
+				 * Option: Breadcrumb Unicode input
+				 */
+
 				$_configs[] = array(
 					'name'      => ASTRA_THEME_SETTINGS . '[breadcrumb-separator]',
 					'type'      => 'control',
 					'control'   => 'text',
 					'section'   => $_section,
-					'default'   => astra_get_option( 'breadcrumb-separator' ) ? astra_get_option( 'breadcrumb-separator' ) : '\00bb',
+					'default'   => astra_get_option( 'breadcrumb-separator' ),
 					'priority'  => 15,
-					'title'     => __( 'Separator', 'astra' ),
+					'title'     => __( 'Unicode', 'astra' ),
 					'context'   => array(
 						array(
 							'setting'  => ASTRA_THEME_SETTINGS . '[breadcrumb-position]',
 							'operator' => '!=',
 							'value'    => 'none',
+						),
+						array(
+							'setting'  => ASTRA_THEME_SETTINGS . '[breadcrumb-separator-selector]',
+							'operator' => '=',
+							'value'    => 'unicode',
 						),
 						Astra_Builder_Helper::$general_tab_config,
 					),
