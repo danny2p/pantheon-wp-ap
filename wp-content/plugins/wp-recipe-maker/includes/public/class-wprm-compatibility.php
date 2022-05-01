@@ -30,13 +30,17 @@ class WPRM_Compatibility {
 		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
 
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'mediavine_ingredients_ad' ) );
-		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ), 10, 3 );
+		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
+
+		// Instacart.
+		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
+		// add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
-		add_action( 'elementor/controls/controls_registered', array( __CLASS__, 'elementor_controls' ) );
+		add_action( 'elementor/controls/register', array( __CLASS__, 'elementor_controls' ) );
 		add_action( 'elementor/preview/enqueue_styles', array( __CLASS__, 'elementor_styles' ) );
-		add_action( 'elementor/widgets/widgets_registered', array( __CLASS__, 'elementor_widgets' ) );
+		add_action( 'elementor/widgets/register', array( __CLASS__, 'elementor_widgets' ) );
 		add_action( 'ECS_after_render_post_footer', array( __CLASS__, 'wpupg_unset_recipe_id' ) );
 
 		// WP Ultimate Post Grid.
@@ -69,7 +73,7 @@ class WPRM_Compatibility {
 	 *
 	 * @since	7.2.0
 	 */
-	public static function yoast_video_seo( $post_content, $video_info, $post ) {
+	public static function yoast_video_seo( $post_content ) {
 		$recipes = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post_content );
 
 		if ( $recipes ) {
@@ -123,17 +127,17 @@ class WPRM_Compatibility {
 
 		wp_enqueue_script( 'wprm-admin-elementor', WPRM_URL . 'assets/js/other/elementor.js', array( 'wprm-admin', 'wprm-admin-modal' ), WPRM_VERSION, true );
 	}
-	public static function elementor_controls() {
+	public static function elementor_controls( $controls_manager ) {
 		include( WPRM_DIR . 'templates/elementor/control.php' );
-		\Elementor\Plugin::$instance->controls_manager->register_control( 'wprm-recipe-select', new WPRM_Elementor_Control() );
+		$controls_manager->register( new WPRM_Elementor_Control() );
 	}
 	public static function elementor_styles() {
 		// Make sure default assets load.
 		WPRM_Assets::load();
 	}
-	public static function elementor_widgets() {
+	public static function elementor_widgets( $widgets_manager ) {
 		include( WPRM_DIR . 'templates/elementor/widget.php' );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new WPRM_Elementor_Widget() );
+		$widgets_manager->register( new WPRM_Elementor_Widget() );
 	}
 
 	/**
@@ -256,6 +260,31 @@ class WPRM_Compatibility {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Add Instacart button after the ingredients.
+	 *
+	 * @since	8.2.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function instacart_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'integration_instacart' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-shop-instacart]' );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Instacart assets in footer.
+	 *
+	 * @since    8.2.0
+	 */
+	public static function instacart_assets() {
+		if ( apply_filters( 'wprm_load_instacart', false ) ) {
+			echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle.js"; js.async = true; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
+		}
 	}
 
 	/**

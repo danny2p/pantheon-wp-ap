@@ -97,11 +97,7 @@ class WPRM_Api_Manage_Analytics {
 						}
 						break;
 					case 'type':
-						if ( 'user' === $value ) {
-							$args['filter'][] = 'recipe_id > 0';
-						} elseif ( 'comment' === $value ) {
-							$args['filter'][] = 'comment_id > 0';
-						}
+						$args['filter'][] = 'type LIKE "%' . esc_sql( like_escape( $value ) ) . '%"';
 						break;
 					case 'approved':
 						if ( 'yes' === $value ) {

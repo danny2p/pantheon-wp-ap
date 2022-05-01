@@ -9,34 +9,6 @@
  * @subpackage WP_Recipe_Maker/templates/settings
  */
 
-$authors = array(
-	'none' => __( 'No author image', 'wp-recipe-maker' ),
-);
-
-if ( false && is_admin() ) {
-	$args = array();
-
-	// Prevent deprecation warning.
-	if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
-		$args['who'] = 'authors';
-	} else {
-		$args['capability'] = array( 'edit_posts' );
-	}
-
-	// Get Authors.
-	$users = get_users( $args );
-
-	foreach ( $users as $user ) {
-		$label = $user->ID;
-
-		if ( $user->data->display_name ) {
-			$label .= ' - ' . $user->data->display_name;
-		}
-
-		$authors[ 'user-' . $user->ID ] = $label;
-	}
-}
-
 $recipe_defaults = array(
 	'id' => 'recipeDefaults',
 	'icon' => 'edit',
@@ -117,20 +89,11 @@ $recipe_defaults = array(
 					'default' => false,
 				),
 				array(
-					'id' => 'recipe_author_same_image',
+					'id' => 'recipe_author_same_image_user_id',
 					'name' => __( 'Author Image', 'wp-recipe-maker' ),
-					'description' => __( 'Use profile image of a specific author on your site.', 'wp-recipe-maker' ),
-					'type' => 'dropdown',
-					'options' => $authors,
-					'dependency' => array(
-						'id' => 'recipe_author_display_default',
-						'value' => 'same',
-					),
-					'sanitize' => function( $value ) {
-						// Options are incomplete when sanitizing, so just accept value.
-						return $value;
-					},
-					'default' => 'none',
+					'description' => __( 'Use profile image of a specific author on your site by specifying the user ID. Leave blank for no image.', 'wp-recipe-maker' ),
+					'type' => 'number',
+					'default' => '',
 				),
 			),
 		),

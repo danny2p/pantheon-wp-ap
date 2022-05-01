@@ -83,7 +83,7 @@ window.WPRMPrint = {
         } else if ( 'wprm-print-toggle-collection-servings' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-collection-item-servings' );
         } else if ( 'wprm-print-toggle-collection-nutrition' === toggle.id ) {
-            elems = document.querySelectorAll( '.wprmprc-collection-column-nutrition' );
+            elems = document.querySelectorAll( '.wprmprc-collection-column-nutrition, .wprmprc-collection-item-nutrition' );
         } else if ( 'wprm-print-toggle-shopping-list-collection' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-shopping-list-collection' );
         } else if ( 'wprm-print-toggle-shopping-list' === toggle.id ) {

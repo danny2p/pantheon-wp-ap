@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2022-02-08 10:51+0000\n"
+"POT-Creation-Date: 2022-04-27 09:48+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: templates/admin/menu/import/import-recipes.php:73
+#: templates/admin/menu/import/import-recipes.php:93
 #, php-format
 msgid "%d more recipe"
 msgid_plural "%d more recipes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/menu/import/import-overview.php:63 
+#: templates/admin/menu/import/import-overview.php:71 
 #: templates/admin/menu/import/import-search.php:29 
 #: templates/admin/menu/import/import-search.php:37
 #, php-format
@@ -343,7 +343,7 @@ msgstr ""
 msgid "Affiliate HTML Preview"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:95
+#: templates/admin/menu/import/import-overview.php:103
 msgid ""
 "After doing so you can mark a recipe as checked to keep track of the recipes "
 "you still have to go through."
@@ -361,11 +361,11 @@ msgstr ""
 msgid "After first paragraph"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:73
+#: templates/admin/menu/import/import-overview.php:81
 msgid "After Importing"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:92
+#: templates/admin/menu/import/import-overview.php:100
 msgid ""
 "After importing your recipes, run a Health Check on the WP Recipe Maker > "
 "Dashboard page."
@@ -375,7 +375,7 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:47
+#: templates/admin/menu/import/import-recipes.php:60
 msgid "all"
 msgstr ""
 
@@ -613,11 +613,11 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:121
+#: templates/settings/group-recipe-defaults.php:93
 msgid "Author Image"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:98
+#: templates/settings/group-recipe-defaults.php:70
 msgid "Author Link"
 msgstr ""
 
@@ -625,12 +625,12 @@ msgstr ""
 msgid "Author Links"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:88 
+#: templates/settings/group-recipe-defaults.php:60 
 #: templates/admin/translations.php:97
 msgid "Author Name"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:153
+#: templates/settings/group-recipe-defaults.php:116
 msgid "Automatic Amount Fraction Symbols"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 msgid "Autoplay Video"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:77
+#: templates/admin/menu/import/import-recipes.php:97
 msgid "Back to start."
 msgstr ""
 
@@ -747,6 +747,10 @@ msgstr ""
 
 #: templates/admin/translations.php:149
 msgid "Cancel"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:56
+msgid "cancel"
 msgstr ""
 
 #: templates/admin/translations.php:235
@@ -921,6 +925,10 @@ msgstr ""
 
 #: templates/admin/translations.php:212
 msgid "Click to copy the recipe to your clipboard."
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:52
+msgid "Click to search the recipes to import"
 msgstr ""
 
 #: templates/settings/group-media.php:44
@@ -1105,11 +1113,11 @@ msgstr ""
 msgid "cups"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:272
+#: includes/admin/class-wprm-modal.php:280
 msgid "Custom author name"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:71
+#: templates/settings/group-recipe-defaults.php:43
 msgid "Custom author per recipe"
 msgstr ""
 
@@ -1259,11 +1267,11 @@ msgstr ""
 msgid "Decimal with leading zero"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:65
+#: templates/settings/group-recipe-defaults.php:37
 msgid "Default Author"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:78
+#: templates/settings/group-recipe-defaults.php:50
 msgid "Default Custom Author Name"
 msgstr ""
 
@@ -1420,11 +1428,11 @@ msgid ""
 "notes."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:66
+#: templates/settings/group-recipe-defaults.php:38
 msgid "Default value for the Recipe Author field when creating a new recipe."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:46
+#: templates/settings/group-recipe-defaults.php:18
 msgid "Defaults"
 msgstr ""
 
@@ -1628,15 +1636,15 @@ msgstr ""
 msgid "Don't rate this recipe"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:270 
-#: templates/settings/group-recipe-defaults.php:69 
+#: includes/admin/class-wprm-modal.php:278 
+#: templates/settings/group-recipe-defaults.php:41 
 #: templates/settings/group-nutrition-label.php:36
 msgid "Don't show"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:304 
-#: includes/admin/class-wprm-modal.php:337 
-#: includes/admin/class-wprm-modal.php:370 
+#: includes/admin/class-wprm-modal.php:312 
+#: includes/admin/class-wprm-modal.php:345 
+#: includes/admin/class-wprm-modal.php:378 
 #: templates/settings/group-links.php:114 
 #: templates/settings/group-links.php:141 
 #: templates/settings/group-links.php:168
@@ -1875,7 +1883,7 @@ msgstr ""
 msgid "Exclude IPs"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:68 
+#: templates/admin/menu/import/import-overview.php:76 
 #: templates/admin/menu/import/import-search.php:32
 msgid "Explore import options"
 msgstr ""
@@ -2190,7 +2198,7 @@ msgid ""
 "nutrition facts for you."
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:98
+#: templates/admin/menu/import/import-overview.php:106
 msgid ""
 "Getting a lot of recipes without parent post or are you missing any ratings?"
 msgstr ""
@@ -2223,7 +2231,7 @@ msgstr ""
 msgid "Go to Collections"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:80
+#: templates/admin/menu/import/import-recipes.php:100
 msgid "Go to the next page."
 msgstr ""
 
@@ -2575,7 +2583,11 @@ msgstr ""
 msgid "Import Recipes"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:36
+#: templates/admin/menu/import/import-overview.php:24
+msgid "Import recipes"
+msgstr ""
+
+#: templates/admin/menu/import/import-overview.php:44
 msgid "Import recipes from other plugins"
 msgstr ""
 
@@ -2583,7 +2595,7 @@ msgstr ""
 msgid "Import Reviews"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:85
+#: templates/admin/menu/import/import-recipes.php:105
 msgid "Import Selected Recipes"
 msgstr ""
 
@@ -2597,10 +2609,6 @@ msgstr ""
 
 #: templates/settings/group-import.php:34
 msgid "Import Units"
-msgstr ""
-
-#: templates/admin/menu/import/import-overview.php:24
-msgid "Import WP Recipe Maker recipes"
 msgstr ""
 
 #: templates/admin/menu/import/importing.php:16
@@ -2774,6 +2782,10 @@ msgstr ""
 msgid "Instruction Name Field"
 msgstr ""
 
+#: templates/settings/group-import.php:71
+msgid "Instruction Parsing"
+msgstr ""
+
 #: templates/admin/translations.php:338
 msgid "Instruction video URL or embed code"
 msgstr ""
@@ -2941,7 +2953,7 @@ msgstr ""
 msgid "leave"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:99
+#: templates/settings/group-recipe-defaults.php:71
 msgid "Leave blank to not use a link."
 msgstr ""
 
@@ -3129,11 +3141,11 @@ msgstr ""
 msgid "Manage all recipes..."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:147
+#: templates/settings/group-recipe-defaults.php:110
 msgid "Manually set author while editing recipe"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:128
+#: templates/admin/menu/import/import-overview.php:136
 msgid "Mark Selected Recipes as Checked"
 msgstr ""
 
@@ -3309,8 +3321,8 @@ msgstr ""
 msgid "Name for this video part"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:271 
-#: templates/settings/group-recipe-defaults.php:70
+#: includes/admin/class-wprm-modal.php:279 
+#: templates/settings/group-recipe-defaults.php:42
 msgid "Name of post author"
 msgstr ""
 
@@ -3340,15 +3352,11 @@ msgid ""
 "should start showing up soon."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:13
-msgid "No author image"
-msgstr ""
-
 #: templates/admin/translations.php:474
 msgid "no comment ratings"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:88
+#: templates/admin/menu/import/import-overview.php:96
 msgid "No imported recipes found."
 msgstr ""
 
@@ -3360,8 +3368,8 @@ msgstr ""
 msgid "No metadata when there is recipe metadata"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:62 
-#: templates/admin/menu/import/import-overview.php:121
+#: templates/admin/menu/import/import-recipes.php:82 
+#: templates/admin/menu/import/import-overview.php:129
 msgid "no parent post found"
 msgstr ""
 
@@ -3382,7 +3390,7 @@ msgstr ""
 msgid "No recipes found"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:52
+#: templates/admin/menu/import/import-overview.php:60
 msgid "No recipes found."
 msgstr ""
 
@@ -3407,7 +3415,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:47
+#: templates/admin/menu/import/import-recipes.php:60
 msgid "none"
 msgstr ""
 
@@ -3488,7 +3496,7 @@ msgstr ""
 msgid "Only use in metadata when explicitely set in recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:110
+#: templates/settings/group-recipe-defaults.php:82
 msgid "Open Author Link in New Tab"
 msgstr ""
 
@@ -3594,7 +3602,7 @@ msgid ""
 "Leave the setting blank to use the default shared key."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:138 
+#: templates/settings/group-recipe-defaults.php:101 
 #: templates/admin/translations.php:449
 msgid "Other"
 msgstr ""
@@ -3801,7 +3809,7 @@ msgstr ""
 msgid "Post Author"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:143
+#: templates/settings/group-recipe-defaults.php:106
 msgid "Post Author to use for the recipe."
 msgstr ""
 
@@ -3992,7 +4000,7 @@ msgstr ""
 msgid "Recipe Archive Page"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:142
+#: templates/settings/group-recipe-defaults.php:105
 msgid "Recipe Author"
 msgstr ""
 
@@ -4016,7 +4024,7 @@ msgstr ""
 msgid "Recipe Data Size"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:43
+#: templates/settings/group-recipe-defaults.php:15
 msgid "Recipe Editing"
 msgstr ""
 
@@ -4352,7 +4360,7 @@ msgstr ""
 msgid "RSS Feed Template"
 msgstr ""
 
-#: includes/public/class-wprm-seo-checker.php:105
+#: includes/public/class-wprm-seo-checker.php:108
 msgid ""
 "Run a Health Check through the WP Recipe Maker > Dashboard page to get SEO "
 "data"
@@ -4374,8 +4382,8 @@ msgstr ""
 msgid "Salad"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:273 
-#: templates/settings/group-recipe-defaults.php:72
+#: includes/admin/class-wprm-modal.php:281 
+#: templates/settings/group-recipe-defaults.php:44
 msgid "Same author for every recipe"
 msgstr ""
 
@@ -4428,7 +4436,7 @@ msgstr ""
 msgid "Search finished."
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:58
+#: templates/admin/menu/import/import-overview.php:66
 msgid "Search for recipes"
 msgstr ""
 
@@ -4438,6 +4446,10 @@ msgstr ""
 
 #: templates/admin/menu/import/import-search.php:15
 msgid "Search Results"
+msgstr ""
+
+#: templates/admin/menu/import/import-recipes.php:56
+msgid "Searching"
 msgstr ""
 
 #: templates/admin/menu/tools/wpurp-ingredients.php:27 
@@ -4485,7 +4497,7 @@ msgid "seconds"
 msgstr ""
 
 #: templates/admin/translations.php:138 
-#: templates/admin/menu/import/import-recipes.php:47
+#: templates/admin/menu/import/import-recipes.php:60
 msgid "Select"
 msgstr ""
 
@@ -4751,6 +4763,18 @@ msgstr ""
 msgid "Soup"
 msgstr ""
 
+#: templates/settings/group-import.php:75
+msgid "Split Instruction Steps"
+msgstr ""
+
+#: templates/settings/group-import.php:79
+msgid "Split on linebreaks"
+msgstr ""
+
+#: templates/settings/group-import.php:80
+msgid "Split on linebreaks and punctuation (.!?)"
+msgstr ""
+
 #: templates/settings/group-template-legacy.php:106 
 #: templates/settings/group-template-legacy.php:132
 msgid "Square"
@@ -4846,7 +4870,7 @@ msgid ""
 "theme handle things."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:146
+#: templates/settings/group-recipe-defaults.php:109
 msgid "Take over author of parent post"
 msgstr ""
 
@@ -5104,13 +5128,17 @@ msgstr ""
 msgid "There was a problem with activating the integration:"
 msgstr ""
 
+#: templates/admin/menu/import/import-overview.php:28
+msgid "These importers are only available in"
+msgstr ""
+
 #: templates/settings/group-legacy.php:16
 msgid ""
 "These settings are around for backwards compatibility only. We highly "
 "recommend leaving them to their default values."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:47
+#: templates/settings/group-recipe-defaults.php:19
 msgid ""
 "These settings change the default value when you start creating a new recipe."
 msgstr ""
@@ -5127,8 +5155,7 @@ msgstr ""
 msgid "This custom styling will be output on your website."
 msgstr ""
 
-#: templates/admin/translations.php:178 
-#: templates/admin/menu/import/import-overview.php:28
+#: templates/admin/translations.php:178
 msgid "This feature is only available in"
 msgstr ""
 
@@ -5424,10 +5451,10 @@ msgstr ""
 msgid "Use decimal point - 0.5"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:281 
-#: includes/admin/class-wprm-modal.php:314 
-#: includes/admin/class-wprm-modal.php:347 
-#: includes/admin/class-wprm-modal.php:380 templates/admin/translations.php:99
+#: includes/admin/class-wprm-modal.php:289 
+#: includes/admin/class-wprm-modal.php:322 
+#: includes/admin/class-wprm-modal.php:355 
+#: includes/admin/class-wprm-modal.php:388 templates/admin/translations.php:99
 msgid "Use Default"
 msgstr ""
 
@@ -5435,7 +5462,7 @@ msgstr ""
 msgid "Use external recipe from a different website"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:59
+#: templates/settings/group-recipe-defaults.php:31
 msgid "Use featured image of parent post if no recipe image is set."
 msgstr ""
 
@@ -5456,7 +5483,7 @@ msgstr ""
 msgid "Use HTML for Print Credit"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:58
+#: templates/settings/group-recipe-defaults.php:30
 msgid "Use image from parent post"
 msgstr ""
 
@@ -5468,9 +5495,9 @@ msgstr ""
 msgid "Use Mixed Fractions"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:305 
-#: includes/admin/class-wprm-modal.php:338 
-#: includes/admin/class-wprm-modal.php:371 
+#: includes/admin/class-wprm-modal.php:313 
+#: includes/admin/class-wprm-modal.php:346 
+#: includes/admin/class-wprm-modal.php:379 
 #: templates/settings/group-links.php:115 
 #: templates/settings/group-links.php:142 
 #: templates/settings/group-links.php:169
@@ -5493,16 +5520,18 @@ msgstr ""
 msgid "Use one of your own recipes"
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:98
+#: templates/admin/menu/import/import-overview.php:106
 msgid "Use our Find Parents tool first and Find Ratings afterwards"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:51
+#: templates/settings/group-recipe-defaults.php:23
 msgid "Use Post Title for Recipe Name"
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:122
-msgid "Use profile image of a specific author on your site."
+#: templates/settings/group-recipe-defaults.php:94
+msgid ""
+"Use profile image of a specific author on your site by specifying the user "
+"ID. Leave blank for no image."
 msgstr ""
 
 #: templates/settings/group-metadata.php:76
@@ -5522,7 +5551,7 @@ msgstr ""
 msgid "Use same as Default Recipe Template"
 msgstr ""
 
-#: templates/admin/menu/import/import-recipes.php:46
+#: templates/admin/menu/import/import-recipes.php:59
 msgid "Use SHIFT-click to (un)check multiple recipes at once."
 msgstr ""
 
@@ -5530,9 +5559,9 @@ msgstr ""
 msgid "Use shortcodes where you want the snippets to appear."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:306 
-#: includes/admin/class-wprm-modal.php:339 
-#: includes/admin/class-wprm-modal.php:372 
+#: includes/admin/class-wprm-modal.php:314 
+#: includes/admin/class-wprm-modal.php:347 
+#: includes/admin/class-wprm-modal.php:380 
 #: templates/settings/group-links.php:116 
 #: templates/settings/group-links.php:143 
 #: templates/settings/group-links.php:170
@@ -5648,25 +5677,25 @@ msgstr ""
 msgid "Used in the recipe metadata. Should be an image of the completed dish."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:198
+#: includes/admin/class-wprm-modal.php:206
 msgid ""
 "Used in the recipe metadata. Should describe the recipe, but not fit in "
 "\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:191
+#: includes/admin/class-wprm-modal.php:199
 msgid ""
 "Used in the recipe metadata. The region associated with your recipe. "
 "Examples: French, Mediterranean, American"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:188
+#: includes/admin/class-wprm-modal.php:196
 msgid ""
 "Used in the recipe metadata. The type of meal or course for this recipe. "
 "Examples: dinner, entree, snack"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:194
+#: includes/admin/class-wprm-modal.php:202
 msgid ""
 "Used in the recipe metadata. This is a restricted list of diets whose label "
 "can be changed on the Manage > Recipe Fields page."
@@ -5786,7 +5815,7 @@ msgstr ""
 msgid "We could not find a term with that ID."
 msgstr ""
 
-#: templates/admin/menu/import/import-overview.php:95
+#: templates/admin/menu/import/import-overview.php:103
 msgid ""
 "We recommend going through all of these recipes to make sure the import "
 "process was successful. Pay attention to the different ingredient parts to "
@@ -5883,7 +5912,7 @@ msgid ""
 "recipe along with the personal data WordPress core stores."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:52
+#: templates/settings/group-recipe-defaults.php:24
 msgid ""
 "When creating a new recipe inside a post, use its title as the default name "
 "value."
@@ -5903,6 +5932,12 @@ msgstr ""
 msgid "When not logged in"
 msgstr ""
 
+#: templates/settings/group-import.php:76
+msgid ""
+"When to split the instructions in separate steps when using the import from "
+"text feature."
+msgstr ""
+
 #: templates/admin/privacy.php:18
 msgid ""
 "When user ratings are enabled we store a WPRM_User_Voted_%recipe% cookie "
@@ -5917,7 +5952,7 @@ msgid ""
 "used as (one of the) measures to prevent rating spam."
 msgstr ""
 
-#: templates/settings/group-recipe-defaults.php:154
+#: templates/settings/group-recipe-defaults.php:117
 msgid ""
 "When using fractions in the ingredient amount field, automatically replace "
 "with their symbol if available. Recommended for accessibility."

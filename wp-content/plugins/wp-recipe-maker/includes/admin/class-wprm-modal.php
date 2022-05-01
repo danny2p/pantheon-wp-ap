@@ -55,6 +55,11 @@ class WPRM_Modal {
 			if ( isset( $_GET['vcv-action'] ) && 'frontend' === $_GET['vcv-action'] ) {
 				return false;
 			}
+
+			// Flatsome UX Builder.
+			if ( isset( $_GET['app'] ) && 'uxbuilder' === $_GET['app'] ) {
+				return false;
+			}
 		}
 
 		return true;
@@ -136,6 +141,9 @@ class WPRM_Modal {
 				'equipment_link_nofollow' => self::get_equipment_link_nofollow_options(),
 				'ingredient_link_nofollow' => self::get_ingredient_link_nofollow_options(),
 				'term_link_nofollow' => self::get_term_link_nofollow_options(),
+			),
+			'settings' => array(
+				'import_instructions_split' => WPRM_Settings::get( 'import_instructions_split' ),
 			),
 			'multilingual' => WPRM_Compatibility::multilingual(),
 			'categories' => self::get_categories(),

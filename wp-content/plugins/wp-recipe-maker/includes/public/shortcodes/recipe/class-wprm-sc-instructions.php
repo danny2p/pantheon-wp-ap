@@ -422,14 +422,18 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 						$style = ' style="margin-bottom: ' . $atts['ingredients_text_margin'] . ';"';
 					}
 
-					$output .= '<' . $tag . ' class="'. implode( ' ', $classes ) . '"' . $style . '>';
-					$output .= wp_strip_all_tags( $text );
-
+					// Optional separator, if not last item.
+					$separator = '';
 					if ( $i + 1 !== count( $ingredients_to_output ) ) {
 						if ( 'inline' === $atts['ingredients_display'] ) {
-							$output .= $atts['ingredients_separator'];
+							$separator = $atts['ingredients_separator'];
 						}
 					}
+
+					// Output.
+					$output .= '<' . $tag . ' class="'. implode( ' ', $classes ) . '" data-separator="' . esc_attr( $separator ) . '"' . $style . '>';
+					$output .= wp_strip_all_tags( $text );
+					$output .= $separator;
 
 					$output .= '</' . $tag . '>';
 

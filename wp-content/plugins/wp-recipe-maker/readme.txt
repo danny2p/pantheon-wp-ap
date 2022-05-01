@@ -64,6 +64,7 @@ Looking for some more advanced functionality? We also have the [WP Recipe Maker 
 *   More **Premium templates** for a unique recipe template
 *   Create custom **recipe taxonomies** like price level, difficulty, ...
 *   Use **checkboxes** for your ingredients and instructions
+*   Import recipes from the **Paprika app**
 
 Even more add-ons can add the following functionality:
 
@@ -133,6 +134,25 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.2.0 =
+* Feature: Condition shortcode for Template Editor
+* Feature: Search list of recipes to import when importing from MV Create or Tasty Recipes
+* Improvement: Support video metadata when using youtube-nocookie.com in embed code
+* Improvement: Setting to split instructions on punctuation when importing from text
+* Fix: Prevent rating caching issues
+* Fix: Yoast Video SEO compatibility
+* Fix: Flatsome theme UX Builder breaking
+* Fix: Don't change ID when importing from JSON in the edit modal
+* Fix: Same author for every recipe image setting
+* Fix: Don't use wprm- prefix in the slug when saving as a public post type
+* Fix: Action filter on the Analytics manage page
+* Fix: Check for keywords in SEO checker
+* Fix: Searching and displaying special characters in ingredient suggestions
+* Fix: SEO Checker not updating after the first rating
+* Fix: Prevent Elementor deprecated notice
+* Fix: Russian translation errors in PHP 8.0
+* Fix: Broken HTML in Pin button
+
 = 8.1.1 =
 * Fix: Fatal error related to settings page
 
@@ -1362,6 +1382,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.2.0 =
+Several fixes and some improvements
+
 = 8.1.1 =
 Update to prevent fatal error from happening in 8.1.0
 

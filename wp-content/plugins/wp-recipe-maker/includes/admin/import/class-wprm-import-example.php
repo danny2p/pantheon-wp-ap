@@ -123,6 +123,18 @@ class WPRM_Import_Example extends WPRM_Import {
 	}
 
 	/**
+	 * Search the list of recipes that are available to import.
+	 *
+	 * @since    8.2.0
+	 * @param	 string $search Search term to use.
+	 */
+	public function get_recipes_search( $search ) {
+		// Optional function with same return as the get_recipes function, but searching by the $search string.
+
+		return array();
+	}
+
+	/**
 	 * Get recipe with the specified ID in the import format.
 	 *
 	 * @since    1.20.0

@@ -40,6 +40,9 @@ class WPRM_Seo_Checker {
 		// Prevent infinite loop.
 		if ( ! array_key_exists( $recipe_id, self::$updating_seo_for ) ) {
 			self::$updating_seo_for[ $recipe_id ] = true;
+
+			// Make sure we get the latest version, with the latest ratings.
+			WPRM_Recipe_Manager::invalidate_recipe( $recipe_id );
 			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
 			if ( $recipe ) {
@@ -135,6 +138,7 @@ class WPRM_Seo_Checker {
 		if ( 0 === count( $recipe->instructions_without_groups() ) ) { $issues[] = 'Instructions'; }
 		if ( 0 === count( $recipe->tags( 'course' ) ) ) { $issues[] = 'Course'; }
 		if ( 0 === count( $recipe->tags( 'cuisine' ) ) ) { $issues[] = 'Cuisine'; }
+		if ( 0 === count( $recipe->tags( 'keyword' ) ) ) { $issues[] = 'Keyword'; }
 
 		$nutrition = $recipe->nutrition();
 		if ( ! isset( $nutrition['calories'] ) || ! $nutrition['calories'] ) { $issues[] = 'Calories'; }

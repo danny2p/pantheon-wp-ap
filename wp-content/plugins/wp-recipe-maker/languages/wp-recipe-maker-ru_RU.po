@@ -8,22 +8,22 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-01-28 13:00+0000\n"
-"Last-Translator: Елена Метелёва\n"
+"PO-Revision-Date: 2022-04-08 13:52+0000\n"
+"Last-Translator: \n"
 "Language-Team: Русский\n"
 "Language: ru-RU\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
 "n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.8; wp-5.9"
+"X-Loco-Version: 2.6.1; wp-5.9.2"
 
 #: templates/admin/menu/import/import-recipes.php:73
 #, php-format
 msgid "%d more recipe"
 msgid_plural "%d more recipes"
-msgstr[0] "% рецепт"
-msgstr[1] "% рецепта"
-msgstr[2] "% рецептов"
+msgstr[0] "%d рецепт"
+msgstr[1] "%d рецепта"
+msgstr[2] "%d рецептов"
 
 #: templates/admin/menu/import/import-overview.php:63 
 #: templates/admin/menu/import/import-search.php:29 
@@ -31,49 +31,49 @@ msgstr[2] "% рецептов"
 #, php-format
 msgid "%d recipe found"
 msgid_plural "%d recipes found"
-msgstr[0] "% рецепт найден"
-msgstr[1] "% рецепта найдено"
-msgstr[2] "% рецептов найдено"
+msgstr[0] "%d рецепт найден"
+msgstr[1] "%d рецепта найдено"
+msgstr[2] "%d рецептов найдено"
 
 #: includes/admin/class-wprm-marketing.php:106
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
-msgstr[0] "% дня"
-msgstr[1] "% дня"
-msgstr[2] "% дней"
+msgstr[0] "%s дня"
+msgstr[1] "%s дня"
+msgstr[2] "%s дней"
 
 #: includes/admin/class-wprm-marketing.php:108
 #, php-format
 msgid "%s hour"
 msgid_plural "%s hours"
-msgstr[0] "% час"
-msgstr[1] "% часа"
-msgstr[2] "% часов"
+msgstr[0] "%s час"
+msgstr[1] "%s часа"
+msgstr[2] "%s часов"
 
 #: includes/admin/class-wprm-marketing.php:110
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
-msgstr[0] "% минута"
-msgstr[1] "% минуты"
-msgstr[2] "% минут"
+msgstr[0] "%s минута"
+msgstr[1] "%s минуты"
+msgstr[2] "%s минут"
 
 #: includes/admin/class-wprm-dashboard.php:214
 #, php-format
 msgid "%s new news item"
 msgid_plural "%s new news items"
-msgstr[0] "% новость"
-msgstr[1] "% новости"
-msgstr[2] "% новостей"
+msgstr[0] "%s новость"
+msgstr[1] "%s новости"
+msgstr[2] "%s новостей"
 
 #: templates/public/comment-rating.php:16
 #, php-format
 msgid "%s star"
 msgid_plural "%s stars"
-msgstr[0] "% звезды"
-msgstr[1] "% звезды"
-msgstr[2] "% звезд"
+msgstr[0] "%s звезды"
+msgstr[1] "%s звезды"
+msgstr[2] "%s звезд"
 
 #: includes/public/class-wprm-metadata.php:646
 msgid "1 serving"
@@ -2708,9 +2708,9 @@ msgstr "Импортировать WP Recipe Maker рецепты"
 #, php-format
 msgid "Importing %d recipe"
 msgid_plural "Importing %d recipes"
-msgstr[0] "Импортировать % рецепта"
-msgstr[1] "Импортировать % рецепта"
-msgstr[2] "Импортировать % рецептов"
+msgstr[0] "Импортировать %d рецепта"
+msgstr[1] "Импортировать %d рецепта"
+msgstr[2] "Импортировать %d рецептов"
 
 #: includes/admin/tools/class-wprm-tools-wpurp-ingredients.php:38
 msgid "Importing Ingredients"
@@ -4039,9 +4039,9 @@ msgstr "Личные заметки"
 #, php-format
 msgid "Processing %d post"
 msgid_plural "Processing %d posts"
-msgstr[0] "Обработка % поста"
-msgstr[1] "Обработка % постов"
-msgstr[2] "Обработка % постов"
+msgstr[0] "Обработка %d поста"
+msgstr[1] "Обработка %d постов"
+msgstr[2] "Обработка %d постов"
 
 #: includes/public/class-wprm-recipe-parser.php:204
 msgid "pt"
@@ -4596,25 +4596,25 @@ msgstr "Результаты поиска"
 #, php-format
 msgid "Searching %d ingredient"
 msgid_plural "Searching %d ingredients"
-msgstr[0] "Поиск % ингредиента"
-msgstr[1] "Поиск % ингредиента"
-msgstr[2] "Поиск % ингредиента"
+msgstr[0] "Поиск %d ингредиента"
+msgstr[1] "Поиск %d ингредиента"
+msgstr[2] "Поиск %d ингредиента"
 
 #: templates/admin/menu/tools/finding-parents.php:16
 #, php-format
 msgid "Searching %d post"
 msgid_plural "Searching %d posts"
-msgstr[0] "Поиск % поста"
-msgstr[1] "Поиск % поста"
-msgstr[2] "Поиск % поста"
+msgstr[0] "Поиск %d поста"
+msgstr[1] "Поиск %d поста"
+msgstr[2] "Поиск %d поста"
 
 #: templates/admin/menu/tools/fixing-comment-ratings.php:15
 #, php-format
 msgid "Searching %d rating"
 msgid_plural "Searching %d ratings"
-msgstr[0] "Поиск % рейтинга"
-msgstr[1] "Поиск % рейтинга"
-msgstr[2] "Поиск % рейтинга"
+msgstr[0] "Поиск %d рейтинга"
+msgstr[1] "Поиск %d рейтинга"
+msgstr[2] "Поиск %d рейтинга"
 
 #: templates/admin/menu/tools/find-ingredient-units.php:15 
 #: templates/admin/menu/tools/create-reviews.php:16 
@@ -4623,9 +4623,9 @@ msgstr[2] "Поиск % рейтинга"
 #, php-format
 msgid "Searching %d recipe"
 msgid_plural "Searching %d recipes"
-msgstr[0] "Поиск % рецепта"
-msgstr[1] "Поиск % рецепта"
-msgstr[2] "Поиск % рецепта"
+msgstr[0] "Поиск %d рецепта"
+msgstr[1] "Поиск %d рецепта"
+msgstr[2] "Поиск %d рецепта"
 
 #: templates/admin/translations.php:66
 msgid "second"

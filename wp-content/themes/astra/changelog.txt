@@ -1,3 +1,11 @@
+v3.7.10
+- Fix: WooCommerce - Grid layout not working properly with Products Archive shortcode.
+- Fix: Toggle menu not collapsible on below IOS 13 version.
+- Fix: Compatibility with WordPress 5.9.2 - Customizer block editor color More Settings getting oval shape around palette.
+
+v3.7.9
+- Fix: Added correct version number for background updater.
+
 v3.7.8
 - Improvement: Added a new filter 'astra_settings_metabox_register' to prevent loading of block based Astra Settings metabox. ( https://wpastra.com/docs/hide-astra-settings-for-user-roles/ )
 - Improvement: Introducing new breadcrumb separators.

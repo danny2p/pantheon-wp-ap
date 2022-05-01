@@ -30,6 +30,7 @@ class WPRM_Nutrition {
 				'unit' => 'kcal',
 				'api' => 'Calories',
 				'active' => true,
+				'order' => 20,
 			),
 		);
 
@@ -39,6 +40,14 @@ class WPRM_Nutrition {
 		if ( ! $include_inactive ) {
 			$nutrition_fields = array_filter( $nutrition_fields, function( $nutrient ) { return true === $nutrient['active']; } );
 		}
+
+		// Sort by order attribute.
+		uasort( $nutrition_fields, function( $a, $b ) {
+			$a_order = isset( $a['order'] ) ? floatval( $a['order'] ) : 99999999;
+			$b_order = isset( $b['order'] ) ? floatval( $b['order'] ) : 99999999;
+
+			return $a_order - $b_order;
+		} );
 
 		return $nutrition_fields;
 	}

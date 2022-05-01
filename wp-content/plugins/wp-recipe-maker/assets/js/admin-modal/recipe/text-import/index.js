@@ -59,7 +59,7 @@ export default class TextImport extends Component {
         selection = selection ? selection : false;
 
         if ( 'equipment' === field || 'ingredients' === field || 'instructions' === field ) {
-            selection = this.getSeperateFields( selection );
+            selection = this.getSeperateFields( selection, field );
         }
 
         if ( selection !== this.state[ field ] ) {
@@ -69,11 +69,17 @@ export default class TextImport extends Component {
         }
     }
 
-    getSeperateFields( content ) {
+    getSeperateFields( content, field ) {
         if ( false === content ) {
             return false;
         }
 
+        // Splitting on punctuation as well?
+        if ( 'instructions' === field && 'punctuation' === wprm_admin_modal.settings.import_instructions_split ) {
+            content = content.replace(/([!\.\?]+)/gm, '$1\n');
+        }
+
+        // Split into seperate lines.
         let fields = [];
         let lines = content.split(/[\r\n]+/);
 

@@ -175,7 +175,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		// Construct link attributes.
 		$attributes = '';
 		$attributes .= ' style="' . $style . '"';
-		$attributes .= ' class="' . implode( ' ', $classes ) . '';
+		$attributes .= ' class="' . implode( ' ', $classes ) . '"';
 		$attributes .= ' target="_blank"';
 		$attributes .= ' rel="nofollow noopener"';
 		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
