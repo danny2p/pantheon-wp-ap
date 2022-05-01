@@ -126,7 +126,7 @@ class WPRM_Recipe {
 		// Integrations.
 		$recipe['my_emissions'] = $this->my_emissions();
 
-		return $recipe;
+		return apply_filters( 'wprm_recipe_data', $recipe, $this );
 	}
 
 	/**

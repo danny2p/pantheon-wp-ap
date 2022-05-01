@@ -67,5 +67,21 @@ $import = array(
 				),
 			),
 		),
+		array(
+			'name' => __( 'Instruction Parsing', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'import_instructions_split',
+					'name' => __( 'Split Instruction Steps', 'wp-recipe-maker' ),
+					'description' => __( 'When to split the instructions in separate steps when using the import from text feature.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'linebreak' => __( 'Split on linebreaks', 'wp-recipe-maker' ),
+						'punctuation' => __( 'Split on linebreaks and punctuation (.!?)', 'wp-recipe-maker' ),
+					),
+					'default' => 'linebreak',
+				),
+			),
+		),
 	),
 );

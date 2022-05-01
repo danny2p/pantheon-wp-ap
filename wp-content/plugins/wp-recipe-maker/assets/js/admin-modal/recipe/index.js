@@ -110,6 +110,9 @@ export default class Recipe extends Component {
     }
 
     onImportJSON(fields) {
+        // Ignore ID.
+        delete fields.id;
+
         this.setState((prevState) => ({
             recipe: {
                 ...prevState.recipe,

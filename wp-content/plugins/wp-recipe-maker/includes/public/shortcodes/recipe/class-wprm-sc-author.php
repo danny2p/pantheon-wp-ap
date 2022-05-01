@@ -146,39 +146,43 @@ class WPRM_SC_Author extends WPRM_Template_Shortcode {
 					$author_id = $recipe->post_author();
 					break;
 				case 'same':
-					$same_author_image = WPRM_Settings::get( 'recipe_author_same_image' );
-					if ( 'user-' === substr( $same_author_image, 0, 5 ) ) {
-						$author_id = intval( substr( $same_author_image, 5 ) );
+					$same_author_image = WPRM_Settings::get( 'recipe_author_same_image_user_id' );
+					if ( $same_author_image ) {
+						$author_id = intval( $same_author_image );
 					}
 					break;
 			}
 
 			if ( $author_id ) {
-				$img = get_avatar( $author_id, $atts['image_size'] );
+				$avatar = get_avatar( $author_id, $atts['image_size'] );
 
-				// Image Style.
-				$style = '';
-				$style .= 'border-width: ' . $atts['image_border_width'] . ';';
-				$style .= 'border-style: ' . $atts['image_border_style'] . ';';
-				$style .= 'border-color: ' . $atts['image_border_color'] . ';';
-
-				if ( 'rounded' === $atts['image_style'] ) {
-					$style .= 'border-radius: ' . $atts['rounded_radius'] . ';';
-				} elseif ( 'circle' === $atts['image_style'] ) {
-					$style .= 'border-radius: 50%;';
-				}
-
-				if ( $style ) {
-					if ( false !== stripos( $img, ' style="' ) ) {
-						$img = str_ireplace( ' style="', ' style="' . $style, $img );
-					} else {
-						$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
-					}
+				if ( $avatar ) {
+					$img = $avatar;
 				}
 			}
 		}
 
 		if ( $img ) {
+			// Image Style.
+			$style = '';
+			$style .= 'border-width: ' . $atts['image_border_width'] . ';';
+			$style .= 'border-style: ' . $atts['image_border_style'] . ';';
+			$style .= 'border-color: ' . $atts['image_border_color'] . ';';
+
+			if ( 'rounded' === $atts['image_style'] ) {
+				$style .= 'border-radius: ' . $atts['rounded_radius'] . ';';
+			} elseif ( 'circle' === $atts['image_style'] ) {
+				$style .= 'border-radius: 50%;';
+			}
+
+			if ( $style ) {
+				if ( false !== stripos( $img, ' style="' ) ) {
+					$img = str_ireplace( ' style="', ' style="' . $style, $img );
+				} else {
+					$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+				}
+			}
+
 			$output = '<span class="wprm-recipe-author-with-image"><span class="wprm-recipe-author-image">' . $img . '</span>' . $output . '</span>';
 		}
 

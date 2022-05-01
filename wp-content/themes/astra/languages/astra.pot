@@ -2,16 +2,16 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra 3.7.8\n"
+"Project-Id-Version: Astra 3.7.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/astra\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-24T07:41:59+00:00\n"
+"POT-Creation-Date: 2022-04-14T10:44:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: astra\n"
 
 #. Theme Name of the theme
@@ -504,7 +504,7 @@ msgid "Alignment"
 msgstr ""
 
 #: inc/addons/breadcrumbs/customizer/class-astra-breadcrumbs-configs.php:325
-#: inc/core/class-astra-admin-settings.php:823
+#: inc/core/class-astra-admin-settings.php:832
 msgid "Spacing"
 msgstr ""
 
@@ -726,6 +726,8 @@ msgstr ""
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:799
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:893
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:987
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 msgid "Size"
 msgstr ""
 
@@ -790,6 +792,8 @@ msgstr ""
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:838
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:932
 #: inc/modules/related-posts/customizer/class-astra-related-posts-configs.php:1026
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 #: inc/customizer/extend-custom-controls/src/ast-font-family/ast-font-family.js:35
 #: inc/customizer/extend-custom-controls/src/ast-font-weight/ast-font-weight.js:22
 msgid "Inherit"
@@ -953,6 +957,8 @@ msgstr ""
 #: inc/customizer/configurations/builder/header/class-astra-mobile-menu-component-configs.php:180
 #: inc/customizer/configurations/colors-background/class-astra-advanced-footer-colors-configs.php:166
 #: inc/customizer/configurations/colors-background/class-astra-footer-colors-configs.php:89
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 #: inc/customizer/extend-custom-controls/src/ast-font-weight/ast-font-weight.js:17
 #: inc/customizer/extend-custom-controls/src/background/background.js:136
 #: inc/customizer/extend-custom-controls/src/border/border-component.js:80
@@ -1058,7 +1064,7 @@ msgid "Bottom Border Color"
 msgstr ""
 
 #: inc/addons/transparent-header/classes/sections/class-astra-customizer-transparent-header-configs.php:390
-#: inc/core/class-astra-admin-settings.php:797
+#: inc/core/class-astra-admin-settings.php:806
 msgid "Colors & Background"
 msgstr ""
 
@@ -1486,12 +1492,12 @@ msgstr ""
 #: inc/compatibility/edd/class-astra-edd.php:323
 #: inc/compatibility/edd/customizer/class-astra-customizer-register-edd-section.php:40
 #: inc/compatibility/edd/customizer/sections/class-astra-edd-sidebar-configs.php:45
-#: inc/core/class-astra-admin-settings.php:984
+#: inc/core/class-astra-admin-settings.php:993
 msgid "Easy Digital Downloads"
 msgstr ""
 
 #: inc/compatibility/edd/class-astra-edd.php:445
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:1776
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:1773
 msgid "View your shopping cart"
 msgstr ""
 
@@ -1660,6 +1666,8 @@ msgid "The Image option cannot be sortable if the Product Style is selected to t
 msgstr ""
 
 #: inc/compatibility/edd/customizer/sections/layout/class-astra-edd-archive-layout-configs.php:78
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 msgid "Image"
 msgstr ""
 
@@ -1732,7 +1740,7 @@ msgstr ""
 
 #: inc/compatibility/learndash/customizer/class-astra-customizer-register-learndash-section.php:40
 #: inc/compatibility/learndash/customizer/sections/class-astra-learndash-sidebar-configs.php:46
-#: inc/core/class-astra-admin-settings.php:997
+#: inc/core/class-astra-admin-settings.php:1006
 msgid "LearnDash"
 msgstr ""
 
@@ -1859,7 +1867,7 @@ msgstr ""
 
 #: inc/compatibility/lifterlms/customizer/class-astra-liferlms-section-configs.php:39
 #: inc/compatibility/lifterlms/customizer/sections/class-astra-lifter-sidebar-configs.php:45
-#: inc/core/class-astra-admin-settings.php:1011
+#: inc/core/class-astra-admin-settings.php:1020
 #: inc/customizer/configurations/builder/header/class-astra-header-account-component-configs.php:62
 msgid "LifterLMS"
 msgstr ""
@@ -1918,7 +1926,7 @@ msgid "WooCommerce Layout"
 msgstr ""
 
 #: inc/compatibility/woocommerce/customizer/sections/class-astra-woo-shop-sidebar-configs.php:45
-#: inc/core/class-astra-admin-settings.php:971
+#: inc/core/class-astra-admin-settings.php:980
 #: inc/customizer/configurations/builder/header/class-astra-header-account-component-configs.php:66
 msgid "WooCommerce"
 msgstr ""
@@ -1966,14 +1974,14 @@ msgid "Availability:"
 msgstr ""
 
 #: inc/core/builder/class-astra-builder-admin.php:60
-#: inc/core/class-astra-admin-settings.php:442
-#: inc/core/class-astra-admin-settings.php:504
+#: inc/core/class-astra-admin-settings.php:451
+#: inc/core/class-astra-admin-settings.php:513
 msgid "Use Old Header/Footer"
 msgstr ""
 
 #: inc/core/builder/class-astra-builder-admin.php:60
-#: inc/core/class-astra-admin-settings.php:443
-#: inc/core/class-astra-admin-settings.php:505
+#: inc/core/class-astra-admin-settings.php:452
+#: inc/core/class-astra-admin-settings.php:514
 msgid "Use New Header/Footer Builder"
 msgstr ""
 
@@ -2133,8 +2141,8 @@ msgstr ""
 #: inc/core/class-astra-admin-settings.php:339
 #: inc/core/class-astra-admin-settings.php:352
 #: inc/core/class-astra-admin-settings.php:361
-#: inc/core/class-astra-admin-settings.php:434
-#: inc/core/class-astra-admin-settings.php:496
+#: inc/core/class-astra-admin-settings.php:443
+#: inc/core/class-astra-admin-settings.php:505
 msgid "See Library &#187;"
 msgstr ""
 
@@ -2145,8 +2153,8 @@ msgstr ""
 
 #: inc/core/class-astra-admin-settings.php:327
 #: inc/core/class-astra-admin-settings.php:340
-#: inc/core/class-astra-admin-settings.php:432
-#: inc/core/class-astra-admin-settings.php:494
+#: inc/core/class-astra-admin-settings.php:441
+#: inc/core/class-astra-admin-settings.php:503
 msgid "Activating Importer Plugin "
 msgstr ""
 
@@ -2158,133 +2166,133 @@ msgstr ""
 msgid "Details &#187;"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:435
-#: inc/core/class-astra-admin-settings.php:497
+#: inc/core/class-astra-admin-settings.php:444
+#: inc/core/class-astra-admin-settings.php:506
 msgid "Activating"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:436
-#: inc/core/class-astra-admin-settings.php:498
+#: inc/core/class-astra-admin-settings.php:445
+#: inc/core/class-astra-admin-settings.php:507
 msgid "Deactivating"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:437
-#: inc/core/class-astra-admin-settings.php:499
-#: inc/core/class-astra-admin-settings.php:1248
-#: inc/core/class-astra-admin-settings.php:1265
+#: inc/core/class-astra-admin-settings.php:446
+#: inc/core/class-astra-admin-settings.php:508
+#: inc/core/class-astra-admin-settings.php:1257
+#: inc/core/class-astra-admin-settings.php:1274
 msgid "Activate"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:438
-#: inc/core/class-astra-admin-settings.php:500
-#: inc/core/class-astra-admin-settings.php:1282
+#: inc/core/class-astra-admin-settings.php:447
+#: inc/core/class-astra-admin-settings.php:509
+#: inc/core/class-astra-admin-settings.php:1291
 msgid "Deactivate"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:439
-#: inc/core/class-astra-admin-settings.php:501
+#: inc/core/class-astra-admin-settings.php:448
+#: inc/core/class-astra-admin-settings.php:510
 msgid "Settings"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:619
+#: inc/core/class-astra-admin-settings.php:628
 msgid "Important Links"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:625
+#: inc/core/class-astra-admin-settings.php:634
 msgid "Astra Website"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:629
+#: inc/core/class-astra-admin-settings.php:638
 msgid "Knowledge Base"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:633
+#: inc/core/class-astra-admin-settings.php:642
 msgid "Five Star Support"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:637
+#: inc/core/class-astra-admin-settings.php:646
 msgid "Users Community Group"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:641
+#: inc/core/class-astra-admin-settings.php:650
 msgid "Rate Us ★★★★★"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:659
+#: inc/core/class-astra-admin-settings.php:668
 msgid "180+ Starter Templates"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:693
+#: inc/core/class-astra-admin-settings.php:702
 msgid "Starter Templates?"
 msgstr ""
 
 #. translators: %1$s: Starter site link.
-#: inc/core/class-astra-admin-settings.php:696
+#: inc/core/class-astra-admin-settings.php:705
 msgid "Did you know %1$s offers a free library of %2$s "
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:705
+#: inc/core/class-astra-admin-settings.php:714
 msgid "Choose from over 180 beautiful templates and kickstart your project!"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:744
+#: inc/core/class-astra-admin-settings.php:753
 msgid "More Options Available with Astra Pro!"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:751
+#: inc/core/class-astra-admin-settings.php:760
 msgid "Header Options"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:756
+#: inc/core/class-astra-admin-settings.php:765
 msgid "Upload Logo"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:761
+#: inc/core/class-astra-admin-settings.php:770
 msgid "Footer Settings"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:766
+#: inc/core/class-astra-admin-settings.php:775
 msgid "Set Colors"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:771
+#: inc/core/class-astra-admin-settings.php:780
 msgid "Layout Options"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:776
+#: inc/core/class-astra-admin-settings.php:785
 msgid "Customize Fonts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:781
+#: inc/core/class-astra-admin-settings.php:790
 msgid "Blog Layouts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:786
+#: inc/core/class-astra-admin-settings.php:795
 msgid "Sidebar Options"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:804
-#: inc/core/class-astra-admin-settings.php:817
-#: inc/core/class-astra-admin-settings.php:830
-#: inc/core/class-astra-admin-settings.php:843
-#: inc/core/class-astra-admin-settings.php:856
-#: inc/core/class-astra-admin-settings.php:869
-#: inc/core/class-astra-admin-settings.php:882
-#: inc/core/class-astra-admin-settings.php:895
-#: inc/core/class-astra-admin-settings.php:910
-#: inc/core/class-astra-admin-settings.php:926
-#: inc/core/class-astra-admin-settings.php:939
-#: inc/core/class-astra-admin-settings.php:952
-#: inc/core/class-astra-admin-settings.php:965
-#: inc/core/class-astra-admin-settings.php:978
-#: inc/core/class-astra-admin-settings.php:991
-#: inc/core/class-astra-admin-settings.php:1005
-#: inc/core/class-astra-admin-settings.php:1018
-#: inc/core/class-astra-admin-settings.php:1031
+#: inc/core/class-astra-admin-settings.php:813
+#: inc/core/class-astra-admin-settings.php:826
+#: inc/core/class-astra-admin-settings.php:839
+#: inc/core/class-astra-admin-settings.php:852
+#: inc/core/class-astra-admin-settings.php:865
+#: inc/core/class-astra-admin-settings.php:878
+#: inc/core/class-astra-admin-settings.php:891
+#: inc/core/class-astra-admin-settings.php:904
+#: inc/core/class-astra-admin-settings.php:919
+#: inc/core/class-astra-admin-settings.php:935
+#: inc/core/class-astra-admin-settings.php:948
+#: inc/core/class-astra-admin-settings.php:961
+#: inc/core/class-astra-admin-settings.php:974
+#: inc/core/class-astra-admin-settings.php:987
+#: inc/core/class-astra-admin-settings.php:1000
+#: inc/core/class-astra-admin-settings.php:1014
+#: inc/core/class-astra-admin-settings.php:1027
+#: inc/core/class-astra-admin-settings.php:1040
 msgid "Learn More &#187;"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:810
+#: inc/core/class-astra-admin-settings.php:819
 #: inc/customizer/class-astra-customizer-register-sections-panels.php:298
 #: inc/customizer/configurations/builder/header/class-astra-customizer-mobile-trigger-configs.php:325
 #: inc/customizer/configurations/buttons/class-astra-existing-button-configs.php:196
@@ -2293,131 +2301,132 @@ msgstr ""
 msgid "Typography"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:836
+#: inc/core/class-astra-admin-settings.php:845
 msgid "Blog Pro"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:849
+#: inc/core/class-astra-admin-settings.php:858
 #: inc/customizer/configurations/layout/class-astra-header-layout-configs.php:397
 msgid "Mobile Header"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:862
+#: inc/core/class-astra-admin-settings.php:871
 msgid "Header Sections"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:875
+#: inc/core/class-astra-admin-settings.php:884
 msgid "Nav Menu"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:888
+#: inc/core/class-astra-admin-settings.php:897
 #: inc/customizer/configurations/builder/header/class-astra-customizer-header-builder-configs.php:509
 #: inc/metabox/class-astra-meta-boxes.php:472
 msgid "Sticky Header"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:901
+#: inc/core/class-astra-admin-settings.php:910
 msgid "Page Headers"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:902
+#: inc/core/class-astra-admin-settings.php:911
 msgid "Make your header layouts look more appealing and sexy!"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:916
+#: inc/core/class-astra-admin-settings.php:925
 msgid "Custom Layouts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:918
+#: inc/core/class-astra-admin-settings.php:927
 msgid "Add content conditionally in the various hook areas of the theme."
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:932
+#: inc/core/class-astra-admin-settings.php:941
 msgid "Site Layouts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:945
+#: inc/core/class-astra-admin-settings.php:954
 #: inc/customizer/class-astra-customizer-register-sections-panels.php:169
 #: inc/customizer/class-astra-customizer-register-sections-panels.php:287
 msgid "Footer Widgets"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:958
+#: inc/core/class-astra-admin-settings.php:967
 msgid "Scroll To Top"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:998
+#: inc/core/class-astra-admin-settings.php:1007
 msgid "Supercharge your LearnDash website with amazing design features."
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1024
+#: inc/core/class-astra-admin-settings.php:1033
 msgid "White Label"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1040
+#: inc/core/class-astra-admin-settings.php:1049
 msgid "Links to Customizer Settings:"
 msgstr ""
 
 #. translators: %1s Astra Theme
-#: inc/core/class-astra-admin-settings.php:1112
+#: inc/core/class-astra-admin-settings.php:1121
 msgid "Extend %1s with free plugins!"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1122
+#: inc/core/class-astra-admin-settings.php:1131
 msgid "Import / Export Customizer Settings"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1129
+#: inc/core/class-astra-admin-settings.php:1138
 msgid "Astra Customizer Reset"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1137
+#: inc/core/class-astra-admin-settings.php:1146
 msgid "Customizer Search"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1145
+#: inc/core/class-astra-admin-settings.php:1154
 msgid "Astra Bulk Edit"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1153
+#: inc/core/class-astra-admin-settings.php:1162
 msgid "Astra Widgets"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1161
+#: inc/core/class-astra-admin-settings.php:1170
 msgid "Custom Fonts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1169
+#: inc/core/class-astra-admin-settings.php:1178
 msgid "Custom Typekit Fonts"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1177
+#: inc/core/class-astra-admin-settings.php:1186
 msgid "Sidebar Manager"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1185
+#: inc/core/class-astra-admin-settings.php:1194
 msgid "Ultimate Addons for Gutenberg"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1340
-#: inc/core/class-astra-admin-settings.php:1389
+#: inc/core/class-astra-admin-settings.php:1349
+#: inc/core/class-astra-admin-settings.php:1398
+#: inc/lib/astra-notices/class-astra-notices.php:119
 msgid "WordPress Nonce not validated."
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1347
-#: inc/core/class-astra-admin-settings.php:1396
+#: inc/core/class-astra-admin-settings.php:1356
+#: inc/core/class-astra-admin-settings.php:1405
 msgid "No plugin specified"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1373
+#: inc/core/class-astra-admin-settings.php:1382
 msgid "Plugin Successfully Activated"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1417
+#: inc/core/class-astra-admin-settings.php:1426
 msgid "Plugin Successfully Deactivated"
 msgstr ""
 
-#: inc/core/class-astra-admin-settings.php:1434
+#: inc/core/class-astra-admin-settings.php:1443
 msgid " Lightning Fast & Fully Customizable WordPress theme!"
 msgstr ""
 
@@ -3209,6 +3218,8 @@ msgstr ""
 #: inc/customizer/configurations/buttons/class-astra-customizer-button-configs.php:664
 #: inc/customizer/configurations/buttons/class-astra-existing-button-configs.php:403
 #: inc/customizer/configurations/layout/class-astra-site-identity-configs.php:372
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 #: inc/customizer/extend-custom-controls/src/color-group/color-group-component.js:251
 #: inc/customizer/extend-custom-controls/src/color-group/color-group-component.js:289
 msgid "Color"
@@ -4152,6 +4163,149 @@ msgstr ""
 
 #: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
 #: inc/customizer/extend-custom-controls/build/index.js:1
+#: inc/customizer/extend-custom-controls/src/link/link-component.js:80
+msgid "Open in a New Tab"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+#: inc/customizer/extend-custom-controls/src/border/border-component.js:86
+#: inc/customizer/extend-custom-controls/src/responsive-spacing/responsive-spacing-component.js:94
+msgid "Link Values Together"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Gradient"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Clear"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Reset"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Select Background Image"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Replace image"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Remove Image"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Left Top"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Left Center"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Left Bottom"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Right Top"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Right Center"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Right Bottom"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Center Top"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Center Center"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Center Bottom"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Attachment"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Fixed"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Scroll"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Repeat"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "No Repeat"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Repeat All"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Repeat Vertically"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Auto"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Cover"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+msgid "Contain"
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 #: inc/customizer/extend-custom-controls/src/builder-layout/builder-header-control.js:22
 msgid "Want more? Upgrade to "
 msgstr ""
@@ -4181,13 +4335,22 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: inc/customizer/extend-custom-controls/src/border/border-component.js:86
-#: inc/customizer/extend-custom-controls/src/responsive-spacing/responsive-spacing-component.js:94
-msgid "Link Values Together"
-msgstr ""
-
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
 #: inc/customizer/extend-custom-controls/src/builder-layout/add-component.js:114
 msgid "Hurray! All Components Are Being Used."
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+#: inc/customizer/extend-custom-controls/src/draggable/draggable-component.js:96
+msgid "Elements used in the builder will be visible here."
+msgstr ""
+
+#: inc/customizer/custom-controls/assets/js/unminified/custom-controls.js:6179
+#: inc/customizer/extend-custom-controls/build/index.js:1
+#: inc/customizer/extend-custom-controls/src/color-palette/color-palette.js:147
+msgid "Palette"
 msgstr ""
 
 #: inc/customizer/extend-custom-controls/src/builder-layout/item-component.js:76
@@ -4205,14 +4368,6 @@ msgstr ""
 #: inc/customizer/extend-custom-controls/src/builder-layout/row-component.js:60
 #: inc/customizer/extend-custom-controls/src/builder-layout/row-component.js:64
 msgid "Off Canvas"
-msgstr ""
-
-#: inc/customizer/extend-custom-controls/src/color-palette/color-palette.js:147
-msgid "Palette"
-msgstr ""
-
-#: inc/customizer/extend-custom-controls/src/draggable/draggable-component.js:96
-msgid "Elements used in the builder will be visible here."
 msgstr ""
 
 #: inc/customizer/extend-custom-controls/src/icon-set/icon-set-component.js:17
@@ -4237,10 +4392,6 @@ msgstr ""
 
 #: inc/customizer/extend-custom-controls/src/icon-set/icon-set-component.js:28
 msgid "Contained"
-msgstr ""
-
-#: inc/customizer/extend-custom-controls/src/link/link-component.js:80
-msgid "Open in a New Tab"
 msgstr ""
 
 #: inc/customizer/extend-custom-controls/src/social-icons/item-component.js:21

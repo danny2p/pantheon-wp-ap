@@ -1,6 +1,12 @@
 {
     "news": [
         {
+            "date": "2022-04-27",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.2.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-2-0/"
+        },
+        {
             "date": "2022-02-08",
             "label": "Release",
             "title": "WP Recipe Maker 8.1.0",

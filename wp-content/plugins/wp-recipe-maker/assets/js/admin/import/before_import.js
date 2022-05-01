@@ -1,6 +1,17 @@
 let import_last_checked = false;
 
 jQuery(document).ready(function($) {
+	// Search recipes functionality.
+	jQuery('#wprm-import-recipes-search').on('click', function(e) {
+		e.preventDefault();
+		const search = prompt( 'What do you want to search for?' );
+
+		if ( search ) {
+			const url = e.target.href;
+			window.location = url + '&s=' + encodeURIComponent( search );
+		}
+	});
+
 	// Quick select functionality.
 	jQuery('.wprm-import-recipes-select-all').on('click', function(e) {
 		e.preventDefault();

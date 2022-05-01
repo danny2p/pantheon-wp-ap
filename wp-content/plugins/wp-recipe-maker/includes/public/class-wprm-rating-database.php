@@ -177,6 +177,9 @@ class WPRM_Rating_Database {
 				// Insert new rating.
 				$wpdb->insert( $table_name, $rating );
 
+				// Clear any cached queries.
+				self::$cache = array();
+
 				// Update cached rating.
 				if ( $rating['recipe_id'] ) {
 					WPRM_Rating::update_recipe_rating( $rating['recipe_id'] );
@@ -284,6 +287,9 @@ class WPRM_Rating_Database {
 		if ( $rating ) {
 			// Delete rating.
 			self::delete_ratings( array( $id ) );
+
+			// Clear any cached queries.
+			self::$cache = array();
 			
 			// Update cached rating.
 			$rating = (array) $rating;
@@ -314,11 +320,18 @@ class WPRM_Rating_Database {
 		if ( is_array( $ids ) && $ids ) {
 			$ids = implode( ',', array_map( 'intval', $ids ) );
 
-			// We need to make sure the cached ratings are deleted as well.
+			// We need to make sure the cached ratings are deleted as well, so get those first.
 			$query = self::get_ratings(array(
 				'where' => 'id IN (' . $ids . ')',
 			));
 
+			// Delete all these rating IDs.
+			$wpdb->query( 'DELETE FROM ' . $table_name . ' WHERE id IN (' . $ids . ')' );
+
+			// Clear any cached queries.
+			self::$cache = array();
+
+			// Update the cache for the ratings that were deleted.
 			foreach ( $query['ratings'] as $rating ) {
 				$rating = (array) $rating;
 
@@ -329,9 +342,6 @@ class WPRM_Rating_Database {
 					WPRM_Comment_Rating::update_cached_rating( $rating['comment_id'], 0 );
 				}
 			}
-			
-			// Delete all these rating IDs.
-			$wpdb->query( 'DELETE FROM ' . $table_name . ' WHERE id IN (' . $ids . ')' );
 		}
 	}
 
@@ -346,6 +356,9 @@ class WPRM_Rating_Database {
 		$table_name = self::get_table_name();
 
 		$wpdb->delete( $table_name, array( 'recipe_id' => $recipe_id ), array( '%d' ) );
+
+		// Clear any cached queries.
+		self::$cache = array();
 
 		// Update cached rating.
 		WPRM_Rating::update_recipe_rating( $recipe_id );
@@ -362,6 +375,9 @@ class WPRM_Rating_Database {
 		$table_name = self::get_table_name();
 
 		$wpdb->delete( $table_name, array( 'comment_id' => $comment_id ), array( '%d' ) );
+
+		// Clear any cached queries.
+		self::$cache = array();
 
 		// Update cached rating.
 		WPRM_Rating::update_recipe_rating_for_comment( $comment_id );

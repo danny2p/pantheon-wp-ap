@@ -178,7 +178,9 @@ class WPRM_Recipe_Saver {
 
 		if ( isset( $recipe['name'] ) ) {
 			$post['post_title'] = $recipe['name'];
-			$post['post_name'] = 'wprm-' . sanitize_title( $recipe['name'] );
+
+			$post_name_prefix = 'public' === WPRM_Settings::get( 'post_type_structure' ) ? '' : 'wprm-';
+			$post['post_name'] = $post_name_prefix . sanitize_title( $recipe['name'] );
 		}
 
 		if ( isset( $recipe['summary'] ) ) {

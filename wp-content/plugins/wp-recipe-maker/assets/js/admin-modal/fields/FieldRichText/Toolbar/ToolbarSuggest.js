@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import he from 'he';
 
 import Api from 'Shared/Api';
 import Loader from 'Shared/Loader';
@@ -86,7 +87,7 @@ export default class ToolbarSuggest extends Component {
 											} }
 											key={ index }
 										>
-											<span className="wprm-admin-modal-toolbar-suggestion-text">{ suggestion.name } ({ suggestion.count})</span>
+											<span className="wprm-admin-modal-toolbar-suggestion-text">{ he.decode( suggestion.name ) } ({ suggestion.count})</span>
 										</span>
 									))
 								}

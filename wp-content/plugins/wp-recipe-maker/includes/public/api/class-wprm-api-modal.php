@@ -71,6 +71,9 @@ class WPRM_Api_Modal {
 		$search = isset( $params['search'] ) ? $params['search'] : '';
 		$search = trim( strip_tags( $search ) );
 
+		// ' is stored differently in the database. Make sure picks up.
+		$search = str_replace( '&#39;', '&#039;', $search );
+
 		// Regular search.
 		$args = array(
 			'taxonomy' => $taxonomy,

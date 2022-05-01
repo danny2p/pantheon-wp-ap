@@ -21,14 +21,22 @@
 		<?php esc_html_e( 'If your current plugin uses custom post types and has different permalinks than regular posts you might want to use a redirection plugin to set up 301 redirects. Contact us if you need help!', 'wp-recipe-maker' ); ?>
 	</p>
 
-	<h3><?php esc_html_e( 'Import WP Recipe Maker recipes', 'wp-recipe-maker' ); ?></h3>
+	<h3><?php esc_html_e( 'Import recipes', 'wp-recipe-maker' ); ?></h3>
 	<p>
 		<?php
 		if ( ! WPRM_Addons::is_active( 'premium' ) ) {
-			echo __( 'This feature is only available in', 'wp-recipe-maker' ) . ' <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>.';
+			echo __( 'These importers are only available in', 'wp-recipe-maker' ) . ' <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>:<br/>';
+
+			echo '<br/>';
+			echo 'Import recipes from JSON<br/>';
+			echo 'Import taxonomy terms from JSON<br/>';
+			echo '<br/>';
+			echo 'Import recipes from Paprika';
 		} else {
 			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_json' ) . '">Import recipes from JSON</a><br/>';
-			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_taxonomies' ) . '">Import taxonomy terms from JSON</a>';
+			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_taxonomies' ) . '">Import taxonomy terms from JSON</a><br/>';
+			echo '<br/>';
+			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_paprika' ) . '">Import recipes from Paprika</a><br/>';
 		}
 		?>
 	</p>

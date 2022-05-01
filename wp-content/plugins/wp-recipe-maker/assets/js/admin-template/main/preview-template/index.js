@@ -98,6 +98,9 @@ export default class PreviewTemplate extends Component {
     parseHtml(html) {
         let htmlToParse = html;
 
+        // Remove closing wprm-condition shortcode from preview.
+        htmlToParse = htmlToParse.replace( /\[\/wprm\-condition\]/g, '' );
+
         // Find shortcodes in HTML.
         let shortcodes = [];
         const regex = /\[([^\s\]]*)\s*([^\]]*?)\]/gmi;

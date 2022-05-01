@@ -171,6 +171,9 @@ class WPRM_Api_Manage_Taxonomies {
 						break;
 					case 'name':
 					case 'slug':
+						// Special characters are stored encoded in the database because of the rich text editor.
+						$value = htmlspecialchars( $value, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 );
+
 						$args['search'] = $value;
 						break;
 					case 'plural':

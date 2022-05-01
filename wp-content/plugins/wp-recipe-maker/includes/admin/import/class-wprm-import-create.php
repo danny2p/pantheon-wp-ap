@@ -93,6 +93,35 @@ class WPRM_Import_Create extends WPRM_Import {
 	}
 
 	/**
+	 * Search the list of recipes that are available to import.
+	 *
+	 * @since    8.2.0
+	 * @param	 string $search Search term to use.
+	 */
+	public function get_recipes_search( $search ) {
+		$recipes = array();
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'mv_creations';
+
+		$mv_recipes = array();
+		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
+			$mv_recipes = $wpdb->get_results( 'SELECT id, object_id, title, type FROM ' . $table . ' WHERE type IN ("recipe","diy") AND title LIKE \'%' . esc_sql( $search ) . '%\'' );
+		}
+
+		foreach ( $mv_recipes as $mv_recipe ) {
+			if ( WPRM_POST_TYPE !== get_post_type( $mv_recipe->object_id ) ) {
+				$recipes[ $mv_recipe->id ] = array(
+					'name' => $mv_recipe->title,
+					'url' => admin_url( 'post.php?action=edit&id=' . intval( $mv_recipe->id ) . '&post=' . intval( $mv_recipe->object_id ) . '&post_type=mv_create&type=' . urlencode( $mv_recipe->type ) ),
+				);
+			}
+		}
+
+		return $recipes;
+	}
+
+	/**
 	 * Get recipe with the specified ID in the import format.
 	 *
 	 * @since    5.4.0

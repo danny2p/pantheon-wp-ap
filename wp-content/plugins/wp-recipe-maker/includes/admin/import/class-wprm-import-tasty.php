@@ -108,6 +108,39 @@ class WPRM_Import_Tasty extends WPRM_Import {
 	}
 
 	/**
+	 * Search the list of recipes that are available to import.
+	 *
+	 * @since    8.2.0
+	 * @param	 string $search Search term to use.
+	 */
+	public function get_recipes_search( $search ) {
+		$recipes = array();
+
+		$args = array(
+			'post_type' => 'tasty_recipe',
+			'post_status' => 'any',
+			'orderby' => 'relevance',
+			'posts_per_page' => -1,
+			's' => $search,
+		);
+
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			$posts = $query->posts;
+
+			foreach ( $posts as $post ) {
+				$recipes[ $post->ID ] = array(
+					'name' => $post->post_title,
+					'url' => get_edit_post_link( $post->ID ),
+				);
+			}
+		}
+
+		return $recipes;
+	}
+
+	/**
 	 * Get recipe with the specified ID in the import format.
 	 *
 	 * @since    1.23.0

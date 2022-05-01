@@ -446,9 +446,9 @@ class WPRM_MetadataVideo {
 	 */
 	private static function get_url_from_embed_code( $embed_code ) {
 		// Check for YouTube embed code.
-		preg_match("/youtube.com\/embed\/(.*?)[\"\?]/im", $embed_code, $match );
-		if ( $match && isset( $match[1] ) ) {
-			return 'https://www.youtube.com/watch?v=' . $match[1];
+		preg_match("/youtube(-nocookie)?.com\/embed\/(.*?)[\"\?]/im", $embed_code, $match );
+		if ( $match && isset( $match[2] ) ) {
+			return 'https://www.youtube.com/watch?v=' . $match[2];
 		}
 
 		// Check for src="" in the embed code.
