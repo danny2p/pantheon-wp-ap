@@ -121,11 +121,19 @@
 
 	}
 
+	// Get the screen inner width.
+	var screenInnerWidth = window.innerWidth;
+
 	window.addEventListener('resize', function () {
 		// Close Cart
 		var cart_close = document.querySelector('.astra-cart-drawer-close');
 		if ( undefined !== cart_close && '' !== cart_close && null !== cart_close && 'INPUT' !== document.activeElement.tagName && cart_flyout.classList.contains( 'active' ) ) {
-			cart_close.click();
+			// Get the modified screen inner width.
+			var modifiedInnerWidth = window.innerWidth;
+			if ( modifiedInnerWidth !== screenInnerWidth ) {
+				screenInnerWidth = modifiedInnerWidth;
+				cart_close.click();
+			}
 		}
 	});
 

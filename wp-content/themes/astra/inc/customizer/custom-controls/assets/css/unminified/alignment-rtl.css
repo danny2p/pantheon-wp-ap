@@ -89,3 +89,6 @@
 .customize-control-ast-selector {
     margin-bottom: 1px;
 }
+.ast-alignment-inner-wrap.active button.components-button.is-primary {
+    border-color: #007cba;
+}

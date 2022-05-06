@@ -253,8 +253,10 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 			$improve_gb_ui = astra_get_option( 'improve-gb-editor-ui', true );
 			/** @psalm-suppress InvalidScalarArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
-			$content_width_size = ( true === $improve_gb_ui ) ? '910px' : '1200px';
-			$css                = ':root{ --ast-content-width-size: ' . $content_width_size . ' }';
+			$ast_content_width = apply_filters( 'astra_block_content_width', '910px' );
+
+			$content_width_size = ( true === $improve_gb_ui ) ? $ast_content_width : '1200px';
+			$css                = ':root{ --wp--custom--ast-content-width-size: ' . $content_width_size . ' }';
 
 			$astra_apply_content_background = astra_apply_content_background_fullwidth_layouts();
 
@@ -422,9 +424,6 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 					);
 					$desktop_css['.edit-post-visual-editor__post-title-wrapper .editor-post-title'] = array(
 						'margin' => '0',
-					);
-					$desktop_css['.editor-styles-wrapper.block-editor-writing-flow']                = array(
-						'padding-bottom' => '0 !important', // Added important here as there is 40vh padding assigned from WP.
 					);
 				} else {
 					$desktop_css['.edit-post-visual-editor']                        = array(

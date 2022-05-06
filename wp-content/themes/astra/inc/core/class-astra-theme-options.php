@@ -385,6 +385,31 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 							'background-media'      => '',
 						),
 					),
+					// Entry Content.
+					'wp-blocks-ui'                         => 'custom',
+					'wp-blocks-global-padding'             => array(
+						'desktop'      => array(
+							'top'    => '',
+							'right'  => '',
+							'bottom' => '',
+							'left'   => '',
+						),
+						'tablet'       => array(
+							'top'    => '',
+							'right'  => '',
+							'bottom' => '',
+							'left'   => '',
+						),
+						'mobile'       => array(
+							'top'    => '',
+							'right'  => '',
+							'bottom' => '',
+							'left'   => '',
+						),
+						'desktop-unit' => 'em',
+						'tablet-unit'  => 'em',
+						'mobile-unit'  => 'em',
+					),
 					// Container.
 					'site-content-layout'                  => 'content-boxed-container',
 					'single-page-content-layout'           => 'default',

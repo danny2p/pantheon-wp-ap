@@ -17,7 +17,51 @@ class Astra_Gutenberg {
 	 * Constructor
 	 */
 	public function __construct() {
-		add_filter( 'render_block', array( $this, 'restore_group_inner_container' ), 10, 2 );
+		if ( ! astra_block_based_legacy_setup() ) {
+			add_action( 'wp', array( $this, 'is_layout_with_blocks' ), 1 );
+		} else {
+			add_filter( 'render_block', array( $this, 'restore_group_inner_container' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * Check if blocks has been used on the layout. Adding it for making moder compatibility CSS target specific.
+	 *
+	 * @since 3.8.0
+	 * @return void
+	 */
+	public function is_layout_with_blocks() {
+		// @codingStandardsIgnoreStart
+		$post_id = astra_get_post_id();
+		/** @psalm-suppress RedundantConditionGivenDocblockType */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		if ( $post_id ) {
+			/** @psalm-suppress RedundantConditionGivenDocblockType */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+
+			/** @psalm-suppress UndefinedConstant */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			$current_post = get_post( (int) $post_id, OBJECT );
+			/** @psalm-suppress UndefinedConstant */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+
+			/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			if ( has_blocks( $current_post ) ) {
+				/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+				add_filter( 'astra_attr_article-entry-content-single-layout', array( $this, 'add_ast_block_container' ) );
+				add_filter( 'astra_attr_article-entry-content', array( $this, 'add_ast_block_container' ) );
+				add_filter( 'astra_attr_article-entry-content-page', array( $this, 'add_ast_block_container' ) );
+			}
+		}
+		// @codingStandardsIgnoreEnd
+	}
+
+	/**
+	 * Update Schema markup attribute.
+	 *
+	 * @param  array $attr An array of attributes.
+	 *
+	 * @return array       Updated embed markup.
+	 */
+	public function add_ast_block_container( $attr ) {
+		$attr['ast-blocks-layout'] = 'true';
+		return $attr;
 	}
 
 	/**

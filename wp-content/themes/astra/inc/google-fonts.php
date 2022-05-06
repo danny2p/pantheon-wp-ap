@@ -3850,6 +3850,12 @@ return array(
 		),
 	),
 	array(
+		'Libre Bodoni' => array(
+			'variants' => array( 'regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Libre Caslon Display' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'serif', 
@@ -4777,6 +4783,12 @@ return array(
 		'Noticia Text' => array(
 			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
 			'category' => 'serif', 
+		),
+	),
+	array(
+		'Noto Emoji' => array(
+			'variants' => array( '300', 'regular', '500', '600', '700' ), 
+			'category' => 'sans-serif', 
 		),
 	),
 	array(
@@ -6586,6 +6598,12 @@ return array(
 		),
 	),
 	array(
+		'Radio Canada' => array(
+			'variants' => array( '300', 'regular', '500', '600', '700' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
 		'Radley' => array(
 			'variants' => array( 'regular', 'italic' ), 
 			'category' => 'serif', 
@@ -6804,6 +6822,12 @@ return array(
 	array(
 		'Roboto Condensed' => array(
 			'variants' => array( '300', '300italic', 'regular', 'italic', '700', '700italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Roboto Flex' => array(
+			'variants' => array( 'regular' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -7756,6 +7780,12 @@ return array(
 		),
 	),
 	array(
+		'Tapestry' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'handwriting', 
+		),
+	),
+	array(
 		'Taprom' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
@@ -8167,6 +8197,12 @@ return array(
 		'Warnes' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
+		),
+	),
+	array(
+		'Water Brush' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'handwriting', 
 		),
 	),
 	array(
