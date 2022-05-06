@@ -3292,8 +3292,6 @@ function astra_fullwidth_layouts_apply_content_background() {
 	}
 }
 
-
-
 /**
  * Sets the default breadcrumb separator selector value if the current user is an exsisting user
  *
@@ -3305,6 +3303,24 @@ function astra_set_default_breadcrumb_separator_option() {
 
 	if ( ! isset( $theme_options['breadcrumb-separator-selector'] ) ) {
 		$theme_options['breadcrumb-separator-selector'] = 'unicode';
+		update_option( 'astra-settings', $theme_options );
+	}
+}
+
+/**
+ * Set flag to avoid direct reflections on live site & to maintain backward compatibility for existing users.
+ *
+ * Backward flag purpose - To initiate modern & updated UI of block editor & frontend.
+ *
+ * @since 3.8.0
+ * @return void
+ */
+function astra_apply_modern_block_editor_ui() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['wp-blocks-ui'] ) ) {
+		$theme_options['blocks-legacy-setup'] = true;
+		$theme_options['wp-blocks-ui']        = 'legacy';
 		update_option( 'astra-settings', $theme_options );
 	}
 }

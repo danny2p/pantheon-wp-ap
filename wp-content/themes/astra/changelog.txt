@@ -1,3 +1,12 @@
+v3.8.0
+- New: Enhanced block editor experience. ( https://wpastra.com/docs/improved-block-editor-experience/ )
+- Improvement: Font variant customizer control's HTML markup was loading from PHP, which is now moved to React JS for the better and optimized customizer performance.
+- Fix: Customizer's typography section loading slowly.
+- Fix: Block editor - Layout settings are not visible for Group block.
+- Fix: Elementor Pro - WooCommerce Checkout Form's shipping details not look appropriate in editor mode as it looks on the frontend.
+- Fix: Search element not displaying in Mobile Offcanvas.
+- Fix: Offcanvas Shopping cart closes automatically on mobile when scrolled.
+
 v3.7.10
 - Fix: WooCommerce - Grid layout not working properly with Products Archive shortcode.
 - Fix: Toggle menu not collapsible on below IOS 13 version.

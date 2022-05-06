@@ -14,13 +14,13 @@ wp.hooks.addFilter(
 				...(settings.supports || {}),
 				layout: {
 					...(settings.supports.layout || {}),
-					allowEditing: false,
+					allowEditing: true,
 					allowSwitching: false,
 					allowInheriting: true,
 				},
 				__experimentalLayout: {
 					...(settings.supports.__experimentalLayout || {}),
-					allowEditing: false,
+					allowEditing: true,
 					allowSwitching: false,
 					allowInheriting: true,
 				},
@@ -29,23 +29,4 @@ wp.hooks.addFilter(
 		return newSettings;
 	},
 	20
-);
-
-wp.hooks.addFilter(
-	'blocks.getBlockAttributes',
-	'lh/fseFixes',
-	(attributes, blockType) => {
-		if (!haystack.includes(blockType.name)) {
-			return attributes;
-		}
-
-		attributes = {
-			...attributes,
-			layout: {
-				inherit: true,
-			},
-		};
-
-		return attributes;
-	}
 );
