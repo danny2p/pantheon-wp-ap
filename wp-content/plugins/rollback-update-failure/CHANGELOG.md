@@ -1,5 +1,15 @@
 [unreleased]
 
+#### 2.2.0 / 2022-05-11
+* add initial setup of weekly `wp_delete_temp_updater_backups` cron task, oops
+
+#### 2.1.2 / 2022-05-11
+* fix `shutdown` hook in `wp_delete_all_temp_backups()` for plugin namespace, not for PR
+
+#### 2.1.1 / 2022-05-11
+* update testing workflows
+* fix action hook `wp_delete_temp_updater_backups` for plugin namespace, not for PR
+
 #### 2.1.0 / 2202-04-12
 * pass basename of destination to `copy_dir( $skip_list )` to avoid potential endless looping.
 
