@@ -441,7 +441,7 @@ class WPForms_Builder {
 			'dom-purify',
 			WPFORMS_PLUGIN_URL . 'assets/js/purify.min.js',
 			[],
-			'2.3.6'
+			'2.3.8'
 		);
 
 		if ( wp_is_mobile() ) {

@@ -1,3 +1,9 @@
+v3.8.1
+- Fix: Users updating from v3.7.8 in some edge cases facing resource allocation error.
+- Fix: Global Typography Body and Headings font family preview changes not appearing in the customizer.
+- Fix: Beaver Builder page content width not working properly with block editor CSS compatibility.
+- Fix: W3 validation - Role attribute is missing for Account element link.
+
 v3.8.0
 - New: Enhanced block editor experience. ( https://wpastra.com/docs/improved-block-editor-experience/ )
 - Improvement: Font variant customizer control's HTML markup was loading from PHP, which is now moved to React JS for the better and optimized customizer performance.

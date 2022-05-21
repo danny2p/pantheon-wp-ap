@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.7.4.2 =
+- Changed: DOMPurify library updated to 2.3.8.
+- Fixed: WordPress 6.0 compatibility - WPForms block styling fixed inside the Full Site Editor.
+- Fixed: Lite Connect: submitted form entries counting improved.
+
 = 1.7.4.1 =
 - Fixed: LiteConnect auth key request didn't work with plain permalinks and with subdirectory install.
 - Fixed: Form Locations compatibility with the Full Site Editor template parts.
