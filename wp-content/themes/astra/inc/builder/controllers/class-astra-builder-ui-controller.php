@@ -374,7 +374,7 @@ if ( ! class_exists( 'Astra_Builder_UI_Controller' ) ) {
 					$link_classes = 'ast-header-account-link ast-header-account-type-' . $login_profile_type . ' ast-account-action-' . $action_type;
 					?>
 					<div class="ast-header-account-inner-wrap">
-						<a class="<?php echo esc_attr( $link_classes ); ?>" aria-label="<?php esc_attr_e( 'Account icon link', 'astra' ); ?>" <?php echo esc_attr( $link_href . ' ' . $new_tab . ' ' . $link_rel ); ?> >
+						<a class="<?php echo esc_attr( $link_classes ); ?>" role="link" aria-label="<?php esc_attr_e( 'Account icon link', 'astra' ); ?>" <?php echo esc_attr( $link_href . ' ' . $new_tab . ' ' . $link_rel ); ?> >
 
 							<?php
 							if ( 'avatar' === $login_profile_type ) {

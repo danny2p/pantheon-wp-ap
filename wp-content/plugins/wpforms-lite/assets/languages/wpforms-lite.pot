@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.7.4.1\n"
+"Project-Id-Version: WPForms Lite 1.7.4.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-05T12:49:49+03:00\n"
+"POT-Creation-Date: 2022-05-19T14:30:17+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wpforms-lite\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: src/Integrations/Divi/Divi.php:207
 #: src/Integrations/Divi/WPFormsSelector.php:35
 #: src/Integrations/Elementor/Widget.php:41
-#: src/Integrations/Gutenberg/FormSelector.php:91
+#: src/Integrations/Gutenberg/FormSelector.php:136
 #: src/Lite/Admin/DashboardWidget.php:173
 #: templates/admin/dashboard/widget/settings.php:42
 msgid "WPForms"
@@ -182,7 +182,7 @@ msgstr ""
 #: includes/admin/admin.php:177
 #: includes/admin/builder/class-builder.php:540
 #: src/Admin/Education/Builder/Captcha.php:156
-#: src/Integrations/Gutenberg/FormSelector.php:104
+#: src/Integrations/Gutenberg/FormSelector.php:149
 #: wpforms.php:152
 msgid "Heads up!"
 msgstr ""
@@ -4874,7 +4874,7 @@ msgstr ""
 #: src/Integrations/Divi/WPFormsSelector.php:60
 #: src/Integrations/Elementor/Widget.php:115
 #: src/Integrations/Elementor/Widget.php:143
-#: src/Integrations/Gutenberg/FormSelector.php:101
+#: src/Integrations/Gutenberg/FormSelector.php:146
 #: templates/emails/summary-body-plain.php:32
 #: templates/emails/summary-body.php:59
 msgid "Form"
@@ -6756,12 +6756,12 @@ msgid "Select form"
 msgstr ""
 
 #: src/Integrations/Divi/WPFormsSelector.php:67
-#: src/Integrations/Gutenberg/FormSelector.php:102
+#: src/Integrations/Gutenberg/FormSelector.php:147
 msgid "Show Title"
 msgstr ""
 
 #: src/Integrations/Divi/WPFormsSelector.php:77
-#: src/Integrations/Gutenberg/FormSelector.php:103
+#: src/Integrations/Gutenberg/FormSelector.php:148
 msgid "Show Description"
 msgstr ""
 
@@ -6797,39 +6797,39 @@ msgstr ""
 msgid "Select a form"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:92
+#: src/Integrations/Gutenberg/FormSelector.php:137
 msgid "Select and display one of your forms."
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:94
+#: src/Integrations/Gutenberg/FormSelector.php:139
 msgid "form"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:95
+#: src/Integrations/Gutenberg/FormSelector.php:140
 msgid "contact"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:96
+#: src/Integrations/Gutenberg/FormSelector.php:141
 msgid "survey"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:99
+#: src/Integrations/Gutenberg/FormSelector.php:144
 msgid "Select a Form"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:100
+#: src/Integrations/Gutenberg/FormSelector.php:145
 msgid "Form Settings"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:105
+#: src/Integrations/Gutenberg/FormSelector.php:150
 msgid "Do not forget to test your form."
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:106
+#: src/Integrations/Gutenberg/FormSelector.php:151
 msgid "Check out our complete guide!"
 msgstr ""
 
-#: src/Integrations/Gutenberg/FormSelector.php:253
+#: src/Integrations/Gutenberg/FormSelector.php:311
 msgid "The form cannot be displayed."
 msgstr ""
 

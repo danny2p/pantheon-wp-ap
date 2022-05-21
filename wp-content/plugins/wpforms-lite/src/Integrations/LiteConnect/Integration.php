@@ -214,14 +214,18 @@ class Integration extends API {
 		$count = self::get_entries_count();
 
 		// Reduces the entries that were already imported previously from the count.
-		$import = wpforms_setting( 'import', false, self::get_option_name() );
+		$import     = wpforms_setting( 'import', false, self::get_option_name() );
+		$prev_count = 0;
 
 		if ( isset( $import['previous_import_count'] ) ) {
 			$prev_count = (int) $import['previous_import_count'];
-			$count      = $count < $prev_count ? 0 : $count - $prev_count;
 		}
 
-		return $count;
+		if ( isset( $import['previous_failed_count'] ) ) {
+			$prev_count += (int) $import['previous_failed_count'];
+		}
+
+		return $count < $prev_count ? 0 : $count - $prev_count;
 	}
 
 	/**
@@ -242,6 +246,9 @@ class Integration extends API {
 		if ( $status === 'done' ) {
 			$previous_imported_entries                   = Transient::get( 'lite_connect_imported_entries' );
 			$settings['import']['previous_import_count'] = is_array( $previous_imported_entries ) ? count( $previous_imported_entries ) : 0;
+
+			$previous_failed_entries                     = Transient::get( 'lite_connect_failed_entries' );
+			$settings['import']['previous_failed_count'] = is_array( $previous_failed_entries ) ? count( $previous_failed_entries ) : 0;
 		}
 
 		self::maybe_set_entries_count();
@@ -296,7 +303,9 @@ class Integration extends API {
 			return;
 		}
 
-		$previous_import_count = isset( $settings['import']['previous_import_count'] ) ? (int) $settings['import']['previous_import_count'] : 0;
+		$previous_import_count  = isset( $settings['import']['previous_import_count'] ) ? (int) $settings['import']['previous_import_count'] : 0;
+		$previous_failed_count  = isset( $settings['import']['previous_failed_count'] ) ? (int) $settings['import']['previous_failed_count'] : 0;
+		$previous_import_count += $previous_failed_count;
 
 		// When the entries counter was manually deleted from options OR it was modified by another process,
 		// we are setting the counter to the value of the previous imported entries.
