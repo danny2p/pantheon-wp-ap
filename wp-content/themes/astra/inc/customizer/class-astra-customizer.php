@@ -690,6 +690,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 				'control_type'      => astra_get_prop( $config, 'control' ),
 				'variant'           => astra_get_prop( $config, 'variant' ),
 				'help'              => astra_get_prop( $config, 'help' ),
+				'input_attrs'       => astra_get_prop( $config, 'input_attrs' ),
 			);
 
 			self::$dynamic_options['settings'][ astra_get_prop( $new_config, 'name' ) ] = array(

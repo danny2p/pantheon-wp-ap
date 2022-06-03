@@ -1,3 +1,15 @@
+v3.8.2
+- Fix: Improvements as per WordPress coding standards.
+- Fix: Compatibility with WordPress 6.0 - Image block not aligned center when Legacy option set from the Block Editor.
+- Fix: Header - Account - Login popup not opening on mobile/tablet.
+- Fix: The theme's responsive styles not loading with the responsive preview option in the block editor.
+- Fix: Off-Canvas - button type is missing for the close button inside the Flyout header type.
+- Fix: W3 validation - Parse error for background-color CSS property.
+- Fix: W3 validation - aria-label attribute is missing for related posts link.
+- Fix: W3 validation - Role attribute is missing for Account element link.
+- Fix: Line height decimal not appearing in the Global typography section.
+- Fix: Block editor - Layout settings are not visible for Group block.
+
 v3.8.1
 - Fix: Users updating from v3.7.8 in some edge cases facing resource allocation error.
 - Fix: Global Typography Body and Headings font family preview changes not appearing in the customizer.

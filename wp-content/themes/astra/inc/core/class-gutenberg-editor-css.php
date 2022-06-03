@@ -307,7 +307,7 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 				/**
 				 * Content base heading color.
 				 */
-				'.editor-post-title__block .editor-post-title__input, .wc-block-grid__product-title, .edit-post-visual-editor .block-editor-block-list__block h1, .edit-post-visual-editor .block-editor-block-list__block h2, .edit-post-visual-editor .block-editor-block-list__block h3, .edit-post-visual-editor .block-editor-block-list__block h4, .edit-post-visual-editor .block-editor-block-list__block h5, .edit-post-visual-editor .block-editor-block-list__block h6, .edit-post-visual-editor .wp-block-heading, .edit-post-visual-editor .wp-block-uagb-advanced-heading h1, .edit-post-visual-editor .wp-block-uagb-advanced-heading h2, .edit-post-visual-editor .wp-block-uagb-advanced-heading h3, .edit-post-visual-editor .wp-block-uagb-advanced-heading h4, .edit-post-visual-editor .wp-block-uagb-advanced-heading h5, .edit-post-visual-editor .wp-block-uagb-advanced-heading h6,.edit-post-visual-editor h1.block-editor-block-list__block, .edit-post-visual-editor h2.block-editor-block-list__block, .edit-post-visual-editor h3.block-editor-block-list__block, .edit-post-visual-editor h4.block-editor-block-list__block, .edit-post-visual-editor h5.block-editor-block-list__block, .edit-post-visual-editor h6.block-editor-block-list__block' => array(
+				'.editor-post-title__block .editor-post-title__input, .wc-block-grid__product-title, .editor-styles-wrapper .block-editor-block-list__block h1, .editor-styles-wrapper .block-editor-block-list__block h2, .editor-styles-wrapper .block-editor-block-list__block h3, .editor-styles-wrapper .block-editor-block-list__block h4, .editor-styles-wrapper .block-editor-block-list__block h5, .editor-styles-wrapper .block-editor-block-list__block h6, .editor-styles-wrapper .wp-block-heading, .editor-styles-wrapper .wp-block-uagb-advanced-heading h1, .editor-styles-wrapper .wp-block-uagb-advanced-heading h2, .editor-styles-wrapper .wp-block-uagb-advanced-heading h3, .editor-styles-wrapper .wp-block-uagb-advanced-heading h4, .editor-styles-wrapper .wp-block-uagb-advanced-heading h5, .editor-styles-wrapper .wp-block-uagb-advanced-heading h6,.editor-styles-wrapper h1.block-editor-block-list__block, .editor-styles-wrapper h2.block-editor-block-list__block, .editor-styles-wrapper h3.block-editor-block-list__block, .editor-styles-wrapper h4.block-editor-block-list__block, .editor-styles-wrapper h5.block-editor-block-list__block, .editor-styles-wrapper h6.block-editor-block-list__block' => array(
 					'color' => esc_attr( $heading_base_color ),
 				),
 				// Blockquote Text Color.
@@ -325,42 +325,42 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 				),
 
 				// Heading H1 - H6 font size.
-				'.edit-post-visual-editor .block-editor-block-list__block h1, .wp-block-heading h1, .wp-block-freeform.block-library-rich-text__tinymce h1, .edit-post-visual-editor .wp-block-heading h1, .wp-block-heading h1.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h1, .edit-post-visual-editor h1.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h1, .wp-block-heading h1, .wp-block-freeform.block-library-rich-text__tinymce h1, .editor-styles-wrapper .wp-block-heading h1, .wp-block-heading h1.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h1, .editor-styles-wrapper h1.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h1_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h1_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h1_font_weight, 'font' ),
 					'line-height'    => esc_attr( $h1_line_height ),
 					'text-transform' => esc_attr( $h1_text_transform ),
 				),
-				'.edit-post-visual-editor .block-editor-block-list__block h2, .wp-block-heading h2, .wp-block-freeform.block-library-rich-text__tinymce h2, .edit-post-visual-editor .wp-block-heading h2, .wp-block-heading h2.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h2, .edit-post-visual-editor h2.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h2, .wp-block-heading h2, .wp-block-freeform.block-library-rich-text__tinymce h2, .editor-styles-wrapper .wp-block-heading h2, .wp-block-heading h2.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h2, .editor-styles-wrapper h2.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h2_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h2_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h2_font_weight, 'font' ),
 					'line-height'    => esc_attr( $h2_line_height ),
 					'text-transform' => esc_attr( $h2_text_transform ),
 				),
-				'.edit-post-visual-editor .block-editor-block-list__block h3, .wp-block-heading h3, .wp-block-freeform.block-library-rich-text__tinymce h3, .edit-post-visual-editor .wp-block-heading h3, .wp-block-heading h3.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h3, .edit-post-visual-editor h3.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h3, .wp-block-heading h3, .wp-block-freeform.block-library-rich-text__tinymce h3, .editor-styles-wrapper .wp-block-heading h3, .wp-block-heading h3.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h3, .editor-styles-wrapper h3.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h3_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h3_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h3_font_weight, 'font' ),
 					'line-height'    => esc_attr( $h3_line_height ),
 					'text-transform' => esc_attr( $h3_text_transform ),
 				),
-				'.edit-post-visual-editor .block-editor-block-list__block h4, .wp-block-heading h4, .wp-block-freeform.block-library-rich-text__tinymce h4, .edit-post-visual-editor .wp-block-heading h4, .wp-block-heading h4.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h4, .edit-post-visual-editor h4.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h4, .wp-block-heading h4, .wp-block-freeform.block-library-rich-text__tinymce h4, .editor-styles-wrapper .wp-block-heading h4, .wp-block-heading h4.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h4, .editor-styles-wrapper h4.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h4_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h4_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h4_font_weight, 'font' ),
 					'line-height'    => esc_attr( $h4_line_height ),
 					'text-transform' => esc_attr( $h4_text_transform ),
 				),
-				'.edit-post-visual-editor .block-editor-block-list__block h5, .wp-block-heading h5, .wp-block-freeform.block-library-rich-text__tinymce h5, .edit-post-visual-editor .wp-block-heading h5, .wp-block-heading h5.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h5, .edit-post-visual-editor h5.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h5, .wp-block-heading h5, .wp-block-freeform.block-library-rich-text__tinymce h5, .editor-styles-wrapper .wp-block-heading h5, .wp-block-heading h5.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h5, .editor-styles-wrapper h5.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h5_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h5_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h5_font_weight, 'font' ),
 					'line-height'    => esc_attr( $h5_line_height ),
 					'text-transform' => esc_attr( $h5_text_transform ),
 				),
-				'.edit-post-visual-editor .block-editor-block-list__block h6, .wp-block-heading h6, .wp-block-freeform.block-library-rich-text__tinymce h6, .edit-post-visual-editor .wp-block-heading h6, .wp-block-heading h6.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h6, .edit-post-visual-editor h6.block-editor-block-list__block' => array(
+				'.editor-styles-wrapper .block-editor-block-list__block h6, .wp-block-heading h6, .wp-block-freeform.block-library-rich-text__tinymce h6, .editor-styles-wrapper .wp-block-heading h6, .wp-block-heading h6.editor-rich-text__tinymce, .editor-styles-wrapper .wp-block-uagb-advanced-heading h6, .editor-styles-wrapper h6.block-editor-block-list__block' => array(
 					'font-size'      => astra_responsive_font( $heading_h6_font_size, 'desktop' ),
 					'font-family'    => astra_get_css_value( $h6_font_family, 'font' ),
 					'font-weight'    => astra_get_css_value( $h6_font_weight, 'font' ),
