@@ -117,3 +117,70 @@ function astra_onload_function() {
 		}, 1 );
 	});
 }
+
+document.body.addEventListener('mousedown', function () {
+	var blockCssMode = document.querySelector('body').classList.contains('ast-block-legacy')
+	var fontCss = document.getElementById('astra-google-fonts-css');
+if(true === blockCssMode){
+	var blockCss = document.getElementById('astra-block-editor-styles-css');
+	var inlineCss = document.getElementById('astra-block-editor-styles-inline-css');
+	
+}else {
+	var blockCss = document.getElementById('astra-wp-editor-styles-css');
+	var inlineCss = document.getElementById('astra-wp-editor-styles-inline-css');
+}
+	
+
+	var blockFixCss = blockCss.cloneNode(true);
+	var blockInlineCss = inlineCss.cloneNode(true);
+	var blockfontCss = null !== fontCss ? fontCss.cloneNode(true) : null;
+
+	setTimeout( function() {
+
+		let tabletPreview = document.getElementsByClassName('is-tablet-preview');
+		let mobilePreview = document.getElementsByClassName('is-mobile-preview');
+
+		if (0 !== tabletPreview.length || 0 !== mobilePreview.length) {
+			var googleFontId = 'astra-google-fonts-css';
+			if(true === blockCssMode){
+				var styleTagId = 'astra-block-editor-styles-inline-css';
+				var styleTagBlockId = 'astra-block-editor-styles-css';
+				
+			} else{
+				var styleTagId = 'astra-wp-editor-styles-inline-css';
+				var styleTagBlockId = 'astra-wp-editor-styles-css';
+			}
+			var styleTagId = 'astra-block-editor-styles-inline-css';
+			var styleTagBlockId = 'astra-block-editor-styles-css';
+			var googleFontId = 'astra-google-fonts-css';
+			let preview = tabletPreview[0] || mobilePreview[0];
+
+				let iframe = preview.getElementsByTagName('iframe')[0];
+				let iframeDocument = iframe.contentWindow.document || iframe.contentDocument;
+
+				let element = iframeDocument.getElementById(
+					styleTagId
+				);
+				let elementBlock = iframeDocument.getElementById(
+					styleTagBlockId
+				);
+				let elementGoogleFont = iframeDocument.getElementById(
+					googleFontId
+				);
+				if ( (null === element || undefined === element)) {
+
+						iframeDocument.head.appendChild( blockInlineCss );
+				}
+				if ( (null === elementBlock || undefined === elementBlock )) {
+
+					iframeDocument.head.appendChild( blockFixCss );
+				}
+				if ( (null === elementGoogleFont || undefined === elementGoogleFont ) && null !== fontCss) {
+
+					iframeDocument.head.appendChild( blockfontCss );
+				}
+
+		}
+	}, 1000);
+
+});

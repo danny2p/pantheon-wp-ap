@@ -311,7 +311,7 @@ return array(
 	),
 	array(
 		'Andika' => array(
-			'variants' => array( 'regular' ), 
+			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -1090,6 +1090,18 @@ return array(
 		),
 	),
 	array(
+		'Blaka' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
+		'Blaka Hollow' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
 		'Blinker' => array(
 			'variants' => array( '100', '200', '300', 'regular', '600', '700', '800', '900' ), 
 			'category' => 'sans-serif', 
@@ -1432,6 +1444,12 @@ return array(
 		),
 	),
 	array(
+		'Charis SIL' => array(
+			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Charm' => array(
 			'variants' => array( 'regular', '700' ), 
 			'category' => 'handwriting', 
@@ -1746,6 +1764,12 @@ return array(
 	array(
 		'Crimson Pro' => array(
 			'variants' => array( '200', '300', 'regular', '500', '600', '700', '800', '900', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Crimson Text' => array(
+			'variants' => array( 'regular', 'italic', '600', '600italic', '700', '700italic' ), 
 			'category' => 'serif', 
 		),
 	),
@@ -2560,6 +2584,12 @@ return array(
 		),
 	),
 	array(
+		'Gentium Plus' => array(
+			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Geo' => array(
 			'variants' => array( 'regular', 'italic' ), 
 			'category' => 'sans-serif', 
@@ -3256,6 +3286,12 @@ return array(
 		),
 	),
 	array(
+		'Joan' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Jockey One' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'sans-serif', 
@@ -3457,6 +3493,12 @@ return array(
 		'Kdam Thmor' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
+		),
+	),
+	array(
+		'Kdam Thmor Pro' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'sans-serif', 
 		),
 	),
 	array(
@@ -5956,6 +5998,12 @@ return array(
 		),
 	),
 	array(
+		'Nuosu SIL' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Odibee Sans' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
@@ -6599,7 +6647,7 @@ return array(
 	),
 	array(
 		'Radio Canada' => array(
-			'variants' => array( '300', 'regular', '500', '600', '700' ), 
+			'variants' => array( '300', 'regular', '500', '600', '700', '300italic', 'italic', '500italic', '600italic', '700italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -7570,6 +7618,12 @@ return array(
 		),
 	),
 	array(
+		'Spline Sans Mono' => array(
+			'variants' => array( '300', 'regular', '500', '600', '700' ), 
+			'category' => 'monospace', 
+		),
+	),
+	array(
 		'Squada One' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
@@ -7768,6 +7822,12 @@ return array(
 		),
 	),
 	array(
+		'Tai Heritage Pro' => array(
+			'variants' => array( 'regular', '700' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Tajawal' => array(
 			'variants' => array( '200', '300', 'regular', '500', '700', '800', '900' ), 
 			'category' => 'sans-serif', 
@@ -7878,6 +7938,54 @@ return array(
 	array(
 		'Tinos' => array(
 			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Bangla' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Devanagari Hindi' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Devanagari Marathi' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Devanagari Sanskrit' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Gurmukhi' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Kannada' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Tamil' => array(
+			'variants' => array( 'regular', 'italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Tiro Telugu' => array(
+			'variants' => array( 'regular', 'italic' ), 
 			'category' => 'serif', 
 		),
 	),

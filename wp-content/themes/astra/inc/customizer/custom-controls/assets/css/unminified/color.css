@@ -435,13 +435,6 @@
     width: 100%;
 }
 /** Modal Color Picker - Group Param */
-.ast-field-settings-modal .astra-popover-color .ast-color-palette {
-	padding: 8px 0px 0px 13px;
-	margin-bottom: -8px;
-}
-.ast-field-settings-modal .astra-popover-color .ast-color-palette .components-circular-option-picker__option-wrapper {
-    margin-right: 5px;
-}
 .ast-field-settings-modal .components-circular-option-picker__option-wrapper .components-circular-option-picker__option:focus::after {
 	width: 24px;
     height: 24px;
