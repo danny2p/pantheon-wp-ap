@@ -61,6 +61,7 @@ class WPRM_Recipe {
 		// Post Type.
 		$recipe['slug'] = $this->slug();
 		$recipe['post_status'] = $this->post_status();
+		$recipe['post_password'] = $this->post_password();
 		$recipe['post_author'] = $this->post_author();
 		$recipe['language'] = $this->language();
 
@@ -718,6 +719,15 @@ class WPRM_Recipe {
 	 */
 	public function post_status() {
 		return $this->post->post_status;
+	}
+
+	/**
+	 * Get the recipe post password.
+	 *
+	 * @since    8.3.0
+	 */
+	public function post_password() {
+		return $this->post->post_password;
 	}
 
 	/**

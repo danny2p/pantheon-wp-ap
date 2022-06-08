@@ -43,11 +43,17 @@ const group = (props, provided) => (
             <div className="wprm-admin-modal-field-ingredient-after-container-icons">
                 <Icon
                     type="trash"
+                    title={ __wprm( 'Remove' ) }
                     onClick={ props.onDelete }
                 />
                 <Icon
+                    type="plus-text"
+                    title={ __wprm( 'Insert Group After' ) }
+                    onClick={ props.onAddGroup }
+                />
+                <Icon
                     type="plus"
-                    title={ __wprm( 'Insert After' ) }
+                    title={ __wprm( 'Insert Ingredient After' ) }
                     onClick={ props.onAdd }
                 />
             </div>
@@ -115,11 +121,17 @@ const ingredient = (props, provided) => {
                 <div className="wprm-admin-modal-field-ingredient-after-container-icons">
                     <Icon
                         type="trash"
+                        title={ __wprm( 'Remove' ) }
                         onClick={ props.onDelete }
                     />
                     <Icon
+                        type="plus-text"
+                        title={ __wprm( 'Insert Group After' ) }
+                        onClick={ props.onAddGroup }
+                    />
+                    <Icon
                         type="plus"
-                        title={ __wprm( 'Insert After' ) }
+                        title={ __wprm( 'Insert Ingredient After' ) }
                         onClick={ props.onAdd }
                     />
                 </div>

@@ -2,13 +2,25 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
     Button,
-    ServerSideRender,
-    Toolbar,
+    ToolbarGroup,
+    ToolbarButton,
 } = wp.components;
-const {
-    BlockControls,
-} = wp.editor;
 const { Fragment } = wp.element;
+
+// Backwards compatibility.
+let BlockControls;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	BlockControls = wp.blockEditor.BlockControls;
+} else {
+	BlockControls = wp.editor.BlockControls;
+}
+
+let ServerSideRender;
+if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
+    ServerSideRender = wp.serverSideRender;
+} else {
+    ServerSideRender = wp.components.ServerSideRender;
+}
 
 import Sidebar from './Sidebar';
 
@@ -136,24 +148,22 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                 <Fragment>
                     <Sidebar {...props} />
                     <BlockControls>
-                        <Toolbar
-                            controls={[
-                                {
-                                    icon: 'edit',
-                                    title: __( 'Edit Recipe' ),
-                                    onClick: () => {
-                                        WPRM_Modal.open( 'roundup', {
-                                            fields: {
-                                                roundup: attributes,
-                                            },
-                                            insertCallback: ( fields ) => {
-                                                modalCallback( fields );
-                                            },
-                                        } );
-                                    }
-                                }
-                            ]}
-                        />
+                        <ToolbarGroup>
+                            <ToolbarButton
+                                icon="edit"
+                                label={ __( 'Edit Recipe' ) }
+                                onClick={ () => {
+                                    WPRM_Modal.open( 'roundup', {
+                                        fields: {
+                                            roundup: attributes,
+                                        },
+                                        insertCallback: ( fields ) => {
+                                            modalCallback( fields );
+                                        },
+                                    } );
+                                } }
+                            />
+                        </ToolbarGroup>
                     </BlockControls>
                     <ServerSideRender
                         block="wp-recipe-maker/recipe-roundup-item"

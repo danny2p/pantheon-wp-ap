@@ -45,6 +45,19 @@ const RecipePostType = (props) => {
                     />
                 </FieldContainer>
             }
+            {
+                showAll
+                &&
+                <FieldContainer id="post_password" label={ __wprm( 'Password' ) } help={ __wprm( `Optionally set a password to restrict access to the recipe post.` ) }>
+                    <FieldText
+                        name="post-password"
+                        value={ props.post_password }
+                        onChange={ (post_password) => {
+                            props.onRecipeChange( { post_password } );
+                        }}
+                    />
+                </FieldContainer>
+            }
             <FieldContainer id="post_author" label={ __wprm( 'Post Author' ) }>
                 <FieldDropdown
                     options={ wprm_admin_modal.options.post_author }

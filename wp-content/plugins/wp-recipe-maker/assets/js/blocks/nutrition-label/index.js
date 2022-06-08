@@ -1,10 +1,17 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const {
-    BlockControls,
-    AlignmentToolbar,
-} = wp.editor;
 const { Fragment } = wp.element;
+
+// Backwards compatibility.
+let BlockControls;
+let AlignmentToolbar;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	BlockControls = wp.blockEditor.BlockControls;
+	AlignmentToolbar = wp.blockEditor.AlignmentToolbar;
+} else {
+	BlockControls = wp.editor.BlockControls;
+	AlignmentToolbar = wp.editor.AlignmentToolbar;
+}
 
 import '../../../css/blocks/nutrition-label.scss';
 

@@ -311,6 +311,10 @@ class WPRM_Recipe_Sanitizer {
 				$sanitized_recipe['post_status'] = $recipe['post_status'];
 			}
 
+			if ( isset( $recipe['post_password'] ) ) {
+				$sanitized_recipe['post_password'] = sanitize_text_field( $recipe['post_password'] );
+			}
+
 			if ( isset( $recipe['language'] ) ) {
 				$sanitized_recipe['language'] = $recipe['language'] ? sanitize_text_field( $recipe['language'] ) : false;
 			}

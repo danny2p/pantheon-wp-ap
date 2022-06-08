@@ -37,7 +37,8 @@ const ActionsRecipe = (props) => {
     // Only for "public" recipe type.
     if ( 'public' === wprm_admin.settings.post_type_structure ) {
         actionOptions.push(
-            { value: 'change-status', label: __wprm( 'Change Recipe Status' ), default: 'draft' }
+            { value: 'change-status', label: __wprm( 'Change Recipe Status' ), default: 'draft' },
+            { value: 'change-password', label: __wprm( 'Change Password' ), default: '' },
         );
 
         if ( wprm_admin_manage.multilingual && 'wpml' === wprm_admin_manage.multilingual.plugin ) {
@@ -125,6 +126,23 @@ const ActionsRecipe = (props) => {
                                 options={ wprm_admin_modal.options.post_status }
                                 value={props.action.options}
                                 onChange={(value) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: value,
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                            />
+                        }
+                        {
+                            'change-password' === selectedAction
+                            &&
+                            <FieldText
+                                name="password"
+                                placeholder={ __wprm( 'Password' ) }
+                                value={ props.action.options }
+                                onChange={ (value) => {
                                     const newAction = {
                                         ...props.action,
                                         options: value,

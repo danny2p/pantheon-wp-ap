@@ -1,6 +1,13 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText } = wp.editor;
+
+// Backwards compatibility.
+let RichText;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	RichText = wp.blockEditor.RichText;
+} else {
+	RichText = wp.editor.RichText;
+}
 
 import '../../../css/public/snippets.scss';
 
@@ -58,7 +65,7 @@ registerBlockType( 'wp-recipe-maker/print-recipe', {
                     value={ [text] }
                     onChange={ ( nextValue ) => richToString( nextValue ) }
                     multiline={ false }
-                    formattingControls={ [] }
+                    allowedFormats={ [] }
                 />
             </div>
         )

@@ -92,7 +92,7 @@ class WPRM_Shortcode_Snippets {
 	 * @param	 mixed $content Content we want to filter before it gets passed along.
 	 */
 	public static function automatically_add_recipe_snippets( $content ) {
-		if ( ! is_feed() && ! is_front_page() && is_single() && is_main_query() ) {
+		if ( ! is_feed() && ! is_front_page() && is_single() && is_main_query() && ! post_password_required() ) {
 			$snippet = false;
 
 			if ( 'legacy' === WPRM_Settings::get( 'recipe_template_mode' ) && WPRM_Settings::get( 'recipe_snippets_automatically_add' ) ) {

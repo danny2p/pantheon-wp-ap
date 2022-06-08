@@ -33,8 +33,8 @@ class WPRM_Compatibility {
 		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
 
 		// Instacart.
-		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
-		// add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
+		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
@@ -283,7 +283,10 @@ class WPRM_Compatibility {
 	 */
 	public static function instacart_assets() {
 		if ( apply_filters( 'wprm_load_instacart', false ) ) {
-			echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle.js"; js.async = true; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
+			// Make sure to only load JS if they actually agree to the terms.
+			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
+				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle.js"; js.async = true; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
+			}
 		}
 	}
 
