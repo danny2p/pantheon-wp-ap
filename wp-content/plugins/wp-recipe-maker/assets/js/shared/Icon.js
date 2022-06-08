@@ -25,6 +25,7 @@ import IconMovie from '../../icons/admin/movie.svg';
 import IconPencil from '../../icons/admin/pencil.svg';
 import IconPhoto from '../../icons/admin/photo.svg';
 import IconPlus from '../../icons/admin/plus.svg';
+import IconPlusText from '../../icons/admin/plus-text.svg';
 import IconPrint from '../../icons/admin/print.svg';
 import IconQuestion from '../../icons/admin/question.svg';
 import IconReload from '../../icons/admin/reload.svg';
@@ -60,6 +61,7 @@ const icons = {
     pencil: IconPencil,
     photo: IconPhoto,
     plus: IconPlus,
+    'plus-text': IconPlusText,
     print: IconPrint,
     question: IconQuestion,
     reload: IconReload,

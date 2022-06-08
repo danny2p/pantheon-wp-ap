@@ -221,6 +221,10 @@ class WPRM_Recipe_Saver {
 				}
 			}
 
+			if ( isset( $recipe['post_password'] ) ) {
+				$post['post_password'] = $recipe['post_password'];
+			}
+
 			if ( isset( $recipe['language'] ) ) {
 				WPRM_Compatibility::set_language_for( $id, $recipe['language'] );
 			}

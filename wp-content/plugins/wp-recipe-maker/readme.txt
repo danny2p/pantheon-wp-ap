@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -31,6 +31,7 @@ An overview of WP Recipe Maker features:
 *   Uses schema.org/Recipe JSON-LD metadata optimised for **Google Recipe search**
 *   Uses schema.org/How-to JSON-LD metadata optimised for **non-food recipes and instructions**
 *   Supports both regular and **Guided Recipes** for Google metadata
+*   Shoppable ingredients with the **Shop with Instacart** button
 *   Google **AMP** compatible
 *   Integrates recipe metadata with Yoast **SEO schema graph**
 *   Option to **disable metadata per recipe** if you want to publish non-food or DIY recipes
@@ -134,6 +135,20 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.3.0 =
+* Feature: Shop Ingredients with Instacart button
+* Improvement: Quick insert icon for group names
+* Improvement: Ability to password protect when using recipes as a public post type
+* Improvement: Automatic alt tag for external roundup images when not saved locally
+* Improvement: New shopping cart icons for the template editor
+* Fix: Snippets showing up for password protected posts
+* Fix: Template editor names with non-latin characters
+* Fix: Smooth scroll in Jump to Comments button
+* Fix: Nutrition fields not instantly updating when using comma as decimal character
+* Fix: Gutenberg deprecations
+* Fix: Elementor deprecation warning
+* Fix: Make sure shortcodes work inside of template conditions
+
 = 8.2.0 =
 * Feature: Condition shortcode for Template Editor
 * Feature: Search list of recipes to import when importing from MV Create or Tasty Recipes
@@ -1382,6 +1397,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.3.0 =
+Instacart integration, some improvements and fixes
+
 = 8.2.0 =
 Several fixes and some improvements
 

@@ -2,19 +2,33 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
     Button,
-    ServerSideRender,
     PanelBody,
     PanelRow,
-    Toolbar,
+    ToolbarGroup,
+    ToolbarButton,
     TextControl,
     SelectControl,
 } = wp.components;
 const { Fragment } = wp.element;
-const {
-    InspectorControls,
-    BlockControls,
-} = wp.editor;
 const { select } = wp.data;
+
+// Backwards compatibility.
+let InspectorControls;
+let BlockControls;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	InspectorControls = wp.blockEditor.InspectorControls;
+	BlockControls = wp.blockEditor.BlockControls;
+} else {
+	InspectorControls = wp.editor.InspectorControls;
+	BlockControls = wp.editor.BlockControls;
+}
+
+let ServerSideRender;
+if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
+    ServerSideRender = wp.serverSideRender;
+} else {
+    ServerSideRender = wp.components.ServerSideRender;
+}
 
 import '../../../css/blocks/recipe.scss';
 
@@ -86,20 +100,20 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                 ?
                 <Fragment>
                     <BlockControls>
-                        <Toolbar
-                            controls={[
-                                {
-                                    icon: 'edit',
-                                    title: __( 'Edit Recipe' ),
-                                    onClick: () => {
+                        <ToolbarGroup>
+                            <ToolbarButton
+                                icon="edit"
+                                label={ __( 'Edit Recipe' ) }
+                                onClick={
+                                    () => {
                                         WPRM_Modal.open( 'recipe', {
                                             recipeId: attributes.id,
                                             saveCallback: modalCallback,
                                         } );
                                     }
                                 }
-                            ]}
-                        />
+                            />
+                        </ToolbarGroup>
                     </BlockControls>
                     <InspectorControls>
                         <PanelBody title={ __( 'Recipe Details' ) }>
@@ -119,7 +133,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                             />
                             <PanelRow>
                                 <Button
-                                    isDefault
+                                    variant="secondary"
                                     onClick={ () => {
                                         WPRM_Modal.open( 'recipe', {
                                             recipeId: attributes.id,

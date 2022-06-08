@@ -149,7 +149,7 @@ class WPRM_Recipe_Shell {
 				$style = ' style="max-width: ' . $width . 'px; height: auto;"';
 			}
 
-			return '<img src="' . esc_url( $this->image_url() ) . '"' . $style . '/>';
+			return '<img src="' . esc_url( $this->image_url() ) . '" alt="' . esc_attr( $this->name() ) .'"' . $style . '/>';
 		}
 
 		$img = wp_get_attachment_image( $image_id, $size );

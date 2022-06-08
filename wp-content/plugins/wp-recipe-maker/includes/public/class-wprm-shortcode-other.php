@@ -162,7 +162,7 @@ class WPRM_Shortcode_Other {
 
 		// Return content if it matches the condition, empty otherwise.
 		if ( $match ) {
-			return $content;
+			return do_shortcode( $content );
 		} else {
 			return '';
 		}

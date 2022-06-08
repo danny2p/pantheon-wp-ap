@@ -459,12 +459,12 @@ class WPRM_Template_Manager {
 	 */
 	public static function save_template( $template ) {
 		$templates = self::get_templates();
-		$slug = isset( $template['slug'] ) ? sanitize_title( $template['slug'] ) : false;
-		$old_slug = isset( $template['oldSlug'] ) ? sanitize_title( $template['oldSlug'] ) : $slug;
+		$slug = isset( $template['slug'] ) && false !== $template['slug'] ? self::slugify( $template['slug'] ) : false;
+		$old_slug = isset( $template['oldSlug'] ) ? self::slugify( $template['oldSlug'] ) : $slug;
 
 		// New slug needed.
 		if ( ! $slug || ( array_key_exists( $slug, $templates['modern'] ) && 'file' === $templates['modern'][ $slug ]['location'] ) ) {
-			$slug_base = sanitize_title( $template['name'], 'template' );
+			$slug_base = self::slugify( $template['name'] );
 
 			$slug = $slug_base;
 			$i = 2;
@@ -508,6 +508,25 @@ class WPRM_Template_Manager {
 		update_option( 'wprm_template_' . $slug, $sanitized_template );
 
 		return $sanitized_template;
+	}
+
+	/**
+	 * Sluggify the name of a template.
+	 *
+	 * @since	8.3.0
+	 * @param	mixed $slug Starting text.
+	 */
+	public static function slugify( $slug ) {
+		$slug = strtolower( $slug );
+		$slug = preg_replace( '/[^a-z0-9 -_]+/', '', $slug );
+		$slug = str_replace( ' ', '-', $slug);
+		$slug = trim( $slug, '-' );
+		
+		if ( ! $slug ) {
+			$slug = 'recipe-template';
+		}
+
+		return $slug;
 	}
 
 	/**

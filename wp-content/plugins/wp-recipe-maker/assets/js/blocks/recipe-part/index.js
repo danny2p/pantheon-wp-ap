@@ -2,17 +2,30 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {
     Button,
-    ServerSideRender,
     PanelBody,
     Toolbar,
     TextControl,
     SelectControl,
 } = wp.components;
 const { Fragment } = wp.element;
-const {
-    InspectorControls,
-    BlockControls,
-} = wp.editor;
+
+// Backwards compatibility.
+let InspectorControls;
+let BlockControls;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	InspectorControls = wp.blockEditor.InspectorControls;
+	BlockControls = wp.blockEditor.BlockControls;
+} else {
+	InspectorControls = wp.editor.InspectorControls;
+	BlockControls = wp.editor.BlockControls;
+}
+
+let ServerSideRender;
+if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
+    ServerSideRender = wp.serverSideRender;
+} else {
+    ServerSideRender = wp.components.ServerSideRender;
+}
 
 registerBlockType( 'wp-recipe-maker/recipe-part', {
     title: __( 'Recipe Part' ),

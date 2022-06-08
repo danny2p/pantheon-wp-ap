@@ -94,7 +94,7 @@
 }
 
 .wprm-admin-modal-field-instruction-after-container {
-    margin-left: 21px;
+    margin-left: 17px;
 
     .wprm-admin-modal-field-instruction-after-container-icons {
         margin: 5px;
@@ -102,10 +102,6 @@
 
         .wprm-admin-icon {
             margin-right: 5px;
-
-            &:last-child {
-                margin-right: 0;
-            }
         }
     }
     .wprm-admin-modal-field-instruction-after-container-ingredient,
@@ -237,7 +233,7 @@
     }
 
     .wprm-admin-modal-field-instruction-unused-ingredients {
-        padding-left: 80px;
+        padding-left: 100px;
         margin-left: 0;
         width: 40%;
         float: right;

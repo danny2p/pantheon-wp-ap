@@ -55,6 +55,13 @@ $adjustable_servings = array(
 					'suffix' => 'decimals',
 					'default' => '2',
 				),
+				array(
+					'id' => 'adjustable_servings_without_servings',
+					'name' => __( 'Show adjustable buttons when no servings set', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to show the 1x 2x 3x buttons even if no default serving size for the recipe has been set.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
 			),
 		),
 		array(

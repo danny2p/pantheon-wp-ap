@@ -305,7 +305,11 @@ class WPRM_Taxonomies {
 		if ( WPRM_POST_TYPE === get_post_type() ) {		
 			// Singular recipe page.
 			if ( is_singular( WPRM_POST_TYPE ) ) {
-				return do_shortcode( '<p>[wprm-recipe id="' . esc_attr( get_the_ID() ). '"]</p>' );
+				if ( post_password_required() ) {
+					return get_the_password_form();
+				} else {
+					return do_shortcode( '<p>[wprm-recipe id="' . esc_attr( get_the_ID() ). '"]</p>' );
+				}
 			}
 
 			// Archive page.

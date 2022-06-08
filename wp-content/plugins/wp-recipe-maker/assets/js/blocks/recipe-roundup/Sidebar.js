@@ -5,11 +5,16 @@ const {
     TextareaControl,
     SelectControl,
 } = wp.components;
-const {
-    InspectorControls,
-} = wp.editor;
 const { compose } = wp.compose;
 const { withSelect, withDispatch } = wp.data;
+
+// Backwards compatibility.
+let InspectorControls;
+if ( wp.hasOwnProperty( 'blockEditor' ) ) {
+	InspectorControls = wp.blockEditor.InspectorControls;
+} else {
+	InspectorControls = wp.editor.InspectorControls;
+}
 
 function Sidebar( props ) {
     const { attributes, setAttributes, name, onChangeName, description, onChangeDescription, recipeRoundupCount } = props;
@@ -90,7 +95,7 @@ function Sidebar( props ) {
 
 const applyWithSelect = withSelect( ( select, ownProps ) => {
     const meta = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
-    const { getGlobalBlockCount } = select( 'core/editor' );
+    const { getGlobalBlockCount } = select( 'core/block-editor' );
 
     const nameMeta = meta['wprm-recipe-roundup-name'];
     const name = nameMeta instanceof Array ? nameMeta[0] : nameMeta;

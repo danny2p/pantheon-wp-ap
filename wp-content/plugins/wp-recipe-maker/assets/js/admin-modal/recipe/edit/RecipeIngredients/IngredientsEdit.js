@@ -166,6 +166,9 @@ export default class IngredientsEdit extends Component {
                                             onAdd={() => {
                                                 this.addField('ingredient', index);
                                             }}
+                                            onAddGroup={() => {
+                                                this.addField('group', index);
+                                            }}
                                         />
                                     ))
                                 }

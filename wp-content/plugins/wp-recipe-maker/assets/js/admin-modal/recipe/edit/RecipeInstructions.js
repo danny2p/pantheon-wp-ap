@@ -222,6 +222,9 @@ export default class RecipeInstructions extends Component {
                                                 onAdd={() => {
                                                     this.addField('instruction', index);
                                                 }}
+                                                onAddGroup={() => {
+                                                    this.addField('group', index);
+                                                }}
                                                 allowVideo={ this.props.allowVideo }
                                                 onChangeVideo={ ( video ) => {
                                                     let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );

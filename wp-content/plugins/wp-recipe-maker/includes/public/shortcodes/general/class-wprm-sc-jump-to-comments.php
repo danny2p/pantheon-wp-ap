@@ -192,7 +192,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$text = $recipe->replace_placeholders( $text );
 		}
 
-		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '">' . $icon . $text . '</a>';
+		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

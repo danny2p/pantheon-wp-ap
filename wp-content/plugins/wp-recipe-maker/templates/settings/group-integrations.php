@@ -21,6 +21,32 @@ $integrations = array(
 	'name' => __( 'Integrations', 'wp-recipe-maker' ),
 	'subGroups' => array(
 		array(
+			'name' => __( 'Shoppable Recipes with Instacart', 'wp-recipe-maker' ),
+			'description' => 'Make your recipes shoppable by adding an Instacart button next to your ingredient list. Available in the US only at the moment.',
+			'documentation' => 'https://help.bootstrapped.ventures/article/323-shop-with-instacart-button',
+			'settings' => array(
+				array(
+					'id' => 'integration_instacart_agree',
+					'name' => __( 'Agree to Instacart Button terms', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to agree with the Shop With Instacart Button Plugin Terms:', 'wp-recipe-maker' ),
+					'documentation' => 'https://widgets.instacart.com/widget-terms.pdf',
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'integration_instacart',
+					'name' => __( 'Automatically add Instacart Button', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the Instacart button after the ingredients section. Alternatively manually add the button in the Template Editor.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+					'dependency' => array(
+						'id' => 'integration_instacart_agree',
+						'value' => true,
+					),
+				),
+			),
+		),
+		array(
 			'name' => 'My Emissions carbon footprint labels',
 			'description' => 'Enable to display a carbon label for your recipes. You must first sign-up with My Emissions to launch this integration; note that WP Recipe Maker customers are entitled to a special reduced price for the labels.',
 			'documentation' => 'https://myemissions.green/wp-recipe-maker?ref=wprm',
