@@ -129,7 +129,6 @@ if ( ! function_exists( 'astra_body_classes' ) ) {
 
 add_filter( 'body_class', 'astra_body_classes' );
 
-
 /**
  * Astra Pagination
  */
@@ -150,19 +149,19 @@ if ( ! function_exists( 'astra_number_pagination' ) ) {
 			return;
 		}
 
-			ob_start();
-			echo "<div class='ast-pagination'>";
-			the_posts_pagination(
-				array(
-					'prev_text'    => astra_default_strings( 'string-blog-navigation-previous', false ),
-					'next_text'    => astra_default_strings( 'string-blog-navigation-next', false ),
-					'taxonomy'     => 'category',
-					'in_same_term' => true,
-				)
-			);
-			echo '</div>';
-			$output = ob_get_clean();
-			echo apply_filters( 'astra_pagination_markup', $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		ob_start();
+		echo "<div class='ast-pagination'>";
+		the_posts_pagination(
+			array(
+				'prev_text'    => astra_default_strings( 'string-blog-navigation-previous', false ),
+				'next_text'    => astra_default_strings( 'string-blog-navigation-next', false ),
+				'taxonomy'     => 'category',
+				'in_same_term' => true,
+			)
+		);
+		echo '</div>';
+		$output = ob_get_clean();
+		echo apply_filters( 'astra_pagination_markup', $output ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 
@@ -187,12 +186,15 @@ if ( ! function_exists( 'astra_logo' ) ) {
 		$display_site_tagline = ( $site_tagline['desktop'] || $site_tagline['tablet'] || $site_tagline['mobile'] ) ? true : false;
 		$site_title           = astra_get_option( 'display-site-title-responsive' );
 		$display_site_title   = ( $site_title['desktop'] || $site_title['tablet'] || $site_title['mobile'] ) ? true : false;
+		$ast_custom_logo_id   = get_theme_mod( 'custom_logo' );
 
 		$html            = '';
 		$has_custom_logo = apply_filters( 'astra_has_custom_logo', has_custom_logo() );
+		$trans_logo      = astra_get_option( 'transparent-header-logo' );
+		$diff_trans_logo = astra_get_option( 'different-transparent-logo' );
 
 		// Site logo.
-		if ( $has_custom_logo ) {
+		if ( ( $has_custom_logo && ! empty( $ast_custom_logo_id ) ) || ( true === $diff_trans_logo && ! empty( $trans_logo ) ) ) {
 
 			if ( apply_filters( 'astra_replace_logo_width', true ) ) {
 				add_filter( 'wp_get_attachment_image_src', 'astra_replace_header_logo', 10, 4 );

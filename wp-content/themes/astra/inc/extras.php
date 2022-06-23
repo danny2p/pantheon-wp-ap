@@ -820,13 +820,13 @@ function astra_apply_content_background_fullwidth_layouts() {
 
 /**
  * Search Component static CSS.
- * 
+ *
  * @return string
  * @since 3.5.0
  */
 function astra_search_static_css() {
 	$search_css = '
-	
+
 	.main-header-bar .main-header-bar-navigation .ast-search-icon {
 		display: block;
 		z-index: 4;
@@ -840,7 +840,7 @@ function astra_search_static_css() {
 		position: relative;
 		line-height: normal;
 	}
-	
+
 	.main-header-bar .ast-search-menu-icon .search-form {
 		background-color: #ffffff;
 	}
@@ -890,7 +890,7 @@ function astra_search_static_css() {
 		opacity: 1;
 		position: relative;
 	}
-	  
+
 	.ast-search-menu-icon.ast-dropdown-active .search-field {
 		width: 235px;
 	}
@@ -913,7 +913,7 @@ function astra_search_static_css() {
 			right: -1em;
 			left: unset;
 		}
-		  
+
 		.site-header-section-left .ast-search-menu-icon.slide-search .search-form .search-field {
 			margin-left: unset;
 			margin-right: 10px;
@@ -943,7 +943,7 @@ function astra_search_static_css() {
 			left: -1em;
 			right: unset;
 		}
-		  
+
 		.site-header-section-left .ast-search-menu-icon.slide-search .search-form .search-field {
 			margin-right: unset;
 			margin-left: 10px;

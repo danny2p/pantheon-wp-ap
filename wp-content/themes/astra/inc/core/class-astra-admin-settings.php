@@ -423,7 +423,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 					 *
 					 * @since 3.7.9
 					 */
-					wp_enqueue_script( 'astra-column-block-comp-js', ASTRA_THEME_URI . 'inc/assets/js/column-block-compatibility.js', array( 'wp-util', 'wp-hooks' ), ASTRA_THEME_VERSION, false );
+					wp_enqueue_script( 'astra-column-block-comp-js', ASTRA_THEME_URI . 'inc/assets/js/column-block-compatibility.js', array( 'wp-util', 'wp-hooks', 'wp-blocks' ), ASTRA_THEME_VERSION, false );
 				}
 			}
 			/* Add CSS for the Submenu for BSF plugins added in Appearance Menu */

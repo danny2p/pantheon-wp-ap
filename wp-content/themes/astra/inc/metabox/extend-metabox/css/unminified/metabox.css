@@ -129,7 +129,7 @@ div#astra_settings_meta_box {
 .ast-meta-selector-controller .ast-selector-inner-wrap .components-button:focus:not(:disabled) {
     box-shadow: none;
 }
-#astra_settings_meta_box .components-toggle-control .components-base-control__field, .ast-header-settings-modal .components-toggle-control .components-base-control__field {
+.components-toggle-control .components-base-control__field {
 	justify-content: space-between;
 	flex-direction: row-reverse;
 	margin-bottom: 0;

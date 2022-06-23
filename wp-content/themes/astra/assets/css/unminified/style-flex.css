@@ -350,6 +350,25 @@ th {
   margin-right: -20px;
 }
 
+@media (min-width: 768px) and (max-width: 921px) {
+  .blog-layout-2 .ast-width-md-6, .blog-layout-3 .ast-width-md-6 {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 921px) {
+  .blog-layout-2, .blog-layout-3 {
+    flex-direction: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-layout-3 {
+    flex-direction: column;
+  }
+}
+
 .ast-grid-common-col {
   position: relative;
   min-height: 1px;

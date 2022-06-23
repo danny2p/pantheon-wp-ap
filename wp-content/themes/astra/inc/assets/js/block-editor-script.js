@@ -53,6 +53,33 @@ function astra_onload_function() {
 					bodyClass.classList.add('ast-page-builder-template');
 					bodyClass.classList.remove('ast-two-container' , 'ast-plain-container' , 'ast-separate-container');
 				break;
+				case 'default':
+					if( bodyClass.classList.contains( 'ast-default-layout-boxed-container' ) ) {
+						bodyClass.classList.add('ast-separate-container' , 'ast-two-container');
+						bodyClass.classList.remove('ast-page-builder-template' , 'ast-plain-container');
+					} else if( bodyClass.classList.contains( 'ast-default-layout-content-boxed-container' ) ) {
+						bodyClass.classList.add('ast-separate-container');
+						bodyClass.classList.remove('ast-two-container' , 'ast-page-builder-template' , 'ast-plain-container');
+					} else if( bodyClass.classList.contains( 'ast-default-layout-page-builder' ) ) {
+						bodyClass.classList.add('ast-page-builder-template');
+						bodyClass.classList.remove('ast-two-container' , 'ast-plain-container' , 'ast-separate-container');
+					} else {
+						bodyClass.classList.add('ast-plain-container');
+						bodyClass.classList.remove('ast-two-container' , 'ast-page-builder-template' , 'ast-separate-container');
+					}
+				break;
+			}
+
+			const editorStylesWrapper = document.querySelector( '.editor-styles-wrapper' );
+
+			if( null !== editorStylesWrapper ) {
+				const editorStylesWrapperWidth = parseInt( editorStylesWrapper.offsetWidth )
+				if( editorStylesWrapperWidth < 1250 ) {
+					editorStylesWrapper.classList.remove( 'ast-stacked-title-visibility' );
+					editorStylesWrapper.classList.add( 'ast-stacked-title-visibility' );
+				} else {
+					editorStylesWrapper.classList.remove( 'ast-stacked-title-visibility' );
+				}
 			}
 
 			/**
@@ -73,10 +100,10 @@ function astra_onload_function() {
 			if( null === titleVisibility && null !== titleBlock ) {
 				var titleVisibilityTrigger = '';
 				if( 'disabled' === wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' )['site-post-title'] ) {
-					titleVisibilityTrigger = '<span class="dashicons dashicons-hidden title-visibility"></span>';
+					titleVisibilityTrigger = '<span class="dashicons dashicons-hidden title-visibility" data-tooltip="Enable Title"></span>';
 					titleBlock.classList.toggle( 'invisible' );
 				} else {
-					titleVisibilityTrigger = '<span class="dashicons dashicons-visibility title-visibility"></span>';
+					titleVisibilityTrigger = '<span class="dashicons dashicons-visibility title-visibility" data-tooltip="Disable Title"></span>';
 				}
 
 				titleBlock.insertAdjacentHTML( 'beforeend', titleVisibilityTrigger );
@@ -87,6 +114,7 @@ function astra_onload_function() {
 					if( this.classList.contains( 'dashicons-hidden' ) ) {
 						this.classList.add( 'dashicons-visibility' );
 						this.classList.remove( 'dashicons-hidden' );
+						this.dataset.tooltip = 'Disable Title';
 						wp.data.dispatch( 'core/editor' ).editPost(
 							{
 								meta: {
@@ -97,6 +125,7 @@ function astra_onload_function() {
 					} else {
 						this.classList.add( 'dashicons-hidden' );
 						this.classList.remove( 'dashicons-visibility' );
+						this.dataset.tooltip = 'Enable Title';
 						wp.data.dispatch( 'core/editor' ).editPost(
 							{
 								meta: {
@@ -114,6 +143,26 @@ function astra_onload_function() {
 			} else {
 				document.body.classList.remove( 'responsive-enabled' );
 			}
+
+			// Adding 'inherit-container-width' width to Group block externally.
+			let postBlocks = ( null !== wp.data.select( 'core/editor' ) && undefined !== wp.data.select( 'core/editor' ).getCurrentPost() && undefined !== wp.data.select( 'core/editor' ).getBlocks() ) ? wp.data.select( 'core/editor' ).getBlocks() : false,
+				groupBlocks = document.querySelectorAll( '.block-editor-block-list__layout.is-root-container > .wp-block-group' );
+			if( postBlocks && groupBlocks ) {
+				for ( let blockNum = 0; blockNum < postBlocks.length; blockNum++ ) {
+					if( 'core/group' === postBlocks[blockNum].name && undefined !== postBlocks[blockNum].attributes && undefined !== postBlocks[blockNum].attributes.layout && undefined !== postBlocks[blockNum].attributes.layout.inherit ) {
+						if( undefined === groupBlocks[blockNum] ) {
+							return;
+						}
+						if( ! postBlocks[blockNum].attributes.layout.inherit ) {
+							groupBlocks[blockNum].classList.remove( 'inherit-container-width' );
+						}
+						if( postBlocks[blockNum].attributes.layout.inherit && ! groupBlocks[blockNum].classList.contains( 'inherit-container-width' ) ) {
+							groupBlocks[blockNum].classList.add( 'inherit-container-width' );
+						}
+					}
+				}
+			}
+
 		}, 1 );
 	});
 }
