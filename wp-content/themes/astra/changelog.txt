@@ -1,3 +1,19 @@
+v3.8.3
+- New: Block editor - Padding presets for container blocks. ( https://wpastra.com/docs/improved-block-editor-experience/ )
+- Improvement: Default sidebar layout is improved.
+- Improvement: Moved Single Post and Page spacing option to theme from addon.
+- Fix: Block editor - Bottom margin is not set as per customizer setting for Paragraph block.
+- Fix: Table block not aligned centrally for Legacy block editor setup.
+- Fix: Sticky header - Offcanvas menu do not close when header menu link is set to #target.
+- Fix: Blog Achieve layout 2 and layout 3 broken between 769px to 921px.
+- Fix: Image block not aligned centrally for Legacy block editor setup.
+- Fix: Block editor and frontend layout mismatch for Row block.
+- Fix: Primary submenus not expandable on mobile when toggle button element is not added.
+- Fix: PHP Notice - Array to string conversion on widget.php page.
+- Fix: ul & ol list items overlap on previous alignleft WordPress block.
+- Fix: Logo markup loading on the frontend without added logo in Site Identity.
+- Fix: Mobile/tablet menu not able to close when #target_id link is used.
+
 v3.8.2
 - Fix: Improvements as per WordPress coding standards.
 - Fix: Compatibility with WordPress 6.0 - Image block not aligned center when Legacy option set from the Block Editor.

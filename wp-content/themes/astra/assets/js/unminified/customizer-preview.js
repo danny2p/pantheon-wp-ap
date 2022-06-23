@@ -980,6 +980,27 @@ function hasWordPressWidgetBlockEditor() {
 	astra_responsive_font_size( 'astra-settings[font-size-site-tagline]', '.site-header .site-description' );
 	astra_responsive_font_size( 'astra-settings[font-size-site-title]', '.site-title' );
 
+	/**
+	 * Single Post Container Outside Spacing
+	 */
+	astra_responsive_spacing( 'astra-settings[single-post-outside-spacing]','.ast-separate-container.ast-single-post.ast-right-sidebar #primary, .ast-separate-container.ast-single-post.ast-left-sidebar #primary, .ast-separate-container.ast-single-post #primary, .ast-plain-container.ast-single-post #primary', 'margin',  ['top', 'bottom' ] );
+	astra_responsive_spacing( 'astra-settings[single-post-outside-spacing]','.ast-left-sidebar.ast-single-post #primary, .ast-right-sidebar.ast-single-post #primary, .ast-separate-container.ast-single-post.ast-right-sidebar #primary, .ast-separate-container.ast-single-post.ast-left-sidebar #primary, .ast-separate-container.ast-single-post #primary', 'padding',  ['left', 'right' ] );
+	// Remove padding top to container if padding top is given to Container Outer Spacing.
+	wp.customize( 'astra-settings[single-post-outside-spacing]', function( value ) {
+		value.bind( function( padding ) {
+
+			var dynamicStyle = '';
+			if( padding.desktop.top != '' || padding.tablet.top != '' || padding.mobile.top != '' ) {
+				dynamicStyle += '.ast-separate-container.ast-single-post #primary { padding-top: 0px;} ';
+			}
+			if( padding.desktop.bottom != '' || padding.tablet.bottom != '' || padding.mobile.bottom != '' ) {
+				dynamicStyle += '.ast-separate-container.ast-single-post #primary { padding-bottom: 0px;} ';
+			}
+			astra_add_dynamic_css( 'remove-header-spacing', dynamicStyle );
+
+		} );
+	} );
+
 	astra_responsive_font_size( 'astra-settings[font-size-entry-title]', '.ast-single-post .entry-title, .page-title' );
 	astra_responsive_font_size( 'astra-settings[font-size-archive-summary-title]', '.ast-archive-description .ast-archive-title' );
 	astra_responsive_font_size( 'astra-settings[font-size-page-title]', 'body:not(.ast-single-post) .entry-title' );

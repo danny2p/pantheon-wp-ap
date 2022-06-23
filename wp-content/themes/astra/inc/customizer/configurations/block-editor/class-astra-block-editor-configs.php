@@ -26,29 +26,46 @@ if ( ! class_exists( 'Astra_Block_Editor_Configs' ) ) {
 		 */
 		public function register_configuration( $configurations, $wp_customize ) {
 
-			$is_legacy_setup = ( 'legacy' === astra_get_option( 'wp-blocks-ui', 'custom' ) || true === astra_get_option( 'blocks-legacy-setup', false ) ) ? true : false;
+			$is_legacy_setup = ( 'legacy' === astra_get_option( 'wp-blocks-ui', 'comfort' ) || true === astra_get_option( 'blocks-legacy-setup', false ) ) ? true : false;
 
-			$spacing_control_title = __( 'Core Blocks Spacing', 'astra' );
-			$spacing_context_array = array();
+			$preset_options = array(
+				'compact' => __( 'Compact', 'astra' ),
+				'comfort' => __( 'Comfort', 'astra' ),
+				'custom'  => __( 'Custom', 'astra' ),
+			);
 			if ( $is_legacy_setup ) {
-				$spacing_control_title = __( 'Size', 'astra' );
-				$spacing_context_array = array(
-					array(
-						'setting'  => ASTRA_THEME_SETTINGS . '[wp-blocks-ui]',
-						'operator' => '===',
-						'value'    => 'custom',
-					),
+				$preset_options = array(
+					'legacy'  => __( 'Legacy', 'astra' ),
+					'compact' => __( 'Compact', 'astra' ),
+					'comfort' => __( 'Comfort', 'astra' ),
+					'custom'  => __( 'Custom', 'astra' ),
 				);
 			}
 
 			$_configs = array(
+				/**
+				 * Option: Presets for block editor padding.
+				 */
+				array(
+					'name'       => ASTRA_THEME_SETTINGS . '[wp-blocks-ui]',
+					'type'       => 'control',
+					'control'    => 'ast-selector',
+					'section'    => 'section-block-editor',
+					'default'    => astra_get_option( 'wp-blocks-ui' ),
+					'priority'   => 9,
+					'title'      => __( 'Core Blocks Spacing', 'astra' ),
+					'choices'    => $preset_options,
+					'responsive' => false,
+					'renderAs'   => 'text',
+				),
+
 				/**
 				 * Option: Global Padding Option.
 				 */
 				array(
 					'name'              => ASTRA_THEME_SETTINGS . '[wp-blocks-global-padding]',
 					'section'           => 'section-block-editor',
-					'title'             => $spacing_control_title,
+					'title'             => __( 'Size', 'astra' ),
 					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_responsive_spacing' ),
 					'default'           => astra_get_option( 'wp-blocks-global-padding' ),
 					'type'              => 'control',
@@ -62,7 +79,13 @@ if ( ! class_exists( 'Astra_Block_Editor_Configs' ) ) {
 					'linked_choices'    => true,
 					'priority'          => 10,
 					'unit_choices'      => array( 'px', 'em', '%' ),
-					'context'           => $spacing_context_array,
+					'context'           => array(
+						array(
+							'setting'  => ASTRA_THEME_SETTINGS . '[wp-blocks-ui]',
+							'operator' => '===',
+							'value'    => 'custom',
+						),
+					),
 				),
 				array(
 					'name'     => ASTRA_THEME_SETTINGS . '[wp-blocks-ui-description]',
@@ -74,27 +97,6 @@ if ( ! class_exists( 'Astra_Block_Editor_Configs' ) ) {
 					'settings' => array(),
 				),
 			);
-
-			if ( $is_legacy_setup ) {
-				/**
-				 * Option: WP Blocks UI type.
-				 */
-				$_configs[] = array(
-					'name'       => ASTRA_THEME_SETTINGS . '[wp-blocks-ui]',
-					'type'       => 'control',
-					'control'    => 'ast-selector',
-					'section'    => 'section-block-editor',
-					'default'    => astra_get_option( 'wp-blocks-ui' ),
-					'priority'   => 9,
-					'title'      => __( 'Core Blocks Spacing', 'astra' ),
-					'choices'    => array(
-						'legacy' => __( 'Legacy', 'astra' ),
-						'custom' => __( 'Custom', 'astra' ),
-					),
-					'responsive' => false,
-					'renderAs'   => 'text',
-				);
-			}
 
 			return array_merge( $configurations, $_configs );
 		}

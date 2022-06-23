@@ -124,6 +124,10 @@ if ( ! class_exists( 'Astra_Theme_Background_Updater' ) ) {
 			'3.8.1' => array(
 				'astra_apply_modern_block_editor_ui',
 			),
+			'3.8.3' => array(
+				'astra_update_customizer_layout_defaults',
+				'astra_apply_modern_block_editor_v2_ui',
+			),
 		);
 
 		/**
