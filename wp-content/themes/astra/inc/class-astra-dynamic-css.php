@@ -146,7 +146,7 @@ if ( ! class_exists( 'Astra_Dynamic_CSS' ) ) {
 			$is_widget_title_support_font_weight = self::support_font_css_to_widget_and_in_editor();
 			$font_weight_prop                    = ( $is_widget_title_support_font_weight ) ? 'inherit' : 'normal';
 
-			$update_customizer_strctural_defaults = astra_get_option( 'customizer-default-layout-update', true );
+			$update_customizer_strctural_defaults = astra_check_is_structural_setup();
 
 			// Fallback for H1 - headings typography.
 			if ( 'inherit' == $h1_font_family ) {
@@ -3997,7 +3997,7 @@ if ( ! class_exists( 'Astra_Dynamic_CSS' ) ) {
 		 */
 		public static function load_sidebar_static_css() {
 
-			$update_customizer_strctural_defaults = astra_get_option( 'customizer-default-layout-update', true );
+			$update_customizer_strctural_defaults = astra_check_is_structural_setup();
 			$secondary_li_bottom_spacing          = ( true === $update_customizer_strctural_defaults ) ? '0.75em' : '0.25em';
 			$is_site_rtl                          = is_rtl() ? true : false;
 			$ltr_left                             = $is_site_rtl ? esc_attr( 'right' ) : esc_attr( 'left' );

@@ -927,7 +927,7 @@ if ( ! function_exists( 'astra_archive_page_info' ) ) {
 			// Author.
 			if ( is_author() ) {
 				$author_name      = get_the_author() ? get_the_author() : '';
-				$author_name_html = ( true === astra_get_option( 'customizer-default-layout-update', true ) && $author_name ) ? __( 'Author name: ', 'astra' ) . $author_name : $author_name;
+				$author_name_html = ( true === astra_check_is_structural_setup() && $author_name ) ? __( 'Author name: ', 'astra' ) . $author_name : $author_name;
 				?>
 
 				<section class="ast-author-box ast-archive-description">
@@ -1575,4 +1575,14 @@ function astra_block_based_legacy_setup() {
 	$astra_settings = get_option( ASTRA_THEME_SETTINGS );
 	$legacy_setup   = ( isset( $astra_settings['blocks-legacy-setup'] ) && isset( $astra_settings['wp-blocks-ui'] ) && 'legacy' === $astra_settings['wp-blocks-ui'] ) ? true : false;
 	return $legacy_setup;
+}
+
+/**
+ * Check is new strctural things are updated.
+ *
+ * @return bool true|false.
+ */
+function astra_check_is_structural_setup() {
+	$astra_settings = get_option( ASTRA_THEME_SETTINGS );
+	return apply_filters( 'astra_get_option_customizer-default-layout-update', isset( $astra_settings['customizer-default-layout-update'] ) ? false : true );
 }

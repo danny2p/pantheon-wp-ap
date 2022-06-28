@@ -30,7 +30,7 @@ function astra_content_background_css( $dynamic_css ) {
 	$blog_layout    = astra_get_option( 'blog-layout' );
 	$blog_grid      = astra_get_option( 'blog-grid' );
 
-	$author_box_extra_selector = ( true === astra_get_option( 'customizer-default-layout-update', true ) ) ? '.site-main' : '';
+	$author_box_extra_selector = ( true === astra_check_is_structural_setup() ) ? '.site-main' : '';
 
 	// Container Layout Colors.
 	$separate_container_css = array(

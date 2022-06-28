@@ -59,7 +59,7 @@ function astra_container_layout_css() {
 	$container_layout = astra_get_content_layout();
 
 	$page_container_css        = '';
-	$customizer_default_update = astra_get_option( 'customizer-default-layout-update', true );
+	$customizer_default_update = astra_check_is_structural_setup();
 	$page_title_header_padding = ( true === $customizer_default_update ) ? '2em' : '4em';
 
 	/** @psalm-suppress InvalidCast */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort

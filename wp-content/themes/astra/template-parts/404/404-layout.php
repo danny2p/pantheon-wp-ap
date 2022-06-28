@@ -9,7 +9,7 @@
  * @since       Astra 1.0.0
  */
 
-$astra_404_subtitle_tag = ( true === astra_get_option( 'customizer-default-layout-update', true ) ) ? 'h3' : 'div';
+$astra_404_subtitle_tag = ( true === astra_check_is_structural_setup() ) ? 'h3' : 'div';
 
 ?>
 <div <?php echo astra_attr( '404_page', array( 'class' => 'ast-404-layout-1' ) ); ?> >
