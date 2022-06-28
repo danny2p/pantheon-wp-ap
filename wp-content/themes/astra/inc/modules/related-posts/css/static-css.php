@@ -59,7 +59,7 @@ function astra_related_posts_static_css( $dynamic_css ) {
 		}
 		';
 
-		if ( true === astra_get_option( 'customizer-default-layout-update', true ) ) {
+		if ( true === astra_check_is_structural_setup() ) {
 			/** @psalm-suppress InvalidOperand */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			$astra_mobile_breakpoint = astra_get_mobile_breakpoint();
 			/** @psalm-suppress InvalidOperand */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort

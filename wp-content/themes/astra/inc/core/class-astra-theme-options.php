@@ -102,8 +102,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 			 *
 			 * @since 3.6.3
 			 */
-			$apply_new_default_values  = astra_button_default_padding_updated();
-			$is_new_strctural_defaults = astra_get_option( 'customizer-default-layout-update', true );
+			$apply_new_default_values = astra_button_default_padding_updated();
 
 			// Defaults list of options.
 			self::$defaults = apply_filters(
@@ -387,7 +386,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 						),
 					),
 					// Entry Content.
-					'wp-blocks-ui'                         => false === $is_new_strctural_defaults ? 'custom' : 'comfort',
+					'wp-blocks-ui'                         => false === astra_check_is_structural_setup() ? 'custom' : 'comfort',
 					'wp-blocks-global-padding'             => array(
 						'desktop'      => array(
 							'top'    => '',
@@ -413,7 +412,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					),
 					// Container.
 					'site-content-layout'                  => 'content-boxed-container',
-					'single-page-content-layout'           => false === $is_new_strctural_defaults ? 'default' : 'plain-container',
+					'single-page-content-layout'           => false === astra_check_is_structural_setup() ? 'default' : 'plain-container',
 					'single-post-content-layout'           => 'default',
 					'archive-post-content-layout'          => 'default',
 					// Typography.
@@ -552,7 +551,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					// Sidebar.
 					'site-sidebar-layout'                  => 'right-sidebar',
 					'site-sidebar-width'                   => 30,
-					'single-page-sidebar-layout'           => false === $is_new_strctural_defaults ? 'default' : 'no-sidebar',
+					'single-page-sidebar-layout'           => false === astra_check_is_structural_setup() ? 'default' : 'no-sidebar',
 					'single-post-sidebar-layout'           => 'default',
 					'archive-post-sidebar-layout'          => 'default',
 

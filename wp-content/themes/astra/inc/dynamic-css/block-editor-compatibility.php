@@ -342,7 +342,7 @@ function astra_load_modern_block_editor_ui( $dynamic_css ) {
 	if ( $astra_block_editor_v2_ui ) {
 		$single_post_continer_spacing = astra_get_option( 'single-post-inside-spacing' );
 
-		$container_lg_spacing = ( true === astra_get_option( 'customizer-default-layout-update', true ) ) ? '3' : '6.67';
+		$container_lg_spacing = ( true === astra_check_is_structural_setup() ) ? '3' : '6.67';
 
 		$astra_continer_left_spacing  = defined( 'ASTRA_EXT_VER' ) && astra_responsive_spacing( $single_post_continer_spacing, 'left', 'desktop' ) ? astra_responsive_spacing( $single_post_continer_spacing, 'left', 'desktop', $container_lg_spacing ) : 'var(--ast-container-default-xlg-padding)';
 		$astra_continer_right_spacing = defined( 'ASTRA_EXT_VER' ) && astra_responsive_spacing( $single_post_continer_spacing, 'right', 'desktop' ) ? astra_responsive_spacing( $single_post_continer_spacing, 'right', 'desktop', $container_lg_spacing ) : 'var(--ast-container-default-xlg-padding)';

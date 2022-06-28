@@ -1,3 +1,6 @@
+v3.8.4
+- Fix: Page layout & Sidebar option directly updating after the last update.
+
 v3.8.3
 - New: Block editor - Padding presets for container blocks. ( https://wpastra.com/docs/improved-block-editor-experience/ )
 - Improvement: Default sidebar layout is improved.
