@@ -1,3 +1,6 @@
+v3.8.5
+- Fix: Getting top spacing for entry-header in case of page builder template.
+
 v3.8.4
 - Fix: Page layout & Sidebar option directly updating after the last update.
 

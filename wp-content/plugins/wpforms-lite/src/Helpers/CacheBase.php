@@ -18,7 +18,7 @@ abstract class CacheBase {
 	 *
 	 * @var bool
 	 */
-	private static $updated = false;
+	protected static $updated = false;
 
 	/**
 	 * Settings.

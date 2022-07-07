@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.0
-Stable tag: 1.7.4.2
+Stable tag: 1.7.5.1
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -51,7 +51,7 @@ Whether you're looking to create a simple contact form, marketing form, request 
 
 WPForms comes with <a href="https://wpforms.com/features/form-templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">pre-built form templates</a> to help you save time. You can add, remove, or re-arrange fields as necessary.
 
-See <a href="https://wpforms.com/templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">300+ Pre-Made WPForms Form Template Demo</a>
+See <a href="https://wpforms.com/templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">400+ Pre-Made WPForms Form Template Demo</a>
 
 = Mobile Ready, SEO Friendly and Optimized for Speed =
 
@@ -177,8 +177,9 @@ Since contact forms are essential for marketing, WPForms is a must have plugin f
 * <a href="https://wpforms.com/addons/activecampaign-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">ActiveCampaign Forms</a> - Add contacts to your ActiveCampaign account, record events, add notes to contacts, and more.
 * <a href="https://wpforms.com/addons/hubspot-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">HubSpot Forms</a> - Create HubSpot forms to send leads from WordPress directly to your HubSpot CRM.
 * <a href="https://wpforms.com/addons/sendinblue-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Sendinblue Forms</a> - Create Sendinblue forms to automate your marketing and engage your subscribers.
+* <a href="https://wpforms.com/addons/mailerlite-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">MailerLite Forms</a> - Create MailerLite forms to easily add subscribers to your email marketing lists.
 * <a href="https://wpforms.com/addons/salesforce-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Salesforce Forms</a> - Easily send your WordPress form contacts and leads to your Salesforce CRM account.
-* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 1000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
+* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 4000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
 
 After reading this feature list, you can probably imagine why WPForms is the best WordPress contact form plugin on the market.
 
@@ -337,6 +338,7 @@ Here is a list of our popular marketing integrations:
 * Zapier
 * Salesforce CRM
 * Sendinblue
+* MailerLite
 
 Using our Zapier integration, you can easily connect WPForms with over 1000+ marketing apps including:
 
@@ -426,6 +428,38 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.7.5.1 =
+- v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
+- Form Tags: incorrect links to filter by tags were generated right after saving tags.
+
+= 1.7.5 =
+- Added: Form Tags: add tags to forms with an ability to filter by them; bulk add/edit/delete tags for multiple forms.
+- Added: Display the status of the Lite Connect setting and the date-time when it was enabled (Tools > System Info).
+- Added: New `{unique_value}` smart tag.
+- Changed: The sodium library is now included in WordPress core, so we removed it from the plugin.
+- Changed: Action Scheduler library was updated to 3.4.2 to fix deprecation notices with PHP 8.1.
+- Changed: The jquery.validate library updated to 1.19.4.
+- Changed: Conditional logic can now be applied to custom fields.
+- Changed: Do not allow not completed Challenge to appear in the regular Form Builder.
+- Fixed: For some fields, their default values were not always previewed in the Form Builder.
+- Fixed: Regularly clean up additional information we store for each task we run within the plugin.
+- Fixed: No fatal error anymore in Allow/Deny email lists with very long or international emails.
+- Fixed: Correctly handle additional CSS classes for each WPForms block on the same page (Block Editor).
+- Fixed: Modals order was incorrect when the Lite Connect feature was enabled or disabled on mobile.
+- Fixed: Notification for the last step of the WPForms Challenge was not displayed on the Posts Page with the Gutenberg plugin.
+- Fixed: Some Form Templates could be empty upon fresh installation.
+- Fixed: Several minor issues in the Challenge flow are now fixed.
+- Fixed: Color Palette was not shown in the Form Builder for duplicated fields.
+- Fixed: Do not register Gutenberg block styles on the front end when no form is present on a page.
+- Fixed: Limit the number of attempts to get the site key in Lite Connect.
+- Fixed: Multiple Items (Radio) choice showed "Empty" on a single entry page if a selected choice value is undefined/empty.
+- Fixed: Added focus state indication for admin tabs.
+- Fixed: GDPR sub-settings remained enabled if GDPR is disabled and sub-setting was left enabled.
+- Fixed: Duplicate/Trash form actions did not work after sorting forms by Name, Author, or Created Date.
+- Fixed: Notices appeared in the debug.log when the user created a Custom Template and used it in the Form Builder.
+- Fixed: hCaptcha pointer had a weird thick dark border since WordPress 6.0.
+- Fixed: Check GDPR settings before trying to use a cookie.
 
 = 1.7.4.2 =
 - Changed: DOMPurify library updated to 2.3.8.

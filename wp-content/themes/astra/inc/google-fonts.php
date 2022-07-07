@@ -490,6 +490,12 @@ return array(
 		),
 	),
 	array(
+		'Arima' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
 		'Arima Madurai' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '700', '800', '900' ), 
 			'category' => 'display', 
@@ -1679,7 +1685,7 @@ return array(
 	),
 	array(
 		'Cormorant' => array(
-			'variants' => array( '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic' ), 
+			'variants' => array( '300', 'regular', '500', '600', '700', '300italic', 'italic', '500italic', '600italic', '700italic' ), 
 			'category' => 'serif', 
 		),
 	),
@@ -2314,6 +2320,12 @@ return array(
 		),
 	),
 	array(
+		'Finlandica' => array(
+			'variants' => array( 'regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
 		'Fira Code' => array(
 			'variants' => array( '300', 'regular', '500', '600', '700' ), 
 			'category' => 'monospace', 
@@ -2548,6 +2560,12 @@ return array(
 		),
 	),
 	array(
+		'Gantari' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
 		'Gayathri' => array(
 			'variants' => array( '100', 'regular', '700' ), 
 			'category' => 'sans-serif', 
@@ -2579,6 +2597,12 @@ return array(
 	),
 	array(
 		'Gentium Book Basic' => array(
+			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Gentium Book Plus' => array(
 			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
 			'category' => 'serif', 
 		),
@@ -2815,6 +2839,12 @@ return array(
 		'Gugi' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
+		),
+	),
+	array(
+		'Gulzar' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'serif', 
 		),
 	),
 	array(
@@ -3444,6 +3474,12 @@ return array(
 	array(
 		'Kantumruy' => array(
 			'variants' => array( '300', 'regular', '700' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Kantumruy Pro' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -4410,6 +4446,12 @@ return array(
 	array(
 		'Mina' => array(
 			'variants' => array( 'regular', '700' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Mingzat' => array(
+			'variants' => array( 'regular' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -6112,12 +6154,6 @@ return array(
 		),
 	),
 	array(
-		'Otomanopee One' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'sans-serif', 
-		),
-	),
-	array(
 		'Outfit' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
 			'category' => 'sans-serif', 
@@ -6235,12 +6271,6 @@ return array(
 		'Palanquin Dark' => array(
 			'variants' => array( 'regular', '500', '600', '700' ), 
 			'category' => 'sans-serif', 
-		),
-	),
-	array(
-		'Palette Mosaic' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'display', 
 		),
 	),
 	array(
@@ -6904,12 +6934,6 @@ return array(
 		),
 	),
 	array(
-		'Rock 3D' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'display', 
-		),
-	),
-	array(
 		'Rock Salt' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'handwriting', 
@@ -7348,12 +7372,6 @@ return array(
 		),
 	),
 	array(
-		'Shizuru' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'display', 
-		),
-	),
-	array(
 		'Shojumaru' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
@@ -7612,6 +7630,12 @@ return array(
 		),
 	),
 	array(
+		'Splash' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'handwriting', 
+		),
+	),
+	array(
 		'Spline Sans' => array(
 			'variants' => array( '300', 'regular', '500', '600', '700' ), 
 			'category' => 'sans-serif', 
@@ -7619,7 +7643,7 @@ return array(
 	),
 	array(
 		'Spline Sans Mono' => array(
-			'variants' => array( '300', 'regular', '500', '600', '700' ), 
+			'variants' => array( '300', 'regular', '500', '600', '700', '300italic', 'italic', '500italic', '600italic', '700italic' ), 
 			'category' => 'monospace', 
 		),
 	),
@@ -8425,18 +8449,6 @@ return array(
 		'Yuji Boku' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'serif', 
-		),
-	),
-	array(
-		'Yuji Hentaigana Akari' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'handwriting', 
-		),
-	),
-	array(
-		'Yuji Hentaigana Akebono' => array(
-			'variants' => array( 'regular' ), 
-			'category' => 'handwriting', 
 		),
 	),
 	array(

@@ -1,5 +1,37 @@
 == Changelog ==
 
+= 1.7.5.1 =
+- v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
+- Form Tags: incorrect links to filter by tags were generated right after saving tags.
+
+= 1.7.5 =
+- Added: Form Tags: add tags to forms with an ability to filter by them; bulk add/edit/delete tags for multiple forms.
+- Added: Display the status of the Lite Connect setting and the date-time when it was enabled (Tools > System Info).
+- Added: New `{unique_value}` smart tag.
+- Changed: The sodium library is now included in WordPress core, so we removed it from the plugin.
+- Changed: Action Scheduler library was updated to 3.4.2 to fix deprecation notices with PHP 8.1.
+- Changed: The jquery.validate library updated to 1.19.4.
+- Changed: Conditional logic can now be applied to custom fields.
+- Changed: Do not allow not completed Challenge to appear in the regular Form Builder.
+- Fixed: For some fields, their default values were not always previewed in the Form Builder.
+- Fixed: Regularly clean up additional information we store for each task we run within the plugin.
+- Fixed: No fatal error anymore in Allow/Deny email lists with very long or international emails.
+- Fixed: Correctly handle additional CSS classes for each WPForms block on the same page (Block Editor).
+- Fixed: Modals order was incorrect when the Lite Connect feature was enabled or disabled on mobile.
+- Fixed: Notification for the last step of the WPForms Challenge was not displayed on the Posts Page with the Gutenberg plugin.
+- Fixed: Some Form Templates could be empty upon fresh installation.
+- Fixed: Several minor issues in the Challenge flow are now fixed.
+- Fixed: Color Palette was not shown in the Form Builder for duplicated fields.
+- Fixed: Do not register Gutenberg block styles on the front end when no form is present on a page.
+- Fixed: Limit the number of attempts to get the site key in Lite Connect.
+- Fixed: Multiple Items (Radio) choice showed "Empty" on a single entry page if a selected choice value is undefined/empty.
+- Fixed: Added focus state indication for admin tabs.
+- Fixed: GDPR sub-settings remained enabled if GDPR is disabled and sub-setting was left enabled.
+- Fixed: Duplicate/Trash form actions did not work after sorting forms by Name, Author, or Created Date.
+- Fixed: Notices appeared in the debug.log when the user created a Custom Template and used it in the Form Builder.
+- Fixed: hCaptcha pointer had a weird thick dark border since WordPress 6.0.
+- Fixed: Check GDPR settings before trying to use a cookie.
+
 = 1.7.4.2 =
 - Changed: DOMPurify library updated to 2.3.8.
 - Fixed: WordPress 6.0 compatibility - WPForms block styling fixed inside the Full Site Editor.

@@ -1153,10 +1153,12 @@ class WPForms_Frontend {
 		 * Runs right after form Submit button rendering.
 		 *
 		 * @since 1.5.0
+		 * @since 1.7.5 Added new parameter for detecting button type.
 		 *
-		 * @param array $form_data Form data.
+		 * @param array  $form_data Form data.
+		 * @param string $button    Button type, e.g. `submit`, `next`.
 		 */
-		do_action( 'wpforms_display_submit_after', $form_data );
+		do_action( 'wpforms_display_submit_after', $form_data, 'submit' ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 
 		echo '</div>';
 
@@ -1244,13 +1246,13 @@ class WPForms_Frontend {
 		) {
 			wp_enqueue_style(
 				'wpforms-jquery-timepicker',
-				WPFORMS_PLUGIN_URL . 'assets/css/jquery.timepicker.css',
+				WPFORMS_PLUGIN_URL . 'assets/lib/jquery.timepicker/jquery.timepicker.min.css',
 				[],
 				'1.11.5'
 			);
 			wp_enqueue_style(
 				'wpforms-flatpickr',
-				WPFORMS_PLUGIN_URL . 'assets/css/flatpickr.min.css',
+				WPFORMS_PLUGIN_URL . 'assets/lib/flatpickr/flatpickr.min.css',
 				[],
 				'4.6.9'
 			);
@@ -1300,9 +1302,9 @@ class WPForms_Frontend {
 		// Load jQuery validation library - https://jqueryvalidation.org/.
 		wp_enqueue_script(
 			'wpforms-validation',
-			WPFORMS_PLUGIN_URL . 'assets/js/jquery.validate.min.js',
+			WPFORMS_PLUGIN_URL . 'assets/lib/jquery.validate.min.js',
 			[ 'jquery' ],
-			'1.19.3',
+			'1.19.4',
 			true
 		);
 
@@ -1314,14 +1316,14 @@ class WPForms_Frontend {
 		) {
 			wp_enqueue_script(
 				'wpforms-flatpickr',
-				WPFORMS_PLUGIN_URL . 'assets/js/flatpickr.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/lib/flatpickr/flatpickr.min.js',
 				[ 'jquery' ],
 				'4.6.9',
 				true
 			);
 			wp_enqueue_script(
 				'wpforms-jquery-timepicker',
-				WPFORMS_PLUGIN_URL . 'assets/js/jquery.timepicker.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/lib/jquery.timepicker/jquery.timepicker.min.js',
 				[ 'jquery' ],
 				'1.11.5',
 				true
@@ -1336,7 +1338,7 @@ class WPForms_Frontend {
 		) {
 			wp_enqueue_script(
 				'wpforms-maskedinput',
-				WPFORMS_PLUGIN_URL . 'assets/js/jquery.inputmask.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/lib/jquery.inputmask.min.js',
 				[ 'jquery' ],
 				'5.0.7-beta.29',
 				true
@@ -1350,7 +1352,7 @@ class WPForms_Frontend {
 		) {
 			wp_enqueue_script(
 				'wpforms-mailcheck',
-				WPFORMS_PLUGIN_URL . 'assets/js/mailcheck.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/lib/mailcheck.min.js',
 				false,
 				'1.1.2',
 				true
@@ -1358,7 +1360,7 @@ class WPForms_Frontend {
 
 			wp_enqueue_script(
 				'wpforms-punycode',
-				WPFORMS_PLUGIN_URL . "assets/js/punycode{$min}.js",
+				WPFORMS_PLUGIN_URL . 'assets/lib/punycode.min.js',
 				[],
 				'1.0.0',
 				true
@@ -1373,7 +1375,7 @@ class WPForms_Frontend {
 		) {
 			wp_enqueue_script(
 				'wpforms-payment',
-				WPFORMS_PLUGIN_URL . 'assets/js/jquery.payment.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/pro/lib/jquery.payment.min.js',
 				[ 'jquery' ],
 				WPFORMS_VERSION,
 				true

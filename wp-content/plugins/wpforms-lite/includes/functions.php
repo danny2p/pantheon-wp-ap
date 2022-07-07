@@ -1,5 +1,7 @@
 <?php
 
+use TrueBV\Punycode;
+
 /**
  * Helper function to trigger displaying a form.
  *
@@ -95,13 +97,20 @@ function wpforms_is_url( $url ) {
  *
  * @param string $email Email address to verify.
  *
- * @return bool Returns a valid email address on success, false on failure.
+ * @return string|false Returns a valid email address on success, false on failure.
  */
 function wpforms_is_email( $email ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+
+	static $punycode;
 
 	// Do not allow callables, arrays and objects.
 	if ( ! is_scalar( $email ) ) {
 		return false;
+	}
+
+	// Allow smart tags in the email address.
+	if ( preg_match( '/{.+?}/', $email ) ) {
+		return $email;
 	}
 
 	// Email can't be longer than 254 octets,
@@ -132,14 +141,70 @@ function wpforms_is_email( $email ) { // phpcs:ignore Generic.Metrics.Cyclomatic
 	$domain_arr = explode( '.', $domain );
 
 	foreach ( $domain_arr as $domain_label ) {
+		$domain_label = trim( $domain_label );
+
+		if ( ! $domain_label ) {
+			return false;
+		}
+
 		// The RFC says: 'A DNS label may be no more than 63 octets long'.
 		if ( strlen( $domain_label ) > 63 ) {
 			return false;
 		}
 	}
 
+	if ( ! $punycode ) {
+		$punycode = new Punycode();
+	}
+
+	/**
+	 * The wp_mail() uses phpMailer, which uses is_email() as verification callback.
+	 * For verification, phpMailer sends the email address where the domain part is punycode encoded only.
+	 * We follow here the same principle.
+	 */
+	$email_check = $local . '@' . $punycode->encode( $domain );
+
 	// Other limitations are checked by the native WordPress function is_email().
-	return (bool) is_email( $email );
+	return is_email( $email_check ) ? $local . '@' . $domain : false;
+}
+
+/**
+ * Check whether the string is json-encoded.
+ *
+ * @since 1.7.5
+ *
+ * @param string $string A string.
+ *
+ * @return bool
+ */
+function wpforms_is_json( $string ) {
+
+	return (
+		is_string( $string ) &&
+		is_array( json_decode( $string, true ) ) &&
+		json_last_error() === JSON_ERROR_NONE
+	);
+}
+
+/**
+ * Decode json-encoded string if it is in json format.
+ *
+ * @since 1.7.5
+ *
+ * @param string $string      A string.
+ * @param bool   $associative Decode to the associative array if true. Decode to object if false.
+ *
+ * @return array|string
+ */
+function wpforms_json_decode( $string, $associative = false ) {
+
+	$string = html_entity_decode( $string );
+
+	if ( ! wpforms_is_json( $string ) ) {
+		return $string;
+	}
+
+	return json_decode( $string, $associative );
 }
 
 /**
@@ -152,8 +217,12 @@ function wpforms_is_email( $email ) { // phpcs:ignore Generic.Metrics.Cyclomatic
  */
 function wpforms_current_url() {
 
+	$parsed_home_url = wp_parse_url( home_url() );
+
 	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	return esc_url_raw( home_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+	$path = wp_unslash( $_SERVER['REQUEST_URI'] );
+
+	return esc_url_raw( $parsed_home_url['scheme'] . '://' . $parsed_home_url['host'] . $path );
 }
 
 /**
@@ -1123,7 +1192,7 @@ function wpforms_countries() {
 		'TO' => esc_html__( 'Tonga', 'wpforms-lite' ),
 		'TT' => esc_html__( 'Trinidad and Tobago', 'wpforms-lite' ),
 		'TN' => esc_html__( 'Tunisia', 'wpforms-lite' ),
-		'TR' => esc_html__( 'Turkey', 'wpforms-lite' ),
+		'TR' => esc_html__( 'Türkiye', 'wpforms-lite' ),
 		'TM' => esc_html__( 'Turkmenistan', 'wpforms-lite' ),
 		'TC' => esc_html__( 'Turks and Caicos Islands', 'wpforms-lite' ),
 		'TV' => esc_html__( 'Tuvalu', 'wpforms-lite' ),
@@ -2242,6 +2311,32 @@ function wpforms_get_day_period_date( $period, $timestamp = '', $format = 'Y-m-d
 }
 
 /**
+ * Return available date formats.
+ *
+ * @since 1.7.5
+ */
+function wpforms_date_formats() {
+
+	/**
+	 * Filters available date formats.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param array $date_formats Default date formats.
+	 *                            Item key is JS date character - see https://flatpickr.js.org/formatting/
+	 *                            Item value is in PHP format - see http://php.net/manual/en/function.date.php.
+	 */
+	return apply_filters(
+		'wpforms_datetime_date_formats',
+		[
+			'm/d/Y'  => 'm/d/Y',
+			'd/m/Y'  => 'd/m/Y',
+			'F j, Y' => 'F j, Y',
+		]
+	);
+}
+
+/**
  * Get an array of all possible provider addons.
  *
  * @since 1.5.5
@@ -2600,20 +2695,59 @@ function wpforms_get_license_key() {
  *
  * @param string $type Specific install type to check for.
  *
- * @return int|false
+ * @return int|false Unix timestamp. False on failure.
  */
 function wpforms_get_activated_timestamp( $type = '' ) {
 
-	$activated = get_option( 'wpforms_activated', [] );
-	$types     = ! empty( $type ) ? [ $type ] : [ 'lite', 'pro' ];
+	$activated = (array) get_option( 'wpforms_activated', [] );
 
-	foreach ( $types as $type ) {
-		if ( ! empty( $activated[ $type ] ) ) {
-			return absint( $activated[ $type ] );
+	if ( empty( $activated ) ) {
+		return false;
+	}
+
+	// When a passed install type is empty, then get it from a DB.
+	// If it is installed/activated first, it is saved first.
+	$type = empty( $type ) ? (string) array_keys( $activated )[0] : $type;
+
+	if ( ! empty( $activated[ $type ] ) ) {
+		return absint( $activated[ $type ] );
+	}
+
+	// Fallback.
+	$types = array_diff( [ 'lite', 'pro' ], [ $type ] );
+
+	foreach ( $types as $_type ) {
+		if ( ! empty( $activated[ $_type ] ) ) {
+			return absint( $activated[ $_type ] );
 		}
 	}
 
 	return false;
+}
+
+/**
+ * Retrieve a timestamp when WPForms was upgraded.
+ *
+ * @since 1.7.5
+ *
+ * @param string $version Specific plugin version to check for.
+ *
+ * @return int|false Unix timestamp or migration status. False on failure.
+ *                   Available migration statuses:
+ *                   -2 if migration is failed;
+ *                   -1 if migration is started (in progress);
+ *                    0 if migration is completed, but no luck to set a timestamp.
+ */
+function wpforms_get_upgraded_timestamp( $version ) {
+
+	$option_name = wpforms()->is_pro() ? 'wpforms_versions' : 'wpforms_versions_lite';
+	$upgrades    = (array) get_option( $option_name, [] );
+
+	if ( ! isset( $upgrades[ $version ] ) ) {
+		return false;
+	}
+
+	return (int) $upgrades[ $version ];
 }
 
 /**
@@ -3102,6 +3236,18 @@ function wpforms_is_collecting_ip_allowed( $form_data = [] ) {
 }
 
 /**
+ * Determine if collecting cookies is allowed by GDPR setting.
+ *
+ * @since 1.7.5
+ *
+ * @return bool
+ */
+function wpforms_is_collecting_cookies_allowed() {
+
+	return ! ( wpforms_setting( 'gdpr', false ) && wpforms_setting( 'gdpr-disable-uuid', false ) );
+}
+
+/**
  * Retrieve a timezone from the site settings as a `DateTimeZone` object.
  *
  * Timezone can be based on a PHP timezone string or a ±HH:MM offset.
@@ -3244,4 +3390,34 @@ function wpforms_wpdb_prepare_in( $items, $format = '%s' ) {
 
 	// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	return $wpdb->prepare( $prepared_format, $items );
+}
+
+/**
+ * Add UTM tags to a link that allows detecting traffic sources for our or partners' websites.
+ *
+ * @since 1.7.5
+ *
+ * @param string $link    Link to which you need to add UTM tags.
+ * @param string $medium  The page or location description. Check your current page and try to find
+ *                        and use an already existing medium for links otherwise, use a page name.
+ * @param string $content The feature's name, the button's content, the link's text, or something
+ *                        else that describes the element that contains the link.
+ * @param string $term    Additional information for the content that makes the link more unique.
+ *
+ * @return string
+ */
+function wpforms_utm_link( $link, $medium, $content = '', $term = '' ) {
+
+	return add_query_arg(
+		array_filter(
+			[
+				'utm_campaign' => wpforms()->is_pro() ? 'plugin' : 'liteplugin',
+				'utm_source'   => strpos( $link, 'https://wpforms.com' ) === 0 ? 'WordPress' : 'wpformsplugin',
+				'utm_medium'   => rawurlencode( $medium ),
+				'utm_content'  => rawurlencode( $content ),
+				'utm_term'     => rawurlencode( $term ),
+			]
+		),
+		$link
+	);
 }

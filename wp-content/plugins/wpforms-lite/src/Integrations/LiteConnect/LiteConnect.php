@@ -206,6 +206,7 @@ abstract class LiteConnect implements IntegrationInterface {
 		$settings         = get_option( Integration::get_option_name(), [] );
 		$settings['site'] = $response;
 
+		update_option( API::GENERATE_KEY_ATTEMPT_COUNTER_OPTION, 0 );
 		update_option( Integration::get_option_name(), $settings );
 
 		exit();

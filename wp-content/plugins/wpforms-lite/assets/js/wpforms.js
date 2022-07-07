@@ -829,7 +829,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 
 				// Hidden input allows to include country code into submitted data.
 				inputOptions.hiddenInput = $el.closest( '.wpforms-field-phone' ).data( 'field-id' );
-				inputOptions.utilsScript = wpforms_settings.wpforms_plugin_url + 'pro/assets/js/vendor/jquery.intl-tel-input-utils.js';
+				inputOptions.utilsScript = wpforms_settings.wpforms_plugin_url + 'assets/pro/lib/intl-tel-input/jquery.intl-tel-input-utils.min.js';
 
 				$el.intlTelInput( inputOptions );
 

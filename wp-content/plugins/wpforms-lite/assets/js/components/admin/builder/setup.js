@@ -174,7 +174,7 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 		},
 
 		/**
-		 * Force focus on the form title field when switched to the the Setup panel.
+		 * Force focus on the form title field when switched to the Setup panel.
 		 *
 		 * @since 1.6.8
 		 *

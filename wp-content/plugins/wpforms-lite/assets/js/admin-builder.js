@@ -75,6 +75,11 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 */
 		load: function() {
 
+			// Trigger initial save for new forms.
+			if ( wpf.getQueryString( 'newform' ) ) {
+				app.formSave( false );
+			}
+
 			var panel = $( '#wpforms-panels-toggle .active' ).data( 'panel' );
 
 			// Render form preview on the Revisions panel if the panel is active.
@@ -126,13 +131,16 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			elements.$exitButton         = $( '#wpforms-exit' );
 
 			// Cache other elements.
-			elements.$fieldOptions       = $( '#wpforms-field-options' );
-			elements.$sortableFieldsWrap = $( '#wpforms-panel-fields .wpforms-field-wrap' );
-			elements.$noFieldsOptions    = $( '#wpforms-panel-fields .wpforms-no-fields-holder .no-fields' );
-			elements.$noFieldsPreview    = $( '#wpforms-panel-fields .wpforms-no-fields-holder .no-fields-preview' );
-			elements.$addFieldsButtons   = $( '.wpforms-add-fields-button' ).not( '.not-draggable' ).not( '.warning-modal' ).not( '.education-modal' );
-			elements.$formPreview        = $( '#wpforms-panel-fields .wpforms-preview-wrap' );
-			elements.$revisionPreview    = $( '#wpforms-panel-revisions .wpforms-panel-content' );
+			elements.$fieldOptions        = $( '#wpforms-field-options' );
+			elements.$sortableFieldsWrap  = $( '#wpforms-panel-fields .wpforms-field-wrap' );
+			elements.$noFieldsOptions     = $( '#wpforms-panel-fields .wpforms-no-fields-holder .no-fields' );
+			elements.$noFieldsPreview     = $( '#wpforms-panel-fields .wpforms-no-fields-holder .no-fields-preview' );
+			elements.$addFieldsButtons    = $( '.wpforms-add-fields-button' ).not( '.not-draggable' ).not( '.warning-modal' ).not( '.education-modal' );
+			elements.$formPreview         = $( '#wpforms-panel-fields .wpforms-preview-wrap' );
+			elements.$revisionPreview     = $( '#wpforms-panel-revisions .wpforms-panel-content' );
+			elements.defaultEmailSelector = '.wpforms-field-option-email .wpforms-field-option-row-default_value input';
+			elements.$defaultEmail        = $( elements.defaultEmailSelector );
+			elements.$focusOutTarget      = null;
 
 			// Remove Embed button if builder opened in popup.
 			if ( app.isBuilderInPopup() ) {
@@ -144,12 +152,6 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			// Bind all actions.
 			app.bindUIActions();
-
-			// Trigger initial save for new forms.
-			var newForm = wpf.getQueryString( 'newform' );
-			if ( newForm ) {
-				app.formSave( false );
-			}
 
 			// Setup/cache some vars not available before
 			s.formID = $( '#wpforms-builder-form' ).data( 'id' );
@@ -412,6 +414,21 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					'.wpforms-field-option-select .wpforms-field-option-row-style select, .wpforms-field-option-payment-select .wpforms-field-option-row-style select',
 					app.dropdownField.events.applyStyle
 				);
+
+				// Add ability to close the drop-down menu.
+				$builder.on( 'click', '.choices', function( e ) {
+
+					var $choices =  $( this ),
+						choicesObj = $choices.find( 'select' ).data( 'choicesjs' );
+
+					if (
+						choicesObj &&
+						$choices.hasClass( 'is-open' ) &&
+						e.target.classList.contains( 'choices__inner' )
+					) {
+						choicesObj.hideDropdown();
+					}
+				} );
 			},
 
 			/**
@@ -1610,6 +1627,19 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				}
 			 });
 
+			$builder.on( 'wpformsFieldDragToggle', function( event, id ) {
+
+				var $field = $( '#wpforms-field-' + id );
+
+				if ( $field.hasClass( 'wpforms-field-not-draggable' ) || $field.hasClass( 'wpforms-field-stick' ) ) {
+					app.fieldDragDisable( $field );
+
+					return;
+				}
+
+				app.fieldDragEnable( $field );
+			} );
+
 			// Field choice add new
 			$builder.on('click', '.wpforms-field-option-row-choices .add', function(e) {
 				app.fieldChoiceAdd(e, $(this));
@@ -1814,20 +1844,66 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			$builder.on( 'focusout', '.wpforms-field-option-row-allowlist textarea,.wpforms-field-option-row-denylist textarea', function() {
 
-				var $field = $( this );
+				var $allowField = $( '.wpforms-field-option-row-allowlist textarea' ),
+					$denyField = $( '.wpforms-field-option-row-denylist textarea' ),
+					$currentField = $( this ),
+					$current = 'allow';
+
+				if ( $currentField.val() === '' ) {
+					return;
+				}
+
+				if ( $currentField.is( $denyField ) ) {
+					$current = 'deny';
+				}
+
 				$.get(
 					wpforms_builder.ajax_url,
 					{
 						nonce: wpforms_builder.nonce,
-						content: $field.val(),
+						content: JSON.stringify(
+							{
+								allow: $allowField.val(),
+								deny: $denyField.val(),
+								current: $current,
+							}
+						),
 						action: 'wpforms_sanitize_restricted_rules',
 					},
 					function( res ) {
 						if ( res.success ) {
-							$field.val( res.data );
+							$currentField.val( res.data.currentField );
+							var intersect = res.data.intersect;
+							if ( intersect.length !== 0 ) {
+								var content = '<p>' + wpforms_builder.allow_deny_lists_intersect + '</p>' +
+									'<p class="bold">' + intersect + '</p>';
+								$.alert( {
+									title: wpforms_builder.heads_up,
+									content: content,
+									icon: 'fa fa-exclamation-circle',
+									type: 'red',
+									buttons: {
+										confirm: {
+											text: wpforms_builder.ok,
+											btnClass: 'btn-confirm',
+											keys: [ 'enter' ],
+										},
+									},
+								} );
+							}
 						}
 					}
 				);
+			} );
+
+			// On any click check if we had focusout event.
+			$builder.on( 'click', function() {
+				app.focusOutEvent();
+			} );
+
+			// Save focusout target.
+			$builder.on( 'focusout', elements.defaultEmailSelector, function() {
+				elements.$focusOutTarget = $( this );
 			} );
 
 			// Real-time updates for "Size" field option
@@ -1888,6 +1964,30 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 					$primary.find( '.placeholder' ).prop( 'selected', ! $primary.prop( 'multiple' ) );
 				}
+			} );
+
+			// Real-time updates for "Default" field option.
+			$builder.on( 'input', '.wpforms-field-option-row-default_value input', function() {
+
+				const $this = $( this ),
+					value = wpf.sanitizeHTML( $this.val() ),
+					id = $this.closest( '.wpforms-field-option-row' ).data( 'field-id' ),
+					$preview = $( `#wpforms-field-${id} .primary-input` );
+
+				$preview.val( value );
+			} );
+
+			// Real-time updates for "Default" field option of the Name and Address fields.
+			$builder.on( 'input', '.wpforms-field-options-column input.default', function() {
+
+				const $this = $( this ),
+					value = wpf.sanitizeHTML( $this.val() ),
+					$row = $this.closest( '.wpforms-field-option-row' ),
+					id = $row.data( 'field-id' ),
+					subfield = $row.data( 'subfield' ),
+					$preview = $( `#wpforms-field-${id} .wpforms-${subfield} input` );
+
+				$preview.val( value );
 			} );
 
 			// Real-time updates for "Confirmation Placeholder" field option
@@ -2184,7 +2284,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				$( '#wpforms-field-' + id ).find( 'img.icon-' + card ).toggleClass( 'card_hide' );
 			} );
 
-			// Generic updates for various additional placeholder fields
+			// Generic updates for various additional placeholder fields (at least Stripe's "Name on Card").
 			$builder.on('input', '.wpforms-field-option input.placeholder-update', function(e) {
 				var $this    = $(this),
 					value    = $this.val(),
@@ -2385,6 +2485,42 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				.on( 'click', '.wpforms-entry-preview-block', app.entryPreviewBlockField );
 
 			app.defaultStateEntryPreviewNotice();
+		},
+
+		/**
+		 * Check if we had focusout event from certain fields.
+		 *
+		 * @since 1.7.5
+		 */
+		focusOutEvent: function() {
+			if ( elements.$focusOutTarget === null ) {
+				return;
+			}
+
+			if ( elements.$defaultEmail.is( elements.$focusOutTarget ) ) {
+				var $field = elements.$focusOutTarget;
+
+				if ( $field.val() === '' ) {
+					return;
+				}
+
+				$.get(
+					wpforms_builder.ajax_url,
+					{
+						nonce: wpforms_builder.nonce,
+						content: $field.val(),
+						action: 'wpforms_sanitize_default_email',
+					},
+					function( res ) {
+						if ( res.success ) {
+							$field.val( res.data );
+							$field.trigger( 'input' );
+						}
+					}
+				);
+			}
+
+			elements.$focusOutTarget = null;
 		},
 
 		/**
@@ -2726,6 +2862,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			$previousPageBreakField.removeClass( 'wpforms-field-not-draggable wpforms-field-entry-preview-not-deleted' );
 			$nextPageBreakOptions.find( '.wpforms-entry-preview-block' ).removeClass( 'wpforms-entry-preview-block' );
+
+			$builder.trigger( 'wpformsFieldDragToggle', [ $previousPageBreakField.data( 'field-id' ), $previousPageBreakField.data( 'field-type' ) ] );
 		},
 
 		/**
@@ -2764,7 +2902,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				$currentFieldPrevToggle = $( '#wpforms-field-option-' + fieldId + ' .wpforms-field-option-row-prev_toggle' ),
 				$currentFieldPrevToggleField = $currentFieldPrevToggle.find( 'input' ),
 				$prevField = $currentField.prevAll( '.wpforms-field-entry-preview,.wpforms-field-pagebreak' ).first(),
-				$prevFieldPrevToggle = $( '#wpforms-field-option-' + $prevField.data( 'field-id' ) + ' .wpforms-field-option-row-prev_toggle' ),
+				prevFieldId = $prevField.data( 'field-id' ),
+				$prevFieldPrevToggle = $( '#wpforms-field-option-' + prevFieldId + ' .wpforms-field-option-row-prev_toggle' ),
 				$prevFieldPrevToggleField = $prevFieldPrevToggle.find( 'input' ),
 				$nextField = $currentField.nextAll( '.wpforms-field-entry-preview,.wpforms-field-pagebreak' ).first(),
 				$nextFieldPrevToggle = $( '#wpforms-field-option-' + $nextField.data( 'field-id' ) + ' .wpforms-field-option-row-prev_toggle' );
@@ -2782,7 +2921,9 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			}
 
 			$currentField.addClass( 'wpforms-field-not-draggable wpforms-field-entry-preview-not-deleted' );
+			$builder.trigger( 'wpformsFieldDragToggle', [ fieldId, type ] );
 			$prevField.removeClass( 'wpforms-field-not-draggable wpforms-field-entry-preview-not-deleted' );
+			$builder.trigger( 'wpformsFieldDragToggle', [ prevFieldId, $prevField.data( 'field-type' ) ] );
 
 			if ( $prevField.prevAll( '.wpforms-field-entry-preview,.wpforms-field-pagebreak' ).first().hasClass( 'wpforms-field-entry-preview' ) ) {
 				$prevFieldPrevToggleField.attr( 'checked', 'checked' ).trigger( 'change' );
@@ -3074,6 +3215,9 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 								// Re-init instance in choices related fields.
 								app.fieldChoiceUpdate( $newField.data( 'field-type' ), newFieldID );
 
+								// Re-init color pickers.
+								app.loadColorPickers();
+
 								// Lastly, update the next ID stored in database.
 								$.post(
 									wpforms_builder.ajax_url,
@@ -3107,9 +3251,16 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 				var entryPreviewId = res.data.field.id;
 
-				app.fieldAdd( 'pagebreak', { 'position': position + 1 } ).done( function() {
+				app.fieldAdd( 'pagebreak', { 'position': position + 1 } ).done( function( res ) {
 
 					app.lockEntryPreviewFieldsPosition( entryPreviewId );
+
+					var $pageBreakField = $( '#wpforms-field-' + res.data.field.id  ),
+						$nextField = $pageBreakField.nextAll( '.wpforms-field-pagebreak, .wpforms-field-entry-preview' ).first();
+
+					if ( $nextField.hasClass( 'wpforms-field-entry-preview' ) ) {
+						app.lockEntryPreviewFieldsPosition( $nextField.data( 'field-id' ) );
+					}
 				} );
 			} );
 		},
@@ -3126,8 +3277,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			var $entryPreviewField = $( '#wpforms-field-' + id ),
 				$pageBreakField = $entryPreviewField.prevAll( '.wpforms-field-pagebreak:not(.wpforms-pagebreak-bottom)' ).first(),
 				$nextPageBreakField = $entryPreviewField.nextAll( '.wpforms-field-pagebreak' ).first(),
-				pageBreakFieldId = $nextPageBreakField.data( 'field-id' ),
-				$pageBreakOptions = $( '#wpforms-field-option-' + pageBreakFieldId ),
+				nextPageBreakFieldId = $nextPageBreakField.data( 'field-id' ),
+				$pageBreakOptions = $( '#wpforms-field-option-' + nextPageBreakFieldId ),
 				$pageBreakPrevToggle = $pageBreakOptions.find( '.wpforms-field-option-row-prev_toggle' ),
 				$pageBreakPrevToggleField = $pageBreakPrevToggle.find( 'input' );
 
@@ -3136,6 +3287,9 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			$pageBreakPrevToggleField.attr( 'checked', 'checked' ).trigger( 'change' );
 			$pageBreakPrevToggle.addClass( 'wpforms-entry-preview-block' );
 			$( '#wpforms-add-fields-entry-preview' ).removeClass( 'wpforms-entry-preview-adding' );
+
+			$builder.trigger( 'wpformsFieldDragToggle', [ id, $entryPreviewField.data( 'field-type' ) ] );
+			$builder.trigger( 'wpformsFieldDragToggle', [ $pageBreakField.data( 'field-id' ), $pageBreakField.data( 'field-type' ) ] );
 		},
 
 		/**
@@ -3632,27 +3786,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				cancel: '.wpforms-field-not-draggable',
 			} );
 
-			// Show popup in case if field is not draggable, cancel moving.
-			var startTopPosition;
-			$( '.wpforms-field-not-draggable, .wpforms-field-stick' ).draggable( {
-				revert: true,
-				axis: 'y',
-				delay  : 100,
-				opacity: 0.75,
-				cursor : 'move',
-				start: function( event, ui ) {
-
-					startTopPosition = ui.position.top;
-				},
-				drag: function( event, ui ) {
-
-					if ( Math.abs( ui.position.top ) - Math.abs( startTopPosition ) > 15 ) {
-						app.youCantReorderFieldPopup();
-
-						return false;
-					}
-				},
-			} );
+			app.fieldDragDisable( $( '.wpforms-field-not-draggable, .wpforms-field-stick' ) );
 
 			$( '.wpforms-add-fields-button' )
 				.not( '.not-draggable' )
@@ -3695,6 +3829,61 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				opacity: 0.75,
 				containment: 'document',
 			} );
+		},
+
+		/**
+		 * Show popup in case if field is not draggable, and cancel moving.
+		 *
+		 * @param {jQuery} $field A field or list of fields.
+		 *
+		 * @since 1.7.5
+		 */
+		fieldDragDisable: function( $field ) {
+
+			if ( $field.hasClass( 'ui-draggable-disabled' ) ) {
+				$field.draggable( 'enable' );
+
+				return;
+			}
+
+			var startTopPosition;
+
+			$field
+				.draggable( {
+					revert: true,
+					axis: 'y',
+					delay  : 100,
+					opacity: 0.75,
+					cursor : 'move',
+					start: function( event, ui ) {
+
+						startTopPosition = ui.position.top;
+					},
+					drag: function( event, ui ) {
+
+						if ( Math.abs( ui.position.top ) - Math.abs( startTopPosition ) > 15 ) {
+							app.youCantReorderFieldPopup();
+
+							return false;
+						}
+					},
+				} );
+		},
+
+		/**
+		 * Allow field dragging.
+		 *
+		 * @param {jQuery} $field A field or list of fields.
+		 *
+		 * @since 1.7.5
+		 */
+		fieldDragEnable: function( $field ) {
+
+			if ( $field.hasClass( 'ui-draggable' ) ) {
+				return;
+			}
+
+			$field.draggable( 'disable' );
 		},
 
 		/**
@@ -5828,6 +6017,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 * Save form.
 		 *
 		 * @since 1.0.0
+		 * @since 1.7.5 Added `wpformsBeforeSave` trigger.
 		 *
 		 * @param {boolean} redirect Whether to redirect after save.
 		 */
@@ -5848,6 +6038,13 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			if ( typeof tinyMCE !== 'undefined' ) {
 				tinyMCE.triggerSave();
+			}
+
+			var event = wpf.triggerEvent( $builder, 'wpformsBeforeSave' );
+
+			// Allow callbacks on `wpformsBeforeSave` to cancel form submission by triggering `event.preventDefault()`.
+			if ( event.isDefaultPrevented() === true ) {
+				return;
 			}
 
 			$label.text( wpforms_builder.saving );
@@ -6119,7 +6316,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			// Don't allow users to enable payments if storing entries has
 			// been disabled in the General settings.
-			$builder.on( 'change', '#wpforms-panel-field-stripe-enable, #wpforms-panel-field-paypal_standard-enable, #wpforms-panel-field-authorize_net-enable, #wpforms-panel-field-square-enable', function( event ) {
+			$builder.on( 'change', app.getPaymentsTogglesSelector(), function( event ) {
 
 				var $this = $( this ),
 					gateway = $this.attr( 'id' ).replace( 'wpforms-panel-field-', '' ).replace( '-enable', '' ),
@@ -6158,8 +6355,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				var $this = $( this );
 				if ( $this.prop( 'checked' ) ) {
 
-					var paymentsEnabled = $( '#wpforms-panel-field-stripe-enable' ).prop( 'checked' ) || $( '#wpforms-panel-field-paypal_standard-enable' ).prop( 'checked' ) || $( '#wpforms-panel-field-authorize_net-enable' ).prop( 'checked' ) || $( '#wpforms-panel-field-square-enable' ).prop( 'checked' );
-					if ( paymentsEnabled ) {
+					if ( app.isPaymentsEnabled() ) {
 						$.confirm( {
 							title: wpforms_builder.heads_up,
 							content: wpforms_builder.payments_on_entries_off,
@@ -6260,6 +6456,45 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			// License Alert close button click.
 			$( '#wpforms-builder-license-alert .close' ).on( 'click', app.exitBack );
+		},
+
+		/**
+		 * Check if one of the payment addons payments enabled.
+		 *
+		 * @since 1.7.5
+		 *
+		 * @returns {boolean} True if one of the payment addons payment enabled.
+		 */
+		isPaymentsEnabled: function() {
+
+			var paymentEnabled = false;
+
+			$( app.getPaymentsTogglesSelector() ).each( function() {
+
+				if ( $( this ).prop( 'checked' ) ) {
+					paymentEnabled = true;
+
+					return false;
+				}
+			} );
+
+			return paymentEnabled;
+		},
+
+		/**
+		 * Get Payments toggles selector.
+		 *
+		 * @since 1.7.5
+		 *
+		 * @returns {string} List of selectors.
+		 */
+		getPaymentsTogglesSelector: function() {
+			return `.wpforms-panel-content-section-payment-toggle-one-time input,
+			.wpforms-panel-content-section-payment-toggle-recurring input,
+			#wpforms-panel-field-stripe-enable,
+			#wpforms-panel-field-paypal_standard-enable,
+			#wpforms-panel-field-authorize_net-enable
+			#wpforms-panel-field-square-enable`;
 		},
 
 		/**
@@ -6382,8 +6617,10 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 * @param {Event} e Event.
 		 */
 		smartTagToggle: function( e ) {
-
 			e.preventDefault();
+
+			// Prevent ajax to validate the default email queued on focusout event.
+			elements.$focusOutTarget = null;
 
 			var $this = $( this ),
 				$wrapper = $this.closest( '.wpforms-panel-field,.wpforms-field-option-row' );
@@ -6624,7 +6861,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 				// Remove redundant spaces after wrapping smartTag into spaces.
 				$input.val( $input.val().trim().replace( '  ', ' ' ) );
-				$input.focus();
+				$input.focus().trigger( 'input' );
 			}
 
 			// remove list, all done!
