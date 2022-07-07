@@ -28,6 +28,8 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 	$panel_id         = sanitize_html_class( $panel );
 	$parent           = ! empty( $args['parent'] ) ? esc_attr( $args['parent'] ) : '';
 	$subsection       = ! empty( $args['subsection'] ) ? esc_attr( $args['subsection'] ) : '';
+	$index            = isset( $args['index'] ) ? esc_attr( $args['index'] ) : '';
+	$index            = is_numeric( $index ) ? absint( $index ) : $index;
 	$label            = ! empty( $label ) ? esc_html( $label ) : '';
 	$class            = ! empty( $args['class'] ) ? wpforms_sanitize_classes( $args['class'] ) : '';
 	$input_class      = ! empty( $args['input_class'] ) ? wpforms_sanitize_classes( $args['input_class'] ) : '';
@@ -62,7 +64,11 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 
 	// Check if we should store values in a parent array.
 	if ( ! empty( $parent ) ) {
-		if ( ! empty( $subsection ) ) {
+		if ( $subsection && ! wpforms_is_empty_string( $index ) ) {
+			$field_name = sprintf( '%s[%s][%s][%s][%s]', $parent, $panel, $subsection, $index, $field );
+			$value      = isset( $form_data[ $parent ][ $panel ][ $subsection ][ $index ][ $field ] ) ? $form_data[ $parent ][ $panel ][ $subsection ][ $index ][ $field ] : $default;
+			$input_id   = sprintf( 'wpforms-panel-field-%s-%s-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $subsection ), sanitize_html_class( $index ), sanitize_html_class( $field ) );
+		} elseif ( ! empty( $subsection ) ) {
 			$field_name = sprintf( '%s[%s][%s][%s]', $parent, $panel, $subsection, $field );
 			$value      = isset( $form_data[ $parent ][ $panel ][ $subsection ][ $field ] ) ? $form_data[ $parent ][ $panel ][ $subsection ][ $field ] : $default;
 			$input_id   = sprintf( 'wpforms-panel-field-%s-%s-%s', sanitize_html_class( $panel_id ), sanitize_html_class( $subsection ), sanitize_html_class( $field ) );
@@ -95,7 +101,7 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 	}
 
 	// Check for readonly inputs.
-	if ( ! empty( $args['readonly' ] ) ) {
+	if ( ! empty( $args['readonly'] ) ) {
 		$data_attr .= 'readonly';
 	}
 
@@ -158,6 +164,11 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 				$input_id,
 				$label
 			);
+
+			if ( ! empty( $args['before_tooltip'] ) ) {
+				$output .= $args['before_tooltip'];
+			}
+
 			if ( ! empty( $args['tooltip'] ) ) {
 				$output .= sprintf( '<i class="fa fa-question-circle-o wpforms-help-tooltip" title="%s"></i>', esc_attr( $args['tooltip'] ) );
 			}
@@ -226,13 +237,15 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 
 		// Select.
 		case 'select':
-			if ( empty( $args['options'] ) && empty( $args['field_map'] ) ) {
+
+			if ( empty( $args['options'] ) && empty( $args['field_map'] ) && empty( $args['multiple'] ) ) {
 				return '';
 			}
 
 			if ( ! empty( $args['field_map'] ) ) {
-				$options          = array();
+				$options          = [];
 				$available_fields = wpforms_get_form_fields( $form_data, $args['field_map'] );
+
 				if ( ! empty( $available_fields ) ) {
 					foreach ( $available_fields as $id => $available_field ) {
 						$options[ $id ] = ! empty( $available_field['label'] )
@@ -245,11 +258,16 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 				}
 				$input_class .= ' wpforms-field-map-select';
 				$data_attr   .= ' data-field-map-allowed="' . implode( ' ', $args['field_map'] ) . '"';
+
 				if ( ! empty( $placeholder ) ) {
 					$data_attr .= ' data-field-map-placeholder="' . esc_attr( $placeholder ) . '"';
 				}
 			} else {
 				$options = $args['options'];
+			}
+
+			if ( ! empty( $args['multiple'] ) ) {
+				$data_attr .= ' multiple';
 			}
 
 			$output = sprintf(
@@ -265,7 +283,19 @@ function wpforms_panel_field( $option, $panel, $field, $form_data, $label, $args
 			}
 
 			foreach ( $options as $key => $item ) {
-				$output .= sprintf( '<option value="%s" %s>%s</option>', esc_attr( $key ), selected( $key, $value, false ), $item );
+
+				if ( is_array( $value ) ) {
+					$selected = in_array( $key, $value, true ) ? 'selected' : '';
+				} else {
+					$selected = selected( $key, $value, false );
+				}
+
+				$output .= sprintf(
+					'<option value="%s" %s>%s</option>',
+					esc_attr( $key ),
+					$selected,
+					$item
+				);
 			}
 
 			$output .= '</select>';

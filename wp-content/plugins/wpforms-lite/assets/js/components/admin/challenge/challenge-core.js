@@ -725,6 +725,35 @@ WPFormsChallenge.core = window.WPFormsChallenge.core || ( function( document, wi
 		},
 
 		/**
+		 * Resume Challenge and execute the callback.
+		 *
+		 * @since 1.7.5
+		 *
+		 * @param {object}   e        Event object.
+		 * @param {Function} callback Callback function.
+		 */
+		resumeChallengeAndExec: function( e, callback ) {
+
+			if ( typeof callback !== 'function' ) {
+				callback = function() {};
+			}
+
+			if ( wpforms_challenge_admin.option.status !== 'paused' ) {
+				callback();
+
+				return;
+			}
+
+			var resumeResult = app.resumeChallenge( e );
+
+			if ( typeof resumeResult === 'object' && typeof resumeResult.done === 'function' ) {
+				resumeResult.done( callback );
+			} else {
+				callback();
+			}
+		},
+
+		/**
 		 * Refresh Page in order to re-init current step.
 		 *
 		 * @since 1.6.2

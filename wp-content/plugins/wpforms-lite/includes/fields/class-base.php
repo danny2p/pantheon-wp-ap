@@ -1014,6 +1014,7 @@ abstract class WPForms_Field {
 				foreach ( $values as $key => $value ) {
 					$default        = ! empty( $value['default'] ) ? $value['default'] : '';
 					$base           = sprintf( 'fields[%d][choices][%d]', absint( $field['id'] ), absint( $key ) );
+					$label          = isset( $value['label'] ) ? $value['label'] : '';
 					$image          = ! empty( $value['image'] ) ? $value['image'] : '';
 					$hide_image_btn = false;
 
@@ -1028,7 +1029,7 @@ abstract class WPForms_Field {
 					$fld .= sprintf(
 						'<input type="text" name="%s[label]" value="%s" class="label">',
 						esc_attr( $base ),
-						esc_attr( $value['label'] )
+						esc_attr( $label )
 					);
 					$fld .= '<a class="add" href="#"><i class="fa fa-plus-circle"></i></a><a class="remove" href="#"><i class="fa fa-minus-circle"></i></a>';
 					$fld .= sprintf(
@@ -1850,7 +1851,7 @@ abstract class WPForms_Field {
 							$output .= sprintf(
 								'<span class="wpforms-image-choices-image"><img src="%s" alt="%s"%s></span>',
 								! empty( $value['image'] ) ? esc_url( $value['image'] ) : WPFORMS_PLUGIN_URL . 'assets/images/builder/placeholder-200x125.svg',
-								esc_attr( $value['label'] ),
+								esc_attr( $label ),
 								! empty( $value['label'] ) ? ' title="' . esc_attr( $value['label'] ) . '"' : ''
 							);
 
@@ -2172,14 +2173,14 @@ abstract class WPForms_Field {
 	 */
 	protected function enqueue_choicesjs_once( $forms ) {
 
-		if ( wpforms()->frontend->is_choicesjs_enqueued ) {
+		if ( wpforms()->get( 'frontend' )->is_choicesjs_enqueued ) {
 			return;
 		}
 
 		wp_enqueue_script(
 			'wpforms-choicesjs',
-			WPFORMS_PLUGIN_URL . 'assets/js/choices.min.js',
-			array(),
+			WPFORMS_PLUGIN_URL . 'assets/lib/choices.min.js',
+			[],
 			'9.0.1',
 			true
 		);
@@ -2195,7 +2196,15 @@ abstract class WPForms_Field {
 			'customAddItemText' => esc_html__( 'Only values matching specific conditions can be added.', 'wpforms-lite' ),
 		];
 
-		// Allow theme/plugin developers to modify the provided or add own Choices.js settings.
+		/**
+		 * Allow theme/plugin developers to modify the provided or add own Choices.js settings.
+		 *
+		 * @since 1.6.1
+		 *
+		 * @param array         $config    Choices.js settings.
+		 * @param array         $forms     Forms on the current page.
+		 * @param WPForms_Field $field_obj Field object.
+		 */
 		$config = apply_filters( 'wpforms_field_select_choicesjs_config', $config, $forms, $this );
 
 		wp_localize_script(
@@ -2204,7 +2213,7 @@ abstract class WPForms_Field {
 			$config
 		);
 
-		wpforms()->frontend->is_choicesjs_enqueued = true;
+		wpforms()->get( 'frontend' )->is_choicesjs_enqueued = true;
 	}
 
 	/**

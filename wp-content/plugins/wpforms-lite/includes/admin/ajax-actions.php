@@ -39,7 +39,7 @@ function wpforms_save_form() {
 			// derive the array path keys via regex and set the value in $_POST.
 			preg_match( '#([^\[]*)(\[(.+)\])?#', $post_input_data->name, $matches );
 
-			$array_bits = array( $matches[1] );
+			$array_bits = [ $matches[1] ];
 
 			if ( isset( $matches[3] ) ) {
 				$array_bits = array_merge( $array_bits, explode( '][', $matches[3] ) );
@@ -52,9 +52,9 @@ function wpforms_save_form() {
 				if ( $i === count( $array_bits ) - 1 ) {
 					$new_post_data[ $array_bits[ $i ] ] = wp_slash( $post_input_data->value );
 				} else {
-					$new_post_data = array(
+					$new_post_data = [
 						$array_bits[ $i ] => $new_post_data,
-					);
+					];
 				}
 			}
 
@@ -62,13 +62,38 @@ function wpforms_save_form() {
 		}
 	}
 
-	$form_id = wpforms()->form->update( $data['id'], $data );
+	// Get form tags.
+	$form_tags = isset( $data['settings']['form_tags_json'] ) ? json_decode( wp_unslash( $data['settings']['form_tags_json'] ), true ) : [];
 
+	// Clear not needed data.
+	unset( $data['settings']['form_tags_json'] );
+
+	// Store tags labels in the form settings.
+	$data['settings']['form_tags'] = wp_list_pluck( $form_tags, 'label' );
+
+	// Update form data.
+	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data );
+
+	/**
+	 * Fires after updating form data.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param int   $form_id Form ID.
+	 * @param array $data    Form data.
+	 */
 	do_action( 'wpforms_builder_save_form', $form_id, $data );
 
 	if ( ! $form_id ) {
 		wp_send_json_error( esc_html__( 'Something went wrong while saving the form.', 'wpforms-lite' ) );
 	}
+
+	// Update form tags.
+	wp_set_post_terms(
+		$form_id,
+		wpforms()->get( 'forms_tags_ajax' )->get_processed_tags( $form_tags ),
+		WPForms_Form_Handler::TAGS_TAXONOMY
+	);
 
 	$response_data = [
 		'form_name' => esc_html( $data['settings']['form_title'] ),

@@ -37,6 +37,33 @@ class_alias( wpforms()->is_pro() ? 'WPForms\Pro\SmartTags\SmartTags' : 'WPForms\
 class_alias( '\WPForms\Providers\Providers', '\WPForms\Providers\Loader' );
 
 /**
+ * Legacy `\WPForms\Admin\Notifications` class was refactored and moved to the new `\WPForms\Admin\Notifications\Notifications` class.
+ * This alias is a safeguard to those developers who use our internal class \WPForms\Admin\Notifications,
+ * which we deleted.
+ *
+ * @since 1.7.5
+ */
+class_alias( '\WPForms\Admin\Notifications\Notifications', '\WPForms\Admin\Notifications' );
+
+/**
+ * Legacy `\WPForms\Migrations` class was refactored and moved to the new `\WPForms\Migrations\Migrations` class.
+ * This alias is a safeguard to those developers who use our internal class \WPForms\Migrations, which we deleted.
+ *
+ * @since 1.7.5
+ */
+class_alias( '\WPForms\Migrations\Migrations', '\WPForms\Migrations' );
+
+if ( wpforms()->is_pro() ) {
+	/**
+	 * Legacy `\WPForms\Pro\Migrations` class was refactored and moved to the new `\WPForms\Pro\Migrations\Migrations` class.
+	 * This alias is a safeguard to those developers who use our internal class \WPForms\Migrations, which we deleted.
+	 *
+	 * @since 1.7.5
+	 */
+	class_alias( '\WPForms\Pro\Migrations\Migrations', '\WPForms\Pro\Migrations' );
+}
+
+/**
  * Get notification state, whether it's opened or closed.
  *
  * @deprecated 1.4.8

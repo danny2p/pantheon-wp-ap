@@ -139,10 +139,12 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 			// Used for dynamic choices.
 			$depth = isset( $choice['depth'] ) ? absint( $choice['depth'] ) : 1;
+			$label = isset( $choice['label'] ) ? $choice['label'] : '';
 
 			// Choice labels should not be left blank, but if they are we
 			// provide a basic value.
-			$value = isset( $field['show_values'] ) ? $choice['value'] : $choice['label'];
+			$value = isset( $field['show_values'] ) ? $choice['value'] : $label;
+
 			if ( '' === $value ) {
 				if ( 1 === count( $choices ) ) {
 					$value = esc_html__( 'Checked', 'wpforms-lite' );
@@ -166,7 +168,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 					'class' => array( 'wpforms-field-label-inline' ),
 					'data'  => array(),
 					'id'    => '',
-					'text'  => $choice['label'],
+					'text'  => $label,
 				),
 				'attr'      => array(
 					'name'  => "wpforms[fields][{$field_id}][]",

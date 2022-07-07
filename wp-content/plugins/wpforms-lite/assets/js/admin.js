@@ -205,6 +205,24 @@
 
 				$this.data( 'choicesjs', new Choices( $this[0], args ) );
 			} );
+
+			// Add ability to close the drop-down menu.
+			$( document ).on( 'click', '.choices', function( e ) {
+
+				var $choices =  $( this ),
+					choicesObj = $choices.find( 'select' ).data( 'choicesjs' );
+
+				if (
+					choicesObj &&
+					$choices.hasClass( 'is-open' ) &&
+					(
+						e.target.classList.contains( 'choices__inner' ) ||
+						e.target.classList.contains( 'choices__arrow' )
+					)
+				) {
+					choicesObj.hideDropdown();
+				}
+			} );
 		},
 
 		/**

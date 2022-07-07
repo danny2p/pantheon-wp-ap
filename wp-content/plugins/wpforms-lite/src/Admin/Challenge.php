@@ -119,7 +119,7 @@ class Challenge {
 
 		$screen = get_current_screen();
 
-		if ( ! isset( $screen->id ) || 'page' !== $screen->id ) {
+		if ( ! isset( $screen->id ) || $screen->id !== 'page' ) {
 			return false;
 		}
 
@@ -129,21 +129,26 @@ class Challenge {
 
 		$step = $this->get_challenge_option( 'step' );
 
-		if ( ! in_array( $step, [ 4, 5 ], true ) ) {
+		if ( ! in_array( $step, [ 3, 4, 5 ], true ) ) {
 			return false;
 		}
 
-		$embed_page = $this->get_challenge_option( 'embed_page' );
+		$embed_page    = $this->get_challenge_option( 'embed_page' );
+		$is_embed_page = false;
 
-		if ( isset( $screen->action ) && 'add' === $screen->action && 0 === $embed_page ) {
-			return true;
+		if ( isset( $screen->action ) && $screen->action === 'add' && $embed_page === 0 ) {
+			$is_embed_page = true;
 		}
 
 		if ( isset( $_GET['post'] ) && $embed_page === (int) $_GET['post'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return true;
+			$is_embed_page = true;
 		}
 
-		return false;
+		if ( $is_embed_page && $step < 4 ) {
+			$this->set_challenge_option( [ 'step' => 4 ] );
+		}
+
+		return $is_embed_page;
 	}
 
 	/**
@@ -191,14 +196,14 @@ class Challenge {
 
 			wp_enqueue_style(
 				'tooltipster',
-				WPFORMS_PLUGIN_URL . 'assets/css/tooltipster.css',
+				WPFORMS_PLUGIN_URL . 'assets/lib/jquery.tooltipster/jquery.tooltipster.min.css',
 				null,
 				'4.2.6'
 			);
 
 			wp_enqueue_script(
 				'tooltipster',
-				WPFORMS_PLUGIN_URL . 'assets/js/jquery.tooltipster.min.js',
+				WPFORMS_PLUGIN_URL . 'assets/lib/jquery.tooltipster/jquery.tooltipster.min.js',
 				[ 'jquery' ],
 				'4.2.6',
 				true
@@ -228,7 +233,7 @@ class Challenge {
 
 			wp_enqueue_style(
 				'wpforms-font-awesome',
-				WPFORMS_PLUGIN_URL . 'assets/css/font-awesome.min.css',
+				WPFORMS_PLUGIN_URL . 'assets/lib/font-awesome/font-awesome.min.css',
 				null,
 				'4.7.0'
 			);
@@ -499,6 +504,10 @@ class Challenge {
 		}
 
 		if ( wpforms_is_admin_page() && ! wpforms_is_admin_page( 'getting-started' ) && $this->challenge_can_start() ) {
+
+			// Before showing the Challenge in the `start` state we should reset the option.
+			// In this way we ensure the Challenge will not appear somewhere in the builder where it is not should be.
+			$this->set_challenge_option( [ 'status' => '' ] );
 			$this->challenge_modal_html( 'start' );
 		}
 

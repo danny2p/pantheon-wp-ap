@@ -814,6 +814,25 @@ var wpf = {
 			return x;
 		} );
 	},
+
+	/**
+	 * Wrapper to trigger a native or custom event and return the event object.
+	 *
+	 * @since 1.7.5
+	 *
+	 * @param {jQuery} $element  Element to trigger event on.
+	 * @param {string} eventName Event name to trigger (custom or native).
+	 *
+	 * @returns {Event} Event object.
+	 */
+	triggerEvent: function( $element, eventName ) {
+
+		var eventObject = new jQuery.Event( eventName );
+
+		$element.trigger( eventObject );
+
+		return eventObject;
+	},
 };
 
 wpf.init();

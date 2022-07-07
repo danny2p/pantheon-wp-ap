@@ -250,9 +250,12 @@ class Help {
 		return [
 			'getting-started' => esc_html__( 'Getting Started', 'wpforms-lite' ),
 			'functionality'   => esc_html__( 'Functionality', 'wpforms-lite' ),
+			'fields'          => esc_html__( 'Fields', 'wpforms-lite' ),
+			'addons'          => esc_html__( 'Addons', 'wpforms-lite' ),
+			'payments'        => esc_html__( 'Payments', 'wpforms-lite' ),
+			'entries'         => esc_html__( 'Entries', 'wpforms-lite' ),
 			'styling'         => esc_html__( 'Styling', 'wpforms-lite' ),
 			'extending'       => esc_html__( 'Extending', 'wpforms-lite' ),
-			'addons'          => esc_html__( 'Addons', 'wpforms-lite' ),
 		];
 	}
 
@@ -328,6 +331,7 @@ class Help {
 			'providers/getresponse_v3'                           => 'getresponse',
 			'providers/mailchimp'                                => 'mailchimp',
 			'providers/mailchimpv3'                              => 'mailchimp',
+			'providers/mailerlite'                               => 'mailerlite',
 			'providers/zapier'                                   => 'zapier',
 			'providers/salesforce'                               => 'salesforce',
 			'providers/sendinblue'                               => 'sendinblue',
@@ -1150,6 +1154,9 @@ class Help {
 			],
 			'mailchimp'                 => [
 				'/docs/install-use-mailchimp-addon-wpforms/',
+			],
+			'mailerlite'                => [
+				'/docs/install-use-mailerlite-addon-wpforms/',
 			],
 			'zapier'                    => [
 				'/docs/how-to-install-and-use-zapier-addon-with-wpforms/',

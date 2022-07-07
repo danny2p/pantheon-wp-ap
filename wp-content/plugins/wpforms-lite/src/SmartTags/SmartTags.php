@@ -131,6 +131,7 @@ class SmartTags {
 			'url_logout'        => esc_html__( 'Logout URL', 'wpforms-lite' ),
 			'url_register'      => esc_html__( 'Register URL', 'wpforms-lite' ),
 			'url_lost_password' => esc_html__( 'Lost Password URL', 'wpforms-lite' ),
+			'unique_value'      => esc_html__( 'Unique Value', 'wpforms-lite' ),
 		];
 	}
 

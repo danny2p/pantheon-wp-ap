@@ -255,7 +255,7 @@ class WPForms_Field_Select extends WPForms_Field {
 				'tooltip' => esc_html__( 'Allow users to select multiple choices in this field.', 'wpforms-lite' ) . '<br>' .
 							sprintf(
 								wp_kses( /* translators: %s - URL to WPForms.com doc article. */
-									esc_html__( 'For details, including how this looks and works for your site\'s visitors, please check out <a href="%s" target="_blank" rel="noopener noreferrer">our doc</a>. ', 'wpforms-lite' ),
+									esc_html__( 'For details, including how this looks and works for your site\'s visitors, please check out <a href="%s" target="_blank" rel="noopener noreferrer">our doc</a>.', 'wpforms-lite' ),
 									[
 										'a' => [
 											'href'   => [],

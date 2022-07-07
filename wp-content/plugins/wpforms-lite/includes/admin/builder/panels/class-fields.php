@@ -162,7 +162,7 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 				printf( '<p class="wpforms-field-submit" style="%1$s"><input type="submit" value="%2$s" class="wpforms-field-submit-button"></p>', esc_attr( $submit_style ), esc_attr( $submit ) );
 
 				/** This action is documented in includes/class-frontend.php. */
-				do_action( 'wpforms_display_submit_after', $this->form_data );
+				do_action( 'wpforms_display_submit_after', $this->form_data, 'submit' ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 				?>
 
 				<?php wpforms_debug_data( $this->form_data ); ?>

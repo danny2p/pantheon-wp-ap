@@ -159,7 +159,7 @@ class Templates {
 			} else {
 
 				if ( $is_higher ) {
-					array_unshift( $templates_denied, $template );
+					$templates_denied = array_merge( [ $i => $template ], $templates_denied );
 				} else {
 					$templates_denied[ $i ] = $template;
 				}
