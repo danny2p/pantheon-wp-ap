@@ -32,7 +32,7 @@ const ButtonBlock = (props) => {
 						event.preventDefault();
 
 						const { selection } = editor;
-						const isCollapsed = selection && Range.isCollapsed(selection);
+						let isCollapsed = selection && Range.isCollapsed(selection);
 
 						let prompt = true;
 						if ( 'link' === props.type ) {
@@ -40,6 +40,13 @@ const ButtonBlock = (props) => {
 						}
 						if ( 'code' === props.type && isCollapsed ) {
 							prompt = window.prompt( __wprm( 'HTML or Shortcode:' ) );
+						}
+						if ( 'temperature' === props.type ) {
+							if ( ! isCollapsed ) {
+								Transforms.collapse(editor, { edge: 'end' })
+								isCollapsed = true;
+							}
+							prompt = window.prompt( __wprm( 'Temperature value (e.g. 350):' ) );
 						}
 
 						if ( prompt ) {
@@ -59,6 +66,12 @@ const ButtonBlock = (props) => {
 									if ( isCollapsed ) {
 										node.children = [{ text: prompt }];
 									}
+									break;
+								case 'temperature':
+									node.icon = '';
+									node.unit = wprm_admin.temperature.default_unit;
+									node.help = '';
+									node.children = [{ text: prompt }];
 									break;
 								default:
 									if ( isCollapsed ) {

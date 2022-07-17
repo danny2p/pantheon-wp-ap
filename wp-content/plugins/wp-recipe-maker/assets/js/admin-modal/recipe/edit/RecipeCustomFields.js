@@ -7,6 +7,7 @@ import FieldContainer from '../../fields/FieldContainer';
 import FieldImage from '../../fields/FieldImage';
 import FieldText from '../../fields/FieldText';
 import FieldRichText from '../../fields/FieldRichText';
+import FieldTinymce from '../../fields/FieldTinymce';
 
 const customFields = wprm_admin_modal.custom_fields && wprm_admin_modal.custom_fields.fields ? Object.values( wprm_admin_modal.custom_fields.fields ) : [];
 
@@ -39,6 +40,17 @@ const RecipeCustomFields = (props) => {
                             return (
                                 <FieldContainer label={ field.name } key={ index }>
                                     <FieldRichText
+                                        value={ value ? value : '' }
+                                        onChange={ (value) => {
+                                            props.onFieldChange( field.key, value );
+                                        }}
+                                    />
+                                </FieldContainer>
+                            );
+                        case 'classic':
+                            return (
+                                <FieldContainer label={ field.name } key={ index }>
+                                    <FieldTinymce
                                         value={ value ? value : '' }
                                         onChange={ (value) => {
                                             props.onFieldChange( field.key, value );

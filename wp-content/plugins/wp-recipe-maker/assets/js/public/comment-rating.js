@@ -1,5 +1,7 @@
 import '../../css/public/comment_rating.scss';
 
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.rating = {
 	init() {
 		const ratingFormElem = document.querySelector( '.comment-form-wprm-rating' );

@@ -21,7 +21,7 @@ const HOTKEYS = {
     'mod+u': 'underline',
 };
 
-const INLINE_BLOCKS = [ 'link', 'affiliate-link', 'code' ];
+const INLINE_BLOCKS = [ 'link', 'affiliate-link', 'code', 'temperature' ];
 
 const RichEditor = (props) => {
     if ( isProblemBrowser() ) {
@@ -184,6 +184,31 @@ const withHtml = ( editor, props ) => {
 }
 
 const getValueFromHtml = ( htmlString ) => {
+    // Convert temperature shortcode to its own element.
+    const regex = /\[wprm-temperature(\s.*?)]/gm;
+
+    let m;
+    while ((m = regex.exec(htmlString)) !== null) {
+        let attrMatch;
+
+        attrMatch = new RegExp(' value=\\"(.*?)"', 'gm').exec( m[1] );
+        const value = attrMatch ? attrMatch[1] : '';
+
+        attrMatch = new RegExp(' unit=\\"(.*?)"', 'gm').exec( m[1] );
+        const unit = attrMatch ? attrMatch[1] : '';
+
+        attrMatch = new RegExp(' icon=\\"(.*?)"', 'gm').exec( m[1] );
+        const icon = attrMatch ? attrMatch[1] : '';
+
+        attrMatch = new RegExp(' help=\\"(.*?)"', 'gm').exec( m[1] );
+        const help = attrMatch ? attrMatch[1] : '';
+
+        const node = `<wprm-temperature unit="${ unit }" icon="${ icon }" help="${ help }">${ value }</wprm-temperature>`;
+        
+        htmlString = htmlString.replace( m[0], node );
+    }
+
+    // Deserialize HTML string.
     const document = new DOMParser().parseFromString( htmlString, 'text/html' );
     const deserialized = deserialize( document.body );
 

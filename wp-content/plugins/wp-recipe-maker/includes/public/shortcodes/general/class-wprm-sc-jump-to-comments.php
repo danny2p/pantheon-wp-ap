@@ -192,7 +192,13 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$text = $recipe->replace_placeholders( $text );
 		}
 
-		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . '>' . $icon . $text . '</a>';
+		// Optional aria-label.
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Rate this Recipe', 'wp-recipe-maker' ) . '"';
+		}
+
+		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

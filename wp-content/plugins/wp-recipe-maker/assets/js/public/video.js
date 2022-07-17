@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 // Source: twentytwenty.intrinsicRatioVideos 
 window.WPRecipeMaker.video = {
 	init() {

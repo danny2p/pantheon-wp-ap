@@ -149,6 +149,17 @@ $recipe_ratings = array(
 			'name' => __( 'User Ratings', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
+					'id' => 'user_ratings_spam_prevention',
+					'name' => __( 'Spam Prevention Method', 'wp-recipe-maker' ),
+					'description' => __( 'How to prevent spam ratings. Use "Anonymous ID" if you do not want to store IP addresses in the database.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'ip' => __( 'Check IP address', 'wp-recipe-maker' ),
+						'uid' => __( 'Anonymous ID stored in cookie', 'wp-recipe-maker' ),
+					),
+					'default' => 'ip',
+				),
+				array(
 					'id' => 'user_ratings_clear_cache',
 					'name' => __( 'Clear Cache after Rating', 'wp-recipe-maker' ),
 					'description' => __( 'Try to clear the site cache after a user rating. Makes sure the vote increases immediately after refreshing the page.', 'wp-recipe-maker' ),

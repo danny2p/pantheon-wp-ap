@@ -142,7 +142,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 
 		// Get formatted average.
 		$decimals = intval( $atts['average_decimals'] );
-		$formatted_average = round( $rating['average'], $decimals );
+		$formatted_average = WPRM_Recipe_Parser::format_quantity( $rating['average'], $decimals );
 
 		if ( 'details' === $atts['display'] || 'stars-details' === $atts['display'] ) {
 			$classes = array(

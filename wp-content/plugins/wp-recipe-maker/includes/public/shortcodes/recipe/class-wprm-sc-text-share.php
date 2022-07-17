@@ -216,7 +216,15 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
-		$output = '<a href="' . $text_url . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Share by Text', 'wp-recipe-maker' ) . '"';
+		}
+
+		$output = '<a href="' . $text_url . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

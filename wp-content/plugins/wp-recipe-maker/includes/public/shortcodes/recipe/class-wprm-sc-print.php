@@ -178,7 +178,15 @@ class WPRM_SC_Print extends WPRM_Template_Shortcode {
 			$target = ' target="_blank"';
 		}
 
-		$output = '<a href="' . $recipe->print_url( $template ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-template="' . esc_attr( $template ) . '"' . $target . ' rel="nofollow">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Print Recipe', 'wp-recipe-maker' ) . '"';
+		}
+
+		$output = '<a href="' . $recipe->print_url( $template ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-template="' . esc_attr( $template ) . '"' . $target . ' rel="nofollow"' . $aria_label . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

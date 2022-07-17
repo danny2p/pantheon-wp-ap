@@ -168,7 +168,15 @@ class WPRM_SC_Facebook_Share extends WPRM_Template_Shortcode {
 			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
-		$output = '<a href="' . $share_url . '" ' . $facebook_script .' data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow noopener">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Share on Facebook', 'wp-recipe-maker' ) . '"';
+		}
+
+		$output = '<a href="' . $share_url . '" ' . $facebook_script .' data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow noopener"' . $aria_label . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

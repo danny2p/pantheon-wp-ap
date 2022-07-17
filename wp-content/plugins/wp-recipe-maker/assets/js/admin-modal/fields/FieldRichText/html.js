@@ -17,6 +17,14 @@ const ELEMENT_TAGS = {
             type: 'code',
         }
     },
+    'WPRM-TEMPERATURE': el => {
+        return {
+            type: 'temperature',
+            icon: el.getAttribute('icon'),
+            unit: el.getAttribute('unit'),
+            help: el.getAttribute('help'),
+        }
+    },
 }
 
 const TEXT_TAGS = {
@@ -158,6 +166,14 @@ export const serialize = node => {
             return `<a href="${escapeHtml(node.url)}" data-eafl-id="${escapeHtml(node.id)}" class="eafl-link">${children}</a>`;
         case 'code':
             return `<wprm-code>${children}</wprm-code>`;
+        case 'temperature':
+            let help = node.help;
+
+            help = help.replace(/"/gm, '&quot;');
+            help = help.replace(/\]/gm, '&#93;');
+            help = help.replace(/>/gm, '&gt;');
+
+            return `<wprm-temperature icon="${ node.icon }" unit="${ node.unit }" help="${ help }">${ children }</wprm-temperature>`;
         default:
             return children;
     }

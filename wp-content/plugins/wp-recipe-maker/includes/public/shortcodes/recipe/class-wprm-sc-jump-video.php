@@ -183,8 +183,16 @@ class WPRM_SC_Jump_Video extends WPRM_Template_Shortcode {
 			$style = '';
 		}
 
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Jump to Video', 'wp-recipe-maker' ) . '"';
+		}
+
 		// "wprm-jump-to-video-shortcode" class for backwards compatibility.
-		$output = '<a href="#wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . '>' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		$output = '<a href="#wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

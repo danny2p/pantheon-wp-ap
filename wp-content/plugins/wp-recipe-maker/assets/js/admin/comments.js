@@ -3,6 +3,8 @@ import { __wprm } from 'Shared/Translations';
 
 import '../../css/admin/comments.scss';
 
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.comments = {
     change: ( container ) => {
         const column = container.closest( '.column-wprm_rating' );

@@ -172,6 +172,14 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Pin Recipe', 'wp-recipe-maker' ) . '"';
+		}
+
 		// Construct link attributes.
 		$attributes = '';
 		$attributes .= ' style="' . $style . '"';
@@ -183,8 +191,9 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' data-media="' . esc_attr( $recipe->pin_image_url() ) . '"';
 		$attributes .= ' data-description="' . esc_attr( $recipe->pin_image_description() ) . '"';
 		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
+		$attributes .= $aria_label;
 
-		$output = '<a href="' . $pin_url . '"' . $attributes . '>' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		$output = '<a href="' . $pin_url . '"' . $attributes . '>' . $icon . $text . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

@@ -27,7 +27,10 @@ class WPRM_Shortcode_Other {
 	public static function init() {
 		add_shortcode( 'adjustable', array( __CLASS__, 'adjustable_shortcode' ) );
 		add_shortcode( 'timer', array( __CLASS__, 'timer_shortcode' ) );
+		add_shortcode( 'wprm-temperature', array( __CLASS__, 'temperature_shortcode' ) );
 		add_shortcode( 'wprm-condition', array( __CLASS__, 'condition_shortcode' ) );
+
+		add_filter( 'wprm_localize_admin', array( __CLASS__, 'temperature_icons' ) );
 	}
 
 	/**
@@ -66,6 +69,104 @@ class WPRM_Shortcode_Other {
 		} else {
 			return $content;
 		}
+	}
+
+	/**
+	 * Output for the temperature shortcode.
+	 *
+	 * @since	8.4.0
+	 * @param	array $atts		Shortcode attributes.
+	 */
+	public static function temperature_shortcode( $atts ) {
+		$atts = shortcode_atts( array(
+			'icon' => '',
+			'value' => '',
+			'unit' => WPRM_Settings::get( 'default_temperature_unit' ),
+			'help' => '',
+		), $atts, 'wprm_temperature' );
+
+		// Value needs to be set.
+		if ( '' === $atts['value'] ) {
+			return '';
+		}
+
+		$icon = sanitize_key( $atts['icon'] );
+		$value = $atts['value'];
+		$unit = strtoupper( sanitize_key( $atts['unit'] ) );
+		$help = sanitize_text_field( $atts['help'] );
+
+		// Construct data.
+		$data = '';
+		$data .= ' data-value="' . esc_attr( $value ) .  '"';
+		$data .= ' data-unit="' . esc_attr( $unit ) .  '"';
+		$data .= ' data-help="' . esc_attr( $help ) .  '"';
+
+		// Construct output.
+		$output = '';
+		$output .= '<span class="wprm-temperature-container"' . $data . '>';
+
+		// Icon output
+		if ( $icon && file_exists( WPRM_DIR . 'assets/icons/temperature/' . $icon . '.svg' ) ) {
+			$output .= '<span class="wprm-temperature-icon">';
+			$output .= '<img src="' . WPRM_URL . 'assets/icons/temperature/' . $icon . '.svg" alt="' . esc_attr( $help ) . '">';
+			$output .= '</span>';
+		}
+
+		// Value output
+		$output .= '<span class="wprm-temperature-value">';
+		$output .= $value;
+		$output .= '</span>';
+
+		// Unit output
+		if ( in_array( $unit, array( 'C', 'F' ) ) ) {
+			$output .= '<span class="wprm-temperature-unit">';
+			switch ( $unit ) {
+				case 'C':
+					$output .= ' °C';
+					break;
+				case 'F':
+					$output .= ' °F';
+					break;
+			}
+			$output .= '</span>';
+		}
+
+		$output .= '</span>';
+
+		return $output;
+	}
+
+	/**
+	 * List of temperature icons to localize.
+	 *
+	 * @since	8.4.0
+	 * @param	array $wprm_admin Admin variables to localize.
+	 */
+	public static function temperature_icons( $wprm_admin ) {
+		$icons = array();
+		$dir = WPRM_DIR . 'assets/icons/temperature';
+
+		if ( $handle = opendir( $dir ) ) {
+			while ( false !== ( $file = readdir( $handle ) ) ) {
+				preg_match( '/^(.*?).svg/', $file, $match );
+				if ( isset( $match[1] ) ) {
+					$file = $match[0];
+					$name = $match[1];
+					
+					$icons[ $name ] = array(
+						'file' => WPRM_DIR . 'assets/icons/temperature/' . $file,
+						'url' => WPRM_URL . 'assets/icons/temperature/' . $file,
+					);
+				}
+			}
+		}
+
+		$wprm_admin['temperature'] = array(
+			'default_unit' => WPRM_Settings::get( 'default_temperature_unit' ),
+			'icons' => $icons,
+		);
+
+		return $wprm_admin;
 	}
 
 	/**

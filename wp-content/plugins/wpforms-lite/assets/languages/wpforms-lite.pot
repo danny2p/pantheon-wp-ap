@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.7.5.1\n"
+"Project-Id-Version: WPForms Lite 1.7.5.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-30T12:24:48+03:00\n"
+"POT-Creation-Date: 2022-07-15T14:36:56+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wpforms-lite\n"
@@ -975,7 +975,7 @@ msgid "Field #%d"
 msgstr ""
 
 #: includes/admin/builder/panels/class-fields.php:18
-#: src/Admin/Builder/Help.php:253
+#: src/Admin/Builder/Help.php:260
 msgid "Fields"
 msgstr ""
 
@@ -1097,7 +1097,7 @@ msgid "Showing the first 20 choices.<br> All %s choices will be displayed when v
 msgstr ""
 
 #: includes/admin/builder/panels/class-payments.php:18
-#: src/Admin/Builder/Help.php:255
+#: src/Admin/Builder/Help.php:262
 msgid "Payments"
 msgstr ""
 
@@ -1453,7 +1453,7 @@ msgid "About Us"
 msgstr ""
 
 #: includes/admin/class-about.php:112
-#: src/Admin/Builder/Help.php:251
+#: src/Admin/Builder/Help.php:258
 msgid "Getting Started"
 msgstr ""
 
@@ -1578,7 +1578,7 @@ msgstr ""
 
 #: includes/admin/class-about.php:569
 #: lite/wpforms-lite.php:539
-msgid "4000+ integrations with marketing and payment services"
+msgid "5000+ integrations with marketing and payment services"
 msgstr ""
 
 #: includes/admin/class-about.php:573
@@ -1939,7 +1939,7 @@ msgstr ""
 #: includes/admin/class-about.php:1252
 #: includes/admin/class-about.php:1266
 #: includes/admin/class-about.php:1280
-msgid "<strong>Bonus:</strong> 4000+ integrations with Zapier."
+msgid "<strong>Bonus:</strong> 5000+ integrations with Zapier."
 msgstr ""
 
 #: includes/admin/class-about.php:1248
@@ -2126,7 +2126,7 @@ msgid "Add New"
 msgstr ""
 
 #: includes/admin/class-menu.php:75
-#: src/Admin/Builder/Help.php:256
+#: src/Admin/Builder/Help.php:263
 #: src/Admin/Forms/Views.php:423
 #: src/Lite/Admin/DashboardWidget.php:154
 #: src/Logger/Log.php:101
@@ -2152,7 +2152,7 @@ msgid "Info"
 msgstr ""
 
 #: includes/admin/class-menu.php:123
-#: src/Admin/Builder/Help.php:254
+#: src/Admin/Builder/Help.php:261
 msgid "Addons"
 msgstr ""
 
@@ -5478,15 +5478,15 @@ msgstr ""
 msgid "Form ID: %d"
 msgstr ""
 
-#: src/Admin/Builder/Help.php:252
+#: src/Admin/Builder/Help.php:259
 msgid "Functionality"
 msgstr ""
 
-#: src/Admin/Builder/Help.php:257
+#: src/Admin/Builder/Help.php:264
 msgid "Styling"
 msgstr ""
 
-#: src/Admin/Builder/Help.php:258
+#: src/Admin/Builder/Help.php:265
 msgid "Extending"
 msgstr ""
 
@@ -6089,7 +6089,7 @@ msgstr ""
 msgid "You just hit 100 entries&hellip; and this is just the beginning! Now it’s time to dig into the data and figure out what makes your visitors tick. The User Journey addon shows you what your visitors looked at before submitting your form. Now you can easily find which areas of your site are triggering form conversions."
 msgstr ""
 
-#: src/Admin/Notifications/Notifications.php:735
+#: src/Admin/Notifications/Notifications.php:741
 msgid "Watch Video"
 msgstr ""
 

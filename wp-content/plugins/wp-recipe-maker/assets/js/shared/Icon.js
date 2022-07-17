@@ -34,6 +34,7 @@ import IconStarEmpty from '../../icons/admin/star-empty.svg';
 import IconStarFull from '../../icons/admin/star-full.svg';
 import IconSubscript from '../../icons/admin/subscript.svg';
 import IconSuperscript from '../../icons/admin/superscript.svg';
+import IconTemperature from '../../icons/admin/temperature.svg';
 import IconTrash from '../../icons/admin/trash.svg';
 import IconUnderline from '../../icons/admin/underline.svg';
 import IconUnlink from '../../icons/admin/unlink.svg';
@@ -70,6 +71,7 @@ const icons = {
     'star-full': IconStarFull,
     subscript: IconSubscript,
     superscript: IconSuperscript,
+    temperature: IconTemperature,
     trash: IconTrash,
     underline: IconUnderline,
     unlink: IconUnlink,

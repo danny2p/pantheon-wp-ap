@@ -478,6 +478,7 @@ class WPRM_Recipe_Sanitizer {
 	public static function sanitize_html( $text ) {
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 		$allowed_tags['wprm-code'] = true;
+		$allowed_tags['wprm-temperature'] = true;
 
 		// Allow more when user can edit posts to prevent abuse from User Submissions form.
 		if ( current_user_can( 'edit_posts' ) ) {
@@ -509,6 +510,39 @@ class WPRM_Recipe_Sanitizer {
 		foreach ( $matches[1] as $key => $match ) {
 			$code = html_entity_decode( $match );
 			$text = str_replace( $match, $code, $text );
+		}
+
+		// WPRM Temperature in rich text. Replace with its shortcode
+		preg_match_all( '/<wprm-temperature(.*?)<\/wprm-temperature>/ms', $text, $matches );
+		foreach ( $matches[1] as $key => $match ) {
+			$split = explode( '>', $match, 2 );
+			
+			// Parse attributes.
+			preg_match( '/icon=\"(.*?)\"/', $split[0], $attr_match );
+			$icon = isset( $attr_match[1] ) ? $attr_match[1] : '';
+
+			preg_match( '/unit=\"(.*?)\"/', $split[0], $attr_match );
+			$unit = isset( $attr_match[1] ) ? $attr_match[1] : '';
+
+			preg_match( '/help=\"(.*?)\"/', $split[0], $attr_match );
+			$help = isset( $attr_match[1] ) ? $attr_match[1] : '';
+
+			$help = html_entity_decode( $help );
+
+			$shortcode = '';
+			if ( isset( $split[1] ) && $split[1] ) {
+				$value = html_entity_decode( $split[1] );
+
+				$shortcode = '[wprm-temperature value="' . esc_attr( $value ) . '"';
+				$shortcode .= ' unit="' . esc_attr( $unit ) . '"';
+
+				if ( $icon ) { $shortcode .= ' icon="' . esc_attr( $icon ) . '"'; }
+				if ( $help ) { $shortcode .= ' help="' . esc_attr( $help ) . '"'; }
+
+				$shortcode .= ']';
+
+			}
+			$text = str_replace( $matches[0][ $key ], $shortcode, $text );
 		}
 
 		// Allow administrators to use any html they want.

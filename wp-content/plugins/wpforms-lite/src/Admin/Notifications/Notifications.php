@@ -132,7 +132,13 @@ class Notifications {
 	 */
 	public function fetch_feed() {
 
-		$response = wp_remote_get( self::SOURCE_URL );
+		$response = wp_remote_get(
+			self::SOURCE_URL,
+			[
+				'timeout'    => 10,
+				'user-agent' => wpforms_get_default_user_agent(),
+			]
+		);
 
 		if ( is_wp_error( $response ) ) {
 			return [];

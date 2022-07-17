@@ -17,6 +17,30 @@
         }
     }
 
+    .wprm-admin-modal-toolbar-temperature {
+        display: flex;
+        align-items: center;
+        padding: 2px;
+
+        .wprm-admin-modal-toolbar-temperature-label {
+            display: inline-block;
+            margin-right: 5px;
+
+            font-weight: bold;
+        }
+        img.wprm-admin-modal-toolbar-temperature-icon {
+            width: 2em;
+            cursor: pointer;
+
+            &.wprm-admin-modal-toolbar-temperature-icon-selected {
+                background-color: white;
+            }
+        }
+        .wprm-admin-modal-toolbar-temperature-value {
+            cursor: pointer;
+        }
+    }
+
     .wprm-admin-modal-toolbar-suggest {
         padding: 0 2px;
         min-height: 30px;
@@ -122,6 +146,18 @@
 
     wprm-code {
         font-family: monospace !important;
+    }
+
+    wprm-temperature {
+        font-family: monospace !important;
+
+        img.wprm-temperature-icon {
+            display: inline-block;
+            width: 1.6em;
+            height: auto;
+            vertical-align: text-bottom;
+            margin-bottom: -0.2em;
+        }
     }
 
     &.wprm-admin-modal-field-richtext-singleline {

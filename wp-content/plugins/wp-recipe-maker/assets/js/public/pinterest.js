@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.pinterest = {
 	init() {
 		document.addEventListener( 'click', function(e) {

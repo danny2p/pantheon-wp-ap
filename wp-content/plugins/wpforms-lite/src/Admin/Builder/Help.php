@@ -179,12 +179,19 @@ class Help {
 		// Unfortunately, we need to call setup() here for properly scheduled execution.
 		$this->setup();
 
+		$wpforms_key = 'lite';
+
+		if ( wpforms()->is_pro() ) {
+			$wpforms_key = wpforms_get_license_key();
+		}
+
 		$request = wp_remote_get(
-			$this->settings['docs_remote_source'],
+			add_query_arg( 'tgm-updater-key', $wpforms_key, $this->settings['docs_remote_source'] ),
 			[
 				// Limit the processing time to half of the default PHP max execution time,
-				// so we will have a chance to see the Form Builder even without the docs data.
-				'timeout' => 15,
+				// so users will have a chance to see the Form Builder even without the docs data.
+				'timeout'    => 15,
+				'user-agent' => wpforms_get_default_user_agent(),
 			]
 		);
 

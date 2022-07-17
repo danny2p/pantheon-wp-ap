@@ -20,6 +20,15 @@
 class WPRM_Import_Helper {
 
 	/**
+	 * Cache of images already handled.
+	 *
+	 * @since	8.4.0
+	 * @access  private
+	 * @var     array $images Images already handled.
+	 */
+	private static $images = array();
+
+	/**
 	 * Get image attachment ID from a given URL or sideload the image if not on the website.
 	 *
 	 * @since	5.2.0
@@ -28,9 +37,17 @@ class WPRM_Import_Helper {
 	 */
 	public static function get_or_upload_attachment( $post_id, $url ) {
 		$url = str_replace( array( "\n", "\t", "\r" ), '', $url );
+
+		// Check if already handled and cached.
+		if ( array_key_exists( $url, self::$images ) ) {
+			return self::$images[ $url ];
+		}
+
+		// Not handled yet, try to get attachment ID or upload.
 		$image_id = self::get_attachment_id_from_url( $url );
 
 		if ( $image_id ) {
+			self::$images[ $url ] = intval( $image_id );
 			return intval( $image_id );
 		} else {
 			if ( ! function_exists( 'media_sideload_image' ) ) {
@@ -42,6 +59,7 @@ class WPRM_Import_Helper {
 			$attachment_id = media_sideload_image( $url, $post_id, null, 'id' );
 
 			if ( ! is_wp_error( $attachment_id ) ) {
+				self::$images[ $url ] = $attachment_id;
 				return $attachment_id;
 			}
 		}

@@ -15,6 +15,7 @@ import ButtonWrap from './ButtonWrap';
 import Spacer from './Spacer';
 import ToolbarAffiliateLink from './ToolbarAffiliateLink';
 import ToolbarLink from './ToolbarLink';
+import ToolbarTemperature from './ToolbarTemperature';
 import ToolbarSuggest from './ToolbarSuggest';
 
 const Toolbar = (props) => {
@@ -61,6 +62,7 @@ const Toolbar = (props) => {
 		<ModalToolbar>
 			<ToolbarAffiliateLink/>
 			<ToolbarLink/>
+			<ToolbarTemperature/>
 			{
 				( 'ingredient' === props.type || 'equipment' === props.type )
 				&&
@@ -124,6 +126,11 @@ const Toolbar = (props) => {
 							before="[timer minutes=0]"
 							after="[/timer]"
 							Icon={ () => <Icon type="clock" title={ __wprm( 'Add Timer Shortcode' ) } /> }
+						/>
+						<ButtonBlock
+							type="temperature"
+							IconAdd={ () => <Icon type="temperature" title={ __wprm( 'Add Temperature' ) } /> }
+							IconRemove={ () => <Icon type="temperature" title={ __wprm( 'Remove Temperature' ) } /> }
 						/>
 						<Spacer />
 						<ButtonCharacter character="½" />

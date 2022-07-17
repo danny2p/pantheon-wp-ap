@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.elementor = {
 	init: () => {
         elementor.channels.editor.on( 'wprm:recipe:create', function( view ) {
