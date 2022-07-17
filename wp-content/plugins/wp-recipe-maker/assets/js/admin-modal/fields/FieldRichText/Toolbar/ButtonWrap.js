@@ -4,7 +4,7 @@ import { useSlate } from 'slate-react'
 
 import { __wprm } from 'Shared/Translations';
 
-const ButtonBlock = (props) => {
+const ButtonWrap = (props) => {
 	const editor = useSlate();
 
 	return (
@@ -41,4 +41,4 @@ const ButtonBlock = (props) => {
 		>{ props.Icon() }</span>
 	);
 }
-export default ButtonBlock;
+export default ButtonWrap;

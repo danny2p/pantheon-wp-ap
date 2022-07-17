@@ -181,9 +181,22 @@ class WPRM_SC_Slickstream extends WPRM_Template_Shortcode {
 			$style .= 'visibility: hidden;';
 		}
 
-		$output .= '<a href="#" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-slickstream-not-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '">' . $icon . __( $atts['text'], 'wp-recipe-maker' ) . '</a>';
+		// Text and optional aria-label.
+		$text = __( $atts['text'], 'wp-recipe-maker' );
+		$text_added = __( $atts['text_added'], 'wp-recipe-maker' );
+
+		$aria_label = '';
+		if ( ! $text ) {
+			$aria_label = ' aria-label="' . __( 'Save to Slickstream', 'wp-recipe-maker' ) . '"';
+		}
+		$aria_label_added = '';
+		if ( ! $text_added ) {
+			$aria_label_added = ' aria-label="' . __( 'Unsave from Slickstream', 'wp-recipe-maker' ) . '"';
+		}
+
+		$output .= '<a href="#" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-slickstream-not-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label . '>' . $icon . $text . '</a>';
 		$style .= 'display: none;';
-		$output .= '<a href="#" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-slickstream-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '">' . $icon_added . __( $atts['text_added'], 'wp-recipe-maker' ) . '</a>';
+		$output .= '<a href="#" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-slickstream-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label_added . '>' . $icon_added . $text_added . '</a>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

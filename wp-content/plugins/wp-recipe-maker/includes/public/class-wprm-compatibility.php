@@ -269,7 +269,7 @@ class WPRM_Compatibility {
 	 * @param	mixed $output Current ingredients output.
 	 */
 	public static function instacart_after_ingredients( $output ) {
-		if ( WPRM_Settings::get( 'integration_instacart' ) ) {
+		if ( WPRM_Settings::get( 'integration_instacart_agree' ) && WPRM_Settings::get( 'integration_instacart' ) ) {
 			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-shop-instacart]' );
 		}
 
@@ -285,7 +285,7 @@ class WPRM_Compatibility {
 		if ( apply_filters( 'wprm_load_instacart', false ) ) {
 			// Make sure to only load JS if they actually agree to the terms.
 			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
-				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle.js"; js.async = true; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
+				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle-v2.js"; js.async = true; js.dataset.source_origin = "recipemaker"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
 			}
 		}
 	}

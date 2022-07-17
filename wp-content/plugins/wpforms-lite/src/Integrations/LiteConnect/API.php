@@ -447,7 +447,7 @@ class API {
 			$wpforms_settings                               = get_option( 'wpforms_settings', [] );
 			$wpforms_settings[ LiteConnect::SETTINGS_SLUG ] = 0;
 
-			wpforms_update_settings( $wpforms_settings );
+			update_option( 'wpforms_settings',  $wpforms_settings );
 		}
 
 		// Store actual attempt counter value to the option.

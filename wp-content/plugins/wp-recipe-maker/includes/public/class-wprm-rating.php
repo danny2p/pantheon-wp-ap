@@ -244,7 +244,7 @@ class WPRM_Rating {
 			}
 
 			// Average decimals.
-			$formatted_average = round( $rating['average'], $decimals );
+			$formatted_average = WPRM_Recipe_Parser::format_quantity( $rating['average'], $decimals );
 			
 			// Replace placeholders.
 			$text = str_ireplace( '%average%', '<span class="wprm-recipe-rating-average">' . $formatted_average . '</span>', $text );

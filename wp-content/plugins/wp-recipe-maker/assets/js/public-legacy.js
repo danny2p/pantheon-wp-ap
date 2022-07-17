@@ -1,4 +1,3 @@
-
 // Polyfills.
 import 'whatwg-fetch';
 
@@ -10,6 +9,7 @@ import './public/pinterest';
 import './public/print';
 import './public/slickstream';
 import './public/smooth-scroll';
+import './public/temperature';
 import './public/video';
 
 import '../css/public/comments.scss';

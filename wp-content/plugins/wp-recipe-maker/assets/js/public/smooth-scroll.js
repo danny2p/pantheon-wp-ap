@@ -1,5 +1,7 @@
 import animateScrollTo from 'animated-scroll-to';
 
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.jump = {
 	init: () => {
 		document.addEventListener( 'click', function(e) {

@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.analytics = {
 	init: () => {
 		if ( wprm_public.settings.analytics_enabled ) {

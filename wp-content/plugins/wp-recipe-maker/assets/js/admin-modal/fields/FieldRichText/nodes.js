@@ -27,6 +27,27 @@ export const Element = ({ attributes, children, element }) => {
 			)
 		case 'code':
 			return <wprm-code>{children}</wprm-code>
+		case 'temperature':
+			let icon = null;
+			if ( element.icon && wprm_admin.temperature.icons.hasOwnProperty( element.icon ) ) {
+				icon = (
+					<img
+						src={ wprm_admin.temperature.icons[ element.icon ].url }
+						className="wprm-temperature-icon"
+						contentEditable={false}
+					/>
+				)
+			}
+
+			let unit = null;
+			if ( element.unit ) {
+				unit = <span contentEditable={false}> °{ element.unit }</span>;
+			}
+			return <wprm-temperature
+						icon={ element.icon }
+						unit={ element.unit }
+						help={ element.help }
+					>{ icon }{ children }{ unit }</wprm-temperature>
 		default:
 			return <p {...attributes}>{children}</p>
 	}

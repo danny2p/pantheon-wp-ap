@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 window.WPRecipeMaker.grow = {
 	init: () => {
         // Make sure growMe is initialized or add temp function.

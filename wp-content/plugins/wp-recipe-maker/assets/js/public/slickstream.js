@@ -1,3 +1,5 @@
+window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
+
 // Source: https://github.com/slickstream/docs/tree/main/engagement/1.x#slickstream-javascript-api-v10.
 window.WPRecipeMaker.slickstream = {
 	init: () => {

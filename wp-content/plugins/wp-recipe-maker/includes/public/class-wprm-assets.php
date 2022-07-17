@@ -229,6 +229,8 @@ class WPRM_Assets {
 			),
 		);
 
+		$wprm_admin = apply_filters( 'wprm_localize_admin', $wprm_admin );
+
 		// Shared loads first, so localize then.
 		wp_localize_script( 'wprm-shared', 'wprm_admin', $wprm_admin );
 	}

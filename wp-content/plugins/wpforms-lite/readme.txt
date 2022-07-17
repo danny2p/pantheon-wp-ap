@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.0
-Stable tag: 1.7.5.1
+Stable tag: 1.7.5.2
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -179,7 +179,7 @@ Since contact forms are essential for marketing, WPForms is a must have plugin f
 * <a href="https://wpforms.com/addons/sendinblue-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Sendinblue Forms</a> - Create Sendinblue forms to automate your marketing and engage your subscribers.
 * <a href="https://wpforms.com/addons/mailerlite-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">MailerLite Forms</a> - Create MailerLite forms to easily add subscribers to your email marketing lists.
 * <a href="https://wpforms.com/addons/salesforce-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Salesforce Forms</a> - Easily send your WordPress form contacts and leads to your Salesforce CRM account.
-* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 4000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
+* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 5000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
 
 After reading this feature list, you can probably imagine why WPForms is the best WordPress contact form plugin on the market.
 
@@ -369,7 +369,7 @@ Using our Zapier integration, you can easily connect WPForms with over 1000+ mar
 
 See all <a href="https://zapier.com/apps/wpforms/integrations">WPForms Zapier Integrations</a>.
 
-Note: WPForms was voted Zapier's 8th fastest growing app in the world.
+Note: WPForms was voted Zapier's 6th fastest growing app in the world.
 
 = Can I create a Payment Form with WPForms =
 
@@ -429,9 +429,13 @@ Syed Balkhi
 
 == Changelog ==
 
+= 1.7.5.2 =
+- Fixed: Increase chances for the templates inside the Form Builder to load properly, so occasional empty form creation from a template should be gone.
+- Fixed: PHP fatal error was generated in some cases when Lite Connect attempted to generate site key too many times.
+
 = 1.7.5.1 =
-- v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
-- Form Tags: incorrect links to filter by tags were generated right after saving tags.
+- Fixed: v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
+- Fixed: Incorrect Form Tags links to filter by tags were generated right after saving tags.
 
 = 1.7.5 =
 - Added: Form Tags: add tags to forms with an ability to filter by them; bulk add/edit/delete tags for multiple forms.

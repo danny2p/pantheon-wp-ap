@@ -1,8 +1,12 @@
 == Changelog ==
 
+= 1.7.5.2 =
+- Fixed: Increase chances for the templates inside the Form Builder to load properly, so occasional empty form creation from a template should be gone.
+- Fixed: PHP fatal error was generated in some cases when Lite Connect attempted to generate site key too many times.
+
 = 1.7.5.1 =
-- v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
-- Form Tags: incorrect links to filter by tags were generated right after saving tags.
+- Fixed: v1.7.5 migration did not complete when a database prefix other than `wp_` was used.
+- Fixed: Incorrect Form Tags links to filter by tags were generated right after saving tags.
 
 = 1.7.5 =
 - Added: Form Tags: add tags to forms with an ability to filter by them; bulk add/edit/delete tags for multiple forms.

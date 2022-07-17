@@ -44,6 +44,7 @@ An overview of WP Recipe Maker features:
 *   Include a **recipe video** in the template and metadata
 *   Add **photos or videos** to any step of the recipe
 *   Print recipe and **jump to recipe** shortcodes
+*   Temperature shortcode with **oven symbols**
 *   This plugin is **fully responsive**, your recipes will look good on any device
 *   Easily change the look and feel to fit your website in the **Template Editor**
 *   Structure your ingredients and instructions in **groups** (e.g. icing and cake batter)
@@ -135,6 +136,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.4.0 =
+* Feature: Temperature shortcode with oven symbols
+* Improvement: Prevent same image from getting imported multiple times
+* Improvement: Add aria-label if no text has been set for a button
+* Fix: Use decimal character from settings for average rating
+
 = 8.3.0 =
 * Feature: Shop Ingredients with Instacart button
 * Improvement: Quick insert icon for group names
@@ -1397,6 +1404,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.4.0 =
+New temperature shortcode with oven symbols
+
 = 8.3.0 =
 Instacart integration, some improvements and fixes
 
