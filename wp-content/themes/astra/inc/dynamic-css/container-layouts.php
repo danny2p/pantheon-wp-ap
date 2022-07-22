@@ -115,10 +115,10 @@ function astra_container_layout_css() {
 				}
 			';
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-			if ( false === astra_check_any_page_builder_is_active( astra_get_post_id() ) ) {
+			if ( true === apply_filters( 'astra_stretched_layout_with_spacing', true ) && false === astra_check_any_page_builder_is_active( astra_get_post_id() ) ) {
 				/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 				$page_container_css .= '
-					.ast-single-post.ast-page-builder-template .site-main > article {
+					.ast-single-post.ast-page-builder-template .site-main > article, .woocommerce.ast-page-builder-template .site-main {
 						padding-top: 2em;
 						padding-left: 20px;
 						padding-right: 20px;

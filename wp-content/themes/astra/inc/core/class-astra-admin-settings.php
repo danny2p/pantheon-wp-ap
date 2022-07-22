@@ -1191,7 +1191,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 
 					'ultimate-addons-for-gutenberg' =>
 						array(
-							'plugin-name'        => __( 'Ultimate Addons for Gutenberg', 'astra' ),
+							'plugin-name'        => __( 'Spectra – WordPress Gutenberg Blocks', 'astra' ),
 							'plugin-init'        => 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php',
 							'settings-link'      => admin_url( 'options-general.php?page=uag' ),
 							'settings-link-text' => 'Settings',

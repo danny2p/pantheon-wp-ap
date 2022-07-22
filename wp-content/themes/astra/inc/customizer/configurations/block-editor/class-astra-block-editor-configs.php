@@ -86,6 +86,7 @@ if ( ! class_exists( 'Astra_Block_Editor_Configs' ) ) {
 							'value'    => 'custom',
 						),
 					),
+					'divider'           => array( 'ast_class' => 'ast-section-spacing' ),
 				),
 				array(
 					'name'     => ASTRA_THEME_SETTINGS . '[wp-blocks-ui-description]',
@@ -93,7 +94,7 @@ if ( ! class_exists( 'Astra_Block_Editor_Configs' ) ) {
 					'control'  => 'ast-description',
 					'section'  => 'section-block-editor',
 					'priority' => 10,
-					'help'     => '<p style="margin-top: -10px;">' . __( 'Global padding setting for WordPress Group, Column, Cover blocks, it can be overridden by respective block\'s Dimension setting.', 'astra' ) . '</p>',
+					'help'     => '<p style="margin-top: -5px;">' . __( 'Global padding setting for WordPress Group, Column, Cover blocks, it can be overridden by respective block\'s Dimension setting.', 'astra' ) . '</p>',
 					'settings' => array(),
 				),
 			);

@@ -786,7 +786,7 @@ class WPForms_Process {
 		$fields = apply_filters( 'wpforms_entry_email_data', $fields, $entry, $form_data );
 
 		// Backwards compatibility for notifications before v1.4.3.
-		if ( empty( $form_data['settings']['notifications'] ) ) {
+		if ( empty( $form_data['settings']['notifications'] ) && ! empty( $form_data['settings']['notification_email'] ) ) {
 			$notifications[1] = array(
 				'email'          => $form_data['settings']['notification_email'],
 				'subject'        => $form_data['settings']['notification_subject'],

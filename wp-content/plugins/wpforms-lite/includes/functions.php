@@ -219,10 +219,16 @@ function wpforms_current_url() {
 
 	$parsed_home_url = wp_parse_url( home_url() );
 
-	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-	$path = wp_unslash( $_SERVER['REQUEST_URI'] );
+	$url = $parsed_home_url['scheme'] . '://' . $parsed_home_url['host'];
 
-	return esc_url_raw( $parsed_home_url['scheme'] . '://' . $parsed_home_url['host'] . $path );
+	if ( ! empty( $parsed_home_url['port'] ) ) {
+		$url .= ':' . $parsed_home_url['port'];
+	}
+
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$url .= wp_unslash( $_SERVER['REQUEST_URI'] );
+
+	return esc_url_raw( $url );
 }
 
 /**

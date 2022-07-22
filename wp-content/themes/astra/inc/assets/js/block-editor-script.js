@@ -180,8 +180,8 @@ if(true === blockCssMode){
 }
 	
 
-	var blockFixCss = blockCss.cloneNode(true);
-	var blockInlineCss = inlineCss.cloneNode(true);
+	var blockFixCss = null !== blockCss ? blockCss.cloneNode(true) : null;
+	var blockInlineCss = null !== inlineCss ?  inlineCss.cloneNode(true) : null;
 	var blockfontCss = null !== fontCss ? fontCss.cloneNode(true) : null;
 
 	setTimeout( function() {

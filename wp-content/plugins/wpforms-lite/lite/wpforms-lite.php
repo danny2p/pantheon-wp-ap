@@ -14,7 +14,7 @@ class WPForms_Lite {
 	/**
 	 * Primary class constructor.
 	 *
-	 * @since 1.2.x
+	 * @since 1.2.2
 	 */
 	public function __construct() {
 
@@ -840,26 +840,6 @@ class WPForms_Lite {
 							<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'entries' ) ); ?>" class="wpforms-btn wpforms-btn-lg wpforms-btn-orange wpforms-upgrade-modal" target="_blank" rel="noopener noreferrer">
 								<?php esc_html_e( 'Upgrade to WPForms Pro Now', 'wpforms-lite' ); ?>
 							</a>
-
-							<?php
-								if ( $is_lite_connect_allowed ) {
-									echo '<p>';
-									esc_html_e( 'Not ready to upgrade?', 'wpforms-lite' );
-
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									echo wpforms_panel_field_toggle_control(
-										[
-											'control-class' => 'wpforms-setting-lite-connect-auto-save-toggle',
-										],
-										'wpforms-setting-lite-connect-enabled',
-										'',
-										esc_html__( 'Enable Form Entry Backups for free', 'wpforms-lite' ),
-										$is_lite_connect_enabled,
-										'disabled'
-									);
-									echo '</p>';
-								}
-							?>
 
 						<?php endif; ?>
 					</div>

@@ -71,36 +71,6 @@ class WPForms_Builder_Panel_Setup extends WPForms_Builder_Panel {
 	}
 
 	/**
-	 * Get templates.
-	 *
-	 * @since 1.6.8
-	 *
-	 * @return array
-	 */
-	private function get_templates() {
-		/**
-		 * Form templates available in the WPForms core plugin.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $templates Core templates data.
-		 */
-		$core_templates = apply_filters( 'wpforms_form_templates_core', [] );
-
-		/**
-		 * Form templates available with the WPForms addons.
-		 * Allows developers to provide additional templates with an addons.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $templates Addons templates data.
-		 */
-		$additional_templates = apply_filters( 'wpforms_form_templates', [] );
-
-		return array_merge( (array) $core_templates, (array) $additional_templates );
-	}
-
-	/**
 	 * Output the Settings panel primary content.
 	 *
 	 * @since 1.0.0
@@ -141,7 +111,7 @@ class WPForms_Builder_Panel_Setup extends WPForms_Builder_Panel {
 
 		<?php
 		ob_start();
-		$this->template_select_options( $this->get_templates() );
+		$this->template_select_options( wpforms()->get( 'builder_templates' )->get_templates() );
 		$templates = ob_get_clean();
 		?>
 

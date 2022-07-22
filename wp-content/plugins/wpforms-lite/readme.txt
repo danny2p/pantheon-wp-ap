@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.0
-Stable tag: 1.7.5.2
+Stable tag: 1.7.5.3
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -428,6 +428,13 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.7.5.3 =
+- Added: New filter to modify CSS classes of the form submit button on the frontend.
+- Changed: Improve cached templates handling in the Form Builder.
+- Fixed: Retrieving a current URL should not strip a custom port.
+- Fixed: "JavaScript file not found" error when the "Load Assets Globally" option was enabled in Settings > General.
+- Fixed: Do not cache an incorrect or empty response from the Templates API.
 
 = 1.7.5.2 =
 - Fixed: Increase chances for the templates inside the Form Builder to load properly, so occasional empty form creation from a template should be gone.

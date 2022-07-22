@@ -1616,3 +1616,19 @@ function astra_post_navigation_template() {
 }
 
 add_filter( 'navigation_markup_template', 'astra_post_navigation_template' );
+
+/**
+ * Prevent onboarding of Elementor.
+ *
+ * @param bool $network_wide Whether to enable the plugin for all sites in the network
+ *                            or just the current site. Multisite only. Default false.
+ *
+ * @since 3.9.0
+ */
+function astra_skip_elementor_onboarding( $network_wide ) {
+	// Deleted transient & setting up onboaded flag true to skip steps.
+	delete_transient( 'elementor_activation_redirect' );
+	update_option( 'elementor_onboarded', true );
+}
+
+add_action( 'activate_elementor/elementor.php', 'astra_skip_elementor_onboarding' );

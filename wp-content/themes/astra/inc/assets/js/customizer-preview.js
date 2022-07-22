@@ -38,6 +38,15 @@
             }
         );
 
+        /**
+         * Ajax quantity input show.
+         */
+        wp.customize( 'astra-settings[woo-header-cart-click-action]', function( setting ) {
+            setting.bind( function( action ) {
+                $( document.body ).trigger( 'wc_fragment_refresh' );
+            } );
+        } );
+
 		/**
 		 * Register partial refresh events at once asynchronously.
 		 */
@@ -241,6 +250,22 @@ wp.customize( 'astra-settings[edd-archive-width]', function( value ) {
         dynamicStyle += '} ';
 
         astra_add_dynamic_css( 'edd-archive-width', dynamicStyle );
+    } );
+} );
+
+// WooCommerce store notice color configs.
+astra_css( 'astra-settings[store-notice-text-color]', 'color', 'body p.demo_store, body .woocommerce-store-notice, body p.demo_store a, body .woocommerce-store-notice a' );
+astra_css( 'astra-settings[store-notice-background-color]', 'background-color', 'body p.demo_store, body .woocommerce-store-notice, body p.demo_store a, body .woocommerce-store-notice a' );
+
+// WooCommerce store notice position preview.
+wp.customize( 'astra-settings[store-notice-position]', function( setting ) {
+    setting.bind( function( position ) {
+		if( 'hang-over-top' === position ) {
+			wp.customize.preview.send( 'refresh' );
+		} else {
+			jQuery('body').removeClass( 'ast-woocommerce-store-notice-hanged' );
+			jQuery('.woocommerce-store-notice').attr( 'data-position', position );
+		}
     } );
 } );
 
