@@ -10,13 +10,13 @@ namespace WPForms\Admin\Builder;
 class Templates {
 
 	/**
-	 * All templates data.
+	 * All templates data from API.
 	 *
 	 * @since 1.6.8
 	 *
 	 * @var array
 	 */
-	private $templates;
+	private $api_templates;
 
 	/**
 	 * Template categories data.
@@ -141,6 +141,13 @@ class Templates {
 		$templates_access = [];
 		$templates_denied = [];
 
+		/**
+		 * The form template was moved to wpforms/includes/templates/class-simple-contact-form.php file.
+		 *
+		 * @since 1.7.5.3
+		 */
+		unset( $templates_all['simple-contact-form-template'] );
+
 		foreach ( $templates_all as $i => $template ) {
 			$template['has_access'] = $this->has_access( $template );
 			$template['license']    = $this->get_license_level( $template );
@@ -170,8 +177,8 @@ class Templates {
 		$templates_higher = array_replace( array_flip( $higher_templates_slugs ), $templates_higher );
 		$templates_higher = array_filter( $templates_higher, 'is_array' );
 
-		// Finally, merge everything together.
-		$this->templates = array_merge( $templates_higher, $templates_access, $templates_denied );
+		// Finally, merge templates from API.
+		$this->api_templates = array_merge( $templates_higher, $templates_access, $templates_denied );
 	}
 
 	/**
@@ -198,6 +205,28 @@ class Templates {
 		}
 
 		return $has_access;
+	}
+
+	/**
+	 * Determine if the template exists and the customer has access to it.
+	 *
+	 * @since 1.7.5.3
+	 *
+	 * @param string $slug Template slug or ID.
+	 *
+	 * @return bool
+	 */
+	public function is_valid_template( $slug ) {
+
+		$template = $this->get_template_by_id( $slug );
+
+		if ( ! $template ) {
+			return ! empty( $this->get_template_by_slug( $slug ) );
+		}
+
+		$has_cache = wpforms()->get( 'builder_template_single' )->instance( $template['id'], $this->license )->get_cached();
+
+		return $this->has_access( $template ) && $has_cache;
 	}
 
 	/**
@@ -251,7 +280,34 @@ class Templates {
 	 */
 	public function get_templates() {
 
-		return $this->templates;
+		static $templates = [];
+
+		if ( ! empty( $templates ) ) {
+			return $templates;
+		}
+
+		/**
+		 * Form templates available in the WPForms core plugin.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array $templates Core templates data.
+		 */
+		$core_templates = (array) apply_filters( 'wpforms_form_templates_core', [] );
+
+		/**
+		 * Form templates available with the WPForms addons.
+		 * Allows developers to provide additional templates with an addons.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array $templates Addons templates data.
+		 */
+		$additional_templates = (array) apply_filters( 'wpforms_form_templates', [] );
+
+		$templates = array_merge( $core_templates, $additional_templates );
+
+		return $templates;
 	}
 
 	/**
@@ -265,10 +321,18 @@ class Templates {
 	 */
 	private function get_template( $slug ) {
 
-		$template = isset( $this->templates[ $slug ] ) ? $this->templates[ $slug ] : $this->get_template_by_id( $slug );
+		$template = $this->get_template_by_slug( $slug );
+
+		if ( ! $template ) {
+			$template = $this->get_template_by_id( $slug );
+		}
 
 		if ( empty( $template ) ) {
 			return [];
+		}
+
+		if ( empty( $template['id'] ) ) {
+			return $template;
 		}
 
 		// Attempt to get template with form data (if available).
@@ -285,6 +349,26 @@ class Templates {
 	}
 
 	/**
+	 * Get template data by slug.
+	 *
+	 * @since 1.7.5.3
+	 *
+	 * @param string $slug Template slug.
+	 *
+	 * @return array
+	 */
+	private function get_template_by_slug( $slug ) {
+
+		foreach ( $this->get_templates() as $template ) {
+			if ( ! empty( $template['slug'] ) && $template['slug'] === $slug ) {
+				return $template;
+			}
+		}
+
+		return [];
+	}
+
+	/**
 	 * Get template data by Id.
 	 *
 	 * @since 1.6.8
@@ -295,17 +379,13 @@ class Templates {
 	 */
 	private function get_template_by_id( $id ) {
 
-		$templates_by_id = [];
-
-		foreach ( $this->templates as $template ) {
-			if ( ! empty( $template['id'] ) ) {
-				$templates_by_id[ $template['id'] ] = ! empty( $template['slug'] ) ? $template['slug'] : '';
+		foreach ( $this->api_templates as $template ) {
+			if ( ! empty( $template['id'] ) && $template['id'] === $id ) {
+				return $template;
 			}
 		}
 
-		$slug = isset( $templates_by_id[ $id ] ) ? $templates_by_id[ $id ] : '';
-
-		return isset( $this->templates[ $slug ] ) ? $this->templates[ $slug ] : [];
+		return [];
 	}
 
 	/**
@@ -319,7 +399,7 @@ class Templates {
 	 */
 	public function add_templates_to_setup_panel( $templates ) {
 
-		return array_merge( $templates, $this->templates );
+		return array_merge( $templates, $this->api_templates );
 	}
 
 	/**

@@ -129,19 +129,31 @@ add_action( 'wp_ajax_wpforms_save_form', 'wpforms_save_form' );
  */
 function wpforms_new_form() {
 
-	// Run a security check.
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
 
-	// Check for form name.
 	if ( empty( $_POST['title'] ) ) {
-		die( esc_html__( 'No form name provided.', 'wpforms-lite' ) );
+		wp_send_json_error(
+			[
+				'error_type' => 'missing_form_title',
+				'message'    => esc_html__( 'No form name provided.', 'wpforms-lite' ),
+			]
+		);
 	}
 
-	// Create form.
 	$form_title    = sanitize_text_field( wp_unslash( $_POST['title'] ) );
 	$form_template = empty( $_POST['template'] ) ? 'blank' : sanitize_text_field( wp_unslash( $_POST['template'] ) );
-	$title_exists  = get_page_by_title( $form_title, 'OBJECT', 'wpforms' );
-	$form_id       = wpforms()->form->add(
+
+	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
+		wp_send_json_error(
+			[
+				'error_type' => 'invalid_template',
+				'message'    => esc_html__( 'The template you selected is currently not available, but you can try again later. If you continue to have trouble, please reach out to support.', 'wpforms-lite' ),
+			]
+		);
+	}
+
+	$title_exists = get_page_by_title( $form_title, 'OBJECT', 'wpforms' );
+	$form_id      = wpforms()->get( 'form' )->add(
 		$form_title,
 		[],
 		[
@@ -166,7 +178,12 @@ function wpforms_new_form() {
 	}
 
 	if ( ! $form_id ) {
-		die( esc_html__( 'Error creating form.', 'wpforms-lite' ) );
+		wp_send_json_error(
+			[
+				'error_type' => 'cant_create_form',
+				'message'    => esc_html__( 'Error creating form.', 'wpforms-lite' ),
+			]
+		);
 	}
 
 	if ( wpforms_current_user_can( 'edit_form_single', $form_id ) ) {
@@ -206,11 +223,25 @@ function wpforms_update_form_template() {
 
 	// Check for form name.
 	if ( empty( $_POST['form_id'] ) ) {
-		wp_send_json_error( esc_html__( 'No form ID provided.', 'wpforms-lite' ) );
+		wp_send_json_error(
+			[
+				'error_type' => 'invalid_form_id',
+				'message'    => esc_html__( 'No form ID provided.', 'wpforms-lite' ),
+			]
+		);
 	}
 
 	$form_id       = absint( $_POST['form_id'] );
 	$form_template = empty( $_POST['template'] ) ? 'blank' : sanitize_text_field( wp_unslash( $_POST['template'] ) );
+
+	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
+		wp_send_json_error(
+			[
+				'error_type' => 'invalid_template',
+				'message'    => esc_html__( 'The template you selected is currently not available, but you can try again later. If you continue to have trouble, please reach out to support.', 'wpforms-lite' ),
+			]
+		);
+	}
 
 	$data    = wpforms()->form->get(
 		$form_id,
@@ -241,7 +272,12 @@ function wpforms_update_form_template() {
 		);
 	}
 
-	wp_send_json_error( esc_html__( 'Error updating form template.', 'wpforms-lite' ) );
+	wp_send_json_error(
+		[
+			'error_type' => 'cant_update',
+			'message'    => esc_html__( 'Error updating form template.', 'wpforms-lite' ),
+		]
+	);
 }
 
 add_action( 'wp_ajax_wpforms_update_form_template', 'wpforms_update_form_template' );

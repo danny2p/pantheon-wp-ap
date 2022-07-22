@@ -1034,15 +1034,37 @@ class WPForms_Frontend {
 	 */
 	public function foot( $form_data, $deprecated, $title, $description, $errors ) {
 
-		$form_id    = absint( $form_data['id'] );
-		$settings   = $form_data['settings'];
-		$submit     = apply_filters( 'wpforms_field_submit', $settings['submit_text'], $form_data );
+		$form_id  = absint( $form_data['id'] );
+		$settings = $form_data['settings'];
+
+		/**
+		 * Filter form submit button text.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $submit_text Submit button text.
+		 * @param array  $form_data   Form data.
+		 */
+		$submit = apply_filters( 'wpforms_field_submit', $settings['submit_text'], $form_data ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
+
 		$attrs      = [
 			'aria-live' => 'assertive',
 			'value'     => 'wpforms-submit',
 		];
 		$data_attrs = [];
-		$classes    = [ 'wpforms-submit' ];
+
+		/**
+		 * Filter form submit button classes.
+		 *
+		 * @since 1.7.5.3
+		 *
+		 * @param array $classes   Button classes.
+		 * @param array $form_data Form data.
+		 */
+		$classes = (array) apply_filters( 'wpforms_frontend_foot_submit_classes', [], $form_data );
+
+		// A lot of our frontend logic is dependent on this class, so we need to make sure it's present.
+		$classes = array_merge( $classes, [ 'wpforms-submit' ] );
 
 		// Check for submit button alt-text.
 		if ( ! empty( $settings['submit_text_processing'] ) ) {
@@ -1363,21 +1385,6 @@ class WPForms_Frontend {
 				WPFORMS_PLUGIN_URL . 'assets/lib/punycode.min.js',
 				[],
 				'1.0.0',
-				true
-			);
-		}
-
-		// Load CC payment library - https://github.com/stripe/jquery.payment/.
-		// TODO: should be moved out of here.
-		if (
-			$this->assets_global() ||
-			wpforms_has_field_type( 'credit-card', $this->forms, true )
-		) {
-			wp_enqueue_script(
-				'wpforms-payment',
-				WPFORMS_PLUGIN_URL . 'assets/pro/lib/jquery.payment.min.js',
-				[ 'jquery' ],
-				WPFORMS_VERSION,
 				true
 			);
 		}

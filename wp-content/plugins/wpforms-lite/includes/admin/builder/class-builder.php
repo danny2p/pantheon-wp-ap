@@ -570,6 +570,7 @@ class WPForms_Builder {
 			'template_modal_display'         => ! empty( $this->template['modal_display'] ) ? $this->template['modal_display'] : '',
 			'template_select'                => esc_html__( 'Use Template', 'wpforms-lite' ),
 			'template_confirm'               => esc_html__( 'Changing templates on an existing form will DELETE existing form fields. Are you sure you want apply the new template?', 'wpforms-lite' ),
+			'use_simple_contact_form'        => esc_html__( 'Use Simple Contact Form Template', 'wpforms-lite' ),
 			'embed'                          => esc_html__( 'Embed', 'wpforms-lite' ),
 			'exit'                           => esc_html__( 'Exit', 'wpforms-lite' ),
 			'exit_url'                       => wpforms_current_user_can( 'view_forms' ) ? admin_url( 'admin.php?page=wpforms-overview' ) : admin_url(),

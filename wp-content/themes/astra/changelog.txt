@@ -1,3 +1,24 @@
+v3.9.0
+- New: Redesigned the entire customizer UI for better user experience.
+- New: WooCommerce - Product Catalog - Introduced content layout & sidebar option.
+- New: WooCommerce - General - Introduced store notice text color & background color options.
+- New: WooCommerce - General - Introduced store notice position option.
+- New: WooCommerce - Single Product- Introduced Option to add free shipping text next to WooCommerce single product price.
+- New: WooCommerce - Single Product - Introduced Product Variation Orientation option.
+- New: WooCommerce Cart - Option for enabling desktop offcanvas cart flyout.
+- New: WooCommerce Cart - Option to update offcanvas flyout direction.
+- New: WooCommerce Cart - Option to change offcanvas flyout width.
+- New: WooCommerce Cart - Introduced cart icon hover color option.
+- New: WooCommerce Cart - Introduced cart Margin and Padding spacing option.
+- New: WooCommerce Cart - Introduced cart total Label position option.
+- New: WooCommerce Cart - Introduced Icon size option in the WooCommerce Cart.
+- New: WooCommerce Cart - Introduced show/hide cart total badge option.
+- Improvement: Categorized & segregated global options into respective sections of customizer.
+- Improvement: WooCommerce Cart - Modify the Cart label section via Shortcodes. ( https://wpastra.com/docs/improvement-woocommerce-modify-the-cart-label-design/ )
+- Improvement: Introduced filter 'astra_stretched_layout_with_spacing' to exclude Stretched layout around spacing CSS. ( https://wpastra.com/docs/improved-block-editor-experience/ )
+- Improvement: Introduced filter 'astra_get_store_sidebar_layout' to extend sidebar option for the WooCommerce layout.
+- Fix: WooCommerce - Margin issue for single shop page with the Full width & Contained Layout.
+
 v3.8.5
 - Fix: Getting top spacing for entry-header in case of page builder template.
 
@@ -92,6 +113,7 @@ v3.7.6
 - Improvement: Builder - Button - Added typography options from Astra Pro to free theme.
 - Fix: Mobile menu does not close when you click a one page navigation link inside them.
 - Fix: Responsive color options from 'color-group-control' are hiding when trying to set them in responsive devices.
+- Fix: Global button design options are not working in customizer preview for WooCommerce buttons.
 - Fix: Removed unwanted title and desc tag present for search icon.
 - Fix: WooCommerce Pagination markup misaligned on mobile devices.
 - Fix: Gutenberg separator dots not appearing properly on frontend.
@@ -112,6 +134,7 @@ v3.7.4
 - Improvement: Gutenberg frontend blocks UI improvement. ( https://wpastra.com/docs/gutenberg-ui-improvements-with-astra/ )
 - Improvement: Global – Typography – Heading presets value should also retain in H1 to H6.
 - Improvement: Moved Astra meta settings into a separate Gutenberg sidebar panel. ( https://wpastra.com/astra-3-7-4/ )
+- Improvement: Added Background color and hover color for WooCommerce Cart.
 - Fix: W3 validation - Getting duplicate H1 tag for site-title.
 - Fix: W3 validation - Duplicate HTML id '#site-navigation' if there are multiple menus on a single page.
 - Fix: W3 validation - CSS parse error for '.menu-link' & '.wp-block-button__link'.

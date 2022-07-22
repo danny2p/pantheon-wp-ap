@@ -358,7 +358,7 @@ function astra_load_modern_block_editor_ui( $dynamic_css ) {
 				padding: 0 10px;
 				color: var(--ast-global-color-3);
 				background: var(--ast-global-color-5);
-				border-color: #e5e5e5;
+				border-color: var(--ast-border-color);
 			}
 			.wp-block-latest-posts .read-more {
 				margin-bottom: 1.5em;

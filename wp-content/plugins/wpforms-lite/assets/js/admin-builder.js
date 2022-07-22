@@ -6319,10 +6319,11 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			$builder.on( 'change', app.getPaymentsTogglesSelector(), function( event ) {
 
 				var $this = $( this ),
-					gateway = $this.attr( 'id' ).replace( 'wpforms-panel-field-', '' ).replace( '-enable', '' ),
-					$notificationWrap = $( '.wpforms-panel-content-section-notifications [id*="-' + gateway + '-wrap"]' );
+					gateway = $this.attr( 'id' ).replace( /wpforms-panel-field-|-enable|_one_time|_recurring/gi, '' ),
+					$notificationWrap = $( '.wpforms-panel-content-section-notifications [id*="-' + gateway + '-wrap"]' ),
+					gatewayEnabled = $this.prop( 'checked' ) || $( '#wpforms-panel-field-' + gateway + '-enable_one_time' ).prop( 'checked' ) || $( '#wpforms-panel-field-' + gateway + '-enable_recurring' ).prop( 'checked' );
 
-				if ( $this.prop( 'checked' ) ) {
+				if ( gatewayEnabled ) {
 					var disabled = $( '#wpforms-panel-field-settings-disable_entries' ).prop( 'checked' );
 					if ( disabled ) {
 						$.confirm( {
@@ -6493,7 +6494,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			.wpforms-panel-content-section-payment-toggle-recurring input,
 			#wpforms-panel-field-stripe-enable,
 			#wpforms-panel-field-paypal_standard-enable,
-			#wpforms-panel-field-authorize_net-enable
+			#wpforms-panel-field-authorize_net-enable,
 			#wpforms-panel-field-square-enable`;
 		},
 

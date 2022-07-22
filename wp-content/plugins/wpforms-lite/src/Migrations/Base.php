@@ -176,7 +176,7 @@ abstract class Base {
 	public function update_versions() {
 
 		// Retrieve the last migrated versions.
-		$last_migrated = get_option( static::MIGRATED_OPTION_NAME );
+		$last_migrated = get_option( static::MIGRATED_OPTION_NAME, [] );
 		$migrated      = array_merge( $last_migrated, $this->migrated );
 
 		/**
@@ -331,7 +331,7 @@ abstract class Base {
 		 * zero means completed earlier at unknown time,
 		 * positive means completion timestamp.
 		 */
-		$this->migrated = get_option( static::MIGRATED_OPTION_NAME );
+		$this->migrated = get_option( static::MIGRATED_OPTION_NAME, [] );
 
 		if ( is_array( $this->migrated ) ) {
 			return;
@@ -347,6 +347,7 @@ abstract class Base {
 		 */
 		$this->migrated = get_option(
 			str_replace( 'versions', 'version', static::MIGRATED_OPTION_NAME )
+			[]
 		);
 
 		$version         = $this->migrated === false ? self::INITIAL_FAKE_VERSION : (string) $this->migrated;
