@@ -4326,6 +4326,9 @@ if ( ! class_exists( 'Astra_Dynamic_CSS' ) ) {
 				text-align: center;
 				margin-top: 0;
 			}
+			.astra-cart-drawer .widget_shopping_cart_content > .woocommerce-mini-cart__empty-message {
+				display: none;
+			}
 			.astra-cart-drawer .woocommerce-mini-cart__empty-message,
 			.astra-cart-drawer .cart_item.empty {
 				text-align: center;

@@ -1,3 +1,8 @@
+v3.9.1
+- Fix: WooCommerce - Child theme's WooCommerce custom templates gets overridden by parent theme.
+- Fix: Block editor - Row block's layout stack in editor.
+- Fix: PHP error with uncaught function 'ctype_xdigit' not found in common-functions.php on some specific servers.
+
 v3.9.0
 - New: Redesigned the entire customizer UI for better user experience.
 - New: WooCommerce - Product Catalog - Introduced content layout & sidebar option.

@@ -49,8 +49,14 @@ if ( ! function_exists( 'astra_get_foreground_color' ) ) {
 		}
 
 		// Return if non hex.
-		if ( ! ctype_xdigit( $hex ) ) {
-			return $hex;
+		if ( function_exists( 'ctype_xdigit' ) && is_callable( 'ctype_xdigit' ) ) {
+			if ( ! ctype_xdigit( $hex ) ) {
+				return $hex;
+			}
+		} else {
+			if ( ! preg_match( '/^[a-f0-9]{2,}$/i', $hex ) ) {
+				return $hex;
+			}
 		}
 
 		// Get r, g & b codes from hex code.
@@ -1028,8 +1034,14 @@ if ( ! function_exists( 'astra_adjust_brightness' ) ) {
 		$hex = str_replace( '#', '', $hex );
 
 		// Return if non hex.
-		if ( ! ctype_xdigit( $hex ) ) {
-			return $hex;
+		if ( function_exists( 'ctype_xdigit' ) && is_callable( 'ctype_xdigit' ) ) {
+			if ( ! ctype_xdigit( $hex ) ) {
+				return $hex;
+			}
+		} else {
+			if ( ! preg_match( '/^[a-f0-9]{2,}$/i', $hex ) ) {
+				return $hex;
+			}
 		}
 
 		$shortcode_atts = array(

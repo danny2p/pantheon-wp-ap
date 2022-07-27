@@ -140,7 +140,7 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'priority'   => 60,
 				'choices'    => array(
 					'default' => __( 'Dropdown Cart', 'astra' ),
-					'flyout'  => __( 'Offcanvas Cart', 'astra' ),
+					'flyout'  => __( 'Slide-In Cart', 'astra' ),
 				),
 				'responsive' => false,
 				'renderAs'   => 'text',
@@ -193,7 +193,7 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 						'value'    => 'flyout',
 					),
 				),
-				'title'       => __( 'Flyout Width', 'astra' ),
+				'title'       => __( 'Slide-In Cart Width', 'astra' ),
 				'control'     => 'ast-slider',
 				'suffix'      => 'px',
 				'priority'    => 70,
