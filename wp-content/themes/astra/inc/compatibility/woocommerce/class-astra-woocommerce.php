@@ -118,9 +118,6 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 				add_filter( 'woocommerce_single_product_summary', array( $this, 'woocommerce_shipping_text' ), 11, 0 );
 			}
 
-			// Changes Woocommerce template directory path.
-			add_action( 'wp', array( $this, 'woocommerce_template_directory_path_change' ), 1 );
-
 			// Register Dynamic Sidebars.
 			if ( is_customize_preview() ) {
 				add_action( 'widgets_init', array( $this, 'store_widgets_dynamic' ), 15 );
@@ -1058,6 +1055,8 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 		 * Remove Woo-Commerce Default actions
 		 */
 		public function woocommerce_init() {
+			add_action( 'woocommerce_after_mini_cart', array( $this, 'astra_update_flyout_cart_layout' ) );
+
 			remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 			remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
 			remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
@@ -2246,22 +2245,23 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 		}
 
 		/**
-		 * Change woocommerce template directory path
+		 * Add shopping CTA in cart flyout.
 		 *
 		 * @since 3.9.0
 		 */
-		public function woocommerce_template_directory_path_change() {
-			add_filter( 'woocommerce_template_path', array( $this, 'woocommerce_template_path' ) );
-		}
-
-		/**
-		 * Woocommerce template path
-		 *
-		 * @since 3.9.0
-		 * @return string
-		 */
-		public function woocommerce_template_path() {
-			return 'inc/compatibility/woocommerce/templates';
+		public function astra_update_flyout_cart_layout() {
+			if ( WC()->cart->is_empty() && 'flyout' === astra_get_option( 'woo-header-cart-click-action' ) ) {
+				?>
+					<div class="ast-mini-cart-empty">
+						<div class="ast-mini-cart-message">
+							<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'astra' ); ?></p>
+						</div>
+						<div class="woocommerce-mini-cart__buttons">
+							<a href="<?php /** @psalm-suppress PossiblyFalseArgument */  echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>" class="button wc-forward"><?php esc_html_e( 'Continue Shopping', 'astra' ); ?></a> <?php // phpcs:ignore Generic.Commenting.DocComment.MissingShort ?>
+						</div>
+					</div>
+				<?php
+			}
 		}
 
 		/**

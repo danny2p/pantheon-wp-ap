@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra 3.9.0\n"
+"Project-Id-Version: Astra 3.9.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/astra\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-20T09:37:34+00:00\n"
+"POT-Creation-Date: 2022-07-25T13:55:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: astra\n"
@@ -60,7 +60,7 @@ msgid "Breadcrumbs"
 msgstr ""
 
 #: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:417
-#: inc/core/common-functions.php:877
+#: inc/core/common-functions.php:883
 msgid "Home"
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgid "Loop End"
 msgstr ""
 
 #: inc/compatibility/edd/class-astra-edd.php:103
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:330
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:327
 #: inc/compatibility/woocommerce/customizer/class-astra-customizer-register-woo-section.php:55
 #: inc/core/builder/class-astra-builder-helper.php:690
 #: inc/core/builder/class-astra-builder-helper.php:700
@@ -1565,7 +1565,7 @@ msgid "Easy Digital Downloads"
 msgstr ""
 
 #: inc/compatibility/edd/class-astra-edd.php:445
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:2195
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:2194
 msgid "View your shopping cart"
 msgstr ""
 
@@ -1584,8 +1584,8 @@ msgid "Easy Digital Downloads Sidebar"
 msgstr ""
 
 #: inc/compatibility/edd/class-astra-edd.php:929
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:159
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:812
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:156
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:809
 msgid "This sidebar will be used on Product archive, Cart, Checkout and My Account pages."
 msgstr ""
 
@@ -2003,33 +2003,41 @@ msgstr ""
 msgid "Membership Columns"
 msgstr ""
 
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:157
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:810
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:154
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:807
 msgid "WooCommerce Sidebar"
 msgstr ""
 
 #. translators: 1: number of products
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:549
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:546
 msgctxt "product categories"
 msgid "%1$s Product"
 msgid_plural "%1$s Products"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:636
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:633
 msgid "& Free Shipping"
 msgstr ""
 
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:641
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:638
 msgid "Proceed to checkout"
 msgstr ""
 
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:824
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:821
 msgid "Product Sidebar"
 msgstr ""
 
-#: inc/compatibility/woocommerce/class-astra-woocommerce.php:826
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:823
 msgid "This sidebar will be used on Single Product page."
+msgstr ""
+
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:2257
+msgid "No products in the cart."
+msgstr ""
+
+#: inc/compatibility/woocommerce/class-astra-woocommerce.php:2260
+msgid "Continue Shopping"
 msgstr ""
 
 #: inc/compatibility/woocommerce/customizer/class-astra-customizer-register-woo-section.php:38
@@ -2155,18 +2163,6 @@ msgstr ""
 #: inc/compatibility/woocommerce/customizer/sections/layout/class-astra-woo-shop-single-layout-configs.php:165
 #: inc/compatibility/woocommerce/customizer/sections/layout/class-astra-woo-shop-single-layout-configs.php:184
 msgid "Button Width"
-msgstr ""
-
-#: inc/compatibility/woocommerce/templates/cart/mini-cart.php:55
-msgid "Remove this item"
-msgstr ""
-
-#: inc/compatibility/woocommerce/templates/cart/mini-cart.php:101
-msgid "No products in the cart."
-msgstr ""
-
-#: inc/compatibility/woocommerce/templates/cart/mini-cart.php:104
-msgid "Continue Shopping"
 msgstr ""
 
 #: inc/compatibility/woocommerce/woocommerce-common-functions.php:84
@@ -2774,21 +2770,21 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: inc/core/common-functions.php:883
+#: inc/core/common-functions.php:889
 msgid "This page doesn't seem to exist."
 msgstr ""
 
 #. translators: 1: search string
-#: inc/core/common-functions.php:889
-#: inc/core/common-functions.php:984
+#: inc/core/common-functions.php:895
+#: inc/core/common-functions.php:990
 msgid "Search Results for: %s"
 msgstr ""
 
-#: inc/core/common-functions.php:930
+#: inc/core/common-functions.php:936
 msgid "Author name: "
 msgstr ""
 
-#: inc/core/common-functions.php:1192
+#: inc/core/common-functions.php:1204
 msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr ""
@@ -3646,11 +3642,11 @@ msgid "Dropdown Cart"
 msgstr ""
 
 #: inc/customizer/configurations/builder/header/class-astra-customizer-woo-cart-configs.php:143
-msgid "Offcanvas Cart"
+msgid "Slide-In Cart"
 msgstr ""
 
 #: inc/customizer/configurations/builder/header/class-astra-customizer-woo-cart-configs.php:196
-msgid "Flyout Width"
+msgid "Slide-In Cart Width"
 msgstr ""
 
 #: inc/customizer/configurations/builder/header/class-astra-customizer-woo-cart-configs.php:216
