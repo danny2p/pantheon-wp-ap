@@ -7,7 +7,7 @@ License: MIT
 Requires PHP: 5.6
 Requires at least: 5.2
 Tested up to: 6.0
-Stable Tag: 3.1.0
+Stable Tag: 3.1.1
 
 This is a feature plugin for testing automatic rollback of a plugin or theme update failure.
 
@@ -30,7 +30,7 @@ This plugin will automatically deactivate itself once the feature has been commi
 
 ### VirtualBox
 
-If you are running a virtualized server and using VirtualBox your hosting environment will need to add a [mu-plugin and watcher script](https://gist.github.com/costdev/502a2ca52a440e5775e2db970227b9b3) to overcome VirtualBox's rename() issues. There are some known issues where rename() in VirtualBox can fail on shared folders
+If you are running a virtualized server and using VirtualBox your hosting environment will need to add a [mu-plugin and watcher script](https://github.com/costdev/wp-virtualbox-testing) to overcome VirtualBox's rename() issues. There are some known issues where rename() in VirtualBox can fail on shared folders
 without reporting an error properly.
 
 More details:
@@ -62,6 +62,9 @@ Logo from a meme generator. [Original artwork](http://hyperboleandahalf.blogspot
 ## Changelog
 
 Please see the Github repository: [CHANGELOG.md](https://github.com/afragen/rollback-update-failure/blob/main/CHANGELOG.md).
+
+#### 3.1.1 / 2022-07-31
+* update VirtualBox testing URL in readme(s)
 
 #### 3.1.0 / 2022-06-27
 * fix to ensure restore functions correctly during bulk update

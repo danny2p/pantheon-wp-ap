@@ -1,5 +1,6 @@
 <?php
 
+use WPForms\Helpers\Templates;
 use WPForms\Tasks\Actions\EntryEmailsTask;
 
 /**
@@ -725,8 +726,14 @@ class WPForms_WP_Emails {
 
 			// Try locating this template file by looping through the template paths.
 			foreach ( $this->get_theme_template_paths() as $template_path ) {
-				if ( file_exists( $template_path . $template_name ) ) {
-					$located = $template_path . $template_name;
+				$validated_path = Templates::validate_safe_path(
+					$template_path . $template_name,
+					[ 'theme', 'plugins' ]
+				);
+
+				if ( $validated_path ) {
+					$located = $validated_path;
+
 					break;
 				}
 			}
