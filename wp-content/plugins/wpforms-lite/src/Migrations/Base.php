@@ -331,8 +331,9 @@ abstract class Base {
 		 * zero means completed earlier at unknown time,
 		 * positive means completion timestamp.
 		 */
-		$this->migrated = get_option( static::MIGRATED_OPTION_NAME, [] );
+		$this->migrated = get_option( static::MIGRATED_OPTION_NAME );
 
+		// If option is an array, it means that it is already converted to the new format.
 		if ( is_array( $this->migrated ) ) {
 			return;
 		}
@@ -347,7 +348,6 @@ abstract class Base {
 		 */
 		$this->migrated = get_option(
 			str_replace( 'versions', 'version', static::MIGRATED_OPTION_NAME )
-			[]
 		);
 
 		$version         = $this->migrated === false ? self::INITIAL_FAKE_VERSION : (string) $this->migrated;

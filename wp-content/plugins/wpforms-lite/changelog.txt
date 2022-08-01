@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.5.5 =
+- Fixed: Migrations logic was broken in certain cases when addons have their own migrations.
+- Fixed: Security-related improvements around email generation for notifications.
+
 = 1.7.5.3 =
 - Added: New filter to modify CSS classes of the form submit button on the frontend.
 - Changed: Improve cached templates handling in the Form Builder.
