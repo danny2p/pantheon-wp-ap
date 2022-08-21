@@ -2,6 +2,8 @@
 
 namespace WPForms\Migrations;
 
+use WPForms\Tasks\Meta;
+
 /**
  * Class Migrations handles Lite plugin upgrade routines.
  *
@@ -34,5 +36,14 @@ class Migrations extends Base {
 		'Upgrade168',
 		'Upgrade175',
 		'Upgrade1751',
+	];
+
+	/**
+	 * Custom table handler classes.
+	 *
+	 * @since 1.7.6
+	 */
+	const CUSTOM_TABLE_HANDLER_CLASSES = [
+		Meta::class,
 	];
 }

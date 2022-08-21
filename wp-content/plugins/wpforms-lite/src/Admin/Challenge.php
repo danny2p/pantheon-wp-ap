@@ -445,6 +445,10 @@ class Challenge {
 			return $can_start;
 		}
 
+		if ( $this->challenge_force_skip() ) {
+			$can_start = false;
+		}
+
 		if ( $this->challenge_force_start() ) {
 			$can_start = true;
 
@@ -474,10 +478,6 @@ class Challenge {
 	 */
 	public function init_challenge() {
 
-		if ( ! isset( $_GET['challenge'] ) || 'init' !== $_GET['challenge'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			return;
-		}
-
 		if ( ! $this->challenge_can_start() ) {
 			return;
 		}
@@ -488,8 +488,6 @@ class Challenge {
 				$this->get_challenge_option_schema()
 			)
 		);
-
-		wp_safe_redirect( remove_query_arg( 'challenge' ) );
 	}
 
 	/**
@@ -499,7 +497,7 @@ class Challenge {
 	 */
 	public function challenge_html() {
 
-		if ( $this->challenge_finished() && ! $this->challenge_force_start() ) {
+		if ( $this->challenge_force_skip() || ( $this->challenge_finished() && ! $this->challenge_force_start() ) ) {
 			return;
 		}
 
@@ -680,5 +678,17 @@ class Challenge {
 
 		$this->set_challenge_option( [ 'feedback_sent' => true ] );
 		wp_send_json_success();
+	}
+
+	/**
+	 * Force WPForms Challenge to skip.
+	 *
+	 * @since 1.7.6
+	 *
+	 * @return bool
+	 */
+	private function challenge_force_skip() {
+
+		return defined( 'WPFORMS_SKIP_CHALLENGE' ) && WPFORMS_SKIP_CHALLENGE;
 	}
 }

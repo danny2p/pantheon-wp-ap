@@ -2,7 +2,6 @@
 
 use WPForms\Lite\Integrations\LiteConnect\LiteConnect;
 use WPForms\Lite\Integrations\LiteConnect\Integration as LiteConnectIntegration;
-use WPMailSMTP\Options;
 
 /**
  * WPForms Lite. Load Lite specific features/functionality.
@@ -55,18 +54,35 @@ class WPForms_Lite {
 	 */
 	public function form_settings_notifications( $settings ) {
 
-		$cc               = wpforms_setting( 'email-carbon-copy', false );
-		$from_name_after  = apply_filters( 'wpforms_builder_notifications_from_name_after', '' );
-		$from_email_after = apply_filters( 'wpforms_builder_notifications_from_email_after', '' );
-		$from_email       = '{admin_email}';
-		$from_name        = sanitize_text_field( get_option( 'blogname' ) );
+		$cc         = wpforms_setting( 'email-carbon-copy', false );
+		$from_email = '{admin_email}';
+		$from_name  = sanitize_text_field( get_option( 'blogname' ) );
 
-		// If WP Mail SMTP is available, use its settings.
-		if ( class_exists( Options::class ) ) {
-			$mail_options = Options::init()->get_group( 'mail' );
-			$from_email   = $mail_options['from_email_force'] ? $mail_options['from_email'] : $from_email;
-			$from_name    = $mail_options['from_name_force'] ? $mail_options['from_name'] : $from_name;
-		}
+		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
+		/**
+		 * Allow filtering of text after the `From Name` field.
+		 *
+		 * @since 1.2.3
+		 * @since 1.7.6 Added $form_data and $id arguments.
+		 *
+		 * @param string $value     Value to be filtered.
+		 * @param array  $form_data Form data.
+		 * @param int    $id        Notification ID.
+		 */
+		$from_name_after = apply_filters( 'wpforms_builder_notifications_from_name_after', '', $settings->form_data, 1 );
+
+		/**
+		 * Allow filtering of text after the `From Email` field.
+		 *
+		 * @since 1.2.3
+		 * @since 1.7.6 Added $form_data and $id arguments.
+		 *
+		 * @param array $value     Value to be filtered.
+		 * @param array $form_data Form data.
+		 * @param int   $id        Notification ID.
+		 */
+		$from_email_after = apply_filters( 'wpforms_builder_notifications_from_email_after', '', $settings->form_data, 1 );
+		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 
 		// Handle backwards compatibility.
 		if ( empty( $settings->form_data['settings']['notifications'] ) ) {
@@ -108,7 +124,7 @@ class WPForms_Lite {
 						],
 					]
 				),
-				'https://wpforms.com/docs/setup-form-notification-wpforms/'
+				esc_url( wpforms_utm_link( 'https://wpforms.com/docs/setup-form-notification-wpforms/', 'Builder Notifications',  'Form Notifications Documentation' ) )
 			);
 			echo '</p>';
 			echo '<p>';
@@ -124,8 +140,8 @@ class WPForms_Lite {
 						'br' => [],
 					]
 				),
-				'https://wpforms.com/docs/how-to-properly-test-your-wordpress-forms-before-launching-checklist/',
-				'https://wpforms.com/docs/troubleshooting-email-notifications/'
+				esc_url( wpforms_utm_link( 'https://wpforms.com/docs/how-to-properly-test-your-wordpress-forms-before-launching-checklist/', 'Builder Notifications', 'Testing A Form Documentation' ) ),
+				esc_url( wpforms_utm_link( 'https://wpforms.com/docs/troubleshooting-email-notifications/', 'Builder Notifications', 'Troubleshoot Notifications Documentation' ) )
 			);
 			echo '</p>';
 			echo '</div>';
@@ -206,17 +222,34 @@ class WPForms_Lite {
 					'sender_name',
 					$settings->form_data,
 					esc_html__( 'From Name', 'wpforms-lite' ),
-					[
-						'default'    => $from_name,
-						'smarttags'  => [
-							'type'   => 'fields',
-							'fields' => 'name,text',
+					// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
+					/**
+					 * Allow modifying the "From Name" field settings in the builder on Settings > Notifications panel.
+					 *
+					 * @since 1.7.6
+					 *
+					 * @param array $args      Field settings.
+					 * @param array $form_data Form data.
+					 * @param int   $id        Notification ID.
+					 */
+					apply_filters(
+						'wpforms_builder_notifications_sender_name_settings',
+						[
+							'default'    => $from_name,
+							'smarttags'  => [
+								'type'   => 'fields',
+								'fields' => 'name,text',
+							],
+							'parent'     => 'settings',
+							'subsection' => $id,
+							'readonly'   => ! empty( $from_name_after ),
+							'after'      => ! empty( $from_name_after ) ? '<div class="wpforms-alert wpforms-alert-warning">' . $from_name_after . '</div>' : '',
+							'class'      => ! empty( $from_name_after ) ? 'wpforms-panel-field-warnings' : '',
 						],
-						'parent'     => 'settings',
-						'subsection' => $id,
-						'readonly'   => ! empty( $from_name_after ),
-						'after'      => ! empty( $from_name_after ) ? '<p class="note">' . $from_name_after . '</p>' : '',
-					]
+						$settings->form_data,
+						$id
+					)
+					// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 				);
 				wpforms_panel_field(
 					'text',
@@ -224,17 +257,34 @@ class WPForms_Lite {
 					'sender_address',
 					$settings->form_data,
 					esc_html__( 'From Email', 'wpforms-lite' ),
-					[
-						'default'    => $from_email,
-						'smarttags'  => [
-							'type'   => 'fields',
-							'fields' => 'email',
+					// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
+					/**
+					 * Allow modifying the "From Email" field settings in the builder on Settings > Notifications panel.
+					 *
+					 * @since 1.7.6
+					 *
+					 * @param array $args      Field settings.
+					 * @param array $form_data Form data.
+					 * @param int   $id        Notification ID.
+					 */
+					apply_filters(
+						'wpforms_builder_notifications_sender_address_settings',
+						[
+							'default'    => $from_email,
+							'smarttags'  => [
+								'type'   => 'fields',
+								'fields' => 'email',
+							],
+							'parent'     => 'settings',
+							'subsection' => $id,
+							'readonly'   => ! empty( $from_email_after ),
+							'after'      => ! empty( $from_email_after ) ? '<div class="wpforms-alert wpforms-alert-warning">' . $from_email_after . '</div>' : '',
+							'class'      => ! empty( $from_email_after ) ? 'wpforms-panel-field-warning' : '',
 						],
-						'parent'     => 'settings',
-						'subsection' => $id,
-						'readonly'   => ! empty( $from_email_after ),
-						'after'      => ! empty( $from_email_after ) ? '<p class="note">' . $from_email_after . '</p>' : '',
-					]
+						$settings->form_data,
+						$id
+					)
+					// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 				);
 				wpforms_panel_field(
 					'text',
@@ -281,6 +331,20 @@ class WPForms_Lite {
 
 		<?php
 		do_action( 'wpforms_builder_settings_notifications_after', 'notifications', $settings );
+
+		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
+
+		/**
+		 * Fires after notification block.
+		 *
+		 * @since 1.7.6
+		 *
+		 * @param array $settings Current confirmation data.
+		 * @param int   $id       Notification id.
+		 */
+		do_action( 'wpforms_form_settings_notifications_single_after', $settings, 1 );
+
+		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 
 	/**
@@ -426,7 +490,7 @@ class WPForms_Lite {
 					'confirmations',
 					'redirect',
 					$settings->form_data,
-					esc_html__( 'Confirmation Redirect URL', 'wpforms-lite' ),
+					esc_html__( 'Confirmation Redirect URL', 'wpforms-lite' ) . ' <span class="required">*</span>',
 					[
 						'input_class' => 'wpforms-panel-field-confirmations-redirect',
 						'parent'      => 'settings',
@@ -538,7 +602,7 @@ class WPForms_Lite {
 				<ul>
 					<li><?php esc_html_e( '5000+ integrations with marketing and payment services', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Let users Save and Resume submissions to prevent abandonment', 'wpforms-lite' ); ?></li>
-					<li><?php esc_html_e( 'Take payments with Stripe, Square, Authorize.Net, and PayPal', 'wpforms-lite' ); ?></li>
+					<li><?php esc_html_e( 'Take payments with PayPal Commerce, Stripe, Square, Authorize.Net, and PayPal Standard', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Collect signatures, geolocation data, and file uploads', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Create user registration and login forms', 'wpforms-lite' ); ?></li>
 				</ul>
@@ -1120,7 +1184,7 @@ class WPForms_Lite {
 	 */
 	public function addon_page_enqueues() {
 
-		_deprecated_function( __METHOD__, '1.6.7 of WPForms plugin', "wpforms()->get( 'addons_page' )->enqueues()" );
+		_deprecated_function( __METHOD__, '1.6.7 of the WPForms plugin', "wpforms()->get( 'addons_page' )->enqueues()" );
 
 		wpforms()->get( 'addons_page' )->enqueues();
 	}
@@ -1133,7 +1197,7 @@ class WPForms_Lite {
 	 */
 	public function addons_page() {
 
-		_deprecated_function( __METHOD__, '1.6.7 of WPForms plugin', "wpforms()->get( 'addons_page' )->output()" );
+		_deprecated_function( __METHOD__, '1.6.7 of the WPForms plugin', "wpforms()->get( 'addons_page' )->output()" );
 
 		if ( ! wpforms_is_admin_page( 'addons' ) ) {
 			return;

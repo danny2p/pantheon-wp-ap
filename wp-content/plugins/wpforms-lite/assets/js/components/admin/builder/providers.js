@@ -438,15 +438,17 @@ WPForms.Admin.Builder.Providers = WPForms.Admin.Builder.Providers || ( function(
 					// Do the actual required fields check.
 					$( this ).find( 'input.wpforms-required, select.wpforms-required, textarea.wpforms-required' ).each( function() {
 
-						var value = $( this ).val();
+						const $this = $( this ),
+							value = $this.val();
 
-						if ( _.isEmpty( value ) ) {
+						if ( _.isEmpty( value ) && ! $this.closest( '.wpforms-builder-provider-connection-block' ).hasClass( 'wpforms-hidden' ) ) {
 							$( this ).addClass( 'wpforms-error' );
 							isRequiredEmpty = true;
 
-						} else {
-							$( this ).removeClass( 'wpforms-error' );
+							return;
 						}
+
+						$( this ).removeClass( 'wpforms-error' );
 					} );
 
 					// Notify user.

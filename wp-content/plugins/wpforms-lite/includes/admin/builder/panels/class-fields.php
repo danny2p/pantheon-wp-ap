@@ -194,6 +194,30 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 				'fields'     => [],
 			],
 		];
+
+		/*
+		 * Allows developers to modify content of the the Add Field tab.
+		 *
+		 * With this filter developers can add their own fields or even fields groups.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array $fields {
+		 *     Fields data multidimensional array.
+		 *
+		 *     @param array $standard Standard fields group.
+		 *         @param string $group_name Group name.
+		 *         @param array  $fields     Fields array.
+		 *
+		 *     @param array $fancy    Fancy fields group.
+		 *		   @param string $group_name Group name.
+		 *         @param array  $fields     Fields array.
+		 *
+		 *     @param array $payment  Payment fields group.
+		 *		   @param string $group_name Group name.
+		 *         @param array  $fields     Fields array.
+		 * }
+		 */
 		$fields = apply_filters( 'wpforms_builder_fields_buttons', $fields );
 
 		// Output the buttons.

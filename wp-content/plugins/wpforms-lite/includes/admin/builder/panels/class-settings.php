@@ -1,6 +1,7 @@
 <?php
 
 use WPForms\Admin\Forms\Tags;
+use WPForms\Forms\Akismet;
 
 /**
  * Settings management panel.
@@ -183,6 +184,8 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 				esc_html__( 'Enable anti-spam protection', 'wpforms-lite' )
 			);
 
+			$this->general_setting_akismet();
+
 			$this->general_setting_captcha();
 
 			$this->general_setting_advanced();
@@ -337,7 +340,11 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 			$this->form_data,
 			esc_html__( 'Enable Prefill by URL', 'wpforms-lite' ),
 			[
-				'tooltip' => '<a href="https://wpforms.com/developers/how-to-enable-dynamic-field-population/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'How to use Prefill by URL', 'wpforms-lite' ) . '</a>',
+				'tooltip' => sprintf(
+					'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+					wpforms_utm_link( 'https://wpforms.com/developers/how-to-enable-dynamic-field-population/', 'Builder Settings', 'Prefill by URL Tooltip' ),
+					esc_html__( 'How to use Prefill by URL', 'wpforms-lite' )
+				),
 			]
 		);
 
@@ -363,6 +370,45 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 				'title'      => esc_html__( 'Advanced', 'wpforms-lite' ),
 			],
 			true
+		);
+	}
+
+	/**
+	 * Output the Akismet settings.
+	 *
+	 * @since 1.7.6
+	 *
+	 * @return void
+	 */
+	private function general_setting_akismet() {
+
+		$args = [];
+
+		if ( ! Akismet::is_configured() ) {
+			$args['data']['akismet-status'] = 'akismet_no_api_key';
+		}
+
+		if ( ! Akismet::is_activated() ) {
+			$args['data']['akismet-status'] = 'akismet_not_activated';
+		}
+
+		if ( ! Akismet::is_installed() ) {
+			$args['data']['akismet-status'] = 'akismet_not_installed';
+		}
+
+		// If akismet isn't available, disable the akismet toggle.
+		if ( isset( $args['data'] ) ) {
+			$args['input_class'] = 'wpforms-akismet-disabled';
+			$args['value']       = '0';
+		}
+
+		wpforms_panel_field(
+			'toggle',
+			'settings',
+			'akismet',
+			$this->form_data,
+			esc_html__( 'Enable Akismet anti-spam protection', 'wpforms-lite' ),
+			$args
 		);
 	}
 }

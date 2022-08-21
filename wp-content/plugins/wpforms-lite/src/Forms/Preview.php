@@ -251,7 +251,7 @@ class Preview {
 	 */
 	public function template_include() {
 
-		_deprecated_function( __METHOD__, '1.7.2 of WPForms plugin' );
+		_deprecated_function( __METHOD__, '1.7.2 of the WPForms plugin' );
 
 		return locate_template( [ 'page.php', 'single.php', 'index.php' ] );
 	}

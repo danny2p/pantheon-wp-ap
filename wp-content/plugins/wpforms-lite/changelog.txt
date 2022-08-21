@@ -1,5 +1,41 @@
 == Changelog ==
 
+= 1.7.6 =
+- Added: Form Submissions can now be checked against the Akismet API to prevent spam.
+- Changed: Empty post titles and term names in Dynamic Choices are now treated the way WordPress does.
+- Changed: Modern Dropdown field fuzzy search sensitivity is adjusted to display only exact matches.
+- Changed: Allow typing choices in the modern Dropdown field with the Multiple Options Selection option enabled.
+- Changed: WPForms Challenge experience is improved for new users.
+- Changed: Lite Connect is now disabled in non-production environments.
+- Changed: Lite Connect functionality improves handling of staging and cloned sites, and changed domain names.
+- Changed: Unnecessary PHP packages are no longer shipped in WPForms Lite.
+- Changed: Stylesheets loaded in the Form Builder and on certain plugin pages are better optimized and shrank to improve performance.
+- Changed: WPForms now better integrates with the WP Mail SMTP plugin to enable overriding From Name and From Email values in existing forms.
+- Changed: Form Notifications now have better validation of From Email settings.
+- Changed: Start using new `elementor/widgets/register` hook introduced in Elementor 3.5.0.
+- Changed: Updated DOMPurify library to 2.3.10.
+- Changed: Updated jquery.validate library to 1.19.5.
+- Fixed: Improved compatibility with Twenty Twenty-Two theme.
+- Fixed: Added meaningful `alt` text to form submission spinner image to stop being flagged by certain SEO scanners.
+- Fixed: Constant Contact Authorization Code and Account Nickname fields are now required on the Settings > Integrations page.
+- Fixed: Constant Contact connection can now be added even if the Authorization Code is invalid.
+- Fixed: Validation of required fields on Marketing section in the Form Builder was triggered even if the field is hidden.
+- Fixed: Action Scheduler was triggering a PHP fatal error on the Tools > Scheduled Actions page on PHP 5.6.
+- Fixed: Images breaking out of containers on smaller screens if Multiple Choice and Checkboxes fields were set to use image choices.
+- Fixed: `query_var` smart tag was not working in Confirmations and Notifications.
+- Fixed: Custom templates had an incorrect badge, "Addon" instead of "Custom".
+- Fixed: The Confirmation Message label overlapped the editor when WYSIWYG mode was disabled.
+- Fixed: Default form title was not changed when switching form templates.
+- Fixed: Both `page_title` and `page_id` smart tags were returning incorrect values on non-singular pages if the form was used outside the Loop.
+- Fixed: WPForms Block preview (on block hover) was rendered incorrectly in Site Editor.
+- Fixed: Custom validation errors were not displayed with hCaptcha enabled upon AJAX form submission.
+- Fixed: Validation errors were not shown when the field with an input mask was not fully filled.
+- Fixed: Smart Tags could be added to Sender Email and Sender Name if the fields were managed by the WP Mail SMTP plugin.
+- Fixed: The Confirmation message block had incorrect margins in the Twenty Twenty-Two theme.
+- Fixed: Occasional errors during migration were fixed when upgrading from some older versions of WPForms.
+- Fixed: The Confirmation Redirect URL can no longer be saved with an empty value.
+- Fixed: Default choices were displayed on the frontend if a Dynamic Choices source had no objects (Dropdown, Multiple Choice, and Checkboxes fields were affected).
+
 = 1.7.5.5 =
 - Fixed: Migrations logic was broken in certain cases when addons have their own migrations.
 - Fixed: Security-related improvements around email generation for notifications.

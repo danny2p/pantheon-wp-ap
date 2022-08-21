@@ -159,6 +159,7 @@ namespace WPForms {
 
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-db.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/functions.php';
+			require_once WPFORMS_PLUGIN_DIR . 'includes/compat.php';
 
 			$this->includes_magic();
 

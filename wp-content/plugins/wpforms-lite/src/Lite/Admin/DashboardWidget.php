@@ -41,6 +41,17 @@ class DashboardWidget extends Widget {
 			return;
 		}
 
+		global $pagenow;
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$is_admin_page   = $pagenow === 'index.php' && empty( $_GET['page'] );
+		$is_ajax_request = wp_doing_ajax() && isset( $_REQUEST['action'] ) && strpos( sanitize_key( $_REQUEST['action'] ), 'wpforms_dash_widget' ) !== false;
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		if ( ! $is_admin_page && ! $is_ajax_request ) {
+			return;
+		}
+
 		if ( ! apply_filters( 'wpforms_admin_dashboardwidget', true ) ) {
 			return;
 		}

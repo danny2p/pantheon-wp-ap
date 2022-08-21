@@ -15,7 +15,7 @@ use WPForms\Tasks\Tasks;
 class Upgrade175 extends UpgradeBase {
 
 	/**
-	 * Run upgrade.
+	 * Delete all task meta of not active tasks.
 	 *
 	 * @since 1.7.5
 	 *
@@ -30,6 +30,10 @@ class Upgrade175 extends UpgradeBase {
 
 		global $wpdb;
 
+		if ( ! $this->as_tables_exist() ) {
+			return true;
+		}
+
 		$group = Tasks::GROUP;
 		$sql   = "SELECT DISTINCT a.args FROM {$wpdb->prefix}actionscheduler_actions a
 					JOIN {$wpdb->prefix}actionscheduler_groups g ON g.group_id = a.group_id
@@ -43,7 +47,6 @@ class Upgrade175 extends UpgradeBase {
 		$meta_ids = [];
 
 		foreach ( $results as $result ) {
-
 			$args = isset( $result['args'] ) ? json_decode( $result['args'], true ) : null;
 
 			if ( $args && ! empty( $args['tasks_meta_id'] ) ) {
@@ -58,8 +61,35 @@ class Upgrade175 extends UpgradeBase {
 		$wpdb->query(
 			"DELETE FROM {$table_name} WHERE id NOT IN ( {$not_in} )"
 		);
+
 		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		return true;
+	}
+
+	/**
+	 * Check whether AS tables exist.
+	 *
+	 * @since 1.7.6
+	 *
+	 * @return bool
+	 */
+	private function as_tables_exist() {
+
+		global $wpdb;
+
+		$required_tables = [
+			$wpdb->prefix . 'actionscheduler_actions',
+			$wpdb->prefix . 'actionscheduler_groups',
+		];
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
+		$tables    = $wpdb->get_col( "SHOW TABLES LIKE '" . $wpdb->prefix . "actionscheduler%'" );
+		$intersect = array_values( array_intersect( $tables, $required_tables ) );
+
+		sort( $intersect );
+		sort( $required_tables );
+
+		return $intersect === $required_tables;
 	}
 }

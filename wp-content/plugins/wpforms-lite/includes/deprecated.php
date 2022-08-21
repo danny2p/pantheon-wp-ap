@@ -77,7 +77,7 @@ if ( wpforms()->is_pro() ) {
  */
 function wpforms_builder_notification_get_state( $form_id, $notification_id ) {
 
-	_deprecated_function( __FUNCTION__, '1.4.8 of the WPForms plugin', 'wpforms_builder_settings_block_get_state()' );
+	_deprecated_function( __FUNCTION__, '1.4.8 of the WPForms addon', 'wpforms_builder_settings_block_get_state()' );
 
 	return wpforms_builder_settings_block_get_state( $form_id, $notification_id, 'notification' );
 }

@@ -127,7 +127,7 @@ add_action( 'wp_ajax_wpforms_save_form', 'wpforms_save_form' );
  *
  * @since 1.0.0
  */
-function wpforms_new_form() {
+function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
 
@@ -243,13 +243,18 @@ function wpforms_update_form_template() {
 		);
 	}
 
-	$data    = wpforms()->form->get(
+	$data = wpforms()->get( 'form' )->get(
 		$form_id,
 		[
 			'content_only' => true,
 		]
 	);
-	$updated = (bool) wpforms()->form->update(
+
+	if ( ! empty( $_POST['title'] ) ) {
+		$data['settings']['form_title'] = sanitize_text_field( wp_unslash( $_POST['title'] ) );
+	}
+
+	$updated = (bool) wpforms()->get( 'form' )->update(
 		$form_id,
 		$data,
 		[
@@ -412,7 +417,7 @@ function wpforms_builder_dynamic_source() {
 		}
 
 		foreach ( $posts as $post ) {
-			$items[] = trim( $post->post_title );
+			$items[] = esc_html( wpforms_get_post_title( $post ) );
 		}
 	} elseif ( $type === 'taxonomy' ) {
 
@@ -438,14 +443,12 @@ function wpforms_builder_dynamic_source() {
 		$source_name = $tax->labels->name;
 
 		foreach ( $terms as $term ) {
-			$items[] = trim( $term->name );
+			$items[] = esc_html( wpforms_get_term_name( $term ) );
 		}
 	}
 
 	if ( empty( $items ) ) {
-		$items = [
-			esc_html__( '(empty)', 'wpforms-lite' ),
-		];
+		$items = [];
 	}
 
 	wp_send_json_success(

@@ -34,6 +34,13 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 	var vars = {};
 
 	/**
+	 * Active template name.
+	 *
+	 * @since 1.7.6
+	 */
+	const activeTemplateName = $( '.wpforms-template.selected .wpforms-template-name' ).text().trim();
+
+	/**
 	 * Public functions and properties.
 	 *
 	 * @since 1.6.8
@@ -256,8 +263,7 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 
 			var $button      = $( e.target ),
 				template     = $button.data( 'template' ),
-				templateName = $button.data( 'template-name-raw' ),
-				formName     = el.$formName.val() || templateName;
+				formName     = app.getFormName( $button );
 
 			// Don't do anything for templates that trigger education modal OR addons-modal.
 			if ( $button.hasClass( 'education-modal' ) ) {
@@ -274,6 +280,25 @@ WPForms.Admin.Builder.Setup = WPForms.Admin.Builder.Setup || ( function( documen
 			$button.html( vars.spinner + wpforms_builder.loading );
 
 			app.applyTemplate( formName, template, $button );
+		},
+
+		/**
+		 * Get form name.
+		 *
+		 * @param {jQuery} $button Pressed template button.
+		 *
+		 * @returns {string} A new form name.
+		 */
+		getFormName: function( $button ) {
+
+			const templateName = $button.data( 'template-name-raw' );
+			const formName = el.$formName.val();
+
+			if ( ! formName ) {
+				return templateName;
+			}
+
+			return activeTemplateName === formName ? templateName : formName;
 		},
 
 		/**
