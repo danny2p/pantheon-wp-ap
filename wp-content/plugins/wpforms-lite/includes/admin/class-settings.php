@@ -446,8 +446,8 @@ class WPForms_Settings {
 					'type'    => 'text',
 					'default' => esc_html__( 'Field values do not match.', 'wpforms-lite' ),
 				],
-				'validation-input-mask-incomplete' => [
-					'id'      => 'validation-input-mask-incomplete',
+				'validation-inputmask-incomplete'  => [
+					'id'      => 'validation-inputmask-incomplete',
 					'name'    => esc_html__( 'Input Mask Incomplete', 'wpforms-lite' ),
 					'type'    => 'text',
 					'default' => esc_html__( 'Please fill out all blanks.', 'wpforms-lite' ),

@@ -100,7 +100,7 @@ class Search {
 	 */
 	public function update_count( $count, $args ) {
 
-		_deprecated_function( __METHOD__, '1.7.5 of WPForms', "wpforms()->get( 'forms_views' )->update_count()" );
+		_deprecated_function( __METHOD__, '1.7.5 of the WPForms plugin', "wpforms()->get( 'forms_views' )->update_count()" );
 
 		return wpforms()->get( 'forms_views' )->update_count();
 	}

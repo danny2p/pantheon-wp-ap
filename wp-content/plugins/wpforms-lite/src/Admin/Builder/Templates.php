@@ -192,6 +192,10 @@ class Templates {
 	 */
 	private function has_access( $template ) {
 
+		if ( ! empty( $template['has_access'] ) ) {
+			return true;
+		}
+
 		$template_licenses = empty( $template['license'] ) ? [] : array_map( 'strtolower', (array) $template['license'] );
 		$has_access        = true;
 
@@ -286,6 +290,8 @@ class Templates {
 			return $templates;
 		}
 
+		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
+
 		/**
 		 * Form templates available in the WPForms core plugin.
 		 *
@@ -304,6 +310,8 @@ class Templates {
 		 * @param array $templates Addons templates data.
 		 */
 		$additional_templates = (array) apply_filters( 'wpforms_form_templates', [] );
+
+		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 
 		$templates = array_merge( $core_templates, $additional_templates );
 

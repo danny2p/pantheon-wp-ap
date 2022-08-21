@@ -206,6 +206,15 @@ class Fields {
 			],
 			[
 				'icon'    => 'fa-credit-card',
+				'name'    => esc_html__( 'PayPal Commerce', 'wpforms-lite' ),
+				'name_en' => 'PayPal Commerce',
+				'type'    => 'paypal-commerce',
+				'group'   => 'payment',
+				'addon'   => 'wpforms-paypal-commerce',
+				'order'   => '89',
+			],
+			[
+				'icon'    => 'fa-credit-card',
 				'name'    => esc_html__( 'Stripe Credit Card', 'wpforms-lite' ),
 				'name_en' => 'Stripe Credit Card',
 				'type'    => 'stripe-credit-card',

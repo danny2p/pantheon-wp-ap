@@ -68,6 +68,11 @@ class Loader {
 		];
 
 		$this->classes[] = [
+			'name' => 'Forms\Akismet',
+			'id'   => 'akismet',
+		];
+
+		$this->classes[] = [
 			'name' => 'Forms\Submission',
 			'id'   => 'submission',
 			'hook' => false,

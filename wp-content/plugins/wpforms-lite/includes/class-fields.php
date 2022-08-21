@@ -67,6 +67,7 @@ class WPForms_Fields {
 				'payment-total',
 				'number-slider',
 				'richtext',
+				'internal-information',
 			)
 		);
 

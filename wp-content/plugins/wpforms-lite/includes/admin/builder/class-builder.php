@@ -441,7 +441,7 @@ class WPForms_Builder {
 			'dom-purify',
 			WPFORMS_PLUGIN_URL . 'assets/lib/purify.min.js',
 			[],
-			'2.3.8'
+			'2.3.10'
 		);
 
 		if ( wp_is_mobile() ) {
@@ -452,6 +452,13 @@ class WPForms_Builder {
 			'wpforms-utils',
 			WPFORMS_PLUGIN_URL . "assets/js/admin-utils{$min}.js",
 			[ 'jquery', 'dom-purify' ],
+			WPFORMS_VERSION
+		);
+
+		wp_enqueue_script(
+			'wpforms-generic-utils',
+			WPFORMS_PLUGIN_URL . "assets/js/utils{$min}.js",
+			[ 'jquery' ],
 			WPFORMS_VERSION
 		);
 
@@ -651,7 +658,76 @@ class WPForms_Builder {
 					],
 				]
 			),
-			'https://wpforms.com/docs/how-to-properly-test-your-wordpress-forms-before-launching-checklist/'
+			esc_url(
+				wpforms_utm_link(
+					'https://wpforms.com/docs/how-to-properly-test-your-wordpress-forms-before-launching-checklist/',
+					'Builder Notifications',
+					'Testing A Form Documentation'
+				)
+			)
+		);
+
+		$strings['akismet_not_installed'] = sprintf(
+			wp_kses( /* translators: %1$s - Link to the plugin search page, %2$s - Link to the WPForms.com doc article. */
+				__( 'This feature cannot be used at this time because the Akismet plugin <a href="%1$s" target="_blank" rel="noopener noreferrer">has not been installed</a>. For information on how to use this feature please <a href="%2$s" target="_blank" rel="noopener noreferrer">refer to our documentation</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
+						'href'   => [],
+						'rel'    => [],
+						'target' => [],
+					],
+				]
+			),
+			esc_url( admin_url( 'plugin-install.php' ) ),
+			esc_url(
+				wpforms_utm_link(
+					'https://wpforms.com/docs/setting-up-akismet-anti-spam-protection/',
+					'Builder Settings',
+					'Akismet Documentation'
+				)
+			)
+		);
+
+		$strings['akismet_not_activated'] = sprintf(
+			wp_kses( /* translators: %1$s - Link to the plugins page, %2$s - Link to the WPForms.com doc article. */
+				__( 'This feature cannot be used at this time because the Akismet plugin <a href="%1$s" target="_blank" rel="noopener noreferrer">has not been activated</a>. For information on how to use this feature please <a href="%2$s" target="_blank" rel="noopener noreferrer">refer to our documentation</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
+						'href'   => [],
+						'rel'    => [],
+						'target' => [],
+					],
+				]
+			),
+			esc_url( admin_url( 'plugins.php' ) ),
+			esc_url(
+				wpforms_utm_link(
+					'https://wpforms.com/docs/setting-up-akismet-anti-spam-protection/',
+					'Builder Settings',
+					'Akismet Documentation'
+				)
+			)
+		);
+
+		$strings['akismet_no_api_key'] = sprintf(
+			wp_kses( /* translators: %1$s - Link to the Akismet settings page, %2$s - Link to the WPForms.com doc article. */
+				__( 'This feature cannot be used at this time because the Akismet plugin <a href="%1$s" target="_blank" rel="noopener noreferrer">has not been properly configured</a>. For information on how to use this feature please <a href="%2$s" target="_blank" rel="noopener noreferrer">refer to our documentation</a>.', 'wpforms-lite' ),
+				[
+					'a' => [
+						'href'   => [],
+						'rel'    => [],
+						'target' => [],
+					],
+				]
+			),
+			esc_url( admin_url( 'options-general.php?page=akismet-key-config&view=start' ) ),
+			esc_url(
+				wpforms_utm_link(
+					'https://wpforms.com/docs/setting-up-akismet-anti-spam-protection/',
+					'Builder Settings',
+					'Akismet Documentation'
+				)
+			)
 		);
 
 		$strings = apply_filters( 'wpforms_builder_strings', $strings, $this->form );

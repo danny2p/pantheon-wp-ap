@@ -52,6 +52,7 @@ class Integration extends API {
 			( is_admin() && ! wp_doing_ajax() ) &&
 			( ( wpforms()->is_pro() && self::get_enabled_since() ) || LiteConnect::is_enabled() )
 		) {
+			$this->maybe_update_access_token();
 			$this->update_keys();
 			$updated = true;
 		}
@@ -84,7 +85,6 @@ class Integration extends API {
 			'site_key'     => $site_key,
 			'access_token' => $this->get_access_token( $site_key ),
 		];
-
 	}
 
 	/**
@@ -361,5 +361,22 @@ class Integration extends API {
 				]
 			);
 		}
+	}
+
+	/**
+	 * Maybe update access token.
+	 *
+	 * @since 1.7.6
+	 */
+	public function maybe_update_access_token() {
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$action = isset( $_GET['wpforms_lite_connect_action'] ) ? sanitize_key( $_GET['wpforms_lite_connect_action'] ) : '';
+
+		if ( $action !== 'update-access-token' || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$this->get_access_token( $this->get_site_key(), true );
 	}
 }

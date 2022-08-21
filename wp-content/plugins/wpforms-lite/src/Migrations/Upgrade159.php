@@ -12,7 +12,7 @@ namespace WPForms\Migrations;
 class Upgrade159 extends UpgradeBase {
 
 	/**
-	 * Run upgrade.
+	 * Create tasks_meta table.
 	 *
 	 * @since 1.7.5
 	 *
@@ -25,8 +25,12 @@ class Upgrade159 extends UpgradeBase {
 
 		$meta = wpforms()->get( 'tasks_meta' );
 
+		if ( ! $meta ) {
+			return false;
+		}
+
 		// Create the table if it doesn't exist.
-		if ( $meta && ! $meta->table_exists() ) {
+		if ( ! $meta->table_exists() ) {
 			$meta->create_table();
 		}
 

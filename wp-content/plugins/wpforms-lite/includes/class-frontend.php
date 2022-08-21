@@ -1166,8 +1166,9 @@ class WPForms_Frontend {
 			);
 
 			printf(
-				'<img src="%s" class="wpforms-submit-spinner" style="display: none;" width="26" height="26" alt="">',
-				esc_url( $src )
+				'<img src="%s" class="wpforms-submit-spinner" style="display: none;" width="26" height="26" alt="%s">',
+				esc_url( $src ),
+				esc_attr__( 'Loading', 'wpforms-lite' )
 			);
 		}
 
@@ -1203,7 +1204,9 @@ class WPForms_Frontend {
 		switch ( $type ) {
 			case 'header':
 			case 'footer':
-				echo '<div class="wpforms-error-container">' . wpforms_sanitize_error( $error ) . '</div>';
+				// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<div class="wpforms-error-container">' . wpautop( wpforms_sanitize_error( $error ) ) . '</div>';
+				// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 				break;
 
 			case 'recaptcha':
@@ -1326,7 +1329,7 @@ class WPForms_Frontend {
 			'wpforms-validation',
 			WPFORMS_PLUGIN_URL . 'assets/lib/jquery.validate.min.js',
 			[ 'jquery' ],
-			'1.19.4',
+			'1.19.5',
 			true
 		);
 
@@ -1388,6 +1391,14 @@ class WPForms_Frontend {
 				true
 			);
 		}
+
+		wp_enqueue_script(
+			'wpforms-generic-utils',
+			WPFORMS_PLUGIN_URL . "assets/js/utils{$min}.js",
+			[ 'jquery' ],
+			WPFORMS_VERSION,
+			true
+		);
 
 		// Load base JS.
 		wp_enqueue_script(
@@ -1715,7 +1726,7 @@ class WPForms_Frontend {
 				)
 			),
 			'val_recaptcha_fail_msg'     => wpforms_setting( 'recaptcha-fail-msg', esc_html__( 'Google reCAPTCHA verification failed, please try again later.', 'wpforms-lite' ) ),
-			'val_empty_blanks'           => wpforms_setting( 'validation-input-mask-incomplete', esc_html__( 'Please fill out all blanks.', 'wpforms-lite' ) ),
+			'val_inputmask_incomplete'   => wpforms_setting( 'validation-inputmask-incomplete', esc_html__( 'Please fill out the field in required format.', 'wpforms-lite' ) ),
 			'uuid_cookie'                => false,
 			'locale'                     => wpforms_get_language_code(),
 			'wpforms_plugin_url'         => WPFORMS_PLUGIN_URL,
@@ -1725,6 +1736,8 @@ class WPForms_Frontend {
 			'mailcheck_domains'          => array_map( 'sanitize_text_field', (array) apply_filters( 'wpforms_mailcheck_domains', array() ) ),
 			'mailcheck_toplevel_domains' => array_map( 'sanitize_text_field', (array) apply_filters( 'wpforms_mailcheck_toplevel_domains', array( 'dev' ) ) ),
 			'is_ssl'                     => is_ssl(),
+			'page_title'                 => wpforms_process_smart_tags( '{page_title}', [], [], '' ),
+			'page_id'                    => wpforms_process_smart_tags( '{page_id}', [], [], '' ),
 		];
 
 		// Include payment related strings if needed.

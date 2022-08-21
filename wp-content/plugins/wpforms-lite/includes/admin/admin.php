@@ -116,6 +116,23 @@ function wpforms_admin_scripts() {
 		false
 	);
 
+	wp_enqueue_script(
+		'wpforms-generic-utils',
+		WPFORMS_PLUGIN_URL . "assets/js/utils{$min}.js",
+		[ 'jquery' ],
+		WPFORMS_VERSION,
+		true
+	);
+
+	// Load admin utils JS.
+	wp_enqueue_script(
+		'wpforms-admin-utils',
+		WPFORMS_PLUGIN_URL . "assets/js/admin-utils{$min}.js",
+		[ 'jquery' ],
+		WPFORMS_VERSION,
+		true
+	);
+
 	// Main admin script.
 	wp_enqueue_script(
 		'wpforms-admin',
@@ -256,6 +273,11 @@ function wpforms_admin_scripts() {
 		'wpforms_admin_scripts_choicesjs_config',
 		[
 			'searchEnabled'  => false,
+			// Forces the search to look for exact matches anywhere in the string.
+			'fuseOptions'    => [
+				'threshold' => 0.1,
+				'distance'  => 1000,
+			],
 			'loadingText'    => ! empty( $strings['choicesjs_loading'] ) ? $strings['choicesjs_loading'] : $default_choicesjs_loading_text,
 			'noResultsText'  => ! empty( $strings['choicesjs_no_results'] ) ? $strings['choicesjs_no_results'] : $default_choicesjs_no_results_text,
 			'noChoicesText'  => ! empty( $strings['choicesjs_no_choices'] ) ? $strings['choicesjs_no_choices'] : $default_choicesjs_no_choices_text,
