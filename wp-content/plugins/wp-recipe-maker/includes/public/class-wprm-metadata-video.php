@@ -118,14 +118,17 @@ class WPRM_MetadataVideo {
 		$metadata = false;
 		$embed_code = trim( $embed_code );
 
-		$metadata = $metadata ? $metadata : self::check_for_youtube_embed( $embed_code );
-		$metadata = $metadata ? $metadata : self::check_for_mediavine_embed( $embed_code, $recipe );
-		$metadata = $metadata ? $metadata : self::check_for_adthrive_embed( $embed_code );
-		$metadata = $metadata ? $metadata : self::check_for_wp_youtube_lyte_embed( $embed_code );
-		$metadata = $metadata ? $metadata : self::check_for_brid_tv_embed( $embed_code );
-
-		$metadata = $metadata ? $metadata : self::check_for_oembed( $embed_code );
-		$metadata = $metadata ? $metadata : self::check_for_meta_html( $embed_code );
+		// Only check if there actually is some embed code.
+		if ( $embed_code ) {
+			$metadata = $metadata ? $metadata : self::check_for_youtube_embed( $embed_code );
+			$metadata = $metadata ? $metadata : self::check_for_mediavine_embed( $embed_code, $recipe );
+			$metadata = $metadata ? $metadata : self::check_for_adthrive_embed( $embed_code );
+			$metadata = $metadata ? $metadata : self::check_for_wp_youtube_lyte_embed( $embed_code );
+			$metadata = $metadata ? $metadata : self::check_for_brid_tv_embed( $embed_code );
+	
+			$metadata = $metadata ? $metadata : self::check_for_oembed( $embed_code );
+			$metadata = $metadata ? $metadata : self::check_for_meta_html( $embed_code );
+		}
 
 		return $metadata;
 	}
@@ -315,34 +318,36 @@ class WPRM_MetadataVideo {
 
 		// Prevent errors from showing up.
 		$internalErrors = libxml_use_internal_errors( true );
-		$dom->loadHTML( $embed_code );
+		$loaded_html = $dom->loadHTML( $embed_code );
 		libxml_use_internal_errors( $internalErrors );
 
-		$meta_tags = $dom->getElementsByTagName( 'meta' );
+		if ( $loaded_html ) {
+			$meta_tags = $dom->getElementsByTagName( 'meta' );
 
-		if ( 0 < $meta_tags->length ) {
-			$metadata = array();
+			if ( 0 < $meta_tags->length ) {
+				$metadata = array();
 
-			foreach ( $meta_tags as $meta_tag ) {
-				if ( in_array( $meta_tag->getAttribute( 'itemprop' ),
-						array(
-							'uploadDate',
-							'name',
-							'description',
-							'duration',
-							'expires',
-							'interactionCount',
-							'thumbnailUrl',
-							'contentUrl',
-							'embedUrl',
-						)
-					) ) {
-					$metadata[ $meta_tag->getAttribute( 'itemprop' ) ] = $meta_tag->getAttribute( 'content' );
+				foreach ( $meta_tags as $meta_tag ) {
+					if ( in_array( $meta_tag->getAttribute( 'itemprop' ),
+							array(
+								'uploadDate',
+								'name',
+								'description',
+								'duration',
+								'expires',
+								'interactionCount',
+								'thumbnailUrl',
+								'contentUrl',
+								'embedUrl',
+							)
+						) ) {
+						$metadata[ $meta_tag->getAttribute( 'itemprop' ) ] = $meta_tag->getAttribute( 'content' );
+					}
 				}
-			}
 
-			if ( ! $metadata ) {
-				$metadata = false;
+				if ( ! $metadata ) {
+					$metadata = false;
+				}
 			}
 		}
 
@@ -404,23 +409,33 @@ class WPRM_MetadataVideo {
 
 					// Default to oEmbed URL.
 					$content_url = isset( $oembed_data->content_url ) ? $oembed_data->content_url : '';
+
+					if ( ! $content_url && isset( $oembed_data->contentUrl ) ) {
+						$content_url = $oembed_data->contentUrl;
+					}
 					$content_url = $content_url ? $content_url : $url;
+
+					// EmbedUrl.
+					$embed_url = isset( $oembed_data->embed_url ) ? $oembed_data->embed_url : '';
+					if ( ! $embed_url && isset( $oembed_data->embedUrl ) ) {
+						$embed_url = $oembed_data->embedUrl;
+					}
+					if ( ! $embed_url && isset( $oembed_data->html ) ) {
+						preg_match( '/src\s*=\s*"([^"]+)"/im', $oembed_data->html, $match );
+						if ( $match && isset( $match[1] ) ) {
+							$embed_url = $match[1];
+						}
+					}
 
 					$metadata = array(
 						'name' => $name,
 						'description' => $description,
 						'thumbnailUrl' => $thumbnail_url,
+						'embedUrl' => $embed_url,
 						'contentUrl' => $content_url,
 						'uploadDate' => $upload_date,
 						'duration' => $duration,
 					);
-
-					if ( isset( $oembed_data->html ) ) {
-						preg_match( '/src\s*=\s*"([^"]+)"/im', $oembed_data->html, $match );
-						if ( $match && isset( $match[1] ) ) {
-							$metadata['embedUrl'] = $match[1];
-						}	
-					}
 				}
 
 				// Extend Youtube metadata via API.

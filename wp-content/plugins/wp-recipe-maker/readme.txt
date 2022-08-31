@@ -136,6 +136,20 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.5.0 =
+* Feature: Tastemakers program for the Instacart Shoppable Recipe button
+* Feature: Grouped ingredients style
+* Feature: Recipe URL block for the template editor
+* Improvement: Ability to set custom class for recipe shortcodes
+* Improvement: Setting to force Mediavine video metadata output
+* Improvement: Import method and diet from Tasty Recipes
+* Improvement: Same style options for equipment notes as for ingredient notes
+* Improvement: Better support for oEmbed video metadata
+* Fix: Prevent import issue with negative time values
+* Fix: Prevent PHP warning when video embed code is empty
+* Fix: Support for m4v recipe videos
+* Fix: Problem deleting templates with a + sign in the slug
+
 = 8.4.0 =
 * Feature: Temperature shortcode with oven symbols
 * Improvement: Prevent same image from getting imported multiple times
@@ -1404,6 +1418,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.5.0 =
+Ability to monetize your recipes with Instacart Tastmakers and some other improvements
+
 = 8.4.0 =
 New temperature shortcode with oven symbols
 

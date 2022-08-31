@@ -22,13 +22,13 @@ $integrations = array(
 	'subGroups' => array(
 		array(
 			'name' => __( 'Shoppable Recipes with Instacart', 'wp-recipe-maker' ),
-			'description' => 'Make your recipes shoppable by adding an Instacart button next to your ingredient list. Available in the US only at the moment.',
+			'description' => 'Make your recipes shoppable by adding an Instacart Shoppable Recipe button next to your ingredient list and monetize your content by signing up for the Instacart Tastemakers Affiliate Marketing Program. Available in the US only at the moment.',
 			'documentation' => 'https://help.bootstrapped.ventures/article/323-shop-with-instacart-button',
 			'settings' => array(
 				array(
 					'id' => 'integration_instacart_agree',
 					'name' => __( 'Agree to Instacart Button terms', 'wp-recipe-maker' ),
-					'description' => __( 'Enable to agree with the Shop With Instacart Button Plugin Terms:', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to agree to the applicable terms of use for the button. Click the following link for more information:', 'wp-recipe-maker' ),
 					'documentation' => 'https://widgets.instacart.com/widget-terms.pdf',
 					'type' => 'toggle',
 					'default' => false,
@@ -36,9 +36,21 @@ $integrations = array(
 				array(
 					'id' => 'integration_instacart',
 					'name' => __( 'Automatically add Instacart Button', 'wp-recipe-maker' ),
-					'description' => __( 'Enable to automatically output the Instacart button after the ingredients section. Alternatively manually add the button in the Template Editor.', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the Instacart Shoppable Recipe button after the ingredients section. Alternatively, add the Shoppable Recipe button in the Template Editor.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
+					'dependency' => array(
+						'id' => 'integration_instacart_agree',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'integration_instacart_affiliate_id',
+					'name' => __( 'Instacart Tastemakers ID', 'wp-recipe-maker' ),
+					'description' => __( 'Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms apply.', 'wp-recipe-maker' ),
+					'documentation' => 'https://www.instacart.com/tastemakers',
+					'type' => 'text',
+					'default' => '',
 					'dependency' => array(
 						'id' => 'integration_instacart_agree',
 						'value' => true,

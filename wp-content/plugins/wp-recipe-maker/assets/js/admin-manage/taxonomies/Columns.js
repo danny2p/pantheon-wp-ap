@@ -225,7 +225,7 @@ export default {
             });
         }
 
-        if ( 'ingredient' !== datatable.props.options.id && wprm_admin.addons.premium ) {
+        if ( wprm_admin.addons.premium ) {
             // Term images.
             columns.push({
                 Header: __wprm( 'Image' ),

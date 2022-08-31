@@ -1,34 +1,29 @@
 <?php
 /**
- * Handle the recipe counter shortcode.
+ * Handle the recipe URL shortcode.
  *
  * @link       http://bootstrapped.ventures
- * @since      6.9.0
+ * @since      8.5.0
  *
  * @package    WP_Recipe_Maker
  * @subpackage WP_Recipe_Maker/includes/public/shortcodes/recipe
  */
 
 /**
- * Handle the recipe counter shortcode.
+ * Handle the recipe URL shortcode.
  *
- * @since      6.9.0
+ * @since      8.5.0
  * @package    WP_Recipe_Maker
  * @subpackage WP_Recipe_Maker/includes/public/shortcodes/recipe
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
-class WPRM_SC_Counter extends WPRM_Template_Shortcode {
-	public static $shortcode = 'wprm-recipe-counter';
+class WPRM_SC_Url extends WPRM_Template_Shortcode {
+	public static $shortcode = 'wprm-recipe-url';
 
 	public static function init() {
 		self::$attributes = array(
 			'id' => array(
 				'default' => '0',
-			),
-			'text' => array(
-				'help' => 'Potential placeholders: %count%, %recipe_name%',
-				'default' => '%count%. %recipe_name%',
-				'type' => 'text',
 			),
 			'text_style' => array(
 				'default' => 'normal',
@@ -36,19 +31,20 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 				'options' => 'text_styles',
 			),
 			'tag' => array(
-				'default' => 'p',
+				'default' => 'span',
 				'type' => 'dropdown',
 				'options' => array(
-					'p' => 'p',
 					'span' => 'span',
 					'div' => 'div',
-					'h1' => 'h1',
-					'h2' => 'h2',
-					'h3' => 'h3',
-					'h4' => 'h4',
-					'h5' => 'h5',
-					'h6' => 'h6',
 				),
+			),
+			'show_protocol' => array(
+				'default' => '1',
+				'type' => 'toggle',
+			),
+			'show_path' => array(
+				'default' => '1',
+				'type' => 'toggle',
 			),
 			'link' => array(
 				'default' => '0',
@@ -61,45 +57,67 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 	/**
 	 * Output for the shortcode.
 	 *
-	 * @since	6.9.0
+	 * @since	3.2.0
 	 * @param	array $atts Options passed along with the shortcode.
 	 */
 	public static function shortcode( $atts ) {
 		$atts = parent::get_attributes( $atts );
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
-		$text = $atts['text'];
-		if ( ! $recipe || ! $text ) {
+		$url = $recipe->permalink();
+		if ( ! $recipe || ! $url ) {
 			return '';
 		}
 
 		// Output.
 		$classes = array(
-			'wprm-recipe-counter',
+			'wprm-recipe-url',
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		// Global count.
-		$count = isset( $GLOBALS['wprm_recipe_counter'] ) ? $GLOBALS['wprm_recipe_counter'] + 1 : 1;
-		$GLOBALS['wprm_recipe_counter'] = $count;
-		
-		$text = str_ireplace( '%count%', $count, $text );
-		$text = $recipe->replace_placeholders( $text );
+		$tag = trim( $atts['tag'] );
 
-		if ( $atts['link'] && $recipe->permalink() ) {
+		// Text to show.
+		$text = $url;
+		$url_parts = parse_url( $url );
+
+		if ( $url_parts ) {
+			$url_parts_text = '';
+
+			if ( ( bool ) $atts['show_protocol'] ) {
+				if ( isset( $url_parts['scheme'] ) && $url_parts['scheme'] ) {
+					$url_parts_text .= $url_parts['scheme'] . '://';
+				}
+			}
+
+			if ( isset( $url_parts['host'] ) && $url_parts['host'] ) {
+				$url_parts_text .= $url_parts['host'];
+			}
+
+			if ( ( bool ) $atts['show_path'] ) {
+				if ( isset( $url_parts['path'] ) && $url_parts['path'] ) {
+					$url_parts_text .= $url_parts['path'];
+				}
+			}
+
+			if ( $url_parts_text ) {
+				$text = $url_parts_text;
+			}
+		}
+
+		if ( $atts['link'] ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . $text . '</a>';
+			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . $text . '</a>';
 		}
 
-		$tag = trim( $atts['tag'] );
 		$output = '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $text . '</' . $tag . '>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }
 
-WPRM_SC_Counter::init();
+WPRM_SC_Url::init();

@@ -146,6 +146,9 @@ class WPRM_SC_Roundup_Link extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$style = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
 			$classes[] = 'wprm-recipe-roundup-link-' . $atts['style'];

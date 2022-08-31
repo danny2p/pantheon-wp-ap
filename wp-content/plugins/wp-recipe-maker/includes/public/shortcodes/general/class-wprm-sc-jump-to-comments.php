@@ -159,6 +159,9 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$smooth_scroll = (bool) $atts['smooth_scroll'];
 		$smooth_scroll_speed = '';
 		if ( $smooth_scroll ) {

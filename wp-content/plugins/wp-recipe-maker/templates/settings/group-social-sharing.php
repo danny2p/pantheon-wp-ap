@@ -46,6 +46,13 @@ $social_sharing = array(
 					'default' => false,
 				),
 				array(
+					'id' => 'pinterest_nopin_ingredient_image',
+					'name' => __( 'Disable ingredient image pinning', 'wp-recipe-maker' ),
+					'description' => __( 'Add the nopin attribute to the ingredient images.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
 					'id' => 'pinterest_nopin_instruction_image',
 					'name' => __( 'Disable instruction image pinning', 'wp-recipe-maker' ),
 					'description' => __( 'Add the nopin attribute to the instruction images.', 'wp-recipe-maker' ),

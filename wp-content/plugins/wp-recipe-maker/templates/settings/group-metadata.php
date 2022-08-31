@@ -129,6 +129,13 @@ $metadata = array(
 					'default' => false,
 				),
 				array(
+					'id' => 'metadata_force_mediavine_video_output',
+					'name' => __( 'Force Mediavine video metadata', 'wp-recipe-maker' ),
+					'description' => __( 'When enabled, the Mediavine video metadata will get output as well as the recipe video metadata. This is their recommendation but results in duplicate video metadata.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'metadata_youtube_api_key',
 					'name' => __( 'Personal YouTube Data API key', 'wp-recipe-maker' ),
 					'description' => __( 'Optionally set your own API key for retrieving the YouTube video metadata. Leave the setting blank to use the default shared key.', 'wp-recipe-maker' ),

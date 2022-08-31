@@ -160,6 +160,9 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$style = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
 			$classes[] = 'wprm-recipe-pin-' . $atts['style'];

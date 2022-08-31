@@ -29,7 +29,7 @@ export default class Analytics extends Component {
                     ?
                     <Fragment>
                         <Charts />
-                        {
+                        {/* {
                             wprm_admin_dashboard.settings.honey_home_integration
                             ?
                             <Footer
@@ -43,7 +43,7 @@ export default class Analytics extends Component {
                             >
                                 WP Recipe Maker partners with <a href="https://dailygrub.com" target="_blank">DailyGrub</a> to offer a full suite of recipe-specific analytics!
                             </Footer>
-                        }
+                        } */}
                     </Fragment>
                     :
                     <EnableAnalytics

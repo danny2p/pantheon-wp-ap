@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2022-07-14 12:35+0000\n"
+"POT-Creation-Date: 2022-08-31 09:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Add as Custom Nutrition Ingredient"
 msgstr ""
 
-#: templates/settings/group-integrations.php:94
+#: templates/settings/group-integrations.php:106
 msgid "Add Carbon Label to your recipe template"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Add Equipment"
 msgstr ""
 
-#: templates/settings/group-integrations.php:111
+#: templates/settings/group-integrations.php:123
 msgid "Add extra Mediavine ad unit"
 msgstr ""
 
@@ -269,11 +269,15 @@ msgstr ""
 msgid "Add the nopin attribute to the equipment images."
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:58
+#: templates/settings/group-social-sharing.php:65
 msgid "Add the nopin attribute to the external recipe roundup item image."
 msgstr ""
 
 #: templates/settings/group-social-sharing.php:51
+msgid "Add the nopin attribute to the ingredient images."
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:58
 msgid "Add the nopin attribute to the instruction images."
 msgstr ""
 
@@ -297,11 +301,6 @@ msgstr ""
 msgid ""
 "Add video start and end time (in seconds or minutes:seconds format) if this "
 "instruction step is part of the recipe video."
-msgstr ""
-
-#: templates/settings/group-analytics.php:72
-msgid ""
-"Add your DailyGrub tracking ID to enable syncing data with the platform."
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:44
@@ -329,10 +328,6 @@ msgstr ""
 msgid ""
 "Advanced Adjustable Servings for baking allows your visitors to change the "
 "size of the baking pan or sheet used for the recipe."
-msgstr ""
-
-#: templates/settings/group-analytics.php:60
-msgid "Advanced recipe and audience analytics."
 msgstr ""
 
 #: templates/admin/translations.php:233
@@ -881,7 +876,7 @@ msgstr ""
 msgid "Change unit system label (does not change ingredients)"
 msgstr ""
 
-#: templates/settings/group-integrations.php:75
+#: templates/settings/group-integrations.php:87
 msgid "Check API Key Status"
 msgstr ""
 
@@ -914,7 +909,7 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:70
+#: templates/settings/group-social-sharing.php:77
 msgid "Choose the pin method to use when clicking the Pin Recipe button."
 msgstr ""
 
@@ -937,7 +932,7 @@ msgstr ""
 msgid "Clear Cache after Rating"
 msgstr ""
 
-#: templates/settings/group-integrations.php:63
+#: templates/settings/group-integrations.php:75
 msgid ""
 "Click \"Save Changes\" in the top left before checking the API Key status."
 msgstr ""
@@ -1168,7 +1163,7 @@ msgstr ""
 msgid "Custom Button Text"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:117
+#: templates/settings/group-social-sharing.php:124
 msgid "Custom Description"
 msgstr ""
 
@@ -1185,11 +1180,11 @@ msgstr ""
 msgid "Custom Hash"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:87
+#: templates/settings/group-social-sharing.php:94
 msgid "Custom Image if set, otherwise recipe image"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:86
+#: templates/settings/group-social-sharing.php:93
 msgid "Custom Image per Recipe"
 msgstr ""
 
@@ -1217,7 +1212,7 @@ msgstr ""
 msgid "Custom Style"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:111
+#: templates/settings/group-social-sharing.php:118
 msgid "Custom Text"
 msgstr ""
 
@@ -1248,16 +1243,8 @@ msgstr ""
 msgid "Daily Values Disclaimer"
 msgstr ""
 
-#: templates/settings/group-analytics.php:59
-msgid "DailyGrub Integration"
-msgstr ""
-
 #: templates/admin/translations.php:21
 msgid "DailyGrub recipe analytics suite"
-msgstr ""
-
-#: templates/settings/group-analytics.php:83
-msgid "DailyGrub Tracking ID"
 msgstr ""
 
 #: includes/admin/class-wprm-dashboard.php:39
@@ -1567,7 +1554,7 @@ msgstr ""
 msgid "Disable equipment image pinning"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:57
+#: templates/settings/group-social-sharing.php:64
 msgid "Disable external recipe roundup image pinning"
 msgstr ""
 
@@ -1576,6 +1563,10 @@ msgid "Disable if you don't want to output inline CSS."
 msgstr ""
 
 #: templates/settings/group-social-sharing.php:50
+msgid "Disable ingredient image pinning"
+msgstr ""
+
+#: templates/settings/group-social-sharing.php:57
 msgid "Disable instruction image pinning"
 msgstr ""
 
@@ -1816,7 +1807,7 @@ msgid ""
 "WP Recipe Maker Manage > Your Custom Fields > Recipe Taxonomies page."
 msgstr ""
 
-#: templates/settings/group-integrations.php:56
+#: templates/settings/group-integrations.php:68
 msgid "Enable My Emissions Integration"
 msgstr ""
 
@@ -1827,10 +1818,12 @@ msgid ""
 msgstr ""
 
 #: templates/settings/group-integrations.php:31
-msgid "Enable to agree with the Shop With Instacart Button Plugin Terms:"
+msgid ""
+"Enable to agree to the applicable terms of use for the button. Click the "
+"following link for more information:"
 msgstr ""
 
-#: templates/settings/group-integrations.php:112
+#: templates/settings/group-integrations.php:124
 msgid ""
 "Enable to automatically output an extra ad unit after the recipe ingredients "
 "block."
@@ -1838,8 +1831,9 @@ msgstr ""
 
 #: templates/settings/group-integrations.php:39
 msgid ""
-"Enable to automatically output the Instacart button after the ingredients "
-"section. Alternatively manually add the button in the Template Editor."
+"Enable to automatically output the Instacart Shoppable Recipe button after "
+"the ingredients section. Alternatively, add the Shoppable Recipe button in "
+"the Template Editor."
 msgstr ""
 
 #: templates/settings/group-recipe-template.php:33
@@ -2159,6 +2153,10 @@ msgid ""
 "on the print page."
 msgstr ""
 
+#: templates/settings/group-metadata.php:133
+msgid "Force Mediavine video metadata"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:178
 msgid "Force people to leave a comment"
 msgstr ""
@@ -2418,7 +2416,7 @@ msgid ""
 msgstr ""
 
 #: templates/settings/group-media.php:19 
-#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:109
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:112
 msgid "Hide instruction media"
 msgstr ""
 
@@ -2582,11 +2580,11 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:109
+#: templates/settings/group-social-sharing.php:116
 msgid "Image Caption"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:110
+#: templates/settings/group-social-sharing.php:117
 msgid "Image Description"
 msgstr ""
 
@@ -2594,11 +2592,11 @@ msgstr ""
 msgid "Image size to link to for the clickable images."
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:108
+#: templates/settings/group-social-sharing.php:115
 msgid "Image Title"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:81
+#: templates/settings/group-social-sharing.php:88
 msgid "Image to use for the Pin Recipe shortcode."
 msgstr ""
 
@@ -2830,6 +2828,10 @@ msgstr ""
 msgid "Insert Instruction After"
 msgstr ""
 
+#: templates/settings/group-integrations.php:49
+msgid "Instacart Tastemakers ID"
+msgstr ""
+
 #: templates/admin/translations.php:275
 msgid "Instruction Group Header"
 msgstr ""
@@ -2935,7 +2937,7 @@ msgstr ""
 #: includes/public/class-wprm-blocks.php:191 
 #: templates/admin/translations.php:260 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:191
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:194
 msgid "Jump to Recipe"
 msgstr ""
 
@@ -2943,7 +2945,7 @@ msgstr ""
 #: includes/public/class-wprm-blocks.php:206 
 #: templates/admin/translations.php:261 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:191
+#: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:194
 msgid "Jump to Video"
 msgstr ""
 
@@ -3101,7 +3103,7 @@ msgstr ""
 msgid "Link Nofollow"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:74
+#: templates/settings/group-social-sharing.php:81
 msgid "Link only (no extra JavaScript loaded from Pinterest)"
 msgstr ""
 
@@ -3130,7 +3132,7 @@ msgstr ""
 msgid "Load admin assets everywhere"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:73
+#: templates/settings/group-social-sharing.php:80
 msgid "Load pinit.js (required for Repin ID pinning)"
 msgstr ""
 
@@ -3225,7 +3227,7 @@ msgid ""
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-advanced-adjustable-servings.php:34
-#:  includes/public/shortcodes/recipe/class-wprm-sc-ingredients.php:380
+#:  includes/public/shortcodes/recipe/class-wprm-sc-ingredients.php:518
 msgid "Makes:"
 msgstr ""
 
@@ -3392,7 +3394,7 @@ msgstr ""
 msgid "Multiple Ratings"
 msgstr ""
 
-#: templates/settings/group-integrations.php:72
+#: templates/settings/group-integrations.php:84
 msgid "My Emissions API Key Status"
 msgstr ""
 
@@ -3635,7 +3637,7 @@ msgid "Open the Post Author link in a new tab."
 msgstr ""
 
 #: templates/settings/group-recipe-roundup.php:52 
-#: templates/settings/group-integrations.php:97 
+#: templates/settings/group-integrations.php:109 
 #: templates/settings/group-template-editor.php:26
 msgid "Open the Template Editor"
 msgstr ""
@@ -3664,6 +3666,12 @@ msgstr ""
 #: templates/settings/group-links.php:138 
 #: templates/settings/group-links.php:165
 msgid "Optional rel attribute to add to custom links by default."
+msgstr ""
+
+#: templates/settings/group-integrations.php:50
+msgid ""
+"Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms "
+"apply."
 msgstr ""
 
 #: templates/settings/group-recipe-print.php:120
@@ -3696,7 +3704,7 @@ msgstr ""
 msgid "Optionally set a password to restrict access to the recipe post."
 msgstr ""
 
-#: templates/settings/group-metadata.php:134
+#: templates/settings/group-metadata.php:141
 msgid ""
 "Optionally set your own API key for retrieving the YouTube video metadata. "
 "Leave the setting blank to use the default shared key."
@@ -3715,7 +3723,7 @@ msgstr ""
 msgid "Other Features"
 msgstr ""
 
-#: templates/settings/group-integrations.php:107
+#: templates/settings/group-integrations.php:119
 msgid "Other Integrations"
 msgstr ""
 
@@ -3843,7 +3851,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: templates/settings/group-metadata.php:133
+#: templates/settings/group-metadata.php:140
 msgid "Personal YouTube Data API key"
 msgstr ""
 
@@ -3860,21 +3868,21 @@ msgstr ""
 msgid "Pin Button"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:102
+#: templates/settings/group-social-sharing.php:109
 msgid "Pin Description"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:80 
+#: templates/settings/group-social-sharing.php:87 
 #: templates/admin/translations.php:167
 msgid "Pin Image"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:69
+#: templates/settings/group-social-sharing.php:76
 msgid "Pin Method"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-pin.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-pin.php:180
+#: includes/public/shortcodes/recipe/class-wprm-sc-pin.php:183
 msgid "Pin Recipe"
 msgstr ""
 
@@ -3894,7 +3902,7 @@ msgstr ""
 msgid "Pinterest"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:65
+#: templates/settings/group-social-sharing.php:72
 msgid "Pinterest - Pin Recipe button"
 msgstr ""
 
@@ -3993,7 +4001,7 @@ msgstr ""
 #: includes/public/class-wprm-blocks.php:221 
 #: templates/admin/translations.php:262 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:48 
-#: includes/public/shortcodes/recipe/class-wprm-sc-print.php:186
+#: includes/public/shortcodes/recipe/class-wprm-sc-print.php:189
 msgid "Print Recipe"
 msgstr ""
 
@@ -4053,7 +4061,7 @@ msgid "Range Keyword"
 msgstr ""
 
 #: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:44 
-#: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:198
+#: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:201
 msgid "Rate this Recipe"
 msgstr ""
 
@@ -4160,7 +4168,7 @@ msgid "Recipe ID (required)"
 msgstr ""
 
 #: includes/public/class-wprm-print.php:298 
-#: templates/settings/group-social-sharing.php:85
+#: templates/settings/group-social-sharing.php:92
 msgid "Recipe Image"
 msgstr ""
 
@@ -4172,7 +4180,7 @@ msgstr ""
 msgid "Recipe Metadata"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:106 
+#: templates/settings/group-social-sharing.php:113 
 #: templates/admin/translations.php:225
 msgid "Recipe Name"
 msgstr ""
@@ -4240,7 +4248,7 @@ msgstr ""
 msgid "Recipe Submissions"
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:107
+#: templates/settings/group-social-sharing.php:114
 msgid "Recipe Summary"
 msgstr ""
 
@@ -4524,11 +4532,11 @@ msgstr ""
 msgid "Save image locally"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:183
+#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:186
 msgid "Save to Grow"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:190
+#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:193
 msgid "Save to Slickstream"
 msgstr ""
 
@@ -4706,22 +4714,22 @@ msgid "Settings Tools"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:212
+#: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:215
 msgid "Share by Email"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:224
+#: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:227
 msgid "Share by Text"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:176
+#: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:179
 msgid "Share on Facebook"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:43 
-#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:184
+#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:187
 msgid "Share on Twitter"
 msgstr ""
 
@@ -4783,7 +4791,7 @@ msgid "Show default WordPress UI"
 msgstr ""
 
 #: templates/settings/group-media.php:18 
-#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:108
+#: includes/public/shortcodes/recipe/class-wprm-sc-media-toggle.php:111
 msgid "Show instruction media"
 msgstr ""
 
@@ -4795,7 +4803,7 @@ msgstr ""
 msgid "Show keywords in the recipe template as well as the metadata."
 msgstr ""
 
-#: templates/settings/group-integrations.php:84
+#: templates/settings/group-integrations.php:96
 msgid "Show label for all recipes"
 msgstr ""
 
@@ -5260,10 +5268,6 @@ msgstr ""
 msgid "The instruction videos"
 msgstr ""
 
-#: templates/settings/group-analytics.php:75
-msgid "The integration is currently active."
-msgstr ""
-
 #: templates/settings/group-media.php:68 templates/settings/group-media.php:81
 msgid "The main recipe video"
 msgstr ""
@@ -5280,10 +5284,6 @@ msgstr ""
 
 #: templates/admin/translations.php:216
 msgid "The weight of 1 serving. Does not affect the calculation."
-msgstr ""
-
-#: templates/settings/group-analytics.php:77
-msgid "There was a problem with activating the integration:"
 msgstr ""
 
 #: templates/admin/menu/import/import-overview.php:28
@@ -5531,11 +5531,11 @@ msgstr ""
 msgid "Unlimited (not recommended for database growth)"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:187
+#: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:190
 msgid "Unsave from Grow"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:194
+#: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:197
 msgid "Unsave from Slickstream"
 msgstr ""
 
@@ -6062,7 +6062,7 @@ msgid ""
 "integration and other plugins that might link to a recipe."
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:103
+#: templates/settings/group-social-sharing.php:110
 msgid "What to use for the pin description."
 msgstr ""
 
@@ -6092,6 +6092,13 @@ msgstr ""
 msgid ""
 "When enabled, only the metadata for the very first food recipe on the page "
 "well get added."
+msgstr ""
+
+#: templates/settings/group-metadata.php:134
+msgid ""
+"When enabled, the Mediavine video metadata will get output as well as the "
+"recipe video metadata. This is their recommendation but results in duplicate "
+"video metadata."
 msgstr ""
 
 #: templates/settings/group-private-notes.php:32
@@ -6191,11 +6198,11 @@ msgid ""
 "up yet."
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:92
+#: templates/settings/group-social-sharing.php:99
 msgid "You can set the pin image when editing a recipe."
 msgstr ""
 
-#: templates/settings/group-social-sharing.php:118
+#: templates/settings/group-social-sharing.php:125
 msgid "You can use the following placeholders:"
 msgstr ""
 
@@ -6216,7 +6223,7 @@ msgstr ""
 msgid "Your Custom Fields"
 msgstr ""
 
-#: templates/settings/group-integrations.php:62
+#: templates/settings/group-integrations.php:74
 msgid "Your My Emissions API Key"
 msgstr ""
 

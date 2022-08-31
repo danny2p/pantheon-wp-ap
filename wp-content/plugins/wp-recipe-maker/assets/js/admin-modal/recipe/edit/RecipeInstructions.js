@@ -235,6 +235,7 @@ export default class RecipeInstructions extends Component {
                                                     });
                                                 }}
                                                 allIngredients={ allIngredients }
+                                                usedIngredients={ usedIngredients }
                                                 onChangeIngredients={ ( ingredients ) => {
                                                     let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
                                                     newFields[index].ingredients = ingredients;

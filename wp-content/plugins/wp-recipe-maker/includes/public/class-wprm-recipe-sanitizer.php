@@ -61,10 +61,24 @@ class WPRM_Recipe_Sanitizer {
 		if ( isset( $recipe['image_id'] ) )		{ $sanitized_recipe['image_id'] = intval( $recipe['image_id'] ); }
 		if ( isset( $recipe['pin_image_id'] ) ) { $sanitized_recipe['pin_image_id'] = intval( $recipe['pin_image_id'] ); }
 		if ( isset( $recipe['video_id'] ) ) 	{ $sanitized_recipe['video_id'] = intval( $recipe['video_id'] ); }
-		if ( isset( $recipe['prep_time'] ) ) 	{ $sanitized_recipe['prep_time'] = intval( $recipe['prep_time'] ); }
-		if ( isset( $recipe['cook_time'] ) ) 	{ $sanitized_recipe['cook_time'] = intval( $recipe['cook_time'] ); }
-		if ( isset( $recipe['total_time'] ) ) 	{ $sanitized_recipe['total_time'] = intval( $recipe['total_time'] ); }
-		if ( isset( $recipe['custom_time'] ) ) 	{ $sanitized_recipe['custom_time'] = intval( $recipe['custom_time'] ); }
+
+		// Times should never be negative.
+		if ( isset( $recipe['prep_time'] ) ) 	{
+			$time = intval( $recipe['prep_time'] );
+			$sanitized_recipe['prep_time'] = $time < 0 ? 0 : $time;
+		}
+		if ( isset( $recipe['cook_time'] ) ) 	{
+			$time = intval( $recipe['cook_time'] );
+			$sanitized_recipe['cook_time'] = $time < 0 ? 0 : $time;
+		}
+		if ( isset( $recipe['total_time'] ) ) 	{
+			$time = intval( $recipe['total_time'] );
+			$sanitized_recipe['total_time'] = $time < 0 ? 0 : $time;
+		}
+		if ( isset( $recipe['custom_time'] ) ) 	{
+			$time = intval( $recipe['custom_time'] );
+			$sanitized_recipe['custom_time'] = $time < 0 ? 0 : $time;
+		}
 
 		// Servings.
 		if ( isset( $recipe['servings'] ) ) {

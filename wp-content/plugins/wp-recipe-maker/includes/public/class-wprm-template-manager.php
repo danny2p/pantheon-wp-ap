@@ -536,7 +536,7 @@ class WPRM_Template_Manager {
 	 * @param	mixed $slug Slug of the template to delete.
 	 */
 	public static function delete_template( $slug ) {
-		$slug = sanitize_title( $slug );
+		$slug = self::slugify( $slug );
 
 		// Make sure list of templates is up to date.
 		$templates = get_option( 'wprm_templates', array() );

@@ -589,6 +589,9 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		if ( 'table' === $atts['style'] ) {
 			$classes[] = 'wprm-recipe-table-borders-' . $atts['table_borders'];
 

@@ -54,47 +54,48 @@ $analytics = array(
 	),
 );
 
-$analytics['settings'][] = array(
-	'id' => 'honey_home_integration',
-	'name' => __( 'DailyGrub Integration', 'wp-recipe-maker' ),
-	'description' => __( 'Advanced recipe and audience analytics.', 'wp-recipe-maker' ),
-	'documentation' => 'https://dailygrub.com',
-	'type' => 'toggle',
-	'default' => false,
-	'dependency' => array(
-		'id' => 'analytics_enabled',
-		'value' => true,
-	),
-);
+// 2022-08-11 DailyGrub not active anymore.
+// $analytics['settings'][] = array(
+// 	'id' => 'honey_home_integration',
+// 	'name' => __( 'DailyGrub Integration', 'wp-recipe-maker' ),
+// 	'description' => __( 'Advanced recipe and audience analytics.', 'wp-recipe-maker' ),
+// 	'documentation' => 'https://dailygrub.com',
+// 	'type' => 'toggle',
+// 	'default' => false,
+// 	'dependency' => array(
+// 		'id' => 'analytics_enabled',
+// 		'value' => true,
+// 	),
+// );
 
-$hh_integration_status = get_option( 'hh_integration_status', false );
+// $hh_integration_status = get_option( 'hh_integration_status', false );
 
-$description = __( 'Add your DailyGrub tracking ID to enable syncing data with the platform.', 'wp-recipe-maker' );
-if ( false !== $hh_integration_status ) {
-	if ( $hh_integration_status['success'] ) {
-		$description = __( 'The integration is currently active.', 'wp-recipe-maker' );
-	} else {
-		$description = __( 'There was a problem with activating the integration:', 'wp-recipe-maker' ) . ' ' . $hh_integration_status['message'];
-	}
-}
+// $description = __( 'Add your DailyGrub tracking ID to enable syncing data with the platform.', 'wp-recipe-maker' );
+// if ( false !== $hh_integration_status ) {
+// 	if ( $hh_integration_status['success'] ) {
+// 		$description = __( 'The integration is currently active.', 'wp-recipe-maker' );
+// 	} else {
+// 		$description = __( 'There was a problem with activating the integration:', 'wp-recipe-maker' ) . ' ' . $hh_integration_status['message'];
+// 	}
+// }
 
-$analytics['settings'][] = array(
-	'id' => 'honey_home_token',
-	'name' => __( 'DailyGrub Tracking ID', 'wp-recipe-maker' ),
-	'description' => $description,
-	'type' => 'text',
-	'default' => '',
-	'sanitize' => function( $value ) {
-		return trim( sanitize_text_field( $value ) );
-	},
-	'dependency' => array(
-		array(
-			'id' => 'analytics_enabled',
-			'value' => true,
-		),
-		array(
-			'id' => 'honey_home_integration',
-			'value' => true,
-		),
-	),
-);
+// $analytics['settings'][] = array(
+// 	'id' => 'honey_home_token',
+// 	'name' => __( 'DailyGrub Tracking ID', 'wp-recipe-maker' ),
+// 	'description' => $description,
+// 	'type' => 'text',
+// 	'default' => '',
+// 	'sanitize' => function( $value ) {
+// 		return trim( sanitize_text_field( $value ) );
+// 	},
+// 	'dependency' => array(
+// 		array(
+// 			'id' => 'analytics_enabled',
+// 			'value' => true,
+// 		),
+// 		array(
+// 			'id' => 'honey_home_integration',
+// 			'value' => true,
+// 		),
+// 	),
+// );

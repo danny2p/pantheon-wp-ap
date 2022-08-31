@@ -96,6 +96,9 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		// Custom style.
 		$style = '';
 		$style .= 'background-color: ' . $atts['button_background'] . ';';

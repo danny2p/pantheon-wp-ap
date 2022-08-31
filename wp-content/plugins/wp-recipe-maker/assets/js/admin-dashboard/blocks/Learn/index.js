@@ -26,7 +26,7 @@ const Learn = (props) => {
                     title={ `🤝 ${ __wprm( 'Our Partners' ) }` }
                 >
                     <Item url="https://myemissions.green/wp-recipe-maker?ref=wprm">{ __wprm( 'My Emissions carbon footprint labels' ) }</Item>
-                    <Item url="https://dailygrub.com">{ __wprm( 'DailyGrub recipe analytics suite' ) }</Item>
+                    <Item url="https://help.bootstrapped.ventures/article/323-shop-with-instacart-button">{ __wprm( 'Shoppable Recipes with Instacart' ) }</Item>
                 </Section>
                 <Section
                     title={ `🙋 ${ __wprm( 'Get Help' ) }` }

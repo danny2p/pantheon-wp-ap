@@ -272,6 +272,9 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		// Args for optional unit conversion and adjustable servings.
 		$media_toggle_atts = array(
 			'id' => $atts['id'],
