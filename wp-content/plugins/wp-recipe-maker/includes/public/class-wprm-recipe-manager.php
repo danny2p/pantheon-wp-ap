@@ -268,7 +268,7 @@ class WPRM_Recipe_Manager {
 			'total' => 30,
 			'average' => 3.75,
 		);
-		$sanitized_recipe['permalink'] = home_url();
+		$sanitized_recipe['permalink'] = home_url() . '/demo-recipe/';
 
 		$demo_recipe = new WPRM_Recipe_Shell( $sanitized_recipe );
 		WPRM_Template_Shortcodes::set_current_recipe_shell( $demo_recipe );

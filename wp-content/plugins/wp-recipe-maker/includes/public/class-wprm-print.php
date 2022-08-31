@@ -181,7 +181,7 @@ class WPRM_Print {
 				$output['recipe'] = $recipe;
 				$output['title'] = $recipe->name() . ' - ' . get_bloginfo( 'name' );
 				$output['url'] = $recipe->permalink();
-				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print', $template['slug'] ) . '</div>';
+				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '" data-recipe-unit-system="' . esc_attr( $recipe->unit_system() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print', $template['slug'] ) . '</div>';
 			}
 		}
 
@@ -246,7 +246,7 @@ class WPRM_Print {
 						$recipe_template = str_replace( 'wprm-recipe-adjustable-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-adjustable-servings-' . $uid . '-container', $recipe_template );
 						$recipe_template = str_replace( 'wprm-recipe-advanced-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-advanced-servings-' . $uid . '-container', $recipe_template );
 
-						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '">' . $recipe_template . '</div>';
+						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '" data-recipe-unit-system="' . esc_attr( $recipe->unit_system() ) . '">' . $recipe_template . '</div>';
 						$uid++;
 					}
 				}

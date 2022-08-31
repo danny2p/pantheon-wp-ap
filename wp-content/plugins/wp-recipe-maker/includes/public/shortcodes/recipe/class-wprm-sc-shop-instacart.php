@@ -59,8 +59,17 @@ class WPRM_SC_Shop_Instacart extends WPRM_Template_Shortcode {
 		// Make sure Instacart integration gets loaded.
 		add_filter( 'wprm_load_instacart', '__return_true' );
 
+		// Optional affiliate ID output.
+		$affiliate_attributes = '';
+		$affiliate_id = WPRM_Settings::get( 'integration_instacart_affiliate_id' );
+
+		if ( $affiliate_id ) {
+			$affiliate_attributes = ' data-affiliate_id="' . esc_attr( $affiliate_id ) . '" data-affiliate_platform="recipe_widget"';
+		}
+
+
 		// Actual output.
-		$output = '<div id="shop-with-instacart-v1"></div>';
+		$output = '<div id="shop-with-instacart-v1"' . $affiliate_attributes . '></div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

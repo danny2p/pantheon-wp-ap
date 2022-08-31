@@ -763,8 +763,7 @@ class WPRM_Recipe {
 			if ( in_array( WPRM_Settings::get( 'video_autoplay' ), array( 'main', 'all' ) ) ) { $output .= ' autoplay="true"'; }
 			if ( in_array( WPRM_Settings::get( 'video_loop' ), array( 'main', 'all' ) ) ) { $output .= ' loop="true"'; }
 
-			$format = isset( $video_data['fileformat'] ) && $video_data['fileformat'] ? $video_data['fileformat'] : 'mp4';
-			$output .= ' ' . $format . '="' . $this->video_url() . '"';
+			$output .= ' src="' . $this->video_url() . '"';
 
 			$thumb_size = array( $video_data['width'], $video_data['height'] );
 			$thumb_url = $this->video_thumb_url( $thumb_size );
@@ -1064,6 +1063,10 @@ class WPRM_Recipe {
 			'height' => 0,
 		);
 
+		if ( ! is_array( $servings_advanced ) ) {
+			return $defaults;
+		}
+
 		return array_replace_recursive( $defaults, $servings_advanced );
 	}
 
@@ -1302,7 +1305,9 @@ class WPRM_Recipe {
 		$ingredients_without_groups = array();
 
 		foreach ( $ingredients as $ingredient_group ) {
-			$ingredients_without_groups = array_merge( $ingredients_without_groups, $ingredient_group['ingredients'] );
+			if ( is_array( $ingredient_group['ingredients'] ) ) {
+				$ingredients_without_groups = array_merge( $ingredients_without_groups, $ingredient_group['ingredients'] );				
+			}
 		}
 
 		return $ingredients_without_groups;

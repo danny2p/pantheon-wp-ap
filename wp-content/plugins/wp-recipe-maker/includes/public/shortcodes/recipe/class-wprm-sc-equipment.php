@@ -120,6 +120,26 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'value' => 'images',
 				),
 			),
+			'equipment_notes_separator' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'None',
+					'comma' => 'Comma',
+					'dash' => 'Dash',
+					'parentheses' => 'Parentheses',
+				),
+			),
+			'notes_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => array(
+					'normal' => 'Normal',
+					'faded' => 'Faded',
+					'smaller' => 'Smaller',
+					'smaller-faded' => 'Smaller & Faded',
+				),
+			),
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
@@ -148,6 +168,9 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$output = '<div class="' . implode( ' ', $classes ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'equipment' );
 
@@ -166,7 +189,23 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					$name = $equipment['amount'] . ' ' . $name;
 				}
 				if ( isset( $equipment['notes'] ) && $equipment['notes'] ) {
-					$name = $name . ' ' . $equipment['notes'];
+					$notes = $equipment['notes'];
+
+					switch ( $atts['equipment_notes_separator'] ) {
+						case 'comma':
+							$separator = ',&#32;';
+							break;
+						case 'dash':
+							$separator = '&#32;-&#32;';
+							break;
+						case 'parentheses':
+							$notes = '(' . $notes . ')';
+							// Fall through to default separator.
+						default:
+							$separator = '&#32;';
+					}
+
+					$name = $name . $separator . '<span class="wprm-recipe-equipment-notes wprm-recipe-equipment-notes-' . $atts['notes_style'] . '">' . $notes . '</span>';
 				}
 
 				$equipment_output = '<div class="wprm-recipe-equipment-name">' . $name . '</div>';

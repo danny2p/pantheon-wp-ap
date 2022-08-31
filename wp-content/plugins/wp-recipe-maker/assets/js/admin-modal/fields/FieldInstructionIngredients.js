@@ -8,7 +8,8 @@ import { __wprm } from 'Shared/Translations';
 const FieldInstructionIngredients = (props) => {
     const ingredients = props.hasOwnProperty( 'ingredients' ) ? props.ingredients : [];
 
-    let ingredientOptions = [];
+    let usedIngredientOptions = [];
+    let unusedIngredientOptions = [];
     let selectedIngredients = [];
 
     for ( let ingredient of props.allIngredients ) {
@@ -20,15 +21,29 @@ const FieldInstructionIngredients = (props) => {
                     value: ingredient.uid,
                     label: he.decode( ingredientString ),
                 };
-        
-                ingredientOptions.push( ingredientOption );
-        
+
+                // Put in correct group.
+                if ( props.usedIngredients.includes( ingredient.uid ) ) {
+                    usedIngredientOptions.push( ingredientOption );                    
+                } else {
+                    unusedIngredientOptions.push( ingredientOption );
+                }
+
+                // Maybe mark as selected.
                 if ( ingredients.includes( ingredient.uid ) ) {
                     selectedIngredients.push( ingredientOption );
                 }
             }
         }
     }
+
+    const ingredientOptions = [{
+        label: __wprm( 'Not associated yet' ),
+        options: unusedIngredientOptions,
+    },{
+        label: __wprm( 'Already Associated' ),
+        options: usedIngredientOptions,
+    }];
 
     return (
         <div className="wprm-admin-modal-field-instruction-after-container-ingredient">

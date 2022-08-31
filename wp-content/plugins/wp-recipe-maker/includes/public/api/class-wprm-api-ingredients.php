@@ -59,6 +59,7 @@ class WPRM_Api_Ingredients {
 		return array(
 			'plural' => isset( $meta['wprm_ingredient_plural'] ) ? $meta['wprm_ingredient_plural'] : '',
 			'group' => isset( $meta['wprmp_ingredient_group'] ) ? $meta['wprmp_ingredient_group'] : '',
+			'image_id' => isset( $meta['wprmp_ingredient_image_id'] ) ? $meta['wprmp_ingredient_image_id'] : '',
 			'eafl' => isset( $meta['wprmp_ingredient_eafl'] ) ? $meta['wprmp_ingredient_eafl'] : '',
 			'link' => isset( $meta['wprmp_ingredient_link'] ) ? $meta['wprmp_ingredient_link'] : '',
 			'link_nofollow' => isset( $meta['wprmp_ingredient_link_nofollow'] ) ? $meta['wprmp_ingredient_link_nofollow'] : '',
@@ -82,6 +83,15 @@ class WPRM_Api_Ingredients {
 		if ( isset( $meta['group'] ) ) {
 			$group = sanitize_text_field( $meta['group'] );
 			update_term_meta( $term->term_id, 'wprmp_ingredient_group', $group );
+		}
+		if ( isset( $meta['image_id'] ) ) {
+			$image_id = intval( $meta['image_id'] );
+
+			if ( 0 === $image_id ) {
+				delete_term_meta( $term->term_id, 'wprmp_ingredient_image_id' );
+			} else {
+				update_term_meta( $term->term_id, 'wprmp_ingredient_image_id', $image_id );
+			}
 		}
 		if ( isset( $meta['eafl'] ) ) {
 			$eafl = intval( $meta['eafl'] );

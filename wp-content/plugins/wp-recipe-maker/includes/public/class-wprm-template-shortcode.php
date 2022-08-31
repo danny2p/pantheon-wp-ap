@@ -87,8 +87,16 @@ class WPRM_Template_Shortcode {
 	}
 
 	protected static function get_attributes( $atts ) {
-		$atts = shortcode_atts( WPRM_Template_Shortcodes::get_defaults( static::$shortcode ), $atts, str_replace( '-', '_', static::$shortcode ) );
+		// Attributes available for this shortcode.
+		$defaults = WPRM_Template_Shortcodes::get_defaults( static::$shortcode );
 
+		// Attributes available for all shortcodes.
+		$defaults['class'] = '';
+
+		// Allow filtering of attributes.
+		$atts = shortcode_atts( $defaults, $atts, str_replace( '-', '_', static::$shortcode ) );
+
+		// Technical attributes that cannot be overwritten.
 		$atts['is_template_editor_preview'] = isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp-recipe-maker/v1/template/preview' === $GLOBALS['wp']->query_vars['rest_route'];
 
 		return $atts;

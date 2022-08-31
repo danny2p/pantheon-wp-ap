@@ -105,6 +105,9 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 			'wprm-block-image-' . $atts['style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		
 		$img = $recipe->image( $size );
 

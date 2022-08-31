@@ -54,6 +54,9 @@ class WPRM_SC_Cost extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$output = '<span class="' . implode( ' ', $classes ) . '">' . $recipe->cost() . '</span>';
 		$output = WPRM_Shortcode_Helper::get_label_container( $atts, 'cost', $output );
 

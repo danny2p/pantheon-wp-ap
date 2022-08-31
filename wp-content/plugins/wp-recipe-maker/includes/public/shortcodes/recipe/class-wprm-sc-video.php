@@ -48,11 +48,24 @@ class WPRM_SC_Video extends WPRM_Template_Shortcode {
 			return '';
 		}
 
-		$output = '<div id="wprm-recipe-video-container-' . $recipe->id() . '" class="wprm-recipe-video-container">';
+		// Output.
+		$classes = array(
+			'wprm-recipe-video-container',
+		);
+
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
+		$output = '<div id="wprm-recipe-video-container-' . $recipe->id() . '" class="' . implode( ' ', $classes ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'video' );
 
 		$output .= '<div class="wprm-recipe-video">' . do_shortcode( $recipe->video() ) . '</div>';
 		$output .= '</div>';
+
+		// Check if force Mediavine video is enabled.
+		if ( WPRM_Settings::get( 'metadata_force_mediavine_video_output' ) ) {
+			$output = str_ireplace( ' data-disable-jsonld="true"', '', $output );
+		}
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

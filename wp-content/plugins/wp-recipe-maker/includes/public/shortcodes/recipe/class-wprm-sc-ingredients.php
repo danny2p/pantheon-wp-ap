@@ -93,19 +93,35 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => array(
 					'regular' => 'Regular',
+					'grouped' => 'Grouped',
 					'table-2' => 'Table with 2 columns',
 					'table-2-align' => 'Table with 2 columns, aligned right',
 					'table-3' => 'Table with 3 columns',
 					'table-3-align' => 'Table with 3 columns, aligned right',
 				),
 			),
+			'group_width' => array(
+				'default' => '250px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'ingredients_style',
+					'value' => 'grouped',
+				),
+			),
 			'table_amount_width' => array(
 				'default' => '100px',
 				'type' => 'size',
 				'dependency' => array(
-					'id' => 'ingredients_style',
-					'value' => 'regular',
-					'type' => 'inverse',
+					array(
+						'id' => 'ingredients_style',
+						'value' => 'regular',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'ingredients_style',
+						'value' => 'grouped',
+						'type' => 'inverse'
+					),
 				),
 			),
 			'table_name_width' => array(
@@ -127,6 +143,11 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 						'value' => 'table-2-align',
 						'type' => 'inverse',
 					),
+					array(
+						'id' => 'ingredients_style',
+						'value' => 'grouped',
+						'type' => 'inverse'
+					),
 				),
 			),
 			'ingredient_notes_separator' => array(
@@ -147,6 +168,122 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'faded' => 'Faded',
 					'smaller' => 'Smaller',
 					'smaller-faded' => 'Smaller & Faded',
+				),
+			),
+			'image_position' => array(
+				'default' => 'before',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'before' => 'Before the ingredient',
+					'after' => 'After the ingredient',
+				),
+			),
+			'image_size' => array(
+				'default' => '50x50',
+				'type' => 'image_size',
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'no_image_width' => array(
+				'default' => '50',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'no_image_height' => array(
+				'default' => '50',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'image_margin' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'image_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => array(
+					'normal' => 'Normal',
+					'rounded' => 'Rounded',
+					'circle' => 'Circle',
+				),
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'image_rounded_radius' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'image_position',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'image_style',
+						'value' => 'rounded',
+					),
+				),
+			),
+			'image_border_width' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'image_position',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'image_border_style' => array(
+				'default' => 'solid',
+				'type' => 'dropdown',
+				'options' => 'border_styles',
+				'dependency' => array(
+					array(
+						'id' => 'image_position',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'image_border_width',
+						'value' => '0px',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'image_border_color' => array(
+				'default' => '#666666',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'image_position',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'image_border_width',
+						'value' => '0px',
+						'type' => 'inverse',
+					),
 				),
 			),
 			'unit_conversion' => array(
@@ -289,6 +426,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'options' => array(
 					'none' => 'None',
 					'parentheses' => 'Parentheses',
+					'slash' => 'Slash',
 				),
 				'dependency' => array(
 					'id' => 'unit_conversion',
@@ -427,6 +565,13 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'wprm-ingredient-style-' . $atts['ingredients_style'],
 		);
 
+		if ( '' !== $atts['image_position'] ) {
+			$classes[] = 'wprm-recipe-images-' . esc_attr( $atts['image_position'] );
+		}
+
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		// Args for optional unit conversion and adjustable servings.
 		$unit_conversion_atts = array(
 			'id' => $atts['id'],
@@ -494,12 +639,20 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					$uid = ' data-uid="' . esc_attr( $ingredient['uid'] ) . '"';
 				}
 
+				// Add group width if set to grouped style.
+				if ( 'grouped' === $atts['ingredients_style'] ) {
+					$style .= 'flex-basis: ' . $atts['group_width'] . ';';
+				}
+
 				$output .= '<li class="wprm-recipe-ingredient" style="' . $style . '"' . $uid . '>';
 
 				// Maybe replace fractions in amount.
 				if ( WPRM_Settings::get( 'automatic_amount_fraction_symbols' ) ) {
 					$ingredient['amount'] = WPRM_Recipe_Parser::replace_any_fractions_with_symbol( $ingredient['amount'] );
 				}
+
+				// Ingredient images.
+				$image = apply_filters( 'wprm_recipe_ingredients_shortcode_image', '', $atts, $ingredient );
 				
 				// Amount & Unit.
 				$amount_unit = '';
@@ -514,8 +667,8 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				// Allow filtering for second unit system.
 				$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', $amount_unit, $atts, $ingredient );
 
-				// Surround with container if not regular style.
-				if ( 'regular' !== $atts['ingredients_style'] ) {
+				// Surround with container if not regular or grouped style.
+				if ( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
 					$amount_unit = '<span class="wprm-recipe-ingredient-amount-unit" style="flex-basis: ' . esc_attr( $atts['table_amount_width'] ) .';">' . trim( $amount_unit ) . '</span> ';
 				}
 
@@ -558,7 +711,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					}
 				}
 
-				if ( $name || 'regular' !== $atts['ingredients_style'] ) {
+				if ( $name || ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
 					if ( 'table-3' === substr( $atts['ingredients_style'], 0, 7 ) ) {
 						$name_output = '<span class="wprm-recipe-ingredient-name" style="flex-basis: ' . esc_attr( $atts['table_name_width'] ) .';"' . $plural_data . '>' . $name . '</span>'  . $separator;
 					} else {
@@ -575,7 +728,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					} else {
 						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . $atts['notes_style'] . '">' . $ingredient['notes'] . '</span>';
 					}
-				} elseif( 'regular' !== $atts['ingredients_style'] ) {
+				} elseif( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
 					$notes_output .= '<span class="wprm-recipe-ingredient-notes"></span>';
 				}
 
@@ -597,9 +750,26 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					$ingredient_output .= $names_notes;
 				}
 
+				// Have image separate when using the grouped style.
+				if ( 'grouped' === $atts['ingredients_style'] ) {
+					$ingredient_output = '<span class="wprm-recipe-ingredient-details">' . $ingredient_output . '</span>';
+				}
+
+				// Output optional ingredient image.
+				if ( 'before' === $atts['image_position'] ) {
+					$ingredient_output = $image . $ingredient_output;
+				} elseif ( 'after' === $atts['image_position'] ) {
+					$ingredient_output .= $image;
+				}
+
 				// Output checkbox.
 				if ( 'checkbox' === $atts['list_style'] ) {
 					$ingredient_output = apply_filters( 'wprm_recipe_ingredients_shortcode_checkbox', $ingredient_output );
+				}
+
+				// Add container when using the grouped style.
+				if ( 'grouped' === $atts['ingredients_style'] ) {
+					$ingredient_output = '<span class="wprm-recipe-ingredient-details-container">' . $ingredient_output . '</span>';
 				}
 
 				$output .= $ingredient_output;

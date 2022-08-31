@@ -150,6 +150,9 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 				'wprm-block-text-' . $atts['text_style'],
 			);
 
+			// Add custom class if set.
+			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 			$output .= '<div class="' . implode( ' ', $classes ) . '">' . WPRM_Rating::get_formatted_rating( $rating, $decimals ) . '</div>';
 		} elseif ( 'average' === $atts['display'] ) {
 			$classes = array(
@@ -157,12 +160,18 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 				'wprm-block-text-' . $atts['text_style'],
 			);
 
+			// Add custom class if set.
+			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 			$output .= '<div class="' . implode( ' ', $classes ) . '">' . $formatted_average . '</div>';
 		} elseif ( 'count' === $atts['display'] ) {
 			$classes = array(
 				'wprm-recipe-rating-count',
 				'wprm-block-text-' . $atts['text_style'],
 			);
+
+			// Add custom class if set.
+			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
 			$output .= '<div class="' . implode( ' ', $classes ) . '">' . $rating['count'] . '</div>';
 		}

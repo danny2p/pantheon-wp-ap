@@ -98,6 +98,9 @@ class WPRM_SC_Tag extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . $atts['text_style'],
 		);
 
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
 		$output = '<span class="' . implode( ' ', $classes ) . '">';
 
 		foreach ( $terms as $index => $term ) {

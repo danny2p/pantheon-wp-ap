@@ -385,7 +385,7 @@ class WPRM_Template_Helper {
 					$unit_systems_output[] = '<a href="#" class="wprm-unit-conversion' . esc_attr( $active ) . '" data-system="' . esc_attr( $unit_system ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">' . $unit_system_label . '</a>';
 				}
 
-				$output = '<div class="wprm-unit-conversion-container">' . implode( ' - ', $unit_systems_output ) . '</div>';
+				$output = '<div class="wprm-unit-conversion-container" data-recipe-unit-system="' . esc_attr( $recipe_unit_system ) . '">' . implode( ' - ', $unit_systems_output ) . '</div>';
 
 				WPRM_Assets::add_js_data( 'wprmpuc_recipe_' . $recipe->id(), array(
 					'ingredients' => $ingredients,

@@ -51,7 +51,29 @@ class WPRM_Import_Tasty extends WPRM_Import {
 	 * @since    1.23.0
 	 */
 	public function get_settings_html() {
-		return '';
+		$html = '<h4>Recipe Tags</h4>';
+
+		$tasty_taxonomies = array(
+			'method' => 'Method',
+		);
+
+		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
+
+		foreach ( $wprm_taxonomies as $wprm_taxonomy => $options ) {
+			$wprm_key = substr( $wprm_taxonomy, 5 );
+
+			$html .= '<label for="tasty-tags-' . $wprm_key . '">' . $options['name'] . ':</label> ';
+			$html .= '<select name="tasty-tags-' . $wprm_key . '" id="tasty-tags-' . $wprm_key . '">';
+			$html .= "<option value=\"\">Don't import anything for this tag</option>";
+			foreach ( $tasty_taxonomies as $name => $label ) {
+				$selected = $wprm_key === $name ? ' selected="selected"' : '';
+				$html .= '<option value="' . esc_attr( $name ) . '"' . esc_html( $selected ) . '>' . esc_html( $label ) . '</option>';
+			}
+			$html .= '</select>';
+			$html .= '<br />';
+		}
+
+		return $html;
 	}
 
 	/**
@@ -192,6 +214,40 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		$recipe['tags']['course'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'category', true ) ) );
 		$recipe['tags']['cuisine'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'cuisine', true ) ) );
 		$recipe['tags']['keyword'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'keywords', true ) ) );
+
+		// Custom tags.
+		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
+		foreach ( $wprm_taxonomies as $wprm_taxonomy => $options ) {
+			$wprm_key = substr( $wprm_taxonomy, 5 );
+			$tag = isset( $post_data[ 'tasty-tags-' . $wprm_key ] ) ? $post_data[ 'tasty-tags-' . $wprm_key ] : false;
+
+			if ( $tag ) {
+				$recipe['tags'][ $wprm_key ] = array_map( 'trim', explode( ',', get_post_meta( $id, $tag, true ) ) );
+			}
+		}
+
+		// Diet tag.
+		$recipe['tags']['suitablefordiet'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'diet', true ) ) );
+
+		$tasty_to_wprm = array(
+			'Diabetic'    => 'DiabeticDiet',
+			'Gluten Free' => 'GlutenFreeDiet',
+			'Halal'       => 'HalalDiet',
+			'Hindu'       => 'HinduDiet',
+			'Kosher'      => 'KosherDiet',
+			'Low Calorie' => 'LowCalorieDiet',
+			'Low Fat'     => 'LowFatDiet',
+			'Low Lactose' => 'LowLactoseDiet',
+			'Low Salt'    => 'LowSaltDiet',
+			'Vegan'       => 'VeganDiet',
+			'Vegetarian'  => 'VegetarianDiet',
+		);
+
+		foreach ( $recipe['tags']['suitablefordiet'] as $index => $tasty_diet ) {
+			if ( isset( $tasty_to_wprm[ $tasty_diet ] ) ) {
+				$recipe['tags']['suitablefordiet'][ $index ] = $tasty_to_wprm[ $tasty_diet ];
+			}
+		}
 
 		// Ingredients.
 		$tasty_ingredients = $this->parse_recipe_component_list( get_post_meta( $id, 'ingredients', true ) );

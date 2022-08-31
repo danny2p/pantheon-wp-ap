@@ -146,6 +146,10 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 			'wprm-icon-shortcode',
 			'wprm-icon-shortcode-' . $atts['style'],
 		);
+
+		// Add custom class if set.
+		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+		
 		$before_icon = '';
 		$after_icon = '';
 

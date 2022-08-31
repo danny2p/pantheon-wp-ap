@@ -232,10 +232,10 @@ class WPRM_Api_Manage_Taxonomies {
 						if ( 'all' !== $value ) {
 							$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
 
-							$type = 'equipment' === $type ? $type : 'term';
+							$image_field = 'equipment' === $type || 'ingredient' === $type ? $type : 'term';
 
 							$args['meta_query'][] = array(
-								'key' => 'wprmp_' . $type . '_image_id',
+								'key' => 'wprmp_' . $image_field . '_image_id',
 								'compare' => $compare,
 							);
 						}
@@ -314,18 +314,14 @@ class WPRM_Api_Manage_Taxonomies {
 				if ( 'equipment' === $type ) { $meta_key = 'equipment'; }
 
 				// Term image.
-				if ( 'ingredient' !== $type ) {
-					$field = 'equipment' === $type ? 'wprmp_equipment_image_id' : 'wprmp_term_image_id';
+				$row->image_id = get_term_meta( $row->term_id, 'wprmp_' . $meta_key . '_image_id', true );
+				$row->image_url = '';
 
-					$row->image_id = get_term_meta( $row->term_id, 'wprmp_' . $meta_key . '_image_id', true );
-					$row->image_url = '';
+				if ( $row->image_id ) {
+					$thumb = wp_get_attachment_image_src( $row->image_id, array( 150, 999 ) );
 
-					if ( $row->image_id ) {
-						$thumb = wp_get_attachment_image_src( $row->image_id, array( 150, 999 ) );
-
-						if ( $thumb && isset( $thumb[0] ) ) {
-							$row->image_url = $thumb[0];
-						}
+					if ( $thumb && isset( $thumb[0] ) ) {
+						$row->image_url = $thumb[0];
 					}
 				}
 
