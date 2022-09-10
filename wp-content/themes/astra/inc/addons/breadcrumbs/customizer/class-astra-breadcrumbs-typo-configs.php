@@ -107,7 +107,7 @@ if ( ! class_exists( 'Astra_Breadcrumbs_Typo_Configs' ) ) {
 						),
 						'em' => array(
 							'min'  => 0,
-							'step' => 1,
+							'step' => 0.01,
 							'max'  => 20,
 						),
 					),

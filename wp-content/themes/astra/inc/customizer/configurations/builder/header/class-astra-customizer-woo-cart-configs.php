@@ -38,6 +38,36 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 		$_section          = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? 'section-header-woo-cart' : 'section-woo-shop-cart';
 		$astra_hfb_enabled = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? true : false;
 
+		$cart_icon_choices = array();
+
+		$woo_cart_icon_new_user = astra_get_option( 'astra-woocommerce-cart-icons-flag', true );
+
+		if ( apply_filters( 'astra_woocommerce_cart_icon', $woo_cart_icon_new_user ) ) {
+
+			$default_icon_value = 'bag';
+
+			if ( 'default' === astra_get_option( 'woo-header-cart-icon' ) ) {
+				astra_update_option( 'woo-header-cart-icon', $default_icon_value );
+			}
+
+			$cart_icon_choices = array(
+				'bag'    => 'shopping-bag',
+				'cart'   => 'shopping-cart',
+				'basket' => 'shopping-basket',
+			);
+
+		} else {
+
+			$default_icon_value = 'default';
+
+			$cart_icon_choices = array(
+				'default' => 'shopping-default',
+				'bag'     => 'shopping-bag',
+				'cart'    => 'shopping-cart',
+				'basket'  => 'shopping-basket',
+			);
+		}
+
 		$_configs = array(
 
 			/**
@@ -53,6 +83,24 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'settings' => array(),
 				'context'  => Astra_Builder_Helper::$general_tab,
 				'divider'  => $astra_hfb_enabled ? array( 'ast_class' => 'ast-bottom-spacing' ) : array( 'ast_class' => 'ast-section-spacing' ),
+			),
+			
+			/**
+			 * Option: Header Cart Icon
+			 */
+			array(
+				'name'       => ASTRA_THEME_SETTINGS . '[woo-header-cart-icon]',
+				'default'    => astra_get_option( 'woo-header-cart-icon', $default_icon_value ),
+				'type'       => 'control',
+				'control'    => 'ast-selector',
+				'section'    => $_section,
+				'priority'   => 3,
+				'title'      => __( 'Select Cart Icon', 'astra' ),
+				'choices'    => $cart_icon_choices,
+				'transport'  => 'postMessage',
+				'context'    => Astra_Builder_Helper::$general_tab,
+				'responsive' => false,
+				'divider'    => ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? array( 'ast_class' => 'ast-top-spacing ast-bottom-section-divider' ) : array( 'ast_class' => 'ast-section-spacing' ),
 			),
 
 			/**
@@ -110,6 +158,22 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'control'   => 'ast-toggle-control',
 				'context'   => Astra_Builder_Helper::$general_tab,
 				'divider'   => array( 'ast_class' => 'ast-top-section-divider' ),
+			),
+
+			/**
+			 * Option: Cart product count badge.
+			 */
+			array(
+				'name'        => ASTRA_THEME_SETTINGS . '[woo-header-cart-total-label]',
+				'default'     => astra_get_option( 'woo-header-cart-total-label' ),
+				'type'        => 'control',
+				'section'     => $_section,
+				'title'       => __( 'Hide Cart Total Label', 'astra' ),
+				'description' => __( 'Hide cart total label if cart is empty', 'astra' ),
+				'priority'    => $astra_hfb_enabled ? 55 : 3.5,
+				'transport'   => 'postMessage',
+				'control'     => 'ast-toggle-control',
+				'context'     => Astra_Builder_Helper::$general_tab,
 			),
 
 			/**
@@ -290,13 +354,66 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'control'    => 'ast-responsive-color',
 				'parent'     => ASTRA_THEME_SETTINGS . '[header-woo-cart-icon-colors]',
 				'section'    => $_section,
-				'transport'  => 'postMessage',
 				'name'       => 'header-woo-cart-icon-hover-color',
 				'default'    => astra_get_option( 'header-woo-cart-icon-hover-color' ),
 				'title'      => __( 'Hover', 'astra' ),
 				'responsive' => false,
 				'rgba'       => true,
 				'priority'   => 65,
+				'context'    => Astra_Builder_Helper::$design_tab,
+			),
+
+			array(
+				'name'       => ASTRA_THEME_SETTINGS . '[woo-header-cart-product-count-color-group]',
+				'default'    => astra_get_option( 'woo-header-cart-product-count-color-group' ),
+				'type'       => 'control',
+				'control'    => 'ast-color-group',
+				'title'      => __( 'Count Color', 'astra' ),
+				'section'    => $_section,
+				'transport'  => 'postMessage',
+				'priority'   => 45,
+				'context'    => array(
+					Astra_Builder_Helper::$design_tab_config,
+					array(
+						'setting'  => ASTRA_THEME_SETTINGS . '[woo-header-cart-icon-style]',
+						'operator' => '!=',
+						'value'    => 'none',
+					),
+				),
+				'responsive' => false,
+				'divider'    => array( 'ast_class' => 'ast-bottom-dotted-divider' ),
+			),
+
+			array(
+				'type'       => 'sub-control',
+				'parent'     => ASTRA_THEME_SETTINGS . '[woo-header-cart-product-count-color-group]',
+				'section'    => $_section,
+				'control'    => 'ast-responsive-color',
+				'transport'  => 'postMessage',
+				'name'       => 'woo-header-cart-product-count-color',
+				'default'    => astra_get_option( 'woo-header-cart-product-count-color' ),
+				'title'      => __( 'Normal', 'astra' ),
+				'responsive' => false,
+				'rgba'       => true,
+				'priority'   => 45,
+				'context'    => Astra_Builder_Helper::$design_tab,
+			),
+
+			/**
+			 * Option: Icon Hover Color section
+			 */
+			array(
+				'type'       => 'sub-control',
+				'control'    => 'ast-responsive-color',
+				'parent'     => ASTRA_THEME_SETTINGS . '[woo-header-cart-product-count-color-group]',
+				'section'    => $_section,
+				'transport'  => 'postMessage',
+				'name'       => 'woo-header-cart-product-count-h-color',
+				'default'    => astra_get_option( 'woo-header-cart-product-count-h-color' ),
+				'title'      => __( 'Hover', 'astra' ),
+				'responsive' => false,
+				'rgba'       => true,
+				'priority'   => 45,
 				'context'    => Astra_Builder_Helper::$design_tab,
 			),
 

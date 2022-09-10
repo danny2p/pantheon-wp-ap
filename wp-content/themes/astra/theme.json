@@ -89,10 +89,5 @@
       "wideSize": "var(--wp--custom--ast-wide-width-size)",
       "fullSize": "none"
     }
-  },
-  "styles": {
-    "spacing": {
-      "blockGap": "2em"
-    }
   }
 }

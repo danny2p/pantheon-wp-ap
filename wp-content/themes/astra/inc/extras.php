@@ -584,6 +584,18 @@ function astra_addon_has_3_5_0_version() {
 }
 
 /**
+ * Check the Astra addon version.
+ * For  major update and frequently we used version_compare, added a function for this for easy maintenance.
+ * 
+ * @param string $version Astra addon version.
+ * @param string $compare Compare symbols.
+ * @since  3.9.2
+ */
+function astra_addon_check_version( $version, $compare ) {
+	return defined( 'ASTRA_EXT_VER' ) && version_compare( ASTRA_EXT_VER, $version, $compare );
+}
+
+/**
  * Get a stylesheet URL for a webfont.
  *
  * @since 3.6.0

@@ -427,20 +427,6 @@
   line-height: 1;
 }
 
-.color-group-item .components-tooltip:before {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: -12px;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid #1f1f1f;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
-
 .customize-control.customize-control-ast-color-group {
   display: flex;
   flex-wrap: wrap;
@@ -567,6 +553,7 @@
 	left: unset;
 	top: unset;
 	vertical-align: sub;
+	z-index: 10;
 }
 
 #customize-control-astra-color-palettes .astra-color-picker-wrap {
@@ -626,6 +613,7 @@
 	.ast-color-palette-wrapper
 	.ast-color-picker-wrap {
 	margin-top: 12px;
+	cursor: pointer;
 }
 
 #customize-control-astra-color-palettes .ast-reset-btn:disabled {
@@ -714,16 +702,14 @@
 
 .color-button-wrap.has-global-palette-color .astra-advanced-color-indicate .global-color{
     color: #fff;
-	display: block;
+    display: block;
     opacity: 1;
     position: absolute;
     right: 50%;
     top: 50%;
     display: block;
-    transform: translate(50%, -50%);
     text-align: center;
-	font-size: 12px;
-	mix-blend-mode: difference;
+    transform: translate(50%, -50%);
 }
 .color-button-wrap.has-global-palette-color .astra-advanced-color-indicate .global-color svg{
     width: 10px;
@@ -733,6 +719,54 @@
 
 #customize-control-astra-color-palettes .ast-adv-toggle-icon {
 	top: -5px;
+}
+
+.ast-color-picker-custom-tooltip {
+	position: absolute;
+    top: -30px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-color-picker-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.ast-color-picker-custom-tooltip-wrapper {
+	position: relative;
+}
+
+.ast-color-picker-wrap:hover + .ast-color-picker-custom-tooltip-wrapper .ast-color-picker-custom-tooltip[data-title]::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
 }
 
  /** Remove Button Color */
@@ -765,6 +799,14 @@
     line-height: 1;
     font-weight: 600;
     margin-bottom: 4px;
+}
+
+.astra-globe-dashicon {
+    color: #ffffff;
+    background: rgba(0,0,0,0.4);
+    border-radius: 100%;
+    border: 0.1px solid rgba(0,0,0,0.1);
+    opacity: 0.78;
 }
 
 .components-button.astra-color-icon-indicate .component-color-indicator.astra-advanced-color-indicate {
@@ -1737,20 +1779,6 @@
   line-height: 1;
 }
 
-.color-group-item .components-tooltip:before {
-  content: '';
-  position: absolute;
-  right: -5px;
-  top: -12px;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid #1f1f1f;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
-
 .customize-control.customize-control-ast-color-group {
   display: flex;
   flex-wrap: wrap;
@@ -1877,6 +1905,7 @@
 	left: unset;
 	top: unset;
 	vertical-align: sub;
+	z-index: 10;
 }
 
 #customize-control-astra-color-palettes .astra-color-picker-wrap {
@@ -1936,6 +1965,7 @@
 	.ast-color-palette-wrapper
 	.ast-color-picker-wrap {
 	margin-top: 12px;
+	cursor: pointer;
 }
 
 #customize-control-astra-color-palettes .ast-reset-btn:disabled {
@@ -2024,16 +2054,14 @@
 
 .color-button-wrap.has-global-palette-color .astra-advanced-color-indicate .global-color{
     color: #fff;
-	display: block;
+    display: block;
     opacity: 1;
     position: absolute;
     right: 50%;
     top: 50%;
     display: block;
-    transform: translate(50%, -50%);
     text-align: center;
-	font-size: 12px;
-	mix-blend-mode: difference;
+    transform: translate(50%, -50%);
 }
 .color-button-wrap.has-global-palette-color .astra-advanced-color-indicate .global-color svg{
     width: 10px;
@@ -2043,6 +2071,54 @@
 
 #customize-control-astra-color-palettes .ast-adv-toggle-icon {
 	top: -5px;
+}
+
+.ast-color-picker-custom-tooltip {
+	position: absolute;
+    top: -30px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-color-picker-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.ast-color-picker-custom-tooltip-wrapper {
+	position: relative;
+}
+
+.ast-color-picker-wrap:hover + .ast-color-picker-custom-tooltip-wrapper .ast-color-picker-custom-tooltip[data-title]::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
 }
 
  /** Remove Button Color */
@@ -2075,6 +2151,14 @@
     line-height: 1;
     font-weight: 600;
     margin-bottom: 4px;
+}
+
+.astra-globe-dashicon {
+    color: #ffffff;
+    background: rgba(0,0,0,0.4);
+    border-radius: 100%;
+    border: 0.1px solid rgba(0,0,0,0.1);
+    opacity: 0.78;
 }
 
 .components-button.astra-color-icon-indicate .component-color-indicator.astra-advanced-color-indicate {
@@ -3157,6 +3241,7 @@ input[type="text"].select2-search__field {
     height: 64px;
     text-align: center;
 	width: 47.5%;
+	position: relative;
 }
 .ast-typo-presets .ast-typo-preset-item:hover{
 	border: 1px solid var(--ast-customizer-color-1);
@@ -3211,6 +3296,50 @@ input[type="text"].select2-search__field {
     width: 0;
     line-height: 0;
 	border: 8px solid #fff;
+}
+
+.ast-typopreset-custom-tooltip {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-typopreset-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.ast-typopreset-custom-tooltip[data-title]:hover::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
 }
 
 span.customize-control-title.ast-group-section-title {
@@ -3438,7 +3567,7 @@ span.customize-control-title.ast-group-section-title {
   height: auto;
   background-color: rgba(221,224,226,0.5);
   border: 1px solid var(--ast-customizer-color-7);
-  border-radius: 4px; 
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.15s ease, box-shadow 0.15s ease;
 }
@@ -3461,9 +3590,8 @@ span.customize-control-title.ast-group-section-title {
 }
 
 /* Image tooltip */
-.image-clickable[data-title]::before,
 .image-clickable[data-title]::after {
-  text-transform: none; 
+  text-transform: none;
   font-size: .9em;
   line-height: 1;
   user-select: none;
@@ -3475,18 +3603,8 @@ span.customize-control-title.ast-group-section-title {
   transform: translate(50%, -.5em);
 }
 
-.image-clickable[data-title]::before {
-  content: '';
-  border: 5px solid transparent;
-  z-index: 1001; 
-  bottom: 100%;
-  border-bottom-width: 0;
-  border-top-color: var(--ast-customizer-color-12);
-  animation: tooltips-vert 300ms ease-out forwards;
-}
-
 .image-clickable[data-title]::after {
-  content: attr(data-title); 
+  content: attr(data-title);
   min-width: 3em;
   max-width: 21em;
   white-space: nowrap;
@@ -3504,13 +3622,11 @@ span.customize-control-title.ast-group-section-title {
 }
 
 /* Make the tooltips respond to hover */
-.image-clickable[data-title]:hover::before,
 .image-clickable[data-title]:hover::after {
   display: block;
 }
 
 /* don't show empty tooltips */
-.image-clickable[data-title='']::before,
 .image-clickable[data-title='']::after {
   display: none !important;
 }
@@ -3529,6 +3645,7 @@ span.customize-control-title.ast-group-section-title {
     transform: translate(0, -50%);
   }
 }
+
 .customize-control-ast-responsive-background {
   position: relative;
   margin-bottom: -5px;
@@ -5154,6 +5271,61 @@ span.customize-control-title.ast-group-section-title {
 .ast-switch:not(:checked), .ast-switch:checked {
   opacity: 0;
 }
+.dashicons-editor-help[data-title]{
+	z-index: 10;
+}
+
+.ast-dashicons-custom-tooltip {
+	display: none;
+	opacity: 0;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-dashicons-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.dashicons-editor-help[data-title]:hover ~ .ast-dashicons-custom-tooltip {
+	display: block;
+	opacity: 100;
+}
+
+.dashicons-editor-help[data-title]:hover ~ .ast-dashicons-custom-tooltip[data-title]::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
+}
+
 .select2-container {
   width: 100% !important;
 }
@@ -5743,6 +5915,7 @@ input[type="text"].select2-search__field {
     height: 64px;
     text-align: center;
 	width: 47.5%;
+	position: relative;
 }
 .ast-typo-presets .ast-typo-preset-item:hover{
 	border: 1px solid var(--ast-customizer-color-1);
@@ -5797,6 +5970,50 @@ input[type="text"].select2-search__field {
     width: 0;
     line-height: 0;
 	border: 8px solid #fff;
+}
+
+.ast-typopreset-custom-tooltip {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-typopreset-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 10em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.ast-typopreset-custom-tooltip[data-title]:hover::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
 }
 
 span.customize-control-title.ast-group-section-title {
@@ -6024,7 +6241,7 @@ span.customize-control-title.ast-group-section-title {
   height: auto;
   background-color: rgba(221,224,226,0.5);
   border: 1px solid var(--ast-customizer-color-7);
-  border-radius: 4px; 
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.15s ease, box-shadow 0.15s ease;
 }
@@ -6047,9 +6264,8 @@ span.customize-control-title.ast-group-section-title {
 }
 
 /* Image tooltip */
-.image-clickable[data-title]::before,
 .image-clickable[data-title]::after {
-  text-transform: none; 
+  text-transform: none;
   font-size: .9em;
   line-height: 1;
   user-select: none;
@@ -6061,18 +6277,8 @@ span.customize-control-title.ast-group-section-title {
   transform: translate(50%, -.5em);
 }
 
-.image-clickable[data-title]::before {
-  content: '';
-  border: 5px solid transparent;
-  z-index: 1001; 
-  bottom: 100%;
-  border-bottom-width: 0;
-  border-top-color: var(--ast-customizer-color-12);
-  animation: tooltips-vert 300ms ease-out forwards;
-}
-
 .image-clickable[data-title]::after {
-  content: attr(data-title); 
+  content: attr(data-title);
   min-width: 3em;
   max-width: 21em;
   white-space: nowrap;
@@ -6090,13 +6296,11 @@ span.customize-control-title.ast-group-section-title {
 }
 
 /* Make the tooltips respond to hover */
-.image-clickable[data-title]:hover::before,
 .image-clickable[data-title]:hover::after {
   display: block;
 }
 
 /* don't show empty tooltips */
-.image-clickable[data-title='']::before,
 .image-clickable[data-title='']::after {
   display: none !important;
 }
@@ -6115,6 +6319,7 @@ span.customize-control-title.ast-group-section-title {
     transform: translate(0, -50%);
   }
 }
+
 .customize-control-ast-responsive-background {
   position: relative;
   margin-bottom: -5px;
@@ -7740,6 +7945,61 @@ span.customize-control-title.ast-group-section-title {
 .ast-switch:not(:checked), .ast-switch:checked {
   opacity: 0;
 }
+.dashicons-editor-help[data-title]{
+	z-index: 10;
+}
+
+.ast-dashicons-custom-tooltip {
+	display: none;
+	opacity: 0;
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ast-dashicons-custom-tooltip[data-title]::after {
+	content: attr(data-title);
+    min-width: 3em;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: 0.3ch;
+    box-shadow: 0 1em 2em -0.5em rgb(0 0 0 / 35%);
+    background: var(--ast-customizer-color-12);
+    color: var(--ast-customizer-color-10);
+    z-index: 1000;
+    bottom: calc(100% + 5px);
+    text-align: center;
+    animation: tooltips-vert .3s ease-out forwards;
+	text-transform: none;
+    font-size: .9em;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    right: 50%;
+    transform: translate(50%,-0.5em);
+}
+
+.dashicons-editor-help[data-title]:hover ~ .ast-dashicons-custom-tooltip {
+	display: block;
+	opacity: 100;
+}
+
+.dashicons-editor-help[data-title]:hover ~ .ast-dashicons-custom-tooltip[data-title]::after{
+	display: flex;
+	white-space: break-spaces;
+	inline-size: max-content;
+}
+
 .select2-container {
   width: 100% !important;
 }

@@ -30,32 +30,11 @@
 		selector + ' .ast-cart-menu-wrap .count, ' + selector + ' .ast-cart-menu-wrap .count:after'
 	);
 
-	// Icon Hover Color.
-	astra_css(
-		'astra-settings[header-woo-cart-icon-hover-color]',
-		'border-color',
-		selector + ' .ast-site-header-cart-li:hover .ast-cart-menu-wrap .count, ' + selector + ' .ast-site-header-cart-li:hover .ast-addon-cart-wrap, ' + selector + ' .ast-site-header-cart-li:hover .ast-cart-menu-wrap .count:after'
-	);
-
-	// Icon Color.
-	astra_css(
-		'astra-settings[header-woo-cart-icon-hover-color]',
-		'color',
-		'.ast-menu-cart-outline .ast-site-header-cart-li:hover .ast-cart-menu-wrap .count, .ast-site-header-cart-li:hover .ast-woo-header-cart-info-wrap, .ast-menu-cart-outline .ast-site-header-cart-li:hover .ast-addon-cart-wrap i.astra-icon'
-	);
-
 	// Icon BG Color.
 	astra_css(
 		'astra-settings[header-woo-cart-icon-color]',
 		'border-color',
 		'.ast-menu-cart-fill .ast-cart-menu-wrap .count, .ast-menu-cart-fill .ast-cart-menu-wrap'
-	);
-
-	// Icon BG hover Color.
-	astra_css(
-		'astra-settings[header-woo-cart-icon-hover-color]',
-		'background-color',
-		'.ast-menu-cart-fill .ast-site-header-cart-li:hover .ast-addon-cart-wrap, .ast-menu-cart-fill .ast-site-header-cart-li:hover .ast-addon-cart-wrap .ast-woo-header-cart-info-wrap, .ast-menu-cart-fill .ast-site-header-cart-li:hover .ast-cart-menu-wrap .count, .ast-menu-cart-fill .ast-site-header-cart-li:hover .ast-cart-menu-wrap, '+ selector + ' .ast-site-header-cart-li:hover .ast-addon-cart-wrap i.astra-icon:after'
 	);
 
 
@@ -255,6 +234,24 @@
 	} );
 
 	/**
+	 * Cart icon type
+	 */
+	wp.customize( 'astra-settings[woo-header-cart-icon]', function( setting ) {
+		setting.bind( function( icon_type ) {
+			$( document.body ).trigger( 'wc_fragment_refresh' );
+		} );
+	} );
+
+	/**
+	 * Cart icon hover style
+	 */
+	wp.customize('astra-settings[header-woo-cart-icon-hover-color]', function (setting) {
+		setting.bind(function (color) {
+			wp.customize.preview.send('refresh');
+		});
+	});
+
+	/**
 	 * Cart icon style
 	 */
 	wp.customize('astra-settings[header-woo-cart-icon-color]', function (setting) {
@@ -413,6 +410,15 @@
 				dynamicStyle += '.ast-count-text {  display:block; } ';
 			}
 			astra_add_dynamic_css('woo-header-cart-badge-display', dynamicStyle);
+		});
+	});
+
+	/**
+	 * Hide Cart Total Label
+	 */
+	wp.customize( 'astra-settings[woo-header-cart-total-label]', function( setting ) {
+		setting.bind( function( toggle ) {
+			$( document.body ).trigger( 'wc_fragment_refresh' );
 		});
 	});
 

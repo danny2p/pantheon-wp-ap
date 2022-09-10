@@ -712,7 +712,7 @@ class Astra_Related_Posts_Configs extends Astra_Customizer_Config_Base {
 					),
 					'em' => array(
 						'min'  => 0,
-						'step' => 1,
+						'step' => 0.01,
 						'max'  => 20,
 					),
 				),
@@ -814,7 +814,7 @@ class Astra_Related_Posts_Configs extends Astra_Customizer_Config_Base {
 					),
 					'em' => array(
 						'min'  => 0,
-						'step' => 1,
+						'step' => 0.01,
 						'max'  => 20,
 					),
 				),
@@ -916,7 +916,7 @@ class Astra_Related_Posts_Configs extends Astra_Customizer_Config_Base {
 					),
 					'em' => array(
 						'min'  => 0,
-						'step' => 1,
+						'step' => 0.01,
 						'max'  => 20,
 					),
 				),
@@ -1018,7 +1018,7 @@ class Astra_Related_Posts_Configs extends Astra_Customizer_Config_Base {
 					),
 					'em' => array(
 						'min'  => 0,
-						'step' => 1,
+						'step' => 0.01,
 						'max'  => 20,
 					),
 				),
