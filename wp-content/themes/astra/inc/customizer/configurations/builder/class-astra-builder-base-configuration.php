@@ -169,7 +169,7 @@ final class Astra_Builder_Base_Configuration {
 						),
 						'em' => array(
 							'min'  => 0,
-							'step' => 1,
+							'step' => 0.01,
 							'max'  => 20,
 						),
 					),
@@ -204,7 +204,7 @@ final class Astra_Builder_Base_Configuration {
 						),
 						'em' => array(
 							'min'  => 0,
-							'step' => 1,
+							'step' => 0.01,
 							'max'  => 20,
 						),
 					),

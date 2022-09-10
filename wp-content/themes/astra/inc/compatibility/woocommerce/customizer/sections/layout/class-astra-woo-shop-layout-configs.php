@@ -31,10 +31,90 @@ if ( ! class_exists( 'Astra_Woo_Shop_Layout_Configs' ) ) {
 		public function register_configuration( $configurations, $wp_customize ) {
 
 			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-			$astra_addon_with_woo = ( defined( 'ASTRA_EXT_VER' ) && Astra_Ext_Extension::is_active( 'woocommerce' ) ) ? true : false;
+			$astra_addon_with_woo = ( astra_has_pro_woocommerce_addon() ) ? true : false;
 			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
+			if ( $astra_addon_with_woo ) {
+				$current_shop_layouts = array(
+					'shop-page-grid-style'   => array(
+						'label' => __( 'Design 1', 'astra' ),
+						'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'shop-grid-view', false ) : '',
+					),
+					'shop-page-modern-style' => array(
+						'label' => __( 'Design 2', 'astra' ),
+						'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'shop-modern-view', false ) : '',
+					),
+					'shop-page-list-style'   => array(
+						'label' => __( 'Design 3', 'astra' ),
+						'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'shop-list-view', false ) : '',
+					),
+				);
+			} else {
+				$current_shop_layouts = array(
+					'shop-page-grid-style'   => array(
+						'label' => __( 'Design 1', 'astra' ),
+						'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'shop-grid-view', false ) : '',
+					),
+					'shop-page-modern-style' => array(
+						'label' => __( 'Design 2', 'astra' ),
+						'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'shop-modern-view', false ) : '',
+					),
+				);
+			}
+
 			$_configs = array(
+
+				/**
+				 * Option: Context for shop archive section.
+				 */
+				array(
+					'name'        => 'section-woocommerce-shop-context-tabs',
+					'section'     => 'woocommerce_product_catalog',
+					'type'        => 'control',
+					'control'     => 'ast-builder-header-control',
+					'priority'    => 0,
+					'description' => '',
+				),
+
+				/**
+				* Option: Divider
+				*/
+				array(
+					'name'     => ASTRA_THEME_SETTINGS . '[shop-box-styling]',
+					'section'  => 'woocommerce_product_catalog',
+					'title'    => __( 'Shop Card Styling', 'astra' ),
+					'type'     => 'control',
+					'control'  => 'ast-heading',
+					'priority' => 229,
+					'settings' => array(),
+					'context'  => array(
+						Astra_Builder_Helper::$design_tab_config,
+					),
+					'divider'  => array( 'ast_class' => 'ast-section-spacing' ),
+				),
+
+				/**
+				 * Option: Content Alignment
+				 */
+				array(
+					'name'       => ASTRA_THEME_SETTINGS . '[shop-product-align-responsive]',
+					'default'    => astra_get_option( 'shop-product-align-responsive' ),
+					'type'       => 'control',
+					'control'    => 'ast-selector',
+					'section'    => 'woocommerce_product_catalog',
+					'priority'   => 229,
+					'title'      => __( 'Horizontal Content Alignment', 'astra' ),
+					'responsive' => true,
+					'choices'    => array(
+						'align-left'   => 'align-left',
+						'align-center' => 'align-center',
+						'align-right'  => 'align-right',
+					),
+					'context'    => array(
+						Astra_Builder_Helper::$design_tab_config,
+					),
+					'divider'    => array( 'ast_class' => 'ast-bottom-section-divider ast-section-spacing' ),
+				),
 
 				/**
 				 * Option: Divider
@@ -85,6 +165,22 @@ if ( ! class_exists( 'Astra_Woo_Shop_Layout_Configs' ) ) {
 					'priority' => 7,
 					'settings' => array(),
 					'divider'  => array( 'ast_class' => 'ast-section-spacing' ),
+				),
+
+				/**
+				 * Option: Choose Product Style
+				 */
+				array(
+					'name'              => ASTRA_THEME_SETTINGS . '[shop-style]',
+					'default'           => astra_get_option( 'shop-style' ),
+					'type'              => 'control',
+					'section'           => 'woocommerce_product_catalog',
+					'title'             => __( 'Shop Card Design', 'astra' ),
+					'control'           => 'ast-radio-image',
+					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_choices' ),
+					'priority'          => 8,
+					'choices'           => $current_shop_layouts,
+					'divider'           => array( 'ast_class' => 'ast-section-spacing ast-bottom-section-divider' ),
 				),
 
 				/**
@@ -182,6 +278,23 @@ if ( ! class_exists( 'Astra_Woo_Shop_Layout_Configs' ) ) {
 					'divider'     => array( 'ast_class' => 'ast-top-dotted-divider' ),
 				),
 			);
+
+			// Learn More link if Astra Pro is not activated.
+			if ( ! defined( 'ASTRA_EXT_VER' ) ) {
+
+				$_configs[] = array(
+					'name'     => ASTRA_THEME_SETTINGS . '[woo-shop-ast-button-link]',
+					'type'     => 'control',
+					'control'  => 'ast-button-link',
+					'section'  => 'woocommerce_product_catalog',
+					'priority' => 999,
+					'title'    => __( 'View Astra Pro Features', 'astra' ),
+					'url'      => astra_get_pro_url( 'https://wpastra.com/pro/', 'customizer', 'learn-more', 'upgrade-to-pro' ),
+					'settings' => array(),
+					'context'  => Astra_Builder_Helper::$design_tab_config,
+				);
+
+			}
 
 			$configurations = array_merge( $configurations, $_configs );
 

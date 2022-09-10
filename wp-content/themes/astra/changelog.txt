@@ -1,3 +1,31 @@
+v3.9.2
+- Improvement: WooCommerce - Admin bar's customize link updated on WooCommerce pages for quick landing to it's respected customizer section.
+- Improvement: WooCommerce - Added WPML translation support for cart dynamic input, proceed to checkout input & free-shipping text input through wpml-config.xml file. (Props - OnTheGoSystems)
+- Improvement: WooCommerce - Shop - Shop skin layout design 3 option moved from addon to theme.
+- Improvement: WooCommerce - Shop - Product card alignment option moved from addon to theme.
+- Improvement: WooCommerce Cart - Hide cart total when cart is empty option.
+- Improvement: WooCommerce - Single Product - Moved sticky add to cart from addon to theme.
+- Improvement: WooCommerce - Moved Add to cart quantity button to cart from addon to theme.
+- Improvement: WooCommerce - Single Product - Moved structure options from pro to free theme.
+- Improvement: WooCommerce - Moved Add to cart quantity button to cart from addon to theme.
+- Improvement: Earth (default) icon for selected color improved for better visibility on brighter & dim colors.
+- Improvement: Redesigned the Astra Meta Settings layout control similar to customizer layout selection options.
+- Fix: WooCommerce - Single Product - Alignment issue with content added by plugin near add to cart section.
+- Fix: WooCommerce - Dropdown icon cart link does not redirect to cart page.
+- Fix: WooCommerce - Cart element is adding primary header height on below and above header section.
+- Fix: WooCommerce - Cross sell grid products showing with 50% width when modern cart layout is enabled on cart page.
+- Fix: WooCommerce - Single Product - Flex CSS conflicting with third party plugins which adds custom functionality aside add-to-cart button.
+- Fix: WooCommerce - Checkout - Misalignment for order products quantity in order summary box.
+- Fix: WooCommerce - Show password eye icon is not visible on My Account page.
+- Fix: Block Editor - 2em Block gap spacing appearing in container blocks.
+- Fix: Customizer range slider control not accepting decimal values for 'em' unit.
+- Fix: Padding being added to the Full Width/Stretched Layout when using Brizy Page Builder.
+- Fix: Search element not clickable on above header, moving old to new header builder.
+- Fix: Showing deprecated function warning on frontend after installing Elementor with theme.
+- Fix: The Menu gets disappeared on the Android mobile device when you select Header Type is set as Dropdown.
+- Fix: Footer - Footer global background color and padding is not working in the frontend.
+- Fix: Spectra plugin settings page link redirect to old 'uag' admin page.
+
 v3.9.1
 - Fix: WooCommerce - Child theme's WooCommerce custom templates gets overridden by parent theme.
 - Fix: Block editor - Row block's layout stack in editor.

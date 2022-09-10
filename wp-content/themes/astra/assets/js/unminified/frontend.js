@@ -430,7 +430,8 @@ var astraTriggerEvent = function astraTriggerEvent( el, typeArg ) {
 
 	} );
 
-	var mobile_width = ( 'Android' === navigator.userAgent.match(/Android/i) ) ? window.visualViewport.width : window.innerWidth;
+	var mobile_width = ( null !== navigator.userAgent.match(/Android/i) && 'Android' === navigator.userAgent.match(/Android/i)[0] ) ? window.visualViewport.width : window.innerWidth;
+
 	function AstraHandleResizeEvent() {
 
 		var menu_offcanvas_close 	= document.getElementById('menu-toggle-close');
@@ -441,7 +442,8 @@ var astraTriggerEvent = function astraTriggerEvent( el, typeArg ) {
 		if ( desktop_header_content ) {
 			desktop_header_content.style.display = 'none';
 		}
-		var mobileResizeWidth = ( 'Android' === navigator.userAgent.match(/Android/i) ) ? window.visualViewport.width : window.innerWidth;
+		var mobileResizeWidth = ( null !== navigator.userAgent.match(/Android/i) && 'Android' === navigator.userAgent.match(/Android/i)[0] ) ? window.visualViewport.width : window.innerWidth;
+
 		if ( mobileResizeWidth !== mobile_width ) {
 			if ( menu_dropdown_close && null === elementor_editor ) {
 				menu_dropdown_close.click();
@@ -820,6 +822,10 @@ var astraTriggerEvent = function astraTriggerEvent( el, typeArg ) {
 		var button = containerButton.getElementsByTagName( 'button' )[0];
 		if ( 'undefined' === typeof button ) {
 			button = containerButton.getElementsByTagName( 'a' )[0];
+			var search_type = button.classList.contains('astra-search-icon');
+			if ( true === search_type ) {
+				return;
+			}
 			if ( 'undefined' === typeof button ) {
 				return;
 			}

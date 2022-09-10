@@ -8,20 +8,6 @@
   line-height: 1;
 }
 
-.color-group-item .components-tooltip:before {
-  content: '';
-  position: absolute;
-  left: -5px;
-  top: -12px;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid #1f1f1f;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-}
-
 .customize-control.customize-control-ast-color-group {
   display: flex;
   flex-wrap: wrap;
