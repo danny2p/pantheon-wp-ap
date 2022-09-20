@@ -2,12 +2,12 @@
 /**
  * Plugin Name: Performance Lab
  * Plugin URI: https://github.com/WordPress/performance
- * Description: Performance plugin from the WordPress Performance Group, which is a collection of standalone performance modules.
+ * Description: Performance plugin from the WordPress Performance Team, which is a collection of standalone performance modules.
  * Requires at least: 5.8
  * Requires PHP: 5.6
- * Version: 1.4.0
- * Author: WordPress Performance Group
- * Author URI: https://make.wordpress.org/core/tag/performance/
+ * Version: 1.5.0
+ * Author: WordPress Performance Team
+ * Author URI: https://make.wordpress.org/performance/
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: performance-lab
@@ -15,7 +15,7 @@
  * @package performance-lab
  */
 
-define( 'PERFLAB_VERSION', '1.4.0' );
+define( 'PERFLAB_VERSION', '1.5.0' );
 define( 'PERFLAB_MAIN_FILE', __FILE__ );
 define( 'PERFLAB_PLUGIN_DIR_PATH', plugin_dir_path( PERFLAB_MAIN_FILE ) );
 define( 'PERFLAB_MODULES_SETTING', 'perflab_modules_settings' );
@@ -43,6 +43,8 @@ add_action( 'init', 'perflab_register_modules_setting' );
  * Gets the default value for the performance modules setting.
  *
  * @since 1.0.0
+ *
+ * @return array Associative array of module settings keyed by module slug.
  */
 function perflab_get_modules_setting_default() {
 	// Since the default relies on some minimal logic that includes requiring an additional file,
