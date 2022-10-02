@@ -128,6 +128,10 @@ class Loader {
 				'hook' => 'admin_init',
 			],
 			[
+				'name' => 'Admin\Pages\Templates',
+				'hook' => 'admin_init',
+			],
+			[
 				'name' => 'Admin\Entries\Export\Export',
 			],
 			[
@@ -233,6 +237,12 @@ class Loader {
 			[
 				'name' => 'Admin\Builder\Templates',
 				'id'   => 'builder_templates',
+			],
+			[
+				'name' => 'Admin\Builder\Notifications\Advanced\Settings',
+			],
+			[
+				'name' => 'Admin\Builder\Notifications\Advanced\EntryCsvAttachment',
 			]
 		);
 	}
@@ -368,6 +378,7 @@ class Loader {
 			'Builder\DidYouKnow',
 			'Builder\Geolocation',
 			'Builder\Confirmations',
+			'Builder\Notifications',
 			'Admin\DidYouKnow',
 			'Admin\Settings\Integrations',
 			'Admin\Settings\Geolocation',

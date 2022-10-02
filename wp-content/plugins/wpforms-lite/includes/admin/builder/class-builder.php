@@ -226,7 +226,6 @@ class WPForms_Builder {
 				'imgareaselect',
 				'wp-mediaelement',
 				'mediaelement',
-				'media-views',
 				'buttons',
 				'admin-bar',
 			]

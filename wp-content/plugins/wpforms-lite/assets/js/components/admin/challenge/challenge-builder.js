@@ -187,7 +187,7 @@ WPFormsChallenge.builder = window.WPFormsChallenge.builder || ( function( docume
 			WPFormsChallenge.core.resumeChallengeAndExec( e, function() {
 
 				WPFormsChallenge.core.stepCompleted( 2 )
-					.done( WPForms.Admin.Builder.Setup.selectTemplate.bind( null, e ) );
+					.done( WPForms.Admin.Builder.Setup.selectTemplate.bind( el, e ) );
 			} );
 		},
 

@@ -76,7 +76,7 @@ class Akismet {
 		 *
 		 * @param array $field_type_allowlist Field types allowed to be sent to Akismet.
 		 */
-		return apply_filters( 'wpforms_forms_akismet_get_field_type_allowlist', $field_type_allowlist );
+		return (array) apply_filters( 'wpforms_forms_akismet_get_field_type_allowlist', $field_type_allowlist );
 	}
 
 	/**
@@ -96,14 +96,15 @@ class Akismet {
 		$entry_content        = [];
 
 		foreach ( $fields as $key => $field ) {
-			$field_type    = $field['type'];
-			$field_content = is_array( $entry['fields'][ $key ] ) ? implode( ' ', $entry['fields'][ $key ] ) : $entry['fields'][ $key ];
+			$field_type = $field['type'];
 
 			if ( ! in_array( $field_type, $field_type_allowlist, true ) ) {
 				continue;
 			}
 
-			if ( in_array( $field_type, [ 'name', 'email', 'url' ], true ) && ! isset( $entry_data[ $field_type ] ) ) {
+			$field_content = is_array( $entry['fields'][ $key ] ) ? implode( ' ', $entry['fields'][ $key ] ) : $entry['fields'][ $key ];
+
+			if ( ! isset( $entry_data[ $field_type ] ) && in_array( $field_type, [ 'name', 'email', 'url' ], true ) ) {
 				$entry_data[ $field_type ] = $field_content;
 
 				continue;
@@ -145,7 +146,7 @@ class Akismet {
 			'comment_content'      => isset( $entry_data['content'] ) ? $entry_data['content'] : '',
 			'blog_lang'            => get_locale(),
 			'blog_charset'         => get_bloginfo( 'charset' ),
-			'user_role'            => wp_get_current_user()->roles[0],
+			'user_role'            => AkismetPlugin::get_user_roles( get_current_user_id() ),
 			'honypot_field_name'   => 'wpforms["hp"]',
 		];
 

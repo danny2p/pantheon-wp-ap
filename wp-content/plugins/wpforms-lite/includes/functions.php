@@ -2366,24 +2366,53 @@ function wpforms_get_day_period_date( $period, $timestamp = '', $format = 'Y-m-d
  * Return available date formats.
  *
  * @since 1.7.5
+ *
+ * @return array
  */
 function wpforms_date_formats() {
 
 	/**
 	 * Filters available date formats.
 	 *
-	 * @since 1.5.0
+	 * @since 1.3.0
 	 *
 	 * @param array $date_formats Default date formats.
 	 *                            Item key is JS date character - see https://flatpickr.js.org/formatting/
 	 *                            Item value is in PHP format - see http://php.net/manual/en/function.date.php.
 	 */
-	return apply_filters(
+	return (array) apply_filters(
 		'wpforms_datetime_date_formats',
 		[
 			'm/d/Y'  => 'm/d/Y',
 			'd/m/Y'  => 'd/m/Y',
 			'F j, Y' => 'F j, Y',
+		]
+	);
+}
+
+/**
+ * Return available time formats.
+ *
+ * @since 1.7.7
+ *
+ * @return array
+ */
+function wpforms_time_formats() {
+
+	/**
+	 * Filters available time formats.
+	 *
+	 * @since 1.5.9
+	 *
+	 * @param array $time_formats Default time formats.
+	 *                            Item key is in PHP format which it used in jquery.timepicker as well,
+	 *                            see http://php.net/manual/en/function.date.php.
+	 */
+	return (array) apply_filters(
+		'wpforms_datetime_time_formats',
+		[
+			'g:i A' => '12 H',
+			'H:i'   => '24 H',
 		]
 	);
 }

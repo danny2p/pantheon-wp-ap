@@ -84,7 +84,6 @@ class Notifications {
 
 		$access = wpforms_current_user_can( 'view_forms' ) && ! wpforms_setting( 'hide-announcements' );
 
-		// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
 		/**
 		 * Allow modifying state if a user has access.
 		 *
@@ -93,7 +92,6 @@ class Notifications {
 		 * @param bool $access True if user has access.
 		 */
 		return (bool) apply_filters( 'wpforms_admin_notifications_has_access', $access );
-		// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 
 	/**

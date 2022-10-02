@@ -542,10 +542,13 @@ function wpforms_panel_fields_group( $inner, $args = [], $echo = true ) {
 
 	$group      = ! empty( $args['group'] ) ? $args['group'] : '';
 	$unfoldable = ! empty( $args['unfoldable'] );
-	$opened     = ! empty( $_COOKIE[ 'wpforms_fields_group_' . $group ] ) && $_COOKIE[ 'wpforms_fields_group_' . $group ] === 'true' ? ' opened' : '';
+	$default    = ( ! empty( $args['default'] ) && $args['default'] === 'opened' ) ? ' opened' : '';
+	$opened     = ! empty( $_COOKIE[ 'wpforms_fields_group_' . $group ] ) && $_COOKIE[ 'wpforms_fields_group_' . $group ] === 'true' ? ' opened' : $default;
+	$class      = ! empty( $args['class'] ) ? wpforms_sanitize_classes( $args['class'] ) : '';
 
 	$output = sprintf(
-		'<div class="wpforms-panel-fields-group%1$s"%2$s>',
+		'<div class="wpforms-panel-fields-group %1$s%2$s"%3$s>',
+		$class,
 		$unfoldable ? ' unfoldable' . $opened : '',
 		$unfoldable ? ' data-group="' . $group . '"' : ''
 	);

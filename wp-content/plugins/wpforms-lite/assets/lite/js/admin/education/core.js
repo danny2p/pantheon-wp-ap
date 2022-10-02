@@ -165,7 +165,7 @@ WPFormsEducation.liteCore = window.WPFormsEducation.liteCore || ( function( docu
 		upgradeModalThankYou: function( type ) {
 
 			$.alert( {
-				title   : false,
+				title   : wpforms_education.thanks_for_interest,
 				content : wpforms_education.upgrade[type].modal,
 				icon    : 'fa fa-info-circle',
 				type    : 'blue',

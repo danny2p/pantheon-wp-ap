@@ -174,7 +174,7 @@ var WPFormsDashboardWidget = window.WPFormsDashboardWidget || ( function( docume
 			var maxY = 20;
 			var i;
 
-			for ( i = 1; i <= 7; i ++ ) {
+			for ( i = 1; i <= 7; i++ ) {
 
 				date = end.clone().subtract( i, 'days' );
 
