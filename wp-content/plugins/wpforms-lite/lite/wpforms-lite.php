@@ -325,6 +325,16 @@ class WPForms_Lite {
 										'</p>',
 					]
 				);
+
+				/**
+				 * Fires immediately after notification block on lite version.
+				 *
+				 * @since 1.7.7
+				 *
+				 * @param array $settings Current confirmation data.
+				 * @param int   $id       Notification id.
+				 */
+				do_action( 'wpforms_lite_form_settings_notifications_block_content_after', $settings, $id );
 				?>
 			</div>
 		</div>
@@ -1236,8 +1246,8 @@ class WPForms_Lite {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query(
 			$wpdb->prepare(
-				"UPDATE {$wpdb->postmeta} 
-					SET meta_value = meta_value + 1 
+				"UPDATE {$wpdb->postmeta}
+					SET meta_value = meta_value + 1
 					WHERE post_id = %d AND meta_key = 'wpforms_entries_count'",
 				$form_id
 			)

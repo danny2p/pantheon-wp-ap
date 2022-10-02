@@ -86,6 +86,16 @@ class WPForms_Admin_Menu {
 		);
 		do_action( 'wpforms_admin_menu', $this );
 
+		// Templates sub menu item.
+		add_submenu_page(
+			'wpforms-overview',
+			esc_html__( 'WPForms Templates', 'wpforms-lite' ),
+			esc_html__( 'Form Templates', 'wpforms-lite' ),
+			$access->get_menu_cap( 'create_forms' ),
+			'wpforms-templates',
+			[ $this, 'admin_page' ]
+		);
+
 		// Settings sub menu item.
 		add_submenu_page(
 			'wpforms-overview',

@@ -365,6 +365,7 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 		wpforms_panel_fields_group(
 			ob_get_clean(),
 			[
+				'borders'    => [ 'top' ],
 				'unfoldable' => true,
 				'group'      => 'settings_advanced',
 				'title'      => esc_html__( 'Advanced', 'wpforms-lite' ),

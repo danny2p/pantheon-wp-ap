@@ -250,7 +250,6 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 							isValid = response.success && response.data;
 
 							if ( isValid ) {
-								validator.resetInternals();
 								validator.toHide = validator.errorsFor( element );
 								validator.showErrors();
 							} else {
@@ -683,7 +682,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 						};
 					}
 
-					// Redefine locale only if user doesn't do that manually and we have the locale.
+					// Redefine locale only if user doesn't do that manually, and we have the locale.
 					if (
 						! properties.hasOwnProperty( 'locale' ) &&
 						typeof wpforms_settings !== 'undefined' &&
@@ -786,7 +785,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 		},
 
 		/**
-		 * Load smart phone field.
+		 * Load Smart Phone field.
 		 *
 		 * @since 1.5.2
 		 */
@@ -864,7 +863,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 		 */
 		loadPayments: function() {
 
-			// Update Total field(s) with latest calculation.
+			// Update Total field(s) with the latest calculation.
 			$( '.wpforms-payment-total' ).each( function( index, el ) {
 				app.amountTotal( this );
 			} );
@@ -1046,7 +1045,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 							}
 
 							// Add a `data-amount` attribute for payment dropdown.
-							// It will be copy from a Choices.js `data-custom-properties` attribute.
+							// It will be a copy from a Choices.js `data-custom-properties` attribute.
 							if ( $element.hasClass( 'wpforms-payment-price' ) && 'undefined' !== typeof item.customProperties && null !== item.customProperties ) {
 								opt.dataset.amount = item.customProperties;
 							}
@@ -1789,7 +1788,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 				amount = whole + '.' + part;
 			}
 
-			// Strip , from the amount (if set as the thousands separator)
+			// Strip , from the amount (if set as the thousand separator)
 			if ( ',' === currency.thousands_sep && ( amount.indexOf( currency.thousands_sep ) !== -1 ) ) {
 				amount = amount.replace( /,/g, '' );
 			}
@@ -1852,7 +1851,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 		 * @param {string} number       Number to format.
 		 * @param {number} decimals     How many decimals should be there.
 		 * @param {string} decimalSep   What is the decimal separator.
-		 * @param {string} thousandsSep What is the thousands separator.
+		 * @param {string} thousandsSep What is the thousand separator.
 		 *
 		 * @returns {string} Formatted number.
 		 */

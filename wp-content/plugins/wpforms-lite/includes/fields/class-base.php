@@ -885,7 +885,7 @@ abstract class WPForms_Field {
 			 */
 			case 'label':
 				$value   = ! empty( $field['label'] ) ? esc_html( $field['label'] ) : '';
-				$tooltip = esc_html__( 'Enter text for the form field label. Field labels are recommended and can be hidden in the Advanced Settings.', 'wpforms-lite' );
+				$tooltip = ! empty( $args['tooltip'] ) ? $args['tooltip'] : esc_html__( 'Enter text for the form field label. Field labels are recommended and can be hidden in the Advanced Settings.', 'wpforms-lite' );
 				$output  = $this->field_element( 'label', $field, array( 'slug' => 'label', 'value' => esc_html__( 'Label', 'wpforms-lite' ), 'tooltip' => $tooltip ), false );
 				$output .= $this->field_element( 'text',  $field, array( 'slug' => 'label', 'value' => $value ), false );
 				$output  = $this->field_element( 'row',   $field, array( 'slug' => 'label', 'content' => $output ), false );
@@ -1917,21 +1917,23 @@ abstract class WPForms_Field {
 	public function field_new() {
 
 		// Run a security check.
-		check_ajax_referer( 'wpforms-builder', 'nonce' );
+		if ( ! check_ajax_referer( 'wpforms-builder', 'nonce', false ) ) {
+			wp_send_json_error( esc_html__( 'Your session expired. Please reload the builder.', 'wpforms-lite' ) );
+		}
 
 		// Check for permissions.
 		if ( ! wpforms_current_user_can( 'edit_forms' ) ) {
-			die( esc_html__( 'You do not have permission.', 'wpforms-lite' ) );
+			wp_send_json_error( esc_html__( 'You are not allowed to perform this action.', 'wpforms-lite' ) );
 		}
 
 		// Check for form ID.
-		if ( ! isset( $_POST['id'] ) || empty( $_POST['id'] ) ) {
-			die( esc_html__( 'No form ID found', 'wpforms-lite' ) );
+		if ( empty( $_POST['id'] ) ) {
+			wp_send_json_error( esc_html__( 'No form ID found', 'wpforms-lite' ) );
 		}
 
 		// Check for field type to add.
-		if ( ! isset( $_POST['type'] ) || empty( $_POST['type'] ) ) {
-			die( esc_html__( 'No field type found', 'wpforms-lite' ) );
+		if ( empty( $_POST['type'] ) ) {
+			wp_send_json_error( esc_html__( 'No field type found', 'wpforms-lite' ) );
 		}
 
 		// Grab field data.

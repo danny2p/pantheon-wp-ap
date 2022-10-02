@@ -450,7 +450,7 @@ class WPForms_Settings {
 					'id'      => 'validation-inputmask-incomplete',
 					'name'    => esc_html__( 'Input Mask Incomplete', 'wpforms-lite' ),
 					'type'    => 'text',
-					'default' => esc_html__( 'Please fill out all blanks.', 'wpforms-lite' ),
+					'default' => esc_html__( 'Please fill out the field in required format.', 'wpforms-lite' ),
 				],
 				'validation-check-limit'           => [
 					'id'      => 'validation-check-limit',

@@ -72,7 +72,7 @@ function wpforms_save_form() {
 	$data['settings']['form_tags'] = wp_list_pluck( $form_tags, 'label' );
 
 	// Update form data.
-	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data );
+	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data, [ 'context' => 'save_form' ] );
 
 	/**
 	 * Fires after updating form data.
@@ -307,7 +307,15 @@ function wpforms_builder_increase_next_field_id() {
 		wp_send_json_error();
 	}
 
-	wpforms()->form->next_field_id( absint( $_POST['form_id'] ) );
+	$args = [];
+
+	// In the case of duplicating the Layout field that contains a bunch of fields,
+	// we need to set the next `field_id` to the desired value which is passed via POST argument.
+	if ( ! empty( $_POST['field_id'] ) ) {
+		$args['field_id'] = absint( $_POST['field_id'] );
+	}
+
+	wpforms()->get( 'form' )->next_field_id( absint( $_POST['form_id'] ), $args );
 
 	wp_send_json_success();
 }

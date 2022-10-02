@@ -1,5 +1,20 @@
 == Changelog ==
 
+= 1.7.7 =
+- Added: All templates are now available on our new Form Templates admin page.
+- Added: Form Templates can now be marked as favorite for easier access to forms inside the Form Builder.
+- Added: The form fields column can now be collapsed in the Form Builder to give more space to the form preview panel.
+- Changed: The DB tables row in the Site Health Info section is now private which means it's excluded from the copied data when the "Copy site info to clipboard" button is clicked.
+- Fixed: WPForms Challenge was displayed after a forms search with no result.
+- Fixed: WPForms Challenge disappeared after selecting a template for the new form.
+- Fixed: After a form submission a PHP warning was generated in some cases when the Akismet anti-spam protection setting was enabled.
+- Fixed: Using allow/deny list was breaking input mask validation for all fields above the Email field.
+- Fixed: An unusually long text string in the confirmation message caused layout problems due to overflow.
+- Fixed: `page_title` smart tag was working inconsistently on a form preview page.
+- Fixed: From Email address check in the Form Builder > Notifications was incorrectly handling domain check containing the `www` prefix.
+- Fixed: Input mask validation message didn't use what was previously saved on the WPForms > Settings > Validation page.
+- Fixed: On the Form builder, a template selection didn't work if a page was translated through web extensions.
+
 = 1.7.6 =
 - Added: Form Submissions can now be checked against the Akismet API to prevent spam.
 - Changed: Empty post titles and term names in Dynamic Choices are now treated the way WordPress does.

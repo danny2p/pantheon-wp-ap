@@ -421,8 +421,14 @@ class WPForms_WP_Emails {
 				->register();
 		}
 
-		// Hooks after the email is sent.
-		do_action( 'wpforms_email_send_after', $this );
+		/**
+		 * Hooks after the email is sent.
+		 *
+		 * @since 1.1.3
+		 *
+		 * @param WPForms_WP_Emails $this Current instance of this object.
+		 */
+		do_action( 'wpforms_email_send_after', $this ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 
 		return $result;
 	}

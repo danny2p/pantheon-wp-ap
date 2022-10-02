@@ -447,6 +447,18 @@ class WPForms_Process {
 		// Success - add entry to database.
 		$this->entry_id = $this->entry_save( $this->fields, $entry, $this->form_data['id'], $this->form_data );
 
+		/**
+		 * Runs right after adding entry to the database.
+		 *
+		 * @since 1.7.7
+		 *
+		 * @param array $fields    Fields data.
+		 * @param array $entry     User submitted data.
+		 * @param array $form_data Form data.
+		 * @param int   $entry_id  Entry ID.
+		 */
+		do_action( 'wpforms_process_entry_saved', $this->fields, $entry, $this->form_data, $this->entry_id );
+
 		// Fire the logic to send notification emails.
 		$this->entry_email( $this->fields, $entry, $this->form_data, $this->entry_id, 'entry' );
 

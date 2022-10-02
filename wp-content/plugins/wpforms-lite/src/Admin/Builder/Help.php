@@ -303,6 +303,7 @@ class Help {
 			'fields/field_options/captcha'            => 'custom captcha',
 			'fields/field_options/rating'             => 'rating',
 			'fields/field_options/richtext'           => 'rich text',
+			'fields/field_options/layout'             => 'layout',
 			'fields/field_options/likert_scale'       => 'likert scale',
 			'fields/field_options/payment-single'     => 'single item',
 			'fields/field_options/payment-multiple'   => 'multiple items',
@@ -476,9 +477,11 @@ class Help {
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
 			],
 			'multiple columns'          => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 			],
 			'columns'                   => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 			],
 			'randomize'                 => [
@@ -641,6 +644,24 @@ class Help {
 			],
 			'rich editor'               => [
 				'/docs/how-to-use-the-rich-text-field-in-wpforms/',
+			],
+			'layout'                    => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
+			],
+			'two columns'               => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
+			],
+			'three columns'             => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
+			],
+			'four columns'              => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
+			],
+			'fields horizontally'       => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
+			],
+			'fields in a row'           => [
+				'/docs/how-to-use-the-layout-field-in-wpforms/',
 			],
 			'page break'                => [
 				'/docs/how-to-create-multi-page-forms-in-wpforms/',
