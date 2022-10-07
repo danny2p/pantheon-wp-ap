@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 1.7.7.1 =
+- Fixed: Very long field labels were not wrapped and were breaking mid-word.
+
 = 1.7.7 =
 - Added: All templates are now available on our new Form Templates admin page.
 - Added: Form Templates can now be marked as favorite for easier access to forms inside the Form Builder.
