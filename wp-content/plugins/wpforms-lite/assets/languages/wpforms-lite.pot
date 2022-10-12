@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.7.7.1\n"
+"Project-Id-Version: WPForms Lite 1.7.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-05T11:20:20+00:00\n"
+"POT-Creation-Date: 2022-10-12T10:27:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wpforms-lite\n"
@@ -2680,7 +2680,7 @@ msgid "per year"
 msgstr ""
 
 #: includes/admin/class-welcome.php:286
-#: lite/templates/admin/addons.php:55
+#: lite/templates/admin/addons.php:65
 #: src/Admin/Notifications/EventDriven.php:595
 #: src/Admin/Notifications/EventDriven.php:602
 #: src/Admin/Notifications/EventDriven.php:609
@@ -5220,12 +5220,17 @@ msgstr ""
 msgid "Unknown Addon"
 msgstr ""
 
-#: lite/templates/admin/addons.php:39
+#: lite/templates/admin/addons.php:43
 msgid "logo"
 msgstr ""
 
-#: lite/templates/admin/addons.php:45
+#: lite/templates/admin/addons.php:49
 msgid "Learn more"
+msgstr ""
+
+#: lite/templates/admin/addons.php:56
+#: lite/templates/education/builder/providers-item.php:34
+msgid "Recommended"
 msgstr ""
 
 #: lite/templates/education/admin/did-you-know.php:42
@@ -5861,11 +5866,11 @@ msgid "Dropdown Items"
 msgstr ""
 
 #: src/Admin/Education/Fields.php:217
-msgid "PayPal Commerce"
+msgid "Stripe Credit Card"
 msgstr ""
 
 #: src/Admin/Education/Fields.php:226
-msgid "Stripe Credit Card"
+msgid "PayPal Commerce"
 msgstr ""
 
 #: src/Admin/Education/Fields.php:235
