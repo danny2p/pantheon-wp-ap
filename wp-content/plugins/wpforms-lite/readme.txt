@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.0
-Stable tag: 1.7.7.1
+Stable tag: 1.7.7.2
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -430,6 +430,13 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.7.7.2 =
+- Added: There is a new filter `wpforms_builder_panel_sidebar_section_classes` to change builder panel sidebar section classes.
+- Changed: Updated DOMPurify library to 2.4.0.
+- Fixed: Placeholder text in the Dropdown field was cut off in the Form Builder.
+- Fixed: The Form Builder had an inconsistent text strings escaping.
+- Fixed: The information about "no form templates to display" did not disappear when a category was changed.
 
 = 1.7.7.1 =
 - Fixed: Very long field labels were not wrapped and were breaking mid-word.
