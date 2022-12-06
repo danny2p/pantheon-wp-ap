@@ -939,7 +939,14 @@ function astra_hf_builder_customizer_defaults( $defaults ) {
 	 * Woo-Cart.
 	 */
 	$defaults['woo-header-cart-click-action']              = 'default';
-	$defaults['woo-desktop-cart-flyout-width']             = 460;
+	$defaults['woo-slide-in-cart-width']                   = array(
+		'desktop'      => 35,
+		'tablet'       => '',
+		'mobile'       => '',
+		'desktop-unit' => '%',
+		'tablet-unit'  => '%',
+		'mobile-unit'  => '%',
+	);
 	$defaults['woo-header-cart-icon-total-label-position'] = array(
 		'desktop' => '',
 		'tablet'  => '',
@@ -950,11 +957,13 @@ function astra_hf_builder_customizer_defaults( $defaults ) {
 		'tablet'  => '',
 		'mobile'  => '',
 	);
+	$defaults['woo-header-cart-icon']                      = 'default';
 	$defaults['woo-header-cart-icon-style']                = 'outline';
 	$defaults['woo-desktop-cart-flyout-direction']         = 'right';
 	$defaults['header-woo-cart-icon-color']                = '';
 	$defaults['transparent-header-woo-cart-icon-color']    = '';
 	$defaults['header-woo-cart-icon-hover-color']          = '';
+	$defaults['woo-header-cart-border-width']              = 2;
 	$defaults['woo-header-cart-icon-radius']               = 3;
 	$defaults['woo-header-cart-badge-display']             = true;
 	// Woo Cart - Dynamic label default value.

@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -136,6 +136,17 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.6.0 =
+* Feature: Add Recipe Roundup Item widgets in Elementor
+* Improvement: Match exact ID when searching for recipes
+* Improvement: Setting to only display roundup items for published recipes
+* Improvement: Better consistency for print URLs
+* Fix: Creating template with some special characters breaking the CSS styling
+* Fix: URL in metadata for some Mediavine videos not working
+* Fix: Ignore caption when putting snippets after first image
+* Fix: Better matching for range keyword during import
+* Fix: Use correct text-domain for block text translations
+
 = 8.5.0 =
 * Feature: Tastemakers program for the Instacart Shoppable Recipe button
 * Feature: Grouped ingredients style
@@ -1418,6 +1429,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.6.0 =
+Some quality of life improvements and better Elementor compatibility
+
 = 8.5.0 =
 Ability to monetize your recipes with Instacart Tastmakers and some other improvements
 

@@ -168,6 +168,25 @@ class WPRM_Recipe_Manager {
 			$query = new WP_Query( $args );
 
 			$posts = $query->posts;
+
+			// If searching for number, include exact result first.
+			if ( is_numeric( $search ) ) {
+				$id = abs( intval( $search ) );
+
+				if ( $id > 0 ) {
+					$args = array(
+						'post_type' => WPRM_POST_TYPE,
+						'post_status' => 'any',
+						'posts_per_page' => 100,
+						'post__in' => array( $id ),
+					);
+	
+					$query = new WP_Query( $args );
+	
+					$posts = array_merge( $query->posts, $posts );
+				}
+			}
+
 			foreach ( $posts as $post ) {
 				$recipes[] = array(
 					'id' => $post->ID,

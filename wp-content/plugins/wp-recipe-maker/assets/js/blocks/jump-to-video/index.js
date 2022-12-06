@@ -12,8 +12,8 @@ if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 import '../../../css/public/snippets.scss';
 
 registerBlockType( 'wp-recipe-maker/jump-to-video', {
-    title: __( 'Jump to Video' ),
-    description: __( 'A button to jump to a WPRM Recipe Video on the same page.' ),
+    title: __( 'Jump to Video', 'wp-recipe-maker' ),
+    description: __( 'A button to jump to a WPRM Recipe Video on the same page.', 'wp-recipe-maker' ),
     icon: 'button',
     keywords: [ 'wprm' ],
     example: {

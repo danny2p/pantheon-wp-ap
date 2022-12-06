@@ -485,6 +485,56 @@ export default {
             });
         }
 
+        // TODO Products.
+        if ( false && wprm_admin.addons.elite && ( 'ingredient' === datatable.props.options.id || 'equipment' === datatable.props.options.id ) ) {
+            columns.push({
+                Header: __wprm( 'Product' ),
+                id: 'product',
+                accessor: 'product',
+                width: 300,
+                sortable: false,
+                Filter: ({ filter, onChange }) => (
+                    <select
+                        onChange={event => onChange(event.target.value)}
+                        style={{ width: '100%', fontSize: '1em' }}
+                        value={filter ? filter.value : 'all'}
+                    >
+                        <option value="all">{ __wprm( 'Show All' ) }</option>
+                        <option value="yes">{ __wprm( 'Has Product' ) }</option>
+                        <option value="no">{ __wprm( 'Does not have Product' ) }</option>
+                    </select>
+                ),
+                Cell: row => {
+                    console.log( row.value );
+
+                    return (
+                        <div className="wprm-manage-product-container">
+                            <Icon
+                                type="pencil"
+                                title={ __wprm( 'Change Product' ) }
+                                onClick={() => {
+                                    WPRM_Modal.open( 'product', {
+                                        label: row.original.name,
+                                        taxonomy: datatable.props.options.id,
+                                        term: row.original.term_id,
+                                        product: row.value,
+                                        saveCallback: () => datatable.refreshData(),
+                                    } );
+                                }}
+                            />
+                            {
+                                row.value
+                                ?
+                                <a href={ row.value.url } target="_blank">{ row.value.name } (#{ row.value.id })</a>
+                                :
+                                null
+                            }
+                        </div>
+                    )
+                },
+            });
+        }
+
         if ( window.hasOwnProperty( 'wpupg_admin' ) ) {
             columns.push({
                 Header: __wprm( 'Grid Link' ),

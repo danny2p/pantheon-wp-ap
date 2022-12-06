@@ -37,32 +37,32 @@ function Sidebar( props ) {
     return (
         <InspectorControls>
             <p>
-                <a href="https://help.bootstrapped.ventures/article/182-itemlist-metadata-for-recipe-roundup-posts" target="_blank">{ __( 'Learn more' ) }</a>
+                <a href="https://help.bootstrapped.ventures/article/182-itemlist-metadata-for-recipe-roundup-posts" target="_blank">{ __( 'Learn more', 'wp-recipe-maker' ) }</a>
             </p>
-            <PanelBody title={ __( 'Recipe Roundup' ) }>
+            <PanelBody title={ __( 'Recipe Roundup', 'wp-recipe-maker' ) }>
                 <TextControl
-                    label={ __( 'Name' ) }
+                    label={ __( 'Name', 'wp-recipe-maker' ) }
                     value={ name }
                     onChange={ onChangeName }
                 />
                 <TextareaControl
-                    label={ __( 'Description' ) }
+                    label={ __( 'Description', 'wp-recipe-maker' ) }
                     value={ description }
                     onChange={ onChangeDescription }
                 />
                 <TextControl
-                    label={ __( 'Number of Roundup Recipes' ) }
+                    label={ __( 'Number of Roundup Recipes', 'wp-recipe-maker' ) }
                     value={ recipeRoundupCount }
                     disabled
                 />
 
             </PanelBody>
-            <PanelBody title={ __( 'Recipe Details' ) }>
+            <PanelBody title={ __( 'Recipe Details', 'wp-recipe-maker' ) }>
                 {
                     attributes.id
                     ?
                     <TextControl
-                        label={ __( 'Recipe ID' ) }
+                        label={ __( 'Recipe ID', 'wp-recipe-maker' ) }
                         value={ attributes.id }
                         disabled
                     />
@@ -73,7 +73,7 @@ function Sidebar( props ) {
                     attributes.link
                     ?
                     <TextControl
-                        label={ __( 'Recipe Link' ) }
+                        label={ __( 'Recipe Link', 'wp-recipe-maker' ) }
                         value={ attributes.link }
                         disabled
                     />
@@ -81,7 +81,7 @@ function Sidebar( props ) {
                     null
                 }
                 <SelectControl
-                    label={ __( 'Recipe Template' ) }
+                    label={ __( 'Recipe Template', 'wp-recipe-maker' ) }
                     value={ attributes.template }
                     options={ templateOptions }
                     onChange={ (template) => setAttributes({

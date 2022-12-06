@@ -362,9 +362,11 @@ class WPRM_Api_Manage_Taxonomies {
 					case 'ingredient':
 						$row->plural = get_term_meta( $row->term_id, 'wprm_ingredient_plural', true );
 						$row->group = get_term_meta( $row->term_id, 'wprmp_ingredient_group', true );
+						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
 					case 'equipment':
 						$row->affiliate_html = get_term_meta( $row->term_id, 'wprmp_equipment_affiliate_html', true );
+						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
 					case 'suitablefordiet':
 						$row->label = get_term_meta( $row->term_id, 'wprm_term_label', true );

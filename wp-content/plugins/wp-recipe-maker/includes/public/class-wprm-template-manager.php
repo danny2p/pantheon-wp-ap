@@ -518,7 +518,7 @@ class WPRM_Template_Manager {
 	 */
 	public static function slugify( $slug ) {
 		$slug = strtolower( $slug );
-		$slug = preg_replace( '/[^a-z0-9 -_]+/', '', $slug );
+		$slug = preg_replace( '/[^a-z0-9-_\s]+/', '', $slug );
 		$slug = str_replace( ' ', '-', $slug);
 		$slug = trim( $slug, '-' );
 		
@@ -650,6 +650,11 @@ class WPRM_Template_Manager {
 			$template = get_option( 'wprm_template_' . $slug, false );
 
 			if ( $template ) {
+				// Check for potential broken slug.
+				if ( $slug !== self::slugify( $slug ) ) {
+					$template['brokenSlug'] = true;
+				}
+
 				$templates['modern'][ $slug ] = $template;
 			}
 		}

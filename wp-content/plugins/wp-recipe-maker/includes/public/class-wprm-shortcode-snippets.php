@@ -141,7 +141,7 @@ class WPRM_Shortcode_Snippets {
 									if ( false !== $pos_image_end ) {
 										$image = substr( $rest_of_content, 0, $pos_image_end + 1 );
 	
-										// Optionally add paragraph end.
+										// Optionally add paragraph end as part of the image, so that snippets appear after.
 										if ( '</p>' === substr( $rest_of_content, $pos_image_end + 1, 4 ) ) {
 											$image .= '</p>';
 										}
@@ -152,6 +152,18 @@ class WPRM_Shortcode_Snippets {
 											) {
 											// Found an image that's not hidden by some known plugins, stop searching.
 											$searching_for_good_image = false;
+
+											// Check if image has caption, if so, make it part of the image so that snippets appear after.
+											if ( '<figcaption' === substr( $rest_of_content, $pos_image_end + 1, 11 ) ) {
+												$end_of_caption = strpos( substr( $rest_of_content, $pos_image_end + 1 ), '</figcaption>' );
+												$caption = substr( $rest_of_content, $pos_image_end + 1, $end_of_caption + 13 );
+												$image .= $caption;
+
+												// Check if also inside of a figure.
+												if ( '</figure>' === substr( $rest_of_content, $pos_image_end + 1 + $end_of_caption + 13, 9 ) ) {
+													$image .= '</figure>';
+												}
+											}
 
 											$content = substr_replace( $content, $image . $snippet, $content_offset + $pos_image_start, strlen( $image ) );
 											$show_at_top = false;

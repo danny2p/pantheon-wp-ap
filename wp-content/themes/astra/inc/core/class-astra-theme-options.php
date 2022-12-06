@@ -550,7 +550,7 @@ if ( ! class_exists( 'Astra_Theme_Options' ) ) {
 					),
 
 					// Sidebar.
-					'site-sidebar-layout'                  => 'right-sidebar',
+					'site-sidebar-layout'                  => false === astra_check_old_sidebar_user() ? 'right-sidebar' : 'no-sidebar',
 					'site-sidebar-width'                   => 30,
 					'single-page-sidebar-layout'           => false === astra_check_is_structural_setup() ? 'default' : 'no-sidebar',
 					'single-post-sidebar-layout'           => 'default',

@@ -319,18 +319,15 @@ var WPFormsFormTemplates = window.WPFormsFormTemplates || ( function( document, 
 				return;
 			}
 
-			let $templatesList = $( '#wpforms-setup-templates-list' ),
-				$listProItem = $templatesList.find( '.pro' ).first();
+			const $templates = $( '#wpforms-setup-templates-list .wpforms-template' );
 
-			if ( $listProItem.length ) {
-				$listProItem.before( template() );
+			if ( $templates.length > 5 ) {
+				$templates.eq( 5 ).after( template() );
 
 				return;
 			}
 
-			if ( $( '.wpforms-setup-templates-categories .active' ).data( 'category' ) === 'available' ) {
-				$templatesList.find( '.wpforms-template' ).last().after( template() );
-			}
+			$templates.last().after( template() );
 		},
 	};
 

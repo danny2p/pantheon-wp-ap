@@ -12,8 +12,8 @@ if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 import '../../../css/public/snippets.scss';
 
 registerBlockType( 'wp-recipe-maker/print-recipe', {
-    title: __( 'Print Recipe' ),
-    description: __( 'A button to print a WPRM Recipe.' ),
+    title: __( 'Print Recipe', 'wp-recipe-maker' ),
+    description: __( 'A button to print a WPRM Recipe.', 'wp-recipe-maker' ),
     icon: 'button',
     keywords: [ 'wprm' ],
     example: {

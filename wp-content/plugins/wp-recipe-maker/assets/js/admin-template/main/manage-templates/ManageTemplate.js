@@ -14,6 +14,11 @@ const ManageTemplate = (props) => {
             </div>
             <div className="wprm-manage-templates-template-actions">
                 {
+                    props.template.hasOwnProperty( 'brokenSlug' ) && props.template.brokenSlug
+                    &&
+                    <p style={{ color: 'darkred', fontWeight: 'bold' }}>This template was created with a slug that might be breaking the CSS styling. That bug has since been fixed, but this template will need to get recreated. Simply cloning might be enough. Contact support@bootstrapped.ventures if you need more help!</p>
+                }
+                {
                     props.template.premium && ! wprm_admin.addons.premium
                     ?
                     <p style={{ color: 'darkred', fontWeight: 'bold' }}>This template is only available in <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>.</p>

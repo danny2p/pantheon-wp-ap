@@ -146,6 +146,10 @@ export default class ManageTemplates extends Component {
                                                 let classes = 'wprm-manage-templates-template';
                                                 classes += props.template.slug === template.slug ? ' wprm-manage-templates-template-selected' : '';
                                                 classes += template.premium && ! wprm_admin.addons.premium ? ' wprm-manage-templates-template-premium' : '';
+
+                                                if ( template.hasOwnProperty( 'brokenSlug' ) && template.brokenSlug ) {
+                                                    classes += ' wprm-manage-templates-template-broken';
+                                                }
     
                                                 return (
                                                     <div

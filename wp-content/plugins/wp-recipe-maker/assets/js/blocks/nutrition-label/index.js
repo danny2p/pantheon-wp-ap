@@ -16,8 +16,8 @@ if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 import '../../../css/blocks/nutrition-label.scss';
 
 registerBlockType( 'wp-recipe-maker/nutrition-label', {
-    title: __( 'Nutrition Label' ),
-    description: __( 'The nutrition label for a WPRM Recipe.' ),
+    title: __( 'Nutrition Label', 'wp-recipe-maker' ),
+    description: __( 'The nutrition label for a WPRM Recipe.', 'wp-recipe-maker' ),
     icon: 'analytics',
     keywords: [ 'wprm' ],
     example: {

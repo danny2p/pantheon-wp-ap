@@ -113,7 +113,7 @@ if ( ! class_exists( 'Astra_Woo_Shop_Layout_Configs' ) ) {
 					'context'    => array(
 						Astra_Builder_Helper::$design_tab_config,
 					),
-					'divider'    => array( 'ast_class' => 'ast-bottom-section-divider ast-section-spacing' ),
+					'divider'    => ! defined( 'ASTRA_EXT_VER' ) ? array( 'ast_class' => 'ast-section-spacing' ) : array( 'ast_class' => 'ast-bottom-section-divider ast-section-spacing' ),
 				),
 
 				/**
@@ -280,20 +280,51 @@ if ( ! class_exists( 'Astra_Woo_Shop_Layout_Configs' ) ) {
 			);
 
 			// Learn More link if Astra Pro is not activated.
-			if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-
+			if ( astra_showcase_upgrade_notices() ) {
 				$_configs[] = array(
-					'name'     => ASTRA_THEME_SETTINGS . '[woo-shop-ast-button-link]',
+					'name'     => ASTRA_THEME_SETTINGS . '[ast-woo-shop-pro-items]',
 					'type'     => 'control',
-					'control'  => 'ast-button-link',
+					'control'  => 'ast-upgrade',
+					'renderAs' => 'list',
+					'choices'  => array(
+						'two'   => array(
+							'title' => __( 'More shop design layouts', 'astra' ),
+						),
+						'three' => array(
+							'title' => __( 'Shop toolbar structure', 'astra' ),
+						),
+						'five'  => array(
+							'title' => __( 'Offcanvas product filters', 'astra' ),
+						),
+						'six'   => array(
+							'title' => __( 'Products quick view', 'astra' ),
+						),
+						'seven' => array(
+							'title' => __( 'Shop pagination', 'astra' ),
+						),
+						'eight' => array(
+							'title' => __( 'More typography options', 'astra' ),
+						),
+						'nine'  => array(
+							'title' => __( 'More color options', 'astra' ),
+						),
+						'ten'   => array(
+							'title' => __( 'More spacing options', 'astra' ),
+						),
+						'four'  => array(
+							'title' => __( 'Box shadow design options', 'astra' ),
+						),
+						'one'   => array(
+							'title' => __( 'More design controls', 'astra' ),
+						),
+					),
 					'section'  => 'woocommerce_product_catalog',
+					'default'  => '',
 					'priority' => 999,
-					'title'    => __( 'View Astra Pro Features', 'astra' ),
-					'url'      => astra_get_pro_url( 'https://wpastra.com/pro/', 'customizer', 'learn-more', 'upgrade-to-pro' ),
-					'settings' => array(),
-					'context'  => Astra_Builder_Helper::$design_tab_config,
+					'title'    => __( 'Optimize your WooCommerce store for maximum profit with enhanced features', 'astra' ),
+					'divider'  => array( 'ast_class' => 'ast-top-section-divider' ),
+					'context'  => array(),
 				);
-
 			}
 
 			$configurations = array_merge( $configurations, $_configs );

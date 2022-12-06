@@ -70,7 +70,7 @@
 }
 
 .components-base-control .components-base-control__field .components-input-control__backdrop {
-  border-color: #ddd;
+  border-color: #D1D5DB !important;
 }
 
 .customize-control .customize-inside-control-row {
@@ -166,9 +166,6 @@ input[type="text"].select2-search__field {
     .dashicons-desktop:before, .dashicons-tablet:before, .dashicons-smartphone:before {
       color: #000000;
       opacity: .75;
-    }
-    .ast-field-settings-modal .customize-control-ast-responsive .input-wrapper .ast-responsive-input.active + .ast-responsive-select {
-      width: 20%;
     }
     .ast-reset-btn.components-button svg {
       padding: 0px;

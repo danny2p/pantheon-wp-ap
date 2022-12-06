@@ -233,6 +233,16 @@ class WPRM_Recipe_Roundup {
 
 			if ( $atts['name'] ) 	{ self::$roundup_overrides['name'] = rawurldecode( $atts['name'] ); }
 			if ( $atts['summary'] ) { self::$roundup_overrides['summary'] = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ); }
+
+			// Only display published recipes.
+			if ( WPRM_Settings::get( 'recipe_roundup_published_only' ) ) {
+				if ( $recipe && 'publish' !== $recipe->post_status() ) {
+					// If not in Gutenberg preview, return empty shortcode.
+					if ( ! isset( $GLOBALS['wp']->query_vars['rest_route'] ) || '/wp/v2/block-renderer/wp-recipe-maker/recipe-roundup-item' !== $GLOBALS['wp']->query_vars['rest_route'] ) {
+						return '';
+					}
+				}
+			}
 		} else {
 			$type = 'external';
 			$recipe_data = array(

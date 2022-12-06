@@ -35,37 +35,47 @@ if ( ! class_exists( 'Astra_Single_Typo_Configs' ) ) {
 			$_configs = array();
 
 			// Learn More link if Astra Pro is not activated.
-			if ( ! defined( 'ASTRA_EXT_VER' ) ) {
+			if ( astra_showcase_upgrade_notices() ) {
 
 				$_configs = array(
 
 					/**
-					 * Option: Learn More about Typography
+					 * Option: Astra Pro blog single post's options.
 					 */
 					array(
-						'name'     => ASTRA_THEME_SETTINGS . '[blog-single-post-ast-button-link]',
+						'name'     => ASTRA_THEME_SETTINGS . '[ast-single-post-items]',
 						'type'     => 'control',
-						'control'  => 'ast-button-link',
+						'control'  => 'ast-upgrade',
+						'renderAs' => 'list',
+						'choices'  => array(
+							'one'   => array(
+								'title' => __( 'Author info', 'astra' ),
+							),
+							'two'   => array(
+								'title' => __( 'Auto load previous posts', 'astra' ),
+							),
+							'three' => array(
+								'title' => __( 'Single post navigation control', 'astra' ),
+							),
+							'four'  => array(
+								'title' => __( 'Custom featured images size', 'astra' ),
+							),
+							'seven' => array(
+								'title' => __( 'Single post read time', 'astra' ),
+							),
+							'five'  => array(
+								'title' => __( 'Extended typography options', 'astra' ),
+							),
+							'six'   => array(
+								'title' => __( 'Extended spacing options', 'astra' ),
+							),
+						),
 						'section'  => 'section-blog-single',
+						'default'  => '',
 						'priority' => 999,
-						'title'    => __( 'View Astra Pro Features', 'astra' ),
-						'url'      => astra_get_pro_url( 'https://wpastra.com/pro/', 'customizer', 'learn-more', 'upgrade-to-pro' ),
-						'settings' => array(),
+						'context'  => array(),
+						'title'    => __( 'Extensive range of tools to help blog pages stand out', 'astra' ),
 						'divider'  => array( 'ast_class' => 'ast-top-section-divider' ),
-					),
-
-					array(
-						'name'     => ASTRA_THEME_SETTINGS . '[blog-single-post-design-ast-button-link]',
-						'type'     => 'control',
-						'control'  => 'ast-button-link',
-						'section'  => 'section-blog-single',
-						'priority' => 999,
-						'title'    => __( 'View Astra Pro Features', 'astra' ),
-						'url'      => astra_get_pro_url( 'https://wpastra.com/pro/', 'customizer', 'learn-more', 'upgrade-to-pro' ),
-						'settings' => array(),
-						'divider'  => array( 'ast_class' => 'ast-top-section-divider' ),
-						'context'  => ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ?
-						Astra_Builder_Helper::$design_tab : Astra_Builder_Helper::$general_tab,
 					),
 				);
 			}

@@ -42,6 +42,10 @@ export default class RecipeIngredients extends Component {
                 label: __wprm( 'Unit Conversion' ),
                 block: () => ( <p>{ __wprm( 'This feature is only available in' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Pro Bundle</a>.</p> ),
             },
+            // 'products': { // TODO Products
+            //     label: __wprm( 'Products' ),
+            //     block: () => ( <p>{ __wprm( 'This feature is only available in' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Elite Bundle</a>.</p> ),
+            // },
         };
 
         // TODO: Doing it here because of invariant hook error others.
@@ -58,6 +62,19 @@ export default class RecipeIngredients extends Component {
 
         let mode = null;
         switch ( this.state.mode ) {
+            case 'products':
+                mode = (
+                    <Content
+                        taxonomy="wprm_ingredient"
+                        items={ this.props.ingredients.filter((field) => 'ingredient' === field.type && field.name ) }
+                        onItemsChange={ ( ingredients_flat ) => {                            
+                            this.props.onRecipeChange({
+                                ingredients_flat,
+                            });
+                        }}
+                    />
+                );
+                break;
             case 'unit-conversion':
                 mode = (
                     <Content

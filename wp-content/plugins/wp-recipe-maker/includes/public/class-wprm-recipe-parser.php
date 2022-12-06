@@ -68,7 +68,7 @@ class WPRM_Recipe_Parser {
 		}
 
 		$range_keyword = trim( WPRM_Settings::get( 'import_range_keyword' ) );
-		$amount_regex = '/^\s*([\d0-9' . $unicode_regex . ']([\s\/\-\d0-9.,' . $unicode_regex . ']|' . $range_keyword . ')*)(.*)/u';
+		$amount_regex = '/^\s*([\d0-9' . $unicode_regex . ']([\s\/\-\d0-9.,' . $unicode_regex . ']|' . $range_keyword . '\s)*)(.*)/u';
 
 		preg_match( $amount_regex, $raw, $match );
 		if ( isset( $match[0] ) ) {

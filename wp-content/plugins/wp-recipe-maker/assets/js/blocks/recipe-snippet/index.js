@@ -28,8 +28,8 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-snippet', {
-    title: __( 'Recipe Snippet' ),
-    description: __( 'Displays the recipe snippet template. Usually used for a Jump to Recipe button at the top of the post content.' ),
+    title: __( 'Recipe Snippet', 'wp-recipe-maker' ),
+    description: __( 'Displays the recipe snippet template. Usually used for a Jump to Recipe button at the top of the post content.', 'wp-recipe-maker' ),
     icon: 'button',
     keywords: [],
     example: {
@@ -78,9 +78,9 @@ registerBlockType( 'wp-recipe-maker/recipe-snippet', {
         return (
             <div className={ className }>
                 <InspectorControls>
-                    <PanelBody title={ __( 'Recipe Snippet Details' ) }>
+                    <PanelBody title={ __( 'Recipe Snippet Details', 'wp-recipe-maker' ) }>
                         <SelectControl
-                            label={ __( 'Recipe Snippet Template' ) }
+                            label={ __( 'Recipe Snippet Template', 'wp-recipe-maker' ) }
                             value={ attributes.template }
                             options={ templateOptions }
                             onChange={ (template) => setAttributes({

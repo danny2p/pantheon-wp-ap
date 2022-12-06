@@ -280,6 +280,7 @@ input[type="search"] {
   border: 0;
 }
 
+.archive .no-results .ast-search-submit,
 .search .site-main .ast-search-submit {
   display: none;
 }

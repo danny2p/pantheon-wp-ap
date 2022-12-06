@@ -35,8 +35,9 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 	 * @return Array Astra Customizer Configurations with updated configurations.
 	 */
 	public function register_configuration( $configurations, $wp_customize ) {
-		$_section          = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? 'section-header-woo-cart' : 'section-woo-shop-cart';
-		$astra_hfb_enabled = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? true : false;
+		$_section                   = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? 'section-header-woo-cart' : 'section-woo-shop-cart';
+		$astra_hfb_enabled          = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? true : false;
+		$cart_outline_width_context = ( true === Astra_Builder_Helper::$is_header_footer_builder_active ) ? Astra_Builder_Helper::$design_tab_config : Astra_Builder_Helper::$general_tab_config;
 
 		$cart_icon_choices = array();
 
@@ -84,7 +85,7 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'context'  => Astra_Builder_Helper::$general_tab,
 				'divider'  => $astra_hfb_enabled ? array( 'ast_class' => 'ast-bottom-spacing' ) : array( 'ast_class' => 'ast-section-spacing' ),
 			),
-			
+
 			/**
 			 * Option: Header Cart Icon
 			 */
@@ -203,13 +204,15 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'control'    => 'ast-selector',
 				'priority'   => 60,
 				'choices'    => array(
-					'default' => __( 'Dropdown Cart', 'astra' ),
-					'flyout'  => __( 'Slide-In Cart', 'astra' ),
+					'default'  => __( 'Dropdown', 'astra' ),
+					'flyout'   => __( 'Slide-In', 'astra' ),
+					'redirect' => __( 'Cart Page', 'astra' ),
 				),
 				'responsive' => false,
 				'renderAs'   => 'text',
 				'context'    => Astra_Builder_Helper::$desktop_general_tab,
 				'divider'    => array( 'ast_class' => 'ast-section-spacing' ),
+				'transport'  => 'postMessage',
 			),
 
 			/**
@@ -241,15 +244,12 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 			),
 
 			/**
-			 * Option: Flyout width
+			 * Option: Slide In Cart Width.
 			 */
 			array(
-				'name'        => ASTRA_THEME_SETTINGS . '[woo-desktop-cart-flyout-width]',
-				'default'     => astra_get_option( 'woo-desktop-cart-flyout-width' ),
-				'type'        => 'control',
-				'transport'   => 'postMessage',
-				'section'     => $_section,
-				'context'     => array(
+				'name'              => ASTRA_THEME_SETTINGS . '[woo-slide-in-cart-width]',
+				'type'              => 'control',
+				'context'           => array(
 					Astra_Builder_Helper::$general_tab_config,
 					array(
 						'setting'  => ASTRA_THEME_SETTINGS . '[woo-header-cart-click-action]',
@@ -257,16 +257,27 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 						'value'    => 'flyout',
 					),
 				),
-				'title'       => __( 'Slide-In Cart Width', 'astra' ),
-				'control'     => 'ast-slider',
-				'suffix'      => 'px',
-				'priority'    => 70,
-				'input_attrs' => array(
-					'min'  => 0,
-					'step' => 1,
-					'max'  => 1920,
+				'control'           => 'ast-responsive-slider',
+				'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_responsive_slider' ),
+				'section'           => $_section,
+				'transport'         => 'postMessage',
+				'title'             => __( 'Slide in Cart Width', 'astra' ),
+				'priority'          => 400,
+				'default'           => astra_get_option( 'woo-slide-in-cart-width' ),
+				'suffix'            => array( 'px', '%' ),
+				'input_attrs'       => array(
+					'px' => array(
+						'min'  => 0,
+						'step' => 1,
+						'max'  => 1920,
+					),
+					'%'  => array(
+						'min'  => 0,
+						'step' => 1,
+						'max'  => 100,
+					),
 				),
-				'divider'     => array( 'ast_class' => 'ast-top-dotted-divider' ),
+				'divider'           => array( 'ast_class' => 'ast-top-dotted-divider' ),
 			),
 
 			/**
@@ -415,6 +426,40 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'rgba'       => true,
 				'priority'   => 45,
 				'context'    => Astra_Builder_Helper::$design_tab,
+			),
+
+			/**
+			 * Option: Border Width
+			 */
+			array(
+				'name'        => ASTRA_THEME_SETTINGS . '[woo-header-cart-border-width]',
+				'default'     => astra_get_option( 'woo-header-cart-border-width' ),
+				'type'        => 'control',
+				'transport'   => 'postMessage',
+				'section'     => $_section,
+				'context'     => array(
+					$cart_outline_width_context,
+					'relation' => 'AND',
+					array(
+						'setting'  => ASTRA_THEME_SETTINGS . '[woo-header-cart-icon-style]',
+						'operator' => '==',
+						'value'    => 'outline',
+					),
+					array(
+						'setting'  => ASTRA_THEME_SETTINGS . '[woo-header-cart-icon]',
+						'operator' => '!=',
+						'value'    => 'default',
+					),
+				),
+				'title'       => __( 'Border Width', 'astra' ),
+				'control'     => 'ast-slider',
+				'suffix'      => 'px',
+				'priority'    => 46,
+				'input_attrs' => array(
+					'min'  => 0,
+					'step' => 1,
+					'max'  => 20,
+				),
 			),
 
 			/**
@@ -935,7 +980,7 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 		}
 
 		// Learn More link if Astra Pro is not activated.
-		if ( ! defined( 'ASTRA_EXT_VER' ) ) {
+		if ( astra_showcase_upgrade_notices() ) {
 
 			$_configs[] = array(
 
@@ -948,28 +993,8 @@ class Astra_Customizer_Woo_Cart_Configs extends Astra_Customizer_Config_Base {
 				'url'      => astra_get_pro_url( 'https://wpastra.com/pro', 'customizer', 'learn-more', 'upgrade-to-pro' ),
 				'settings' => array(),
 				'divider'  => array( 'ast_class' => 'ast-top-section-divider' ),
-				'context'  => Astra_Builder_Helper::$general_tab,
+				'context'  => array(),
 			);
-
-		}
-
-		// Learn More link if Astra Pro is not activated.
-		if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-
-			$_configs[] = array(
-
-				'name'     => ASTRA_THEME_SETTINGS . '[ast-woo-cart-design-button-link]',
-				'type'     => 'control',
-				'control'  => 'ast-button-link',
-				'section'  => $_section,
-				'priority' => 999,
-				'title'    => __( 'View Astra Pro Features', 'astra' ),
-				'url'      => astra_get_pro_url( 'https://wpastra.com/pro', 'customizer', 'learn-more', 'upgrade-to-pro' ),
-				'settings' => array(),
-				'divider'  => array( 'ast_class' => 'ast-top-section-divider' ),
-				'context'  => Astra_Builder_Helper::$design_tab,
-			);
-
 		}
 
 		$configurations = array_merge( $configurations, $_configs );

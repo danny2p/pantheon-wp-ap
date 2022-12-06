@@ -408,6 +408,23 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'value' => $key,
 					'type' => 'includes',
 				);
+
+				// Add a second set for wprm_% so that it matches both wprm_course and course. But only if not set yet.
+				$key = 'wprm_' . $key;
+				if ( ! array_key_exists( $key, $fields_with_labels ) ) {
+					$fields_with_labels[ $key ] = $options['singular_name'];
+
+					$shortcodes[ $shortcode ]['tag_separator']['dependency'][] = array(
+						'id' => 'selected_fields',
+						'value' => $key,
+						'type' => 'includes',
+					);
+					$shortcodes[ $shortcode ]['tag_display_style']['dependency'][] = array(
+						'id' => 'selected_fields',
+						'value' => $key,
+						'type' => 'includes',
+					);
+				}
 			}
 
 			// Add label and icon attributes to shortcode.
@@ -551,6 +568,14 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$field_shortcode = 'WPRM_SC_Custom_Field';
 				$field_atts['key'] = $field;
 				$field_atts['image_size'] = $atts['custom_field_image_size'];
+			} elseif ( in_array( $field, array_keys( $taxonomies ) ) ) {
+				// Added afterwards to make sure both wprm_course and course match, without accidentally interfering with existing custom fields.
+				$field_shortcode = 'WPRM_SC_Tag';
+				$field_atts['key'] = substr( $field, 5 );
+				$field_atts['separator'] = $atts['tag_separator'];
+				$field_atts['display_style'] = $atts['tag_display_style'];
+				$field_atts['image_size'] = $atts['tag_image_size'];
+				$field_atts['image_position'] = $atts['tag_image_position'];
 			}
 
 			if ( $field_shortcode && class_exists( $field_shortcode ) ) {

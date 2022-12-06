@@ -55,12 +55,34 @@ class Notifications implements EducationInterface {
 	 *
 	 * @param WPForms_Builder_Panel_Settings $settings Builder panel settings.
 	 * @param int                            $id       Notification id.
-	 *
-	 * @return void
 	 */
 	public function advanced_section( $settings, $id ) {
 
-		$panel = wpforms_panel_field(
+		$file_upload_attachment_panel = wpforms_panel_field(
+			'toggle',
+			'notifications',
+			'file_upload_attachment_enable',
+			$settings->form_data,
+			esc_html__( 'Enable File Upload Attachments', 'wpforms-lite' ),
+			[
+				'input_class' => 'notifications_enable_file_upload_attachment_toggle education-modal',
+				'parent'      => 'settings',
+				'subsection'  => $id,
+				'pro_badge'   => true,
+				'data'        => [
+					'action'  => 'upgrade',
+					'name'    => esc_html__( 'File Upload Attachments', 'wpforms-lite' ),
+					'licence' => 'pro',
+				],
+				'attrs'       => [
+					'disabled' => 'disabled',
+				],
+				'value'       => false,
+			],
+			false
+		);
+
+		$entry_csv_attachment_panel = wpforms_panel_field(
 			'toggle',
 			'notifications',
 			'entry_csv_attachment_enable',
@@ -86,7 +108,7 @@ class Notifications implements EducationInterface {
 
 		// Wrap advanced settings to the unfoldable group.
 		wpforms_panel_fields_group(
-			$panel,
+			$file_upload_attachment_panel . $entry_csv_attachment_panel,
 			[
 				'borders'    => [ 'top' ],
 				'class'      => 'wpforms-builder-notifications-advanced',

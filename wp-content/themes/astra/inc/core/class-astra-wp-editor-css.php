@@ -321,6 +321,32 @@ class Astra_WP_Editor_CSS {
 			);
 		}
 
+		// Site title (Page Title) on Block Editor.
+		$site_title_font_family              = astra_get_option( 'font-family-entry-title' );
+		$site_title_font_weight              = astra_get_option( 'font-weight-entry-title' );
+		$site_title_line_height              = astra_get_option( 'line-height-entry-title' );
+		$site_title_font_size                = astra_get_option( 'font-size-entry-title' );
+		$site_title_text_transform           = astra_get_option( 'text-transform-entry-title', $headings_text_transform );
+		$is_widget_title_support_font_weight = Astra_Dynamic_CSS::support_font_css_to_widget_and_in_editor();
+		$font_weight_prop                    = ( $is_widget_title_support_font_weight ) ? 'inherit' : 'normal';
+
+		// Fallback for Site title (Page Title).
+		if ( 'inherit' == $site_title_font_family ) {
+			$site_title_font_family = $headings_font_family;
+		}
+		if ( $font_weight_prop === $site_title_font_weight ) {
+			$site_title_font_weight = $headings_font_weight;
+		}
+		if ( '' == $site_title_text_transform ) {
+			$site_title_text_transform = '' === $headings_text_transform ? astra_get_option( 'text-transform-h1' ) : $headings_text_transform;
+		}
+		if ( '' == $site_title_line_height ) {
+			$site_title_line_height = $headings_line_height;
+		}
+		if ( 'inherit' == $site_title_font_weight || '' == $site_title_font_weight ) {
+			$site_title_font_weight = 'normal';
+		}
+
 		// check the selection color in-case of empty/no theme color.
 		$selection_text_color = ( 'transparent' === $highlight_theme_color ) ? '' : $highlight_theme_color;
 
@@ -331,7 +357,7 @@ class Astra_WP_Editor_CSS {
 		$astra_wide_particular_selector = $astra_is_block_editor_v2_ui ? '.editor-styles-wrapper .block-editor-block-list__layout.is-root-container .block-list-appender' : '.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > p, .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .block-list-appender';
 
 		$blocks_spacings = self::astra_get_block_spacings();
-
+		
 		$desktop_top_spacing    = isset( $blocks_spacings['desktop']['top'] ) ? $blocks_spacings['desktop']['top'] : '';
 		$desktop_right_spacing  = isset( $blocks_spacings['desktop']['right'] ) ? $blocks_spacings['desktop']['right'] : '';
 		$desktop_bottom_spacing = isset( $blocks_spacings['desktop']['bottom'] ) ? $blocks_spacings['desktop']['bottom'] : '';
@@ -345,9 +371,12 @@ class Astra_WP_Editor_CSS {
 		$mobile_bottom_spacing  = isset( $blocks_spacings['mobile']['bottom'] ) ? $blocks_spacings['mobile']['bottom'] : '';
 		$mobile_left_spacing    = isset( $blocks_spacings['mobile']['left'] ) ? $blocks_spacings['mobile']['left'] : '';
 
+		// Preset post title wrapper padding (20px) + post title h1 padding (6px).
+		$page_title_internal_padding = '26px';
+		
 		$ast_content_width = apply_filters( 'astra_block_content_width', $astra_is_block_editor_v2_ui ? $astra_container_width : '910px' );
 		$ast_wide_width    = apply_filters( 'astra_block_wide_width', $astra_is_block_editor_v2_ui ? 'calc(' . esc_attr( $astra_container_width ) . ' + var(--wp--custom--ast-default-block-left-padding) + var(--wp--custom--ast-default-block-right-padding))' : $astra_container_width );
-
+		
 		$css = ':root, body .editor-styles-wrapper {
 			--wp--custom--ast-default-block-top-padding: ' . $desktop_top_spacing . ';
 			--wp--custom--ast-default-block-right-padding: ' . $desktop_right_spacing . ';
@@ -467,7 +496,7 @@ class Astra_WP_Editor_CSS {
 			),
 
 			// Gutenberg button compatibility for default styling.
-			'.wp-block-button .wp-block-button__link, .block-editor-writing-flow .wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button, .block-editor-writing-flow .wp-block-file .wp-block-file__button' => array(
+			'.editor-styles-wrapper .wp-block-button .wp-block-button__link, .block-editor-writing-flow .wp-block-search .wp-block-search__inside-wrapper .wp-block-search__button, .block-editor-writing-flow .wp-block-file .wp-block-file__button' => array(
 				'border-style'        => ( $theme_btn_top_border || $theme_btn_right_border || $theme_btn_left_border || $theme_btn_bottom_border ) ? 'solid' : '',
 				'border-top-width'    => $theme_btn_top_border,
 				'border-right-width'  => $theme_btn_right_border,
@@ -493,10 +522,43 @@ class Astra_WP_Editor_CSS {
 				'background-color' => esc_attr( $btn_bg_h_color ),
 				'border-color'     => empty( $btn_border_h_color ) ? esc_attr( $btn_bg_h_color ) : esc_attr( $btn_border_h_color ),
 			),
+
+			// Margin bottom same as applied on frontend.
+			'.editor-styles-wrapper .is-root-container.block-editor-block-list__layout > .wp-block-heading' => array(
+				'margin-bottom' => '20px',
+			),
+
+			/**
+			 * Site title (Page Title) on Block Editor.
+			 */
+			'body .edit-post-visual-editor__post-title-wrapper > h1:first-of-type' => array(
+				'font-size'      => astra_responsive_font( $site_title_font_size, 'desktop' ),
+				'font-weight'    => astra_get_css_value( $site_title_font_weight, 'font' ),
+				'font-family'    => astra_get_css_value( $site_title_font_family, 'font', $body_font_family ),
+				'line-height'    => esc_attr( $site_title_line_height ),
+				'text-transform' => esc_attr( $site_title_text_transform ),
+			),
+		);
+
+		// Boxed, Content-Boxed page title alignment with Spectra Container Blocks.
+		$desktop_css['.ast-separate-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .uagb-is-root-container'] = array(
+			'max-width'            => 'var(--wp--custom--ast-content-width-size)',
+			'padding-' . $ltr_left => '0 !important',
+		);
+
+		// Full-Width Stretched Layout page title alignment.
+		$desktop_css['.ast-page-builder-template .edit-post-visual-editor__post-title-wrapper'] = array(
+			'max-width' => 'calc( 100% - 5px ) !important',
+		);
+
+		// Full-Width Contained Layout page title wrapper crops in stacked view fix.
+		$desktop_css['.ast-plain-container .ast-stacked-title-visibility .edit-post-visual-editor__post-title-wrapper'] = array(
+			'padding-left'  => '3px',
+			'padding-right' => '3px',
 		);
 
 		$content_links_underline = astra_get_option( 'underline-content-links' );
-
+		
 		if ( $content_links_underline ) {
 			$desktop_css['.edit-post-visual-editor a'] = array(
 				'text-decoration' => 'underline',
@@ -526,10 +588,6 @@ class Astra_WP_Editor_CSS {
 			$desktop_css['.ast-separate-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignwide, .ast-plain-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignwide'] = array(
 				'margin-left'  => $alignwide_left_negative_margin,
 				'margin-right' => $alignwide_right_negative_margin,
-			);
-			$desktop_css['.ast-separate-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignfull'] = array(
-				'margin-left'  => $astra_continer_left_spacing,
-				'margin-right' => $astra_continer_right_spacing,
 			);
 			$desktop_css['.ast-page-builder-template .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *.wp-block, .ast-page-builder-template .is-root-container > .alignfull > :where(:not(.alignleft):not(.alignright)), .editor-styles-wrapper .is-root-container > .wp-block-cover.alignfull .wp-block-cover__image-background'] = array(
 				'max-width' => 'none',

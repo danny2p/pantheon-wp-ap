@@ -41,6 +41,7 @@ class WPRM_Compatibility {
 		add_action( 'elementor/controls/register', array( __CLASS__, 'elementor_controls' ) );
 		add_action( 'elementor/preview/enqueue_styles', array( __CLASS__, 'elementor_styles' ) );
 		add_action( 'elementor/widgets/register', array( __CLASS__, 'elementor_widgets' ) );
+		add_action( 'elementor/elements/categories_registered', array( __CLASS__, 'elementor_categories' ) );
 		add_action( 'ECS_after_render_post_footer', array( __CLASS__, 'wpupg_unset_recipe_id' ) );
 
 		// WP Ultimate Post Grid.
@@ -136,8 +137,26 @@ class WPRM_Compatibility {
 		WPRM_Assets::load();
 	}
 	public static function elementor_widgets( $widgets_manager ) {
-		include( WPRM_DIR . 'templates/elementor/widget.php' );
-		$widgets_manager->register( new WPRM_Elementor_Widget() );
+		include( WPRM_DIR . 'templates/elementor/widget-recipe.php' );
+		include( WPRM_DIR . 'templates/elementor/widget-roundup.php' );
+
+		$widgets_manager->register( new WPRM_Elementor_Recipe_Widget() );
+		$widgets_manager->register( new WPRM_Elementor_Roundup_Widget() );
+	}
+
+	/**
+	 * Add custom widget categories to Elementor.
+	 *
+	 * @since 8.6.0
+	 */
+	public static function elementor_categories( $elements_manager ) {
+		$elements_manager->add_category(
+			'wp-recipe-maker',
+			array(
+				'title' => __( 'WP Recipe Maker', 'wp-recipe-maker' ),
+				'icon'  => 'fa fa-plug',
+			)
+		);
 	}
 
 	/**
