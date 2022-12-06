@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
 
 jQuery(document).ready(function($) {
-    elementor.hooks.addAction( 'panel/open_editor/widget/wprm-recipe', function( panel, model, view ) {
+    const renderSelectRecipe = function( panel, model, view ) {
         const $placeholder = panel.$el.find( '#wprm-recipe-select-placeholder' );
 
         if ( $placeholder.length ) {
@@ -28,7 +28,10 @@ jQuery(document).ready(function($) {
                 $placeholder[0]
             );            
         }
-     } );
+    }
+
+    elementor.hooks.addAction( 'panel/open_editor/widget/wprm-recipe', renderSelectRecipe );
+    elementor.hooks.addAction( 'panel/open_editor/widget/wprm-recipe-roundup-item', renderSelectRecipe );
 });
 
 // Based on /admin-modal/select/SelectRecipe.js

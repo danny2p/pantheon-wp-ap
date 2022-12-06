@@ -4,7 +4,7 @@
  * @since x.x.x
  */
 
- window.addEventListener( "load", function(e) {
+window.addEventListener( "load", function(e) {
     astrawpWooQuantityButtons();
 });
 
@@ -42,7 +42,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
             // Add plus and minus icons.
             $qty_parent = $quantityBoxes.parentElement;
             $qty_parent.classList.add( 'buttons_added' );
-            switch (  astra_qty_btn.style_type ) {
+            switch ( astra_qty_btn.style_type ) {
 
 				case 'no-internal-border':
 						$quantityBoxes.classList.add( 'ast-no-internal-border' );
@@ -96,7 +96,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
 
                 pm_el.addEventListener( "click", function(ev) {
 
-                    
+
                     // Quantity.
                     var $quantityBox;
 
@@ -162,7 +162,7 @@ function astrawpWooQuantityButtons( $quantitySelector ) {
 						let qtyNonce = astra.single_product_qty_ajax_nonce;
 
                         miniCart.classList.add('ajax-mini-cart-qty-loading');
-                        
+
 						// Creating a XMLHttpRequest object.
 						let xhrRequest = new XMLHttpRequest();
 						xhrRequest.open( 'POST', astra.ajax_url, true );

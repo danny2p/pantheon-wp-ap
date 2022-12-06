@@ -1527,7 +1527,7 @@ class WPRM_Recipe {
 		}
 
 		if ( get_option( 'permalink_structure' ) ) {
-			$print_url = $home_url . WPRM_Print::slug() . '/recipe/' . $this->id();
+			$print_url = $home_url . WPRM_Print::slug() . '/' . $this->id();
 
 			if ( $template ) {
 				$print_url .= '/' . $template;

@@ -27,6 +27,15 @@
     }
 }
 
+.wprm-manage-product-container {
+    display: flex;
+    align-items: center;
+
+    a {
+        margin-left: 5px;
+    }
+}
+
 .wprm-manage-image-preview {
     display: flex;
 

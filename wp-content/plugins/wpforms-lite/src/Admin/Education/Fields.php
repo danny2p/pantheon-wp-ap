@@ -121,6 +121,14 @@ class Fields {
 				'order'   => '180',
 			],
 			[
+				'icon'    => 'fa-file-image-o',
+				'name'    => esc_html__( 'Content', 'wpforms-lite' ),
+				'name_en' => 'Content',
+				'type'    => 'content',
+				'group'   => 'fancy',
+				'order'   => '181',
+			],
+			[
 				'icon'    => 'fa-file-text-o',
 				'name'    => esc_html__( 'Entry Preview', 'wpforms-lite' ),
 				'name_en' => 'Entry Preview',

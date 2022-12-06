@@ -1,5 +1,19 @@
 == Changelog ==
 
+= 1.7.8 =
+- Added: All anti-spam protection settings are grouped in one place in the Form Builder > Settings for easier access.
+- Changed: Recently added Form Templates are now available in the "New Templates" category.
+- Changed: Non-responsive (desktop) version of the Form Builder is not accessible on mobile devices.
+- Fixed: jQuery deprecation notices were triggered in the browser's console.
+- Fixed: Close button in dropdowns was displayed incorrectly in certain places.
+- Fixed: A PHP warning was raised on certain site configurations when the user tried to submit a form.
+- Fixed: Toggle control animation was working incorrectly in certain cases.
+- Fixed: Text was overlapping the down arrow on dropdowns in the 2021 theme.
+- Fixed: WPForms Challenge user experience was improved.
+- Fixed: Smart tag list was too big in fields with warnings.
+- Fixed: Some input masks caused the text in the Text field to be right-aligned.
+- Fixed: Compatibility with the 2023 theme was improved.
+
 = 1.7.7.2 =
 - Added: There is a new filter `wpforms_builder_panel_sidebar_section_classes` to change builder panel sidebar section classes.
 - Changed: Updated DOMPurify library to 2.4.0.

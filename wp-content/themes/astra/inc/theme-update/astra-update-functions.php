@@ -1057,3 +1057,38 @@ function astra_apply_woocommerce_show_password_icon_css() {
 		update_option( 'astra-settings', $theme_options );
 	}
 }
+
+/**
+ * Handle backward compatibility on version 3.9.4
+ *
+ * @since 3.9.4
+ * @return void
+ */
+function astra_theme_background_updater_3_9_4() {
+	$theme_options = get_option( 'astra-settings', array() );
+
+	// Check if user is a old global sidebar user.
+	if ( ! isset( $theme_options['astra-old-global-sidebar-default'] ) ) {
+		$theme_options['astra-old-global-sidebar-default'] = false;
+		update_option( 'astra-settings', $theme_options );
+	}
+
+	// Slide in cart width responsive control backwards compatibility.
+	if ( isset( $theme_options['woo-desktop-cart-flyout-width'] ) && ! isset( $theme_options['woo-slide-in-cart-width'] ) ) {
+		$theme_options['woo-slide-in-cart-width'] = array(
+			'desktop'      => $theme_options['woo-desktop-cart-flyout-width'],
+			'tablet'       => '',
+			'mobile'       => '',
+			'desktop-unit' => 'px',
+			'tablet-unit'  => 'px',
+			'mobile-unit'  => 'px',
+		);
+		update_option( 'astra-settings', $theme_options );
+	}
+
+	// Astra Spectra Gutenberg Compatibility CSS.
+	if ( ! isset( $theme_options['spectra-gutenberg-compat-css'] ) ) {
+		$theme_options['spectra-gutenberg-compat-css'] = false;
+		update_option( 'astra-settings', $theme_options );
+	}
+}

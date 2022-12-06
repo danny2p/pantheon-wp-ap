@@ -38,6 +38,41 @@
             }
         );
 
+        $document.on(
+            'click',
+            '.customizer-navigate-on-focus',
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const currentElement = $( this ).closest( '.customizer-navigate-on-focus' );
+                const section_id = currentElement.attr( 'data-section' ) || '';
+                const type       = currentElement.attr( 'data-type' ) ? currentElement.attr( 'data-type' ) : 'section';
+
+                if ( section_id && type ) {
+
+                    if( 'section' === type ) {
+                        if ( defaultTarget.wp.customize.section( section_id ) ) {
+                            defaultTarget.wp.customize.section( section_id ).focus();
+                        }
+                    }
+
+                    if( 'control' === type ) {
+                        if ( defaultTarget.wp.customize.control( section_id ) ) {
+                            defaultTarget.wp.customize.control( section_id ).focus();
+                        }
+                    }
+
+                    if( 'panel' === type ) {
+                        if ( defaultTarget.wp.customize.panel( section_id ) ) {
+                            defaultTarget.wp.customize.panel( section_id ).focus();
+                        }
+                    }
+                  
+                }
+            }
+        );
+
         /**
          * Ajax quantity input show.
          */

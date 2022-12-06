@@ -33,7 +33,7 @@ function astra_onload_function() {
 	wp.data.subscribe(function () {
 		setTimeout( function () {
 			// Compatibility for updating layout in editor with direct reflection.
-			const contentLayout = ( null !== wp.data.select( 'core/editor' ) && undefined !== wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' ) && wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' )['site-content-layout'] ) ? wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' )['site-content-layout'] : 'default',
+			const contentLayout = ( undefined !== wp.data.select( 'core/editor' ) && null !== wp.data.select( 'core/editor' ) && undefined !== wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' ) && wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' )['site-content-layout'] ) ? wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' )['site-content-layout'] : 'default',
 				bodyClass = document.querySelector('body');
 
 			switch( contentLayout ) {
@@ -74,7 +74,7 @@ function astra_onload_function() {
 
 			if( null !== editorStylesWrapper ) {
 				const editorStylesWrapperWidth = parseInt( editorStylesWrapper.offsetWidth )
-				if( editorStylesWrapperWidth < 1250 ) {
+				if( editorStylesWrapperWidth < 1350 ) {
 					editorStylesWrapper.classList.remove( 'ast-stacked-title-visibility' );
 					editorStylesWrapper.classList.add( 'ast-stacked-title-visibility' );
 				} else {
@@ -145,7 +145,7 @@ function astra_onload_function() {
 			}
 
 			// Adding 'inherit-container-width' width to Group block externally.
-			let postBlocks = ( null !== wp.data.select( 'core/editor' ) && undefined !== wp.data.select( 'core/editor' ).getCurrentPost() && undefined !== wp.data.select( 'core/editor' ).getBlocks() ) ? wp.data.select( 'core/editor' ).getBlocks() : false,
+			let postBlocks = ( undefined !== wp.data.select( 'core/editor' ) && null !== wp.data.select( 'core/editor' ) && undefined !== wp.data.select( 'core/editor' ).getCurrentPost() && undefined !== wp.data.select( 'core/editor' ).getBlocks() ) ? wp.data.select( 'core/editor' ).getBlocks() : false,
 				groupBlocks = document.querySelectorAll( '.block-editor-block-list__layout.is-root-container > .wp-block-group' );
 			if( postBlocks && groupBlocks ) {
 				for ( let blockNum = 0; blockNum < postBlocks.length; blockNum++ ) {

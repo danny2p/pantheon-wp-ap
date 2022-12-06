@@ -393,6 +393,15 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		if ( ! $time ) {
 			return 0;
 		}
+		
+		// Special case "00:15".
+		$first_five_characters = substr( $time, 0, 5 );
+		preg_match( '/(\d\d):([0-6]\d)/', $first_five_characters, $match );
+		if ( $match && isset( $match[2] ) ) {
+			$hours = intval( $match[1] );
+			$minutes = intval( $match[2] );
+			$time = 60 * $hours + $minutes;
+		}
 
 		// Assume a number is minutes.
 		if ( is_numeric( $time ) ) {

@@ -33,6 +33,10 @@ export default class RecipeEquipment extends Component {
                 label: __wprm( 'Equipment Affiliate Fields' ),
                 block: () => ( <p>{ __wprm( 'This feature is only available in' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>.</p> ),
             },
+            // 'products': { // TODO Products
+            //     label: __wprm( 'Products' ),
+            //     block: () => ( <p>{ __wprm( 'This feature is only available in' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Elite Bundle</a>.</p> ),
+            // },
         };
 
         const allModes = hooks.applyFilters( 'modalRecipeEquipment', modes );
@@ -44,6 +48,19 @@ export default class RecipeEquipment extends Component {
 
         let mode = null;
         switch ( this.state.mode ) {
+            case 'products':
+                mode = (
+                    <Content
+                        taxonomy="wprm_equipment"
+                        items={ this.props.equipment.filter((field) => field.name ) }
+                        onItemsChange={ ( equipment ) => {                            
+                            this.props.onRecipeChange({
+                                equipment,
+                            });
+                        }}
+                    />
+                );
+                break;
             default:
                 mode = (
                     <Content

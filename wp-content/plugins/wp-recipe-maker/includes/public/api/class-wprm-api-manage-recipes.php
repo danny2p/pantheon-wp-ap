@@ -821,6 +821,29 @@ class WPRM_Api_Manage_Recipes {
 					case 'recalculate-time':
 						$recipe_data['total_time'] = intval( $recipe_data['prep_time'] ) + intval( $recipe_data['cook_time'] ) + intval( $recipe_data['custom_time'] );
 						break;
+					case 'user-rating':
+						$recipe_data = false;
+						$rating = intval( $action['options'] );
+
+						if ( 0 === $rating ) {
+							$user_rating = WPRM_Rating_Database::get_rating( array(
+								'where' => 'ip = "wprm-author-rating" AND recipe_id = "' . intval( $recipe->id() ) . '"',
+							) );
+
+							if ( $user_rating ) {
+								WPRM_Rating_Database::delete_ratings( array( $user_rating->id ) );
+							}
+						} else {
+							$user_rating = array(
+								'recipe_id' => $recipe->id(),
+								'user_id' => 0,
+								'ip' => 'wprm-author-rating',
+								'rating' => $rating,
+							);
+				
+							WPRM_Rating_Database::add_or_update_rating( $user_rating );
+						}
+						break;
 					case 'custom-nutrition-ingredient':
 						$recipe_data = false;
 

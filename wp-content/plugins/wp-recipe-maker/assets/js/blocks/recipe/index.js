@@ -33,8 +33,8 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 import '../../../css/blocks/recipe.scss';
 
 registerBlockType( 'wp-recipe-maker/recipe', {
-    title: __( 'WPRM Recipe' ),
-    description: __( 'Display a recipe box with recipe metadata.' ),
+    title: __( 'WPRM Recipe', 'wp-recipe-maker' ),
+    description: __( 'Display a recipe box with recipe metadata.', 'wp-recipe-maker' ),
     icon: 'media-document',
     keywords: [ 'wprm', 'wp recipe maker' ],
     example: {
@@ -80,7 +80,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
         };
 
         let templateOptions = [
-            { label: 'Use default from settings', value: '' },
+            { label: __( 'Use default from settings', 'wp-recipe-maker' ), value: '' },
         ];
         const templates = wprm_admin.recipe_templates.modern;
 
@@ -103,7 +103,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                         <ToolbarGroup>
                             <ToolbarButton
                                 icon="edit"
-                                label={ __( 'Edit Recipe' ) }
+                                label={ __( 'Edit Recipe', 'wp-recipe-maker' ) }
                                 onClick={
                                     () => {
                                         WPRM_Modal.open( 'recipe', {
@@ -116,14 +116,14 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                         </ToolbarGroup>
                     </BlockControls>
                     <InspectorControls>
-                        <PanelBody title={ __( 'Recipe Details' ) }>
+                        <PanelBody title={ __( 'Recipe Details', 'wp-recipe-maker' ) }>
                             <TextControl
-                                label={ __( 'Recipe ID' ) }
+                                label={ __( 'Recipe ID', 'wp-recipe-maker' ) }
                                 value={ attributes.id }
                                 disabled
                             />
                             <SelectControl
-                                label={ __( 'Recipe Template' ) }
+                                label={ __( 'Recipe Template', 'wp-recipe-maker' ) }
                                 value={ attributes.template }
                                 options={ templateOptions }
                                 onChange={ (template) => setAttributes({
@@ -140,7 +140,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                                             saveCallback: modalCallback,
                                         } );
                                     }}>
-                                    { __( 'Edit Recipe' ) }
+                                    { __( 'Edit Recipe', 'wp-recipe-maker' ) }
                                 </Button>
                             </PanelRow>
                         </PanelBody>
@@ -152,7 +152,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                 </Fragment>
                 :
                 <Fragment>
-                    <h2>WPRM { __( 'Recipe' ) }</h2>
+                    <h2>WPRM { __( 'Recipe', 'wp-recipe-maker' ) }</h2>
                     <Button
                         isPrimary
                         isLarge
@@ -171,13 +171,13 @@ registerBlockType( 'wp-recipe-maker/recipe', {
 
                             WPRM_Modal.open( 'recipe', args );
                         }}>
-                        { __( 'Create new Recipe' ) }
+                        { __( 'Create new Recipe', 'wp-recipe-maker' ) }
                     </Button> <Button
                         isLarge
                         onClick={ () => {
                             WPRM_Modal.open( 'select', {
-                                title: 'Insert existing Recipe',
-                                button: 'Insert',
+                                title: __( 'Insert existing Recipe', 'wp-recipe-maker' ),
+                                button: __( 'Insert', 'wp-recipe-maker' ),
                                 fields: {
                                     recipe: {},
                                 },
@@ -186,7 +186,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                                 },
                             } );
                         }}>
-                        { __( 'Insert existing Recipe' ) }
+                        { __( 'Insert existing Recipe', 'wp-recipe-maker' ) }
                     </Button> {
                         wprm_admin.addons.premium
                         &&
@@ -194,8 +194,8 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                             isLarge
                             onClick={ () => {
                                 WPRM_Modal.open( 'select', {
-                                    title: 'Create new from existing Recipe',
-                                    button: 'Clone Recipe',
+                                    title: __( 'Create new from existing Recipe', 'wp-recipe-maker' ),
+                                    button: __( 'Clone Recipe', 'wp-recipe-maker' ),
                                     fields: {
                                         recipe: {},
                                     },
@@ -208,7 +208,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                                     },
                                 } );
                             }}>
-                            { __( 'Create new from existing Recipe' ) }
+                            { __( 'Create new from existing Recipe', 'wp-recipe-maker' ) }
                         </Button>
                     }
                 </Fragment>

@@ -1,3 +1,28 @@
+v3.9.4
+- New: WooCommerce Cart - "Cart Page" click action introduced to redirect the user to the cart page.
+- Improvement: Added Spectra plugin compatibility for a better experience.
+- Improvement: WooCommerce Cart - Moved border width option for cart icon from the addon to theme.
+- Improvement: WooCommerce - Clear button is aligned on top for WooCommerce active filter widget when the "Chips" option is enabled.
+- Improvement: WooCommerce - Single Product - Edit shortcut link assigned to sticky add to cart for easy navigation in respective customizer section.
+- Improvement: WooCommerce - Added product images for tablet users on the cart page.
+- Improvement: To have an elegant fresh setup UI, updated the customizer sidebar layout by default to No-Sidebar.
+- Improvement: WooCommerce Cart - Responsive slider option to adjust Slide-in Cart width for Desktop, Tablet, & Mobile devices.
+- Fix: WooCommerce - Content background colour not working in the customizer preview.
+- Fix: WooCommerce - Shop - Sale badge text is misaligned on the front end.
+- Fix: WooCommerce - Custom image and icon support for payment section.
+- Fix: WooCommerce - Payment list styling is broken inside quick view.
+- Fix: Block Editor - Astra Meta settings do not save when the Custom Fields option is enabled from the preferences.
+- Fix: Two search buttons are visible on the empty archive search result page.
+- Fix: Disabled Astra meta setting for the Blog page, which does not work from meta box, as it acts like an archive page on the frontend.
+- Fix: Megamenu spacing conflicts with the primary menu top offset option on mobile devices.
+- Fix: WooCommerce - Cart icon size is not working on the starter template site.
+- Fix: Top border showing up for related post section on a single post when Boxed & Content Boxed layout is active.
+- Fix: Editor - External toggle controls reverse their direction due to the theme's CSS.
+- Fix: Block editor - Getting console error for reading properties of undefined for getEditedPostAttribute.
+
+v3.9.3
+- Improvement: Compatibility with WordPress 6.1.
+
 v3.9.2
 - Improvement: WooCommerce - Admin bar's customize link updated on WooCommerce pages for quick landing to it's respected customizer section.
 - Improvement: WooCommerce - Added WPML translation support for cart dynamic input, proceed to checkout input & free-shipping text input through wpml-config.xml file. (Props - OnTheGoSystems)

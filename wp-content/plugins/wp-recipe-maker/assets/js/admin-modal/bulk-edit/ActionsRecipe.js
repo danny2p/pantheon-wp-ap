@@ -65,6 +65,7 @@ const ActionsRecipe = (props) => {
 
     if ( wprm_admin.addons.premium ) {
         actionOptions.push(      
+            { value: 'user-rating', label: __wprm( 'Set User Rating by Author' ), default: '5' },
             { value: 'custom-nutrition-ingredient', label: __wprm( 'Create Custom Nutrition Ingredient' ), default: false },
         );
     }
@@ -317,6 +318,30 @@ const ActionsRecipe = (props) => {
                                     }}
                                 />
                             </FieldContainer>
+                        }
+                        {
+                            'user-rating' === selectedAction
+                            &&
+                            <FieldRadio
+                                id="type"
+                                options={ [
+                                    { value: '0', label: __wprm( 'Remove rating by author' ) },
+                                    { value: '1', label: __wprm( '1 star' ) },
+                                    { value: '2', label: __wprm( '2 stars' ) },
+                                    { value: '3', label: __wprm( '3 stars' ) },
+                                    { value: '4', label: __wprm( '4 stars' ) },
+                                    { value: '5', label: __wprm( '5 stars' ) },
+                                ] }
+                                value={props.action.options}
+                                onChange={(value) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: value,
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                            />
                         }
                         {
                             ( 'add-terms' === selectedAction || 'remove-terms' === selectedAction )

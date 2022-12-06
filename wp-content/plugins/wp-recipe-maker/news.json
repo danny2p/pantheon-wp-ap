@@ -1,6 +1,30 @@
 {
     "news": [
         {
+            "date": "2022-11-14",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.6.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-6-0/"
+        },
+        {
+            "date": "2022-11-03",
+            "label": "Blog",
+            "title": "6 Food Blogger Tips for Amazing Instagram Food Reels",
+            "url": "https://bootstrapped.ventures/food-reels/"
+        },
+        {
+            "date": "2022-10-28",
+            "label": "Blog",
+            "title": "How Much Money Can Food Bloggers Make? (2022 Update)",
+            "url": "https://bootstrapped.ventures/food-blogger-salary/"
+        },
+        {
+            "date": "2022-10-20",
+            "label": "Blog",
+            "title": "The Top 10 Instagram Food Bloggers in 2022",
+            "url": "https://bootstrapped.ventures/food-blog-instagram/"
+        },
+        {
             "date": "2022-08-31",
             "label": "Release",
             "title": "WP Recipe Maker 8.5.0",

@@ -53,6 +53,13 @@ $recipe_roundup = array(
 			'link' => admin_url( 'admin.php?page=wprm_template_editor' ),
 		),
 		array(
+			'id' => 'recipe_roundup_published_only',
+			'name' => __( 'Only show published posts', 'wp-recipe-maker' ),
+			'description' => __( 'The roundup item will only show up if the recipe status is "Published".', 'wp-recipe-maker' ),
+			'type' => 'toggle',
+			'default' => false,
+		),
+		array(
 			'id' => 'recipe_roundup_no_metadata_when_recipe',
 			'name' => __( 'No metadata when there is recipe metadata', 'wp-recipe-maker' ),
 			'description' => __( 'Do not output the ItemList metadata when there is already recipe metadata on the same page.', 'wp-recipe-maker' ),

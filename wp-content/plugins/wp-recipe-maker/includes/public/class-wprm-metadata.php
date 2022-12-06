@@ -717,7 +717,7 @@ class WPRM_Metadata {
 			if ( stripos( $url, 'vimeo.com' ) ) {
 				return $url . '#t=' . $time;
 			}
-			if ( stripos( $url, 'mediavine.com' ) ) {
+			if ( stripos( $url, 'mediavine' ) ) {
 				$permalink = $recipe->permalink();
 
 				if ( $permalink ) {

@@ -56,13 +56,13 @@ class WPRM_Api_Equipment {
 	public static function api_get_equipment_meta( $object, $field_name, $request ) {
 		$meta = get_term_meta( $object[ 'id' ] );
 
-		return array(
+		return apply_filters( 'wprm_get_term_meta', array(
 			'eafl' => isset( $meta['wprmp_equipment_eafl'] ) ? $meta['wprmp_equipment_eafl'] : '',
 			'link' => isset( $meta['wprmp_equipment_link'] ) ? $meta['wprmp_equipment_link'] : '',
 			'link_nofollow' => isset( $meta['wprmp_equipment_link_nofollow'] ) ? $meta['wprmp_equipment_link_nofollow'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
-		);
+		), $object, $meta );
 	}
 	
 	/**
@@ -114,6 +114,8 @@ class WPRM_Api_Equipment {
 				update_term_meta( $term->term_id, 'wpupg_custom_image', $image );
 			}
 		}
+
+		do_action( 'wprm_update_term_meta', $term, $meta );
 	}
 
 	/**

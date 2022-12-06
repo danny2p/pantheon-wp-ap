@@ -42,6 +42,14 @@ class WPRM_Access {
 	 * @param	int $post_id Post ID to check access for.
 	 */
 	public static function can_access( $post_id ) {
+		// Allow overriding of this function.
+		$override_can_access = apply_filters( 'wprm_can_access', null, $post_id );
+		
+		if ( ! is_null( $override_can_access ) ) {
+			return $override_can_access;
+		}
+
+		// Default checks.
 		$membership_plugin = self::membership_plugin();
 
 		// No membership plugin active? Don't check anything.

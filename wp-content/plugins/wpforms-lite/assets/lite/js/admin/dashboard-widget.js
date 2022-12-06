@@ -279,8 +279,7 @@ var WPFormsDashboardWidget = window.WPFormsDashboardWidget || ( function( docume
 		 */
 		handleRecommendedPluginsClose: function() {
 
-			el.$recomBlockDismissBtn.click( function() {
-
+			el.$recomBlockDismissBtn.on( 'click', function() {
 				app.dismissRecommendedBlock();
 			} );
 		},

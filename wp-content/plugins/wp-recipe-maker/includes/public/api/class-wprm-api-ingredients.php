@@ -56,7 +56,7 @@ class WPRM_Api_Ingredients {
 	public static function api_get_ingredient_meta( $object, $field_name, $request ) {
 		$meta = get_term_meta( $object[ 'id' ] );
 
-		return array(
+		return apply_filters( 'wprm_get_term_meta', array(
 			'plural' => isset( $meta['wprm_ingredient_plural'] ) ? $meta['wprm_ingredient_plural'] : '',
 			'group' => isset( $meta['wprmp_ingredient_group'] ) ? $meta['wprmp_ingredient_group'] : '',
 			'image_id' => isset( $meta['wprmp_ingredient_image_id'] ) ? $meta['wprmp_ingredient_image_id'] : '',
@@ -65,7 +65,7 @@ class WPRM_Api_Ingredients {
 			'link_nofollow' => isset( $meta['wprmp_ingredient_link_nofollow'] ) ? $meta['wprmp_ingredient_link_nofollow'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
-		);
+		), $object, $meta );
 	}
 	
 	/**
@@ -121,6 +121,8 @@ class WPRM_Api_Ingredients {
 				update_term_meta( $term->term_id, 'wpupg_custom_image', $image );
 			}
 		}
+
+		do_action( 'wprm_update_term_meta', $term, $meta );
 	}
 
 	/**

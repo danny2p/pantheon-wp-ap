@@ -35,8 +35,8 @@ const cleanUpShortcodeAttribute = (value) => {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
-    title: __( 'WPRM Recipe Roundup Item' ),
-    description: __( 'Output your Recipe Roundup as ItemList metadata.' ),
+    title: __( 'WPRM Recipe Roundup Item', 'wp-recipe-maker' ),
+    description: __( 'Output your Recipe Roundup as ItemList metadata.', 'wp-recipe-maker' ),
     icon: 'media-document',
     keywords: [ 'wprm', 'wp recipe maker' ],
     example: {
@@ -151,7 +151,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                         <ToolbarGroup>
                             <ToolbarButton
                                 icon="edit"
-                                label={ __( 'Edit Recipe' ) }
+                                label={ __( 'Edit Recipe', 'wp-recipe-maker' ) }
                                 onClick={ () => {
                                     WPRM_Modal.open( 'roundup', {
                                         fields: {
@@ -172,7 +172,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                 </Fragment>
                 :
                 <Fragment>
-                    <h2>WPRM { __( 'Recipe Roundup Item' ) }</h2>
+                    <h2>WPRM { __( 'Recipe Roundup Item', 'wp-recipe-maker' ) }</h2>
                     <Button
                         isLarge
                         onClick={ () => {
@@ -182,7 +182,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                                 },
                             } );
                         }}>
-                        { __( 'Select Recipe' ) }
+                        { __( 'Select Recipe', 'wp-recipe-maker' ) }
                     </Button>
                 </Fragment>
             }</div>

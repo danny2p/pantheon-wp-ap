@@ -72,6 +72,12 @@
         color: darkred;
         border-color: darkred;
     }
+
+    &.wprm-manage-templates-template-broken {
+        border-color: darkred;
+        background-color: darkred;
+        color: white;
+    }
 }
 
 .wprm-manage-templates-template-fields {

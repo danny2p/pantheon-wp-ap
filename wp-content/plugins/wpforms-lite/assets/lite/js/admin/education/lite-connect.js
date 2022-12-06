@@ -113,7 +113,7 @@ WPFormsEducation.liteConnect = window.WPFormsEducation.liteConnect || ( function
 					app.openSettingsLiteConnectModal( isEnabled, function() {
 
 						$input
-							.click()
+							.trigger( 'click' )
 							.prop( 'disabled', true );
 					} );
 				}

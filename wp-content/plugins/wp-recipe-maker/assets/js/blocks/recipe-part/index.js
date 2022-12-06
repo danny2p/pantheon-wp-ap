@@ -28,8 +28,8 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-part', {
-    title: __( 'Recipe Part' ),
-    description: __( 'Display a specific recipe part' ),
+    title: __( 'Recipe Part', 'wp-recipe-maker' ),
+    description: __( 'Display a specific recipe part', 'wp-recipe-maker' ),
     icon: 'shortcode',
     keywords: [],
     example: {
@@ -73,10 +73,10 @@ registerBlockType( 'wp-recipe-maker/recipe-part', {
         return (
             <div className={ className }>
                 <InspectorControls>
-                    <PanelBody title={ __( 'Recipe Part Details' ) }>
+                    <PanelBody title={ __( 'Recipe Part Details', 'wp-recipe-maker' ) }>
                         <TextControl
-                            label={ __( 'Recipe ID' ) }
-                            help={ __( 'Leave blank to use the first recipe on the page' ) }
+                            label={ __( 'Recipe ID', 'wp-recipe-maker' ) }
+                            help={ __( 'Leave blank to use the first recipe on the page', 'wp-recipe-maker' ) }
                             value={ attributes.id }
                             onChange={ (id) => {
                                 let newId = parseInt( id );
@@ -91,7 +91,7 @@ registerBlockType( 'wp-recipe-maker/recipe-part', {
                             } }
                         />
                         <SelectControl
-                            label={ __( 'Recipe Part' ) }
+                            label={ __( 'Recipe Part', 'wp-recipe-maker' ) }
                             value={ attributes.part }
                             options={ partOptions }
                             onChange={ (part) => setAttributes({

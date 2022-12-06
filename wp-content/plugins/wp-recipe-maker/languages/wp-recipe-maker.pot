@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2022-08-31 09:07+0000\n"
+"POT-Creation-Date: 2022-11-14 14:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,7 +71,11 @@ msgstr[1] ""
 msgid "1 serving"
 msgstr ""
 
-#: templates/admin/translations.php:137
+#: templates/admin/translations.php:106
+msgid "1 star"
+msgstr ""
+
+#: templates/admin/translations.php:152
 msgid "1. Highlight text and click the corresponding button"
 msgstr ""
 
@@ -79,8 +83,16 @@ msgstr ""
 msgid "180 Days"
 msgstr ""
 
-#: templates/admin/translations.php:143
+#: templates/admin/translations.php:107
+msgid "2 stars"
+msgstr ""
+
+#: templates/admin/translations.php:158
 msgid "2. Fine-tune selections"
+msgstr ""
+
+#: templates/admin/translations.php:108
+msgid "3 stars"
 msgstr ""
 
 #: templates/settings/group-analytics.php:34
@@ -89,6 +101,14 @@ msgstr ""
 
 #: templates/settings/group-analytics.php:31
 msgid "365 Days"
+msgstr ""
+
+#: templates/admin/translations.php:109
+msgid "4 stars"
+msgstr ""
+
+#: templates/admin/translations.php:110
+msgid "5 stars"
 msgstr ""
 
 #: templates/settings/group-analytics.php:35
@@ -161,23 +181,23 @@ msgstr ""
 msgid "Access to Tools Page"
 msgstr ""
 
-#: templates/admin/translations.php:441
+#: templates/admin/translations.php:457
 msgid "Action"
 msgstr ""
 
-#: templates/admin/translations.php:528
+#: templates/admin/translations.php:548
 msgid "Action Details"
 msgstr ""
 
-#: templates/admin/translations.php:89
+#: templates/admin/translations.php:98
 msgid "Action options:"
 msgstr ""
 
-#: templates/admin/translations.php:116
+#: templates/admin/translations.php:131
 msgid "Actions"
 msgstr ""
 
-#: templates/admin/translations.php:157
+#: templates/admin/translations.php:172
 msgid "Active Time"
 msgstr ""
 
@@ -185,15 +205,15 @@ msgstr ""
 msgid "Adapted from"
 msgstr ""
 
-#: templates/admin/translations.php:314
+#: templates/admin/translations.php:330
 msgid "Add Adjustable Shortcode"
 msgstr ""
 
-#: templates/admin/translations.php:327
+#: templates/admin/translations.php:343
 msgid "Add Affiliate Link"
 msgstr ""
 
-#: templates/admin/translations.php:104
+#: templates/admin/translations.php:119
 msgid "Add as Custom Nutrition Ingredient"
 msgstr ""
 
@@ -201,7 +221,7 @@ msgstr ""
 msgid "Add Carbon Label to your recipe template"
 msgstr ""
 
-#: templates/admin/translations.php:219
+#: templates/admin/translations.php:233
 msgid "Add Equipment"
 msgstr ""
 
@@ -209,55 +229,55 @@ msgstr ""
 msgid "Add extra Mediavine ad unit"
 msgstr ""
 
-#: templates/admin/translations.php:312
+#: templates/admin/translations.php:328
 msgid "Add HTML or Shortcode"
 msgstr ""
 
-#: templates/admin/translations.php:511
+#: templates/admin/translations.php:527
 msgid "Add Image"
 msgstr ""
 
-#: templates/admin/translations.php:181
+#: templates/admin/translations.php:195
 msgid "Add Ingredient"
 msgstr ""
 
-#: templates/admin/translations.php:183
+#: templates/admin/translations.php:197
 msgid "Add Ingredient Group"
 msgstr ""
 
-#: templates/admin/translations.php:191
+#: templates/admin/translations.php:205
 msgid "Add Instruction"
 msgstr ""
 
-#: templates/admin/translations.php:192
+#: templates/admin/translations.php:206
 msgid "Add Instruction Group"
 msgstr ""
 
-#: templates/admin/translations.php:339
+#: templates/admin/translations.php:355
 msgid "Add Instruction Image"
 msgstr ""
 
-#: templates/admin/translations.php:310
+#: templates/admin/translations.php:326
 msgid "Add Link"
 msgstr ""
 
-#: templates/admin/translations.php:180
+#: templates/admin/translations.php:194
 msgid "Add Material"
 msgstr ""
 
-#: templates/admin/translations.php:182
+#: templates/admin/translations.php:196
 msgid "Add Material Group"
 msgstr ""
 
-#: templates/admin/translations.php:359
+#: templates/admin/translations.php:375
 msgid "Add rel=\"nofollow\" to link"
 msgstr ""
 
-#: templates/admin/translations.php:316
+#: templates/admin/translations.php:332
 msgid "Add Temperature"
 msgstr ""
 
-#: templates/admin/translations.php:72
+#: templates/admin/translations.php:80
 msgid "Add Terms"
 msgstr ""
 
@@ -285,7 +305,7 @@ msgstr ""
 msgid "Add the nopin attribute to the recipe image."
 msgstr ""
 
-#: templates/admin/translations.php:315
+#: templates/admin/translations.php:331
 msgid "Add Timer Shortcode"
 msgstr ""
 
@@ -297,7 +317,7 @@ msgstr ""
 msgid "Add to Shopping List"
 msgstr ""
 
-#: templates/admin/translations.php:281
+#: templates/admin/translations.php:297
 msgid ""
 "Add video start and end time (in seconds or minutes:seconds format) if this "
 "instruction step is part of the recipe video."
@@ -330,7 +350,7 @@ msgid ""
 "size of the baking pan or sheet used for the recipe."
 msgstr ""
 
-#: templates/admin/translations.php:233
+#: templates/admin/translations.php:247
 msgid "Advanced Servings"
 msgstr ""
 
@@ -338,11 +358,11 @@ msgstr ""
 msgid "Advanced Template Options"
 msgstr ""
 
-#: templates/admin/translations.php:115
+#: templates/admin/translations.php:130
 msgid "Affiliate HTML"
 msgstr ""
 
-#: templates/admin/translations.php:522
+#: templates/admin/translations.php:538
 msgid "Affiliate HTML Preview"
 msgstr ""
 
@@ -378,7 +398,7 @@ msgstr ""
 msgid "Agree to Instacart Button terms"
 msgstr ""
 
-#: templates/admin/translations.php:393
+#: templates/admin/translations.php:409
 msgid "All"
 msgstr ""
 
@@ -386,36 +406,36 @@ msgstr ""
 msgid "all"
 msgstr ""
 
-#: templates/admin/translations.php:466
+#: templates/admin/translations.php:482
 msgid "All Authors"
 msgstr ""
 
-#: templates/admin/translations.php:468
+#: templates/admin/translations.php:484
 msgid "All Display Author Types"
 msgstr ""
 
-#: templates/admin/translations.php:17
+#: templates/admin/translations.php:25
 msgid "All features in action on our demo site"
 msgstr ""
 
-#: templates/admin/translations.php:242
+#: templates/admin/translations.php:256
 msgid "All fields are required."
 msgstr ""
 
-#: templates/admin/translations.php:189
+#: templates/admin/translations.php:203
 msgid "All ingredients are associated with a step!"
 msgstr ""
 
-#: templates/admin/translations.php:478
+#: templates/admin/translations.php:494
 msgid "All Languages"
 msgstr ""
 
-#: templates/admin/translations.php:148
+#: templates/admin/translations.php:163
 msgid ""
 "All of these will be imported. Use the checkbox to indicate group headers."
 msgstr ""
 
-#: templates/admin/translations.php:385
+#: templates/admin/translations.php:401
 msgid "All Ratings"
 msgstr ""
 
@@ -423,11 +443,11 @@ msgstr ""
 msgid "All recipe videos"
 msgstr ""
 
-#: templates/admin/translations.php:470
+#: templates/admin/translations.php:486
 msgid "All Statuses"
 msgstr ""
 
-#: templates/admin/translations.php:389
+#: templates/admin/translations.php:405
 msgid "All Types"
 msgstr ""
 
@@ -478,6 +498,10 @@ msgstr ""
 msgid "Allow your visitors to submit their own recipes to your website."
 msgstr ""
 
+#: templates/admin/translations.php:289
+msgid "Already Associated"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:198
 msgid "Always redirect to the comment form"
 msgstr ""
@@ -486,7 +510,7 @@ msgstr ""
 msgid "American"
 msgstr ""
 
-#: templates/admin/translations.php:177
+#: templates/admin/translations.php:191
 msgid "Amount"
 msgstr ""
 
@@ -494,14 +518,14 @@ msgstr ""
 msgid "AMP Template"
 msgstr ""
 
-#: templates/admin/translations.php:514
+#: templates/admin/translations.php:530
 msgid ""
 "An Affiliate Link with this ID cannot be found. Try deleting and adding it "
 "again."
 msgstr ""
 
 #: templates/settings/group-analytics.php:15 
-#: templates/admin/translations.php:48
+#: templates/admin/translations.php:56
 msgid "Analytics"
 msgstr ""
 
@@ -520,19 +544,19 @@ msgstr ""
 msgid "Anonymous ID stored in cookie"
 msgstr ""
 
-#: templates/admin/translations.php:488
+#: templates/admin/translations.php:504
 msgid "Any"
 msgstr ""
 
-#: templates/admin/translations.php:291
+#: templates/admin/translations.php:307
 msgid "any color"
 msgstr ""
 
-#: templates/admin/translations.php:520
+#: templates/admin/translations.php:536
 msgid "Any Nofollow"
 msgstr ""
 
-#: templates/admin/translations.php:479
+#: templates/admin/translations.php:495
 msgid "Any Rating"
 msgstr ""
 
@@ -547,11 +571,11 @@ msgstr ""
 msgid "Appetizer"
 msgstr ""
 
-#: templates/admin/translations.php:392
+#: templates/admin/translations.php:408
 msgid "Approved"
 msgstr ""
 
-#: templates/admin/translations.php:370
+#: templates/admin/translations.php:386
 msgid "Archive"
 msgstr ""
 
@@ -572,35 +596,35 @@ msgstr ""
 msgid "Archive Template"
 msgstr ""
 
-#: templates/admin/translations.php:150
+#: templates/admin/translations.php:165
 msgid "Are you sure you want to close without saving changes?"
 msgstr ""
 
-#: templates/admin/translations.php:369
+#: templates/admin/translations.php:385
 msgid "Are you sure you want to delete"
 msgstr ""
 
-#: templates/admin/translations.php:487
+#: templates/admin/translations.php:503
 msgid "Are you sure you want to delete the user ratings for"
 msgstr ""
 
-#: templates/admin/translations.php:527
+#: templates/admin/translations.php:547
 msgid "Are you sure you want to delete this action?"
 msgstr ""
 
-#: templates/admin/translations.php:515
+#: templates/admin/translations.php:531
 msgid "Are you sure you want to delete this link?"
 msgstr ""
 
-#: templates/admin/translations.php:382
+#: templates/admin/translations.php:398
 msgid "Are you sure you want to delete this rating?"
 msgstr ""
 
-#: templates/admin/translations.php:354
+#: templates/admin/translations.php:370
 msgid "Are you sure you want to leave this page?"
 msgstr ""
 
-#: templates/admin/translations.php:411
+#: templates/admin/translations.php:427
 msgid "Are you sure you want to merge"
 msgstr ""
 
@@ -608,11 +632,11 @@ msgstr ""
 msgid "Are you sure you want to remove this recipe?"
 msgstr ""
 
-#: templates/admin/translations.php:149
+#: templates/admin/translations.php:164
 msgid "Are you sure you want to stop calculating the nutrition facts?"
 msgstr ""
 
-#: templates/admin/translations.php:300
+#: templates/admin/translations.php:316
 msgid "area"
 msgstr ""
 
@@ -621,7 +645,7 @@ msgstr ""
 msgid "Armenian"
 msgstr ""
 
-#: templates/admin/translations.php:188
+#: templates/admin/translations.php:202
 msgid "Associated Ingredients"
 msgstr ""
 
@@ -629,7 +653,7 @@ msgstr ""
 msgid "At the start of the post content"
 msgstr ""
 
-#: templates/admin/translations.php:228 
+#: templates/admin/translations.php:242 
 #: includes/public/deprecated/class-wprm-template-helper.php:53 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:337
 msgid "Author"
@@ -648,7 +672,7 @@ msgid "Author Links"
 msgstr ""
 
 #: templates/settings/group-recipe-defaults.php:71 
-#: templates/admin/translations.php:94
+#: templates/admin/translations.php:103
 msgid "Author Name"
 msgstr ""
 
@@ -700,7 +724,7 @@ msgstr ""
 msgid "Background Color"
 msgstr ""
 
-#: templates/admin/translations.php:449
+#: templates/admin/translations.php:465
 msgid "Bad"
 msgstr ""
 
@@ -716,7 +740,7 @@ msgstr ""
 msgid "Below the comment field"
 msgstr ""
 
-#: templates/admin/translations.php:305
+#: templates/admin/translations.php:321
 msgid "Bold"
 msgstr ""
 
@@ -740,7 +764,7 @@ msgstr ""
 msgid "Breakfast"
 msgstr ""
 
-#: templates/admin/translations.php:125
+#: templates/admin/translations.php:140
 msgid "Bulk Edit"
 msgstr ""
 
@@ -762,7 +786,7 @@ msgstr ""
 msgid "c"
 msgstr ""
 
-#: templates/admin/translations.php:218
+#: templates/admin/translations.php:232
 msgid "Calculate Nutrition Facts"
 msgstr ""
 
@@ -771,7 +795,7 @@ msgstr ""
 msgid "Calories"
 msgstr ""
 
-#: templates/admin/translations.php:146
+#: templates/admin/translations.php:161
 msgid "Cancel"
 msgstr ""
 
@@ -779,11 +803,11 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: templates/admin/translations.php:232
+#: templates/admin/translations.php:246
 msgid "candles"
 msgstr ""
 
-#: templates/admin/translations.php:199
+#: templates/admin/translations.php:213
 msgid "Categories"
 msgstr ""
 
@@ -808,71 +832,75 @@ msgstr ""
 msgid "centimeters"
 msgstr ""
 
-#: templates/admin/translations.php:71
+#: templates/admin/translations.php:79
 msgid "Change"
 msgstr ""
 
-#: templates/admin/translations.php:111
+#: templates/admin/translations.php:126
 msgid "Change Affiliate HTML"
 msgstr ""
 
-#: templates/admin/translations.php:79
+#: templates/admin/translations.php:87
 msgid "Change Display Author"
 msgstr ""
 
-#: templates/admin/translations.php:506
+#: templates/admin/translations.php:522
 msgid "Change Group"
 msgstr ""
 
-#: templates/admin/translations.php:521
+#: templates/admin/translations.php:537
 msgid "Change HTML"
 msgstr ""
 
-#: templates/admin/translations.php:76
+#: templates/admin/translations.php:84
 msgid "Change Language"
 msgstr ""
 
-#: templates/admin/translations.php:102
+#: templates/admin/translations.php:117
 msgid "Change Link"
 msgstr ""
 
-#: templates/admin/translations.php:103
+#: templates/admin/translations.php:118
 msgid "Change Link Nofollow"
 msgstr ""
 
-#: templates/admin/translations.php:75
+#: templates/admin/translations.php:83
 msgid "Change Password"
 msgstr ""
 
-#: templates/admin/translations.php:504
+#: templates/admin/translations.php:520
 msgid "Change Plural"
 msgstr ""
 
-#: templates/admin/translations.php:77
+#: templates/admin/translations.php:85
 msgid "Change Post Author"
 msgstr ""
 
-#: templates/admin/translations.php:74
+#: templates/admin/translations.php:542
+msgid "Change Product"
+msgstr ""
+
+#: templates/admin/translations.php:82
 msgid "Change Recipe Status"
 msgstr ""
 
-#: templates/admin/translations.php:78
+#: templates/admin/translations.php:86
 msgid "Change Recipe Type"
 msgstr ""
 
-#: templates/admin/translations.php:80
+#: templates/admin/translations.php:88
 msgid "Change Servings"
 msgstr ""
 
-#: templates/admin/translations.php:101
+#: templates/admin/translations.php:116
 msgid "Change Shopping List Group"
 msgstr ""
 
-#: templates/admin/translations.php:499
+#: templates/admin/translations.php:515
 msgid "Change Slug"
 msgstr ""
 
-#: templates/admin/translations.php:84
+#: templates/admin/translations.php:93
 msgid "Change unit system label (does not change ingredients)"
 msgstr ""
 
@@ -937,7 +965,8 @@ msgid ""
 "Click \"Save Changes\" in the top left before checking the API Key status."
 msgstr ""
 
-#: templates/elementor/widget.php:162
+#: templates/elementor/widget-recipe.php:162 
+#: templates/elementor/widget-roundup.php:116
 msgid "Click and select a WP Recipe Maker recipe to display in the sidebar."
 msgstr ""
 
@@ -945,7 +974,7 @@ msgstr ""
 msgid "Click here to add your own private notes."
 msgstr ""
 
-#: templates/admin/translations.php:380
+#: templates/admin/translations.php:396
 msgid "Click on the stars to edit the rating."
 msgstr ""
 
@@ -953,11 +982,11 @@ msgstr ""
 msgid "Click on the stars to vote!"
 msgstr ""
 
-#: templates/admin/translations.php:388
+#: templates/admin/translations.php:404
 msgid "Click to change this rating to:"
 msgstr ""
 
-#: templates/admin/translations.php:209
+#: templates/admin/translations.php:223
 msgid "Click to copy the recipe to your clipboard."
 msgstr ""
 
@@ -965,7 +994,7 @@ msgstr ""
 msgid "Click to search the recipes to import"
 msgstr ""
 
-#: templates/admin/translations.php:322
+#: templates/admin/translations.php:338
 msgid "Click to set an optional tooltip"
 msgstr ""
 
@@ -981,11 +1010,11 @@ msgstr ""
 msgid "Clickable Recipe Image"
 msgstr ""
 
-#: templates/admin/translations.php:256
+#: templates/admin/translations.php:270
 msgid "Clone Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:126
+#: templates/admin/translations.php:141
 msgid "Close"
 msgstr ""
 
@@ -999,7 +1028,7 @@ msgid "cloves"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:234 
-#: templates/admin/translations.php:298
+#: templates/admin/translations.php:314
 msgid "cm"
 msgstr ""
 
@@ -1015,16 +1044,16 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: templates/admin/translations.php:482
+#: templates/admin/translations.php:498
 msgid "comment"
 msgstr ""
 
-#: templates/admin/translations.php:398
+#: templates/admin/translations.php:414
 msgid "Comment ID"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:132 
-#: templates/admin/translations.php:391
+#: templates/admin/translations.php:407
 msgid "Comment Rating"
 msgstr ""
 
@@ -1037,7 +1066,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: templates/admin/translations.php:483
+#: templates/admin/translations.php:499
 msgid "comments"
 msgstr ""
 
@@ -1057,7 +1086,7 @@ msgstr ""
 msgid "Convert Reviews to Comments"
 msgstr ""
 
-#: templates/admin/translations.php:490
+#: templates/admin/translations.php:506
 msgid "Converted Ingredients"
 msgstr ""
 
@@ -1068,17 +1097,17 @@ msgid ""
 "created for the parent post of the WPRM recipe."
 msgstr ""
 
-#: templates/admin/translations.php:158 
+#: templates/admin/translations.php:173 
 #: includes/public/deprecated/class-wprm-template-helper.php:49 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:345
 msgid "Cook Time"
 msgstr ""
 
-#: templates/admin/translations.php:69
+#: templates/admin/translations.php:77
 msgid "Copied!"
 msgstr ""
 
-#: templates/admin/translations.php:70
+#: templates/admin/translations.php:78
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1090,44 +1119,44 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: templates/admin/translations.php:247
+#: templates/admin/translations.php:261
 msgid "course"
 msgstr ""
 
-#: templates/admin/translations.php:250 
+#: templates/admin/translations.php:264 
 #: includes/admin/import/class-wprm-import-wpzoom.php:58
 msgid "Courses"
 msgstr ""
 
-#: templates/admin/translations.php:404
+#: templates/admin/translations.php:420
 msgid "Create"
 msgstr ""
 
-#: templates/admin/translations.php:82
+#: templates/admin/translations.php:91
 msgid "Create Custom Nutrition Ingredient"
 msgstr ""
 
-#: templates/admin/translations.php:255
+#: templates/admin/translations.php:269
 msgid "Create new from existing Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:252
+#: templates/admin/translations.php:266
 msgid "Create new Recipe"
 msgstr ""
 
-#: templates/elementor/widget.php:66
+#: templates/elementor/widget-recipe.php:66
 msgid "Create new recipe"
 msgstr ""
 
-#: templates/admin/translations.php:37
+#: templates/admin/translations.php:45
 msgid "Create Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:245
+#: templates/admin/translations.php:259
 msgid "Creating new Custom Taxonomy"
 msgstr ""
 
-#: templates/admin/translations.php:205
+#: templates/admin/translations.php:219
 msgid "Creating new Recipe"
 msgstr ""
 
@@ -1159,7 +1188,7 @@ msgstr ""
 msgid "Custom author per recipe"
 msgstr ""
 
-#: templates/admin/translations.php:364
+#: templates/admin/translations.php:380
 msgid "Custom Button Text"
 msgstr ""
 
@@ -1167,11 +1196,11 @@ msgstr ""
 msgid "Custom Description"
 msgstr ""
 
-#: templates/admin/translations.php:430
+#: templates/admin/translations.php:446
 msgid "Custom Field"
 msgstr ""
 
-#: templates/admin/translations.php:202
+#: templates/admin/translations.php:216
 msgid "Custom Fields"
 msgstr ""
 
@@ -1188,23 +1217,23 @@ msgstr ""
 msgid "Custom Image per Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:433
+#: templates/admin/translations.php:449
 msgid "Custom Nutrient"
 msgstr ""
 
-#: templates/admin/translations.php:434
+#: templates/admin/translations.php:450
 msgid "Custom Nutrients"
 msgstr ""
 
-#: templates/admin/translations.php:432
+#: templates/admin/translations.php:448
 msgid "Custom Nutrition"
 msgstr ""
 
-#: templates/admin/translations.php:431
+#: templates/admin/translations.php:447
 msgid "Custom Nutrition Ingredient"
 msgstr ""
 
-#: templates/admin/translations.php:123
+#: templates/admin/translations.php:138
 msgid "Custom Nutrition Ingredients"
 msgstr ""
 
@@ -1216,12 +1245,12 @@ msgstr ""
 msgid "Custom Text"
 msgstr ""
 
-#: templates/admin/translations.php:162 
+#: templates/admin/translations.php:177 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:346
 msgid "Custom Time"
 msgstr ""
 
-#: templates/admin/translations.php:159
+#: templates/admin/translations.php:174
 msgid "Custom Time Label"
 msgstr ""
 
@@ -1235,7 +1264,7 @@ msgstr ""
 msgid "d"
 msgstr ""
 
-#: templates/admin/translations.php:55
+#: templates/admin/translations.php:63
 msgid "Daily Interaction"
 msgstr ""
 
@@ -1243,25 +1272,21 @@ msgstr ""
 msgid "Daily Values Disclaimer"
 msgstr ""
 
-#: templates/admin/translations.php:21
-msgid "DailyGrub recipe analytics suite"
-msgstr ""
-
 #: includes/admin/class-wprm-dashboard.php:39
 msgid "Dashboard"
 msgstr ""
 
-#: templates/admin/translations.php:383
+#: templates/admin/translations.php:399
 msgid "Date"
 msgstr ""
 
-#: templates/admin/translations.php:60 
+#: templates/admin/translations.php:68 
 #: includes/public/deprecated/class-wprm-template-helper.php:147 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
 msgid "day"
 msgstr ""
 
-#: templates/admin/translations.php:61 
+#: templates/admin/translations.php:69 
 #: includes/public/deprecated/class-wprm-template-helper.php:147 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:113
 msgid "days"
@@ -1466,67 +1491,67 @@ msgstr ""
 msgid "Defaults"
 msgstr ""
 
-#: templates/admin/translations.php:276
+#: templates/admin/translations.php:292
 msgid "Delete"
 msgstr ""
 
-#: templates/admin/translations.php:526
+#: templates/admin/translations.php:546
 msgid "Delete Action"
 msgstr ""
 
-#: templates/admin/translations.php:129
+#: templates/admin/translations.php:144
 msgid "Delete Actions"
 msgstr ""
 
-#: templates/admin/translations.php:113
+#: templates/admin/translations.php:128
 msgid "Delete Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:106
+#: templates/admin/translations.php:121
 msgid "Delete Ingredients"
 msgstr ""
 
-#: templates/admin/translations.php:381
+#: templates/admin/translations.php:397
 msgid "Delete Rating"
 msgstr ""
 
-#: templates/admin/translations.php:128
+#: templates/admin/translations.php:143
 msgid "Delete Ratings"
 msgstr ""
 
-#: templates/admin/translations.php:446
+#: templates/admin/translations.php:462
 msgid "Delete Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:87
+#: templates/admin/translations.php:96
 msgid "Delete Recipes"
 msgstr ""
 
-#: templates/admin/translations.php:496
+#: templates/admin/translations.php:512
 msgid "Delete Revision"
 msgstr ""
 
-#: templates/admin/translations.php:127
+#: templates/admin/translations.php:142
 msgid "Delete Revisions"
 msgstr ""
 
-#: templates/admin/translations.php:132
+#: templates/admin/translations.php:147
 msgid "Delete Saved Collections"
 msgstr ""
 
-#: templates/admin/translations.php:368
+#: templates/admin/translations.php:384
 msgid "Delete Taxonomy"
 msgstr ""
 
-#: templates/admin/translations.php:110
+#: templates/admin/translations.php:125
 msgid "Delete Terms"
 msgstr ""
 
-#: templates/admin/translations.php:130
+#: templates/admin/translations.php:145
 msgid "Delete Units"
 msgstr ""
 
-#: templates/admin/translations.php:226
+#: templates/admin/translations.php:240
 msgid "Description"
 msgstr ""
 
@@ -1538,11 +1563,11 @@ msgstr ""
 msgid "Diabetic"
 msgstr ""
 
-#: templates/admin/translations.php:299
+#: templates/admin/translations.php:315
 msgid "diameter"
 msgstr ""
 
-#: templates/admin/translations.php:501
+#: templates/admin/translations.php:517
 msgid "Diet"
 msgstr ""
 
@@ -1587,11 +1612,11 @@ msgstr ""
 msgid "Disc"
 msgstr ""
 
-#: templates/admin/translations.php:469
+#: templates/admin/translations.php:485
 msgid "Display Author"
 msgstr ""
 
-#: templates/admin/translations.php:467
+#: templates/admin/translations.php:483
 msgid "Display Author Type"
 msgstr ""
 
@@ -1612,7 +1637,7 @@ msgstr ""
 msgid "Display Type"
 msgstr ""
 
-#: templates/admin/translations.php:258
+#: templates/admin/translations.php:272
 msgid "Displays default snippet template as set in the WPRM Settings"
 msgstr ""
 
@@ -1624,7 +1649,7 @@ msgstr ""
 msgid "Do not import to ingredient notes"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:58
+#: templates/settings/group-recipe-roundup.php:65
 msgid ""
 "Do not output the ItemList metadata when there is already recipe metadata on "
 "the same page."
@@ -1636,31 +1661,35 @@ msgid ""
 "line."
 msgstr ""
 
-#: templates/admin/translations.php:16
+#: templates/admin/translations.php:24
 msgid "Documentation in our knowledge base"
 msgstr ""
 
-#: templates/admin/translations.php:465
+#: templates/admin/translations.php:481
 msgid "Does not have a video"
 msgstr ""
 
-#: templates/admin/translations.php:460
+#: templates/admin/translations.php:476
 msgid "Does not have Custom Pin Image"
 msgstr ""
 
-#: templates/admin/translations.php:509
+#: templates/admin/translations.php:525
 msgid "Does not have Image"
 msgstr ""
 
-#: templates/admin/translations.php:474
+#: templates/admin/translations.php:490
 msgid "Does not have Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:458
+#: templates/admin/translations.php:541
+msgid "Does not have Product"
+msgstr ""
+
+#: templates/admin/translations.php:474
 msgid "Does not have Recipe Image"
 msgstr ""
 
-#: templates/admin/translations.php:518
+#: templates/admin/translations.php:534
 msgid ""
 "does not start with http:// or https:// as we would expect for a link. Are "
 "you sure you want to use this? Regular HTML code will not work here."
@@ -1689,56 +1718,56 @@ msgstr ""
 msgid "Drinks"
 msgstr ""
 
-#: templates/admin/translations.php:512
+#: templates/admin/translations.php:528
 msgid "Easy Affiliate Links"
 msgstr ""
 
-#: templates/admin/translations.php:326
+#: templates/admin/translations.php:342
 msgid "Edit Affiliate Link"
 msgstr ""
 
-#: templates/admin/translations.php:221
+#: templates/admin/translations.php:235
 msgid "Edit Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:510
+#: templates/admin/translations.php:526
 msgid "Edit Image"
 msgstr ""
 
-#: templates/admin/translations.php:172
+#: templates/admin/translations.php:187
 msgid "Edit Ingredients"
 msgstr ""
 
-#: templates/admin/translations.php:513
+#: templates/admin/translations.php:529
 msgid "Edit Link"
 msgstr ""
 
-#: templates/admin/translations.php:171
+#: templates/admin/translations.php:186
 msgid "Edit Materials"
 msgstr ""
 
-#: templates/admin/translations.php:476
+#: templates/admin/translations.php:492
 msgid "Edit Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:41 
+#: templates/admin/translations.php:49 
 #: includes/admin/classic-editor/class-wprm-button.php:53
 msgid "Edit Recipe"
 msgstr ""
 
-#: templates/elementor/widget.php:84
+#: templates/elementor/widget-recipe.php:84
 msgid "Edit selected recipe"
 msgstr ""
 
-#: templates/admin/translations.php:367
+#: templates/admin/translations.php:383
 msgid "Edit Taxonomy"
 msgstr ""
 
-#: templates/admin/translations.php:244
+#: templates/admin/translations.php:258
 msgid "Editing Custom Taxonomy"
 msgstr ""
 
-#: templates/admin/translations.php:204
+#: templates/admin/translations.php:218
 msgid "Editing Recipe"
 msgstr ""
 
@@ -1750,7 +1779,7 @@ msgstr ""
 msgid "Email Link Button"
 msgstr ""
 
-#: templates/admin/translations.php:24
+#: templates/admin/translations.php:32
 msgid "Email our support team"
 msgstr ""
 
@@ -1758,11 +1787,11 @@ msgstr ""
 msgid "Email Share"
 msgstr ""
 
-#: templates/admin/translations.php:342
+#: templates/admin/translations.php:358
 msgid "Embed Instruction Video"
 msgstr ""
 
-#: templates/admin/translations.php:350
+#: templates/admin/translations.php:366
 msgid "Embed Video"
 msgstr ""
 
@@ -1771,7 +1800,7 @@ msgid "Enable Adjustable Servings"
 msgstr ""
 
 #: templates/settings/group-analytics.php:19 
-#: templates/admin/translations.php:47
+#: templates/admin/translations.php:55
 msgid "Enable Analytics"
 msgstr ""
 
@@ -1846,7 +1875,7 @@ msgid ""
 "well as food recipes."
 msgstr ""
 
-#: templates/admin/translations.php:534
+#: templates/admin/translations.php:16
 msgid ""
 "Enable to have an advanced servings calculator, useful for different baking "
 "forms"
@@ -1881,20 +1910,20 @@ msgid ""
 "page."
 msgstr ""
 
-#: templates/admin/translations.php:318
+#: templates/admin/translations.php:334
 msgid "Enter the URL of the link:"
 msgstr ""
 
-#: templates/admin/translations.php:122
+#: templates/admin/translations.php:137
 msgid "Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:222
+#: templates/admin/translations.php:236
 msgid "Equipment Affiliate Fields"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:40 
-#: templates/admin/translations.php:114
+#: templates/admin/translations.php:129
 msgid "Equipment Link"
 msgstr ""
 
@@ -1908,7 +1937,7 @@ msgid ""
 "Equipment page."
 msgstr ""
 
-#: templates/admin/translations.php:234
+#: templates/admin/translations.php:248
 msgid "Estimated Cost"
 msgstr ""
 
@@ -1941,27 +1970,27 @@ msgstr ""
 msgid "Explore import options"
 msgstr ""
 
-#: templates/admin/translations.php:112
+#: templates/admin/translations.php:127
 msgid "Export Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:105
+#: templates/admin/translations.php:120
 msgid "Export Ingredients"
 msgstr ""
 
-#: templates/admin/translations.php:86
+#: templates/admin/translations.php:95
 msgid "Export Recipes"
 msgstr ""
 
-#: templates/admin/translations.php:109
+#: templates/admin/translations.php:124
 msgid "Export Terms"
 msgstr ""
 
-#: templates/admin/translations.php:361
+#: templates/admin/translations.php:377
 msgid "External image. Recommended:"
 msgstr ""
 
-#: templates/admin/translations.php:292
+#: templates/admin/translations.php:308
 msgid "extra virgin"
 msgstr ""
 
@@ -1973,11 +2002,11 @@ msgstr ""
 msgid "FAQ & Support"
 msgstr ""
 
-#: templates/admin/translations.php:435
+#: templates/admin/translations.php:451
 msgid "Features"
 msgstr ""
 
-#: templates/admin/translations.php:33
+#: templates/admin/translations.php:41
 msgid "Feedback"
 msgstr ""
 
@@ -1989,15 +2018,15 @@ msgstr ""
 msgid "Fill in the ID of the recipe to display."
 msgstr ""
 
-#: templates/admin/translations.php:376
+#: templates/admin/translations.php:392
 msgid "Filter"
 msgstr ""
 
-#: templates/admin/translations.php:379
+#: templates/admin/translations.php:395
 msgid "Filter:"
 msgstr ""
 
-#: templates/admin/translations.php:374
+#: templates/admin/translations.php:390
 msgid "filtered of"
 msgstr ""
 
@@ -2007,7 +2036,7 @@ msgstr ""
 msgid "Find Ingredient Units"
 msgstr ""
 
-#: templates/admin/translations.php:46
+#: templates/admin/translations.php:54
 msgid ""
 "Find out what recipes visitors are interacting with, what affiliate links "
 "are getting clicked on, and more..."
@@ -2027,7 +2056,7 @@ msgstr ""
 msgid "Find the ID of the latest recipes"
 msgstr ""
 
-#: templates/admin/translations.php:271
+#: templates/admin/translations.php:285
 msgid ""
 "Find the saved collection ID on the WP Recipe Maker > Manage > Saved "
 "Collections page"
@@ -2063,11 +2092,11 @@ msgid ""
 "caches."
 msgstr ""
 
-#: templates/admin/translations.php:353
+#: templates/admin/translations.php:369
 msgid "First recipe on page"
 msgstr ""
 
-#: templates/admin/translations.php:97
+#: templates/admin/translations.php:112
 msgid "First Unit System"
 msgstr ""
 
@@ -2102,7 +2131,7 @@ msgstr ""
 msgid "Follow this link to print all of the selected recipes:"
 msgstr ""
 
-#: templates/admin/translations.php:453
+#: templates/admin/translations.php:469
 msgid "Food"
 msgstr ""
 
@@ -2110,7 +2139,7 @@ msgstr ""
 msgid "Food Labels"
 msgstr ""
 
-#: templates/admin/translations.php:91
+#: templates/admin/translations.php:100
 msgid "Food Recipe"
 msgstr ""
 
@@ -2140,7 +2169,7 @@ msgstr ""
 msgid "For example:"
 msgstr ""
 
-#: templates/admin/translations.php:187
+#: templates/admin/translations.php:201
 msgid ""
 "For guided recipes, Google wants a short (usually 1 word) summary for each "
 "instruction step. This will be the \"name\" in the HowToStep metadata. This "
@@ -2161,7 +2190,7 @@ msgstr ""
 msgid "Force people to leave a comment"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:65
+#: templates/settings/group-recipe-roundup.php:72
 msgid "Force recipe links to your own site to open in a new tab as well."
 msgstr ""
 
@@ -2183,7 +2212,7 @@ msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:481 
+#: templates/admin/translations.php:497 
 #: includes/public/deprecated/class-wprm-template-helper.php:240
 msgid "from"
 msgstr ""
@@ -2196,7 +2225,7 @@ msgstr ""
 msgid "ft"
 msgstr ""
 
-#: templates/admin/translations.php:259
+#: templates/admin/translations.php:273
 msgid "Full Snippet Template"
 msgstr ""
 
@@ -2228,7 +2257,7 @@ msgstr ""
 
 #: templates/settings/group-metadata.php:18 
 #: templates/settings/group-performance.php:8 
-#: templates/settings/group-links.php:18 templates/admin/translations.php:197
+#: templates/settings/group-links.php:18 templates/admin/translations.php:211
 msgid "General"
 msgstr ""
 
@@ -2242,11 +2271,11 @@ msgstr ""
 msgid "Get access to more recipe templates with WP Recipe Maker Premium."
 msgstr ""
 
-#: templates/admin/translations.php:22
+#: templates/admin/translations.php:30
 msgid "Get Help"
 msgstr ""
 
-#: templates/admin/translations.php:14
+#: templates/admin/translations.php:22
 msgid "Get the most out of WPRM"
 msgstr ""
 
@@ -2303,11 +2332,11 @@ msgstr ""
 msgid "Go to the next page."
 msgstr ""
 
-#: templates/elementor/widget.php:134
+#: templates/elementor/widget-recipe.php:134
 msgid "Go to WPRM Manage page"
 msgstr ""
 
-#: templates/admin/translations.php:452
+#: templates/admin/translations.php:468
 msgid "Good"
 msgstr ""
 
@@ -2323,11 +2352,11 @@ msgstr ""
 msgid "grams"
 msgstr ""
 
-#: templates/admin/translations.php:525
+#: templates/admin/translations.php:545
 msgid "Grid Image"
 msgstr ""
 
-#: templates/admin/translations.php:523
+#: templates/admin/translations.php:543
 msgid "Grid Link"
 msgstr ""
 
@@ -2347,35 +2376,39 @@ msgstr ""
 msgid "Handle Archive Pages Output"
 msgstr ""
 
-#: templates/admin/translations.php:464
+#: templates/admin/translations.php:480
 msgid "Has an embedded video"
 msgstr ""
 
-#: templates/admin/translations.php:463
+#: templates/admin/translations.php:479
 msgid "Has an uploaded video"
 msgstr ""
 
-#: templates/admin/translations.php:462
+#: templates/admin/translations.php:478
 msgid "Has any video"
 msgstr ""
 
-#: templates/admin/translations.php:251
+#: templates/admin/translations.php:265
 msgid "Has Archive Pages"
 msgstr ""
 
-#: templates/admin/translations.php:459
+#: templates/admin/translations.php:475
 msgid "Has Custom Pin Image"
 msgstr ""
 
-#: templates/admin/translations.php:508
+#: templates/admin/translations.php:524
 msgid "Has Image"
 msgstr ""
 
-#: templates/admin/translations.php:473
+#: templates/admin/translations.php:489
 msgid "Has Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:457
+#: templates/admin/translations.php:540
+msgid "Has Product"
+msgstr ""
+
+#: templates/admin/translations.php:473
 msgid "Has Recipe Image"
 msgstr ""
 
@@ -2399,13 +2432,13 @@ msgstr ""
 msgid "Header Font"
 msgstr ""
 
-#: templates/admin/tools.php:88 templates/admin/translations.php:25 
+#: templates/admin/tools.php:88 templates/admin/translations.php:33 
 #: includes/admin/tools/class-wprm-tools-health-check.php:38 
 #: includes/admin/tools/class-wprm-tools-health-check.php:38
 msgid "Health Check"
 msgstr ""
 
-#: templates/admin/translations.php:301
+#: templates/admin/translations.php:317
 msgid "height"
 msgstr ""
 
@@ -2434,13 +2467,13 @@ msgstr ""
 msgid "Hindu"
 msgstr ""
 
-#: templates/admin/translations.php:62 
+#: templates/admin/translations.php:70 
 #: includes/public/deprecated/class-wprm-template-helper.php:164 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
 msgid "hour"
 msgstr ""
 
-#: templates/admin/translations.php:63 
+#: templates/admin/translations.php:71 
 #: includes/public/deprecated/class-wprm-template-helper.php:164 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:130
 msgid "hours"
@@ -2475,15 +2508,15 @@ msgstr ""
 msgid "How to recognize if it should be part of the ingredient notes."
 msgstr ""
 
-#: templates/admin/translations.php:34
+#: templates/admin/translations.php:42
 msgid "How would you rate WP Recipe Maker?"
 msgstr ""
 
-#: templates/admin/translations.php:454
+#: templates/admin/translations.php:470
 msgid "How-to"
 msgstr ""
 
-#: templates/admin/translations.php:92
+#: templates/admin/translations.php:101
 msgid "How-to Instructions"
 msgstr ""
 
@@ -2503,13 +2536,13 @@ msgstr ""
 msgid "How-to Instructions Template"
 msgstr ""
 
-#: templates/admin/translations.php:442 
+#: templates/admin/translations.php:458 
 #: includes/public/deprecated/class-wprm-template-helper.php:162 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
 msgid "hr"
 msgstr ""
 
-#: templates/admin/translations.php:443 
+#: templates/admin/translations.php:459 
 #: includes/public/deprecated/class-wprm-template-helper.php:162 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:128
 msgid "hrs"
@@ -2519,7 +2552,7 @@ msgstr ""
 msgid "HTML Element to scroll to"
 msgstr ""
 
-#: templates/admin/translations.php:319
+#: templates/admin/translations.php:335
 msgid "HTML or Shortcode:"
 msgstr ""
 
@@ -2539,7 +2572,7 @@ msgstr ""
 msgid "Icon Color"
 msgstr ""
 
-#: templates/admin/translations.php:403
+#: templates/admin/translations.php:419
 msgid "ID"
 msgstr ""
 
@@ -2576,7 +2609,7 @@ msgid ""
 "redirects. Contact us if you need help!"
 msgstr ""
 
-#: templates/admin/translations.php:165
+#: templates/admin/translations.php:180
 msgid "Image"
 msgstr ""
 
@@ -2600,7 +2633,7 @@ msgstr ""
 msgid "Image to use for the Pin Recipe shortcode."
 msgstr ""
 
-#: templates/settings/group-import.php:20 templates/admin/translations.php:194 
+#: templates/settings/group-import.php:20 templates/admin/translations.php:208 
 #: templates/admin/menu/import/import-recipes.php:28 
 #: templates/admin/menu/import/importing.php:15
 msgid "Import"
@@ -2630,11 +2663,11 @@ msgstr ""
 msgid "Import finished succesfully. Click here to continue."
 msgstr ""
 
-#: templates/admin/translations.php:152
+#: templates/admin/translations.php:167
 msgid "Import from JSON"
 msgstr ""
 
-#: templates/admin/translations.php:136
+#: templates/admin/translations.php:151
 msgid "Import from Text"
 msgstr ""
 
@@ -2734,7 +2767,7 @@ msgid "Inactive Time"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:245 
-#: templates/admin/translations.php:297
+#: templates/admin/translations.php:313
 msgid "inch"
 msgstr ""
 
@@ -2754,20 +2787,20 @@ msgstr ""
 msgid "Indian"
 msgstr ""
 
-#: templates/admin/translations.php:417
+#: templates/admin/translations.php:433
 msgid "Ingredient"
 msgstr ""
 
-#: templates/admin/translations.php:284
+#: templates/admin/translations.php:300
 msgid "Ingredient Group Header"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:41 
-#: templates/admin/translations.php:108
+#: templates/admin/translations.php:123
 msgid "Ingredient Link"
 msgstr ""
 
-#: templates/settings/group-links.php:123 templates/admin/translations.php:174 
+#: templates/settings/group-links.php:123 templates/admin/translations.php:189 
 #: templates/admin/menu/tools/wpurp-ingredients.php:14
 msgid "Ingredient Links"
 msgstr ""
@@ -2790,41 +2823,41 @@ msgstr ""
 msgid "Ingredient Parsing"
 msgstr ""
 
-#: templates/admin/translations.php:420
+#: templates/admin/translations.php:436
 msgid "Ingredient Unit"
 msgstr ""
 
 #: includes/admin/class-wprm-notices.php:95 
-#: templates/admin/translations.php:121
+#: templates/admin/translations.php:136
 msgid "Ingredient Units"
 msgstr ""
 
-#: templates/admin/translations.php:120 
+#: templates/admin/translations.php:135 
 #: includes/public/deprecated/class-wprm-template-helper.php:54
 msgid "Ingredients"
 msgstr ""
 
-#: templates/admin/translations.php:254
+#: templates/admin/translations.php:268
 msgid "Insert"
 msgstr ""
 
-#: templates/admin/translations.php:331
+#: templates/admin/translations.php:347
 msgid "Insert After"
 msgstr ""
 
-#: templates/admin/translations.php:253
+#: templates/admin/translations.php:267
 msgid "Insert existing Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:277
+#: templates/admin/translations.php:293
 msgid "Insert Group After"
 msgstr ""
 
-#: templates/admin/translations.php:286
+#: templates/admin/translations.php:302
 msgid "Insert Ingredient After"
 msgstr ""
 
-#: templates/admin/translations.php:278
+#: templates/admin/translations.php:294
 msgid "Insert Instruction After"
 msgstr ""
 
@@ -2832,7 +2865,7 @@ msgstr ""
 msgid "Instacart Tastemakers ID"
 msgstr ""
 
-#: templates/admin/translations.php:275
+#: templates/admin/translations.php:291
 msgid "Instruction Group Header"
 msgstr ""
 
@@ -2848,7 +2881,7 @@ msgstr ""
 msgid "Instruction Images"
 msgstr ""
 
-#: templates/admin/translations.php:344
+#: templates/admin/translations.php:360
 msgid "Instruction is part of the main video"
 msgstr ""
 
@@ -2860,7 +2893,7 @@ msgstr ""
 msgid "Instruction List Style"
 msgstr ""
 
-#: templates/admin/translations.php:185
+#: templates/admin/translations.php:199
 msgid "Instruction Media"
 msgstr ""
 
@@ -2876,11 +2909,11 @@ msgstr ""
 msgid "Instruction Parsing"
 msgstr ""
 
-#: templates/admin/translations.php:345
+#: templates/admin/translations.php:361
 msgid "Instruction video URL or embed code"
 msgstr ""
 
-#: templates/admin/translations.php:140 
+#: templates/admin/translations.php:155 
 #: includes/public/deprecated/class-wprm-template-helper.php:55
 msgid "Instructions"
 msgstr ""
@@ -2897,11 +2930,11 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: templates/admin/translations.php:56
+#: templates/admin/translations.php:64
 msgid "Interactions"
 msgstr ""
 
-#: templates/admin/translations.php:53
+#: templates/admin/translations.php:61
 msgid "Interactions (last 7 days)"
 msgstr ""
 
@@ -2909,15 +2942,15 @@ msgstr ""
 msgid "Interactivity"
 msgstr ""
 
-#: templates/admin/translations.php:49
+#: templates/admin/translations.php:57
 msgid "Interested in more data?"
 msgstr ""
 
-#: templates/admin/translations.php:410
+#: templates/admin/translations.php:426
 msgid "into"
 msgstr ""
 
-#: templates/admin/translations.php:397
+#: templates/admin/translations.php:413
 msgid "IP"
 msgstr ""
 
@@ -2925,7 +2958,7 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: templates/admin/translations.php:306
+#: templates/admin/translations.php:322
 msgid "Italic"
 msgstr ""
 
@@ -2935,7 +2968,7 @@ msgstr ""
 
 #: includes/public/class-wprm-analytics.php:50 
 #: includes/public/class-wprm-blocks.php:191 
-#: templates/admin/translations.php:260 
+#: templates/admin/translations.php:274 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:194
 msgid "Jump to Recipe"
@@ -2943,7 +2976,7 @@ msgstr ""
 
 #: includes/public/class-wprm-analytics.php:51 
 #: includes/public/class-wprm-blocks.php:206 
-#: templates/admin/translations.php:261 
+#: templates/admin/translations.php:275 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:194
 msgid "Jump to Video"
@@ -2957,7 +2990,7 @@ msgstr ""
 msgid "kcal"
 msgstr ""
 
-#: templates/admin/translations.php:246
+#: templates/admin/translations.php:260
 msgid "Key"
 msgstr ""
 
@@ -2996,7 +3029,7 @@ msgstr ""
 msgid "l"
 msgstr ""
 
-#: templates/admin/translations.php:502
+#: templates/admin/translations.php:518
 msgid "Label"
 msgstr ""
 
@@ -3005,15 +3038,15 @@ msgstr ""
 msgid "Label used in the comment form."
 msgstr ""
 
-#: templates/admin/translations.php:241
+#: templates/admin/translations.php:255
 msgid "Language"
 msgstr ""
 
-#: templates/admin/translations.php:27
+#: templates/admin/translations.php:35
 msgid "Last check:"
 msgstr ""
 
-#: templates/admin/translations.php:36
+#: templates/admin/translations.php:44
 msgid "Latest Recipes"
 msgstr ""
 
@@ -3025,15 +3058,15 @@ msgstr ""
 msgid "lbs"
 msgstr ""
 
-#: templates/admin/translations.php:15
+#: templates/admin/translations.php:23
 msgid "Learn More"
 msgstr ""
 
-#: templates/admin/translations.php:32
+#: templates/admin/translations.php:40
 msgid "Learn more about the Health Check feature"
 msgstr ""
 
-#: templates/admin/translations.php:57
+#: templates/admin/translations.php:65
 msgid "Learn more about the sale"
 msgstr ""
 
@@ -3049,7 +3082,7 @@ msgstr ""
 msgid "Leave blank to not use a link."
 msgstr ""
 
-#: templates/admin/translations.php:365
+#: templates/admin/translations.php:381
 msgid "Leave blank to use default from template"
 msgstr ""
 
@@ -3070,7 +3103,7 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: templates/admin/translations.php:68
+#: templates/admin/translations.php:76
 msgid "left to grab the discount!"
 msgstr ""
 
@@ -3091,7 +3124,7 @@ msgstr ""
 msgid "Lightbox"
 msgstr ""
 
-#: templates/admin/translations.php:229
+#: templates/admin/translations.php:243
 msgid "Link"
 msgstr ""
 
@@ -3099,7 +3132,7 @@ msgstr ""
 msgid "Link Color"
 msgstr ""
 
-#: templates/admin/translations.php:519
+#: templates/admin/translations.php:535
 msgid "Link Nofollow"
 msgstr ""
 
@@ -3153,7 +3186,7 @@ msgid ""
 "Load the default snippet templates in the footer to improve performance."
 msgstr ""
 
-#: templates/admin/translations.php:203
+#: templates/admin/translations.php:217
 msgid "Loading Recipe..."
 msgstr ""
 
@@ -3204,7 +3237,7 @@ msgstr ""
 msgid "Main Course"
 msgstr ""
 
-#: templates/admin/translations.php:144
+#: templates/admin/translations.php:159
 msgid "Make a selection using the buttons above first."
 msgstr ""
 
@@ -3220,7 +3253,7 @@ msgid ""
 "twice."
 msgstr ""
 
-#: templates/admin/translations.php:533
+#: templates/admin/translations.php:15
 msgid ""
 "Make sure to pick the right recipe type to ensure we include the correct "
 "metadata."
@@ -3235,7 +3268,7 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: templates/admin/translations.php:39
+#: templates/admin/translations.php:47
 msgid "Manage all recipes..."
 msgstr ""
 
@@ -3247,15 +3280,15 @@ msgstr ""
 msgid "Mark Selected Recipes as Checked"
 msgstr ""
 
-#: templates/admin/translations.php:283
+#: templates/admin/translations.php:299
 msgid "Material Group Header"
 msgstr ""
 
-#: templates/admin/translations.php:173
+#: templates/admin/translations.php:188
 msgid "Material Links"
 msgstr ""
 
-#: templates/admin/translations.php:200
+#: templates/admin/translations.php:214
 msgid "Materials"
 msgstr ""
 
@@ -3263,11 +3296,11 @@ msgstr ""
 msgid "Max Denominator"
 msgstr ""
 
-#: templates/admin/translations.php:296
+#: templates/admin/translations.php:312
 msgid "measured in"
 msgstr ""
 
-#: templates/settings/group-media.php:5 templates/admin/translations.php:195
+#: templates/settings/group-media.php:5 templates/admin/translations.php:209
 msgid "Media"
 msgstr ""
 
@@ -3283,7 +3316,7 @@ msgstr ""
 msgid "Mention %handle% or tag %tag%!"
 msgstr ""
 
-#: templates/admin/translations.php:408
+#: templates/admin/translations.php:424
 msgid "Merge into another"
 msgstr ""
 
@@ -3295,7 +3328,7 @@ msgstr ""
 msgid "Message to show when the visitor is not logged in."
 msgstr ""
 
-#: templates/admin/translations.php:186
+#: templates/admin/translations.php:200
 msgid "Metadata"
 msgstr ""
 
@@ -3341,31 +3374,31 @@ msgstr ""
 msgid "millimeters"
 msgstr ""
 
-#: templates/admin/translations.php:444 
+#: templates/admin/translations.php:460 
 #: includes/public/deprecated/class-wprm-template-helper.php:179 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
 msgid "min"
 msgstr ""
 
-#: templates/admin/translations.php:445 
+#: templates/admin/translations.php:461 
 #: includes/public/deprecated/class-wprm-template-helper.php:179 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:145
 msgid "mins"
 msgstr ""
 
-#: templates/admin/translations.php:64 
+#: templates/admin/translations.php:72 
 #: includes/public/deprecated/class-wprm-template-helper.php:181 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
 msgid "minute"
 msgstr ""
 
-#: templates/admin/translations.php:65 
+#: templates/admin/translations.php:73 
 #: includes/public/deprecated/class-wprm-template-helper.php:181 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:147
 msgid "minutes"
 msgstr ""
 
-#: templates/admin/translations.php:494
+#: templates/admin/translations.php:510
 msgid "missing"
 msgstr ""
 
@@ -3382,11 +3415,11 @@ msgstr ""
 msgid "Modern"
 msgstr ""
 
-#: templates/admin/translations.php:217
+#: templates/admin/translations.php:231
 msgid "More nutrients are available in"
 msgstr ""
 
-#: templates/admin/translations.php:31
+#: templates/admin/translations.php:39
 msgid "Most recent results:"
 msgstr ""
 
@@ -3398,24 +3431,24 @@ msgstr ""
 msgid "My Emissions API Key Status"
 msgstr ""
 
-#: templates/admin/translations.php:20
+#: templates/admin/translations.php:28
 msgid "My Emissions carbon footprint labels"
 msgstr ""
 
-#: templates/admin/translations.php:235
+#: templates/admin/translations.php:249
 msgid "My Emissions Label"
 msgstr ""
 
 #: includes/public/class-wprm-recipe.php:165 
-#: templates/admin/translations.php:396
+#: templates/admin/translations.php:412
 msgid "n/a"
 msgstr ""
 
-#: templates/admin/translations.php:138
+#: templates/admin/translations.php:153
 msgid "Name"
 msgstr ""
 
-#: templates/admin/translations.php:280
+#: templates/admin/translations.php:296
 msgid "Name for this video part"
 msgstr ""
 
@@ -3432,7 +3465,7 @@ msgstr ""
 msgid "Never, allow any user rating"
 msgstr ""
 
-#: templates/admin/translations.php:35
+#: templates/admin/translations.php:43
 msgid "News"
 msgstr ""
 
@@ -3440,17 +3473,17 @@ msgstr ""
 msgid "Next to recipe in HTML body element"
 msgstr ""
 
-#: templates/admin/translations.php:372
+#: templates/admin/translations.php:388
 msgid "No"
 msgstr ""
 
-#: templates/admin/translations.php:50
+#: templates/admin/translations.php:58
 msgid ""
 "No actions found for the last 7 days. If you just enabled analytics they "
 "should start showing up soon."
 msgstr ""
 
-#: templates/admin/translations.php:480
+#: templates/admin/translations.php:496
 msgid "no comment ratings"
 msgstr ""
 
@@ -3458,11 +3491,11 @@ msgstr ""
 msgid "No imported recipes found."
 msgstr ""
 
-#: templates/admin/translations.php:236
+#: templates/admin/translations.php:250
 msgid "No language set"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:57
+#: templates/settings/group-recipe-roundup.php:64
 msgid "No metadata when there is recipe metadata"
 msgstr ""
 
@@ -3472,7 +3505,7 @@ msgid "no parent post found"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:51 
-#: templates/admin/translations.php:451
+#: templates/admin/translations.php:467
 msgid "No Ratings"
 msgstr ""
 
@@ -3484,7 +3517,7 @@ msgstr ""
 msgid "No recipe videos"
 msgstr ""
 
-#: templates/admin/translations.php:352
+#: templates/admin/translations.php:368
 msgid "No recipes found"
 msgstr ""
 
@@ -3492,19 +3525,19 @@ msgstr ""
 msgid "No recipes found."
 msgstr ""
 
-#: templates/admin/translations.php:38
+#: templates/admin/translations.php:46
 msgid "No recipes found. Welcome to WP Recipe Maker!"
 msgstr ""
 
-#: templates/admin/translations.php:303
+#: templates/admin/translations.php:319
 msgid "No suggestions found."
 msgstr ""
 
-#: templates/admin/translations.php:484
+#: templates/admin/translations.php:500
 msgid "no user ratings"
 msgstr ""
 
-#: templates/admin/translations.php:155
+#: templates/admin/translations.php:170
 msgid "No valid recipe found."
 msgstr ""
 
@@ -3517,8 +3550,12 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#: templates/admin/translations.php:394
+#: templates/admin/translations.php:410
 msgid "Not Approved"
+msgstr ""
+
+#: templates/admin/translations.php:288
+msgid "Not associated yet"
 msgstr ""
 
 #: templates/settings/group-template-legacy.php:32
@@ -3526,7 +3563,7 @@ msgid "Note: not all options will affect every recipe template."
 msgstr ""
 
 #: includes/public/class-wprm-print.php:326 
-#: templates/admin/translations.php:141
+#: templates/admin/translations.php:156
 msgid "Notes"
 msgstr ""
 
@@ -3540,7 +3577,7 @@ msgid ""
 "Number of decimals to round a quantity to when calculating nutrition facts."
 msgstr ""
 
-#: templates/admin/translations.php:201
+#: templates/admin/translations.php:215
 msgid "Nutrition"
 msgstr ""
 
@@ -3554,7 +3591,7 @@ msgid "Nutrition Facts Calculation"
 msgstr ""
 
 #: templates/settings/group-nutrition-label.php:15 
-#: templates/admin/translations.php:264
+#: templates/admin/translations.php:278
 msgid "Nutrition Label"
 msgstr ""
 
@@ -3562,7 +3599,7 @@ msgstr ""
 msgid "Nutrition Label in template"
 msgstr ""
 
-#: templates/admin/translations.php:290
+#: templates/admin/translations.php:306
 msgid "olive oil"
 msgstr ""
 
@@ -3588,6 +3625,10 @@ msgstr ""
 
 #: templates/settings/group-metadata.php:126
 msgid "Only show metadata for first recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-roundup.php:57
+msgid "Only show published posts"
 msgstr ""
 
 #: templates/settings/group-metadata.php:77
@@ -3616,15 +3657,15 @@ msgstr ""
 msgid "Open in New Tab"
 msgstr ""
 
-#: templates/settings/group-links.php:85 templates/admin/translations.php:323
+#: templates/settings/group-links.php:85 templates/admin/translations.php:339
 msgid "Open in new tab"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:64
+#: templates/settings/group-recipe-roundup.php:71
 msgid "Open internal links in a new tab"
 msgstr ""
 
-#: templates/admin/translations.php:360
+#: templates/admin/translations.php:376
 msgid "Open link in new tab"
 msgstr ""
 
@@ -3646,7 +3687,7 @@ msgstr ""
 msgid "Opt out of Rich Pins"
 msgstr ""
 
-#: templates/admin/translations.php:302
+#: templates/admin/translations.php:318
 msgid "optional"
 msgstr ""
 
@@ -3656,7 +3697,7 @@ msgid ""
 "Use any HTML code."
 msgstr ""
 
-#: templates/admin/translations.php:160
+#: templates/admin/translations.php:175
 msgid ""
 "Optional extra time field that you can label yourself. Examples: Resting "
 "Time, Baking Time"
@@ -3686,7 +3727,7 @@ msgid ""
 "following placeholders:"
 msgstr ""
 
-#: templates/admin/translations.php:363
+#: templates/admin/translations.php:379
 msgid "Optionally fill in these fields to use instead of the recipe values:"
 msgstr ""
 
@@ -3696,11 +3737,11 @@ msgid ""
 "lazy loading your comments, for example."
 msgstr ""
 
-#: templates/admin/translations.php:168
+#: templates/admin/translations.php:183
 msgid "Optionally set a different image to use for the \"Pin Recipe\" button."
 msgstr ""
 
-#: templates/admin/translations.php:536
+#: templates/admin/translations.php:18
 msgid "Optionally set a password to restrict access to the recipe post."
 msgstr ""
 
@@ -3711,15 +3752,15 @@ msgid ""
 msgstr ""
 
 #: templates/settings/group-recipe-defaults.php:112 
-#: templates/admin/translations.php:455
+#: templates/admin/translations.php:471
 msgid "Other"
 msgstr ""
 
-#: templates/admin/translations.php:93
+#: templates/admin/translations.php:102
 msgid "Other (no metadata)"
 msgstr ""
 
-#: templates/admin/translations.php:266
+#: templates/admin/translations.php:280
 msgid "Other Features"
 msgstr ""
 
@@ -3759,11 +3800,11 @@ msgstr ""
 msgid "Our cookies are stored for 30 days."
 msgstr ""
 
-#: templates/admin/translations.php:19
+#: templates/admin/translations.php:27
 msgid "Our Partners"
 msgstr ""
 
-#: templates/admin/translations.php:28
+#: templates/admin/translations.php:36
 msgid "outdated version"
 msgstr ""
 
@@ -3775,7 +3816,7 @@ msgstr ""
 msgid "Output Recipe Metadata"
 msgstr ""
 
-#: templates/admin/translations.php:413
+#: templates/admin/translations.php:429
 msgid "Overview"
 msgstr ""
 
@@ -3783,27 +3824,27 @@ msgstr ""
 msgid "oz"
 msgstr ""
 
-#: templates/admin/translations.php:329
+#: templates/admin/translations.php:345
 msgid "Pair of scissors"
 msgstr ""
 
-#: templates/admin/translations.php:289
+#: templates/admin/translations.php:305
 msgid "paper"
 msgstr ""
 
-#: templates/admin/translations.php:471
+#: templates/admin/translations.php:487
 msgid "Parent ID"
 msgstr ""
 
-#: templates/admin/translations.php:477
+#: templates/admin/translations.php:493
 msgid "Parent Language"
 msgstr ""
 
-#: templates/admin/translations.php:472
+#: templates/admin/translations.php:488
 msgid "Parent Name"
 msgstr ""
 
-#: templates/admin/translations.php:400
+#: templates/admin/translations.php:416
 msgid "Parent Post ID"
 msgstr ""
 
@@ -3811,23 +3852,23 @@ msgstr ""
 msgid "Passive Time"
 msgstr ""
 
-#: templates/admin/translations.php:90
+#: templates/admin/translations.php:99
 msgid "Password"
 msgstr ""
 
-#: templates/admin/translations.php:142
+#: templates/admin/translations.php:157
 msgid "Paste or type recipe"
 msgstr ""
 
-#: templates/admin/translations.php:151
+#: templates/admin/translations.php:166
 msgid "Paste or type recipe to start..."
 msgstr ""
 
-#: templates/admin/translations.php:153
+#: templates/admin/translations.php:168
 msgid "Paste the recipe JSON data to import"
 msgstr ""
 
-#: templates/admin/translations.php:95
+#: templates/admin/translations.php:104
 msgid "people"
 msgstr ""
 
@@ -3839,11 +3880,11 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
-#: templates/admin/translations.php:402
+#: templates/admin/translations.php:418
 msgid "Permanently Delete"
 msgstr ""
 
-#: templates/admin/translations.php:133
+#: templates/admin/translations.php:148
 msgid "Permanently Delete Recipes"
 msgstr ""
 
@@ -3856,7 +3897,7 @@ msgid "Personal YouTube Data API key"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:255 
-#: templates/admin/translations.php:287
+#: templates/admin/translations.php:303
 msgid "piece"
 msgstr ""
 
@@ -3873,7 +3914,7 @@ msgid "Pin Description"
 msgstr ""
 
 #: templates/settings/group-social-sharing.php:87 
-#: templates/admin/translations.php:167
+#: templates/admin/translations.php:182
 msgid "Pin Image"
 msgstr ""
 
@@ -3914,15 +3955,15 @@ msgstr ""
 msgid "Placeholder for the Instacart button"
 msgstr ""
 
-#: templates/admin/translations.php:503
+#: templates/admin/translations.php:519
 msgid "Plural"
 msgstr ""
 
-#: templates/admin/translations.php:249
+#: templates/admin/translations.php:263
 msgid "Plural Name"
 msgstr ""
 
-#: templates/admin/translations.php:240
+#: templates/admin/translations.php:254
 msgid "Post Author"
 msgstr ""
 
@@ -3930,7 +3971,7 @@ msgstr ""
 msgid "Post Author to use for the recipe."
 msgstr ""
 
-#: templates/admin/translations.php:196
+#: templates/admin/translations.php:210
 msgid "Post Type"
 msgstr ""
 
@@ -3966,13 +4007,13 @@ msgid ""
 "post content."
 msgstr ""
 
-#: templates/admin/translations.php:156 
+#: templates/admin/translations.php:171 
 #: includes/public/deprecated/class-wprm-template-helper.php:48 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:344
 msgid "Prep Time"
 msgstr ""
 
-#: templates/admin/translations.php:330
+#: templates/admin/translations.php:346
 msgid "Pressure cooker"
 msgstr ""
 
@@ -3999,13 +4040,13 @@ msgid "Print Footer Ad"
 msgstr ""
 
 #: includes/public/class-wprm-blocks.php:221 
-#: templates/admin/translations.php:262 
+#: templates/admin/translations.php:276 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:48 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:189
 msgid "Print Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:85
+#: templates/admin/translations.php:94
 msgid "Print Recipes"
 msgstr ""
 
@@ -4032,6 +4073,14 @@ msgid_plural "Processing %d posts"
 msgstr[0] ""
 msgstr[1] ""
 
+#: templates/admin/translations.php:539
+msgid "Product"
+msgstr ""
+
+#: templates/admin/translations.php:19
+msgid "Products"
+msgstr ""
+
 #: includes/public/class-wprm-recipe-parser.php:204
 msgid "pt"
 msgstr ""
@@ -4052,7 +4101,7 @@ msgstr ""
 msgid "quarts"
 msgstr ""
 
-#: templates/admin/translations.php:42
+#: templates/admin/translations.php:50
 msgid "Quick Tips"
 msgstr ""
 
@@ -4085,7 +4134,7 @@ msgstr ""
 msgid "Rate this recipe 5 out of 5 stars"
 msgstr ""
 
-#: templates/admin/translations.php:384
+#: templates/admin/translations.php:400
 msgid "Rating"
 msgstr ""
 
@@ -4093,7 +4142,7 @@ msgstr ""
 msgid "Rating Feature"
 msgstr ""
 
-#: templates/admin/translations.php:117
+#: templates/admin/translations.php:132
 msgid "Ratings"
 msgstr ""
 
@@ -4107,11 +4156,11 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: templates/admin/translations.php:81
+#: templates/admin/translations.php:89
 msgid "Recalculate Total Time"
 msgstr ""
 
-#: templates/admin/translations.php:52
+#: templates/admin/translations.php:60
 msgid "Recipe"
 msgstr ""
 
@@ -4124,7 +4173,7 @@ msgid "Recipe Author"
 msgstr ""
 
 #: templates/settings/group-recipe-collections.php:15 
-#: templates/admin/translations.php:270
+#: templates/admin/translations.php:284
 msgid "Recipe Collections"
 msgstr ""
 
@@ -4139,7 +4188,7 @@ msgstr ""
 msgid "Recipe CSS"
 msgstr ""
 
-#: templates/admin/translations.php:498
+#: templates/admin/translations.php:514
 msgid "Recipe Data Size"
 msgstr ""
 
@@ -4151,7 +4200,7 @@ msgstr ""
 msgid "Recipe Existence"
 msgstr ""
 
-#: templates/admin/translations.php:416
+#: templates/admin/translations.php:432
 msgid "Recipe Fields"
 msgstr ""
 
@@ -4159,7 +4208,7 @@ msgstr ""
 msgid "Recipe fields"
 msgstr ""
 
-#: templates/admin/translations.php:399
+#: templates/admin/translations.php:415
 msgid "Recipe ID"
 msgstr ""
 
@@ -4181,16 +4230,16 @@ msgid "Recipe Metadata"
 msgstr ""
 
 #: templates/settings/group-social-sharing.php:113 
-#: templates/admin/translations.php:225
+#: templates/admin/translations.php:239
 msgid "Recipe Name"
 msgstr ""
 
-#: templates/admin/translations.php:164 
+#: templates/admin/translations.php:179 
 #: includes/public/deprecated/class-wprm-template-helper.php:57
 msgid "Recipe Notes"
 msgstr ""
 
-#: templates/admin/translations.php:263
+#: templates/admin/translations.php:277
 msgid "Recipe Parts"
 msgstr ""
 
@@ -4218,7 +4267,7 @@ msgstr ""
 msgid "Recipe Roundup"
 msgstr ""
 
-#: templates/admin/translations.php:268
+#: templates/admin/translations.php:282
 msgid "Recipe Roundup Item"
 msgstr ""
 
@@ -4227,24 +4276,24 @@ msgid "Recipe Slug"
 msgstr ""
 
 #: templates/settings/group-recipe-snippets.php:15 
-#: templates/admin/translations.php:257
+#: templates/admin/translations.php:271
 msgid "Recipe Snippets"
 msgstr ""
 
 #: templates/settings/group-recipe-submission.php:15 
-#: templates/admin/translations.php:440
+#: templates/admin/translations.php:456
 msgid "Recipe Submission"
 msgstr ""
 
-#: templates/admin/translations.php:269
+#: templates/admin/translations.php:283
 msgid "Recipe Submission Form"
 msgstr ""
 
-#: templates/admin/translations.php:491
+#: templates/admin/translations.php:507
 msgid "Recipe Submission User"
 msgstr ""
 
-#: templates/admin/translations.php:439
+#: templates/admin/translations.php:455
 msgid "Recipe Submissions"
 msgstr ""
 
@@ -4252,11 +4301,11 @@ msgstr ""
 msgid "Recipe Summary"
 msgstr ""
 
-#: templates/admin/translations.php:429
+#: templates/admin/translations.php:445
 msgid "Recipe Taxonomies"
 msgstr ""
 
-#: templates/admin/translations.php:428
+#: templates/admin/translations.php:444
 msgid "Recipe Taxonomy"
 msgstr ""
 
@@ -4269,24 +4318,24 @@ msgstr ""
 msgid "Recipe Times"
 msgstr ""
 
-#: templates/admin/translations.php:224
+#: templates/admin/translations.php:238
 msgid "Recipe Type"
 msgstr ""
 
-#: templates/admin/translations.php:265 
+#: templates/admin/translations.php:279 
 #: includes/public/deprecated/class-wprm-template-helper.php:56
 msgid "Recipe Video"
 msgstr ""
 
-#: templates/admin/translations.php:238
+#: templates/admin/translations.php:252
 msgid "recipe-slug"
 msgstr ""
 
-#: templates/admin/translations.php:118
+#: templates/admin/translations.php:133
 msgid "Recipes"
 msgstr ""
 
-#: templates/admin/translations.php:99
+#: templates/admin/translations.php:114
 msgid "Recipes only"
 msgstr ""
 
@@ -4294,15 +4343,15 @@ msgstr ""
 msgid "Recipes to Import"
 msgstr ""
 
-#: templates/admin/translations.php:100
+#: templates/admin/translations.php:115
 msgid "Recipes with their parent post"
 msgstr ""
 
-#: templates/admin/translations.php:30
+#: templates/admin/translations.php:38
 msgid "Recommended to run occassionally by clicking on the blue button."
 msgstr ""
 
-#: templates/admin/translations.php:295
+#: templates/admin/translations.php:311
 msgid "Rectangle"
 msgstr ""
 
@@ -4344,11 +4393,11 @@ msgstr ""
 msgid "Regular Font"
 msgstr ""
 
-#: templates/admin/translations.php:131
+#: templates/admin/translations.php:146
 msgid "Reload Recipes"
 msgstr ""
 
-#: templates/admin/translations.php:285
+#: templates/admin/translations.php:301
 msgid "Remove"
 msgstr ""
 
@@ -4356,7 +4405,7 @@ msgstr ""
 msgid "remove"
 msgstr ""
 
-#: templates/admin/translations.php:328
+#: templates/admin/translations.php:344
 msgid "Remove Affiliate Link"
 msgstr ""
 
@@ -4364,11 +4413,11 @@ msgstr ""
 msgid "Remove any links inside the recipe."
 msgstr ""
 
-#: templates/admin/translations.php:377
+#: templates/admin/translations.php:393
 msgid "Remove fixed filter"
 msgstr ""
 
-#: templates/admin/translations.php:313
+#: templates/admin/translations.php:329
 msgid "Remove HTML or Shortcode"
 msgstr ""
 
@@ -4376,11 +4425,11 @@ msgstr ""
 msgid "Remove Identifier"
 msgstr ""
 
-#: templates/admin/translations.php:335
+#: templates/admin/translations.php:351
 msgid "Remove Image"
 msgstr ""
 
-#: templates/admin/translations.php:311
+#: templates/admin/translations.php:327
 msgid "Remove Link"
 msgstr ""
 
@@ -4388,19 +4437,23 @@ msgstr ""
 msgid "Remove links"
 msgstr ""
 
-#: templates/admin/translations.php:58
+#: templates/admin/translations.php:66
 msgid "Remove Notice"
 msgstr ""
 
-#: templates/admin/translations.php:336
+#: templates/admin/translations.php:105
+msgid "Remove rating by author"
+msgstr ""
+
+#: templates/admin/translations.php:352
 msgid "Remove Repin ID"
 msgstr ""
 
-#: templates/admin/translations.php:317
+#: templates/admin/translations.php:333
 msgid "Remove Temperature"
 msgstr ""
 
-#: templates/admin/translations.php:73
+#: templates/admin/translations.php:81
 msgid "Remove Terms"
 msgstr ""
 
@@ -4409,23 +4462,23 @@ msgid ""
 "Remove the above ingredient notes identifier from the notes after importing."
 msgstr ""
 
-#: templates/admin/translations.php:340
+#: templates/admin/translations.php:356
 msgid "Remove Video"
 msgstr ""
 
-#: templates/admin/translations.php:343
+#: templates/admin/translations.php:359
 msgid "Remove Video Part"
 msgstr ""
 
-#: templates/admin/translations.php:405
+#: templates/admin/translations.php:421
 msgid "Rename"
 msgstr ""
 
-#: templates/admin/translations.php:461
+#: templates/admin/translations.php:477
 msgid "Repin ID"
 msgstr ""
 
-#: templates/admin/translations.php:179
+#: templates/admin/translations.php:193
 msgid "required"
 msgstr ""
 
@@ -4441,11 +4494,11 @@ msgstr ""
 msgid "Reset Settings to Default"
 msgstr ""
 
-#: templates/admin/translations.php:161
+#: templates/admin/translations.php:176
 msgid "Resting Time"
 msgstr ""
 
-#: templates/admin/translations.php:401
+#: templates/admin/translations.php:417
 msgid "Restore Recipe"
 msgstr ""
 
@@ -4453,15 +4506,15 @@ msgstr ""
 msgid "Restrict Ingredient Length"
 msgstr ""
 
-#: templates/admin/translations.php:414
+#: templates/admin/translations.php:430
 msgid "Revision"
 msgstr ""
 
-#: templates/admin/translations.php:497
+#: templates/admin/translations.php:513
 msgid "Revision ID"
 msgstr ""
 
-#: templates/admin/translations.php:119
+#: templates/admin/translations.php:134
 msgid "Revisions"
 msgstr ""
 
@@ -4470,7 +4523,7 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: templates/admin/translations.php:294
+#: templates/admin/translations.php:310
 msgid "Round"
 msgstr ""
 
@@ -4479,7 +4532,7 @@ msgstr ""
 msgid "Round quantity to"
 msgstr ""
 
-#: templates/admin/translations.php:375
+#: templates/admin/translations.php:391
 msgid "rows"
 msgstr ""
 
@@ -4493,7 +4546,7 @@ msgid ""
 "data"
 msgstr ""
 
-#: templates/admin/translations.php:26
+#: templates/admin/translations.php:34
 msgid "Run Check"
 msgstr ""
 
@@ -4514,13 +4567,13 @@ msgstr ""
 msgid "Same author for every recipe"
 msgstr ""
 
-#: templates/admin/translations.php:211 
+#: templates/admin/translations.php:225 
 #: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:43
 msgid "Save"
 msgstr ""
 
-#: templates/admin/translations.php:212
+#: templates/admin/translations.php:226
 msgid "Save & Close"
 msgstr ""
 
@@ -4528,7 +4581,7 @@ msgstr ""
 msgid "Save changed rating"
 msgstr ""
 
-#: templates/admin/translations.php:362
+#: templates/admin/translations.php:378
 msgid "Save image locally"
 msgstr ""
 
@@ -4540,19 +4593,19 @@ msgstr ""
 msgid "Save to Slickstream"
 msgstr ""
 
-#: templates/admin/translations.php:436
+#: templates/admin/translations.php:452
 msgid "Saved Collection"
 msgstr ""
 
-#: templates/admin/translations.php:124
+#: templates/admin/translations.php:139
 msgid "Saved Collections"
 msgstr ""
 
-#: templates/admin/translations.php:272
+#: templates/admin/translations.php:286
 msgid "Saved Recipe Collection"
 msgstr ""
 
-#: templates/admin/translations.php:210
+#: templates/admin/translations.php:224
 msgid "Saved successfully"
 msgstr ""
 
@@ -4620,64 +4673,64 @@ msgid_plural "Searching %d recipes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/translations.php:66
+#: templates/admin/translations.php:74
 msgid "second"
 msgstr ""
 
-#: templates/admin/translations.php:98
+#: templates/admin/translations.php:113
 msgid "Second Unit System"
 msgstr ""
 
-#: templates/admin/translations.php:67
+#: templates/admin/translations.php:75
 msgid "seconds"
 msgstr ""
 
-#: templates/admin/translations.php:135 
+#: templates/admin/translations.php:150 
 #: templates/admin/menu/import/import-recipes.php:60
 msgid "Select"
 msgstr ""
 
-#: templates/admin/translations.php:88
+#: templates/admin/translations.php:97
 msgid "Select an action to perform:"
 msgstr ""
 
-#: templates/admin/translations.php:346
+#: templates/admin/translations.php:362
 msgid "Select from list or type to create..."
 msgstr ""
 
-#: templates/admin/translations.php:347
+#: templates/admin/translations.php:363
 msgid "Select from list..."
 msgstr ""
 
-#: templates/admin/translations.php:337
+#: templates/admin/translations.php:353
 msgid "Select Image"
 msgstr ""
 
-#: templates/admin/translations.php:274
+#: templates/admin/translations.php:290
 msgid "Select ingredients..."
 msgstr ""
 
-#: templates/admin/translations.php:134
+#: templates/admin/translations.php:149
 msgid "Select Media"
 msgstr ""
 
-#: templates/admin/translations.php:351
+#: templates/admin/translations.php:367
 msgid "Select or search a recipe"
 msgstr ""
 
-#: templates/admin/translations.php:355
+#: templates/admin/translations.php:371
 msgid "Select Roundup Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:447
+#: templates/admin/translations.php:463
 msgid "SEO"
 msgstr ""
 
-#: templates/admin/translations.php:215
+#: templates/admin/translations.php:229
 msgid "Serving Size"
 msgstr ""
 
-#: templates/admin/translations.php:231 
+#: templates/admin/translations.php:245 
 #: includes/public/deprecated/class-wprm-template-helper.php:51 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:339
 msgid "Servings"
@@ -4689,7 +4742,7 @@ msgid ""
 "Leave blank for default print template as defined in the settings."
 msgstr ""
 
-#: templates/admin/translations.php:516
+#: templates/admin/translations.php:532
 msgid "Set Affiliate Link"
 msgstr ""
 
@@ -4703,6 +4756,10 @@ msgstr ""
 
 #: templates/settings/group-media.php:77
 msgid "Set the loop option for uploaded (not embedded) videos."
+msgstr ""
+
+#: templates/admin/translations.php:90
+msgid "Set User Rating by Author"
 msgstr ""
 
 #: includes/public/class-wprm-settings.php:63
@@ -4733,20 +4790,21 @@ msgstr ""
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/settings/group-integrations.php:24
+#: templates/settings/group-integrations.php:24 
+#: templates/admin/translations.php:29
 msgid "Shoppable Recipes with Instacart"
 msgstr ""
 
-#: templates/admin/translations.php:107 
+#: templates/admin/translations.php:122 
 #: templates/admin/menu/tools/wpurp-ingredients.php:17
 msgid "Shopping List Group"
 msgstr ""
 
-#: templates/admin/translations.php:227
+#: templates/admin/translations.php:241
 msgid "Short description of this recipe..."
 msgstr ""
 
-#: templates/admin/translations.php:456
+#: templates/admin/translations.php:472
 msgid "Shortcode"
 msgstr ""
 
@@ -4754,7 +4812,7 @@ msgstr ""
 msgid "Should work as a background for white text"
 msgstr ""
 
-#: templates/admin/translations.php:273
+#: templates/admin/translations.php:287
 msgid "Show \"0\" in template"
 msgstr ""
 
@@ -4782,7 +4840,7 @@ msgstr ""
 msgid "Show advanced options"
 msgstr ""
 
-#: templates/admin/translations.php:448
+#: templates/admin/translations.php:464
 msgid "Show All"
 msgstr ""
 
@@ -4824,7 +4882,7 @@ msgstr ""
 msgid "Show values when 0"
 msgstr ""
 
-#: templates/admin/translations.php:373
+#: templates/admin/translations.php:389
 msgid "Showing"
 msgstr ""
 
@@ -4838,7 +4896,7 @@ msgid ""
 "English sites by automatically translating ingredients."
 msgstr ""
 
-#: templates/admin/translations.php:248
+#: templates/admin/translations.php:262
 msgid "Singular Name"
 msgstr ""
 
@@ -4858,7 +4916,7 @@ msgstr ""
 msgid "Slider in Tooltip"
 msgstr ""
 
-#: templates/admin/translations.php:237
+#: templates/admin/translations.php:251
 msgid "Slug"
 msgstr ""
 
@@ -4884,7 +4942,7 @@ msgstr ""
 msgid "Social Sharing"
 msgstr ""
 
-#: templates/admin/translations.php:13
+#: templates/admin/translations.php:21
 msgid "Something went wrong during saving."
 msgstr ""
 
@@ -4895,15 +4953,15 @@ msgstr ""
 msgid "Something went wrong."
 msgstr ""
 
-#: templates/admin/translations.php:243
+#: templates/admin/translations.php:257
 msgid "Something went wrong. Make sure this key does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:207
+#: templates/admin/translations.php:221
 msgid "Something went wrong. Please contact support."
 msgstr ""
 
-#: templates/admin/translations.php:378
+#: templates/admin/translations.php:394
 msgid "Sort:"
 msgstr ""
 
@@ -4932,7 +4990,7 @@ msgstr ""
 msgid "Square"
 msgstr ""
 
-#: templates/admin/translations.php:386
+#: templates/admin/translations.php:402
 msgid "star"
 msgstr ""
 
@@ -4944,7 +5002,7 @@ msgstr ""
 msgid "Star Size"
 msgstr ""
 
-#: templates/admin/translations.php:387
+#: templates/admin/translations.php:403
 msgid "stars"
 msgstr ""
 
@@ -4968,11 +5026,11 @@ msgstr ""
 msgid "State of the instruction media toggle when the page loads."
 msgstr ""
 
-#: templates/admin/translations.php:239
+#: templates/admin/translations.php:253
 msgid "Status"
 msgstr ""
 
-#: templates/admin/translations.php:282
+#: templates/admin/translations.php:298
 msgid "Step Summary"
 msgstr ""
 
@@ -4980,23 +5038,23 @@ msgstr ""
 msgid "Still searching, keep this page open."
 msgstr ""
 
-#: templates/admin/translations.php:308
+#: templates/admin/translations.php:324
 msgid "Subscript"
 msgstr ""
 
-#: templates/admin/translations.php:304
+#: templates/admin/translations.php:320
 msgid "Suggestions:"
 msgstr ""
 
-#: templates/admin/translations.php:139
+#: templates/admin/translations.php:154
 msgid "Summary"
 msgstr ""
 
-#: templates/admin/translations.php:309
+#: templates/admin/translations.php:325
 msgid "Superscript"
 msgstr ""
 
-#: templates/admin/translations.php:83
+#: templates/admin/translations.php:92
 msgid "Switch ingredient units with converted ones (does not change label)"
 msgstr ""
 
@@ -5115,7 +5173,7 @@ msgid "tbs"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:217 
-#: templates/admin/translations.php:288
+#: templates/admin/translations.php:304
 msgid "tbsp"
 msgstr ""
 
@@ -5135,11 +5193,11 @@ msgstr ""
 msgid "Tell Pinterest NOT to display pins as rich pins on recipe pages."
 msgstr ""
 
-#: templates/admin/translations.php:321
+#: templates/admin/translations.php:337
 msgid "Temperature tooltip (e.g. Fan Assisted Heating):"
 msgstr ""
 
-#: templates/admin/translations.php:320
+#: templates/admin/translations.php:336
 msgid "Temperature value (e.g. 350):"
 msgstr ""
 
@@ -5182,7 +5240,7 @@ msgid ""
 "page."
 msgstr ""
 
-#: templates/admin/translations.php:489
+#: templates/admin/translations.php:505
 msgid "Terms"
 msgstr ""
 
@@ -5250,17 +5308,17 @@ msgid ""
 "metadata for better SEO will get you more visitors!"
 msgstr ""
 
-#: templates/admin/translations.php:535
+#: templates/admin/translations.php:17
 msgid ""
 "The estimated cost of the materials consumed when performing instructions. "
 "Used in the metadata."
 msgstr ""
 
-#: templates/admin/translations.php:333
+#: templates/admin/translations.php:349
 msgid "The image should have at least this height:"
 msgstr ""
 
-#: templates/admin/translations.php:332
+#: templates/admin/translations.php:348
 msgid "The image should have at least this width:"
 msgstr ""
 
@@ -5272,17 +5330,22 @@ msgstr ""
 msgid "The main recipe video"
 msgstr ""
 
-#: templates/admin/translations.php:206
+#: templates/admin/translations.php:220
 msgid ""
 "The recipe has been copied and can be used in the \"Import from JSON\" "
 "feature."
 msgstr ""
 
-#: templates/admin/translations.php:154
+#: templates/admin/translations.php:169
 msgid "The recipe has been imported."
 msgstr ""
 
-#: templates/admin/translations.php:216
+#: templates/settings/group-recipe-roundup.php:58
+msgid ""
+"The roundup item will only show up if the recipe status is \"Published\"."
+msgstr ""
+
+#: templates/admin/translations.php:230
 msgid "The weight of 1 serving. Does not affect the calculation."
 msgstr ""
 
@@ -5301,7 +5364,7 @@ msgid ""
 "These settings change the default value when you start creating a new recipe."
 msgstr ""
 
-#: templates/admin/translations.php:213
+#: templates/admin/translations.php:227
 msgid "These should be the nutrition facts for 1 serving of your recipe."
 msgstr ""
 
@@ -5313,7 +5376,7 @@ msgstr ""
 msgid "This custom styling will be output on your website."
 msgstr ""
 
-#: templates/admin/translations.php:175
+#: templates/admin/translations.php:20
 msgid "This feature is only available in"
 msgstr ""
 
@@ -5321,15 +5384,15 @@ msgstr ""
 msgid "This is a \"WPRM Recipe\" block with a non-existing recipe ID."
 msgstr ""
 
-#: templates/admin/translations.php:279
+#: templates/admin/translations.php:295
 msgid "This is one step of the instructions."
 msgstr ""
 
-#: templates/admin/translations.php:208
+#: templates/admin/translations.php:222
 msgid "This is taking a long time. Maybe something went wrong?"
 msgstr ""
 
-#: templates/admin/translations.php:531
+#: templates/admin/translations.php:13
 msgid "This recipe doesn't have any ingredients."
 msgstr ""
 
@@ -5351,28 +5414,28 @@ msgid ""
 "user ratings vote for this recipe."
 msgstr ""
 
-#: templates/admin/translations.php:407
+#: templates/admin/translations.php:423
 msgid ""
 "This will update the unit for all recipes using it. Take note that terms are "
 "case insensitive (t and T will be seen as the same unit and both get "
 "replaced)."
 msgstr ""
 
-#: templates/admin/translations.php:198
+#: templates/admin/translations.php:212
 msgid "Times"
 msgstr ""
 
-#: templates/admin/translations.php:220
+#: templates/admin/translations.php:234
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add equipment."
 msgstr ""
 
-#: templates/admin/translations.php:184
+#: templates/admin/translations.php:198
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add ingredients."
 msgstr ""
 
-#: templates/admin/translations.php:193
+#: templates/admin/translations.php:207
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add instructions."
 msgstr ""
@@ -5389,25 +5452,25 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: templates/admin/translations.php:51
+#: templates/admin/translations.php:59
 msgid "Top Recipe Interactions (last 7 days)"
 msgstr ""
 
-#: templates/admin/translations.php:43
+#: templates/admin/translations.php:51
 msgid "Total"
 msgstr ""
 
-#: templates/admin/translations.php:214
+#: templates/admin/translations.php:228
 msgid "Total servings for this recipe:"
 msgstr ""
 
-#: templates/admin/translations.php:163 
+#: templates/admin/translations.php:178 
 #: includes/public/deprecated/class-wprm-template-helper.php:50 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:347
 msgid "Total Time"
 msgstr ""
 
-#: templates/admin/translations.php:45
+#: templates/admin/translations.php:53
 msgid "Track different visitor actions related to recipes."
 msgstr ""
 
@@ -5421,7 +5484,7 @@ msgstr ""
 msgid "Translation API"
 msgstr ""
 
-#: templates/admin/translations.php:415
+#: templates/admin/translations.php:431
 msgid "Trash"
 msgstr ""
 
@@ -5439,7 +5502,7 @@ msgstr ""
 msgid "Try to force a page break after every recipe when printing."
 msgstr ""
 
-#: templates/admin/translations.php:358
+#: templates/admin/translations.php:374
 msgid "Try to load details from URL"
 msgstr ""
 
@@ -5469,7 +5532,7 @@ msgstr ""
 msgid "Twitter Share"
 msgstr ""
 
-#: templates/admin/translations.php:54
+#: templates/admin/translations.php:62
 msgid "Type"
 msgstr ""
 
@@ -5492,22 +5555,22 @@ msgid ""
 "loaded."
 msgstr ""
 
-#: templates/admin/translations.php:307
+#: templates/admin/translations.php:323
 msgid "Underline"
 msgstr ""
 
-#: templates/admin/translations.php:44
+#: templates/admin/translations.php:52
 msgid "Unique"
 msgstr ""
 
-#: templates/admin/translations.php:178
+#: templates/admin/translations.php:192
 msgid "Unit"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:45 
 #: templates/settings/group-adjustable-servings.php:74 
 #: templates/settings/group-unit-conversion.php:15 
-#: templates/admin/translations.php:176
+#: templates/admin/translations.php:190
 msgid "Unit Conversion"
 msgstr ""
 
@@ -5539,11 +5602,12 @@ msgstr ""
 msgid "Unsave from Slickstream"
 msgstr ""
 
-#: templates/elementor/widget.php:116
+#: templates/elementor/widget-recipe.php:116 
+#: templates/elementor/widget-roundup.php:80
 msgid "Unset selected recipe"
 msgstr ""
 
-#: templates/admin/translations.php:190
+#: templates/admin/translations.php:204
 msgid "Unused ingredients:"
 msgstr ""
 
@@ -5555,11 +5619,11 @@ msgstr ""
 msgid "Upgrade WPRM"
 msgstr ""
 
-#: templates/admin/translations.php:341
+#: templates/admin/translations.php:357
 msgid "Upload Instruction Video"
 msgstr ""
 
-#: templates/admin/translations.php:349
+#: templates/admin/translations.php:365
 msgid "Upload Video"
 msgstr ""
 
@@ -5581,7 +5645,7 @@ msgstr ""
 msgid "URL Parameter to use to set a specific serving size"
 msgstr ""
 
-#: templates/admin/translations.php:366
+#: templates/admin/translations.php:382
 msgid "Use"
 msgstr ""
 
@@ -5620,11 +5684,11 @@ msgstr ""
 #: includes/admin/class-wprm-modal.php:289 
 #: includes/admin/class-wprm-modal.php:322 
 #: includes/admin/class-wprm-modal.php:355 
-#: includes/admin/class-wprm-modal.php:388 templates/admin/translations.php:96
+#: includes/admin/class-wprm-modal.php:388 templates/admin/translations.php:111
 msgid "Use Default"
 msgstr ""
 
-#: templates/admin/translations.php:357
+#: templates/admin/translations.php:373
 msgid "Use external recipe from a different website"
 msgstr ""
 
@@ -5632,7 +5696,7 @@ msgstr ""
 msgid "Use featured image of parent post if no recipe image is set."
 msgstr ""
 
-#: templates/admin/translations.php:267
+#: templates/admin/translations.php:281
 msgid "Use for a list of existing recipes on your website"
 msgstr ""
 
@@ -5670,7 +5734,7 @@ msgstr ""
 msgid "Use Nofollow"
 msgstr ""
 
-#: templates/admin/translations.php:324
+#: templates/admin/translations.php:340
 msgid "Use nofollow"
 msgstr ""
 
@@ -5682,7 +5746,7 @@ msgstr ""
 msgid "Use noreferrer for external links"
 msgstr ""
 
-#: templates/admin/translations.php:356
+#: templates/admin/translations.php:372
 msgid "Use one of your own recipes"
 msgstr ""
 
@@ -5704,7 +5768,7 @@ msgstr ""
 msgid "Use regular instruction text if name is not set"
 msgstr ""
 
-#: templates/admin/translations.php:338
+#: templates/admin/translations.php:354
 msgid "Use Repin ID"
 msgstr ""
 
@@ -5734,7 +5798,7 @@ msgstr ""
 msgid "Use Sponsored"
 msgstr ""
 
-#: templates/admin/translations.php:325
+#: templates/admin/translations.php:341
 msgid "Use sponsored"
 msgstr ""
 
@@ -5758,11 +5822,11 @@ msgid ""
 "and Print Recipe buttons, for example."
 msgstr ""
 
-#: templates/admin/translations.php:145
+#: templates/admin/translations.php:160
 msgid "Use the checkboxes to indicate group headers (like Frosting and Cake)"
 msgstr ""
 
-#: templates/admin/translations.php:29
+#: templates/admin/translations.php:37
 msgid ""
 "Use the Health Check feature to search for any WPRM-related issues and "
 "improve your recipes."
@@ -5795,7 +5859,7 @@ msgid ""
 "website:"
 msgstr ""
 
-#: templates/admin/translations.php:147
+#: templates/admin/translations.php:162
 msgid "Use these Values"
 msgstr ""
 
@@ -5817,7 +5881,7 @@ msgid ""
 "Units page is up to date."
 msgstr ""
 
-#: templates/admin/translations.php:348
+#: templates/admin/translations.php:364
 msgid ""
 "Use URL to the video (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or "
 "the full embed code."
@@ -5833,13 +5897,13 @@ msgstr ""
 msgid "Used for the color of the star ratings and other icons."
 msgstr ""
 
-#: templates/admin/translations.php:170
+#: templates/admin/translations.php:185
 msgid ""
 "Used in the recipe metadata. Can be displayed elsewhere on the page using "
 "the [wprm-recipe-video] shortcode."
 msgstr ""
 
-#: templates/admin/translations.php:166
+#: templates/admin/translations.php:181
 msgid "Used in the recipe metadata. Should be an image of the completed dish."
 msgstr ""
 
@@ -5867,15 +5931,15 @@ msgid ""
 "can be changed on the Manage > Recipe Fields page."
 msgstr ""
 
-#: templates/admin/translations.php:437
+#: templates/admin/translations.php:453
 msgid "User Collection"
 msgstr ""
 
-#: templates/admin/translations.php:438
+#: templates/admin/translations.php:454
 msgid "User Collections"
 msgstr ""
 
-#: templates/admin/translations.php:395
+#: templates/admin/translations.php:411
 msgid "User ID"
 msgstr ""
 
@@ -5884,7 +5948,7 @@ msgid "User Not Voted"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:48 
-#: templates/admin/translations.php:390
+#: templates/admin/translations.php:406
 msgid "User Rating"
 msgstr ""
 
@@ -5909,52 +5973,52 @@ msgstr ""
 msgid "Vegetarian"
 msgstr ""
 
-#: templates/settings/group-media.php:52 templates/admin/translations.php:169
+#: templates/settings/group-media.php:52 templates/admin/translations.php:184
 msgid "Video"
 msgstr ""
 
-#: templates/admin/translations.php:18
+#: templates/admin/translations.php:26
 msgid "Video tutorials and walkthroughs"
 msgstr ""
 
-#: templates/admin/translations.php:475
+#: templates/admin/translations.php:491
 msgid "View Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:40
+#: templates/admin/translations.php:48
 msgid "View Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:495
+#: templates/admin/translations.php:511
 msgid "View Revision"
 msgstr ""
 
-#: templates/admin/translations.php:530
+#: templates/admin/translations.php:550
 msgid "Visitor Details"
 msgstr ""
 
-#: templates/admin/translations.php:529
+#: templates/admin/translations.php:549
 msgid "Visitor UID"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:485 
+#: templates/admin/translations.php:501 
 #: includes/public/deprecated/class-wprm-template-helper.php:240
 msgid "vote"
 msgid_plural "votes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/translations.php:486
+#: templates/admin/translations.php:502
 msgid "votes"
 msgstr ""
 
-#: templates/admin/translations.php:223
+#: templates/admin/translations.php:237
 msgid "Warning!"
 msgstr ""
 
-#: templates/admin/translations.php:334
+#: templates/admin/translations.php:350
 msgid ""
 "Warning! We recommend making sure the image meets the following requirements:"
 msgstr ""
@@ -5965,19 +6029,19 @@ msgid ""
 "have activated."
 msgstr ""
 
-#: templates/admin/translations.php:450
+#: templates/admin/translations.php:466
 msgid "Warnings"
 msgstr ""
 
-#: templates/admin/translations.php:493
+#: templates/admin/translations.php:509
 msgid "Was not a Recipe Submission"
 msgstr ""
 
-#: templates/admin/translations.php:492
+#: templates/admin/translations.php:508
 msgid "Was Recipe Submission"
 msgstr ""
 
-#: templates/admin/translations.php:412
+#: templates/admin/translations.php:428
 msgid "We could not find a term with that ID."
 msgstr ""
 
@@ -5988,65 +6052,65 @@ msgid ""
 "be able to make use of all of our features."
 msgstr ""
 
-#: templates/admin/translations.php:424
+#: templates/admin/translations.php:440
 msgid ""
 "We were not able to create this equipment. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:419
+#: templates/admin/translations.php:435
 msgid ""
 "We were not able to create this ingredient. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:426
+#: templates/admin/translations.php:442
 msgid "We were not able to create this term. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:422
+#: templates/admin/translations.php:438
 msgid "We were not able to create this unit. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:505
+#: templates/admin/translations.php:521
 msgid "What do you want the plural to be for"
 msgstr ""
 
-#: templates/admin/translations.php:500
+#: templates/admin/translations.php:516
 msgid "What do you want the slug to be for"
 msgstr ""
 
-#: templates/admin/translations.php:423
+#: templates/admin/translations.php:439
 msgid "What do you want to be the name of this new equipment?"
 msgstr ""
 
-#: templates/admin/translations.php:418
+#: templates/admin/translations.php:434
 msgid "What do you want to be the name of this new ingredient?"
 msgstr ""
 
-#: templates/admin/translations.php:425
+#: templates/admin/translations.php:441
 msgid "What do you want to be the name of this new term?"
 msgstr ""
 
-#: templates/admin/translations.php:421
+#: templates/admin/translations.php:437
 msgid "What do you want to be the name of this new unit?"
 msgstr ""
 
-#: templates/admin/translations.php:524
+#: templates/admin/translations.php:544
 msgid "What do you want to be the new grid link for"
 msgstr ""
 
-#: templates/admin/translations.php:507
+#: templates/admin/translations.php:523
 msgid "What do you want to be the new group for"
 msgstr ""
 
-#: templates/admin/translations.php:517
+#: templates/admin/translations.php:533
 msgid "What do you want to be the new link for"
 msgstr ""
 
-#: templates/admin/translations.php:406
+#: templates/admin/translations.php:422
 msgid "What do you want to be the new name for"
 msgstr ""
 
-#: templates/admin/translations.php:409
+#: templates/admin/translations.php:425
 msgid "What is the ID of the term you want the merge"
 msgstr ""
 
@@ -6140,10 +6204,11 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
+#: includes/public/class-wprm-compatibility.php:156
 msgid "WP Recipe Maker"
 msgstr ""
 
-#: templates/admin/translations.php:23
+#: templates/admin/translations.php:31
 msgid "WP Recipe Maker Facebook Group"
 msgstr ""
 
@@ -6184,15 +6249,15 @@ msgstr ""
 msgid "yd"
 msgstr ""
 
-#: templates/admin/translations.php:371
+#: templates/admin/translations.php:387
 msgid "Yes"
 msgstr ""
 
-#: templates/admin/translations.php:230
+#: templates/admin/translations.php:244
 msgid "Yield"
 msgstr ""
 
-#: templates/admin/translations.php:293
+#: templates/admin/translations.php:309
 msgid ""
 "You can already fill in the values, but the adjustable changer will not show "
 "up yet."
@@ -6206,12 +6271,12 @@ msgstr ""
 msgid "You can use the following placeholders:"
 msgstr ""
 
-#: templates/admin/translations.php:532
+#: templates/admin/translations.php:14
 msgid ""
 "You don't have the servings field set for your recipe under \"General\"."
 msgstr ""
 
-#: templates/admin/translations.php:59
+#: templates/admin/translations.php:67
 msgid "You just missed the deadline!"
 msgstr ""
 
@@ -6219,7 +6284,7 @@ msgstr ""
 msgid "You need to enable the Comment Ratings feature to use this option."
 msgstr ""
 
-#: templates/admin/translations.php:427
+#: templates/admin/translations.php:443
 msgid "Your Custom Fields"
 msgstr ""
 

@@ -15,10 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define Constants
  */
-define( 'ASTRA_THEME_VERSION', '3.9.2' );
+define( 'ASTRA_THEME_VERSION', '3.9.4' );
 define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
 define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
 define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
+define( 'ASTRA_PRO_UPGRADE_URL', 'https://wpastra.com/pro/' );
 
 /**
  * Minimum Version requirement of the Astra Pro addon.
@@ -37,11 +38,8 @@ require_once ASTRA_THEME_DIR . 'inc/core/class-astra-icons.php';
 /**
  * Update theme
  */
-require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-theme-update.php';
 require_once ASTRA_THEME_DIR . 'inc/theme-update/astra-update-functions.php';
 require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-theme-background-updater.php';
-require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-pb-compatibility.php';
-
 
 /**
  * Fonts Files
@@ -105,13 +103,11 @@ require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-helper.php';
 require_once ASTRA_THEME_DIR . 'inc/schema/class-astra-schema.php';
 
 if ( is_admin() ) {
-
 	/**
 	 * Admin Menu Settings
 	 */
 	require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-settings.php';
 	require_once ASTRA_THEME_DIR . 'inc/lib/astra-notices/class-astra-notices.php';
-
 }
 
 /**
