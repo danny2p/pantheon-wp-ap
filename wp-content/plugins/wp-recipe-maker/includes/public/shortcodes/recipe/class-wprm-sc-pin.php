@@ -185,8 +185,8 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 
 		// Construct link attributes.
 		$attributes = '';
-		$attributes .= ' style="' . $style . '"';
-		$attributes .= ' class="' . implode( ' ', $classes ) . '"';
+		$attributes .= ' style="' . esc_attr( $style ) . '"';
+		$attributes .= ' class="' . esc_attr( implode( ' ', $classes ) ) . '"';
 		$attributes .= ' target="_blank"';
 		$attributes .= ' rel="nofollow noopener"';
 		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
@@ -196,7 +196,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
 		$attributes .= $aria_label;
 
-		$output = '<a href="' . $pin_url . '"' . $attributes . '>' . $icon . $text . '</a>';
+		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . wp_kses_post( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

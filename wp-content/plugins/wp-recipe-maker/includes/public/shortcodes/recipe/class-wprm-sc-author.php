@@ -137,7 +137,7 @@ class WPRM_SC_Author extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output .= '<span class="' . implode( ' ', $classes ) . '">' . $recipe->author() . '</span>';
+		$output .= '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $recipe->author() . '</span>';
 
 		// Optional author image.
 		$img = '';
@@ -180,9 +180,9 @@ class WPRM_SC_Author extends WPRM_Template_Shortcode {
 
 			if ( $style ) {
 				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = str_ireplace( ' style="', ' style="' . $style, $img );
+					$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
 				} else {
-					$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 				}
 			}
 

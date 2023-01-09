@@ -187,7 +187,7 @@ class WPRM_SC_Twitter_Share extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Share on Twitter', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . $share_url . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow noopener"' . $aria_label . '>' . $icon . $text . '</a>';
+		$output = '<a href="' . esc_attr( $share_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow noopener"' . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

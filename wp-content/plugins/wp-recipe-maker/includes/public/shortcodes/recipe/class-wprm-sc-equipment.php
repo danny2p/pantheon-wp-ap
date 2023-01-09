@@ -171,7 +171,7 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<div class="' . implode( ' ', $classes ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'equipment' );
 
 		if ( 'list' === $atts['display_style'] ) {
@@ -179,7 +179,7 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 			foreach ( $recipe->equipment() as $equipment ) {
 				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
 				$style = 'list-style-type: ' . $list_style_type . ';';
-				$output .= '<li class="wprm-recipe-equipment-item" style="' . $style . '">';
+				$output .= '<li class="wprm-recipe-equipment-item" style="' . esc_attr( $style ) . '">';
 
 				// Equipment link.
 				$name = apply_filters( 'wprm_recipe_equipment_shortcode_link', $equipment['name'], $equipment );
@@ -205,7 +205,7 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 							$separator = '&#32;';
 					}
 
-					$name = $name . $separator . '<span class="wprm-recipe-equipment-notes wprm-recipe-equipment-notes-' . $atts['notes_style'] . '">' . $notes . '</span>';
+					$name = $name . $separator . '<span class="wprm-recipe-equipment-notes wprm-recipe-equipment-notes-' . esc_attr( $atts['notes_style'] ) . '">' . $notes . '</span>';
 				}
 
 				$equipment_output = '<div class="wprm-recipe-equipment-name">' . $name . '</div>';

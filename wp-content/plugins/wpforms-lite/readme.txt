@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.1
-Stable tag: 1.7.8
+Stable tag: 1.7.9
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -235,10 +235,10 @@ Visit <a href="https://www.wpbeginner.com/" rel="friend" title="WPBeginner">WPBe
 
 1. WPForms Drag & Drop Online Form Builder
 2. Adding New Field
-3. Form Preview
-4. Form Settings
-5. Conversational Forms addon
-6. Form Pages addon
+3. WPForms Settings
+4. Form Preview
+5. Form Pages with multiple styles
+6. Conversational Forms
 
 == Frequently Asked Questions ==
 
@@ -432,6 +432,23 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.7.9 =
+- Added: Icon Choices feature for Checkboxes and Multiple Choice fields - a selection of 2000+ icons can now be used with your choices!
+- Changed: Avoid rendering the WPForms Import admin page if the user lacks `unfiltered_html` capability.
+- Changed: Respect site settings for displaying avatars on the Revisions screen in the Form Builder.
+- Changed: Color picker fields in the Form Builder are now correctly handling default colors.
+- Changed: In the form Notifications you can now set up the Reply-To Name value in addition to the Reply-To Email using a special format.
+- Changed: Updated jquery-confirm library to 3.3.4.
+- Fixed: Prevent field duplication in the Form Builder performed multiple times when clicking fast inside the confirmation modal.
+- Fixed: Action links were rendered on two lines in the admin dashboard widget.
+- Fixed: PHP notices were generated when form locations logic ran for unregistered post types.
+- Fixed: The Embed modal performance in the Form Builder was improved a lot when there are a ton of pages on a site.
+- Fixed: The confirmation message for non-AJAX form submissions wasn't wrapped into the main form container.
+- Fixed: Improved compatibility with Elementor popups v3.9+.
+- Fixed: Notification email suggestion didn't work properly in WordPress installed in a subdomain.
+- Fixed: `{page_title}` smart tag was conflicting with the wpSEO plugin.
+- Fixed: Better compatibility with the Popup Maker plugin.
 
 = 1.7.8 =
 - Added: All anti-spam protection settings are grouped in one place in the Form Builder > Settings for easier access.

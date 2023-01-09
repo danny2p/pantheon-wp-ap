@@ -32,9 +32,9 @@ class Help {
 	 *
 	 * @since 1.6.3
 	 */
-	public function init() {
+	public function init() { // phpcs:ignore WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
 
-		// This should be here, otherwise scheduled task doesn't executes.
+		// This should be here, otherwise scheduled task doesn't execute.
 		add_action( 'wpforms_builder_help_cache_update', [ $this, 'update_docs' ] );
 
 		// Terminate initialization if not in builder.
@@ -494,11 +494,15 @@ class Help {
 			'image choices'             => [
 				'/docs/how-to-add-image-choices-to-fields/',
 			],
+			'icon choices'              => [
+				'/docs/using-icon-choices/',
+			],
 			'multiple choice'           => [
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 				'/docs/how-to-randomize-checkbox-and-multiple-choice-options/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
@@ -508,6 +512,7 @@ class Help {
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 				'/docs/how-to-randomize-checkbox-and-multiple-choice-options/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
@@ -518,6 +523,7 @@ class Help {
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 				'/docs/how-to-randomize-checkbox-and-multiple-choice-options/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
@@ -528,6 +534,7 @@ class Help {
 				'/docs/how-to-create-a-multi-column-layout-for-radio-buttons-and-checkboxes/',
 				'/docs/how-to-randomize-checkbox-and-multiple-choice-options/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
@@ -941,6 +948,7 @@ class Help {
 				'/docs/how-to-create-a-donation-form-with-multiple-amounts/',
 				'/docs/how-to-allow-users-to-choose-a-payment-method-on-your-form/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
@@ -953,6 +961,7 @@ class Help {
 				'/docs/how-to-create-a-donation-form-with-multiple-amounts/',
 				'/docs/how-to-allow-users-to-choose-a-payment-method-on-your-form/',
 				'/docs/how-to-add-image-choices-to-fields/',
+				'/docs/using-icon-choices/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',

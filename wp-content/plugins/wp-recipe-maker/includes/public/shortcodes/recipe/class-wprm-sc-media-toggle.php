@@ -127,7 +127,7 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			// Get button text.
 			$button_text = '';
 			if ( $atts[ $button . '_text'] ) {
-				$button_text .= '<span class="wprm-toggle-text">' . $atts[ $button . '_text'] . '</span>';
+				$button_text .= '<span class="wprm-toggle-text">' . wp_kses_post( $atts[ $button . '_text'] ) . '</span>';
 			}
 
 			// Get optional icon.
@@ -144,11 +144,11 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			}
 
 			$active = 'on' === $button ? ' wprm-toggle-active' : ''; 
-			$buttons_output .= '<button class="wprm-recipe-media-toggle wprm-toggle' . $active . '" data-state="' . $button . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $button_style .'" aria-label="' . $label . '">' . $button_text . '</button>';
+			$buttons_output .= '<button class="wprm-recipe-media-toggle wprm-toggle' . $active . '" data-state="' . esc_attr( $button ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $button_style ) .'" aria-label="' . $label . '">' . $button_text . '</button>';
 		}
 
 		// Output.
-		$output = '<div class="' . implode( ' ', $classes ) . '" style="' . $style . '">' . $buttons_output . '</div>';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $buttons_output . '</div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

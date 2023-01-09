@@ -597,7 +597,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'text_style' => $atts['advanced_servings_text_style'],
 		);
 
-		$output = '<div class="' . implode( ' ', $classes ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'ingredients', array(
 			'unit_conversion_atts' => $unit_conversion_atts,
 			'adjustable_servings_atts' => $adjustable_servings_atts,
@@ -624,8 +624,8 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
-				$tag = trim( $atts['group_tag'] );
-				$output .= '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $ingredient_group['name'] . '</' . $tag . '>';
+				$tag = sanitize_key( $atts['group_tag'] );
+				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $ingredient_group['name'] . '</' . $tag . '>';
 			}
 
 			$output .= '<ul class="wprm-recipe-ingredients">';
@@ -644,7 +644,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					$style .= 'flex-basis: ' . $atts['group_width'] . ';';
 				}
 
-				$output .= '<li class="wprm-recipe-ingredient" style="' . $style . '"' . $uid . '>';
+				$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';
 
 				// Maybe replace fractions in amount.
 				if ( WPRM_Settings::get( 'automatic_amount_fraction_symbols' ) ) {
@@ -724,9 +724,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 
 				if ( $ingredient['notes'] ) {
 					if ( 'parentheses' === $atts['ingredient_notes_separator'] ) {
-						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . $atts['notes_style'] . '">(' . $ingredient['notes'] . ')</span>';
+						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">(' . $ingredient['notes'] . ')</span>';
 					} else {
-						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . $atts['notes_style'] . '">' . $ingredient['notes'] . '</span>';
+						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">' . $ingredient['notes'] . '</span>';
 					}
 				} elseif( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
 					$notes_output .= '<span class="wprm-recipe-ingredient-notes"></span>';

@@ -1,6 +1,24 @@
 {
     "news": [
         {
+            "date": "2022-12-09",
+            "label": "Blog",
+            "title": "How to Make Cooking Videos At Home (Step-by-Step)",
+            "url": "https://bootstrapped.ventures/how-to-make-cooking-videos/"
+        },
+        {
+            "date": "2022-12-01",
+            "label": "Blog",
+            "title": "How To Write an Introduction Page For Your Food Blog",
+            "url": "https://bootstrapped.ventures/food-blog-introduction-sample/"
+        },
+        {
+            "date": "2022-11-23",
+            "label": "Blog",
+            "title": "How to Make the Most of Your Food Blog with Recipe Videos",
+            "url": "https://bootstrapped.ventures/how-to-make-a-food-video/"
+        },
+        {
             "date": "2022-11-14",
             "label": "Release",
             "title": "WP Recipe Maker 8.6.0",

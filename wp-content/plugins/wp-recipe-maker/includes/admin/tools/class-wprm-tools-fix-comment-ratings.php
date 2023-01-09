@@ -35,7 +35,7 @@ class WPRM_Tools_Fix_Comment_Ratings {
 	 * @since	5.9.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Fix Comment Ratings', 'wp-recipe-maker' ), __( 'Fix Comment Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_fixing_comment_ratings', array( __CLASS__, 'fixing_comment_ratings' ) );
+		add_submenu_page( '', __( 'Fix Comment Ratings', 'wp-recipe-maker' ), __( 'Fix Comment Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_fixing_comment_ratings', array( __CLASS__, 'fixing_comment_ratings' ) );
 	}
 
 	/**

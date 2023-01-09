@@ -75,7 +75,7 @@ class WPRM_Shortcode_Snippets {
 						// Add to used templates.
 						WPRM_Template_Manager::add_used_template( $template );
 
-						$output = '<div class="wprm-recipe wprm-recipe-snippet wprm-recipe-template-' . $template['slug'] . '">' . do_shortcode( $template['html'] ) . '</div>';
+						$output = '<div class="wprm-recipe wprm-recipe-snippet wprm-recipe-template-' . esc_attr( $template['slug'] ) . '">' . do_shortcode( $template['html'] ) . '</div>';
 						return apply_filters( 'wprm_recipe_snippet_shortcode_output', $output, $atts, $recipe_id, $template );
 					}
 				}

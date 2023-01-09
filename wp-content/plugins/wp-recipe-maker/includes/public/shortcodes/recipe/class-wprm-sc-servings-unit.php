@@ -58,7 +58,7 @@ class WPRM_SC_Servings_Unit extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<span class="' . implode( ' ', $classes ) . '">' . $recipe->servings_unit() . '</span>';
+		$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $recipe->servings_unit() . '</span>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

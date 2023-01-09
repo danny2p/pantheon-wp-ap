@@ -384,13 +384,13 @@ class WPRM_Shortcode {
 			// Output full snippet or recipe template.
 			$align_class = '';
 			if ( isset( $atts['align'] ) && $atts['align'] ) {
-				$align_class = ' align' . $atts['align'];
+				$align_class = ' align' . esc_attr( $atts['align'] );
 			}
 
 			if ( $recipe_template && 'snippet-' === substr( $recipe_template, 0, 8 ) ) {
-				$output = '<div id="wprm-recipe-snippet-container-' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-snippet-container' . $align_class . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '">';
+				$output = '<div id="wprm-recipe-snippet-container-' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-snippet-container' . esc_attr( $align_class ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '">';
 			} else {
-				$output = '<div id="wprm-recipe-container-' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-container' . $align_class . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
+				$output = '<div id="wprm-recipe-container-' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-container' . esc_attr( $align_class ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
 			}
 
 			if ( 'amp' === $type || 'single' === $type ) {

@@ -35,7 +35,7 @@ class WPRM_Tools_Find_Ratings {
 	 * @since	5.6.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Finding Ratings', 'wp-recipe-maker' ), __( 'Finding Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_finding_ratings', array( __CLASS__, 'finding_ratings' ) );
+		add_submenu_page( '', __( 'Finding Ratings', 'wp-recipe-maker' ), __( 'Finding Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_finding_ratings', array( __CLASS__, 'finding_ratings' ) );
 	}
 
 	/**

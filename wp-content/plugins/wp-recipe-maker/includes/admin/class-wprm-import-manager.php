@@ -57,9 +57,9 @@ class WPRM_Import_Manager {
 	 */
 	public static function add_submenu_page() {
 		add_submenu_page( 'wprecipemaker', __( 'Import Recipes', 'wp-recipe-maker' ), __( 'Import Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_import_overview', array( __CLASS__, 'overview_page_template' ) );
-		add_submenu_page( null, __( 'Import Recipes', 'wp-recipe-maker' ), __( 'Import Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_import', array( __CLASS__, 'import_page_template' ) );
-		add_submenu_page( null, __( 'Search Recipes', 'wp-recipe-maker' ), __( 'Search Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_import_search', array( __CLASS__, 'import_search_page_template' ) );
-		add_submenu_page( null, __( 'Importing Recipes', 'wp-recipe-maker' ), __( 'Importing Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_importing', array( __CLASS__, 'importing_recipes' ) );
+		add_submenu_page( '', __( 'Import Recipes', 'wp-recipe-maker' ), __( 'Import Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_import', array( __CLASS__, 'import_page_template' ) );
+		add_submenu_page( '', __( 'Search Recipes', 'wp-recipe-maker' ), __( 'Search Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_import_search', array( __CLASS__, 'import_search_page_template' ) );
+		add_submenu_page( '', __( 'Importing Recipes', 'wp-recipe-maker' ), __( 'Importing Recipes', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_import_access' ), 'wprm_importing', array( __CLASS__, 'importing_recipes' ) );
 	}
 
 	/**

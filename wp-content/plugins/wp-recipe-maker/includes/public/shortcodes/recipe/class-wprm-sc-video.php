@@ -56,7 +56,7 @@ class WPRM_SC_Video extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<div id="wprm-recipe-video-container-' . $recipe->id() . '" class="' . implode( ' ', $classes ) . '">';
+		$output = '<div id="wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'video' );
 
 		$output .= '<div class="wprm-recipe-video">' . do_shortcode( $recipe->video() ) . '</div>';

@@ -35,7 +35,7 @@ class WPRM_Tools_WPURP_Nutrition {
 	 * @since	5.6.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Importing Nutrition', 'wp-recipe-maker' ), __( 'Importing Nutrition', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_wpurp_nutrition', array( __CLASS__, 'wpurp_nutrition' ) );
+		add_submenu_page( '', __( 'Importing Nutrition', 'wp-recipe-maker' ), __( 'Importing Nutrition', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_wpurp_nutrition', array( __CLASS__, 'wpurp_nutrition' ) );
 	}
 
 	/**

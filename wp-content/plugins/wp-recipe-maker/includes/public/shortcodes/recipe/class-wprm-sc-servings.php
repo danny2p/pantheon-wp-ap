@@ -86,7 +86,7 @@ class WPRM_SC_Servings extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<span class="' . implode( ' ', $classes ) . '">' . $recipe->servings() . '</span>';
+		$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $recipe->servings() . '</span>';
 
 		if ( (bool) $atts['label_container'] ) {
 			$unit = WPRM_SC_Servings_Unit::shortcode( $atts );

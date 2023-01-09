@@ -144,7 +144,7 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 		// Output.
 		$classes = array(
 			'wprm-icon-shortcode',
-			'wprm-icon-shortcode-' . $atts['style'],
+			'wprm-icon-shortcode-' . esc_attr( $atts['style'] ),
 		);
 
 		// Add custom class if set.
@@ -155,25 +155,25 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 
 		$style = '';
 		if ( '16px' !== $atts['icon_size'] ) {
-			$style .= 'font-size: ' . $atts['icon_size'] . ';';
-			$style .= 'height: ' . $atts['icon_size'] . ';';
+			$style .= 'font-size: ' . esc_attr( $atts['icon_size'] ) . ';';
+			$style .= 'height: ' . esc_attr( $atts['icon_size'] ) . ';';
 		}
 
 		if ( 'separate' === $atts['style'] ) {
-			$classes[] = 'wprm-align-' . $atts['align'];
-			$classes[] = 'wprm-icon-decoration-' . $atts['decoration'];
+			$classes[] = 'wprm-align-' . esc_attr( $atts['align'] );
+			$classes[] = 'wprm-icon-decoration-' . esc_attr( $atts['decoration'] );
 
 			if ( 'line' === $atts['decoration'] ) {
 				if ( 'left' === $atts['align'] || 'center' === $atts['align'] ) {
-					$after_icon = '<div class="wprm-decoration-line" style="border-color: ' . $atts['line_color'] . '"></div>';
+					$after_icon = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['line_color'] ) . '"></div>';
 				}
 				if ( 'right' === $atts['align'] || 'center' === $atts['align'] ) {
-					$before_icon = '<div class="wprm-decoration-line" style="border-color: ' . $atts['line_color'] . '"></div>';
+					$before_icon = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['line_color'] ) . '"></div>';
 				}
 			}
 		}
 
-		$output = '<div class="' . implode( ' ', $classes ) . '" style="' . $style .'">' . $before_icon . $icon . $after_icon . '</div>';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) .'">' . $before_icon . $icon . $after_icon . '</div>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

@@ -407,13 +407,18 @@ class DashboardWidget extends Widget {
 
 		?>
 		<div class="wpforms-dash-widget-recommended-plugin-block">
-			<p><?php esc_html_e( 'Recommended Plugin:', 'wpforms-lite' ); ?>
-				<strong><?php echo esc_html( $plugin['name'] ); ?></strong> -
-				<?php if ( wpforms_can_install( 'plugin' ) ) { ?>
-					<a href="<?php echo esc_url( $install_url ); ?>"><?php esc_html_e( 'Install', 'wpforms-lite' ); ?></a> &vert;
-				<?php } ?>
-				<a href="<?php echo esc_url( $plugin['more'] ); ?>?utm_source=wpformsplugin&utm_medium=link&utm_campaign=wpformsdashboardwidget"><?php esc_html_e( 'Learn More', 'wpforms-lite' ); ?></a></p>
-
+			<span class="wpforms-dash-widget-recommended-plugin">
+				<span class="recommended"><?php esc_html_e( 'Recommended Plugin:', 'wpforms-lite' ); ?></span>
+				<strong><?php echo esc_html( $plugin['name'] ); ?></strong>
+				<span class="sep">-</span>
+				<span class="action-links">
+					<?php if ( wpforms_can_install( 'plugin' ) ) { ?>
+						<a href="<?php echo esc_url( $install_url ); ?>"><?php esc_html_e( 'Install', 'wpforms-lite' ); ?></a>
+						<span class="sep sep-vertical">&vert;</span>
+					<?php } ?>
+					<a href="<?php echo esc_url( $plugin['more'] ); ?>?utm_source=wpformsplugin&utm_medium=link&utm_campaign=wpformsdashboardwidget"><?php esc_html_e( 'Learn More', 'wpforms-lite' ); ?></a>
+				</span>
+			</span>
 			<button type="button" id="wpforms-dash-widget-dismiss-recommended-plugin-block" class="wpforms-dash-widget-dismiss-recommended-plugin-block" title="<?php esc_html_e( 'Dismiss recommended plugin', 'wpforms-lite' ); ?>">
 				<span class="dashicons dashicons-no-alt"></span>
 			</button>

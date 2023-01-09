@@ -47,8 +47,8 @@ class WPRM_SC_Spacer extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$style = '10px' === $atts['size'] ? '' : ' style="height: ' . $atts['size'] . '"';
-		$output = '<div class="' . implode( ' ', $classes ) . '"' . $style . '></div>';
+		$style = '10px' === $atts['size'] ? '' : ' style="height: ' . esc_attr( $atts['size'] ) . '"';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '></div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}

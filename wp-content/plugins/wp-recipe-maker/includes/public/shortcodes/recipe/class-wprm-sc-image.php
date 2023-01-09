@@ -123,9 +123,9 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 
 		if ( $style ) {
 			if ( false !== stripos( $img, ' style="' ) ) {
-				$img = str_ireplace( ' style="', ' style="' . $style, $img );
+				$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
 			} else {
-				$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 			}
 		}
 
@@ -148,7 +148,7 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 			}
 		}
 
-		$output = '<div class="' . implode( ' ', $classes ) . '">' . $img . '</div>';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ). '">' . $img . '</div>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

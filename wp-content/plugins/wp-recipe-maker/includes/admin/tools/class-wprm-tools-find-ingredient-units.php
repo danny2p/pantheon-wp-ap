@@ -35,7 +35,7 @@ class WPRM_Tools_Find_Ingredient_Units {
 	 * @since	7.6.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Find Ingredient Units', 'wp-recipe-maker' ), __( 'Find Ingredient Units', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_find_ingredient_units', array( __CLASS__, 'find_ingredient_units' ) );
+		add_submenu_page( '', __( 'Find Ingredient Units', 'wp-recipe-maker' ), __( 'Find Ingredient Units', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_find_ingredient_units', array( __CLASS__, 'find_ingredient_units' ) );
 	}
 
 	/**

@@ -193,9 +193,9 @@ class WPRM_SC_Grow extends WPRM_Template_Shortcode {
 		$output = '';
 
 		$output .= '<span class="wprm-recipe-grow-container">';
-		$output .= '<a href="https://app.grow.me" target="_blank" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-grow-not-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label . '>' . $icon . $text . '</a>';
+		$output .= '<a href="https://app.grow.me" target="_blank" rel="nofollow noreferrer" style="' . esc_attr( $style ) . '" class="wprm-recipe-grow-not-saved ' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
 		$style .= 'display: none;';
-		$output .= '<a href="https://app.grow.me" target="_blank" rel="nofollow noreferrer" style="' . $style . '" class="wprm-recipe-grow-saved ' . implode( ' ', $classes ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label_added . '>' . $icon_added . $text_added . '</a>';
+		$output .= '<a href="https://app.grow.me" target="_blank" rel="nofollow noreferrer" style="' . esc_attr( $style ) . '" class="wprm-recipe-grow-saved ' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '"' . $aria_label_added . '>' . $icon_added . wp_kses_post( $text_added ) . '</a>';
 		$output .= '</span>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );

@@ -66,7 +66,7 @@ class WPRM_SC_Name extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$tag = trim( $atts['tag'] );
+		$tag = sanitize_key( $atts['tag'] );
 		$name = $recipe->name();
 
 		if ( $atts['link'] && $recipe->permalink() ) {
@@ -76,7 +76,7 @@ class WPRM_SC_Name extends WPRM_Template_Shortcode {
 			$name = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . $name . '</a>';
 		}
 
-		$output = '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $name . '</' . $tag . '>';
+		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $name . '</' . $tag . '>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

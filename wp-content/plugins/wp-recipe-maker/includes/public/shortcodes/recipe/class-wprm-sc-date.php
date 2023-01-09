@@ -67,7 +67,7 @@ class WPRM_SC_Date extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$tag = trim( $atts['tag'] );
+		$tag = sanitize_key( $atts['tag'] );
 		
 		// Date format.
 		$format = $atts['date_format'];
@@ -76,7 +76,7 @@ class WPRM_SC_Date extends WPRM_Template_Shortcode {
 		}
 		$date = date_i18n( $format, strtotime( $recipe->date() ) );
 
-		$output = '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $date . '</' . $tag . '>';
+		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $date . '</' . $tag . '>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

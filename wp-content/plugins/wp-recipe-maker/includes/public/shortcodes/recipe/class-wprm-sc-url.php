@@ -78,7 +78,7 @@ class WPRM_SC_Url extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$tag = trim( $atts['tag'] );
+		$tag = sanitize_key( $atts['tag'] );
 
 		// Text to show.
 		$text = $url;
@@ -112,10 +112,10 @@ class WPRM_SC_Url extends WPRM_Template_Shortcode {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . $text . '</a>';
+			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . wp_kses_post( $text ) . '</a>';
 		}
 
-		$output = '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $text . '</' . $tag . '>';
+		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $text . '</' . $tag . '>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

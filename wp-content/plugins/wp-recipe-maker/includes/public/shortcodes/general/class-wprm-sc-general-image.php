@@ -105,7 +105,7 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 		// Output.
 		$classes = array(
 			'wprm-image',
-			'wprm-block-image-' . $atts['style'],
+			'wprm-block-image-' . esc_attr( $atts['style'] ),
 		);
 
 		// Add custom class if set.
@@ -118,19 +118,19 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 
 		// Image Style.
 		$style = '';
-		$style .= 'border-width: ' . $atts['border_width'] . ';';
-		$style .= 'border-style: ' . $atts['border_style'] . ';';
-		$style .= 'border-color: ' . $atts['border_color'] . ';';
+		$style .= 'border-width: ' . esc_attr( $atts['border_width'] ) . ';';
+		$style .= 'border-style: ' . esc_attr( $atts['border_style'] ) . ';';
+		$style .= 'border-color: ' . esc_attr( $atts['border_color'] ) . ';';
 
 		if ( 'rounded' === $atts['style'] ) {
-			$style .= 'border-radius: ' . $atts['rounded_radius'] . ';';
+			$style .= 'border-radius: ' . esc_attr( $atts['rounded_radius'] ) . ';';
 		}
 
 		if ( $style ) {
 			if ( false !== stripos( $img, ' style="' ) ) {
-				$img = str_ireplace( ' style="', ' style="' . $style, $img );
+				$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
 			} else {
-				$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 			}
 		}
 
@@ -139,7 +139,7 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 			$img = str_ireplace( ' class="', ' class="skip-lazy disable-lazyload ', $img );
 		}
 
-		$output = '<div class="' . implode( ' ', $classes ) . '">' . $img . '</div>';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $img . '</div>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

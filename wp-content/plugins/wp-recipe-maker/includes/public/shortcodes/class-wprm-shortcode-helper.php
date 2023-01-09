@@ -164,7 +164,7 @@ class WPRM_Shortcode_Helper {
 					$icon_classes[] = 'wprm-recipe-' . $field . '-icon';
 				}
 
-				$icon = '<span class="' . implode( ' ', $icon_classes ) . '">' . $icon . '</span> ';
+				$icon = '<span class="' . esc_attr( implode( ' ', $icon_classes ) ) . '">' . $icon . '</span> ';
 			}
 		}
 
@@ -179,7 +179,7 @@ class WPRM_Shortcode_Helper {
 				$label_classes[] = 'wprm-recipe-' . $field . '-label';
 			}
 
-			$label = '<span class="' . implode( ' ', $label_classes ) . '">' . __( $atts['label'], 'wp-recipe-maker' ) . $atts['label_separator'] . '</span>';
+			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '">' . wp_kses_post( __( $atts['label'], 'wp-recipe-maker' ) ) . wp_kses_post( $atts['label_separator'] ) . '</span>';
 		}
 
 		// Inline style.
@@ -204,7 +204,7 @@ class WPRM_Shortcode_Helper {
 			$classes[] = 'wprm-recipe-' . $field . '-container';
 		}
 
-		$container = '<div class="' . implode( ' ', $classes ) . '" style="' . $style . '">';
+		$container = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">';
 		$container .= $icon;
 		$container .= $label;
 		$container .= $content;
@@ -361,10 +361,10 @@ class WPRM_Shortcode_Helper {
 			$after_header = '';
 			if ( 'line' === $atts['header_decoration'] ) {
 				if ( 'left' === $atts['header_align'] || 'center' === $atts['header_align'] ) {
-					$after_header = '<div class="wprm-decoration-line" style="border-color: ' . $atts['header_line_color'] . '"></div>';
+					$after_header = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['header_line_color'] ) . '"></div>';
 				}
 				if ( 'right' === $atts['header_align'] || 'center' === $atts['header_align'] ) {
-					$before_header = '<div class="wprm-decoration-line" style="border-color: ' . $atts['header_line_color'] . '"></div>';
+					$before_header = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['header_line_color'] ) . '"></div>';
 				}
 			} elseif ( 'icon' === $atts['header_decoration'] ) {
 				$icon = '';
@@ -407,8 +407,8 @@ class WPRM_Shortcode_Helper {
 				}
 			}
 
-			$tag = trim( $atts['header_tag'] );
-			$header .= '<' . $tag . ' class="' . implode( ' ', $classes ) . '" style="' . $style . '">' . $before_header . $header_text . $after_header . '</' . $tag . '>';
+			$tag = sanitize_key( $atts['header_tag'] );
+			$header .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $before_header . wp_kses_post( $header_text ) . $after_header . '</' . $tag . '>';
 		}
 
 		return $header;
@@ -454,10 +454,10 @@ class WPRM_Shortcode_Helper {
 			);
 
 			if ( '#333333' !== $atts['switch_active'] ) {
-				$output .= '<style type="text/css">#wprm-toggle-switch-' . $uid . ' input:checked + .wprm-toggle-switch-slider { background-color: ' . $atts['switch_active'] . ' !important; }</style>';
+				$output .= '<style type="text/css">#wprm-toggle-switch-' . $uid . ' input:checked + .wprm-toggle-switch-slider { background-color: ' . esc_html( $atts['switch_active'] ) . ' !important; }</style>';
 			}
 
-			$output .= '<label id="wprm-toggle-switch-' . $uid . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" aria-label="' . __( 'Toggle switch', 'wp-recipe-maker' ) . '" style="' . esc_attr( $switch_style ) . '">';
+			$output .= '<label id="wprm-toggle-switch-' . esc_attr( $uid ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" aria-label="' . __( 'Toggle switch', 'wp-recipe-maker' ) . '" style="' . esc_attr( $switch_style ) . '">';
 			$output .= '<input type="checkbox" id="' . esc_attr( $args['class'] . '-' . $uid ) . '" class="' . esc_attr( $args['class'] ) . '" />';
 			$output .= '<span class="wprm-toggle-switch-slider" style="' . esc_attr( $slider_style ) . '"></span>';
 			$output .= '</label>';
