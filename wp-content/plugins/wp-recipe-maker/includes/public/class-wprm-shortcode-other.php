@@ -114,7 +114,7 @@ class WPRM_Shortcode_Other {
 
 		// Value output
 		$output .= '<span class="wprm-temperature-value">';
-		$output .= $value;
+		$output .= esc_html( $value );
 		$output .= '</span>';
 
 		// Unit output

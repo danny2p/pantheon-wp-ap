@@ -130,6 +130,6 @@ class SendEntryTask extends Integration {
 		}
 
 		// Increase the entries count if the entry has been added successfully.
-		$this->increase_entries_count();
+		$this->increase_entries_count( $form_id );
 	}
 }

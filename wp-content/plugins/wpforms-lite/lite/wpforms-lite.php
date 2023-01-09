@@ -291,11 +291,19 @@ class WPForms_Lite {
 					'notifications',
 					'replyto',
 					$settings->form_data,
-					esc_html__( 'Reply-To Email Address', 'wpforms-lite' ),
+					esc_html__( 'Reply-To', 'wpforms-lite' ),
 					[
+						'tooltip'    => esc_html(
+							sprintf( /* translators: %s - <email@example.com>. */
+								__( 'Enter the email address or email address with recipient\'s name in "First Last %s" format.', 'wpforms-lite' ),
+								// &#8203 is a zero-width space character. Without it, Tooltipster thinks it's an HTML tag
+								// and closes it at the end of the string, hiding everything after this value.
+								'<&#8203;email@example.com&#8203;>'
+							)
+						),
 						'smarttags'  => [
 							'type'   => 'fields',
-							'fields' => 'email',
+							'fields' => 'email,name',
 						],
 						'parent'     => 'settings',
 						'subsection' => $id,
@@ -489,10 +497,15 @@ class WPForms_Lite {
 					$settings->form_data,
 					esc_html__( 'Confirmation Page', 'wpforms-lite' ),
 					[
-						'options'     => wpforms_get_pages_list(),
+						'class'       => 'wpforms-panel-field-confirmations-page-choicesjs-unflippable',
+						'options'     => wpforms_builder_form_settings_confirmation_get_pages( $settings->form_data, $field_id ),
 						'input_class' => 'wpforms-panel-field-confirmations-page',
 						'parent'      => 'settings',
 						'subsection'  => $field_id,
+						'choicesjs'   => [
+							'use_ajax'    => true,
+							'callback_fn' => 'select_pages',
+						],
 					]
 				);
 				wpforms_panel_field(

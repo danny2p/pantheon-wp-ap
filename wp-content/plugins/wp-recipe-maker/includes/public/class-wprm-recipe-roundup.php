@@ -288,10 +288,10 @@ class WPRM_Recipe_Roundup {
 
 				$align_class = '';
 				if ( isset( $atts['align'] ) && $atts['align'] ) {
-					$align_class = ' align' . $atts['align'];
+					$align_class = ' align' . esc_attr( $atts['align'] );
 				}
 
-				$output = '<div class="wprm-recipe wprm-recipe-roundup-item wprm-recipe-roundup-item-' . $recipe->id() . ' wprm-recipe-template-' . $template['slug'] . $align_class . '" data-servings="' . esc_attr( $recipe->servings() ). '">';
+				$output = '<div class="wprm-recipe wprm-recipe-roundup-item wprm-recipe-roundup-item-' . esc_attr( $recipe->id() ) . ' wprm-recipe-template-' . esc_attr( $template['slug'] ) . esc_attr( $align_class ) . '" data-servings="' . esc_attr( $recipe->servings() ). '">';
 
 				// Add filters for overrides and immediately remove after doing shortcode.
 				add_filter( 'wprm_recipe_roundup_link_text', array( __CLASS__, 'roundup_link_text_override' ) );

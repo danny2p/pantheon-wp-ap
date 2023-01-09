@@ -153,7 +153,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			// Add custom class if set.
 			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-			$output .= '<div class="' . implode( ' ', $classes ) . '">' . WPRM_Rating::get_formatted_rating( $rating, $decimals ) . '</div>';
+			$output .= '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">' . WPRM_Rating::get_formatted_rating( $rating, $decimals ) . '</div>';
 		} elseif ( 'average' === $atts['display'] ) {
 			$classes = array(
 				'wprm-recipe-rating-average',
@@ -163,7 +163,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			// Add custom class if set.
 			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-			$output .= '<div class="' . implode( ' ', $classes ) . '">' . $formatted_average . '</div>';
+			$output .= '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $formatted_average . '</div>';
 		} elseif ( 'count' === $atts['display'] ) {
 			$classes = array(
 				'wprm-recipe-rating-count',
@@ -173,7 +173,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			// Add custom class if set.
 			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-			$output .= '<div class="' . implode( ' ', $classes ) . '">' . $rating['count'] . '</div>';
+			$output .= '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $rating['count'] . '</div>';
 		}
 
 		$output .= '</div>';
@@ -199,8 +199,8 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 
 		// Backwards compatibility.
 		$voteable = (bool) $atts['voteable'];
-		$icon = $atts['icon'];
-		$color = $atts['icon_color'];
+		$icon = esc_attr( $atts['icon'] );
+		$color = esc_attr( $atts['icon_color'] );
 
 		// Only output when there is an actual rating or users can rate.
 		if ( $rating_value ) {
@@ -238,7 +238,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			}
 
 			// Output stars.
-			$output .= '<div id="' . $id . '" class="' . implode( ' ', $classes ) . '">';
+			$output .= '<div id="' . esc_attr( $id ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			for ( $i = 1; $i <= 5; $i++ ) {
 				// Get star class.
 				if ( $i <= $rating_value ) {
@@ -258,7 +258,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 					}
 				}
 
-				$output .= '<span class="wprm-rating-star wprm-rating-star-' . $i . ' ' . $class . '" data-rating="' . $i . '" data-color="' . $color . '">';
+				$output .= '<span class="wprm-rating-star wprm-rating-star-' . $i . ' ' . esc_attr( $class ) . '" data-rating="' . esc_attr( $i ) . '" data-color="' . esc_attr( $color ) . '">';
 				$output .= apply_filters( 'wprm_recipe_rating_star_icon', WPRM_Icon::get( $icon, $color) );
 				$output .= '</span>';
 			}	

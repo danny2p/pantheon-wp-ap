@@ -136,6 +136,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.6.2 =
+* Improvement: Allow some HTML tags in shortcode output while still being secure
+
+= 8.6.1 =
+* Feature: Author schema integration with Yoast SEO
+* Improvement: FlyingPress compatibility for comment ratings
+* Fix: Sanitizing shortcode input correctly
+* Fix: Deprecation warning because of add_submenu_page
+
 = 8.6.0 =
 * Feature: Add Recipe Roundup Item widgets in Elementor
 * Improvement: Match exact ID when searching for recipes
@@ -1429,6 +1438,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.6.2 =
+Fix for some HTML problems in template
+
+= 8.6.1 =
+Security fix update
+
 = 8.6.0 =
 Some quality of life improvements and better Elementor compatibility
 

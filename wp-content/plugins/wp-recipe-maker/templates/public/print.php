@@ -84,7 +84,10 @@
 		$classes = isset( $output['classes'] ) ? $output['classes'] : array();
 
 		echo '<div id="wprm-print-content" class="' . implode( ' ', $classes ) . '">';
-		echo apply_filters( 'wprm_print_output_html', $output['html'] );
+
+		$html = do_shortcode( $output['html'] );
+		echo apply_filters( 'wprm_print_output_html', $html );
+
 		echo '</div>';
 		?>
 		<?php

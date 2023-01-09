@@ -35,7 +35,7 @@ class WPRM_Tools_Create_Reviews {
 	 * @since	7.5.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Importing Reviews', 'wp-recipe-maker' ), __( 'Importing Reviews', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_create_reviews', array( __CLASS__, 'create_reviews' ) );
+		add_submenu_page( '', __( 'Importing Reviews', 'wp-recipe-maker' ), __( 'Importing Reviews', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_create_reviews', array( __CLASS__, 'create_reviews' ) );
 	}
 
 	/**

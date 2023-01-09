@@ -99,7 +99,7 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<span class="' . implode( ' ', $classes ) . '">' . $nutrient['value'] .  '</span>';
+		$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $nutrient['value'] .  '</span>';
 
 		if ( $show_unit && $nutrient['unit'] ) {
 			$classes = array(
@@ -109,7 +109,7 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 				'wprm-block-text-' . $atts['text_style'],
 			);
 
-			$output = '<span class="wprm-recipe-nutrition-with-unit">' . $output . $atts['unit_separator'] . '<span class="' . implode( ' ', $classes ) . '">' . $nutrient['unit'] . '</span></span>';
+			$output = '<span class="wprm-recipe-nutrition-with-unit">' . $output . wp_kses_post( $atts['unit_separator'] ) . '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $nutrient['unit'] . '</span></span>';
 		}
 
 		$output = WPRM_Shortcode_Helper::get_label_container( $atts, array( 'nutrition', $atts['field'] ), $output );

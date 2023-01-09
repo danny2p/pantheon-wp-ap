@@ -156,7 +156,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 		$classes = array(
 			'wprm-recipe-jump-to-comments',
 			'wprm-recipe-link',
-			'wprm-block-text-' . $atts['text_style'],
+			'wprm-block-text-' . esc_attr( $atts['text_style'] ),
 		);
 
 		// Add custom class if set.
@@ -201,7 +201,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Rate this Recipe', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . $text . '</a>';
+		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

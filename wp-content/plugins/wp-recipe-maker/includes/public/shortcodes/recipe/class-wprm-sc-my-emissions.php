@@ -77,7 +77,7 @@ class WPRM_SC_My_Emissions extends WPRM_Template_Shortcode {
 			// Add custom class if set.
 			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-			$output = '<div class="' . implode( ' ', $classes ) . '">';
+			$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'my-emissions' );
 			$output .= '<div class="wprm-recipe-my-emissions">';
 

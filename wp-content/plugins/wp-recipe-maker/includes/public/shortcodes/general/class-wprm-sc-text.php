@@ -94,7 +94,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
 		$output = '';
-		$tag = trim( $atts['tag'] );
+		$tag = sanitize_key( $atts['tag'] );
 
 		// Alignment.
 		if ( 'span' !== $tag && 'left' !== $atts['align'] ) {
@@ -116,7 +116,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 			$output .= $header;
 		}
 
-		$output .= '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $text . '</' . $tag . '>';
+		$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . wp_kses_post( $text ) . '</' . $tag . '>';
 
 		if ( $header ) {
 			$output .= '</div>';

@@ -236,12 +236,10 @@ class Access {
 	 */
 	public function output_section_row_upgrade_to_pro() {
 
-		$content = sprintf(
+		return sprintf(
 			'<a href="%1$s" target="_blank" rel="noopener noreferrer" class="wpforms-upgrade-modal wpforms-btn wpforms-btn-lg wpforms-btn-orange">%2$s</a>',
-			esc_url( 'https://wpforms.com/lite-upgrade/?discount=LITEUPGRADE&utm_source=WordPress&utm_medium=settings-license&utm_campaign=liteplugin' ),
+			esc_url( wpforms_admin_upgrade_link( 'settings-license' ) ),
 			esc_html__( 'Upgrade to WPForms Pro', 'wpforms-lite' )
 		);
-
-		return $content;
 	}
 }

@@ -35,7 +35,7 @@ class WPRM_Tools_Refresh_Video_Metadata {
 	 * @since	6.0.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Refresh Video Metadata', 'wp-recipe-maker' ), __( 'Refresh Video Metadata', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_refresh_video_metadata', array( __CLASS__, 'refresh_video_metadata' ) );
+		add_submenu_page( '', __( 'Refresh Video Metadata', 'wp-recipe-maker' ), __( 'Refresh Video Metadata', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_refresh_video_metadata', array( __CLASS__, 'refresh_video_metadata' ) );
 	}
 
 	/**

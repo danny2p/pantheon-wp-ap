@@ -160,7 +160,7 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 			// Add custom class if set.
 			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-			$output = '<span class="' . implode( ' ', $classes ) . '">' . $output . '</span>';
+			$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $output . '</span>';
 		}
 
 		return $output;

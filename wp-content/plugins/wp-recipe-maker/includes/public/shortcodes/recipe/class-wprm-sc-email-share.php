@@ -215,7 +215,7 @@ class WPRM_SC_Email_Share extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Share by Email', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . $mailto_url . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . $style . '" class="' . implode( ' ', $classes ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . $text . '</a>';
+		$output = '<a href="' . esc_attr( $mailto_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

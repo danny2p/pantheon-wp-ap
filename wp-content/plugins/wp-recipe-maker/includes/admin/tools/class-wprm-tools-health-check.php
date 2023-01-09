@@ -35,7 +35,7 @@ class WPRM_Tools_Health_Check {
 	 * @since	8.0.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Health Check', 'wp-recipe-maker' ), __( 'Health Check', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_health_check', array( __CLASS__, 'health_check' ) );
+		add_submenu_page( '', __( 'Health Check', 'wp-recipe-maker' ), __( 'Health Check', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_health_check', array( __CLASS__, 'health_check' ) );
 	}
 
 	/**

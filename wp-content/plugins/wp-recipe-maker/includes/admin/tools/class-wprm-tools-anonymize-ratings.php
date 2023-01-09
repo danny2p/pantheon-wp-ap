@@ -35,7 +35,7 @@ class WPRM_Tools_Anonymize_Ratings {
 	 * @since	8.4.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Anonymize Ratings', 'wp-recipe-maker' ), __( 'Anonymize Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_anonymize_ratings', array( __CLASS__, 'anonymize_ratings_template' ) );
+		add_submenu_page( '', __( 'Anonymize Ratings', 'wp-recipe-maker' ), __( 'Anonymize Ratings', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_anonymize_ratings', array( __CLASS__, 'anonymize_ratings_template' ) );
 	}
 
 	/**

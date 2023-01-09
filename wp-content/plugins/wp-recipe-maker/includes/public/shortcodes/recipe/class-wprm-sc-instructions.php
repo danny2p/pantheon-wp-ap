@@ -288,7 +288,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'off_text' => $atts['toggle_off_text'],
 		);
 
-		$output = '<div class="' . implode( ' ', $classes ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'instructions', array(
 			'media_toggle_atts' => $media_toggle_atts,
 		) );
@@ -308,8 +308,8 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
-				$tag = trim( $atts['group_tag'] );
-				$output .= '<' . $tag . ' class="' . implode( ' ', $classes ) . '">' . $instruction_group['name'] . '</' . $tag . '>';
+				$tag = sanitize_key( $atts['group_tag'] );
+				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $instruction_group['name'] . '</' . $tag . '>';
 			}
 
 			$output .= '<ul class="wprm-recipe-instructions">';
@@ -318,7 +318,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
 				$style = 'list-style-type: ' . $list_style_type . ';';
 
-				$output .= '<li id="wprm-recipe-' . $recipe->id() . '-step-' . $group_index . '-' . $index . '" class="wprm-recipe-instruction" style="' . $style . '">';
+				$output .= '<li id="wprm-recipe-' . esc_attr( $recipe->id() ) . '-step-' . esc_attr( $group_index ) . '-' . esc_attr( $index ) . '" class="wprm-recipe-instruction" style="' . esc_attr( $style ) . '">';
 
 				if ( 'before' === $atts['ingredients_position'] ) {
 					$output .= self::instruction_ingredients( $recipe, $instruction, $atts );
@@ -331,7 +331,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					$text_style = '';
 
 					if ( '0px' !== $atts['text_margin'] ) {
-						$text_style = ' style="margin-bottom: ' . $atts['text_margin'] . '";';
+						$text_style = ' style="margin-bottom: ' . esc_attr( $atts['text_margin'] ) . '";';
 					}
 
 					$instruction_text = '<div class="wprm-recipe-instruction-text"' . $text_style . '>' . $text . '</div>';
@@ -407,11 +407,11 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 				$style = '';
 				if ( 'after' === $atts['ingredients_position'] && '0px' !== $atts['text_margin'] ) {
-					$style = ' style="margin-top: -' . $atts['text_margin'] . '; margin-bottom: ' . $atts['text_margin'] . ';"';
+					$style = ' style="margin-top: -' . esc_attr( $atts['text_margin'] ) . '; margin-bottom: ' . esc_attr( $atts['text_margin'] ) . ';"';
 				}
 
 				$i = 0;
-				$output .= '<div class="'. implode( ' ', $classes ) . '"' . $style . '>';
+				$output .= '<div class="'. esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>';
 				$tag = 'inline' === $atts['ingredients_display'] ? 'span' : 'div';
 
 				foreach ( $ingredients_to_output as $uid => $text ) {
@@ -422,7 +422,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 					$style = '';
 					if ( '0px' !== $atts['ingredients_text_margin'] ) {
-						$style = ' style="margin-bottom: ' . $atts['ingredients_text_margin'] . ';"';
+						$style = ' style="margin-bottom: ' . esc_attr( $atts['ingredients_text_margin'] ) . ';"';
 					}
 
 					// Optional separator, if not last item.
@@ -434,7 +434,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					}
 
 					// Output.
-					$output .= '<' . $tag . ' class="'. implode( ' ', $classes ) . '" data-separator="' . esc_attr( $separator ) . '"' . $style . '>';
+					$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $style . '>';
 					$output .= wp_strip_all_tags( $text );
 					$output .= $separator;
 
@@ -462,7 +462,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$output = '';
 
 		if ( $instruction['image'] ) {
-			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-image" style="text-align: ' . $atts['image_alignment'] . ';">' . self::instruction_image( $recipe, $instruction, $atts['image_size'] ) . '</div> ';
+			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-image" style="text-align: ' . esc_attr( $atts['image_alignment'] ) . ';">' . self::instruction_image( $recipe, $instruction, $atts['image_size'] ) . '</div> ';
 		} else if ( isset( $instruction['video'] ) && isset( $instruction['video']['type'] ) && in_array( $instruction['video']['type'], array( 'upload', 'embed' ) ) ) {
 			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-video">' . self::instruction_video( $recipe, $instruction ) . '</div> ';
 		}
@@ -496,9 +496,9 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$style = 'max-width: ' . $image_data[1] . 'px;';
 
 				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = str_ireplace( ' style="', ' style="' . $style, $img );
+					$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
 				} else {
-					$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 				}
 			}
 		}

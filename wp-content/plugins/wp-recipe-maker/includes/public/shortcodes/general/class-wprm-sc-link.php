@@ -179,7 +179,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 		$classes = array(
 			'wprm-link',
 			'wprm-recipe-link',
-			'wprm-block-text-' . $atts['text_style'],
+			'wprm-block-text-' . esc_attr( $atts['text_style'] ),
 		);
 
 		// Add custom class if set.
@@ -187,7 +187,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 
 		$style = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
-			$classes[] = 'wprm-recipe-link-' . $atts['style'];
+			$classes[] = 'wprm-recipe-link-' . esc_attr( $atts['style'] );
 			$classes[] = 'wprm-color-accent';
 
 			$style .= 'background-color: ' . $atts['button_color'] . ';';
@@ -197,7 +197,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 		}
 
 		$nofollow = 'nofollow' === $atts['link_nofollow'] ? ' rel="nofollow"' : '';
-		$output = '<a href="' . $link . '" target="' . $atts['link_target']. '" class="' . implode( ' ', $classes ) . '"' . $nofollow . ' style="' . $style . '">' . $icon . $text . '</a>';
+		$output = '<a href="' . $link . '" target="' . esc_attr( $atts['link_target'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ). '"' . $nofollow . ' style="' . esc_attr( $style ) . '">' . $icon . wp_kses_post( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

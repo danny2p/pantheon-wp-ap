@@ -101,12 +101,29 @@ class WPRM_Metadata_Yoast_Seo implements WPSEO_Graph_Piece {
 
 		if ( $metadata ) {
 			WPRM_Metadata::outputted_metadata_for( $this->recipe->id() );
+			// Context is already set by Yoast.
+			unset( $metadata['@context'] );
+
+			// Give an ID to the recipe part.
 			$metadata['@id'] = $this->context->canonical . '#recipe';
 
+			// Recipe isPartOf an article of webpage, with the recipe the mainEntityOfPage.
 			$parent = $this->using_article ? $this->context->canonical . WPSEO_Schema_IDs::ARTICLE_HASH : $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH;
 
 			$metadata['isPartOf'] = array( '@id' => $parent );
 			$metadata['mainEntityOfPage'] = $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH;
+
+			// Unless author is custom (and actually set), use the author that Yoast already defines.
+			if ( 'custom' !== $this->recipe->author_display() || '' === $this->recipe->custom_author_name() ) {
+				// Only if Yoast's author is the same as the recipe author.
+				if ( $this->context->post->post_author === $this->recipe->post_author() ) {
+					$user_schema_id = YoastSEO()->helpers->schema->id->get_user_schema_id( $this->recipe->post_author(), $this->context );
+
+					if ( $user_schema_id ) {
+						$metadata['author'] = array( '@id' => $user_schema_id );
+					}
+				}
+			}
 
 			return $metadata;
 		}

@@ -627,7 +627,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			}
 		}
 
-		$output = $show_container ? '<div class="' . implode( ' ', $classes ) . '" style="' . $style . '">' : '';
+		$output = $show_container ? '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' : '';
 
 		foreach ( $fields_output as $field_output ) {
 			$output .= $field_output;

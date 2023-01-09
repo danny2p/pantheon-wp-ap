@@ -197,6 +197,12 @@ class WPRM_Comment_Rating {
 
 			if ( $comment ) {
 				update_comment_meta( $comment_id, 'wprm-comment-rating', $comment_rating );
+
+				// FlyingPress compatibility.
+				if ( class_exists( 'FlyingPress\Purge' ) ) {
+					$post_link = get_permalink( $comment->comment_post_ID );
+					FlyingPress\Purge::purge_by_urls( array( $post_link ) );
+				}
 			}
 		}
 	}

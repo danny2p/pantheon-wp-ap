@@ -35,7 +35,7 @@ class WPRM_Tools_Find_Parents {
 	 * @since	5.6.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( null, __( 'Finding Parents', 'wp-recipe-maker' ), __( 'Finding Parents', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_finding_parents', array( __CLASS__, 'finding_parents' ) );
+		add_submenu_page( '', __( 'Finding Parents', 'wp-recipe-maker' ), __( 'Finding Parents', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_tools_access' ), 'wprm_finding_parents', array( __CLASS__, 'finding_parents' ) );
 	}
 
 	/**
