@@ -369,7 +369,7 @@ class Astra_Customizer_Mobile_Trigger_Configs extends Astra_Customizer_Config_Ba
 					'type'        => 'sub-control',
 					'priority'    => 23,
 					'suffix'      => 'px',
-					'title'       => __( 'Size', 'astra' ),
+					'title'       => __( 'Font Size', 'astra' ),
 					'control'     => 'ast-slider',
 					'transport'   => 'postMessage',
 					'input_attrs' => array(
@@ -386,7 +386,7 @@ class Astra_Customizer_Mobile_Trigger_Configs extends Astra_Customizer_Config_Ba
 		} else {
 
 			$typo_configs = array(
-				
+
 				// Option: Trigger Font Size.
 				array(
 					'name'        => ASTRA_THEME_SETTINGS . '[mobile-header-label-font-size]',

@@ -390,6 +390,9 @@
 					} );
 				} );
 
+				// Sub menu
+				astra_font_extras_css( 'header-menu' + index + '-font-extras', '.ast-builder-menu-' + index + ' .menu-item > .menu-link' );
+
 			})(index);
 
 

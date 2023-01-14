@@ -1,8 +1,8 @@
 <?php
 /**
- * Sticky Header Markup
+ * Transparent Header Markup
  *
- * @package Astra Addon
+ * @package Astra
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Astra_ExtTransparenty_Header_Markup' ) ) {
 
 	/**
-	 * Sticky Header Markup Initial Setup
+	 * Transparent Header Markup Initial Setup
 	 *
 	 * @since 1.0.0
 	 */

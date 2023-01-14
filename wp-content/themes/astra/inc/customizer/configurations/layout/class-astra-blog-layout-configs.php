@@ -33,75 +33,6 @@ if ( ! class_exists( 'Astra_Blog_Layout_Configs' ) ) {
 			$_configs = array(
 
 				/**
-				 * Archive / Blog container layout.
-				 */
-				array(
-					'name'              => ASTRA_THEME_SETTINGS . '[archive-post-content-layout]',
-					'type'              => 'control',
-					'control'           => 'ast-radio-image',
-					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_choices' ),
-					'section'           => 'section-blog',
-					'default'           => astra_get_option( 'archive-post-content-layout' ),
-					'priority'          => 5,
-					'title'             => __( 'Container Layout', 'astra' ),
-					'choices'           => array(
-						'default'                 => array(
-							'label' => __( 'Default', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'layout-default', false ) : '',
-						),
-						'boxed-container'         => array(
-							'label' => __( 'Boxed', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'container-boxed', false ) : '',
-						),
-						'content-boxed-container' => array(
-							'label' => __( 'Content Boxed', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'container-content-boxed', false ) : '',
-						),
-						'plain-container'         => array(
-							'label' => __( 'Full Width / Contained', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'container-full-width-contained', false ) : '',
-						),
-						'page-builder'            => array(
-							'label' => __( 'Full Width / Stretched', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'container-full-width-stretched', false ) : '',
-						),
-					),
-					'divider'           => array( 'ast_class' => 'ast-bottom-section-divider ast-section-spacing' ),
-				),
-
-				/**
-				 * Archive / Blog sidebar layout.
-				 */
-				array(
-					'name'              => ASTRA_THEME_SETTINGS . '[archive-post-sidebar-layout]',
-					'type'              => 'control',
-					'control'           => 'ast-radio-image',
-					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_choices' ),
-					'section'           => 'section-blog',
-					'default'           => astra_get_option( 'archive-post-sidebar-layout' ),
-					'priority'          => 5,
-					'title'             => __( 'Sidebar Layout', 'astra' ),
-					'choices'           => array(
-						'default'       => array(
-							'label' => __( 'Default', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'layout-default', false ) : '',
-						),
-						'no-sidebar'    => array(
-							'label' => __( 'No Sidebar', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'no-sidebar', false ) : '',
-						),
-						'left-sidebar'  => array(
-							'label' => __( 'Left Sidebar', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'left-sidebar', false ) : '',
-						),
-						'right-sidebar' => array(
-							'label' => __( 'Right Sidebar', 'astra' ),
-							'path'  => ( class_exists( 'Astra_Builder_UI_Controller' ) ) ? Astra_Builder_UI_Controller::fetch_svg_icon( 'right-sidebar', false ) : '',
-						),
-					),
-				),
-
-				/**
 				 * Option: Blog Content Width
 				 */
 				array(
@@ -176,7 +107,7 @@ if ( ! class_exists( 'Astra_Blog_Layout_Configs' ) ) {
 				array(
 					'name'     => ASTRA_THEME_SETTINGS . '[archive-post-content-structure-divider]',
 					'section'  => 'section-blog',
-					'title'    => __( 'Structure', 'astra' ),
+					'title'    => __( 'Posts Structure', 'astra' ),
 					'type'     => 'control',
 					'control'  => 'ast-heading',
 					'priority' => 50,
@@ -202,7 +133,6 @@ if ( ! class_exists( 'Astra_Blog_Layout_Configs' ) ) {
 						'title-meta' => __( 'Title & Blog Meta', 'astra' ),
 					),
 				),
-
 			);
 
 			if ( ! defined( 'ASTRA_EXT_VER' ) ) {

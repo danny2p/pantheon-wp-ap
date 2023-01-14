@@ -542,6 +542,7 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 				'content-boxed-container' => __( 'Content Boxed', 'astra' ),
 				'plain-container'         => __( 'Full Width / Contained', 'astra' ),
 				'page-builder'            => __( 'Full Width / Stretched', 'astra' ),
+				'narrow-container'        => __( 'Narrow Width', 'astra' ),
 			);
 		}
 

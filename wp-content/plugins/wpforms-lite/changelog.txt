@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.9.1 =
+- Fixed: Incorrect spacing around the Submit button in the Form Builder was fixed.
+- Fixed: Missing assets were added to the plugin.
+
 = 1.7.9 =
 - Added: Icon Choices feature for Checkboxes and Multiple Choice fields - a selection of 2000+ icons can now be used with your choices!
 - Changed: Avoid rendering the WPForms Import admin page if the user lacks `unfiltered_html` capability.
