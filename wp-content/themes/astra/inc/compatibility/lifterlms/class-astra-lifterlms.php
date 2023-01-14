@@ -235,7 +235,7 @@ if ( ! class_exists( 'Astra_LifterLMS' ) ) :
 				<div id="old_reviews">
 				<h3><?php echo apply_filters( 'lifterlms_reviews_section_title', _e( 'What Others Have Said', 'astra' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound ?></h3>
 				<?php
-				$args        = array(
+				$args = array(
 					'posts_per_page'   => get_post_meta( get_the_ID(), '_llms_num_reviews', true ), // phpcs:ignore WPThemeReview.CoreFunctionality.PostsPerPage.posts_per_page_posts_per_page, WordPress.WP.PostsPerPage.posts_per_page_posts_per_page
 					'post_type'        => 'llms_review',
 					'post_status'      => 'publish',
@@ -586,8 +586,26 @@ if ( ! class_exists( 'Astra_LifterLMS' ) ) :
 					$llms_sidebar = astra_get_option( 'lifterlms-course-lesson-sidebar-layout' );
 				}
 
-				if ( 'default' !== $llms_sidebar ) {
+				$supported_post_types = Astra_Posts_Structure_Loader::get_supported_post_types();
+				$post_type            = strval( get_post_type() );
 
+				if ( in_array( $post_type, $supported_post_types ) ) {
+					$dynamic_sidebar_layout = '';
+
+					if ( is_singular() ) {
+						$dynamic_sidebar_layout = astra_get_option( 'single-' . $post_type . '-sidebar-layout' );
+					}
+
+					if ( is_archive() ) {
+						$dynamic_sidebar_layout = astra_get_option( 'archive-' . $post_type . '-sidebar-layout' );
+					}
+
+					if ( ! empty( $dynamic_sidebar_layout ) && 'default' !== $dynamic_sidebar_layout ) {
+						$llms_sidebar = $dynamic_sidebar_layout;
+					}
+				}
+
+				if ( 'default' !== $llms_sidebar ) {
 					$layout = $llms_sidebar;
 				}
 
@@ -623,6 +641,24 @@ if ( ! class_exists( 'Astra_LifterLMS' ) ) :
 			if ( is_lifterlms() || is_llms_account_page() || is_llms_checkout() ) {
 
 				$llms_layout = astra_get_option( 'lifterlms-content-layout' );
+
+				$supported_post_types = Astra_Posts_Structure_Loader::get_supported_post_types();
+				$post_type            = strval( get_post_type() );
+
+				if ( in_array( $post_type, $supported_post_types ) ) {
+					$dynamic_sidebar_layout = '';
+
+					if ( is_singular() ) {
+						$dynamic_sidebar_layout = astra_get_option( 'single-' . $post_type . '-content-layout' );
+					}
+					if ( is_archive() ) {
+						$dynamic_sidebar_layout = astra_get_option( 'archive-' . $post_type . '-content-layout' );
+					}
+
+					if ( ! empty( $dynamic_sidebar_layout ) && 'default' !== $dynamic_sidebar_layout ) {
+						$llms_layout = $dynamic_sidebar_layout;
+					}
+				}
 
 				if ( 'default' !== $llms_layout ) {
 

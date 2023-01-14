@@ -1378,7 +1378,7 @@ acronym {
 }
 
 pre {
-  background: #eee;
+  background: var(--ast-code-block-background);
   font-family: "Courier 10 Pitch", Courier, monospace;
   margin-bottom: 1.6em;
   overflow: auto;

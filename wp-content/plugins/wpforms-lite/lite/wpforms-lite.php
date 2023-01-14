@@ -4,7 +4,7 @@ use WPForms\Lite\Integrations\LiteConnect\LiteConnect;
 use WPForms\Lite\Integrations\LiteConnect\Integration as LiteConnectIntegration;
 
 /**
- * WPForms Lite. Load Lite specific features/functionality.
+ * WPForms Lite. Load Lite-specific features/functionality.
  *
  * @since 1.2.0
  */

@@ -78,11 +78,13 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 		$menu_resp_bg_color_active_mobile  = ( isset( $menu_resp_bg_color_active['mobile'] ) ) ? $menu_resp_bg_color_active['mobile'] : '';
 
 		// Typography.
-		$menu_font_family    = astra_get_option( 'header-' . $_prefix . '-font-family' );
-		$menu_font_size      = astra_get_option( 'header-' . $_prefix . '-font-size' );
-		$menu_font_weight    = astra_get_option( 'header-' . $_prefix . '-font-weight' );
-		$menu_text_transform = astra_get_option( 'header-' . $_prefix . '-text-transform' );
-		$menu_line_height    = astra_get_option( 'header-' . $_prefix . '-line-height' );
+		$menu_font_family     = astra_get_option( 'header-' . $_prefix . '-font-family' );
+		$menu_font_size       = astra_get_option( 'header-' . $_prefix . '-font-size' );
+		$menu_font_weight     = astra_get_option( 'header-' . $_prefix . '-font-weight' );
+		$menu_text_transform  = astra_get_font_extras( astra_get_option( 'header-' . $_prefix . '-font-extras' ), 'text-transform' );
+		$menu_line_height     = astra_get_font_extras( astra_get_option( 'header-' . $_prefix . '-font-extras' ), 'line-height', 'line-height-unit' );
+		$menu_letter_spacing  = astra_get_font_extras( astra_get_option( 'header-' . $_prefix . '-font-extras' ), 'letter-spacing', 'letter-spacing-unit' );
+		$menu_text_decoration = astra_get_font_extras( astra_get_option( 'header-' . $_prefix . '-font-extras' ), 'text-decoration' );
 
 		$menu_font_size_desktop      = ( isset( $menu_font_size['desktop'] ) ) ? $menu_font_size['desktop'] : '';
 		$menu_font_size_tablet       = ( isset( $menu_font_size['tablet'] ) ) ? $menu_font_size['tablet'] : '';
@@ -124,13 +126,15 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 				'text-transform' => esc_attr( $menu_text_transform ),
 			),
 			$selector . ' .menu-item > .menu-link'       => array(
-				'line-height'    => esc_attr( $menu_line_height ),
-				'font-size'      => astra_get_font_css_value( $menu_font_size_desktop, $menu_font_size_desktop_unit ),
-				'color'          => $menu_resp_color_desktop,
-				'padding-top'    => astra_responsive_spacing( $menu_spacing, 'top', 'desktop' ),
-				'padding-bottom' => astra_responsive_spacing( $menu_spacing, 'bottom', 'desktop' ),
-				'padding-left'   => astra_responsive_spacing( $menu_spacing, 'left', 'desktop' ),
-				'padding-right'  => astra_responsive_spacing( $menu_spacing, 'right', 'desktop' ),
+				'line-height'     => esc_attr( $menu_line_height ),
+				'font-size'       => astra_get_font_css_value( $menu_font_size_desktop, $menu_font_size_desktop_unit ),
+				'color'           => $menu_resp_color_desktop,
+				'padding-top'     => astra_responsive_spacing( $menu_spacing, 'top', 'desktop' ),
+				'padding-bottom'  => astra_responsive_spacing( $menu_spacing, 'bottom', 'desktop' ),
+				'padding-left'    => astra_responsive_spacing( $menu_spacing, 'left', 'desktop' ),
+				'padding-right'   => astra_responsive_spacing( $menu_spacing, 'right', 'desktop' ),
+				'text-decoration' => esc_attr( $menu_text_decoration ),
+				'letter-spacing'  => esc_attr( $menu_letter_spacing ),
 			),
 			$selector . ' .menu-item > .ast-menu-toggle' => array(
 				'color' => $menu_resp_color_desktop,
@@ -191,7 +195,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 
 		$css_output_tablet = array(
 
-			$mobile_selector                             => array(
+			$mobile_selector . ' .menu-item > .menu-link' => array(
 				'font-size' => astra_get_font_css_value( $menu_font_size_tablet, $menu_font_size_tablet_unit ),
 			),
 			$mobile_selector . ' .main-header-menu .menu-item > .menu-link' => array(
@@ -203,7 +207,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 			$selector . ' .main-header-menu .menu-item > .menu-link' => array(
 				'color' => $menu_resp_color_tablet,
 			),
-			$selector . ' .menu-item > .ast-menu-toggle' => array(
+			$selector . ' .menu-item > .ast-menu-toggle'  => array(
 				'color' => $menu_resp_color_tablet,
 			),
 			$selector . ' .menu-item:hover > .menu-link, ' . $selector . ' .inline-on-mobile .menu-item:hover > .ast-menu-toggle' => array(
@@ -228,7 +232,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 				'content' => 'unset',
 			),
 			// Margin CSS.
-			$margin_selector                             => array(
+			$margin_selector                              => array(
 				'margin-top'    => astra_responsive_spacing( $margin, 'top', 'tablet' ),
 				'margin-bottom' => astra_responsive_spacing( $margin, 'bottom', 'tablet' ),
 				'margin-left'   => astra_responsive_spacing( $margin, 'left', 'tablet' ),
@@ -243,7 +247,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 
 		$css_output_mobile = array(
 
-			$mobile_selector                              => array(
+			$mobile_selector . ' .menu-item > .menu-link' => array(
 				'font-size' => astra_get_font_css_value( $menu_font_size_mobile, $menu_font_size_mobile_unit ),
 			),
 			$mobile_selector . ' .main-header-menu .menu-item > .menu-link' => array(
@@ -313,7 +317,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 		$css_output .= astra_parse_css( $css_output_mobile, '', astra_get_mobile_breakpoint() );
 
 		$dynamic_css .= $css_output;
-		
+
 		$dynamic_css .= Astra_Builder_Base_Dynamic_CSS::prepare_visibility_css( $_section, $selector );
 
 	}
@@ -324,7 +328,7 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 
 /**
  * Load Menu hover style static CSS if any one of the menu hover style is selected.
- * 
+ *
  * @return string
  * @since 3.5.0
  */
@@ -350,22 +354,22 @@ function astra_menu_hover_style_css() {
 		  transform: scale(0, 0) translate(-50%, 0);
 		  transition: transform .3s ease-in-out, color .0s ease-in-out;
 		}
-		
+
 		.ast-desktop .ast-menu-hover-style-underline > .menu-item:hover > .menu-link:before,
 		.ast-desktop .ast-menu-hover-style-overline > .menu-item:hover > .menu-link:before {
 		  width: calc(100% - 1.2em);
 		  background-color: currentColor;
 		  transform: scale(1, 1) translate(50%, 0);
 		}
-		
+
 		.ast-desktop .ast-menu-hover-style-underline > .menu-item > .menu-link:before {
 		  bottom: 0;
 		}
-		
+
 		.ast-desktop .ast-menu-hover-style-overline > .menu-item > .menu-link:before {
 		  top: 0;
 		}
-		
+
 		.ast-desktop .ast-menu-hover-style-zoom > .menu-item > .menu-link:hover {
 		  transition: all .3s ease;
 		  transform: scale(1.2);

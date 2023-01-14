@@ -275,7 +275,7 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 			$css_output_desktop['.ast-desktop .astra-cart-drawer.open-right']        = array(
 				'width' => astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 				'left'  => '-' . astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
-			); 
+			);
 			$css_output_desktop['.ast-desktop .astra-cart-drawer.open-right.active'] = array(
 				'left' => astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 			);
@@ -411,7 +411,7 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 
 		/**
 		* Tablet flyout cart width.
-		*/      
+		*/
 		$responsive_selector . '.active'                   => array(
 			'width' => astra_get_css_value( $flyout_cart_width_tablet, $flyout_cart_width_tablet_unit ),
 		),
@@ -448,11 +448,11 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 
 	if ( 'none' !== $header_cart_icon_style ) {
 
-		
+
 		if ( ! astra_has_pro_woocommerce_addon() && 'outline' === $header_cart_icon_style && 'default' !== $header_woo_cart_list ) {
 
 			$border_width = astra_get_option( 'woo-header-cart-border-width' );
-			
+
 			$header_cart_icon_outline = array(
 				'.ast-menu-cart-outline .ast-cart-menu-wrap .count, .ast-menu-cart-outline .ast-addon-cart-wrap'  => array(
 					'border-style' => 'solid',
@@ -486,7 +486,7 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 			),
 
 		);
-		
+
 		// We adding this conditional CSS only to maintain backwards. Remove this condition after 2-3 updates of add-on.
 		if ( defined( 'ASTRA_EXT_VER' ) && version_compare( ASTRA_EXT_VER, '3.4.2', '<' ) ) {
 			// Outline cart style border.

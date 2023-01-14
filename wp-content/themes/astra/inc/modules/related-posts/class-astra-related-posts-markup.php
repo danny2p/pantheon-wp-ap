@@ -129,7 +129,7 @@ class Astra_Related_Posts_Markup {
 												do_action( 'astra_related_post_after_featured_image', $post_id );
 											} else {
 												?>
-														<header class="entry-header">
+														<header class="entry-header related-entry-header">
 														<?php
 															$this->astra_get_related_post_title( $post_id );
 															echo apply_filters( 'astra_related_posts_meta_html', '<div class="entry-meta">' . $output_str . '</div>', $output_str ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

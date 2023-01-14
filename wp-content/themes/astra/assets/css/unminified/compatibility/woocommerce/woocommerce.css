@@ -813,13 +813,14 @@ p.demo_store[data-position="bottom"],
   background: inherit;
   font-weight: 700;
   display: inline-block;
+  text-decoration: inherit;
 }
 
 .woocommerce div.product span.price del,
 .woocommerce div.product p.price del {
   opacity: 0.5;
   font-weight: normal;
-  display: inline-block;
+  display: initial;
 }
 
 .woocommerce div.product p.stock,
@@ -849,6 +850,7 @@ p.demo_store[data-position="bottom"],
   padding-top: .5em;
   font-size: .9em;
   margin: 0 0 0.8em;
+  text-decoration: inherit;
 }
 
 .woocommerce div.product .product_meta > span {
@@ -1554,6 +1556,7 @@ p.demo_store[data-position="bottom"],
   background: none;
   font-weight: 700;
   display: inline-block;
+  text-decoration: inherit;
 }
 
 .woocommerce ul.products li.product .price .from {

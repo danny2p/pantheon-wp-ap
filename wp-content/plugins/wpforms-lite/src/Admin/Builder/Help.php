@@ -321,6 +321,7 @@ class Help {
 			'settings/anti_spam'                      => 'spam',
 			'settings/notifications'                  => 'notification emails',
 			'settings/confirmation'                   => 'confirmation message',
+			'settings/lead_forms'                     => 'lead forms',
 			'settings/form_abandonment'               => 'form abandonment',
 			'settings/post_submissions'               => 'post submissions',
 			'settings/user_registration'              => 'user registration',
@@ -1079,6 +1080,9 @@ class Help {
 			'conditional confirmation'  => [
 				'/docs/setup-form-confirmation-wpforms/',
 				'/docs/how-to-create-conditional-form-confirmations/',
+			],
+			'lead forms'                => [
+				'/docs/lead-forms-addon/',
 			],
 			'form abandonment'          => [
 				'/docs/how-to-install-and-use-form-abandonment-with-wpforms/',

@@ -77,7 +77,7 @@ return array(
 	),
 	array(
 		'Advent Pro' => array(
-			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700' ), 
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -96,7 +96,7 @@ return array(
 	array(
 		'Akaya Telivigala' => array(
 			'variants' => array( 'regular' ), 
-			'category' => 'display', 
+			'category' => 'display',
 		),
 	),
 	array(
@@ -174,13 +174,19 @@ return array(
 	array(
 		'Aleo' => array(
 			'variants' => array( '300', '300italic', 'regular', 'italic', '700', '700italic' ), 
-			'category' => 'serif',
+			'category' => 'serif', 
 		),
 	),
 	array(
 		'Alex Brush' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'handwriting', 
+		),
+	),
+	array(
+		'Alexandria' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
+			'category' => 'sans-serif', 
 		),
 	),
 	array(
@@ -587,13 +593,13 @@ return array(
 	),
 	array(
 		'Asap' => array(
-			'variants' => array( 'regular', '500', '600', '700', 'italic', '500italic', '600italic', '700italic' ), 
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
 	array(
 		'Asap Condensed' => array(
-			'variants' => array( 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic' ), 
+			'variants' => array( '200', '200italic', '300', '300italic', 'regular', 'italic', '500', '500italic', '600', '600italic', '700', '700italic', '800', '800italic', '900', '900italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -1595,8 +1601,14 @@ return array(
 	),
 	array(
 		'Chivo' => array(
-			'variants' => array( '300', '300italic', 'regular', 'italic', '700', '700italic', '900', '900italic' ), 
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
 			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Chivo Mono' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'monospace', 
 		),
 	),
 	array(
@@ -2411,7 +2423,7 @@ return array(
 	),
 	array(
 		'Figtree' => array(
-			'variants' => array( '300', 'regular', '500', '600', '700', '800', '900' ), 
+			'variants' => array( '300', 'regular', '500', '600', '700', '800', '900', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -2537,7 +2549,7 @@ return array(
 	),
 	array(
 		'Frank Ruhl Libre' => array(
-			'variants' => array( '300', 'regular', '500', '700', '900' ), 
+			'variants' => array( '300', 'regular', '500', '600', '700', '800', '900' ), 
 			'category' => 'serif', 
 		),
 	),
@@ -3013,6 +3025,12 @@ return array(
 		'Handlee' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'handwriting', 
+		),
+	),
+	array(
+		'Hanken Grotesk' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
 		),
 	),
 	array(
@@ -4408,6 +4426,12 @@ return array(
 		),
 	),
 	array(
+		'Martian Mono' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800' ), 
+			'category' => 'monospace', 
+		),
+	),
+	array(
 		'Marvel' => array(
 			'variants' => array( 'regular', 'italic', '700', '700italic' ), 
 			'category' => 'sans-serif', 
@@ -5746,6 +5770,12 @@ return array(
 		),
 	),
 	array(
+		'Noto Sans SignWriting' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
 		'Noto Sans Sinhala' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
 			'category' => 'sans-serif', 
@@ -5850,6 +5880,12 @@ return array(
 	array(
 		'Noto Sans Tamil Supplement' => array(
 			'variants' => array( 'regular' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Noto Sans Tangsa' => array(
+			'variants' => array( 'regular', '500', '600', '700' ), 
 			'category' => 'sans-serif', 
 		),
 	),
@@ -6040,6 +6076,12 @@ return array(
 		),
 	),
 	array(
+		'Noto Serif Khojki' => array(
+			'variants' => array( 'regular', '500', '600', '700' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
 		'Noto Serif Lao' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
 			'category' => 'serif', 
@@ -6054,6 +6096,12 @@ return array(
 	array(
 		'Noto Serif Myanmar' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Noto Serif NP Hmong' => array(
+			'variants' => array( 'regular', '500', '600', '700' ), 
 			'category' => 'serif', 
 		),
 	),
@@ -6114,6 +6162,12 @@ return array(
 	array(
 		'Noto Serif Tibetan' => array(
 			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
+			'category' => 'serif', 
+		),
+	),
+	array(
+		'Noto Serif Toto' => array(
+			'variants' => array( 'regular', '500', '600', '700' ), 
 			'category' => 'serif', 
 		),
 	),
@@ -6415,6 +6469,12 @@ return array(
 		'Padauk' => array(
 			'variants' => array( 'regular', '700' ), 
 			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Padyakke Expanded One' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
 		),
 	),
 	array(
@@ -7168,6 +7228,12 @@ return array(
 		),
 	),
 	array(
+		'Rubik 80s Fade' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
 		'Rubik Beastly' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
@@ -7193,6 +7259,12 @@ return array(
 	),
 	array(
 		'Rubik Distressed' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
+		'Rubik Gemstones' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
 		),
@@ -7241,6 +7313,24 @@ return array(
 	),
 	array(
 		'Rubik Puddles' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
+		'Rubik Spray Paint' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
+		'Rubik Storm' => array(
+			'variants' => array( 'regular' ), 
+			'category' => 'display', 
+		),
+	),
+	array(
+		'Rubik Vinyl' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'display', 
 		),
@@ -7729,6 +7819,30 @@ return array(
 		'Sofia' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'handwriting', 
+		),
+	),
+	array(
+		'Sofia Sans' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Sofia Sans Condensed' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Sofia Sans Extra Condensed' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
+		),
+	),
+	array(
+		'Sofia Sans Semi Condensed' => array(
+			'variants' => array( '100', '200', '300', 'regular', '500', '600', '700', '800', '900', '100italic', '200italic', '300italic', 'italic', '500italic', '600italic', '700italic', '800italic', '900italic' ), 
+			'category' => 'sans-serif', 
 		),
 	),
 	array(
@@ -8347,6 +8461,12 @@ return array(
 		'Ultra' => array(
 			'variants' => array( 'regular' ), 
 			'category' => 'serif', 
+		),
+	),
+	array(
+		'Unbounded' => array(
+			'variants' => array( '200', '300', 'regular', '500', '600', '700', '800', '900' ), 
+			'category' => 'display', 
 		),
 	),
 	array(

@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.7.9\n"
+"Project-Id-Version: WPForms Lite 1.7.9.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-03T09:39:22+00:00\n"
+"POT-Creation-Date: 2023-01-11T13:38:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: wpforms-lite\n"
@@ -2009,7 +2009,7 @@ msgid "Pro Addons Included"
 msgstr ""
 
 #: includes/admin/class-about.php:1445
-msgid "Form Abandonment, Conversational Forms, Frontend Post Submission, User Registration, Geolocation, Google Sheets, and more (26 total)"
+msgid "Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Google Sheets, and more (27 total)"
 msgstr ""
 
 #: includes/admin/class-about.php:1451
@@ -2021,7 +2021,7 @@ msgstr ""
 #: includes/admin/class-about.php:1452
 #: includes/admin/class-about.php:1459
 #: includes/admin/class-about.php:1466
-msgid "Form Abandonment, Conversational Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, and more (30+ total)"
+msgid "Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, and more (30+ total)"
 msgstr ""
 
 #: includes/admin/class-about.php:1474

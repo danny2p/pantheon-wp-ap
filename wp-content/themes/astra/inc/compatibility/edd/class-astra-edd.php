@@ -839,14 +839,10 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 		public function theme_defaults( $defaults ) {
 
 			// Container.
-			$defaults['edd-content-layout']         = 'plain-container';
-			$defaults['edd-single-product-layout']  = 'default';
-			$defaults['edd-archive-product-layout'] = 'default';
+			$defaults['edd-content-layout'] = 'plain-container';
 
 			// Sidebar.
-			$defaults['edd-sidebar-layout']                = 'no-sidebar';
-			$defaults['edd-general-sidebar-layout']        = 'default';
-			$defaults['edd-single-product-sidebar-layout'] = 'default';
+			$defaults['edd-general-sidebar-layout'] = 'default';
 
 			// Edd Archive.
 			$defaults['edd-archive-grids'] = array(
@@ -1001,7 +997,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 				}
 
 				if ( $is_edd_single_product_page ) {
-					$edd_single_product_sidebar = astra_get_option( 'edd-single-product-sidebar-layout' );
+					$edd_single_product_sidebar = astra_get_option( 'single-download-sidebar-layout' );
 
 					if ( 'default' !== $edd_single_product_sidebar ) {
 						$sidebar_layout = $edd_single_product_sidebar;
@@ -1010,7 +1006,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 					$page_id            = get_the_ID();
 					$edd_sidebar_layout = get_post_meta( $page_id, 'site-sidebar-layout', true );
 				} elseif ( $is_edd_archive_page ) {
-					$edd_sidebar_layout = astra_get_option( 'edd-sidebar-layout' );
+					$edd_sidebar_layout = astra_get_option( 'archive-download-sidebar-layout' );
 				} else {
 					$edd_sidebar_layout = astra_get_option_meta( 'site-sidebar-layout', '', true );
 				}
@@ -1037,7 +1033,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 
 			if ( $is_edd_page ) {
 
-				
+
 				// Global.
 				$edd_layout = astra_get_option( 'site-content-layout' );
 
@@ -1054,7 +1050,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 				}
 
 				if ( $is_edd_single_page ) {
-					$edd_single_product_layout = astra_get_option( 'edd-single-product-layout' );
+					$edd_single_product_layout = astra_get_option( 'single-download-content-layout' );
 
 					if ( 'default' !== $edd_single_product_layout ) {
 						$layout = $edd_single_product_layout;
@@ -1063,7 +1059,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 					$page_id         = get_the_ID();
 					$edd_page_layout = get_post_meta( $page_id, 'site-content-layout', true );
 				} elseif ( $is_edd_archive_page ) {
-					$edd_page_layout = astra_get_option( 'edd-archive-product-layout' );
+					$edd_page_layout = astra_get_option( 'archive-download-content-layout' );
 				} else {
 					$edd_page_layout = astra_get_option_meta( 'site-content-layout', '', true );
 				}

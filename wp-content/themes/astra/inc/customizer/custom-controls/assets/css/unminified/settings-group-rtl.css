@@ -100,7 +100,7 @@
 
 .ast-field-settings-wrap .ast-field-settings-modal {
   border-radius: 3px;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -174,13 +174,17 @@
 
 /* Popup params padding */
 .ast-field-settings-modal .customize-control {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 16px;
+  padding-left: 16px;
   box-sizing: border-box;
+}
+.ast-control-wrap .ast-color-picker-alpha {
+    margin-right: -5px;
+    margin-left: -5px;
 }
 
 .ast-field-settings-modal .customize-control:first-child {
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .ast-field-settings-modal .ui-tabs-nav .customize-control:first-child {
@@ -188,7 +192,7 @@
 }
 
 .ast-field-settings-modal .customize-control:last-child {
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 .customize-control-ast-settings-group {
@@ -223,7 +227,11 @@
 }
 
 .ast-field-settings-modal .customize-control {
-  margin-top: 20px;
+  margin-top: 2px;
+}
+
+#customize-control-headings-font-extras.ast-sub-top-dotted-divider {
+  margin-top: 12px;
 }
 
 /**

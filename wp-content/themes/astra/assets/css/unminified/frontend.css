@@ -679,7 +679,7 @@ acronym {
 }
 
 pre {
-  background: #eee;
+  background: var(--ast-code-block-background);
   font-family: "Courier 10 Pitch", Courier, monospace;
   margin-bottom: 1.6em;
   overflow: auto;
@@ -2686,7 +2686,7 @@ textarea {
   border-style: solid;
   border-color: var(--ast-border-color);
   border-radius: 2px;
-  background: #fafafa;
+  background: var(--ast-comment-inputs-background);
   box-shadow: none;
   box-sizing: border-box;
   transition: all 0.2s linear;
@@ -3104,17 +3104,8 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 /* 2 - Single Post Article Header */
-.single .entry-header .ast-single-post-order + .post-thumb img {
-  margin-top: 2em;
-  margin-bottom: 0;
-}
-
-.single .entry-header.ast-no-title .post-thumb + .ast-single-post-order {
-  margin-top: 0;
-}
-
-.single .entry-header .post-thumb + .ast-single-post-order {
-  margin-top: 2em;
+.single .entry-header .post-thumb {
+  margin-bottom: 2em;
 }
 
 .single .entry-header .post-thumb img {

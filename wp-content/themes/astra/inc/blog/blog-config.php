@@ -11,6 +11,49 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Prepare markup for taxonomies.
+ *
+ * @param string $control_tax Taxonomy subcontrol name.
+ * @param int    $loop_count Meta loop counter to decide separator appearance.
+ * @param string $separator Separator.
+ *
+ * @return string $output Taxonomy output.
+ */
+function astra_get_dynamic_taxonomy( $control_tax, $loop_count, $separator ) {
+
+	$tax_type = astra_get_option( $control_tax );
+	$post_id  = get_the_ID();
+
+	if ( ! $post_id ) {
+		return '';
+	}
+
+	$terms = get_the_terms( $post_id, $tax_type );
+	/** @psalm-suppress RedundantCondition */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+	if ( $terms && ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+		/** @psalm-suppress RedundantCondition */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+
+		$term_links = array();
+
+		/** @psalm-suppress PossibleRawObjectIteration */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		foreach ( $terms as $term ) {
+			/** @psalm-suppress PossibleRawObjectIteration */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+
+			/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			$term_links[] = '<a href="' . esc_url( get_term_link( $term->slug, $tax_type ) ) . '">' . esc_attr( $term->name ) . '</a>';
+			/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		}
+
+		$all_terms  = join( ', ', $term_links );
+		$output_str = '<span class="ast-terms-link">' . $all_terms . '</span>';
+
+		return ( 1 != $loop_count ) ? ' ' . $separator . ' ' . $output_str : $output_str;
+	}
+
+	return '';
+}
+
+/**
  * Common Functions for Blog and Single Blog
  *
  * @return  post meta
@@ -20,7 +63,7 @@ if ( ! function_exists( 'astra_get_post_meta' ) ) {
 	/**
 	 * Post meta
 	 *
-	 * @param  string $post_meta Post meta.
+	 * @param  array  $post_meta Post meta.
 	 * @param  string $separator Separator.
 	 * @return string            post meta markup.
 	 */
@@ -36,11 +79,8 @@ if ( ! function_exists( 'astra_get_post_meta' ) ) {
 			switch ( $meta_value ) {
 
 				case 'author':
-					$author = get_the_author();
-					if ( ! empty( $author ) ) {
-						$output_str .= ( 1 != $loop_count && '' != $output_str ) ? ' ' . $separator . ' ' : '';
-						$output_str .= esc_html( astra_default_strings( 'string-blog-meta-author-by', false ) ) . astra_post_author();
-					}
+					$output_str .= ( 1 != $loop_count && '' != $output_str ) ? ' ' . $separator . ' ' : '';
+					$output_str .= esc_html( astra_default_strings( 'string-blog-meta-author-by', false ) ) . astra_post_author();
 					break;
 
 				case 'date':
@@ -74,6 +114,10 @@ if ( ! function_exists( 'astra_get_post_meta' ) ) {
 				default:
 					$output_str = apply_filters( 'astra_meta_case_' . $meta_value, $output_str, $loop_count, $separator );
 
+			}
+
+			if ( strpos( $meta_value, '-taxonomy' ) !== false ) {
+				$output_str .= astra_get_dynamic_taxonomy( $meta_value, $loop_count, $separator );
 			}
 
 			$loop_count ++;
@@ -116,6 +160,37 @@ if ( ! function_exists( 'astra_post_date' ) ) {
 		$output       .= '</span>';
 		return apply_filters( 'astra_post_date', $output );
 	}
+}
+
+/**
+ * Function to get Author name.
+ *
+ * @return null|string $author_name Author name.
+ * @since 4.0.0
+ */
+function astra_post_author_name() {
+	$author_name = '';
+	if ( empty( get_the_author() ) ) {
+		/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		global $post;
+		/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		if ( is_object( $post ) && isset( $post->post_author ) ) {
+			$user_id = $post->post_author;
+			/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			global $authordata;
+				/** @psalm-suppress InvalidGlobal */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			$author_data = '';
+			if ( ! $authordata ) {
+				$author_data = get_userdata( $user_id );
+			}
+
+			$author_name = esc_attr( ! empty( $author_data ) ? $author_data->display_name : '' );
+		}
+	} else {
+		$author_name = get_the_author();
+	}
+
+	return $author_name;
 }
 
 /**
@@ -165,7 +240,7 @@ if ( ! function_exists( 'astra_post_author' ) ) {
 						)
 					);
 				?>
-				><?php echo get_the_author(); ?></span>
+				><?php echo astra_post_author_name(); ?></span>
 			</a>
 		</span>
 
