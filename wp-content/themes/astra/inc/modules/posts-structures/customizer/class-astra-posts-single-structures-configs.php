@@ -201,10 +201,18 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 			// Filter out taxonomies in index-value format.
 			$taxonomies = array();
 			foreach ( $raw_taxonomies as $index => $value ) {
+				/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+				$tax_object = get_taxonomy( $value );
+				/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+
+				// @codingStandardsIgnoreStart
+				$tax_val    = ( is_object( $tax_object ) && ! empty( $tax_object->label ) ) ? $tax_object->label : $value;
+				// @codingStandardsIgnoreEnd
+
 				if ( '' === $index ) {
-					$taxonomies[''] = $value;
+					$taxonomies[''] = $tax_val;
 				} else {
-					$taxonomies[ $value ] = $value;
+					$taxonomies[ $value ] = $tax_val;
 				}
 			}
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -227,8 +235,8 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 				$parent_section = $section;
 			}
 
-			$taxonomy_meta = array();
-			$clone_limit   = 0;
+			$meta_config_options = array();
+			$clone_limit         = 0;
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			if ( count( $taxonomies ) > 1 ) {
 				/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -237,7 +245,7 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 				if ( absint( astra_get_option( $title_section . '-taxonomy-clone-tracker', 1 ) ) === $clone_limit ) {
 					$to_clone = false;
 				}
-				$taxonomy_meta[ $title_section . '-taxonomy' ]   = array(
+				$meta_config_options[ $title_section . '-taxonomy' ]   = array(
 					'clone'         => $to_clone,
 					'is_parent'     => true,
 					'main_index'    => $title_section . '-taxonomy',
@@ -245,7 +253,7 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 					'clone_tracker' => ASTRA_THEME_SETTINGS . '[' . $title_section . '-taxonomy-clone-tracker]',
 					'title'         => __( 'Taxonomy', 'astra' ),
 				);
-				$taxonomy_meta[ $title_section . '-taxonomy-1' ] = array(
+				$meta_config_options[ $title_section . '-taxonomy-1' ] = array(
 					'clone'         => $to_clone,
 					'is_parent'     => true,
 					'main_index'    => $title_section . '-taxonomy',
@@ -253,7 +261,7 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 					'clone_tracker' => ASTRA_THEME_SETTINGS . '[' . $title_section . '-taxonomy-clone-tracker]',
 					'title'         => __( 'Taxonomy', 'astra' ),
 				);
-				$taxonomy_meta[ $title_section . '-taxonomy-2' ] = array(
+				$meta_config_options[ $title_section . '-taxonomy-2' ] = array(
 					'clone'         => $to_clone,
 					'is_parent'     => true,
 					'main_index'    => $title_section . '-taxonomy',
@@ -261,6 +269,12 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 					'clone_tracker' => ASTRA_THEME_SETTINGS . '[' . $title_section . '-taxonomy-clone-tracker]',
 					'title'         => __( 'Taxonomy', 'astra' ),
 				);
+			}
+
+			// Display Read Time option in Meta options only when Astra Addon is activated.
+			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			if ( defined( 'ASTRA_EXT_VER' ) && Astra_Ext_Extension::is_active( 'blog-pro' ) ) {
+				$meta_config_options['read-time'] = __( 'Read Time', 'astra' );
 			}
 
 			$structure_sub_controls = array();
@@ -522,7 +536,7 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 							'author'   => __( 'Author', 'astra' ),
 							'date'     => __( 'Publish Date', 'astra' ),
 						),
-						$taxonomy_meta
+						$meta_config_options
 					),
 				),
 

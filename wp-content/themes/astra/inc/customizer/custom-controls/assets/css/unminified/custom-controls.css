@@ -290,6 +290,7 @@
   border-radius: 3px;
   box-shadow: none;
   transition: all 0.3s;
+  -moz-appearance: textfield;
 }
 
 .customize-control-ast-border .input-wrapper .ast-border-wrapper li .ast-border-connected {
@@ -2102,6 +2103,9 @@ li[ID*="accordion-section-ast-dynamic-archive-"].control-section-ast_section {
 	text-align: center;
 	padding: 0 5px;
 }
+.ast-font-extras-wrapper .ast-font-extras-input input[type=number], .ast-font-spacing-wrapper .ast-font-spacing-input input[type=number] {
+	-moz-appearance: textfield;
+}
 .ast-font-extras-input:hover, .ast-font-spacing-input:hover {
 	border-color: var(--ast-customizer-color-2);
 }
@@ -3237,6 +3241,10 @@ span.customize-control-title.ast-group-section-title {
 .customize-control-ast-responsive-spacing .ast-spacing-input-item {
   margin: 0 2px;
   -moz-appearance: textfield;
+}
+
+.customize-control-ast-responsive-spacing .ast-spacing-input-item input[type=number] {
+	-moz-appearance: textfield;
 }
 
 .customize-control-ast-responsive-spacing .ast-spacing-input-item input::-webkit-inner-spin-button,

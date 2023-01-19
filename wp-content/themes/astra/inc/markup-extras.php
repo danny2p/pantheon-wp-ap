@@ -1357,7 +1357,7 @@ if ( ! function_exists( 'astra_entry_header_class' ) ) {
 		$classes          = array();
 		$title_markup     = astra_the_title( '', '', $post_id, false );
 		$thumb_markup     = astra_get_post_thumbnail( '', '', false );
-		$post_meta_markup = astra_single_get_post_meta( false );
+		$post_meta_markup = astra_get_post_meta( astra_get_option( 'ast-dynamic-single-' . $post_type . '-metadata', array( 'comments', 'author', 'date' ) ) );
 		$single_structure = 'page' === $post_type ? astra_get_option( 'ast-dynamic-single-page-structure', array( 'ast-dynamic-single-page-image', 'ast-dynamic-single-page-title' ) ) : astra_get_option( 'ast-dynamic-single-' . esc_attr( $post_type ) . '-structure', array( 'ast-dynamic-single-' . $post_type . '-title', 'ast-dynamic-single-' . $post_type . '-meta' ) );
 
 		if ( empty( $single_structure ) ) {

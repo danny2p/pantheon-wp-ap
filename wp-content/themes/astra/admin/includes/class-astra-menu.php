@@ -290,7 +290,7 @@ class Astra_Menu {
 			array(
 				'logo-favicon' => array(
 					'title'     => __( 'Site Identity', 'astra' ),
-					'quick_url' => admin_url( 'customize.php?autofocus[control]=custom_logo' ),
+					'quick_url' => admin_url( 'customize.php?autofocus[control]=site_icon' ),
 				),
 				'header'       => array(
 					'title'     => __( 'Header Settings', 'astra' ),

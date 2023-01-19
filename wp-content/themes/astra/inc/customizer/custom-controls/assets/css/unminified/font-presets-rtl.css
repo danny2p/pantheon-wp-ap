@@ -109,6 +109,9 @@
 	text-align: center;
 	padding: 0 5px;
 }
+.ast-font-extras-wrapper .ast-font-extras-input input[type=number], .ast-font-spacing-wrapper .ast-font-spacing-input input[type=number] {
+	-moz-appearance: textfield;
+}
 .ast-font-extras-input:hover, .ast-font-spacing-input:hover {
 	border-color: var(--ast-customizer-color-2);
 }
