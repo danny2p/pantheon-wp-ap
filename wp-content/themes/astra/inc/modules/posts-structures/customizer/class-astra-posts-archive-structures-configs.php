@@ -282,7 +282,7 @@ class Astra_Posts_Archive_Structures_Configs extends Astra_Customizer_Config_Bas
 					'section'  => $parent_section,
 					'priority' => 2,
 					'linked'   => $title_section,
-					'linkText' => ( 'post' === $post_type ) ? __( 'Blog Title', 'astra' ) : ucfirst( $post_type ) . __( ' Title', 'astra' ),
+					'linkText' => ( 'post' === $post_type ) ? __( 'Blog Title', 'astra' ) : Astra_Posts_Structures_Configs::astra_get_dynamic_section_title( get_post_type_object( $post_type ), $post_type ) . __( ' Title', 'astra' ),
 				),
 
 				/**

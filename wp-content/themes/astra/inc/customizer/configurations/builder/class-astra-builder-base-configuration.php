@@ -218,15 +218,6 @@ final class Astra_Builder_Base_Configuration {
 	}
 
 	/**
-	 * Get astra-options DB values.
-	 *
-	 * @since 4.0.0
-	 */
-	public static function get_astra_options() {
-		return get_option( ASTRA_THEME_SETTINGS );
-	}
-
-	/**
 	 * Prepare Visibility options.
 	 *
 	 * @param string $_section section id.

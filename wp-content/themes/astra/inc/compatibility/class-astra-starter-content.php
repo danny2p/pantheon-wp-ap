@@ -54,10 +54,41 @@ class Astra_Starter_Content {
 		}
 
 		// preview customizer values.
+		add_filter( 'default_post_metadata', array( $this, 'starter_meta' ), 99, 3 );
+
 		add_filter( 'astra_theme_defaults', array( $this, 'theme_defaults' ) );
 
 		add_filter( 'astra_global_color_palette', array( $this, 'theme_color_palettes_defaults' ) );
 
+	}
+
+	/**
+	 * Load default starter meta.
+	 *
+	 * @since 4.0.2
+	 * @param mixed  $value Value.
+	 * @param int    $post_id Post id.
+	 * @param string $meta_key Meta key.
+	 *
+	 * @return string Meta value.
+	 */
+	public function starter_meta( $value, $post_id, $meta_key ) {
+		if ( get_post_type( $post_id ) !== 'page' ) {
+			return $value;
+		}
+		if ( 'site-content-layout' === $meta_key ) {
+			return 'plain-container';
+		}
+		if ( 'theme-transparent-header-meta' === $meta_key ) {
+			return 'enabled';
+		}
+		if ( 'site-sidebar-layout' === $meta_key ) {
+			return 'no-sidebar';
+		}
+		if ( 'site-post-title' === $meta_key ) {
+			return 'disabled';
+		}
+		return $value;
 	}
 
 	/**
@@ -240,7 +271,6 @@ class Astra_Starter_Content {
 			'options'     => array(
 				'page_on_front' => '{{' . self::HOME_SLUG . '}}',
 				'show_on_front' => 'page',
-				'blogname'      => 'Astra',
 			),
 			'posts'       => array(
 				self::HOME_SLUG => require ASTRA_THEME_DIR . 'inc/compatibility/starter-content/home.php', // PHPCS:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound

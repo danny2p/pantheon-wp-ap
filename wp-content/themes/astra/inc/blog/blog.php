@@ -461,7 +461,7 @@ function astra_banner_elements_order( $structure = array() ) {
 				if ( ! empty( $post_meta ) ) {
 					$output_str = astra_get_post_meta( $post_meta );
 					if ( ! empty( $output_str ) ) {
-						$output = apply_filters( 'astra_single_banner_post_meta', '<div class="entry-meta">' . $output_str . '</div>' ); // WPCS: XSS OK.
+						$output = apply_filters( 'astra_single_post_meta', '<div class="entry-meta">' . $output_str . '</div>' ); // WPCS: XSS OK.
 					}
 				}
 				echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -480,11 +480,13 @@ function astra_banner_elements_order( $structure = array() ) {
 
 			case 'archive-title':
 				do_action( 'astra_blog_archive_title_before' );
+				add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
 				if ( 'layout-1' === $layout_type ) {
 					astra_the_post_title( '<h1 class="page-title ast-archive-title">', '</h1>', 0, true );
 				} else {
 					astra_the_post_title( '<h1>', '</h1>', 0, true );
 				}
+				remove_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
 				do_action( 'astra_blog_archive_title_after' );
 				break;
 

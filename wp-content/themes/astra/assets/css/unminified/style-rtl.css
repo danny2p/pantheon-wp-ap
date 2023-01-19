@@ -1655,9 +1655,9 @@ a:hover {
 # Media
 --------------------------------------------------------------*/
 /* Make sure embeds and iframes fit their containers. */
-embed,
-iframe,
-object {
+embed, .entry-content[ast-blocks-layout] > embed,
+iframe, .entry-content[ast-blocks-layout] > iframe,
+object, .entry-content[ast-blocks-layout] > object {
   max-width: 100%;
 }
 
