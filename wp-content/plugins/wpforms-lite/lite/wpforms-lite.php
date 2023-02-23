@@ -382,7 +382,7 @@ class WPForms_Lite {
 		wp_enqueue_style(
 			'wpforms-lite-admin',
 			WPFORMS_PLUGIN_URL . "assets/lite/css/admin{$min}.css",
-			array(),
+			[],
 			WPFORMS_VERSION
 		);
 	}
@@ -567,7 +567,7 @@ class WPForms_Lite {
 						],
 					]
 				),
-				'https://wpforms.com/docs/setup-form-notification-wpforms/'
+				esc_url( wpforms_utm_link( 'https://wpforms.com/docs/setup-form-notification-wpforms/', 'Builder Notifications', 'Disable Notifications Alert' ) )
 			),
 		];
 
@@ -631,7 +631,8 @@ class WPForms_Lite {
 				</ul>
 			</div>
 			<p>
-				<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'settings-upgrade' ) ); ?>" target="_blank" rel="noopener noreferrer">
+				<?php $utm_content = ucwords( $view ) . ' Tab'; ?>
+				<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'settings-upgrade', $utm_content ) ); ?>" target="_blank" rel="noopener noreferrer">
 					<?php esc_html_e( 'Get WPForms Pro Today and Unlock all the Powerful Features »', 'wpforms-lite' ); ?>
 				</a>
 			</p>
@@ -702,6 +703,9 @@ class WPForms_Lite {
 				-ms-filter: blur(3px);
 				-o-filter: blur(3px);
 				filter: blur(3px);
+				user-select: none;
+				-webkit-user-select: none;
+				pointer-events: none;
 			}
 
 			.wpforms-admin-content a {
@@ -856,7 +860,7 @@ class WPForms_Lite {
 			} );
 		</script>
 
-		<div id="wpforms-entries-list" class="wrap wpforms-admin-wrap">
+		<div id="wpforms-entries-list" class="wrap wpforms-admin-wrap wpforms-entries-list-upgrade">
 			<h1 class="page-title">Entries</h1>
 			<div class="wpforms-admin-content-wrap">
 
@@ -918,13 +922,13 @@ class WPForms_Lite {
 								}
 							// phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentAfterEnd
 							?>.</p>
-							<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'entries' ) ); ?>" class="wpforms-btn wpforms-btn-lg wpforms-btn-orange wpforms-upgrade-modal" target="_blank" rel="noopener noreferrer">
+							<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'entries', 'Upgrade to WPForms Pro & Restore Form Entries Button' ) ); ?>" class="wpforms-btn wpforms-btn-lg wpforms-btn-orange wpforms-upgrade-modal" target="_blank" rel="noopener noreferrer">
 								<?php esc_html_e( 'Upgrade to WPForms Pro & Restore Form Entries', 'wpforms-lite' ); ?>
 							</a>
 
 						<?php else : ?>
 
-							<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'entries' ) ); ?>" class="wpforms-btn wpforms-btn-lg wpforms-btn-orange wpforms-upgrade-modal" target="_blank" rel="noopener noreferrer">
+							<a href="<?php echo esc_url( wpforms_admin_upgrade_link( 'entries', 'Upgrade to WPForms Pro Now Button' ) ); ?>" class="wpforms-btn wpforms-btn-lg wpforms-btn-orange wpforms-upgrade-modal" target="_blank" rel="noopener noreferrer">
 								<?php esc_html_e( 'Upgrade to WPForms Pro Now', 'wpforms-lite' ); ?>
 							</a>
 
