@@ -1,5 +1,20 @@
 == Changelog ==
 
+= 1.8.0.1 =
+- Added: Prevent spam submissions using the new Cloudflare Turnstile anti-spam integration. You can find it on the Settings > CAPTCHA page.
+- Changed: Non-public taxonomies should not be displayed in Dynamic Choices' available sources.
+- Changed: External usage of removed PHP classes is now handled gracefully without generating fatal errors.
+- Changed: The performance of the Email field validation is improved when using an allowlist or denylist.
+- Changed: Updated DOMPurify library to 2.4.3.
+- Fixed: The Dropdown field text indentation was incorrect in the Form Builder in Firefox.
+- Fixed: Various notification modals' titles had inconsistent sizes in the Form Builder.
+- Fixed: Validation errors in various modals were inconsistent in the Form Builder.
+- Fixed: When duplicating an inactive field, the settings of the active field are now removed properly.
+- Fixed: Some cache files were unnecessarily re-downloaded on the front end.
+- Fixed: Users with roles other than Administrator could not add the reCAPTCHA/hCaptcha field and dismiss notices even if they had sufficient permissions.
+- Fixed: Number Slider field validation failed if a maximum value was not a multiple of steps..
+- Fixed: HTML markup in the Default Text of Paragraph Text fields was not being displayed on the front end and in the Form Builder preview.
+
 = 1.7.9.1 =
 - Fixed: Incorrect spacing around the Submit button in the Form Builder was fixed.
 - Fixed: Missing assets were added to the plugin.

@@ -3,9 +3,9 @@
  * Plugin Name: Performance Lab
  * Plugin URI: https://github.com/WordPress/performance
  * Description: Performance plugin from the WordPress Performance Team, which is a collection of standalone performance modules.
- * Requires at least: 6.0
+ * Requires at least: 6.1
  * Requires PHP: 5.6
- * Version: 1.9.0
+ * Version: 2.0.0
  * Author: WordPress Performance Team
  * Author URI: https://make.wordpress.org/performance/
  * License: GPLv2 or later
@@ -15,7 +15,7 @@
  * @package performance-lab
  */
 
-define( 'PERFLAB_VERSION', '1.9.0' );
+define( 'PERFLAB_VERSION', '2.0.0' );
 define( 'PERFLAB_MAIN_FILE', __FILE__ );
 define( 'PERFLAB_PLUGIN_DIR_PATH', plugin_dir_path( PERFLAB_MAIN_FILE ) );
 define( 'PERFLAB_MODULES_SETTING', 'perflab_modules_settings' );
@@ -123,7 +123,6 @@ function perflab_get_module_settings() {
 	$legacy_module_slugs = array(
 		'site-health/audit-autoloaded-options' => 'database/audit-autoloaded-options',
 		'site-health/audit-enqueued-assets'    => 'js-and-css/audit-enqueued-assets',
-		'site-health/audit-full-page-cache'    => 'object-cache/audit-full-page-cache',
 		'site-health/webp-support'             => 'images/webp-support',
 	);
 
@@ -159,7 +158,7 @@ function perflab_get_active_modules() {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array An array of the currently active modules.
+	 * @param array $modules An array of the currently active modules.
 	 */
 	$modules = apply_filters( 'perflab_active_modules', $modules );
 
@@ -288,6 +287,17 @@ function perflab_maybe_set_object_cache_dropin() {
 
 	// Bail if already placed.
 	if ( PERFLAB_OBJECT_CACHE_DROPIN_VERSION ) {
+		return;
+	}
+
+	/**
+	 * Filters whether the Perflab server timing drop-in should be set.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param bool Whether the server timing drop-in should be set.
+	 */
+	if ( apply_filters( 'perflab_disable_object_cache_dropin', false ) ) {
 		return;
 	}
 
