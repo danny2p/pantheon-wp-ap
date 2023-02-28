@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WPForms Lite 1.8.0.1\n"
+"Project-Id-Version: WPForms Lite 1.8.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpforms-lite\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-16T10:38:47+00:00\n"
+"POT-Creation-Date: 2023-02-28T11:36:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: wpforms-lite\n"
@@ -1498,12 +1498,12 @@ msgstr ""
 
 #. translators: %s - stars.
 #: includes/admin/class-about.php:525
-msgid "We know that you will truly love WPForms. It has over <strong>11,000+ five star ratings</strong> (%s) and is active on over 5 million websites."
+msgid "We know that you will truly love WPForms. It has over <strong>12,000+ five star ratings</strong> (%s) and is active on over 5 million websites."
 msgstr ""
 
 #: includes/admin/class-about.php:546
 #: lite/wpforms-lite.php:619
-msgid "500+ customizable form templates"
+msgid "600+ customizable form templates"
 msgstr ""
 
 #: includes/admin/class-about.php:550
@@ -1880,7 +1880,7 @@ msgid "Basic Form Templates"
 msgstr ""
 
 #: includes/admin/class-about.php:1227
-msgid "All Form Templates including Bonus 500+ pre-made form templates"
+msgid "All Form Templates including Bonus 600+ pre-made form templates"
 msgstr ""
 
 #: includes/admin/class-about.php:1235
@@ -2201,7 +2201,7 @@ msgid "Read the documentation"
 msgstr ""
 
 #: includes/admin/class-menu.php:363
-#: includes/admin/class-review.php:277
+#: includes/admin/class-review.php:290
 #: templates/builder/help.php:122
 msgid "Docs"
 msgstr ""
@@ -2239,19 +2239,19 @@ msgstr ""
 msgid "Please rate %1$s <a href=\"%2$s\" target=\"_blank\" rel=\"noopener noreferrer\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href=\"%3$s\" target=\"_blank\" rel=\"noopener\">WordPress.org</a> to help us spread the word."
 msgstr ""
 
-#: includes/admin/class-review.php:268
+#: includes/admin/class-review.php:281
 msgid "Support"
 msgstr ""
 
-#: includes/admin/class-review.php:282
+#: includes/admin/class-review.php:295
 msgid "VIP Circle"
 msgstr ""
 
-#: includes/admin/class-review.php:287
+#: includes/admin/class-review.php:300
 msgid "Free Plugins"
 msgstr ""
 
-#: includes/admin/class-review.php:294
+#: includes/admin/class-review.php:307
 msgid "Made with ♥ by the WPForms Team"
 msgstr ""
 
@@ -5509,7 +5509,7 @@ msgstr ""
 
 #. translators: %s - star icons.
 #: lite/wpforms-lite.php:604
-msgid "We know that you will truly love WPForms. It has over 11,000+ five star ratings (%s) and is active on over 5 million websites."
+msgid "We know that you will truly love WPForms. It has over 12,000+ five star ratings (%s) and is active on over 5 million websites."
 msgstr ""
 
 #: lite/wpforms-lite.php:616
@@ -6283,7 +6283,7 @@ msgid "Welcome to WPForms!"
 msgstr ""
 
 #: src/Admin/Notifications/EventDriven.php:523
-msgid "We’re grateful that you chose WPForms for your website! Now that you’ve installed the plugin, you’re less than 5 minutes away from publishing your first form. To make it easy, we’ve got 500+ form templates to get you started!"
+msgid "We’re grateful that you chose WPForms for your website! Now that you’ve installed the plugin, you’re less than 5 minutes away from publishing your first form. To make it easy, we’ve got 600+ form templates to get you started!"
 msgstr ""
 
 #: src/Admin/Notifications/EventDriven.php:527
