@@ -1758,6 +1758,8 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 				}
 			} );
 
+			$( document ).trigger( 'wpformsAmountTotalCalculated', [ $form, total ] );
+
 			return total;
 		},
 
@@ -2242,7 +2244,7 @@ var wpforms = window.wpforms || ( function( document, window, $ ) {
 			} else if ( $captchaContainer.hasClass( 'wpforms-is-turnstile' ) ) {
 				apiVar = turnstile;
 			} else {
-				apiVar = 'grecaptcha';
+				apiVar = grecaptcha;
 			}
 
 			// Check for invisible recaptcha first.
