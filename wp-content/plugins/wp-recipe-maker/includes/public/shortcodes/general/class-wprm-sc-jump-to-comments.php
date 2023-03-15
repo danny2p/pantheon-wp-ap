@@ -201,7 +201,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Rate this Recipe', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

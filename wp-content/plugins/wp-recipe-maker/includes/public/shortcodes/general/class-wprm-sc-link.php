@@ -197,7 +197,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 		}
 
 		$nofollow = 'nofollow' === $atts['link_nofollow'] ? ' rel="nofollow"' : '';
-		$output = '<a href="' . $link . '" target="' . esc_attr( $atts['link_target'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ). '"' . $nofollow . ' style="' . esc_attr( $style ) . '">' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="' . $link . '" target="' . esc_attr( $atts['link_target'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ). '"' . $nofollow . ' style="' . esc_attr( $style ) . '">' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

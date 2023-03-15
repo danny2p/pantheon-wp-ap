@@ -201,7 +201,13 @@ class WPRM_Comment_Rating {
 				// FlyingPress compatibility.
 				if ( class_exists( 'FlyingPress\Purge' ) ) {
 					$post_link = get_permalink( $comment->comment_post_ID );
-					FlyingPress\Purge::purge_by_urls( array( $post_link ) );
+
+					// FlyingPress changed API. Make sure there are no PHP errors.
+					if( is_callable( 'FlyingPress\Purge::purge_url' ) ) {
+						FlyingPress\Purge::purge_url( $post_link );
+					} elseif ( is_callable( 'FlyingPress\Purge::purge_by_urls' ) ) {
+						FlyingPress\Purge::purge_by_urls( array( $post_link ) );
+					}
 				}
 			}
 		}

@@ -104,6 +104,10 @@ const instruction = (props, provided) => {
                     <div className="wprm-admin-modal-field-instruction-text-name-container">
                         <FieldRichText
                             className="wprm-admin-modal-field-instruction-text"
+                            ingredients={ props.ingredients }
+                            instructions={ props.instructions }
+                            allIngredients={ props.hasOwnProperty( 'allIngredients' ) ? props.allIngredients : null }
+                            inlineIngredientsPortal={ props.hasOwnProperty( 'inlineIngredientsPortal' ) ? props.inlineIngredientsPortal : null }
                             value={ props.text }
                             placeholder={ __wprm( 'This is one step of the instructions.' ) }
                             onChange={(value) => props.onChangeText(value)}
@@ -112,6 +116,7 @@ const instruction = (props, provided) => {
                                     props.onTab(event);
                                 }
                             }}
+                            key={ props.hasOwnProperty( 'externalUpdate' ) ? props.externalUpdate : null }
                         />
                     </div>
                     {

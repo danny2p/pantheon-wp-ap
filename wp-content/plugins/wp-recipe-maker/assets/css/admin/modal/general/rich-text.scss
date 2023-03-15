@@ -41,6 +41,29 @@
         }
     }
 
+    .wprm-admin-modal-toolbar-ingredient {
+        display: flex;
+        align-items: center;
+        padding: 2px;
+
+        .wprm-admin-modal-toolbar-temperature-label {
+            display: inline-block;
+            margin-right: 5px;
+
+            font-weight: bold;
+        }
+        .wprm-admin-modal-toolbar-temperature-action {
+            display: inline-block;
+            margin-right: 5px;
+
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
     .wprm-admin-modal-toolbar-suggest {
         padding: 0 2px;
         min-height: 30px;
@@ -157,6 +180,15 @@
             height: auto;
             vertical-align: text-bottom;
             margin-bottom: -0.2em;
+        }
+    }
+
+    wprm-ingredient {
+        color: #2271b1;
+
+        &[removed="1"] {
+            color: darkred;
+            text-decoration: line-through;
         }
     }
 

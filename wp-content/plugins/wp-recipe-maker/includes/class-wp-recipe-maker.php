@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '8.6.2' );
+		define( 'WPRM_VERSION', '8.7.2' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_DIR', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -113,6 +113,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-custom-hash.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-fallback-recipe.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-icon.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-rank-math.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-video.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-migrations.php' );

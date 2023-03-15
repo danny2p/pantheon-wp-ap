@@ -138,6 +138,8 @@ class WPRM_Recipe {
 	public function get_data_manage() {
 		$recipe = $this->get_data();
 
+		$recipe['editable'] = current_user_can( 'edit_post', $this->id() );
+
 		$recipe['date'] = $this->date();
 		$recipe['date_formatted'] = $this->date_formatted();
 		$recipe['seo'] = $this->seo();
@@ -334,7 +336,7 @@ class WPRM_Recipe {
 
 		if ( $author_id ) {
 			$author = get_userdata( $author_id );
-			return $author->data->display_name;
+			return $author ? $author->data->display_name : '';
 		} else {
 			return '';
 		}

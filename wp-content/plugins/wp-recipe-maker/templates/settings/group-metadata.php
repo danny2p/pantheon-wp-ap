@@ -24,6 +24,13 @@ $metadata = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'rank_math_integration',
+					'name' => __( 'Integrate with Rank Math', 'wp-recipe-maker' ),
+					'description' => __( 'Integrate with the Rank Math Schema Graph when enabled.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 		array(

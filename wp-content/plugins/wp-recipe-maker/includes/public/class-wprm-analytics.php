@@ -55,6 +55,9 @@ class WPRM_Analytics {
 			'twitter-share-button' => __( 'Twitter Share', 'wp-recipe-maker' ),
 			'text-share-button' => __( 'Text Share', 'wp-recipe-maker' ),
 			'email-share-button' => __( 'Email Share', 'wp-recipe-maker' ),
+
+			'add-to-collections-button' => __( 'Add to Recipe Collections', 'wp-recipe-maker' ),
+			'add-to-shopping-list-button' => __( 'Add to Quick Access Shopping List', 'wp-recipe-maker' ),
 		);
 
 		add_filter( 'wprm_settings_update', array( __CLASS__, 'check_hh_token_on_settings_update' ), 10, 2 );

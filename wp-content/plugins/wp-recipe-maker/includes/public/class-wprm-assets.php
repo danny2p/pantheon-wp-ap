@@ -226,6 +226,8 @@ class WPRM_Assets {
 			'translations' => self::get_translations( 'admin' ),
 			'text' => array(
 				'shortcode_remove' => __( 'Are you sure you want to remove this recipe?', 'wp-recipe-maker' ),
+				'nutrition_label_servings' => __( 'Amount per Serving', 'wp-recipe-maker-premium' ),
+				'nutrition_label_100g' => __( 'Amount per 100g', 'wp-recipe-maker-premium' ),
 			),
 		);
 

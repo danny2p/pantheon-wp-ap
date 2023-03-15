@@ -3,10 +3,6 @@
     align-items: center;
     margin: 10px 0;
 
-    .wprm-toggle-switch {
-        margin-right: 10px;
-    }
-
     label {
         cursor: pointer;
         margin: 0;
@@ -24,24 +20,26 @@
 .wprm-toggle-switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 20px;
 
     input {
         opacity: 0;
         width: 0;
+        min-width: 0;
         height: 0;
         margin: 0;
         padding: 0;
     }
 
     .wprm-toggle-switch-slider {
+        width: 40px;
+        height: 20px;
+
         position: absolute;
         cursor: pointer;
-        top: 0;
+        top: 50%;
+        margin-top: -10px;
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: #cccccc;
         -webkit-transition: .4s;
         transition: .4s;
@@ -70,7 +68,11 @@
     input:checked + .wprm-toggle-switch-slider:before {
         left: 50%;
         right: 7%;
-      }
+    }
+
+    .wprm-toggle-switch-label {
+        margin-left: 50px;
+    }
 }
 
 .wprm-toggle-switch-rounded {

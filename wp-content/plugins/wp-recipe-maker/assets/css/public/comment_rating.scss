@@ -6,6 +6,10 @@ body:not(:hover) fieldset.wprm-comment-ratings-container:focus-within span {
     text-align: left;
 	margin-top: 5px;
     margin-bottom: 20px;
+
+    .wprm-rating-stars {
+        vertical-align: middle;
+    }
 }
 
 // Source: https://codepen.io/thierry/pen/wyYZoe.

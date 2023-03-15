@@ -1,7 +1,7 @@
 import 'core-js/features/array/flat';
 
 import React, { useCallback, useMemo, useState } from 'react';
-import { Editor, Transforms, createEditor } from 'slate';
+import { Editor, Path, Range, Transforms, createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey'
@@ -10,6 +10,7 @@ import FieldText from '../FieldText';
 import FieldTextarea from '../FieldTextarea';
 import { isProblemBrowser, isFirefox } from 'Shared/Browser';
 import Toolbar from './Toolbar';
+import InlineIngredients from '../../recipe/edit/RecipeInstructions/InlineIngredients';
 import { deserialize, serialize } from './html';
 import { Element, Leaf } from './nodes';
 
@@ -21,7 +22,7 @@ const HOTKEYS = {
     'mod+u': 'underline',
 };
 
-const INLINE_BLOCKS = [ 'link', 'affiliate-link', 'code', 'temperature' ];
+const INLINE_BLOCKS = [ 'link', 'affiliate-link', 'code', 'temperature', 'ingredient' ];
 
 const RichEditor = (props) => {
     if ( isProblemBrowser() ) {
@@ -84,6 +85,16 @@ const RichEditor = (props) => {
                 }
             }
         >
+            {
+                props.className
+                && 'wprm-admin-modal-field-instruction-text' === props.className
+                &&
+                <InlineIngredients
+                    ingredients={ props.hasOwnProperty( 'ingredients' ) ? props.ingredients : null }
+                    instructions={ props.hasOwnProperty( 'instructions' ) ? props.instructions : null }
+                    allIngredients={ props.hasOwnProperty( 'allIngredients' ) ? props.allIngredients : null }
+                />
+            }
             <Toolbar
                 type={ props.toolbar ? props.toolbar : 'all' }
                 isMarkActive={ isMarkActive }
@@ -132,6 +143,42 @@ const RichEditor = (props) => {
                     if ( props.singleLine && isHotkey( 'enter', event ) ) {
                         event.preventDefault();
                         return;
+                    }
+
+                    // Special handling of inline ingredients (contentEditable false hides cursor).
+                    if ( ! [ 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Meta', 'Alt', 'Control', 'Shift', 'Escape' ].includes( event.key ) ) {
+                        const { selection } = editor;
+                        const isCollapsed = selection && Range.isCollapsed(selection);
+
+                        // Only when collapsed (otherwise issues when using CTRL-V with ingredient inside, for example).
+                        if ( isCollapsed ) {
+                            const [block] = Editor.nodes(editor, { match: n => n.type === 'ingredient' });
+                            if ( block ) {
+                                // Backspace or delete converts to regular text.
+                                if ( [ 'Backspace', 'Delete' ].includes( event.key ) ) {
+                                    Transforms.unwrapNodes(editor, { match: n => n.type === 'ingredient' });
+
+                                    event.preventDefault();
+                                    return;
+                                }
+
+                                // Move selection after ingredient and insert there.
+                                const afterIngredient = {
+                                    path: Path.next( block[1] ),
+                                    offset: 0,
+                                };
+                                Transforms.select(editor, afterIngredient );
+
+                                // Simulate text added.
+                                const keyText = event.key;
+                                if ( 1 === keyText.length ) {
+                                    Transforms.insertText( editor, keyText );
+                                }
+
+                                event.preventDefault();
+                                return;
+                            }
+                        }
                     }
 
                     // Check for mark shortcodes.
@@ -204,6 +251,27 @@ const getValueFromHtml = ( htmlString ) => {
         const help = attrMatch ? attrMatch[1] : '';
 
         const node = `<wprm-temperature unit="${ unit }" icon="${ icon }" help="${ help }">${ value }</wprm-temperature>`;
+        
+        htmlString = htmlString.replace( m[0], node );
+    }
+
+    // Convert ingredient shortcode to its own element.
+    const inlineRegex = /\[wprm-ingredient(\s.*?)]/gm;
+
+    m = null;
+    while ((m = inlineRegex.exec(htmlString)) !== null) {
+        let attrMatch;
+
+        attrMatch = new RegExp(' uid=\\"(.*?)"', 'gm').exec( m[1] );
+        const uid = attrMatch ? attrMatch[1] : '';
+
+        attrMatch = new RegExp(' removed=\\"(.*?)"', 'gm').exec( m[1] );
+        const removed = attrMatch && '1' === attrMatch[1] ? true : false;
+
+        attrMatch = new RegExp(' text=\\"(.*?)"', 'gm').exec( m[1] );
+        const text = attrMatch ? attrMatch[1] : '';
+
+        const node = `<wprm-ingredient uid="${ uid }" removed="${ removed ? '1': '0' }">${ text }</wprm-ingredient>`;
         
         htmlString = htmlString.replace( m[0], node );
     }

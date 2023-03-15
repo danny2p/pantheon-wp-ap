@@ -1,23 +1,6 @@
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
-
 window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
 
 window.WPRecipeMaker.temperature = {
-	init() {
-		WPRecipeMaker.temperature.addTooltips();
-	},
-	addTooltips() {
-		const temperatures = WPRecipeMaker.temperature.getTemperatures();
-
-        for ( let temperature of temperatures ) {
-            if ( temperature.help ) {
-                tippy( temperature.container, {
-                    content: temperature.help,
-                });
-            }
-        }
-    },
     getTemperatures() {
         let temperatures = [];
         const containers = document.querySelectorAll('.wprm-temperature-container');
@@ -33,19 +16,7 @@ window.WPRecipeMaker.temperature = {
             container,
             value: container.dataset.value,
             unit: container.dataset.unit,
-            help: container.dataset.help,
+            help: container.dataset.tooltip,
         };
     },
 };
-
-ready(() => {
-	window.WPRecipeMaker.temperature.init();
-});
-
-function ready( fn ) {
-    if (document.readyState != 'loading'){
-        fn();
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}

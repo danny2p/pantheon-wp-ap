@@ -171,6 +171,22 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				),
 				'dependency_compare' => 'OR',
 			),
+			'tag_image_tooltip' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'No Tooltip',
+					'term' => 'Show term name',
+					'title' => 'Show image title attribute',
+					'caption' => 'Show image caption attribute',
+					'description' => 'Show image description attribute',
+				),
+				'dependency' => array(
+					'id' => 'tag_display_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
 			'tag_image_size' => array(
 				'default' => '30x30',
 				'type' => 'image_size',
@@ -556,6 +572,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$field_atts['key'] = $field;
 				$field_atts['separator'] = $atts['tag_separator'];
 				$field_atts['display_style'] = $atts['tag_display_style'];
+				$field_atts['image_tooltip'] = $atts['tag_image_tooltip'];
 				$field_atts['image_size'] = $atts['tag_image_size'];
 				$field_atts['image_position'] = $atts['tag_image_position'];
 			} elseif ( in_array( $field, array_keys( $nutrition_fields ) ) ) {
@@ -574,6 +591,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$field_atts['key'] = substr( $field, 5 );
 				$field_atts['separator'] = $atts['tag_separator'];
 				$field_atts['display_style'] = $atts['tag_display_style'];
+				$field_atts['image_tooltip'] = $atts['tag_image_tooltip'];
 				$field_atts['image_size'] = $atts['tag_image_size'];
 				$field_atts['image_position'] = $atts['tag_image_position'];
 			}

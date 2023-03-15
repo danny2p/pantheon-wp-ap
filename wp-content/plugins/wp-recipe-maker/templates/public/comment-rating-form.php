@@ -71,6 +71,9 @@ $selected = isset( $rating ) && $rating ? $rating : 0;
 				$svg = ob_get_contents();
 				ob_end_clean();
 
+				// Replace color.
+				$svg = str_replace( '#343434', WPRM_Settings::get( 'template_color_comment_rating' ), $svg );
+
 				// Output HTML.
 				echo '<input aria-label="' . esc_attr( $labels[ $star ] ) . '" name="' . esc_attr( $name ) .'" value="' . $star . '" type="radio"' . $onclick;
 				echo 5 === $star && $label_id ? ' id="' . esc_attr( $label_id ) . '"' : '';

@@ -284,6 +284,7 @@ class WPRM_Recipe_Parser {
 		$range_keyword = trim( WPRM_Settings::get( 'import_range_keyword' ) );
 		$range_keyword = $range_keyword ? $range_keyword : 'to';
 		$raw = str_replace( ' ' . $range_keyword . ' ', '-', $raw );
+		$raw = str_replace( ' - ', '-', $raw );
 
 		// Replace fraction symbols.
 		foreach ( self::$fraction_symbols_map as $unicode => $normal ) {
@@ -378,7 +379,7 @@ class WPRM_Recipe_Parser {
 
 				$formatted = number_format( $raw, $decimals );
 				if ( 0.0 === floatval( $formatted ) ) {
-					$formatted .= pow( 10, -1 * decimals );
+					$formatted .= pow( 10, -1 * $decimals );
 				}
 
 				// No unnecessary trailing zeroes.

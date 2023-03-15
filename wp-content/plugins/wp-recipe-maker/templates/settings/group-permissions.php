@@ -36,7 +36,7 @@ $permissions = array(
 		array(
 			'name' => __( 'Backend Access', 'wp-recipe-maker' ),
 			'description' => __( 'Accepts one value only. Set the minimum capability required to access specific features. For example, set to edit_others_posts to provide access to editors and administrators.', 'wp-recipe-maker' ),
-			'documentation' => 'https://codex.wordpress.org/Roles_and_Capabilities',
+			'documentation' => 'https://wordpress.org/documentation/article/roles-and-capabilities/',
 			'settings' => array(
 				array(
 					'id' => 'features_dashboard_access',
@@ -82,6 +82,13 @@ $permissions = array(
 					'sanitize' => function( $value ) {
 						return preg_replace( '/[,\s]/', '', $value );
 					},
+				),
+				array(
+					'id' => 'manage_page_show_uneditable',
+					'name' => __( 'Show recipes that cannot be edited', 'wp-recipe-maker' ),
+					'description' => __( 'Show all recipes on the Manage page, even if a user will not be able to edit them.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
 				),
 			),
 		),

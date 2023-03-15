@@ -35,6 +35,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'text_styles',
 			),
+			'list_style_header' => array(
+				'type' => 'header',
+				'default' => __( 'List Style', 'wp-recipe-maker' ),
+			),
 			'list_style' => array(
 				'default' => 'disc',
 				'type' => 'dropdown',
@@ -79,6 +83,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'id' => 'list_style',
 					'value' => 'advanced',
 				),
+			),
+			'ingredient_fields_header' => array(
+				'type' => 'header',
+				'default' => __( 'Ingredient Fields', 'wp-recipe-maker' ),
 			),
 			'ingredients_order' => array(
 				'default' => 'regular',
@@ -169,6 +177,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'smaller' => 'Smaller',
 					'smaller-faded' => 'Smaller & Faded',
 				),
+			),
+			'ingredient_images_header' => array(
+				'type' => 'header',
+				'default' => __( 'Ingredient Images', 'wp-recipe-maker' ),
 			),
 			'image_position' => array(
 				'default' => 'before',
@@ -285,6 +297,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 						'type' => 'inverse',
 					),
 				),
+			),
+			'unit_conversion_header' => array(
+				'type' => 'header',
+				'default' => __( 'Unit Conversion', 'wp-recipe-maker' ),
 			),
 			'unit_conversion' => array(
 				'default' => 'after',
@@ -440,6 +456,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'id' => 'unit_conversion',
 					'value' => 'both',
 				),
+			),
+			'adjustable_servings_header' => array(
+				'type' => 'header',
+				'default' => __( 'Adjustable Servings', 'wp-recipe-maker' ),
 			),
 			'adjustable_servings' => array(
 				'default' => '',

@@ -150,6 +150,31 @@
     }
 }
 
+.wprm-admin-modal-field-instruction-inline-ingredients-container {
+    margin-left: 26px;
+
+    .wprm-admin-modal-field-instruction-inline-ingredients-info {
+        font-style: italic;
+    }
+    .wprm-admin-modal-field-instruction-inline-ingredient {
+        display: block;
+        margin: 4px 0;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &.wprm-admin-modal-field-instruction-inline-ingredient-in-other {
+            opacity: 0.5;
+        }
+        &.wprm-admin-modal-field-instruction-inline-ingredient-in-current {
+            opacity: 0.5;
+            color: darkgreen;
+        }
+    }
+}
+
 .wprm-admin-modal-field-instruction-unused-ingredients {
     margin-left: 26px;
     margin-top: 10px;
@@ -237,5 +262,20 @@
         margin-left: 0;
         width: 40%;
         float: right;
+    }
+
+    .wprm-admin-modal-field-instruction-container-inline {
+        position: relative;
+
+        .wprm-admin-modal-field-instruction-inline-ingredients-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 60%;
+            margin-left: 96px;
+
+            overflow-y: scroll;
+        }
     }
 }

@@ -149,6 +149,13 @@ $recipe_ratings = array(
 			'name' => __( 'User Ratings', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
+					'id' => 'user_ratings_indicate_not_voted',
+					'name' => __( 'Transparent Stars when not Voted', 'wp-recipe-maker' ),
+					'description' => __( 'Make the stars transparent when the current user has not voted yet.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
 					'id' => 'user_ratings_spam_prevention',
 					'name' => __( 'Spam Prevention Method', 'wp-recipe-maker' ),
 					'description' => __( 'How to prevent spam ratings. Use "Anonymous ID" if you do not want to store IP addresses in the database.', 'wp-recipe-maker' ),

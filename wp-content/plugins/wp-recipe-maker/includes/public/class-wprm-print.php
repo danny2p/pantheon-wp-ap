@@ -275,6 +275,8 @@ class WPRM_Print {
 			$output .= '<style>';
 			$output .= ' #wprm-print-button-print { border-color: ' . $color . ' !important; background-color: ' . $color . ' !important; }';
 			$output .= ' .wprm-print-toggle:checked + label:before { border-color: ' . $color . ' !important; background: ' . $color . ' !important; }';
+			$output .= ' .wprm-print-option-container a.wprm-print-option { border-color: ' . $color . ' !important; }';
+			$output .= ' .wprm-print-option-container a.wprm-print-option.option-active { background-color: ' . $color . ' !important; }';
 			$output .= '</style>';
 		}
 
@@ -379,7 +381,38 @@ class WPRM_Print {
 					'html' => '<script>var wprm_print_url = ' . wp_json_encode( $output['url'] ) . ';</script>',
 				);
 			}
+
+			// Print size options.
+			if ( WPRM_Settings::get( 'print_size_options' ) ) {
+				$output['header'] .= self::get_size_header();
+			}
 		}
+
+		return $output;
+	}
+
+	/**
+	 * Get header for size options.
+	 *
+	 * @since	8.7.0
+	 */
+	private static function get_size_header() {
+		$output = '';
+
+		$output .= '<div id="wprm-print-size-container" class="wprm-print-option-container">';
+
+		$options = array(
+			'small' => __( 'Smaller', 'wp-recipe-maker' ),
+			'normal' => __( 'Normal', 'wp-recipe-maker' ),
+			'large' => __( 'Larger', 'wp-recipe-maker' ),
+		);
+
+		foreach ( $options as $value => $label ) {
+			$active = 'normal' === $value ? ' option-active' : '';
+			$output .= '<a href="#" role="button" class="wprm-print-size wprm-print-option' . $active . '" data-size="' . esc_attr( $value ) . '" aria-label="' . __( 'Make print size', 'wp-recipe-maker' ) . ' ' . esc_attr( $label ) . '">' . $label . '</a>';
+		}
+
+		$output .= '</div>';
 
 		return $output;
 	}

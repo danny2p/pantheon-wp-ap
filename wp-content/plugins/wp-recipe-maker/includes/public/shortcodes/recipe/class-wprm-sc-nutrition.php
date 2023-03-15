@@ -30,6 +30,14 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'nutrition_fields',
 			),
+			'display_value' => array(
+				'default' => 'serving',
+				'type' => 'dropdown',
+				'options' => array(
+					'serving' => __( 'Per serving', 'wp-recipe-maker' ),
+					'100g' => __( 'Per 100g', 'wp-recipe-maker' ),
+				),
+			),
 			'unit' => array(
 				'default' => '0',
 				'type' => 'toggle',
@@ -109,7 +117,7 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 				'wprm-block-text-' . $atts['text_style'],
 			);
 
-			$output = '<span class="wprm-recipe-nutrition-with-unit">' . $output . wp_kses_post( $atts['unit_separator'] ) . '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $nutrient['unit'] . '</span></span>';
+			$output = '<span class="wprm-recipe-nutrition-with-unit">' . $output . WPRM_Shortcode_Helper::sanitize_html( $atts['unit_separator'] ) . '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $nutrient['unit'] . '</span></span>';
 		}
 
 		$output = WPRM_Shortcode_Helper::get_label_container( $atts, array( 'nutrition', $atts['field'] ), $output );

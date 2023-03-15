@@ -196,6 +196,13 @@ $recipe_print = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'print_size_options',
+					'name' => __( 'Size Options', 'wp-recipe-maker' ),
+					'description' => __( 'Allow visitors to change the print size.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 		array(

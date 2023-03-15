@@ -227,7 +227,7 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Share by Text', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_attr( $text_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="' . esc_attr( $text_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

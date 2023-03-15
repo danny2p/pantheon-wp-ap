@@ -2,12 +2,15 @@ window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window
 
 // Source: twentytwenty.intrinsicRatioVideos 
 window.WPRecipeMaker.video = {
-	init() {
-		this.forceRatio();
-
+	load() {
 		window.addEventListener( 'resize', function() {
 			this.forceRatio();
         }.bind( this ) );
+
+		window.WPRecipeMaker.video.init();
+	},
+	init() {
+		this.forceRatio();
     },
 	forceRatio() {
 		document.querySelectorAll( '.wprm-recipe iframe, .wprm-recipe object, .wprm-recipe video, .wprm-recipe-video-container iframe, .wprm-recipe-video-container object, .wprm-recipe-video-container video' ).forEach( function( video ) {
@@ -39,7 +42,7 @@ window.WPRecipeMaker.video = {
 
 ready(() => {
     if ( wprm_public.settings.video_force_ratio ) {
-        window.WPRecipeMaker.video.init();
+        window.WPRecipeMaker.video.load();
     }
 });
 

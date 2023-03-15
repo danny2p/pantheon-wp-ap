@@ -179,7 +179,7 @@ class WPRM_Shortcode_Helper {
 				$label_classes[] = 'wprm-recipe-' . $field . '-label';
 			}
 
-			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '">' . wp_kses_post( __( $atts['label'], 'wp-recipe-maker' ) ) . wp_kses_post( $atts['label_separator'] ) . '</span>';
+			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '">' . self::sanitize_html( __( $atts['label'], 'wp-recipe-maker' ) ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
 		}
 
 		// Inline style.
@@ -408,7 +408,7 @@ class WPRM_Shortcode_Helper {
 			}
 
 			$tag = sanitize_key( $atts['header_tag'] );
-			$header .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $before_header . wp_kses_post( $header_text ) . $after_header . '</' . $tag . '>';
+			$header .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $before_header . self::sanitize_html( $header_text ) . $after_header . '</' . $tag . '>';
 		}
 
 		return $header;
@@ -434,18 +434,20 @@ class WPRM_Shortcode_Helper {
 			// Calculate other sizes.
 			$height = ceil( $width / 2 );
 
-			// Custom style for the switch.
-			$switch_style = '';
-			$switch_style .= 'width: ' . $width . 'px;';
-			$switch_style .= 'height: ' . $height . 'px;';
-
 			// Custom style for the slider.
 			$slider_style = '';
+			$slider_style .= 'width: ' . $width . 'px;';
+			$slider_style .= 'height: ' . $height . 'px;';
+			$slider_style .= 'margin-top: -' . ( $height / 2 ) . 'px;';
 			$slider_style .= 'background-color: ' . $atts['switch_inactive'] . ';';
 
 			if ( 'rounded' === $atts['switch_style'] ) {
 				$slider_style .= 'border-radius: ' . ( $height / 2 ) . 'px;';
 			}
+
+			// Custom style for the label.
+			$label_style = '';
+			$label_style .= 'margin-left: ' . ( $width + 10 ) . 'px;';
 
 			// Classes.
 			$classes = array(
@@ -457,9 +459,24 @@ class WPRM_Shortcode_Helper {
 				$output .= '<style type="text/css">#wprm-toggle-switch-' . $uid . ' input:checked + .wprm-toggle-switch-slider { background-color: ' . esc_html( $atts['switch_active'] ) . ' !important; }</style>';
 			}
 
-			$output .= '<label id="wprm-toggle-switch-' . esc_attr( $uid ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" aria-label="' . __( 'Toggle switch', 'wp-recipe-maker' ) . '" style="' . esc_attr( $switch_style ) . '">';
+			$output .= '<label id="wprm-toggle-switch-' . esc_attr( $uid ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			$output .= '<input type="checkbox" id="' . esc_attr( $args['class'] . '-' . $uid ) . '" class="' . esc_attr( $args['class'] ) . '" />';
 			$output .= '<span class="wprm-toggle-switch-slider" style="' . esc_attr( $slider_style ) . '"></span>';
+			
+			if ( isset( $args['label'] ) ) {
+				$label_classes = array(
+					'wprm-toggle-switch-label',
+				);
+
+				if ( isset( $args['label_classes'] ) ) {
+					$label_classes = array_merge( $label_classes, $args['label_classes'] );
+				}
+
+				$output .= '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '" style="' . esc_attr( $label_style ) . '">';
+				$output .= $args['label'];
+				$output .= '</span>';
+			}
+
 			$output .= '</label>';
 		}
 
@@ -494,5 +511,19 @@ class WPRM_Shortcode_Helper {
 				'type' => 'color',
 			),
 		);
+	}
+
+	/**
+	 * Sanitize HTML in shortcode for output.
+	 *
+	 * @since	8.6.0
+	 */
+	public static function sanitize_html( $text ) {
+		if ( $text ) {
+			$text = str_replace( '&quot;', '"', $text );
+			$text = wp_kses_post( $text );
+		}
+
+		return $text;
 	}
 }

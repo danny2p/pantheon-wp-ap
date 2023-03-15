@@ -7,9 +7,11 @@ import './public/grow';
 import './public/media-toggle';
 import './public/pinterest';
 import './public/print';
+import './public/recipe';
 import './public/slickstream';
 import './public/smooth-scroll';
 import './public/temperature';
+import './public/tooltip';
 import './public/video';
 
 import '../css/public/comments.scss';

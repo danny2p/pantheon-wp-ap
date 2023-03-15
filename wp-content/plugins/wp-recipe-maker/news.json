@@ -1,6 +1,60 @@
 {
     "news": [
         {
+            "date": "2023-03-13",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.7.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-7-0/"
+        },
+        {
+            "date": "2023-03-09",
+            "label": "Blog",
+            "title": "WordPress Food Themes: 7 Best Free Themes for Sharing Recipes in 2023",
+            "url": "https://bootstrapped.ventures/wordpress-food-theme/"
+        },
+        {
+            "date": "2023-02-23",
+            "label": "Blog",
+            "title": "The Best Tripods for Food Photography (5 Best Picks)",
+            "url": "https://bootstrapped.ventures/tripods-for-food-photography/"
+        },
+        {
+            "date": "2023-02-10",
+            "label": "Blog",
+            "title": "The Best Backdrops & Surfaces for Food Photography in 2023",
+            "url": "https://bootstrapped.ventures/background-for-food-photography/"
+        },
+        {
+            "date": "2023-02-02",
+            "label": "Blog",
+            "title": "20 Inspiring Blog Post Ideas for Food Bloggers in 2023",
+            "url": "https://bootstrapped.ventures/food-blog-ideas/"
+        },
+        {
+            "date": "2023-01-25",
+            "label": "Blog",
+            "title": "How to Choose Plates and Props for Your Food Photography (2023)",
+            "url": "https://bootstrapped.ventures/food-photography-props/"
+        },
+        {
+            "date": "2023-01-16",
+            "label": "Blog",
+            "title": "5 Steps to Making Recipe Videos on Your Phone",
+            "url": "https://bootstrapped.ventures/how-to-make-cooking-video-with-smartphone/"
+        },
+        {
+            "date": "2023-01-10",
+            "label": "Blog",
+            "title": "Food Blogging Tips: How to Take Pictures of Your Food",
+            "url": "https://bootstrapped.ventures/food-blog-pictures/"
+        },
+        {
+            "date": "2022-12-22",
+            "label": "Blog",
+            "title": "Ever Wondered Where Food Bloggers Get Their Recipes? Here's the Answer!",
+            "url": "https://bootstrapped.ventures/where-do-food-bloggers-get-their-recipes/"
+        },
+        {
             "date": "2022-12-09",
             "label": "Blog",
             "title": "How to Make Cooking Videos At Home (Step-by-Step)",

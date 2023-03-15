@@ -43,6 +43,22 @@ class WPRM_SC_Tag extends WPRM_Template_Shortcode {
 					'text_images' => 'Text with Images',
 				),
 			),
+			'image_tooltip' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'No Tooltip',
+					'term' => 'Show term name',
+					'title' => 'Show image title attribute',
+					'caption' => 'Show image caption attribute',
+					'description' => 'Show image description attribute',
+				),
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'text',
+					'type' => 'inverse',
+				),
+			),
 			'image_size' => array(
 				'default' => '30x30',
 				'type' => 'image_size',

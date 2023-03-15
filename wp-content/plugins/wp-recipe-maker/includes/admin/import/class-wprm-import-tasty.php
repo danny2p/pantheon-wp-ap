@@ -249,6 +249,50 @@ class WPRM_Import_Tasty extends WPRM_Import {
 			}
 		}
 
+		// Equipment.
+		$tasty_links_ids = get_post_meta( $id, 'tasty_links_ids', true );
+		$equipment = array();
+
+		if ( $tasty_links_ids && is_array( $tasty_links_ids ) ) {
+			foreach( $tasty_links_ids as $tasty_link_id ) {
+				$link = self::get_tasty_link( $tasty_link_id );
+
+				if ( $link && $link['name'] ) {
+					$equipment[] = array(
+						'name' => $link['name'],
+					);
+
+					// Import link and image if not already set.
+					$equipment_id = WPRM_Recipe_Sanitizer::get_equipment_id( $link['name'] );
+
+					if ( $equipment_id ) {
+						$existing_link = get_term_meta( $equipment_id, 'wprmp_equipment_link', true );
+
+						if ( ! $existing_link && $link['url'] ) {
+							update_term_meta( $equipment_id, 'wprmp_equipment_link', $link['url'] );
+						}
+
+						$existing_image_id = get_term_meta( $equipment_id, 'wprmp_equipment_image_id', true );
+
+						if ( ! $existing_image_id ) {
+
+							if ( $link['image_id'] ) {
+								update_term_meta( $equipment_id, 'wprmp_equipment_image_id', $link['image_id'] );
+							} elseif ( $link['image_url'] ) {
+								$image_id = WPRM_Import_Helper::get_or_upload_attachment( $id, $link['image_url'] );
+
+								if ( $image_id ) {
+									update_term_meta( $equipment_id, 'wprmp_equipment_image_id', $image_id );
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		$recipe['equipment'] = $equipment;
+
 		// Ingredients.
 		$tasty_ingredients = $this->parse_recipe_component_list( get_post_meta( $id, 'ingredients', true ) );
 
@@ -454,5 +498,43 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		$component_list[] = $component_group;
 
 		return $component_list;
+	}
+
+	/**
+	 * Get Tasty Link data from ID.
+	 *
+	 * @since    8.7.0
+	 * @param	 int $id ID of the Tasty Link.
+	 */
+	private function get_tasty_link( $id ) {
+		$link = false;
+		$post = get_post( $id );
+
+		if ( $post && 'tasty_link' === $post->post_type ) {
+			$link = array(
+				'id' => $id,
+				'name' => trim( $post->post_title ),
+				'url' => get_post_meta( $id, 'ta_link', true ),
+				'nofollow' => 'on' === get_post_meta( $id, 'tasty_links_rel_nofollow', true ) ? true : false,
+				'image_id' => false,
+				'image_url' => false,
+			);
+
+			if ( has_post_thumbnail( $post ) ) {
+				$image_id = get_post_thumbnail_id( $post );
+
+				if ( $image_id ) {
+					$link['image_id'] = intval( $image_id );
+				} else {
+					$image_url = get_post_meta( $id, 'tasty_links_image_url', true );
+
+					if ( $image_url ) {
+						$link['image_url'] = $image_url;
+					}
+				}
+			}
+		}
+
+		return $link;
 	}
 }

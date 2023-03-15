@@ -53,16 +53,25 @@ export default {
                 ),
                 Cell: row => (
                     <div className="wprm-admin-manage-actions">
-                        <Icon
-                            type="pencil"
-                            title={ __wprm( 'Edit Recipe' ) }
-                            onClick={() => {
-                                WPRM_Modal.open( 'recipe', {
-                                    recipe: row.original,
-                                    saveCallback: () => recipes.refreshData(),
-                                } );
-                            }}
-                        />
+                        {
+                            row.original.editable
+                            ?
+                            <Icon
+                                type="pencil"
+                                title={ __wprm( 'Edit Recipe' ) }
+                                onClick={() => {
+                                    WPRM_Modal.open( 'recipe', {
+                                        recipe: row.original,
+                                        saveCallback: () => recipes.refreshData(),
+                                    } );
+                                }}
+                            />
+                            :
+                            <Icon
+                                type="lock"
+                                title={ __wprm( 'You do not have the correct permissions to edit this recipe' ) }
+                            />
+                        }
                         <Icon
                             type="print"
                             title={ __wprm( 'Print Recipe' ) }
