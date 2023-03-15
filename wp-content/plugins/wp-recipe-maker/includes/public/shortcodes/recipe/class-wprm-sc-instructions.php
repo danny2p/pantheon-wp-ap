@@ -35,6 +35,14 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'text_styles',
 			),
+			'text_margin' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
+			'list_style_header' => array(
+				'type' => 'header',
+				'default' => __( 'List Style', 'wp-recipe-maker' ),
+			),
 			'list_style' => array(
 				'default' => 'decimal',
 				'type' => 'dropdown',
@@ -80,9 +88,30 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'value' => 'advanced',
 				),
 			),
-			'text_margin' => array(
-				'default' => '0px',
-				'type' => 'size',
+			'inline_ingredients_header' => array(
+				'type' => 'header',
+				'default' => __( 'Inline Ingredients', 'wp-recipe-maker' ),
+			),
+			'inline_text_style' => array(
+				'default' => 'bold',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+			),
+			'inline_use_custom_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'inline_custom_color' => array(
+				'default' => '#000000',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'inline_use_custom_color',
+					'value' => '1',
+				),
+			),
+			'associated_ingredients_header' => array(
+				'type' => 'header',
+				'default' => __( 'Associated Ingredients', 'wp-recipe-maker' ),
 			),
 			'ingredients_position' => array(
 				'default' => 'after',
@@ -140,6 +169,54 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'ingredients_show_both_units' => array(
+				'default' => '0',
+				'type' => 'toggle',
+				'dependency' => array(
+					'id' => 'ingredients_position',
+					'value' => 'none',
+					'type' => 'inverse',
+				),
+			),
+			'both_units_style' => array(
+				'default' => 'parentheses',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'None',
+					'parentheses' => 'Parentheses',
+					'slash' => 'Slash',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'ingredients_position',
+						'value' => 'none',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'ingredients_show_both_units',
+						'value' => '1',
+					),
+				),
+			),
+			'both_units_show_if_identical' => array(
+				'default' => '0',
+				'type' => 'toggle',
+				'dependency' => array(
+					array(
+						'id' => 'ingredients_position',
+						'value' => 'none',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'ingredients_show_both_units',
+						'value' => '1',
+					),
+				),
+			),
+			'instruction_images_header' => array(
+				'type' => 'header',
+				'default' => __( 'Instruction Images', 'wp-recipe-maker' ),
+			),
 			'image_size' => array(
 				'default' => 'thumbnail',
 				'type' => 'image_size',
@@ -160,6 +237,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'before' => 'Before Text',
 					'after' => 'After Text',
 				),
+			),
+			'media_toggle_header' => array(
+				'type' => 'header',
+				'default' => __( 'Media Toggle', 'wp-recipe-maker' ),
 			),
 			'media_toggle' => array(
 				'default' => '',
@@ -326,8 +407,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				if ( 'before' === $atts['image_position'] ) {
 					$output .= self::instruction_media( $recipe, $instruction, $atts );
 				}
-				if ( $instruction['text'] ) {					
-					$text = parent::clean_paragraphs( $instruction['text'] );
+				if ( $instruction['text'] ) {
+					$text = $instruction['text'];
+					$text = self::inline_ingredients( $text, $atts );
+					$text = parent::clean_paragraphs( $text );
 					$text_style = '';
 
 					if ( '0px' !== $atts['text_margin'] ) {
@@ -362,6 +445,27 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 	}
 
 	/**
+	 * Set attributes for inline ingredients.
+	 *
+	 * @since	8.7.0
+	 * @param	string	$text	Text to check for inline ingredients.
+	 * @param	mixed 	$atts	Shortcode attributes.
+	 */
+	private static function inline_ingredients( $text, $atts ) {
+		// Construct attributes to add to inline ingredients shortcode.
+		$inline_atts = 'style="' . esc_attr( $atts['inline_text_style'] ) . '"';
+
+		if ( $atts['inline_use_custom_color'] ) {
+			$inline_atts .= ' color="' . esc_attr( $atts['inline_custom_color'] ) . '"';
+		}
+
+		// Add attributes to potential inline ingredients.
+		$text = str_replace( '[wprm-ingredient ', '[wprm-ingredient ' . $inline_atts . ' ', $text );
+
+		return $text;
+	}
+
+	/**
 	 * Output the associated ingredients.
 	 *
 	 * @since	7.4.0
@@ -387,11 +491,25 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 						if ( $found_ingredient['amount'] ) { $parts[] = $found_ingredient['amount']; };
 						if ( $found_ingredient['unit'] ) { $parts[] = $found_ingredient['unit']; };
+
+						// Optionally add second unit system.
+						$show_both_units = (bool) $atts['ingredients_show_both_units'];
+						if ( $show_both_units ) {
+							$atts['unit_conversion'] = 'both';
+							$atts['unit_conversion_both_style'] = $atts['both_units_style'];
+							$atts['unit_conversion_show_identical'] = $atts['both_units_show_if_identical'];
+
+							$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $found_ingredient );
+						}
+
 						if ( $found_ingredient['name'] ) { $parts[] = $found_ingredient['name']; };
 
 						$text_to_show = implode( ' ', $parts );
 
 						if ( $text_to_show ) {
+							if ( $show_both_units ) {
+								$text_to_show = $amount_unit . ' ' . $found_ingredient['name'];
+							}
 							$ingredients_to_output[ $found_ingredient['uid'] ] = $text_to_show;
 						}
 					}

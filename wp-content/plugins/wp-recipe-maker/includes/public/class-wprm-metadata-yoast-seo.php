@@ -9,6 +9,8 @@
  * @subpackage WP_Recipe_Maker/includes/public
  */
 
+ use Yoast\WP\SEO\Config\Schema_IDs;
+
 /**
  * Handle the recipe metadata integration with Yoast SEO Schema (version 11+)
  *
@@ -17,20 +19,20 @@
  * @subpackage WP_Recipe_Maker/includes/public
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
-class WPRM_Metadata_Yoast_Seo implements WPSEO_Graph_Piece {
+class WPRM_Metadata_Yoast_Seo extends \Yoast\WP\SEO\Generators\Schema\Abstract_Schema_Piece {
 	/**
 	 * A value object with context variables.
 	 *
 	 * @var WPSEO_Schema_Context
 	 */
-	private $context;
+	public $context;
 
 	/**
 	 * Recipe to output schema for.
 	 *
 	 * @var WPRM_Recipe
 	 */
-	private $recipe;
+	public $recipe = false;
 
 	/**
 	 * Wether or not an article is used.
@@ -108,11 +110,30 @@ class WPRM_Metadata_Yoast_Seo implements WPSEO_Graph_Piece {
 			$metadata['@id'] = $this->context->canonical . '#recipe';
 
 			// Recipe isPartOf an article of webpage, with the recipe the mainEntityOfPage.
-			$parent = $this->using_article ? $this->context->canonical . WPSEO_Schema_IDs::ARTICLE_HASH : $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH;
+			$parent = $this->using_article ? $this->context->canonical . Schema_IDs::ARTICLE_HASH : $this->context->canonical . Schema_IDs::WEBPAGE_HASH;
 
 			$metadata['isPartOf'] = array( '@id' => $parent );
-			$metadata['mainEntityOfPage'] = $this->context->canonical . WPSEO_Schema_IDs::WEBPAGE_HASH;
+			$metadata['mainEntityOfPage'] = $this->context->canonical . Schema_IDs::WEBPAGE_HASH;
 
+			// Maybe point to Yoast Person piece.
+			$person = $this->get_person();
+			if ( $person && $person['piece'] ) {
+				$metadata['author'] = array( '@id' => $person['piece'] );
+			}
+
+			return $metadata;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get the person associated with this recipe.
+	 *
+	 * @return array|bool $person A person on success, false on failure.
+	 */
+	public function get_person() {
+		if ( $this->recipe ) {
 			// Unless author is custom (and actually set), use the author that Yoast already defines.
 			if ( 'custom' !== $this->recipe->author_display() || '' === $this->recipe->custom_author_name() ) {
 				// Only if Yoast's author is the same as the recipe author.
@@ -120,12 +141,13 @@ class WPRM_Metadata_Yoast_Seo implements WPSEO_Graph_Piece {
 					$user_schema_id = YoastSEO()->helpers->schema->id->get_user_schema_id( $this->recipe->post_author(), $this->context );
 
 					if ( $user_schema_id ) {
-						$metadata['author'] = array( '@id' => $user_schema_id );
+						return array(
+							'id' => intval( $this->recipe->post_author() ),
+							'piece' => $user_schema_id,
+						);
 					}
 				}
 			}
-
-			return $metadata;
 		}
 
 		return false;

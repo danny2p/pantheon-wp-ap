@@ -107,6 +107,15 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'type' => 'inverse',
 					),
 				),
+				'nutrition_header' => array(
+					'type' => 'header',
+					'default' => __( 'Nutrition Fields', 'wp-recipe-maker' ),
+					'dependency' => array(
+						'id' => 'style',
+						'value' => 'label',
+						'type' => 'inverse',
+					),
+				),
 				'label_color' => array(
 					'default' => '#777777',
 					'type' => 'color',
@@ -155,6 +164,19 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 				'unit_separator' => array(
 					'default' => '',
 					'type' => 'text',
+					'dependency' => array(
+						'id' => 'style',
+						'value' => 'label',
+						'type' => 'inverse',
+					),
+				),
+				'nutrition_values' => array(
+					'default' => 'serving',
+					'type' => 'dropdown',
+					'options' => array(
+						'serving' => __( 'Per serving', 'wp-recipe-maker' ),
+						'100g' => __( 'Per 100g', 'wp-recipe-maker' ),
+					),
 					'dependency' => array(
 						'id' => 'style',
 						'value' => 'label',

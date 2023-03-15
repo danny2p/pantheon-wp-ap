@@ -189,7 +189,7 @@ class WPRM_SC_Print extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Print Recipe', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_attr( $recipe->print_url( $template ) ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-template="' . esc_attr( $template ) . '"' . $target . ' rel="nofollow"' . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="' . esc_attr( $recipe->print_url( $template ) ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-template="' . esc_attr( $template ) . '"' . $target . ' rel="nofollow"' . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

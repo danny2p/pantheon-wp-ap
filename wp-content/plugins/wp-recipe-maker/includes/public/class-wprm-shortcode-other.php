@@ -28,6 +28,7 @@ class WPRM_Shortcode_Other {
 		add_shortcode( 'adjustable', array( __CLASS__, 'adjustable_shortcode' ) );
 		add_shortcode( 'timer', array( __CLASS__, 'timer_shortcode' ) );
 		add_shortcode( 'wprm-temperature', array( __CLASS__, 'temperature_shortcode' ) );
+		add_shortcode( 'wprm-ingredient', array( __CLASS__, 'ingredient_shortcode' ) );
 		add_shortcode( 'wprm-condition', array( __CLASS__, 'condition_shortcode' ) );
 
 		add_filter( 'wprm_localize_admin', array( __CLASS__, 'temperature_icons' ) );
@@ -95,15 +96,24 @@ class WPRM_Shortcode_Other {
 		$unit = strtoupper( sanitize_key( $atts['unit'] ) );
 		$help = sanitize_text_field( $atts['help'] );
 
+		// Classes.
+		$classes = array(
+			'wprm-temperature-container',
+		);
+
+		if ( $atts['help'] ) {
+			$classes[] = 'wprm-tooltip';
+		}
+
 		// Construct data.
 		$data = '';
 		$data .= ' data-value="' . esc_attr( $value ) .  '"';
 		$data .= ' data-unit="' . esc_attr( $unit ) .  '"';
-		$data .= ' data-help="' . esc_attr( $help ) .  '"';
+		$data .= ' data-tooltip="' . esc_attr( $help ) .  '"';
 
 		// Construct output.
 		$output = '';
-		$output .= '<span class="wprm-temperature-container"' . $data . '>';
+		$output .= '<span class="' . implode( ' ', $classes ) . '"' . $data . '>';
 
 		// Icon output
 		if ( $icon && file_exists( WPRM_DIR . 'assets/icons/temperature/' . $icon . '.svg' ) ) {
@@ -132,6 +142,68 @@ class WPRM_Shortcode_Other {
 		}
 
 		$output .= '</span>';
+
+		return $output;
+	}
+
+	/**
+	 * Output for the ingredient shortcode.
+	 *
+	 * @since	8.4.0
+	 * @param	array $atts		Shortcode attributes.
+	 */
+	public static function ingredient_shortcode( $atts ) {
+		$atts = shortcode_atts( array(
+			'id' => '',
+			'uid' => '',
+			'text' => '',
+			'style' => 'bold',
+			'color' => '',
+		), $atts, 'wprm_ingredient' );
+
+		// Default to text as output.
+		$output = WPRM_Shortcode_Helper::sanitize_html( $atts['text'] );
+
+		// Get recipe (defaults to current).
+		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
+
+		if ( $recipe && is_numeric( $atts['uid'] ) ) {
+			$uid = intval( $atts['uid'] );
+
+			$ingredients_flat = $recipe->ingredients_flat();
+			$index = array_search( $uid, array_column( $ingredients_flat, 'uid' ) );
+
+			if ( false !== $index && isset( $ingredients_flat[ $index ] ) ) {
+				$found_ingredient = $ingredients_flat[ $index ];
+
+				if ( 'ingredient' === $found_ingredient['type'] ) {
+					$parts = array();
+
+					if ( $found_ingredient['amount'] ) { $parts[] = $found_ingredient['amount']; };
+					if ( $found_ingredient['unit'] ) { $parts[] = $found_ingredient['unit']; };
+					if ( $found_ingredient['name'] ) { $parts[] = $found_ingredient['name']; };
+
+					$text_to_show = implode( ' ', $parts );
+
+					if ( $text_to_show ) {
+						$classes = array(
+							'wprm-inline-ingredient',
+							'wprm-inline-ingredient-' . $recipe->id() . '-' . $uid,
+							'wprm-block-text-' . $atts['style'],
+						);
+
+						// Custom CSS style.
+						$style = '';
+
+						if ( $atts['color'] ) {
+							$style = ' style="color: ' . esc_attr( $atts['color'] ) . ';"';
+						}
+					
+						$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $style . '>' . $text_to_show . '</span>';
+					}
+				}
+			}
+		}
 
 		return $output;
 	}

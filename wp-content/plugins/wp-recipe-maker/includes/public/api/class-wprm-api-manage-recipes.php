@@ -205,10 +205,17 @@ class WPRM_Api_Manage_Recipes {
 
 		$recipes = array();
 		$posts = $query->posts;
+		$no_permission_total = 0;
+
 		foreach ( $posts as $post ) {
 			$recipe = WPRM_Recipe_Manager::get_recipe( $post );
 
 			if ( ! $recipe ) {
+				continue;
+			}
+
+			if ( false === WPRM_Settings::get( 'manage_page_show_uneditable' ) && ! current_user_can( 'edit_post', $recipe->id() ) ) {
+				$no_permission_total++;
 				continue;
 			}
 
@@ -224,11 +231,15 @@ class WPRM_Api_Manage_Recipes {
 			unset( $total['pending'] );
 		}
 
+		// Totals.
+		$total_recipes = array_sum( $total ) - $no_permission_total;
+		$filtered_recipes = intval( $query->found_posts ) - $no_permission_total;
+
 		return array(
 			'rows' => array_values( $recipes ),
-			'total' => array_sum( $total ),
-			'filtered' => intval( $query->found_posts ),
-			'pages' => ceil( $query->found_posts / $page_size ),
+			'total' => $total_recipes,
+			'filtered' => $filtered_recipes,
+			'pages' => ceil( $filtered_recipes / $page_size ),
 		);
 	}
 

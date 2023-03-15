@@ -25,6 +25,13 @@ const ELEMENT_TAGS = {
             help: el.getAttribute('help'),
         }
     },
+    'WPRM-INGREDIENT': el => {
+        return {
+            type: 'ingredient',
+            uid: el.getAttribute('uid'),
+            removed: el.getAttribute('removed') && '1' === el.getAttribute('removed') ? true : false,
+        }
+    },
 }
 
 const TEXT_TAGS = {
@@ -174,6 +181,8 @@ export const serialize = node => {
             help = help.replace(/>/gm, '&gt;');
 
             return `<wprm-temperature icon="${ node.icon }" unit="${ node.unit }" help="${ help }">${ children }</wprm-temperature>`;
+        case 'ingredient':
+            return `<wprm-ingredient uid="${ node.uid }" removed="${ node.removed ? '1' : '0' }">${ children }</wprm-ingredient>`;
         default:
             return children;
     }

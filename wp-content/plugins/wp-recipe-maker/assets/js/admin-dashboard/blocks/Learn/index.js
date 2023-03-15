@@ -25,7 +25,6 @@ const Learn = (props) => {
                 <Section
                     title={ `🤝 ${ __wprm( 'Our Partners' ) }` }
                 >
-                    <Item url="https://myemissions.green/wp-recipe-maker?ref=wprm">{ __wprm( 'My Emissions carbon footprint labels' ) }</Item>
                     <Item url="https://help.bootstrapped.ventures/article/323-shop-with-instacart-button">{ __wprm( 'Shoppable Recipes with Instacart' ) }</Item>
                 </Section>
                 <Section

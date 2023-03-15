@@ -29,7 +29,6 @@ class WPRM_Compatibility {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'rank_math' ) );
 		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
 
-		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'mediavine_ingredients_ad' ) );
 		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
 
 		// Instacart.
@@ -265,20 +264,6 @@ class WPRM_Compatibility {
 		}
 
 		return $taxonomies;
-	}
-
-	/**
-	 * Add extra Mediavine ad unit after the ingredients.
-	 *
-	 * @since	5.8.3
-	 * @param	mixed $output Current ingredients output.
-	 */
-	public static function mediavine_ingredients_ad( $output ) {
-		if ( WPRM_Settings::get( 'integration_mediavine_ad' ) ) {
-			$output = $output . '<div class="mv_slot_target" data-slot="recipe" data-render-default="true"></div>';
-		}
-
-		return $output;
 	}
 
 	/**

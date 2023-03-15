@@ -94,6 +94,24 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'icon_size' => array(
+				'default' => '1em',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'icon',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'icon_padding' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'icon',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
 			'average_decimals' => array(
 				'default' => '2',
 				'type' => 'text',
@@ -205,28 +223,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 		// Only output when there is an actual rating or users can rate.
 		if ( $rating_value ) {
 			// Output style for star color.
-			$output .= '<style>';
-			$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-full svg * { fill: ' . $color . '; }';
-			$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-33 svg * { fill: url(#' . $id . '-33); }';
-			$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-50 svg * { fill: url(#' . $id . '-50); }';
-			$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-66 svg * { fill: url(#' . $id . '-66); }';
-			$output .= 'linearGradient#' . $id . '-33 stop { stop-color: ' . $color . '; }';
-			$output .= 'linearGradient#' . $id . '-50 stop { stop-color: ' . $color . '; }';
-			$output .= 'linearGradient#' . $id . '-66 stop { stop-color: ' . $color . '; }';
-			$output .= '</style>';
-
-			// Definitions for quarter and half stars.
-			$output .= '<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display:block;width:0px;height:0px">';
-			if ( is_rtl() ) {
-				$output .= '<defs><linearGradient id="' . $id .'-33"><stop offset="0%" stop-opacity="0" /><stop offset="66%" stop-opacity="0" /><stop offset="66%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
-				$output .= '<defs><linearGradient id="' . $id .'-50"><stop offset="0%" stop-opacity="0" /><stop offset="50%" stop-opacity="0" /><stop offset="50%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
-				$output .= '<defs><linearGradient id="' . $id .'-66"><stop offset="0%" stop-opacity="0" /><stop offset="33%" stop-opacity="0" /><stop offset="33%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
-			} else {
-				$output .= '<defs><linearGradient id="' . $id .'-33"><stop offset="0%" stop-opacity="1" /><stop offset="33%" stop-opacity="1" /><stop offset="33%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
-				$output .= '<defs><linearGradient id="' . $id .'-50"><stop offset="0%" stop-opacity="1" /><stop offset="50%" stop-opacity="1" /><stop offset="50%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
-				$output .= '<defs><linearGradient id="' . $id .'-66"><stop offset="0%" stop-opacity="1" /><stop offset="66%" stop-opacity="1" /><stop offset="66%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
-			}
-			$output .= '</svg>';
+			$output .= self::get_stars_style( $id, $atts );
 
 			// Get classes.
 			$classes = array(
@@ -258,13 +255,84 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 					}
 				}
 
-				$output .= '<span class="wprm-rating-star wprm-rating-star-' . $i . ' ' . esc_attr( $class ) . '" data-rating="' . esc_attr( $i ) . '" data-color="' . esc_attr( $color ) . '">';
+				// Style.
+				$style = self::get_star_style( $i, $atts );
+
+				$output .= '<span class="wprm-rating-star wprm-rating-star-' . $i . ' ' . esc_attr( $class ) . '" data-rating="' . esc_attr( $i ) . '" data-color="' . esc_attr( $color ) . '"' . $style . '>';
 				$output .= apply_filters( 'wprm_recipe_rating_star_icon', WPRM_Icon::get( $icon, $color) );
 				$output .= '</span>';
 			}	
 		}
 
 		return apply_filters( 'wprm_recipe_rating_shortcode_stars', $output, $recipe, $rating, $voteable, $icon, $color, $atts );
+	}
+
+	/**
+	 * Get style output for the stars container.
+	 *
+	 * @since    8.7.0
+	 * @param    mixed 	 $id  	ID for the stars container.
+	 * @param    mixed	 $atts	Options passed along with the shortcode.
+	 */
+	public static function get_stars_style( $id, $atts ) {
+		$output = '';
+		$color = esc_attr( $atts['icon_color'] );
+
+		// Output style for star color.
+		$output .= '<style>';
+		$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-full svg * { fill: ' . $color . '; }';
+		$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-33 svg * { fill: url(#' . $id . '-33); }';
+		$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-50 svg * { fill: url(#' . $id . '-50); }';
+		$output .= '#' . $id . ' .wprm-rating-star.wprm-rating-star-66 svg * { fill: url(#' . $id . '-66); }';
+		$output .= 'linearGradient#' . $id . '-33 stop { stop-color: ' . $color . '; }';
+		$output .= 'linearGradient#' . $id . '-50 stop { stop-color: ' . $color . '; }';
+		$output .= 'linearGradient#' . $id . '-66 stop { stop-color: ' . $color . '; }';
+		$output .= '</style>';
+
+		// Definitions for quarter and half stars.
+		$output .= '<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display:block;width:0px;height:0px">';
+		if ( is_rtl() ) {
+			$output .= '<defs><linearGradient id="' . $id .'-33"><stop offset="0%" stop-opacity="0" /><stop offset="66%" stop-opacity="0" /><stop offset="66%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
+			$output .= '<defs><linearGradient id="' . $id .'-50"><stop offset="0%" stop-opacity="0" /><stop offset="50%" stop-opacity="0" /><stop offset="50%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
+			$output .= '<defs><linearGradient id="' . $id .'-66"><stop offset="0%" stop-opacity="0" /><stop offset="33%" stop-opacity="0" /><stop offset="33%" stop-opacity="1" /><stop offset="100%" stop-opacity="1" /></linearGradient></defs>';
+		} else {
+			$output .= '<defs><linearGradient id="' . $id .'-33"><stop offset="0%" stop-opacity="1" /><stop offset="33%" stop-opacity="1" /><stop offset="33%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
+			$output .= '<defs><linearGradient id="' . $id .'-50"><stop offset="0%" stop-opacity="1" /><stop offset="50%" stop-opacity="1" /><stop offset="50%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
+			$output .= '<defs><linearGradient id="' . $id .'-66"><stop offset="0%" stop-opacity="1" /><stop offset="66%" stop-opacity="1" /><stop offset="66%" stop-opacity="0" /><stop offset="100%" stop-opacity="0" /></linearGradient></defs>';
+		}
+		$output .= '</svg>';
+
+		return $output;
+	}
+
+	/**
+	 * Get the star icon style attribute.
+	 *
+	 * @since    8.7.0
+	 * @param    int 	 $i   	Star number we're displaying.
+	 * @param    mixed	 $atts	Options passed along with the shortcode.
+	 */
+	public static function get_star_style( $i, $atts ) {
+		$style = '';
+
+		$style .= ' style="';
+		$style .= 'font-size: ' . esc_attr( $atts['icon_size' ] ) . ';';
+
+		if ( '0px' !== $atts['icon_padding'] ) {
+			$style .= 'padding: ' . esc_attr( $atts['icon_padding'] ) . ';';
+			switch ( $i ) {
+				case 1:
+					$style .= 'padding-left: 0;';
+					break;
+				case 5:
+					$style .= 'padding-right: 0;';
+					break;
+			}
+		}
+
+		$style .= '"';
+
+		return $style;
 	}
 }
 

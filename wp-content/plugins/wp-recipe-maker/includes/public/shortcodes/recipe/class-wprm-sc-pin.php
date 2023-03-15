@@ -196,7 +196,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
 		$attributes .= $aria_label;
 
-		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

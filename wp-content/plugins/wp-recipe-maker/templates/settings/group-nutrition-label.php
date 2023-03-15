@@ -72,6 +72,21 @@ $nutrition_label = array(
 					'default' => 'g',
 				),
 				array(
+					'id' => 'nutrition_label_legacy_servings_type',
+					'name' => __( 'Show nutrition values', 'wp-recipe-maker-premium' ),
+					'description' => __( 'How to display the nutrition values in the label.', 'wp-recipe-maker-premium' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'serving' => __( 'Per serving', 'wp-recipe-maker' ),
+						'100g' => __( 'Per 100g', 'wp-recipe-maker' ),
+					),
+					'default' => 'serving',
+					'dependency' => array(
+						'id' => 'nutrition_label_style',
+						'value' => 'legacy',
+					),
+				),
+				array(
 					'id' => 'nutrition_label_zero_values',
 					'name' => __( 'Show values when 0', 'wp-recipe-maker' ),
 					'description' => __( 'Show nutrient in the nutrition label when it has a value of 0.', 'wp-recipe-maker' ),

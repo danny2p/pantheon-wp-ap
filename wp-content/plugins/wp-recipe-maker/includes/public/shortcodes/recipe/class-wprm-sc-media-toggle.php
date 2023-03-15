@@ -127,7 +127,7 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			// Get button text.
 			$button_text = '';
 			if ( $atts[ $button . '_text'] ) {
-				$button_text .= '<span class="wprm-toggle-text">' . wp_kses_post( $atts[ $button . '_text'] ) . '</span>';
+				$button_text .= '<span class="wprm-toggle-text">' . WPRM_Shortcode_Helper::sanitize_html( $atts[ $button . '_text'] ) . '</span>';
 			}
 
 			// Get optional icon.

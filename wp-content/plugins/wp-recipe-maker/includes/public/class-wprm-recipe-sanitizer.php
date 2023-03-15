@@ -493,6 +493,7 @@ class WPRM_Recipe_Sanitizer {
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 		$allowed_tags['wprm-code'] = true;
 		$allowed_tags['wprm-temperature'] = true;
+		$allowed_tags['wprm-ingredient'] = true;
 
 		// Allow more when user can edit posts to prevent abuse from User Submissions form.
 		if ( current_user_can( 'edit_posts' ) ) {
@@ -552,6 +553,35 @@ class WPRM_Recipe_Sanitizer {
 
 				if ( $icon ) { $shortcode .= ' icon="' . esc_attr( $icon ) . '"'; }
 				if ( $help ) { $shortcode .= ' help="' . esc_attr( $help ) . '"'; }
+
+				$shortcode .= ']';
+
+			}
+			$text = str_replace( $matches[0][ $key ], $shortcode, $text );
+		}
+
+		// WPRM Ingredient in rich text. Replace with its shortcode
+		preg_match_all( '/<wprm-ingredient(.*?)<\/wprm-ingredient>/ms', $text, $matches );
+		foreach ( $matches[1] as $key => $match ) {
+			$split = explode( '>', $match, 2 );
+			
+			// Parse attributes.
+			preg_match( '/uid=\"(.*?)\"/', $split[0], $attr_match );
+			$uid = isset( $attr_match[1] ) ? $attr_match[1] : '';
+
+			preg_match( '/removed=\"(.*?)\"/', $split[0], $attr_match );
+			$removed = isset( $attr_match[1] ) && '1' === $attr_match[1] ? true : false;
+
+			$shortcode = '';
+			if ( isset( $split[1] ) && $split[1] ) {
+				$ingredient = html_entity_decode( $split[1] );
+
+				$shortcode = '[wprm-ingredient text="' . esc_attr( $ingredient ) . '"';
+				$shortcode .= ' uid="' . esc_attr( $uid ) . '"';
+
+				if ( $removed ) {
+					$shortcode .= ' removed="1"';
+				}
 
 				$shortcode .= ']';
 

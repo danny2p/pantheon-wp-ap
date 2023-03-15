@@ -199,10 +199,9 @@
             "ingredients": [1,3,5]
         },
         {
-            "text": "<p>Combine the flour and salt.<\/p>",
+            "text": "<p>Combine [wprm-ingredient uid=\"2\" text=\"2 cups all-purpose flour\"] and [wprm-ingredient uid=\"4\" text=\"1 tsp salt\"].<\/p>",
             "type": "instruction",
-            "image_url": "",
-            "ingredients": [2,4]
+            "image_url": ""
         },
         {
             "text": "<p>Add the yeast mixture and knead until you get a soft ball.<\/p>",
@@ -230,6 +229,8 @@
     "video_embed": "https://www.youtube.com/watch?v=AtvGLRtTQgg",
     "notes": "<p>Feel free to swap any of the topping in the ingredient list with whatever you have lying around. It will probably taste just as amazing!<\/p>\n",
     "nutrition": {
+        "serving_size": 195,
+        "serving_unit": "g",
         "calories": 482,
         "carbohydrates": 101,
         "protein": 14,

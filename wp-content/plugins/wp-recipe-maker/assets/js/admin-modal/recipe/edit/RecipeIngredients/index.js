@@ -25,7 +25,8 @@ export default class RecipeIngredients extends Component {
                 || this.props.type !== nextProps.type
                 || this.props.linkType !== nextProps.linkType
                 || this.props.system !== nextProps.system
-                || JSON.stringify( this.props.ingredients ) !== JSON.stringify( nextProps.ingredients );
+                || JSON.stringify( this.props.ingredients ) !== JSON.stringify( nextProps.ingredients )
+                || JSON.stringify( this.props.instructions ) !== JSON.stringify( nextProps.instructions );
     }
   
     render() {

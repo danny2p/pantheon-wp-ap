@@ -195,7 +195,7 @@ class WPRM_SC_Jump_Video extends WPRM_Template_Shortcode {
 		}
 
 		// "wprm-jump-to-video-shortcode" class for backwards compatibility.
-		$output = '<a href="#wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . wp_kses_post( $text ) . '</a>';
+		$output = '<a href="#wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

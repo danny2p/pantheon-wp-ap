@@ -116,7 +116,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 			$output .= $header;
 		}
 
-		$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . wp_kses_post( $text ) . '</' . $tag . '>';
+		$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</' . $tag . '>';
 
 		if ( $header ) {
 			$output .= '</div>';

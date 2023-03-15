@@ -8,6 +8,7 @@ import Helpers from '../general/Helpers';
 import PropertyColor from './properties/Color';
 import PropertyDropdown from './properties/Dropdown';
 import PropertyFont from './properties/Font';
+import PropertyHeader from './properties/Header';
 import PropertyIcon from './properties/Icon';
 import PropertyImage from './properties/Image';
 import PropertyImageSize from './properties/ImageSize';
@@ -25,6 +26,7 @@ const propertyTypes = {
     float: PropertyDropdown,
     font: PropertyFont,
     font_size: PropertySize,
+    header: PropertyHeader,
     icon: PropertyIcon,
     image: PropertyImage,
     image_size: PropertyImageSize,
@@ -61,7 +63,7 @@ const Property = (props) => {
     return (
         <div className="wprm-template-property">
             {
-                'info' === props.property.type
+                ['header', 'info'].includes( props.property.type )
                 ?
                 <PropertyComponent property={props.property} />
                 :

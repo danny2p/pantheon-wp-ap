@@ -112,7 +112,7 @@ class WPRM_SC_Url extends WPRM_Template_Shortcode {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . wp_kses_post( $text ) . '</a>';
+			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		}
 
 		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $text . '</' . $tag . '>';

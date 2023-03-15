@@ -62,12 +62,27 @@ window.WPRecipeMaker.analytics = {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'email-share-button' );
 			}
 			return true;
+		} else if ( target.matches( '.wprm-recipe-add-to-collection-recipe' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipeId : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'add-to-collections-button' );
+			}
+			return true;
+		} else if ( target.matches( '.wprm-recipe-add-to-shopping-list' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipeId : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'add-to-shopping-list-button' );
+			}
+			return true;
 		} else if ( target.matches( '.wprm-recipe-equipment a' ) ) {
 			const container = target.closest( '.wprm-recipe-equipment-container' );
-			const type = target.querySelector( '.wprm-recipe-equipment-image' ) || target.querySelector( 'img' ) ? 'image' : 'text';
-			const name = target.querySelector( '.wprm-recipe-equipment-name' );
 
 			if ( container ) {
+				const item = target.closest( '.wprm-recipe-equipment-item' );
+				const type = item && item.classList.contains( 'wprm-recipe-equipment-item-has-image' ) ? 'image' : 'text';
+				const name = item ? item.querySelector( '.wprm-recipe-equipment-name' ) : target;
 				const recipeId = container.dataset.recipe; 
 
 				if ( recipeId ) {

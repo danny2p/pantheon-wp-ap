@@ -33,7 +33,7 @@ An overview of WP Recipe Maker features:
 *   Supports both regular and **Guided Recipes** for Google metadata
 *   Shoppable ingredients with the **Shop with Instacart** button
 *   Google **AMP** compatible
-*   Integrates recipe metadata with Yoast **SEO schema graph**
+*   Integrates recipe metadata with **Yoast SEO and Rank Math schema graph**
 *   Option to **disable metadata per recipe** if you want to publish non-food or DIY recipes
 *   Compatible with **Pinterest Rich Pins** and a setting to easily opt out
 *   Outputs ItemList metadata for **Recipe Roundup** posts
@@ -136,6 +136,29 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.7.2 =
+* Fix: PHP error when rounding numbers in some cases
+
+= 8.7.1 =
+* Fix: Transparant stars setting off by default
+
+= 8.7.0 =
+* Feature: Inline ingredients in instruction steps
+* Feature: Integrate with the Rank Math JSON-LD Schema Graph
+* Feature: Different size options when printing
+* Feature: Quick access for ℉ and ℃ symbols (better for accessibility)
+* Feature: Setting to hide recipes on the manage page that the current user cannot edit
+* Feature: Easily change size and padding of stars in template editor
+* Improvement: Do not show edit icon on manage page if a user is not allowed to edit
+* Improvement: Import equipment from WP Tasty
+* Improvement: Integration with the SEO schema graph for Yoast 20+
+* Improvement: Subsections for properties in the template editor
+* Improvement: Initialize features when dynamically loading recipes in WP Ultimate Post Grid
+* Improvement: Better interpretation of ranges used in ingredient quantities
+* Fix: FlyingPress 4 compatibility
+* Fix: Comment rating star color in Firefox
+* Fix: Leftover quotes when using HTML in shortcode text
+
 = 8.6.2 =
 * Improvement: Allow some HTML tags in shortcode output while still being secure
 
@@ -1438,6 +1461,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.7.2 =
+Update to prevent a PHP error in some specific cases
+
+= 8.7.1 =
+Only changes the default of one of the new settings
+
+= 8.7.0 =
+Lots of great new features, improvements and fixes
+
 = 8.6.2 =
 Fix for some HTML problems in template
 

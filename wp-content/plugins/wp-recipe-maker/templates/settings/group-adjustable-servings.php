@@ -84,7 +84,7 @@ $adjustable_servings = array(
 				array(
 					'id' => 'fractions_enabled',
 					'name' => __( 'Use Fractions', 'wp-recipe-maker' ),
-					'description' => __( 'Convert decimal numbers to fractions after adjusting.', 'wp-recipe-maker' ),
+					'description' => __( 'Convert decimal numbers to fractions after adjusting.', 'wp-recipe-maker' ) . ' ' . __( 'Can optionally be disabled per unit system in the Unit Conversion settings.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
 				),

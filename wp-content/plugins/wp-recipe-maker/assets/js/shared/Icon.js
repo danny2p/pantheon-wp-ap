@@ -20,6 +20,7 @@ import IconEaflUnlink from '../../icons/admin/eafl-unlink.svg';
 import IconEye from '../../icons/admin/eye.svg';
 import IconItalic from '../../icons/admin/italic.svg';
 import IconLink from '../../icons/admin/link.svg';
+import IconLock from '../../icons/admin/lock.svg';
 import IconMerge from '../../icons/admin/merge.svg';
 import IconMovie from '../../icons/admin/movie.svg';
 import IconPencil from '../../icons/admin/pencil.svg';
@@ -57,6 +58,7 @@ const icons = {
     eye: IconEye,
     italic: IconItalic,
     link: IconLink,
+    lock: IconLock,
     merge: IconMerge,
     movie: IconMovie,
     pencil: IconPencil,

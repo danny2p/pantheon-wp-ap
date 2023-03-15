@@ -45,6 +45,10 @@ window.WPRMPrint = {
             });
         }
 
+        // Size changer.
+        this.sizeChanger = document.querySelector( '#wprm-print-size-container' );
+        this.initSizeChanger();
+
         // Add padding at bottom of recipe template to fit footer ad.
         const footerAd = document.querySelector( '#wprm-print-footer-ad' );
         if ( footerAd ) {
@@ -78,6 +82,10 @@ window.WPRMPrint = {
             elems = document.querySelectorAll( '.wprm-recipe-notes-container' );
         } else if ( 'wprm-print-toggle-recipe-nutrition' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-nutrition-header, .wprm-nutrition-label-container' );
+        } else if ( 'wprm-print-toggle-collection-name' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-container-header-container' );
+        } else if ( 'wprm-print-toggle-collection-description' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-collection-description' );
         } else if ( 'wprm-print-toggle-collection-images' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-collection-item-image' );
         } else if ( 'wprm-print-toggle-collection-servings' === toggle.id ) {
@@ -136,6 +144,49 @@ window.WPRMPrint = {
 
         //     document.getElementById( 'print-pdf' ).innerHTML = '';
         // });
+    },
+    sizeChanger: false,
+    initSizeChanger() {
+        if ( this.sizeChanger ) {
+            const options = this.sizeChanger.querySelectorAll( '.wprm-print-option' );
+
+            // On click.
+            for ( let option of options ) {
+                option.addEventListener( 'click', () => {
+                    this.setSize( option.dataset.size );
+                });
+            }
+        }
+    },
+    setSize( size ) {
+        if ( ['small', 'normal', 'large'].includes( size ) ) {
+            const contentOptions = document.querySelectorAll( '#wprm-print-content, .wprm-recipe-collections-layout-grid, .wprm-recipe-collections-layout-classic' );
+
+            for ( let content of contentOptions ) {
+                switch ( size ) {
+                    case 'small':
+                        content.style.fontSize = '0.8em';
+                        break;
+                    case 'normal':
+                        content.style.fontSize = '';
+                        break;
+                    case 'large':
+                        content.style.fontSize = '1.2em';
+                        break;
+                }
+            }            
+
+            if ( this.sizeChanger ) {
+                const options = this.sizeChanger.querySelectorAll( '.wprm-print-option' );
+                for ( let option of options ) {
+                    option.classList.remove( 'option-active');
+
+                    if ( size === option.dataset.size ) {
+                        option.classList.add( 'option-active' );
+                    }
+                }
+            }
+        }
     },
 };
 

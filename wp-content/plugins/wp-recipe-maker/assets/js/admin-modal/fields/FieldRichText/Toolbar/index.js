@@ -14,6 +14,7 @@ import ButtonMark from './ButtonMark';
 import ButtonWrap from './ButtonWrap';
 import Spacer from './Spacer';
 import ToolbarAffiliateLink from './ToolbarAffiliateLink';
+import ToolbarInlineIngredient from './ToolbarInlineIngredient';
 import ToolbarLink from './ToolbarLink';
 import ToolbarTemperature from './ToolbarTemperature';
 import ToolbarSuggest from './ToolbarSuggest';
@@ -63,6 +64,7 @@ const Toolbar = (props) => {
 			<ToolbarAffiliateLink/>
 			<ToolbarLink/>
 			<ToolbarTemperature/>
+			<ToolbarInlineIngredient/>
 			{
 				( 'ingredient' === props.type || 'equipment' === props.type )
 				&&
@@ -151,6 +153,8 @@ const Toolbar = (props) => {
 						<ButtonCharacter character="⅞" />
 						<Spacer />
 						<ButtonCharacter character="°" />
+						<ButtonCharacter character="℉" />
+						<ButtonCharacter character="℃" />
 						<ButtonCharacter character="Ø" />
 					</Fragment>
 				}

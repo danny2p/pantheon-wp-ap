@@ -48,6 +48,13 @@ export const Element = ({ attributes, children, element }) => {
 						unit={ element.unit }
 						help={ element.help }
 					>{ icon }{ children }{ unit }</wprm-temperature>
+		case 'ingredient':
+			return (
+				<wprm-ingredient
+					uid={ element.uid }
+					removed={ element.removed ? '1' : '0' }
+				>{children}</wprm-ingredient>
+			)
 		default:
 			return <p {...attributes}>{children}</p>
 	}

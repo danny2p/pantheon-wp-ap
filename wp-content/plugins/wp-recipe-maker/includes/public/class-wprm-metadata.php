@@ -97,7 +97,7 @@ class WPRM_Metadata {
 			}
 		}
 
-		if ( is_singular() && 'head' === WPRM_Settings::get( 'metadata_location' ) && ! self::use_yoast_seo_integration() ) {
+		if ( is_singular() && 'head' === WPRM_Settings::get( 'metadata_location' ) && ! self::use_yoast_seo_integration() && ! self::use_rank_math_integration() ) {
 			$recipe_ids_to_output_metadata_for = self::get_recipe_ids_to_output();
 			
 			foreach ( $recipe_ids_to_output_metadata_for as $recipe_id ) {
@@ -147,12 +147,21 @@ class WPRM_Metadata {
 	}
 
 	/**
+	 * Wether or not to use Rank Math integration.
+	 *
+	 * @since	8.7.0
+	 */
+	public static function use_rank_math_integration() {
+		return WPRM_Settings::get( 'rank_math_integration' ) && has_filter( 'rank_math/json_ld' );
+	}
+
+	/**
 	 * Wether or not to use Yoast SEO 11 integration.
 	 *
 	 * @since	5.1.0
 	 */
 	public static function use_yoast_seo_integration() {
-		return WPRM_Settings::get( 'yoast_seo_integration' ) && interface_exists( 'WPSEO_Graph_Piece' );
+		return WPRM_Settings::get( 'yoast_seo_integration' ) && class_exists( '\Yoast\WP\SEO\Generators\Schema\Abstract_Schema_Piece' );
 	}
 
 	/**
@@ -165,7 +174,20 @@ class WPRM_Metadata {
 	public static function wpseo_schema_graph_pieces( $pieces, $context ) {
 		if ( self::use_yoast_seo_integration() ) {
 			require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-yoast-seo.php' );
-			$pieces[] = new WPRM_Metadata_Yoast_Seo( $context );
+			$recipe_piece = new WPRM_Metadata_Yoast_Seo( $context );
+			$pieces[] = $recipe_piece;
+
+			// Make sure Yoast loads the Person schema for the recipe author.
+			add_filter( 'wpseo_schema_needs_person', '__return_true' );
+			add_filter( 'wpseo_schema_person_user_id', function( $person_user_id ) use( $recipe_piece ) {
+				$person = $recipe_piece->get_person();
+
+				if ( $person && $person['id'] ) {
+					return $person['id'];
+				}
+
+				return $person_user_id;
+			} );
 		}
 	
 		return $pieces;

@@ -93,7 +93,7 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . wp_kses_post( $text ) . '</a>';
+			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		}
 
 		$tag = sanitize_key( $atts['tag'] );
