@@ -152,7 +152,7 @@ class WPRM_Metadata {
 	 * @since	8.7.0
 	 */
 	public static function use_rank_math_integration() {
-		return WPRM_Settings::get( 'rank_math_integration' ) && has_filter( 'rank_math/json_ld' );
+		return WPRM_Settings::get( 'rank_math_integration' ) && class_exists( '\RankMath\Schema\JsonLD' );
 	}
 
 	/**
@@ -177,17 +177,19 @@ class WPRM_Metadata {
 			$recipe_piece = new WPRM_Metadata_Yoast_Seo( $context );
 			$pieces[] = $recipe_piece;
 
-			// Make sure Yoast loads the Person schema for the recipe author.
-			add_filter( 'wpseo_schema_needs_person', '__return_true' );
-			add_filter( 'wpseo_schema_person_user_id', function( $person_user_id ) use( $recipe_piece ) {
-				$person = $recipe_piece->get_person();
+			if ( $recipe_piece->is_needed() ) {
+				// Make sure Yoast loads the Person schema for the recipe author.
+				add_filter( 'wpseo_schema_needs_person', '__return_true' );
+				add_filter( 'wpseo_schema_person_user_id', function( $person_user_id ) use( $recipe_piece ) {
+					$person = $recipe_piece->get_person();
 
-				if ( $person && $person['id'] ) {
-					return $person['id'];
-				}
+					if ( $person && $person['id'] ) {
+						return $person['id'];
+					}
 
-				return $person_user_id;
-			} );
+					return $person_user_id;
+				} );
+			}
 		}
 	
 		return $pieces;

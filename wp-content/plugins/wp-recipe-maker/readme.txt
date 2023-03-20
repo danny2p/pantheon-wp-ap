@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -136,6 +136,17 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.7.5 =
+* Fix: Only affect Yoast metadata on recipe pages
+* Fix: Prevent PHP warning with Rank Math integration
+
+= 8.7.4 =
+* Improvement: Better method for detecting presence of Rank Math plugin
+* Fix: Prevent rare PHP error in some specific themes
+
+= 8.7.3 =
+* Fix: Metadata not showing up correctly with some combinations of SEO plugins
+
 = 8.7.2 =
 * Fix: PHP error when rounding numbers in some cases
 
@@ -1461,6 +1472,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.7.5 =
+Update recommended when using Yoast SEO
+
+= 8.7.4 =
+Update can fix some rare theme compatibility problems
+
+= 8.7.3 =
+Update highly recommended to prevent recipe metadata issues
+
 = 8.7.2 =
 Update to prevent a PHP error in some specific cases
 
