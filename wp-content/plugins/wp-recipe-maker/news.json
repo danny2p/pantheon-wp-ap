@@ -1,6 +1,12 @@
 {
     "news": [
         {
+            "date": "2023-03-15",
+            "label": "Blog",
+            "title": "15 Food Styling Tricks to Make Your Food Photography Shine",
+            "url": "https://bootstrapped.ventures/food-styling-tips/"
+        },
+        {
             "date": "2023-03-13",
             "label": "Release",
             "title": "WP Recipe Maker 8.7.0",

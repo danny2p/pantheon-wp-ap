@@ -113,12 +113,14 @@ class WPRM_Metadata_Rank_Math {
 				$blog_posting = false;
 				
 				foreach ( $data as $key => $schema ) {
-					if ( 'WebPage' === $schema['@type'] ) {
-						$webpage = $key;
-					} elseif ( 'Article' === $schema['@type'] ) {
-						$article = $key;
-					} elseif ( 'BlogPosting' === $schema['@type'] ) {
-						$article = $key;
+					if ( isset( $schema['@type'] ) ) {
+						if ( 'WebPage' === $schema['@type'] ) {
+							$webpage = $key;
+						} elseif ( 'Article' === $schema['@type'] ) {
+							$article = $key;
+						} elseif ( 'BlogPosting' === $schema['@type'] ) {
+							$article = $key;
+						}
 					}
 				}
 

@@ -2,12 +2,10 @@ window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window
 
 window.WPRecipeMaker.recipe = {
 	init: () => {
-		if ( window.hasOwnProperty( 'WPUPG_Grids' ) ) {
-			window.addEventListener( 'wpupgInitReady', function (e) {
-				const grid = e.detail;
-				window.WPRecipeMaker.recipe.wpupgGridCompatibility( grid );
-			} );
-		}
+		window.addEventListener( 'wpupgInitReady', function (e) {
+			const grid = e.detail;
+			window.WPRecipeMaker.recipe.wpupgGridCompatibility( grid );
+		} );
 	},
 	wpupgGridCompatibility: ( grid ) => {
 		if ( grid ) {
@@ -63,14 +61,5 @@ window.WPRecipeMaker.recipe = {
 	},
 };
 
-ready(() => {
-	window.WPRecipeMaker.recipe.init();
-});
-
-function ready( fn ) {
-    if (document.readyState != 'loading'){
-        fn();
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
+// Don't wait for DOMContentLoaded. Listener needs to be added as soon as possible.
+window.WPRecipeMaker.recipe.init();
