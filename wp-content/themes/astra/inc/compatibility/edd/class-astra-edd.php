@@ -164,7 +164,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 		public function header_cart_icon_class( $classes ) {
 
 			if ( false === Astra_Builder_Helper::$is_header_footer_builder_active && ! defined( 'ASTRA_EXT_VER' ) ) {
-				return;
+				return $classes;
 			}
 
 			$header_cart_icon_style = astra_get_option( 'edd-header-cart-icon-style' );
@@ -737,7 +737,7 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 			}
 			$btn_bg_h_color = astra_get_option( 'button-bg-h-color', $link_h_color );
 
-			$btn_border_radius = astra_get_option( 'button-radius' );
+			$btn_border_radius_fields = astra_get_option( 'button-radius-fields' );
 
 			$cart_h_color = astra_get_foreground_color( $link_h_color );
 
@@ -776,10 +776,13 @@ if ( ! class_exists( 'Astra_Edd' ) ) :
 					),
 
 					'.ast-edd-site-header-cart .widget_edd_cart_widget .edd_checkout a, .widget_edd_cart_widget .edd_checkout a' => array(
-						'color'            => $btn_h_color,
-						'border-color'     => $btn_bg_h_color,
-						'background-color' => $btn_bg_h_color,
-						'border-radius'    => astra_get_css_value( $btn_border_radius, 'px' ),
+						'color'                      => $btn_h_color,
+						'border-color'               => $btn_bg_h_color,
+						'background-color'           => $btn_bg_h_color,
+						'border-top-left-radius'     => astra_responsive_spacing( $btn_border_radius_fields, 'top', 'desktop' ),
+						'border-top-right-radius'    => astra_responsive_spacing( $btn_border_radius_fields, 'right', 'desktop' ),
+						'border-bottom-right-radius' => astra_responsive_spacing( $btn_border_radius_fields, 'bottom', 'desktop' ),
+						'border-bottom-left-radius'  => astra_responsive_spacing( $btn_border_radius_fields, 'left', 'desktop' ),
 					),
 					'.site-header .ast-edd-site-header-cart .ast-edd-site-header-cart-widget .edd_checkout a, .site-header .ast-edd-site-header-cart .ast-edd-site-header-cart-widget .edd_checkout a:hover' => array(
 						'color' => $btn_color,

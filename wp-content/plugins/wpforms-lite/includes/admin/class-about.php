@@ -465,7 +465,7 @@ class WPForms_About {
 				</p>
 
 				<p>
-					<?php esc_html_e( 'To begin, you’ll need to be logged into the WordPress admin area. Once there, click on WPForms in the admin sidebar to go the Forms Overview page.', 'wpforms-lite' ); ?>
+					<?php esc_html_e( 'To begin, you’ll need to be logged into the WordPress admin area. Once there, click on WPForms in the admin sidebar to go to the Forms Overview page.', 'wpforms-lite' ); ?>
 				</p>
 
 				<p>

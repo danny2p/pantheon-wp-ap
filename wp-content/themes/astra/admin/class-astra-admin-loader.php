@@ -60,10 +60,10 @@ class Astra_Admin_Loader {
 	 */
 	public function includes() {
 		/* Ajax init */
-		require_once ASTRA_THEME_ADMIN_DIR . 'includes/class-astra-admin-ajax.php';
+		require_once ASTRA_THEME_ADMIN_DIR . 'includes/class-astra-admin-ajax.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Not a template file so loading in a normal way.
 
 		/* Setup Menu */
-		require_once ASTRA_THEME_ADMIN_DIR . 'includes/class-astra-menu.php';
+		require_once ASTRA_THEME_ADMIN_DIR . 'includes/class-astra-menu.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Not a template file so loading in a normal way.
 	}
 }
 

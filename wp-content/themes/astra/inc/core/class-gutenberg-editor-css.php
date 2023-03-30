@@ -67,13 +67,13 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 			/**
 			 * WooCommerce Grid Products compatibility.
 			 */
-			$link_h_color      = astra_get_option( 'link-h-color' );
-			$btn_color         = astra_get_option( 'button-color' );
-			$btn_bg_color      = astra_get_option( 'button-bg-color', '', $theme_color );
-			$btn_h_color       = astra_get_option( 'button-h-color' );
-			$btn_bg_h_color    = astra_get_option( 'button-bg-h-color', '', $link_h_color );
-			$btn_border_radius = astra_get_option( 'button-radius' );
-			$theme_btn_padding = astra_get_option( 'theme-button-padding' );
+			$link_h_color             = astra_get_option( 'link-h-color' );
+			$btn_color                = astra_get_option( 'button-color' );
+			$btn_bg_color             = astra_get_option( 'button-bg-color', '', $theme_color );
+			$btn_h_color              = astra_get_option( 'button-h-color' );
+			$btn_bg_h_color           = astra_get_option( 'button-bg-h-color', '', $link_h_color );
+			$btn_border_radius_fields = astra_get_option( 'button-radius-fields' );
+			$theme_btn_padding        = astra_get_option( 'theme-button-padding' );
 
 			/**
 			 * Button theme compatibility.
@@ -446,11 +446,14 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 					'background-color' => $btn_bg_h_color,
 				),
 				'.wc-block-grid__products .wc-block-grid__product .wp-block-button__link' => array(
-					'border-radius'  => astra_get_css_value( $btn_border_radius, 'px' ),
-					'padding-top'    => astra_responsive_spacing( $theme_btn_padding, 'top', 'desktop' ),
-					'padding-right'  => astra_responsive_spacing( $theme_btn_padding, 'right', 'desktop' ),
-					'padding-bottom' => astra_responsive_spacing( $theme_btn_padding, 'bottom', 'desktop' ),
-					'padding-left'   => astra_responsive_spacing( $theme_btn_padding, 'left', 'desktop' ),
+					'border-top-left-radius'     => astra_responsive_spacing( $btn_border_radius_fields, 'top', 'desktop' ),
+					'border-top-right-radius'    => astra_responsive_spacing( $btn_border_radius_fields, 'right', 'desktop' ),
+					'border-bottom-right-radius' => astra_responsive_spacing( $btn_border_radius_fields, 'bottom', 'desktop' ),
+					'border-bottom-left-radius'  => astra_responsive_spacing( $btn_border_radius_fields, 'left', 'desktop' ),
+					'padding-top'                => astra_responsive_spacing( $theme_btn_padding, 'top', 'desktop' ),
+					'padding-right'              => astra_responsive_spacing( $theme_btn_padding, 'right', 'desktop' ),
+					'padding-bottom'             => astra_responsive_spacing( $theme_btn_padding, 'bottom', 'desktop' ),
+					'padding-left'               => astra_responsive_spacing( $theme_btn_padding, 'left', 'desktop' ),
 				),
 
 				// Margin bottom same as applied on frontend.
@@ -633,26 +636,29 @@ if ( ! class_exists( 'Gutenberg_Editor_CSS' ) ) :
 					 * Gutenberg button compatibility for default styling.
 					 */
 					'.editor-styles-wrapper .wp-block-button .wp-block-button__link' . $search_button_selector . $file_block_button_selector => array(
-						'border-style'        => 'solid',
-						'border-top-width'    => $theme_btn_top_border,
-						'border-right-width'  => $theme_btn_right_border,
-						'border-left-width'   => $theme_btn_left_border,
-						'border-bottom-width' => $theme_btn_bottom_border,
-						'color'               => esc_attr( $btn_color ),
-						'border-color'        => empty( $btn_border_color ) ? esc_attr( $btn_bg_color ) : esc_attr( $btn_border_color ),
-						'background-color'    => esc_attr( $btn_bg_color ),
-						'font-family'         => astra_get_font_family( $theme_btn_font_family ),
-						'font-weight'         => esc_attr( $theme_btn_font_weight ),
-						'line-height'         => esc_attr( $theme_btn_line_height ),
-						'text-transform'      => esc_attr( $theme_btn_text_transform ),
-						'letter-spacing'      => astra_get_css_value( $theme_btn_letter_spacing, 'px' ),
-						'text-decoration'     => esc_attr( $theme_btn_text_decoration ),
-						'font-size'           => astra_responsive_font( $theme_btn_font_size, 'desktop' ),
-						'border-radius'       => astra_get_css_value( $btn_border_radius, 'px' ),
-						'padding-top'         => astra_responsive_spacing( $theme_btn_padding, 'top', 'desktop' ),
-						'padding-right'       => astra_responsive_spacing( $theme_btn_padding, 'right', 'desktop' ),
-						'padding-bottom'      => astra_responsive_spacing( $theme_btn_padding, 'bottom', 'desktop' ),
-						'padding-left'        => astra_responsive_spacing( $theme_btn_padding, 'left', 'desktop' ),
+						'border-style'               => 'solid',
+						'border-top-width'           => $theme_btn_top_border,
+						'border-right-width'         => $theme_btn_right_border,
+						'border-left-width'          => $theme_btn_left_border,
+						'border-bottom-width'        => $theme_btn_bottom_border,
+						'color'                      => esc_attr( $btn_color ),
+						'border-color'               => empty( $btn_border_color ) ? esc_attr( $btn_bg_color ) : esc_attr( $btn_border_color ),
+						'background-color'           => esc_attr( $btn_bg_color ),
+						'font-family'                => astra_get_font_family( $theme_btn_font_family ),
+						'font-weight'                => esc_attr( $theme_btn_font_weight ),
+						'line-height'                => esc_attr( $theme_btn_line_height ),
+						'text-transform'             => esc_attr( $theme_btn_text_transform ),
+						'letter-spacing'             => astra_get_css_value( $theme_btn_letter_spacing, 'px' ),
+						'text-decoration'            => esc_attr( $theme_btn_text_decoration ),
+						'font-size'                  => astra_responsive_font( $theme_btn_font_size, 'desktop' ),
+						'border-top-left-radius'     => astra_responsive_spacing( $btn_border_radius_fields, 'top', 'desktop' ),
+						'border-top-right-radius'    => astra_responsive_spacing( $btn_border_radius_fields, 'right', 'desktop' ),
+						'border-bottom-right-radius' => astra_responsive_spacing( $btn_border_radius_fields, 'bottom', 'desktop' ),
+						'border-bottom-left-radius'  => astra_responsive_spacing( $btn_border_radius_fields, 'left', 'desktop' ),
+						'padding-top'                => astra_responsive_spacing( $theme_btn_padding, 'top', 'desktop' ),
+						'padding-right'              => astra_responsive_spacing( $theme_btn_padding, 'right', 'desktop' ),
+						'padding-bottom'             => astra_responsive_spacing( $theme_btn_padding, 'bottom', 'desktop' ),
+						'padding-left'               => astra_responsive_spacing( $theme_btn_padding, 'left', 'desktop' ),
 					),
 					'.wp-block-button .wp-block-button__link:hover, .wp-block-button .wp-block-button__link:focus' . $search_button_hover_selector . $file_block_button_hover_selector => array(
 						'color'            => esc_attr( $btn_h_color ),

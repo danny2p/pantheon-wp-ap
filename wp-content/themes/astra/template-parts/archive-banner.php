@@ -8,36 +8,37 @@
  * @since 4.0.0
  */
 
-$post_type      = strval( get_post_type() );
-$banner_control = 'ast-dynamic-archive-' . esc_attr( $post_type );
+$astra_post_type      = strval( get_post_type() );
+$astra_banner_control = 'ast-dynamic-archive-' . esc_attr( $astra_post_type );
 
 // If description is the only meta available in structure & its blank then no need to render banner markup.
-$archive_structure = astra_get_option( $banner_control . '-structure', array( $banner_control . '-title', $banner_control . '-description' ) );
-if ( 1 === count( $archive_structure ) && in_array( $banner_control . '-description', $archive_structure ) && empty( astra_get_archive_description( $post_type ) ) ) {
+$astra_archive_structure       = astra_get_option( $astra_banner_control . '-structure', array( $astra_banner_control . '-title', $astra_banner_control . '-description' ) );
+$astra_get_archive_description = astra_get_archive_description( $astra_post_type );
+if ( 1 === count( $astra_archive_structure ) && in_array( $astra_banner_control . '-description', $astra_archive_structure ) && empty( $astra_get_archive_description ) ) {
 	return;
 }
 
 // Conditionally updating data section & class.
-$attr = 'class="ast-archive-entry-banner"';
+$astra_attr = 'class="ast-archive-entry-banner"';
 if ( is_customize_preview() ) {
-	$attr = 'class="ast-archive-entry-banner ast-post-banner-highlight site-header-focus-item" data-section="' . esc_attr( $banner_control ) . '"';
+	$astra_attr = 'class="ast-archive-entry-banner ast-post-banner-highlight site-header-focus-item" data-section="' . esc_attr( $astra_banner_control ) . '"';
 }
 
-$layout_type = astra_get_option( $banner_control . '-layout' );
-$data_attrs  = 'data-post-type="' . $post_type . '" data-banner-layout="' . $layout_type . '"';
+$astra_layout_type = astra_get_option( $astra_banner_control . '-layout' );
+$astra_data_attrs  = 'data-post-type="' . $astra_post_type . '" data-banner-layout="' . $astra_layout_type . '"';
 
-if ( 'layout-2' === $layout_type && 'custom' === astra_get_option( $banner_control . '-banner-width-type', 'fullwidth' ) ) {
-	$data_attrs .= 'data-banner-width-type="custom"';
+if ( 'layout-2' === $astra_layout_type && 'custom' === astra_get_option( $astra_banner_control . '-banner-width-type', 'fullwidth' ) ) {
+	$astra_data_attrs .= 'data-banner-width-type="custom"';
 }
 
-$background_type = astra_get_option( $banner_control . '-banner-image-type', 'none' );
-if ( 'layout-2' === $layout_type && 'none' !== $background_type ) {
-	$data_attrs .= 'data-banner-background-type="' . $background_type . '"';
+$astra_background_type = astra_get_option( $astra_banner_control . '-banner-image-type', 'none' );
+if ( 'layout-2' === $astra_layout_type && 'none' !== $astra_background_type ) {
+	$astra_data_attrs .= 'data-banner-background-type="' . $astra_background_type . '"';
 }
 
 ?>
 
-<section <?php echo $attr . ' ' . $data_attrs; ?>>
+<section <?php echo wp_kses_post( $astra_attr . ' ' . $astra_data_attrs ); ?>>
 	<div class="ast-container">
 		<?php
 		if ( is_customize_preview() ) {

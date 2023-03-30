@@ -41,13 +41,13 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 		$theme_color = astra_get_option( 'theme-color' );
 
 		// Sub Menu.
-		$sub_menu_border         = astra_get_option( 'header-' . $_prefix . '-submenu-border' );
-		$sub_menu_divider_toggle = astra_get_option( 'header-' . $_prefix . '-submenu-item-border' );
-		$sub_menu_divider_size   = astra_get_option( 'header-' . $_prefix . '-submenu-item-b-size' );
-		$sub_menu_divider_color  = astra_get_option( 'header-' . $_prefix . '-submenu-item-b-color' );
-		$sub_menu_border_radius  = astra_get_option( 'header-' . $_prefix . '-submenu-border-radius' );
-		$sub_menu_top_offset     = astra_get_option( 'header-' . $_prefix . '-submenu-top-offset' );
-		$sub_menu_width          = astra_get_option( 'header-' . $_prefix . '-submenu-width' );
+		$sub_menu_border               = astra_get_option( 'header-' . $_prefix . '-submenu-border' );
+		$sub_menu_divider_toggle       = astra_get_option( 'header-' . $_prefix . '-submenu-item-border' );
+		$sub_menu_divider_size         = astra_get_option( 'header-' . $_prefix . '-submenu-item-b-size' );
+		$sub_menu_divider_color        = astra_get_option( 'header-' . $_prefix . '-submenu-item-b-color' );
+		$sub_menu_border_radius_fields = astra_get_option( 'header-' . $_prefix . '-submenu-border-radius-fields' );
+		$sub_menu_top_offset           = astra_get_option( 'header-' . $_prefix . '-submenu-top-offset' );
+		$sub_menu_width                = astra_get_option( 'header-' . $_prefix . '-submenu-width' );
 
 		// Menu.
 		$menu_resp_color           = astra_get_option( 'header-' . $_prefix . '-color-responsive' );
@@ -104,9 +104,6 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 
 		$sub_menu_border_left = ( isset( $sub_menu_border ) && ! empty( $sub_menu_border['left'] ) ) ? $sub_menu_border['left'] : 0;
 
-		// Border-Radius.
-		$sub_menu_border_radius = ! empty( $sub_menu_border_radius ) ? $sub_menu_border_radius : 0;
-
 		// Top offset position.
 		$sub_menu_top_offset = ! empty( $sub_menu_top_offset ) ? $sub_menu_top_offset : 0;
 
@@ -155,14 +152,17 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 			),
 			// Sub Menu.
 			$selector . ' .sub-menu, ' . $selector . ' .inline-on-mobile .sub-menu' => array(
-				'border-top-width'    => astra_get_css_value( $sub_menu_border_top, 'px' ),
-				'border-bottom-width' => astra_get_css_value( $sub_menu_border_bottom, 'px' ),
-				'border-right-width'  => astra_get_css_value( $sub_menu_border_right, 'px' ),
-				'border-left-width'   => astra_get_css_value( $sub_menu_border_left, 'px' ),
-				'border-color'        => esc_attr( astra_get_option( 'header-' . $_prefix . '-submenu-b-color', $theme_color ) ),
-				'border-style'        => 'solid',
-				'width'               => astra_get_css_value( $sub_menu_width, 'px' ),
-				'border-radius'       => astra_get_css_value( $sub_menu_border_radius, 'px' ),
+				'border-top-width'           => astra_get_css_value( $sub_menu_border_top, 'px' ),
+				'border-bottom-width'        => astra_get_css_value( $sub_menu_border_bottom, 'px' ),
+				'border-right-width'         => astra_get_css_value( $sub_menu_border_right, 'px' ),
+				'border-left-width'          => astra_get_css_value( $sub_menu_border_left, 'px' ),
+				'border-color'               => esc_attr( astra_get_option( 'header-' . $_prefix . '-submenu-b-color', $theme_color ) ),
+				'border-style'               => 'solid',
+				'width'                      => astra_get_css_value( $sub_menu_width, 'px' ),
+				'border-top-left-radius'     => astra_responsive_spacing( $sub_menu_border_radius_fields, 'top', 'desktop' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $sub_menu_border_radius_fields, 'right', 'desktop' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $sub_menu_border_radius_fields, 'bottom', 'desktop' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $sub_menu_border_radius_fields, 'left', 'desktop' ),
 			),
 			$selector . ' .main-header-menu > .menu-item > .sub-menu, ' . $selector . ' .main-header-menu > .menu-item > .astra-full-megamenu-wrapper' => array(
 				'margin-top' => astra_get_css_value( $sub_menu_top_offset, 'px' ),
@@ -203,6 +203,13 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 				'padding-bottom' => astra_responsive_spacing( $menu_spacing, 'bottom', 'tablet' ),
 				'padding-left'   => astra_responsive_spacing( $menu_spacing, 'left', 'tablet' ),
 				'padding-right'  => astra_responsive_spacing( $menu_spacing, 'right', 'tablet' ),
+			),
+			// Sub Menu.
+			$selector . ' .sub-menu, ' . $selector . ' .inline-on-mobile .sub-menu' => array(
+				'border-top-left-radius'     => astra_responsive_spacing( $sub_menu_border_radius_fields, 'top', 'tablet' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $sub_menu_border_radius_fields, 'right', 'tablet' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $sub_menu_border_radius_fields, 'bottom', 'tablet' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $sub_menu_border_radius_fields, 'left', 'tablet' ),
 			),
 			$selector . ' .main-header-menu .menu-item > .menu-link' => array(
 				'color' => $menu_resp_color_tablet,
@@ -255,6 +262,13 @@ function astra_hb_menu_dynamic_css( $dynamic_css, $dynamic_css_filtered = '' ) {
 				'padding-bottom' => astra_responsive_spacing( $menu_spacing, 'bottom', 'mobile' ),
 				'padding-left'   => astra_responsive_spacing( $menu_spacing, 'left', 'mobile' ),
 				'padding-right'  => astra_responsive_spacing( $menu_spacing, 'right', 'mobile' ),
+			),
+			// Sub Menu.
+			$selector . ' .sub-menu, ' . $selector . ' .inline-on-mobile .sub-menu' => array(
+				'border-top-left-radius'     => astra_responsive_spacing( $sub_menu_border_radius_fields, 'top', 'mobile' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $sub_menu_border_radius_fields, 'right', 'mobile' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $sub_menu_border_radius_fields, 'bottom', 'mobile' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $sub_menu_border_radius_fields, 'left', 'mobile' ),
 			),
 			$selector . ' .main-header-menu .menu-item > .menu-link' => array(
 				'color' => $menu_resp_color_mobile,

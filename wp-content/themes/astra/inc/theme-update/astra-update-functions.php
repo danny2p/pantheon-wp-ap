@@ -825,7 +825,7 @@ function astra_theme_background_updater_4_0_0() {
 								$migrated_post_metadata[]   = $tax_slug;
 								$theme_options[ $tax_slug ] = 'category';
 
-								$tax_counter = $tax_counter + 1;
+								$tax_counter = ++$tax_counter;
 								$tax_slug    = 'ast-dynamic-single-' . esc_attr( $post_type ) . '-taxonomy-' . $tax_counter;
 							}
 							break;
@@ -834,7 +834,7 @@ function astra_theme_background_updater_4_0_0() {
 								$migrated_post_metadata[]   = $tax_slug;
 								$theme_options[ $tax_slug ] = 'post_tag';
 
-								$tax_counter = $tax_counter + 1;
+								$tax_counter = ++$tax_counter;
 								$tax_slug    = 'ast-dynamic-single-' . esc_attr( $post_type ) . '-taxonomy-' . $tax_counter;
 							}
 							break;
@@ -1006,6 +1006,127 @@ function astra_theme_background_updater_4_0_2() {
 		if ( isset( $theme_options['ast-dynamic-single-post-metadata'] ) && ! in_array( 'read-time', $theme_options['ast-dynamic-single-post-metadata'] ) ) {
 			$theme_options['ast-dynamic-single-post-metadata'][] = 'read-time';
 			$theme_options['v4-0-2-update-migration']            = true;
+			update_option( 'astra-settings', $theme_options );
+		}
+	}
+}
+
+/**
+ * Handle backward compatibility on version 4.1.0
+ *
+ * @since 4.1.0
+ * @return void
+ */
+function astra_theme_background_updater_4_1_0() {
+
+	$theme_options = get_option( 'astra-settings', array() );
+
+	if ( ! isset( $theme_options['v4-1-0-update-migration'] ) ) {
+		$theme_options['v4-1-0-update-migration'] = true;
+		$current_payment_list                     = array();
+		$old_payment_list                         = isset( $theme_options['single-product-payment-list']['items'] ) ? $theme_options['single-product-payment-list']['items'] : array();
+
+		$visa_payment       = isset( $theme_options['single-product-payment-visa'] ) ? $theme_options['single-product-payment-visa'] : '';
+		$mastercard_payment = isset( $theme_options['single-product-payment-mastercard'] ) ? $theme_options['single-product-payment-mastercard'] : '';
+		$discover_payment   = isset( $theme_options['single-product-payment-discover'] ) ? $theme_options['single-product-payment-discover'] : '';
+		$paypal_payment     = isset( $theme_options['single-product-payment-paypal'] ) ? $theme_options['single-product-payment-paypal'] : '';
+		$apple_pay_payment  = isset( $theme_options['single-product-payment-apple-pay'] ) ? $theme_options['single-product-payment-apple-pay'] : '';
+
+		false !== $visa_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-100',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-visa',
+				'image'   => '',
+				'label'   => __( 'Visa', 'astra' ),
+			)
+		) : '';
+
+		false !== $mastercard_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-101',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-mastercard',
+				'image'   => '',
+				'label'   => __( 'Mastercard', 'astra' ),
+			)
+		) : '';
+
+		false !== $mastercard_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-102',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-amex',
+				'image'   => '',
+				'label'   => __( 'Amex', 'astra' ),
+			)
+		) : '';
+
+		false !== $discover_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-103',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-discover',
+				'image'   => '',
+				'label'   => __( 'Discover', 'astra' ),
+			)
+		) : '';
+
+		$paypal_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-104',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-paypal',
+				'image'   => '',
+				'label'   => __( 'Paypal', 'astra' ),
+			)
+		) : '';
+
+		$apple_pay_payment ? array_push(
+			$current_payment_list,
+			array(
+				'id'      => 'item-105',
+				'enabled' => true,
+				'source'  => 'icon',
+				'icon'    => 'cc-apple-pay',
+				'image'   => '',
+				'label'   => __( 'Apple Pay', 'astra' ),
+			)
+		) : '';
+
+		if ( $current_payment_list ) {
+			$theme_options['single-product-payment-list'] =
+			array(
+				'items' =>
+					array_merge(
+						$current_payment_list,
+						$old_payment_list
+					),
+			);
+
+			update_option( 'astra-settings', $theme_options );
+		}
+
+		if ( ! isset( $theme_options['woo_support_global_settings'] ) ) {
+			$theme_options['woo_support_global_settings'] = true;
+			update_option( 'astra-settings', $theme_options );
+		}
+
+		if ( isset( $theme_options['theme-dynamic-customizer-support'] ) ) {
+			$post_types = Astra_Posts_Structure_Loader::get_supported_post_types();
+			foreach ( $post_types as $index => $post_type ) {
+				$theme_options[ 'ast-dynamic-single-' . esc_attr( $post_type ) . '-title-font-extras' ]['text-transform'] = '';
+			}
 			update_option( 'astra-settings', $theme_options );
 		}
 	}

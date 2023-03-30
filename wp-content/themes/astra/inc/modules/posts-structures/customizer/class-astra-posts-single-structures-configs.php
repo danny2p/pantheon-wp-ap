@@ -270,6 +270,13 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 					'title'         => __( 'Taxonomy', 'astra' ),
 				);
 			}
+			$meta_config_options['date'] = array(
+				'clone'       => false,
+				'is_parent'   => true,
+				'main_index'  => 'date',
+				'clone_limit' => 1,
+				'title'       => __( 'Date', 'astra' ),
+			);
 
 			// Display Read Time option in Meta options only when Astra Addon is activated.
 			/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -534,9 +541,55 @@ class Astra_Posts_Single_Structures_Configs extends Astra_Customizer_Config_Base
 						array(
 							'comments' => __( 'Comments', 'astra' ),
 							'author'   => __( 'Author', 'astra' ),
-							'date'     => __( 'Publish Date', 'astra' ),
 						),
 						$meta_config_options
+					),
+				),
+
+				/**
+				 * Option: Date Meta Type.
+				 */
+				array(
+					'name'       => $title_section . '-meta-date-type',
+					'parent'     => ASTRA_THEME_SETTINGS . '[' . $title_section . '-metadata]',
+					'type'       => 'sub-control',
+					'control'    => 'ast-selector',
+					'section'    => $title_section,
+					'default'    => astra_get_option( $title_section . '-meta-date-type', 'published' ),
+					'priority'   => 1,
+					'linked'     => 'date',
+					'transport'  => 'refresh',
+					'title'      => __( 'Type', 'astra' ),
+					'choices'    => array(
+						'published' => __( 'Published', 'astra' ),
+						'updated'   => __( 'Last Updated', 'astra' ),
+					),
+					'divider'    => array( 'ast_class' => 'ast-top-divider ast-bottom-spacing' ),
+					'responsive' => false,
+					'renderAs'   => 'text',
+				),
+
+				/**
+				 * Date format support for meta field.
+				 */
+				array(
+					'name'       => $title_section . '-date-format',
+					'default'    => astra_get_option( $title_section . '-date-format', '' ),
+					'parent'     => ASTRA_THEME_SETTINGS . '[' . $title_section . '-metadata]',
+					'linked'     => 'date',
+					'type'       => 'sub-control',
+					'control'    => 'ast-select',
+					'section'    => $title_section,
+					'priority'   => 2,
+					'responsive' => false,
+					'renderAs'   => 'text',
+					'title'      => __( 'Format', 'astra' ),
+					'choices'    => array(
+						''       => __( 'Default', 'astra' ),
+						'F j, Y' => 'November 6, 2010',
+						'Y-m-d'  => '2010-11-06',
+						'm/d/Y'  => '11/06/2010',
+						'd/m/Y'  => '06/11/2010',
 					),
 				),
 

@@ -52,16 +52,39 @@ class Astra_Scroll_To_Top_Loader {
 	 * @since 4.0.0
 	 */
 	public function theme_defaults( $defaults ) {
+		$astra_options = Astra_Theme_Options::get_astra_options();
 
-		$defaults['scroll-to-top-enable']          = true;
-		$defaults['scroll-to-top-icon-size']       = 15;
-		$defaults['scroll-to-top-icon-position']   = 'right';
-		$defaults['scroll-to-top-on-devices']      = 'both';
-		$defaults['scroll-to-top-icon-radius']     = '';
-		$defaults['scroll-to-top-icon-color']      = '';
-		$defaults['scroll-to-top-icon-h-color']    = '';
-		$defaults['scroll-to-top-icon-bg-color']   = '';
-		$defaults['scroll-to-top-icon-h-bg-color'] = '';
+		$defaults['scroll-to-top-enable']             = true;
+		$defaults['scroll-to-top-icon-size']          = 15;
+		$defaults['scroll-to-top-icon-position']      = 'right';
+		$defaults['scroll-to-top-on-devices']         = 'both';
+		$defaults['scroll-to-top-icon-radius-fields'] = array(
+			'desktop'      => array(
+				'top'    => ! isset( $astra_options['scroll-to-top-icon-radius'] ) ? '' : $astra_options['scroll-to-top-icon-radius'],
+				'right'  => ! isset( $astra_options['scroll-to-top-icon-radius'] ) ? '' : $astra_options['scroll-to-top-icon-radius'],
+				'bottom' => ! isset( $astra_options['scroll-to-top-icon-radius'] ) ? '' : $astra_options['scroll-to-top-icon-radius'],
+				'left'   => ! isset( $astra_options['scroll-to-top-icon-radius'] ) ? '' : $astra_options['scroll-to-top-icon-radius'],
+			),
+			'tablet'       => array(
+				'top'    => '',
+				'right'  => '',
+				'bottom' => '',
+				'left'   => '',
+			),
+			'mobile'       => array(
+				'top'    => '',
+				'right'  => '',
+				'bottom' => '',
+				'left'   => '',
+			),
+			'desktop-unit' => 'px',
+			'tablet-unit'  => 'px',
+			'mobile-unit'  => 'px',
+		);
+		$defaults['scroll-to-top-icon-color']         = '';
+		$defaults['scroll-to-top-icon-h-color']       = '';
+		$defaults['scroll-to-top-icon-bg-color']      = '';
+		$defaults['scroll-to-top-icon-h-bg-color']    = '';
 
 		return $defaults;
 	}
@@ -73,7 +96,7 @@ class Astra_Scroll_To_Top_Loader {
 	 * @since 4.0.0
 	 */
 	public function new_customize_register( $wp_customize ) {
-		require_once ASTRA_SCROLL_TO_TOP_DIR . 'classes/customizer/class-astra-scroll-to-top-configs.php';
+		require_once ASTRA_SCROLL_TO_TOP_DIR . 'classes/customizer/class-astra-scroll-to-top-configs.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Not a template file so loading in a normal way.
 	}
 
 	/**

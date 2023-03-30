@@ -310,6 +310,17 @@ wp.customize( 'astra-settings[store-notice-position]', function( setting ) {
     } );
 } );
 
+wp.customize( 'astra-settings[blog-meta-date-type]', function( setting ) {
+	setting.bind( function( val ) {
+		wp.customize.preview.send( 'refresh' );
+	} );
+} );
+wp.customize( 'astra-settings[blog-meta-date-format]', function( setting ) {
+	setting.bind( function( val ) {
+		wp.customize.preview.send( 'refresh' );
+	} );
+} );
+
 // Global Typography Refresh - START
 const bodyFontFamily = [
 	'body-font-family',

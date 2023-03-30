@@ -84,6 +84,14 @@ function astra_refresh_customizer( control ) {
 		}
 
 		astra_refresh_customizer(
+			'astra-settings[ast-dynamic-single-' + postType + '-meta-date-type]'
+		);
+
+		astra_refresh_customizer(
+			'astra-settings[ast-dynamic-single-' + postType + '-date-format]'
+		);
+
+		astra_refresh_customizer(
 			'astra-settings[ast-dynamic-single-' + postType + '-taxonomy]'
 		);
 

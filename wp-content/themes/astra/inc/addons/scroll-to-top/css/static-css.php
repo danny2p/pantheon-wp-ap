@@ -44,6 +44,7 @@ function astra_scroll_to_top_static_css( $dynamic_css ) {
 			color: #ffffff;
 			border-radius: 2px;
 			content: "";
+			outline: inherit;
 		}
 		@media (min-width: 769px) {
 			#ast-scroll-top {
