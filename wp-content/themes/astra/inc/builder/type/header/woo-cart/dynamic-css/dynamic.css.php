@@ -36,7 +36,7 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 	$icon_color            = esc_attr( astra_get_option( 'header-woo-cart-icon-color', $theme_color ) );
 	$icon_hover_color      = esc_attr( astra_get_option( 'header-woo-cart-icon-hover-color' ) ); // icon cart hover color.
 
-	$header_cart_icon_radius         = astra_get_option( 'woo-header-cart-icon-radius' );
+	$header_cart_icon_radius_fields  = astra_get_option( 'woo-header-cart-icon-radius-fields' );
 	$cart_h_color                    = astra_get_foreground_color( $icon_color );
 	$header_cart_icon_style          = astra_get_option( 'woo-header-cart-icon-style' );
 	$theme_h_color                   = astra_get_foreground_color( $theme_color );
@@ -268,15 +268,15 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 			'opacity'    => '0',
 			'visibility' => 'hidden',
 		);
-		$css_output_desktop['.ast-desktop .astra-cart-drawer.open-right'] = array(
+		$css_output_desktop['.ast-desktop .astra-cart-drawer'] = array(
 			'width' => astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 		);
 		if ( 'left' === $desktop_flyout_cart_direction ) {
-			$css_output_desktop['.ast-desktop .astra-cart-drawer.open-right']        = array(
+			$css_output_desktop['.ast-desktop .astra-cart-drawer']        = array(
 				'width' => astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 				'left'  => '-' . astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 			);
-			$css_output_desktop['.ast-desktop .astra-cart-drawer.open-right.active'] = array(
+			$css_output_desktop['.ast-desktop .astra-cart-drawer.active'] = array(
 				'left' => astra_get_css_value( $flyout_cart_width_desktop, $flyout_cart_width_desktop_unit ),
 			);
 		}
@@ -482,10 +482,36 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 
 			// Border radius.
 			'.ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-outline .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-woo-header-cart-info-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-woo-header-cart-info-wrap' => array(
-				'border-radius' => astra_get_css_value( $header_cart_icon_radius, 'px' ),
+				'border-top-left-radius'     => astra_responsive_spacing( $header_cart_icon_radius_fields, 'top', 'desktop' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $header_cart_icon_radius_fields, 'right', 'desktop' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $header_cart_icon_radius_fields, 'bottom', 'desktop' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $header_cart_icon_radius_fields, 'left', 'desktop' ),
 			),
 
 		);
+
+		$header_cart_icon_tablet = array(
+			// Border radius.
+			'.ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-outline .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-woo-header-cart-info-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-woo-header-cart-info-wrap' => array(
+				'border-top-left-radius'     => astra_responsive_spacing( $header_cart_icon_radius_fields, 'top', 'tablet' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $header_cart_icon_radius_fields, 'right', 'tablet' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $header_cart_icon_radius_fields, 'bottom', 'tablet' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $header_cart_icon_radius_fields, 'left', 'tablet' ),
+			),
+
+		);
+
+		$header_cart_icon_mobile = array(
+			// Border radius.
+			'.ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-fill .ast-cart-menu-wrap .count, .ast-site-header-cart.ast-menu-cart-outline .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-addon-cart-wrap, .ast-site-header-cart.ast-menu-cart-outline .ast-woo-header-cart-info-wrap, .ast-site-header-cart.ast-menu-cart-fill .ast-woo-header-cart-info-wrap' => array(
+				'border-top-left-radius'     => astra_responsive_spacing( $header_cart_icon_radius_fields, 'top', 'mobile' ),
+				'border-top-right-radius'    => astra_responsive_spacing( $header_cart_icon_radius_fields, 'right', 'mobile' ),
+				'border-bottom-right-radius' => astra_responsive_spacing( $header_cart_icon_radius_fields, 'bottom', 'mobile' ),
+				'border-bottom-left-radius'  => astra_responsive_spacing( $header_cart_icon_radius_fields, 'left', 'mobile' ),
+			),
+		);
+
+
 
 		// We adding this conditional CSS only to maintain backwards. Remove this condition after 2-3 updates of add-on.
 		if ( defined( 'ASTRA_EXT_VER' ) && version_compare( ASTRA_EXT_VER, '3.4.2', '<' ) ) {
@@ -502,6 +528,8 @@ function astra_hb_woo_cart_dynamic_css( $dynamic_css, $dynamic_css_filtered = ''
 		}
 
 		$css_output .= astra_parse_css( $header_cart_icon );
+		$css_output .= astra_parse_css( $header_cart_icon_tablet, '', astra_get_tablet_breakpoint() );
+		$css_output .= astra_parse_css( $header_cart_icon_mobile, '', astra_get_mobile_breakpoint() );
 	}
 
 	$remove_when_transparent_header = array(

@@ -255,7 +255,7 @@ if ( ! class_exists( 'Astra_Site_Identity_Configs' ) ) {
 						'tablet'  => 'customizer-tablet',
 						'mobile'  => 'customizer-mobile',
 					),
-					'divider'   => array( 'ast_class' => 'ast-top-dotted-divider ast-bottom-section-divider' ),
+					'divider'   => array( 'ast_class' => 'ast-top-dotted-divider' ),
 				),
 
 				/**

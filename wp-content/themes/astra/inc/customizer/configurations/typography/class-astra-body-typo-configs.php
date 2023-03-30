@@ -94,8 +94,8 @@ if ( ! class_exists( 'Astra_Body_Typo_Configs' ) ) {
 					'default'           => astra_get_option( 'body-font-variant' ),
 					'ast_inherit'       => __( 'Default', 'astra' ),
 					'section'           => $typo_section,
-					'priority'          => 6,
-					'title'             => __( 'Variants', 'astra' ),
+					'priority'          => 15,
+					'title'             => '',
 					'variant'           => ASTRA_THEME_SETTINGS . '[body-font-family]',
 					'context'           => array(
 						array(
@@ -104,6 +104,8 @@ if ( ! class_exists( 'Astra_Body_Typo_Configs' ) ) {
 							'value'    => 'inherit',
 						),
 					),
+					'divider'           => array( 'ast_class' => 'ast-sub-bottom-dotted-divider' ),
+
 				),
 
 				/**
@@ -119,10 +121,9 @@ if ( ! class_exists( 'Astra_Body_Typo_Configs' ) ) {
 					'default'           => astra_get_option( 'body-font-weight' ),
 					'ast_inherit'       => __( 'Default', 'astra' ),
 					'section'           => $typo_section,
-					'priority'          => 15,
+					'priority'          => 14,
 					'title'             => __( 'Font Weight', 'astra' ),
 					'connect'           => 'body-font-family',
-					'divider'           => array( 'ast_class' => 'ast-sub-bottom-dotted-divider' ),
 				),
 
 				/**
@@ -209,30 +210,6 @@ if ( ! class_exists( 'Astra_Body_Typo_Configs' ) ) {
 				),
 
 				/**
-				 * Option: Font Variant
-				 */
-				array(
-					'name'              => 'headings-font-variant',
-					'type'              => 'sub-control',
-					'parent'            => ASTRA_THEME_SETTINGS . '[ast-headings-font-settings]',
-					'control'           => 'ast-font-variant',
-					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_font_variant' ),
-					'default'           => astra_get_option( 'headings-font-variant' ),
-					'ast_inherit'       => __( 'Default', 'astra' ),
-					'section'           => $typo_section,
-					'priority'          => 26,
-					'title'             => __( 'Variants', 'astra' ),
-					'variant'           => ASTRA_THEME_SETTINGS . '[headings-font-family]',
-					'context'           => array(
-						array(
-							'setting'  => ASTRA_THEME_SETTINGS . '[headings-font-family]',
-							'operator' => '!=',
-							'value'    => 'inherit',
-						),
-					),
-				),
-
-				/**
 				 * Option: Headings Font Weight
 				 */
 				array(
@@ -247,6 +224,29 @@ if ( ! class_exists( 'Astra_Body_Typo_Configs' ) ) {
 					'section'           => $typo_section,
 					'priority'          => 26,
 					'connect'           => 'headings-font-family',
+				),
+
+				/**
+				 * Option: Font Variant
+				 */
+				array(
+					'name'              => 'headings-font-variant',
+					'type'              => 'sub-control',
+					'parent'            => ASTRA_THEME_SETTINGS . '[ast-headings-font-settings]',
+					'control'           => 'ast-font-variant',
+					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_font_variant' ),
+					'default'           => astra_get_option( 'headings-font-variant' ),
+					'ast_inherit'       => __( 'Default', 'astra' ),
+					'section'           => $typo_section,
+					'priority'          => 26,
+					'variant'           => ASTRA_THEME_SETTINGS . '[headings-font-family]',
+					'context'           => array(
+						array(
+							'setting'  => ASTRA_THEME_SETTINGS . '[headings-font-family]',
+							'operator' => '!=',
+							'value'    => 'inherit',
+						),
+					),
 				),
 
 				/**

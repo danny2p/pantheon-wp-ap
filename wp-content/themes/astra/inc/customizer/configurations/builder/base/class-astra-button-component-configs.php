@@ -305,26 +305,29 @@ class Astra_Button_Component_Configs {
 				),
 
 				/**
-				* Option: Button Border Radius
-				*/
-
+				 * Option: Button Radius Fields
+				 */
 				array(
-					'name'        => ASTRA_THEME_SETTINGS . '[' . $builder_type . '-' . $_prefix . '-border-radius]',
-					'default'     => astra_get_option( $builder_type . '-' . $_prefix . '-border-radius' ),
-					'type'        => 'control',
-					'section'     => $_section,
-					'control'     => 'ast-slider',
-					'transport'   => 'postMessage',
-					'priority'    => 99,
-					'context'     => Astra_Builder_Helper::$design_tab,
-					'title'       => __( 'Border Radius', 'astra' ),
-					'suffix'      => 'px',
-					'input_attrs' => array(
-						'min'  => 0,
-						'step' => 1,
-						'max'  => 100,
+					'name'              => ASTRA_THEME_SETTINGS . '[' . $builder_type . '-' . $_prefix . '-border-radius-fields]',
+					'default'           => astra_get_option( $builder_type . '-' . $_prefix . '-border-radius-fields' ),
+					'type'              => 'control',
+					'control'           => 'ast-responsive-spacing',
+					'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_responsive_spacing' ),
+					'section'           => $_section,
+					'title'             => __( 'Border Radius', 'astra' ),
+					'linked_choices'    => true,
+					'transport'         => 'postMessage',
+					'unit_choices'      => array( 'px', 'em', '%' ),
+					'choices'           => array(
+						'top'    => __( 'Top', 'astra' ),
+						'right'  => __( 'Right', 'astra' ),
+						'bottom' => __( 'Bottom', 'astra' ),
+						'left'   => __( 'Left', 'astra' ),
 					),
-					'divider'     => array( 'ast_class' => 'ast-top-section-divider' ),
+					'priority'          => 99,
+					'context'           => Astra_Builder_Helper::$design_tab,
+					'connected'         => false,
+					'divider'           => array( 'ast_class' => 'ast-top-section-divider' ),
 				),
 
 				/**

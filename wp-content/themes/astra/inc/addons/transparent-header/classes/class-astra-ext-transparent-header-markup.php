@@ -299,7 +299,7 @@ if ( ! class_exists( 'Astra_ExtTransparenty_Header_Markup' ) ) {
 		public function add_options( $meta_option ) {
 
 			$meta_option['theme-transparent-header-meta'] = array(
-				'sanitize' => 'FILTER_DEFAULT',
+				'sanitize' => 'FILTER_SANITIZE_STRING',
 			);
 
 			return $meta_option;

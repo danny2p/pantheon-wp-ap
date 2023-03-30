@@ -185,7 +185,10 @@ if ( class_exists( 'Astra_Customizer_Config_Base' ) ) {
 					'priority'   => 90,
 					'context'    => Astra_Builder_Helper::$design_tab,
 					'responsive' => true,
-					'divider'    => array( 'ast_class' => 'ast-bottom-dotted-divider' ),
+					'divider'    => array(
+						'ast_title' => '',
+						'ast_class' => class_exists( 'Astra_Ext_Extension' ) && Astra_Ext_Extension::is_active( 'colors-and-background' ) ? 'ast-bottom-dotted-divider' : '',
+					),
 				),
 				// Option: Menu Color.
 				array(

@@ -167,7 +167,9 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 				'description'    => '',
 			);
 			// Register panel.
+			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			$wp_customize->add_panel( 'astra-site-identity', $panel_arr );
+			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
 			$section_arr = array(
 				'priority'       => 80,
@@ -1183,6 +1185,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 			require ASTRA_THEME_DIR . 'inc/customizer/configurations/typography/class-astra-single-typo-configs.php';
 			require ASTRA_THEME_DIR . 'inc/customizer/configurations/typography/class-astra-global-typo-configs.php';
 			require ASTRA_THEME_DIR . 'inc/customizer/configurations/global-misc/class-astra-global-misc-configs.php';
+			require ASTRA_THEME_DIR . 'inc/customizer/configurations/accessibility/class-astra-accessibility-configs.php';
 
 			if ( astra_existing_header_footer_configs() ) {
 				require ASTRA_THEME_DIR . 'inc/customizer/configurations/buttons/class-astra-existing-button-configs.php';
@@ -1468,6 +1471,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 				'has_block_editor_support'             => Astra_Dynamic_CSS::is_block_editor_support_enabled(),
 				'updated_gb_outline_button_patterns'   => astra_button_default_padding_updated(),
 				'apply_content_bg_fullwidth_layouts'   => astra_get_option( 'apply-content-background-fullwidth-layouts', true ),
+				'astra_woo_btn_global_compatibility'   => is_callable( 'Astra_Dynamic_CSS::astra_woo_support_global_settings' ) ? Astra_Dynamic_CSS::astra_woo_support_global_settings() : false,
 			);
 
 			wp_localize_script( 'astra-customizer-preview-js', 'astraCustomizer', $localize_array );

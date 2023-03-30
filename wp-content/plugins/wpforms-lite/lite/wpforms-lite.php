@@ -277,9 +277,6 @@ class WPForms_Lite {
 							],
 							'parent'     => 'settings',
 							'subsection' => $id,
-							'readonly'   => ! empty( $from_email_after ),
-							'after'      => ! empty( $from_email_after ) ? '<div class="wpforms-alert wpforms-alert-warning">' . $from_email_after . '</div>' : '',
-							'class'      => ! empty( $from_email_after ) ? 'wpforms-panel-field-warning' : '',
 						],
 						$settings->form_data,
 						$id
@@ -1327,12 +1324,28 @@ class WPForms_Lite {
 	 */
 	public function upgrade_to_pro_menu( WP_Admin_Bar $wp_admin_bar ) {
 
+		$current_screen      = is_admin() ? get_current_screen() : null;
+		$upgrade_utm_content = $current_screen === null ? 'Upgrade to Pro' : 'Upgrade to Pro - ' . $current_screen->base;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$upgrade_utm_content = empty( $_GET['view'] ) ? $upgrade_utm_content : $upgrade_utm_content . ': ' . sanitize_key( $_GET['view'] );
+
 		$wp_admin_bar->add_menu(
 			[
 				'parent' => 'wpforms-menu',
 				'id'     => 'wpforms-upgrade',
 				'title'  => esc_html__( 'Upgrade to Pro', 'wpforms-lite' ),
-				'href'   => 'https://wpforms.com/lite-upgrade/?utm_campaign=liteplugin&utm_medium=admin-bar&utm_source=WordPress&utm_content=Upgrade+to+Pro',
+				'href'   => esc_url(
+					add_query_arg(
+						[
+							'utm_campaign' => 'liteplugin',
+							'utm_medium'   => 'admin-bar',
+							'utm_source'   => 'WordPress',
+							'utm_content'  => $upgrade_utm_content,
+							'utm_locale'   => wpforms_sanitize_key( get_locale() ),
+						],
+						'https://wpforms.com/lite-upgrade/'
+					)
+				),
 				'meta'   => [
 					'target' => '_blank',
 					'rel'    => 'noopener noreferrer',

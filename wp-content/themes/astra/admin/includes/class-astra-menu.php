@@ -10,6 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+/**
+ * Astra_Menu.
+ *
+ * @since 4.1.0
+ */
 class Astra_Menu {
 
 	/**
@@ -134,6 +139,7 @@ class Astra_Menu {
 	 */
 	public function setup_menu() {
 		global $submenu;
+
 		$capability = 'manage_options';
 
 		if ( ! current_user_can( $capability ) ) {
@@ -143,7 +149,7 @@ class Astra_Menu {
 		$astra_icon = apply_filters( 'astra_menu_icon', 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0iI2E3YWFhZCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCAyMEMxNS41MjI4IDIwIDIwIDE1LjUyMjggMjAgMTBDMjAgNC40NzcxNSAxNS41MjI4IDAgMTAgMEM0LjQ3NzE1IDAgMCA0LjQ3NzE1IDAgMTBDMCAxNS41MjI4IDQuNDc3MTUgMjAgMTAgMjBaTTUuODczMDQgMTEuMTY0MUM3LjIwMjM0IDguNDQyNzggOC41MzE4MSA1LjcyMTEyIDkuODYxMjcgMy4wMDAzOEwxMS4yNTUyIDUuNzA3NTlDMTAuMjA2NCA3Ljc2MjQ0IDkuMTU3NSA5LjgxNjg1IDguMTA4NzggMTEuODcwOEw2LjUxMTkgMTQuOTk4NUg0TDUuODczMDQgMTEuMTY0MVpNMTAuMDQ2NCAxMi44MzM5TDEyLjQ2NTUgNy45NjE2NUMxMi45OTMzIDkuMDEyOTIgMTMuNTIxMyAxMC4wNjQyIDE0LjA0OTQgMTEuMTE1NkMxNC42OTk2IDEyLjQxMDEgMTUuMzQ5OSAxMy43MDQ4IDE2IDE1SDEzLjMwMjVMMTIuODM5MyAxMy45NjY2TDEyLjM3MjIgMTIuOTI0NUgxMC4wNDY0SDkuOTk5NzZMMTAuMDQ2NCAxMi44MzM5WiIgZmlsbD0iI2E3YWFhZCIvPgo8L3N2Zz4K' );
 		$priority   = apply_filters( 'astra_menu_priority', 59 );
 
-		add_menu_page(
+		add_menu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_menu_page -- Taken the menu on top level
 			self::$page_title,
 			self::$page_title,
 			$capability,
@@ -154,7 +160,7 @@ class Astra_Menu {
 		);
 
 		// Add Customize submenu.
-		add_submenu_page(
+		add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page -- Taken the menu on top level
 			self::$plugin_slug,
 			__( 'Customize', 'astra' ),
 			__( 'Customize', 'astra' ),
@@ -168,7 +174,7 @@ class Astra_Menu {
 		/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
 		if ( $show_custom_layout_submenu ) {
-			add_submenu_page(
+			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page -- Taken the menu on top level
 				self::$plugin_slug,
 				__( 'Custom Layouts', 'astra' ),
 				__( 'Custom Layouts', 'astra' ),
@@ -181,17 +187,28 @@ class Astra_Menu {
 
 		if ( ! astra_is_white_labelled() ) {
 			// Add Spectra submenu.
-			add_submenu_page(
+			add_submenu_page( // phpcs:ignore WPThemeReview.PluginTerritory.NoAddAdminPages.add_menu_pages_add_submenu_page -- Taken the menu on top level
 				self::$plugin_slug,
 				__( 'Spectra', 'astra' ),
 				__( 'Spectra', 'astra' ),
 				$capability,
-				defined( 'UAGB_VER' ) ? admin_url( 'options-general.php?page=' . UAGB_SLUG ) : 'admin.php?page=' . self::$plugin_slug . '&path=spectra'
+				$this->get_spectra_page_admin_link()
 			);
 		}
 
 		// Rename to Home menu.
-		$submenu[ self::$plugin_slug ][0][0] = __( 'Dashboard', 'astra' );
+		$submenu[ self::$plugin_slug ][0][0] = __( 'Dashboard', 'astra' ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Required to rename the home menu.
+	}
+
+	/**
+	 * Provide the Spectra admin page URL.
+	 *
+	 * @since 4.1.1
+	 * @return string url.
+	 */
+	public function get_spectra_page_admin_link() {
+		$spectra_admin_url = defined( 'UAGB_VER' ) ? ( version_compare( UAGB_VER, '2.4.1', '>=' ) ? admin_url( 'admin.php?page=' . UAGB_SLUG ) : admin_url( 'options-general.php?page=' . UAGB_SLUG ) ) : 'admin.php?page=' . self::$plugin_slug . '&path=spectra';
+		return apply_filters( 'astra_dashboard_spectra_admin_link', $spectra_admin_url );
 	}
 
 	/**
@@ -210,9 +227,15 @@ class Astra_Menu {
 			$page_action = str_replace( '_', '-', $page_action );
 		}
 
-		/** @psalm-suppress MissingFile */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-		include_once ASTRA_THEME_ADMIN_DIR . 'views/admin-base.php';
-		/** @psalm-suppress MissingFile */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		?>
+		<div class="ast-menu-page-wrapper">
+			<div id="ast-menu-page">
+				<div class="ast-menu-page-content">
+					<div id="astra-dashboard-app" class="astra-dashboard-app"> </div>
+				</div>
+			</div>
+		</div>
+		<?php
 	}
 
 	/**
@@ -233,9 +256,9 @@ class Astra_Menu {
 		/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 		$show_self_branding = defined( 'ASTRA_EXT_VER' ) && is_callable( 'Astra_Ext_White_Label_Markup::show_branding' ) ? Astra_Ext_White_Label_Markup::show_branding() : true;
 		/** @psalm-suppress UndefinedClass */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-
-		$localize = array(
-			'current_user'           => ! empty( wp_get_current_user()->user_firstname ) ? ucfirst( wp_get_current_user()->user_firstname ) : ucfirst( wp_get_current_user()->display_name ),
+		$user_firstname = wp_get_current_user()->user_firstname;
+		$localize       = array(
+			'current_user'           => ! empty( $user_firstname ) ? ucfirst( $user_firstname ) : ucfirst( wp_get_current_user()->display_name ),
 			'admin_base_url'         => admin_url(),
 			'plugin_dir'             => ASTRA_THEME_URI,
 			'plugin_ver'             => defined( 'ASTRA_EXT_VER' ) ? ASTRA_EXT_VER : '',
@@ -631,28 +654,29 @@ class Astra_Menu {
 		);
 	}
 
+
+
 	/**
 	 * Get Astra's useful plugins.
 	 * Extend this in following way -
 	 *
-	 * array(
-	 *      'title' => "Plugin Name",
-	 *      'subtitle' => "Plugin description goes here.",
-	 *      'path' => 'plugin-slug/plugin-slug.php',
-	 *      'redirection' => admin_url( 'admin.php?page=sc-dashboard' ),
-	 *      'status' => self::get_plugin_status( 'plugin-slug/plugin-slug.php' ),
-	 *      'logoPath' => array(
-	 *          'internal_icon' => true, // true = will take internal Astra's any icon. false = provide next custom icon link.
-	 *          'icon_path' => "spectra", // If internal_icon false then - example custom SVG URL: ASTRA_THEME_URI . 'inc/assets/images/astra.svg'.
-	 *      ),
-	 *  ),
+	 * //  array(
+	 * //         'title' => "Plugin Name",
+	 * //         'subtitle' => "Plugin description goes here.",
+	 * //         'path' => 'plugin-slug/plugin-slug.php',
+	 * //         'redirection' => admin_url( 'admin.php?page=sc-dashboard' ),
+	 * //         'status' => self::get_plugin_status( 'plugin-slug/plugin-slug.php' ),
+	 * //         'logoPath' => array(
+	 * //             'internal_icon' => true, // true = will take internal Astra's any icon. false = provide next custom icon link.
+	 * //             'icon_path' => "spectra", // If internal_icon false then - example custom SVG URL: ASTRA_THEME_URI . 'inc/assets/images/astra.svg'.
+	 * //         ),
+	 * //     ),
 	 *
 	 * @since 4.0.0
 	 * @return array
 	 * @access public
 	 */
 	public static function astra_get_useful_plugins() {
-
 		$st_plugin_data = self::get_starter_template_plugin_data();
 
 		/** @psalm-suppress PossiblyUndefinedStringArrayOffset */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -675,7 +699,8 @@ class Astra_Menu {
 		$st_plugin_redirection = isset( $st_plugin_data['redirection'] ) ? $st_plugin_data['redirection'] : '';
 		/** @psalm-suppress PossiblyUndefinedStringArrayOffset */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
-		$surecart_redirection = empty( get_option( 'sc_api_token', '' ) ) ? 'sc-getting-started' : 'sc-dashboard';
+		$sc_api_token         = get_option( 'sc_api_token', '' );
+		$surecart_redirection = empty( $sc_api_token ) ? 'sc-getting-started' : 'sc-dashboard';
 
 		// Making useful plugin section dynamic.
 		if ( class_exists( 'WooCommerce' ) ) {
@@ -866,25 +891,26 @@ class Astra_Menu {
 	 * Get Astra's recommended integrations.
 	 * Extend this in following way -
 	 *
-	 * array(
-	 *      'title' => "Plugin Name",
-	 *      'subtitle' => "Plugin description goes here.",
-	 *      'isPro' => false,
-	 *      'status' => self::get_plugin_status( 'plugin-slug/plugin-slug.php' ),
-	 *      'path' => 'plugin-slug/plugin-slug.php',
-	 *      'redirection' => admin_url( 'admin.php?page=sc-dashboard' ),
-	 *      'logoPath' => array(
-	 *          'internal_icon' => true, // true = will take internal Astra's any icon. false = provide next custom icon link.
-	 *          'icon_path' => "spectra", // If internal_icon false then - example custom SVG URL: ASTRA_THEME_URI . 'inc/assets/images/astra.svg'.
-	 *      ),
-	 *  ),
+	 * // array(
+	 * //    'title' => "Plugin Name",
+	 * //    'subtitle' => "Plugin description goes here.",
+	 * //     'isPro' => false,
+	 * //     'status' => self::get_plugin_status( 'plugin-slug/plugin-slug.php' ),
+	 * //     'path' => 'plugin-slug/plugin-slug.php',
+	 * //     'redirection' => admin_url( 'admin.php?page=sc-dashboard' ),
+	 * //     'logoPath' => array(
+	 * //         'internal_icon' => true, // true = will take internal Astra's any icon. false = provide next custom icon link.
+	 * //         'icon_path' => "spectra", // If internal_icon false then - example custom SVG URL: ASTRA_THEME_URI . 'inc/assets/images/astra.svg'.
+	 * //     ),
+	 * // ),
 	 *
 	 * @since 4.0.0
 	 * @return array
 	 * @access public
 	 */
 	public static function astra_get_integrations() {
-		$surecart_redirection = empty( get_option( 'sc_api_token', '' ) ) ? 'sc-getting-started' : 'sc-dashboard';
+		$sc_api_token         = get_option( 'sc_api_token', '' );
+		$surecart_redirection = empty( $sc_api_token ) ? 'sc-getting-started' : 'sc-dashboard';
 		return apply_filters(
 			'astra_integrated_plugins',
 			array(
@@ -968,7 +994,7 @@ class Astra_Menu {
 		$script_asset_path = $build_path . 'dashboard-app.asset.php';
 
 		/** @psalm-suppress MissingFile */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-		$script_info = file_exists( $script_asset_path ) ? include $script_asset_path : array(
+		$script_info = file_exists( $script_asset_path ) ? include $script_asset_path : array(  // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound -- Not a template file so loading in a normal way.
 			'dependencies' => array(),
 			'version'      => ASTRA_THEME_VERSION,
 		);
@@ -1016,7 +1042,7 @@ class Astra_Menu {
 	 * @since 4.0.0
 	 */
 	public function astra_admin_footer_link() {
-		echo '<span id="footer-thankyou"> Thank you for using <span class="focus:text-astra-hover active:text-astra-hover hover:text-astra-hover"> ' . esc_attr( astra_get_theme_name() ) . '.</span></span>';
+		return '<span id="footer-thankyou"> Thank you for using <span class="focus:text-astra-hover active:text-astra-hover hover:text-astra-hover"> ' . esc_html( astra_get_theme_name() ) . '.</span></span>';
 	}
 }
 

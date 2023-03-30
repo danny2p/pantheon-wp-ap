@@ -981,10 +981,6 @@ li#customize-control-astra-settings-header-desktop-items, li#customize-control-a
     max-height: 340px;
 }
 
-.ahfb-popover-builder-list {
-    padding: 0 5px;
-}
-
 .ahfb-popover-builder-list .ahfb-radio-container-control .components-button.is-tertiary {
     font-size: 12px;
     margin: 0;
@@ -1451,8 +1447,9 @@ li#customize-control-astra-settings-header-desktop-items, li#customize-control-a
 }
 
 .ahfb-sorter-item-panel-header .ahfb-sorter-item-expand, .ahfb-sorter-item-panel-header .ahfb-sorter-item-remove {
-    color: #4B5563;
-    box-shadow: none;
+    color: #4B5563 !important;
+    background: none !important;
+    box-shadow: none !important;
 }
 
 .ahfb-sorter-item-panel-header .ahfb-sorter-item-expand:focus, .ahfb-sorter-item-panel-header .ahfb-sorter-item-remove:focus {
@@ -1540,10 +1537,6 @@ li#customize-control-astra-settings-header-desktop-items, li#customize-control-a
     height: 30px;
     line-height: normal;
     padding: 0 12px 2px;
-}
-
-.ahfb-sorter-row {
-    margin-bottom: 16px;
 }
 
 .ahfb-sorter-item-panel-content .components-button.button-add-media {

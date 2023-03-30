@@ -69,6 +69,9 @@ if ( ! class_exists( 'Astra_Single_Typo_Configs' ) ) {
 							'six'   => array(
 								'title' => __( 'Extended spacing options', 'astra' ),
 							),
+							'eight' => array(
+								'title' => __( 'Social sharing options', 'astra' ),
+							),
 						),
 						'section'  => 'section-blog-single',
 						'default'  => '',

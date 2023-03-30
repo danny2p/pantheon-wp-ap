@@ -101,6 +101,7 @@
   top: 50%;
   left: 40px;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .customize-control.customize-control-ast-toggle-control.ast-top-dotted-divider .ast-control-tooltip {

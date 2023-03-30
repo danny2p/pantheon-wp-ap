@@ -138,7 +138,7 @@ function astra_related_posts_css( $dynamic_css ) {
 			'.ast-single-related-posts-container .ast-related-posts-wrapper' => array(
 				'grid-template-columns' => Astra_Builder_Helper::$grid_size_mapping[ $tablet_grid ],
 			),
-			'.ast-related-post-content .ast-related-post-title' => array(
+			'.ast-related-post-content .entry-header .ast-related-post-title, .ast-related-post-content .entry-header .ast-related-post-title a' => array(
 				'font-size' => astra_responsive_font( $related_post_title_font_size, 'tablet' ),
 			),
 			'.ast-related-post-content .entry-meta *' => array(
@@ -168,7 +168,7 @@ function astra_related_posts_css( $dynamic_css ) {
 			'.ast-single-related-posts-container .ast-related-posts-wrapper' => array(
 				'grid-template-columns' => Astra_Builder_Helper::$grid_size_mapping[ $mobile_grid ],
 			),
-			'.ast-related-post-content .ast-related-post-title' => array(
+			'.ast-related-post-content .entry-header .ast-related-post-title, .ast-related-post-content .entry-header .ast-related-post-title a' => array(
 				'font-size' => astra_responsive_font( $related_post_title_font_size, 'mobile' ),
 			),
 			'.ast-related-post-content .entry-meta *' => array(

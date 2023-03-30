@@ -1,3 +1,46 @@
+v4.1.2
+- Fix: Post content shrinks on one side for the blog archive.
+- Fix: Menu - CSS menu arrow icons are coming along with SVG icons.
+- Fix: Menu - Submenu arrows are hidden in case of SVG icons are disabled.
+
+v4.1.1
+- Fix: Single Post - Related Post Title Font Size is not working for responsive devices.
+- Fix: PHP notice "Warning: Array to string conversion" while parsing button styling CSS.
+
+v4.1.0
+- New: Accessibility options to change color and style of highlighted element. ( https://wpastra.com/docs/accessibility-controls/ )
+- New: WooCommerce - Shop - Introducing new redirect actions on add to cart click. ( https://wpastra.com/docs/introducing-new-add-to-cart-trigger-actions-for-shop-and-single-product-pages/ )
+- New: WooCommerce - Sortable support for payment options on single product page.
+- New: Published, last-updated date support for post meta date field.
+- New: Date format option for post meta date field.
+- New: Introduced new filter 'astra_custom_logo_attributes' to add attributes into custom logo.
+- Improvement: Hardened the security.
+- Improvement: Compatibility with WordPress-6.2.
+- Improvement: Starter Templates admin menu nav-link removed when Whitelabel is enabled.
+- Improvement: Improved accessibility for header menu navigation.
+- Fix: Customizer - Typography and Button Preset options selected preset not highlighting and reset button not functioning.
+- Fix: Author Info box is visible multiple times and goes into infinite loop in case of BBPress.
+- Fix: W3 validation - Builder - Menu - Duplicate IDs for responsive devices.
+- Fix: Block editor - Image breaking outside the entry container when left/right aligned.
+- Fix: WooCommerce - Real Time Quantity Updater not working in case of shortcode used.
+- Fix: WooCommerce - CSS overriding Global H2 tag font size WooCommerce pages.
+- Fix: Customizer - Global buttons text and background hover color not working in customizer preview.
+- Fix: Customizer - Global outline button styling not reflecting in block editor for some cases.
+- Fix: Footer builder - Widgets dynamic CSS gets added multiple times on the frontend.
+- Fix: WooCommerce - Error, info content messages UI breaking on the frontend.
+- Fix: Builder - Off-canvas menu - Dropdown menu arrow icon is misplaced in case of toggle for desktop.
+- Fix: Spectra Compatibility - Spectra spacing options for applying custom margin and padding not working.
+- Fix: Content background color does not apply to Author Box in customizer preview.
+- Fix: Cost Calculator Builder - compatibility range slider.
+- Fix: Disable the title from Elementor setting is not working as expected.
+- Fix: Footer menu alignment issue for responsive devices.
+- Fix: Inside container spacing for single posts affecting the related posts section.
+- Fix: PHP error 'Uncaught TypeError: ltrim()' for getting taxonomy term link.
+- Fix: Single post title transformed to capitalize with 4.0 update.
+- Fix: WooCommerce - Console throwing an event listener error when a product has only 1 item in stock.
+- Fix: Customizer - Typography and Button Preset options selected preset not highlighting and reset button not functioning.
+- Fix: WooCommerce - Buttons does not inherit global button styling from the theme customizer. ( https://wpastra.com/docs/global-button-styling-now-supports-woocommerce-store-buttons/ )
+
 v4.0.2
 - Deprecated: Filter 'astra_single_banner_post_meta' for single post meta markup has been deprecated instead use 'astra_single_post_meta'.
 - Fix: get_option database call increase page loads for fetching theme options.

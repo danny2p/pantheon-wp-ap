@@ -400,11 +400,13 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 			foreach ( $post_meta as $key => $data ) {
 
 				// Sanitize values.
-				$sanitize_filter = ( isset( $data['sanitize'] ) ) ? $data['sanitize'] : 'FILTER_DEFAULT';
+				$sanitize_filter = ( isset( $data['sanitize'] ) ) ? $data['sanitize'] : 'FILTER_SANITIZE_STRING';
 
 				switch ( $sanitize_filter ) {
 
+					default:
 					case 'FILTER_SANITIZE_STRING':
+							// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- This deprecation will be addressed later.
 							$meta_value = filter_input( INPUT_POST, $key, FILTER_SANITIZE_STRING );
 						break;
 
@@ -416,8 +418,8 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 							$meta_value = filter_input( INPUT_POST, $key, FILTER_SANITIZE_NUMBER_INT );
 						break;
 
-					default:
-							$meta_value = filter_input( INPUT_POST, $key, FILTER_DEFAULT );
+					case 'FILTER_DEFAULT':
+							$meta_value = filter_input( INPUT_POST, $key, FILTER_DEFAULT ); // phpcs:ignore WordPressVIPMinimum.Security.PHPFilterFunctions.RestrictedFilter -- Default filter after all other cases, keeping this filter for backward compatibility of PRO options.
 						break;
 				}
 
@@ -937,42 +939,42 @@ if ( ! class_exists( 'Astra_Meta_Boxes' ) ) {
 				'astra_meta_box_options',
 				array(
 					'ast-global-header-display'     => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-hfb-above-header-display'  => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-main-header-display'       => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-hfb-below-header-display'  => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-hfb-mobile-header-display' => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'footer-sml-layout'             => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'footer-adv-display'            => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'site-post-title'               => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'site-sidebar-layout'           => array(
 						'default'  => 'default',
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'site-content-layout'           => array(
 						'default'  => 'default',
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-featured-img'              => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 					'ast-breadcrumbs-content'       => array(
-						'sanitize' => 'FILTER_DEFAULT',
+						'sanitize' => 'FILTER_SANITIZE_STRING',
 					),
 				)
 			);

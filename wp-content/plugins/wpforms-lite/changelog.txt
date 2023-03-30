@@ -1,5 +1,15 @@
 == Changelog ==
 
+= 1.8.1.1 =
+- Added: Modern Form Styles - easily control the appearance of form fields, labels, and buttons without writing code, right inside the Block Editor.
+- Added: The new filter `wpforms_frontend_assets_header_force_load` allows forcing load assets in the header which is useful when the form is in the sidebar widget and similar locations.
+- Changed: Tooltips design is improved.
+- Fixed: The form preview page was incorrectly shown in some themes.
+- Fixed: CF turnstile form ID was translated creating problems with analysis in Cloudflare Dashboard.
+- Fixed: Notifications Settings styles were looking bad on a small screen in the Form Builder.
+- Fixed: An "active column" state was stuck for a duplicated Layout field inside the Form Builder preview panel.
+- Fixed: Limit Length functionality was broken in the Paragraph Text field.
+
 = 1.8.0.2 =
 - Changed: Updated DOMPurify library to 3.0.1.
 - Fixed: An error occurred when the DreamHost Panel Login plugin and WPForms Lite were both active and WPForms Pro was activated.

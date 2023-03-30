@@ -114,6 +114,10 @@
 	clear: both;
 }
 
+#customize-controls .customize-section-title.is-in-view.is-sticky {
+    z-index: 99;
+}
+
 #customize-control-astra-color-palettes .ast-palette-selection-wrapper {
 	overflow: hidden;
 	padding: 2px;
@@ -229,6 +233,10 @@
     position: relative !important;
     right: 5px !important;
     top: -35px !important;
+    transform: unset !important;
+}
+.customize-control .components-tooltip {
+    z-index: 8 !important;
 }
 .color-group-item .components-popover .components-popover__content,
 .ast-color-palette .components-popover .components-popover__content {

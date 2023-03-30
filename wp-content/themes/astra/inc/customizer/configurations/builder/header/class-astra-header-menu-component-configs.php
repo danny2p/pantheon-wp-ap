@@ -306,26 +306,29 @@ if ( class_exists( 'Astra_Customizer_Config_Base' ) ) {
 					),
 
 					/**
-					 * Option: Submenu Button Radius
-					 */
+					* Option: Button Radius Fields
+					*/
 					array(
-						'name'        => ASTRA_THEME_SETTINGS . '[header-' . $_prefix . '-submenu-border-radius]',
-						'default'     => astra_get_option( 'header-' . $_prefix . '-submenu-border-radius' ),
-						'type'        => 'control',
-						'parent'      => ASTRA_THEME_SETTINGS . '[header-' . $_prefix . '-submenu-border-group]',
-						'section'     => $_section,
-						'control'     => 'ast-slider',
-						'priority'    => 23,
-						'title'       => __( 'Border Radius', 'astra' ),
-						'suffix'      => 'px',
-						'context'     => Astra_Builder_Helper::$design_tab,
-						'transport'   => 'postMessage',
-						'input_attrs' => array(
-							'min'  => 0,
-							'step' => 1,
-							'max'  => 200,
+						'name'              => ASTRA_THEME_SETTINGS . '[header-' . $_prefix . '-submenu-border-radius-fields]',
+						'default'           => astra_get_option( 'header-' . $_prefix . '-submenu-border-radius-fields' ),
+						'type'              => 'control',
+						'control'           => 'ast-responsive-spacing',
+						'sanitize_callback' => array( 'Astra_Customizer_Sanitizes', 'sanitize_responsive_spacing' ),
+						'section'           => $_section,
+						'title'             => __( 'Border Radius', 'astra' ),
+						'linked_choices'    => true,
+						'transport'         => 'postMessage',
+						'unit_choices'      => array( 'px', 'em', '%' ),
+						'choices'           => array(
+							'top'    => __( 'Top', 'astra' ),
+							'right'  => __( 'Right', 'astra' ),
+							'bottom' => __( 'Bottom', 'astra' ),
+							'left'   => __( 'Left', 'astra' ),
 						),
-						'divider'     => array( 'ast_class' => 'ast-bottom-section-divider' ),
+						'priority'          => 23,
+						'connected'         => false,
+						'divider'           => array( 'ast_class' => 'ast-bottom-section-divider' ),
+						'context'           => Astra_Builder_Helper::$design_tab,
 					),
 
 					// Option: Submenu Divider Checkbox.

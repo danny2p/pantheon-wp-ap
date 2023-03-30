@@ -978,7 +978,7 @@ final class Astra_Builder_Helper {
 			<div class="ast-mobile-popup-overlay"></div>
 			<div class="ast-mobile-popup-inner">
 					<div class="ast-mobile-popup-header">
-						<button type="button" id="menu-toggle-close" class="menu-toggle-close" aria-label="Close menu">
+						<button type="button" id="menu-toggle-close" class="menu-toggle-close" aria-label="Close menu" tabindex="0">
 							<span class="ast-svg-iconset">
 								<?php echo Astra_Builder_UI_Controller::fetch_svg_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</span>

@@ -6,6 +6,7 @@
  * @package Astra\Compatibility\Starter_Content
  */
 
+// @codingStandardsIgnoreStart WordPressVIPMinimum.Security.Mustache.OutputNotation -- Required for starter content.
 $astra_default_home_content = '<!-- wp:cover {"minHeight":720,"minHeightUnit":"px","customGradient":"linear-gradient(35deg,rgb(6,0,151) 0%,rgb(130,4,255) 73%,rgb(193,15,255) 100%)","isDark":false,"align":"full"} -->
 <div class="wp-block-cover alignfull is-light" style="min-height:720px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient" style="background:linear-gradient(35deg,rgb(6,0,151) 0%,rgb(130,4,255) 73%,rgb(193,15,255) 100%)"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","layout":{"inherit":true,"type":"constrained"}} -->
 <div class="wp-block-group alignwide"><!-- wp:media-text {"mediaPosition":"right","mediaId":118,"mediaLink":"","mediaType":"image","mediaWidth":43,"verticalAlignment":"center"} -->
@@ -229,7 +230,7 @@ $astra_default_home_content = '<!-- wp:cover {"minHeight":720,"minHeightUnit":"p
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->';
-
+// @codingStandardsIgnoreEnd WordPressVIPMinimum.Security.Mustache.OutputNotation -- Required for starter content.
 return array(
 	'post_type'    => 'page',
 	'post_title'   => _x( 'Home', 'Theme starter content', 'astra' ),
