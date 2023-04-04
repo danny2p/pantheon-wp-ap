@@ -10,15 +10,14 @@
  * Plugin Name: Rollback Update Failure
  * Author: WP Core Contributors
  * Description: Feature plugin to test plugin/theme update failures and rollback to previous installed packages.
- * Version: 4.1.2
+ * Version: 5.0.3
  * Network: true
  * License: MIT
  * Text Domain: rollback-update-failure
  * Requires PHP: 5.6
- * Requires at least: 6.0
+ * Requires at least: 6.2
  * GitHub Plugin URI: https://github.com/WordPress/rollback-update-failure
  * Primary Branch: main
- * Requires Plugins: faster-updates
  */
 
 namespace Rollback_Update_Failure;
@@ -33,17 +32,35 @@ if ( ! defined( 'WPINC' ) ) {
 // Load the Composer autoloader.
 require __DIR__ . '/vendor/autoload.php';
 
-// Add to wp-admin/includes/admin-filters.php.
-add_action( 'init', array( 'WP_Rollback_Auto_Update', 'init' ) );
+if ( version_compare( get_bloginfo( 'version' ), '6.2-beta1', '>=' ) ) {
+	define( 'WP_ROLLBACK_MOVE_DIR', true );
+} else {
+	define( 'WP_ROLLBACK_MOVE_DIR', false );
+}
 
-if ( ! function_exists( 'is_plugin_active' ) && ! function_exists( 'deactivate_plugins' ) ) {
+// TODO: update with correct version.
+if ( version_compare( get_bloginfo( 'version' ), '6.3-beta1', '>=' ) ) {
+	define( 'WP_ROLLBACK_COMMITTED', true );
+} else {
+	define( 'WP_ROLLBACK_COMMITTED', false );
+}
+
+if ( ! WP_ROLLBACK_MOVE_DIR ) {
 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
-}
-if ( ! is_plugin_active( 'faster-updates/faster-updates.php' ) ) {
-	echo '<div class="error notice is-dismissible"><p>';
-	print(
-		wp_kses_post( __( '<strong>Rollback Update Failure</strong> cannot run unless the <strong>Faster Updates</strong> plugin is active. Please refer to the readme.', 'rollback-update-failure' ) )
-	);
-	echo '</p></div>';
 	deactivate_plugins( __FILE__ );
+	return;
 }
+
+if ( ! WP_ROLLBACK_COMMITTED ) {
+	require_once __DIR__ . '/src/wp-admin/includes/class-wp-site-health.php';
+	require_once __DIR__ . '/src/wp-admin/includes/class-plugin-theme-upgrader.php';
+	require_once __DIR__ . '/src/wp-admin/includes/class-wp-upgrader.php';
+	require_once __DIR__ . '/src/wp-includes/update.php';
+}
+
+// Insert at end of wp-admin/includes/class-wp-upgrader.php.
+/** WP_Rollback_Auto_Update class */
+require_once __DIR__ . '/src/wp-admin/includes/class-rollback-auto-update.php';
+
+// WP_Upgrader::init.
+add_filter( 'upgrader_install_package_result', array( new \WP_Rollback_Auto_Update(), 'auto_update_check' ), 15, 2 );
