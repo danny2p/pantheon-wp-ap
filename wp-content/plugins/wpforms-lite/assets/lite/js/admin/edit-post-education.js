@@ -58,27 +58,36 @@ const WPFormsEditPostEducation = window.WPFormsEditPostEducation || ( function( 
 				return;
 			}
 
-			if ( ! app.isFse() ) {
+			const blockLoadedInterval = setInterval( function() {
 
-				app.maybeShowGutenbergNotice();
-				app.bindGutenbergEvents();
-
-				return;
-			}
-
-			const iframe = document.querySelector( 'iframe[name="editor-canvas"]' );
-			const observer = new MutationObserver( function() {
-
-				const iframeDocument = iframe.contentDocument || iframe.contentWindow.document || {};
-
-				if ( iframeDocument.readyState === 'complete' && iframeDocument.querySelector( '.editor-post-title__input' ) ) {
-					app.maybeShowGutenbergNotice();
-					app.bindFseEvents();
-
-					observer.disconnect();
+				if ( ! document.querySelector( '.editor-post-title__input, iframe[name="editor-canvas"]' ) ) {
+					return;
 				}
-			} );
-			observer.observe( document.body, { subtree: true, childList: true } );
+
+				clearInterval( blockLoadedInterval );
+
+				if ( ! app.isFse() ) {
+
+					app.maybeShowGutenbergNotice();
+					app.bindGutenbergEvents();
+
+					return;
+				}
+
+				const iframe = document.querySelector( 'iframe[name="editor-canvas"]' );
+				const observer = new MutationObserver( function() {
+
+					const iframeDocument = iframe.contentDocument || iframe.contentWindow.document || {};
+
+					if ( iframeDocument.readyState === 'complete' && iframeDocument.querySelector( '.editor-post-title__input' ) ) {
+						app.maybeShowGutenbergNotice();
+						app.bindFseEvents();
+
+						observer.disconnect();
+					}
+				} );
+				observer.observe( document.body, { subtree: true, childList: true } );
+			}, 200 );
 		},
 
 		/**
@@ -104,11 +113,16 @@ const WPFormsEditPostEducation = window.WPFormsEditPostEducation || ( function( 
 		 */
 		bindGutenbergEvents: function() {
 
+			const $document = $( document );
+
+			$document
+				.on( 'DOMSubtreeModified', '.edit-post-layout', app.distractionFreeModeToggle );
+
 			if ( app.isNoticeVisible ) {
 				return;
 			}
 
-			$( document )
+			$document
 				.on( 'input', '.editor-post-title__input', app.maybeShowGutenbergNotice )
 				.on( 'DOMSubtreeModified', '.editor-post-title__input', app.maybeShowGutenbergNotice );
 		},
@@ -121,6 +135,9 @@ const WPFormsEditPostEducation = window.WPFormsEditPostEducation || ( function( 
 		bindFseEvents: function() {
 
 			const $iframe = $( 'iframe[name="editor-canvas"]' );
+
+			$( document )
+				.on( 'DOMSubtreeModified', '.edit-post-layout', app.distractionFreeModeToggle );
 
 			$iframe.contents()
 				.on( 'DOMSubtreeModified', '.editor-post-title__input', app.maybeShowGutenbergNotice );
@@ -311,6 +328,36 @@ const WPFormsEditPostEducation = window.WPFormsEditPostEducation || ( function( 
 
 				app.showGutenbergNotice();
 			}
+		},
+
+		/**
+		 * Add notice class when the distraction mode is enabled.
+		 *
+		 * @since 1.8.1.2
+		 */
+		distractionFreeModeToggle: function() {
+
+			if ( ! app.isNoticeVisible ) {
+				return;
+			}
+
+			const $document = $( document );
+			const isDistractionFreeMode = Boolean( $document.find( '.is-distraction-free' ).length );
+
+			if ( ! isDistractionFreeMode ) {
+				return;
+			}
+
+			const isNoticeHasClass = Boolean( $( '.wpforms-edit-post-education-notice' ).length );
+
+			if ( isNoticeHasClass ) {
+				return;
+			}
+
+			const $noticeBody = $document.find( '.wpforms-edit-post-education-notice-body' );
+			const $notice = $noticeBody.closest( '.components-notice' );
+
+			$notice.addClass( 'wpforms-edit-post-education-notice' );
 		},
 
 		/**

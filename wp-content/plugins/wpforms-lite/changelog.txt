@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.8.1.2 =
+- Fixed: Checkboxes were shifting when the limit choices rule was triggered.
+- Fixed: "Ask for a review" admin notice links improperly opened new tab.
+- Fixed: There was a fatal error when settings were incorrectly reset by a 3rd-party plugin.
+
 = 1.8.1.1 =
 - Added: Modern Form Styles - easily control the appearance of form fields, labels, and buttons without writing code, right inside the Block Editor.
 - Added: The new filter `wpforms_frontend_assets_header_force_load` allows forcing load assets in the header which is useful when the form is in the sidebar widget and similar locations.

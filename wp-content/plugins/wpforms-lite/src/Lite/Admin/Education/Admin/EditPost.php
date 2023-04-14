@@ -42,7 +42,15 @@ class EditPost implements EducationInterface {
 			return false;
 		}
 
+		// Skip it if it's the Challenge flow.
 		if ( wpforms()->get( 'challenge' )->is_form_embed_page() ) {
+			return false;
+		}
+
+		$form_embed_wizard = wpforms()->get( 'form_embed_wizard' );
+
+		// Skip it if it's the Form Embed Wizard flow.
+		if ( $form_embed_wizard->is_form_embed_page( 'edit' ) && $form_embed_wizard->get_meta() ) {
 			return false;
 		}
 
@@ -150,7 +158,7 @@ class EditPost implements EducationInterface {
 		wp_enqueue_script(
 			'wpforms-edit-post-education',
 			WPFORMS_PLUGIN_URL . "assets/lite/js/admin/edit-post-education.es5{$min}.js",
-			[],
+			[ 'jquery' ],
 			WPFORMS_VERSION,
 			true
 		);
