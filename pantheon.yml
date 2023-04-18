@@ -3,7 +3,7 @@
 api_version: 1
 php_version: 8.0
 database:
-  version: 10.5
+  version: 10.4
 workflows:
   sync_code:
     after:
