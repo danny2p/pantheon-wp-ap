@@ -242,6 +242,8 @@ function webp_uploads_wp_get_missing_image_subsizes( $missing_sizes, $image_meta
 	 * @see wp_update_image_subsizes()
 	 * @see wp_get_missing_image_subsizes()
 	 */
+	// PHPCS ignore reason: Only the way to generate missing image subsize if all core sub-sizes have been generated.
+	// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace
 	$trace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 10 );
 
 	foreach ( $trace as $element ) {
@@ -762,3 +764,20 @@ function webp_uploads_modify_webp_quality( $quality, $mime_type ) {
 	return $quality;
 }
 add_filter( 'wp_editor_set_quality', 'webp_uploads_modify_webp_quality', 10, 2 );
+
+/**
+ * Displays the HTML generator tag for the WebP Uploads plugin.
+ *
+ * See {@see 'wp_head'}.
+ *
+ * @since 2.2.0
+ */
+function webp_uploads_render_generator() {
+	if (
+		defined( 'WEBP_UPLOADS_VERSION' ) &&
+		! str_starts_with( WEBP_UPLOADS_VERSION, 'Performance Lab ' )
+	) {
+		echo '<meta name="generator" content="WebP Uploads ' . esc_attr( WEBP_UPLOADS_VERSION ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'webp_uploads_render_generator' );
