@@ -5,7 +5,7 @@
  * Description: Performance plugin from the WordPress Performance Team, which is a collection of standalone performance modules.
  * Requires at least: 6.1
  * Requires PHP: 5.6
- * Version: 2.1.0
+ * Version: 2.2.0
  * Author: WordPress Performance Team
  * Author URI: https://make.wordpress.org/performance/
  * License: GPLv2 or later
@@ -15,7 +15,7 @@
  * @package performance-lab
  */
 
-define( 'PERFLAB_VERSION', '2.1.0' );
+define( 'PERFLAB_VERSION', '2.2.0' );
 define( 'PERFLAB_MAIN_FILE', __FILE__ );
 define( 'PERFLAB_PLUGIN_DIR_PATH', plugin_dir_path( PERFLAB_MAIN_FILE ) );
 define( 'PERFLAB_MODULES_SETTING', 'perflab_modules_settings' );
@@ -124,6 +124,7 @@ function perflab_get_module_settings() {
 		'site-health/audit-autoloaded-options' => 'database/audit-autoloaded-options',
 		'site-health/audit-enqueued-assets'    => 'js-and-css/audit-enqueued-assets',
 		'site-health/webp-support'             => 'images/webp-support',
+		'images/dominant-color'                => 'images/dominant-color-images',
 	);
 
 	foreach ( $legacy_module_slugs as $legacy_slug => $current_slug ) {
@@ -169,6 +170,7 @@ function perflab_get_active_modules() {
  * Gets the active and valid performance modules.
  *
  * @since 1.3.0
+ * @since 2.2.0 Adds an additional check for standalone plugins.
  *
  * @param string $module Slug of the module.
  * @return bool True if the module is active and valid, otherwise false.
@@ -176,6 +178,11 @@ function perflab_get_active_modules() {
 function perflab_is_valid_module( $module ) {
 
 	if ( empty( $module ) ) {
+		return false;
+	}
+
+	// Do not load the module if it can be loaded by a separate plugin.
+	if ( perflab_is_standalone_plugin_loaded( $module ) ) {
 		return false;
 	}
 
@@ -249,6 +256,39 @@ function perflab_can_load_module( $module ) {
 }
 
 /**
+ * Checks whether the given module has already been loaded by a separate plugin.
+ *
+ * @since 2.2.0
+ *
+ * @param string $module Slug of the module.
+ * @return bool Whether the module has already been loaded by a separate plugin.
+ */
+function perflab_is_standalone_plugin_loaded( $module ) {
+	$standalone_plugins_constants = perflab_get_standalone_plugins_constants();
+	if (
+		isset( $standalone_plugins_constants[ $module ] ) &&
+		defined( $standalone_plugins_constants[ $module ] ) &&
+		! str_starts_with( constant( $standalone_plugins_constants[ $module ] ), 'Performance Lab ' )
+	) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Gets the standalone plugin constants used for each module / plugin.
+ *
+ * @since 2.2.0
+ *
+ * @return array Map of module path to version constant used.
+ */
+function perflab_get_standalone_plugins_constants() {
+	return array(
+		'images/webp-uploads' => 'WEBP_UPLOADS_VERSION',
+	);
+}
+
+/**
  * Loads the active and valid performance modules.
  *
  * @since 1.0.0
@@ -262,7 +302,7 @@ function perflab_load_active_and_valid_modules() {
 		require_once PERFLAB_PLUGIN_DIR_PATH . 'modules/' . $module . '/load.php';
 	}
 }
-perflab_load_active_and_valid_modules();
+add_action( 'plugins_loaded', 'perflab_load_active_and_valid_modules' );
 
 /**
  * Places the Performance Lab's object cache drop-in in the drop-ins folder.
