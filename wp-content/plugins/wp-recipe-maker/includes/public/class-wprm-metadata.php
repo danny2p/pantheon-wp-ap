@@ -37,6 +37,7 @@ class WPRM_Metadata {
 		add_action( 'after_setup_theme', array( __CLASS__, 'metadata_image_sizes' ) );
 
 		add_filter( 'wpseo_schema_graph_pieces', array( __CLASS__, 'wpseo_schema_graph_pieces' ), 1, 2 );
+		add_filter( 'wpseo_schema_graph', array( __CLASS__, 'wpseo_schema_graph' ), 99, 2 );
 	}
 
 	/**
@@ -152,7 +153,7 @@ class WPRM_Metadata {
 	 * @since	8.7.0
 	 */
 	public static function use_rank_math_integration() {
-		return WPRM_Settings::get( 'rank_math_integration' ) && class_exists( '\RankMath\Schema\JsonLD' );
+		return WPRM_Settings::get( 'rank_math_integration' ) && class_exists( '\RankMath\Schema\JsonLD' ) && class_exists( '\RankMath\Helper') && \RankMath\Helper::is_module_active( 'rich-snippet' );
 	}
 
 	/**
@@ -176,23 +177,54 @@ class WPRM_Metadata {
 			require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-yoast-seo.php' );
 			$recipe_piece = new WPRM_Metadata_Yoast_Seo( $context );
 			$pieces[] = $recipe_piece;
-
-			if ( $recipe_piece->is_needed() ) {
-				// Make sure Yoast loads the Person schema for the recipe author.
-				add_filter( 'wpseo_schema_needs_person', '__return_true' );
-				add_filter( 'wpseo_schema_person_user_id', function( $person_user_id ) use( $recipe_piece ) {
-					$person = $recipe_piece->get_person();
-
-					if ( $person && $person['id'] ) {
-						return $person['id'];
-					}
-
-					return $person_user_id;
-				} );
-			}
 		}
 	
 		return $pieces;
+	}
+
+	/**
+	 * Yoast SEO 11 Schema graph.
+	 *
+	 * @since	8.8.0
+	 * @param 	array $graph  Yoast schema graph.
+	 * @param 	mixed $context Yoast schema context.
+	 */
+	public static function wpseo_schema_graph( $graph, $context ) {
+		if ( self::use_yoast_seo_integration() ) {
+			$recipe_piece_index = false;
+			$person_piece_indexes = array();
+
+			foreach ( $graph as $index => $piece ) {
+				if ( isset( $piece['@type'] ) ) {
+					if ( 'Person' === $piece['@type'] && isset( $piece['@id' ] ) ) {
+						$person_piece_indexes[] = $index;
+					} elseif( 'Recipe' === $piece['@type'] && isset( $piece['author_reference'] ) ) {
+						$recipe_piece_index = $index;
+					}
+				}
+			}
+
+			if ( false !== $recipe_piece_index ) {
+				// Check is Yoast is outputting Person metadata for the author we want to reference.
+				$person_reference_found = false;
+
+				foreach ( $person_piece_indexes as $index ) {
+					if ( $graph[ $index ]['@id'] === $graph[ $recipe_piece_index ]['author_reference']['@id'] ) {
+						$person_reference_found = true;
+					}
+				}
+
+				// Found a match, so we can use the reference instead of simple author metadata.
+				if ( $person_reference_found ) {
+					$graph[ $recipe_piece_index ]['author'] = $graph[ $recipe_piece_index ]['author_reference'];
+				}
+
+				// Always remove temporary placeholder.
+				unset( $graph[ $recipe_piece_index ]['author_reference'] );
+			}
+		}
+	
+		return $graph;
 	}
 
 	/**

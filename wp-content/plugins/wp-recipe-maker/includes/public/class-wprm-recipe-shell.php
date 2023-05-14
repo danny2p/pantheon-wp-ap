@@ -177,7 +177,7 @@ class WPRM_Recipe_Shell {
 		if ( WPRM_Settings::get( 'recipe_image_clickable' ) ) {
 			$full_image_url = $this->image_url( 'full' );
 			if ( $full_image_url ) {
-				$img = '<a href="' . esc_url( $full_image_url) . '">' . $img . '</a>';
+				$img = '<a href="' . esc_url( $full_image_url) . '" aria-label="' . __( 'Open recipe image in full size', 'wp-recipe-maker' ) . '">' . $img . '</a>';
 			}
 		}
 

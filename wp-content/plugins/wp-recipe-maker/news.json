@@ -1,6 +1,48 @@
 {
     "news": [
         {
+            "date": "2023-05-09",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.8.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-8-0/"
+        },
+        {
+            "date": "2023-05-04",
+            "label": "Blog",
+            "title": "How to Share Recipes Properly - Step by Step",
+            "url": "https://bootstrapped.ventures/share-a-recipe/"
+        },
+        {
+            "date": "2023-04-26",
+            "label": "Blog",
+            "title": "How to Create the Ultimate Digital Cookbook in 2023",
+            "url": "https://bootstrapped.ventures/digital-cookbook/"
+        },
+        {
+            "date": "2023-04-20",
+            "label": "Blog",
+            "title": "How to Create and Print Your Own Recipes [2023]",
+            "url": "https://bootstrapped.ventures/print-recipe/"
+        },
+        {
+            "date": "2023-04-13",
+            "label": "Blog",
+            "title": "How to Organize Your Recipes Like a Pro in 2023",
+            "url": "https://bootstrapped.ventures/how-to-organize-recipes/"
+        },
+        {
+            "date": "2023-03-31",
+            "label": "Blog",
+            "title": "How to Take Professional Cooking Photos With Your Smartphone",
+            "url": "https://bootstrapped.ventures/food-photography-ideas-with-phone/"
+        },
+        {
+            "date": "2023-03-22",
+            "label": "Blog",
+            "title": "The Complete Guide to Starting a Cooking Channel on YouTube (2023)",
+            "url": "https://bootstrapped.ventures/how-to-start-a-cooking-channel-on-youtube/"
+        },
+        {
             "date": "2023-03-15",
             "label": "Blog",
             "title": "15 Food Styling Tricks to Make Your Food Photography Shine",

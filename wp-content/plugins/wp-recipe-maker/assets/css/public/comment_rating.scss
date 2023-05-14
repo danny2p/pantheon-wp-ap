@@ -8,6 +8,7 @@ body:not(:hover) fieldset.wprm-comment-ratings-container:focus-within span {
     margin-bottom: 20px;
 
     .wprm-rating-stars {
+        display: inline-block;
         vertical-align: middle;
     }
 }

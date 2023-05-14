@@ -163,6 +163,14 @@
     border-radius: 4px;
     padding: 0 10px;
 
+    // Fix placeholder positioning in Safari.
+    span[data-slate-placeholder="true"] {
+        top: 1em;
+    }
+    &.wprm-admin-modal-field-richtext-singleline span[data-slate-placeholder="true"] {
+        top: 10px;
+    }
+
     p {
         font-size: 14px;
     }

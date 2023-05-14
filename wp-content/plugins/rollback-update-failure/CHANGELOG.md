@@ -1,5 +1,22 @@
 [unreleased]
 
+#### 5.2.0 / 2023-05-09
+* restart theme auto-updates
+* remove guard for Rollback not being committed
+* set Plugin_Upgrader via hook
+* cleanup Plugin_Upgrader hook from fatal update
+
+#### 5.1.1 / 2023-05-05
+* update readme
+
+#### 5.1.0 / 2023-05-03
+* align docblocks with PR
+* update for Rollback committed to core
+* change `temp-backup` to `upgrade-temp-backup`
+
+#### 5.0.6 / 2023-04-25
+* update code logic for creating `temp-backup` dir, thanks @azaozz
+
 #### 5.0.5 / 2023-04-14
 * hotfix for no autoload
 

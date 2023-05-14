@@ -222,18 +222,12 @@ export default class DataTable extends Component {
                     || this.props.options.createButton
                     ?
                     <div className="wprm-admin-manage-header">
-                        {
-                            false === this.state.selectedColumns
-                            ?
-                            <div></div>
-                            :
-                            <SelectColumns
-                                onColumnsChange={this.onColumnsChange}
-                                columns={this.state.columns}
-                                selectedColumns={this.state.selectedColumns}
-                                filteredColumns={filteredColumns}
-                            />
-                        }
+                        <SelectColumns
+                            onColumnsChange={this.onColumnsChange}
+                            columns={this.state.columns}
+                            selectedColumns={this.state.selectedColumns}
+                            filteredColumns={filteredColumns}
+                        />
                         <div className="wprm-admin-manage-header-buttons">
                             {
                                 ( false === this.state.selectedColumns || this.state.selectedColumns.includes( 'bulk_edit' ) )

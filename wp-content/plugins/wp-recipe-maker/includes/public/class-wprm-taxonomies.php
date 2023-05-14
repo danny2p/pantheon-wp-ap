@@ -363,7 +363,18 @@ class WPRM_Taxonomies {
 			// Check if this taxonomy has archive pages.
 			if ( $should_add_link && self::has_archive_pages( $taxonomy ) ) {
 				$link = get_term_link( $term, $taxonomy );
-				 return '<a href="' . $link . '">' . $output . '</a>';
+
+				$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
+				$taxonomy_label = isset( $wprm_taxonomies[ $taxonomy ] ) ? $wprm_taxonomies[ $taxonomy ]['singular_name'] : '';
+
+				$label = sprintf(
+					/* translators: 1: Taxonomy label 2: Term label */
+					__( 'View more recipes classified as %1$s: %2$s', 'wp-recipe-maker' ),
+					$taxonomy_label,
+					$term->name
+				);
+
+				return '<a href="' . $link . '" aria-label="' . esc_attr( $label ) . '">' . $output . '</a>';
 			}
 		}
 

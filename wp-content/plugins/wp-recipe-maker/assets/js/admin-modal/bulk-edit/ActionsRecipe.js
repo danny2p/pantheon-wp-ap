@@ -61,6 +61,7 @@ const ActionsRecipe = (props) => {
         { value: 'change-author', label: __wprm( 'Change Display Author' ), default: { author: 'default', author_name: '', author_link: '' } },
         { value: 'change-servings', label: __wprm( 'Change Servings' ), default: { servings: '', servings_unit: '' } },
         { value: 'recalculate-time', label: __wprm( 'Recalculate Total Time' ), default: false },
+        { value: 'add-equipment', label: __wprm( 'Add Equipment' ), default: { amount: '', name: '', notes: '' } },
     );
 
     if ( wprm_admin.addons.premium ) {
@@ -312,6 +313,57 @@ const ActionsRecipe = (props) => {
                                             options: {
                                                 ...props.action.options,
                                                 servings_unit,
+                                            }
+                                        }
+                                        props.onActionChange(newAction);
+                                    }}
+                                />
+                            </FieldContainer>
+                        }
+                        {
+                            'add-equipment' === selectedAction
+                            &&
+                            <FieldContainer id="equipment">
+                                <FieldText
+                                    name="equipment-amount"
+                                    placeholder="1"
+                                    value={ props.action.options.amount }
+                                    onChange={ (amount) => {
+                                        const newAction = {
+                                            ...props.action,
+                                            options: {
+                                                ...props.action.options,
+                                                amount,
+                                            }
+                                        }
+                                        props.onActionChange(newAction);
+                                    }}
+                                />
+                                <FieldText
+                                    name="equipment-name"
+                                    placeholder={ __wprm( 'Pressure cooker' ) }
+                                    value={ props.action.options.name }
+                                    onChange={ (name) => {
+                                        const newAction = {
+                                            ...props.action,
+                                            options: {
+                                                ...props.action.options,
+                                                name,
+                                            }
+                                        }
+                                        props.onActionChange(newAction);
+                                    }}
+                                />
+                                <FieldText
+                                    name="equipment-notes"
+                                    placeholder={ __wprm( 'optional notes' ) }
+                                    value={ props.action.options.notes }
+                                    onChange={ (notes) => {
+                                        const newAction = {
+                                            ...props.action,
+                                            options: {
+                                                ...props.action.options,
+                                                notes,
                                             }
                                         }
                                         props.onActionChange(newAction);

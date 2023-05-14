@@ -32,6 +32,7 @@ class WPRM_Shortcode_Other {
 		add_shortcode( 'wprm-condition', array( __CLASS__, 'condition_shortcode' ) );
 
 		add_filter( 'wprm_localize_admin', array( __CLASS__, 'temperature_icons' ) );
+		add_filter( 'the_content', array( __CLASS__, 'recipe_counter_total' ), 99 );
 	}
 
 	/**
@@ -239,6 +240,21 @@ class WPRM_Shortcode_Other {
 		);
 
 		return $wprm_admin;
+	}
+
+	/**
+	 * Set the total for the recipe counter shortcode.
+	 *
+	 * @since	8.8.0
+	 * @param	string $content The content to filter.
+	 */
+	public static function recipe_counter_total( $content ) {
+		if ( isset( $GLOBALS['wprm_recipe_counter_using_total'] ) && $GLOBALS['wprm_recipe_counter_using_total'] ) {
+			$count = isset( $GLOBALS['wprm_recipe_counter'] ) ? $GLOBALS['wprm_recipe_counter'] : 1;
+			$content = str_replace( '<span class="wprm-recipe-counter-total">1</span>', $count, $content );
+		}
+
+		return $content;
 	}
 
 	/**

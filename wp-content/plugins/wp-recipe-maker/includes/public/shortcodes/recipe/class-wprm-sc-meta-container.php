@@ -43,6 +43,10 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'value' => 'custom',
 				),
 			),
+			'container_style_header' => array(
+				'type' => 'header',
+				'default' => __( 'Container Style', 'wp-recipe-maker' ),
+			),
 			'style' => array(
 				'default' => 'separate',
 				'type' => 'dropdown',
@@ -142,6 +146,18 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'value' => '1',
 				),
 			),
+			'tag_header' => array(
+				'type' => 'header',
+				'default' => __( 'Tag Term Fields', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'fields',
+						'value' => 'tags',
+					),
+					// Custom dependencies set dynamically.
+				),
+				'dependency_compare' => 'OR',
+			),
 			'tag_separator' => array(
 				'default' => ', ',
 				'type' => 'text',
@@ -210,6 +226,18 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'value' => 'text_images',
 				),
 			),
+			'time_header' => array(
+				'type' => 'header',
+				'default' => __( 'Time Fields', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'fields',
+						'value' => 'times',
+					),
+					// Custom dependencies set dynamically.
+				),
+				'dependency_compare' => 'OR',
+			),
 			'time_shorthand' => array(
 				'default' => '0',
 				'type' => 'toggle',
@@ -220,6 +248,12 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					),
 					// Custom dependencies set dynamically.
 				),
+				'dependency_compare' => 'OR',
+			),
+			'nutrition_header' => array(
+				'type' => 'header',
+				'default' => __( 'Nutrition Fields', 'wp-recipe-maker' ),
+				'dependency' => array(), // Custom dependencies set dynamically.
 				'dependency_compare' => 'OR',
 			),
 			'nutrition_unit' => array(
@@ -240,6 +274,17 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				'dependency' => array(), // Custom dependencies set dynamically.
 				'dependency_compare' => 'OR',
 			),
+			'custom_field_header' => array(
+				'type' => 'header',
+				'default' => __( 'Custom Field', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'selected_fields',
+						'value' => 'actual_values_set_in_parse_shortcode_below',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
 			'custom_field_image_size' => array(
 				'default' => 'thumbnail',
 				'type' => 'image_size',
@@ -250,6 +295,17 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					),
 				),
 				'dependency_compare' => 'OR',
+			),
+			'adjustable_servings_header' => array(
+				'type' => 'header',
+				'default' => __( 'Servings Field', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'selected_fields',
+						'value' => 'servings',
+						'type' => 'includes',
+					),
+				),
 			),
 			'servings_adjustable' => array (
 				'default' => 'tooltip',
@@ -308,6 +364,10 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'defaults_header' => array(
+				'type' => 'header',
+				'default' => __( 'Defaults', 'wp-recipe-maker' ),
+			),
 			'icon' => array(
 				'default' => '',
 				'type' => 'icon',
@@ -364,12 +424,15 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			);
 			foreach ( $times as $key => $label ) {
 				$fields_with_labels[ $key ] = $label;
-				
-				$shortcodes[ $shortcode ][ 'time_shorthand' ]['dependency'][] = array(
+
+				$time_dependency = array(
 					'id' => 'selected_fields',
 					'value' => $key,
 					'type' => 'includes',
 				);
+				
+				$shortcodes[ $shortcode ][ 'time_header' ]['dependency'][] = $time_dependency;
+				$shortcodes[ $shortcode ][ 'time_shorthand' ]['dependency'][] = $time_dependency;
 			}
 
 			// Add Nutrients.
@@ -377,21 +440,16 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			foreach ( $nutrition_fields as $nutrient => $options ) {
 				$fields_with_labels[ $nutrient ] = $options['label'];
 
-				$shortcodes[ $shortcode ][ 'nutrition_unit' ]['dependency'][] = array(
+				$nutrition_dependency = array(
 					'id' => 'selected_fields',
 					'value' => $nutrient,
 					'type' => 'includes',
 				);
-				$shortcodes[ $shortcode ][ 'nutrition_unit_separator' ]['dependency'][] = array(
-					'id' => 'selected_fields',
-					'value' => $nutrient,
-					'type' => 'includes',
-				);
-				$shortcodes[ $shortcode ][ 'nutrition_daily' ]['dependency'][] = array(
-					'id' => 'selected_fields',
-					'value' => $nutrient,
-					'type' => 'includes',
-				);
+
+				$shortcodes[ $shortcode ][ 'nutrition_header' ]['dependency'][] = $nutrition_dependency;
+				$shortcodes[ $shortcode ][ 'nutrition_unit' ]['dependency'][] = $nutrition_dependency;
+				$shortcodes[ $shortcode ][ 'nutrition_unit_separator' ]['dependency'][] = $nutrition_dependency;
+				$shortcodes[ $shortcode ][ 'nutrition_daily' ]['dependency'][] = $nutrition_dependency;
 			}
 
 			// Add Custom Fields.
@@ -400,11 +458,14 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$fields_with_labels[ $key ] = $custom_field['name'];
 
 				if ( 'image' === $custom_field['type'] ) {
-					$shortcodes[ $shortcode ]['custom_field_image_size']['dependency'][] = array(
+					$image_field_dependency = array(
 						'id' => 'selected_fields',
 						'value' => $key,
 						'type' => 'includes',
 					);
+
+					$shortcodes[ $shortcode ]['custom_field_header']['dependency'][] = $image_field_dependency;
+					$shortcodes[ $shortcode ]['custom_field_image_size']['dependency'][] = $image_field_dependency;
 				}
 			}
 			
@@ -414,32 +475,30 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$key = substr( $taxonomy, 5 );
 				$fields_with_labels[ $key ] = $options['singular_name'];
 
-				$shortcodes[ $shortcode ]['tag_separator']['dependency'][] = array(
+				$tag_dependency = array(
 					'id' => 'selected_fields',
 					'value' => $key,
 					'type' => 'includes',
 				);
-				$shortcodes[ $shortcode ]['tag_display_style']['dependency'][] = array(
-					'id' => 'selected_fields',
-					'value' => $key,
-					'type' => 'includes',
-				);
+
+				$shortcodes[ $shortcode ]['tag_header']['dependency'][] = $tag_dependency;
+				$shortcodes[ $shortcode ]['tag_separator']['dependency'][] = $tag_dependency;
+				$shortcodes[ $shortcode ]['tag_display_style']['dependency'][] = $tag_dependency;
 
 				// Add a second set for wprm_% so that it matches both wprm_course and course. But only if not set yet.
 				$key = 'wprm_' . $key;
 				if ( ! array_key_exists( $key, $fields_with_labels ) ) {
 					$fields_with_labels[ $key ] = $options['singular_name'];
 
-					$shortcodes[ $shortcode ]['tag_separator']['dependency'][] = array(
+					$tag_dependency = array(
 						'id' => 'selected_fields',
 						'value' => $key,
 						'type' => 'includes',
 					);
-					$shortcodes[ $shortcode ]['tag_display_style']['dependency'][] = array(
-						'id' => 'selected_fields',
-						'value' => $key,
-						'type' => 'includes',
-					);
+
+					$shortcodes[ $shortcode ]['tag_header']['dependency'][] = $tag_dependency;
+					$shortcodes[ $shortcode ]['tag_separator']['dependency'][] = $tag_dependency;
+					$shortcodes[ $shortcode ]['tag_display_style']['dependency'][] = $tag_dependency;
 				}
 			}
 
@@ -469,6 +528,13 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					);
 				}
 
+				$shortcodes[ $shortcode ][ $key . '_header'] = array(
+					'type' => 'header',
+					'default' => $label,
+					'dependency' => $dependency,
+					'dependency_compare' => 'OR',
+				);
+
 				// Add Label and Icon attributes.
 				if ( 'custom_time' !== $key ) { // Special case, doesn't have a label.
 					$shortcodes[ $shortcode ]['label_' . $key] = array(
@@ -478,6 +544,12 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 						'dependency_compare' => 'OR',
 					);
 				}
+				$shortcodes[ $shortcode ]['accessibility_label_' . $key] = array(
+					'default' => '',
+					'type' => 'text',
+					'dependency' => $dependency,
+					'dependency_compare' => 'OR',
+				);
 				$shortcodes[ $shortcode ]['icon_' . $key] = array(
 					'default' => '',
 					'type' => 'icon',
@@ -551,6 +623,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			$field_atts = $atts;
 			$field_atts['label_container'] = '1';
 			$field_atts['label'] = isset( $atts['label_' . $field ] ) ? $atts['label_' . $field ] : '';
+			$field_atts['accessibility_label'] = isset( $atts['accessibility_label_' . $field ] ) ? $atts['accessibility_label_' . $field ] : '';
 			$field_atts['icon'] = isset( $atts['icon_' . $field] ) && $atts['icon_' . $field] ? $atts['icon_' . $field] : $atts['icon'];
 
 			if ( 'author' === $field ) {

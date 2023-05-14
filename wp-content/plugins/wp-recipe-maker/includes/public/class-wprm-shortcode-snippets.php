@@ -53,6 +53,11 @@ class WPRM_Shortcode_Snippets {
 			if ( $recipe_id ) {
 				WPRM_Assets::load();
 
+				// Set current recipe ID to make sure it outputs for the correct recipe.
+				if ( $atts['id'] ) {
+					WPRM_Template_Shortcodes::set_current_recipe_id( $recipe_id );
+				}
+
 				if ( 'legacy' === WPRM_Settings::get( 'recipe_template_mode' ) ) {
 					$alignment = WPRM_Settings::get( 'recipe_snippets_alignment' );
 					return '<div class="wprm-recipe-snippets" style="text-align: ' . esc_attr( $alignment ) . ';">' . do_shortcode( WPRM_Settings::get( 'recipe_snippets_text' ) ) . '</div>';
@@ -78,6 +83,11 @@ class WPRM_Shortcode_Snippets {
 						$output = '<div class="wprm-recipe wprm-recipe-snippet wprm-recipe-template-' . esc_attr( $template['slug'] ) . '">' . do_shortcode( $template['html'] ) . '</div>';
 						return apply_filters( 'wprm_recipe_snippet_shortcode_output', $output, $atts, $recipe_id, $template );
 					}
+				}
+
+				// Reset current recipe ID.
+				if ( $atts['id'] ) {
+					WPRM_Template_Shortcodes::set_current_recipe_id( false );
 				}
 			}
 		}

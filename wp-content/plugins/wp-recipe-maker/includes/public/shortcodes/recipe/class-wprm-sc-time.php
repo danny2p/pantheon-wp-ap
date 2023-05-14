@@ -105,7 +105,10 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 		if ( $days > 0 ) {
 			$output .= '<span class="wprm-recipe-details wprm-recipe-details-days wprm-recipe-' . $type . ' wprm-recipe-' . $type . '-days">';
 			$output .= $days;
-			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-unit-days wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-days">';
+			$output .= '<span class="sr-only screen-reader-text wprm-screen-reader-text"> ';
+			$output .= $days != 1 ? __( 'days', 'wp-recipe-maker' ) : __( 'day', 'wp-recipe-maker' );
+			$output .= '</span>';
+			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-unit-days wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-days" aria-hidden="true">';
 
 			if ( $shorthand ) {
 				$output .= $days != 1 ? __( 'd', 'wp-recipe-maker' ) : __( 'd', 'wp-recipe-maker' );
@@ -122,7 +125,10 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 			}
 			$output .= '<span class="wprm-recipe-details wprm-recipe-details-hours wprm-recipe-' . $type . ' wprm-recipe-' . $type . '-hours">';
 			$output .= $hours;
-			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-unit-hours wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-hours">';
+			$output .= '<span class="sr-only screen-reader-text wprm-screen-reader-text"> ';
+			$output .= $hours != 1 ? __( 'hours', 'wp-recipe-maker' ) : __( 'hour', 'wp-recipe-maker' );
+			$output .= '</span>';
+			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-unit-hours wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-hours" aria-hidden="true">';
 
 			if ( $shorthand ) {
 				$output .= $hours != 1 ? __( 'hrs', 'wp-recipe-maker' ) : __( 'hr', 'wp-recipe-maker' );
@@ -139,7 +145,10 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 			}
 			$output .= '<span class="wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-' . $type . ' wprm-recipe-' . $type . '-minutes">';
 			$output .= $minutes;
-			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-minutes wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-minutes">';
+			$output .= '<span class="sr-only screen-reader-text wprm-screen-reader-text"> ';
+			$output .= $minutes != 1 ? __( 'minutes', 'wp-recipe-maker' ) : __( 'minute', 'wp-recipe-maker' );
+			$output .= '</span>';
+			$output .= '</span> <span class="wprm-recipe-details-unit wprm-recipe-details-minutes wprm-recipe-' . $type . '-unit wprm-recipe-' . $type . 'unit-minutes" aria-hidden="true">';
 
 			if ( $shorthand ) {
 				$output .= $minutes != 1 ? __( 'mins', 'wp-recipe-maker' ) : __( 'min', 'wp-recipe-maker' );

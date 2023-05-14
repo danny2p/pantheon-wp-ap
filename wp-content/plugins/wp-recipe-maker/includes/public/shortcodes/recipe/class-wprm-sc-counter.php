@@ -89,6 +89,12 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 		$text = str_ireplace( '%count%', $count, $text );
 		$text = $recipe->replace_placeholders( $text );
 
+		// Check if %total% is used.
+		if ( false !== stripos( $text, '%total%' ) ) {
+			$text = str_ireplace( '%total%', '<span class="wprm-recipe-counter-total">1</span>', $text );
+			$GLOBALS['wprm_recipe_counter_using_total'] = true;
+		}
+
 		if ( $atts['link'] && $recipe->permalink() ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
 			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';

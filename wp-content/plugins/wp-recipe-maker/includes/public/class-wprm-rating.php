@@ -81,10 +81,12 @@ class WPRM_Rating {
 		// Update recipe rating and average (to sort by).
 		update_post_meta( $recipe_id, 'wprm_rating', $recipe_rating );
 		update_post_meta( $recipe_id, 'wprm_rating_average', $recipe_rating['average'] );
+		update_post_meta( $recipe_id, 'wprm_rating_count', $recipe_rating['count'] );
 
 		// Update parent post with rating data (TODO account for multiple recipes in a post).
 		update_post_meta( $recipe->parent_post_id(), 'wprm_rating', $recipe_rating );
 		update_post_meta( $recipe->parent_post_id(), 'wprm_rating_average', $recipe_rating['average'] );
+		update_post_meta( $recipe->parent_post_id(), 'wprm_rating_count', $recipe_rating['count'] );
 
 		// Update SEO checker.
 		WPRM_Seo_Checker::update_seo_for( $recipe_id );

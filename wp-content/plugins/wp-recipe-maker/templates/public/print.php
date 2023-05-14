@@ -9,6 +9,13 @@
  * @subpackage WP_Recipe_Maker/templates/public
  */
 
+function wprm_maybe_redirect_to_parent_post( $output ) {
+	if ( WPRM_Settings::get( 'print_page_redirect' ) && isset( $output['url'] ) ) {
+		// Use timeout to make sure args (set by clicking on print button in a parent post) are set.
+		echo '<script>setTimeout( () => { window.WPRMPrint.maybeRedirect("' . esc_url( $output['url'] ) . '"); }, 100 );</script>';
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html <?php echo get_language_attributes(); ?>>
@@ -55,14 +62,12 @@
 					// Check if same domain.
 					if ( $host_without_port === parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_HOST ) ) {
 						$back_link = $_SERVER['HTTP_REFERER'];
-					} else if ( WPRM_Settings::get( 'print_page_redirect' ) && isset( $output['url'] ) ) {
-						echo '<script>window.location.replace("' . esc_url( $output['url'] ) . '");</script>';
+					} else {
+						wprm_maybe_redirect_to_parent_post( $output );
 					}
 				} else {
 					// No referer. Redirect to parent post?
-					if ( WPRM_Settings::get( 'print_page_redirect' ) && isset( $output['url'] ) ) {
-						echo '<script>window.location.replace("' . esc_url( $output['url'] ) . '");</script>';
-					}
+					wprm_maybe_redirect_to_parent_post( $output );
 				}
 				?>
 				<a href="<?php echo $back_link; ?>" id="wprm-print-button-back" class="wprm-print-button"><?php _e( 'Go Back', 'wp-recipe-maker' );?></a>

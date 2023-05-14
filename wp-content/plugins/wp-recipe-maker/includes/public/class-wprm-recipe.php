@@ -532,7 +532,7 @@ class WPRM_Recipe {
 
 			$clickable_image_url = $this->image_url( $size );
 			if ( $clickable_image_url ) {
-				$img = '<a href="' . esc_url( $clickable_image_url ) . '">' . $img . '</a>';
+				$img = '<a href="' . esc_url( $clickable_image_url) . '" aria-label="' . __( 'Open larger version of the recipe image', 'wp-recipe-maker' ) . '">' . $img . '</a>';
 			}
 		}
 

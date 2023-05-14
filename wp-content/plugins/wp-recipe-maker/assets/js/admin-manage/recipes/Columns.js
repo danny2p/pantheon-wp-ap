@@ -225,6 +225,7 @@ export default {
                 width: 150,
                 Filter: (props) => (<TextFilter {...props}/>),
             },{
+                groupHeader: __wprm( 'Media' ),
                 Header: __wprm( 'Image' ),
                 id: 'image',
                 accessor: 'image_url',
@@ -253,6 +254,7 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'Media' ),
                 Header: __wprm( 'Pin Image' ),
                 id: 'pin_image',
                 accessor: 'pin_image_url',
@@ -281,12 +283,14 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'Media' ),
                 Header: __wprm( 'Repin ID' ),
                 id: 'pin_image_repin_id',
                 accessor: 'pin_image_repin_id',
                 width: 170,
                 Filter: (props) => (<TextFilter {...props}/>),
             },{
+                groupHeader: __wprm( 'Media' ),
                 Header: __wprm( 'Video' ),
                 id: 'video',
                 accessor: 'video_url',
@@ -325,12 +329,14 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Name' ),
                 id: 'name',
                 accessor: 'name',
                 width: 300,
                 Filter: (props) => (<TextFilter {...props}/>),
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Summary' ),
                 id: 'summary',
                 accessor: 'summary',
@@ -344,6 +350,7 @@ export default {
                     return ( <div dangerouslySetInnerHTML={ { __html: row.value } } /> );
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Author' ),
                 id: 'post_author',
                 accessor: 'post_author',
@@ -389,6 +396,7 @@ export default {
                     )
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Display Author Type' ),
                 id: 'author_display',
                 accessor: 'author_display',
@@ -425,6 +433,7 @@ export default {
                     )
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Display Author' ),
                 id: 'author',
                 accessor: 'author',
@@ -438,6 +447,7 @@ export default {
                     return ( <div dangerouslySetInnerHTML={ { __html: row.original.author } } /> );
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Status' ),
                 id: 'status',
                 accessor: 'post_status',
@@ -465,6 +475,7 @@ export default {
                     );
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Parent ID' ),
                 id: 'parent_post_id',
                 accessor: 'parent_post_id',
@@ -480,6 +491,7 @@ export default {
                     }
                 },
             },{
+                groupHeader: __wprm( 'General' ),
                 Header: __wprm( 'Parent Name' ),
                 id: 'parent_post',
                 accessor: 'parent_post',
@@ -537,6 +549,7 @@ export default {
         if ( wprm_admin_manage.multilingual ) {
             columns.push(
                 {
+                    groupHeader: __wprm( 'General' ),
                     Header: __wprm( 'Parent Language' ),
                     id: 'parent_post_language',
                     accessor: 'parent_post_language',
@@ -574,6 +587,15 @@ export default {
         }
         
         columns.push({
+            groupHeader: __wprm( 'General' ),
+            Header: __wprm( 'Servings' ),
+            id: 'servings',
+            accessor: 'servings',
+            width: 100,
+            Filter: (props) => (<TextFilter {...props}/>),
+            Cell: row => (<div>{ '0' === row.value ? '' : row.value } { row.original.servings_unit }</div>),
+        },{
+                groupHeader: __wprm( 'Stars' ),
                 Header: __wprm( 'Ratings' ),
                 id: 'rating',
                 accessor: 'rating',
@@ -638,6 +660,28 @@ export default {
                         </div>
                     );
                 },
+            },
+            {
+                groupHeader: __wprm( 'Stars' ),
+                Header: __wprm( '# Ratings Given' ),
+                id: 'rating_count',
+                accessor: 'rating',
+                width: 150,
+                Cell: row => {
+                    const ratings = row.value;
+
+                    const nbrCommentRatings = false === ratings.comment_ratings ? 0 : ratings.comment_ratings.count;
+                    const nbrUserRatings = false === ratings.user_ratings ? 0 : ratings.user_ratings.count;
+                    const totalRatings = nbrCommentRatings + nbrUserRatings;
+
+                    if ( totalRatings <= 0 ) {
+                        return null;
+                    }
+
+                    return (
+                        <div>{ totalRatings }</div>
+                    );
+                },
             }
         );
 
@@ -646,6 +690,7 @@ export default {
             taxonomy.terms.sort((a,b) => a.name.localeCompare(b.name));
         
             columns.push({
+                groupHeader: __wprm( 'Taxonomies' ),
                 Header: taxonomy.label,
                 id: `tag_${ key }`,
                 accessor: d => d.tags[key],
@@ -682,6 +727,7 @@ export default {
         }
 
         columns.push({
+                groupHeader: __wprm( 'Times' ),
                 Header: __wprm( 'Prep Time' ),
                 id: 'prep_time',
                 accessor: 'prep_time',
@@ -689,6 +735,7 @@ export default {
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => (<div>{ getFormattedTime( row.value, row.original.prep_time_zero ) }</div>),
             },{
+                groupHeader: __wprm( 'Times' ),
                 Header: __wprm( 'Cook Time' ),
                 id: 'cook_time',
                 accessor: 'cook_time',
@@ -696,6 +743,7 @@ export default {
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => (<div>{ getFormattedTime( row.value, row.original.cook_time_zero ) }</div>),
             },{
+                groupHeader: __wprm( 'Times' ),
                 Header: __wprm( 'Custom Time' ),
                 id: 'custom_time',
                 accessor: 'custom_time',
@@ -708,6 +756,7 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'Times' ),
                 Header: __wprm( 'Total Time' ),
                 id: 'total_time',
                 accessor: 'total_time',
@@ -715,13 +764,7 @@ export default {
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => (<div>{ getFormattedTime( row.value ) }</div>),
             },{
-                Header: __wprm( 'Servings' ),
-                id: 'servings',
-                accessor: 'servings',
-                width: 100,
-                Filter: (props) => (<TextFilter {...props}/>),
-                Cell: row => (<div>{ '0' === row.value ? '' : row.value } { row.original.servings_unit }</div>),
-            },{
+                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Equipment' ),
                 id: 'equipment',
                 accessor: 'equipment',
@@ -750,6 +793,7 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Ingredients' ),
                 id: 'ingredient',
                 accessor: 'ingredients',
@@ -796,6 +840,7 @@ export default {
                     </div>
                 ),
             },{
+                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Converted Ingredients' ),
                 id: 'unit_conversion',
                 accessor: 'unit_conversion',
@@ -826,6 +871,45 @@ export default {
                     )
                 },
             },{
+                groupHeader: __wprm( 'Other' ),
+                Header: __wprm( 'Instructions' ),
+                id: 'instructions',
+                accessor: 'instructions',
+                width: 300,
+                sortable: false,
+                Filter: (props) => (<TextFilter {...props}/>),
+                Cell: row => (
+                    <div>
+                        {
+                            row.value
+                            ?
+                            row.value.map( (group, index) => {
+                                group.name = group.name.replace( /(<([^>]+)>)/ig, '' ).trim();
+
+                                return (
+                                    <div key={index}>
+                                        { group.name && <div style={{ fontWeight: 'bold' }}>{ he.decode( group.name ) }</div> }
+                                        {
+                                            group.instructions.map( (instruction, instruction_index) => {
+                                                const instructionText = instruction.text.replace( /(<([^>]+)>)/ig, '' ).trim();
+
+                                                if ( instructionText ) {
+                                                    return (
+                                                        <div key={instruction_index}>{ he.decode( instructionText ) }</div>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </div>
+                                )
+                            })
+                            :
+                            null
+                        }
+                    </div>
+                ),
+            },{
+                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Nutrition' ),
                 id: 'nutrition',
                 accessor: 'nutrition',
@@ -873,6 +957,7 @@ export default {
 
         if ( wprm_admin.addons.elite ) {
             columns.push({
+                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Recipe Submission User' ),
                 id: 'submission_author',
                 accessor: 'submission_author',
@@ -932,6 +1017,7 @@ export default {
 
         for ( let customField of customFields ) {
             columns.push({
+                groupHeader: __wprm( 'Custom Fields' ),
                 Header: customField.name,
                 id: `custom_field_${ customField.key }`,
                 accessor: 'custom_fields',
