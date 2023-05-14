@@ -10,6 +10,7 @@ import Loader from 'Shared/Loader';
 import Block from './Block';
 import AddBlocks from '../../menu/AddBlocks';
 import RemoveBlocks from '../../menu/RemoveBlocks';
+import MoveBlocks from '../../menu/MoveBlocks';
 import BlockProperties from '../../menu/BlockProperties';
 import PreviewRecipe from './PreviewRecipe';
 
@@ -53,6 +54,7 @@ export default class PreviewTemplate extends Component {
             shortcodes: [],
             editingBlock: false,
             addingBlock: false,
+            movingBlock: false,
             hoveringBlock: false,
             hasError: false,
         }
@@ -274,6 +276,40 @@ export default class PreviewTemplate extends Component {
         }
     }
 
+    onChangeMovingBlock(shortcode) {
+        this.setState({
+            movingBlock: shortcode,
+        });
+    }
+
+    onMoveBlock(target, before) {
+        let htmlMap = this.state.htmlMap;
+        const shortcode = '<wprm-replace-shortcode-with-block uid="' + this.state.movingBlock.uid + '"></wprm-replace-shortcode-with-block>';
+        const targetShortcode = '<wprm-replace-shortcode-with-block uid="' + target + '"></wprm-replace-shortcode-with-block>';
+
+        // Remove from current position.
+        htmlMap = htmlMap.replace(shortcode, '');
+
+        // Move to new position.
+        if ( before ) {
+            htmlMap = htmlMap.replace(targetShortcode, shortcode + '\n' + targetShortcode);
+        } else {
+            htmlMap = htmlMap.replace(targetShortcode, targetShortcode + '\n' + shortcode);
+        }
+
+        if ( htmlMap !== this.state.htmlMap) {
+            this.setState({
+                movingBlock: false,
+                hoveringBlock: false,
+                htmlMap,
+            },
+                () => {
+                    let newHtml = this.unparseHtml();
+                    this.props.onChangeHTML(newHtml);
+                });
+        }
+    }
+
     render() {
         const parsedHtml = this.state.hasError ? <Loader /> : this.state.parsedHtml;
 
@@ -469,6 +505,86 @@ export default class PreviewTemplate extends Component {
                         ! this.state.shortcodes.length && <p>There are no blocks to remove.</p>
                 }
                 </RemoveBlocks>
+                <MoveBlocks>
+                {
+                        this.state.shortcodes.length <= 1
+                        ?
+                        <p>There are not enough blocks to move.</p>
+                        :
+                        <Fragment>
+                            {
+                                false === this.state.movingBlock
+                                ?
+                                <Fragment>
+                                    <p>Select block to move:</p>
+                                    {
+                                        this.state.shortcodes.map((shortcode, i) => {
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
+                                                    onClick={ () => {
+                                                        this.onChangeMovingBlock(shortcode);
+                                                    }}
+                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
+                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                                >{ shortcode.name }</div>
+                                            );
+                                        })
+                                    }
+                                </Fragment>
+                                :
+                                <Fragment>
+                                    <a href="#" onClick={(e) => {
+                                        e.preventDefault();
+                                        this.onChangeMovingBlock(false);
+                                    }}>Cancel</a>
+                                    <p>Move "{ this.state.movingBlock.name }" before:</p>
+                                    {
+                                        this.state.shortcodes.map((shortcode, i) => {
+                                            if ( shortcode.uid === this.state.movingBlock.uid ) {
+                                                return null;
+                                            }
+                                            
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
+                                                    onClick={ () => {
+                                                        this.onMoveBlock(shortcode.uid, true);
+                                                    }}
+                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
+                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                                >{ shortcode.name }</div>
+                                            );
+                                        })
+                                    }
+                                    <br/><br/>
+                                    <p>Move "{ this.state.movingBlock.name }" after:</p>
+                                    {
+                                        this.state.shortcodes.map((shortcode, i) => {
+                                            if ( shortcode.uid === this.state.movingBlock.uid ) {
+                                                return null;
+                                            }
+
+                                            return (
+                                                <div
+                                                    key={i}
+                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
+                                                    onClick={ () => {
+                                                        this.onMoveBlock(shortcode.uid, false);
+                                                    }}
+                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
+                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                                >{ shortcode.name }</div>
+                                            );
+                                        })
+                                    }
+                                </Fragment>
+                            }
+                        </Fragment>
+                }
+                </MoveBlocks>
             </Fragment>
         );
     }

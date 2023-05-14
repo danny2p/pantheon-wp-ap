@@ -73,6 +73,10 @@ const Menu = (props) => {
                             onClick={ (e) => { props.onChangeMode( 'remove' ) } }
                         ><Icon type='remove' /> Remove Blocks</a>
                         <a
+                            className={ 'move' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                            onClick={ (e) => { props.onChangeMode( 'move' ) } }
+                        ><Icon type='move' /> Move Blocks</a>
+                        <a
                             className={ 'html' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
                             onClick={ (e) => { props.onChangeMode( 'html' ) } }
                         ><Icon type='html' /> Edit HTML</a>
@@ -101,6 +105,11 @@ const Menu = (props) => {
             <div
                 id="wprm-remove-blocks"
                 style={{ display: 'remove' !== props.mode ? 'none' : 'block' }}
+                className="wprm-template-properties"
+            ></div>
+            <div
+                id="wprm-move-blocks"
+                style={{ display: 'move' !== props.mode ? 'none' : 'block' }}
                 className="wprm-template-properties"
             ></div>
             <div

@@ -103,14 +103,25 @@ export default class Roundup extends Component {
             '(\\?[;&a-z\\d%_.~+=-]*)?'+
             '(\\#[-a-z\\d_]*)?$','i');
         
+        // Valid URL, use OpenGraph API to load content.
         if ( pattern.test(url) ) {
-            // Valid URL, use OpenGraph API to load content.
+
+            // Check if own API key is set.
+            let endpoint = 'https://api.microlink.io';
+            let headers = {};
+
+            if ( '' !== wprm_admin.settings.microlink_api_key ) {
+                endpoint = 'https://pro.microlink.io';
+                headers['x-api-key'] = wprm_admin.settings.microlink_api_key;
+            }
+
             this.setState({
                 loading: true,
             }, () => {
-                fetch('https://api.microlink.io?url=' + encodeURIComponent( url ))
+                return fetch( endpoint + '?url=' + encodeURIComponent( url ), { headers })
                     .then((response) => response.json())
                     .then((json) => {
+                        console.log(json);
                         let newState = {
                             loading: false,
                         }

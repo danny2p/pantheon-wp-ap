@@ -110,6 +110,14 @@ class WPRM_Shortcode_Helper {
                     ),
 				),
 			),
+			'accessibility_label' => array(
+				'default' => '',
+                'type' => 'text',
+                'dependency' => array(
+					'id' => 'label_container',
+					'value' => '1',
+				),
+			),
 			// Needs to pass trough but not actually shown.
 			'table_borders' => array(
 				'default' => 'top-bottom',
@@ -168,6 +176,12 @@ class WPRM_Shortcode_Helper {
 			}
 		}
 
+		// Check for accessibility label.
+		$accessibility_label = '';
+		if ( $atts['accessibility_label'] ) {
+			$accessibility_label = '<span class="sr-only screen-reader-text wprm-screen-reader-text">' . self::sanitize_html( $atts['accessibility_label'] ) . '</span>';
+		}
+
 		// Get optional label.
 		$label = '';
 		if ( $atts['label'] ) {
@@ -179,7 +193,12 @@ class WPRM_Shortcode_Helper {
 				$label_classes[] = 'wprm-recipe-' . $field . '-label';
 			}
 
-			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '">' . self::sanitize_html( __( $atts['label'], 'wp-recipe-maker' ) ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
+			$aria_hidden = '';
+			if ( $accessibility_label ) {
+				$aria_hidden = ' aria-hidden="true"';
+			}
+
+			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '"' . $aria_hidden . '>' . self::sanitize_html( __( $atts['label'], 'wp-recipe-maker' ) ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
 		}
 
 		// Inline style.
@@ -206,6 +225,7 @@ class WPRM_Shortcode_Helper {
 
 		$container = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">';
 		$container .= $icon;
+		$container .= $accessibility_label;
 		$container .= $label;
 		$container .= $content;
 		$container .= '</div>';

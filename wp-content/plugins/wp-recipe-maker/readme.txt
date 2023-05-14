@@ -136,6 +136,35 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.8.2 =
+* Fix: Redirecting on print page in cases when it shouldn't
+
+= 8.8.1 =
+* Fix: Prevent PHP warning in comment form in some versions of PHP
+
+= 8.8.0 =
+* Feature: Use %total% placeholder in roundup counter block
+* Feature: Move blocks in template editor through UI
+* Feature: Bulk add equipment through manage page
+* Feature: Order by total number of ratings
+* Feature: Change padding for stars in comment form
+* Feature: Set optional accessibility label in Template Editor
+* Improvement: Ability to hide list of columns on manage page
+* Improvement: Better method for referencing author in Yoast Integration
+* Improvement: Less clutter on manage page by hiding column selection
+* Improvement: Subsections for the meta container block
+* Improvement: Prevent browser extensions from breaking ingredient entry form
+* Improvement: Setting to set your own Microlink API key
+* Improvement: Accessibility for recipe times
+* Improvement: Accessibility for image links
+* Improvement: Try to prevent incorrect redirect on print page when using caching plugins
+* Fix: Don't show print toggles if fields are not part of template
+* Fix: Setting ID for snippet shortcode not working
+* Fix: Rich text editor placeholder position in Safari
+* Fix: Check if Rank Math schema module is active when using integration
+* Fix: Don't change comment star color when use custom style setting is disabled
+* Fix: Comment rating compatibility when loading form through AJAX
+
 = 8.7.5 =
 * Fix: Only affect Yoast metadata on recipe pages
 * Fix: Prevent PHP warning with Rank Math integration
@@ -1472,6 +1501,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.8.2 =
+Update to prevent incorrect redirects from print page
+
+= 8.8.1 =
+Update to make sure PHP warning does not show up
+
+= 8.8.0 =
+Some great new features and improvements
+
 = 8.7.5 =
 Update recommended when using Yoast SEO
 

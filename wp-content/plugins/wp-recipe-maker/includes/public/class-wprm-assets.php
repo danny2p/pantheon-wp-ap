@@ -215,6 +215,7 @@ class WPRM_Assets {
 				'recipe_name_from_post_title' => WPRM_Settings::get( 'recipe_name_from_post_title' ),
 				'recipe_use_author' => WPRM_Settings::get( 'recipe_use_author' ),
 				'post_type_structure' => WPRM_Settings::get( 'post_type_structure' ),
+				'microlink_api_key' => WPRM_Settings::get( 'microlink_api_key' ),
 			),
 			'manage' => array(
 				'tooltip' => array(

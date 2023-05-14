@@ -23,11 +23,19 @@ if ( WPRM_Settings::get( 'performance_use_combined_stars' ) ) :
 <?php else : ?>
 <img class="wprm-comment-rating" src="<?php echo $svg; ?>" alt="<?php echo esc_attr( $alt ); ?>" width="80" height="16" />
 <?php endif; // WP Rocket lazy loading. ?>
-<?php else : ?>
+<?php else :
+
+$padding = intval( WPRM_Settings::get( 'comment_rating_star_padding' ) );
+$padding = 0 < $padding ? $padding : 0;	
+
+$container_style = $padding ? ' style="margin: 0 -' . $padding . 'px;"' : '';
+?>
 <div class="wprm-comment-rating">
-	<span class="wprm-rating-stars"><?php
+	<span class="wprm-rating-stars"<?php echo $container_style; ?>><?php
 		for ( $i = 1; $i <= 5; $i++ ) {
-			echo '<span class="wprm-rating-star">';
+			$style = $padding ? ' style="padding: 0 ' . $padding . 'px;"' : '';
+
+			echo '<span class="wprm-rating-star"'. $style . '>';
 			if ( $i <= $rating ) {
 					ob_start();
 					include( WPRM_DIR . 'assets/icons/star-full.svg' );

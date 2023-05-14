@@ -2,10 +2,28 @@
     h4 {
         margin: 0 0 5px 0;
     }
+
+    a {
+        display: inline-block;
+        margin: 3px;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .wprm-admin-manage-select-columns {
     margin: -3px;
+
+    .wprm-admin-manage-select-columns-group {
+        display: inline-block;
+        margin: 3px;
+        margin-bottom: 0;
+        font-weight: bold;
+    }
 
     .wprm-admin-manage-select-columns-column {
         display: inline-flex;

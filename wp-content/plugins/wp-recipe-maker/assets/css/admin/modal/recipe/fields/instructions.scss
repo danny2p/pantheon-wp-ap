@@ -70,15 +70,15 @@
             margin-top: 2px;
             align-items: center;
 
-            input:nth-child(1),
-            input:nth-child(2) {
+            input:nth-of-type(1),
+            input:nth-of-type(2) {
                 min-width: 62px;
                 max-width: 62px;
                 flex-basis: 62px;
                 flex-shrink: 0;
                 margin-right: 2px;
             }
-            input:nth-child(3) {
+            input:nth-of-type(3) {
                 flex: auto;
             }
             .wprm-admin-icon {

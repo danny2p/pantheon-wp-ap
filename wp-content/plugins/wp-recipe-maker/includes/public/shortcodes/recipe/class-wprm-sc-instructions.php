@@ -645,7 +645,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$clickable_image = wp_get_attachment_image_src( $instruction['image'], $size );
 			$clickable_image_url = $clickable_image && isset( $clickable_image[0] ) ? $clickable_image[0] : '';
 			if ( $clickable_image_url ) {
-				$img = '<a href="' . esc_url( $clickable_image_url ) . '">' . $img . '</a>';
+				$img = '<a href="' . esc_url( $clickable_image_url ) . '" aria-label="' . __( 'Open larger version of the instruction image', 'wp-recipe-maker' ) . '">' . $img . '</a>';
 			}
 		}
 

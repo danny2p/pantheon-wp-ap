@@ -118,7 +118,7 @@ class WPRM_Metadata_Yoast_Seo extends \Yoast\WP\SEO\Generators\Schema\Abstract_S
 			// Maybe point to Yoast Person piece.
 			$person = $this->get_person();
 			if ( $person && $person['piece'] ) {
-				$metadata['author'] = array( '@id' => $person['piece'] );
+				$metadata['author_reference'] = array( '@id' => $person['piece'] );
 			}
 
 			return $metadata;

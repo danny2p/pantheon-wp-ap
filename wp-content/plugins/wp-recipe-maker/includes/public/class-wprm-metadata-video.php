@@ -500,7 +500,7 @@ class WPRM_MetadataVideo {
 			$video_id = $video_parts[1];
 		}
 
-		if ( $video_id ) {
+		if ( $video_id && WPRM_Settings::get( 'metadata_youtube_agree_terms' ) ) {
 			$api_key = self::get_youtube_api_key();
 			$api_url = 'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=contentDetails&id=' . urlencode( $video_id ) . '&key=' . urlencode( $api_key );
 

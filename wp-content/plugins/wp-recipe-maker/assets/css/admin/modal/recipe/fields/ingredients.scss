@@ -33,13 +33,13 @@
     font-weight: bold;
 
     .wprm-admin-modal-field-ingredient-header {
-        &:nth-child(1),
-        &:nth-child(2) {
+        &:nth-of-type(1),
+        &:nth-of-type(2) {
             flex: 0 0 50%;
         }
 
-        &:nth-child(3),
-        &:nth-child(4) {
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
             display: none;
         }
 
@@ -60,13 +60,13 @@
 
         .wprm-admin-modal-field-richtext,
         .wprm-admin-modal-field-richtext-legacy {
-            &:nth-child(1),
-            &:nth-child(2) {
+            &:nth-of-type(1),
+            &:nth-of-type(2) {
                 flex: 0 0 50%;
             }
 
-            &:nth-child(3),
-            &:nth-child(4) {
+            &:nth-of-type(3),
+            &:nth-of-type(4) {
                 flex: 0 0 100%;
             }
         }
@@ -101,12 +101,12 @@
 @media screen and (min-width: 550px) {
     .wprm-admin-modal-field-ingredient-header-container {
         .wprm-admin-modal-field-ingredient-header {
-            &:nth-child(1),
-            &:nth-child(2) {
+            &:nth-of-type(1),
+            &:nth-of-type(2) {
                 flex: 0 0 25%;
             }
 
-            &:nth-child(3) {
+            &:nth-of-type(3) {
                 display: block;
                 flex: 0 0 50%;
             }
@@ -117,12 +117,12 @@
         .wprm-admin-modal-field-ingredient-text-container {
             .wprm-admin-modal-field-richtext,
             .wprm-admin-modal-field-richtext-legacy {
-                &:nth-child(1),
-                &:nth-child(2) {
+                &:nth-of-type(1),
+                &:nth-of-type(2) {
                     flex: 0 0 25%;
                 }
     
-                &:nth-child(3) {
+                &:nth-of-type(3) {
                     flex: 0 0 50%;
                 }
             }
@@ -138,19 +138,19 @@
     
     .wprm-admin-modal-field-ingredient-header-container {
         .wprm-admin-modal-field-ingredient-header {
-            &:nth-child(1) {
+            &:nth-of-type(1) {
                 flex: 0 0 75px;
                 margin-right: 5px;
             }
-            &:nth-child(2) {
+            &:nth-of-type(2) {
                 flex: 0 0 90px;
                 margin-right: 5px;
             }    
-            &:nth-child(3) {
+            &:nth-of-type(3) {
                 flex: 0 0 250px;
                 margin-right: 5px;
             }
-            &:nth-child(4) {
+            &:nth-of-type(4) {
                 display: block;
                 flex: auto;
             }
@@ -166,19 +166,19 @@
 
             .wprm-admin-modal-field-richtext,
             .wprm-admin-modal-field-richtext-legacy {
-                &:nth-child(1) {
+                &:nth-of-type(1) {
                     flex: 0 0 75px;
                     margin-right: 5px;
                 }
-                &:nth-child(2) {
+                &:nth-of-type(2) {
                     flex: 0 0 90px;
                     margin-right: 5px;
                 }    
-                &:nth-child(3) {
+                &:nth-of-type(3) {
                     flex: 0 0 250px;
                     margin-right: 5px;
                 }
-                &:nth-child(4) {
+                &:nth-of-type(4) {
                     flex: auto;
                 }
             }
@@ -189,7 +189,7 @@
 @media screen and (min-width: 900px) {
     .wprm-admin-modal-field-ingredient-header-container {
         .wprm-admin-modal-field-ingredient-header {
-            &:nth-child(3) {
+            &:nth-of-type(3) {
                 flex: 0 0 300px;
             }
         }
@@ -199,7 +199,7 @@
         .wprm-admin-modal-field-ingredient-text-container {
             .wprm-admin-modal-field-richtext,
             .wprm-admin-modal-field-richtext-legacy {
-                &:nth-child(3) {
+                &:nth-of-type(3) {
                     flex: 0 0 300px;
                 };
             }
@@ -210,7 +210,7 @@
 @media screen and (min-width: 1024px) {
     .wprm-admin-modal-field-ingredient-header-container {
         .wprm-admin-modal-field-ingredient-header {
-            &:nth-child(3) {
+            &:nth-of-type(3) {
                 flex: 0 0 350px;
             }
         }
@@ -221,7 +221,7 @@
 
             .wprm-admin-modal-field-richtext,
             .wprm-admin-modal-field-richtext-legacy {
-                &:nth-child(3) {
+                &:nth-of-type(3) {
                     flex: 0 0 350px;
                 };
             }

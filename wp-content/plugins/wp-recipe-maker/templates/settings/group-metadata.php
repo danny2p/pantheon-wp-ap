@@ -115,6 +115,38 @@ $metadata = array(
 			),
 		),
 		array(
+			'name' => __( 'Video Metadata', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'metadata_youtube_agree_terms',
+					'name' => __( 'Agree to YouTube Terms of Service', 'wp-recipe-maker' ),
+					'description' => __( 'When enabled, the plugin will automatically retrieve the video details to include in the recipe metadata through the YouTube Data API. By enabling you agree to be bound by the YouTube Terms of Service:', 'wp-recipe-maker' ),
+					'documentation' => 'https://www.youtube.com/t/terms',
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
+					'name' => __( 'Google Privacy Policy', 'wp-recipe-maker' ),
+					'description' => __( 'Whenever you add a YouTube embed as the recipe video, the plugin will use the YouTube Data API to retrieve the video details. These details will be stored to use in the recipe metadata and refreshed on a weekly basis (or whenever you update the recipe).', 'wp-recipe-maker' ),
+					'type' => 'button',
+					'button' => __( 'Read the Google Privacy Policy', 'wp-recipe-maker' ),
+					'link' => 'http://www.google.com/policies/privacy',
+					'dependency' => array(
+						'id' => 'metadata_youtube_agree_terms',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'metadata_youtube_api_key',
+					'name' => __( 'Personal YouTube Data API key', 'wp-recipe-maker' ),
+					'description' => __( 'Optionally set your own API key for retrieving the YouTube video metadata. Leave the setting blank to use the default shared key.', 'wp-recipe-maker' ),
+					'documentation' => 'https://help.bootstrapped.ventures/article/260-setting-your-own-youtube-data-api-key',
+					'type' => 'text',
+					'default' => '',
+				),
+			),
+		),
+		array(
 			'name' => __( 'Advanced', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
@@ -141,14 +173,6 @@ $metadata = array(
 					'description' => __( 'When enabled, the Mediavine video metadata will get output as well as the recipe video metadata. This is their recommendation but results in duplicate video metadata.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => true,
-				),
-				array(
-					'id' => 'metadata_youtube_api_key',
-					'name' => __( 'Personal YouTube Data API key', 'wp-recipe-maker' ),
-					'description' => __( 'Optionally set your own API key for retrieving the YouTube video metadata. Leave the setting blank to use the default shared key.', 'wp-recipe-maker' ),
-					'documentation' => 'https://help.bootstrapped.ventures/article/260-setting-your-own-youtube-data-api-key',
-					'type' => 'text',
-					'default' => '',
 				),
 			),
 		),

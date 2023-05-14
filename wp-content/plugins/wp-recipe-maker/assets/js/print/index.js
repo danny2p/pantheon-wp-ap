@@ -8,6 +8,8 @@ window.WPRMPrint = {
         document.dispatchEvent( new Event( 'wprmPrintArgs' ) );
     },
 	init() {
+        this.checkToggles();
+
         // On click print button.
         document.querySelector( '#wprm-print-button-print' ).addEventListener( 'click', (e) => {
             e.preventDefault();
@@ -69,6 +71,37 @@ window.WPRMPrint = {
 
         for ( let link of links ) {
             link.outerHTML = '<span>' + link.innerHTML + '</span>';
+        }
+    },
+    checkToggles() {
+        // Check if recipe image is present.
+        const images = document.querySelectorAll( '.wprm-recipe-image' );
+
+        if ( ! images.length ) {
+            const toggle = document.querySelector( '#wprm-print-toggle-recipe-image' );
+            if ( toggle ) {
+                toggle.parentNode.style.display = 'none';
+            }
+        }
+
+        // Check if notes are present.
+        const notes = document.querySelectorAll( '.wprm-recipe-notes-container' );
+
+        if ( ! notes.length ) {
+            const toggle = document.querySelector( '#wprm-print-toggle-recipe-notes' );
+            if ( toggle ) {
+                toggle.parentNode.style.display = 'none';
+            }
+        }
+
+        // Check if nutrition label is present.
+        const nutrition = document.querySelectorAll( '.wprm-nutrition-label-container' );
+
+        if ( ! nutrition.length ) {
+            const toggle = document.querySelector( '#wprm-print-toggle-recipe-nutrition' );
+            if ( toggle ) {
+                toggle.parentNode.style.display = 'none';
+            }
         }
     },
     onClickToggle( toggle ) {
@@ -186,6 +219,11 @@ window.WPRMPrint = {
                     }
                 }
             }
+        }
+    },
+    maybeRedirect( url ) {
+        if ( url && 0 === Object.keys( this.args ).length ) {
+            window.location.replace( url );
         }
     },
 };

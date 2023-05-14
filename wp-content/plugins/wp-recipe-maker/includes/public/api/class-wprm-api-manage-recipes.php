@@ -142,6 +142,10 @@ class WPRM_Api_Manage_Recipes {
 				$args['orderby'] = 'meta_value_num';
 				$args['meta_key'] = 'wprm_rating_average';
 				break;
+			case 'rating_count':
+				$args['orderby'] = 'meta_value_num';
+				$args['meta_key'] = 'wprm_rating_count';
+				break;
 			case 'prep_time':
 				$args['orderby'] = 'meta_value_num';
 				$args['meta_key'] = 'wprm_prep_time';
@@ -609,6 +613,15 @@ class WPRM_Api_Manage_Recipes {
 					);
 				}
 				break;
+			case 'instructions':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_instructions',
+						'compare' => 'LIKE',
+						'value' => $value,
+					);
+				}
+				break;
 			case 'submission_author':
 				if ( 'all' !== $value ) {
 					$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
@@ -831,6 +844,20 @@ class WPRM_Api_Manage_Recipes {
 						break;
 					case 'recalculate-time':
 						$recipe_data['total_time'] = intval( $recipe_data['prep_time'] ) + intval( $recipe_data['cook_time'] ) + intval( $recipe_data['custom_time'] );
+						break;
+					case 'add-equipment':
+						$name = $action['options']['name'];
+
+						if ( $name ) {
+							$equipment = $recipe->equipment();
+							$equipment[] = array(
+								'amount' => $action['options']['amount'],
+								'name' => $name,
+								'notes' => $action['options']['notes'],
+							);
+
+							$recipe_data['equipment'] = $equipment;
+						}
 						break;
 					case 'user-rating':
 						$recipe_data = false;

@@ -101,10 +101,14 @@ $recipe_ratings = array(
 					'type' => 'number',
 					'suffix' => 'px',
 					'default' => '18',
-					'dependency' => array(
-						'id' => 'features_custom_style',
-						'value' => true,
-					),
+				),
+				array(
+					'id' => 'comment_rating_star_padding',
+					'name' => __( 'Star Padding', 'wp-recipe-maker' ),
+					'description' => __( 'Padding of the stars in the comment section. Increase when experiencing tap target issues.', 'wp-recipe-maker' ),
+					'type' => 'number',
+					'suffix' => 'px',
+					'default' => '3',
 				),
 				array(
 					'id' => 'comment_rating_position',
