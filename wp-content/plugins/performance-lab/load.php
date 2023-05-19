@@ -5,7 +5,7 @@
  * Description: Performance plugin from the WordPress Performance Team, which is a collection of standalone performance modules.
  * Requires at least: 6.1
  * Requires PHP: 5.6
- * Version: 2.2.0
+ * Version: 2.3.0
  * Author: WordPress Performance Team
  * Author URI: https://make.wordpress.org/performance/
  * License: GPLv2 or later
@@ -284,7 +284,9 @@ function perflab_is_standalone_plugin_loaded( $module ) {
  */
 function perflab_get_standalone_plugins_constants() {
 	return array(
-		'images/webp-uploads' => 'WEBP_UPLOADS_VERSION',
+		'images/dominant-color-images' => 'DOMINANT_COLOR_IMAGES_VERSION',
+		'images/fetchpriority'         => 'FETCHPRIORITY_VERSION',
+		'images/webp-uploads'          => 'WEBP_UPLOADS_VERSION',
 	);
 }
 
