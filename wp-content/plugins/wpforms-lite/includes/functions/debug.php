@@ -79,7 +79,7 @@ function wpforms_debug_data( $data, $echo = true ) {
 		<div class="wpforms-debug">
 			<textarea readonly>=================== WPFORMS DEBUG ===================%s</textarea>
 		</div>',
-		"\n\n" . $data
+		"\n\n" . esc_html( $data )
 	);
 
 	/**

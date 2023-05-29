@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Turnstile, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.2
-Stable tag: 1.8.1.2
+Stable tag: 1.8.1.3
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -438,6 +438,12 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.8.1.3 =
+- Changed: The Uncanny Automator logo is updated.
+- Fixed: Debug information (controlled by a constant) is now properly escaped before being displayed on a page.
+- Fixed: Turnstile Captcha verification message overlapped the captcha when the captcha type was changed from Invisible to Managed.
+- Fixed: Fatal error with AMP plugin.
 
 = 1.8.1.2 =
 - Fixed: Checkboxes were shifting when the limit choices rule was triggered.
