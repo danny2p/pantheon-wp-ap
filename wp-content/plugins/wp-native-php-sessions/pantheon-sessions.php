@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Native PHP Sessions for WordPress
- * Version: 1.3.5
+ * Version: 1.3.6
  * Description: Offload PHP's native sessions to your database for multi-server compatibility.
  * Author: Pantheon
  * Author URI: https://www.pantheon.io/
@@ -13,7 +13,7 @@
 
 use Pantheon_Sessions\Session;
 
-define( 'PANTHEON_SESSIONS_VERSION', '1.3.5' );
+define( 'PANTHEON_SESSIONS_VERSION', '1.3.6' );
 
 /**
  * Main controller class for the plugin.
@@ -26,6 +26,13 @@ class Pantheon_Sessions {
 	 * @var object
 	 */
 	private static $instance;
+
+	/**
+	 * The admin instance.
+	 *
+	 * @var \Pantheon_Sessions\Admin
+	 */
+	private $admin;
 
 	/**
 	 * Gets a copy of the singleton instance.
@@ -62,8 +69,8 @@ class Pantheon_Sessions {
 			$this->setup_database();
 			$this->initialize_session_override();
 			$this->set_ini_values();
-			add_action( 'set_logged_in_cookie', array( __CLASS__, 'action_set_logged_in_cookie' ), 10, 4 );
-			add_action( 'clear_auth_cookie', array( __CLASS__, 'action_clear_auth_cookie' ) );
+			add_action( 'set_logged_in_cookie', [ __CLASS__, 'action_set_logged_in_cookie' ], 10, 4 );
+			add_action( 'clear_auth_cookie', [ __CLASS__, 'action_clear_auth_cookie' ] );
 		}
 	}
 
@@ -164,7 +171,21 @@ class Pantheon_Sessions {
 		require_once __DIR__ . '/inc/class-session-handler.php';
 		$session_handler = new Pantheon_Sessions\Session_Handler();
 		if ( PHP_SESSION_ACTIVE !== session_status() ) {
-			session_set_save_handler( $session_handler, false );
+			// Check if headers have already been sent.
+			if ( headers_sent( $file, $line ) ) {
+				// Output a friendly error message if headers are already sent.
+				trigger_error(
+					sprintf(
+						/* translators: %1s: File path, %2d: Line number */
+						__( "Oops! The wp-native-php-sessions plugin couldn't start the session because output has already been sent. This might be caused by PHP throwing errors. Please check the code in %1s on line %2d.", 'wp-native-php-sessions' ),
+						$file,
+						$line
+					),
+					E_USER_WARNING
+				);
+			} else {
+				session_set_save_handler( $session_handler, false );
+			}
 		}
 		// Close the session before $wpdb destructs itself.
 		add_action( 'shutdown', 'session_write_close', 999, 0 );
@@ -239,10 +260,7 @@ class Pantheon_Sessions {
 				update_option( 'active_plugins', $plugins );
 			}
 		}
-
-		return;
 	}
-
 }
 
 /**
