@@ -30,8 +30,8 @@ class WPForms_Lite {
 		add_filter( 'wpforms_helpers_templates_get_theme_template_paths', [ $this, 'add_templates' ] );
 
 		// Entries count logging for WPForms Lite.
-		add_action( 'wpforms_process_entry_save', [ $this, 'entry_submit' ], 10, 4 );
-		add_action( 'wpforms_process_entry_save', [ $this, 'update_entry_count' ], 10, 3 );
+		add_action( 'wpforms_process_entry_saved', [ $this, 'entry_submit' ], 10, 5 );
+		add_action( 'wpforms_process_entry_saved', [ $this, 'update_entry_count' ], 10, 5 );
 
 		// Upgrade to Pro WPForms menu bar item.
 		add_action( 'admin_bar_menu', [ $this, 'upgrade_to_pro_menu' ], 1000 );
@@ -622,7 +622,7 @@ class WPForms_Lite {
 				<ul>
 					<li><?php esc_html_e( '5000+ integrations with marketing and payment services', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Let users Save and Resume submissions to prevent abandonment', 'wpforms-lite' ); ?></li>
-					<li><?php esc_html_e( 'Take payments with PayPal Commerce, Stripe, Square, Authorize.Net, and PayPal Standard', 'wpforms-lite' ); ?></li>
+					<li><?php esc_html_e( 'Take payments with PayPal Commerce, Stripe Pro, Square, Authorize.Net, and PayPal Standard', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Collect signatures, geolocation data, and file uploads', 'wpforms-lite' ); ?></li>
 					<li><?php esc_html_e( 'Create user registration and login forms', 'wpforms-lite' ); ?></li>
 				</ul>
@@ -1234,12 +1234,15 @@ class WPForms_Lite {
 	 * Increase entries count once a form is submitted.
 	 *
 	 * @since 1.5.9
+	 * @since 1.8.2 Added Payment ID.
 	 *
-	 * @param array      $fields  Set of form fields.
-	 * @param array      $entry   Entry contents.
-	 * @param int|string $form_id Form ID.
+	 * @param array $fields     Set of form fields.
+	 * @param array $entry      Entry contents.
+	 * @param array $form_data  Form data.
+	 * @param int   $entry_id   Entry ID.
+	 * @param int   $payment_id Payment ID for the payment form.
 	 */
-	public function update_entry_count( $fields, $entry, $form_id ) {
+	public function update_entry_count( $fields, $entry, $form_data, $entry_id, $payment_id ) {
 
 		global $wpdb;
 
@@ -1247,7 +1250,7 @@ class WPForms_Lite {
 			return;
 		}
 
-		$form_id = absint( $form_id );
+		$form_id = absint( $form_data['id'] );
 
 		if ( empty( $form_id ) ) {
 			return;
@@ -1272,20 +1275,27 @@ class WPForms_Lite {
 	 * Submit entry to the Lite Connect API.
 	 *
 	 * @since 1.7.4
+	 * @since 1.8.2 Added Payment ID.
 	 *
-	 * @param array $fields    Set of form fields.
-	 * @param array $entry     Entry contents.
-	 * @param int   $form_id   Form ID.
-	 * @param array $form_data Form data.
+	 * @param array $fields     Set of form fields.
+	 * @param array $entry      Entry contents.
+	 * @param array $form_data  Form data.
+	 * @param int   $entry_id   Entry ID.
+	 * @param int   $payment_id Payment ID for the payment form.
 	 */
-	public function entry_submit( $fields, $entry, $form_id, $form_data = [] ) {
+	public function entry_submit( $fields, $entry, $form_data, $entry_id, $payment_id ) {
 
 		$submission = wpforms()->get( 'submission' );
 
-		$submission->register( $fields, $entry, $form_id, $form_data );
+		$submission->register( $fields, $entry, $form_data['id'], $form_data );
 
 		// Prepare the entry args.
 		$entry_args = $submission->prepare_entry_data();
+
+		if ( $payment_id ) {
+			$entry_args['type']       = 'payment';
+			$entry_args['payment_id'] = $payment_id;
+		}
 
 		// Submit entry args and form data to the Lite Connect API.
 		if (
