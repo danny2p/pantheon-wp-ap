@@ -136,6 +136,26 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.9.2 =
+* Fix: Prevent infinite loop in some environments
+
+= 8.9.1 =
+* Temporarily revert to 8.8.2 because of possible memory leak
+
+= 8.9.0 =
+* Feature: Bulk add ingredients button
+* Feature: Bulk add instructions button
+* Feature: Glossary terms with tooltip explanation
+* Feature: Change tooltip colors through settings
+* Feature: Support for Themify Builder when associating parent posts
+* Feature: Importer for Recipe Card Blocks by WPZOOM custom post type
+* Improvement: Position inline ingredients next to instruction when editing
+* Fix: Show correct Diet term name on archive pages
+* Fix: Author metadata for HowTo Instructions with the Yoast Integration
+* Fix: WPZoom import with links in ingredients
+* Fix: Remove brackets when importing from Create with links in ingredients
+* Fix: Parsing of unicode fraction slash during import
+
 = 8.8.2 =
 * Fix: Redirecting on print page in cases when it shouldn't
 
@@ -1501,6 +1521,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.9.2 =
+Back to version 8.9.0, with a fix for some environments
+
+= 8.9.1 =
+Temporary revert to version 8.8.2
+
+= 8.9.0 =
+Some great new features and improvements
+
 = 8.8.2 =
 Update to prevent incorrect redirects from print page
 

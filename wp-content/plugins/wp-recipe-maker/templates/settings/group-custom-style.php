@@ -21,25 +21,59 @@ $custom_style = array(
 			'type' => 'toggle',
 			'default' => true,
 		),
+	),
+	'subGroups' => array(
 		array(
-			'id' => 'recipe_css',
-			'name' => __( 'Recipe CSS', 'wp-recipe-maker' ),
-			'description' => __( 'This custom styling will be output on your website.', 'wp-recipe-maker' ),
-			'type' => 'code',
-			'code' => 'css',
-			'default' => '',
+			'name' => __( 'CSS Code', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'recipe_css',
+					'name' => __( 'Recipe CSS', 'wp-recipe-maker' ),
+					'description' => __( 'This custom styling will be output on your website.', 'wp-recipe-maker' ),
+					'type' => 'code',
+					'code' => 'css',
+					'default' => '',
+					'dependency' => array(
+						'id' => 'features_custom_style',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'print_css',
+					'name' => __( 'Recipe Print CSS', 'wp-recipe-maker' ),
+					'description' => __( 'This custom styling will be output on the recipe print page.', 'wp-recipe-maker' ),
+					'type' => 'code',
+					'code' => 'css',
+					'default' => '',
+				),
+			),
+		),
+		array(
+			'name' => __( 'Tooltips', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'tooltip_background_color',
+					'name' => __( 'Background Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#333333',
+				),
+				array(
+					'id' => 'tooltip_text_color',
+					'name' => __( 'Text Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#FFFFFF',
+				),
+				array(
+					'id' => 'tooltip_link_color',
+					'name' => __( 'Link Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#FFFFFF',
+				),
+			),
 			'dependency' => array(
 				'id' => 'features_custom_style',
 				'value' => true,
 			),
-		),
-		array(
-			'id' => 'print_css',
-			'name' => __( 'Recipe Print CSS', 'wp-recipe-maker' ),
-			'description' => __( 'This custom styling will be output on the recipe print page.', 'wp-recipe-maker' ),
-			'type' => 'code',
-			'code' => 'css',
-			'default' => '',
 		),
 	),
 );

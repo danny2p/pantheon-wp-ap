@@ -60,7 +60,7 @@ class WPRM_Admin_Menu {
 			$taxonomies = WPRM_Taxonomies::get_taxonomies_to_register();
 
 			foreach ( $taxonomies as $taxonomy => $options ) {
-				if ( $options['archive'] ) {
+				if ( $options['archive'] || 'wprm_glossary_term' === $taxonomy ) {
 					$page = 'edit-tags.php?taxonomy=' . $taxonomy . '&post_type=' . WPRM_POST_TYPE;
 					add_submenu_page( 'wprm_taxonomies', $options['name'], $options['name'], WPRM_Settings::get( 'features_manage_access' ), $page, null );
 

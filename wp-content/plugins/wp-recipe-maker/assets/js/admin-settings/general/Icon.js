@@ -27,6 +27,7 @@ import IconPainting from '../../../icons/settings/painting.svg';
 import IconPlug from '../../../icons/settings/plug.svg';
 import IconPrinter from '../../../icons/settings/printer.svg';
 import IconQuestion from '../../../icons/settings/question.svg';
+import IconQuestionBox from '../../../icons/settings/question-box.svg';
 import IconSearch from '../../../icons/settings/search.svg';
 import IconShare from '../../../icons/settings/share.svg';
 import IconSliders from '../../../icons/settings/sliders.svg';
@@ -65,6 +66,7 @@ const icons = {
     plug: IconPlug,
     printer: IconPrinter,
     question: IconQuestion,
+    'question-box': IconQuestionBox,
     search: IconSearch,
     share: IconShare,
     sliders: IconSliders,

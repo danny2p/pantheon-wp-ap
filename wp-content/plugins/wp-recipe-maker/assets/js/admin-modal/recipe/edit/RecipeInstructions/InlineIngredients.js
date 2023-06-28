@@ -8,6 +8,7 @@ import { __wprm } from 'Shared/Translations';
 import InlineIngredientsHelper from './InlineIngredientsHelper';
 
 import { serialize } from '../../../fields/FieldRichText/html';
+import { off } from 'medium-editor';
 
 const InlineIngredients = (props) => {
     const inlineIngredientsPortal = document.getElementById( 'wprm-admin-modal-field-instruction-inline-ingredients-portal' );
@@ -42,13 +43,38 @@ const InlineIngredients = (props) => {
     }
 
     // Get All Ingredients.
-    const allIngredients = props.hasOwnProperty( 'allIngredients' ) && props.allIngredients ? props.allIngredients : [];
+    let allIngredients = props.hasOwnProperty( 'allIngredients' ) && props.allIngredients ? props.allIngredients : [];
+    allIngredients = allIngredients.filter( ( ingredient ) => 'ingredient' === ingredient.type );
 
     // Set to false further down if we find an unused ingredient
     let allIngredientsAreUsed = allIngredients.length ? true : false;
 
+    // Show inline ingredients next to active element.
+    const activeElement = document.activeElement;
+
+    // Get position of the parent instruction, relative to its parent.
+    const instruction = activeElement.closest( '.wprm-admin-modal-field-instruction' );
+    const instructionOffset = instruction.offsetTop;
+
+    // Get offset the portal already has.
+    const portal = document.getElementById( 'wprm-admin-modal-field-instruction-inline-ingredients-portal' );
+    const portalOffset = portal.offsetTop;
+
+    const ingredientsMiddle = allIngredients.length * 18 / 2;
+    let offsetToAdd = instructionOffset - portalOffset - ingredientsMiddle;
+
+    // Maximum offset to add.
+    const instructionsContainer = document.getElementsByClassName( 'wprm-admin-modal-field-instruction-container' )[0];
+    const maxOffset = instructionsContainer.offsetHeight - 2 * ingredientsMiddle - portalOffset - 20;
+
+    offsetToAdd = Math.min( offsetToAdd, maxOffset );
+
     return ReactDOM.createPortal(
         <Fragment>
+            {
+                offsetToAdd > 0
+                && <div className="wprm-admin-modal-field-instruction-inline-ingredients-offset" style={{ height: offsetToAdd }}></div>
+            }
             <div
                 className="wprm-admin-modal-field-instruction-inline-ingredients"
                 onMouseDown={ (event) => {
@@ -57,42 +83,40 @@ const InlineIngredients = (props) => {
             >
                 {
                     allIngredients.map( ( ingredient, index ) => {
-                        if ( 'ingredient' === ingredient.type ) {
-                            const ingredientString = InlineIngredientsHelper.getIngredientText( ingredient );
-                
-                            if ( ingredientString ) {
-                                let classes = [
-                                    'wprm-admin-modal-field-instruction-inline-ingredient',
-                                ];
+                        const ingredientString = InlineIngredientsHelper.getIngredientText( ingredient );
+            
+                        if ( ingredientString ) {
+                            let classes = [
+                                'wprm-admin-modal-field-instruction-inline-ingredient',
+                            ];
 
-                                // Check if ingredient is already used.
-                                if ( ingredientUidsInCurrent.includes( ingredient.uid ) ) {
-                                    classes.push( 'wprm-admin-modal-field-instruction-inline-ingredient-in-current' );
-                                } else if ( ingredientUidsInAll.includes( ingredient.uid ) ) {
-                                    classes.push( 'wprm-admin-modal-field-instruction-inline-ingredient-in-other' );
-                                } else {
-                                    allIngredientsAreUsed = false;
-                                }
-
-                                return (
-                                    <a
-                                        href="#"
-                                        className={ classes.join( ' ' ) }
-                                        onMouseDown={ (e) => {
-                                            e.preventDefault();
-
-                                            let node = {
-                                                type: 'ingredient',
-                                                uid: ingredient.uid,
-                                                children: [{ text: ingredientString }],
-                                            };
-
-                                            Transforms.insertNodes( editor, node );
-                                        }}
-                                        key={ index }
-                                    >{ he.decode( ingredientString ) }</a>
-                                );
+                            // Check if ingredient is already used.
+                            if ( ingredientUidsInCurrent.includes( ingredient.uid ) ) {
+                                classes.push( 'wprm-admin-modal-field-instruction-inline-ingredient-in-current' );
+                            } else if ( ingredientUidsInAll.includes( ingredient.uid ) ) {
+                                classes.push( 'wprm-admin-modal-field-instruction-inline-ingredient-in-other' );
+                            } else {
+                                allIngredientsAreUsed = false;
                             }
+
+                            return (
+                                <a
+                                    href="#"
+                                    className={ classes.join( ' ' ) }
+                                    onMouseDown={ (e) => {
+                                        e.preventDefault();
+
+                                        let node = {
+                                            type: 'ingredient',
+                                            uid: ingredient.uid,
+                                            children: [{ text: ingredientString }],
+                                        };
+
+                                        Transforms.insertNodes( editor, node );
+                                    }}
+                                    key={ index }
+                                >{ he.decode( ingredientString ) }</a>
+                            );
                         }
 
                         return null;

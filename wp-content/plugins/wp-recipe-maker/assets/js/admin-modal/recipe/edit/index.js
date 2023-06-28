@@ -171,6 +171,7 @@ const EditRecipe = (props) => {
                 ingredients={ props.recipe.ingredients_flat }
                 instructions={ props.recipe.instructions_flat }
                 onRecipeChange={ props.onRecipeChange }
+                onModeChange={ props.onModeChange }
                 allowVideo={ hasVideo && 'other' !== props.recipe.type }
             />
         )

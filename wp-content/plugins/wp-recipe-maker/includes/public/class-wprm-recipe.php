@@ -1206,7 +1206,7 @@ class WPRM_Recipe {
 			}
 		}
 
-		return $equipment_array;
+		return apply_filters( 'wprm_recipe_field', $equipment_array, 'equipment', $this );
 	}
 
 	/**
@@ -1216,7 +1216,9 @@ class WPRM_Recipe {
 	 */
 	public function ingredients() {
 		$ingredients = self::unserialize( $this->meta( 'wprm_ingredients', array() ) );
-		return is_array( $ingredients ) ? $ingredients : array();
+		$ingredients = is_array( $ingredients ) ? $ingredients : array();
+
+		return apply_filters( 'wprm_recipe_field', $ingredients, 'ingredients', $this );
 	}
 
 	/**
@@ -1322,7 +1324,9 @@ class WPRM_Recipe {
 	 */
 	public function instructions() {
 		$instructions = self::unserialize( $this->meta( 'wprm_instructions', array() ) );
-		return is_array( $instructions ) ? $instructions : array();
+		$instructions = is_array( $instructions ) ? $instructions : array();
+
+		return apply_filters( 'wprm_recipe_field', $instructions, 'instructions', $this );
 	}
 
 	/**
@@ -1417,7 +1421,8 @@ class WPRM_Recipe {
 	 * @since    1.0.0
 	 */
 	public function notes() {
-		return wpautop( $this->meta( 'wprm_notes', '' ) );
+		$notes = apply_filters( 'wprm_recipe_field', $this->meta( 'wprm_notes', '' ), 'notes', $this );
+		return wpautop( $notes );
 	}
 
 	/**

@@ -8,6 +8,7 @@ import ColumnsRevision from './revisions/Columns';
 import ColumnsTaxonomies from './taxonomies/Columns';
 import ColumnsTrash from './trash/Columns';
 import ColumnsUnits from './units/Columns';
+import ColumnsGlossary from './glossary/Columns';
 import ColumnsAnalytics from './analytics/Columns';
 
 let datatables = {
@@ -276,6 +277,34 @@ datatables.rating = {
     createButton: false,
     selectedColumns: ['date','rating','type', 'user_id','ip'],
     columns: ColumnsRatings,
+}
+
+datatables.glossary = {
+    parent: __wprm( 'Features' ),
+    id: 'glossary_term',
+    route: 'taxonomy',
+    label: {
+        singular: __wprm( 'Glossary Term' ),
+        plural: __wprm( 'Glossary Terms' ),
+    },
+    bulkEdit: {
+        route: 'taxonomy',
+        type: 'glossary_term',
+    },
+    createButton: (datatable) => {
+        let name = prompt( __wprm( 'What do you want to be the new term to be?' ) );
+        if( name && name.trim() ) {
+            Api.manage.createTerm('glossary_term', name).then((data) => {
+                if ( ! data ) {
+                    alert( __wprm( 'We were not able to create this term. Make sure it does not exist yet.' ) );
+                } else {
+                    datatable.refreshData();
+                }
+            });
+        }
+    },
+    selectedColumns: false,
+    columns: ColumnsGlossary,
 }
 
 datatables.collections = {

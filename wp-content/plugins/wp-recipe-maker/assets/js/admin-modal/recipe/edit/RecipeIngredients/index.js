@@ -91,6 +91,7 @@ export default class RecipeIngredients extends Component {
                                 unit_system,
                             });
                         } }
+                        onModeChange={ this.props.onModeChange }
                     />
                 );
                 break;
@@ -127,6 +128,7 @@ export default class RecipeIngredients extends Component {
                         ingredients={ this.props.ingredients }
                         instructions={ this.props.instructions }
                         onRecipeChange={ this.props.onRecipeChange }
+                        onModeChange={ this.props.onModeChange }
                     />
                 );
         }

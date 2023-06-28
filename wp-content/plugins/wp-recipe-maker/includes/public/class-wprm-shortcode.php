@@ -116,6 +116,7 @@ class WPRM_Shortcode {
 		$content = self::replace_tasty_shortcode( $content );
 		$content = self::replace_ziplist_shortcode( $content );
 		$content = self::replace_bigoven_shortcode( $content );
+		$content = self::replace_wpzoom_shortcode( $content );
 
 		return $content;
 	}
@@ -234,6 +235,46 @@ class WPRM_Shortcode {
 		return $content;
 	}
 
+	/**
+	 * Replace WP Zoom shortcode with ours.
+	 *
+	 * @since    8.9.0
+	 * @param	 mixed $content Content we want to filter before it gets passed along.
+	 */
+	public static function replace_wpzoom_shortcode( $content ) {
+		preg_match_all( "/\[wpzoom_rcb_post\s.*?id='?\"?(\d+).*?]/im", $content, $matches );
+		foreach ( $matches[0] as $key => $match ) {
+			$id = $matches[1][ $key ];
+
+			$wprm_imported_to = get_post_meta( $id, 'wprm_imported_to', true );
+			if ( $wprm_imported_to ) {
+				$content = str_replace( $match, '[wprm-recipe id="' . $wprm_imported_to . '"]', $content );
+			}
+		}
+
+		if ( function_exists( 'parse_blocks' ) ) {
+			preg_match_all( '/<!--(.*?)-->/im', $content, $matches);
+
+			foreach ( $matches[0] as $key => $match ) {
+				$blocks = parse_blocks( $match );
+
+				if ( $blocks && 1 === count( $blocks ) && $blocks[0] && 'wpzoom-recipe-card/recipe-block-from-posts' === $blocks[0]['blockName'] ) {
+					$id = $blocks[0]['attrs']['postId'];
+
+					if ( $id ) {
+						$wprm_imported_to = get_post_meta( $id, 'wprm_imported_to', true );
+
+						if ( $wprm_imported_to ) {
+							$content = str_replace( $match, '[wprm-recipe id="' . $wprm_imported_to . '"]', $content );
+						}
+					}
+				}
+			}			
+		}
+
+		return $content;
+	}
+
 
 	/**
 	 * Replace blocks by other recipe plugins with ours, if they have been imported.
@@ -263,6 +304,19 @@ class WPRM_Shortcode {
 
 				if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {
 					$content = do_shortcode( '[wprm-recipe id="' . $post_id . '"]' );
+				}
+			}
+		}
+
+		// WP Zoom.
+		if ( 'wpzoom-recipe-card/recipe-block-from-posts' === $block['blockName'] ) {
+			$wpzoom_id = isset( $block['attrs']['postId'] ) ? intval( $block['attrs']['postId'] ) : false;
+
+			if ( $wpzoom_id ) {
+				$wprm_imported_to = get_post_meta( $wpzoom_id, 'wprm_imported_to', true );
+
+				if ( $wprm_imported_to ) {
+					$content = do_shortcode( '[wprm-recipe id="' . $wprm_imported_to . '"]' );
 				}
 			}
 		}

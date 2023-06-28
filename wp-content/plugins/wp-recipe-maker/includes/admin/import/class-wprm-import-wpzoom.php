@@ -42,7 +42,7 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 	 * @since    7.4.0
 	 */
 	public function get_name() {
-		return 'Recipe Card Blocks by WPZOOM';
+		return 'Recipe Card Blocks by WPZOOM (Legacy, searches for blocks in posts only)';
 	}
 
 	/**
@@ -507,6 +507,11 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 								// Add image after.
 								$parsed[] = intval( $image_id );
 							}
+						}
+						break;
+					default:
+						if ( isset( $part['props'] ) && isset( $part['props']['children'] ) && is_array( $part['props']['children'] ) ) {
+							$text .= $this->parse_rich_text( $part['props']['children'], true, $post_id );
 						}
 						break;
 				}

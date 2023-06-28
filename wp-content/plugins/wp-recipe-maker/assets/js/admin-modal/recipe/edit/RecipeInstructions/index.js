@@ -348,6 +348,13 @@ export default class RecipeInstructions extends Component {
                                 this.addField( 'group' );
                             } }
                         >{ __wprm( 'Add Instruction Group' ) }</button>
+                        <button
+                            className="button"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                this.props.onModeChange('bulk-add-instructions');
+                            } }
+                        >{ __wprm( 'Bulk Add Instructions' ) }</button>
                         <p>{ __wprm( 'Tip: use the TAB key to move from field to field and easily add instructions.' ) }</p>
                     </div>
                 </div>

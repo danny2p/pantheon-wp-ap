@@ -1,5 +1,19 @@
 == Changelog ==
 
+= 1.8.2.2 =
+- Added: Developers can now use a new hook that is fired when the form is duplicated.
+- Fixed: A PHP deprecation notice was generated when enabling or disabling auto-updates of any plugin.
+- Fixed: Form challenge items were not aligned correctly in various languages.
+- Fixed: Legacy Layout Classes didn't work when using the Modern Form Styles.
+- Fixed: Custom Math Captcha was still large when the Lead Forms addon was disabled.
+- Fixed: Checkboxes and Multiple Choice fields with icons were cut on mobile devices.
+- Fixed: Words in the Form Export dropdown on the Tools > Export admin page were split by letters.
+- Fixed: Links were stripped in choices labels.
+- Fixed: Block Editor kept showing the unsaved changes dialog even though there weren't any changes.
+- Fixed: `wpforms_sanitize_amount()` function did not work properly with exponent numbers.
+- Fixed: Compatibility with the Popup Maker plugin was improved - Stripe Credit Card field didn't load when a payment form was inserted into a popup.
+- Fixed: There was no empty state when no forms created for the WPForms widget in the Elementor screen.
+
 = 1.8.2.1 =
 - Added: Payment fields are now available for everyone.
 - Added: Users can connect their Stripe accounts and receive payments via their payment forms.
