@@ -261,6 +261,9 @@ class WPRM_Import_Create extends WPRM_Import {
 							'nofollow' => '0' === $mv_ingredient['nofollow'] ? 'follow' : 'nofollow',
 						);
 						$has_ingredient_links = true;
+
+						// Remove square brackets, used to indicate link.
+						$ingredient['raw'] = preg_replace( '/\[(.*)\]/', '$1', $ingredient['raw'] );
 					}
 
 					$group['ingredients'][] = $ingredient;

@@ -352,6 +352,36 @@ class WPRM_Assets {
 				echo '<style type="text/css">' . $css . '</style>';
 			}
 		}
+
+		// Custom CSS for glossary terms.
+		if ( WPRM_Settings::get( 'glossary_terms_styling' ) ) {
+			$css = '';
+
+			$css .= '.wprm-glossary-term {';
+
+			// Text Color.
+			$css .= 'color: ' . esc_attr( WPRM_Settings::get( 'glossary_terms_text_color' ) ) . ';';
+
+			// Underline.
+			switch( WPRM_Settings::get( 'glossary_terms_underline' ) ) {
+				case 'regular':
+					$css .= 'text-decoration: underline;';
+					break;
+				case 'dotted':
+				case 'dashed':
+					$css .= 'border-bottom: 1px ' . esc_attr( WPRM_Settings::get( 'glossary_terms_underline' ) ) . ' ' . esc_attr( WPRM_Settings::get( 'glossary_terms_text_color' ) ) .';';
+					break;
+			}
+
+			// Cursor.
+			if ( 'none' !== WPRM_Settings::get( 'glossary_terms_hover_cursor' ) ) {
+				$css .= 'cursor: ' . esc_attr( WPRM_Settings::get( 'glossary_terms_hover_cursor' ) ) . ';';
+			}
+		
+			$css .= '}';
+
+			echo '<style type="text/css">' . $css . '</style>';
+		}
 	}
 
 	/**
@@ -442,6 +472,14 @@ class WPRM_Assets {
 				$output .= $selector . ' li.wprm-recipe-instruction { list-style-type: ' . WPRM_Settings::get( 'template_instruction_list_style' ) . '; }';
 			}
 		}
+
+		// Tooltips.
+		$output .= ' .tippy-box[data-theme~="wprm"] { background-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; color: ' . WPRM_Settings::get( 'tooltip_text_color' ) . '; }';
+		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="top"] > .tippy-arrow::before { border-top-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
+		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="bottom"] > .tippy-arrow::before { border-bottom-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
+		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="left"] > .tippy-arrow::before { border-left-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
+		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="right"] > .tippy-arrow::before { border-right-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
+		$output .= ' .tippy-box[data-theme~="wprm"] a { color: ' . WPRM_Settings::get( 'tooltip_link_color' ) . '; }';
 
 		// Comment ratings.
 		$output .= ' .wprm-comment-rating svg { width: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; height: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; }';

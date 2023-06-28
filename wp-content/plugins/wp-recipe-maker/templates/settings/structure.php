@@ -26,6 +26,7 @@ require_once( 'group-recipe-template.php' );
 require_once( 'group-recipe-print.php' );
 require_once( 'group-recipe-snippets.php' );
 require_once( 'group-nutrition-label.php' );
+require_once( 'group-glossary-terms.php' );
 require_once( 'group-integrations.php' );
 require_once( 'group-custom-style.php' );
 
@@ -71,6 +72,7 @@ $settings_structure = array(
 	$recipe_print,
 	$recipe_snippets,
 	$nutrition_label,
+	$glossary_terms,
 	$integrations,
 	$custom_style,
 	array( 'header' => __( 'Interactivity', 'wp-recipe-maker' ) ),

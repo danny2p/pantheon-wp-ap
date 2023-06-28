@@ -254,6 +254,20 @@ class WPRM_Recipe_Saver {
 
 		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post->post_content );
 
+		// Themify Builder compatibility.
+		if ( '<!-- wp:themify-builder/canvas /-->' === substr( $post->post_content, 0, 38 ) ) {
+			$ThemifyBuilder = isset( $GLOBALS['ThemifyBuilder'] ) ? $GLOBALS['ThemifyBuilder'] : false;
+
+			if ( $ThemifyBuilder ) {
+				$content = $ThemifyBuilder->get_builder_output( $post->ID );
+			
+				if ( $content ) {
+					preg_match_all( '/id="wprm-recipe-container-(\d+)"/m', $content, $matches );
+					$recipe_ids = array_unique( $recipe_ids + $matches[1] );
+				}
+			}
+		}
+
 		if ( count( $recipe_ids ) > 0 ) {
 			// Immediately update when importing, otherwise do on next load to prevent issues with other plugins.
 			if ( isset( $_POST['importer_uid'] ) || ( isset( $_POST['action'] ) && 'wprm_finding_parents' === $_POST['action'] ) ) { // Input var okay.

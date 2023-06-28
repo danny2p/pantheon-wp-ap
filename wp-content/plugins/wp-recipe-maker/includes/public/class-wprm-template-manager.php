@@ -348,7 +348,15 @@ class WPRM_Template_Manager {
 				}
 				break;
 			case 'print-collection':
-				$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
+				if ( '_modern' === $mode ) {
+					if ( 'food' === $recipe_type ) { 
+						$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
+					} else {
+						$template_slug = WPRM_Settings::get( 'recipe_collections_print_' . $recipe_type . '_recipes_template' . $mode );
+					}
+				} else {
+					$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
+				}
 				break;
 			case 'snippet':
 				if ( 'food' === $recipe_type ) { 
@@ -412,7 +420,15 @@ class WPRM_Template_Manager {
 					}
 					break;
 				case 'print-collection':
-					$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
+					if ( '_modern' === $mode ) {
+						if ( 'food' === $recipe_type ) { 
+							$template_slug = WPRM_Settings::get_default( 'recipe_collections_print_recipes_template' . $mode );
+						} else {
+							$template_slug = WPRM_Settings::get_default( 'recipe_collections_print_' . $recipe_type . '_recipes_template' . $mode );
+						}
+					} else {
+						$template_slug = WPRM_Settings::get_default( 'recipe_collections_print_recipes_template' . $mode );
+					}
 					break;
 				case 'snippet':
 					if ( 'food' === $recipe_type ) { 

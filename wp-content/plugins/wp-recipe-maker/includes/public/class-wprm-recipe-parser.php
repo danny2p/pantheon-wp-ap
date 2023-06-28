@@ -62,6 +62,9 @@ class WPRM_Recipe_Parser {
 		// Amount.
 		$amount = '';
 
+		// Use regular / instead of unicode one.
+		$raw = str_replace( '⁄', '/', $raw );
+
 		$unicode_regex = '';
 		foreach ( self::$fraction_symbols_map as $unicode => $normal ) {
 			$unicode_regex .= '\x{' . $unicode . '}';

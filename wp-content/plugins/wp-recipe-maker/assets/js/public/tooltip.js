@@ -23,7 +23,10 @@ window.WPRecipeMaker.tooltip = {
 
             if ( tooltip ) {
                 tippy( container, {
+                    theme: 'wprm',
                     content: tooltip,
+                    allowHTML: true,
+                    interactive: true,
                 });
             }
         }

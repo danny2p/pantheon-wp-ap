@@ -1,0 +1,42 @@
+.wprm-admin-modal-bulk-add-container {
+    padding: 10px;
+    overflow: scroll;
+
+    h2 {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .wprm-admin-modal-bulk-add-input {
+        textarea {
+            height: 200px;
+        }
+    }
+
+    .wprm-admin-modal-field-text-import-groups {
+        p {
+            margin-top: 10px;
+        }
+
+        .wprm-admin-modal-field-text-import-groups-field {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+
+            input[type="text"] {
+                flex: auto;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-bulk-add-container {
+        .wprm-admin-modal-bulk-add-input {
+            textarea {
+                flex: auto;
+            }
+        }
+    }
+}

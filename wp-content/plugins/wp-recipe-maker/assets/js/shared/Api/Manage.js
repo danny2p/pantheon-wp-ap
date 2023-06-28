@@ -63,6 +63,13 @@ export default {
 
         return ApiWrapper.call( `${taxonomyEndpoint}${type}/${id}`, 'POST', data );
     },
+    changeTermDescription(type, id, description) {
+        const data = {
+            description,
+        };
+
+        return ApiWrapper.call( `${taxonomyEndpoint}${type}/${id}`, 'POST', data );
+    },
     renameTermLabel(type, id, label) {
         const data = {
             type,

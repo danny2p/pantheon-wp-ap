@@ -232,6 +232,13 @@ export default class IngredientsEdit extends Component {
                             this.addField( 'group' );
                         } }
                     >{ 'howto' === this.props.type ? __wprm( 'Add Material Group' ) : __wprm( 'Add Ingredient Group' ) }</button>
+                    <button
+                        className="button"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.props.onModeChange('bulk-add-ingredients');
+                        } }
+                    >{ 'howto' === this.props.type ? __wprm( 'Bulk Add Materials' ) : __wprm( 'Bulk Add Ingredients' ) }</button>
                     <p>{ __wprm( 'Tip: use the TAB key to move from field to field and easily add ingredients.' ) }</p>
                 </div>
             </div>

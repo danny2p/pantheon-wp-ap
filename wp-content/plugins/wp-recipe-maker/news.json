@@ -1,6 +1,30 @@
 {
     "news": [
         {
+            "date": "2023-06-26",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.9.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-9-0/"
+        },
+        {
+            "date": "2023-06-16",
+            "label": "Blog",
+            "title": "How to Create a Recipe Roundup for Your Food Blog [2023]",
+            "url": "https://bootstrapped.ventures/recipe-roundup/"
+        },
+        {
+            "date": "2023-06-08",
+            "label": "Blog",
+            "title": "How to Add a Jump to Recipe Button to Your Food Blog",
+            "url": "https://bootstrapped.ventures/jump-to-recipe/"
+        },
+        {
+            "date": "2023-05-25",
+            "label": "Blog",
+            "title": "How to Make a Recipe Website with WordPress",
+            "url": "https://bootstrapped.ventures/build-a-recipe-website/"
+        },
+        {
             "date": "2023-05-09",
             "label": "Release",
             "title": "WP Recipe Maker 8.8.0",

@@ -9,8 +9,11 @@ const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
 
 import EditRecipe from './edit';
 import TextImport from './text-import';
+import BulkAdd from './bulk-add';
 
 const modalContent = {
+    'bulk-add-ingredients': BulkAdd,
+    'bulk-add-instructions': BulkAdd,
     'text-import': TextImport,
     recipe: EditRecipe,
 };
@@ -66,6 +69,7 @@ export default class Recipe extends Component {
         this.onRecipeChange = this.onRecipeChange.bind(this);
         this.onImportJSON = this.onImportJSON.bind(this);
         this.saveRecipe = this.saveRecipe.bind(this);
+        this.setUids = this.setUids.bind(this);
         this.allowCloseModal = this.allowCloseModal.bind(this);
         this.changesMade = this.changesMade.bind(this);
     }
@@ -173,6 +177,21 @@ export default class Recipe extends Component {
         }
     }
 
+    setUids( currentValues, valuesToAdd ) {
+        // Give unique UID.
+        let maxUid = Math.max.apply( Math, currentValues.map( function(field) { return field.uid; } ) );
+        maxUid = maxUid < 0 ? -1 : maxUid;
+
+        let valuesWithUid = [];
+        for ( let valueToAdd of valuesToAdd ) {
+            maxUid++;
+            valueToAdd.uid = maxUid;
+            valuesWithUid.push( valueToAdd );
+        }
+
+        return valuesWithUid;
+    }
+
     allowCloseModal() {
         switch ( this.state.mode ) {
             case 'nutrition-calculation':
@@ -188,6 +207,12 @@ export default class Recipe extends Component {
                 return false;
             case 'text-import':
                 this.onModeChange( 'recipe' );
+                return false;
+            case 'bulk-add-ingredients':
+                this.onModeChange( 'recipe', 'ingredients' );
+                return false;
+            case 'bulk-add-instructions':
+                this.onModeChange( 'recipe', 'instructions' );
                 return false;
         }
 
@@ -274,6 +299,50 @@ export default class Recipe extends Component {
                                 ingredients_flat,
                             });
                             this.onModeChange( 'recipe', 'ingredients' );
+                        }}
+                    />
+                );
+            case 'bulk-add-ingredients':
+                return (
+                    <Content
+                        onCloseModal={ this.props.maybeCloseModal }
+                        onCancel={() => {
+                            this.onModeChange( 'recipe', 'ingredients' );
+                        }}
+                        field="ingredients"
+                        onBulkAdd={ (ingredients_flat) => {
+                            const currentIngredients = JSON.parse( JSON.stringify( this.state.recipe.ingredients_flat ) );
+                            const newIngredients = this.setUids( currentIngredients, ingredients_flat );
+
+                            this.onRecipeChange({
+                                ingredients_flat: [
+                                    ...currentIngredients,
+                                    ...newIngredients,
+                                ],
+                            });
+                            this.onModeChange( 'recipe', 'ingredients' );
+                        }}
+                    />
+                );
+            case 'bulk-add-instructions':
+                return (
+                    <Content
+                        onCloseModal={ this.props.maybeCloseModal }
+                        onCancel={() => {
+                            this.onModeChange( 'recipe', 'instructions' );
+                        }}
+                        field="instructions"
+                        onBulkAdd={ (instructions_flat) => {
+                            const currentInstructions = JSON.parse( JSON.stringify( this.state.recipe.instructions_flat ) );
+                            const newInstructions = this.setUids( currentInstructions, instructions_flat );
+
+                            this.onRecipeChange({
+                                instructions_flat: [
+                                    ...currentInstructions,
+                                    ...newInstructions,
+                                ],
+                            });
+                            this.onModeChange( 'recipe', 'instructions' );
                         }}
                     />
                 );

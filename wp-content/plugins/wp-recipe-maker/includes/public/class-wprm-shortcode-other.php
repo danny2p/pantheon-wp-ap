@@ -28,6 +28,7 @@ class WPRM_Shortcode_Other {
 		add_shortcode( 'adjustable', array( __CLASS__, 'adjustable_shortcode' ) );
 		add_shortcode( 'timer', array( __CLASS__, 'timer_shortcode' ) );
 		add_shortcode( 'wprm-temperature', array( __CLASS__, 'temperature_shortcode' ) );
+		add_shortcode( 'wprm-glossary', array( __CLASS__, 'glossary_shortcode' ) );
 		add_shortcode( 'wprm-ingredient', array( __CLASS__, 'ingredient_shortcode' ) );
 		add_shortcode( 'wprm-condition', array( __CLASS__, 'condition_shortcode' ) );
 
@@ -143,6 +144,47 @@ class WPRM_Shortcode_Other {
 		}
 
 		$output .= '</span>';
+
+		return $output;
+	}
+
+	/**
+	 * Output for the glossary shortcode.
+	 *
+	 * @since	8.9.0
+	 * @param	array $atts		Shortcode attributes.
+	 */
+	public static function glossary_shortcode( $atts, $content ) {
+		$atts = shortcode_atts( array(
+			'id' => '',
+		), $atts, 'wprm_glossary' );
+
+		$id = intval( $atts['id'] );
+		$original_text = $content ? $content : '';
+		$term = $id ? get_term( $id, 'wprm_glossary_term' ) : false;
+
+		$output = '';
+
+		if ( $term ) {
+			$name = $original_text ? $original_text : $term->name;
+
+			if ( $name ) {
+				$classes = array(
+					'wprm-glossary-term',
+					'wprm-glossary-term-' . $term->term_id,
+				);
+
+				$tooltip = $term->description;
+				$data_tooltip = '';
+
+				if ( $tooltip ) { 
+					$classes[] = 'wprm-tooltip';
+					$data_tooltip = ' data-tooltip="' . esc_attr( $tooltip ) . '"';
+				}
+
+				$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $data_tooltip . '>' . $name . '</span>';
+			}
+		}
 
 		return $output;
 	}

@@ -157,6 +157,9 @@ class WPRM_Api_Manage_Taxonomies {
 				$args['orderby'] = 'meta_value';
 				$args['meta_key'] = 'wpupg_custom_image';
 				break;
+			case 'tooltip':
+				$args['orderby'] = 'description';
+				break;
 			default:
 			 	$args['orderby'] = 'ID';
 		}
@@ -262,6 +265,11 @@ class WPRM_Api_Manage_Taxonomies {
 									'compare' => 'NOT EXISTS',
 								);
 							}
+						}
+						break;
+					case 'tooltip':
+						if ( '' !== $value ) {
+							$args['description__like'] = $value;
 						}
 						break;
 				}
@@ -370,6 +378,9 @@ class WPRM_Api_Manage_Taxonomies {
 						break;
 					case 'suitablefordiet':
 						$row->label = get_term_meta( $row->term_id, 'wprm_term_label', true );
+						break;
+					case 'glossary_term':
+						$row->tooltip = $row->description;
 						break;
 				}
 			}

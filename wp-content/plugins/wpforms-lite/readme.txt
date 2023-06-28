@@ -3,7 +3,7 @@ Contributors: wpforms, jaredatch, smub, slaFFik
 Tags: contact form, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Turnstile, Akismet, email form, web form, feedback form, payment form, survey form, donation form, email submit form, message form, mailchimp, mailchimp form, aweber, aweber form, paypal, paypal form, stripe, stripe form, getresponse, getresponse form, email subscription, contact form widget, user registration form, wordpress registration, wordpress login form, feedback
 Requires at least: 5.2
 Tested up to: 6.2
-Stable tag: 1.8.2.1
+Stable tag: 1.8.2.2
 Requires PHP: 5.6
 License: GNU General Public License v2.0 or later
 
@@ -15,7 +15,7 @@ The best WordPress contact form plugin. Drag & Drop online form builder to creat
 
 We believe that you shouldn't have to hire a developer to create a WordPress contact form. That's why we built <a href="https://wpforms.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend" title="WPForms">WPForms</a>, a drag & drop WordPress form builder that's EASY and POWERFUL.
 
-WPForms allows you to create beautiful contact forms, feedback form, subscription forms, payment forms (using Stripe, Square, or PayPal), and other types of forms for your site in minutes, not hours!
+WPForms allows you to create beautiful contact forms, feedback forms, subscription forms, payment forms, and other types of forms for your site in minutes, not hours!
 
 At WPForms, user experience is our #1 priority. Our pre-built form templates and workflows make WPForms the most beginner-friendly contact form plugin on the market.
 
@@ -51,7 +51,7 @@ Whether you're looking to create a simple contact form, marketing form, request 
 
 WPForms comes with <a href="https://wpforms.com/features/form-templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">pre-built form templates</a> to help you save time. You can add, remove, or re-arrange fields as necessary.
 
-See <a href="https://wpforms.com/templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">600+ Pre-Made WPForms Form Template Demo</a>
+See <a href="https://wpforms.com/templates/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">700+ Pre-Made WPForms Form Template Demos</a>
 
 = Mobile Ready, SEO Friendly and Optimized for Speed =
 
@@ -106,8 +106,6 @@ While WPForms started out as a contact form plugin, it has evolved into a powerf
 
 WPForms integrates with PayPal, Stripe, Square, and Authorize.Net so you can easily create a credit card payment form to accept payments. If you're using SSL, then you can use our Stripe, Square, or Authorize.Net Payment forms to accept credit card payments directly on your website. Alternatively, you can use our PayPal Commerce addon to take payments via PayPal or credit card on your forms.
 
-<strong>NEW:</strong> WPForms Lite now includes Stripe Payment Form in the free version. This allows you to easily accept online payments on your website through secure payment forms. Supported payment methods include credit card payments, Apple Pay, Google Pay, and other Stripe supported payment elements.
-
 Aside from simple order forms, business owners also use WPForms to create custom product purchase forms, t-shirt order forms, online booking forms, and more.
 
 We understand that sometimes you may need to create a contact form that require a signature. WPForms comes with a signature field to collect user signature on your WordPress forms or even create custom signature forms.
@@ -149,6 +147,7 @@ Since contact forms are essential for marketing, WPForms is a must have plugin f
 * <a href="https://wpforms.com/features/form-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Smart Form Confirmation</a> - Show a custom success message, or redirect users to a custom thank you page.
 * <a href="https://wpforms.com/docs/how-to-choose-the-right-form-field-for-your-forms/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin#phone" rel="friend">Smart Phone Field</a> - Automatically adapts to your visitor's location so you always get phone numbers in the correct country format.
 * Payment & Donation Forms - Track the growth of your business with simple payment tracking and revenue charts.
+* <a href="https://wpforms.com/addons/coupons-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Coupon Forms</a> - Offer one-time discounts, free shipping, and percentage discounts with custom payment coupons.
 * <a href="https://wpforms.com/features/file-uploads/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">File Uploads</a> - Collect files and media through your contact forms with File Uploads.
 * <a href="https://wpforms.com/features/multi-page-forms/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Multi-Page Forms</a> - Split long forms into multiple pages with progress bar to improve user experience.
 * <a href="https://wpforms.com/features/conditional-logic/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Smart Conditional Logic</a> - Show or hide fields and contact form sections based on user behavior.
@@ -187,7 +186,7 @@ Since contact forms are essential for marketing, WPForms is a must have plugin f
 * <a href="https://wpforms.com/addons/mailerlite-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">MailerLite Forms</a> - Create MailerLite forms to easily add subscribers to your email marketing lists.
 * <a href="https://wpforms.com/addons/salesforce-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Salesforce Forms</a> - Easily send your WordPress form contacts and leads to your Salesforce CRM account.
 * <a href="https://wpforms.com/addons/google-sheets-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Google Sheets Addon</a> - Connect your WordPress forms to your Google account and easily send forms entries to Google Sheets.
-* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 5000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
+* <a href="https://wpforms.com/addons/zapier-addon/?utm_source=wprepo&utm_medium=link&utm_campaign=liteplugin" rel="friend">Zapier Addon</a> - Connect your WordPress forms with over 5,000+ apps. Route your contact form data to your favorite CRM, email marketing service, etc.
 
 After reading this feature list, you can probably imagine why WPForms is the best WordPress contact form plugin on the market.
 
@@ -243,12 +242,10 @@ Visit <a href="https://www.wpbeginner.com/" rel="friend" title="WPBeginner">WPBe
 
 1. WPForms Drag & Drop Online Form Builder
 2. Adding New Field
-3. Form Templates
-4. Payments Overview
-5. Single Payment Page
-6. Form Preview
-7. Form Pages with multiple styles
-8. Conversational Forms
+3. WPForms Settings
+4. Form Preview
+5. Form Pages with multiple styles
+6. Conversational Forms
 
 == Frequently Asked Questions ==
 
@@ -355,7 +352,7 @@ Here is a list of our popular marketing integrations:
 * Sendinblue
 * MailerLite
 
-Using our Zapier integration, you can easily connect WPForms with over 5000+ marketing apps including:
+Using our Zapier integration, you can easily connect WPForms with over 5,000+ marketing apps including:
 
 * PipeDrive CRM
 * Google Sheets
@@ -443,6 +440,20 @@ Thank you
 Syed Balkhi
 
 == Changelog ==
+
+= 1.8.2.2 =
+- Added: Developers can now use a new hook that is fired when the form is duplicated.
+- Fixed: A PHP deprecation notice was generated when enabling or disabling auto-updates of any plugin.
+- Fixed: Form challenge items were not aligned correctly in various languages.
+- Fixed: Legacy Layout Classes didn't work when using the Modern Form Styles.
+- Fixed: Custom Math Captcha was still large when the Lead Forms addon was disabled.
+- Fixed: Checkboxes and Multiple Choice fields with icons were cut on mobile devices.
+- Fixed: Words in the Form Export dropdown on the Tools > Export admin page were split by letters.
+- Fixed: Links were stripped in choices labels.
+- Fixed: Block Editor kept showing the unsaved changes dialog even though there weren't any changes.
+- Fixed: `wpforms_sanitize_amount()` function did not work properly with exponent numbers.
+- Fixed: Compatibility with the Popup Maker plugin was improved - Stripe Credit Card field didn't load when a payment form was inserted into a popup.
+- Fixed: There was no empty state when no forms created for the WPForms widget in the Elementor screen.
 
 = 1.8.2.1 =
 - Added: Payment fields are now available for everyone.

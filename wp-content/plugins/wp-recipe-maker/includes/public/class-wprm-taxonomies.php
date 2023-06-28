@@ -17,7 +17,7 @@
  * @subpackage WP_Recipe_Maker/includes/public
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
-class WPRM_Taxonomies {
+class WPRM_Taxonomies { 
 
 	/**
 	 * Register actions and filters.
@@ -29,6 +29,7 @@ class WPRM_Taxonomies {
 		add_action( 'pre_get_posts', array( __CLASS__, 'taxonomies_archive' ), 1 );
 
 		add_filter( 'the_content', array( __CLASS__, 'archive_content' ) );
+		add_filter( 'get_term', array( __CLASS__, 'suitablefordiet_term_name' ), 10, 2 );
 
 		add_filter( 'wprm_recipe_tag_shortcode_link', array( __CLASS__, 'archive_link' ), 11, 2 );
 		add_filter( 'wprm_recipe_equipment_shortcode_link', array( __CLASS__, 'archive_link' ), 11, 2 );
@@ -69,6 +70,11 @@ class WPRM_Taxonomies {
 				if ( WPRM_Settings::get( 'taxonomies_show_default_ui' ) ) {
 					$args['show_ui'] = true;
 				}
+			}
+
+			// No public archive for glossary terms, but maybe show default UI.
+			if ( 'wprm_glossary_term' === $taxonomy && WPRM_Settings::get( 'taxonomies_show_default_ui' ) ) {				
+				$args['show_ui'] = true;
 			}
 
 			register_taxonomy( $taxonomy, WPRM_POST_TYPE, $args );
@@ -119,6 +125,10 @@ class WPRM_Taxonomies {
 				'name'               => _x( 'Ingredient Units', 'taxonomy general name', 'wp-recipe-maker' ),
 				'singular_name'      => _x( 'Ingredient Unit', 'taxonomy singular name', 'wp-recipe-maker' ),
 			),
+			'wprm_glossary_term' => array(
+				'name'               => _x( 'Glossary Terms', 'taxonomy general name', 'wp-recipe-maker' ),
+				'singular_name'      => _x( 'Glossary Term', 'taxonomy singular name', 'wp-recipe-maker' ),
+			),
 			'wprm_equipment' => array(
 				'name'               => _x( 'Equipment', 'taxonomy general name', 'wp-recipe-maker' ),
 				'singular_name'      => _x( 'Equipment', 'taxonomy singular name', 'wp-recipe-maker' ),
@@ -164,6 +174,7 @@ class WPRM_Taxonomies {
 		if ( ! $include_internal ) {
 			unset( $taxonomies['wprm_ingredient'] );
 			unset( $taxonomies['wprm_ingredient_unit'] );
+			unset( $taxonomies['wprm_glossary_term'] );
 			unset( $taxonomies['wprm_equipment'] );
 		}
 
@@ -319,6 +330,27 @@ class WPRM_Taxonomies {
 			}
 		}
 		return $content;
+	}
+
+	/**
+	 * Change term name for suitablefordiet taxonomy.
+	 *
+	 * @since	8.9.0
+	 * @param	mixed $term Term.
+	 */
+	public static function suitablefordiet_term_name( $term, $taxonomy ) {
+		if ( ! is_admin() && 'wprm_suitablefordiet' === $taxonomy ) {
+			// Make sure there is no recursion.
+			remove_filter( 'get_term', array( __CLASS__, 'suitablefordiet_term_name' ), 10, 2 );
+			$term_label = get_term_meta( $term->term_id, 'wprm_term_label', true );
+			add_filter( 'get_term', array( __CLASS__, 'suitablefordiet_term_name' ), 10, 2 );
+
+			if ( $term_label ) {
+				$term->name = $term_label;
+			}
+		}
+
+		return $term;
 	}
 
 	/**

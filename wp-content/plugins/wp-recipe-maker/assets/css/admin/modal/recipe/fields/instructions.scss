@@ -156,6 +156,9 @@
     .wprm-admin-modal-field-instruction-inline-ingredients-info {
         font-style: italic;
     }
+    .wprm-admin-modal-field-instruction-inline-ingredients-offset {
+        display: none;
+    }
     .wprm-admin-modal-field-instruction-inline-ingredient {
         display: block;
         margin: 4px 0;
@@ -267,6 +270,10 @@
     .wprm-admin-modal-field-instruction-container-inline {
         position: relative;
 
+        .wprm-admin-modal-field-instruction-inline-ingredients-offset {
+            display: block;
+        }
+
         .wprm-admin-modal-field-instruction-inline-ingredients-container {
             position: absolute;
             top: 0;
@@ -275,7 +282,7 @@
             left: 60%;
             margin-left: 96px;
 
-            overflow-y: scroll;
+            overflow: visible;
         }
     }
 }

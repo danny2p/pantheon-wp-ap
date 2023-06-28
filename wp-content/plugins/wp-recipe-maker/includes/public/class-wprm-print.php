@@ -237,9 +237,9 @@ class WPRM_Print {
 						// Add styling for this recipe's print template.
 						$output['assets'][] = array(
 							'type' => 'custom',
-							'html' => WPRM_Template_Manager::get_template_styles( $recipe, 'print' ),
+							'html' => WPRM_Template_Manager::get_template_styles( $recipe, 'print-collection' ),
 						);
-						$recipe_template = WPRM_Template_Manager::get_template( $recipe, 'print' );
+						$recipe_template = WPRM_Template_Manager::get_template( $recipe, 'print-collection' );
 
 						// Update ID for adjustable servings.
 						$recipe_template = str_replace( 'wprm-recipe-servings-' . $unique_recipe['id'], 'wprm-recipe-servings-' . $uid, $recipe_template );

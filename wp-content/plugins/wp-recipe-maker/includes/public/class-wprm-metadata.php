@@ -198,7 +198,7 @@ class WPRM_Metadata {
 				if ( isset( $piece['@type'] ) ) {
 					if ( 'Person' === $piece['@type'] && isset( $piece['@id' ] ) ) {
 						$person_piece_indexes[] = $index;
-					} elseif( 'Recipe' === $piece['@type'] && isset( $piece['author_reference'] ) ) {
+					} elseif( ( 'Recipe' === $piece['@type'] || 'HowTo' === $piece['@type'] ) && isset( $piece['author_reference'] ) ) {
 						$recipe_piece_index = $index;
 					}
 				}
