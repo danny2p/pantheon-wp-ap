@@ -4,10 +4,10 @@ Plugin Name: Rollback Update Failure
 Contributors: afragen, aristath, costdev, pbiron
 Tags: feature plugin, update, failure
 License: MIT
-Requires PHP: 5.6
-Requires at least: 6.2
-Tested up to: 6.3
-Stable Tag: 5.3.3
+Requires PHP: 7.0
+Requires at least: 6.3
+Tested up to: 6.4
+Stable Tag: 6.2.0
 
 This is a feature plugin for testing automatic rollback of a plugin or theme update failure.
 
@@ -43,6 +43,27 @@ Logo from a meme generator. [Original artwork](http://hyperboleandahalf.blogspot
 ## Changelog
 
 Please see the Github repository: [CHANGELOG.md](https://github.com/afragen/rollback-update-failure/blob/main/CHANGELOG.md).
+
+#### 6.2.0 / 2023-08-15
+* minor email message adjustment
+* add default value in email processing for invalid current version
+* use `WP_Automatic_Upgrader::after_plugin_theme_update()` for sending email
+
+#### 6.1.0 / 2023-08-12
+* add failure email back otherwise no update email is sent
+
+#### 6.0.1 / 2023-08-12
+* add back `sleep( 2 )` to prevent potential race condition
+* update error exception list
+
+#### 6.0.0 / 2023-08-09
+* increase requirements to WP 6.3 and PHP 7.0
+* add version check for Rollback part 3
+* deactivate/reactivate plugin during auto-update test similar `plugin_sandbox_scrape()` as Core
+* add shutdown function
+* add method to check if we want an error to pass through, likley caused by calling `include()` on an activated plugin
+* log caught error from error handler, exception handler, and shutdown function
+* temporary halt to failure email
 
 #### 5.3.3 / 2023-07-16
 * remove Reflection in `WP_Rollback_Auto_Update::cron_rollback()` as methods are public
