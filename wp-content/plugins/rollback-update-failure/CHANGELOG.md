@@ -1,5 +1,26 @@
 [unreleased]
 
+#### 6.2.0 / 2023-08-15
+* minor email message adjustment
+* add default value in email processing for invalid current version
+* use `WP_Automatic_Upgrader::after_plugin_theme_update()` for sending email
+
+#### 6.1.0 / 2023-08-12
+* add failure email back otherwise no update email is sent
+
+#### 6.0.1 / 2023-08-12
+* add back `sleep( 2 )` to prevent potential race condition
+* update error exception list
+
+#### 6.0.0 / 2023-08-09
+* increase requirements to WP 6.3 and PHP 7.0
+* add version check for Rollback part 3
+* deactivate/reactivate plugin during auto-update test similar `plugin_sandbox_scrape()` as Core
+* add shutdown function
+* add method to check if we want an error to pass through, likley caused by calling `include()` on an activated plugin
+* log caught error from error handler, exception handler, and shutdown function
+* temporary halt to failure email
+
 #### 5.3.3 / 2023-07-16
 * remove Reflection in `WP_Rollback_Auto_Update::cron_rollback()` as methods are public
 
