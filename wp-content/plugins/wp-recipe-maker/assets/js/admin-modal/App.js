@@ -109,7 +109,7 @@ export default class App extends Component {
                 isOpen={ this.state.modalIsOpen }
                 onRequestClose={ this.closeIfAllowed }
                 overlayClassName="wprm-admin-modal-overlay"
-                className={`wprm-admin-modal wprm-admin-modal-${this.state.mode}`}
+                className={`wprm-admin-modal wprm-admin-modal-${this.state.mode} wp-core-ui`}
             >
                 <ErrorBoundary module="Modal">
                     <Content

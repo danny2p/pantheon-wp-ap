@@ -35,6 +35,10 @@ class WPRM_Compatibility {
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
+		// Smart With Food.
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'smartwithfood_after_ingredients' ), 9 );
+		add_action( 'wp_footer', array( __CLASS__, 'smartwithfood_assets' ) );
+
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
 		add_action( 'elementor/controls/register', array( __CLASS__, 'elementor_controls' ) );
@@ -290,6 +294,36 @@ class WPRM_Compatibility {
 			// Make sure to only load JS if they actually agree to the terms.
 			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
 				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle-v2.js"; js.async = true; js.dataset.source_origin = "recipemaker"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
+			}
+		}
+	}
+
+	/**
+	 * Add Smart with Food button after the ingredients.
+	 *
+	 * @since	8.10.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function smartwithfood_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'integration_smartwithfood_token' ) && WPRM_Settings::get( 'integration_smartwithfood' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-smart-with-food]' );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Smart with Food assets in footer.
+	 *
+	 * @since    8.10.0
+	 */
+	public static function smartwithfood_assets() {
+		if ( apply_filters( 'wprm_load_smartwithfood', false ) ) {
+			// Make sure to only load JS if a token is set up.
+			if ( WPRM_Settings::get( 'integration_smartwithfood_token' ) ) {
+				echo '<script src="https://unpkg.com/@smartwithfood/js-sdk@2.0.0/dist/index.min.js"></script>';
+				echo '<script src="' . WPRM_URL . 'assets/js/other/smart-with-food.js"></script>';
+				echo '<script>window.wprm_smartwithfood_token = "' . esc_attr( WPRM_Settings::get( 'integration_smartwithfood_token' ) ).'";</script>';
 			}
 		}
 	}

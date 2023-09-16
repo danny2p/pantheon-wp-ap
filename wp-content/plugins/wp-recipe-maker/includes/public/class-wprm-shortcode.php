@@ -410,6 +410,12 @@ class WPRM_Shortcode {
 		if ( $recipe ) {			
 			WPRM_Assets::load();
 
+			// Output recipe data on page.
+			add_filter( 'wprm_recipes_on_page', function( $recipes ) use ( $recipe_id ) {
+				$recipes[] = $recipe_id;
+				return $recipes;
+			} );
+
 			// Check type of recipe we need to output.
 			if ( 0 < count( self::$shortcode_type ) ) {
 				$type = end( self::$shortcode_type );

@@ -145,7 +145,7 @@ class WPRM_Shortcode_Other {
 
 		$output .= '</span>';
 
-		return $output;
+		return apply_filters( 'wprm_temperature_shortcode', $output, $atts );
 	}
 
 	/**
@@ -202,6 +202,9 @@ class WPRM_Shortcode_Other {
 			'text' => '',
 			'style' => 'bold',
 			'color' => '',
+			'unit_conversion' => '',
+			'unit_conversion_both_style' => '',
+			'unit_conversion_show_identical' => '',
 		), $atts, 'wprm_ingredient' );
 
 		// Default to text as output.
@@ -224,6 +227,13 @@ class WPRM_Shortcode_Other {
 
 					if ( $found_ingredient['amount'] ) { $parts[] = $found_ingredient['amount']; };
 					if ( $found_ingredient['unit'] ) { $parts[] = $found_ingredient['unit']; };
+
+					// Optionally add second unit system.
+					$show_both_units = 'both' === $atts['unit_conversion'];
+					if ( $show_both_units ) {
+						$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $found_ingredient );
+					}
+
 					if ( $found_ingredient['name'] ) { $parts[] = $found_ingredient['name']; };
 
 					$text_to_show = implode( ' ', $parts );
@@ -240,6 +250,11 @@ class WPRM_Shortcode_Other {
 
 						if ( $atts['color'] ) {
 							$style = ' style="color: ' . esc_attr( $atts['color'] ) . ';"';
+						}
+
+						// Needed to show both units?
+						if ( $show_both_units ) {
+							$text_to_show = $amount_unit . ' ' . $found_ingredient['name'];
 						}
 					
 						$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $style . '>' . $text_to_show . '</span>';

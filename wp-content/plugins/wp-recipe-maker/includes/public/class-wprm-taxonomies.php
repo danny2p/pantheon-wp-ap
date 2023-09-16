@@ -346,6 +346,7 @@ class WPRM_Taxonomies {
 			add_filter( 'get_term', array( __CLASS__, 'suitablefordiet_term_name' ), 10, 2 );
 
 			if ( $term_label ) {
+				$term->actual_name = $term->name;
 				$term->name = $term_label;
 			}
 		}

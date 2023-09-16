@@ -4,6 +4,7 @@ import 'whatwg-fetch';
 import './public/analytics';
 import './public/comment-rating';
 import './public/grow';
+import './public/manager';
 import './public/media-toggle';
 import './public/pinterest';
 import './public/print';
@@ -14,6 +15,7 @@ import './public/temperature';
 import './public/tooltip';
 import './public/video';
 
+import '../css/public/admin-bar.scss';
 import '../css/public/comments.scss';
 import '../css/public/snippets.scss';
 import '../css/public/template_reset.scss';

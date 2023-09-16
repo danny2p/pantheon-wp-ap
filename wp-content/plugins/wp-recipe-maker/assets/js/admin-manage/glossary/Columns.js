@@ -78,7 +78,7 @@ export default {
                                 title={ __wprm( 'Change Tooltip' ) }
                                 onClick={() => {
                                     const newTooltip = prompt( `${ __wprm( 'What do you want to be the new tooltip for' ) } "${row.original.name}"?`, row.value );
-                                    if( false !== newTooltip ) {
+                                    if( null !== newTooltip ) {
                                         Api.manage.changeTermDescription(datatable.props.options.id, row.original.term_id, newTooltip).then(() => datatable.refreshData());
                                     }
                                 }}

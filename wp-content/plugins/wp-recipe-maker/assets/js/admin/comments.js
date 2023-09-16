@@ -8,7 +8,7 @@ window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window
 window.WPRecipeMaker.comments = {
     change: ( container ) => {
         const column = container.closest( '.column-wprm_rating' );
-        const saveButton = column.querySelector( '.wprm-rating-change-save' );
+        const saveButton = column ? column.querySelector( '.wprm-rating-change-save' ) : false;
 
         if ( saveButton ) {
             const oldRating = parseInt( container.dataset.originalRating );
@@ -24,22 +24,24 @@ window.WPRecipeMaker.comments = {
     },
     save: ( el ) => {
         const column = el.closest( '.column-wprm_rating' );
-        const container = column.querySelector( '.wprm-comment-ratings-container' );
+        const container = column ? column.querySelector( '.wprm-comment-ratings-container' ) : false;
 
         const commentId = parseInt( el.dataset.commentId );
 
-        const oldRating = parseInt( container.dataset.originalRating );
-        const newRating = parseInt( container.dataset.currentRating );
-        
-        if ( commentId && oldRating !== newRating ) {
-            Api.rating.updateComment( commentId, newRating ).then((data) => {
-                if ( data && data.hasOwnProperty( 'rating' ) ) {
-                    container.dataset.originalRating = data.rating;
-                    window.WPRecipeMaker.comments.change( container );
-                } else {
-                    alert( __wprm( 'Something went wrong during saving.' ) );
-                }
-            });
+        if ( container ) {
+            const oldRating = parseInt( container.dataset.originalRating );
+            const newRating = parseInt( container.dataset.currentRating );
+            
+            if ( commentId && oldRating !== newRating ) {
+                Api.rating.updateComment( commentId, newRating ).then((data) => {
+                    if ( data && data.hasOwnProperty( 'rating' ) ) {
+                        container.dataset.originalRating = data.rating;
+                        window.WPRecipeMaker.comments.change( container );
+                    } else {
+                        alert( __wprm( 'Something went wrong during saving.' ) );
+                    }
+                });
+            }
         }
     },
 };

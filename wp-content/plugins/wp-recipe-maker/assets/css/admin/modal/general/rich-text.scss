@@ -165,10 +165,10 @@
 
     // Fix placeholder positioning in Safari.
     span[data-slate-placeholder="true"] {
-        top: 1em;
+        top: 1em !important;
     }
     &.wprm-admin-modal-field-richtext-singleline span[data-slate-placeholder="true"] {
-        top: 10px;
+        top: 10px !important;
     }
 
     p {

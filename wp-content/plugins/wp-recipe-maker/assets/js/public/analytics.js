@@ -2,7 +2,7 @@ window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window
 
 window.WPRecipeMaker.analytics = {
 	init: () => {
-		if ( wprm_public.settings.analytics_enabled ) {
+		if ( wprm_public.settings.analytics_enabled || wprm_public.settings.google_analytics_enabled ) {
 			document.addEventListener( 'click', function(e) {
 				for ( var target = e.target; target && target != this; target = target.parentNode ) {
 					if ( window.WPRecipeMaker.analytics.checkClick( target, e ) ) {
@@ -133,38 +133,30 @@ window.WPRecipeMaker.analytics = {
 		return false;
 	},
 	registerAction: ( recipeId, postId, type, meta = {} ) => {		
-		if ( wprm_public.settings.analytics_enabled ) {
-			fetch( wprm_public.endpoints.analytics, {
-				method: 'POST',
-				headers: {
-					'X-WP-Nonce': wprm_public.api_nonce,
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				credentials: 'same-origin',
-				body: JSON.stringify({
-					recipeId,
-					postId,
-					type,
-					meta,
-					uid: getCookieValue( 'wprm_analytics_visitor' ),
-					nonce: wprm_public.nonce,
-				}),
-			});
-		}
+		window.WPRecipeMaker.analytics.registerActionLocal( recipeId, postId, type, meta );
+		window.WPRecipeMaker.analytics.registerActionGoogleAnalytics( recipeId, postId, type, meta );
 	},
 	registerActionOnce: ( recipeId, postId, type, meta = {} ) => {		
+		if ( window.WPRecipeMaker.analytics.registeredActions.hasOwnProperty( `recipe-${recipeId}` ) && window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`].hasOwnProperty( type ) ) {
+			// Already tracked this action for this recipe on this pageload, ignore.
+			return;
+		}
+
+		// Track action as already registered for this recipe.
+		if ( ! window.WPRecipeMaker.analytics.registeredActions.hasOwnProperty( `recipe-${recipeId}` ) ) {
+			window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`] = {};
+		}
+		window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`][ type ] = true;
+
+		// Hadn't been tracked yet, so do it now.
+		window.WPRecipeMaker.analytics.registerAction( recipeId, postId, type, meta );
+	},
+	registerActionLocal: ( recipeId, postId, type, meta = {} ) => {
 		if ( wprm_public.settings.analytics_enabled ) {
-			if ( window.WPRecipeMaker.analytics.registeredActions.hasOwnProperty( `recipe-${recipeId}` ) && window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`].hasOwnProperty( type ) ) {
-				// Already tracked this action for this recipe on this pageload, ignore.
+			// Ignore these for local tracking, tracked in PHP.
+			if ( 'comment-rating' === type || 'user-rating' === type ) {
 				return;
 			}
-
-			// Track action as already registered for this recipe.
-			if ( ! window.WPRecipeMaker.analytics.registeredActions.hasOwnProperty( `recipe-${recipeId}` ) ) {
-				window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`] = {};
-			}
-			window.WPRecipeMaker.analytics.registeredActions[`recipe-${recipeId}`][ type ] = true;
 
 			// Register action through API.
 			fetch( wprm_public.endpoints.analytics, {
@@ -184,6 +176,36 @@ window.WPRecipeMaker.analytics = {
 					nonce: wprm_public.nonce,
 				}),
 			});
+		}
+	},
+	registerActionGoogleAnalytics: ( recipeId, postId, type, meta = {} ) => {
+		if ( wprm_public.settings.google_analytics_enabled && window.hasOwnProperty( 'gtag' ) ) {
+			const event = 'wprm_' + type.replace( /-/g, '_' );
+			const label = type.replace( /-/g, ' ' );
+
+			let eventData = {
+				event_category: 'wprecipemaker',
+				event_label: 'WPRM ' + label.charAt(0).toUpperCase() + label.slice(1),
+				wprm_recipe_id: '' + recipeId,
+				wprm_post_id: '' + postId,
+			};
+
+			// Special case for ratings.
+			if ( ( 'comment-rating' === type || 'user-rating' === type ) && meta.hasOwnProperty( 'rating' ) ) {
+				eventData.value = meta.rating;
+				delete meta.rating;
+			}
+
+			// Pass along other meta.
+			if ( 0 < meta.length ) {
+				for ( let key in Object.keys( meta ) ) {
+					if ( meta[key] ) {
+						eventData[`wprm_event_${key}`] = '' + meta[key];
+					}
+				}
+			}
+
+			window.gtag( 'event', event, eventData );
 		}
 	},
 	registeredActions: {},

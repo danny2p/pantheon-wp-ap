@@ -25,7 +25,7 @@ class WPRM_Admin_Menu {
 	 * @access   private
 	 * @var      string    $icon    Base64 encoded svg menu icon.
 	 */
-	private static $icon = 'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyA+DQo8cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMTAsMEM5LjQsMCw5LDAuNCw5LDF2NEg3VjFjMC0wLjYtMC40LTEtMS0xUzUsMC40LDUsMXY0SDNWMWMwLTAuNi0wLjQtMS0xLTFTMSwwLjQsMSwxdjhjMCwxLjcsMS4zLDMsMywzDQp2MTBjMCwxLjEsMC45LDIsMiwyczItMC45LDItMlYxMmMxLjcsMCwzLTEuMywzLTNWMUMxMSwwLjQsMTAuNiwwLDEwLDB6Ii8+DQo8cGF0aCBkYXRhLWNvbG9yPSJjb2xvci0yIiBmaWxsPSIjZmZmZmZmIiBkPSJNMTksMGMtMy4zLDAtNiwyLjctNiw2djljMCwwLjYsMC40LDEsMSwxaDJ2NmMwLDEuMSwwLjksMiwyLDJzMi0wLjksMi0yVjENCkMyMCwwLjQsMTkuNiwwLDE5LDB6Ii8+DQo8L2c+PC9zdmc+';
+	private static $icon = 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODEuMSIgaGVpZ2h0PSIyODcuOSIgdmlld0JveD0iMCAwIDI4MS4xIDI4Ny45Ij4KICA8ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPgogICAgPGc+CiAgICAgIDxwYXRoIGQ9Im0yNzMuOSwyMDAuM2M1LDEuNiw3LjQsNy41LDQuOCwxMi4xLTM0LjIsNjAuNC0xMDcuMiw5MC40LTE3NS43LDY4LjFDMzQuNCwyNTguMy02LjksMTkxLjEsMSwxMjIuMWMuNi01LjMsNS45LTguNiwxMS03bDI2Miw4NS4yWiIgZmlsbD0iI2ZmZiIvPgogICAgICA8Y2lyY2xlIGN4PSIyMzkuNyIgY3k9IjExMS43IiByPSI0MS40IiBmaWxsPSIjZmZmIi8+CiAgICAgIDxwYXRoIGQ9Im0xNTIuOCwxMC40bDQ5LjYsOC44YzYuOSwxLjIsMTAuMSw5LjQsNS44LDE1bC0yOS41LDM4LjhjLTQuNCw1LjgtMTMuNCw0LjYtMTYuMi0ybC0yMC4xLTQ3LjZjLTIuOS02LjksMy0xNC4yLDEwLjMtMTIuOVoiIGZpbGw9IiNmZmYiLz4KICAgICAgPHBhdGggZD0ibTEzMywxMjUuOWMtMS4zLS4zLTIuNS0uNy0zLjctMS40bC02LjQtMy43Yy0xNy4xLTEwLTI4LTI4LjUtMjguNC00OC4zdi0uN2MtLjMtMTYuOC04LjItMzIuNC0yMS41LTQyLjdsLTkuMS03LjFjLTUuMy00LjEtNi4zLTExLjgtMi4yLTE3LjEsNC4xLTUuMywxMS44LTYuMywxNy4xLTIuMmw5LjEsNy4xYzE5LjIsMTQuOSwzMC41LDM3LjMsMzAuOSw2MS42di43Yy4yLDExLjMsNi41LDIyLDE2LjMsMjcuN2w2LjQsMy43YzUuOCwzLjQsNy44LDEwLjksNC40LDE2LjctMi43LDQuNy04LDYuOC0xMyw1LjhaIiBmaWxsPSIjZmZmIi8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=';
 
 	/**
 	 * Register actions and filters.
@@ -46,7 +46,7 @@ class WPRM_Admin_Menu {
 	 * @since    1.0.0
 	 */
 	public static function add_menu_page() {
-		add_menu_page( 'WP Recipe Maker', 'WP Recipe Maker', WPRM_Settings::get( 'features_dashboard_access' ), 'wprecipemaker', array( 'WPRM_Dashboard', 'page_template' ), 'data:image/svg+xml;base64,' . self::$icon, '57.9' );
+		add_menu_page( 'WP Recipe Maker', 'WP Recipe Maker', WPRM_Settings::get( 'features_dashboard_access' ), 'wprecipemaker', array( 'WPRM_Dashboard', 'page_template' ), 'dashicons-food', '57.9' );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class WPRM_Admin_Menu {
 			}
 
 			if ( false !== $first_taxonomy_showing ) {
-				add_menu_page( 'WPRM ' . __( 'Taxonomies', 'wp-recipe-maker' ), __( 'Taxonomies', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_manage_access' ), 'wprm_taxonomies', $first_taxonomy_showing, 'data:image/svg+xml;base64,' . self::$icon, '57.91' );
+				add_menu_page( 'WPRM ' . __( 'Taxonomies', 'wp-recipe-maker' ), __( 'Taxonomies', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_manage_access' ), 'wprm_taxonomies', $first_taxonomy_showing, 'dashicons-food', '57.91' );
 			}
 		}
 	}

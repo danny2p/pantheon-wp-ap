@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -136,6 +136,26 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.10.1 =
+* Fix: Admin assets loading incorrectly on frontend
+
+= 8.10.0 =
+* Feature: Google Analytics 4 Event Tracking
+* Feature: Shortcuts and frontend editing through admin bar
+* Improvement: Better compatibility with WPML for automatic translation
+* Improvement: Better compatibility with Themify Builder
+* Improvement: ol tag option for instructions block
+* Improvement: Slightly increased opacity of faded style for accessibility
+* Improvement: Allow overriding the print.php file
+* Fix: Problem with unit conversion on print pages
+* Fix: Editing rich text fields on Android
+* Fix: SuitableForDiet name on manage page and metadata
+* Fix: Cancel button when changing glossary term tooltip
+* Fix: Filtering by date on Analytics manage page
+* Fix: Jetpack Photon deprecation
+* Fix: Prevent recipe from become its own parent post
+* Fix: Prevent infinite loop in some rare cases
+
 = 8.9.2 =
 * Fix: Prevent infinite loop in some environments
 
@@ -1521,6 +1541,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.10.1 =
+Update to prevent unnecessary assets from loading
+
+= 8.10.0 =
+Some great new features and improvements
+
 = 8.9.2 =
 Back to version 8.9.0, with a fix for some environments
 

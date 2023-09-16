@@ -122,13 +122,13 @@ class WPRM_Tools_Find_Parents {
 				);
 				wp_update_post( $update_content );
 			} else {
-				$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_content( $content );
+				$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post_id );
 
 				foreach ( $recipe_ids as $recipe_id ) {
 					$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
 					if ( $recipe ) {
-						if ( $recipe->parent_post_id() !== $post_id ) {
+						if ( $recipe->parent_post_id() !== $post_id && $post_id !== $recipe_id ) {
 							update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
 						}
 					}

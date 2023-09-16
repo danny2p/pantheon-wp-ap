@@ -45,6 +45,8 @@ class WPRM_Recipe_Manager {
 	public static function init() {
 		add_action( 'wp_ajax_wprm_get_recipe', array( __CLASS__, 'ajax_get_recipe' ) );
 		add_action( 'wp_ajax_wprm_search_recipes', array( __CLASS__, 'ajax_search_recipes' ) );
+
+		add_action( 'wp_footer', array( __CLASS__, 'recipe_data_in_footer' ) );
 	}
 
 	/**
@@ -316,7 +318,23 @@ class WPRM_Recipe_Manager {
 				if ( WPRM_POST_TYPE === $post->post_type ) {
 					self::$posts[ $post_id ] = array( $post_id );
 				} else {
-					self::$posts[ $post_id ] = self::get_recipe_ids_from_content( $post->post_content );
+					$recipe_ids = self::get_recipe_ids_from_content( $post->post_content );
+
+					// Themify Builder compatibility.
+					if ( '<!-- wp:themify-builder/canvas /-->' === substr( $post->post_content, 0, 38 ) ) {
+						$ThemifyBuilder = isset( $GLOBALS['ThemifyBuilder'] ) ? $GLOBALS['ThemifyBuilder'] : false;
+
+						if ( $ThemifyBuilder ) {
+							$content = $ThemifyBuilder->get_builder_output( $post->ID );
+						
+							if ( $content ) {
+								preg_match_all( '/id="wprm-recipe-container-(\d+)"/m', $content, $matches );
+								$recipe_ids = array_unique( $recipe_ids + $matches[1] );
+							}
+						}
+					}
+
+					self::$posts[ $post_id ] = $recipe_ids;
 				}
 			} else {
 				// Fail now and give another chance to find ids later.
@@ -386,6 +404,32 @@ class WPRM_Recipe_Manager {
 	public static function invalidate_recipe( $recipe_id ) {
 		if ( array_key_exists( $recipe_id, self::$recipes ) ) {
 			unset( self::$recipes[ $recipe_id ] );
+		}
+	}
+
+	/**
+	 * Recipe data to pass along in footer.
+	 *
+	 * @since	8.10.0
+	 */
+	public static function recipe_data_in_footer() {
+		$recipes = apply_filters( 'wprm_recipes_on_page', array() );
+
+		if ( $recipes ) {
+			$recipe_data = array();
+			$recipes = array_unique( $recipes );
+
+			foreach( $recipes as $recipe_id ) {
+				$recipe = self::get_recipe( $recipe_id );
+
+				if ( $recipe ) {
+					$recipe_data[ 'recipe-' . $recipe_id ] = $recipe->get_data_frontend();
+				}
+			}
+
+			if ( $recipe_data ) {
+				echo '<script>window.wprm_recipes = ' . wp_json_encode( $recipe_data ) . '</script>';
+			}
 		}
 	}
 }

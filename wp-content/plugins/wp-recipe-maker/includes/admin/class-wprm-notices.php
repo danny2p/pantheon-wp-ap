@@ -85,10 +85,10 @@ class WPRM_Notices {
 	 * @param	array $notices Existing notices.
 	 */
 	public static function ingredient_units_notice( $notices ) {
-		$screen = get_current_screen();
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
 
 		// Only load on manage page.
-		if ( 'wp-recipe-maker_page_wprm_manage' === $screen->id ) {
+		if ( $screen && 'wp-recipe-maker_page_wprm_manage' === $screen->id ) {
 			if ( WPRM_Version::migration_needed_to( '7.6.0' ) ) {
 				$notices[] = array(
 					'id' => 'ingredient_units',

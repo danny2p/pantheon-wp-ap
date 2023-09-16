@@ -128,6 +128,9 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'doing_dynamic_refresh' => array(
+				'default' => false,
+			),
 		);
 		parent::init();
 	}
@@ -155,7 +158,15 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 				return '';
 			}
 		} else {
-			$output = '<div class="wprm-recipe-rating">';
+			$data = '';
+
+			if ( ! $atts['doing_dynamic_refresh'] && WPRM_Settings::get( 'features_user_ratings' ) && WPRM_Settings::get( 'user_ratings_dynamic_refresh' ) ) {
+				$dynamic_atts = $atts;
+				$dynamic_atts['id'] = $recipe->id();
+				$data .= ' data-dynamic-refresh="' . esc_attr( json_encode( $dynamic_atts ) ) . '"';
+			}
+
+			$output = '<div class="wprm-recipe-rating"' . $data . '>';
 		}
 
 		// Get formatted average.

@@ -181,6 +181,21 @@ class WPRM_Recipe {
 	}
 
 	/**
+	 * Get recipe data for the frontend.
+	 *
+	 * @since	8.10.0
+	 */
+	public function get_data_frontend() {
+		$recipe = array();
+
+		$recipe['id'] = $this->id();
+		$recipe['type'] = $this->type();
+		$recipe['name'] = $this->name();
+
+		return $recipe;
+	}
+
+	/**
 	 * Get metadata value.
 	 *
 	 * @since    1.0.0
