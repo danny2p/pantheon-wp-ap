@@ -96,6 +96,7 @@ class WPRM_Assets {
 				'instruction_media_toggle_default' => WPRM_Settings::get( 'instruction_media_toggle_default' ),
 				'video_force_ratio' => WPRM_Settings::get( 'video_force_ratio' ),
 				'analytics_enabled' => WPRM_Settings::get( 'analytics_enabled' ),
+				'google_analytics_enabled' => WPRM_Settings::get( 'google_analytics_enabled' ),
 				'print_new_tab' => WPRM_Settings::get( 'print_new_tab' ),
 			),
 			'post_id' => get_the_ID(),
@@ -119,17 +120,16 @@ class WPRM_Assets {
 			return true;
 		}
 
-		$screen = get_current_screen();
-		if ( 'toplevel_page_wprecipemaker' === $screen->id
-			|| 'wp-recipe-maker' === substr( $screen->id, 0, 15 ) ) {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+		if ( $screen && ( 'toplevel_page_wprecipemaker' === $screen->id || 'wp-recipe-maker' === substr( $screen->id, 0, 15 ) ) ) {
 			return true;
 		}
 
-		if ( ( method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor() ) || ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) ) {
+		if ( $screen && ( method_exists( $screen, 'is_block_editor' ) && $screen->is_block_editor() ) || ( function_exists( 'is_gutenberg_page' ) && is_gutenberg_page() ) ) {
 			return true;
 		}
 
-		if ( false !== strpos( $screen->id, 'wprm' ) ) {
+		if ( $screen && false !== strpos( $screen->id, 'wprm' ) ) {
 			return true;
 		}
 
@@ -154,13 +154,13 @@ class WPRM_Assets {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'wprm-admin', WPRM_URL . 'dist/admin.css', array(), WPRM_VERSION, 'all' );
 
-		$screen = get_current_screen();
-		if ( 'wp-recipe-maker_page_wprm_settings' === $screen->id ) {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+		if ( $screen && 'wp-recipe-maker_page_wprm_settings' === $screen->id ) {
 			wp_enqueue_style( 'wprm-admin-settings', WPRM_URL . 'dist/admin-settings.css', array(), WPRM_VERSION, 'all' );
 			wp_enqueue_script( 'wprm-admin-settings', WPRM_URL . 'dist/admin-settings.js', array( 'wprm-admin' ), WPRM_VERSION, true );
 		}
 
-		if ( 'admin_page_wprm_template_editor' === $screen->id || 'wp-recipe-maker_page_wprm_faq' === $screen->id ) {
+		if ( $screen && ( 'admin_page_wprm_template_editor' === $screen->id || 'wp-recipe-maker_page_wprm_faq' === $screen->id ) ) {
 			wp_enqueue_media();
 			wp_enqueue_style( 'wprm-admin-template', WPRM_URL . 'dist/admin-template.css', array(), WPRM_VERSION, 'all' );
 			wp_enqueue_script( 'wprm-admin-template', WPRM_URL . 'dist/admin-template.js', array( 'wprm-admin' ), WPRM_VERSION, true );

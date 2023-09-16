@@ -88,8 +88,8 @@ class WPRM_Api_Manage_Analytics {
 			foreach ( $filtered as $filter ) {
 				$value = $filter['value'];
 				switch( $filter['id'] ) {
-					case 'date':
-						$args['filter'][] = 'date LIKE "%' . esc_sql( like_escape( esc_attr( $value ) ) ) . '%"';
+					case 'created_at':
+						$args['filter'][] = 'DATE_FORMAT(created_at, "%Y-%m-%d %T") LIKE "%' . esc_sql( like_escape( esc_attr( $value ) ) ) . '%"';
 						break;
 					case 'rating':
 						if ( 'all' !== $value ) {

@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '8.9.2' );
+		define( 'WPRM_VERSION', '8.10.1' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_DIR', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -98,6 +98,7 @@ class WP_Recipe_Maker {
 		// Public.
 		require_once( WPRM_DIR . 'includes/public/class-wprm-access.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-addons.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-admin-bar.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics-database.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-assets.php' );

@@ -59,6 +59,33 @@ $integrations = array(
 			),
 		),
 		array(
+			'name' => __( 'SmartWithFood', 'wp-recipe-maker' ),
+			'description' => 'SmartWithFood presents a widget that enables the automated translation of recipe ingredients into actual products within the Collect&Go platform, all via an embedded button. This feature seamlessly integrates the ingredients into the digital shopping basket, streamlining the user experience.',
+			'documentation' => 'https://www.smartwithfood.com/solutions/shoppable-recipes',
+			'settings' => array(
+				array(
+					'id' => 'integration_smartwithfood_token',
+					'name' => __( 'SmartWithFood Token', 'wp-recipe-maker' ),
+					'description' => __( 'The token provided by SmartWithFood. Required to make the button show up.', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => '',
+				),
+				array(
+					'id' => 'integration_smartwithfood',
+					'name' => __( 'Automatically add SmartWithFood Button', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the Smart with Food button after the ingredients section. Alternatively, add the button in the Template Editor.', 'wp-recipe-maker' ),
+					'documentation' => 'https://help.bootstrapped.ventures/article/332-smartwithfood-shoppable-recipes',
+					'type' => 'toggle',
+					'default' => false,
+					'dependency' => array(
+						'id' => 'integration_smartwithfood_token',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+		),
+		array(
 			'name' => 'My Emissions carbon footprint labels',
 			'description' => 'Enable to display a carbon label for your recipes. You must first sign-up with My Emissions to launch this integration; note that WP Recipe Maker customers are entitled to a special reduced price for the labels.',
 			'documentation' => 'https://myemissions.green/wp-recipe-maker?ref=wprm',

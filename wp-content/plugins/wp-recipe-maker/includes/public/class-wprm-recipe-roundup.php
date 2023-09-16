@@ -78,7 +78,7 @@ class WPRM_Recipe_Roundup {
 			if ( WPRM_POST_TYPE === $post->post_type ) {
 				$recipe_ids[] = $post->ID;
 			} else if ( 'all' === WPRM_Settings::get( 'itemlist_metadata_archive_pages_post_types' ) ) {
-				$recipe_ids_in_post = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post->post_content );
+				$recipe_ids_in_post = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID );
 
 				if ( $recipe_ids_in_post ) {
 					if ( ! WPRM_Settings::get( 'metadata_only_show_for_first_recipe' ) ) {

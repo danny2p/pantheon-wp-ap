@@ -90,6 +90,13 @@ $permissions = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'admin_bar_menu_item',
+					'name' => __( 'Show Admin Bar Menu Item', 'wp-recipe-maker' ),
+					'description' => __( 'Show WP Recipe Maker in Admin Bar on frontend for easy editing and shortcuts.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 	),

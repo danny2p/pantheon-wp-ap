@@ -217,7 +217,8 @@
 
 @media print {
 	#wprm-print-header,
-	#wprm-print-footer-ad {
+	#wprm-print-footer-ad,
+	.wprm-prevent-sleep {
 		display: none;
 	}
 }

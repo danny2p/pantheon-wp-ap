@@ -1,6 +1,60 @@
 {
     "news": [
         {
+            "date": "2023-09-14",
+            "label": "Blog",
+            "title": "6 Pro Tips for Food Photography Lighting",
+            "url": "https://bootstrapped.ventures/food-photography-lighting/"
+        },
+        {
+            "date": "2023-09-14",
+            "label": "Release",
+            "title": "WP Recipe Maker 8.10.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-8-10-0/"
+        },
+        {
+            "date": "2023-09-08",
+            "label": "Blog",
+            "title": "Pizza Photo Perfection: A Comprehensive Guide",
+            "url": "https://bootstrapped.ventures/pizza-photography/"
+        },
+        {
+            "date": "2023-09-01",
+            "label": "Blog",
+            "title": "How to Launch Your Own Weight Loss Blog (Step-by-Step)",
+            "url": "https://bootstrapped.ventures/how-to-start-a-weight-loss-journey-blog/"
+        },
+        {
+            "date": "2023-08-24",
+            "label": "Blog",
+            "title": "Top 20 Tips for Food Blogging Success in 2023",
+            "url": "https://bootstrapped.ventures/food-blog-tips/"
+        },
+        {
+            "date": "2023-08-17",
+            "label": "Blog",
+            "title": "The Complete Guide to Monetizing a Food Blog in 2023",
+            "url": "https://bootstrapped.ventures/how-to-monetize-a-food-blog/"
+        },
+        {
+            "date": "2023-08-11",
+            "label": "Blog",
+            "title": "A Guide to Becoming a Food Writer in 2023",
+            "url": "https://bootstrapped.ventures/how-to-become-a-food-writer/"
+        },
+        {
+            "date": "2023-08-07",
+            "label": "Blog",
+            "title": "How to Create a Recipe Section with Elementor (Step-by-Step)",
+            "url": "https://bootstrapped.ventures/elementor-recipe/"
+        },
+        {
+            "date": "2023-07-28",
+            "label": "Blog",
+            "title": "The Beginner's Guide to Starting a Health Blog [2023]",
+            "url": "https://bootstrapped.ventures/how-to-start-a-health-blog/"
+        },
+        {
             "date": "2023-06-26",
             "label": "Release",
             "title": "WP Recipe Maker 8.9.0",

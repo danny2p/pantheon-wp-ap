@@ -192,6 +192,26 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'type' => 'inverse',
 					),
 				),
+				'daily_seperator' => array(
+					'default' => 'parentheses',
+					'type' => 'dropdown',
+					'options' => array(
+						'parentheses' => 'Parentheses',
+						'dash' => 'Dash',
+						'none' => 'None',
+					),
+					'dependency' => array(
+						array(
+							'id' => 'style',
+							'value' => 'label',
+							'type' => 'inverse',
+						),
+						array(
+							'id' => 'daily',
+							'value' => '1',
+						),
+					),
+				),
 				'align' => array(
 					'default' => 'left',
 					'type' => 'dropdown',

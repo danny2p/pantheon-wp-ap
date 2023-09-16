@@ -1,0 +1,26 @@
+#wp-admin-bar-wp-recipe-maker {
+	display: block !important;
+}
+
+#wp-admin-bar-wp-recipe-maker .ab-icon {
+	margin: 2px 4px 0 0;
+}
+
+#wp-admin-bar-wp-recipe-maker .ab-icon::before {
+	content: "\f187";
+}
+
+#wp-admin-bar-wp-recipe-maker .ab-sub-wrapper .ab-empty-item {
+    font-weight: 200;
+    text-align: center;
+}
+
+@media (max-width: 782px) {
+	#wp-admin-bar-wp-recipe-maker .ab-icon {
+		margin-left: 4px;
+	}
+
+	#wp-admin-bar-wp-recipe-maker .ab-label {
+		display: none;
+	}
+}

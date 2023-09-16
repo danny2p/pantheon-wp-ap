@@ -33,6 +33,18 @@ window.WPRecipeMaker.rating = {
 			container.dataset.currentRating = 0;
 		} else {
 			container.dataset.currentRating = newValue;
+
+			// Maybe track via analytics.
+			if ( window.WPRecipeMaker.hasOwnProperty( 'analytics' ) ) {
+				let recipeId = 0;
+
+				const recipe = document.querySelector( '.wprm-recipe-container' );
+				if ( recipe && recipe.dataset.hasOwnProperty( 'recipeId' ) ) {
+					recipeId = parseInt( recipe.dataset.recipeId );
+				}
+
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'comment-rating', { rating: newValue } );
+			}
 		}
 
 		// Optionally update admin rating.

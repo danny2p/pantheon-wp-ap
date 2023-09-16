@@ -276,7 +276,7 @@ class WPRM_Health_Check {
 
 		// Check for any recipes inside of post content.
 		if ( isset( $post->post_content ) && $post->post_content ) {
-			$data['recipe_ids'] = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post->post_content );
+			$data['recipe_ids'] = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID );
 		}
 
 		// General data to use.

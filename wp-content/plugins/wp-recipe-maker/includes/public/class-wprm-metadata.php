@@ -293,8 +293,8 @@ class WPRM_Metadata {
 		// Prevent Jetpack Photon from replacing image URLs in metadata.
 		// Source: https://git.ethitter.com/snippets/1
 		$photon_removed = false;
-		if ( class_exists( 'Jetpack_Photon' ) && Jetpack::is_module_active( 'photon' ) ) {
-			$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
+		if ( class_exists( '\Automattic\Jetpack\Image_CDN\Image_CDN' ) && Jetpack::is_module_active( 'photon' ) ) {
+			$photon_removed = remove_filter( 'image_downsize', array( Automattic\Jetpack\Image_CDN\Image_CDN::instance(), 'filter_image_downsize' ) );
 		}
 
 		// Get the correct metadata for each recipe type.
@@ -306,7 +306,7 @@ class WPRM_Metadata {
 
 		// Restore Jetpack Photon if we removed it.
 		if ( $photon_removed ) {
-			add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
+			add_filter( 'image_downsize', array( Automattic\Jetpack\Image_CDN\Image_CDN::instance(), 'filter_image_downsize' ), 10, 3 );
 		}
 
 		// Allow external filtering of metadata.
@@ -638,9 +638,19 @@ class WPRM_Metadata {
 			// Diets.
 			$diets = $recipe->tags( 'suitablefordiet' );
 			if ( count( $diets ) > 0 ) {
+				$diet_names = array();
+
+				foreach( $diets as $diet ) {
+					if ( isset( $diet->actual_name ) ) {
+						$diet_names[] = $diet->actual_name;
+					} else {
+						$diet_names[] = $diet->name;
+					}
+				}
+
 				$metadata['suitableForDiet'] = array_map( function( $diet ) {
 					return 'https://schema.org/' . $diet;
-				}, wp_list_pluck( $diets, 'name' ) );
+				}, $diet_names );
 			}
 
 			// Keywords.

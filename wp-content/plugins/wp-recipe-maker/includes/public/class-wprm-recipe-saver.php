@@ -252,21 +252,7 @@ class WPRM_Recipe_Saver {
 			$post = get_post( $revision_parent );
 		}
 
-		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_content( $post->post_content );
-
-		// Themify Builder compatibility.
-		if ( '<!-- wp:themify-builder/canvas /-->' === substr( $post->post_content, 0, 38 ) ) {
-			$ThemifyBuilder = isset( $GLOBALS['ThemifyBuilder'] ) ? $GLOBALS['ThemifyBuilder'] : false;
-
-			if ( $ThemifyBuilder ) {
-				$content = $ThemifyBuilder->get_builder_output( $post->ID );
-			
-				if ( $content ) {
-					preg_match_all( '/id="wprm-recipe-container-(\d+)"/m', $content, $matches );
-					$recipe_ids = array_unique( $recipe_ids + $matches[1] );
-				}
-			}
-		}
+		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID );
 
 		if ( count( $recipe_ids ) > 0 ) {
 			// Immediately update when importing, otherwise do on next load to prevent issues with other plugins.
@@ -399,7 +385,9 @@ class WPRM_Recipe_Saver {
 
 				wp_update_post( $recipe );
 
-				update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+				if ( $post_id !== $recipe_id ) {
+					update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+				}
 
 				// Optionally associate categories with recipes.
 				if ( is_object_in_taxonomy( WPRM_POST_TYPE, 'category' ) ) {

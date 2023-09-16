@@ -43,6 +43,14 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'type' => 'header',
 				'default' => __( 'List Style', 'wp-recipe-maker' ),
 			),
+			'list_tag' => array(
+				'default' => 'ul',
+				'type' => 'dropdown',
+				'options' => array(
+					'ul' => 'ul',
+					'ol' => 'ol',
+				),
+			),
 			'list_style' => array(
 				'default' => 'decimal',
 				'type' => 'dropdown',
@@ -169,14 +177,13 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'ingredients_unit_conversion_header' => array(
+				'type' => 'header',
+				'default' => __( 'Unit Conversion', 'wp-recipe-maker' ),
+			),
 			'ingredients_show_both_units' => array(
 				'default' => '0',
 				'type' => 'toggle',
-				'dependency' => array(
-					'id' => 'ingredients_position',
-					'value' => 'none',
-					'type' => 'inverse',
-				),
 			),
 			'both_units_style' => array(
 				'default' => 'parentheses',
@@ -187,30 +194,16 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'slash' => 'Slash',
 				),
 				'dependency' => array(
-					array(
-						'id' => 'ingredients_position',
-						'value' => 'none',
-						'type' => 'inverse',
-					),
-					array(
-						'id' => 'ingredients_show_both_units',
-						'value' => '1',
-					),
+					'id' => 'ingredients_show_both_units',
+					'value' => '1',
 				),
 			),
 			'both_units_show_if_identical' => array(
 				'default' => '0',
 				'type' => 'toggle',
 				'dependency' => array(
-					array(
-						'id' => 'ingredients_position',
-						'value' => 'none',
-						'type' => 'inverse',
-					),
-					array(
-						'id' => 'ingredients_show_both_units',
-						'value' => '1',
-					),
+					'id' => 'ingredients_show_both_units',
+					'value' => '1',
 				),
 			),
 			'instruction_images_header' => array(
@@ -378,6 +371,8 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$output .= WPRM_SC_Media_Toggle::shortcode( $media_toggle_atts );
 		}
 
+		$list_tag = 'ol' === $atts['list_tag'] ? 'ol' : 'ul';
+
 		$instructions = $recipe->instructions();
 		foreach ( $instructions as $group_index => $instruction_group ) {
 			$output .= '<div class="wprm-recipe-instruction-group">';
@@ -393,7 +388,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $instruction_group['name'] . '</' . $tag . '>';
 			}
 
-			$output .= '<ul class="wprm-recipe-instructions">';
+			$output .= '<' . $list_tag . ' class="wprm-recipe-instructions">';
 
 			foreach ( $instruction_group['instructions'] as $index => $instruction ) {
 				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
@@ -435,7 +430,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$output .= '</li>';
 			}
 
-			$output .= '</ul>';
+			$output .= '</' . $list_tag . '>';
 			$output .= '</div>';
 		}
 
@@ -457,6 +452,14 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 		if ( $atts['inline_use_custom_color'] ) {
 			$inline_atts .= ' color="' . esc_attr( $atts['inline_custom_color'] ) . '"';
+		}
+
+		// Unit Conversion related.
+		$show_both_units = (bool) $atts['ingredients_show_both_units'];
+		if ( $show_both_units ) {
+			$inline_atts .= ' unit_conversion="both"';
+			$inline_atts .= ' unit_conversion_both_style="' . $atts['both_units_style'] .'"';
+			$inline_atts .= ' unit_conversion_show_identical="' . $atts['both_units_show_if_identical'] .'"';
 		}
 
 		// Add attributes to potential inline ingredients.

@@ -70,7 +70,7 @@ const RichEditor = (props) => {
         <Slate
             spellCheck
             editor={editor}
-            value={value}
+            initialValue={value}
             onChange={value => {
                     setValue(value);
 

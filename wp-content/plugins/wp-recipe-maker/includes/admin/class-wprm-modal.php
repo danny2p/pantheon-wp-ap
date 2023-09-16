@@ -18,6 +18,7 @@
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
 class WPRM_Modal {
+	private static $context = 'admin';
 
 	/**
 	 * Register actions and filters.
@@ -31,11 +32,41 @@ class WPRM_Modal {
 	}
 
 	/**
+	 * Load the modal on the frontend.
+	 *
+	 * @since    8.10.0
+	 */
+	public static function load_public() {
+		// Change context of modal.
+		self::$context = 'public';
+		
+		// Required admin classes.
+		require_once( WPRM_DIR . 'includes/admin/class-wprm-notices.php' );
+
+		// Make sure regular admin assets are loaded.
+		add_filter( 'wprm_should_load_admin_assets', '__return_true' );
+		add_action( 'wp_enqueue_scripts', array( 'WPRM_Assets', 'enqueue_admin' ), 1 );
+
+		// Make sure any Premium admin assets are loaded.
+		if ( WPRM_Addons::is_active( 'premium' ) ) {
+			add_action( 'wp_enqueue_scripts', array( 'WPRMP_Assets', 'enqueue_admin' ) );
+		}
+
+		// Add action hooks for frontend.
+		add_action( 'wp_footer', array( __CLASS__, 'add_modal_content' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
+	}
+
+	/**
 	 * Check if modal assets should get loaded.
 	 *
 	 * @since    6.7.0
 	 */
 	public static function should_load_modal_assets() {
+		if ( 'public' === self::$context ) {
+			return true;
+		}
+
 		if ( ! WPRM_Assets::should_load_admin_assets() ) {
 			return false;
 		} else {

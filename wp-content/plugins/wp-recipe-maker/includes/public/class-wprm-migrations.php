@@ -122,6 +122,9 @@ class WPRM_Migrations {
 			if ( version_compare( $migrated_to_version, '8.0.0' ) < 0 ) {
 				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-8-0-0-collection-layout.php' );
 			}
+			if ( version_compare( $migrated_to_version, '8.10.0' ) < 0 ) {
+				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-8-10-0-temperature-settings.php' );
+			}
 
 			// Specific migrations.
 			if ( ! self::is_migrated_to( 'ratings_db' ) ) {

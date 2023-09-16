@@ -178,6 +178,13 @@ $recipe_ratings = array(
 					'default' => true,
 				),
 				array(
+					'id' => 'user_ratings_dynamic_refresh',
+					'name' => __( 'Dynamic Refresh on Page Load', 'wp-recipe-maker' ),
+					'description' => __( 'Dynamically refresh the ratings after page load to prevent seeing cached values.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'user_ratings_thank_you_message',
 					'name' => __( 'Thank You Message', 'wp-recipe-maker' ),
 					'description' => __( 'Thank you message to show after clicking on the stars. Make empty to not show anything.', 'wp-recipe-maker' ),

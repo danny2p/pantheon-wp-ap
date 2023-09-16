@@ -84,7 +84,7 @@ class WPRM_Tools_Create_Reviews {
 
 			if ( count( $posts ) > 0 ) {
 				$posts_left = $posts;
-				$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 10 ) );
+				$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 1 ) );
 
 				$result = self::import_reviews( $posts_processed );
 

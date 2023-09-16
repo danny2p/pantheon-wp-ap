@@ -378,6 +378,10 @@ class WPRM_Api_Manage_Taxonomies {
 						break;
 					case 'suitablefordiet':
 						$row->label = get_term_meta( $row->term_id, 'wprm_term_label', true );
+						if ( isset( $row->actual_name ) ) {
+							$row->name = $row->actual_name;
+						}
+
 						break;
 					case 'glossary_term':
 						$row->tooltip = $row->description;

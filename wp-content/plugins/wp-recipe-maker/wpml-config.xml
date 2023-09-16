@@ -1,0 +1,67 @@
+<wpml-config>
+  <gutenberg-blocks>
+    <gutenberg-block type="wp-recipe-maker/recipe" translate="0">
+        <key name="id" type="post-ids" sub-type="wprm_recipe" />
+    </gutenberg-block>
+  </gutenberg-blocks>    
+  <shortcodes>
+    <shortcode>
+      <tag ignore-content="1">wprm-recipe</tag>
+      <attributes>
+        <attribute type="post-ids">id</attribute>
+      </attributes>
+    </shortcode>
+  </shortcodes>    
+  <custom-types>
+    <custom-type translate="1">wprm_recipe</custom-type>
+  </custom-types>    
+  <custom-fields>
+    <custom-field action="copy">wprm_type</custom-field>
+    <custom-field action="copy">wprm_pin_image_id</custom-field>
+    <custom-field action="copy">wprm_pin_image_repin_id</custom-field>
+    <custom-field action="copy">wprm_rating</custom-field>
+    <custom-field action="copy">wprm_rating_average</custom-field>
+    <custom-field action="copy">wprm_rating_count</custom-field>
+    <custom-field action="copy">wprm_user_ratings</custom-field>
+    <custom-field action="copy">wprm_servings_advanced_enabled</custom-field>
+    <custom-field action="copy">wprm_servings_advanced</custom-field>
+    <custom-field action="translate">wprm_equipment</custom-field>
+    <custom-field action="translate">wprm_ingredients</custom-field>
+    <custom-field action="translate">wprm_nutrition_serving_size</custom-field>
+    <custom-field action="translate">wprm_nutrition_calories</custom-field>
+    <custom-field action="translate">wprm_nutrition_carbohydrates</custom-field>
+    <custom-field action="translate">wprm_nutrition_protein</custom-field>
+    <custom-field action="translate">wprm_nutrition_fat</custom-field>
+    <custom-field action="translate">wprm_nutrition_saturated_fat</custom-field>
+    <custom-field action="translate">wprm_nutrition_cholesterol</custom-field>
+    <custom-field action="translate">wprm_nutrition_sodium</custom-field>
+    <custom-field action="translate">wprm_nutrition_potassium</custom-field>
+    <custom-field action="translate">wprm_nutrition_fiber</custom-field>
+    <custom-field action="translate">wprm_nutrition_sugar</custom-field>
+    <custom-field action="translate">wprm_nutrition_vitamin_a</custom-field>
+    <custom-field action="translate">wprm_nutrition_vitamin_c</custom-field>
+    <custom-field action="translate">wprm_nutrition_calcium</custom-field>
+    <custom-field action="translate">wprm_nutrition_iron</custom-field>
+    <custom-field action="translate">wprm_nutrition_serving_unit</custom-field>
+    <custom-field action="translate">wprm_servings</custom-field>
+    <custom-field action="translate">wprm_servings_unit</custom-field>
+    <custom-field action="translate">wprm_cost</custom-field>
+    <custom-field action="translate">wprm_prep_time</custom-field>
+    <custom-field action="translate">wprm_prep_time_zero</custom-field>
+    <custom-field action="translate">wprm_cook_time</custom-field>
+    <custom-field action="translate">wprm_cook_time_zero</custom-field>
+    <custom-field action="translate">wprm_total_time</custom-field>
+    <custom-field action="translate">wprm_custom_time</custom-field>
+    <custom-field action="translate">wprm_custom_time_zero</custom-field>
+    <custom-field action="translate">wprm_custom_time_label</custom-field>
+    <custom-field action="translate">wprm_instructions</custom-field>
+    <custom-field action="translate">wprm_notes</custom-field>
+  </custom-fields>
+  <taxonomies>
+    <taxonomy translate="1">wprm_course</taxonomy>
+    <taxonomy translate="1">wprm_cuisine</taxonomy>
+    <taxonomy translate="1">wprm_suitablefordiet</taxonomy>
+    <taxonomy translate="1">wprm_keyword</taxonomy>
+    <taxonomy translate="1">wprm_glossary_term</taxonomy>
+  </taxonomies>
+</wpml-config>

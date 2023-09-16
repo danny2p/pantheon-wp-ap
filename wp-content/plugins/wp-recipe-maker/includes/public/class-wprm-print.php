@@ -90,9 +90,12 @@ class WPRM_Print {
 					Fusion_Images::$lazy_load = false;
 				}
 
+				// Allow overriding of print.php file.
+				$print_file = apply_filters( 'wprm_print_file', WPRM_DIR . 'templates/public/print.php' );
+
 				// Load print template file.
 				header( 'HTTP/1.1 200 OK' );
-				require( WPRM_DIR . 'templates/public/print.php' );
+				require( $print_file );
 				flush();
 				exit;
 			} else {
