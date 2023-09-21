@@ -68,6 +68,8 @@ class WPRM_Recipe_Manager {
 					'order' => 'DESC',
 					'posts_per_page' => $limit,
 					'offset' => $offset,
+					'suppress_filters' => true,
+					'lang' => '',
 			);
 
 			$query = new WP_Query( $args );
@@ -111,6 +113,8 @@ class WPRM_Recipe_Manager {
 				'order' => 'DESC',
 				'posts_per_page' => $limit,
 				'offset' => 0,
+				'suppress_filters' => true,
+				'lang' => '',
 		);
 
 		$query = new WP_Query( $args );
@@ -165,6 +169,8 @@ class WPRM_Recipe_Manager {
 				'post_status' => 'any',
 				'posts_per_page' => 100,
 				's' => $search,
+				'suppress_filters' => true,
+				'lang' => '',
 			);
 
 			$query = new WP_Query( $args );

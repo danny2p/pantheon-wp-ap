@@ -101,6 +101,7 @@ class WPRM_Api_Manage_Recipes {
 				'relation' => 'AND',
 			),
 			'tax_query' => array(),
+			'lang' => '',
 		);
 
 		// Order.
@@ -203,9 +204,21 @@ class WPRM_Api_Manage_Recipes {
 			}
 		}
 
+		// Make sure all recipes show up when using WPML.
+		global $wpml_query_filter;
+		if ( $wpml_query_filter ) {
+			remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+			remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+		}
+
 		add_filter( 'posts_where', array( __CLASS__, 'api_manage_recipes_query_where' ), 10, 2 );
 		$query = new WP_Query( $args );
 		remove_filter( 'posts_where', array( __CLASS__, 'api_manage_recipes_query_where' ), 10, 2 );
+
+		if ( $wpml_query_filter ) {
+			add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
+			add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
+		}
 
 		$recipes = array();
 		$posts = $query->posts;
