@@ -5,7 +5,7 @@
  * Description: Performance plugin from the WordPress Performance Team, which is a collection of standalone performance modules.
  * Requires at least: 6.1
  * Requires PHP: 5.6
- * Version: 2.6.0
+ * Version: 2.6.1
  * Author: WordPress Performance Team
  * Author URI: https://make.wordpress.org/performance/
  * License: GPLv2 or later
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'PERFLAB_VERSION', '2.6.0' );
+define( 'PERFLAB_VERSION', '2.6.1' );
 define( 'PERFLAB_MAIN_FILE', __FILE__ );
 define( 'PERFLAB_PLUGIN_DIR_PATH', plugin_dir_path( PERFLAB_MAIN_FILE ) );
 define( 'PERFLAB_MODULES_SETTING', 'perflab_modules_settings' );
@@ -70,7 +70,7 @@ function perflab_get_modules_setting_default() {
 		$default_enabled_modules = require PERFLAB_PLUGIN_DIR_PATH . 'default-enabled-modules.php';
 		$default_option          = array_reduce(
 			$default_enabled_modules,
-			static function( $module_settings, $module_dir ) {
+			static function ( $module_settings, $module_dir ) {
 				$module_settings[ $module_dir ] = array( 'enabled' => true );
 				return $module_settings;
 			},
@@ -97,7 +97,7 @@ function perflab_sanitize_modules_setting( $value ) {
 	// Ensure that every element is an array with an 'enabled' key.
 	return array_filter(
 		array_map(
-			static function( $module_settings ) {
+			static function ( $module_settings ) {
 				if ( ! is_array( $module_settings ) ) {
 					return array();
 				}
@@ -152,7 +152,7 @@ function perflab_get_active_modules() {
 	$modules = array_keys(
 		array_filter(
 			perflab_get_module_settings(),
-			static function( $module_settings ) {
+			static function ( $module_settings ) {
 				return isset( $module_settings['enabled'] ) && $module_settings['enabled'];
 			}
 		)
@@ -531,7 +531,7 @@ add_action(
 	 * @param string $option Name of the option to add.
 	 * @param mixed  $value  Value of the option.
 	 */
-	static function( $option, $value ) {
+	static function ( $option, $value ) {
 		perflab_run_module_activation_deactivation( perflab_get_modules_setting_default(), $value );
 	},
 	10,

@@ -718,7 +718,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 
 				// Check for plural.
 				$plural_data = '';
-				if ( $ingredient['id'] && '' === $ingredient['unit'] ) {
+				if ( isset( $ingredient['id'] ) && $ingredient['id'] && '' === $ingredient['unit'] ) {
 					$ingredient_term = get_term( $ingredient['id'] );
 
 					if ( $ingredient_term && ! is_wp_error( $ingredient_term ) ) {

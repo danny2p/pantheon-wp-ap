@@ -279,7 +279,7 @@ class WPRM_Import_Create extends WPRM_Import {
 		}
 
 		// Equipment.
-		$mv_equipment = (array) $mv_published['tools'];
+		$mv_equipment = isset( $mv_published['tools'] ) ? (array) $mv_published['tools'] : array();
 		$equipment = array();
 
 		foreach ( $mv_equipment as $mv_group_name => $mv_group_equipment ) {

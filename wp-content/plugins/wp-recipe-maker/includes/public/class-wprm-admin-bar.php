@@ -40,6 +40,11 @@ class WPRM_Admin_Bar {
 			return false;
 		}
 
+		// Prevent admin bar when editing in Divi (breaks their text editor).
+		if ( isset( $_GET['et_fb'] ) ) {
+			return false;
+		}
+
 		return WPRM_Settings::get( 'admin_bar_menu_item' );
 	}
 

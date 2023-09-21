@@ -254,6 +254,11 @@ class WPRM_Recipe_Saver {
 
 		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID );
 
+		// Make sure post itself is not included.
+		if ( in_array( $post->ID, $recipe_ids ) ) {
+			$recipe_ids = array_diff( $recipe_ids, array( $post->ID ) );
+		}
+
 		if ( count( $recipe_ids ) > 0 ) {
 			// Immediately update when importing, otherwise do on next load to prevent issues with other plugins.
 			if ( isset( $_POST['importer_uid'] ) || ( isset( $_POST['action'] ) && 'wprm_finding_parents' === $_POST['action'] ) ) { // Input var okay.
@@ -370,6 +375,11 @@ class WPRM_Recipe_Saver {
 
 			// Update recipes.
 			foreach ( $recipe_ids as $recipe_id ) {
+				// Prevent infinite loop.
+				if ( $recipe_id === $post_id ) {
+					continue;
+				}
+
 				$recipe = array(
 					'ID'          	=> $recipe_id,
 					'post_status' 	=> $recipe_post_status,
@@ -384,10 +394,7 @@ class WPRM_Recipe_Saver {
 				}
 
 				wp_update_post( $recipe );
-
-				if ( $post_id !== $recipe_id ) {
-					update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
-				}
+				update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
 
 				// Optionally associate categories with recipes.
 				if ( is_object_in_taxonomy( WPRM_POST_TYPE, 'category' ) ) {

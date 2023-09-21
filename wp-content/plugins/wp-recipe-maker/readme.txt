@@ -136,6 +136,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.10.2 =
+* Improvement: Compatibility with multilingual plugins when searching for recipes in the backend
+* Fix: Checkboxes showing up in inline or associated ingredients
+* Fix: Prevent Divi visual text editor from breaking because of admin bar
+* Fix: Prevent PHP warnings in WPZoom import
+* Fix: PHP error when using Jetpack Boost
+* Fix: Importing recipes from some other plugins causing memory problem
+* Fix: Removing recipes from trash not working
+
 = 8.10.1 =
 * Fix: Admin assets loading incorrectly on frontend
 
@@ -1541,6 +1550,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.10.2 =
+Update for some important bug fixes
+
 = 8.10.1 =
 Update to prevent unnecessary assets from loading
 

@@ -317,7 +317,7 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 				} else {
 					$parsed = $this->parse_rich_text( $instruction['text'], false, $post_id );
 
-					if ( isset( $instruction['gallery'] ) && $instruction['gallery']['ids'] ) {
+					if ( isset( $instruction['gallery'] ) && isset( $instruction['gallery']['ids'] ) && $instruction['gallery']['ids'] ) {
 						$parsed = array_merge( $parsed, $instruction['gallery']['ids'] );
 					}
 

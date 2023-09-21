@@ -298,7 +298,7 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 						);
 					}
 				} else {
-					$parsed = $this->parse_rich_text( $instruction['text'], false, $post_id );
+					$parsed = $this->parse_rich_text( $instruction['text'], false, $id );
 
 					if ( isset( $instruction['gallery'] ) && $instruction['gallery']['ids'] ) {
 						$parsed = array_merge( $parsed, $instruction['gallery']['ids'] );

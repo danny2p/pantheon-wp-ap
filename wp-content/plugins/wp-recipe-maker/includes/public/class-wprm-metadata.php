@@ -293,7 +293,7 @@ class WPRM_Metadata {
 		// Prevent Jetpack Photon from replacing image URLs in metadata.
 		// Source: https://git.ethitter.com/snippets/1
 		$photon_removed = false;
-		if ( class_exists( '\Automattic\Jetpack\Image_CDN\Image_CDN' ) && Jetpack::is_module_active( 'photon' ) ) {
+		if ( class_exists( 'Jetpack') && class_exists( '\Automattic\Jetpack\Image_CDN\Image_CDN' ) && Jetpack::is_module_active( 'photon' ) ) {
 			$photon_removed = remove_filter( 'image_downsize', array( Automattic\Jetpack\Image_CDN\Image_CDN::instance(), 'filter_image_downsize' ) );
 		}
 
