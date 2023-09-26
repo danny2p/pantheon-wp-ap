@@ -59,6 +59,14 @@ class WPRM_SC_Add_To_Shopping_LIst extends WPRM_Template_Shortcode {
 				'default' => __( 'Add to Shopping List', 'wp-recipe-maker' ),
 				'type' => 'text',
 			),
+			'added_action' => array(
+				'default' => 'go',
+				'type' => 'dropdown',
+				'options' => array(
+					'go' => 'Go to Shopping List',
+					'remove' => 'Remove from Shopping List',
+				),
+			),
 			'icon_added' => array(
 				'default' => '',
 				'type' => 'icon',

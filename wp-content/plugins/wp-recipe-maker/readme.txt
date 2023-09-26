@@ -136,6 +136,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 8.10.3 =
+* Fix: Revert dynamic ratings update feature (causing too much server load)
+
 = 8.10.2 =
 * Improvement: Compatibility with multilingual plugins when searching for recipes in the backend
 * Fix: Checkboxes showing up in inline or associated ingredients
@@ -1550,6 +1553,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 8.10.3 =
+Update to reduce plugin server load
+
 = 8.10.2 =
 Update for some important bug fixes
 
