@@ -1,5 +1,21 @@
 [unreleased]
 
+#### 7.0.3 / 2023-10-16
+* update kill switch
+* update for PR
+* fix readme.txt, thanks Otto
+
+#### 7.0.2 / 2023-10-12
+* just a bump for dot org
+
+#### 7.0.1 / 2023-10-12
+* needed to require upgrader classes in main plugin file
+
+#### 7.0.0 / 2023-10-11
+* attempt to sync with refactored PR
+* simpler replacement with modified upgrader classes
+* error logging present
+
 #### 6.3.1 / 2023-10-22
 * removed too much stuff
 
