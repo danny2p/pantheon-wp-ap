@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f
+class ComposerStaticInite802a51eb30cb430dfc33b5e490e03de
 {
     public static $prefixLengthsPsr4 = array (
         'C' => 
@@ -827,7 +827,8 @@ class ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f
         'Yoast\\WP\\SEO\\Integrations\\Admin\\Workouts_Integration' => __DIR__ . '/../..' . '/src/integrations/admin/workouts-integration.php',
         'Yoast\\WP\\SEO\\Integrations\\Alerts\\Abstract_Dismissable_Alert' => __DIR__ . '/../..' . '/src/integrations/alerts/abstract-dismissable-alert.php',
         'Yoast\\WP\\SEO\\Integrations\\Alerts\\Black_Friday_Product_Editor_Checklist_Notification' => __DIR__ . '/../..' . '/src/integrations/alerts/black-friday-product-editor-checklist-notification.php',
-        'Yoast\\WP\\SEO\\Integrations\\Alerts\\Black_Friday_Promo_Notification' => __DIR__ . '/../..' . '/src/integrations/alerts/black-friday-promo-notification.php',
+        'Yoast\\WP\\SEO\\Integrations\\Alerts\\Black_Friday_Promotion_Notification' => __DIR__ . '/../..' . '/src/integrations/alerts/black-friday-promotion-notification.php',
+        'Yoast\\WP\\SEO\\Integrations\\Alerts\\Black_Friday_Sidebar_Checklist_Notification' => __DIR__ . '/../..' . '/src/integrations/alerts/black-friday-sidebar-checklist-notification.php',
         'Yoast\\WP\\SEO\\Integrations\\Alerts\\Jetpack_Boost_Pre_Publish' => __DIR__ . '/../..' . '/src/integrations/alerts/jetpack-boost-pre-publish.php',
         'Yoast\\WP\\SEO\\Integrations\\Alerts\\Webinar_Promo_Notification' => __DIR__ . '/../..' . '/src/integrations/alerts/webinar-promo-notification.php',
         'Yoast\\WP\\SEO\\Integrations\\Blocks\\Breadcrumbs_Block' => __DIR__ . '/../..' . '/src/integrations/blocks/breadcrumbs-block.php',
@@ -1097,9 +1098,9 @@ class ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0ed40f9efb344be2102e6b1e982df89f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite802a51eb30cb430dfc33b5e490e03de::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite802a51eb30cb430dfc33b5e490e03de::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite802a51eb30cb430dfc33b5e490e03de::$classMap;
 
         }, null, ClassLoader::class);
     }
