@@ -31,9 +31,10 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '8.10.3' );
+		define( 'WPRM_VERSION', '9.0.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
+		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
 		define( 'WPRM_DIR', plugin_dir_path( dirname( __FILE__ ) ) );
 		define( 'WPRM_URL', plugin_dir_url( dirname( __FILE__ ) ) );
 	}
@@ -80,7 +81,9 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-equipment.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-ingredient-units.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-ingredients.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-list.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-analytics.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-lists.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-ratings.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-recipes.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-revisions.php' );
@@ -116,6 +119,12 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-custom-hash.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-fallback-recipe.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-icon.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list-manager.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list-post-type.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list-saver.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list-shell.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list-shortcode.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-list.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-rank-math.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-video.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata.php' );
@@ -163,6 +172,7 @@ class WP_Recipe_Maker {
 
 			// Tools.
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-anonymize-ratings.php' );
+			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-create-lists.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-create-reviews.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-find-ingredient-units.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-find-parents.php' );

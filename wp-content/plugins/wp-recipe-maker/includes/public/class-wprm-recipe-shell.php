@@ -161,9 +161,10 @@ class WPRM_Recipe_Shell {
 				$style = 'max-width: ' . $image_data[1] . 'px; height: auto;';
 
 				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = str_ireplace( ' style="', ' style="' . $style, $img );
+					$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
+					$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
 				} else {
-					$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 				}
 			}
 		}

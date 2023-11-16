@@ -94,6 +94,26 @@ class WPRM_Blocks {
 						'type' => 'string',
 						'default' => '',
 					),
+					'updated' => array(
+						'type' => 'number',
+						'default' => 0,
+					),
+				),
+				'render_callback' => array( __CLASS__, 'render_list_block' ),
+			);
+			register_block_type( 'wp-recipe-maker/list', $block_settings );
+
+
+			$block_settings = array(
+				'attributes' => array(
+					'id' => array(
+						'type' => 'number',
+						'default' => 0,
+					),
+					'align' => array(
+						'type' => 'string',
+						'default' => '',
+					),
 					'link' => array(
 						'type' => 'string',
 						'default' => '',
@@ -111,6 +131,10 @@ class WPRM_Blocks {
 						'default' => 0,
 					),
 					'image_url' => array(
+						'type' => 'string',
+						'default' => '',
+					),
+					'credit' => array(
 						'type' => 'string',
 						'default' => '',
 					),
@@ -281,6 +305,39 @@ class WPRM_Blocks {
 		}
 
 		$output .= WPRM_Shortcode::recipe_shortcode( $atts );
+
+		return $output;
+	}
+
+	/**
+	 * Render the list block.
+	 *
+	 * @since	3.1.2
+	 * @param	mixed $atts Block attributes.
+	 */
+	public static function render_list_block( $atts ) {
+		$atts = self::parse_atts( $atts );
+		$output = '';
+
+		// Only do this for the Gutenberg Preview.
+		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/list' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+			$list = WPRM_List_Manager::get_list( $atts['id'] );
+
+			// No list found? ID is incorrect => show warning.
+			if ( ! $list ) {
+				return '<div class="wprm-recipe-block-invalid">' . __( 'This is a "WPRM List" block with a non-existing recipe ID.', 'wp-recipe-maker' ) . '</div>';
+			}
+
+			if ( 'default' !== $list->template() ) {
+				$template = WPRM_Template_Manager::get_template_by_slug( $list->template() );
+			} else {
+				// Use default single recipe template.
+				$template = WPRM_Template_Manager::get_template_by_type( 'roundup' );
+			}
+			$output .= '<style type="text/css">' . WPRM_Template_Manager::get_template_css( $template ) . '</style>';
+		}
+
+		$output .= WPRM_List_Shortcode::shortcode( $atts );
 
 		return $output;
 	}

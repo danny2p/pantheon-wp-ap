@@ -522,9 +522,10 @@ class WPRM_Recipe {
 				$style = 'max-width: ' . $image_data[1] . 'px; height: auto;';
 
 				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = str_ireplace( ' style="', ' style="' . $style, $img );
+					$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
+					$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
 				} else {
-					$img = str_ireplace( '<img ', '<img style="' . $style . '" ', $img );
+					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 				}
 			}
 		}
@@ -538,7 +539,7 @@ class WPRM_Recipe {
 		if ( WPRM_Settings::get( 'recipe_image_clickable' ) ) {
 			$settings_size = WPRM_Settings::get( 'clickable_image_size' );
 
-			preg_match( '/^(\d+)x(\d+)$/i', $settings_size, $match );
+			preg_match( '/^(\d+)x(\d+)(\!?)$/i', $settings_size, $match );
 			if ( ! empty( $match ) ) {
 				$size = array( intval( $match[1] ), intval( $match[2] ) );
 			} else {
@@ -1438,6 +1439,15 @@ class WPRM_Recipe {
 	public function notes() {
 		$notes = apply_filters( 'wprm_recipe_field', $this->meta( 'wprm_notes', '' ), 'notes', $this );
 		return wpautop( $notes );
+	}
+
+	/**
+	 * Get the recipe credit.
+	 *
+	 * @since    9.0.0
+	 */
+	public function credit() {
+		return '';
 	}
 
 	/**

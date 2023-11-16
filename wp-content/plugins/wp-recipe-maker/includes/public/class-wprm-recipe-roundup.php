@@ -113,9 +113,9 @@ class WPRM_Recipe_Roundup {
 	 * @param	mixed $url			URL of the roundup page.
 	 * @param	mixed $name			Name for the ItemList.
 	 * @param	mixed $description	Description for the ItemList.
-	 * @param	mixed $recipe_ids 	IDs of the recipes to get the ItemList metadata for.
+	 * @param	mixed $post_ids 	IDs of the posts to get the ItemList metadata for.
 	 */
-	public static function output_itemlist_metadata( $url, $name, $description, $recipe_ids ) {
+	public static function output_itemlist_metadata( $url, $name, $description, $post_ids ) {
 		$metadata = array(
 			'@context' => 'http://schema.org',
 			'@type' => 'ItemList',
@@ -132,20 +132,26 @@ class WPRM_Recipe_Roundup {
 		}
 
 		$item_list_counter = 0;
-		foreach ( $recipe_ids as $recipe_id ) {
-			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+		foreach ( $post_ids as $post_id ) {
+			$url = false;
+			
+			if ( WPRM_POST_TYPE === get_post_type( $post_id ) ) {
+				$recipe = WPRM_Recipe_Manager::get_recipe( $post_id );
 
-			if ( $recipe ) {
-				$url = $recipe->permalink();
-
-				if ( $url ) {
-					$item_list_counter++;
-					$metadata['itemListElement'][] = array(
-						'@type'    => 'ListItem',
-						'position' => $item_list_counter,
-						'url'      => $url,
-					);
+				if ( $recipe ) {
+					$url = $recipe->permalink();
 				}
+			} else {
+				$url = get_permalink( $post_id );
+			}
+
+			if ( $url ) {
+				$item_list_counter++;
+				$metadata['itemListElement'][] = array(
+					'@type'    => 'ListItem',
+					'position' => $item_list_counter,
+					'url'      => $url,
+				);
 			}
 		}
 
@@ -163,7 +169,7 @@ class WPRM_Recipe_Roundup {
 	 * @param    mixed $content Content to get the recipe roundup items from.
 	 */
 	public static function get_items_from_content( $content ) {
-		$recipe_ids = array();
+		$post_ids = array();
 
 		$recipe_shortcodes = array();
 		$pattern = get_shortcode_regex( array( 'wprm-recipe-roundup-item' ) );
@@ -177,14 +183,14 @@ class WPRM_Recipe_Roundup {
 		}
 
 		foreach ( $recipe_shortcodes as $shortcode => $shortcode_options ) {
-			$recipe_id = isset( $shortcode_options['id'] ) ? intval( $shortcode_options['id'] ) : 0;
+			$post_id = isset( $shortcode_options['id'] ) ? intval( $shortcode_options['id'] ) : 0;
 
-			if ( $recipe_id ) {
-				$recipe_ids[] = $recipe_id;
+			if ( $post_id ) {
+				$post_ids[] = $post_id;
 			}
 		}
 
-		return $recipe_ids;
+		return $post_ids;
 	}
 
 	/**
@@ -211,6 +217,7 @@ class WPRM_Recipe_Roundup {
 				'link' => '',
 				'image' => '',
 				'image_url' => '',
+				'credit' => '',
 				'summary' => '',
 				'name' => '',
 				'button' => '',
@@ -243,6 +250,32 @@ class WPRM_Recipe_Roundup {
 					}
 				}
 			}
+
+			// If no recipe was found, maybe it was of a "post" type instead.
+			if ( ! $recipe ) {
+				$post = get_post( $recipe_id );
+
+				if ( $post && WPRM_POST_TYPE !== $post->post_type ) {
+					$type = 'post';
+
+					$name = rawurldecode( $atts['name'] );
+					$summary = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) );
+
+					$recipe_data = array(
+						'type' => 'food',
+						'parent_id' => true,
+						'parent_url' => get_permalink( $post ),
+						'permalink' => get_permalink( $post ),
+						'name' => $name ? $name : $post->post_title,
+						'summary' => $summary ? $summary : '',
+						'image_id' => get_post_thumbnail_id( $post ),
+						'parent_url_new_tab' => false,
+						'parent_url_nofollow' => false,
+					);
+
+					$recipe = new WPRM_Recipe_Shell( $recipe_data );
+				}
+			}
 		} else {
 			$type = 'external';
 			$recipe_data = array(
@@ -254,6 +287,7 @@ class WPRM_Recipe_Roundup {
 				'summary' => rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),
 				'parent_url_new_tab' => $atts['newtab'] ? true : false,
 				'parent_url_nofollow' => $atts['nofollow'] ? true : false,
+				'credit' => rawurldecode( $atts['credit'] ),
 			);
 
 			$image_id = intval( $atts['image'] );

@@ -45,6 +45,16 @@ class WPRM_Api_Utilities {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_permissions_administrator' ),
 			));
+			register_rest_route( 'wp-recipe-maker/v1', '/utilities/post_summary/(?P<id>\d+)', array(
+				'callback' => array( __CLASS__, 'api_get_post_summary' ),
+				'methods' => 'GET',
+				'args' => array(
+					'id' => array(
+						'validate_callback' => array( __CLASS__, 'api_validate_numeric' ),
+					),
+				),
+				'permission_callback' => array( __CLASS__, 'api_permissions_author' ),
+			));
 		}
 	}
 
@@ -64,6 +74,18 @@ class WPRM_Api_Utilities {
 	 */
 	public static function api_permissions_administrator() {
 		return current_user_can( 'manage_options' );
+	}
+
+	/**
+	 * Validate ID in API call.
+	 *
+	 * @since 9.0.0
+	 * @param mixed           $param Parameter to validate.
+	 * @param WP_REST_Request $request Current request.
+	 * @param mixed           $key Key.
+	 */
+	public static function api_validate_numeric( $param, $request, $key ) {
+		return is_numeric( $param );
 	}
 
 	/**
@@ -117,6 +139,33 @@ class WPRM_Api_Utilities {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Handle get post summary to the REST API.
+	 *
+	 * @since 9.0.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_get_post_summary( $request ) {
+		$post_id = intval( $request['id'] );
+		$name = '';
+		$image_url = '';
+
+		$post = get_post( $post_id );
+
+		if ( $post ) {
+			$name = $post->post_title;
+			$image_url = get_the_post_thumbnail_url( $post_id, 'full' );
+		}
+
+		return array(
+			'post' => array(
+				'id' => $post_id,
+				'name' => $name,
+				'image_url' => $image_url,
+			),
+		);
 	}
 }
 

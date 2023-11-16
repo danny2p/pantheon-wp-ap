@@ -45,6 +45,7 @@ class WPRM_Recipe_Manager {
 	public static function init() {
 		add_action( 'wp_ajax_wprm_get_recipe', array( __CLASS__, 'ajax_get_recipe' ) );
 		add_action( 'wp_ajax_wprm_search_recipes', array( __CLASS__, 'ajax_search_recipes' ) );
+		add_action( 'wp_ajax_wprm_search_posts', array( __CLASS__, 'ajax_search_posts' ) );
 
 		add_action( 'wp_footer', array( __CLASS__, 'recipe_data_in_footer' ) );
 	}
@@ -217,6 +218,82 @@ class WPRM_Recipe_Manager {
 	}
 
 	/**
+	 * Search for posts by keyword.
+	 *
+	 * @since    9.0.0
+	 */
+	public static function ajax_search_posts() {
+		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : ''; // Input var okay.
+
+			$found_posts = array();
+			$found_posts_with_id = array();
+
+			$args = array(
+				'post_type' => 'any',
+				'post_status' => 'any',
+				'posts_per_page' => 100,
+				's' => $search,
+				'suppress_filters' => true,
+				'lang' => '',
+			);
+
+			$query = new WP_Query( $args );
+
+			$posts = $query->posts;
+
+			// If searching for number, include exact result first.
+			if ( is_numeric( $search ) ) {
+				$id = abs( intval( $search ) );
+
+				if ( $id > 0 ) {
+					$args = array(
+						'post_type' => 'any',
+						'post_status' => 'any',
+						'posts_per_page' => 100,
+						'post__in' => array( $id ),
+					);
+	
+					$query = new WP_Query( $args );
+	
+					$posts = array_merge( $query->posts, $posts );
+				}
+			}
+
+			foreach ( $posts as $post ) {
+				$ignore_post_types = array(
+					WPRM_POST_TYPE,
+					'attachment',
+				);
+				if ( in_array( $post->post_type, $ignore_post_types ) ) {
+					continue;
+				}
+
+				$found_posts[] = array(
+					'id' => $post->ID,
+					'text' => $post->post_title,
+				);
+
+				// Get post type name.
+				$post_type_object = get_post_type_object( $post->post_type );
+				$post_type_label = $post_type_object ? $post_type_object->labels->singular_name : $post->post_type;
+
+				$found_posts_with_id[] = array(
+					'id' => $post->ID,
+					'text' => $post_type_label . ' - ' . $post->ID . ' - ' . $post->post_title,
+				);
+			}
+
+			wp_send_json_success( array(
+				'posts' => $found_posts,
+				'posts_with_id' => $found_posts_with_id,
+			) );
+		}
+
+		wp_die();
+	}
+
+	/**
 	 * Get recipe data by ID through AJAX.
 	 *
 	 * @since    1.0.0
@@ -307,9 +384,10 @@ class WPRM_Recipe_Manager {
 	 * Get an array of recipe IDs that are in a specific post.
 	 *
 	 * @since	4.2.0
-	 * @param	mixed $post_id Optional post ID. Uses current post if not set.
+	 * @param	mixed	$post_id Optional post ID. Uses current post if not set.
+	 * @param	boolean	$ignore_cache Wether the cache should be ignored.
 	 */
-	public static function get_recipe_ids_from_post( $post_id = false ) {
+	public static function get_recipe_ids_from_post( $post_id = false, $ignore_cache = false ) {
 		// Default to current post ID and sanitize.
 		if ( ! $post_id ) {
 			$post_id = get_the_ID();
@@ -317,7 +395,7 @@ class WPRM_Recipe_Manager {
 		$post_id = intval( $post_id );
 
 		// Search through post content if not in cache only.
-		if ( ! isset( self::$posts[ $post_id ] ) ) {
+		if ( $ignore_cache || ! isset( self::$posts[ $post_id ] ) ) {
 			$post = get_post( $post_id );
 
 			if ( $post ) {

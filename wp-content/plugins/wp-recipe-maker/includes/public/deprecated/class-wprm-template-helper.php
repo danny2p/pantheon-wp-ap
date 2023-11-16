@@ -291,7 +291,7 @@ class WPRM_Template_Helper {
 		$settings_size = 'legacy' === WPRM_Settings::get( 'recipe_template_mode' ) ? WPRM_Settings::get( 'template_recipe_image' ) : false;
 
 		if ( $settings_size ) {
-			preg_match( '/^(\d+)x(\d+)$/i', $settings_size, $match );
+			preg_match( '/^(\d+)x(\d+)(\!?)$/i', $settings_size, $match );
 			if ( ! empty( $match ) ) {
 				$size = array( intval( $match[1] ), intval( $match[2] ) );
 			} else {
@@ -313,7 +313,7 @@ class WPRM_Template_Helper {
 		$settings_size = WPRM_Settings::get( 'template_instruction_image' );
 
 		if ( $settings_size ) {
-			preg_match( '/^(\d+)x(\d+)$/i', $settings_size, $match );
+			preg_match( '/^(\d+)x(\d+)(\!?)$/i', $settings_size, $match );
 			if ( ! empty( $match ) ) {
 				$size = array( intval( $match[1] ), intval( $match[2] ) );
 			} else {
@@ -332,7 +332,7 @@ class WPRM_Template_Helper {
 		if ( WPRM_Settings::get( 'instruction_image_clickable' ) ) {
 			$settings_size = WPRM_Settings::get( 'clickable_image_size' );
 
-			preg_match( '/^(\d+)x(\d+)$/i', $settings_size, $match );
+			preg_match( '/^(\d+)x(\d+)(\!?)$/i', $settings_size, $match );
 			if ( ! empty( $match ) ) {
 				$size = array( intval( $match[1] ), intval( $match[2] ) );
 			} else {

@@ -5,6 +5,7 @@ import CustomTaxonomy from './CustomTaxonomy';
 import Dashboard from './Dashboard';
 import General from './General';
 import Import from './Import';
+import List from './List';
 import Manage from './Manage';
 import Modal from './Modal';
 import Rating from './Rating';
@@ -19,6 +20,7 @@ const api = hooks.applyFilters( 'api', {
     dashboard: Dashboard,
     general: General,
     import: Import,
+    list: List,
     manage: Manage,
     modal: Modal,
     rating: Rating,

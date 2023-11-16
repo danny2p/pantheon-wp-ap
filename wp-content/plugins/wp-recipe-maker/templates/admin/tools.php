@@ -181,6 +181,17 @@
 					</p>
 				</td>
 			</tr>
+			<tr>
+				<th scope="row">
+					<?php esc_html_e( 'Create Lists', 'wp-recipe-maker' ); ?>
+				</th>
+				<td>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_create_lists' ) ); ?>" class="button"><?php esc_html_e( 'Recreate Lists in WP Recipe Maker', 'wp-recipe-maker' ); ?></a>
+					<p class="description">
+						<?php esc_html_e( 'Will create a WPRM Roundup List for your Create Lists. Make sure to import the recipes themselves first. Will not automatically replace the Create List inside of the post content. Running again will replace the previously imported Create List.', 'wp-recipe-maker' ); ?>
+					</p>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 <?php endif; // MV Create Reviews exist. ?>

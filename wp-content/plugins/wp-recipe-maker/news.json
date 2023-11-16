@@ -1,6 +1,36 @@
 {
     "news": [
         {
+            "date": "2023-11-16",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.0.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-0-0/"
+        },
+        {
+            "date": "2023-11-02",
+            "label": "Blog",
+            "title": "10 Food Business Ideas with Minimal Capital Investment",
+            "url": "https://bootstrapped.ventures/food-business-ideas-with-small-capital/"
+        },
+        {
+            "date": "2023-10-26",
+            "label": "Blog",
+            "title": "Storing Your Favorite Recipes in the Cloud: Top 3 Methods",
+            "url": "https://bootstrapped.ventures/recipe-software/"
+        },
+        {
+            "date": "2023-10-19",
+            "label": "Blog",
+            "title": "Your Go-To Guide for Writing Winning Recipes",
+            "url": "https://bootstrapped.ventures/how-to-write-recipe/"
+        },
+        {
+            "date": "2023-09-29",
+            "label": "Blog",
+            "title": "5 Essential Tips for Making Money from Food",
+            "url": "https://bootstrapped.ventures/how-to-make-money-from-food/"
+        },
+        {
             "date": "2023-09-21",
             "label": "Blog",
             "title": "7 Tasty Tips to Kickstart Your Food-Writing Career",

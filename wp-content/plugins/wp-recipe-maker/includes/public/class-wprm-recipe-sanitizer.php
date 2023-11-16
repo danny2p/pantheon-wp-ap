@@ -30,7 +30,7 @@ class WPRM_Recipe_Sanitizer {
 
 		// Prevent infinite loop.
 		if ( isset( $recipe['video_embed'] ) ) {
-			$embed_code = $recipe['video_embed'];
+			$embed_code = trim( $recipe['video_embed'] );
 			$embed_code = str_ireplace( '[wprm-recipe-video]', '', $embed_code );
 			$sanitized_recipe['video_embed'] = $embed_code;
 		}

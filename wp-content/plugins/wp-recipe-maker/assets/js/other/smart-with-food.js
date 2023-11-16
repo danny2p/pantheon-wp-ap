@@ -21,6 +21,8 @@ window.WPRecipeMaker.smartwithfood = {
 
         for ( let button of buttons ) {
             const recipeId = button.dataset.recipe;
+            const recipeName = button.dataset.recipeName;
+            const recipeImage = button.dataset.recipeImage;
 
             if ( recipeId ) {
                 const container = document.getElementById( 'wprm-recipe-container-' + recipeId );
@@ -29,21 +31,17 @@ window.WPRecipeMaker.smartwithfood = {
                     const image = button.querySelector( '.wprm-recipe-smart-with-food-button' );
                     image.addEventListener( 'click', ( event ) => {
                         event.preventDefault();
-                        window.WPRecipeMaker.smartwithfood.purchaseRecipe( recipeId );
+                        window.WPRecipeMaker.smartwithfood.purchaseRecipe( recipeId, recipeName, recipeImage );
                     });
                     button.style.display = '';
                 }
             }
         }
     },
-    purchaseRecipe: ( recipeId ) => {
+    purchaseRecipe: ( recipeId, recipeName = '', recipeImage = '' ) => {
         const container = document.getElementById( 'wprm-recipe-container-' + recipeId );
 
         if ( container ) {
-            // TODO use JS object for recipe data.
-            const recipeName = container.querySelector( '.wprm-recipe-name' ).innerText;
-            const recipeImage = container.querySelector( '.wprm-recipe-image img' ).src;
-
             // Get servings.
             let servings = 1;
             const servingsContainer = container.querySelector( '.wprm-recipe-servings' );
@@ -62,10 +60,24 @@ window.WPRecipeMaker.smartwithfood = {
 
             const ingredientContainers = container.querySelectorAll( '.wprm-recipe-ingredient' );
             for ( let ingredientContainer of ingredientContainers ) {
-                const ingredient = ingredientContainer.innerText.trim();
+                const ingredientClone = document.createElement( 'div' );
+                ingredientClone.innerHTML = ingredientContainer.innerHTML;
+                
+                // Remove notes.
+                const ingredientCloneNotes = ingredientClone.querySelector( '.wprm-recipe-ingredient-notes' );
+                if ( ingredientCloneNotes ) { ingredientCloneNotes.remove(); }
 
-                if ( ingredient ) {
-                    ingredients.push( ingredient );
+                // Remove checkbox.
+                const ingredientCloneCheckbox = ingredientClone.querySelector( '.wprm-checkbox-container' );
+                if ( ingredientCloneCheckbox ) { ingredientCloneCheckbox.remove(); }
+
+                // Get and clean up remaining text.
+                let ingredientString = ingredientClone.innerText;
+                ingredientString = ingredientString.replace( /\s\s+/g, ' ' );
+                ingredientString = ingredientString.trim();
+
+                if ( ingredientString ) {
+                    ingredients.push( ingredientString );
                 }
             }
 
