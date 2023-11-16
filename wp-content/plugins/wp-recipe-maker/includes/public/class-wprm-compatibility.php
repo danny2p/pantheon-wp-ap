@@ -133,7 +133,10 @@ class WPRM_Compatibility {
 	}
 	public static function elementor_controls( $controls_manager ) {
 		include( WPRM_DIR . 'templates/elementor/control.php' );
+		include( WPRM_DIR . 'templates/elementor/control-list.php' );
+
 		$controls_manager->register( new WPRM_Elementor_Control() );
+		$controls_manager->register( new WPRM_Elementor_Control_List() );
 	}
 	public static function elementor_styles() {
 		// Make sure default assets load.
@@ -141,9 +144,11 @@ class WPRM_Compatibility {
 	}
 	public static function elementor_widgets( $widgets_manager ) {
 		include( WPRM_DIR . 'templates/elementor/widget-recipe.php' );
+		include( WPRM_DIR . 'templates/elementor/widget-list.php' );
 		include( WPRM_DIR . 'templates/elementor/widget-roundup.php' );
 
 		$widgets_manager->register( new WPRM_Elementor_Recipe_Widget() );
+		$widgets_manager->register( new WPRM_Elementor_List_Widget() );
 		$widgets_manager->register( new WPRM_Elementor_Roundup_Widget() );
 	}
 
@@ -322,7 +327,7 @@ class WPRM_Compatibility {
 			// Make sure to only load JS if a token is set up.
 			if ( WPRM_Settings::get( 'integration_smartwithfood_token' ) ) {
 				echo '<script src="https://unpkg.com/@smartwithfood/js-sdk@2.0.0/dist/index.min.js"></script>';
-				echo '<script src="' . WPRM_URL . 'assets/js/other/smart-with-food.js"></script>';
+				echo '<script src="' . WPRM_URL . 'assets/js/other/smart-with-food.js?ver=' . WPRM_VERSION .'"></script>';
 				echo '<script>window.wprm_smartwithfood_token = "' . esc_attr( WPRM_Settings::get( 'integration_smartwithfood_token' ) ).'";</script>';
 			}
 		}

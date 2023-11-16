@@ -110,7 +110,10 @@ class WPRM_SC_Smart_With_Food extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Direct in je mandje bij Collect & Go', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<div style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '<a href="#" class="wprm-recipe-smart-with-food-button"' . $aria_label . '><img src="https://fgdjrynm.filerobot.com/icons/49ecf8a9664802bfa8649382155f978e407ce0a1ec70a7aadfbedbda464065ba.svg?vh=2d14be"></a></div>';
+		$name = $recipe->name();
+		$image = $recipe->image_url( 'full' );
+
+		$output = '<div style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-recipe-name="' . esc_attr( $name ) . '" data-recipe-image="' . esc_attr( $image ) . '">' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '<a href="#" class="wprm-recipe-smart-with-food-button"' . $aria_label . '><img src="https://fgdjrynm.filerobot.com/icons/49ecf8a9664802bfa8649382155f978e407ce0a1ec70a7aadfbedbda464065ba.svg?vh=2d14be"></a></div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

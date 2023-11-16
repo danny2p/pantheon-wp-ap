@@ -13,14 +13,16 @@ import FieldRadio from '../fields/FieldRadio';
 import FieldText from '../fields/FieldText';
 import FieldRichText from '../fields/FieldRichText';
 import FieldTextarea from '../fields/FieldTextarea';
+
 import SelectRecipe from '../select/SelectRecipe';
+import SelectPost from '../select/SelectPost';
 
 export default class Roundup extends Component {
     constructor(props) {
         super(props);
 
         let type = 'internal';
-        let recipe = false;
+        let post = false;
         let link = '';
         let nofollow = false;
         let newtab = true;
@@ -31,6 +33,7 @@ export default class Roundup extends Component {
             id: 0,
             url: '',
         }
+        let credit = '';
 
         // Fallback to classic textarea if summary existed before and wasn't created in rich editor.
         let fallbackToTextarea = false;
@@ -39,10 +42,10 @@ export default class Roundup extends Component {
             const roundup = props.args.fields.roundup;
 
             if ( roundup.id ) {
-                type = 'internal';
-                recipe = {
+                type = roundup.type ? roundup.type : 'internal';
+                post = {
                     id: roundup.id,
-                    text: `${ __wprm( 'Recipe' ) } #${ roundup.id }`,
+                    text: 'internal' === type ? `${ __wprm( 'Recipe' ) } #${ roundup.id }` : `${ __wprm( 'Post' ) } #${ roundup.id }`,
                 };
                 name = roundup.name;
                 summary = roundup.summary.replaceAll( '%0A', '\n');
@@ -57,6 +60,7 @@ export default class Roundup extends Component {
                 button = roundup.button;
                 image.id = roundup.image;
                 image.url = roundup.image_url;
+                credit = roundup.credit;
 
                 // Existing roundup summary that doesn't start with "<p>" => created as regular textarea.
                 if ( summary && '<p>' !== summary.substr( 0, 3 ) ) {
@@ -67,13 +71,14 @@ export default class Roundup extends Component {
     
         this.state = {
             type,
-            recipe,
+            post,
             link,
             nofollow,
             newtab,
             name,
             summary,
             image,
+            credit,
             button,
             loading: false,
             saving: false,
@@ -88,7 +93,7 @@ export default class Roundup extends Component {
         if ( 'external' === this.state.type ) {
             return '' !== this.state.link;
         } else {
-            return false !== this.state.recipe;
+            return false !== this.state.post;
         }
     }
 
@@ -190,6 +195,7 @@ export default class Roundup extends Component {
                         id="type"
                         options={ [
                             { value: 'internal', label: __wprm( 'Use one of your own recipes' ) },
+                            { value: 'post', label: __wprm( 'Use one your posts or pages' ) },
                             { value: 'external', label: __wprm( 'Use external recipe from a different website' ) },
                         ] }
                         value={ this.state.type }
@@ -204,113 +210,145 @@ export default class Roundup extends Component {
                             <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Recipe' ) }</div>
                             <SelectRecipe
                                 options={ [] }
-                                value={ this.state.recipe }
-                                onValueChange={(recipe) => {
-                                    this.setState({ recipe });
+                                value={ this.state.post }
+                                onValueChange={(post) => {
+                                    this.setState({ post });
                                 }}
                             />
                         </Fragment>
                         :
                         <Fragment>
-                            <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Link' ) }</div>
-                            <FieldText
-                                name="roundup-link"
-                                placeholder="https://demo.wprecipemaker.com/amazing-vegetable-pizza/"
-                                type="url"
-                                value={ this.state.link }
-                                onChange={ (link) => {
-                                    this.setState({ link });
-                                }}
-                                disabled={ this.state.loading }
-                            />
                             {
-                                this.state.loading
+                                'post' === this.state.type
                                 ?
-                                <Loader/>
+                                <Fragment>
+                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Post' ) }</div>
+                                    <SelectPost
+                                        options={ [] }
+                                        value={ this.state.post }
+                                        onValueChange={(post) => {
+                                            this.setState({ post });
+                                        }}
+                                    />
+                                </Fragment>
                                 :
                                 <Fragment>
-                                    <div
-                                        className="wprm-admin-modal-roundup-field-load-details-container"
-                                        style={ ! this.state.link ? { visibility: 'hidden' } : {} }
-                                    >
-                                        <a
-                                            href="#"
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                this.loadDetailsFromURL();
-                                            }}
-                                        >{ __wprm( 'Try to load details from URL' ) }</a>
-                                    </div>
-                                    <div className="wprm-admin-modal-roundup-field-nofollow-container">
-                                        <input
-                                            id="wprm-admin-modal-roundup-field-nofollow"
-                                            type="checkbox"
-                                            checked={ this.state.nofollow }
-                                            onChange={(e) => {
-                                                this.setState({ nofollow: e.target.checked });
-                                            }}
-                                        /> <label htmlFor="wprm-admin-modal-roundup-field-nofollow">{ __wprm( 'Add rel="nofollow" to link' ) }</label>
-                                    </div>
-                                    <div className="wprm-admin-modal-roundup-field-new-tab-container">
-                                        <input
-                                            id="wprm-admin-modal-roundup-field-new-tab"
-                                            type="checkbox"
-                                            checked={ this.state.newtab }
-                                            onChange={(e) => {
-                                                this.setState({ newtab: e.target.checked });
-                                            }}
-                                        /> <label htmlFor="wprm-admin-modal-roundup-field-new-tab">{ __wprm( 'Open link in new tab' ) }</label>
-                                    </div>
-                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Image' ) }</div>
+                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Link' ) }</div>
+                                    <FieldText
+                                        name="roundup-link"
+                                        placeholder="https://demo.wprecipemaker.com/amazing-vegetable-pizza/"
+                                        type="url"
+                                        value={ this.state.link }
+                                        onChange={ (link) => {
+                                            this.setState({ link });
+                                        }}
+                                        disabled={ this.state.loading }
+                                    />
                                     {
-                                        this.state.saving
+                                        this.state.loading
                                         ?
                                         <Loader/>
                                         :
                                         <Fragment>
+                                            <div
+                                                className="wprm-admin-modal-roundup-field-load-details-container"
+                                                style={ ! this.state.link ? { visibility: 'hidden' } : {} }
+                                            >
+                                                <a
+                                                    href="#"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        this.loadDetailsFromURL();
+                                                    }}
+                                                >{ __wprm( 'Try to load details from URL' ) }</a>
+                                            </div>
+                                            <div className="wprm-admin-modal-roundup-field-nofollow-container">
+                                                <input
+                                                    id="wprm-admin-modal-roundup-field-nofollow"
+                                                    type="checkbox"
+                                                    checked={ this.state.nofollow }
+                                                    onChange={(e) => {
+                                                        this.setState({ nofollow: e.target.checked });
+                                                    }}
+                                                /> <label htmlFor="wprm-admin-modal-roundup-field-nofollow">{ __wprm( 'Add rel="nofollow" to link' ) }</label>
+                                            </div>
+                                            <div className="wprm-admin-modal-roundup-field-new-tab-container">
+                                                <input
+                                                    id="wprm-admin-modal-roundup-field-new-tab"
+                                                    type="checkbox"
+                                                    checked={ this.state.newtab }
+                                                    onChange={(e) => {
+                                                        this.setState({ newtab: e.target.checked });
+                                                    }}
+                                                /> <label htmlFor="wprm-admin-modal-roundup-field-new-tab">{ __wprm( 'Open link in new tab' ) }</label>
+                                            </div>
+                                            <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Image' ) }</div>
                                             {
-                                                -1 === this.state.image.id
-                                                && '' !== this.state.image.url
+                                                this.state.saving
                                                 ?
-                                                <div className="wprm-admin-modal-field-image">
-                                                    <p>
-                                                        { __wprm( 'External image. Recommended:' ) } <a
-                                                            href="#"
-                                                            onClick={ (e) => {
-                                                                e.preventDefault();
-                                                                this.saveImage();
-                                                            } }
-                                                        >{ __wprm( 'Save image locally' ) }</a>
-                                                    </p>
-                                                    <div className="wprm-admin-modal-field-image-preview">
-                                                        <img src={ this.state.image.url } />
-                                                        <a
-                                                            href="#"
-                                                            onClick={ (e) => {
-                                                                e.preventDefault();
-                                                                this.setState({
+                                                <Loader/>
+                                                :
+                                                <Fragment>
+                                                    {
+                                                        -1 === this.state.image.id
+                                                        && '' !== this.state.image.url
+                                                        ?
+                                                        <div className="wprm-admin-modal-field-image">
+                                                            <p>
+                                                                { __wprm( 'External image. Recommended:' ) } <a
+                                                                    href="#"
+                                                                    onClick={ (e) => {
+                                                                        e.preventDefault();
+                                                                        this.saveImage();
+                                                                    } }
+                                                                >{ __wprm( 'Save image locally' ) }</a>
+                                                            </p>
+                                                            <div className="wprm-admin-modal-field-image-preview">
+                                                                <img src={ this.state.image.url } />
+                                                                <a
+                                                                    href="#"
+                                                                    onClick={ (e) => {
+                                                                        e.preventDefault();
+                                                                        this.setState({
+                                                                            image: {
+                                                                                id: 0,
+                                                                                url: '',
+                                                                            }
+                                                                        });
+                                                                    } }
+                                                                >{ __wprm( 'Remove Image' ) }</a>
+                                                            </div>
+                                                        </div>
+                                                        :
+                                                        <FieldImage
+                                                            id={ this.state.image.id }
+                                                            url={ this.state.image.url }
+                                                            onChange={ ( id, url ) => {
+                                                                this.setState( {
                                                                     image: {
-                                                                        id: 0,
-                                                                        url: '',
+                                                                        id,
+                                                                        url,
                                                                     }
                                                                 });
-                                                            } }
-                                                        >{ __wprm( 'Remove Image' ) }</a>
-                                                    </div>
-                                                </div>
-                                                :
-                                                <FieldImage
-                                                    id={ this.state.image.id }
-                                                    url={ this.state.image.url }
-                                                    onChange={ ( id, url ) => {
-                                                        this.setState( {
-                                                            image: {
-                                                                id,
-                                                                url,
-                                                            }
-                                                        });
-                                                    }}
-                                                />
+                                                            }}
+                                                        />
+                                                    }
+                                                </Fragment>
+                                            }
+                                            {
+                                                ( 0 < this.state.image.id || '' !== this.state.image.url )
+                                                &&
+                                                <Fragment>
+                                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Image Credit' ) }</div>
+                                                    <FieldText
+                                                        name="image-credit"
+                                                        placeholder={ 'demo.wprecipemaker.com' }
+                                                        value={ this.state.credit }
+                                                        onChange={ (credit) => {
+                                                            this.setState({ credit });
+                                                        }}
+                                                    />
+                                                </Fragment>
                                             }
                                         </Fragment>
                                     }
@@ -324,6 +362,11 @@ export default class Roundup extends Component {
                         <p className="wprm-admin-modal-roundup-override">{ __wprm( 'Optionally fill in these fields to use instead of the recipe values:' ) }</p>
                     }
                     {
+                        'post' === this.state.type
+                        &&
+                        <p className="wprm-admin-modal-roundup-override">{ __wprm( 'Optionally fill in these fields to use instead of the post values:' ) }</p>
+                    }
+                    {
                         /* Shared by internal and external */
                         ! this.state.loading
                         &&
@@ -331,7 +374,7 @@ export default class Roundup extends Component {
                             <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Name' ) }</div>
                             <FieldText
                                 name="recipe-name"
-                                placeholder={ __wprm( 'Recipe Name' ) }
+                                placeholder={ __wprm( 'Roundup Item Name' ) }
                                 value={ this.state.name }
                                 onChange={ (name) => {
                                     this.setState({ name });
@@ -342,7 +385,7 @@ export default class Roundup extends Component {
                                 this.state.fallbackToTextarea
                                 ?
                                 <FieldTextarea
-                                    placeholder={ __wprm( 'Short description of this recipe...' ) }
+                                    placeholder={ __wprm( 'Short description of this roundup item...' ) }
                                     value={ this.state.summary }
                                     onChange={ (summary) => {
                                         this.setState({ summary });
@@ -351,7 +394,7 @@ export default class Roundup extends Component {
                                 :
                                 <FieldRichText
                                     toolbar="roundup"
-                                    placeholder={ __wprm( 'Short description of this recipe...' ) }
+                                    placeholder={ __wprm( 'Short description of this roundup item...' ) }
                                     value={ this.state.summary }
                                     onChange={ (summary) => {
                                         // Remove empty lines before saving.

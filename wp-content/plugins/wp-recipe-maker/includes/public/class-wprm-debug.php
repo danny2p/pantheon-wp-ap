@@ -61,7 +61,7 @@ class WPRM_Debug {
 	 * @since	8.9.0
 	 */
 	public static function debugging() {
-		if ( self::$debugging || ( defined( 'WPRM_DEBUGGING' ) && WPRM_DEBUGGING ) ) {
+		if ( self::$debugging || ( defined( 'WPRM_DEBUGGING' ) && WPRM_DEBUGGING ) || isset( $_GET['wprm_debug'] ) ) {
 			// We are actually debugging, now check the user.
 			if ( self::$debugger_user_id ) {
 				// If debugger user ID is set, only show debug info to that specific user.

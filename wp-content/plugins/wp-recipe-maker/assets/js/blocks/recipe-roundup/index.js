@@ -96,6 +96,12 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                             return image_url.replace( 'image_url', '' );
                         },
                     },
+                    credit: {
+                        type: 'string',
+                        shortcode: ( { named: { credit = '' } } ) => {
+                            return credit.replace( 'credit', '' );
+                        },
+                    },
                     name: {
                         type: 'string',
                         shortcode: ( { named: { name = '' } } ) => {
@@ -129,12 +135,13 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
 
         const modalCallback = ( fields ) => {
             setAttributes({
-                id: 'external' !== fields.type ? fields.recipe.id : 0,
+                id: 'external' !== fields.type ? fields.post.id : 0,
                 link: fields.link,
                 nofollow: fields.nofollow ? '1' : '',
                 newtab: fields.newtab ? '1' : '',
                 image: parseInt( fields.image.id ),
                 image_url: fields.image.url,
+                credit: fields.credit,
                 name: fields.name,
                 button: fields.button,
                 summary: fields.summary.replace(/\r?\n|\r/gm, '%0A'),
@@ -223,6 +230,10 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
 
             if ( -1 === attributes.image && attributes.image_url ) {
                 shortcode += attributes.image_url ? ` image_url="${ attributes.image_url }"` : '';
+            }
+
+            if ( attributes.credit ) {
+                shortcode += ` credit="${ cleanUpShortcodeAttribute( attributes.credit ) }"`;
             }
             
             shortcode += ']';

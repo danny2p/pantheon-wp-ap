@@ -7,6 +7,7 @@ import Header from '../general/Header';
 import Footer from '../general/Footer';
 
 import SelectRecipe from './SelectRecipe';
+import SelectList from './SelectList';
 
 const firstRecipeOnPage = {
     id: 0,
@@ -17,18 +18,24 @@ export default class Select extends Component {
     constructor(props) {
         super(props);
 
-        let recipe = false;
-        if ( props.args.fields.recipe.showFirst ) {
-            recipe = firstRecipeOnPage;
+        let type = 'recipe';
+        if ( props.args.hasOwnProperty( 'type' ) ) {
+            type = props.args.type;
+        }
+
+        let selection = false;
+        if ( 'recipe' === type && props.args.fields.recipe.showFirst ) {
+            selection = firstRecipeOnPage;
         }
     
         this.state = {
-            recipe,
+            type,
+            selection,
         };
     }
 
     selectionsMade() {
-        return false !== this.state.recipe;
+        return false !== this.state.selection;
     }
 
     render() {
@@ -47,23 +54,42 @@ export default class Select extends Component {
                 </Header>
                 <div className="wprm-admin-modal-select-container">
                     {
-                        this.props.args.fields.recipe
-                        ?
-                        <SelectRecipe
-                            options={
-                                this.props.args.fields.recipe.showFirst
+                        'recipe' === this.state.type
+                        &&
+                        <Fragment>
+                            {
+                                this.props.args.fields.recipe
                                 ?
-                                [firstRecipeOnPage]
+                                <SelectRecipe
+                                    options={
+                                        this.props.args.fields.recipe.showFirst
+                                        ?
+                                        [firstRecipeOnPage]
+                                        :
+                                        []
+                                    }
+                                    value={ this.state.selection }
+                                    onValueChange={(selection) => {
+                                        this.setState({ selection });
+                                    }}
+                                />
                                 :
-                                []
+                                null
                             }
-                            value={ this.state.recipe }
-                            onValueChange={(recipe) => {
-                                this.setState({ recipe });
-                            }}
-                        />
-                        :
-                        null
+                        </Fragment>
+                    }
+                    {
+                        'list' === this.state.type
+                        &&
+                        <Fragment>
+                            <SelectList
+                                options={ [] }
+                                value={ this.state.selection }
+                                onValueChange={(selection) => {
+                                    this.setState({ selection });
+                                }}
+                            />
+                        </Fragment>
                     }
                 </div>
                 <Footer
@@ -72,11 +98,21 @@ export default class Select extends Component {
                     <button
                         className="button button-primary"
                         onClick={ () => {
+                            let data = {};
+
+                            switch ( this.state.type ) {
+                                case 'list':
+                                    data.list = this.state.selection;
+                                    break;
+                                default:
+                                    data.recipe = this.state.selection;
+                            }
+
                             if ( 'function' === typeof this.props.args.nextStepCallback ) {
-                                this.props.args.nextStepCallback( this.state );
+                                this.props.args.nextStepCallback( data );
                             } else {
                                 if ( 'function' === typeof this.props.args.insertCallback ) {
-                                    this.props.args.insertCallback( this.state );
+                                    this.props.args.insertCallback( data );
                                 }
                                 this.props.maybeCloseModal();
                             }

@@ -16,4 +16,7 @@ export default {
 
         return ApiWrapper.call( `${utilitiesEndpoint}/feedback`, 'POST', data );
     },
+    getPostSummary(id) {
+        return ApiWrapper.call( `${utilitiesEndpoint}/post_summary/${id}` );
+    },
 };

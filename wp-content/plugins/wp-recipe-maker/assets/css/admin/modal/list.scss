@@ -1,0 +1,23 @@
+.wprm-admin-modal-list {
+    max-width: 1000px;
+
+    .wprm-admin-modal-field-container {
+        input {
+            max-width: 500px;
+        }
+    }
+
+    .wprm-admin-modal-field-container-metadata_output {
+        align-items: center;
+    }
+
+    .wprm-admin-modal-field-items-actions {
+        margin-left: 26px;
+        margin-top: 10px;
+
+        .button {
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+    }
+}

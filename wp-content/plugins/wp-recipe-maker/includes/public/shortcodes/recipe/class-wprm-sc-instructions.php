@@ -409,7 +409,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					$text_style = '';
 
 					if ( '0px' !== $atts['text_margin'] ) {
-						$text_style = ' style="margin-bottom: ' . esc_attr( $atts['text_margin'] ) . '";';
+						$text_style = ' style="margin-bottom: ' . esc_attr( $atts['text_margin'] ) . ';"';
 					}
 
 					$instruction_text = '<div class="wprm-recipe-instruction-text"' . $text_style . '>' . $text . '</div>';
@@ -602,10 +602,12 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 	private static function instruction_image( $recipe, $instruction, $default_image_size ) {
 		$settings_size = 'legacy' === WPRM_Settings::get( 'recipe_template_mode' ) ? WPRM_Settings::get( 'template_instruction_image' ) : false;
 		$size = $settings_size ? $settings_size : $default_image_size;
+		$force_size = false;
 
-		preg_match( '/^(\d+)x(\d+)$/i', $size, $match );
+		preg_match( '/^(\d+)x(\d+)(\!?)$/i', $size, $match );
 		if ( ! empty( $match ) ) {
 			$size = array( intval( $match[1] ), intval( $match[2] ) );
+			$force_size = isset( $match[3] ) && '!' === $match[3];
 		}
 
 		$img = wp_get_attachment_image( $instruction['image'], $size );
@@ -617,10 +619,27 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				$style = 'max-width: ' . $image_data[1] . 'px;';
 
 				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
+					$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
+					$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
 				} else {
 					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 				}
+			}
+		}
+
+		// Maybe force image size.
+		if ( $force_size ) {
+			$style = '';
+			$style .= 'width: ' . $size[0] . 'px;';
+			$style .= 'max-width: 100%;';
+			$style .= 'height: ' . $size[1] . 'px;';
+			$style .= 'object-fit: cover;';
+
+			if ( false !== stripos( $img, ' style="' ) ) {
+				$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
+				$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
+			} else {
+				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 			}
 		}
 

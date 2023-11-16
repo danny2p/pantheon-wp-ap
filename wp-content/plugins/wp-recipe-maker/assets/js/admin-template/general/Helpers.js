@@ -18,7 +18,11 @@ export default {
         return css;
     },
     getShortcodeName(id) {
-        let name = id.replace('wprm-', '');
+        let name = id;
+
+        name = name.replace('wprm-recipe-', '');
+        name = name.replace('wprm-', '');
+
         name = name.replace(/-/g, ' ');
         name = name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();

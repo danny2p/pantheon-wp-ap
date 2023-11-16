@@ -216,7 +216,7 @@ export default class Menu extends Component {
 
                                             if ( ! fields.hasOwnProperty( 'type' ) || 'external' !== fields.type ) {
                                                 // Default to internal link.
-                                                shortcode += ` id="${ fields.recipe.id }"`;
+                                                shortcode += ` id="${ fields.post.id }"`;
 
                                                 // Optional override fields.
                                                 if ( fields.name ) { shortcode += ` name="${ cleanUpShortcodeAttribute( fields.name ) }"`; }
@@ -234,6 +234,8 @@ export default class Menu extends Component {
                                                 if ( -1 === fields.image.id && fields.image.url ) {
                                                     shortcode += fields.image.url ? ` image_url="${ fields.image.url }"` : '';
                                                 }
+
+                                                shortcode += ` credit="${ cleanUpShortcodeAttribute( fields.credit ) }"`;
                                             }
 
                                             // Both internal and external.

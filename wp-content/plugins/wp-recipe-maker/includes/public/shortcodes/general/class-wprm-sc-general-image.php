@@ -88,11 +88,13 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 		}
 
 		$size = $atts['size'];
+		$force_size = false;
 
 		// Check if size should be handled as array.
-		preg_match( '/^(\d+)x(\d+)$/i', $size, $match );
+		preg_match( '/^(\d+)x(\d+)(\!?)$/i', $size, $match );
 		if ( ! empty( $match ) ) {
 			$size = array( intval( $match[1] ), intval( $match[2] ) );
+			$force_size = isset( $match[3] ) && '!' === $match[3];
 		}
 
 		// Get image.
@@ -126,9 +128,17 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 			$style .= 'border-radius: ' . esc_attr( $atts['rounded_radius'] ) . ';';
 		}
 
+		if ( $force_size ) {
+			$style .= 'width: ' . $size[0] . 'px;';
+			$style .= 'max-width: 100%;';
+			$style .= 'height: ' . $size[1] . 'px;';
+			$style .= 'object-fit: cover;';
+		}
+
 		if ( $style ) {
 			if ( false !== stripos( $img, ' style="' ) ) {
-				$img = str_ireplace( ' style="', ' style="' . esc_attr( $style ), $img );
+				$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
+				$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
 			} else {
 				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
 			}

@@ -1,3 +1,5 @@
+import Helpers from 'Shared/Helpers';
+
 export default {
     updateInlineIngredientInText( ingredient, text, removed = false ) {
         let updatedText = text;
@@ -29,19 +31,7 @@ export default {
         return updatedText;
     },
     getIngredientText( ingredient, includeNotes = false ) {
-        let ingredientString = '';
-
-        let fields = [];
-        if ( ingredient.amount ) { fields.push( ingredient.amount ); }
-        if ( ingredient.unit ) { fields.push( ingredient.unit ); }
-        if ( ingredient.name ) { fields.push( ingredient.name ); }
-        if ( includeNotes && ingredient.notes ) { fields.push( ingredient.notes ); }
-        
-        if ( fields.length ) {
-            ingredientString = fields.join( ' ' ).replace( /(<([^>]+)>)/ig, '' ).trim();
-        }
-
-        return ingredientString;
+        return Helpers.getIngredientString( ingredient, includeNotes );
     },
     getShortcodeFor( atts ) {
         const uid = atts.hasOwnProperty( 'uid' ) ? parseInt( atts.uid ) : 0;

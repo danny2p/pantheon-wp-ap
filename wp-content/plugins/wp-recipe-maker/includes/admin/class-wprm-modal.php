@@ -161,8 +161,10 @@ class WPRM_Modal {
 				),
 			),
 		));
+		$empty_list = new WPRM_List_Shell();
 
 		$localize_data = apply_filters( 'wprm_admin_modal_localize', array(
+			'list' => $empty_list->get_data(),
 			'recipe' => $empty_recipe->get_data(),
 			'editor_uid' => 0,
 			'options' => array(

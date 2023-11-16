@@ -19,6 +19,7 @@ class WPRM_Elementor_Control extends \Elementor\Base_Data_Control {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce' => wp_create_nonce( 'wprm' ),
 			'latest_recipes' => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
+			'latest_lists' => WPRM_List_Manager::get_latest_lists( 20, 'id' ),
 		) );
 	}
 

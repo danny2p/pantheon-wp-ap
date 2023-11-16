@@ -160,7 +160,7 @@ class WPRM_Assets {
 			wp_enqueue_script( 'wprm-admin-settings', WPRM_URL . 'dist/admin-settings.js', array( 'wprm-admin' ), WPRM_VERSION, true );
 		}
 
-		if ( $screen && ( 'admin_page_wprm_template_editor' === $screen->id || 'wp-recipe-maker_page_wprm_faq' === $screen->id ) ) {
+		if ( $screen && ( 'wp-recipe-maker_page_wprm_template_editor' === $screen->id || 'wp-recipe-maker_page_wprm_faq' === $screen->id ) ) {
 			wp_enqueue_media();
 			wp_enqueue_style( 'wprm-admin-template', WPRM_URL . 'dist/admin-template.css', array(), WPRM_VERSION, 'all' );
 			wp_enqueue_script( 'wprm-admin-template', WPRM_URL . 'dist/admin-template.js', array( 'wprm-admin' ), WPRM_VERSION, true );
@@ -187,6 +187,7 @@ class WPRM_Assets {
 			'api_nonce' => wp_create_nonce( 'wp_rest' ),
 			'endpoints' => array(
 				'recipe' => rtrim( get_rest_url( null, 'wp/v2/' . WPRM_POST_TYPE ), '/' ),
+				'list' => rtrim( get_rest_url( null, 'wp/v2/' . WPRM_LIST_POST_TYPE ), '/' ),
 				'taxonomy' => rtrim( get_rest_url( null, 'wp/v2/wprm_' ), '/' ),
 				'manage' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/manage' ), '/' ),
 				'modal' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/modal' ), '/' ),
@@ -201,6 +202,7 @@ class WPRM_Assets {
 			),
 			'eol' => PHP_EOL,
 			'latest_recipes' => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
+			'latest_lists' => WPRM_List_Manager::get_latest_lists( 20, 'id' ),
 			'recipe_templates' => WPRM_Template_Manager::get_templates(),
 			'addons' => array(
 				'premium' => WPRM_Addons::is_active( 'premium' ),

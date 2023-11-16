@@ -58,8 +58,22 @@ class WPRM_Cache {
 			if ( class_exists( 'Cache_Enabler' ) && method_exists( 'Cache_Enabler', 'clear_post_cache' ) ) {
 				Cache_Enabler::clear_post_cache( $post_id );
 			}
+
+			if ( class_exists( 'FlyingPress\Purge' ) ) {
+				$post_link = get_permalink( $post_id );
+
+				if ( $post_link ) {
+					if ( is_callable( 'FlyingPress\Purge::purge_url' ) ) {
+						FlyingPress\Purge::purge_url( $post_link );
+					} elseif ( is_callable( 'FlyingPress\Purge::purge_by_urls' ) ) {
+						FlyingPress\Purge::purge_by_urls( array( $post_link ) );
+					}
+				}
+			}
 		}
 
+		// Allow other plugins to hook in.
+		do_action( 'wprm_clear_cache', $post_id, $clear_all );
 	
 		// Caches below require us to clear everything.
 		if ( $clear_all ) {
@@ -101,7 +115,6 @@ class WPRM_Cache {
 			if ( class_exists( 'autoptimizeCache' ) && method_exists( 'autoptimizeCache', 'clearall' ) ) {
 				autoptimizeCache::clearall();
 			}
-
 
 			// Clear WP Object Cache.
 			global $wp_object_cache;

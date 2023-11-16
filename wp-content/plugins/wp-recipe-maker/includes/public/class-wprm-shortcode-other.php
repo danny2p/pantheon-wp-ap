@@ -327,6 +327,9 @@ class WPRM_Shortcode_Other {
 			'field' => '',
 			'device' => '',
 			'user' => '',
+			'taxonomy' => '',
+			'term_ids' => '',
+			'term_slugs' => '',
 			'inverse' => '0',
 		), $atts, 'wprm_condition' );
 
@@ -342,7 +345,7 @@ class WPRM_Shortcode_Other {
 			if ( $recipe ) {
 				switch ( $field_condition ) {
 					case 'image':
-						$matches_conditions[] = 0 < $recipe->image_id();
+						$matches_conditions[] = 0 < intval( $recipe->image_id() ) || 'url' === $recipe->image_id() && $recipe->image_url();
 						break;
 					case 'video':
 						$matches_conditions[] = '' !== $recipe->video();
@@ -354,6 +357,36 @@ class WPRM_Shortcode_Other {
 						$matches_conditions[] = '' !== do_shortcode( '[wprm-recipe-unit-conversion id="' . $recipe->id() . '"]' );
 						break;
 				}
+			}
+		}
+
+		// Taxonomy conditions.
+		if ( $atts['taxonomy'] && ( $atts['term_ids'] || $atts['term_slugs'] ) ) {
+			$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
+
+			if ( $recipe ) {
+				// Get recipe taxonomy terms.
+				$taxonomy = sanitize_key( $atts['taxonomy'] );
+				$taxonomy = 'wprm_' === substr( $taxonomy, 0, 5 ) ? substr( $taxonomy, 5 ) : $taxonomy;
+				$terms = $recipe->tags( $taxonomy );
+
+				// Get terms to match on.
+				if ( $atts['term_ids'] ) {
+					$terms_to_match = wp_list_pluck( $terms, 'term_id' );
+
+					$values = explode( ';', str_replace( ',', ';', trim( $atts['term_ids'] ) ) );
+					$values = array_map( 'intval', $values );
+				} else {
+					$terms_to_match = wp_list_pluck( $terms, 'slug' );
+
+					$values = explode( ';', str_replace( ',', ';', trim( $atts['term_slugs'] ) ) );
+				}
+
+				// Check for match.
+				$matches = array_intersect( $values, $terms_to_match );
+
+				// Matches if there is at least one.
+				$matches_conditions[] = 0 < count( $matches );
 			}
 		}
 

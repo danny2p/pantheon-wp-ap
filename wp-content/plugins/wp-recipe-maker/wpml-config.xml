@@ -64,4 +64,13 @@
     <taxonomy translate="1">wprm_keyword</taxonomy>
     <taxonomy translate="1">wprm_glossary_term</taxonomy>
   </taxonomies>
+  <admin-texts>
+    <key name="wprmp_nutrition_label_layout">
+      <key name="blocks">
+        <key name="*">
+          <key name="text" />
+        </key>
+      </key>
+    </key>
+  </admin-texts>
 </wpml-config>

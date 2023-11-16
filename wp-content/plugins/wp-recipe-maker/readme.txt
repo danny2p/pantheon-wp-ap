@@ -3,7 +3,7 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, ingredients, food, cooking, seo, schema.org, json-ld
 Requires at least: 4.4
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -136,6 +136,23 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.0.0 =
+* Feature: Easier Roundup List management
+* Feature: New Roundup Item template
+* Feature: Import Roundup Lists from MV Create Lists
+* Feature: Internal link to non-recipe posts in roundup list
+* Feature: Photo Credit field for recipe roundup items
+* Feature: Taxonomy term conditions for Template Editor
+* Feature: Ability to force image to a specific size in the Template Editor
+* Improvement: Overview of "Add Blocks" in Template Editor
+* Improvement: Access Template Editor through menu
+* Improvement: Trim video embed code to make sure embed URLs show up
+* Fix: Adding inline ingredients that use the [adjustable] shortcode
+* Fix: Incorrect CSS
+* Fix: Recipe roundup admin modal scroll problem
+* Fix: Elementor not always associating correct parent post
+* Fix: Prevent admin CSS from changing comment rating stars when logged in with admin bar feature
+
 = 8.10.3 =
 * Fix: Revert dynamic ratings update feature (causing too much server load)
 
@@ -1553,6 +1570,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.0.0 =
+Some great new features and improvements
+
 = 8.10.3 =
 Update to reduce plugin server load
 

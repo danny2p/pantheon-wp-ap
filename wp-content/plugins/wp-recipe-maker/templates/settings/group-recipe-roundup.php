@@ -24,14 +24,14 @@ $recipe_roundup = array(
 					'name' => __( 'Food Recipe Roundup Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default roundup template to use for the food recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
-					'default' => 'roundup-summary',
+					'default' => 'roundup-clean',
 				),
 				array(
 					'id' => 'howto_recipe_roundup_template',
 					'name' => __( 'How-to Instructions Roundup Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default roundup template to use for the how-to instructions on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
-					'default' => 'roundup-summary',
+					'default' => 'roundup-clean',
 					'dependency' => array(
 						'id' => 'recipe_template_show_types',
 						'value' => true,
@@ -42,7 +42,7 @@ $recipe_roundup = array(
 					'name' => __( 'Other Recipe Roundup Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default roundup template to use for the "other (no metadata)" recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
-					'default' => 'roundup-summary',
+					'default' => 'roundup-clean',
 					'dependency' => array(
 						'id' => 'recipe_template_show_types',
 						'value' => true,

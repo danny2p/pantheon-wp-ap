@@ -252,7 +252,7 @@ class WPRM_Recipe_Saver {
 			$post = get_post( $revision_parent );
 		}
 
-		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID );
+		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID, true );
 
 		// Make sure post itself is not included.
 		if ( in_array( $post->ID, $recipe_ids ) ) {

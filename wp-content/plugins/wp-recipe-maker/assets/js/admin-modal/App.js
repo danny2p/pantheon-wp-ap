@@ -15,6 +15,7 @@ const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
 
 import BulkEdit from './bulk-edit';
 import InputFields from './input-fields';
+import List from './list';
 import Menu from './menu';
 import Recipe from './recipe';
 import Roundup from './roundup';
@@ -24,6 +25,7 @@ import Taxonomy from './taxonomy';
 const contentBlocks = {
     'bulk-edit': BulkEdit,
     'input-fields': InputFields,
+    list: List,
     menu: Menu,
     recipe: Recipe,
     roundup: Roundup,

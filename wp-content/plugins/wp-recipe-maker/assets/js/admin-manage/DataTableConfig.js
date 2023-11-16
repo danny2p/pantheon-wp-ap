@@ -2,6 +2,7 @@ import { __wprm } from 'Shared/Translations';
 import Api from 'Shared/Api';
 
 import ColumnsCustomTaxonomies from './custom-taxonomies/Columns';
+import ColumnsLists from './lists/Columns';
 import ColumnsRatings from './ratings/Columns';
 import ColumnsRecipe from './recipes/Columns';
 import ColumnsRevision from './revisions/Columns';
@@ -278,6 +279,24 @@ datatables.rating = {
     selectedColumns: ['date','rating','type', 'user_id','ip'],
     columns: ColumnsRatings,
 }
+
+datatables.lists = {
+    parent: __wprm( 'Roundup Lists' ),
+    id: 'lists',
+    route: 'list',
+    label: {
+        singular: __wprm( 'List' ),
+        plural: __wprm( 'Lists' ),
+    },
+    bulkEdit: false,
+    createButton: (datatable) => {
+        WPRM_Modal.open( 'list', {
+            saveCallback: () => datatable.refreshData(),
+        } );
+    },
+    selectedColumns: ['id','date','name','parent_post'],
+    columns: ColumnsLists,
+};
 
 datatables.glossary = {
     parent: __wprm( 'Features' ),

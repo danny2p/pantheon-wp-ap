@@ -1,0 +1,151 @@
+.wprm-admin-modal-field-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: white;
+
+    .wprm-admin-modal-field-item-handle {
+        flex-shrink: 0;
+
+        .wprm-admin-icon {
+            margin: 0 5px;
+            cursor: move;
+
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+.wprm-admin-modal-field-items-header-container {
+    display: flex;
+    align-items: center;
+    margin: 0 26px 10px 26px;
+    font-weight: bold;
+    max-width: 650px;
+
+    .wprm-admin-modal-field-items-header {
+        &:nth-of-type(1) {
+            flex: 0 0 40px;
+            margin-right: 5px;
+            text-align: center;
+        }
+        &:nth-of-type(2) {
+            display: none;
+        }
+        &:nth-of-type(3) {
+            flex: auto;
+        }
+    }
+}
+
+.wprm-admin-modal-field-items-container {
+    counter-reset: item;
+}
+
+.wprm-admin-modal-field-item {    
+    .wprm-admin-modal-field-item-container {
+        display: flex;
+        flex: auto;
+        flex-wrap: wrap;
+        align-items: center;
+        max-width: 650px;
+
+        .wprm-admin-modal-field-item-text {
+            flex: auto;
+            margin: 10px 0 10px 55px;
+        }
+
+        .wprm-admin-modal-field-item-number {
+            flex: 0 0 40px;
+            margin-right: 5px;
+            text-align: center;
+            font-weight: bold;
+
+            &::before {
+                counter-increment: item;
+                content: counter(item);
+            }
+        }
+        .wprm-admin-modal-field-item-image {
+            display: none;
+        }
+        .wprm-admin-modal-field-item-name {
+            flex: auto;
+        }
+    }
+}
+
+.wprm-admin-modal-field-item-after-container {
+    .wprm-admin-modal-field-item-after-container-icons {
+        flex-shrink: 0;
+        margin: 5px;
+
+        .wprm-admin-modal-field-item-after-container-icon {
+            display: inline-block;
+            margin-right: 5px;
+
+            &:first-child {
+                width: 75px;
+                text-align: center;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.wprm-admin-modal-field-item-actions {
+    margin-left: 26px;
+    margin-top: 10px;
+
+    .button {
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+
+    p {
+        font-style: italic;
+    }
+}
+
+@media screen and (min-width: 550px) {
+    .wprm-admin-modal-field-items-header-container {
+        .wprm-admin-modal-field-items-header {
+            &:nth-of-type(2) {
+                display: block;
+                flex: 0 0 100px;
+                text-align: center;
+            }
+        }
+    }
+
+    .wprm-admin-modal-field-item {   
+        margin-bottom: 5px;
+ 
+        .wprm-admin-modal-field-item-container {
+            .wprm-admin-modal-field-item-image {
+                display: block;
+                flex: 0 0 100px;
+                text-align: center;
+
+                img {
+                    max-width: 80px;
+                    max-height: 80px;
+                    border-radius: 5px;
+                }
+
+                .wprm-admin-modal-field-item-noimage {
+                    width: 80px;
+                    height: 80px;
+                    border: 1px dashed #ccc;
+                    border-radius: 5px;
+
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

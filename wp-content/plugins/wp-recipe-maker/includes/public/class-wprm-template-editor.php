@@ -33,7 +33,7 @@ class WPRM_Template_Editor {
 	 * @since	4.0.0
 	 */
 	public static function add_submenu_page() {
-		add_submenu_page( '', __( 'WPRM Template Editor', 'wp-recipe-maker' ), __( 'Template Editor', 'wp-recipe-maker' ), 'manage_options', 'wprm_template_editor', array( __CLASS__, 'template_editor_page_template' ) );
+		add_submenu_page( 'wprecipemaker', __( 'WPRM Template Editor', 'wp-recipe-maker' ), __( 'Template Editor', 'wp-recipe-maker' ), 'manage_options', 'wprm_template_editor', array( __CLASS__, 'template_editor_page_template' ) );
 	}
 
 	/**
