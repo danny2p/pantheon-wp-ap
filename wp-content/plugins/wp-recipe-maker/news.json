@@ -1,6 +1,18 @@
 {
     "news": [
         {
+            "date": "2023-11-27",
+            "label": "Blog",
+            "title": "How to Start a Fitness Blog in 4 Easy Steps",
+            "url": "https://bootstrapped.ventures/how-to-start-a-fitness-blog/"
+        },
+        {
+            "date": "2023-11-16",
+            "label": "Blog",
+            "title": "Kickstart Your Lifestyle Blog and Make Money: A 2024 Guide",
+            "url": "https://bootstrapped.ventures/how-to-start-a-lifestyle-blog/"
+        },
+        {
             "date": "2023-11-16",
             "label": "Release",
             "title": "WP Recipe Maker 9.0.0",
