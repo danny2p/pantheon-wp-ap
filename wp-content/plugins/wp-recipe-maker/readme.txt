@@ -136,6 +136,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.0.1 =
+* Fix: Template properties not editable when cloning default template
+
 = 9.0.0 =
 * Feature: Easier Roundup List management
 * Feature: New Roundup Item template
@@ -1570,6 +1573,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.0.1 =
+Update to prevent issues with editing templates
+
 = 9.0.0 =
 Some great new features and improvements
 
