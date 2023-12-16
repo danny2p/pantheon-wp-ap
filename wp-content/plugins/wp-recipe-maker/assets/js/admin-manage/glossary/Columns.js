@@ -21,7 +21,7 @@ export default {
                 id: 'actions',
                 headerClassName: 'wprm-admin-table-help-text',
                 sortable: false,
-                width: 70,
+                width: 105,
                 Filter: () => (
                     <div>
                         { __wprm( 'Filter:' ) }
@@ -37,6 +37,31 @@ export default {
                                     let newName = prompt( `${ __wprm( 'What do you want to be the new name for' ) } "${row.original.name}"? ${ __wprm( 'This will update the term anywhere you are using it. Take note that terms are case insensitive (t and T will be seen as the same unit and both get replaced).' ) }`, row.original.name );
                                     if( newName && newName.trim() ) {
                                         Api.manage.renameTerm(datatable.props.options.id, row.original.term_id, newName).then(() => datatable.refreshData());
+                                    }
+                                }}
+                            />
+                            <Icon
+                                type="duplicate"
+                                title={ `${ __wprm( 'Clone' ) } ${ datatable.props.options.label.singular }` }
+                                onClick={() => {
+                                    let name;
+
+                                    while ( true ) {
+                                        name = prompt( __wprm( 'What do you want to be the new term to be?' ) + ' ' + __wprm( 'Make sure the name is different.' ), row.original.name );
+
+                                        if ( name === null || name !== row.original.name ) {
+                                            break;
+                                        }
+                                    }
+
+                                    if( name && name.trim() && name !== row.original.name ) {
+                                        Api.manage.cloneTerm( 'glossary_term', row.original.term_id, name ).then((data) => {
+                                            if ( ! data ) {
+                                                alert( __wprm( 'We were not able to create this term. Make sure it does not exist yet.' ) );
+                                            } else {
+                                                datatable.refreshData();
+                                            }
+                                        });
                                     }
                                 }}
                             />

@@ -184,9 +184,6 @@ class WPRM_Modal {
 			'nutrition' => WPRM_Nutrition::get_fields(),
 			'unit_conversion' => false,
 			'notices' => WPRM_Notices::get_notices(),
-			'integrations' => array(
-				'my_emissions_checkbox' => WPRM_Compatibility_My_Emissions::show_checkbox_in_modal(),
-			),
 			'images' => array(
 				'video' => includes_url( 'images/media/video.png' ),
 			),

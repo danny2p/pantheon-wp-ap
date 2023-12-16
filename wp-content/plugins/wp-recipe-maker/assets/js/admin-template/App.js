@@ -16,6 +16,7 @@ export default class App extends Component {
         this.state = {
             mode: 'manage',
             editing: false,
+            shortcode: false,
             templates: JSON.parse(JSON.stringify(wprm_admin_template.templates)),
             template: false,
             savingTemplate: false,
@@ -56,11 +57,7 @@ export default class App extends Component {
                 this.setState({
                     editing,
                     mode: 'manage',
-                }, () => {
-                    // Reset template values.
-                    if ( this.state.template ) {
-                        this.onChangeTemplate(this.state.template.slug);   
-                    }
+                    template: false,
                 });
             }
         }
@@ -118,6 +115,14 @@ export default class App extends Component {
             newState.template.style.css = css;
 
             this.setState(newState);
+        }
+    }
+
+    onChangeShortcode(shortcode) {
+        if ( shortcode !== this.state.shortcode ) {
+            this.setState({
+                shortcode
+            });
         }
     }
 
@@ -208,6 +213,8 @@ export default class App extends Component {
                     onChangeTemplate={ this.onChangeTemplate.bind(this) }
                     onChangeHTML={ this.onChangeHTML.bind(this) }
                     onChangeCSS={ this.onChangeCSS.bind(this) }
+                    shortcode={ this.state.shortcode }
+                    onChangeShortcode={ this.onChangeShortcode.bind(this) }
                 />
             </div>
         );

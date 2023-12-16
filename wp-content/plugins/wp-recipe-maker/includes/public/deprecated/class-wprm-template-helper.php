@@ -94,10 +94,8 @@ class WPRM_Template_Helper {
 			$target = WPRM_Settings::get( 'ingredient_links_open_in_new_tab' ) ? ' target="_blank"' : '';
 
 			// Nofollow.
+			$nofollow = '';
 			switch ( $link['nofollow'] ) {
-				case 'follow':
-					$nofollow = '';
-					break;
 				case 'nofollow':
 					$nofollow = ' rel="nofollow"';
 					break;
@@ -130,7 +128,7 @@ class WPRM_Template_Helper {
 	 */
 	public static function time( $type, $time, $show_zero, $shorthand ) {
 		$time = intval( $time );
-		$days = floor( $time / (24 * 60) );
+		$days = WPRM_Settings::get( 'recipe_times_use_days' ) ? floor( $time / (24 * 60) ) : 0;
 		$hours = floor( ( $time - $days * 24 * 60 ) / 60 );
 		$minutes = ( $time - $days * 24 * 60 ) % 60;
 
@@ -328,8 +326,8 @@ class WPRM_Template_Helper {
 			$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
 		}
 
-		// Clickable images.
-		if ( WPRM_Settings::get( 'instruction_image_clickable' ) ) {
+		// Clickable images (but not in Gutenberg Preview).
+		if ( WPRM_Settings::get( 'instruction_image_clickable' ) && ! WPRM_Context::is_gutenberg_preview() ) {
 			$settings_size = WPRM_Settings::get( 'clickable_image_size' );
 
 			preg_match( '/^(\d+)x(\d+)(\!?)$/i', $settings_size, $match );

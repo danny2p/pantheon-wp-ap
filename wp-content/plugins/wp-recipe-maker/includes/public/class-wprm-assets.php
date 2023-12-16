@@ -216,8 +216,11 @@ class WPRM_Assets {
 				'features_comment_ratings' => WPRM_Settings::get( 'features_comment_ratings' ),
 				'recipe_name_from_post_title' => WPRM_Settings::get( 'recipe_name_from_post_title' ),
 				'recipe_use_author' => WPRM_Settings::get( 'recipe_use_author' ),
+				'recipe_times_use_days' => WPRM_Settings::get( 'recipe_times_use_days' ),
 				'post_type_structure' => WPRM_Settings::get( 'post_type_structure' ),
 				'microlink_api_key' => WPRM_Settings::get( 'microlink_api_key' ),
+				'recipe_roundup_default_nofollow' => WPRM_Settings::get( 'recipe_roundup_default_nofollow' ),
+				'recipe_roundup_default_newtab' => WPRM_Settings::get( 'recipe_roundup_default_newtab' ),
 			),
 			'manage' => array(
 				'tooltip' => array(

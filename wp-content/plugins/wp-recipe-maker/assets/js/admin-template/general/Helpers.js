@@ -30,6 +30,27 @@ export default {
 
         return name;
     },
+    getShortcodeAttributes(shortcode) {
+        let shortcode_atts = {};
+        let attributes = shortcode.match(/(\w+=\"[^\"]*?\"|\w+=\'[^\']*?\'|\w+=\w*)/gmi);
+
+        if (attributes) {
+            for (let i = 0; i < attributes.length; i++) {
+                let attribute = attributes[i];
+                let property = attribute.substring(0, attribute.indexOf('='));
+                let value = attribute.substring(attribute.indexOf('=') + 1);
+
+                // Trim value if necessary.
+                if ('"' === value[0] || "'" === value[0] ) {
+                    value = value.substr(1, value.length-2);
+                }
+
+                shortcode_atts[property] = value;
+            }
+        }
+
+        return shortcode_atts;
+    },
     getFullShortcode(shortcode) {
         let fullShortcode = '[' + shortcode.id;
 

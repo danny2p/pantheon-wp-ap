@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { __wprm } from 'Shared/Translations';
  
@@ -10,25 +10,31 @@ const FieldTime = (props) => {
         minutes = 0;
 
     if ( time > 0 ) {
-        days = Math.floor( time / 24 / 60 );
-        hours = Math.floor( time / 60 % 24 );
+        days = wprm_admin.settings.recipe_times_use_days ? Math.floor( time / 24 / 60 ) : 0;
+        hours = Math.floor( ( time - days * 24 * 60 ) / 60 );
         minutes = Math.floor( time % 60 );
     }
 
     return (
         <div className="wprm-admin-modal-field-time">
             <div className="wprm-admin-modal-field-time-parts">
-                <input
-                    type="number"
-                    value={ 0 < days ? '' + days : '' }
-                    onChange={ (e) => {
-                        let newDays = parseInt( e.target.value );
-                        newDays = isNaN( newDays ) ? 0 : newDays;
+                {
+                    wprm_admin.settings.recipe_times_use_days
+                    &&
+                    <Fragment>
+                        <input
+                            type="number"
+                            value={ 0 < days ? '' + days : '' }
+                            onChange={ (e) => {
+                                let newDays = parseInt( e.target.value );
+                                newDays = isNaN( newDays ) ? 0 : newDays;
 
-                        const newTime = 24 * 60 * Math.max( 0, newDays ) + 60 * hours + minutes;
-                        props.onChange( newTime );
-                    }}
-                /> { __wprm( 'days' ) }
+                                const newTime = 24 * 60 * Math.max( 0, newDays ) + 60 * hours + minutes;
+                                props.onChange( newTime );
+                            }}
+                        /> { __wprm( 'days' ) }
+                    </Fragment>
+                }
                 <input
                     type="number"
                     value={ 0 < hours ? '' + hours : '' }

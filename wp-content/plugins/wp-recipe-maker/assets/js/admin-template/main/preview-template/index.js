@@ -13,112 +13,9 @@ import RemoveBlocks from '../../menu/RemoveBlocks';
 import MoveBlocks from '../../menu/MoveBlocks';
 import BlockProperties from '../../menu/BlockProperties';
 import PreviewRecipe from './PreviewRecipe';
+import Shortcodes from '../../general/shortcodes';
 
-// Sort shortcodes for "Add Blocks" section.
-const shortcodeGroups = {
-    general: {
-        group: 'General',
-        shortcodes: [
-            'wprm-spacer',
-            'wprm-text',
-            'wprm-link',
-            'wprm-image',
-            'wprm-call-to-action',
-            'wprm-icon',
-            'wprm-prevent-sleep',
-        ],
-    },
-    recipe: {
-        group: 'Recipe Fields',
-        shortcodes: [
-            'wprm-recipe-name',
-            'wprm-recipe-image',
-            'wprm-recipe-rating',
-            'wprm-recipe-date',
-            'wprm-recipe-author',
-            'wprm-recipe-summary',
-            'wprm-recipe-meta-container',
-            'wprm-recipe-tag',
-            'wprm-recipe-time',
-            'wprm-recipe-cost',
-            'wprm-recipe-servings',
-            'wprm-recipe-servings-unit',
-            'wprm-recipe-equipment',
-            'wprm-recipe-ingredients',
-            'wprm-recipe-instructions',
-            'wprm-recipe-video',
-            'wprm-recipe-notes',
-            'wprm-nutrition-label',
-            'wprm-recipe-nutrition',
-            'wprm-recipe-url',
-            'wprm-recipe-custom-field',
-        ],
-    },
-    roundup: {
-        group: 'Recipe Roundup Fields',
-        shortcodes: [
-            'wprm-recipe-counter',
-            'wprm-recipe-roundup-link',
-            'wprm-recipe-roundup-credit',
-        ],
-    },
-    snippet: {
-        group: 'Recipe Snippet Fields',
-        shortcodes: [
-            'wprm-recipe-jump',
-            'wprm-recipe-jump-to-comments',
-            'wprm-recipe-jump-video',
-        ],
-    },
-    interaction: {
-        group: 'Recipe Interactions',
-        shortcodes: [
-            'wprm-recipe-add-to-collection',
-            'wprm-recipe-add-to-shopping-list',
-            'wprm-recipe-adjustable-servings',
-            'wprm-recipe-advanced-adjustable-servings',
-            'wprm-recipe-unit-conversion',
-            'wprm-recipe-media-toggle',
-            'wprm-recipe-print',
-            'wprm-private-notes',
-        ],
-    },
-    sharing: {
-        group: 'Recipe Sharing',
-        shortcodes: [
-            'wprm-recipe-pin',
-            'wprm-recipe-email-share',
-            'wprm-recipe-facebook-share',
-            'wprm-recipe-twitter-share',
-            'wprm-recipe-text-share',
-        ],
-    },
-    integration: {
-        group: 'Integrations',
-        shortcodes: [
-            'wprm-recipe-emeals',
-            'wprm-recipe-grow.me',
-            'wprm-recipe-shop-instacart',
-            'wprm-recipe-slickstream-favorites',
-            'wprm-recipe-smart-with-food',
-        ],
-    },
-    deprecated: {
-        group: 'Deprecated',
-        shortcodes: [
-            'wprm-recipe-my-emissions-label',
-        ],
-    },
-};
-
-const generalShortcodeKeys = Object.values( shortcodeGroups ).flatMap( ( { shortcodes = [] } ) => shortcodes );
-const shortcodeKeysAlphebetically = Object.keys( wprm_admin_template.shortcodes ).sort();
-
-for ( let shortcode of shortcodeKeysAlphebetically ) {
-    if ( ! generalShortcodeKeys.includes( shortcode ) ) {
-        shortcodeGroups.recipe.shortcodes.push( shortcode );
-    }
-}
+const { shortcodeGroups, shortcodeKeysAlphebetically } = Shortcodes;
 
 export default class PreviewTemplate extends Component {
     constructor(props) {
@@ -158,11 +55,20 @@ export default class PreviewTemplate extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // If changing to edit blocks mode, reset the editing blocks.
-        if ( 'blocks' === this.props.mode && this.props.mode !== prevProps.mode ) {
-            this.onChangeEditingBlock(false);
+        if ( 'shortcode-generator' === this.props.mode ) {
+            // Make sure editing block stays on the shortcode.
+            if ( this.state.editingBlock !== 0 ) {
+                this.onChangeEditingBlock(0);
+            } else {
+                this.checkHtmlChange();
+            }
         } else {
-            this.checkHtmlChange(); // onChangeEditingBlock forces HTML update, so no need to check.
+            // If changing to edit blocks mode, reset the editing blocks.
+            if ( 'blocks' === this.props.mode && this.props.mode !== prevProps.mode ) {
+                this.onChangeEditingBlock(false);
+            } else {
+                this.checkHtmlChange(); // onChangeEditingBlock forces HTML update, so no need to check.
+            }
         }
     }
 
@@ -197,23 +103,7 @@ export default class PreviewTemplate extends Component {
         let match;
         while ((match = regex.exec(html)) !== null) {
             // Check for attributes in shortcode.
-            let shortcode_atts = {};
-            let attributes = match[2].match(/(\w+=\"[^\"]*?\"|\w+=\'[^\']*?\'|\w+=\w*)/gmi);
-
-            if (attributes) {
-                for (let i = 0; i < attributes.length; i++) {
-                    let attribute = attributes[i];
-                    let property = attribute.substring(0, attribute.indexOf('='));
-                    let value = attribute.substring(attribute.indexOf('=') + 1);
-
-                    // Trim value if necessary.
-                    if ('"' === value[0] || "'" === value[0] ) {
-                        value = value.substr(1, value.length-2);
-                    }
-
-                    shortcode_atts[property] = value;
-                }
-            }
+            let shortcode_atts = Helpers.getShortcodeAttributes( match[2] );
 
             // Get shortcode name.
             let id = match[1];
@@ -241,6 +131,7 @@ export default class PreviewTemplate extends Component {
                         const recipeId = this.state.recipe ? this.state.recipe.id : false;
     
                         return <Block
+                                    mode={ 'shortcode-generator' === this.props.mode ? this.props.mode : null }
                                     recipeId={ recipeId }
                                     shortcode={ shortcodes[ domNode.attribs.uid ] }
                                     shortcodes={ shortcodes }
@@ -481,6 +372,14 @@ export default class PreviewTemplate extends Component {
                                         <h2>Our second recipe</h2>
                                         <p>A roundup would have multiple recipes, so here is another one with some more demo text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo.</p>
                                         <p>...</p>
+                                    </Fragment>
+                                }
+                                {
+                                    'shortcode' === this.props.template.type
+                                    &&
+                                    <Fragment>
+                                        <p>&nbsp;</p>
+                                        <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
                                     </Fragment>
                                 }
                             </div>

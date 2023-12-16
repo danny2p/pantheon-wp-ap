@@ -45,6 +45,11 @@ class WPRM_Api_Manage_Taxonomies {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			) );
+			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/clone', array(
+				'callback' => array( __CLASS__, 'api_manage_taxonomies_clone' ),
+				'methods' => 'POST',
+				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+			) );
 			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/label', array(
 				'callback' => array( __CLASS__, 'api_manage_taxonomies_label' ),
 				'methods' => 'POST',
@@ -149,6 +154,18 @@ class WPRM_Api_Manage_Taxonomies {
 				$args['orderby'] = 'meta_value';
 				$args['meta_key'] = 'wprmp_' . $link_type . '_link_nofollow';
 				break;
+			case 'amazon_asin':
+				$args['orderby'] = 'meta_value';
+				$args['meta_key'] = 'wprmp_amazon_asin';
+				break;
+			case 'amazon_name':
+				$args['orderby'] = 'meta_value';
+				$args['meta_key'] = 'wprmp_amazon_name';
+				break;
+			case 'amazon_updated':
+				$args['orderby'] = 'meta_value_num';
+				$args['meta_key'] = 'wprmp_amazon_updated';
+				break;
 			case 'wpupg_custom_link':
 				$args['orderby'] = 'meta_value';
 				$args['meta_key'] = 'wpupg_custom_link';
@@ -228,6 +245,25 @@ class WPRM_Api_Manage_Taxonomies {
 								'key' => 'wprmp_' . $type . '_link',
 								'compare' => '!=',
 								'value' => '',
+							);
+						}
+						break;
+					case 'amazon_asin':
+						if ( 'all' !== $value ) {
+							$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';
+
+							$args['meta_query'][] = array(
+								'key' => 'wprmp_amazon_asin',
+								'compare' => $compare,
+							);
+						}
+						break;
+					case 'amazon_name':
+						if ( '' !== $value ) {
+							$args['meta_query'][] = array(
+								'key' => 'wprmp_amazon_name',
+								'compare' => 'LIKE',
+								'value' => $value,
 							);
 						}
 						break;
@@ -374,6 +410,10 @@ class WPRM_Api_Manage_Taxonomies {
 						break;
 					case 'equipment':
 						$row->affiliate_html = get_term_meta( $row->term_id, 'wprmp_equipment_affiliate_html', true );
+						$row->amazon_asin = get_term_meta( $row->term_id, 'wprmp_amazon_asin', true );
+						$row->amazon_name = get_term_meta( $row->term_id, 'wprmp_amazon_name', true );
+						$row->amazon_image = get_term_meta( $row->term_id, 'wprmp_amazon_image', true );
+						$row->amazon_updated = get_term_meta( $row->term_id, 'wprmp_amazon_updated', true );
 						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
 					case 'suitablefordiet':
@@ -556,6 +596,53 @@ class WPRM_Api_Manage_Taxonomies {
 				// Delete old term.
 				wp_delete_term( $old_term->term_id, $taxonomy );
 				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Handle taxonomies clone call to the REST API.
+	 *
+	 * @since    9.1.0
+	 * @param    WP_REST_Request $request Current request.
+	 */
+	public static function api_manage_taxonomies_clone( $request ) {
+		// Parameters.
+		$params = $request->get_params();
+
+		$type = isset( $params['type'] ) ? sanitize_key( $params['type'] ) : '';
+		$taxonomy = 'wprm_' . $type;
+
+		if ( ! taxonomy_exists( $taxonomy ) ) {
+			return false;
+		}
+
+		$existing_id = isset( $params['id'] ) ? intval( $params['id'] ) : false;
+		$new_name = isset( $params['name'] ) ? WPRM_Recipe_Sanitizer::sanitize_html( $params['name'] ) : '';
+
+		if ( $existing_id && $new_name ) {
+			$existing_term = get_term( $existing_id, $taxonomy );
+
+			if ( $existing_term && ! is_wp_error( $existing_term ) ) {
+				$existing_meta = get_term_meta( $existing_id );
+
+				$new_term = wp_insert_term( $new_name, $taxonomy, array(
+					'description' => $existing_term->description,
+					'parent'      => $existing_term->parent,
+				) );
+
+				if ( ! is_wp_error( $new_term ) && $new_term['term_id'] ) {
+					// Copy all term metadata through Database.
+					global $wpdb;
+
+					$sql = $wpdb->prepare( sprintf( "INSERT INTO %s (`term_id`, `meta_key`, `meta_value`) SELECT %%d, `meta_key`, `meta_value` FROM %s WHERE `term_id` = %%d", $wpdb->termmeta, $wpdb->termmeta ), $new_term['term_id'], $existing_id );
+					$wpdb->query( $sql );
+
+					return true;
+				}
 			}
 		}
 

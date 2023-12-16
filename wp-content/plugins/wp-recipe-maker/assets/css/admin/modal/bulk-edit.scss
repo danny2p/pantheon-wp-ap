@@ -39,6 +39,21 @@
         }
     }
 
+    .wprm-admin-modal-bulk-edit-options {
+        label.wprm-admin-modal-bulk-edit-checkbox {
+            display: block;
+
+            font-size: 14px;
+            line-height: 16px;
+
+            margin-top: 20px;
+
+            input {
+                margin: 0;
+            }
+        }
+    }
+
     .wprm-admin-modal-field-container-equipment {
         input {
             &:nth-of-type(1) {

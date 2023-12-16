@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import FieldContainer from '../fields/FieldContainer';
+import FieldCheckbox from '../fields/FieldCheckbox';
 import FieldDropdown from '../fields/FieldDropdown';
 import FieldRadio from '../fields/FieldRadio';
 import FieldCategory from '../fields/FieldCategory';
@@ -80,7 +81,7 @@ const ActionsRecipe = (props) => {
     // Default options (part 2).
     actionOptions.push(
         { value: 'print', label: __wprm( 'Print Recipes' ), default: false },
-        { value: 'export', label: __wprm( 'Export Recipes' ), default: 'recipe', required: 'premium' },
+        { value: 'export', label: __wprm( 'Export Recipes' ), default: { type: 'recipe', user_ratings: false }, required: 'premium' },
         { value: 'delete', label: __wprm( 'Delete Recipes' ), default: false },
     );
 
@@ -473,22 +474,43 @@ const ActionsRecipe = (props) => {
                         {
                             'export' === selectedAction
                             &&
-                            <FieldRadio
-                                id="type"
-                                options={ [
-                                    { value: 'recipe', label: __wprm( 'Recipes only' ) },
-                                    { value: 'with_parent', label: __wprm( 'Recipes with their parent post' ) },
-                                ] }
-                                value={props.action.options}
-                                onChange={(value) => {
-                                    const newAction = {
-                                        ...props.action,
-                                        options: value,
-                                    }
-                
-                                    props.onActionChange(newAction);
-                                }}
-                            />
+                            <Fragment>
+                                <FieldRadio
+                                    id="type"
+                                    options={ [
+                                        { value: 'recipe', label: __wprm( 'Recipes only' ) },
+                                        { value: 'with_parent', label: __wprm( 'Recipes with their parent post' ) },
+                                    ] }
+                                    value={props.action.options.type}
+                                    onChange={(value) => {
+                                        const newAction = {
+                                            ...props.action,
+                                            options: {
+                                                ...props.action.options,
+                                                type: value,
+                                            },
+                                        }
+                    
+                                        props.onActionChange(newAction);
+                                    }}
+                                />
+                                <label className="wprm-admin-modal-bulk-edit-checkbox">
+                                    <FieldCheckbox
+                                        value={ props.action.options.user_ratings }
+                                        onChange={ (user_ratings) => {
+                                            const newAction = {
+                                                ...props.action,
+                                                options: {
+                                                    ...props.action.options,
+                                                    user_ratings,
+                                                },
+                                            }
+                        
+                                            props.onActionChange(newAction);
+                                        }}
+                                    /> { __wprm( 'Include User Ratings' ) }
+                                </label>
+                            </Fragment>
                         }
                     </div>
                 </Fragment>

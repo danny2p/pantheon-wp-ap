@@ -94,7 +94,12 @@ export const deserialize = ( el, singleLine = false ) => {
 
         // Special case: wprm-code.
         if ( 'WPRM-CODE' === nodeName ) {
-            element.children = [{ text: el.innerHTML }];
+            // Going through textarea to decode HTML entities.
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = el.innerHTML;
+            const decoded = textarea.value;
+
+            element.children = [{ text: decoded }];
         }
 
         if ( 0 === element.children.length ) {

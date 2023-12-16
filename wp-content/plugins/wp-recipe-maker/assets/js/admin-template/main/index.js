@@ -5,6 +5,7 @@ import '../../../css/admin/template/main.scss';
 import ManageTemplates from './manage-templates';
 import EditTemplate from './edit-template';
 import PreviewTemplate from './preview-template';
+import ShortcodeGenerator from './shortcode-generator';
 
 const Main = (props) => {
     return (
@@ -30,6 +31,14 @@ const Main = (props) => {
                     template={ props.template }
                     onChangeHTML={ props.onChangeHTML }
                     onChangeCSS={ props.onChangeCSS }
+                />
+            }
+            {
+                'shortcode' === props.mode
+                &&
+                <ShortcodeGenerator
+                    shortcode={ props.shortcode }
+                    onChangeShortcode={ props.onChangeShortcode }
                 />
             }
             {

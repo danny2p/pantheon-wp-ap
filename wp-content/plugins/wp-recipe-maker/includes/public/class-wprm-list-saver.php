@@ -77,6 +77,7 @@ class WPRM_List_Saver {
 					$text = WPRM_Recipe_Sanitizer::sanitize_html( $data['text'] );
 					
 					if ( $text ) {
+						$data['text'] = $text; // Make sure to store sanitized version.
 						$valid_item = true;
 					}
 				}
@@ -85,7 +86,7 @@ class WPRM_List_Saver {
 					$sanitized_items[] = array(
 						'uid' => intval( $item['uid'] ),
 						'type' => sanitize_key( $item['type'] ),
-						'data' => $item['data'],
+						'data' => $data,
 					);
 				}
 			}

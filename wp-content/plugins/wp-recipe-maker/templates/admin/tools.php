@@ -107,6 +107,63 @@
 			</tr>
 		</tbody>
 	</table>
+<?php
+	if ( class_exists( 'WPRMP_Amazon_api' ) ) :
+		$partner_tag_set = WPRM_Settings::get( 'amazon_partner_tag' ) ? true : false;
+		$api_credentials_set = WPRMP_Amazon_Api::validate_api_credentials();
+?>
+	<h2><?php esc_html_e( 'Amazon Affiliate Links Migration for Equipment', 'wp-recipe-maker' ); ?></h2>
+	<?php if ( ! $partner_tag_set ) : ?>
+		<p><?php esc_html_e( 'Set your Amazon Store ID on the WP Recipe Maker > Settings > Amazon Products page to enable these tools.', 'wp-recipe-maker' ); ?></p><br/>
+	<?php else : ?>
+		<table class="form-table">
+			<tbody>
+				<tr>
+					<th scope="row">
+						<?php esc_html_e( 'Convert Affiliate HTML Code', 'wp-recipe-maker' ); ?>
+					</th>
+					<td>
+						<?php if ( $api_credentials_set ) : ?>
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_amazon_html_products' ) ); ?>" class="button"><?php esc_html_e( 'Convert to Products', 'wp-recipe-maker' ); ?></a> <a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_amazon_html_links' ) ); ?>" class="button"><?php esc_html_e( 'Convert to Regular Links', 'wp-recipe-maker' ); ?></a>
+						<?php else : ?>
+							<a class="button button-disabled"><?php esc_html_e( 'Convert to Products', 'wp-recipe-maker' ); ?></a> <a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_amazon_html_links' ) ); ?>" class="button"><?php esc_html_e( 'Convert to Regular Links', 'wp-recipe-maker' ); ?></a>
+						<?php endif; ?>
+						<p class="description">
+							<?php
+								esc_html_e( 'Converts Amazon Affiliate HTML code to either products or regular links.', 'wp-recipe-maker' );
+								if ( ! $api_credentials_set ) {
+									echo ' ';
+									esc_html_e( 'Converting to products is only possible when the PA-API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
+								}
+							?>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+						<?php esc_html_e( 'Convert Regular Links', 'wp-recipe-maker' ); ?>
+					</th>
+					<td>
+						<?php if ( $api_credentials_set ) : ?>
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_amazon_links_to_products' ) ); ?>" class="button"><?php esc_html_e( 'Convert to Products', 'wp-recipe-maker' ); ?></a>
+						<?php else : ?>
+							<a class="button button-disabled"><?php esc_html_e( 'Convert to Products', 'wp-recipe-maker' ); ?></a>
+						<?php endif; ?>
+						<p class="description">
+							<?php
+								esc_html_e( 'Converts regular Amazon equipment links to products. Does not work for short links.', 'wp-recipe-maker' );
+								if ( ! $api_credentials_set ) {
+									echo ' ';
+									esc_html_e( 'Converting to products is only possible when the PA-API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
+								}
+							?>
+						</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	<?php endif; // Partner tag set. ?>
+<?php endif; // Amazon class exists. ?>
 <?php if ( class_exists( 'WPUltimateRecipe' ) ) : ?>
 	<h2><?php esc_html_e( 'WP Ultimate Recipe Migration', 'wp-recipe-maker' ); ?></h2>
 	<p><?php esc_html_e( 'Use these buttons to migrate from our old WP Ultimate Recipe plugin.', 'wp-recipe-maker' ); ?></p>

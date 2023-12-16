@@ -546,4 +546,50 @@ class WPRM_Shortcode_Helper {
 
 		return $text;
 	}
+
+	/**
+	 * Add inline style to image.
+	 *
+	 * @since	9.1.0
+	 */
+	public static function add_inline_style( $html, $style, $tag = 'img' ) {
+		if ( $html && $style ) {
+			$start_pos = stripos( $html, '<' . $tag );
+
+			if ( false !== $start_pos ) {
+				$end_pos = stripos( $html, '>', $start_pos );
+
+				if ( false !== $end_pos ) {
+					$element = substr( $html, $start_pos, $end_pos - $start_pos + 1 );
+
+					if ( false !== stripos( $element, ' style="' ) ) {
+						$element = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $element );
+						$element = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $element );
+					} else {
+						$element = str_ireplace( '<' . $tag, '<' . $tag . ' style="' . esc_attr( $style ) . '"', $element );
+					}
+
+					$html = substr_replace( $html, $element, $start_pos, $end_pos - $start_pos + 1 );
+				}
+			}
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Get style to force image size.
+	 *
+	 * @since	9.1.0
+	 */
+	public static function get_force_image_size_style( $size ) {
+		$style = '';
+
+		$style .= 'width: ' . $size[0] . 'px;';
+		$style .= 'max-width: 100%;';
+		$style .= 'height: ' . $size[1] . 'px;';
+		$style .= 'object-fit: cover;';
+
+		return $style;
+	}
 }

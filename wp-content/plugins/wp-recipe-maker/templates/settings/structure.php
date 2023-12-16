@@ -38,6 +38,7 @@ require_once( 'group-adjustable-servings.php' );
 require_once( 'group-social-sharing.php' );
 require_once( 'group-private-notes.php' );
 require_once( 'group-links.php' );
+require_once( 'group-amazon.php' );
 require_once( 'group-nutrition-calculation.php' );
 require_once( 'group-translate.php' );
 require_once( 'group-unit-conversion.php' );
@@ -83,6 +84,7 @@ $settings_structure = array(
 	$social_sharing,
 	$private_notes,
 	$links,
+	$amazon,
 	$nutrition_calculation,
 	$translate,
 	$unit_conversion,

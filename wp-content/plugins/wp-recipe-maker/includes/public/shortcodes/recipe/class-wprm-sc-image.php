@@ -124,20 +124,10 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 		}
 
 		if ( $force_size ) {
-			$style .= 'width: ' . $size[0] . 'px;';
-			$style .= 'max-width: 100%;';
-			$style .= 'height: ' . $size[1] . 'px;';
-			$style .= 'object-fit: cover;';
+			$style .= WPRM_Shortcode_Helper::get_force_image_size_style( $size );
 		}
 
-		if ( $style ) {
-			if ( false !== stripos( $img, ' style="' ) ) {
-				$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
-				$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
-			} else {
-				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
-			}
-		}
+		$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
 
 		// Prevent lazy image loading on print page.
 		if ( 'print' === WPRM_Context::get() ) {

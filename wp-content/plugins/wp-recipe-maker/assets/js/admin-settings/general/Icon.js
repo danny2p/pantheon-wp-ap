@@ -30,6 +30,7 @@ import IconQuestion from '../../../icons/settings/question.svg';
 import IconQuestionBox from '../../../icons/settings/question-box.svg';
 import IconSearch from '../../../icons/settings/search.svg';
 import IconShare from '../../../icons/settings/share.svg';
+import IconShoppingCart from '../../../icons/settings/shopping-cart.svg';
 import IconSliders from '../../../icons/settings/sliders.svg';
 import IconSpeed from '../../../icons/settings/speed.svg';
 import IconStar from '../../../icons/settings/star.svg';
@@ -69,6 +70,7 @@ const icons = {
     'question-box': IconQuestionBox,
     search: IconSearch,
     share: IconShare,
+    'shopping-cart': IconShoppingCart,
     sliders: IconSliders,
     speed: IconSpeed,
     star: IconStar,

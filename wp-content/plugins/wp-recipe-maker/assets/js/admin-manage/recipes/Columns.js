@@ -20,8 +20,8 @@ const getFormattedTime = ( timeMins, showZero = false ) => {
         formatted = '';
 
     if ( time > 0 ) {
-        days = Math.floor( time / 24 / 60 );
-        hours = Math.floor( time / 60 % 24 );
+        days = wprm_admin.settings.recipe_times_use_days ? Math.floor( time / 24 / 60 ) : 0;
+        hours = Math.floor( ( time - days * 24 * 60 ) / 60 );
         minutes = Math.floor( time % 60 );
 
         if ( days ) { formatted += `${days} ${days === 1 ? __wprm( 'day' ) : __wprm( 'days' ) } `; }

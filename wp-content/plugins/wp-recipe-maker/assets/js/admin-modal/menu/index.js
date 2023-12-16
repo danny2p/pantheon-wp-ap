@@ -219,6 +219,7 @@ export default class Menu extends Component {
                                                 shortcode += ` id="${ fields.post.id }"`;
 
                                                 // Optional override fields.
+                                                if ( fields.image && 0 < parseInt( fields.image ) ) { shortcode += ` image="${ fields.image }"`; }
                                                 if ( fields.name ) { shortcode += ` name="${ cleanUpShortcodeAttribute( fields.name ) }"`; }
                                                 if ( fields.summary ) { shortcode += ` summary="${ cleanUpShortcodeAttribute( fields.summary ) }"`; }
                                             } else {

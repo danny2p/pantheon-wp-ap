@@ -97,7 +97,6 @@ const EditRecipe = (props) => {
                 servings_advanced_enabled={ props.recipe.servings_advanced_enabled }
                 servings_advanced={ props.recipe.servings_advanced }
                 cost={ props.recipe.cost }
-                my_emissions={ props.recipe.my_emissions }
                 onRecipeChange={ props.onRecipeChange }
             />
         )

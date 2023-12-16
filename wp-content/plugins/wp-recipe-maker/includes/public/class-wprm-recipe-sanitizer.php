@@ -39,7 +39,6 @@ class WPRM_Recipe_Sanitizer {
 		if ( isset( $recipe['prep_time_zero'] ) )				{ $sanitized_recipe['prep_time_zero'] = $recipe['prep_time_zero'] ? true : false; }
 		if ( isset( $recipe['cook_time_zero'] ) )				{ $sanitized_recipe['cook_time_zero'] = $recipe['cook_time_zero'] ? true : false; }
 		if ( isset( $recipe['custom_time_zero'] ) )				{ $sanitized_recipe['custom_time_zero'] = $recipe['custom_time_zero'] ? true : false; }
-		if ( isset( $recipe['my_emissions'] ) )					{ $sanitized_recipe['my_emissions'] = $recipe['my_emissions'] ? true : false; }
 		if ( isset( $recipe['servings_advanced_enabled'] ) )	{ $sanitized_recipe['servings_advanced_enabled'] = $recipe['servings_advanced_enabled'] ? true : false; }
 
 		// Text fields.

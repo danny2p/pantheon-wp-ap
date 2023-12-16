@@ -157,7 +157,7 @@ class WPRM_Api_Manage_Trash {
 
 		$date_search = $wp_query->get( 'wprm_search_date' );
 		if ( $date_search ) {
-			$where .= ' AND ' . $wpdb->posts . '.post_date LIKE \'%' . esc_sql( like_escape( $date_search ) ) . '%\'';
+			$where .= ' AND DATE_FORMAT(' . $wpdb->posts . '.post_date, \'%Y-%m-%d %T\') LIKE \'%' . esc_sql( like_escape( $date_search ) ) . '%\'';
 		}
 
 		$title_search = $wp_query->get( 'wprm_search_title' );
