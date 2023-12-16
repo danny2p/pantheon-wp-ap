@@ -76,9 +76,8 @@ class WPRM_List_Shortcode {
 					$output .= $shortcode;
 				}
 
-				if ( 'text' === $item['type'] ) {
-					
-					$output .= $item['data']['text'];
+				if ( 'text' === $item['type'] ) {					
+					$output .= do_shortcode( $item['data']['text'] );
 				}
 			}
 

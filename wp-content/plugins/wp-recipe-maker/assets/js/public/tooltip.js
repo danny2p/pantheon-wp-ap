@@ -1,4 +1,4 @@
-import tippy from 'tippy.js';
+import tippy, { inlinePositioning } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
 window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
@@ -27,6 +27,10 @@ window.WPRecipeMaker.tooltip = {
                     content: tooltip,
                     allowHTML: true,
                     interactive: true,
+                    onCreate(instance) {
+                        // Prevents the tooltip from breaking ingredients into multiple lines.
+                        instance.popper.style.display = 'inline-block';
+                    },
                 });
             }
         }

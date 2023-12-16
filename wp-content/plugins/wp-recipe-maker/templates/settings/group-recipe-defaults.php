@@ -123,6 +123,13 @@ $recipe_defaults = array(
 					'default' => 'parent',
 				),
 				array(
+					'id' => 'recipe_times_use_days',
+					'name' => __( 'Use Days for Recipe Times', 'wp-recipe-maker' ),
+					'description' => __( 'Input and display days for the recipe times. When disabled, only hours and minutes will be used.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'automatic_amount_fraction_symbols',
 					'name' => __( 'Automatic Amount Fraction Symbols', 'wp-recipe-maker' ),
 					'description' => __( 'When using fractions in the ingredient amount field, automatically replace with their symbol if available. Recommended for accessibility.', 'wp-recipe-maker' ),

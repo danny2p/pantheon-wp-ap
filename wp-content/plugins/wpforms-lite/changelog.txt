@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.8.5.3 =
+- Fixed: Better compatibility with default Block themes.
+- Fixed: Form Embed Wizard was loaded on the YOOtheme Builder page.
+
 = 1.8.5.2 =
 - Added: New email templates are ready to use!
 - Added: Email template can now be customized and previewed on the Settings.

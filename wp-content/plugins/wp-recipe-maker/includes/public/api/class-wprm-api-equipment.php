@@ -102,6 +102,22 @@ class WPRM_Api_Equipment {
 			$affiliate_html = $meta['affiliate_html'];
 			update_term_meta( $term->term_id, 'wprmp_equipment_affiliate_html', $affiliate_html );
 		}
+		if ( isset( $meta['amazon_asin'] ) ) {
+			$amazon_asin = $meta['amazon_asin'];
+			update_term_meta( $term->term_id, 'wprmp_amazon_asin', $amazon_asin );
+		}
+		if ( isset( $meta['amazon_updated'] ) ) {
+			$amazon_updated = intval( $meta['amazon_updated'] );
+			update_term_meta( $term->term_id, 'wprmp_amazon_updated', $amazon_updated );
+		}
+		if ( isset( $meta['amazon_image'] ) ) {
+			$amazon_image = $meta['amazon_image'];
+			update_term_meta( $term->term_id, 'wprmp_amazon_image', $amazon_image );
+		}
+		if ( isset( $meta['amazon_name'] ) ) {
+			$amazon_name = $meta['amazon_name'];
+			update_term_meta( $term->term_id, 'wprmp_amazon_name', $amazon_name );
+		}
 		if ( isset( $meta['wpupg_custom_link'] ) ) {
 			$link = trim( $meta['wpupg_custom_link'] );
 			update_term_meta( $term->term_id, 'wpupg_custom_link', $link );

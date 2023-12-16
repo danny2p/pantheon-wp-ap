@@ -387,6 +387,7 @@ class WPRM_Print {
 
 			// Print size options.
 			if ( WPRM_Settings::get( 'print_size_options' ) ) {
+				$output['header'] = isset( $output['header'] ) ? $output['header'] : '';
 				$output['header'] .= self::get_size_header();
 			}
 		}

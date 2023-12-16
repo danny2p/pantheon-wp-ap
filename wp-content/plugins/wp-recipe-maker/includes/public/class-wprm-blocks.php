@@ -277,7 +277,7 @@ class WPRM_Blocks {
 		$output = '';
 
 		// Only do this for the Gutenberg Preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			$recipe = WPRM_Recipe_Manager::get_recipe( $atts['id'] );
 
 			// No recipe find? ID is incorrect => show warning.
@@ -320,7 +320,7 @@ class WPRM_Blocks {
 		$output = '';
 
 		// Only do this for the Gutenberg Preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/list' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			$list = WPRM_List_Manager::get_list( $atts['id'] );
 
 			// No list found? ID is incorrect => show warning.
@@ -353,7 +353,7 @@ class WPRM_Blocks {
 		$output = '';
 
 		// Only do this for the Gutenberg Preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe-roundup-item' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			if ( isset( $atts['template'] ) && $atts['template'] ) {
 				$template = WPRM_Template_Manager::get_template_by_slug( $atts['template'] );
 			} else {
@@ -386,7 +386,7 @@ class WPRM_Blocks {
 		$output = '';
 
 		// Only do this for the Gutenberg Preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe-snippet' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			if ( isset( $atts['template'] ) && $atts['template'] ) {
 				$template = WPRM_Template_Manager::get_template_by_slug( $atts['template'] );
 			} else {

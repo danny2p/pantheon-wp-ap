@@ -238,18 +238,9 @@ class WPRM_Recipe_Roundup {
 			$type = 'internal';
 			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
+			if ( $atts['image'] && 0 < intval( $atts['image'] ) ) { self::$roundup_overrides['image_id'] = intval( $atts['image'] ); }
 			if ( $atts['name'] ) 	{ self::$roundup_overrides['name'] = rawurldecode( $atts['name'] ); }
 			if ( $atts['summary'] ) { self::$roundup_overrides['summary'] = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ); }
-
-			// Only display published recipes.
-			if ( WPRM_Settings::get( 'recipe_roundup_published_only' ) ) {
-				if ( $recipe && 'publish' !== $recipe->post_status() ) {
-					// If not in Gutenberg preview, return empty shortcode.
-					if ( ! isset( $GLOBALS['wp']->query_vars['rest_route'] ) || '/wp/v2/block-renderer/wp-recipe-maker/recipe-roundup-item' !== $GLOBALS['wp']->query_vars['rest_route'] ) {
-						return '';
-					}
-				}
-			}
 
 			// If no recipe was found, maybe it was of a "post" type instead.
 			if ( ! $recipe ) {
@@ -266,6 +257,7 @@ class WPRM_Recipe_Roundup {
 						'parent_id' => true,
 						'parent_url' => get_permalink( $post ),
 						'permalink' => get_permalink( $post ),
+						'post_status' => $post->post_status,
 						'name' => $name ? $name : $post->post_title,
 						'summary' => $summary ? $summary : '',
 						'image_id' => get_post_thumbnail_id( $post ),
@@ -274,6 +266,16 @@ class WPRM_Recipe_Roundup {
 					);
 
 					$recipe = new WPRM_Recipe_Shell( $recipe_data );
+				}
+			}
+
+			// Only display published recipes/posts.
+			if ( WPRM_Settings::get( 'recipe_roundup_published_only' ) ) {
+				if ( $recipe && 'publish' !== $recipe->post_status() ) {
+					// If not in Gutenberg preview, return empty shortcode.
+					if ( ! WPRM_Context::is_gutenberg_preview() ) {
+						return '';
+					}
 				}
 			}
 		} else {

@@ -1,6 +1,24 @@
 {
     "news": [
         {
+            "date": "2023-12-13",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.1.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-1-0/"
+        },
+        {
+            "date": "2023-12-12",
+            "label": "Blog",
+            "title": "Get Started Teaching Online Cooking Classes: A How-To Guide",
+            "url": "https://bootstrapped.ventures/teach-cooking-class/"
+        },
+        {
+            "date": "2023-12-07",
+            "label": "Blog",
+            "title": "Content Marketing in the Food Industry: Tips for Success",
+            "url": "https://bootstrapped.ventures/content-marketing-in-the-food-industry-tips-for-success/"
+        },
+        {
             "date": "2023-11-27",
             "label": "Blog",
             "title": "How to Start a Fitness Blog in 4 Easy Steps",

@@ -32,6 +32,7 @@ import IconQuestionBox from '../../icons/admin/question-box.svg';
 import IconQuestion from '../../icons/admin/question.svg';
 import IconReload from '../../icons/admin/reload.svg';
 import IconRestore from '../../icons/admin/restore.svg';
+import IconSearch from '../../icons/admin/search.svg';
 import IconStarEmpty from '../../icons/admin/star-empty.svg';
 import IconStarFull from '../../icons/admin/star-full.svg';
 import IconSubscript from '../../icons/admin/subscript.svg';
@@ -71,6 +72,7 @@ const icons = {
     question: IconQuestion,
     reload: IconReload,
     restore: IconRestore,
+    search: IconSearch,
     'star-empty': IconStarEmpty,
     'star-full': IconStarFull,
     subscript: IconSubscript,

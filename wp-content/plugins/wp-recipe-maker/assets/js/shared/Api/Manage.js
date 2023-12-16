@@ -46,6 +46,15 @@ export default {
 
         return ApiWrapper.call( `${taxonomyEndpoint}${type}`, 'POST', data );
     },
+    cloneTerm(type, id, name) {
+        const data = {
+            type,
+            id,
+            name,
+        };
+
+        return ApiWrapper.call( `${manageEndpoint}/taxonomy/clone`, 'POST', data );
+    },
     deleteTerm(type, id) {
         return ApiWrapper.call( `${taxonomyEndpoint}${type}/${id}?force=true`, 'DELETE' );
     },

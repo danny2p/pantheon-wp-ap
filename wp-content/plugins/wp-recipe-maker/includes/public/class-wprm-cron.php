@@ -40,7 +40,12 @@ class WPRM_Cron {
 	public static function add_cron_interval( $schedules ) {
 		$schedules['wprm_daily'] = array(
 			'interval' => 24 * 60 * 60, // Daily.
-			'display'  => 'WP Recipe Maker',
+			'display'  => 'WP Recipe Maker - Daily',
+		);
+
+		$schedules['wprm_hourly'] = array(
+			'interval' => 60 * 60, // Hourly.
+			'display'  => 'WP Recipe Maker - Hourly',
 		);
 		
 		return $schedules;
@@ -57,6 +62,13 @@ class WPRM_Cron {
 		if ( ! $next_event ) {
 			// Nothing scheduled, add schedule.
 			wp_schedule_event( time(), 'wprm_daily', 'wprm_daily_cron' );
+		}
+
+		$next_event = wp_next_scheduled( 'wprm_hourly_cron' );
+
+		if ( ! $next_event ) {
+			// Nothing scheduled, add schedule.
+			wp_schedule_event( time(), 'wprm_hourly', 'wprm_hourly_cron' );
 		}
 	}
 }

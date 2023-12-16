@@ -96,7 +96,7 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 		$shorthand = (bool) $atts['shorthand'];
 
 		$time = intval( $time );
-		$days = floor( $time / (24 * 60) );
+		$days = WPRM_Settings::get( 'recipe_times_use_days' ) ? floor( $time / (24 * 60) ) : 0;
 		$hours = floor( ( $time - $days * 24 * 60 ) / 60 );
 		$minutes = ( $time - $days * 24 * 60 ) % 60;
 

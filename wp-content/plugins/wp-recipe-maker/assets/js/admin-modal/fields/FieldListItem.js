@@ -55,7 +55,7 @@ export default class FieldListItem extends Component {
 
         // Get image to display.
         let image_url = item.data.image_url;
-        if ( post && post.image_url ) {
+        if ( post && post.image_url && ! image_url ) {
             image_url = post.image_url;
         }
 

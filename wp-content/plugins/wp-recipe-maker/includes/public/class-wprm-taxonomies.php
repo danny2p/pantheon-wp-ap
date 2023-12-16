@@ -77,6 +77,8 @@ class WPRM_Taxonomies {
 				$args['show_ui'] = true;
 			}
 
+			$args = apply_filters( 'wprm_register_taxonomy_args', $args, $taxonomy );
+
 			register_taxonomy( $taxonomy, WPRM_POST_TYPE, $args );
 			register_taxonomy_for_object_type( $taxonomy, WPRM_POST_TYPE );
 

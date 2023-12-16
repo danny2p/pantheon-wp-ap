@@ -203,6 +203,9 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
             if ( attributes.template ) {
                 shortcode += ` template="${attributes.template}"`;
             }
+            if ( attributes.image && 0 < parseInt( attributes.image ) ) {
+                shortcode += ` image="${ attributes.image }"`;
+            }
             if ( attributes.name ) {
                 shortcode += ` name="${ cleanUpShortcodeAttribute( attributes.name ) }"`;
             }

@@ -151,22 +151,6 @@ const RecipeGeneral = (props) => {
                     }}
                 />
             </FieldContainer>
-            {
-                wprm_admin_modal.integrations.my_emissions_checkbox
-                &&
-                <FieldContainer
-                    id="my-emissions"
-                    label={ __wprm( 'My Emissions Label' ) }
-                >
-                    <FieldCheckbox
-                        name="my-emissions"
-                        value={ props.my_emissions }
-                        onChange={ (my_emissions) => {
-                            props.onRecipeChange( { my_emissions } );
-                        }}
-                    />
-                </FieldContainer>
-            }
         </Fragment>
     );
 }

@@ -53,6 +53,10 @@ const Menu = (props) => {
                             className={ 'manage' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
                             onClick={ (e) => { props.onChangeMode( 'manage' ) } }
                         ><Icon type='manage' /> Manage Templates</a>
+                        <a
+                            className={ 'shortcode' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                            onClick={ (e) => { props.onChangeMode( 'shortcode' ) } }
+                        ><Icon type='html' /> Shortcode Generator</a>
                     </Fragment>
                     :
                     <Fragment>
@@ -114,7 +118,7 @@ const Menu = (props) => {
             ></div>
             <div
                 id="wprm-block-properties"
-                style={{ display: 'blocks' !== props.mode ? 'none' : 'block' }}
+                style={{ display: 'blocks' !== props.mode && 'shortcode' !== props.mode ? 'none' : 'block' }}
                 className="wprm-template-properties"
             ></div>
         </div>

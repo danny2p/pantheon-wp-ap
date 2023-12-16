@@ -54,7 +54,7 @@ $media = array(
 				array(
 					'id' => 'video_force_ratio',
 					'name' => __( 'Force video ratio', 'wp-recipe-maker' ),
-					'description' => __( 'Enable if your embedded videos are not responsive or seem to be usign the wrong ratio. Some themes already have this functionality.', 'wp-recipe-maker' ),
+					'description' => __( 'Enable if your embedded videos are not responsive or seem to be using the wrong ratio. Some themes already have this functionality.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
 				),

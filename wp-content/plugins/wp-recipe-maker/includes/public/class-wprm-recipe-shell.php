@@ -148,24 +148,25 @@ class WPRM_Recipe_Shell {
 			if ( $width ) {
 				$style = ' style="max-width: ' . $width . 'px; height: auto;"';
 			}
+			
+			$img = '<img src="' . esc_url( $this->image_url() ) . '" alt="' . esc_attr( $this->name() ) .'"' . $style . '/>';
 
-			return '<img src="' . esc_url( $this->image_url() ) . '" alt="' . esc_attr( $this->name() ) .'"' . $style . '/>';
+			// Disable external recipe image pinning.
+			if ( WPRM_Settings::get( 'pinterest_nopin_external_roundup_image' ) ) {
+				$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
+			}
+
+			return $img;
 		}
 
 		$img = wp_get_attachment_image( $image_id, $size );
 
 		// Prevent stretching of recipe image in Gutenberg Preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			$image_data = $this->image_data( $size );
 			if ( $image_data[1] ) {
 				$style = 'max-width: ' . $image_data[1] . 'px; height: auto;';
-
-				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
-					$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
-				} else {
-					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
-				}
+				$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
 			}
 		}
 
@@ -174,8 +175,8 @@ class WPRM_Recipe_Shell {
 			$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
 		}
 
-		// Clickable images.
-		if ( WPRM_Settings::get( 'recipe_image_clickable' ) ) {
+		// Clickable images (but not in Gutenberg Preview).
+		if ( WPRM_Settings::get( 'recipe_image_clickable' ) && ! WPRM_Context::is_gutenberg_preview() ) {
 			$full_image_url = $this->image_url( 'full' );
 			if ( $full_image_url ) {
 				$img = '<a href="' . esc_url( $full_image_url) . '" aria-label="' . __( 'Open recipe image in full size', 'wp-recipe-maker' ) . '">' . $img . '</a>';

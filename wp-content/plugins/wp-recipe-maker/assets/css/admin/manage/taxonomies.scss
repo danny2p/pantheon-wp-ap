@@ -47,6 +47,19 @@
     }
 }
 
+.wprm-manage-equipment-amazon-product-container {
+    display: flex;
+    align-items: center;
+
+    .wprm-manage-equipment-amazon-product {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .wprm-admin-icon {
+        margin-right: 5px;
+    }
+}
+
 .wprm-manage-glossary-tooltip-container {
     display: flex;
     align-items: center;

@@ -442,12 +442,14 @@ class WPRM_Comment_Rating {
 			$rating = intval( $_POST['tcm_extra_fields']['wprm-comment-rating'] );
 		}
 
-		// Track in analytics.
-		$post_id = isset( $commentdata['comment_post_ID'] ) ? intval( $commentdata['comment_post_ID'] ) : false;
-		WPRM_Analytics::register_action( false, $post_id, 'comment', array(
-			'comment_id' => $comment_id,
-			'rating' => $rating,
-		) );
+		// Track in analytics, but only if approved.
+		if ( 1 === intval( $comment_approved ) ) {
+			$post_id = isset( $commentdata['comment_post_ID'] ) ? intval( $commentdata['comment_post_ID'] ) : false;
+			WPRM_Analytics::register_action( false, $post_id, 'comment', array(
+				'comment_id' => $comment_id,
+				'rating' => $rating,
+			) );
+		}
 
 		self::add_or_update_rating_for( $comment_id, $rating );
 	}

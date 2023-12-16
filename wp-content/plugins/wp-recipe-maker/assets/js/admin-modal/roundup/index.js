@@ -24,8 +24,8 @@ export default class Roundup extends Component {
         let type = 'internal';
         let post = false;
         let link = '';
-        let nofollow = false;
-        let newtab = true;
+        let nofollow = wprm_admin.settings.recipe_roundup_default_nofollow ? true : false;
+        let newtab = wprm_admin.settings.recipe_roundup_default_newtab ? true : false;
         let name = '';
         let summary = '';
         let button = '';
@@ -47,6 +47,8 @@ export default class Roundup extends Component {
                     id: roundup.id,
                     text: 'internal' === type ? `${ __wprm( 'Recipe' ) } #${ roundup.id }` : `${ __wprm( 'Post' ) } #${ roundup.id }`,
                 };
+                image.id = roundup.image;
+                image.url = roundup.image_url;
                 name = roundup.name;
                 summary = roundup.summary.replaceAll( '%0A', '\n');
                 button = roundup.button;
@@ -371,6 +373,25 @@ export default class Roundup extends Component {
                         ! this.state.loading
                         &&
                         <Fragment>
+                            {
+                                'external' !== this.state.type
+                                &&
+                                <Fragment>
+                                    <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Alternative Image' ) }</div>
+                                    <FieldImage
+                                        id={ this.state.image.id }
+                                        url={ this.state.image.url }
+                                        onChange={ ( id, url ) => {
+                                            this.setState( {
+                                                image: {
+                                                    id,
+                                                    url,
+                                                }
+                                            });
+                                        }}
+                                    />
+                                </Fragment>
+                            }
                             <div className="wprm-admin-modal-roundup-field-label">{ __wprm( 'Name' ) }</div>
                             <FieldText
                                 name="recipe-name"

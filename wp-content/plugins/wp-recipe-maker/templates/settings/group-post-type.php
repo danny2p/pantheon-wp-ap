@@ -39,7 +39,10 @@ $post_type = array(
 					'type' => 'text',
 					'default' => 'recipe',
 					'sanitize' => function( $value ) {
-						return sanitize_title( $value );
+						$parts = explode( '/', $value );
+						$parts = array_map( 'sanitize_title', $parts );
+						$value = implode( '/', $parts );
+						return trim( $value, '/' );
 					},
 					'dependency' => array(
 						'id' => 'post_type_structure',

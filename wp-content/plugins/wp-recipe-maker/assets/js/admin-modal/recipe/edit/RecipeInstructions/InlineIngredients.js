@@ -109,7 +109,7 @@ const InlineIngredients = (props) => {
                                         let node = {
                                             type: 'ingredient',
                                             uid: ingredient.uid,
-                                            children: [{ text: ingredientString }],
+                                            children: [{ text: he.decode( ingredientString ) }],
                                         };
 
                                         Transforms.insertNodes( editor, node );

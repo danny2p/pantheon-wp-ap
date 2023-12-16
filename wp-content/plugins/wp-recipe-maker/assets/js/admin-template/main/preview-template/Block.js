@@ -12,11 +12,13 @@ export default class Block extends Component {
     constructor(props) {
         super(props);
 
+        const blockMode = props.hasOwnProperty('mode') ? props.mode : 'edit';
+
         this.state = {
             fullShortcode: '',
             html: '',
             loading: false,
-            blockMode: 'edit',
+            blockMode,
         }
     }
 
@@ -32,8 +34,8 @@ export default class Block extends Component {
             this.updatePreview();
         }
 
-        // Make sure we start out in edit mode.
-        if  ( prevProps.editingBlock !== this.props.editingBlock ) {
+        // Make sure we start out in edit mode unless we're in shortcode generator.
+        if  ( 'shortcode-generator' !== this.state.blockMode && prevProps.editingBlock !== this.props.editingBlock ) {
             this.onChangeBlockMode('edit');
         }
     }
@@ -163,13 +165,21 @@ export default class Block extends Component {
                                 <div className="wprm-template-menu-block-details"><a href="#" onClick={ (e) => { e.preventDefault(); return this.props.onChangeEditingBlock(false); }}>Blocks</a> &gt; { this.props.shortcode.name }</div>
                                 <div className="wprm-template-menu-block-quick-edit">
                                     <a href="#" onClick={(e) => {
-                                    e.preventDefault();
-                                    this.onChangeBlockMode('copy');
-                                }}>Copy styles to...</a> | <a href="#" onClick={(e) => {
-                                    e.preventDefault();
-                                    this.onChangeBlockMode('paste');
-                                }}>Paste styles from...</a>
+                                        e.preventDefault();
+                                        this.onChangeBlockMode('copy');
+                                    }}>Copy styles to...</a> | <a href="#" onClick={(e) => {
+                                        e.preventDefault();
+                                        this.onChangeBlockMode('paste');
+                                    }}>Paste styles from...</a>
                                 </div>
+                            </Fragment>
+                        }
+                        {
+                            ( 'edit' === this.state.blockMode 
+                            || 'shortcode-generator' === this.state.blockMode )
+                            &&
+                            <Fragment>
+                                
                                 {
                                     Object.values(properties).map((property, i) => {
                                         return <Property

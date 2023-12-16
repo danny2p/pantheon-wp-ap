@@ -136,6 +136,25 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.1.0 =
+* Feature: Select different image to use for recipe roundup item
+* Feature: Shortcode generator without going through template
+* Feature: Clone glossary term on manage page
+* Feature: Setting to disable display of days for recipe times
+* Improvement: Allow the use of / in recipe slug setting
+* Improvement: Prevent images from being clickable in Gutenberg Preview
+* Improvement: Settings for default nofollow or newtab for roundup items
+* Fix: Loading of HTML code in the rich text editor
+* Fix: Quotes when adding inline ingredients
+* Fix: "Only show published posts" for regular posts roundup item
+* Fix: Glossary term tooltip breaking ingredients into multiple lines
+* Fix: Prevent PHP warning on some print pages
+* Fix: Searching by date on manage pages
+* Fix: HTML and shortcodes in Roundup List text field
+* Fix: Only track approved comments in analytics feature
+* Fix: No Pin setting for external roundup items not always working
+* Other: Remove everything related to "My Emissions" because of shut down
+
 = 9.0.1 =
 * Fix: Template properties not editable when cloning default template
 
@@ -1573,6 +1592,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.1.0 =
+Some great new features and improvements
+
 = 9.0.1 =
 Update to prevent issues with editing templates
 

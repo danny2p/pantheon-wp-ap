@@ -613,34 +613,18 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$img = wp_get_attachment_image( $instruction['image'], $size );
 
 		// Prevent instruction image from getting stretched in Gutenberg preview.
-		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp/v2/block-renderer/wp-recipe-maker/recipe' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+		if ( WPRM_Context::is_gutenberg_preview() ) {
 			$image_data = wp_get_attachment_image_src( $instruction['image'], $size );
 			if ( $image_data[1] ) {
 				$style = 'max-width: ' . $image_data[1] . 'px;';
-
-				if ( false !== stripos( $img, ' style="' ) ) {
-					$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
-					$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
-				} else {
-					$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
-				}
+				$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
 			}
 		}
 
 		// Maybe force image size.
 		if ( $force_size ) {
-			$style = '';
-			$style .= 'width: ' . $size[0] . 'px;';
-			$style .= 'max-width: 100%;';
-			$style .= 'height: ' . $size[1] . 'px;';
-			$style .= 'object-fit: cover;';
-
-			if ( false !== stripos( $img, ' style="' ) ) {
-				$img = preg_replace( '/ style="(.*?);?"/i', ' style="$1;wprm_new_style_placeholder"', $img );
-				$img = str_replace( 'wprm_new_style_placeholder', esc_attr( $style ), $img );
-			} else {
-				$img = str_ireplace( '<img ', '<img style="' . esc_attr( $style ) . '" ', $img );
-			}
+			$style = WPRM_Shortcode_Helper::get_force_image_size_style( $size );
+			$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
 		}
 
 		// Prevent lazy image loading on print page.
@@ -653,8 +637,8 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
 		}
 
-		// Clickable images.
-		if ( WPRM_Settings::get( 'instruction_image_clickable' ) ) {
+		// Clickable images (but not in Gutenberg Preview).
+		if ( WPRM_Settings::get( 'instruction_image_clickable' ) && ! WPRM_Context::is_gutenberg_preview() ) {
 			$settings_size = WPRM_Settings::get( 'clickable_image_size' );
 
 			preg_match( '/^(\d+)x(\d+)$/i', $settings_size, $match );

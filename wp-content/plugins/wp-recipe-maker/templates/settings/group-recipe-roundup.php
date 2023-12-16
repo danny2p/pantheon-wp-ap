@@ -58,12 +58,31 @@ $recipe_roundup = array(
 			),
 		),
 		array(
+			'name' => __( 'External Links', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'recipe_roundup_default_nofollow',
+					'name' => __( 'Nofollow Default', 'wp-recipe-maker' ),
+					'description' => __( 'Default value to use for the nofollow attribute when creating a new roundup item.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'recipe_roundup_default_newtab',
+					'name' => __( 'Open in New Tab Default', 'wp-recipe-maker' ),
+					'description' => __( 'Default value to use for the open in new tab attribute when creating a new roundup item.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Advanced', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
 					'id' => 'recipe_roundup_published_only',
 					'name' => __( 'Only show published posts', 'wp-recipe-maker' ),
-					'description' => __( 'The roundup item will only show up if the recipe status is "Published".', 'wp-recipe-maker' ),
+					'description' => __( 'The roundup item will only show up if it has the "Published" status.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
 				),

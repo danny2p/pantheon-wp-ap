@@ -276,6 +276,20 @@ const getValueFromHtml = ( htmlString ) => {
         htmlString = htmlString.replace( m[0], node );
     }
 
+    // Prevent DOM parser from breaking wprm-code.
+    const codeRegex = /<wprm-code>(.+?)<\/wprm-code>/gm;
+
+    while ((m = codeRegex.exec(htmlString)) !== null) {
+        if (m.index === codeRegex.lastIndex) {
+            codeRegex.lastIndex++;
+        }
+        
+        let code = m[1];
+        code = code.replace( /</gm, '&lt;' );
+
+        htmlString = htmlString.replace( m[0], `<wprm-code>${ code }</wprm-code>` );
+    }
+
     // Deserialize HTML string.
     const document = new DOMParser().parseFromString( htmlString, 'text/html' );
     const deserialized = deserialize( document.body );

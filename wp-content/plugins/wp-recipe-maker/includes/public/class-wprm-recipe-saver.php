@@ -161,7 +161,6 @@ class WPRM_Recipe_Saver {
 		if ( isset( $recipe['notes'] ) )						{ $meta['wprm_notes'] = $recipe['notes']; }
 		if ( isset( $recipe['ingredient_links_type'] ) )		{ $meta['wprm_ingredient_links_type'] = $recipe['ingredient_links_type']; }
 		if ( isset( $recipe['unit_system'] ) )					{ $meta['wprm_unit_system'] = $recipe['unit_system']; }
-		if ( isset( $recipe['my_emissions'] ) )					{ $meta['wprm_my_emissions'] = $recipe['my_emissions']; }
 		if ( isset( $recipe['import_source'] ) ) 				{ $meta['wprm_import_source'] = $recipe['import_source']; }
 		if ( isset( $recipe['import_backup'] ) ) 				{ $meta['wprm_import_backup'] = $recipe['import_backup']; }
 

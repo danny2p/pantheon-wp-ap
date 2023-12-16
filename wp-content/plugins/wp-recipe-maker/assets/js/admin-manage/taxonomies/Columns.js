@@ -483,6 +483,184 @@ export default {
                     )
                 },
             });
+
+            columns.push({
+                Header: __wprm( 'Amazon Product ASIN' ),
+                id: 'amazon_asin',
+                accessor: 'amazon_asin',
+                width: 180,
+                Filter: ({ filter, onChange }) => (
+                    <select
+                        onChange={event => onChange(event.target.value)}
+                        style={{ width: '100%', fontSize: '1em' }}
+                        value={filter ? filter.value : 'all'}
+                    >
+                        <option value="all">{ __wprm( 'Show All' ) }</option>
+                        <option value="yes">{ __wprm( 'Has Product' ) }</option>
+                        <option value="no">{ __wprm( 'Does not have Product' ) }</option>
+                    </select>
+                ),
+                Cell: row => {
+                    return (
+                        <div className="wprm-manage-equipment-amazon-product-container">
+                            <Icon
+                                type="link"
+                                title={ __wprm( 'Set ASIN from Amazon Link' ) }
+                                onClick={() => {
+                                    let asin = false;
+
+                                    const getASINfromLink = ( link ) => {
+                                        const regex = /(?:[/dp/]|$)([A-Z0-9]{10})/g;
+                                        const match = regex.exec( link );
+
+                                        if ( match && match[1] ) {
+                                            return match[1];
+                                        }
+
+                                        return false;
+                                    }
+
+                                    // Warning that the link that's currently manually set will get overwritten.
+                                    if ( ! row.value && row.original.link ) {
+                                        // Check for ASIN in current URL.
+                                        asin = getASINfromLink( row.original.link );
+                                        
+                                        if ( ! asin ) {
+                                            if ( ! confirm( __wprm( 'Selecting an Amazon Product will overwrite the current link. Are you sure you want to continue?' ) ) ) {
+                                                return;
+                                            }
+                                        }
+                                    }
+
+                                    // No ASIN found in current URL, ask for one.
+                                    if ( ! asin ) {
+                                        const link = prompt( __wprm( 'Amazon Product URL' ), '' );
+
+                                        if ( link ) {
+                                            asin = getASINfromLink( link );
+                                        }
+                                    }
+
+                                    // ASIN found? Open modal.
+                                    if ( asin ) {
+                                        WPRM_Modal.open( 'amazon', {
+                                            term: row.original,
+                                            search: asin,
+                                            selectCallback: ( product ) => {
+                                                Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
+                                                    amazon_updated: Date.now(),
+                                                    amazon_image: product.image,
+                                                    amazon_name: product.name,
+                                                    amazon_asin: product.asin,
+                                                    link: product.link,
+                                                } ).then(() => datatable.refreshData());
+                                            },
+                                        } );
+                                    } else {
+                                        alert( __wprm( 'No ASIN could be found in the URL you entered.' ) );
+                                    }
+                                }}
+                            />
+                            <Icon
+                                type="search"
+                                title={ __wprm( 'Search Products' ) }
+                                onClick={() => {
+                                    // Warning that the link that's currently manually set will get overwritten.
+                                    if ( ! row.value && row.original.link ) {
+                                        if ( ! confirm( __wprm( 'Selecting an Amazon Product will overwrite the current link. Are you sure you want to continue?' ) ) ) {
+                                            return;
+                                        }
+                                    }
+
+                                    WPRM_Modal.open( 'amazon', {
+                                        term: row.original,
+                                        selectCallback: ( product ) => {
+                                            Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
+                                                amazon_updated: Date.now(),
+                                                amazon_image: product.image,
+                                                amazon_name: product.name,
+                                                amazon_asin: product.asin,
+                                                link: product.link,
+                                            } ).then(() => datatable.refreshData());
+                                        },
+                                    } );
+                                }}
+                            />
+                            <span className="wprm-manage-equipment-amazon-product">{ row.value }</span>
+                            {
+                                row.value
+                                &&
+                                <Icon
+                                    type="trash"
+                                    title={ __wprm( 'Remove Product' ) }
+                                    onClick={() => {
+                                        Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
+                                            amazon_updated: Date.now(),
+                                            amazon_image: '',
+                                            amazon_name: '',
+                                            amazon_asin: '',
+                                            link: '',
+                                        } ).then(() => datatable.refreshData());
+                                    }}
+                                />
+                            }
+                        </div>
+                    )
+                },
+            });
+
+            columns.push({
+                Header: __wprm( 'Amazon Name' ),
+                id: 'amazon_name',
+                accessor: 'amazon_name',
+                width: 250,
+                Filter: (props) => (<TextFilter {...props}/>),
+                Cell: row => {
+                    return (
+                        <div className="wprm-manage-equipment-amazon-name-container">
+                            { row.value }
+                        </div>
+                    )
+                },
+            });
+
+            columns.push({
+                Header: __wprm( 'Amazon Image' ),
+                id: 'amazon_image',
+                accessor: 'amazon_image',
+                width: 125,
+                sortable: false,
+                filterable: false,
+                Cell: row => {
+                    return (
+                        <div className="wprm-manage-equipment-amazon-image-container">
+                            {
+                                row.value
+                                ?
+                                <img src={ row.value } width="100" />
+                                :
+                                null
+                            }
+                        </div>
+                    )
+                },
+            });
+
+            columns.push({
+                Header: __wprm( 'Amazon Updated' ),
+                id: 'amazon_updated',
+                accessor: 'amazon_updated',
+                width: 160,
+                filterable: false,
+                Cell: row => {
+                    if ( ! row.value ) {
+                        return null;
+                    }
+
+                    const dt = new Date( parseInt( row.value ) );
+                    return dt.toLocaleString();
+                },
+            });
         }
 
         // TODO Products.

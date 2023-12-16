@@ -56,4 +56,21 @@ class WPRM_Context {
 		$full_context[] = $context;
 		self::$context = $full_context;
 	}
+
+	/**
+	 * Check if we're currently in a Gutenberg Preview.
+	 *
+	 * @since	9.1.0
+	 */
+	public static function is_gutenberg_preview() {
+		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) ) {
+			$rest_route = $GLOBALS['wp']->query_vars['rest_route'];
+
+			if ( 0 === strpos( $rest_route, '/wp/v2/block-renderer' ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
