@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.8.5.4 =
+- Changed: The `Chart.js` library has been updated to v2.9.4.
+- Fixed: Email Summary header image did not honor max width setting.
+
 = 1.8.5.3 =
 - Fixed: Better compatibility with default Block themes.
 - Fixed: Form Embed Wizard was loaded on the YOOtheme Builder page.

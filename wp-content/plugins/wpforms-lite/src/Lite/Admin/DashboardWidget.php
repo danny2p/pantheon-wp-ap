@@ -144,7 +144,7 @@ class DashboardWidget extends Widget {
 			'wpforms-chart',
 			WPFORMS_PLUGIN_URL . 'assets/lib/chart.min.js',
 			[ 'moment' ],
-			'2.7.2',
+			'2.9.4',
 			true
 		);
 
