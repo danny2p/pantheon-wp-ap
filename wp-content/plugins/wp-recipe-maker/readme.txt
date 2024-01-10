@@ -136,6 +136,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.1.1 =
+* Fix: Make sure nofollow and new tab attributes import correctly for roundup lists from Create
+* Fix: Comment form overflow problem in some themes
+* Fix: Prevent potential misuse of tag attribute in shortcodes
+* Fix: Prevent potential misuse of icon_color attribute in shortcodes
+* Fix: Prevent directory traversal with icon shortcode attribute
+* Fix: Only allow script tags in recipe notes when author has unfiltered_html capability
+* Fix: Prevent potential misuse of referer header on print pages
+
 = 9.1.0 =
 * Feature: Select different image to use for recipe roundup item
 * Feature: Shortcode generator without going through template
@@ -1592,6 +1601,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.1.1 =
+Fixes to prevent potential security issues 
+
 = 9.1.0 =
 Some great new features and improvements
 

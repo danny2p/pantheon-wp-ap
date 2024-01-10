@@ -1,6 +1,18 @@
 {
     "news": [
         {
+            "date": "2024-01-03",
+            "label": "Blog",
+            "title": "Essential Tips to Kickstart Your Food Instagram",
+            "url": "https://bootstrapped.ventures/how-to-start-food-blogging-on-instagram/"
+        },
+        {
+            "date": "2023-12-15",
+            "label": "Blog",
+            "title": "Becoming a Food Influencer: A Comprehensive Guide",
+            "url": "https://bootstrapped.ventures/how-to-become-a-food-influencer/"
+        },
+        {
             "date": "2023-12-13",
             "label": "Release",
             "title": "WP Recipe Maker 9.1.0",

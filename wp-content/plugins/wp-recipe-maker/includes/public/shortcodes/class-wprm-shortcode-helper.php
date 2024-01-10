@@ -427,7 +427,7 @@ class WPRM_Shortcode_Helper {
 				}
 			}
 
-			$tag = sanitize_key( $atts['header_tag'] );
+			$tag = self::sanitize_html_element( $atts['header_tag'] );
 			$header .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $before_header . self::sanitize_html( $header_text ) . $after_header . '</' . $tag . '>';
 		}
 
@@ -545,6 +545,31 @@ class WPRM_Shortcode_Helper {
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Sanitize HTML element in shortcode for output.
+	 *
+	 * @since	9.2.0
+	 */
+	public static function sanitize_html_element( $tag ) {
+		$allowed = array(
+			'p' => 'p',
+			'span' => 'span',
+			'div' => 'div',
+			'h1' => 'h1',
+			'h2' => 'h2',
+			'h3' => 'h3',
+			'h4' => 'h4',
+			'h5' => 'h5',
+			'h6' => 'h6',
+		);
+
+		if ( ! isset( $allowed[ $tag ] ) ) {
+			$tag = 'span';
+		}
+
+		return $tag;
 	}
 
 	/**

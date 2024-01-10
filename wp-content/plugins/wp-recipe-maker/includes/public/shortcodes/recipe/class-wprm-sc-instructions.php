@@ -384,7 +384,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
-				$tag = sanitize_key( $atts['group_tag'] );
+				$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['group_tag'] );
 				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $instruction_group['name'] . '</' . $tag . '>';
 			}
 
@@ -582,7 +582,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 	private static function instruction_media( $recipe, $instruction, $atts ) {
 		$output = '';
 
-		if ( $instruction['image'] ) {
+		if ( isset( $instruction['image'] ) && $instruction['image'] ) {
 			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-image" style="text-align: ' . esc_attr( $atts['image_alignment'] ) . ';">' . self::instruction_image( $recipe, $instruction, $atts['image_size'] ) . '</div> ';
 		} else if ( isset( $instruction['video'] ) && isset( $instruction['video']['type'] ) && in_array( $instruction['video']['type'], array( 'upload', 'embed' ) ) ) {
 			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-video">' . self::instruction_video( $recipe, $instruction ) . '</div> ';

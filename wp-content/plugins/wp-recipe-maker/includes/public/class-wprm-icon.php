@@ -34,11 +34,12 @@ class WPRM_Icon {
 		}
 
 		$sources = array_reverse( self::get_sources() ); // Reverse to give priority to child theme versions of icon.
+		$keyword = sanitize_key( $keyword_or_url ); // Prevent directory traversal.
 
 		foreach ( $sources as $source ) {
-			if ( file_exists( $source['dir'] . '/' . $keyword_or_url . '.svg' ) ) {
+			if ( file_exists( $source['dir'] . '/' . $keyword . '.svg' ) ) {
 				// Use file_get_contents instead of include as include breaks when the svg file starts with <?xml.
-				$icon = file_get_contents( $source['dir'] . '/' . $keyword_or_url . '.svg' );
+				$icon = file_get_contents( $source['dir'] . '/' . $keyword . '.svg' );
 				break;
 			}
 		}
@@ -49,6 +50,7 @@ class WPRM_Icon {
 		}
 
 		if ( $color ) {
+			$color = esc_attr( $color ); // Prevent misuse of color attribute.
 			$icon = preg_replace( '/#[0-9a-f]{3,6}/mi', $color, $icon );
 		}
 

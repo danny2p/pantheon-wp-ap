@@ -1206,7 +1206,8 @@ class WPRM_Recipe {
 			$equipment_array[ $index ]['uid'] = $uid;
 			$uid++;
 
-			$term_key = array_search( intval( $equipment['id'] ), wp_list_pluck( $terms, 'term_id' ) );
+			$equipment_id = isset( $equipment['id'] ) ? intval( $equipment['id'] ) : 0;
+			$term_key = array_search( $equipment_id, wp_list_pluck( $terms, 'term_id' ) );
 			
 			if ( false !== $term_key ) {
 				$term = $terms[ $term_key ];

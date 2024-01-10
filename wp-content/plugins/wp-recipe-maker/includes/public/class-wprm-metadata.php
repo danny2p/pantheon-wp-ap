@@ -520,7 +520,7 @@ class WPRM_Metadata {
 					}
 
 					// Add instruction image.
-					if ( $instruction['image'] ) {
+					if ( isset( $instruction['image'] ) && $instruction['image'] ) {
 						$thumb = wp_get_attachment_image_src( $instruction['image'], 'full' );
 
 						if ( $thumb && isset( $thumb[0] ) ) {

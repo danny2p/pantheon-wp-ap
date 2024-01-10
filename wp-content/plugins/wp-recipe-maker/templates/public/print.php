@@ -70,7 +70,7 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 					wprm_maybe_redirect_to_parent_post( $output );
 				}
 				?>
-				<a href="<?php echo $back_link; ?>" id="wprm-print-button-back" class="wprm-print-button"><?php _e( 'Go Back', 'wp-recipe-maker' );?></a>
+				<a href="<?php echo esc_url( $back_link ); ?>" id="wprm-print-button-back" class="wprm-print-button"><?php _e( 'Go Back', 'wp-recipe-maker' );?></a>
 				<?php
 				if ( ! isset( $output['no-email'] ) && WPRM_Settings::get( 'print_email_link_button' ) ) {
 					echo '<a href="#" id="wprm-print-button-email" class="wprm-print-button">' . __( 'Email Link', 'wp-recipe-maker' ) . '</a>';

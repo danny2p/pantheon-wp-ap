@@ -87,16 +87,25 @@ window.WPRecipeMaker.print = {
 
 		const url = WPRecipeMaker.print.getUrl( urlArgs );
 		const target = wprm_public.settings.print_new_tab ? '_blank' : '_self';
+
+		// Pass along data to print window before opening it.
+		const printArgs = {
+			id,
+			system,
+			servings,
+			advancedServings,
+		};
+		localStorage.setItem( 'wprmPrintArgs', JSON.stringify( printArgs ) );
+
+		// Open print window.
 		const printWindow = window.open( url, target );
 
-		printWindow.onload = () => {
-			printWindow.focus();
-			printWindow.WPRMPrint.setArgs({
-				system,
-				servings,
-				advancedServings,
-			});
-		};
+		// Focus on print window when opening in new tab.
+		if ( '_blank' === target ) {
+			printWindow.onload = () => {
+				printWindow.focus();
+			};
+		}
 	},
 	getUrl: ( args ) => {
 		const urlParts = wprm_public.home_url.split(/\?(.+)/);

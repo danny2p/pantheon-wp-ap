@@ -504,12 +504,6 @@ class WPRM_Recipe_Sanitizer {
 				'allowfullscreen' => array(),
 			);
 
-			$allowed_tags['script'] = array(
-				'src'             => array(),
-				'height'          => array(),
-				'width'           => array(),
-			);
-
 			// Specific data attributes.
 			$allowed_tags['a']['data-optimize-leads-uid'] = true;
 		}
