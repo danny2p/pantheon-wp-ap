@@ -94,7 +94,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
 		$output = '';
-		$tag = sanitize_key( $atts['tag'] );
+		$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['tag'] );
 
 		// Alignment.
 		if ( 'span' !== $tag && 'left' !== $atts['align'] ) {

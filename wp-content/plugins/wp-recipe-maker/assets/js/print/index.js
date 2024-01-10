@@ -65,6 +65,23 @@ window.WPRMPrint = {
 
         // Trigger init event.
         document.dispatchEvent( new Event( 'wprmPrintInit' ) );
+
+        // Check for print args set in local storage. Needs to happen after init.
+        let args = localStorage.getItem( 'wprmPrintArgs' );
+        localStorage.removeItem( 'wprmPrintArgs' );
+
+        if ( args ) {
+            args = JSON.parse( args );
+
+            if ( args && args.hasOwnProperty( 'id' ) ) {
+                const firstRecipe = document.querySelector( '#wprm-print-recipe-0' );
+                const firstRecipeId = firstRecipe && firstRecipe.dataset.hasOwnProperty( 'recipeId' ) ? parseInt( firstRecipe.dataset.recipeId ) : false;
+
+                if ( firstRecipeId && firstRecipeId === parseInt( args.id ) ) {
+                    this.setArgs( args );
+                }
+            }
+        }
     },
     removeLinks() {
         const links = document.querySelector( '#wprm-print-content' ).querySelectorAll( 'a:not(.wprm-recipe-link)' );

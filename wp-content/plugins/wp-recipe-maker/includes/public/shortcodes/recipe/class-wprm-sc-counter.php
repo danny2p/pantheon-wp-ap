@@ -102,7 +102,7 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		}
 
-		$tag = sanitize_key( $atts['tag'] );
+		$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['tag'] );
 		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $text . '</' . $tag . '>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

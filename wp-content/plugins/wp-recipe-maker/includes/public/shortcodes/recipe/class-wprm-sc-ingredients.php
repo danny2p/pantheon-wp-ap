@@ -644,7 +644,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
-				$tag = sanitize_key( $atts['group_tag'] );
+				$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['group_tag'] );
 				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $ingredient_group['name'] . '</' . $tag . '>';
 			}
 

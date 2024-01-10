@@ -67,7 +67,7 @@ class WPRM_SC_Date extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$tag = sanitize_key( $atts['tag'] );
+		$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['tag'] );
 		
 		// Date format.
 		$format = $atts['date_format'];
