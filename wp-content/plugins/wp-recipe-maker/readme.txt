@@ -136,6 +136,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.1.2 =
+* Fix: Error caused by Yoast SEO suddenly removing constant
+
 = 9.1.1 =
 * Fix: Make sure nofollow and new tab attributes import correctly for roundup lists from Create
 * Fix: Comment form overflow problem in some themes
@@ -1601,6 +1604,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.1.2 =
+Update to prevent issues when using Yoast SEO
+
 = 9.1.1 =
 Fixes to prevent potential security issues 
 
