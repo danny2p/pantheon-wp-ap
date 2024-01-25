@@ -101,6 +101,11 @@ class WPRM_Metadata_Yoast_Seo extends \Yoast\WP\SEO\Generators\Schema\Abstract_S
 	public function generate() {
 		$metadata = WPRM_Metadata::sanitize_metadata( WPRM_Metadata::get_metadata( $this->recipe ) );
 
+		// Prevent errors if Schema_IDs are suddenly gone.
+		$article_hash = defined( 'Schema_IDs::ARTICLE_HASH' ) ? Schema_IDs::ARTICLE_HASH : '#article';
+		$webpage_hash = defined( 'Schema_IDs::WEBPAGE_HASH' ) ? Schema_IDs::WEBPAGE_HASH : '';
+		
+
 		if ( $metadata ) {
 			WPRM_Metadata::outputted_metadata_for( $this->recipe->id() );
 			// Context is already set by Yoast.
@@ -110,10 +115,10 @@ class WPRM_Metadata_Yoast_Seo extends \Yoast\WP\SEO\Generators\Schema\Abstract_S
 			$metadata['@id'] = $this->context->canonical . '#recipe';
 
 			// Recipe isPartOf an article of webpage, with the recipe the mainEntityOfPage.
-			$parent = $this->using_article ? $this->context->canonical . Schema_IDs::ARTICLE_HASH : $this->context->canonical . Schema_IDs::WEBPAGE_HASH;
+			$parent = $this->using_article ? $this->context->canonical . $article_hash : $this->context->canonical . $webpage_hash;
 
 			$metadata['isPartOf'] = array( '@id' => $parent );
-			$metadata['mainEntityOfPage'] = $this->context->canonical . Schema_IDs::WEBPAGE_HASH;
+			$metadata['mainEntityOfPage'] = $this->context->canonical . $webpage_hash;
 
 			// Maybe point to Yoast Person piece.
 			$person = $this->get_person();
