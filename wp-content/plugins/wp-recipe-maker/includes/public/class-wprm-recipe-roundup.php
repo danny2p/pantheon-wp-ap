@@ -249,6 +249,7 @@ class WPRM_Recipe_Roundup {
 				if ( $post && WPRM_POST_TYPE !== $post->post_type ) {
 					$type = 'post';
 
+					$image = $atts['image'] && 0 < intval( $atts['image'] ) ? intval( $atts['image'] ) : get_post_thumbnail_id( $post );
 					$name = rawurldecode( $atts['name'] );
 					$summary = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) );
 
@@ -260,7 +261,7 @@ class WPRM_Recipe_Roundup {
 						'post_status' => $post->post_status,
 						'name' => $name ? $name : $post->post_title,
 						'summary' => $summary ? $summary : '',
-						'image_id' => get_post_thumbnail_id( $post ),
+						'image_id' => $image,
 						'parent_url_new_tab' => false,
 						'parent_url_nofollow' => false,
 					);

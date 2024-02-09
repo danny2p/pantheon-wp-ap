@@ -85,31 +85,33 @@ class WPRM_Tools_WPURP_Ingredients {
 	 */
 	public static function ajax_wpurp_ingredients() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
-			$posts = isset( $_POST['posts'] ) ? json_decode( wp_unslash( $_POST['posts'] ) ) : array(); // Input var okay.
-			$args = isset( $_POST['args'] ) ? wp_unslash( $_POST['args'] ) : array();
+			if ( current_user_can( WPRM_Settings::get( 'features_tools_access' ) ) ) {
+				$posts = isset( $_POST['posts'] ) ? json_decode( wp_unslash( $_POST['posts'] ) ) : array(); // Input var okay.
+				$args = isset( $_POST['args'] ) ? wp_unslash( $_POST['args'] ) : array();
 
-			$field = $args && isset( $args['field'] ) ? $args['field'] : false;
+				$field = $args && isset( $args['field'] ) ? $args['field'] : false;
 
-			$posts_left = array();
-			$posts_processed = array();
+				$posts_left = array();
+				$posts_processed = array();
 
-			if ( count( $posts ) > 0 && in_array( $field, array( 'link', 'plural', 'group', 'nutrition' ) ) ) {
-				$posts_left = $posts;
-				$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 10 ) );
+				if ( count( $posts ) > 0 && in_array( $field, array( 'link', 'plural', 'group', 'nutrition' ) ) ) {
+					$posts_left = $posts;
+					$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 10 ) );
 
-				$result = self::import_ingredients( $posts_processed, $field );
+					$result = self::import_ingredients( $posts_processed, $field );
 
-				if ( is_wp_error( $result ) ) {
-					wp_send_json_error( array(
-						'redirect' => add_query_arg( array( 'sub' => 'advanced' ), admin_url( 'admin.php?page=wprm_tools' ) ),
-					) );
+					if ( is_wp_error( $result ) ) {
+						wp_send_json_error( array(
+							'redirect' => add_query_arg( array( 'sub' => 'advanced' ), admin_url( 'admin.php?page=wprm_tools' ) ),
+						) );
+					}
 				}
-			}
 
-			wp_send_json_success( array(
-				'posts_processed' => $posts_processed,
-				'posts_left' => $posts_left,
-			) );
+				wp_send_json_success( array(
+					'posts_processed' => $posts_processed,
+					'posts_left' => $posts_left,
+				) );
+			}
 		}
 
 		wp_die();

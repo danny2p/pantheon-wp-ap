@@ -617,4 +617,33 @@ class WPRM_Shortcode_Helper {
 
 		return $style;
 	}
+
+	/**
+	 * Get the thumbnail size they need to get.
+	 *
+	 * @since	9.2.0
+	 */
+	public static function get_thumbnail_image_size( $image_id, $size, $force_size ) {
+		$thumbnail_size = $size;
+
+		if ( is_array( $size ) && $size[0] && $size[1] && $force_size ) {
+			$ratio = $size[0] / $size[1];
+
+			$original_image = wp_get_attachment_image_src( $image_id, 'full' );
+
+			if ( $original_image ) {
+				$original_image_ratio = $original_image[1] / $original_image[2];
+
+				if ( $ratio > $original_image_ratio ) {
+					// Need at least the full width.
+					$thumbnail_size = array( $size[0], 999999 );
+				} else {
+					// Need at least the full height.
+					$thumbnail_size = array( 999999, $size[1] );
+				}
+			}
+		}
+
+		return $thumbnail_size;
+	}
 }

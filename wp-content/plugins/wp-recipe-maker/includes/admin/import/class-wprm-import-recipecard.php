@@ -103,7 +103,7 @@ class WPRM_Import_Recipecard extends WPRM_Import {
 	 */
 	public function get_recipe( $id, $post_data ) {
 		global $wpdb;
-		$rc_raw_recipe = $wpdb->get_row( 'SELECT id, recipe, nutrition, post_id FROM ' . $wpdb->prefix . 'yumprint_recipe_recipe WHERE id=' . $id );
+		$rc_raw_recipe = $wpdb->get_row( 'SELECT id, recipe, nutrition, post_id FROM ' . $wpdb->prefix . 'yumprint_recipe_recipe WHERE id=' . intval( $id ) );
 		$post_id = $rc_raw_recipe->post_id;
 
 		$rc_recipe = json_decode( $rc_raw_recipe->recipe );
@@ -228,7 +228,7 @@ class WPRM_Import_Recipecard extends WPRM_Import {
 	 */
 	public function replace_recipe( $id, $wprm_id, $post_data ) {
 		global $wpdb;
-		$rc_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'yumprint_recipe_recipe WHERE id=' . $id );
+		$rc_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'yumprint_recipe_recipe WHERE id=' . intval( $id ) );
 		$post_id = $rc_recipe->post_id;
 
 		// Update post_id field to show that this recipe has been imported.

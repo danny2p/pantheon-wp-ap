@@ -57,12 +57,18 @@ $links = array(
 		),
 		array(
 			'name' => __( 'Author Links', 'wp-recipe-maker' ),
-			'description' => __( 'This setting only applies when the recipe uses "Post Author". Check the WP Recipe Maker > Settings > Recipe Defaults page to change the default.', 'wp-recipe-maker' ),
 			'required' => 'premium',
 			'settings' => array(
 				array(
+					'id' => 'custom_author_link_new_tab',
+					'name' => __( 'Open Custom Author Link in new tab', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'post_author_link',
 					'name' => __( 'Use link for Post Author', 'wp-recipe-maker' ),
+					'description' => __( 'This setting only applies when the recipe uses "Post Author". Check the WP Recipe Maker > Settings > Recipe Defaults page to change the default.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
 				),

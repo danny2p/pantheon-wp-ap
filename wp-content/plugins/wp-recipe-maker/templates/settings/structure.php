@@ -27,10 +27,10 @@ require_once( 'group-recipe-print.php' );
 require_once( 'group-recipe-snippets.php' );
 require_once( 'group-nutrition-label.php' );
 require_once( 'group-glossary-terms.php' );
-require_once( 'group-integrations.php' );
 require_once( 'group-custom-style.php' );
 
 // Interactivity.
+require_once( 'group-integrations.php' );
 require_once( 'group-recipe-roundup.php' );
 require_once( 'group-media.php' );
 require_once( 'group-recipe-ratings.php' );
@@ -49,6 +49,7 @@ require_once( 'group-analytics.php' );
 // Backend.
 require_once( 'group-recipe-defaults.php' );
 require_once( 'group-import.php' );
+require_once( 'group-changelog.php' );
 
 // Advanced.
 require_once( 'group-post-type.php' );
@@ -74,9 +75,9 @@ $settings_structure = array(
 	$recipe_snippets,
 	$nutrition_label,
 	$glossary_terms,
-	$integrations,
 	$custom_style,
 	array( 'header' => __( 'Interactivity', 'wp-recipe-maker' ) ),
+	$integrations,
 	$recipe_roundup,
 	$media,
 	$recipe_ratings,
@@ -94,6 +95,7 @@ $settings_structure = array(
 	array( 'header' => __( 'Backend', 'wp-recipe-maker' ) ),
 	$recipe_defaults,
 	$import,
+	$changelog,
 	array( 'header' => __( 'Advanced', 'wp-recipe-maker' ) ),
 	$post_type,
 	$metadata,

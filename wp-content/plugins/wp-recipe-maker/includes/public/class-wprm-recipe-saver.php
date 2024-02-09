@@ -44,7 +44,9 @@ class WPRM_Recipe_Saver {
 		);
 
 		$recipe_id = wp_insert_post( $post );
-		WPRM_Recipe_Saver::update_recipe( $recipe_id, $recipe );
+		WPRM_Recipe_Saver::update_recipe( $recipe_id, $recipe, true );
+
+		WPRM_Changelog::log( 'recipe_created', $recipe_id );
 
 		return $recipe_id;
 	}
@@ -52,11 +54,12 @@ class WPRM_Recipe_Saver {
 	/**
 	 * Save recipe fields.
 	 *
-	 * @since    1.0.0
-	 * @param		 int   $id Post ID of the recipe.
-	 * @param		 array $recipe Recipe fields to save.
+	 * @since	1.0.0
+	 * @param	int		$id Post ID of the recipe.
+	 * @param	array	$recipe Recipe fields to save.
+	 * @param	boolean $ignore_log Wether this edit should be ignored for the changelog.
 	 */
-	public static function update_recipe( $id, $recipe ) {
+	public static function update_recipe( $id, $recipe, $ignore_log = false ) {
 		$meta = array();
 
 		// Featured Image.
@@ -232,6 +235,10 @@ class WPRM_Recipe_Saver {
 		// Always update post to make sure revision gets made.
 		WPRM_Recipe_Manager::invalidate_recipe( $id );
 		wp_update_post( $post );
+
+		if ( ! $ignore_log ) {
+			WPRM_Changelog::log( 'recipe_edited', $id );
+		}
 
 		// Update recipe SEO values afterwards.
 		WPRM_Seo_Checker::update_seo_for( $id );

@@ -231,6 +231,9 @@ const withHtml = ( editor, props ) => {
 }
 
 const getValueFromHtml = ( htmlString ) => {
+    // Remove comments from HTML string.
+    htmlString = htmlString.replace(/<!--[\s\S]*?-->/g, '');
+
     // Convert temperature shortcode to its own element.
     const regex = /\[wprm-temperature(\s.*?)]/gm;
 

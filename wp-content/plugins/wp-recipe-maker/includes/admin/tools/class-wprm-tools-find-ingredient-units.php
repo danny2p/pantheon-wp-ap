@@ -77,28 +77,30 @@ class WPRM_Tools_Find_Ingredient_Units {
 	 */
 	public static function ajax_find_ingredient_units() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
-			$posts = isset( $_POST['posts'] ) ? json_decode( wp_unslash( $_POST['posts'] ) ) : array(); // Input var okay.
+			if ( current_user_can( WPRM_Settings::get( 'features_tools_access' ) ) ) {
+				$posts = isset( $_POST['posts'] ) ? json_decode( wp_unslash( $_POST['posts'] ) ) : array(); // Input var okay.
 
-			$posts_left = array();
-			$posts_processed = array();
+				$posts_left = array();
+				$posts_processed = array();
 
-			if ( count( $posts ) > 0 ) {
-				$posts_left = $posts;
-				$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 10 ) );
+				if ( count( $posts ) > 0 ) {
+					$posts_left = $posts;
+					$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 10 ) );
 
-				$result = self::finding_ingredient_units( $posts_processed );
+					$result = self::finding_ingredient_units( $posts_processed );
 
-				if ( is_wp_error( $result ) ) {
-					wp_send_json_error( array(
-						'redirect' => add_query_arg( array( 'sub' => 'advanced' ), admin_url( 'admin.php?page=wprm_tools' ) ),
-					) );
+					if ( is_wp_error( $result ) ) {
+						wp_send_json_error( array(
+							'redirect' => add_query_arg( array( 'sub' => 'advanced' ), admin_url( 'admin.php?page=wprm_tools' ) ),
+						) );
+					}
 				}
-			}
 
-			wp_send_json_success( array(
-				'posts_processed' => $posts_processed,
-				'posts_left' => $posts_left,
-			) );
+				wp_send_json_success( array(
+					'posts_processed' => $posts_processed,
+					'posts_left' => $posts_left,
+				) );
+			}
 		}
 
 		wp_die();

@@ -185,6 +185,10 @@ class WPRM_List_Saver {
 
 		$list_ids = WPRM_List_Manager::get_list_ids_from_post( $post->ID );
 
+		if ( false === $list_ids ) {
+			return;
+		}
+
 		// Make sure post itself is not included.
 		if ( in_array( $post->ID, $list_ids ) ) {
 			$list_ids = array_diff( $list_ids, array( $post->ID ) );

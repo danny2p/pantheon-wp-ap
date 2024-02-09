@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.1.2' );
+		define( 'WPRM_VERSION', '9.2.1' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -83,6 +83,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-ingredients.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-list.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-analytics.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-changelog.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-lists.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-ratings.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-recipes.php' );
@@ -104,6 +105,9 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-admin-bar.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics-database.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog-database.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog-track.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-assets.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-blocks.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-cache.php' );
@@ -129,6 +133,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-migrations.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-nutrition.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-popup.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-post-type.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-print.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-rating-database.php' );

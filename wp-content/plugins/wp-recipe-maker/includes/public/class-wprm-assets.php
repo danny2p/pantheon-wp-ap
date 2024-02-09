@@ -89,6 +89,7 @@ class WPRM_Assets {
 		return array(
 			'endpoints' => array(
 				'analytics' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/analytics' ), '/' ),
+				'manage' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/manage' ), '/' ),
 			),
 			'settings' => array(
 				'features_comment_ratings' => WPRM_Settings::get( 'features_comment_ratings' ),
@@ -489,11 +490,15 @@ class WPRM_Assets {
 		// Comment ratings.
 		$output .= ' .wprm-comment-rating svg { width: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; height: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; }';
 		$output .= ' img.wprm-comment-rating { width: ' . ( 5 * WPRM_Settings::get( 'comment_rating_star_size' ) ) . 'px !important; height: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; }';
-		$output .= ' .wprm-comment-rating svg path { fill: ' . WPRM_Settings::get( 'template_color_comment_rating' ) . '; }';
-		$output .= ' .wprm-comment-rating svg polygon { stroke: ' . WPRM_Settings::get( 'template_color_comment_rating' ) . '; }';
-		
-		$output .= ' .wprm-comment-ratings-container svg .wprm-star-full { fill: ' . WPRM_Settings::get( 'template_color_comment_rating' ) . '; }';
-		$output .= ' .wprm-comment-ratings-container svg .wprm-star-empty { stroke: ' . WPRM_Settings::get( 'template_color_comment_rating' ) . '; }';
+		$output .= ' body { --comment-rating-star-color: ' . WPRM_Settings::get( 'template_color_comment_rating' ) . '; }';
+
+		// Modal styling.
+		$output .= ' body { --wprm-popup-font-size: ' . intval( WPRM_Settings::get( 'modal_font_size' ) ) . 'px; }';
+		$output .= ' body { --wprm-popup-background: ' . WPRM_Settings::get( 'modal_background_color' ) . '; }';
+		$output .= ' body { --wprm-popup-title: ' . WPRM_Settings::get( 'modal_title_color' ) . '; }';
+		$output .= ' body { --wprm-popup-content: ' . WPRM_Settings::get( 'modal_content_color' ) . '; }';
+		$output .= ' body { --wprm-popup-button-background: ' . WPRM_Settings::get( 'modal_button_background_color' ) . '; }';
+		$output .= ' body { --wprm-popup-button-text: ' . WPRM_Settings::get( 'modal_button_text_color' ) . '; }';
 
 		// Allow add-ons to hook in.
 		$output = apply_filters( 'wprm_custom_css', $output, $type, $selector );

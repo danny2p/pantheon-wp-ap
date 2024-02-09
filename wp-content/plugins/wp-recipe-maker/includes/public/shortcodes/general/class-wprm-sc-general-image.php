@@ -98,7 +98,8 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 		}
 
 		// Get image.
-		$img = wp_get_attachment_image( $image_id, $size );
+		$thumbnail_size = WPRM_Shortcode_Helper::get_thumbnail_image_size( $image_id, $size, $force_size );
+		$img = wp_get_attachment_image( $image_id, $thumbnail_size );
 
 		if ( ! $img ) {
 			return '';

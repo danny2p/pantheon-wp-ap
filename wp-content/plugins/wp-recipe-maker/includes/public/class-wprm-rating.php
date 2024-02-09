@@ -20,15 +20,6 @@
 class WPRM_Rating {
 
 	/**
-	 * Register actions and filters.
-	 *
-	 * @since    1.22.0
-	 */
-	public static function init() {
-		add_action( 'init', array( __CLASS__, 'get_formatted_rating' ) );
-	}
-
-	/**
 	 * Update the rating for the recipes affected by a specific comment.
 	 *
 	 * @since    1.22.0
@@ -168,6 +159,7 @@ class WPRM_Rating {
 	 */
 	public static function get_ratings_summary_for( $recipe_id ) {
 		$ratings = array(
+			'count' => get_post_meta( $recipe_id, 'wprm_rating_count', true ),
 			'average' => get_post_meta( $recipe_id, 'wprm_rating_average', true ),
 			'comment_ratings' => false,
 			'user_ratings' => false,
@@ -259,5 +251,3 @@ class WPRM_Rating {
 		return $formatted;
 	}
 }
-
-WPRM_Rating::init();

@@ -1,3 +1,25 @@
+:root {
+    --comment-rating-star-color: #343434;
+}
+
+.wprm-comment-rating {
+    svg {
+        path {
+            fill: var(--comment-rating-star-color);
+        }
+        polygon {
+            stroke: var(--comment-rating-star-color);
+        }
+    }
+}
+
+.wprm-comment-ratings-container svg .wprm-star-full {
+    fill: var(--comment-rating-star-color);
+}
+.wprm-comment-ratings-container svg .wprm-star-empty {
+    stroke: var(--comment-rating-star-color);
+}
+
 body:not(:hover) fieldset.wprm-comment-ratings-container:focus-within span {
     outline: 1px solid #4D90FE;
 }

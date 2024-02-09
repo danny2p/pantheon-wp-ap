@@ -40,6 +40,16 @@ class WPRM_Api_Manage_Recipes {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			) );
+			register_rest_route( 'wp-recipe-maker/v1', '/manage/recipe/(?P<id>\d+)', array(
+				'callback' => array( __CLASS__, 'api_manage_get_recipe' ),
+				'methods' => 'POST',
+				'args' => array(
+					'id' => array(
+						'validate_callback' => array( __CLASS__, 'api_validate_numeric' ),
+					),
+				),
+				'permission_callback' => '__return_true',
+			));
 			register_rest_route( 'wp-recipe-maker/v1', '/manage/recipe/bulk', array(
 				'callback' => array( __CLASS__, 'api_manage_recipes_bulk_edit' ),
 				'methods' => 'POST',
@@ -67,6 +77,31 @@ class WPRM_Api_Manage_Recipes {
 	 */
 	public static function api_required_permissions() {
 		return current_user_can( WPRM_Settings::get( 'features_manage_access' ) );
+	}
+
+	/**
+	 * Handle manage get recipe call to the REST API.
+	 *
+	 * @since    9.2.0
+	 * @param    WP_REST_Request $request Current request.
+	 */
+	public static function api_manage_get_recipe( $request ) {
+		$params = $request->get_params();
+		$format = isset( $params['format'] ) ? $params['format'] : 'frontend';
+		$recipe_id = intval( $request['id'] );
+
+		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+
+		if ( $recipe ) {
+			if ( 'frontend' === $format ) {
+				// Only return data if recipe is published or user has permission to edit.
+				if ( 'publish' === $recipe->post_status() || current_user_can( 'edit_post', $recipe->id() ) ) {
+					return $recipe->get_data_frontend();
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**

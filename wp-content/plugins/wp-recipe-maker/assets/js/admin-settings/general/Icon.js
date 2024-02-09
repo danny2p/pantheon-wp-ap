@@ -23,6 +23,7 @@ import IconLink from '../../../icons/settings/link.svg';
 import IconList from '../../../icons/settings/list.svg';
 import IconLock from '../../../icons/settings/lock.svg';
 import IconMeasureApple from '../../../icons/settings/measure-apple.svg';
+import IconModal from '../../../icons/settings/modal.svg';
 import IconPainting from '../../../icons/settings/painting.svg';
 import IconPlug from '../../../icons/settings/plug.svg';
 import IconPrinter from '../../../icons/settings/printer.svg';
@@ -36,6 +37,7 @@ import IconSpeed from '../../../icons/settings/speed.svg';
 import IconStar from '../../../icons/settings/star.svg';
 import IconSupport from '../../../icons/settings/support.svg';
 import IconText from '../../../icons/settings/text.svg';
+import IconTimeline from '../../../icons/settings/timeline.svg';
 import IconUndo from '../../../icons/settings/undo.svg';
 import IconUp from '../../../icons/settings/up.svg';
 import IconWarning from '../../../icons/settings/warning.svg';
@@ -63,6 +65,7 @@ const icons = {
     list: IconList,
     lock: IconLock,
     'measure-apple': IconMeasureApple,
+    modal: IconModal,
     painting: IconPainting,
     plug: IconPlug,
     printer: IconPrinter,
@@ -76,6 +79,7 @@ const icons = {
     star: IconStar,
     support: IconSupport,
     text: IconText,
+    timeline: IconTimeline,
     undo: IconUndo,
     up: IconUp,
     warning: IconWarning,

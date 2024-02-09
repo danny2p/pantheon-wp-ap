@@ -11,6 +11,7 @@ import ColumnsTrash from './trash/Columns';
 import ColumnsUnits from './units/Columns';
 import ColumnsGlossary from './glossary/Columns';
 import ColumnsAnalytics from './analytics/Columns';
+import ColumnsChangelog from './changelog/Columns';
 
 let datatables = {
     'recipe': {
@@ -373,6 +374,20 @@ datatables.analytics = {
     createButton: false,
     selectedColumns: ['created_at','type','recipe_id','post_id','user_id'],
     columns: ColumnsAnalytics,
+};
+
+datatables.changelog = {
+    parent: __wprm( 'Changelog' ),
+    title: __wprm( 'Overview' ),
+    id: 'changelog',
+    route: 'changelog',
+    label: {
+        singular: __wprm( 'Change' ),
+        plural: __wprm( 'Changes' ),
+    },
+    createButton: false,
+    selectedColumns: ['created_at','type','meta','object_id','user_id'],
+    columns: ColumnsChangelog,
 };
 
 export default datatables;

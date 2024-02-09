@@ -1,6 +1,30 @@
 {
     "news": [
         {
+            "date": "2024-02-06",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.2.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-2-0/"
+        },
+        {
+            "date": "2024-02-02",
+            "label": "Blog",
+            "title": "4 Unbeatable Tips for Food Influencer Marketing Success",
+            "url": "https://bootstrapped.ventures/food-influencer-marketing/"
+        },
+        {
+            "date": "2024-01-25",
+            "label": "Blog",
+            "title": "A Comprehensive Guide to Food Photography Lighting Setup",
+            "url": "https://bootstrapped.ventures/food-photography-setup/"
+        },
+        {
+            "date": "2024-01-12",
+            "label": "Blog",
+            "title": "2024 Guide: The Best Cameras for Food Photography",
+            "url": "https://bootstrapped.ventures/best-camera-for-food-photography/"
+        },
+        {
             "date": "2024-01-03",
             "label": "Blog",
             "title": "Essential Tips to Kickstart Your Food Instagram",

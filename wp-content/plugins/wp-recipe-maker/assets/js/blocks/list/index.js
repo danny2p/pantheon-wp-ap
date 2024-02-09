@@ -117,7 +117,7 @@ registerBlockType( 'wp-recipe-maker/list', {
                 <Fragment>
                     <h2>WPRM { __( 'List', 'wp-recipe-maker' ) }</h2>
                     <Button
-                        isPrimary
+                        variant="primary"
                         onClick={ () => {
                             WPRM_Modal.open( 'list', {
                                 saveCallback: modalCallback,
@@ -125,6 +125,7 @@ registerBlockType( 'wp-recipe-maker/list', {
                         }}>
                         { __( 'Create new List', 'wp-recipe-maker' ) }
                     </Button> <Button
+                        variant="secondary"
                         onClick={ () => {
                             WPRM_Modal.open( 'select', {
                                 title: __( 'Insert existing List', 'wp-recipe-maker' ),
@@ -140,6 +141,7 @@ registerBlockType( 'wp-recipe-maker/list', {
                         wprm_admin.addons.premium
                         &&
                         <Button
+                            variant="secondary"
                             onClick={ () => {
                                 WPRM_Modal.open( 'select', {
                                     title: __( 'Create new from existing List', 'wp-recipe-maker' ),

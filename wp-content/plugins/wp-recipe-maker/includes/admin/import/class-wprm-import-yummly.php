@@ -101,7 +101,7 @@ class WPRM_Import_Yummly extends WPRM_Import {
 	 */
 	public function get_recipe( $id, $post_data ) {
 		global $wpdb;
-		$yum_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'amd_yrecipe_recipes WHERE recipe_id=' . $id );
+		$yum_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'amd_yrecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $yum_recipe->post_id;
 
 		$recipe = array(
@@ -248,7 +248,7 @@ class WPRM_Import_Yummly extends WPRM_Import {
 	 */
 	public function replace_recipe( $id, $wprm_id, $post_data ) {
 		global $wpdb;
-		$yum_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_yrecipe_recipes WHERE recipe_id=' . $id );
+		$yum_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_yrecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $yum_recipe->post_id;
 
 		// Update post_id field to show that this recipe has been imported.
