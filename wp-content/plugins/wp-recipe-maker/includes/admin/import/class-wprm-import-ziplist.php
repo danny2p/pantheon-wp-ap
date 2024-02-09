@@ -101,7 +101,7 @@ class WPRM_Import_Ziplist extends WPRM_Import {
 	 */
 	public function get_recipe( $id, $post_data ) {
 		global $wpdb;
-		$zl_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $id );
+		$zl_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $zl_recipe->post_id;
 
 		$recipe = array(
@@ -288,7 +288,7 @@ class WPRM_Import_Ziplist extends WPRM_Import {
 	 */
 	public function replace_recipe( $id, $wprm_id, $post_data ) {
 		global $wpdb;
-		$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $id );
+		$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $zl_recipe->post_id;
 
 		// Migrate ratings.
@@ -297,7 +297,7 @@ class WPRM_Import_Ziplist extends WPRM_Import {
 
 		$ratings = array();
 		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$ratings = $wpdb->get_results( 'SELECT rating, ip FROM ' . $table . ' WHERE recipe_id=' . $id );
+			$ratings = $wpdb->get_results( 'SELECT rating, ip FROM ' . $table . ' WHERE recipe_id=' . intval( $id ) );
 		}
 
 		foreach ( $ratings as $rating ) {

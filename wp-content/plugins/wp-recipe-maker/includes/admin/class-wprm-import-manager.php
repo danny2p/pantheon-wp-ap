@@ -132,33 +132,35 @@ class WPRM_Import_Manager {
 	 */
 	public static function ajax_import_recipes() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
-			$importer_uid = isset( $_POST['importer_uid'] ) ? sanitize_title( wp_unslash( $_POST['importer_uid'] ) ) : ''; // Input var okay.
-			$post_data = isset( $_POST['post_data'] ) ? wp_unslash( $_POST['post_data'] ) : array(); // Input var okay.
-			$recipes = isset( $_POST['recipes'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['recipes'] ) ) : array(); // Input var okay.
+			if ( current_user_can( WPRM_Settings::get( 'features_import_access' ) ) ) {
+				$importer_uid = isset( $_POST['importer_uid'] ) ? sanitize_title( wp_unslash( $_POST['importer_uid'] ) ) : ''; // Input var okay.
+				$post_data = isset( $_POST['post_data'] ) ? wp_unslash( $_POST['post_data'] ) : array(); // Input var okay.
+				$recipes = isset( $_POST['recipes'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['recipes'] ) ) : array(); // Input var okay.
 
-			$importer = self::get_importer( $importer_uid );
+				$importer = self::get_importer( $importer_uid );
 
-			$recipes_left = array();
-			$recipes_imported = array();
+				$recipes_left = array();
+				$recipes_imported = array();
 
-			if ( $importer && count( $recipes ) > 0 ) {
-				$recipes_left = $recipes;
-				$recipes_imported = array_splice( $recipes_left, 0, 3 );
+				if ( $importer && count( $recipes ) > 0 ) {
+					$recipes_left = $recipes;
+					$recipes_imported = array_splice( $recipes_left, 0, 3 );
 
-				$result = self::import_recipes( $importer, $recipes_imported, $post_data ); // Input var okay.
+					$result = self::import_recipes( $importer, $recipes_imported, $post_data ); // Input var okay.
 
-				if ( is_wp_error( $result ) ) {
-					wp_send_json_error( array(
-						'redirect' => add_query_arg( array( 'from' => $importer_uid, 'error' => rawurlencode( $result->get_error_message() ) ), admin_url( 'admin.php?page=wprm_import' ) ),
-					) );
+					if ( is_wp_error( $result ) ) {
+						wp_send_json_error( array(
+							'redirect' => add_query_arg( array( 'from' => $importer_uid, 'error' => rawurlencode( $result->get_error_message() ) ), admin_url( 'admin.php?page=wprm_import' ) ),
+						) );
+					}
 				}
-			}
 
-			wp_send_json_success( array(
-				'post_data' => $post_data,
-				'recipes_left' => $recipes_left,
-				'recipes_imported' => $recipes_imported,
-			) );
+				wp_send_json_success( array(
+					'post_data' => $post_data,
+					'recipes_left' => $recipes_left,
+					'recipes_imported' => $recipes_imported,
+				) );
+			}
 		}
 
 		wp_die();

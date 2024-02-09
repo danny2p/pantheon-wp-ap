@@ -57,9 +57,15 @@ class WPRM_Api_Equipment {
 		$meta = get_term_meta( $object[ 'id' ] );
 
 		return apply_filters( 'wprm_get_term_meta', array(
+			'image_id' => isset( $meta['wprmp_equipment_image_id'] ) ? $meta['wprmp_equipment_image_id'] : '',
 			'eafl' => isset( $meta['wprmp_equipment_eafl'] ) ? $meta['wprmp_equipment_eafl'] : '',
 			'link' => isset( $meta['wprmp_equipment_link'] ) ? $meta['wprmp_equipment_link'] : '',
 			'link_nofollow' => isset( $meta['wprmp_equipment_link_nofollow'] ) ? $meta['wprmp_equipment_link_nofollow'] : '',
+			'affiliate_html' => isset( $meta['wprmp_equipment_affiliate_html'] ) ? $meta['wprmp_equipment_affiliate_html'] : '',
+			'amazon_asin' => isset( $meta['wprmp_amazon_asin'] ) ? $meta['wprmp_amazon_asin'] : '',
+			'amazon_image' => isset( $meta['wprmp_amazon_image'] ) ? $meta['wprmp_amazon_image'] : '',
+			'amazon_name' => isset( $meta['wprmp_amazon_name'] ) ? $meta['wprmp_amazon_name'] : '',
+			'amazon_updated' => isset( $meta['wprmp_amazon_updated'] ) ? $meta['wprmp_amazon_updated'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
 		), $object, $meta );

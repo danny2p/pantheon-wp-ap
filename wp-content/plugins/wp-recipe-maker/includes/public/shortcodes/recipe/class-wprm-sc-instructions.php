@@ -610,11 +610,12 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$force_size = isset( $match[3] ) && '!' === $match[3];
 		}
 
-		$img = wp_get_attachment_image( $instruction['image'], $size );
+		$thumbnail_size = WPRM_Shortcode_Helper::get_thumbnail_image_size( $instruction['image'], $size, $force_size );
+		$img = wp_get_attachment_image( $instruction['image'], $thumbnail_size );
 
 		// Prevent instruction image from getting stretched in Gutenberg preview.
 		if ( WPRM_Context::is_gutenberg_preview() ) {
-			$image_data = wp_get_attachment_image_src( $instruction['image'], $size );
+			$image_data = wp_get_attachment_image_src( $instruction['image'], $thumbnail_size );
 			if ( $image_data[1] ) {
 				$style = 'max-width: ' . $image_data[1] . 'px;';
 				$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );

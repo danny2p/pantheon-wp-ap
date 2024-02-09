@@ -136,6 +136,24 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.2.1 =
+* Fix: Make sure modal color settings work in all environments
+* Fix: Error when saving Customizer
+
+= 9.2.0 =
+* Feature: Changelog for tracking backend recipe changes with optional email notification
+* Improvement: Include rating summary in REST API get recipe call
+* Improvement: Allow URL to be used for recipe image when using REST API
+* Improvement: Better accessibility for tooltips
+* Improvement: Setting to open custom author link in same tab
+* Fix: Print going blank in Safari
+* Fix: Block validation error when post is saved without changes to the post content
+* Fix: Prevent HTML comments from breaking rich editor
+* Fix: Allow any user rating if comment rating is not possible
+* Fix: Alternative image not working for "other" roundup post
+* Fix: Improved authorization for authenticated users to prevent security issues
+* Fix: Make sure correct image thumbnail is used when using force size option
+
 = 9.1.2 =
 * Fix: Error caused by Yoast SEO suddenly removing constant
 
@@ -1604,6 +1622,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.2.1 =
+Fixes a few small issues
+
+= 9.2.0 =
+Some great new features and improvements
+
 = 9.1.2 =
 Update to prevent issues when using Yoast SEO
 

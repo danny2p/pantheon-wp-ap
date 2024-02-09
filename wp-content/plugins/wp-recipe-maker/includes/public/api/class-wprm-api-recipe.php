@@ -59,7 +59,7 @@ class WPRM_Api_Recipe{
 		// Make sure we're getting the most recent data by invalidating first.
 		WPRM_Recipe_Manager::invalidate_recipe( $object['id'] );
 		$recipe = WPRM_Recipe_Manager::get_recipe( $object['id'] );
-		return $recipe->get_data();
+		return $recipe->get_data( 'api' );
 	}
 
 	/**
@@ -72,10 +72,33 @@ class WPRM_Api_Recipe{
 	 */
 	public static function api_insert_update_recipe( $post, $request, $creating ) {
 		$params = $request->get_params();
-		$recipe = isset( $params['recipe'] ) ? WPRM_Recipe_Sanitizer::sanitize( $params['recipe'] ) : array();
+		$recipe_data = isset( $params['recipe'] ) ? $params['recipe'] : array();
+
+		$recipe = WPRM_Recipe_Sanitizer::sanitize( $recipe_data );
 		$recipe_id = $post->ID;
 
-		WPRM_Recipe_Saver::update_recipe( $recipe_id, $recipe );
+		// Allow images to be passed as URLs instead of IDs, but only when IDs had not been set explicitly.
+		require_once( WPRM_DIR . 'includes/admin/class-wprm-import-helper.php' );
+		if ( isset( $recipe_data['image_url'] ) && $recipe_data['image_url'] && ! isset( $recipe['image_id'] ) ) {
+			$attachment_id = WPRM_Import_Helper::get_or_upload_attachment( $recipe_id, $recipe_data['image_url'] );
+			if ( $attachment_id ) {
+				$recipe['image_id'] = $attachment_id;
+			}
+		}
+		if ( isset( $recipe_data['pin_image_url'] ) && $recipe_data['pin_image_url'] && ! isset( $recipe['pin_image_id'] ) ) {
+			$attachment_id = WPRM_Import_Helper::get_or_upload_attachment( $recipe_id, $recipe_data['pin_image_url'] );
+			if ( $attachment_id ) {
+				$recipe['pin_image_id'] = $attachment_id;
+			}
+		}
+
+		// Save recipe data.
+		$ignore_edit_log = $creating;
+		WPRM_Recipe_Saver::update_recipe( $recipe_id, $recipe, $ignore_edit_log );
+
+		if ( $creating ) {
+			WPRM_Changelog::log( 'recipe_created', $recipe_id );
+		}
 	}
 
 	/**

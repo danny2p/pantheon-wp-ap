@@ -147,6 +147,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 		}
 		
 		$rating = $recipe->rating();
+		$decimals = intval( $atts['average_decimals'] );
 
 		if ( 'stars' === $atts['display'] || 'stars-details' === $atts['display'] ) {
 			$output = self::get_stars( $rating, $atts, $recipe );
@@ -155,11 +156,10 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 				return '';
 			}
 		} else {
-			$output = '<div class="wprm-recipe-rating">';
+			$output = '<div class="wprm-recipe-rating wprm-recipe-rating-recipe-' . esc_attr( $recipe->id() ) . '" data-decimals="' . esc_attr( $decimals ) . '">';
 		}
 
 		// Get formatted average.
-		$decimals = intval( $atts['average_decimals'] );
 		$formatted_average = WPRM_Recipe_Parser::format_quantity( $rating['average'], $decimals );
 
 		if ( 'details' === $atts['display'] || 'stars-details' === $atts['display'] ) {
@@ -228,6 +228,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			// Get classes.
 			$classes = array(
 				'wprm-recipe-rating',
+				'wprm-recipe-rating-recipe-' . $recipe->id(),
 			);
 
 			if ( 'stars-details' === $atts['display'] ) {

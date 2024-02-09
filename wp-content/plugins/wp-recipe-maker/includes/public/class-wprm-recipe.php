@@ -52,7 +52,7 @@ class WPRM_Recipe {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_data() {
+	public function get_data( $context = 'default' ) {
 		$recipe = array();
 
 		// Technical Fields.
@@ -124,56 +124,60 @@ class WPRM_Recipe {
 		$recipe['ingredient_links_type'] = $this->ingredient_links_type();
 		$recipe['unit_system'] = $this->unit_system( true );
 
-		return apply_filters( 'wprm_recipe_data', $recipe, $this );
+		if ( 'api' === $context ) {
+			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
+		} elseif ( 'manage' === $context ) {
+			$recipe['editable'] = current_user_can( 'edit_post', $this->id() );
+
+			$recipe['date'] = $this->date();
+			$recipe['date_formatted'] = $this->date_formatted();
+			$recipe['seo'] = $this->seo();
+			$recipe['seo_priority'] = $this->seo_priority();
+			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
+	
+			$recipe['permalink'] = $this->permalink( true );
+	
+			// Parent Post.
+			$recipe['parent_post_id'] = $this->parent_post_id();
+			$recipe['parent_post'] = $this->parent_post();
+			$recipe['parent_post_url'] = $this->parent_url();
+			$recipe['parent_post_edit_url'] = $this->parent_edit_url();
+			$recipe['parent_post_language'] = $this->parent_post_language();
+	
+			// Authors.
+			$recipe['author'] = $this->author();
+			$recipe['post_author_name'] = $this->post_author_name();
+			$recipe['post_author_link'] = $this->post_author() ? get_edit_user_link( $this->post_author() ) : '';
+	
+			// Video.
+			$recipe['video_url'] = $this->video_url();
+	
+			// Unit Conversion.
+			$recipe['unit_conversion'] = __( 'n/a', 'wp-recipe-maker' );
+			
+			// Submission Author.
+			$recipe['submission_author'] = $this->submission_author();
+			if ( $recipe['submission_author'] && isset( $recipe['submission_author']['id'] ) && $recipe['submission_author']['id'] ) {
+				$recipe['submission_author_user_link'] = get_edit_user_link( $recipe['submission_author']['id'] );
+	
+				$userdata = get_userdata( $recipe['submission_author']['id'] );
+				if ( $userdata ) {
+					$recipe['submission_author_user_name'] = $userdata->display_name;	
+				}
+			}
+		}
+
+		return apply_filters( 'wprm_recipe_data', $recipe, $this, $context );
 	}
 
 	/**
 	 * Get recipe data for the manage page.
+	 * Function still exists for backwards compatibility. The regular get_data( 'manage' ) function should be used instead.
 	 *
 	 * @since    4.1.0
 	 */
 	public function get_data_manage() {
-		$recipe = $this->get_data();
-
-		$recipe['editable'] = current_user_can( 'edit_post', $this->id() );
-
-		$recipe['date'] = $this->date();
-		$recipe['date_formatted'] = $this->date_formatted();
-		$recipe['seo'] = $this->seo();
-		$recipe['seo_priority'] = $this->seo_priority();
-		$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
-
-		$recipe['permalink'] = $this->permalink( true );
-
-		// Parent Post.
-		$recipe['parent_post_id'] = $this->parent_post_id();
-		$recipe['parent_post'] = $this->parent_post();
-		$recipe['parent_post_url'] = $this->parent_url();
-		$recipe['parent_post_edit_url'] = $this->parent_edit_url();
-		$recipe['parent_post_language'] = $this->parent_post_language();
-
-		// Authors.
-		$recipe['author'] = $this->author();
-		$recipe['post_author_name'] = $this->post_author_name();
-		$recipe['post_author_link'] = $this->post_author() ? get_edit_user_link( $this->post_author() ) : '';
-
-		// Video.
-		$recipe['video_url'] = $this->video_url();
-
-		// Unit Conversion.
-		$recipe['unit_conversion'] = __( 'n/a', 'wp-recipe-maker' );
-		
-		// Submission Author.
-		$recipe['submission_author'] = $this->submission_author();
-		if ( $recipe['submission_author'] && isset( $recipe['submission_author']['id'] ) && $recipe['submission_author']['id'] ) {
-			$recipe['submission_author_user_link'] = get_edit_user_link( $recipe['submission_author']['id'] );
-
-			$userdata = get_userdata( $recipe['submission_author']['id'] );
-			if ( $userdata ) {
-				$recipe['submission_author_user_name'] = $userdata->display_name;	
-			}
-		}
-
+		$recipe = $this->get_data( 'manage' );
 		return apply_filters( 'wprm_recipe_manage_data', $recipe, $this );
 	}
 
@@ -185,11 +189,13 @@ class WPRM_Recipe {
 	public function get_data_frontend() {
 		$recipe = array();
 
-		$recipe['id'] = $this->id();
 		$recipe['type'] = $this->type();
 		$recipe['name'] = $this->name();
 
-		return $recipe;
+		$recipe['servings'] = $this->servings();
+		$recipe['rating'] = $this->rating();
+
+		return apply_filters( 'wprm_recipe_frontend_data', $recipe, $this );
 	}
 
 	/**

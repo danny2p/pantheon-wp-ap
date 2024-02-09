@@ -8,20 +8,35 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2023-07-17 11:36+0000\n"
+"PO-Revision-Date: 2024-01-28 10:35+0000\n"
 "Last-Translator: https://svenni.no :  Svein Ove Omland\n"
 "Language-Team: Norsk bokmål\n"
 "Language: nb-NO\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.4; wp-6.2.2"
+"X-Loco-Version: 2.6.6; wp-6.4.2"
 
-#: templates/admin/translations.php:523
+#: templates/admin/translations.php:292
+msgid "#"
+msgstr "#"
+
+#: templates/admin/translations.php:445
+msgid "# External"
+msgstr "# Ekstern"
+
+#: templates/admin/translations.php:444
+msgid "# Internal"
+msgstr "# Internt"
+
+#: templates/admin/translations.php:443
+msgid "# Items"
+msgstr "# elementer"
+
+#: templates/admin/translations.php:567
 msgid "# Ratings Given"
 msgstr "# Vurderinger gitt"
 
 #: templates/admin/menu/import/import-recipes.php:93
-#, php-format
 msgid "%d more recipe"
 msgid_plural "%d more recipes"
 msgstr[0] "%d oppskrift til"
@@ -30,27 +45,26 @@ msgstr[1] "%d flere oppskrifter"
 #: templates/admin/menu/import/import-overview.php:71 
 #: templates/admin/menu/import/import-search.php:29 
 #: templates/admin/menu/import/import-search.php:37
-#, php-format
 msgid "%d recipe found"
 msgid_plural "%d recipes found"
 msgstr[0] "%d oppskrift funnet"
 msgstr[1] "%d oppskrifter funnet"
 
-#: includes/admin/class-wprm-marketing.php:115
+#: includes/admin/class-wprm-marketing.php:124
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] "%s dag"
 msgstr[1] "%s dager"
 
-#: includes/admin/class-wprm-marketing.php:117
+#: includes/admin/class-wprm-marketing.php:126
 #, php-format
 msgid "%s hour"
 msgid_plural "%s hours"
 msgstr[0] "%s time"
 msgstr[1] "%s timer"
 
-#: includes/admin/class-wprm-marketing.php:119
+#: includes/admin/class-wprm-marketing.php:128
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
@@ -64,6 +78,13 @@ msgid_plural "%s new news items"
 msgstr[0] "%s ny nyhet"
 msgstr[1] "%s nye nyheter"
 
+#: includes/public/class-wprm-admin-bar.php:172
+#, php-format
+msgid "%s pending recipe submission"
+msgid_plural "%s pending recipe submissions"
+msgstr[0] "%s venter på innsending av oppskrift"
+msgstr[1] "%s venter på innsending av oppskrifter"
+
 #: templates/public/comment-rating.php:16
 #, php-format
 msgid "%s star"
@@ -71,59 +92,63 @@ msgid_plural "%s stars"
 msgstr[0] "%s stjerne"
 msgstr[1] "%s stjerner"
 
-#: includes/public/class-wprm-metadata.php:702
+#: includes/public/class-wprm-metadata.php:712
 msgid "1 serving"
 msgstr "1 porsjon"
 
-#: templates/admin/translations.php:108
+#: templates/admin/translations.php:109
 msgid "1 star"
 msgstr "1 stjerne"
 
-#: templates/admin/translations.php:154
+#: templates/admin/translations.php:156
 msgid "1. Highlight text and click the corresponding button"
 msgstr "1. Marker tekst og klikk på den tilsvarende knappen"
 
-#: templates/settings/group-analytics.php:32
+#: templates/admin/translations.php:284
+msgid "10 Birthday Party Recipes"
+msgstr "10 Bursdags fest oppskrifter"
+
+#: templates/settings/group-analytics.php:37
 msgid "180 Days"
 msgstr "180 dager"
 
-#: templates/admin/translations.php:109
+#: templates/admin/translations.php:110
 msgid "2 stars"
 msgstr "2 stjerner"
 
-#: templates/admin/translations.php:160
+#: templates/admin/translations.php:162
 msgid "2. Fine-tune selections"
 msgstr "2. Finjuster valgene"
 
-#: templates/admin/translations.php:110
+#: templates/admin/translations.php:111
 msgid "3 stars"
 msgstr "3 stjerner"
 
-#: templates/settings/group-analytics.php:34
+#: templates/settings/group-analytics.php:39
 msgid "30 Days"
 msgstr "30 dager"
 
-#: templates/settings/group-analytics.php:31
+#: templates/settings/group-analytics.php:36
 msgid "365 Days"
 msgstr "365 dager"
 
-#: templates/admin/translations.php:111
+#: templates/admin/translations.php:112
 msgid "4 stars"
 msgstr "4 stjerner"
 
-#: templates/admin/translations.php:112
+#: templates/admin/translations.php:113
 msgid "5 stars"
 msgstr "5 stjerner"
 
-#: templates/settings/group-analytics.php:35
+#: templates/settings/group-analytics.php:40
 msgid "7 Days"
 msgstr "7 dager"
 
-#: templates/settings/group-analytics.php:33
+#: templates/settings/group-analytics.php:38
 msgid "90 Days"
 msgstr "90 dager"
 
-#: templates/settings/group-post-type.php:52
+#: templates/settings/group-post-type.php:55
 msgid ""
 "A list of all recipes accessible at the /slug/ archive page. Flush your "
 "permalinks after changing this setting."
@@ -131,7 +156,7 @@ msgstr ""
 "En liste over alle oppskrifter tilgjengelig på /slug/-arkivsiden. Skyll "
 "permalinkene dine etter å ha endret denne innstillingen."
 
-#: templates/settings/group-recipe-roundup.php:88
+#: templates/settings/group-recipe-roundup.php:107
 msgid ""
 "A third party API is used to automatically retrieve the title, summary and "
 "image of an external site. Their free plan includes a limited number of "
@@ -204,23 +229,23 @@ msgstr "Tilgang til private notater"
 msgid "Access to Tools Page"
 msgstr "Tilgang til Verktøy-siden"
 
-#: templates/admin/translations.php:475
+#: templates/admin/translations.php:527
 msgid "Action"
 msgstr "Handling"
 
-#: templates/admin/translations.php:574
+#: templates/admin/translations.php:630
 msgid "Action Details"
 msgstr "Handlings Detaljer"
 
-#: templates/admin/translations.php:98
+#: templates/admin/translations.php:99
 msgid "Action options:"
 msgstr "Handlings alternativer:"
 
-#: templates/admin/translations.php:133
+#: templates/admin/translations.php:135
 msgid "Actions"
 msgstr "Handlinger"
 
-#: templates/admin/translations.php:174
+#: templates/admin/translations.php:176
 msgid "Active Time"
 msgstr "Aktiv tid"
 
@@ -228,27 +253,23 @@ msgstr "Aktiv tid"
 msgid "Adapted from"
 msgstr "Tilpasset fra"
 
-#: templates/admin/translations.php:266
+#: templates/admin/translations.php:267
 msgid "Add"
 msgstr "Legg til"
 
-#: templates/admin/translations.php:341
+#: templates/admin/translations.php:362
 msgid "Add Adjustable Shortcode"
 msgstr "Legg til justerbar kortkode"
 
-#: templates/admin/translations.php:357
+#: templates/admin/translations.php:378
 msgid "Add Affiliate Link"
 msgstr "Legg til Tilknyttet Link"
 
-#: templates/admin/translations.php:121
+#: templates/admin/translations.php:123
 msgid "Add as Custom Nutrition Ingredient"
 msgstr "Legg til som tilpasset ernæringsingrediens"
 
-#: templates/settings/group-integrations.php:106
-msgid "Add Carbon Label to your recipe template"
-msgstr "Legg til Karbonetikett  til oppskriftsmalen din"
-
-#: templates/admin/translations.php:89
+#: templates/admin/translations.php:90
 msgid "Add Equipment"
 msgstr "Legg til utstyr"
 
@@ -262,58 +283,66 @@ msgstr ""
 "Ordlistevilkår. Uansett hvor du setter dem inn, kan et verktøytips dukke opp "
 "for å forklare disse begrepene til leserne dine."
 
-#: templates/admin/translations.php:339
+#: templates/admin/translations.php:360
 msgid "Add HTML or Shortcode"
 msgstr ""
 "Legg til HTML eller Kort kode\n"
 
-#: templates/admin/translations.php:553
+#: templates/admin/translations.php:599
 msgid "Add Image"
 msgstr "Legg til bilde"
 
-#: templates/admin/translations.php:197
+#: templates/admin/translations.php:199
 msgid "Add Ingredient"
 msgstr "Tilsett ingrediens"
 
-#: templates/admin/translations.php:199
+#: templates/admin/translations.php:201
 msgid "Add Ingredient Group"
 msgstr "Legg til ingrediens gruppe"
 
-#: templates/admin/translations.php:236
+#: templates/admin/translations.php:238
 msgid "Add Instruction"
 msgstr "Legg til instruksjon"
 
-#: templates/admin/translations.php:237
+#: templates/admin/translations.php:239
 msgid "Add Instruction Group"
 msgstr "Legg til instruksjons gruppe"
 
-#: templates/admin/translations.php:368
+#: templates/admin/translations.php:388
 msgid "Add Instruction Image"
 msgstr "Legg til instruksjons bilde"
 
-#: templates/admin/translations.php:337
+#: templates/admin/translations.php:358
 msgid "Add Link"
 msgstr "Legg til lenke"
 
-#: templates/admin/translations.php:196
+#: templates/admin/translations.php:198
 msgid "Add Material"
 msgstr "Legg til materiale"
 
-#: templates/admin/translations.php:198
+#: templates/admin/translations.php:200
 msgid "Add Material Group"
 msgstr "Legg til material gruppe"
 
-#: templates/admin/translations.php:388
+#: templates/admin/translations.php:414
 msgid "Add rel=\"nofollow\" to link"
 msgstr "Legg til rel=\"nofollow\" til lenken"
 
-#: templates/admin/translations.php:343
+#: templates/admin/translations.php:293
+msgid "Add Roundup Item"
+msgstr "Legg til Roundup-element"
+
+#: templates/admin/translations.php:364
 msgid "Add Temperature"
 msgstr "Legg til temperatur"
 
-#: templates/admin/translations.php:79
+#: templates/admin/translations.php:80
 msgid "Add Terms"
 msgstr "Legg til vilkår"
+
+#: templates/admin/translations.php:294
+msgid "Add Text Field"
+msgstr "Legg til tekstfelt"
 
 #: templates/settings/group-social-sharing.php:37
 msgid "Add the nopin attribute to the category images."
@@ -340,7 +369,7 @@ msgstr "Legg til nopin-attributtet til instruksjonsbildene."
 msgid "Add the nopin attribute to the recipe image."
 msgstr "Legg til nopin-attributtet til oppskriftsbildet."
 
-#: templates/admin/translations.php:342
+#: templates/admin/translations.php:363
 msgid "Add Timer Shortcode"
 msgstr "Legg til timer kortkode"
 
@@ -360,7 +389,7 @@ msgstr "Legg til oppskriftssamlinger"
 msgid "Add to Shopping List"
 msgstr "Legg til handleliste"
 
-#: templates/admin/translations.php:308
+#: templates/admin/translations.php:329
 msgid ""
 "Add video start and end time (in seconds or minutes:seconds format) if this "
 "instruction step is part of the recipe video."
@@ -380,9 +409,9 @@ msgstr "Justerbare porsjoner"
 
 #: templates/settings/group-adjustable-servings.php:127 
 #: templates/settings/group-metadata.php:150 
-#: templates/settings/group-recipe-roundup.php:61 
+#: templates/settings/group-recipe-roundup.php:80 
 #: templates/settings/group-recipe-print.php:209 
-#: templates/settings/structure.php:95 
+#: templates/settings/structure.php:97 
 #: templates/settings/group-recipe-snippets.php:157
 msgid "Advanced"
 msgstr "Avansert"
@@ -399,7 +428,7 @@ msgstr ""
 "Avanserte justerbare porsjoner for baking lar besøkende endre størrelsen på "
 "stekepannen eller arket som brukes til oppskriften."
 
-#: templates/admin/translations.php:254
+#: templates/admin/translations.php:256
 msgid "Advanced Servings"
 msgstr "Avanserte porsjoner"
 
@@ -407,11 +436,11 @@ msgstr "Avanserte porsjoner"
 msgid "Advanced Template Options"
 msgstr "Avanserte Mal Alternativer"
 
-#: templates/admin/translations.php:132
+#: templates/admin/translations.php:134
 msgid "Affiliate HTML"
 msgstr "Tilknyttet HTML"
 
-#: templates/admin/translations.php:564
+#: templates/admin/translations.php:610
 msgid "Affiliate HTML Preview"
 msgstr "Forhåndsvisning av tilknyttet HTML"
 
@@ -447,7 +476,7 @@ msgstr ""
 "Etter å ha importert oppskriftene dine, kjør en helsesjekk på siden WP "
 "Recipe Maker > Dashboard-side."
 
-#: templates/settings/group-integrations.php:30
+#: templates/settings/group-integrations.php:14
 msgid "Agree to Instacart Button terms"
 msgstr "Godta vilkårene for Instacart Knappevilkår"
 
@@ -455,7 +484,7 @@ msgstr "Godta vilkårene for Instacart Knappevilkår"
 msgid "Agree to YouTube Terms of Service"
 msgstr "Godta YouTubes vilkår for bruk"
 
-#: templates/admin/translations.php:424
+#: templates/admin/translations.php:474
 msgid "All"
 msgstr "Alle"
 
@@ -463,11 +492,11 @@ msgstr "Alle"
 msgid "all"
 msgstr "alle"
 
-#: templates/admin/translations.php:501
+#: templates/admin/translations.php:551
 msgid "All Authors"
 msgstr "Alle forfattere"
 
-#: templates/admin/translations.php:503
+#: templates/admin/translations.php:553
 msgid "All Display Author Types"
 msgstr "Alle Vis forfattertyper"
 
@@ -475,30 +504,30 @@ msgstr "Alle Vis forfattertyper"
 msgid "All features in action on our demo site"
 msgstr "Alle funksjoner i aksjon på vår demoside"
 
-#: templates/admin/translations.php:267
+#: templates/admin/translations.php:268
 msgid "All fields are required."
 msgstr "Alle felt må fylles ut."
 
-#: templates/admin/translations.php:234
+#: templates/admin/translations.php:236
 msgid "All ingredients are associated with a step!"
 msgstr "Alle ingrediensene er forbundet med et trinn!"
 
-#: templates/admin/translations.php:240
+#: templates/admin/translations.php:242
 msgid "All ingredients have been added in a step!"
 msgstr "Alle ingrediensene er tilsatt i et trinn!"
 
-#: templates/admin/translations.php:513
+#: templates/admin/translations.php:557
 msgid "All Languages"
 msgstr "Alle språk"
 
-#: templates/admin/translations.php:165
+#: templates/admin/translations.php:167
 msgid ""
 "All of these will be imported. Use the checkbox to indicate group headers."
 msgstr ""
 "Alle disse vil bli importert. Bruk avmerkingsboksen for å angi "
 "gruppeoverskrifter."
 
-#: templates/admin/translations.php:416
+#: templates/admin/translations.php:466
 msgid "All Ratings"
 msgstr "Alle vurderinger"
 
@@ -506,11 +535,11 @@ msgstr "Alle vurderinger"
 msgid "All recipe videos"
 msgstr "Alle oppskriftsvideoer"
 
-#: templates/admin/translations.php:505
+#: templates/admin/translations.php:555
 msgid "All Statuses"
 msgstr "Alle Statuser"
 
-#: templates/admin/translations.php:420
+#: templates/admin/translations.php:470
 msgid "All Types"
 msgstr "Alle Typer"
 
@@ -570,19 +599,67 @@ msgstr "La besøkende stemme på oppskriftene dine når de kommenterer."
 msgid "Allow your visitors to submit their own recipes to your website."
 msgstr "La de besøkende sende inn sine egne oppskrifter til nettstedet ditt."
 
-#: templates/admin/translations.php:300
+#: templates/admin/translations.php:318
 msgid "Already Associated"
 msgstr "Allerede Tilknyttet"
+
+#: templates/admin/translations.php:421
+msgid "Alternative Image"
+msgstr "Alternativt bilde"
 
 #: templates/settings/group-recipe-ratings.php:209
 msgid "Always redirect to the comment form"
 msgstr "Omdiriger alltid til kommentar skjemaet"
 
-#: includes/public/class-wprm-taxonomies.php:236
+#: templates/settings/group-amazon.php:155
+msgid "Amazon Access Key"
+msgstr "Amazon tilgangsnøkkel"
+
+#: templates/admin/tools.php:115
+msgid "Amazon Affiliate Links Migration for Equipment"
+msgstr "Amazon Migrering av tilknyttede lenker for utstyr"
+
+#: templates/admin/translations.php:621
+msgid "Amazon Image"
+msgstr "Amazon Bilde"
+
+#: templates/admin/translations.php:620
+msgid "Amazon Name"
+msgstr "Amazon Navn"
+
+#: templates/admin/translations.php:611
+msgid "Amazon Product ASIN"
+msgstr "Amazon Produkt ASIN"
+
+#: templates/admin/translations.php:616
+msgid "Amazon Product URL"
+msgstr "Amazon Produktets URL"
+
+#: templates/settings/group-amazon.php:127
+msgid "Amazon Products"
+msgstr "Amazon Produkter"
+
+#: templates/settings/group-amazon.php:161
+msgid "Amazon Secret Key"
+msgstr "Amazon Hemmelig Nøkkel"
+
+#: templates/settings/group-amazon.php:134
+msgid "Amazon Store"
+msgstr "Amazon Butikk"
+
+#: templates/settings/group-amazon.php:142
+msgid "Amazon Store ID"
+msgstr "Amazon Butikk ID"
+
+#: templates/admin/translations.php:622
+msgid "Amazon Updated"
+msgstr "Amazon Oppdatert"
+
+#: includes/public/class-wprm-taxonomies.php:238
 msgid "American"
 msgstr "Amerikansk"
 
-#: templates/admin/translations.php:193
+#: templates/admin/translations.php:195
 msgid "Amount"
 msgstr "Beløp"
 
@@ -590,7 +667,7 @@ msgstr "Beløp"
 msgid "AMP Template"
 msgstr "AMP Mal"
 
-#: templates/admin/translations.php:556
+#: templates/admin/translations.php:602
 msgid ""
 "An Affiliate Link with this ID cannot be found. Try deleting and adding it "
 "again."
@@ -618,39 +695,43 @@ msgstr "Anonymiser vurderinger (irreversible!)"
 msgid "Anonymous ID stored in cookie"
 msgstr "Anonym ID lagret i informasjonskapsel"
 
-#: templates/admin/translations.php:525
+#: templates/admin/translations.php:569
 msgid "Any"
 msgstr "Noen"
 
-#: templates/admin/translations.php:318
+#: templates/admin/translations.php:339
 msgid "any color"
 msgstr "hvilken som helst farge"
 
-#: templates/admin/translations.php:562
+#: templates/admin/translations.php:608
 msgid "Any Nofollow"
 msgstr "Enhver Ingen følgere"
 
-#: templates/admin/translations.php:514
+#: templates/admin/translations.php:558
 msgid "Any Rating"
 msgstr "Enhver vurdering"
 
+#: templates/settings/group-amazon.php:150
+msgid "API Details"
+msgstr "API Detaljer"
+
 #: templates/settings/group-recipe-print.php:66 
 #: templates/settings/group-recipe-times.php:18 
-#: templates/settings/structure.php:61 
+#: templates/settings/structure.php:62 
 #: templates/settings/group-recipe-ratings.php:46 
 #: templates/settings/group-glossary-terms.php:91
 msgid "Appearance"
 msgstr "Utseende"
 
-#: includes/public/class-wprm-taxonomies.php:219
+#: includes/public/class-wprm-taxonomies.php:221
 msgid "Appetizer"
 msgstr "Forrett"
 
-#: templates/admin/translations.php:423
+#: templates/admin/translations.php:473
 msgid "Approved"
 msgstr "Godkjent"
 
-#: templates/admin/translations.php:399
+#: templates/admin/translations.php:430
 msgid "Archive"
 msgstr "Arkiv"
 
@@ -659,11 +740,11 @@ msgid "Archive Page Links"
 msgstr "Linker til arkivside"
 
 #: templates/settings/group-metadata.php:91 
-#: templates/settings/group-post-type.php:102
+#: templates/settings/group-post-type.php:105
 msgid "Archive Pages"
 msgstr "Arkiv Sider"
 
-#: templates/settings/group-post-type.php:113
+#: templates/settings/group-post-type.php:116
 msgid "Archive Pages Template"
 msgstr "Mal for arkiv sider"
 
@@ -671,48 +752,52 @@ msgstr "Mal for arkiv sider"
 msgid "Archive Template"
 msgstr "Arkiv Mal"
 
-#: templates/admin/translations.php:167
+#: templates/admin/translations.php:169
 msgid "Are you sure you want to close without saving changes?"
 msgstr "Er du sikker på at du vil lukke uten å lagre endringer?"
 
-#: templates/admin/translations.php:398
+#: templates/admin/translations.php:429
 msgid "Are you sure you want to delete"
 msgstr ""
 "Er du sikker på at du vil slette\n"
 
-#: templates/admin/translations.php:522
+#: templates/admin/translations.php:566
 msgid "Are you sure you want to delete the user ratings for"
 msgstr "Er du sikker på at du vil slette brukervurderingene for"
 
-#: templates/admin/translations.php:573
+#: templates/admin/translations.php:629
 msgid "Are you sure you want to delete this action?"
 msgstr "Er du sikker på at du vil slette denne handlingen?"
 
-#: templates/admin/translations.php:557
+#: templates/admin/translations.php:603
 msgid "Are you sure you want to delete this link?"
 msgstr "Er du sikker på at du vil slette denne koblingen?"
 
-#: templates/admin/translations.php:413
+#: templates/admin/translations.php:438
+msgid "Are you sure you want to delete this list?"
+msgstr "Er du sikker på at du vil slette denne listen?"
+
+#: templates/admin/translations.php:464
 msgid "Are you sure you want to delete this rating?"
 msgstr "Er du sikker på at du vil slette denne vurderingen?"
 
-#: templates/admin/translations.php:383
+#: templates/admin/translations.php:407
 msgid "Are you sure you want to leave this page?"
 msgstr "Er du sikker på at du vil forlate denne siden?"
 
-#: templates/admin/translations.php:442
+#: templates/admin/translations.php:491
 msgid "Are you sure you want to merge"
 msgstr "Er du sikker på at du vil slå sammen"
 
-#: includes/public/class-wprm-assets.php:229
+#: includes/public/class-wprm-assets.php:234
 msgid "Are you sure you want to remove this recipe?"
 msgstr "Er du sikker på at du vil fjerne denne oppskriften?"
 
-#: templates/admin/translations.php:166
+#: templates/admin/translations.php:168
 msgid "Are you sure you want to stop calculating the nutrition facts?"
 msgstr "Er du sikker på at du vil slutte å beregne ernæringsfakta?"
 
-#: templates/admin/translations.php:327
+#: templates/admin/translations.php:348
 msgid "area"
 msgstr "område"
 
@@ -721,8 +806,8 @@ msgstr "område"
 msgid "Armenian"
 msgstr "Armensk"
 
-#: templates/admin/translations.php:231 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:114
+#: templates/admin/translations.php:233 
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:122
 msgid "Associated Ingredients"
 msgstr "Tilknyttede Ingredienser"
 
@@ -730,7 +815,7 @@ msgstr "Tilknyttede Ingredienser"
 msgid "At the start of the post content"
 msgstr "Ved starten av innleggets innhold"
 
-#: templates/admin/translations.php:249 
+#: templates/admin/translations.php:251 
 #: includes/public/deprecated/class-wprm-template-helper.php:53 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:413
 msgid "Author"
@@ -749,11 +834,11 @@ msgid "Author Links"
 msgstr "Forfatter Linker"
 
 #: templates/settings/group-recipe-defaults.php:71 
-#: templates/admin/translations.php:103
+#: templates/admin/translations.php:104
 msgid "Author Name"
 msgstr "Forfatter Navn"
 
-#: templates/settings/group-recipe-defaults.php:127
+#: templates/settings/group-recipe-defaults.php:134
 msgid "Automatic Amount Fraction Symbols"
 msgstr "Automatiske Beløps Brøk Symboler"
 
@@ -761,9 +846,13 @@ msgstr "Automatiske Beløps Brøk Symboler"
 msgid "Automatic ItemList Metadata"
 msgstr "Automatisk Vareliste Metadata"
 
-#: templates/settings/group-integrations.php:38
+#: templates/settings/group-integrations.php:22
 msgid "Automatically add Instacart Button"
 msgstr "Legg til Instacart-knapp automatisk"
+
+#: templates/settings/group-integrations.php:59
+msgid "Automatically add SmartWithFood Button"
+msgstr "Legg til SmartWithFood-knapp automatisk"
 
 #: templates/settings/group-recipe-snippets.php:27 
 #: templates/settings/group-recipe-snippets.php:100
@@ -794,7 +883,7 @@ msgstr "Automatisk avspilling av video"
 msgid "Back to start."
 msgstr "Tilbake til start."
 
-#: templates/settings/structure.php:92
+#: templates/settings/structure.php:94
 msgid "Backend"
 msgstr "Baksiden"
 
@@ -808,7 +897,7 @@ msgstr "Tilgang Baksiden"
 msgid "Background Color"
 msgstr "Bakgrunns farge"
 
-#: templates/admin/translations.php:484
+#: templates/admin/translations.php:535
 msgid "Bad"
 msgstr "Dårlig"
 
@@ -824,7 +913,7 @@ msgstr "Under kommentaren"
 msgid "Below the comment field"
 msgstr "Under kommentarfeltet"
 
-#: templates/admin/translations.php:332
+#: templates/admin/translations.php:353
 msgid "Bold"
 msgstr "Bold"
 
@@ -848,23 +937,23 @@ msgstr ""
 msgid "Border Color"
 msgstr "Grense Farge"
 
-#: includes/public/class-wprm-taxonomies.php:218
+#: includes/public/class-wprm-taxonomies.php:220
 msgid "Breakfast"
 msgstr "Frokost"
 
-#: templates/admin/translations.php:201
+#: templates/admin/translations.php:203
 msgid "Bulk Add Ingredients"
 msgstr "Tilsett ingredienser i bulk"
 
-#: templates/admin/translations.php:238
+#: templates/admin/translations.php:240
 msgid "Bulk Add Instructions"
 msgstr "Instruksjoner for massetillegg"
 
-#: templates/admin/translations.php:200
+#: templates/admin/translations.php:202
 msgid "Bulk Add Materials"
 msgstr "Massetilsett materialer"
 
-#: templates/admin/translations.php:142
+#: templates/admin/translations.php:144
 msgid "Bulk Edit"
 msgstr "Masse redigering"
 
@@ -892,7 +981,7 @@ msgstr ""
 msgid "c"
 msgstr "c"
 
-#: templates/admin/translations.php:227
+#: templates/admin/translations.php:229
 msgid "Calculate Nutrition Facts"
 msgstr "Beregn ernæringsfakta"
 
@@ -908,7 +997,7 @@ msgstr ""
 "Kan valgfritt deaktiveres pr enhetssystem i innstillingene for "
 "enhetskonvertering."
 
-#: templates/admin/translations.php:163
+#: templates/admin/translations.php:165
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -916,7 +1005,7 @@ msgstr "Avbryt"
 msgid "cancel"
 msgstr "avbryt"
 
-#: templates/admin/translations.php:253
+#: templates/admin/translations.php:255
 msgid "candles"
 msgstr "stearinlys"
 
@@ -924,7 +1013,7 @@ msgstr "stearinlys"
 msgid "Case insensitive matching"
 msgstr "Case insensitive matching"
 
-#: templates/admin/translations.php:208
+#: templates/admin/translations.php:210
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -949,85 +1038,81 @@ msgstr "centimeter"
 msgid "centimeters"
 msgstr "centimeters"
 
-#: templates/admin/translations.php:78
+#: templates/admin/translations.php:79
 msgid "Change"
 msgstr "Endring"
 
-#: templates/admin/translations.php:128
+#: templates/admin/translations.php:130
 msgid "Change Affiliate HTML"
 msgstr "Forandre Tilknyttet HTML"
 
-#: templates/admin/translations.php:86
+#: templates/admin/translations.php:87
 msgid "Change Display Author"
 msgstr "Endre visnings Forfatter"
 
-#: templates/admin/translations.php:548
+#: templates/admin/translations.php:594
 msgid "Change Group"
 msgstr "Endre Gruppe"
 
-#: templates/admin/translations.php:563
+#: templates/admin/translations.php:609
 msgid "Change HTML"
 msgstr "Endre HTML"
 
-#: templates/admin/translations.php:83
+#: templates/admin/translations.php:84
 msgid "Change Language"
 msgstr "Endre Språk"
 
-#: templates/admin/translations.php:119
+#: templates/admin/translations.php:121
 msgid "Change Link"
 msgstr "Endre Lenke"
 
-#: templates/admin/translations.php:120
+#: templates/admin/translations.php:122
 msgid "Change Link Nofollow"
 msgstr "Endre Lenke Ingen Følgere"
 
-#: templates/admin/translations.php:82
+#: templates/admin/translations.php:83
 msgid "Change Password"
 msgstr "Endre Passord"
 
-#: templates/admin/translations.php:546
+#: templates/admin/translations.php:592
 msgid "Change Plural"
 msgstr "Endre Flertall"
 
-#: templates/admin/translations.php:84
+#: templates/admin/translations.php:85
 msgid "Change Post Author"
 msgstr "Endre Innleggs Forfatter"
 
-#: templates/admin/translations.php:568
+#: templates/admin/translations.php:624
 msgid "Change Product"
 msgstr "Endre produkt"
 
-#: templates/admin/translations.php:81
+#: templates/admin/translations.php:82
 msgid "Change Recipe Status"
 msgstr "Endre Oppskrifts Status"
 
-#: templates/admin/translations.php:85
+#: templates/admin/translations.php:86
 msgid "Change Recipe Type"
 msgstr "Endre Oppskrifts Type"
 
-#: templates/admin/translations.php:87
+#: templates/admin/translations.php:88
 msgid "Change Servings"
 msgstr "Endre porsjoner"
 
-#: templates/admin/translations.php:118
+#: templates/admin/translations.php:120
 msgid "Change Shopping List Group"
 msgstr "Endre Handleliste Gruppe"
 
-#: templates/admin/translations.php:541
+#: templates/admin/translations.php:587
 msgid "Change Slug"
 msgstr "Endre Slug"
 
-#: templates/admin/translations.php:535
+#: templates/admin/translations.php:581
 msgid "Change Tooltip"
 msgstr "Endre Verktøytips"
 
-#: templates/admin/translations.php:93
+#: templates/admin/translations.php:94
 msgid "Change unit system label (does not change ingredients)"
 msgstr "Bytt enhets system etikett (endrer ikke ingredienser)"
-
-#: templates/settings/group-integrations.php:87
-msgid "Check API Key Status"
-msgstr "Sjekk API Nøkkel Status"
 
 #: templates/settings/group-recipe-ratings.php:168
 msgid "Check IP address"
@@ -1056,7 +1141,7 @@ msgstr ""
 "Sjekker om en oppskrift er i innleggsinnholdet i det overordnede innlegget. "
 "Kan brukes i kombinasjon med medlems plugins."
 
-#: includes/public/class-wprm-taxonomies.php:234
+#: includes/public/class-wprm-taxonomies.php:236
 msgid "Chinese"
 msgstr "kinesisk"
 
@@ -1085,12 +1170,9 @@ msgstr "cl"
 msgid "Clear Cache after Rating"
 msgstr "Tøm Buffer etter Vurdering"
 
-#: templates/settings/group-integrations.php:75
-msgid ""
-"Click \"Save Changes\" in the top left before checking the API Key status."
-msgstr ""
-"Klikk \"Lagre endringer\" øverst til venstre før du sjekker API-"
-"nøkkelstatusen."
+#: templates/elementor/widget-list.php:158
+msgid "Click and select a WP Recipe Maker list to display in the sidebar."
+msgstr "Klikk og velg en WP Recipe Maker-liste som skal vises i sidefeltet."
 
 #: templates/elementor/widget-recipe.php:162 
 #: templates/elementor/widget-roundup.php:116
@@ -1102,7 +1184,7 @@ msgstr ""
 msgid "Click here to add your own private notes."
 msgstr "Klikk her for å legge til dine egne private notater."
 
-#: templates/admin/translations.php:411
+#: templates/admin/translations.php:462
 msgid "Click on the stars to edit the rating."
 msgstr "Klikk på stjernene for å redigere vurderingen."
 
@@ -1110,11 +1192,11 @@ msgstr "Klikk på stjernene for å redigere vurderingen."
 msgid "Click on the stars to vote!"
 msgstr "Klikk på stjernene for å stemme!"
 
-#: templates/admin/translations.php:419
+#: templates/admin/translations.php:469
 msgid "Click to change this rating to:"
 msgstr "Klikk for å endre denne vurderingen til:"
 
-#: templates/admin/translations.php:218
+#: templates/admin/translations.php:220
 msgid "Click to copy the recipe to your clipboard."
 msgstr "Klikk for å kopiere oppskriften til utklippstavlen."
 
@@ -1122,7 +1204,7 @@ msgstr "Klikk for å kopiere oppskriften til utklippstavlen."
 msgid "Click to search the recipes to import"
 msgstr "Klikk for å søke i oppskriftene som skal importeres"
 
-#: templates/admin/translations.php:349
+#: templates/admin/translations.php:370
 msgid "Click to set an optional tooltip"
 msgstr "Klikk for å angi et valgfritt verktøytips"
 
@@ -1138,11 +1220,19 @@ msgstr "Klikkbare instruksjonsbilder"
 msgid "Clickable Recipe Image"
 msgstr "Klikkbart oppskriftsbilde"
 
-#: templates/admin/translations.php:281
+#: templates/admin/translations.php:577
+msgid "Clone"
+msgstr "Klone"
+
+#: templates/admin/translations.php:436
+msgid "Clone List"
+msgstr "Klone Liste"
+
+#: templates/admin/translations.php:299
 msgid "Clone Recipe"
 msgstr "Klone oppskrift"
 
-#: templates/admin/translations.php:143
+#: templates/admin/translations.php:145
 msgid "Close"
 msgstr "Lukk"
 
@@ -1156,7 +1246,7 @@ msgid "cloves"
 msgstr "cloves"
 
 #: includes/public/class-wprm-recipe-parser.php:237 
-#: templates/admin/translations.php:325
+#: templates/admin/translations.php:346
 msgid "cm"
 msgstr "cm"
 
@@ -1172,16 +1262,16 @@ msgstr "Komma eller parentes, avhengig av hva som kommer først"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: templates/admin/translations.php:517
+#: templates/admin/translations.php:561
 msgid "comment"
 msgstr "kommentar"
 
-#: templates/admin/translations.php:429
+#: templates/admin/translations.php:479
 msgid "Comment ID"
 msgstr "Kommentar ID"
 
 #: templates/settings/group-recipe-ratings.php:136 
-#: templates/admin/translations.php:422
+#: templates/admin/translations.php:472
 msgid "Comment Rating"
 msgstr "Kommentar Vurdering"
 
@@ -1190,11 +1280,11 @@ msgstr "Kommentar Vurdering"
 msgid "Comment Ratings"
 msgstr "Kommentar Vurdering"
 
-#: templates/settings/group-post-type.php:78
+#: templates/settings/group-post-type.php:81
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: templates/admin/translations.php:518
+#: templates/admin/translations.php:562
 msgid "comments"
 msgstr "kommentarer"
 
@@ -1206,27 +1296,59 @@ msgstr "Hensyn før import"
 msgid "Container Style"
 msgstr "Beholderstil"
 
+#: templates/admin/tools.php:123
+msgid "Convert Affiliate HTML Code"
+msgstr "Konverter Tilknyttet HTML-kode"
+
 #: templates/settings/group-adjustable-servings.php:87
 msgid "Convert decimal numbers to fractions after adjusting."
 msgstr "Konverter desimaltall til brøker etter justering."
 
-#: templates/admin/tools.php:175
+#: templates/admin/tools.php:144
+msgid "Convert Regular Links"
+msgstr "Konverter vanlige lenker"
+
+#: templates/admin/tools.php:232
 msgid "Convert Reviews"
 msgstr "Konverter anmeldelser"
 
-#: templates/admin/tools.php:178
+#: templates/admin/tools.php:235
 msgid "Convert Reviews to Comments"
 msgstr "Konverter anmeldelser til kommentarer"
 
-#: templates/admin/translations.php:355
+#: templates/admin/tools.php:127 templates/admin/tools.php:129 
+#: templates/admin/tools.php:148 templates/admin/tools.php:150
+msgid "Convert to Products"
+msgstr "Konverter til Produkter"
+
+#: templates/admin/tools.php:127 templates/admin/tools.php:129
+msgid "Convert to Regular Links"
+msgstr "Konverter til Vanlige Lenker"
+
+#: templates/admin/translations.php:376
 msgid "Convert to regular text"
 msgstr "Konverter til vanlig tekst"
 
-#: templates/admin/translations.php:527
+#: templates/admin/translations.php:571
 msgid "Converted Ingredients"
 msgstr "Konverterte ingredienser"
 
-#: templates/admin/tools.php:180
+#: templates/admin/tools.php:136 templates/admin/tools.php:157
+msgid ""
+"Converting to products is only possible when the PA-API credentials are set "
+"on the WP Recipe Maker > Settings > Amazon Products page."
+msgstr ""
+"Konvertering til produkter er bare mulig når PA-API-legitimasjonen er satt "
+"på siden WP Recipe Maker > Innstillinger > Amazon-produkter."
+
+#: templates/admin/tools.php:133
+msgid ""
+"Converts Amazon Affiliate HTML code to either products or regular links."
+msgstr ""
+"Konverterer Amazon Tilknyttet HTML-kode til enten produkter eller vanlige "
+"lenker."
+
+#: templates/admin/tools.php:237
 msgid ""
 "Converts MV Create reviews to regular comments with a comment rating. Will "
 "only do this after recipes have been imported to WPRM. Comments will be "
@@ -1237,7 +1359,15 @@ msgstr ""
 "til WPRM. Kommentarer vil bli opprettet for det overordnede innlegget til "
 "WPRM-oppskriften."
 
-#: templates/admin/translations.php:175 
+#: templates/admin/tools.php:154
+msgid ""
+"Converts regular Amazon equipment links to products. Does not work for short "
+"links."
+msgstr ""
+"Konverterer vanlige Amazon-utstyrslenker til produkter. Fungerer ikke for "
+"korte lenker."
+
+#: templates/admin/translations.php:177 
 #: includes/public/deprecated/class-wprm-template-helper.php:49 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:421
 msgid "Cook Time"
@@ -1259,29 +1389,37 @@ msgstr "Koste"
 msgid "Course"
 msgstr "Rett"
 
-#: templates/admin/translations.php:272
+#: templates/admin/translations.php:273
 msgid "course"
 msgstr "rett"
 
-#: templates/admin/translations.php:275 
+#: templates/admin/translations.php:276 
 #: includes/admin/import/class-wprm-import-wpzoomcpt.php:58 
 #: includes/admin/import/class-wprm-import-wpzoom.php:58
 msgid "Courses"
 msgstr "Retter"
 
-#: templates/admin/translations.php:435
+#: templates/admin/translations.php:484
 msgid "Create"
 msgstr "Lage"
 
-#: templates/admin/translations.php:91
+#: templates/admin/translations.php:92
 msgid "Create Custom Nutrition Ingredient"
 msgstr "Lag Tilpasset Ernærings Ingrediens"
 
-#: templates/admin/translations.php:280
+#: templates/admin/tools.php:243 templates/admin/menu/tools/create-lists.php:15
+msgid "Create Lists"
+msgstr "Lag lister"
+
+#: templates/admin/translations.php:298
 msgid "Create new from existing Recipe"
 msgstr "Create new from existing Recipe"
 
-#: templates/admin/translations.php:277
+#: templates/elementor/widget-list.php:66
+msgid "Create new list"
+msgstr "Opprett ny liste"
+
+#: templates/admin/translations.php:295
 msgid "Create new Recipe"
 msgstr "Lag ny Oppskrift"
 
@@ -1293,11 +1431,19 @@ msgstr "Lag ny oppskrift"
 msgid "Create Recipe"
 msgstr "Lag oppskrift"
 
-#: templates/admin/translations.php:270
+#: includes/admin/tools/class-wprm-tools-create-lists.php:38
+msgid "Creating Lists"
+msgstr "Opprette Lister"
+
+#: templates/admin/translations.php:271
 msgid "Creating new Custom Taxonomy"
 msgstr "Opprette ny tilpasset taksonomi"
 
-#: templates/admin/translations.php:214
+#: templates/admin/translations.php:280
+msgid "Creating new List"
+msgstr "Oppretter ny liste"
+
+#: templates/admin/translations.php:216
 msgid "Creating new Recipe"
 msgstr "Oppretter ny Oppskrift"
 
@@ -1326,7 +1472,7 @@ msgstr "kopp"
 msgid "cups"
 msgstr "kopper"
 
-#: includes/admin/class-wprm-modal.php:280
+#: includes/admin/class-wprm-modal.php:310
 msgid "Custom author name"
 msgstr "Egendefinert forfatter navn"
 
@@ -1334,7 +1480,7 @@ msgstr "Egendefinert forfatter navn"
 msgid "Custom author per recipe"
 msgstr "Tilpasset forfatter pr oppskrift"
 
-#: templates/admin/translations.php:393
+#: templates/admin/translations.php:424
 msgid "Custom Button Text"
 msgstr "Egendefinert knapptekst"
 
@@ -1342,12 +1488,12 @@ msgstr "Egendefinert knapptekst"
 msgid "Custom Description"
 msgstr "Egendefinert beskrivelse"
 
-#: templates/admin/translations.php:461 
+#: templates/admin/translations.php:510 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:279
 msgid "Custom Field"
 msgstr "Egendefinert felt"
 
-#: templates/admin/translations.php:211
+#: templates/admin/translations.php:213
 msgid "Custom Fields"
 msgstr "Egendefinerte felt"
 
@@ -1364,23 +1510,23 @@ msgstr "Egendefinert bilde hvis angitt, ellers oppskriftsbilde"
 msgid "Custom Image per Recipe"
 msgstr "Egendefinert bilde per oppskrift"
 
-#: templates/admin/translations.php:464
+#: templates/admin/translations.php:513
 msgid "Custom Nutrient"
 msgstr "Tilpasset Næringsstoff"
 
-#: templates/admin/translations.php:465
+#: templates/admin/translations.php:514
 msgid "Custom Nutrients"
 msgstr "Tilpassede næringsstoffer"
 
-#: templates/admin/translations.php:463
+#: templates/admin/translations.php:512
 msgid "Custom Nutrition"
 msgstr "Tilpasset Ernæring"
 
-#: templates/admin/translations.php:462
+#: templates/admin/translations.php:511
 msgid "Custom Nutrition Ingredient"
 msgstr "Tilpasset Ernærings Ingrediens"
 
-#: templates/admin/translations.php:140
+#: templates/admin/translations.php:142
 msgid "Custom Nutrition Ingredients"
 msgstr "Tilpassede Ernærings Ingredienser"
 
@@ -1392,12 +1538,12 @@ msgstr "Egendefinert Stil"
 msgid "Custom Text"
 msgstr "Egendefinert Tekst"
 
-#: templates/admin/translations.php:179 
+#: templates/admin/translations.php:181 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:422
 msgid "Custom Time"
 msgstr "Egendefinert Tid"
 
-#: templates/admin/translations.php:176
+#: templates/admin/translations.php:178
 msgid "Custom Time Label"
 msgstr "Egendefinert Tids Etikett"
 
@@ -1405,7 +1551,7 @@ msgstr "Egendefinert Tids Etikett"
 msgid "Customize"
 msgstr "Tilpass"
 
-#: includes/public/deprecated/class-wprm-template-helper.php:145 
+#: includes/public/deprecated/class-wprm-template-helper.php:143 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:114 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:114
 msgid "d"
@@ -1419,7 +1565,8 @@ msgstr "Daglig interaksjon"
 msgid "Daily Values Disclaimer"
 msgstr "Ansvarsfraskrivelse for daglige verdier"
 
-#: includes/admin/class-wprm-dashboard.php:39
+#: includes/admin/class-wprm-dashboard.php:39 
+#: includes/public/class-wprm-admin-bar.php:142
 msgid "Dashboard"
 msgstr "Dashbord"
 
@@ -1427,25 +1574,25 @@ msgstr "Dashbord"
 msgid "Dashed"
 msgstr "Stiplet"
 
-#: templates/admin/translations.php:414
+#: templates/admin/translations.php:441
 msgid "Date"
 msgstr "Dato"
 
 #: templates/admin/translations.php:67 
-#: includes/public/deprecated/class-wprm-template-helper.php:147 
+#: includes/public/deprecated/class-wprm-template-helper.php:145 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:109 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:116
 msgid "day"
 msgstr "Dag"
 
 #: templates/admin/translations.php:68 
-#: includes/public/deprecated/class-wprm-template-helper.php:147 
+#: includes/public/deprecated/class-wprm-template-helper.php:145 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:109 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:116
 msgid "days"
 msgstr "dager"
 
-#: templates/settings/group-analytics.php:26
+#: templates/settings/group-analytics.php:31
 msgid "Days to Keep"
 msgstr "Dager å beholde"
 
@@ -1665,89 +1812,109 @@ msgstr ""
 "Standard verdi for feltet Oppskrifts Forfatter når du oppretter en ny "
 "oppskrift."
 
+#: templates/settings/group-recipe-roundup.php:66
+msgid ""
+"Default value to use for the nofollow attribute when creating a new roundup "
+"item."
+msgstr ""
+"Standardverdi som skal brukes for ingen følgere-attributtet når du oppretter "
+"et nytt oppsummeringselement."
+
+#: templates/settings/group-recipe-roundup.php:73
+msgid ""
+"Default value to use for the open in new tab attribute when creating a new "
+"roundup item."
+msgstr ""
+"Standardverdi som skal brukes for åpne i ny fane-attributtet når du "
+"oppretter et nytt sammendragselement."
+
 #: templates/settings/group-recipe-defaults.php:18 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:369
 msgid "Defaults"
 msgstr "Standarder"
 
-#: templates/admin/translations.php:303
+#: templates/admin/translations.php:324
 msgid "Delete"
 msgstr "Slett"
 
-#: templates/admin/translations.php:572
+#: templates/admin/translations.php:628
 msgid "Delete Action"
 msgstr ""
 "Slett handling\n"
 
-#: templates/admin/translations.php:146
+#: templates/admin/translations.php:148
 msgid "Delete Actions"
 msgstr "Slett handlinger"
 
-#: templates/admin/translations.php:130
+#: templates/admin/translations.php:132
 msgid "Delete Equipment"
 msgstr "Slett utstyr"
 
-#: templates/admin/translations.php:123
+#: templates/admin/translations.php:125
 msgid "Delete Ingredients"
 msgstr "Slett ingredienser"
 
-#: templates/admin/translations.php:412
+#: templates/admin/translations.php:437
+msgid "Delete List"
+msgstr "Slett Liste"
+
+#: templates/admin/translations.php:463
 msgid "Delete Rating"
 msgstr "Slett vurdering"
 
-#: templates/admin/translations.php:145
+#: templates/admin/translations.php:147
 msgid "Delete Ratings"
 msgstr "Slett vurderinger"
 
-#: templates/admin/translations.php:481
+#: templates/admin/translations.php:533
 msgid "Delete Recipe"
 msgstr "Slett oppskrift"
 
-#: templates/admin/translations.php:96
+#: templates/admin/translations.php:97
 msgid "Delete Recipes"
 msgstr "Slett oppskrifter"
 
-#: templates/admin/translations.php:538
+#: templates/admin/translations.php:584
 msgid "Delete Revision"
 msgstr "Slett revisjon"
 
-#: templates/admin/translations.php:144
+#: templates/admin/translations.php:146
 msgid "Delete Revisions"
 msgstr "Slett revisjoner"
 
-#: templates/admin/translations.php:149
+#: templates/admin/translations.php:151
 msgid "Delete Saved Collections"
 msgstr "Slett lagrede samlinger"
 
-#: templates/admin/translations.php:397
+#: templates/admin/translations.php:428
 msgid "Delete Taxonomy"
 msgstr "Slett taksonomi"
 
-#: templates/admin/translations.php:127
+#: templates/admin/translations.php:129
 msgid "Delete Terms"
 msgstr "Slett vilkår"
 
-#: templates/admin/translations.php:147
+#: templates/admin/translations.php:149
 msgid "Delete Units"
 msgstr "Slett enheter"
 
-#: templates/admin/translations.php:247
+#: templates/admin/translations.php:249
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: includes/public/class-wprm-taxonomies.php:224
+#: includes/public/class-wprm-taxonomies.php:226
 msgid "Dessert"
 msgstr "Dessert"
 
-#: includes/public/class-wprm-taxonomies.php:251
+#: includes/public/class-wprm-taxonomies.php:253
 msgid "Diabetic"
 msgstr "Diabetiker"
 
-#: templates/admin/translations.php:326
+#: templates/admin/translations.php:347
 msgid "diameter"
 msgstr "diameter"
 
-#: templates/admin/translations.php:543
+#: templates/admin/translations.php:589
 msgid "Diet"
 msgstr "Kosthold"
 
@@ -1755,6 +1922,14 @@ msgstr "Kosthold"
 #: includes/admin/import/class-wprm-import-wpzoom.php:60
 msgid "Difficulties"
 msgstr "Vanskeligheter"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-smart-with-food.php:29
+msgid "Direct in je mandje bij"
+msgstr "Rett i kurven din"
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-smart-with-food.php:110
+msgid "Direct in je mandje bij Collect & Go"
+msgstr "Rett i handlekurven hos Collect & Go"
 
 #: templates/settings/group-social-sharing.php:43
 msgid "Disable equipment image pinning"
@@ -1798,11 +1973,11 @@ msgstr "Deaktiver festing av taksonomiterm bilde"
 msgid "Disc"
 msgstr "Plate"
 
-#: templates/admin/translations.php:504
+#: templates/admin/translations.php:554
 msgid "Display Author"
 msgstr "Vis Forfatter"
 
-#: templates/admin/translations.php:502
+#: templates/admin/translations.php:552
 msgid "Display Author Type"
 msgstr "Vis Forfatter Type"
 
@@ -1823,7 +1998,7 @@ msgstr "Vis næringsetiketten på standardplasseringen i oppskriftsmalen."
 msgid "Display Type"
 msgstr "Visningstype"
 
-#: templates/admin/translations.php:283
+#: templates/admin/translations.php:301
 msgid "Displays default snippet template as set in the WPRM Settings"
 msgstr ""
 "Viser standard kodebitmal som angitt i WPRM-innstillingene\n"
@@ -1836,7 +2011,7 @@ msgstr "dl"
 msgid "Do not import to ingredient notes"
 msgstr "Ikke importer til ingrediens notater"
 
-#: templates/settings/group-recipe-roundup.php:73
+#: templates/settings/group-recipe-roundup.php:92
 msgid ""
 "Do not output the ItemList metadata when there is already recipe metadata on "
 "the same page."
@@ -1844,7 +2019,7 @@ msgstr ""
 "Ikke skriv ut Vareliste-metadata når det allerede er reseptmetadata på samme "
 "side."
 
-#: templates/settings/group-analytics.php:46
+#: templates/settings/group-analytics.php:51
 msgid ""
 "Do not track any analytics for these IP addresses. One address or range per "
 "line."
@@ -1856,31 +2031,31 @@ msgstr ""
 msgid "Documentation in our knowledge base"
 msgstr "Dokumentasjon i vår kunnskapsbase"
 
-#: templates/admin/translations.php:500
+#: templates/admin/translations.php:550
 msgid "Does not have a video"
 msgstr "Har ikke video"
 
-#: templates/admin/translations.php:495
+#: templates/admin/translations.php:545
 msgid "Does not have Custom Pin Image"
 msgstr "Har ikke Tilpasset Pin-bilde"
 
-#: templates/admin/translations.php:551
+#: templates/admin/translations.php:597
 msgid "Does not have Image"
 msgstr "Har ikke bilde"
 
-#: templates/admin/translations.php:509
+#: templates/admin/translations.php:452
 msgid "Does not have Parent Post"
 msgstr "Har ikke Foreldre Post"
 
-#: templates/admin/translations.php:567
+#: templates/admin/translations.php:613
 msgid "Does not have Product"
 msgstr "Har ikke Produkt"
 
-#: templates/admin/translations.php:493
+#: templates/admin/translations.php:543
 msgid "Does not have Recipe Image"
 msgstr "Har ikke Oppskrifts Bilde"
 
-#: templates/admin/translations.php:560
+#: templates/admin/translations.php:606
 msgid ""
 "does not start with http:// or https:// as we would expect for a link. Are "
 "you sure you want to use this? Regular HTML code will not work here."
@@ -1892,15 +2067,15 @@ msgstr ""
 msgid "Don't rate this recipe"
 msgstr "Ikke ranger denne oppskriften"
 
-#: includes/admin/class-wprm-modal.php:278 
+#: includes/admin/class-wprm-modal.php:308 
 #: templates/settings/group-recipe-defaults.php:52 
 #: templates/settings/group-nutrition-label.php:36
 msgid "Don't show"
 msgstr "Ikke vis"
 
-#: includes/admin/class-wprm-modal.php:312 
-#: includes/admin/class-wprm-modal.php:345 
-#: includes/admin/class-wprm-modal.php:378 
+#: includes/admin/class-wprm-modal.php:342 
+#: includes/admin/class-wprm-modal.php:375 
+#: includes/admin/class-wprm-modal.php:408 
 #: templates/settings/group-links.php:114 
 #: templates/settings/group-links.php:141 
 #: templates/settings/group-links.php:168
@@ -1911,39 +2086,47 @@ msgstr "Ikke bruk Ingen Følgere"
 msgid "Dotted"
 msgstr "Stiplet"
 
-#: includes/public/class-wprm-taxonomies.php:226
+#: includes/public/class-wprm-taxonomies.php:228
 msgid "Drinks"
 msgstr "Drinker"
 
-#: templates/admin/translations.php:554
+#: templates/admin/translations.php:600
 msgid "Easy Affiliate Links"
 msgstr "Enkle tilknyttede lenker"
 
-#: templates/admin/translations.php:356
+#: templates/admin/translations.php:377
 msgid "Edit Affiliate Link"
 msgstr "Rediger tilknyttet lenke"
 
-#: templates/admin/translations.php:242
+#: templates/admin/translations.php:244
 msgid "Edit Equipment"
 msgstr "Rediger utstyr"
 
-#: templates/admin/translations.php:552
+#: templates/admin/translations.php:598
 msgid "Edit Image"
 msgstr "Rediger bilde"
 
-#: templates/admin/translations.php:189
+#: templates/admin/translations.php:191
 msgid "Edit Ingredients"
 msgstr "Rediger ingredienser"
 
-#: templates/admin/translations.php:555
+#: templates/admin/translations.php:601
 msgid "Edit Link"
 msgstr "Rediger lenke"
 
-#: templates/admin/translations.php:188
+#: templates/admin/translations.php:435
+msgid "Edit List"
+msgstr "Rediger Liste"
+
+#: templates/admin/translations.php:320
+msgid "Edit List Item"
+msgstr "Rediger Liste Element"
+
+#: templates/admin/translations.php:190
 msgid "Edit Materials"
 msgstr "Rediger materialer"
 
-#: templates/admin/translations.php:511
+#: templates/admin/translations.php:454
 msgid "Edit Parent Post"
 msgstr "Rediger overordnet innlegg"
 
@@ -1952,19 +2135,31 @@ msgstr "Rediger overordnet innlegg"
 msgid "Edit Recipe"
 msgstr "Rediger oppskrift"
 
+#: includes/public/class-wprm-admin-bar.php:197
+msgid "Edit Recipes"
+msgstr "Rediger Oppskrifter"
+
+#: templates/elementor/widget-list.php:84
+msgid "Edit selected list"
+msgstr "Rediger valgt liste"
+
 #: templates/elementor/widget-recipe.php:84
 msgid "Edit selected recipe"
 msgstr "Rediger valgt oppskrift"
 
-#: templates/admin/translations.php:396
+#: templates/admin/translations.php:427
 msgid "Edit Taxonomy"
 msgstr "Rediger taksonomi"
 
-#: templates/admin/translations.php:269
+#: templates/admin/translations.php:270
 msgid "Editing Custom Taxonomy"
 msgstr "Redigere tilpasset taksonomi"
 
-#: templates/admin/translations.php:213
+#: templates/admin/translations.php:279
+msgid "Editing List"
+msgstr "Redigerings Liste"
+
+#: templates/admin/translations.php:215
 msgid "Editing Recipe"
 msgstr "Redigering av oppskrift"
 
@@ -1984,11 +2179,11 @@ msgstr "Send e-post til supportteamet vårt"
 msgid "Email Share"
 msgstr "E-postdeling"
 
-#: templates/admin/translations.php:371
+#: templates/admin/translations.php:391
 msgid "Embed Instruction Video"
 msgstr "Bygg Inn Instruksjonsvideo"
 
-#: templates/admin/translations.php:379
+#: templates/admin/translations.php:399
 msgid "Embed Video"
 msgstr "Bygg inn video"
 
@@ -1996,12 +2191,12 @@ msgstr "Bygg inn video"
 msgid "Enable Adjustable Servings"
 msgstr "Aktiver justerbare porsjoner"
 
-#: templates/settings/group-analytics.php:19 
+#: templates/settings/group-analytics.php:24 
 #: templates/admin/translations.php:54
 msgid "Enable Analytics"
 msgstr "Aktivere Analyser"
 
-#: templates/settings/group-post-type.php:79
+#: templates/settings/group-post-type.php:82
 msgid "Enable comments for the recipe post type."
 msgstr "Aktiver kommentarer for oppskrifts innleggs typen."
 
@@ -2021,9 +2216,16 @@ msgstr "Aktiver for ingredienser"
 msgid "Enable for other Taxonomies "
 msgstr "Aktiver for andre taksonomier"
 
+#: templates/settings/group-analytics.php:68
+msgid "Enable GA Tracking"
+msgstr "Aktiver GA-sporing"
+
 #: templates/settings/group-media.php:57
+#| msgid ""
+#| "Enable if your embedded videos are not responsive or seem to be usign the "
+#| "wrong ratio. Some themes already have this functionality."
 msgid ""
-"Enable if your embedded videos are not responsive or seem to be usign the "
+"Enable if your embedded videos are not responsive or seem to be using the "
 "wrong ratio. Some themes already have this functionality."
 msgstr ""
 "Aktiver hvis de innebygde videoene dine ikke reagerer eller ser ut til å "
@@ -2038,10 +2240,6 @@ msgstr ""
 "WP Recipe Maker Administrer > Dine egendefinerte felter > Oppskrifts "
 "Taksonomier-siden."
 
-#: templates/settings/group-integrations.php:68
-msgid "Enable My Emissions Integration"
-msgstr "Aktiver Min Utslipps Integrasjon"
-
 #: templates/settings/group-recipe-print.php:231
 msgid ""
 "Enable this setting if you want to prevent people from pinning your print "
@@ -2050,7 +2248,7 @@ msgstr ""
 "Aktiver denne innstillingen hvis du vil forhindre at folk fester "
 "utskriftssiden din til Pinterest."
 
-#: templates/settings/group-integrations.php:31
+#: templates/settings/group-integrations.php:15
 msgid ""
 "Enable to agree to the applicable terms of use for the button. Click the "
 "following link for more information:"
@@ -2058,7 +2256,7 @@ msgstr ""
 "Aktiver for å godta gjeldende bruksvilkår for knappen. Klikk på følgende "
 "lenke for mer informasjon:"
 
-#: templates/settings/group-integrations.php:39
+#: templates/settings/group-integrations.php:23
 msgid ""
 "Enable to automatically output the Instacart Shoppable Recipe button after "
 "the ingredients section. Alternatively, add the Shoppable Recipe button in "
@@ -2067,6 +2265,14 @@ msgstr ""
 "Aktiver for å automatisk sende ut Instacart-kjøpbar oppskrift-knappen etter "
 "ingrediensdelen. Alternativt kan du legge til knappen Kjøpbar oppskrift i "
 "malredigering."
+
+#: templates/settings/group-integrations.php:60
+msgid ""
+"Enable to automatically output the Smart with Food button after the "
+"ingredients section. Alternatively, add the button in the Template Editor."
+msgstr ""
+"Aktiver for å automatisk sende ut Smart med mat-knappen etter "
+"ingrediensdelen. Alternativt kan du legge til knappen i malredigering."
 
 #: templates/settings/group-recipe-template.php:33
 msgid "Enable to change the templates for archive, AMP or RSS feed pages."
@@ -2116,7 +2322,7 @@ msgstr ""
 "Aktiver for å vise 1x 2x 3x-knappene selv om ingen standard "
 "serveringsstørrelse for oppskriften er angitt."
 
-#: templates/settings/group-post-type.php:95
+#: templates/settings/group-post-type.php:98
 msgid ""
 "Enable to show the default WordPress UI for any taxonomies that have their "
 "archive pages enabled on the WP Recipe Maker > Manage > Your Custom Fields "
@@ -2126,20 +2332,20 @@ msgstr ""
 "arkivsidene aktivert på siden WP Recipe Maker > Administrer > Dine "
 "egendefinerte felter."
 
-#: templates/admin/translations.php:345
+#: templates/admin/translations.php:366
 msgid "Enter the URL of the link:"
 msgstr "Skriv inn URL-en til lenken:"
 
-#: templates/admin/translations.php:139
+#: templates/admin/translations.php:141
 msgid "Equipment"
 msgstr "Utstyr"
 
-#: templates/admin/translations.php:243
+#: templates/admin/translations.php:245
 msgid "Equipment Affiliate Fields"
 msgstr "Utstyr Tilknyttede felt"
 
 #: includes/public/class-wprm-analytics.php:40 
-#: templates/admin/translations.php:131
+#: templates/admin/translations.php:133
 msgid "Equipment Link"
 msgstr "Utstyr Link"
 
@@ -2155,11 +2361,11 @@ msgstr ""
 "Utstyrs lenker kan settes på siden WP Recipe Maker > Administrer > "
 "Oppskriftsfelt > Utstyr."
 
-#: templates/admin/translations.php:255
+#: templates/admin/translations.php:257
 msgid "Estimated Cost"
 msgstr "Estimert kostnad"
 
-#: templates/settings/group-post-type.php:68
+#: templates/settings/group-post-type.php:71
 msgid "Even if there is a parent post, link to the recipe itself"
 msgstr "Selv om det er et foreldreinnlegg, lenke til selve oppskriften"
 
@@ -2183,7 +2389,7 @@ msgstr "Alt innenfor parentes"
 msgid "Exact match only"
 msgstr "Kun eksakt match"
 
-#: templates/settings/group-analytics.php:45
+#: templates/settings/group-analytics.php:50
 msgid "Exclude IPs"
 msgstr "Ekskluder IP-er"
 
@@ -2192,27 +2398,31 @@ msgstr "Ekskluder IP-er"
 msgid "Explore import options"
 msgstr "Utforsk import alternativer"
 
-#: templates/admin/translations.php:129
+#: templates/admin/translations.php:131
 msgid "Export Equipment"
 msgstr "Eksporter utstyr"
 
-#: templates/admin/translations.php:122
+#: templates/admin/translations.php:124
 msgid "Export Ingredients"
 msgstr "Eksporter ingredienser"
 
-#: templates/admin/translations.php:95
+#: templates/admin/translations.php:96
 msgid "Export Recipes"
 msgstr "Eksporter oppskrifter"
 
-#: templates/admin/translations.php:126
+#: templates/admin/translations.php:128
 msgid "Export Terms"
 msgstr "Eksportvilkår"
 
-#: templates/admin/translations.php:390
+#: templates/admin/translations.php:416
 msgid "External image. Recommended:"
 msgstr "Eksternt bilde. Anbefalt:"
 
-#: templates/admin/translations.php:319
+#: templates/settings/group-recipe-roundup.php:61
+msgid "External Links"
+msgstr "Eksterne Linker"
+
+#: templates/admin/translations.php:340
 msgid "extra virgin"
 msgstr "extra virgin"
 
@@ -2224,7 +2434,7 @@ msgstr "Facebook Deling"
 msgid "FAQ & Support"
 msgstr "FAQ & Support"
 
-#: templates/admin/translations.php:466
+#: templates/admin/translations.php:515
 msgid "Features"
 msgstr "Egenskaper"
 
@@ -2240,15 +2450,15 @@ msgstr "føtter"
 msgid "Fill in the ID of the recipe to display."
 msgstr "Fyll inn ID-en til oppskriften som skal vises."
 
-#: templates/admin/translations.php:405
+#: templates/admin/translations.php:458
 msgid "Filter"
 msgstr "Filter"
 
-#: templates/admin/translations.php:410
+#: templates/admin/translations.php:434
 msgid "Filter:"
 msgstr "Filter:"
 
-#: templates/admin/translations.php:403
+#: templates/admin/translations.php:456
 msgid "filtered of"
 msgstr "filtrert fra"
 
@@ -2280,7 +2490,7 @@ msgstr "Finn oppskrifts vurderinger"
 msgid "Find the ID of the latest recipes"
 msgstr "Find the ID of the latest recipes"
 
-#: templates/admin/translations.php:296
+#: templates/admin/translations.php:314
 msgid ""
 "Find the saved collection ID on the WP Recipe Maker > Manage > Saved "
 "Collections page"
@@ -2300,12 +2510,13 @@ msgstr "Finne foreldre"
 msgid "Finding Ratings"
 msgstr "Finne vurderinger"
 
-#: templates/admin/translations.php:264
+#: templates/admin/translations.php:265
 msgid "Fine-tune"
 msgstr "Finjustert"
 
 #: templates/admin/menu/tools/find-ingredient-units.php:19 
 #: templates/admin/menu/tools/health-check.php:20 
+#: templates/admin/menu/tools/create-lists.php:20 
 #: templates/admin/menu/tools/create-reviews.php:20 
 #: templates/admin/menu/tools/finding-parents.php:20 
 #: templates/admin/menu/tools/anonymize-ratings.php:19 
@@ -2324,11 +2535,11 @@ msgstr ""
 "Fullført vellykket. Bruk \"Finn vurderinger\"-verktøyet for å tømme "
 "eventuelle vurderingsbuffere."
 
-#: templates/admin/translations.php:382
+#: templates/admin/translations.php:406
 msgid "First recipe on page"
 msgstr "Første oppskrift på side"
 
-#: templates/admin/translations.php:114
+#: templates/admin/translations.php:115
 msgid "First Unit System"
 msgstr "Første enhetssystem"
 
@@ -2359,11 +2570,11 @@ msgstr "væske unse"
 msgid "fluid ounces"
 msgstr "væske unser"
 
-#: includes/public/api/class-wprm-api-manage-recipes.php:766
+#: includes/public/api/class-wprm-api-manage-recipes.php:779
 msgid "Follow this link to print all of the selected recipes:"
 msgstr "Følg denne lenken for å skrive ut alle de valgte oppskriftene:"
 
-#: templates/admin/translations.php:488
+#: templates/admin/translations.php:539
 msgid "Food"
 msgstr "Mat"
 
@@ -2372,7 +2583,7 @@ msgstr "Mat"
 msgid "Food Labels"
 msgstr "Matetiketter"
 
-#: templates/admin/translations.php:100
+#: templates/admin/translations.php:101
 msgid "Food Recipe"
 msgstr "Matoppskrift"
 
@@ -2402,7 +2613,7 @@ msgstr "fot"
 msgid "For example:"
 msgstr "For eksempel:"
 
-#: templates/admin/translations.php:230
+#: templates/admin/translations.php:232
 msgid ""
 "For guided recipes, Google wants a short (usually 1 word) summary for each "
 "instruction step. This will be the \"name\" in the HowToStep metadata. This "
@@ -2428,10 +2639,14 @@ msgstr "Tving Mediavine-video metadata"
 msgid "Force people to leave a comment"
 msgstr "Tving folk til å legge igjen en kommentar"
 
-#: templates/settings/group-recipe-roundup.php:80
+#: templates/settings/group-recipe-roundup.php:99
 msgid "Force recipe links to your own site to open in a new tab as well."
 msgstr ""
 "Tving oppskriftslenker til ditt eget nettsted for å åpne i en ny fane også."
+
+#: templates/admin/translations.php:78
+msgid "Force this size using CSS"
+msgstr "Tving denne størrelsen ved hjelp av CSS"
 
 #: templates/settings/group-media.php:56
 msgid "Force video ratio"
@@ -2445,14 +2660,14 @@ msgstr "Tving besøkende til å legge igjen en kommentar"
 msgid "Fractions"
 msgstr "Brøker"
 
-#: includes/public/class-wprm-taxonomies.php:230
+#: includes/public/class-wprm-taxonomies.php:232
 msgid "French"
 msgstr "Fransk"
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:516 
-#: includes/public/deprecated/class-wprm-template-helper.php:240
+#: templates/admin/translations.php:560 
+#: includes/public/deprecated/class-wprm-template-helper.php:238
 msgid "from"
 msgstr "fra"
 
@@ -2464,7 +2679,7 @@ msgstr "Frontend Tilgang"
 msgid "ft"
 msgstr "ft"
 
-#: templates/admin/translations.php:284
+#: templates/admin/translations.php:302
 msgid "Full Snippet Template"
 msgstr "Full Utdrag Mal"
 
@@ -2496,7 +2711,7 @@ msgstr "gallons"
 
 #: templates/settings/group-metadata.php:18 
 #: templates/settings/group-performance.php:8 
-#: templates/settings/group-links.php:18 templates/admin/translations.php:206
+#: templates/settings/group-links.php:18 templates/admin/translations.php:208
 msgid "General"
 msgstr "Generelt"
 
@@ -2534,16 +2749,16 @@ msgstr ""
 "Får du mange oppskrifter uten foreldreinnlegg, eller mangler du noen "
 "vurderinger?"
 
-#: templates/admin/translations.php:467
+#: templates/admin/translations.php:519
 msgid "Glossary Term"
 msgstr "Ordliste vilkår"
 
 #: templates/settings/group-glossary-terms.php:15 
-#: templates/admin/translations.php:468
+#: templates/admin/translations.php:520
 msgid "Glossary Terms"
 msgstr "Ordliste Vilkår"
 
-#: includes/public/class-wprm-taxonomies.php:252
+#: includes/public/class-wprm-taxonomies.php:254
 msgid "Gluten Free"
 msgstr "Glutenfri"
 
@@ -2585,7 +2800,7 @@ msgstr ""
 msgid "Go to Collections"
 msgstr "Gå til Samlinger"
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-shopping-list.php:67
+#: includes/public/shortcodes/recipe/class-wprm-sc-add-to-shopping-list.php:75
 msgid "Go to Shopping List"
 msgstr "Gå til handleliste"
 
@@ -2597,9 +2812,13 @@ msgstr "Gå til neste side."
 msgid "Go to WPRM Manage page"
 msgstr "Gå til WPRM-administrasjonssiden"
 
-#: templates/admin/translations.php:487
+#: templates/admin/translations.php:538
 msgid "Good"
 msgstr "Flink"
+
+#: templates/settings/group-analytics.php:62
+msgid "Google Analytics Tracking"
+msgstr "Google Analytics Sporing"
 
 #: templates/settings/group-metadata.php:129
 msgid "Google Privacy Policy"
@@ -2617,11 +2836,11 @@ msgstr "gram"
 msgid "grams"
 msgstr "gram"
 
-#: templates/admin/translations.php:571
+#: templates/admin/translations.php:627
 msgid "Grid Image"
 msgstr "Rutenettbilde"
 
-#: templates/admin/translations.php:569
+#: templates/admin/translations.php:625
 msgid "Grid Link"
 msgstr "Rutenettkobling"
 
@@ -2629,7 +2848,7 @@ msgstr "Rutenettkobling"
 msgid "Guided Recipes"
 msgstr "Guidede Oppskrifter"
 
-#: includes/public/class-wprm-taxonomies.php:253
+#: includes/public/class-wprm-taxonomies.php:255
 msgid "Halal"
 msgstr "Halal"
 
@@ -2639,43 +2858,43 @@ msgstr ""
 "Håndtere arkivsider for alle innleggstyper eller bare oppskrifts "
 "innleggstypen.\n"
 
-#: templates/settings/group-post-type.php:106
+#: templates/settings/group-post-type.php:109
 msgid "Handle Archive Pages Output"
 msgstr "Håndter utdata fra arkivsider"
 
-#: templates/admin/translations.php:499
+#: templates/admin/translations.php:549
 msgid "Has an embedded video"
 msgstr "Har en innebygd video"
 
-#: templates/admin/translations.php:498
+#: templates/admin/translations.php:548
 msgid "Has an uploaded video"
 msgstr "Har en opplastet video"
 
-#: templates/admin/translations.php:497
+#: templates/admin/translations.php:547
 msgid "Has any video"
 msgstr "Har noen video"
 
-#: templates/admin/translations.php:276
+#: templates/admin/translations.php:277
 msgid "Has Archive Pages"
 msgstr "Har arkivsider"
 
-#: templates/admin/translations.php:494
+#: templates/admin/translations.php:544
 msgid "Has Custom Pin Image"
 msgstr "Har tilpasset pin-bilde"
 
-#: templates/admin/translations.php:550
+#: templates/admin/translations.php:596
 msgid "Has Image"
 msgstr "Har bilde"
 
-#: templates/admin/translations.php:508
+#: templates/admin/translations.php:451
 msgid "Has Parent Post"
 msgstr "Har foreldrepost"
 
-#: templates/admin/translations.php:566
+#: templates/admin/translations.php:612
 msgid "Has Product"
 msgstr "Har produkt"
 
-#: templates/admin/translations.php:492
+#: templates/admin/translations.php:542
 msgid "Has Recipe Image"
 msgstr "Har oppskriftsbilde"
 
@@ -2709,7 +2928,7 @@ msgstr "Overskriftsskrift"
 msgid "Health Check"
 msgstr "Helsesjekk"
 
-#: templates/admin/translations.php:328
+#: templates/admin/translations.php:349
 msgid "height"
 msgstr "høyde"
 
@@ -2742,19 +2961,19 @@ msgstr ""
 "Høyeste nevner å bruke for brøker. Vil avrunde verdier for å passe. For de "
 "fleste formål anbefales 8."
 
-#: includes/public/class-wprm-taxonomies.php:254
+#: includes/public/class-wprm-taxonomies.php:256
 msgid "Hindu"
 msgstr "Hindu"
 
 #: templates/admin/translations.php:69 
-#: includes/public/deprecated/class-wprm-template-helper.php:164 
+#: includes/public/deprecated/class-wprm-template-helper.php:162 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:129 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:136
 msgid "hour"
 msgstr "time"
 
 #: templates/admin/translations.php:70 
-#: includes/public/deprecated/class-wprm-template-helper.php:164 
+#: includes/public/deprecated/class-wprm-template-helper.php:162 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:129 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:136
 msgid "hours"
@@ -2764,7 +2983,7 @@ msgstr "timer"
 msgid "Hover Cursor"
 msgstr "Hold musepekeren"
 
-#: templates/settings/group-analytics.php:27
+#: templates/settings/group-analytics.php:32
 msgid "How many days of data should stay stored in the database."
 msgstr "Hvor mange dager med data skal lagres i databasen."
 
@@ -2802,11 +3021,11 @@ msgstr "Hvordan gjenkjenne om det skal være en del av ingrediens notatene."
 msgid "How would you rate WP Recipe Maker?"
 msgstr "Hvordan vil du vurdere WP Recipe Maker?"
 
-#: templates/admin/translations.php:489
+#: templates/admin/translations.php:540
 msgid "How-to"
 msgstr "Slik gjør du"
 
-#: templates/admin/translations.php:101
+#: templates/admin/translations.php:102
 msgid "How-to Instructions"
 msgstr "Slik gjør du instruksjoner"
 
@@ -2826,14 +3045,14 @@ msgstr "Utdragsmal For Veiledningsanvisninger"
 msgid "How-to Instructions Template"
 msgstr "Mal For Veiledning"
 
-#: templates/admin/translations.php:476 
-#: includes/public/deprecated/class-wprm-template-helper.php:162 
+#: templates/admin/translations.php:528 
+#: includes/public/deprecated/class-wprm-template-helper.php:160 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:134
 msgid "hr"
 msgstr "hr"
 
-#: templates/admin/translations.php:477 
-#: includes/public/deprecated/class-wprm-template-helper.php:162 
+#: templates/admin/translations.php:529 
+#: includes/public/deprecated/class-wprm-template-helper.php:160 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:134
 msgid "hrs"
 msgstr "timer"
@@ -2842,7 +3061,7 @@ msgstr "timer"
 msgid "HTML Element to scroll to"
 msgstr "HTML-element å rulle til"
 
-#: templates/admin/translations.php:346
+#: templates/admin/translations.php:367
 msgid "HTML or Shortcode:"
 msgstr "HTML eller kortkode:"
 
@@ -2862,11 +3081,11 @@ msgstr "Jeg fant denne oppskriften du kanskje liker:"
 msgid "Icon Color"
 msgstr "Ikon farge"
 
-#: templates/admin/translations.php:434
+#: templates/admin/translations.php:439
 msgid "ID"
 msgstr "ID"
 
-#: templates/settings/group-post-type.php:67
+#: templates/settings/group-post-type.php:70
 msgid "If there is a parent post for the recipe, link to that parent"
 msgstr ""
 "Hvis det er et foreldreinnlegg for oppskriften, lenke til den forelderen"
@@ -2905,13 +3124,17 @@ msgstr ""
 "permalinker enn vanlige innlegg, vil du kanskje bruke en omdirigeringsplugin "
 "for å sette opp 301-viderekoblinger. Kontakt oss hvis du trenger hjelp!"
 
-#: templates/admin/translations.php:182
+#: templates/admin/translations.php:184
 msgid "Image"
 msgstr "Bilde"
 
 #: templates/settings/group-social-sharing.php:116
 msgid "Image Caption"
 msgstr "Bildetekst"
+
+#: templates/admin/translations.php:418
+msgid "Image Credit"
+msgstr "Bilde Kreditt"
 
 #: templates/settings/group-social-sharing.php:117
 msgid "Image Description"
@@ -2930,18 +3153,18 @@ msgstr "Bildetittel"
 msgid "Image to use for the Pin Recipe shortcode."
 msgstr "Bilde som skal brukes for kortkoden for Pin Oppskrift."
 
-#: templates/settings/group-import.php:20 templates/admin/translations.php:203 
+#: templates/settings/group-import.php:20 templates/admin/translations.php:205 
 #: templates/admin/menu/import/import-recipes.php:28 
 #: templates/admin/menu/import/importing.php:15
 msgid "Import"
 msgstr "Import"
 
-#: templates/admin/tools.php:133
+#: templates/admin/tools.php:190
 msgid "Import all ingredients that have a plural set."
 msgstr ""
 "Importer alle ingrediensene som har et flertallsett.\n"
 
-#: templates/admin/tools.php:144
+#: templates/admin/tools.php:201
 msgid ""
 "Import all ingredients that have a shopping list group set for use in the "
 "Recipe Collections feature."
@@ -2949,11 +3172,11 @@ msgstr ""
 "Importer alle ingrediensene som har en handlelistegruppe satt til bruk i "
 "funksjonen for oppskriftssamlinger.\n"
 
-#: templates/admin/tools.php:122
+#: templates/admin/tools.php:179
 msgid "Import all ingredients that have ingredient links set."
 msgstr "Importer alle ingredienser som har ingrediens koblinger satt."
 
-#: templates/admin/tools.php:156
+#: templates/admin/tools.php:213
 msgid ""
 "Import all ingredients that have nutrition facts set. These will become "
 "Custom Nutrition Ingredients"
@@ -2965,23 +3188,23 @@ msgstr ""
 msgid "Import finished succesfully. Click here to continue."
 msgstr "Importen er fullført. Klikk her for å fortsette."
 
-#: templates/admin/translations.php:169
+#: templates/admin/translations.php:171
 msgid "Import from JSON"
 msgstr "Importer fra JSON"
 
-#: templates/admin/translations.php:153
+#: templates/admin/translations.php:155
 msgid "Import from Text"
 msgstr "Importer fra tekst"
 
-#: templates/admin/tools.php:117 templates/admin/tools.php:120
+#: templates/admin/tools.php:174 templates/admin/tools.php:177
 msgid "Import Ingredient Links"
 msgstr "Importer ingrediens koblinger"
 
-#: templates/admin/tools.php:128 templates/admin/tools.php:131
+#: templates/admin/tools.php:185 templates/admin/tools.php:188
 msgid "Import Ingredient Plural"
 msgstr "Importer ingrediens flertall"
 
-#: templates/admin/tools.php:151 templates/admin/tools.php:154
+#: templates/admin/tools.php:208 templates/admin/tools.php:211
 msgid "Import Nutrition Facts"
 msgstr "Importer ernæringsfakta"
 
@@ -3012,7 +3235,7 @@ msgstr "Importer utvalgte oppskrifter"
 msgid "Import Settings"
 msgstr "Importer innstillinger"
 
-#: templates/admin/tools.php:139 templates/admin/tools.php:142
+#: templates/admin/tools.php:196 templates/admin/tools.php:199
 msgid "Import Shopping List Groups"
 msgstr "Importer handleliste grupper"
 
@@ -3021,7 +3244,6 @@ msgid "Import Units"
 msgstr "Importer enheter"
 
 #: templates/admin/menu/import/importing.php:16
-#, php-format
 msgid "Importing %d recipe"
 msgid_plural "Importing %d recipes"
 msgstr[0] "Importerer %d oppskrift"
@@ -3073,7 +3295,7 @@ msgid "Inactive Time"
 msgstr "Inaktiv tid"
 
 #: includes/public/class-wprm-recipe-parser.php:248 
-#: templates/admin/translations.php:324
+#: templates/admin/translations.php:345
 msgid "inch"
 msgstr "tomme"
 
@@ -3089,11 +3311,15 @@ msgstr "Inkluder Ingrediens Notater"
 msgid "Include the ingredient notes field in the recipeIngredient metadata."
 msgstr "Inkludere ingrediens notat feltet i oppskriften ingrediens metadata."
 
-#: includes/public/class-wprm-taxonomies.php:233
+#: templates/admin/translations.php:119
+msgid "Include User Ratings"
+msgstr "Inkluder Bruker Vurderinger"
+
+#: includes/public/class-wprm-taxonomies.php:235
 msgid "Indian"
 msgstr "indisk"
 
-#: templates/admin/translations.php:448
+#: templates/admin/translations.php:497
 msgid "Ingredient"
 msgstr "Ingrediens"
 
@@ -3101,7 +3327,7 @@ msgstr "Ingrediens"
 msgid "Ingredient Fields"
 msgstr "Ingrediensfelt"
 
-#: templates/admin/translations.php:311
+#: templates/admin/translations.php:332
 msgid "Ingredient Group Header"
 msgstr "Ingrediensgruppe overskrift"
 
@@ -3110,11 +3336,11 @@ msgid "Ingredient Images"
 msgstr "Ingrediens bilder"
 
 #: includes/public/class-wprm-analytics.php:41 
-#: templates/admin/translations.php:125
+#: templates/admin/translations.php:127
 msgid "Ingredient Link"
 msgstr "Ingrediens lenke"
 
-#: templates/settings/group-links.php:123 templates/admin/translations.php:191 
+#: templates/settings/group-links.php:123 templates/admin/translations.php:193 
 #: templates/admin/menu/tools/wpurp-ingredients.php:14
 msgid "Ingredient Links"
 msgstr "Ingrediens linker"
@@ -3139,50 +3365,58 @@ msgstr "Identifikator For Ingrediens Notater"
 msgid "Ingredient Parsing"
 msgstr "Ingrediens Parsing"
 
-#: templates/admin/translations.php:451
+#: templates/admin/translations.php:500
 msgid "Ingredient Unit"
 msgstr "Ingrediens enhet"
 
 #: includes/admin/class-wprm-notices.php:95 
-#: templates/admin/translations.php:138
+#: templates/admin/translations.php:140
 msgid "Ingredient Units"
 msgstr "Ingrediens enheter"
 
-#: templates/admin/translations.php:137 
+#: templates/admin/translations.php:139 
 #: includes/public/deprecated/class-wprm-template-helper.php:54
 msgid "Ingredients"
 msgstr "Ingredienser"
 
-#: templates/admin/translations.php:354
+#: templates/admin/translations.php:375
 msgid "Inline Ingredient"
 msgstr "Inline ingrediens"
 
-#: templates/admin/translations.php:232 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:93
+#: templates/admin/translations.php:234 
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:101
 msgid "Inline Ingredients"
 msgstr "På linje ingredienser"
 
-#: templates/admin/translations.php:279
+#: templates/settings/group-recipe-defaults.php:128
+msgid ""
+"Input and display days for the recipe times. When disabled, only hours and "
+"minutes will be used."
+msgstr ""
+"Legg inn og vis dager for oppskriftstidene. Når den er deaktivert, brukes "
+"bare timer og minutter."
+
+#: templates/admin/translations.php:297
 msgid "Insert"
 msgstr "Sett inn"
 
-#: templates/admin/translations.php:360
+#: templates/admin/translations.php:322
 msgid "Insert After"
 msgstr "Sett inn etter"
 
-#: templates/admin/translations.php:278
+#: templates/admin/translations.php:296
 msgid "Insert existing Recipe"
 msgstr "Sett inn eksisterende oppskrift"
 
-#: templates/admin/translations.php:304
+#: templates/admin/translations.php:325
 msgid "Insert Group After"
 msgstr "Sett inn gruppe etter"
 
-#: templates/admin/translations.php:313
+#: templates/admin/translations.php:334
 msgid "Insert Ingredient After"
 msgstr "Sett inn ingrediens etter"
 
-#: templates/admin/translations.php:305
+#: templates/admin/translations.php:326
 msgid "Insert Instruction After"
 msgstr "Sett inn instruksjon etter"
 
@@ -3194,11 +3428,11 @@ msgstr ""
 "Sett inn kortkoden [wprm-ordliste id=123] der du vil at en term skal vises. "
 "Term-ID-en finner du på Administrer-siden."
 
-#: templates/settings/group-integrations.php:49
+#: templates/settings/group-integrations.php:33
 msgid "Instacart Tastemakers ID"
 msgstr "Instacart Tastemakers ID"
 
-#: templates/admin/translations.php:302
+#: templates/admin/translations.php:323
 msgid "Instruction Group Header"
 msgstr "Instruksjons gruppe overskrift"
 
@@ -3210,12 +3444,12 @@ msgstr "Instruksjon Bildejustering"
 msgid "Instruction Image Size"
 msgstr "Instruksjons bildestørrelse"
 
-#: includes/public/class-wprm-print.php:319 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:218
+#: includes/public/class-wprm-print.php:322 
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:211
 msgid "Instruction Images"
 msgstr "Instruksjonsbilder"
 
-#: templates/admin/translations.php:373
+#: templates/admin/translations.php:393
 msgid "Instruction is part of the main video"
 msgstr "Instruksjon er en del av hovedvideoen"
 
@@ -3227,7 +3461,7 @@ msgstr "Instruksjonslink"
 msgid "Instruction List Style"
 msgstr "Instruksjons listestil"
 
-#: templates/admin/translations.php:228
+#: templates/admin/translations.php:230
 msgid "Instruction Media"
 msgstr "Instruksjons medier"
 
@@ -3243,11 +3477,11 @@ msgstr "Felt for Instruksjons Navn"
 msgid "Instruction Parsing"
 msgstr "Instruksjon Parsing"
 
-#: templates/admin/translations.php:374
+#: templates/admin/translations.php:394
 msgid "Instruction video URL or embed code"
 msgstr "Instruksjonsvideo-URL eller innebyggingskode"
 
-#: templates/admin/translations.php:157 
+#: templates/admin/translations.php:159 
 #: includes/public/deprecated/class-wprm-template-helper.php:55
 msgid "Instructions"
 msgstr "FREMGANGSMÅTE"
@@ -3268,7 +3502,7 @@ msgstr "Integrer med Yoast SEO"
 msgid "Integrate with Yoast SEO Schema (version 11+) when enabled."
 msgstr "Integrer med Yoast SEO Skjema (versjon 11+) når aktivert."
 
-#: templates/settings/group-integrations.php:21
+#: templates/settings/group-integrations.php:5
 msgid "Integrations"
 msgstr "Integrasjoner"
 
@@ -3280,7 +3514,7 @@ msgstr "Interaksjoner"
 msgid "Interactions (last 7 days)"
 msgstr "Interaksjoner (siste 7 dager)"
 
-#: templates/settings/structure.php:78
+#: templates/settings/structure.php:79
 msgid "Interactivity"
 msgstr "Interaktivitet"
 
@@ -3288,43 +3522,59 @@ msgstr "Interaktivitet"
 msgid "Interested in more data?"
 msgstr "Interessert i mer data?"
 
-#: templates/admin/translations.php:441
+#: templates/admin/translations.php:281
+msgid "Internal"
+msgstr "Innvendig"
+
+#: templates/admin/translations.php:286
+msgid "Internal Name"
+msgstr "Internt Navn"
+
+#: templates/admin/translations.php:288
+msgid "Internal Note"
+msgstr "Intern Merknad"
+
+#: templates/admin/translations.php:490
 msgid "into"
 msgstr "inn i"
 
-#: templates/admin/translations.php:428
+#: templates/admin/translations.php:478
 msgid "IP"
 msgstr "IP"
 
-#: includes/public/class-wprm-taxonomies.php:231
+#: includes/public/class-wprm-taxonomies.php:233
 msgid "Italian"
 msgstr "Italiensk"
 
-#: templates/admin/translations.php:333
+#: templates/admin/translations.php:354
 msgid "Italic"
 msgstr "Kursiv"
 
-#: includes/public/class-wprm-taxonomies.php:235
+#: templates/admin/translations.php:282
+msgid "Items"
+msgstr "Varer"
+
+#: includes/public/class-wprm-taxonomies.php:237
 msgid "Japanese"
 msgstr "japansk"
 
 #: includes/public/class-wprm-analytics.php:50 
-#: includes/public/class-wprm-blocks.php:191 
-#: templates/admin/translations.php:285 
+#: includes/public/class-wprm-blocks.php:215 
+#: templates/admin/translations.php:303 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:194
 msgid "Jump to Recipe"
 msgstr "Gå til oppskrift"
 
 #: includes/public/class-wprm-analytics.php:51 
-#: includes/public/class-wprm-blocks.php:206 
-#: templates/admin/translations.php:286 
+#: includes/public/class-wprm-blocks.php:230 
+#: templates/admin/translations.php:304 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:194
 msgid "Jump to Video"
 msgstr "Gå til Video"
 
-#: includes/public/class-wprm-metadata.php:691 
+#: includes/public/class-wprm-metadata.php:701 
 #: includes/public/shortcodes/recipe/class-wprm-sc-nutrition.php:89 
 #: templates/recipe/legacy/simple/simple.php:87 
 #: templates/recipe/legacy/clean/clean.php:83 
@@ -3332,7 +3582,7 @@ msgstr "Gå til Video"
 msgid "kcal"
 msgstr "kcal"
 
-#: templates/admin/translations.php:271
+#: templates/admin/translations.php:272
 msgid "Key"
 msgstr "Nøkkel"
 
@@ -3366,7 +3616,7 @@ msgstr "kilogram"
 msgid "kilograms"
 msgstr "kilograms"
 
-#: includes/public/class-wprm-taxonomies.php:255
+#: includes/public/class-wprm-taxonomies.php:257
 msgid "Kosher"
 msgstr "Kosher"
 
@@ -3374,7 +3624,7 @@ msgstr "Kosher"
 msgid "l"
 msgstr "l"
 
-#: templates/admin/translations.php:544
+#: templates/admin/translations.php:590
 msgid "Label"
 msgstr "Merkelapp"
 
@@ -3383,11 +3633,11 @@ msgstr "Merkelapp"
 msgid "Label used in the comment form."
 msgstr "Etikett brukt i kommentarskjemaet."
 
-#: templates/admin/translations.php:262
+#: templates/admin/translations.php:263
 msgid "Language"
 msgstr "Språk"
 
-#: includes/public/class-wprm-print.php:407
+#: includes/public/class-wprm-print.php:411
 msgid "Larger"
 msgstr "Større"
 
@@ -3431,7 +3681,7 @@ msgstr "leave"
 msgid "Leave blank to not use a link."
 msgstr "La stå tomt for ikke å bruke en lenke."
 
-#: templates/admin/translations.php:394
+#: templates/admin/translations.php:425
 msgid "Leave blank to use default from template"
 msgstr "La stå tomt for å bruke standard fra mal"
 
@@ -3473,7 +3723,7 @@ msgstr "Eldre Innstillinger"
 msgid "Lightbox"
 msgstr "Lysboks"
 
-#: templates/admin/translations.php:250
+#: templates/admin/translations.php:252
 msgid "Link"
 msgstr "Link"
 
@@ -3482,7 +3732,7 @@ msgstr "Link"
 msgid "Link Color"
 msgstr "Link farge"
 
-#: templates/admin/translations.php:561
+#: templates/admin/translations.php:607
 msgid "Link Nofollow"
 msgstr "Link Ingen følgere"
 
@@ -3502,10 +3752,26 @@ msgstr "Link til bruk for Post Forfatter"
 msgid "Links"
 msgstr "Linker"
 
+#: templates/admin/translations.php:517
+msgid "List"
+msgstr "Liste"
+
+#: templates/admin/translations.php:287
+msgid "List Name"
+msgstr "Liste Navn"
+
 #: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:44 
 #: includes/public/shortcodes/recipe/class-wprm-sc-ingredients.php:40
 msgid "List Style"
-msgstr "Listestil"
+msgstr "Liste Stil"
+
+#: templates/admin/translations.php:290
+msgid "List Template"
+msgstr "Liste Mal"
+
+#: templates/admin/translations.php:518
+msgid "Lists"
+msgstr "Lister"
 
 #: includes/public/class-wprm-recipe-parser.php:188
 msgid "liter"
@@ -3547,9 +3813,17 @@ msgid ""
 msgstr ""
 "Last inn standard kodebitmalene i bunnteksten for å forbedre ytelsen.\n"
 
-#: templates/admin/translations.php:212
+#: templates/admin/translations.php:278
+msgid "Loading List..."
+msgstr "Laster inn liste..."
+
+#: templates/admin/translations.php:214
 msgid "Loading Recipe..."
 msgstr "Laster Oppskrift..."
+
+#: templates/settings/group-analytics.php:18
+msgid "Local Tracking"
+msgstr "Lokal sporing"
 
 #: templates/settings/group-private-notes.php:26
 msgid "Logged In Users"
@@ -3559,19 +3833,19 @@ msgstr "Innloggede Brukere"
 msgid "Loop Video"
 msgstr "Sløyfevideo"
 
-#: includes/public/class-wprm-taxonomies.php:256
+#: includes/public/class-wprm-taxonomies.php:258
 msgid "Low Calorie"
 msgstr "Lav kalori"
 
-#: includes/public/class-wprm-taxonomies.php:257
+#: includes/public/class-wprm-taxonomies.php:259
 msgid "Low Fat"
 msgstr "Lite fett"
 
-#: includes/public/class-wprm-taxonomies.php:258
+#: includes/public/class-wprm-taxonomies.php:260
 msgid "Low Lactose"
 msgstr "Lav laktose"
 
-#: includes/public/class-wprm-taxonomies.php:259
+#: includes/public/class-wprm-taxonomies.php:261
 msgid "Low Salt"
 msgstr "Lite salt"
 
@@ -3594,17 +3868,25 @@ msgstr "Nedre romersk"
 msgid "m"
 msgstr "m"
 
-#: includes/public/class-wprm-taxonomies.php:221
+#: includes/public/class-wprm-taxonomies.php:223
 msgid "Main Course"
 msgstr "Hovedrett"
 
-#: templates/admin/translations.php:161
+#: templates/admin/translations.php:163
 msgid "Make a selection using the buttons above first."
 msgstr "Gjør et valg ved å bruke knappene ovenfor først."
 
-#: includes/public/class-wprm-print.php:412
+#: includes/public/class-wprm-print.php:416
 msgid "Make print size"
 msgstr "Lag utskriftsstørrelse"
+
+#: templates/admin/translations.php:578
+msgid "Make sure the name is different."
+msgstr "Sørg for at navnet er annerledes."
+
+#: templates/settings/group-amazon.php:143
+msgid "Make sure this is the partner tag for the store selected above."
+msgstr "Sørg for at dette er partner-taggen for butikken valgt ovenfor."
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:55
 msgid ""
@@ -3629,6 +3911,14 @@ msgstr ""
 "Sørg for å velge riktig oppskriftstype for å sikre at vi inkluderer riktige "
 "metadata."
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-smart-with-food.php:78
+msgid ""
+"Make sure to set your token on the WP Recipe Maker > Settings > Integrations "
+"page"
+msgstr ""
+"Sørg for å angi tokenet ditt på siden WP Recipe Maker > Innstillinger > "
+"Integrasjoner"
+
 #: templates/settings/group-recipe-ratings.php:158
 msgid "Make the stars transparent when the current user has not voted yet."
 msgstr ""
@@ -3639,7 +3929,8 @@ msgstr ""
 msgid "Makes:"
 msgstr "Gjør at:"
 
-#: includes/admin/class-wprm-manage.php:39
+#: includes/admin/class-wprm-manage.php:39 
+#: includes/public/class-wprm-admin-bar.php:152
 msgid "Manage"
 msgstr "Administrer"
 
@@ -3667,15 +3958,15 @@ msgstr "Merk valgte oppskrifter som avkrysset"
 msgid "Matching"
 msgstr "Matchende"
 
-#: templates/admin/translations.php:310
+#: templates/admin/translations.php:331
 msgid "Material Group Header"
 msgstr "Materialgruppe overskrift"
 
-#: templates/admin/translations.php:190
+#: templates/admin/translations.php:192
 msgid "Material Links"
 msgstr "Materialkoblinger"
 
-#: templates/admin/translations.php:209
+#: templates/admin/translations.php:211
 msgid "Materials"
 msgstr "Materialer"
 
@@ -3683,23 +3974,23 @@ msgstr "Materialer"
 msgid "Max Denominator"
 msgstr "Maks nevner"
 
-#: templates/admin/translations.php:323
+#: templates/admin/translations.php:344
 msgid "measured in"
 msgstr "målt i"
 
-#: templates/settings/group-media.php:5 templates/admin/translations.php:204
+#: templates/settings/group-media.php:5 templates/admin/translations.php:206
 msgid "Media"
 msgstr "Media"
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:243
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:236
 msgid "Media Toggle"
 msgstr "Medieveksling"
 
-#: templates/admin/tools.php:170
+#: templates/admin/tools.php:227
 msgid "Mediavine Create Migration"
 msgstr "Mediavine Opprett migrering"
 
-#: includes/public/class-wprm-taxonomies.php:232
+#: includes/public/class-wprm-taxonomies.php:234
 msgid "Mediterranean"
 msgstr "Middelhavet"
 
@@ -3707,7 +3998,7 @@ msgstr "Middelhavet"
 msgid "Mention %handle% or tag %tag%!"
 msgstr "Nevn %handle% eller tag %tag%!"
 
-#: templates/admin/translations.php:439
+#: templates/admin/translations.php:488
 msgid "Merge into another"
 msgstr "Slå sammen til en annen"
 
@@ -3719,9 +4010,17 @@ msgstr "Melding som skal vises"
 msgid "Message to show when the visitor is not logged in."
 msgstr "Melding for å vise når den besøkende ikke er pålogget."
 
-#: templates/admin/translations.php:229
+#: templates/admin/translations.php:231
 msgid "Metadata"
 msgstr "Metadata"
+
+#: templates/admin/translations.php:447
+msgid "Metadata Description"
+msgstr "Metadata Beskrivelse"
+
+#: templates/admin/translations.php:446
+msgid "Metadata Name"
+msgstr "Metadata Navn"
 
 #: includes/public/class-wprm-recipe-parser.php:233
 msgid "meter"
@@ -3732,20 +4031,20 @@ msgstr "meter"
 msgid "meters"
 msgstr "meter"
 
-#: includes/public/class-wprm-taxonomies.php:237
+#: includes/public/class-wprm-taxonomies.php:239
 msgid "Mexican"
 msgstr "Meksikansk"
 
 #: includes/public/class-wprm-recipe-parser.php:178 
-#: includes/public/class-wprm-metadata.php:693
+#: includes/public/class-wprm-metadata.php:703
 msgid "mg"
 msgstr "mg"
 
-#: templates/settings/group-recipe-roundup.php:87
+#: templates/settings/group-recipe-roundup.php:106
 msgid "Microlink API"
 msgstr "Microlink API"
 
-#: templates/settings/group-recipe-roundup.php:92
+#: templates/settings/group-recipe-roundup.php:111
 msgid "Microlink API Key"
 msgstr "Microlink API Nøkkel"
 
@@ -3773,33 +4072,33 @@ msgstr "millimeter"
 msgid "millimeters"
 msgstr "millimeter"
 
-#: templates/admin/translations.php:478 
-#: includes/public/deprecated/class-wprm-template-helper.php:179 
+#: templates/admin/translations.php:530 
+#: includes/public/deprecated/class-wprm-template-helper.php:177 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:154
 msgid "min"
 msgstr "min"
 
-#: templates/admin/translations.php:479 
-#: includes/public/deprecated/class-wprm-template-helper.php:179 
+#: templates/admin/translations.php:531 
+#: includes/public/deprecated/class-wprm-template-helper.php:177 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:154
 msgid "mins"
 msgstr "min"
 
 #: templates/admin/translations.php:71 
-#: includes/public/deprecated/class-wprm-template-helper.php:181 
+#: includes/public/deprecated/class-wprm-template-helper.php:179 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:149 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:156
 msgid "minute"
 msgstr "minutt"
 
 #: templates/admin/translations.php:72 
-#: includes/public/deprecated/class-wprm-template-helper.php:181 
+#: includes/public/deprecated/class-wprm-template-helper.php:179 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:149 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:156
 msgid "minutes"
 msgstr "minutter"
 
-#: templates/admin/translations.php:531
+#: templates/admin/translations.php:575
 msgid "missing"
 msgstr "savnet"
 
@@ -3816,7 +4115,7 @@ msgstr "mm"
 msgid "Modern"
 msgstr "Moderne"
 
-#: templates/admin/translations.php:226
+#: templates/admin/translations.php:228
 msgid "More nutrients are available in"
 msgstr "Flere næringsstoffer er tilgjengelig i"
 
@@ -3828,28 +4127,20 @@ msgstr "Siste resultater:"
 msgid "Multiple Ratings"
 msgstr "Flere vurderinger"
 
-#: templates/settings/group-integrations.php:84
-msgid "My Emissions API Key Status"
-msgstr "Mine Utslipp API Nøkkelstatus"
-
-#: templates/admin/translations.php:256
-msgid "My Emissions Label"
-msgstr "Mitt Utslippsmerke"
-
-#: includes/public/class-wprm-recipe.php:167 
-#: templates/admin/translations.php:427
+#: includes/public/class-wprm-recipe.php:164 
+#: templates/admin/translations.php:477
 msgid "n/a"
 msgstr "n/a"
 
-#: templates/admin/translations.php:155
+#: templates/admin/translations.php:157
 msgid "Name"
 msgstr "Navn"
 
-#: templates/admin/translations.php:307
+#: templates/admin/translations.php:328
 msgid "Name for this video part"
 msgstr "Navn på denne videodelen"
 
-#: includes/admin/class-wprm-modal.php:279 
+#: includes/admin/class-wprm-modal.php:309 
 #: templates/settings/group-recipe-defaults.php:53
 msgid "Name of post author"
 msgstr "Navn på innleggs forfatter"
@@ -3870,7 +4161,7 @@ msgstr "Nyheter"
 msgid "Next to recipe in HTML body element"
 msgstr "Ved siden av oppskrift i HTML-kroppselement"
 
-#: templates/admin/translations.php:401
+#: templates/admin/translations.php:432
 msgid "No"
 msgstr "Nei"
 
@@ -3882,7 +4173,11 @@ msgstr ""
 "Ingen handlinger funnet de siste 7 dagene. Hvis du nettopp har aktivert "
 "analyser, bør de snart begynne å vises."
 
-#: templates/admin/translations.php:515
+#: templates/admin/translations.php:617
+msgid "No ASIN could be found in the URL you entered."
+msgstr "Ingen ASIN ble funnet i URL-en du skrev inn."
+
+#: templates/admin/translations.php:559
 msgid "no comment ratings"
 msgstr "ingen kommentar vurderinger"
 
@@ -3894,11 +4189,15 @@ msgstr "Ingen ikon"
 msgid "No imported recipes found."
 msgstr "Ingen importerte oppskrifter funnet."
 
-#: templates/admin/translations.php:257
+#: templates/admin/translations.php:258
 msgid "No language set"
 msgstr "Ikke angitt språk"
 
-#: templates/settings/group-recipe-roundup.php:72
+#: templates/admin/translations.php:405
+msgid "No lists found"
+msgstr "Ingen lister funnet"
+
+#: templates/settings/group-recipe-roundup.php:91
 msgid "No metadata when there is recipe metadata"
 msgstr "Ingen metadata når det er reseptmetadata"
 
@@ -3907,8 +4206,12 @@ msgstr "Ingen metadata når det er reseptmetadata"
 msgid "no parent post found"
 msgstr "ingen foreldreinnlegg funnet"
 
+#: templates/admin/translations.php:401
+msgid "No posts found"
+msgstr "Ingen innlegg funnet"
+
 #: templates/settings/group-recipe-ratings.php:51 
-#: templates/admin/translations.php:486
+#: templates/admin/translations.php:537
 msgid "No Ratings"
 msgstr "Ingen vurderinger"
 
@@ -3920,7 +4223,7 @@ msgstr "Ingen vurderinger ennå"
 msgid "No recipe videos"
 msgstr "Ingen oppskriftsvideoer"
 
-#: templates/admin/translations.php:381
+#: templates/admin/translations.php:403
 msgid "No recipes found"
 msgstr "Ingen oppskrifter funnet"
 
@@ -3932,7 +4235,7 @@ msgstr "Ingen oppskrifter funnet."
 msgid "No recipes found. Welcome to WP Recipe Maker!"
 msgstr "Ingen oppskrifter funnet. Velkommen til WP Recipe Maker!"
 
-#: templates/admin/translations.php:330
+#: templates/admin/translations.php:351
 msgid "No suggestions found."
 msgstr "Fant ingen forslag."
 
@@ -3940,13 +4243,17 @@ msgstr "Fant ingen forslag."
 msgid "No Underline"
 msgstr "Ingen understreking"
 
-#: templates/admin/translations.php:519
+#: templates/admin/translations.php:563
 msgid "no user ratings"
 msgstr "ingen brukervurderinger"
 
-#: templates/admin/translations.php:172
+#: templates/admin/translations.php:174
 msgid "No valid recipe found."
 msgstr "Ingen gyldig oppskrift funnet."
+
+#: templates/settings/group-recipe-roundup.php:65
+msgid "Nofollow Default"
+msgstr "Ingen følgere Standard"
 
 #: templates/settings/group-template-legacy.php:102 
 #: templates/settings/group-template-legacy.php:128
@@ -3957,24 +4264,28 @@ msgstr "Ingen"
 msgid "none"
 msgstr "ingen"
 
-#: includes/public/class-wprm-print.php:406
+#: includes/public/class-wprm-print.php:410
 msgid "Normal"
 msgstr "Normal"
 
-#: templates/admin/translations.php:425
+#: templates/admin/translations.php:475
 msgid "Not Approved"
 msgstr "Ikke godkjent"
 
-#: templates/admin/translations.php:299
+#: templates/admin/translations.php:317
 msgid "Not associated yet"
 msgstr "Ikke tilknyttet ennå"
+
+#: templates/admin/translations.php:442
+msgid "Note"
+msgstr "Merk"
 
 #: templates/settings/group-template-legacy.php:32
 msgid "Note: not all options will affect every recipe template."
 msgstr "Merk: ikke alle alternativer vil påvirke hver oppskrifts mal."
 
-#: includes/public/class-wprm-print.php:328 
-#: templates/admin/translations.php:158
+#: includes/public/class-wprm-print.php:331 
+#: templates/admin/translations.php:160
 msgid "Notes"
 msgstr "Merknader"
 
@@ -3991,7 +4302,7 @@ msgid ""
 msgstr ""
 "Antall desimaler å avrunde en mengde til ved beregning av ernærings fakta."
 
-#: templates/admin/translations.php:210
+#: templates/admin/translations.php:212
 msgid "Nutrition"
 msgstr "Ernæring"
 
@@ -4010,7 +4321,7 @@ msgid "Nutrition Fields"
 msgstr "Ernæringsfelt"
 
 #: templates/settings/group-nutrition-label.php:15 
-#: templates/admin/translations.php:289
+#: templates/admin/translations.php:307
 msgid "Nutrition Label"
 msgstr "Ernærings Etikett"
 
@@ -4018,7 +4329,7 @@ msgstr "Ernærings Etikett"
 msgid "Nutrition Label in template"
 msgstr "Ernæringsetikett i mal"
 
-#: templates/admin/translations.php:317
+#: templates/admin/translations.php:338
 msgid "olive oil"
 msgstr "oliven olje"
 
@@ -4050,7 +4361,7 @@ msgstr ""
 msgid "Only show metadata for first recipe"
 msgstr "Vis kun metadata for første oppskrift"
 
-#: templates/settings/group-recipe-roundup.php:65
+#: templates/settings/group-recipe-roundup.php:84
 msgid "Only show published posts"
 msgstr "Vis kun publiserte innlegg"
 
@@ -4080,24 +4391,28 @@ msgstr "Åpne egendefinerte termkoblinger i en ny fane."
 msgid "Open in New Tab"
 msgstr "Åpne i Ny fane"
 
-#: templates/settings/group-links.php:85 templates/admin/translations.php:350
+#: templates/settings/group-links.php:85 templates/admin/translations.php:371
 msgid "Open in new tab"
 msgstr "Åpne i Ny fane"
 
-#: templates/settings/group-recipe-roundup.php:79
+#: templates/settings/group-recipe-roundup.php:72
+msgid "Open in New Tab Default"
+msgstr "Åpne i ny fane som standard"
+
+#: templates/settings/group-recipe-roundup.php:98
 msgid "Open internal links in a new tab"
 msgstr "Åpne interne lenker i en ny fane"
 
-#: includes/public/deprecated/class-wprm-template-helper.php:345 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:648
+#: includes/public/deprecated/class-wprm-template-helper.php:343 
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:654
 msgid "Open larger version of the instruction image"
 msgstr "Åpne større versjon av instruksjonsbildet"
 
-#: includes/public/class-wprm-recipe.php:535
+#: includes/public/class-wprm-recipe.php:542
 msgid "Open larger version of the recipe image"
 msgstr "Åpne større versjon av oppskriftsbildet"
 
-#: templates/admin/translations.php:389
+#: templates/admin/translations.php:415
 msgid "Open link in new tab"
 msgstr "Åpne lenken i ny fane"
 
@@ -4105,7 +4420,7 @@ msgstr "Åpne lenken i ny fane"
 msgid "Open Print links in New Tab"
 msgstr "Åpne Skriv ut lenker i Ny fane"
 
-#: includes/public/class-wprm-recipe-shell.php:180
+#: includes/public/class-wprm-recipe-shell.php:182
 msgid "Open recipe image in full size"
 msgstr "Åpne oppskriftsbilde i full størrelse"
 
@@ -4114,7 +4429,6 @@ msgid "Open the Post Author link in a new tab."
 msgstr "Åpne koblingen Post Forfatter i en ny fane."
 
 #: templates/settings/group-recipe-roundup.php:55 
-#: templates/settings/group-integrations.php:109 
 #: templates/settings/group-template-editor.php:26
 msgid "Open the Template Editor"
 msgstr "Åpne Mal Redigering"
@@ -4123,7 +4437,7 @@ msgstr "Åpne Mal Redigering"
 msgid "Opt out of Rich Pins"
 msgstr "Velg bort Rich Pins"
 
-#: templates/admin/translations.php:329
+#: templates/admin/translations.php:350
 msgid "optional"
 msgstr "valgfri"
 
@@ -4135,7 +4449,7 @@ msgstr ""
 "Valgfri annonse som skal vises i bunnteksten på den trykte siden. Blir ikke "
 "skrevet ut. Bruk hvilken som helst HTML-kode."
 
-#: templates/admin/translations.php:177
+#: templates/admin/translations.php:179
 msgid ""
 "Optional extra time field that you can label yourself. Examples: Resting "
 "Time, Baking Time"
@@ -4143,7 +4457,11 @@ msgstr ""
 "Valgfritt ekstra tidsfelt som du kan merke selv. Eksempler: Hviletid, "
 "Steketid"
 
-#: templates/admin/translations.php:106
+#: templates/admin/translations.php:289
+msgid "Optional note about this list"
+msgstr "Valgfri merknad om denne listen"
+
+#: templates/admin/translations.php:107
 msgid "optional notes"
 msgstr "valgfrie notater"
 
@@ -4154,7 +4472,7 @@ msgid "Optional rel attribute to add to custom links by default."
 msgstr ""
 "Valgfritt rel-attributt for å legge til tilpassede lenker som standard."
 
-#: templates/settings/group-integrations.php:50
+#: templates/settings/group-integrations.php:34
 msgid ""
 "Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms "
 "apply."
@@ -4178,7 +4496,7 @@ msgstr ""
 "Valgfri tekst som skal vises nederst på utskriftssiden. Du kan bruke "
 "følgende plassholdere:"
 
-#: templates/settings/group-recipe-roundup.php:93
+#: templates/settings/group-recipe-roundup.php:112
 msgid ""
 "Optionally add your own microlink.io API key. Leave blank to use the free "
 "plan (limited number of requests per day)."
@@ -4186,7 +4504,13 @@ msgstr ""
 "Legg eventuelt til din egen microlink.io API-nøkkel. La stå tomt for å bruke "
 "gratisplanen (begrenset antall forespørsler per dag)."
 
-#: templates/admin/translations.php:392
+#: templates/admin/translations.php:420
+msgid "Optionally fill in these fields to use instead of the post values:"
+msgstr ""
+"Du kan eventuelt fylle ut disse feltene for å bruke i stedet for "
+"postverdiene:"
+
+#: templates/admin/translations.php:419
 msgid "Optionally fill in these fields to use instead of the recipe values:"
 msgstr ""
 "Fyll eventuelt ut disse feltene for å bruke i stedet for oppskriftsverdiene:"
@@ -4199,7 +4523,7 @@ msgstr ""
 "Velg eventuelt et tilpasset HTML-element å rulle til. Kan for eksempel være "
 "nyttig når du bruker lat lasting av kommentarer."
 
-#: templates/admin/translations.php:185
+#: templates/admin/translations.php:187
 msgid "Optionally set a different image to use for the \"Pin Recipe\" button."
 msgstr ""
 "Velg eventuelt et annet bilde som skal brukes for \"Pin Oppskrift\"-knappen."
@@ -4218,15 +4542,15 @@ msgstr ""
 "innstillingen stå tom for å bruke standard delt nøkkel."
 
 #: templates/settings/group-recipe-defaults.php:112 
-#: templates/admin/translations.php:490
+#: templates/admin/translations.php:541
 msgid "Other"
 msgstr "Annen"
 
-#: templates/admin/translations.php:102
+#: templates/admin/translations.php:103
 msgid "Other (no metadata)"
 msgstr "Annet (ingen metadata)"
 
-#: templates/admin/translations.php:291
+#: templates/admin/translations.php:309
 msgid "Other Features"
 msgstr "Andre funksjoner"
 
@@ -4274,11 +4598,15 @@ msgstr "utdatert versjon"
 msgid "Output Combined Stars in Comments"
 msgstr "Skriv ut kombinerte stjerner i kommentarer"
 
+#: templates/admin/translations.php:283
+msgid "Output ItemList Metadata"
+msgstr "Utgangs elementliste Metadata"
+
 #: templates/settings/group-metadata.php:154
 msgid "Output Recipe Metadata"
 msgstr "Output Oppskrift Metadata"
 
-#: templates/admin/translations.php:444
+#: templates/admin/translations.php:493
 msgid "Overview"
 msgstr "Oversikt"
 
@@ -4294,27 +4622,27 @@ msgstr ""
 "Polstring av stjernene i kommentarfeltet. Øk når du opplever problemer med "
 "trykkmål."
 
-#: templates/admin/translations.php:359
+#: templates/admin/translations.php:380
 msgid "Pair of scissors"
 msgstr "Par av saks"
 
-#: templates/admin/translations.php:316
+#: templates/admin/translations.php:337
 msgid "paper"
 msgstr "papir"
 
-#: templates/admin/translations.php:506
+#: templates/admin/translations.php:448
 msgid "Parent ID"
 msgstr "Foreldre-ID"
 
-#: templates/admin/translations.php:512
+#: templates/admin/translations.php:556
 msgid "Parent Language"
 msgstr "Foreldrespråk"
 
-#: templates/admin/translations.php:507
+#: templates/admin/translations.php:449
 msgid "Parent Name"
 msgstr "Foreldrenavn"
 
-#: templates/admin/translations.php:431
+#: templates/admin/translations.php:481
 msgid "Parent Post ID"
 msgstr "ID for overordnet innlegg"
 
@@ -4322,31 +4650,31 @@ msgstr "ID for overordnet innlegg"
 msgid "Passive Time"
 msgstr "Passiv tid"
 
-#: templates/admin/translations.php:99
+#: templates/admin/translations.php:100
 msgid "Password"
 msgstr "Passord"
 
-#: templates/admin/translations.php:263
+#: templates/admin/translations.php:264
 msgid "Paste in text"
 msgstr "Paste in text"
 
-#: templates/admin/translations.php:265
+#: templates/admin/translations.php:266
 msgid "Paste in text first."
 msgstr "Lim inn tekst først."
 
-#: templates/admin/translations.php:159
+#: templates/admin/translations.php:161
 msgid "Paste or type recipe"
 msgstr "Lim inn eller skriv oppskrift"
 
-#: templates/admin/translations.php:168
+#: templates/admin/translations.php:170
 msgid "Paste or type recipe to start..."
 msgstr "Lim inn eller skriv inn oppskriften for å starte..."
 
-#: templates/admin/translations.php:170
+#: templates/admin/translations.php:172
 msgid "Paste the recipe JSON data to import"
 msgstr "Lim inn oppskriften JSON-data for å importere"
 
-#: templates/admin/translations.php:104
+#: templates/admin/translations.php:105
 msgid "people"
 msgstr "mennesker"
 
@@ -4370,11 +4698,11 @@ msgstr "Utfør en helsesjekk av plugin-en og oppskriftene dine."
 msgid "Performance"
 msgstr "Opptreden"
 
-#: templates/admin/translations.php:433
+#: templates/admin/translations.php:483
 msgid "Permanently Delete"
 msgstr "Slett permanent"
 
-#: templates/admin/translations.php:150
+#: templates/admin/translations.php:152
 msgid "Permanently Delete Recipes"
 msgstr "Slett oppskrifter permanent"
 
@@ -4386,8 +4714,12 @@ msgstr "Tillatelser"
 msgid "Personal YouTube Data API key"
 msgstr "Personlig YouTube Data API-nøkkel"
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-roundup-credit.php:55
+msgid "Photo credit"
+msgstr "Bildekreditt"
+
 #: includes/public/class-wprm-recipe-parser.php:258 
-#: templates/admin/translations.php:314
+#: templates/admin/translations.php:335
 msgid "piece"
 msgstr "stykke"
 
@@ -4404,7 +4736,7 @@ msgid "Pin Description"
 msgstr "Pin Beskrivelse"
 
 #: templates/settings/group-social-sharing.php:87 
-#: templates/admin/translations.php:184
+#: templates/admin/translations.php:186
 msgid "Pin Image"
 msgstr "Pin Bilde"
 
@@ -4445,15 +4777,19 @@ msgstr "halvlitere"
 msgid "Placeholder for the Instacart button"
 msgstr "Plassholder for Instacart-knappen"
 
-#: templates/admin/translations.php:545
+#: templates/admin/translations.php:591
 msgid "Plural"
 msgstr "Flertall"
 
-#: templates/admin/translations.php:274
+#: templates/admin/translations.php:275
 msgid "Plural Name"
 msgstr "Flertallsnavn"
 
-#: templates/admin/translations.php:261
+#: templates/admin/translations.php:408
+msgid "Post"
+msgstr "Post"
+
+#: templates/admin/translations.php:262
 msgid "Post Author"
 msgstr "Post forfatter"
 
@@ -4461,7 +4797,7 @@ msgstr "Post forfatter"
 msgid "Post Author to use for the recipe."
 msgstr "Post Forfatter som skal brukes til oppskriften."
 
-#: templates/admin/translations.php:205
+#: templates/admin/translations.php:207
 msgid "Post Type"
 msgstr "Posttype"
 
@@ -4473,10 +4809,20 @@ msgstr "Post Type & Taksonomier"
 msgid "Post Type Behaviour"
 msgstr "Post Type Atferd"
 
+#: includes/public/class-wprm-list-post-type.php:38
+msgctxt "post type general name"
+msgid "Lists"
+msgstr "Lister"
+
 #: includes/public/class-wprm-post-type.php:41
 msgctxt "post type general name"
 msgid "Recipes"
 msgstr "Oppskrifter"
+
+#: includes/public/class-wprm-list-post-type.php:39
+msgctxt "post type singular name"
+msgid "List"
+msgstr "Liste"
 
 #: includes/public/class-wprm-post-type.php:42
 msgctxt "post type singular name"
@@ -4499,13 +4845,13 @@ msgstr ""
 "Foretrukket plassering for oppskriftsbitene. Starter som standard "
 "innleggsinnholdet."
 
-#: templates/admin/translations.php:173 
+#: templates/admin/translations.php:175 
 #: includes/public/deprecated/class-wprm-template-helper.php:48 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:420
 msgid "Prep Time"
 msgstr "FORBEREDELSESTID"
 
-#: templates/admin/translations.php:105
+#: templates/admin/translations.php:106
 msgid "Pressure cooker"
 msgstr "Trykkoker"
 
@@ -4531,14 +4877,14 @@ msgstr "Skriv Ut Kreditt"
 msgid "Print Footer Ad"
 msgstr "Skriv ut bunntekst annonse"
 
-#: includes/public/class-wprm-blocks.php:221 
-#: templates/admin/translations.php:287 
+#: includes/public/class-wprm-blocks.php:245 
+#: templates/admin/translations.php:305 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:48 
 #: includes/public/shortcodes/recipe/class-wprm-sc-print.php:189
 msgid "Print Recipe"
 msgstr "Skriv ut oppskrift"
 
-#: templates/admin/translations.php:94
+#: templates/admin/translations.php:95
 msgid "Print Recipes"
 msgstr "Skriv ut oppskrifter"
 
@@ -4560,13 +4906,12 @@ msgid "Private Notes"
 msgstr "Private Notater"
 
 #: templates/admin/menu/tools/health-check.php:16
-#, php-format
 msgid "Processing %d post"
 msgid_plural "Processing %d posts"
 msgstr[0] "Behandler %d innlegg"
 msgstr[1] "Behandler %d innlegg"
 
-#: templates/admin/translations.php:565
+#: templates/admin/translations.php:623
 msgid "Product"
 msgstr "Produkt"
 
@@ -4582,7 +4927,7 @@ msgstr "pt"
 msgid "Public - Recipes have their own URL as a custom post type"
 msgstr "Offentlig – Oppskrifter har sin egen URL som en egendefinert posttype"
 
-#: templates/admin/translations.php:233
+#: templates/admin/translations.php:235
 msgid ""
 "Put your cursor in the instruction text and click on an ingredient to add it."
 msgstr ""
@@ -4634,7 +4979,7 @@ msgstr "Gi denne oppskriften 4 av 5 stjerner"
 msgid "Rate this recipe 5 out of 5 stars"
 msgstr "Gi denne oppskriften 5 av 5 stjerner"
 
-#: templates/admin/translations.php:415
+#: templates/admin/translations.php:465
 msgid "Rating"
 msgstr "Vurdering"
 
@@ -4642,7 +4987,7 @@ msgstr "Vurdering"
 msgid "Rating Feature"
 msgstr "Rangeringsfunksjon"
 
-#: templates/admin/translations.php:134
+#: templates/admin/translations.php:136
 msgid "Ratings"
 msgstr "Vurderinger"
 
@@ -4662,7 +5007,7 @@ msgstr "Les Mer"
 msgid "Read the Google Privacy Policy"
 msgstr "Les Googles personvern Regler"
 
-#: templates/admin/translations.php:88
+#: templates/admin/translations.php:89
 msgid "Recalculate Total Time"
 msgstr "Beregn total tid på nytt"
 
@@ -4670,7 +5015,7 @@ msgstr "Beregn total tid på nytt"
 msgid "Recipe"
 msgstr "Oppskrift"
 
-#: templates/settings/group-post-type.php:51
+#: templates/settings/group-post-type.php:54
 msgid "Recipe Archive Page"
 msgstr "Oppskriftsarkivside"
 
@@ -4679,7 +5024,7 @@ msgid "Recipe Author"
 msgstr "Oppskrifts Forfatter"
 
 #: templates/settings/group-recipe-collections.php:15 
-#: templates/admin/translations.php:295
+#: templates/admin/translations.php:313
 msgid "Recipe Collections"
 msgstr "Oppskrifts Samlinger"
 
@@ -4697,7 +5042,7 @@ msgstr ""
 msgid "Recipe CSS"
 msgstr "Recipe CSS"
 
-#: templates/admin/translations.php:540
+#: templates/admin/translations.php:586
 msgid "Recipe Data Size"
 msgstr "Oppskrifts data størrelse"
 
@@ -4713,7 +5058,7 @@ msgstr "Oppskriftsutstyr"
 msgid "Recipe Existence"
 msgstr "Oppskrifts Eksistens"
 
-#: templates/admin/translations.php:447
+#: templates/admin/translations.php:496
 msgid "Recipe Fields"
 msgstr "Oppskrifts Felt"
 
@@ -4721,7 +5066,7 @@ msgstr "Oppskrifts Felt"
 msgid "Recipe fields"
 msgstr "Oppskrifts felt"
 
-#: templates/admin/translations.php:430
+#: templates/admin/translations.php:480
 msgid "Recipe ID"
 msgstr "Oppskrifts-ID"
 
@@ -4729,7 +5074,7 @@ msgstr "Oppskrifts-ID"
 msgid "Recipe ID (required)"
 msgstr "Oppskrifts-ID (påkrevd)"
 
-#: includes/public/class-wprm-print.php:300 
+#: includes/public/class-wprm-print.php:303 
 #: templates/settings/group-social-sharing.php:92
 msgid "Recipe Image"
 msgstr "Oppskrifts bilde"
@@ -4759,21 +5104,21 @@ msgid "Recipe Metadata"
 msgstr "Oppskrifts Metadata"
 
 #: templates/settings/group-social-sharing.php:113 
-#: templates/admin/translations.php:246
+#: templates/admin/translations.php:248
 msgid "Recipe Name"
 msgstr "Navn på oppskriften"
 
 #: templates/settings/group-glossary-terms.php:74 
-#: templates/admin/translations.php:181 
+#: templates/admin/translations.php:183 
 #: includes/public/deprecated/class-wprm-template-helper.php:57
 msgid "Recipe Notes"
 msgstr "Oppskrifts notater"
 
-#: templates/admin/translations.php:288
+#: templates/admin/translations.php:306
 msgid "Recipe Parts"
 msgstr "Oppskriftsdeler"
 
-#: templates/settings/group-post-type.php:63
+#: templates/settings/group-post-type.php:66
 msgid "Recipe Permalink"
 msgstr "Oppskrift Permalink"
 
@@ -4797,7 +5142,7 @@ msgstr "Oppskrifts vurdering"
 msgid "Recipe Roundup"
 msgstr "Oppsummering av Oppskrifter"
 
-#: templates/admin/translations.php:293
+#: templates/admin/translations.php:311
 msgid "Recipe Roundup Item"
 msgstr "Oppskrifts sammendrag"
 
@@ -4806,24 +5151,25 @@ msgid "Recipe Slug"
 msgstr "Oppskrift slug"
 
 #: templates/settings/group-recipe-snippets.php:15 
-#: templates/admin/translations.php:282
+#: templates/admin/translations.php:300
 msgid "Recipe Snippets"
 msgstr "Oppskrifts Biter"
 
 #: templates/settings/group-recipe-submission.php:15 
-#: templates/admin/translations.php:474
+#: templates/admin/translations.php:526
 msgid "Recipe Submission"
 msgstr "Innlevering Av Oppskrifter"
 
-#: templates/admin/translations.php:294
+#: templates/admin/translations.php:312
 msgid "Recipe Submission Form"
 msgstr "Skjema for innlevering av oppskrifter"
 
-#: templates/admin/translations.php:528
+#: templates/admin/translations.php:572
 msgid "Recipe Submission User"
 msgstr "Bruker for innsending av oppskrifter"
 
-#: templates/admin/translations.php:473
+#: includes/public/class-wprm-admin-bar.php:167 
+#: templates/admin/translations.php:525
 msgid "Recipe Submissions"
 msgstr "Innlevering av oppskrifter"
 
@@ -4832,11 +5178,11 @@ msgstr "Innlevering av oppskrifter"
 msgid "Recipe Summary"
 msgstr "Oppsummering av oppskrifter"
 
-#: templates/admin/translations.php:460
+#: templates/admin/translations.php:509
 msgid "Recipe Taxonomies"
 msgstr "Oppskrifts Taksonomier"
 
-#: templates/admin/translations.php:459
+#: templates/admin/translations.php:508
 msgid "Recipe Taxonomy"
 msgstr "Oppskrifts taksonomi"
 
@@ -4849,24 +5195,24 @@ msgstr "Oppskrifts Mal"
 msgid "Recipe Times"
 msgstr "Oppskriftstider"
 
-#: templates/admin/translations.php:245
+#: templates/admin/translations.php:247
 msgid "Recipe Type"
 msgstr "Type oppskrift"
 
-#: templates/admin/translations.php:290 
+#: templates/admin/translations.php:308 
 #: includes/public/deprecated/class-wprm-template-helper.php:56
 msgid "Recipe Video"
 msgstr "Oppskriftsvideo"
 
-#: templates/admin/translations.php:259
+#: templates/admin/translations.php:260
 msgid "recipe-slug"
 msgstr "oppskrift-slug"
 
-#: templates/admin/translations.php:135
+#: templates/admin/translations.php:137
 msgid "Recipes"
 msgstr "Oppskrifter"
 
-#: templates/admin/translations.php:116
+#: templates/admin/translations.php:117
 msgid "Recipes only"
 msgstr "Kun oppskrifter"
 
@@ -4874,7 +5220,7 @@ msgstr "Kun oppskrifter"
 msgid "Recipes to Import"
 msgstr "Oppskrifter å importere"
 
-#: templates/admin/translations.php:117
+#: templates/admin/translations.php:118
 msgid "Recipes with their parent post"
 msgstr "Oppskrifter med foreldreinnlegget deres"
 
@@ -4882,7 +5228,11 @@ msgstr "Oppskrifter med foreldreinnlegget deres"
 msgid "Recommended to run occassionally by clicking on the blue button."
 msgstr "Anbefalt å løpe av og til ved å klikke på den blå knappen."
 
-#: templates/admin/translations.php:322
+#: templates/admin/tools.php:246
+msgid "Recreate Lists in WP Recipe Maker"
+msgstr "Gjenskap lister i WP Recipe Maker"
+
+#: templates/admin/translations.php:343
 msgid "Rectangle"
 msgstr "Rektangel"
 
@@ -4935,11 +5285,11 @@ msgstr "Regelmessig"
 msgid "Regular Font"
 msgstr "Vanlig skrift"
 
-#: templates/admin/translations.php:148
+#: templates/admin/translations.php:150
 msgid "Reload Recipes"
 msgstr "Last opp oppskrifter på nytt"
 
-#: templates/admin/translations.php:312
+#: templates/admin/translations.php:333
 msgid "Remove"
 msgstr "Fjerne"
 
@@ -4947,7 +5297,7 @@ msgstr "Fjerne"
 msgid "remove"
 msgstr "fjerne"
 
-#: templates/admin/translations.php:358
+#: templates/admin/translations.php:379
 msgid "Remove Affiliate Link"
 msgstr "Remove Tilknyttet Link"
 
@@ -4955,11 +5305,11 @@ msgstr "Remove Tilknyttet Link"
 msgid "Remove any links inside the recipe."
 msgstr "Fjern eventuelle lenker inne i oppskriften."
 
-#: templates/admin/translations.php:406
+#: templates/admin/translations.php:459
 msgid "Remove fixed filter"
 msgstr "Fjern det faste filteret"
 
-#: templates/admin/translations.php:340
+#: templates/admin/translations.php:361
 msgid "Remove HTML or Shortcode"
 msgstr "Fjern HTML eller Kort kode"
 
@@ -4967,11 +5317,11 @@ msgstr "Fjern HTML eller Kort kode"
 msgid "Remove Identifier"
 msgstr "Fjern identifikator"
 
-#: templates/admin/translations.php:364
+#: templates/admin/translations.php:384
 msgid "Remove Image"
 msgstr "Fjern bilde"
 
-#: templates/admin/translations.php:338
+#: templates/admin/translations.php:359
 msgid "Remove Link"
 msgstr "Fjern lenke"
 
@@ -4979,23 +5329,31 @@ msgstr "Fjern lenke"
 msgid "Remove links"
 msgstr "Fjern lenker"
 
+#: templates/admin/translations.php:321
+msgid "Remove List Item"
+msgstr "Fjern liste element"
+
 #: templates/admin/translations.php:65
 msgid "Remove Notice"
 msgstr "Fjern varsel"
 
-#: templates/admin/translations.php:107
+#: templates/admin/translations.php:619
+msgid "Remove Product"
+msgstr "Fjern Produktet"
+
+#: templates/admin/translations.php:108
 msgid "Remove rating by author"
 msgstr "Fjern vurdering av forfatter"
 
-#: templates/admin/translations.php:365
+#: templates/admin/translations.php:385
 msgid "Remove Repin ID"
 msgstr "Fjern repin-ID"
 
-#: templates/admin/translations.php:344
+#: templates/admin/translations.php:365
 msgid "Remove Temperature"
 msgstr "Fjern temperatur"
 
-#: templates/admin/translations.php:80
+#: templates/admin/translations.php:81
 msgid "Remove Terms"
 msgstr "Fjern vilkår"
 
@@ -5005,31 +5363,31 @@ msgid ""
 msgstr ""
 "Fjern identifikatoren ovenfor ingrediens notat fra notatene etter import."
 
-#: templates/admin/translations.php:369
+#: templates/admin/translations.php:389
 msgid "Remove Video"
 msgstr "Fjern video"
 
-#: templates/admin/translations.php:372
+#: templates/admin/translations.php:392
 msgid "Remove Video Part"
 msgstr "Fjern videodelen"
 
-#: templates/admin/translations.php:353
+#: templates/admin/translations.php:374
 msgid "Removed Inline Ingredient"
 msgstr "Fjernet innebygd ingrediens"
 
-#: templates/admin/translations.php:436
+#: templates/admin/translations.php:485
 msgid "Rename"
 msgstr "Gi nytt navn"
 
-#: templates/admin/translations.php:496
+#: templates/admin/translations.php:546
 msgid "Repin ID"
 msgstr "Repin ID"
 
-#: templates/admin/translations.php:195
+#: templates/admin/translations.php:197
 msgid "required"
 msgstr "nødvendig"
 
-#: includes/class-wp-recipe-maker.php:218
+#: includes/class-wp-recipe-maker.php:229
 msgid "Required by WP Recipe Maker Premium"
 msgstr "Kreves av WP Recipe Maker Premium"
 
@@ -5041,11 +5399,11 @@ msgstr "Tilbakestill innstillinger"
 msgid "Reset Settings to Default"
 msgstr "Tilbakestill innstillinger til standard"
 
-#: templates/admin/translations.php:178
+#: templates/admin/translations.php:180
 msgid "Resting Time"
 msgstr "Hviletid"
 
-#: templates/admin/translations.php:432
+#: templates/admin/translations.php:482
 msgid "Restore Recipe"
 msgstr "Gjenopprett Oppskrift"
 
@@ -5053,15 +5411,15 @@ msgstr "Gjenopprett Oppskrift"
 msgid "Restrict Ingredient Length"
 msgstr "Begrens Ingrediens Lengde"
 
-#: templates/admin/translations.php:445
+#: templates/admin/translations.php:494
 msgid "Revision"
 msgstr "Revisjon"
 
-#: templates/admin/translations.php:539
+#: templates/admin/translations.php:585
 msgid "Revision ID"
 msgstr "Revisjon ID"
 
-#: templates/admin/translations.php:136
+#: templates/admin/translations.php:138
 msgid "Revisions"
 msgstr "Revisjoner"
 
@@ -5070,7 +5428,7 @@ msgstr "Revisjoner"
 msgid "Right"
 msgstr "Høyre(Right)"
 
-#: templates/admin/translations.php:321
+#: templates/admin/translations.php:342
 msgid "Round"
 msgstr "Rund"
 
@@ -5079,7 +5437,15 @@ msgstr "Rund"
 msgid "Round quantity to"
 msgstr "Rundt antall til"
 
-#: templates/admin/translations.php:404
+#: templates/admin/translations.php:422
+msgid "Roundup Item Name"
+msgstr "Navn på sammendrags element"
+
+#: templates/admin/translations.php:516
+msgid "Roundup Lists"
+msgstr "Oppsummerings lister"
+
+#: templates/admin/translations.php:457
 msgid "rows"
 msgstr "rader"
 
@@ -5107,22 +5473,22 @@ msgstr "Kjør helsesjekk"
 msgid "Running Health Check"
 msgstr "Kjører helsesjekk"
 
-#: includes/public/class-wprm-taxonomies.php:223
+#: includes/public/class-wprm-taxonomies.php:225
 msgid "Salad"
 msgstr "Salat"
 
-#: includes/admin/class-wprm-modal.php:281 
+#: includes/admin/class-wprm-modal.php:311 
 #: templates/settings/group-recipe-defaults.php:55
 msgid "Same author for every recipe"
 msgstr "Samme forfatter for hver oppskrift"
 
-#: templates/admin/translations.php:220 
+#: templates/admin/translations.php:222 
 #: includes/public/shortcodes/recipe/class-wprm-sc-grow.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-slickstream.php:43
 msgid "Save"
 msgstr "Lagre"
 
-#: templates/admin/translations.php:221
+#: templates/admin/translations.php:223
 msgid "Save & Close"
 msgstr "Lagre og lukk"
 
@@ -5130,7 +5496,7 @@ msgstr "Lagre og lukk"
 msgid "Save changed rating"
 msgstr "Lagre endret vurdering"
 
-#: templates/admin/translations.php:391
+#: templates/admin/translations.php:417
 msgid "Save image locally"
 msgstr "Lagre bildet lokalt"
 
@@ -5142,19 +5508,19 @@ msgstr "Lagre for å vokse"
 msgid "Save to Slickstream"
 msgstr "Lagre i Slickstream"
 
-#: templates/admin/translations.php:470
+#: templates/admin/translations.php:522
 msgid "Saved Collection"
 msgstr "Lagret samling"
 
-#: templates/admin/translations.php:141
+#: templates/admin/translations.php:143
 msgid "Saved Collections"
 msgstr "Lagrede samlinger"
 
-#: templates/admin/translations.php:297
+#: templates/admin/translations.php:315
 msgid "Saved Recipe Collection"
 msgstr "Lagret oppskriftssamling"
 
-#: templates/admin/translations.php:219
+#: templates/admin/translations.php:221
 msgid "Saved successfully"
 msgstr "Lagret vellykket"
 
@@ -5179,6 +5545,10 @@ msgstr "Søket er fullført."
 msgid "Search for recipes"
 msgstr "Søk etter oppskrifter"
 
+#: templates/admin/translations.php:618
+msgid "Search Products"
+msgstr "Søk etter produkter"
+
 #: includes/admin/class-wprm-import-manager.php:61
 msgid "Search Recipes"
 msgstr "Søk etter oppskrifter"
@@ -5191,16 +5561,20 @@ msgstr "Søke Resultater"
 msgid "Searching"
 msgstr "Søker"
 
+#: templates/admin/menu/tools/create-lists.php:16
+msgid "Searching %d Create List"
+msgid_plural "Searching %d Create Lists"
+msgstr[0] "Søker %d Opprett Liste"
+msgstr[1] "Søker %d Opprett Lister"
+
 #: templates/admin/menu/tools/wpurp-ingredients.php:27 
 #: templates/admin/menu/tools/wpurp-nutrition.php:15
-#, php-format
 msgid "Searching %d ingredient"
 msgid_plural "Searching %d ingredients"
 msgstr[0] "Søker etter %d ingrediens"
 msgstr[1] "Søker etter %d ingredienser"
 
 #: templates/admin/menu/tools/finding-parents.php:16
-#, php-format
 msgid "Searching %d post"
 msgid_plural "Searching %d posts"
 msgstr[0] "Søker etter %d innlegg"
@@ -5208,7 +5582,6 @@ msgstr[1] "Søker etter %d innlegg"
 
 #: templates/admin/menu/tools/fixing-comment-ratings.php:15 
 #: templates/admin/menu/tools/anonymize-ratings.php:15
-#, php-format
 msgid "Searching %d rating"
 msgid_plural "Searching %d ratings"
 msgstr[0] "Søker etter %d vurdering"
@@ -5218,7 +5591,6 @@ msgstr[1] "Søker etter %d vurderinger"
 #: templates/admin/menu/tools/create-reviews.php:16 
 #: templates/admin/menu/tools/refresh-video-metadata.php:15 
 #: templates/admin/menu/tools/finding-ratings.php:18
-#, php-format
 msgid "Searching %d recipe"
 msgid_plural "Searching %d recipes"
 msgstr[0] "Søker etter %d oppskrift"
@@ -5228,7 +5600,7 @@ msgstr[1] "Søker etter %d oppskrifter"
 msgid "second"
 msgstr "sekund"
 
-#: templates/admin/translations.php:115
+#: templates/admin/translations.php:116
 msgid "Second Unit System"
 msgstr "Andre enhetssystem"
 
@@ -5236,52 +5608,68 @@ msgstr "Andre enhetssystem"
 msgid "seconds"
 msgstr "sekunder"
 
-#: templates/admin/translations.php:152 
+#: templates/admin/translations.php:154 
 #: templates/admin/menu/import/import-recipes.php:60
 msgid "Select"
 msgstr "Plukke ut"
 
-#: templates/admin/translations.php:97
+#: templates/admin/translations.php:98
 msgid "Select an action to perform:"
 msgstr "Velg en handling som skal utføres:"
 
-#: templates/admin/translations.php:375
+#: templates/admin/translations.php:395
 msgid "Select from list or type to create..."
 msgstr "Velg fra liste eller skriv for å opprette..."
 
-#: templates/admin/translations.php:376
+#: templates/admin/translations.php:396
 msgid "Select from list..."
 msgstr "Velg fra liste..."
 
-#: templates/admin/translations.php:366
+#: templates/admin/translations.php:386
 msgid "Select Image"
 msgstr "Velg Bilde"
 
-#: templates/admin/translations.php:301
+#: templates/admin/translations.php:319
 msgid "Select ingredients..."
 msgstr "Velg ingredienser..."
 
-#: templates/admin/translations.php:151
+#: templates/admin/translations.php:153
 msgid "Select Media"
 msgstr "Velg Media"
 
-#: templates/admin/translations.php:380
+#: templates/admin/translations.php:404
+msgid "Select or search a list"
+msgstr "Velg eller søk i en liste"
+
+#: templates/admin/translations.php:400
+msgid "Select or search a post"
+msgstr "Velg eller søk etter et innlegg"
+
+#: templates/admin/translations.php:402
 msgid "Select or search a recipe"
 msgstr "Velg eller søk etter en oppskrift"
 
-#: templates/admin/translations.php:384
+#: templates/admin/translations.php:409
 msgid "Select Roundup Recipe"
 msgstr "Velg oppsummerings oppskrift"
 
-#: templates/admin/translations.php:482
+#: templates/admin/translations.php:615
+msgid ""
+"Selecting an Amazon Product will overwrite the current link. Are you sure "
+"you want to continue?"
+msgstr ""
+"Å velge et Amazon-produkt vil overskrive gjeldende lenke. Er du sikker på at "
+"du vil fortsette?"
+
+#: templates/admin/translations.php:534
 msgid "SEO"
 msgstr "SEO"
 
-#: templates/admin/translations.php:224
+#: templates/admin/translations.php:226
 msgid "Serving Size"
 msgstr "Serverings størrelse"
 
-#: templates/admin/translations.php:252 
+#: templates/admin/translations.php:254 
 #: includes/public/deprecated/class-wprm-template-helper.php:51 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:415
 msgid "Servings"
@@ -5300,9 +5688,13 @@ msgstr ""
 "malsnegl. La stå tomt for standard utskriftsmal som definert i "
 "innstillingene."
 
-#: templates/admin/translations.php:558
+#: templates/admin/translations.php:604
 msgid "Set Affiliate Link"
 msgstr "Sett tilknyttet lenke"
+
+#: templates/admin/translations.php:614
+msgid "Set ASIN from Amazon Link"
+msgstr "Sett ASIN fra Amazon Link"
 
 #: templates/settings/group-adjustable-servings.php:131
 msgid "Set servings through URL"
@@ -5317,9 +5709,17 @@ msgstr ""
 msgid "Set the loop option for uploaded (not embedded) videos."
 msgstr "Angi loop-alternativet for opplastede (ikke innebygde) videoer."
 
-#: templates/admin/translations.php:90
+#: templates/admin/translations.php:91
 msgid "Set User Rating by Author"
 msgstr "Angi brukervurdering etter forfatter"
+
+#: templates/admin/tools.php:117
+msgid ""
+"Set your Amazon Store ID on the WP Recipe Maker > Settings > Amazon Products "
+"page to enable these tools."
+msgstr ""
+"Angi Amazon Store-ID-en din på siden WP Recipe Maker > Innstillinger > "
+"Amazon-produkter for å aktivere disse verktøyene.\n"
 
 #: includes/public/class-wprm-settings.php:63
 msgid "Settings"
@@ -5349,29 +5749,38 @@ msgstr "Del på Facebook"
 msgid "Share on Twitter"
 msgstr "Del på Twitter"
 
-#: templates/settings/group-integrations.php:24 
+#: templates/settings/group-integrations.php:8 
 #: templates/admin/translations.php:28
 msgid "Shoppable Recipes with Instacart"
 msgstr "Kjøpbare oppskrifter med Instacart"
 
-#: templates/admin/translations.php:124 
+#: templates/admin/translations.php:126 
 #: templates/admin/menu/tools/wpurp-ingredients.php:17
 msgid "Shopping List Group"
 msgstr "Handleliste gruppe"
 
-#: templates/admin/translations.php:248
+#: templates/admin/translations.php:250
 msgid "Short description of this recipe..."
 msgstr "Kort beskrivelse av denne oppskriften..."
 
-#: templates/admin/translations.php:491
+#: templates/admin/translations.php:423
+msgid "Short description of this roundup item..."
+msgstr ""
+"Kort beskrivelse av dette oppsummerings elementet...\n"
+
+#: templates/admin/translations.php:440
 msgid "Shortcode"
 msgstr "Kort kode"
+
+#: includes/public/class-wprm-admin-bar.php:133
+msgid "Shortcuts"
+msgstr "Snarveier"
 
 #: templates/settings/group-recipe-print.php:81
 msgid "Should work as a background for white text"
 msgstr "Skal fungere som bakgrunn for hvit tekst"
 
-#: templates/admin/translations.php:298
+#: templates/admin/translations.php:316
 msgid "Show \"0\" in template"
 msgstr "Vis \"0\" i malen"
 
@@ -5395,11 +5804,15 @@ msgstr "Vis en egendefinert melding"
 msgid "Show adjustable buttons when no servings set"
 msgstr "Vis justerbare knapper når ingen porsjoner er satt"
 
+#: templates/settings/group-permissions.php:95
+msgid "Show Admin Bar Menu Item"
+msgstr "Vis menyelementet på administrasjonslinjen"
+
 #: templates/settings/group-recipe-template.php:32
 msgid "Show advanced options"
 msgstr "Vis avanserte innstillinger"
 
-#: templates/admin/translations.php:483
+#: templates/admin/translations.php:450
 msgid "Show All"
 msgstr "Vis alt"
 
@@ -5411,7 +5824,7 @@ msgstr ""
 "Vis alle oppskrifter på Administrer-siden, selv om en bruker ikke vil kunne "
 "redigere dem."
 
-#: templates/settings/group-post-type.php:94
+#: templates/settings/group-post-type.php:97
 msgid "Show default WordPress UI"
 msgstr "Vis standard WordPress UI"
 
@@ -5427,10 +5840,6 @@ msgstr "Vis søkeord i malen"
 #: templates/settings/group-metadata.php:57
 msgid "Show keywords in the recipe template as well as the metadata."
 msgstr "Vis nøkkelord i oppskrifts malen samt metadata."
-
-#: templates/settings/group-integrations.php:96
-msgid "Show label for all recipes"
-msgstr "Vis etikett for alle oppskrifter"
 
 #: templates/settings/group-recipe-template.php:25
 msgid "Show non-food recipe types"
@@ -5453,11 +5862,18 @@ msgstr "Vis tid når den har en verdi på 0."
 msgid "Show values when 0"
 msgstr "Vis verdier når 0"
 
-#: templates/admin/translations.php:402
+#: templates/settings/group-permissions.php:96
+msgid ""
+"Show WP Recipe Maker in Admin Bar on frontend for easy editing and shortcuts."
+msgstr ""
+"Vis WP Recipe Maker i Admin Bar på frontend for enkel redigering og "
+"snarveier."
+
+#: templates/admin/translations.php:455
 msgid "Showing"
 msgstr "Viser"
 
-#: includes/public/class-wprm-taxonomies.php:222
+#: includes/public/class-wprm-taxonomies.php:224
 msgid "Side Dish"
 msgstr "Siderett"
 
@@ -5469,7 +5885,7 @@ msgstr ""
 "Forenkle ernæringsfakta og API-arbeidsflyt for enhetskonvertering for ikke-"
 "engelske nettsteder ved å automatisk oversette ingredienser."
 
-#: templates/admin/translations.php:273
+#: templates/admin/translations.php:274
 msgid "Singular Name"
 msgstr "Entalls navn"
 
@@ -5493,7 +5909,7 @@ msgstr "skiver"
 msgid "Slider in Tooltip"
 msgstr "Skyveknapp i Verktøytips"
 
-#: templates/admin/translations.php:258
+#: templates/admin/translations.php:259
 msgid "Slug"
 msgstr "Slug"
 
@@ -5505,11 +5921,19 @@ msgstr ""
 "Slug brukt i URL-en for utskriftssider. Pass på at det ikke er noen konflikt "
 "med andre sider!"
 
-#: includes/public/class-wprm-print.php:405
+#: includes/public/class-wprm-print.php:409
 msgid "Smaller"
 msgstr "Mindre"
 
-#: includes/public/class-wprm-taxonomies.php:225
+#: templates/settings/group-integrations.php:46
+msgid "SmartWithFood"
+msgstr "SmartWithFood"
+
+#: templates/settings/group-integrations.php:52
+msgid "SmartWithFood Token"
+msgstr "SmartWithFood Token"
+
+#: includes/public/class-wprm-taxonomies.php:227
 msgid "Snack"
 msgstr "Matbit"
 
@@ -5536,19 +5960,19 @@ msgstr "Noe gikk galt under lagringen."
 msgid "Something went wrong."
 msgstr "Noe gikk galt."
 
-#: templates/admin/translations.php:268
+#: templates/admin/translations.php:269
 msgid "Something went wrong. Make sure this key does not exist yet."
 msgstr "Noe gikk galt. Sørg for at denne nøkkelen ikke eksisterer ennå."
 
-#: templates/admin/translations.php:216
+#: templates/admin/translations.php:218
 msgid "Something went wrong. Please contact support."
 msgstr "Noe gikk galt. Vennligst kontakt support."
 
-#: templates/admin/translations.php:409
+#: templates/admin/translations.php:433
 msgid "Sort:"
 msgstr "Sortere:"
 
-#: includes/public/class-wprm-taxonomies.php:220
+#: includes/public/class-wprm-taxonomies.php:222
 msgid "Soup"
 msgstr "Suppe"
 
@@ -5573,7 +5997,7 @@ msgstr "Del på linjeskift og tegnsetting (.!?)"
 msgid "Square"
 msgstr "Square"
 
-#: templates/admin/translations.php:417
+#: templates/admin/translations.php:467
 msgid "star"
 msgstr "stjerne"
 
@@ -5589,7 +6013,7 @@ msgstr "Stjerne Rangeringer"
 msgid "Star Size"
 msgstr "Stjernestørrelse"
 
-#: templates/admin/translations.php:418
+#: templates/admin/translations.php:468
 msgid "stars"
 msgstr "stjerner"
 
@@ -5613,11 +6037,11 @@ msgstr "Start Status"
 msgid "State of the instruction media toggle when the page loads."
 msgstr "Status for instruksjonsmediet veksler når siden lastes."
 
-#: templates/admin/translations.php:260
+#: templates/admin/translations.php:261
 msgid "Status"
 msgstr "Status"
 
-#: templates/admin/translations.php:309
+#: templates/admin/translations.php:330
 msgid "Step Summary"
 msgstr "Trinnsammendrag"
 
@@ -5625,27 +6049,35 @@ msgstr "Trinnsammendrag"
 msgid "Still searching, keep this page open."
 msgstr "Søker fortsatt, hold denne siden åpen."
 
+#: templates/settings/group-analytics.php:19
+msgid ""
+"Store actions locally in your own database. Does not send data to other "
+"servers."
+msgstr ""
+"Lagre handlinger lokalt i din egen database. Sender ikke data til andre "
+"servere."
+
 #: templates/settings/group-glossary-terms.php:95
 msgid "Styling for glossary terms"
 msgstr "Styling for ordlisteuttrykk"
 
-#: templates/admin/translations.php:335
+#: templates/admin/translations.php:356
 msgid "Subscript"
 msgstr "Subscript"
 
-#: templates/admin/translations.php:331
+#: templates/admin/translations.php:352
 msgid "Suggestions:"
 msgstr "Forslag:"
 
-#: templates/admin/translations.php:156
+#: templates/admin/translations.php:158
 msgid "Summary"
 msgstr "Sammendrag"
 
-#: templates/admin/translations.php:336
+#: templates/admin/translations.php:357
 msgid "Superscript"
 msgstr "Superscript"
 
-#: templates/admin/translations.php:92
+#: templates/admin/translations.php:93
 msgid "Switch ingredient units with converted ones (does not change label)"
 msgstr "Bytt ingrediensenheter med konverterte (endrer ikke etikett)"
 
@@ -5669,7 +6101,7 @@ msgstr "spiseskjeer"
 msgid "Tag Term Fields"
 msgstr "Tag term felt"
 
-#: templates/settings/group-post-type.php:107
+#: templates/settings/group-post-type.php:110
 msgid ""
 "Take control of the output for recipe archive pages. Disable to let your "
 "theme handle things."
@@ -5681,89 +6113,89 @@ msgstr ""
 msgid "Take over author of parent post"
 msgstr "Overta forfatter av overordnet innlegg"
 
-#: templates/settings/group-post-type.php:90 
-#: templates/admin/translations.php:524 
+#: templates/settings/group-post-type.php:93 
+#: templates/admin/translations.php:568 
 #: includes/admin/menu/class-wprm-admin-menu.php:74 
 #: includes/admin/menu/class-wprm-admin-menu.php:74
 msgid "Taxonomies"
 msgstr "Taksonomier"
 
-#: includes/public/class-wprm-taxonomies.php:105
+#: includes/public/class-wprm-taxonomies.php:107
 msgctxt "taxonomy general name"
 msgid "Courses"
 msgstr "Retter"
 
-#: includes/public/class-wprm-taxonomies.php:109
+#: includes/public/class-wprm-taxonomies.php:111
 msgctxt "taxonomy general name"
 msgid "Cuisines"
 msgstr "Kjøkken"
 
-#: includes/public/class-wprm-taxonomies.php:113
+#: includes/public/class-wprm-taxonomies.php:115
 msgctxt "taxonomy general name"
 msgid "Diets"
 msgstr "Dietter"
 
-#: includes/public/class-wprm-taxonomies.php:133
+#: includes/public/class-wprm-taxonomies.php:135
 msgctxt "taxonomy general name"
 msgid "Equipment"
 msgstr "Utstyr"
 
-#: includes/public/class-wprm-taxonomies.php:129
+#: includes/public/class-wprm-taxonomies.php:131
 msgctxt "taxonomy general name"
 msgid "Glossary Terms"
 msgstr "Ordliste Vilkår"
 
-#: includes/public/class-wprm-taxonomies.php:125
+#: includes/public/class-wprm-taxonomies.php:127
 msgctxt "taxonomy general name"
 msgid "Ingredient Units"
 msgstr "Ingrediens Enheter"
 
-#: includes/public/class-wprm-taxonomies.php:121
+#: includes/public/class-wprm-taxonomies.php:123
 msgctxt "taxonomy general name"
 msgid "Ingredients"
 msgstr "Ingredienser"
 
-#: includes/public/class-wprm-taxonomies.php:117
+#: includes/public/class-wprm-taxonomies.php:119
 msgctxt "taxonomy general name"
 msgid "Keywords"
 msgstr "Nøkkelord"
 
-#: includes/public/class-wprm-taxonomies.php:106
+#: includes/public/class-wprm-taxonomies.php:108
 msgctxt "taxonomy singular name"
 msgid "Course"
 msgstr "Rett"
 
-#: includes/public/class-wprm-taxonomies.php:110
+#: includes/public/class-wprm-taxonomies.php:112
 msgctxt "taxonomy singular name"
 msgid "Cuisine"
 msgstr "Kjøkken"
 
-#: includes/public/class-wprm-taxonomies.php:114
+#: includes/public/class-wprm-taxonomies.php:116
 msgctxt "taxonomy singular name"
 msgid "Diet"
 msgstr "Kosthold"
 
-#: includes/public/class-wprm-taxonomies.php:134
+#: includes/public/class-wprm-taxonomies.php:136
 msgctxt "taxonomy singular name"
 msgid "Equipment"
 msgstr "Utstyr"
 
-#: includes/public/class-wprm-taxonomies.php:130
+#: includes/public/class-wprm-taxonomies.php:132
 msgctxt "taxonomy singular name"
 msgid "Glossary Term"
 msgstr "Ordliste vilkår"
 
-#: includes/public/class-wprm-taxonomies.php:122
+#: includes/public/class-wprm-taxonomies.php:124
 msgctxt "taxonomy singular name"
 msgid "Ingredient"
 msgstr "Ingrediens"
 
-#: includes/public/class-wprm-taxonomies.php:126
+#: includes/public/class-wprm-taxonomies.php:128
 msgctxt "taxonomy singular name"
 msgid "Ingredient Unit"
 msgstr "Ingrediens enhet"
 
-#: includes/public/class-wprm-taxonomies.php:118
+#: includes/public/class-wprm-taxonomies.php:120
 msgctxt "taxonomy singular name"
 msgid "Keyword"
 msgstr "Nøkkelord"
@@ -5781,7 +6213,7 @@ msgid "tbs"
 msgstr "ss"
 
 #: includes/public/class-wprm-recipe-parser.php:220 
-#: templates/admin/translations.php:315
+#: templates/admin/translations.php:336
 msgid "tbsp"
 msgstr "ss"
 
@@ -5802,12 +6234,12 @@ msgid "Tell Pinterest NOT to display pins as rich pins on recipe pages."
 msgstr ""
 "Fortell Pinterest om IKKE å vise pins som rike pins på oppskriftssider."
 
-#: templates/admin/translations.php:348
+#: templates/admin/translations.php:369
 msgid "Temperature tooltip (e.g. Fan Assisted Heating):"
 msgstr ""
 "Temperaturverktøytips (f.eks. vifteassistert oppvarming):\n"
 
-#: templates/admin/translations.php:347
+#: templates/admin/translations.php:368
 msgid "Temperature value (e.g. 350):"
 msgstr "Temperaturverdi (f.eks. 350):"
 
@@ -5840,11 +6272,11 @@ msgstr "Mal Modus"
 msgid "Template Options"
 msgstr "Mal Alternativer"
 
-#: templates/settings/group-post-type.php:114
+#: templates/settings/group-post-type.php:117
 msgid "Template to output on recipe archive pages."
 msgstr "Mal for utgang på oppskrifts arkiv sider."
 
-#: templates/admin/translations.php:533
+#: templates/admin/translations.php:579
 msgid "Term"
 msgstr "Begrep"
 
@@ -5860,7 +6292,7 @@ msgstr ""
 "Termkoblinger kan settes gjennom siden WP Recipe Maker > Administrer > "
 "Oppskriftsfelt."
 
-#: templates/admin/translations.php:526
+#: templates/admin/translations.php:570
 msgid "Terms"
 msgstr "Vilkår"
 
@@ -5916,6 +6348,10 @@ msgstr ""
 msgid "The \"Template Editor\" feature can only work in \"Modern\" mode."
 msgstr "\"Malredigering\"-funksjonen kan bare fungere i \"Moderne\"-modus."
 
+#: templates/settings/group-amazon.php:135
+msgid "The Amazon store to use for your affiliate links."
+msgstr "Amazon-butikken du kan bruke for tilknyttede lenker."
+
 #: includes/public/shortcodes/recipe/class-wprm-sc-add-to-collection.php:31
 msgid ""
 "The button will only show up when a link to the collections feature is set "
@@ -5948,11 +6384,11 @@ msgstr ""
 "Den estimerte kostnaden for materialene som forbrukes ved utførelse av "
 "instruksjoner. Brukes i metadataene."
 
-#: templates/admin/translations.php:362
+#: templates/admin/translations.php:382
 msgid "The image should have at least this height:"
 msgstr "Bildet bør ha minst denne høyden:"
 
-#: templates/admin/translations.php:361
+#: templates/admin/translations.php:381
 msgid "The image should have at least this width:"
 msgstr "Bildet bør ha minst denne bredden:"
 
@@ -5964,30 +6400,37 @@ msgstr "Instruksjons videoene"
 msgid "The main recipe video"
 msgstr "Hovedoppskrifts videoen"
 
-#: templates/admin/translations.php:215
+#: templates/admin/translations.php:217
 msgid ""
 "The recipe has been copied and can be used in the \"Import from JSON\" "
 "feature."
 msgstr "Oppskriften er kopiert og kan brukes i «Importer fra JSON»-funksjonen."
 
-#: templates/admin/translations.php:171
+#: templates/admin/translations.php:173
 msgid "The recipe has been imported."
 msgstr "Oppskriften er importert."
 
-#: templates/settings/group-recipe-roundup.php:66
-msgid ""
-"The roundup item will only show up if the recipe status is \"Published\"."
+#: templates/settings/group-recipe-roundup.php:85
+msgid "The roundup item will only show up if it has the \"Published\" status."
 msgstr ""
-"Oppsummerings elementet vil bare vises hvis oppskrifts statusen er "
-"\"Publisert\"."
+"Oppsummerings elementet vil bare vises hvis det har statusen \"Publisert\"."
 
-#: templates/admin/translations.php:225
+#: templates/settings/group-integrations.php:53
+msgid ""
+"The token provided by SmartWithFood. Required to make the button show up."
+msgstr "Tokenet levert av SmartWithFood. Nødvendig for at knappen skal vises."
+
+#: templates/admin/translations.php:227
 msgid "The weight of 1 serving. Does not affect the calculation."
 msgstr "Vekten av 1 porsjon. Påvirker ikke beregningen."
 
 #: templates/admin/menu/import/import-overview.php:28
 msgid "These importers are only available in"
 msgstr "Disse importørene er kun tilgjengelige i"
+
+#: templates/admin/translations.php:285
+msgid "These recipes are great for a kids birthday party."
+msgstr "Disse oppskriftene er flotte for en barnebursdag."
 
 #: templates/settings/group-legacy.php:16
 msgid ""
@@ -6004,7 +6447,7 @@ msgstr ""
 "Disse innstillingene endrer standardverdien når du begynner å lage en ny "
 "oppskrift."
 
-#: templates/admin/translations.php:222
+#: templates/admin/translations.php:224
 msgid "These should be the nutrition facts for 1 serving of your recipe."
 msgstr "Dette bør være ernæringsfakta for 1 porsjon av oppskriften din."
 
@@ -6021,16 +6464,21 @@ msgstr "Denne tilpassede stylingen vil bli publisert på nettstedet ditt."
 msgid "This feature is only available in"
 msgstr "Denne funksjonen er kun tilgjengelig i"
 
-#: includes/public/class-wprm-blocks.php:261
+#: includes/public/class-wprm-blocks.php:328
+msgid "This is a \"WPRM List\" block with a non-existing recipe ID."
+msgstr ""
+"Dette er en \"WPRM List\"-blokk med en ikke-eksisterende oppskrifts-ID."
+
+#: includes/public/class-wprm-blocks.php:285
 msgid "This is a \"WPRM Recipe\" block with a non-existing recipe ID."
 msgstr ""
 "Dette er en \"WPRM Oppskrift\"-blokk med en ikke-eksisterende oppskrifts-ID."
 
-#: templates/admin/translations.php:306
+#: templates/admin/translations.php:327
 msgid "This is one step of the instructions."
 msgstr "Dette er ett trinn i instruksjonene."
 
-#: templates/admin/translations.php:217
+#: templates/admin/translations.php:219
 msgid "This is taking a long time. Maybe something went wrong?"
 msgstr "Dette tar lang tid. Kanskje noe gikk galt?"
 
@@ -6063,7 +6511,7 @@ msgstr ""
 "Dette vil vises der %voted% plassholderen brukes, hvis brukeren har en "
 "brukervurderingsstemme for denne oppskriften."
 
-#: templates/admin/translations.php:532
+#: templates/admin/translations.php:576
 msgid ""
 "This will update the term anywhere you are using it. Take note that terms "
 "are case insensitive (t and T will be seen as the same unit and both get "
@@ -6073,7 +6521,7 @@ msgstr ""
 "at termer ikke skiller mellom store og små bokstaver (t og T vil bli sett på "
 "som samme enhet og begge erstattes)."
 
-#: templates/admin/translations.php:438
+#: templates/admin/translations.php:487
 msgid ""
 "This will update the unit for all recipes using it. Take note that terms are "
 "case insensitive (t and T will be seen as the same unit and both get "
@@ -6087,25 +6535,25 @@ msgstr ""
 msgid "Time Fields"
 msgstr "Tidsfelt"
 
-#: templates/admin/translations.php:207
+#: templates/admin/translations.php:209
 msgid "Times"
 msgstr "Tider"
 
-#: templates/admin/translations.php:241
+#: templates/admin/translations.php:243
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add equipment."
 msgstr ""
 "Tips: bruk TAB-tasten for å flytte fra felt til felt og enkelt legge til "
 "utstyr."
 
-#: templates/admin/translations.php:202
+#: templates/admin/translations.php:204
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add ingredients."
 msgstr ""
 "Tips: Bruk TAB-tasten for å flytte fra felt til felt og enkelt legge til "
 "ingredienser."
 
-#: templates/admin/translations.php:239
+#: templates/admin/translations.php:241
 msgid ""
 "Tip: use the TAB key to move from field to field and easily add instructions."
 msgstr ""
@@ -6120,7 +6568,7 @@ msgstr "til"
 msgid "Tools"
 msgstr "Verktøy"
 
-#: templates/admin/translations.php:534
+#: templates/admin/translations.php:580
 msgid "Tooltip"
 msgstr "Verktøytips"
 
@@ -6136,22 +6584,30 @@ msgstr "Topp oppskrifts interaksjoner (siste 7 dager)"
 msgid "Total"
 msgstr "Total"
 
-#: templates/admin/translations.php:223
+#: templates/admin/translations.php:225
 msgid "Total servings for this recipe:"
 msgstr "Totalt antall porsjoner for denne oppskriften:"
 
-#: templates/admin/translations.php:180 
+#: templates/admin/translations.php:182 
 #: includes/public/deprecated/class-wprm-template-helper.php:50 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:423
 msgid "Total Time"
 msgstr "Total tid"
+
+#: templates/settings/group-analytics.php:63
+msgid ""
+"Track actions using gtag.js events for usage in Google Analytics. Make sure "
+"gtag.js is already loaded on your site."
+msgstr ""
+"Spor handlinger ved å bruke gtag.js-hendelser for bruk i Google Analytics. "
+"Sørg for at gtag.js allerede er lastet inn på nettstedet ditt."
 
 #: templates/admin/translations.php:52
 msgid "Track different visitor actions related to recipes."
 msgstr ""
 "Spor forskjellige besøkendes handlinger relatert til oppskrifter.\n"
 
-#: templates/settings/group-analytics.php:20
+#: templates/settings/group-analytics.php:25
 msgid ""
 "Track different visitor actions related to recipes. Might require changes to "
 "your cookie or privacy policy!"
@@ -6167,7 +6623,7 @@ msgstr "Oversettelses API"
 msgid "Transparent Stars when not Voted"
 msgstr "Gjennomsiktige stjerner når de ikke er stemt"
 
-#: templates/admin/translations.php:446
+#: templates/admin/translations.php:495
 msgid "Trash"
 msgstr "Søppel"
 
@@ -6187,7 +6643,7 @@ msgstr ""
 msgid "Try to force a page break after every recipe when printing."
 msgstr "Prøv å tvinge et side skift etter hver oppskrift når du skriver ut."
 
-#: templates/admin/translations.php:387
+#: templates/admin/translations.php:413
 msgid "Try to load details from URL"
 msgstr "Prøv å laste inn detaljer fra URL"
 
@@ -6249,7 +6705,7 @@ msgstr ""
 "Skriv inn navnet på skriften du vil bruke. Kontroller at skriften allerede "
 "er lastet inn."
 
-#: templates/admin/translations.php:334
+#: templates/admin/translations.php:355
 msgid "Underline"
 msgstr "Understrek"
 
@@ -6261,14 +6717,15 @@ msgstr "Understrek stil"
 msgid "Unique"
 msgstr "Unik"
 
-#: templates/admin/translations.php:194
+#: templates/admin/translations.php:196
 msgid "Unit"
 msgstr "Enhet"
 
 #: includes/public/class-wprm-analytics.php:45 
 #: templates/settings/group-adjustable-servings.php:74 
 #: templates/settings/group-unit-conversion.php:15 
-#: templates/admin/translations.php:192 
+#: templates/admin/translations.php:194 
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:182 
 #: includes/public/shortcodes/recipe/class-wprm-sc-ingredients.php:303
 msgid "Unit Conversion"
 msgstr "Enhets Konvertering"
@@ -6290,7 +6747,7 @@ msgstr ""
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: templates/settings/group-analytics.php:30
+#: templates/settings/group-analytics.php:35
 msgid "Unlimited (not recommended for database growth)"
 msgstr "Ubegrenset (anbefales ikke for databasevekst)"
 
@@ -6302,12 +6759,16 @@ msgstr "Fjern lagring fra Grow"
 msgid "Unsave from Slickstream"
 msgstr "Fjern lagring fra Slickstream"
 
+#: templates/elementor/widget-list.php:116
+msgid "Unset selected list"
+msgstr "Fjern valgt liste"
+
 #: templates/elementor/widget-recipe.php:116 
 #: templates/elementor/widget-roundup.php:80
 msgid "Unset selected recipe"
 msgstr "Fjern valgt oppskrift"
 
-#: templates/admin/translations.php:235
+#: templates/admin/translations.php:237
 msgid "Unused ingredients:"
 msgstr "Ubrukte ingredienser:"
 
@@ -6319,11 +6780,11 @@ msgstr "Oppgrader WP Recipe Maker"
 msgid "Upgrade WPRM"
 msgstr "Oppgrader WPRM"
 
-#: templates/admin/translations.php:370
+#: templates/admin/translations.php:390
 msgid "Upload Instruction Video"
 msgstr "Last opp instruksjonsvideo"
 
-#: templates/admin/translations.php:378
+#: templates/admin/translations.php:398
 msgid "Upload Video"
 msgstr "Last opp video"
 
@@ -6345,7 +6806,7 @@ msgstr "URL-parameter"
 msgid "URL Parameter to use to set a specific serving size"
 msgstr "URL-parameter som skal brukes til å angi en bestemt visningsstørrelse"
 
-#: templates/admin/translations.php:395
+#: templates/admin/translations.php:426
 msgid "Use"
 msgstr "Bruk"
 
@@ -6378,6 +6839,10 @@ msgstr "Bruk Egendefinert Hash for Første Video på Siden"
 msgid "Use Custom Styling"
 msgstr "Bruk Tilpasset Styling"
 
+#: templates/settings/group-recipe-defaults.php:127
+msgid "Use Days for Recipe Times"
+msgstr "Bruk Dager for Oppskrifts Tider"
+
 #: templates/settings/group-adjustable-servings.php:154
 msgid "Use decimal comma - 0,5"
 msgstr "Bruk desimalkomma - 0,5"
@@ -6386,14 +6851,18 @@ msgstr "Bruk desimalkomma - 0,5"
 msgid "Use decimal point - 0.5"
 msgstr "Bruk desimaltegn - 0,5"
 
-#: includes/admin/class-wprm-modal.php:289 
-#: includes/admin/class-wprm-modal.php:322 
-#: includes/admin/class-wprm-modal.php:355 
-#: includes/admin/class-wprm-modal.php:388 templates/admin/translations.php:113
+#: includes/admin/class-wprm-modal.php:319 
+#: includes/admin/class-wprm-modal.php:352 
+#: includes/admin/class-wprm-modal.php:385 
+#: includes/admin/class-wprm-modal.php:418 templates/admin/translations.php:114
 msgid "Use Default"
 msgstr "Bruk Standard"
 
-#: templates/admin/translations.php:386
+#: templates/admin/translations.php:291
+msgid "Use default from settings"
+msgstr "Bruk standard fra innstillinger"
+
+#: templates/admin/translations.php:412
 msgid "Use external recipe from a different website"
 msgstr "Bruk ekstern oppskrift fra et annet nettsted"
 
@@ -6403,7 +6872,7 @@ msgstr ""
 "Bruk fremhevet bilde av overordnet innlegg hvis det ikke er angitt noe "
 "oppskriftsbilde."
 
-#: templates/admin/translations.php:292
+#: templates/admin/translations.php:310
 msgid "Use for a list of existing recipes on your website"
 msgstr "Bruk for en liste over eksisterende oppskrifter på nettstedet ditt"
 
@@ -6433,16 +6902,16 @@ msgstr "Bruk lenke for Post Forfatter"
 msgid "Use Mixed Fractions"
 msgstr "Bruk Blandede Brøker"
 
-#: includes/admin/class-wprm-modal.php:313 
-#: includes/admin/class-wprm-modal.php:346 
-#: includes/admin/class-wprm-modal.php:379 
+#: includes/admin/class-wprm-modal.php:343 
+#: includes/admin/class-wprm-modal.php:376 
+#: includes/admin/class-wprm-modal.php:409 
 #: templates/settings/group-links.php:115 
 #: templates/settings/group-links.php:142 
 #: templates/settings/group-links.php:169
 msgid "Use Nofollow"
 msgstr "Bruk Ingen Følgere"
 
-#: templates/admin/translations.php:351
+#: templates/admin/translations.php:372
 msgid "Use nofollow"
 msgstr "Bruk ingen følgere "
 
@@ -6454,9 +6923,13 @@ msgstr "Bruk ingen åpner for eksterne lenker"
 msgid "Use noreferrer for external links"
 msgstr "Bruk ingen henviser for eksterne lenker"
 
-#: templates/admin/translations.php:385
+#: templates/admin/translations.php:410
 msgid "Use one of your own recipes"
 msgstr "Bruk en av dine egne oppskrifter"
+
+#: templates/admin/translations.php:411
+msgid "Use one your posts or pages"
+msgstr "Bruk en av dine innlegg eller sider"
 
 #: templates/admin/menu/import/import-overview.php:106
 msgid "Use our Find Parents tool first and Find Ratings afterwards"
@@ -6478,7 +6951,7 @@ msgstr ""
 msgid "Use regular instruction text if name is not set"
 msgstr "Bruk vanlig instruksjonstekst hvis navn ikke er angitt"
 
-#: templates/admin/translations.php:367
+#: templates/admin/translations.php:387
 msgid "Use Repin ID"
 msgstr "Bruk Repin ID"
 
@@ -6499,16 +6972,16 @@ msgstr "Bruk SHIFT-klikk for å (av)sjekke flere oppskrifter samtidig."
 msgid "Use shortcodes where you want the snippets to appear."
 msgstr "Bruk kortkoder der du vil at tekstutdragene skal vises."
 
-#: includes/admin/class-wprm-modal.php:314 
-#: includes/admin/class-wprm-modal.php:347 
-#: includes/admin/class-wprm-modal.php:380 
+#: includes/admin/class-wprm-modal.php:344 
+#: includes/admin/class-wprm-modal.php:377 
+#: includes/admin/class-wprm-modal.php:410 
 #: templates/settings/group-links.php:116 
 #: templates/settings/group-links.php:143 
 #: templates/settings/group-links.php:170
 msgid "Use Sponsored"
 msgstr "Bruk Sponset"
 
-#: templates/admin/translations.php:352
+#: templates/admin/translations.php:373
 msgid "Use sponsored"
 msgstr "Bruk sponset"
 
@@ -6535,7 +7008,15 @@ msgstr ""
 "øverst i innlegget ditt med innstillingen. Kan for eksempel brukes til "
 "knappene Gå til oppskrift og Skriv ut oppskrift."
 
-#: templates/admin/translations.php:162
+#: templates/settings/group-amazon.php:129
+msgid ""
+"Use the Amazon Product API to easily search for Amazon products to link to "
+"your equipment."
+msgstr ""
+"Bruk Amazon Product API for enkelt å søke etter Amazon-produkter for å koble "
+"til utstyret ditt."
+
+#: templates/admin/translations.php:164
 msgid "Use the checkboxes to indicate group headers (like Frosting and Cake)"
 msgstr ""
 "Bruk avmerkingsboksene for å angi gruppeoverskrifter (som Frosting og Cake)"
@@ -6570,7 +7051,7 @@ msgstr ""
 msgid "Use the website link as set on the user's profile page"
 msgstr "Bruk nettstedslenken som angitt på brukerens profilside"
 
-#: templates/admin/tools.php:112
+#: templates/admin/tools.php:169
 msgid "Use these buttons to migrate from our old WP Ultimate Recipe plugin."
 msgstr ""
 "Bruk disse knappene til å migrere fra vår gamle WP Ultimate Recipe-plugin."
@@ -6583,7 +7064,7 @@ msgstr ""
 "Bruk disse innstillingene for å endre hvordan oppskriften ser ut i andre "
 "deler av nettstedet ditt:"
 
-#: templates/admin/translations.php:164
+#: templates/admin/translations.php:166
 msgid "Use these Values"
 msgstr "Bruk disse verdiene"
 
@@ -6611,7 +7092,7 @@ msgstr ""
 "Bruk for å sikre at siden WP Recipe Maker > Administrer > Oppskriftsfelt > "
 "Ingrediensenheter er oppdatert."
 
-#: templates/admin/translations.php:377
+#: templates/admin/translations.php:397
 msgid ""
 "Use URL to the video (e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ) or "
 "the full embed code."
@@ -6631,7 +7112,7 @@ msgstr ""
 msgid "Used for the color of the star ratings and other icons."
 msgstr "Brukes for fargen på stjernerangeringer og andre ikoner."
 
-#: templates/admin/translations.php:187
+#: templates/admin/translations.php:189
 msgid ""
 "Used in the recipe metadata. Can be displayed elsewhere on the page using "
 "the [wprm-recipe-video] shortcode."
@@ -6639,12 +7120,12 @@ msgstr ""
 "Brukes i oppskriftens metadata. Kan vises andre steder på siden ved å bruke "
 "kortkoden [wprm-recipe-video]."
 
-#: templates/admin/translations.php:183
+#: templates/admin/translations.php:185
 msgid "Used in the recipe metadata. Should be an image of the completed dish."
 msgstr ""
 "Brukes i oppskriftens metadata. Skal være et bilde av den ferdige retten."
 
-#: includes/admin/class-wprm-modal.php:206
+#: includes/admin/class-wprm-modal.php:236
 msgid ""
 "Used in the recipe metadata. Should describe the recipe, but not fit in "
 "\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
@@ -6652,7 +7133,7 @@ msgstr ""
 "Brukes i oppskriftens metadata. Skal beskrive oppskriften, men ikke passe "
 "inn i \"Retter\" eller \"Kjøkken\". Eksempler: sommer, rask, muskatskorpe"
 
-#: includes/admin/class-wprm-modal.php:199
+#: includes/admin/class-wprm-modal.php:229
 msgid ""
 "Used in the recipe metadata. The region associated with your recipe. "
 "Examples: French, Mediterranean, American"
@@ -6660,7 +7141,7 @@ msgstr ""
 "Brukes i oppskriftens metadata. Regionen knyttet til oppskriften din. "
 "Eksempler: fransk, middelhavs, amerikansk"
 
-#: includes/admin/class-wprm-modal.php:196
+#: includes/admin/class-wprm-modal.php:226
 msgid ""
 "Used in the recipe metadata. The type of meal or course for this recipe. "
 "Examples: dinner, entree, snack"
@@ -6668,7 +7149,7 @@ msgstr ""
 "Brukes i oppskriftens metadata. Typen måltid eller rett for denne "
 "oppskriften. Eksempler: middag, hovedrett, mellommåltid"
 
-#: includes/admin/class-wprm-modal.php:202
+#: includes/admin/class-wprm-modal.php:232
 msgid ""
 "Used in the recipe metadata. This is a restricted list of diets whose label "
 "can be changed on the Manage > Recipe Fields page."
@@ -6676,15 +7157,15 @@ msgstr ""
 "Brukes i oppskriftens metadata. Dette er en begrenset liste over dietter "
 "hvis etikett kan endres på siden Administrer > Oppskriftsfelt."
 
-#: templates/admin/translations.php:471
+#: templates/admin/translations.php:523
 msgid "User Collection"
 msgstr "Brukersamling"
 
-#: templates/admin/translations.php:472
+#: templates/admin/translations.php:524
 msgid "User Collections"
 msgstr "Brukersamlinger"
 
-#: templates/admin/translations.php:426
+#: templates/admin/translations.php:476
 msgid "User ID"
 msgstr "Bruker-ID"
 
@@ -6693,7 +7174,7 @@ msgid "User Not Voted"
 msgstr "Bruker har ikke stemt"
 
 #: includes/public/class-wprm-analytics.php:48 
-#: templates/admin/translations.php:421
+#: templates/admin/translations.php:471
 msgid "User Rating"
 msgstr "Bruker vurdering"
 
@@ -6710,15 +7191,15 @@ msgstr "Brukerinnsendte data lagres på ubestemt tid i den lokale databasen."
 msgid "User Voted"
 msgstr "Bruker stemte"
 
-#: includes/public/class-wprm-taxonomies.php:260
+#: includes/public/class-wprm-taxonomies.php:262
 msgid "Vegan"
 msgstr "Vegansk"
 
-#: includes/public/class-wprm-taxonomies.php:261
+#: includes/public/class-wprm-taxonomies.php:263
 msgid "Vegetarian"
 msgstr "Vegetarisk"
 
-#: templates/settings/group-media.php:52 templates/admin/translations.php:186
+#: templates/settings/group-media.php:52 templates/admin/translations.php:188
 msgid "Video"
 msgstr "Video"
 
@@ -6731,12 +7212,12 @@ msgid "Video tutorials and walkthroughs"
 msgstr "Videoopplæringer og gjennomganger"
 
 #. 1: Taxonomy label 2: Term label
-#: includes/public/class-wprm-taxonomies.php:401
+#: includes/public/class-wprm-taxonomies.php:407
 #, php-format
 msgid "View more recipes classified as %1$s: %2$s"
 msgstr "Se flere oppskrifter klassifisert som %1$s: %2$s"
 
-#: templates/admin/translations.php:510
+#: templates/admin/translations.php:453
 msgid "View Parent Post"
 msgstr "Se overordnet innlegg"
 
@@ -6744,36 +7225,36 @@ msgstr "Se overordnet innlegg"
 msgid "View Recipe"
 msgstr "Se oppskrift"
 
-#: templates/admin/translations.php:537
+#: templates/admin/translations.php:583
 msgid "View Revision"
 msgstr "Se revisjon"
 
-#: templates/admin/translations.php:576
+#: templates/admin/translations.php:632
 msgid "Visitor Details"
 msgstr "Besøksdetaljer"
 
-#: templates/admin/translations.php:575
+#: templates/admin/translations.php:631
 msgid "Visitor UID"
 msgstr "Besøkende UID"
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:520 
-#: includes/public/deprecated/class-wprm-template-helper.php:240
+#: templates/admin/translations.php:564 
+#: includes/public/deprecated/class-wprm-template-helper.php:238
 msgid "vote"
 msgid_plural "votes"
 msgstr[0] "stemme"
 msgstr[1] "stemmer"
 
-#: templates/admin/translations.php:521
+#: templates/admin/translations.php:565
 msgid "votes"
 msgstr "votes"
 
-#: templates/admin/translations.php:244
+#: templates/admin/translations.php:246
 msgid "Warning!"
 msgstr "Advarsel!"
 
-#: templates/admin/translations.php:363
+#: templates/admin/translations.php:383
 msgid ""
 "Warning! We recommend making sure the image meets the following requirements:"
 msgstr ""
@@ -6787,19 +7268,19 @@ msgstr ""
 "Advarsel: kommentarvurderinger kan ikke fungere med Jetpack-kommentarer-"
 "funksjonen du har aktivert."
 
-#: templates/admin/translations.php:485
+#: templates/admin/translations.php:536
 msgid "Warnings"
 msgstr "Advarsler"
 
-#: templates/admin/translations.php:530
+#: templates/admin/translations.php:574
 msgid "Was not a Recipe Submission"
 msgstr "Var ikke en oppskrifts innlevering"
 
-#: templates/admin/translations.php:529
+#: templates/admin/translations.php:573
 msgid "Was Recipe Submission"
 msgstr "Var oppskrifts innlevering"
 
-#: templates/admin/translations.php:443
+#: templates/admin/translations.php:492
 msgid "We could not find a term with that ID."
 msgstr "Vi kunne ikke finne en term med den ID-en."
 
@@ -6813,78 +7294,78 @@ msgstr ""
 "importprosessen var vellykket. Vær oppmerksom på de forskjellige "
 "ingrediensdelene for å kunne bruke alle funksjonene våre."
 
-#: templates/admin/translations.php:455
+#: templates/admin/translations.php:504
 msgid ""
 "We were not able to create this equipment. Make sure it does not exist yet."
 msgstr ""
 "Vi klarte ikke å lage dette utstyret. Sørg for at den ikke eksisterer ennå."
 
-#: templates/admin/translations.php:450
+#: templates/admin/translations.php:499
 msgid ""
 "We were not able to create this ingredient. Make sure it does not exist yet."
 msgstr ""
 "Vi klarte ikke å lage denne ingrediensen. Sørg for at den ikke eksisterer "
 "ennå."
 
-#: templates/admin/translations.php:457
+#: templates/admin/translations.php:506
 msgid "We were not able to create this term. Make sure it does not exist yet."
 msgstr ""
 "Vi klarte ikke å lage dette begrepet. Sørg for at den ikke eksisterer ennå."
 
-#: templates/admin/translations.php:453
+#: templates/admin/translations.php:502
 msgid "We were not able to create this unit. Make sure it does not exist yet."
 msgstr ""
 "Vi kunne ikke opprette denne enheten. Sørg for at den ikke eksisterer ennå."
 
-#: templates/admin/translations.php:547
+#: templates/admin/translations.php:593
 msgid "What do you want the plural to be for"
 msgstr "Hva vil du at flertall skal være for"
 
-#: templates/admin/translations.php:542
+#: templates/admin/translations.php:588
 msgid "What do you want the slug to be for"
 msgstr "Hva vil du at slug skal være til"
 
-#: templates/admin/translations.php:454
+#: templates/admin/translations.php:503
 msgid "What do you want to be the name of this new equipment?"
 msgstr "Hva vil du skal hete på dette nye utstyret?"
 
-#: templates/admin/translations.php:449
+#: templates/admin/translations.php:498
 msgid "What do you want to be the name of this new ingredient?"
 msgstr "Hva vil du være navnet på denne nye ingrediensen?"
 
-#: templates/admin/translations.php:456
+#: templates/admin/translations.php:505
 msgid "What do you want to be the name of this new term?"
 msgstr "Hva vil du bli navnet skal være på denne nye termen?"
 
-#: templates/admin/translations.php:452
+#: templates/admin/translations.php:501
 msgid "What do you want to be the name of this new unit?"
 msgstr "Hva vil du navnet skal være på denne nye enheten?"
 
-#: templates/admin/translations.php:570
+#: templates/admin/translations.php:626
 msgid "What do you want to be the new grid link for"
 msgstr "Hva vil den nye rutenettlenken skal være for"
 
-#: templates/admin/translations.php:549
+#: templates/admin/translations.php:595
 msgid "What do you want to be the new group for"
 msgstr "Hva vil du den nye gruppen skal være for"
 
-#: templates/admin/translations.php:559
+#: templates/admin/translations.php:605
 msgid "What do you want to be the new link for"
 msgstr "Hva vil du den nye lenken skal være for"
 
-#: templates/admin/translations.php:437
+#: templates/admin/translations.php:486
 msgid "What do you want to be the new name for"
 msgstr "Hva vil du det nye navnet skal være for"
 
-#: templates/admin/translations.php:469
+#: templates/admin/translations.php:521
 msgid "What do you want to be the new term to be?"
 msgstr "Hva vil du det nye begrepet skal være for?"
 
-#: templates/admin/translations.php:536
+#: templates/admin/translations.php:582
 msgid "What do you want to be the new tooltip for"
 msgstr "Hva vil du det nye verktøytipset skal være for"
 
-#: templates/admin/translations.php:440
+#: templates/admin/translations.php:489
 msgid "What is the ID of the term you want the merge"
 msgstr "Hva er ID-en til termen du ønsker å slå sammen"
 
@@ -6896,7 +7377,7 @@ msgstr ""
 "Hva du skal gjøre med delen \"Private notater\" når den besøkende ikke er "
 "pålogget."
 
-#: templates/settings/group-post-type.php:64
+#: templates/settings/group-post-type.php:67
 msgid ""
 "What to link to for a recipe. This is relevant for the roundup feature, grid "
 "integration and other plugins that might link to a recipe."
@@ -6998,7 +7479,7 @@ msgstr ""
 "Når brukervurderinger er aktivert, lagrer vi IP-adressen ved stemmegivning. "
 "Dette brukes som (ett av) tiltak for å forhindre rangering av spam."
 
-#: templates/settings/group-recipe-defaults.php:128
+#: templates/settings/group-recipe-defaults.php:135
 msgid ""
 "When using fractions in the ingredient amount field, automatically replace "
 "with their symbol if available. Recommended for accessibility."
@@ -7017,6 +7498,18 @@ msgstr ""
 "plugin-en bruke YouTube Data API for å hente videodetaljene. Disse detaljene "
 "vil bli lagret for bruk i oppskriftens metadata og oppdateres ukentlig "
 "(eller hver gang du oppdaterer oppskriften)."
+
+#: templates/admin/tools.php:248
+msgid ""
+"Will create a WPRM Roundup List for your Create Lists. Make sure to import "
+"the recipes themselves first. Will not automatically replace the Create List "
+"inside of the post content. Running again will replace the previously "
+"imported Create List."
+msgstr ""
+"Vil opprette en WPRM Oppsummerings Liste for dine opprettelister. Sørg for å "
+"importere selve oppskriftene først. Vil ikke automatisk erstatte "
+"opprettingslisten inne i innleggsinnholdet. Å kjøre på nytt vil erstatte den "
+"tidligere importerte opprettingslisten."
 
 #: templates/admin/privacy.php:22
 msgid ""
@@ -7039,7 +7532,7 @@ msgstr ""
 "navnetreff og vise dem som ordlisteord med et verktøytips."
 
 #. Name of the plugin
-#: includes/public/class-wprm-compatibility.php:155
+#: includes/public/class-wprm-compatibility.php:164
 msgid "WP Recipe Maker"
 msgstr "WP Recipe Maker"
 
@@ -7056,7 +7549,7 @@ msgstr "Kun WP Recipe Maker Premium"
 msgid "WP Recipe Maker Tools"
 msgstr "WP Recipe Maker Verktøy"
 
-#: templates/admin/tools.php:111
+#: templates/admin/tools.php:168
 msgid "WP Ultimate Recipe Migration"
 msgstr "WP Ultimate Oppskrifts Migrering"
 
@@ -7084,15 +7577,15 @@ msgstr "yards"
 msgid "yd"
 msgstr "yd"
 
-#: templates/admin/translations.php:400
+#: templates/admin/translations.php:431
 msgid "Yes"
 msgstr "Ja"
 
-#: templates/admin/translations.php:251
+#: templates/admin/translations.php:253
 msgid "Yield"
 msgstr "Utbytte"
 
-#: templates/admin/translations.php:320
+#: templates/admin/translations.php:341
 msgid ""
 "You can already fill in the values, but the adjustable changer will not show "
 "up yet."
@@ -7108,7 +7601,7 @@ msgstr "Du kan angi pin-bildet når du redigerer en oppskrift."
 msgid "You can use the following placeholders:"
 msgstr "Du kan bruke følgende plassholdere:"
 
-#: templates/admin/translations.php:480
+#: templates/admin/translations.php:532
 msgid "You do not have the correct permissions to edit this recipe"
 msgstr "Du har ikke de riktige tillatelsene til å redigere denne oppskriften"
 
@@ -7127,23 +7620,23 @@ msgid "You need to enable the Comment Ratings feature to use this option."
 msgstr ""
 "Du må aktivere kommentarvurderingsfunksjonen for å bruke dette alternativet."
 
-#: templates/admin/translations.php:458
+#: templates/settings/group-amazon.php:151
+msgid "Your Amazon Product Advertising API details."
+msgstr "Din Amazon Product Produkt Annonserings-API-detaljer."
+
+#: templates/admin/translations.php:507
 msgid "Your Custom Fields"
 msgstr "Dine Egendefinerte Felt"
-
-#: templates/settings/group-integrations.php:74
-msgid "Your My Emissions API Key"
-msgstr "Din My Emissions API-nøkkel"
 
 #: templates/settings/group-recipe-ratings.php:72
 msgid "Your vote:"
 msgstr "Din stemme:"
 
-#: templates/admin/translations.php:407
+#: templates/admin/translations.php:460
 msgid "← Columns"
 msgstr "← Kolonner"
 
-#: templates/admin/translations.php:408
+#: templates/admin/translations.php:461
 msgid "→ Change Columns"
 msgstr "→ Endre kolonner"
 

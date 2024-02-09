@@ -167,7 +167,10 @@ window.WPRMPrint = {
             window.history.replaceState( {}, document.title, window.wprm_print_url );
         }
 
-        window.print();
+        // Use setTimeout to prevent print window going blank in Safari.
+        setTimeout( () => {
+            window.print();
+        });
 
         if ( currentUrl ) {
             window.history.replaceState( {}, document.title, currentUrl );

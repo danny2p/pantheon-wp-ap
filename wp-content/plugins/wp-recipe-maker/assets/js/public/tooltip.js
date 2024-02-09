@@ -1,6 +1,8 @@
 import tippy, { inlinePositioning } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
+import '../../css/public/tooltip.scss';
+
 window.WPRecipeMaker = typeof window.WPRecipeMaker === "undefined" ? {} : window.WPRecipeMaker;
 
 window.WPRecipeMaker.tooltip = {
@@ -22,6 +24,8 @@ window.WPRecipeMaker.tooltip = {
             const tooltip = container.dataset.hasOwnProperty( 'tooltip' ) ? container.dataset.tooltip : false;
 
             if ( tooltip ) {
+                container.role = "button"; // Needed for accessibility.
+
                 tippy( container, {
                     theme: 'wprm',
                     content: tooltip,

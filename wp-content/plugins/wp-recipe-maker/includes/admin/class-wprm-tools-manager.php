@@ -63,12 +63,14 @@ class WPRM_Tools_Manager {
 	 */
 	public static function ajax_reset_settings() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
-			// Clear all settings.
-			delete_option( 'wprm_settings' );
+			if ( current_user_can( WPRM_Settings::get( 'features_tools_access' ) ) ) {
+				// Clear all settings.
+				delete_option( 'wprm_settings' );
 
-			wp_send_json_success( array(
-				'redirect' => admin_url( 'admin.php?page=wprm_settings' ),
-			) );
+				wp_send_json_success( array(
+					'redirect' => admin_url( 'admin.php?page=wprm_settings' ),
+				) );
+			}
 		}
 
 		wp_die();

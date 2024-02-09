@@ -32,6 +32,9 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 
 import '../../../css/blocks/recipe.scss';
 
+const openedBlockEditor = Date.now();
+
+
 registerBlockType( 'wp-recipe-maker/recipe', {
     title: __( 'WPRM Recipe', 'wp-recipe-maker' ),
     description: __( 'Display a recipe box with recipe metadata.', 'wp-recipe-maker' ),
@@ -94,6 +97,16 @@ registerBlockType( 'wp-recipe-maker/recipe', {
             }
         }
 
+        // Prevent block validation error when post is saved without the post content being changed.
+        const lastBlockRefresh = attributes.hasOwnProperty( 'updated' ) ? attributes.updated : 0;
+        if ( lastBlockRefresh < openedBlockEditor ) {
+            setTimeout( () => {
+                setAttributes({
+                    updated: Date.now(),
+                });
+            });
+        }
+
         return (
             <div className={ className }>{
                 attributes.id
@@ -154,8 +167,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                 <Fragment>
                     <h2>WPRM { __( 'Recipe', 'wp-recipe-maker' ) }</h2>
                     <Button
-                        isPrimary
-                        isLarge
+                        variant="primary"
                         onClick={ () => {
                             let args = {
                                 saveCallback: modalCallback,
@@ -173,7 +185,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                         }}>
                         { __( 'Create new Recipe', 'wp-recipe-maker' ) }
                     </Button> <Button
-                        isLarge
+                        variant="secondary"
                         onClick={ () => {
                             WPRM_Modal.open( 'select', {
                                 title: __( 'Insert existing Recipe', 'wp-recipe-maker' ),
@@ -191,7 +203,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                         wprm_admin.addons.premium
                         &&
                         <Button
-                            isLarge
+                            variant="secondary"
                             onClick={ () => {
                                 WPRM_Modal.open( 'select', {
                                     title: __( 'Create new from existing Recipe', 'wp-recipe-maker' ),

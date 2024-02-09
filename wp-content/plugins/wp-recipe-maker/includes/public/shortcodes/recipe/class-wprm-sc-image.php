@@ -109,9 +109,9 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
-
 		
-		$img = $recipe->image( $size );
+		$thumbnail_size = WPRM_Shortcode_Helper::get_thumbnail_image_size( $recipe->image_id(), $size, $force_size );
+		$img = $recipe->image( $thumbnail_size );
 
 		// Image Style.
 		$style = '';

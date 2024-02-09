@@ -8,3 +8,4 @@ import './admin/tools';
 import '../css/admin/addons.scss';
 
 import './public/comment-rating';
+import './public/modal';

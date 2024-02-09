@@ -181,7 +181,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
                 <Fragment>
                     <h2>WPRM { __( 'Recipe Roundup Item', 'wp-recipe-maker' ) }</h2>
                     <Button
-                        isLarge
+                        variant="primary"
                         onClick={ () => {
                             WPRM_Modal.open( 'roundup', {
                                 insertCallback: ( fields ) => {

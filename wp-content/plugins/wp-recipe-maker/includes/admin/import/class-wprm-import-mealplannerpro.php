@@ -111,7 +111,7 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 		);
 
 		global $wpdb;
-		$mpp_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'mpprecipe_recipes WHERE recipe_id=' . $id );
+		$mpp_recipe = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'mpprecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $mpp_recipe->post_id;
 
 		// Featured Image.
@@ -256,7 +256,7 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 	 */
 	public function replace_recipe( $id, $wprm_id, $post_data ) {
 		global $wpdb;
-		$mpp_recipe = $wpdb->get_row( 'SELECT post_id, server_recipe_id FROM ' . $wpdb->prefix . 'mpprecipe_recipes WHERE recipe_id=' . $id );
+		$mpp_recipe = $wpdb->get_row( 'SELECT post_id, server_recipe_id FROM ' . $wpdb->prefix . 'mpprecipe_recipes WHERE recipe_id=' . intval( $id ) );
 		$post_id = $mpp_recipe->post_id;
 		$server_recipe_id = $mpp_recipe->server_recipe_id;
 
@@ -266,7 +266,7 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 
 		$ratings = array();
 		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$ratings = $wpdb->get_results( 'SELECT rating, comment_id FROM ' . $table . ' WHERE recipe_id=' . $id );
+			$ratings = $wpdb->get_results( 'SELECT rating, comment_id FROM ' . $table . ' WHERE recipe_id=' . intval( $id ) );
 		}
 
 		foreach ( $ratings as $rating ) {

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2023-12-13 09:50+0000\n"
+"POT-Creation-Date: 2024-02-06 15:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "# Items"
 msgstr ""
 
-#: templates/admin/translations.php:567
+#: templates/admin/translations.php:573
 msgid "# Ratings Given"
 msgstr ""
 
@@ -108,7 +108,8 @@ msgstr ""
 msgid "10 Birthday Party Recipes"
 msgstr ""
 
-#: templates/settings/group-analytics.php:37
+#: templates/settings/group-analytics.php:37 
+#: templates/settings/group-changelog.php:64
 msgid "180 Days"
 msgstr ""
 
@@ -124,11 +125,13 @@ msgstr ""
 msgid "3 stars"
 msgstr ""
 
-#: templates/settings/group-analytics.php:39
+#: templates/settings/group-analytics.php:39 
+#: templates/settings/group-changelog.php:66
 msgid "30 Days"
 msgstr ""
 
-#: templates/settings/group-analytics.php:36
+#: templates/settings/group-analytics.php:36 
+#: templates/settings/group-changelog.php:63
 msgid "365 Days"
 msgstr ""
 
@@ -140,11 +143,13 @@ msgstr ""
 msgid "5 stars"
 msgstr ""
 
-#: templates/settings/group-analytics.php:40
+#: templates/settings/group-analytics.php:40 
+#: templates/settings/group-changelog.php:67
 msgid "7 Days"
 msgstr ""
 
-#: templates/settings/group-analytics.php:38
+#: templates/settings/group-analytics.php:38 
+#: templates/settings/group-changelog.php:65
 msgid "90 Days"
 msgstr ""
 
@@ -219,11 +224,11 @@ msgstr ""
 msgid "Access to Tools Page"
 msgstr ""
 
-#: templates/admin/translations.php:527
+#: templates/admin/translations.php:531
 msgid "Action"
 msgstr ""
 
-#: templates/admin/translations.php:630
+#: templates/admin/translations.php:636
 msgid "Action Details"
 msgstr ""
 
@@ -274,7 +279,7 @@ msgstr ""
 msgid "Add HTML or Shortcode"
 msgstr ""
 
-#: templates/admin/translations.php:599
+#: templates/admin/translations.php:605
 msgid "Add Image"
 msgstr ""
 
@@ -394,7 +399,7 @@ msgstr ""
 #: templates/settings/group-metadata.php:150 
 #: templates/settings/group-recipe-roundup.php:80 
 #: templates/settings/group-recipe-print.php:209 
-#: templates/settings/structure.php:97 
+#: templates/settings/structure.php:99 
 #: templates/settings/group-recipe-snippets.php:157
 msgid "Advanced"
 msgstr ""
@@ -421,7 +426,7 @@ msgstr ""
 msgid "Affiliate HTML"
 msgstr ""
 
-#: templates/admin/translations.php:610
+#: templates/admin/translations.php:616
 msgid "Affiliate HTML Preview"
 msgstr ""
 
@@ -461,7 +466,7 @@ msgstr ""
 msgid "Agree to YouTube Terms of Service"
 msgstr ""
 
-#: templates/admin/translations.php:474
+#: templates/admin/translations.php:480
 msgid "All"
 msgstr ""
 
@@ -469,11 +474,11 @@ msgstr ""
 msgid "all"
 msgstr ""
 
-#: templates/admin/translations.php:551
+#: templates/admin/translations.php:557
 msgid "All Authors"
 msgstr ""
 
-#: templates/admin/translations.php:553
+#: templates/admin/translations.php:559
 msgid "All Display Author Types"
 msgstr ""
 
@@ -493,7 +498,7 @@ msgstr ""
 msgid "All ingredients have been added in a step!"
 msgstr ""
 
-#: templates/admin/translations.php:557
+#: templates/admin/translations.php:563
 msgid "All Languages"
 msgstr ""
 
@@ -502,7 +507,7 @@ msgid ""
 "All of these will be imported. Use the checkbox to indicate group headers."
 msgstr ""
 
-#: templates/admin/translations.php:466
+#: templates/admin/translations.php:472
 msgid "All Ratings"
 msgstr ""
 
@@ -510,11 +515,11 @@ msgstr ""
 msgid "All recipe videos"
 msgstr ""
 
-#: templates/admin/translations.php:555
+#: templates/admin/translations.php:561
 msgid "All Statuses"
 msgstr ""
 
-#: templates/admin/translations.php:470
+#: templates/admin/translations.php:476
 msgid "All Types"
 msgstr ""
 
@@ -577,8 +582,12 @@ msgstr ""
 msgid "Alternative Image"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:209
+#: templates/settings/group-recipe-ratings.php:214
 msgid "Always redirect to the comment form"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:327
+msgid "Always require a comment"
 msgstr ""
 
 #: templates/settings/group-amazon.php:155
@@ -589,19 +598,19 @@ msgstr ""
 msgid "Amazon Affiliate Links Migration for Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:621
+#: templates/admin/translations.php:627
 msgid "Amazon Image"
 msgstr ""
 
-#: templates/admin/translations.php:620
+#: templates/admin/translations.php:626
 msgid "Amazon Name"
 msgstr ""
 
-#: templates/admin/translations.php:611
+#: templates/admin/translations.php:617
 msgid "Amazon Product ASIN"
 msgstr ""
 
-#: templates/admin/translations.php:616
+#: templates/admin/translations.php:622
 msgid "Amazon Product URL"
 msgstr ""
 
@@ -621,7 +630,7 @@ msgstr ""
 msgid "Amazon Store ID"
 msgstr ""
 
-#: templates/admin/translations.php:622
+#: templates/admin/translations.php:628
 msgid "Amazon Updated"
 msgstr ""
 
@@ -637,7 +646,7 @@ msgstr ""
 msgid "AMP Template"
 msgstr ""
 
-#: templates/admin/translations.php:602
+#: templates/admin/translations.php:608
 msgid ""
 "An Affiliate Link with this ID cannot be found. Try deleting and adding it "
 "again."
@@ -659,11 +668,11 @@ msgstr ""
 msgid "Anonymize Ratings (irreversible!)"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:169
+#: templates/settings/group-recipe-ratings.php:181
 msgid "Anonymous ID stored in cookie"
 msgstr ""
 
-#: templates/admin/translations.php:569
+#: templates/admin/translations.php:575
 msgid "Any"
 msgstr ""
 
@@ -671,11 +680,11 @@ msgstr ""
 msgid "any color"
 msgstr ""
 
-#: templates/admin/translations.php:608
+#: templates/admin/translations.php:614
 msgid "Any Nofollow"
 msgstr ""
 
-#: templates/admin/translations.php:558
+#: templates/admin/translations.php:564
 msgid "Any Rating"
 msgstr ""
 
@@ -685,7 +694,7 @@ msgstr ""
 
 #: templates/settings/group-recipe-print.php:66 
 #: templates/settings/group-recipe-times.php:18 
-#: templates/settings/structure.php:62 
+#: templates/settings/structure.php:63 
 #: templates/settings/group-recipe-ratings.php:46 
 #: templates/settings/group-glossary-terms.php:91
 msgid "Appearance"
@@ -695,7 +704,7 @@ msgstr ""
 msgid "Appetizer"
 msgstr ""
 
-#: templates/admin/translations.php:473
+#: templates/admin/translations.php:479
 msgid "Approved"
 msgstr ""
 
@@ -728,15 +737,15 @@ msgstr ""
 msgid "Are you sure you want to delete"
 msgstr ""
 
-#: templates/admin/translations.php:566
+#: templates/admin/translations.php:572
 msgid "Are you sure you want to delete the user ratings for"
 msgstr ""
 
-#: templates/admin/translations.php:629
+#: templates/admin/translations.php:635
 msgid "Are you sure you want to delete this action?"
 msgstr ""
 
-#: templates/admin/translations.php:603
+#: templates/admin/translations.php:609
 msgid "Are you sure you want to delete this link?"
 msgstr ""
 
@@ -744,7 +753,7 @@ msgstr ""
 msgid "Are you sure you want to delete this list?"
 msgstr ""
 
-#: templates/admin/translations.php:464
+#: templates/admin/translations.php:470
 msgid "Are you sure you want to delete this rating?"
 msgstr ""
 
@@ -752,11 +761,11 @@ msgstr ""
 msgid "Are you sure you want to leave this page?"
 msgstr ""
 
-#: templates/admin/translations.php:491
+#: templates/admin/translations.php:495
 msgid "Are you sure you want to merge"
 msgstr ""
 
-#: includes/public/class-wprm-assets.php:234
+#: includes/public/class-wprm-assets.php:235
 msgid "Are you sure you want to remove this recipe?"
 msgstr ""
 
@@ -848,7 +857,7 @@ msgstr ""
 msgid "Back to start."
 msgstr ""
 
-#: templates/settings/structure.php:94
+#: templates/settings/structure.php:95
 msgid "Backend"
 msgstr ""
 
@@ -858,11 +867,12 @@ msgstr ""
 
 #: templates/settings/group-template-legacy.php:162 
 #: templates/settings/group-custom-style.php:56 
+#: templates/settings/group-custom-style.php:91 
 #: templates/settings/group-recipe-snippets.php:124
 msgid "Background Color"
 msgstr ""
 
-#: templates/admin/translations.php:535
+#: templates/admin/translations.php:541
 msgid "Bad"
 msgstr ""
 
@@ -916,6 +926,14 @@ msgstr ""
 
 #: templates/admin/translations.php:144
 msgid "Bulk Edit"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:109
+msgid "Button Background Color"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:115
+msgid "Button Text Color"
 msgstr ""
 
 #: templates/settings/group-post-type.php:16
@@ -999,15 +1017,23 @@ msgstr ""
 msgid "Change Affiliate HTML"
 msgstr ""
 
+#: templates/admin/translations.php:455
+msgid "Change Details"
+msgstr ""
+
+#: includes/public/class-wprm-changelog.php:102
+msgid "Change detected that you wanted to be notified about."
+msgstr ""
+
 #: templates/admin/translations.php:87
 msgid "Change Display Author"
 msgstr ""
 
-#: templates/admin/translations.php:594
+#: templates/admin/translations.php:600
 msgid "Change Group"
 msgstr ""
 
-#: templates/admin/translations.php:609
+#: templates/admin/translations.php:615
 msgid "Change HTML"
 msgstr ""
 
@@ -1027,7 +1053,7 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
-#: templates/admin/translations.php:592
+#: templates/admin/translations.php:598
 msgid "Change Plural"
 msgstr ""
 
@@ -1035,7 +1061,7 @@ msgstr ""
 msgid "Change Post Author"
 msgstr ""
 
-#: templates/admin/translations.php:624
+#: templates/admin/translations.php:630
 msgid "Change Product"
 msgstr ""
 
@@ -1055,19 +1081,32 @@ msgstr ""
 msgid "Change Shopping List Group"
 msgstr ""
 
-#: templates/admin/translations.php:587
+#: templates/admin/translations.php:593
 msgid "Change Slug"
 msgstr ""
 
-#: templates/admin/translations.php:581
+#: templates/admin/translations.php:587
 msgid "Change Tooltip"
+msgstr ""
+
+#: templates/settings/group-changelog.php:35
+msgid "Change types to receive the notification for."
 msgstr ""
 
 #: templates/admin/translations.php:94
 msgid "Change unit system label (does not change ingredients)"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:168
+#: templates/settings/group-changelog.php:15 
+#: templates/admin/translations.php:532
+msgid "Changelog"
+msgstr ""
+
+#: templates/admin/translations.php:533
+msgid "Changes"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:180
 msgid "Check IP address"
 msgstr ""
 
@@ -1115,7 +1154,7 @@ msgstr ""
 msgid "cl"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:175
+#: templates/settings/group-recipe-ratings.php:187
 msgid "Clear Cache after Rating"
 msgstr ""
 
@@ -1132,7 +1171,7 @@ msgstr ""
 msgid "Click here to add your own private notes."
 msgstr ""
 
-#: templates/admin/translations.php:462
+#: templates/admin/translations.php:468
 msgid "Click on the stars to edit the rating."
 msgstr ""
 
@@ -1140,7 +1179,7 @@ msgstr ""
 msgid "Click on the stars to vote!"
 msgstr ""
 
-#: templates/admin/translations.php:469
+#: templates/admin/translations.php:475
 msgid "Click to change this rating to:"
 msgstr ""
 
@@ -1168,7 +1207,7 @@ msgstr ""
 msgid "Clickable Recipe Image"
 msgstr ""
 
-#: templates/admin/translations.php:577
+#: templates/admin/translations.php:583
 msgid "Clone"
 msgstr ""
 
@@ -1180,7 +1219,7 @@ msgstr ""
 msgid "Clone Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:145
+#: templates/admin/translations.php:145 templates/public/popup-modal.php:26
 msgid "Close"
 msgstr ""
 
@@ -1210,16 +1249,20 @@ msgstr ""
 msgid "Comment"
 msgstr ""
 
-#: templates/admin/translations.php:561
+#: templates/admin/translations.php:567
 msgid "comment"
 msgstr ""
 
-#: templates/admin/translations.php:479
+#: templates/admin/translations.php:483
 msgid "Comment ID"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:313
+msgid "Comment Placeholder"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:136 
-#: templates/admin/translations.php:472
+#: templates/admin/translations.php:478
 msgid "Comment Rating"
 msgstr ""
 
@@ -1232,7 +1275,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: templates/admin/translations.php:562
+#: templates/admin/translations.php:568
 msgid "comments"
 msgstr ""
 
@@ -1242,6 +1285,10 @@ msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:48
 msgid "Container Style"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:103
+msgid "Content Text Color"
 msgstr ""
 
 #: templates/admin/tools.php:123
@@ -1277,7 +1324,7 @@ msgstr ""
 msgid "Convert to regular text"
 msgstr ""
 
-#: templates/admin/translations.php:571
+#: templates/admin/translations.php:577
 msgid "Converted Ingredients"
 msgstr ""
 
@@ -1337,7 +1384,7 @@ msgstr ""
 msgid "Courses"
 msgstr ""
 
-#: templates/admin/translations.php:484
+#: templates/admin/translations.php:488
 msgid "Create"
 msgstr ""
 
@@ -1426,7 +1473,7 @@ msgstr ""
 msgid "Custom Description"
 msgstr ""
 
-#: templates/admin/translations.php:510 
+#: templates/admin/translations.php:514 
 #: includes/public/shortcodes/recipe/class-wprm-sc-meta-container.php:279
 msgid "Custom Field"
 msgstr ""
@@ -1448,19 +1495,19 @@ msgstr ""
 msgid "Custom Image per Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:513
+#: templates/admin/translations.php:517
 msgid "Custom Nutrient"
 msgstr ""
 
-#: templates/admin/translations.php:514
+#: templates/admin/translations.php:518
 msgid "Custom Nutrients"
 msgstr ""
 
-#: templates/admin/translations.php:512
+#: templates/admin/translations.php:516
 msgid "Custom Nutrition"
 msgstr ""
 
-#: templates/admin/translations.php:511
+#: templates/admin/translations.php:515
 msgid "Custom Nutrition Ingredient"
 msgstr ""
 
@@ -1530,7 +1577,8 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: templates/settings/group-analytics.php:31
+#: templates/settings/group-analytics.php:31 
+#: templates/settings/group-changelog.php:58
 msgid "Days to Keep"
 msgstr ""
 
@@ -1568,9 +1616,9 @@ msgstr ""
 msgid "Default Custom Author Name"
 msgstr ""
 
-#: templates/settings/group-links.php:110 
-#: templates/settings/group-links.php:137 
-#: templates/settings/group-links.php:164
+#: templates/settings/group-links.php:116 
+#: templates/settings/group-links.php:143 
+#: templates/settings/group-links.php:170
 msgid "Default Nofollow Attribute"
 msgstr ""
 
@@ -1746,7 +1794,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/admin/translations.php:628
+#: templates/admin/translations.php:634
 msgid "Delete Action"
 msgstr ""
 
@@ -1766,7 +1814,7 @@ msgstr ""
 msgid "Delete List"
 msgstr ""
 
-#: templates/admin/translations.php:463
+#: templates/admin/translations.php:469
 msgid "Delete Rating"
 msgstr ""
 
@@ -1774,7 +1822,7 @@ msgstr ""
 msgid "Delete Ratings"
 msgstr ""
 
-#: templates/admin/translations.php:533
+#: templates/admin/translations.php:539
 msgid "Delete Recipe"
 msgstr ""
 
@@ -1782,7 +1830,7 @@ msgstr ""
 msgid "Delete Recipes"
 msgstr ""
 
-#: templates/admin/translations.php:584
+#: templates/admin/translations.php:590
 msgid "Delete Revision"
 msgstr ""
 
@@ -1822,7 +1870,7 @@ msgstr ""
 msgid "diameter"
 msgstr ""
 
-#: templates/admin/translations.php:589
+#: templates/admin/translations.php:595
 msgid "Diet"
 msgstr ""
 
@@ -1880,11 +1928,11 @@ msgstr ""
 msgid "Disc"
 msgstr ""
 
-#: templates/admin/translations.php:554
+#: templates/admin/translations.php:560
 msgid "Display Author"
 msgstr ""
 
-#: templates/admin/translations.php:552
+#: templates/admin/translations.php:558
 msgid "Display Author Type"
 msgstr ""
 
@@ -1933,15 +1981,15 @@ msgstr ""
 msgid "Documentation in our knowledge base"
 msgstr ""
 
-#: templates/admin/translations.php:550
+#: templates/admin/translations.php:556
 msgid "Does not have a video"
 msgstr ""
 
-#: templates/admin/translations.php:545
+#: templates/admin/translations.php:551
 msgid "Does not have Custom Pin Image"
 msgstr ""
 
-#: templates/admin/translations.php:597
+#: templates/admin/translations.php:603
 msgid "Does not have Image"
 msgstr ""
 
@@ -1949,15 +1997,15 @@ msgstr ""
 msgid "Does not have Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:613
+#: templates/admin/translations.php:619
 msgid "Does not have Product"
 msgstr ""
 
-#: templates/admin/translations.php:543
+#: templates/admin/translations.php:549
 msgid "Does not have Recipe Image"
 msgstr ""
 
-#: templates/admin/translations.php:606
+#: templates/admin/translations.php:612
 msgid ""
 "does not start with http:// or https:// as we would expect for a link. Are "
 "you sure you want to use this? Regular HTML code will not work here."
@@ -1976,9 +2024,9 @@ msgstr ""
 #: includes/admin/class-wprm-modal.php:342 
 #: includes/admin/class-wprm-modal.php:375 
 #: includes/admin/class-wprm-modal.php:408 
-#: templates/settings/group-links.php:114 
-#: templates/settings/group-links.php:141 
-#: templates/settings/group-links.php:168
+#: templates/settings/group-links.php:120 
+#: templates/settings/group-links.php:147 
+#: templates/settings/group-links.php:174
 msgid "Don't Use Nofollow"
 msgstr ""
 
@@ -1990,7 +2038,7 @@ msgstr ""
 msgid "Drinks"
 msgstr ""
 
-#: templates/admin/translations.php:600
+#: templates/admin/translations.php:606
 msgid "Easy Affiliate Links"
 msgstr ""
 
@@ -2002,7 +2050,7 @@ msgstr ""
 msgid "Edit Equipment"
 msgstr ""
 
-#: templates/admin/translations.php:598
+#: templates/admin/translations.php:604
 msgid "Edit Image"
 msgstr ""
 
@@ -2010,7 +2058,7 @@ msgstr ""
 msgid "Edit Ingredients"
 msgstr ""
 
-#: templates/admin/translations.php:601
+#: templates/admin/translations.php:607
 msgid "Edit Link"
 msgstr ""
 
@@ -2094,6 +2142,10 @@ msgstr ""
 #: templates/settings/group-analytics.php:24 
 #: templates/admin/translations.php:54
 msgid "Enable Analytics"
+msgstr ""
+
+#: templates/settings/group-changelog.php:21
+msgid "Enable Changelog"
 msgstr ""
 
 #: templates/settings/group-post-type.php:82
@@ -2219,11 +2271,11 @@ msgstr ""
 msgid "Equipment Link"
 msgstr ""
 
-#: templates/settings/group-links.php:150
+#: templates/settings/group-links.php:156
 msgid "Equipment Links"
 msgstr ""
 
-#: templates/settings/group-links.php:151
+#: templates/settings/group-links.php:157
 msgid ""
 "Equipment links can be set on the WP Recipe Maker > Manage > Recipe Fields > "
 "Equipment page."
@@ -2302,7 +2354,7 @@ msgstr ""
 msgid "FAQ & Support"
 msgstr ""
 
-#: templates/admin/translations.php:515
+#: templates/admin/translations.php:519
 msgid "Features"
 msgstr ""
 
@@ -2318,7 +2370,7 @@ msgstr ""
 msgid "Fill in the ID of the recipe to display."
 msgstr ""
 
-#: templates/admin/translations.php:458
+#: templates/admin/translations.php:464
 msgid "Filter"
 msgstr ""
 
@@ -2326,7 +2378,7 @@ msgstr ""
 msgid "Filter:"
 msgstr ""
 
-#: templates/admin/translations.php:456
+#: templates/admin/translations.php:462
 msgid "filtered of"
 msgstr ""
 
@@ -2334,6 +2386,10 @@ msgstr ""
 #: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38 
 #: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38
 msgid "Find Ingredient Units"
+msgstr ""
+
+#: includes/public/class-wprm-changelog.php:104
+msgid "Find out more"
 msgstr ""
 
 #: templates/admin/translations.php:53
@@ -2432,11 +2488,15 @@ msgstr ""
 msgid "fluid ounces"
 msgstr ""
 
-#: includes/public/api/class-wprm-api-manage-recipes.php:779
+#: includes/public/api/class-wprm-api-manage-recipes.php:814
 msgid "Follow this link to print all of the selected recipes:"
 msgstr ""
 
-#: templates/admin/translations.php:539
+#: templates/settings/group-custom-style.php:84
+msgid "Font Size"
+msgstr ""
+
+#: templates/admin/translations.php:545
 msgid "Food"
 msgstr ""
 
@@ -2469,6 +2529,10 @@ msgstr ""
 msgid "foot"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:283
+msgid "For colors and fonts, check out the Appearance > Custom Style section."
+msgstr ""
+
 #: templates/settings/group-template-legacy.php:71 
 #: templates/settings/group-template-legacy.php:78 
 #: templates/settings/group-media.php:45
@@ -2492,7 +2556,7 @@ msgstr ""
 msgid "Force Mediavine video metadata"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:189
+#: templates/settings/group-recipe-ratings.php:194
 msgid "Force people to leave a comment"
 msgstr ""
 
@@ -2508,7 +2572,8 @@ msgstr ""
 msgid "Force video ratio"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:200
+#: templates/settings/group-recipe-ratings.php:205 
+#: templates/settings/group-recipe-ratings.php:319
 msgid "Force visitors to leave a comment"
 msgstr ""
 
@@ -2522,7 +2587,7 @@ msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:560 
+#: templates/admin/translations.php:566 
 #: includes/public/deprecated/class-wprm-template-helper.php:238
 msgid "from"
 msgstr ""
@@ -2600,12 +2665,12 @@ msgid ""
 "Getting a lot of recipes without parent post or are you missing any ratings?"
 msgstr ""
 
-#: templates/admin/translations.php:519
+#: templates/admin/translations.php:523
 msgid "Glossary Term"
 msgstr ""
 
 #: templates/settings/group-glossary-terms.php:15 
-#: templates/admin/translations.php:520
+#: templates/admin/translations.php:524
 msgid "Glossary Terms"
 msgstr ""
 
@@ -2655,7 +2720,7 @@ msgstr ""
 msgid "Go to WPRM Manage page"
 msgstr ""
 
-#: templates/admin/translations.php:538
+#: templates/admin/translations.php:544
 msgid "Good"
 msgstr ""
 
@@ -2679,11 +2744,11 @@ msgstr ""
 msgid "grams"
 msgstr ""
 
-#: templates/admin/translations.php:627
+#: templates/admin/translations.php:633
 msgid "Grid Image"
 msgstr ""
 
-#: templates/admin/translations.php:625
+#: templates/admin/translations.php:631
 msgid "Grid Link"
 msgstr ""
 
@@ -2703,15 +2768,15 @@ msgstr ""
 msgid "Handle Archive Pages Output"
 msgstr ""
 
-#: templates/admin/translations.php:549
+#: templates/admin/translations.php:555
 msgid "Has an embedded video"
 msgstr ""
 
-#: templates/admin/translations.php:548
+#: templates/admin/translations.php:554
 msgid "Has an uploaded video"
 msgstr ""
 
-#: templates/admin/translations.php:547
+#: templates/admin/translations.php:553
 msgid "Has any video"
 msgstr ""
 
@@ -2719,11 +2784,11 @@ msgstr ""
 msgid "Has Archive Pages"
 msgstr ""
 
-#: templates/admin/translations.php:544
+#: templates/admin/translations.php:550
 msgid "Has Custom Pin Image"
 msgstr ""
 
-#: templates/admin/translations.php:596
+#: templates/admin/translations.php:602
 msgid "Has Image"
 msgstr ""
 
@@ -2731,11 +2796,11 @@ msgstr ""
 msgid "Has Parent Post"
 msgstr ""
 
-#: templates/admin/translations.php:612
+#: templates/admin/translations.php:618
 msgid "Has Product"
 msgstr ""
 
-#: templates/admin/translations.php:542
+#: templates/admin/translations.php:548
 msgid "Has Recipe Image"
 msgstr ""
 
@@ -2816,7 +2881,8 @@ msgstr ""
 msgid "Hover Cursor"
 msgstr ""
 
-#: templates/settings/group-analytics.php:32
+#: templates/settings/group-analytics.php:32 
+#: templates/settings/group-changelog.php:59
 msgid "How many days of data should stay stored in the database."
 msgstr ""
 
@@ -2835,7 +2901,7 @@ msgid ""
 "How to handle the name field that Google wants for every instruction step."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:165
+#: templates/settings/group-recipe-ratings.php:177
 msgid ""
 "How to prevent spam ratings. Use \"Anonymous ID\" if you do not want to "
 "store IP addresses in the database."
@@ -2849,7 +2915,7 @@ msgstr ""
 msgid "How would you rate WP Recipe Maker?"
 msgstr ""
 
-#: templates/admin/translations.php:540
+#: templates/admin/translations.php:546
 msgid "How-to"
 msgstr ""
 
@@ -2873,19 +2939,19 @@ msgstr ""
 msgid "How-to Instructions Template"
 msgstr ""
 
-#: templates/admin/translations.php:528 
+#: templates/admin/translations.php:534 
 #: includes/public/deprecated/class-wprm-template-helper.php:160 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:134
 msgid "hr"
 msgstr ""
 
-#: templates/admin/translations.php:529 
+#: templates/admin/translations.php:535 
 #: includes/public/deprecated/class-wprm-template-helper.php:160 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:134
 msgid "hrs"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:219
+#: templates/settings/group-recipe-ratings.php:230
 msgid "HTML Element to scroll to"
 msgstr ""
 
@@ -2917,19 +2983,23 @@ msgstr ""
 msgid "If there is a parent post for the recipe, link to that parent"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:205
+#: templates/settings/group-recipe-ratings.php:210 
+#: templates/settings/group-recipe-ratings.php:323
 msgid "If they want to give 1 star"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:206
+#: templates/settings/group-recipe-ratings.php:211 
+#: templates/settings/group-recipe-ratings.php:324
 msgid "If they want to give 2 stars or less"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:207
+#: templates/settings/group-recipe-ratings.php:212 
+#: templates/settings/group-recipe-ratings.php:325
 msgid "If they want to give 3 stars or less"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:208
+#: templates/settings/group-recipe-ratings.php:213 
+#: templates/settings/group-recipe-ratings.php:326
 msgid "If they want to give 4 stars or less"
 msgstr ""
 
@@ -2972,6 +3042,10 @@ msgstr ""
 
 #: templates/settings/group-social-sharing.php:88
 msgid "Image to use for the Pin Recipe shortcode."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:163
+msgid "Immediately rate when clicking on the stars"
 msgstr ""
 
 #: templates/settings/group-import.php:20 templates/admin/translations.php:205 
@@ -3131,7 +3205,7 @@ msgstr ""
 msgid "Indian"
 msgstr ""
 
-#: templates/admin/translations.php:497
+#: templates/admin/translations.php:501
 msgid "Ingredient"
 msgstr ""
 
@@ -3152,12 +3226,12 @@ msgstr ""
 msgid "Ingredient Link"
 msgstr ""
 
-#: templates/settings/group-links.php:123 templates/admin/translations.php:193 
+#: templates/settings/group-links.php:129 templates/admin/translations.php:193 
 #: templates/admin/menu/tools/wpurp-ingredients.php:14
 msgid "Ingredient Links"
 msgstr ""
 
-#: templates/settings/group-links.php:124
+#: templates/settings/group-links.php:130
 msgid ""
 "Ingredient links can be set when editing a recipe or through the WP Recipe "
 "Maker > Manage > Recipe Fields > Ingredients page."
@@ -3175,7 +3249,7 @@ msgstr ""
 msgid "Ingredient Parsing"
 msgstr ""
 
-#: templates/admin/translations.php:500
+#: templates/admin/translations.php:504
 msgid "Ingredient Unit"
 msgstr ""
 
@@ -3340,11 +3414,11 @@ msgstr ""
 msgid "Internal Note"
 msgstr ""
 
-#: templates/admin/translations.php:490
+#: templates/admin/translations.php:494
 msgid "into"
 msgstr ""
 
-#: templates/admin/translations.php:478
+#: templates/admin/translations.php:482
 msgid "IP"
 msgstr ""
 
@@ -3388,6 +3462,10 @@ msgstr ""
 msgid "kcal"
 msgstr ""
 
+#: templates/settings/group-changelog.php:16
+msgid "Keep track of recipe related changes."
+msgstr ""
+
 #: templates/admin/translations.php:272
 msgid "Key"
 msgstr ""
@@ -3428,7 +3506,7 @@ msgstr ""
 msgid "l"
 msgstr ""
 
-#: templates/admin/translations.php:590
+#: templates/admin/translations.php:596
 msgid "Label"
 msgstr ""
 
@@ -3536,7 +3614,7 @@ msgstr ""
 msgid "Link Color"
 msgstr ""
 
-#: templates/admin/translations.php:607
+#: templates/admin/translations.php:613
 msgid "Link Nofollow"
 msgstr ""
 
@@ -3544,11 +3622,11 @@ msgstr ""
 msgid "Link only (no extra JavaScript loaded from Pinterest)"
 msgstr ""
 
-#: templates/settings/group-links.php:75
+#: templates/settings/group-links.php:81
 msgid "Link to the archive page for this user"
 msgstr ""
 
-#: templates/settings/group-links.php:71
+#: templates/settings/group-links.php:77
 msgid "Link to use for Post Author"
 msgstr ""
 
@@ -3556,7 +3634,7 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: templates/admin/translations.php:517
+#: templates/admin/translations.php:521
 msgid "List"
 msgstr ""
 
@@ -3573,7 +3651,7 @@ msgstr ""
 msgid "List Template"
 msgstr ""
 
-#: templates/admin/translations.php:518
+#: templates/admin/translations.php:522
 msgid "Lists"
 msgstr ""
 
@@ -3678,7 +3756,7 @@ msgstr ""
 msgid "Make print size"
 msgstr ""
 
-#: templates/admin/translations.php:578
+#: templates/admin/translations.php:584
 msgid "Make sure the name is different."
 msgstr ""
 
@@ -3710,7 +3788,7 @@ msgid ""
 "page"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:158
+#: templates/settings/group-recipe-ratings.php:170
 msgid "Make the stars transparent when the current user has not voted yet."
 msgstr ""
 
@@ -3788,7 +3866,7 @@ msgstr ""
 msgid "Mention %handle% or tag %tag%!"
 msgstr ""
 
-#: templates/admin/translations.php:488
+#: templates/admin/translations.php:492
 msgid "Merge into another"
 msgstr ""
 
@@ -3798,6 +3876,13 @@ msgstr ""
 
 #: templates/settings/group-private-notes.php:48
 msgid "Message to show when the visitor is not logged in."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:265 
+#: templates/settings/group-recipe-ratings.php:353
+msgid ""
+"Message to show when there was a problem with rating the recipe. Make empty "
+"to not show anything."
 msgstr ""
 
 #: templates/admin/translations.php:231
@@ -3862,13 +3947,13 @@ msgstr ""
 msgid "millimeters"
 msgstr ""
 
-#: templates/admin/translations.php:530 
+#: templates/admin/translations.php:536 
 #: includes/public/deprecated/class-wprm-template-helper.php:177 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:154
 msgid "min"
 msgstr ""
 
-#: templates/admin/translations.php:531 
+#: templates/admin/translations.php:537 
 #: includes/public/deprecated/class-wprm-template-helper.php:177 
 #: includes/public/shortcodes/recipe/class-wprm-sc-time.php:154
 msgid "mins"
@@ -3888,7 +3973,7 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-#: templates/admin/translations.php:575
+#: templates/admin/translations.php:581
 msgid "missing"
 msgstr ""
 
@@ -3898,6 +3983,10 @@ msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:240
 msgid "mm"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:287
+msgid "Modal Title"
 msgstr ""
 
 #: templates/settings/group-template-mode.php:33 
@@ -3917,8 +4006,8 @@ msgstr ""
 msgid "Multiple Ratings"
 msgstr ""
 
-#: includes/public/class-wprm-recipe.php:164 
-#: templates/admin/translations.php:477
+#: includes/public/class-wprm-recipe.php:156 
+#: templates/admin/translations.php:457
 msgid "n/a"
 msgstr ""
 
@@ -3939,7 +4028,8 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:204
+#: templates/settings/group-recipe-ratings.php:209 
+#: templates/settings/group-recipe-ratings.php:322
 msgid "Never, allow any user rating"
 msgstr ""
 
@@ -3961,11 +4051,11 @@ msgid ""
 "should start showing up soon."
 msgstr ""
 
-#: templates/admin/translations.php:617
+#: templates/admin/translations.php:623
 msgid "No ASIN could be found in the URL you entered."
 msgstr ""
 
-#: templates/admin/translations.php:559
+#: templates/admin/translations.php:565
 msgid "no comment ratings"
 msgstr ""
 
@@ -3999,7 +4089,7 @@ msgid "No posts found"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:51 
-#: templates/admin/translations.php:537
+#: templates/admin/translations.php:543
 msgid "No Ratings"
 msgstr ""
 
@@ -4031,7 +4121,7 @@ msgstr ""
 msgid "No Underline"
 msgstr ""
 
-#: templates/admin/translations.php:563
+#: templates/admin/translations.php:569
 msgid "no user ratings"
 msgstr ""
 
@@ -4056,7 +4146,7 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: templates/admin/translations.php:475
+#: templates/admin/translations.php:481
 msgid "Not Approved"
 msgstr ""
 
@@ -4114,6 +4204,14 @@ msgstr ""
 msgid "Nutrition Label in template"
 msgstr ""
 
+#: templates/admin/translations.php:458
+msgid "Object Details"
+msgstr ""
+
+#: templates/admin/translations.php:456
+msgid "Object ID"
+msgstr ""
+
 #: templates/admin/translations.php:338
 msgid "olive oil"
 msgstr ""
@@ -4150,29 +4248,37 @@ msgstr ""
 msgid "Only use in metadata when explicitely set in recipe"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:162
+msgid "Open a modal when clicking on the stars (recommended)"
+msgstr ""
+
 #: templates/settings/group-recipe-defaults.php:93
 msgid "Open Author Link in New Tab"
 msgstr ""
 
-#: templates/settings/group-links.php:158
+#: templates/settings/group-links.php:64
+msgid "Open Custom Author Link in new tab"
+msgstr ""
+
+#: templates/settings/group-links.php:164
 msgid "Open custom equipment links in a new tab."
 msgstr ""
 
-#: templates/settings/group-links.php:131
+#: templates/settings/group-links.php:137
 msgid "Open custom ingredient links in a new tab."
 msgstr ""
 
-#: templates/settings/group-links.php:104
+#: templates/settings/group-links.php:110
 msgid "Open custom term links in a new tab."
 msgstr ""
 
-#: templates/settings/group-links.php:103 
-#: templates/settings/group-links.php:130 
-#: templates/settings/group-links.php:157
+#: templates/settings/group-links.php:109 
+#: templates/settings/group-links.php:136 
+#: templates/settings/group-links.php:163
 msgid "Open in New Tab"
 msgstr ""
 
-#: templates/settings/group-links.php:85 templates/admin/translations.php:371
+#: templates/settings/group-links.php:91 templates/admin/translations.php:371
 msgid "Open in new tab"
 msgstr ""
 
@@ -4185,11 +4291,11 @@ msgid "Open internal links in a new tab"
 msgstr ""
 
 #: includes/public/deprecated/class-wprm-template-helper.php:343 
-#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:654
+#: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:655
 msgid "Open larger version of the instruction image"
 msgstr ""
 
-#: includes/public/class-wprm-recipe.php:542
+#: includes/public/class-wprm-recipe.php:548
 msgid "Open larger version of the recipe image"
 msgstr ""
 
@@ -4205,7 +4311,7 @@ msgstr ""
 msgid "Open recipe image in full size"
 msgstr ""
 
-#: templates/settings/group-links.php:86
+#: templates/settings/group-links.php:92
 msgid "Open the Post Author link in a new tab."
 msgstr ""
 
@@ -4242,9 +4348,9 @@ msgstr ""
 msgid "optional notes"
 msgstr ""
 
-#: templates/settings/group-links.php:111 
-#: templates/settings/group-links.php:138 
-#: templates/settings/group-links.php:165
+#: templates/settings/group-links.php:117 
+#: templates/settings/group-links.php:144 
+#: templates/settings/group-links.php:171
 msgid "Optional rel attribute to add to custom links by default."
 msgstr ""
 
@@ -4280,7 +4386,7 @@ msgstr ""
 msgid "Optionally fill in these fields to use instead of the recipe values:"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:220
+#: templates/settings/group-recipe-ratings.php:231
 msgid ""
 "Optionally set a custom HTML element to scroll to. Can be useful when using "
 "lazy loading your comments, for example."
@@ -4301,7 +4407,7 @@ msgid ""
 msgstr ""
 
 #: templates/settings/group-recipe-defaults.php:112 
-#: templates/admin/translations.php:541
+#: templates/admin/translations.php:547
 msgid "Other"
 msgstr ""
 
@@ -4365,7 +4471,7 @@ msgstr ""
 msgid "Output Recipe Metadata"
 msgstr ""
 
-#: templates/admin/translations.php:493
+#: templates/admin/translations.php:497
 msgid "Overview"
 msgstr ""
 
@@ -4391,7 +4497,7 @@ msgstr ""
 msgid "Parent ID"
 msgstr ""
 
-#: templates/admin/translations.php:556
+#: templates/admin/translations.php:562
 msgid "Parent Language"
 msgstr ""
 
@@ -4399,7 +4505,7 @@ msgstr ""
 msgid "Parent Name"
 msgstr ""
 
-#: templates/admin/translations.php:481
+#: templates/admin/translations.php:485
 msgid "Parent Post ID"
 msgstr ""
 
@@ -4455,7 +4561,7 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
-#: templates/admin/translations.php:483
+#: templates/admin/translations.php:487
 msgid "Permanently Delete"
 msgstr ""
 
@@ -4534,12 +4640,16 @@ msgstr ""
 msgid "Placeholder for the Instacart button"
 msgstr ""
 
-#: templates/admin/translations.php:591
+#: templates/admin/translations.php:597
 msgid "Plural"
 msgstr ""
 
 #: templates/admin/translations.php:275
 msgid "Plural Name"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:79
+msgid "Popup Modal"
 msgstr ""
 
 #: templates/admin/translations.php:408
@@ -4618,6 +4728,10 @@ msgstr ""
 msgid "Prevent printing of restricted recipes"
 msgstr ""
 
+#: includes/admin/menu/class-wprm-admin-menu-preview.php:51
+msgid "Preview"
+msgstr ""
+
 #: includes/public/class-wprm-analytics.php:38 templates/public/print.php:82 
 #: includes/public/deprecated/class-wprm-template-helper.php:44
 msgid "Print"
@@ -4659,13 +4773,18 @@ msgstr ""
 msgid "Private Notes"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:264 
+#: templates/settings/group-recipe-ratings.php:352
+msgid "Problem Message"
+msgstr ""
+
 #: templates/admin/menu/tools/health-check.php:16
 msgid "Processing %d post"
 msgid_plural "Processing %d posts"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/translations.php:623
+#: templates/admin/translations.php:629
 msgid "Product"
 msgstr ""
 
@@ -4706,6 +4825,18 @@ msgstr ""
 msgid "Range Keyword"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:341
+msgid "Rate and Review Recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:335
+msgid "Rate Recipe"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:289
+msgid "Rate This Recipe"
+msgstr ""
+
 #: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:44 
 #: includes/public/shortcodes/general/class-wprm-sc-jump-to-comments.php:201
 msgid "Rate this Recipe"
@@ -4731,7 +4862,7 @@ msgstr ""
 msgid "Rate this recipe 5 out of 5 stars"
 msgstr ""
 
-#: templates/admin/translations.php:465
+#: templates/admin/translations.php:471
 msgid "Rating"
 msgstr ""
 
@@ -4761,6 +4892,10 @@ msgstr ""
 msgid "Recalculate Total Time"
 msgstr ""
 
+#: templates/settings/group-changelog.php:34
+msgid "Receive Notifications For"
+msgstr ""
+
 #: templates/admin/translations.php:59
 msgid "Recipe"
 msgstr ""
@@ -4785,12 +4920,27 @@ msgid ""
 "used for collecting favorites, meal planning and much more!"
 msgstr ""
 
+#: includes/public/class-wprm-changelog.php:38 
+#: templates/settings/group-changelog.php:38
+msgid "Recipe Created"
+msgstr ""
+
 #: templates/settings/group-custom-style.php:31
 msgid "Recipe CSS"
 msgstr ""
 
-#: templates/admin/translations.php:586
+#: templates/admin/translations.php:592
 msgid "Recipe Data Size"
+msgstr ""
+
+#: includes/public/class-wprm-changelog.php:41 
+#: templates/settings/group-changelog.php:41
+msgid "Recipe Deleted"
+msgstr ""
+
+#: includes/public/class-wprm-changelog.php:39 
+#: templates/settings/group-changelog.php:39
+msgid "Recipe Edited"
 msgstr ""
 
 #: templates/settings/group-recipe-defaults.php:15
@@ -4805,7 +4955,7 @@ msgstr ""
 msgid "Recipe Existence"
 msgstr ""
 
-#: templates/admin/translations.php:496
+#: templates/admin/translations.php:500
 msgid "Recipe Fields"
 msgstr ""
 
@@ -4813,7 +4963,7 @@ msgstr ""
 msgid "Recipe fields"
 msgstr ""
 
-#: templates/admin/translations.php:480
+#: templates/admin/translations.php:484
 msgid "Recipe ID"
 msgstr ""
 
@@ -4903,7 +5053,7 @@ msgid "Recipe Snippets"
 msgstr ""
 
 #: templates/settings/group-recipe-submission.php:15 
-#: templates/admin/translations.php:526
+#: templates/admin/translations.php:530
 msgid "Recipe Submission"
 msgstr ""
 
@@ -4911,12 +5061,12 @@ msgstr ""
 msgid "Recipe Submission Form"
 msgstr ""
 
-#: templates/admin/translations.php:572
+#: templates/admin/translations.php:578
 msgid "Recipe Submission User"
 msgstr ""
 
 #: includes/public/class-wprm-admin-bar.php:167 
-#: templates/admin/translations.php:525
+#: templates/admin/translations.php:529
 msgid "Recipe Submissions"
 msgstr ""
 
@@ -4925,11 +5075,11 @@ msgstr ""
 msgid "Recipe Summary"
 msgstr ""
 
-#: templates/admin/translations.php:509
+#: templates/admin/translations.php:513
 msgid "Recipe Taxonomies"
 msgstr ""
 
-#: templates/admin/translations.php:508
+#: templates/admin/translations.php:512
 msgid "Recipe Taxonomy"
 msgstr ""
 
@@ -4940,6 +5090,11 @@ msgstr ""
 
 #: templates/settings/group-recipe-times.php:15
 msgid "Recipe Times"
+msgstr ""
+
+#: includes/public/class-wprm-changelog.php:40 
+#: templates/settings/group-changelog.php:40
+msgid "Recipe Trashed"
 msgstr ""
 
 #: templates/admin/translations.php:247
@@ -4987,7 +5142,7 @@ msgstr ""
 msgid "Redirect to parent post"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:201
+#: templates/settings/group-recipe-ratings.php:206
 msgid ""
 "Redirect visitors to the comment form instead of allowing them to vote by "
 "just clicking."
@@ -5045,7 +5200,7 @@ msgstr ""
 msgid "Remove any links inside the recipe."
 msgstr ""
 
-#: templates/admin/translations.php:459
+#: templates/admin/translations.php:465
 msgid "Remove fixed filter"
 msgstr ""
 
@@ -5077,7 +5232,7 @@ msgstr ""
 msgid "Remove Notice"
 msgstr ""
 
-#: templates/admin/translations.php:619
+#: templates/admin/translations.php:625
 msgid "Remove Product"
 msgstr ""
 
@@ -5114,11 +5269,11 @@ msgstr ""
 msgid "Removed Inline Ingredient"
 msgstr ""
 
-#: templates/admin/translations.php:485
+#: templates/admin/translations.php:489
 msgid "Rename"
 msgstr ""
 
-#: templates/admin/translations.php:546
+#: templates/admin/translations.php:552
 msgid "Repin ID"
 msgstr ""
 
@@ -5126,7 +5281,7 @@ msgstr ""
 msgid "required"
 msgstr ""
 
-#: includes/class-wp-recipe-maker.php:229
+#: includes/class-wp-recipe-maker.php:235
 msgid "Required by WP Recipe Maker Premium"
 msgstr ""
 
@@ -5142,7 +5297,7 @@ msgstr ""
 msgid "Resting Time"
 msgstr ""
 
-#: templates/admin/translations.php:482
+#: templates/admin/translations.php:486
 msgid "Restore Recipe"
 msgstr ""
 
@@ -5150,11 +5305,11 @@ msgstr ""
 msgid "Restrict Ingredient Length"
 msgstr ""
 
-#: templates/admin/translations.php:494
+#: templates/admin/translations.php:498
 msgid "Revision"
 msgstr ""
 
-#: templates/admin/translations.php:585
+#: templates/admin/translations.php:591
 msgid "Revision ID"
 msgstr ""
 
@@ -5180,11 +5335,11 @@ msgstr ""
 msgid "Roundup Item Name"
 msgstr ""
 
-#: templates/admin/translations.php:516
+#: templates/admin/translations.php:520
 msgid "Roundup Lists"
 msgstr ""
 
-#: templates/admin/translations.php:457
+#: templates/admin/translations.php:463
 msgid "rows"
 msgstr ""
 
@@ -5245,7 +5400,7 @@ msgstr ""
 msgid "Save to Slickstream"
 msgstr ""
 
-#: templates/admin/translations.php:522
+#: templates/admin/translations.php:526
 msgid "Saved Collection"
 msgstr ""
 
@@ -5280,7 +5435,7 @@ msgstr ""
 msgid "Search for recipes"
 msgstr ""
 
-#: templates/admin/translations.php:618
+#: templates/admin/translations.php:624
 msgid "Search Products"
 msgstr ""
 
@@ -5388,13 +5543,13 @@ msgstr ""
 msgid "Select Roundup Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:615
+#: templates/admin/translations.php:621
 msgid ""
 "Selecting an Amazon Product will overwrite the current link. Are you sure "
 "you want to continue?"
 msgstr ""
 
-#: templates/admin/translations.php:534
+#: templates/admin/translations.php:540
 msgid "SEO"
 msgstr ""
 
@@ -5418,11 +5573,11 @@ msgid ""
 "Leave blank for default print template as defined in the settings."
 msgstr ""
 
-#: templates/admin/translations.php:604
+#: templates/admin/translations.php:610
 msgid "Set Affiliate Link"
 msgstr ""
 
-#: templates/admin/translations.php:614
+#: templates/admin/translations.php:620
 msgid "Set ASIN from Amazon Link"
 msgstr ""
 
@@ -5450,6 +5605,18 @@ msgstr ""
 
 #: includes/public/class-wprm-settings.php:63
 msgid "Settings"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:283
+msgid ""
+"Settings related to the modal that pops up when a visitors clicks on the "
+"stars."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:253
+msgid ""
+"Settings related to the tooltip that pops up when a visitors clicks on the "
+"stars."
 msgstr ""
 
 #: templates/settings/group-settings-tools.php:15
@@ -5591,7 +5758,7 @@ msgid ""
 "Show WP Recipe Maker in Admin Bar on frontend for easy editing and shortcuts."
 msgstr ""
 
-#: templates/admin/translations.php:455
+#: templates/admin/translations.php:461
 msgid "Showing"
 msgstr ""
 
@@ -5667,6 +5834,13 @@ msgstr ""
 msgid "Social Sharing"
 msgstr ""
 
+#: templates/settings/group-custom-style.php:80
+msgid ""
+"Some plugin features will make a modal pop up for users to interact with. "
+"With these settings you can change how that modal will appear to match the "
+"styling of your site."
+msgstr ""
+
 #: templates/admin/translations.php:21
 msgid "Something went wrong during saving."
 msgstr ""
@@ -5694,7 +5868,7 @@ msgstr ""
 msgid "Soup"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:164
+#: templates/settings/group-recipe-ratings.php:176
 msgid "Spam Prevention Method"
 msgstr ""
 
@@ -5715,11 +5889,12 @@ msgstr ""
 msgid "Square"
 msgstr ""
 
-#: templates/admin/translations.php:467
+#: templates/admin/translations.php:473
 msgid "star"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:107
+#: templates/settings/group-recipe-ratings.php:107 
+#: templates/settings/group-recipe-ratings.php:306
 msgid "Star Padding"
 msgstr ""
 
@@ -5727,15 +5902,17 @@ msgstr ""
 msgid "Star Ratings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:99
+#: templates/settings/group-recipe-ratings.php:99 
+#: templates/settings/group-recipe-ratings.php:299
 msgid "Star Size"
 msgstr ""
 
-#: templates/admin/translations.php:468
+#: templates/admin/translations.php:474
 msgid "stars"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:88
+#: templates/settings/group-recipe-ratings.php:88 
+#: templates/settings/group-recipe-ratings.php:293
 msgid "Stars Color"
 msgstr ""
 
@@ -5775,6 +5952,14 @@ msgstr ""
 
 #: templates/settings/group-glossary-terms.php:95
 msgid "Styling for glossary terms"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:339
+msgid "Submit Comment Button"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:333
+msgid "Submit Rating Button"
 msgstr ""
 
 #: templates/admin/translations.php:356
@@ -5828,7 +6013,7 @@ msgid "Take over author of parent post"
 msgstr ""
 
 #: templates/settings/group-post-type.php:93 
-#: templates/admin/translations.php:568 
+#: templates/admin/translations.php:574 
 #: includes/admin/menu/class-wprm-admin-menu.php:74 
 #: includes/admin/menu/class-wprm-admin-menu.php:74
 msgid "Taxonomies"
@@ -5988,21 +6173,21 @@ msgstr ""
 msgid "Template to output on recipe archive pages."
 msgstr ""
 
-#: templates/admin/translations.php:579
+#: templates/admin/translations.php:585
 msgid "Term"
 msgstr ""
 
-#: templates/settings/group-links.php:97
+#: templates/settings/group-links.php:103
 msgid "Term Links"
 msgstr ""
 
-#: templates/settings/group-links.php:98
+#: templates/settings/group-links.php:104
 msgid ""
 "Term links can be set through the WP Recipe Maker > Manage > Recipe Fields "
 "page."
 msgstr ""
 
-#: templates/admin/translations.php:570
+#: templates/admin/translations.php:576
 msgid "Terms"
 msgstr ""
 
@@ -6029,15 +6214,18 @@ msgstr ""
 msgid "Text to output"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:185
+#: templates/settings/group-recipe-ratings.php:260 
+#: templates/settings/group-recipe-ratings.php:348
 msgid "Thank you for voting!"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:182
+#: templates/settings/group-recipe-ratings.php:257 
+#: templates/settings/group-recipe-ratings.php:345
 msgid "Thank You Message"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:183
+#: templates/settings/group-recipe-ratings.php:258 
+#: templates/settings/group-recipe-ratings.php:346
 msgid ""
 "Thank you message to show after clicking on the stars. Make empty to not "
 "show anything."
@@ -6117,8 +6305,19 @@ msgid ""
 "The token provided by SmartWithFood. Required to make the button show up."
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:154
+msgid ""
+"The User Ratings feature allows visitors to vote on your recipes by simply "
+"clicking on the stars inside of the recipe card."
+msgstr ""
+
 #: templates/admin/translations.php:227
 msgid "The weight of 1 serving. Does not affect the calculation."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:267 
+#: templates/settings/group-recipe-ratings.php:355
+msgid "There was a problem rating this recipe. Please try again later."
 msgstr ""
 
 #: templates/admin/menu/import/import-overview.php:28
@@ -6176,7 +6375,7 @@ msgstr ""
 msgid "This recipe doesn't have any ingredients."
 msgstr ""
 
-#: templates/settings/group-links.php:60
+#: templates/settings/group-links.php:71
 msgid ""
 "This setting only applies when the recipe uses \"Post Author\". Check the WP "
 "Recipe Maker > Settings > Recipe Defaults page to change the default."
@@ -6194,14 +6393,14 @@ msgid ""
 "user ratings vote for this recipe."
 msgstr ""
 
-#: templates/admin/translations.php:576
+#: templates/admin/translations.php:582
 msgid ""
 "This will update the term anywhere you are using it. Take note that terms "
 "are case insensitive (t and T will be seen as the same unit and both get "
 "replaced)."
 msgstr ""
 
-#: templates/admin/translations.php:487
+#: templates/admin/translations.php:491
 msgid ""
 "This will update the unit for all recipes using it. Take note that terms are "
 "case insensitive (t and T will be seen as the same unit and both get "
@@ -6231,6 +6430,10 @@ msgid ""
 "Tip: use the TAB key to move from field to field and easily add instructions."
 msgstr ""
 
+#: templates/settings/group-custom-style.php:97
+msgid "Title Text Color"
+msgstr ""
+
 #: templates/settings/group-import.php:30
 msgid "to"
 msgstr ""
@@ -6239,7 +6442,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: templates/admin/translations.php:580
+#: templates/admin/translations.php:586
 msgid "Tooltip"
 msgstr ""
 
@@ -6285,11 +6488,11 @@ msgstr ""
 msgid "Translation API"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:157
+#: templates/settings/group-recipe-ratings.php:169
 msgid "Transparent Stars when not Voted"
 msgstr ""
 
-#: templates/admin/translations.php:495
+#: templates/admin/translations.php:499
 msgid "Trash"
 msgstr ""
 
@@ -6297,7 +6500,7 @@ msgstr ""
 msgid "Tried this recipe?"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:176
+#: templates/settings/group-recipe-ratings.php:188
 msgid ""
 "Try to clear the site cache after a user rating. Makes sure the vote "
 "increases immediately after refreshing the page."
@@ -6401,7 +6604,8 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: templates/settings/group-analytics.php:35
+#: templates/settings/group-analytics.php:35 
+#: templates/settings/group-changelog.php:62
 msgid "Unlimited (not recommended for database growth)"
 msgstr ""
 
@@ -6540,7 +6744,7 @@ msgstr ""
 msgid "Use image from parent post"
 msgstr ""
 
-#: templates/settings/group-links.php:65
+#: templates/settings/group-links.php:70
 msgid "Use link for Post Author"
 msgstr ""
 
@@ -6551,9 +6755,9 @@ msgstr ""
 #: includes/admin/class-wprm-modal.php:343 
 #: includes/admin/class-wprm-modal.php:376 
 #: includes/admin/class-wprm-modal.php:409 
-#: templates/settings/group-links.php:115 
-#: templates/settings/group-links.php:142 
-#: templates/settings/group-links.php:169
+#: templates/settings/group-links.php:121 
+#: templates/settings/group-links.php:148 
+#: templates/settings/group-links.php:175
 msgid "Use Nofollow"
 msgstr ""
 
@@ -6619,9 +6823,9 @@ msgstr ""
 #: includes/admin/class-wprm-modal.php:344 
 #: includes/admin/class-wprm-modal.php:377 
 #: includes/admin/class-wprm-modal.php:410 
-#: templates/settings/group-links.php:116 
-#: templates/settings/group-links.php:143 
-#: templates/settings/group-links.php:170
+#: templates/settings/group-links.php:122 
+#: templates/settings/group-links.php:149 
+#: templates/settings/group-links.php:176
 msgid "Use Sponsored"
 msgstr ""
 
@@ -6678,7 +6882,7 @@ msgid ""
 "to match your style!"
 msgstr ""
 
-#: templates/settings/group-links.php:74
+#: templates/settings/group-links.php:80
 msgid "Use the website link as set on the user's profile page"
 msgstr ""
 
@@ -6764,15 +6968,19 @@ msgid ""
 "can be changed on the Manage > Recipe Fields page."
 msgstr ""
 
-#: templates/admin/translations.php:523
+#: templates/admin/translations.php:527
 msgid "User Collection"
 msgstr ""
 
-#: templates/admin/translations.php:524
+#: templates/admin/translations.php:528
 msgid "User Collections"
 msgstr ""
 
-#: templates/admin/translations.php:476
+#: templates/admin/translations.php:460
+msgid "User Details"
+msgstr ""
+
+#: templates/admin/translations.php:459
 msgid "User ID"
 msgstr ""
 
@@ -6781,13 +6989,25 @@ msgid "User Not Voted"
 msgstr ""
 
 #: includes/public/class-wprm-analytics.php:48 
-#: templates/admin/translations.php:471
+#: templates/admin/translations.php:477
 msgid "User Rating"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:36 
 #: templates/settings/group-recipe-ratings.php:153
 msgid "User Ratings"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:282
+msgid "User Ratings Modal"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:158
+msgid "User Ratings Mode"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:252
+msgid "User Ratings Tooltip"
 msgstr ""
 
 #: templates/admin/privacy.php:24
@@ -6832,28 +7052,28 @@ msgstr ""
 msgid "View Recipe"
 msgstr ""
 
-#: templates/admin/translations.php:583
+#: templates/admin/translations.php:589
 msgid "View Revision"
 msgstr ""
 
-#: templates/admin/translations.php:632
+#: templates/admin/translations.php:638
 msgid "Visitor Details"
 msgstr ""
 
-#: templates/admin/translations.php:631
+#: templates/admin/translations.php:637
 msgid "Visitor UID"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
-#: templates/admin/translations.php:564 
+#: templates/admin/translations.php:570 
 #: includes/public/deprecated/class-wprm-template-helper.php:238
 msgid "vote"
 msgid_plural "votes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/translations.php:565
+#: templates/admin/translations.php:571
 msgid "votes"
 msgstr ""
 
@@ -6872,20 +7092,26 @@ msgid ""
 "have activated."
 msgstr ""
 
-#: templates/admin/translations.php:536
+#: templates/admin/translations.php:542
 msgid "Warnings"
 msgstr ""
 
-#: templates/admin/translations.php:574
+#: templates/admin/translations.php:580
 msgid "Was not a Recipe Submission"
 msgstr ""
 
-#: templates/admin/translations.php:573
+#: templates/admin/translations.php:579
 msgid "Was Recipe Submission"
 msgstr ""
 
-#: templates/admin/translations.php:492
+#: templates/admin/translations.php:496
 msgid "We could not find a term with that ID."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:315
+msgid ""
+"We love getting a rating, but a review would be even better! Please consider "
+"leaving a comment to help us out..."
 msgstr ""
 
 #: templates/admin/menu/import/import-overview.php:103
@@ -6895,73 +7121,73 @@ msgid ""
 "be able to make use of all of our features."
 msgstr ""
 
-#: templates/admin/translations.php:504
+#: templates/admin/translations.php:508
 msgid ""
 "We were not able to create this equipment. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:499
+#: templates/admin/translations.php:503
 msgid ""
 "We were not able to create this ingredient. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:506
+#: templates/admin/translations.php:510
 msgid "We were not able to create this term. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:502
+#: templates/admin/translations.php:506
 msgid "We were not able to create this unit. Make sure it does not exist yet."
 msgstr ""
 
-#: templates/admin/translations.php:593
+#: templates/admin/translations.php:599
 msgid "What do you want the plural to be for"
 msgstr ""
 
-#: templates/admin/translations.php:588
+#: templates/admin/translations.php:594
 msgid "What do you want the slug to be for"
 msgstr ""
 
-#: templates/admin/translations.php:503
+#: templates/admin/translations.php:507
 msgid "What do you want to be the name of this new equipment?"
 msgstr ""
 
-#: templates/admin/translations.php:498
+#: templates/admin/translations.php:502
 msgid "What do you want to be the name of this new ingredient?"
 msgstr ""
 
-#: templates/admin/translations.php:505
+#: templates/admin/translations.php:509
 msgid "What do you want to be the name of this new term?"
 msgstr ""
 
-#: templates/admin/translations.php:501
+#: templates/admin/translations.php:505
 msgid "What do you want to be the name of this new unit?"
 msgstr ""
 
-#: templates/admin/translations.php:626
+#: templates/admin/translations.php:632
 msgid "What do you want to be the new grid link for"
 msgstr ""
 
-#: templates/admin/translations.php:595
+#: templates/admin/translations.php:601
 msgid "What do you want to be the new group for"
 msgstr ""
 
-#: templates/admin/translations.php:605
+#: templates/admin/translations.php:611
 msgid "What do you want to be the new link for"
 msgstr ""
 
-#: templates/admin/translations.php:486
+#: templates/admin/translations.php:490
 msgid "What do you want to be the new name for"
 msgstr ""
 
-#: templates/admin/translations.php:521
+#: templates/admin/translations.php:525
 msgid "What do you want to be the new term to be?"
 msgstr ""
 
-#: templates/admin/translations.php:582
+#: templates/admin/translations.php:588
 msgid "What do you want to be the new tooltip for"
 msgstr ""
 
-#: templates/admin/translations.php:489
+#: templates/admin/translations.php:493
 msgid "What is the ID of the term you want the merge"
 msgstr ""
 
@@ -6979,6 +7205,10 @@ msgstr ""
 
 #: templates/settings/group-social-sharing.php:110
 msgid "What to use for the pin description."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:159
+msgid "What type of user ratings to use."
 msgstr ""
 
 #: templates/settings/group-private-notes.php:22
@@ -7088,8 +7318,16 @@ msgstr ""
 msgid "WP Recipe Maker"
 msgstr ""
 
+#: includes/public/class-wprm-changelog.php:101
+msgid "WP Recipe Maker Change:"
+msgstr ""
+
 #: templates/admin/translations.php:30
 msgid "WP Recipe Maker Facebook Group"
+msgstr ""
+
+#: templates/admin/menu/preview.php:15
+msgid "WP Recipe Maker Plugin Preview"
 msgstr ""
 
 #: includes/public/class-wprm-template-shortcodes.php:213 
@@ -7151,7 +7389,7 @@ msgstr ""
 msgid "You can use the following placeholders:"
 msgstr ""
 
-#: templates/admin/translations.php:532
+#: templates/admin/translations.php:538
 msgid "You do not have the correct permissions to edit this recipe"
 msgstr ""
 
@@ -7164,7 +7402,7 @@ msgstr ""
 msgid "You just missed the deadline!"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:190
+#: templates/settings/group-recipe-ratings.php:195
 msgid "You need to enable the Comment Ratings feature to use this option."
 msgstr ""
 
@@ -7172,7 +7410,7 @@ msgstr ""
 msgid "Your Amazon Product Advertising API details."
 msgstr ""
 
-#: templates/admin/translations.php:507
+#: templates/admin/translations.php:511
 msgid "Your Custom Fields"
 msgstr ""
 
@@ -7180,10 +7418,10 @@ msgstr ""
 msgid "Your vote:"
 msgstr ""
 
-#: templates/admin/translations.php:460
+#: templates/admin/translations.php:466
 msgid "← Columns"
 msgstr ""
 
-#: templates/admin/translations.php:461
+#: templates/admin/translations.php:467
 msgid "→ Change Columns"
 msgstr ""

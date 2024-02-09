@@ -22,7 +22,7 @@ window.WPRecipeMaker.rating = {
 		enabled: typeof window.wprm_public !== 'undefined' ? wprm_public.settings.features_comment_ratings : wprm_admin.settings.features_comment_ratings,
 	},
 	onClick( el ) {
-		const container = el.closest( '.wprm-comment-ratings-container' );
+		const container = el.closest( '.wprm-comment-ratings-container, .wprm-user-ratings-modal-stars' );
 		const oldValue = container ? parseInt( container.dataset.currentRating ) : 0;
 
 		const newValue = parseInt( el.value );
@@ -51,6 +51,9 @@ window.WPRecipeMaker.rating = {
 		if ( window.WPRecipeMaker.hasOwnProperty( 'comments' ) && window.WPRecipeMaker.comments.hasOwnProperty( 'change' ) ) {
 			window.WPRecipeMaker.comments.change( container );
 		}
+
+		// Trigger stars change event.
+		document.dispatchEvent( new CustomEvent( 'wprm-comment-rating-change', { detail: { el, container, rating: newValue } } ) );
 	},
 };
 
