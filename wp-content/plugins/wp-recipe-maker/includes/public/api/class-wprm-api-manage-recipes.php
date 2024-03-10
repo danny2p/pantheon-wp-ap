@@ -96,12 +96,12 @@ class WPRM_Api_Manage_Recipes {
 			if ( 'frontend' === $format ) {
 				// Only return data if recipe is published or user has permission to edit.
 				if ( 'publish' === $recipe->post_status() || current_user_can( 'edit_post', $recipe->id() ) ) {
-					return $recipe->get_data_frontend();
+					return rest_ensure_response( $recipe->get_data_frontend() );
 				}
 			}
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -287,12 +287,14 @@ class WPRM_Api_Manage_Recipes {
 		$total_recipes = array_sum( $total ) - $no_permission_total;
 		$filtered_recipes = intval( $query->found_posts ) - $no_permission_total;
 
-		return array(
+		$data = array(
 			'rows' => array_values( $recipes ),
 			'total' => $total_recipes,
 			'filtered' => $filtered_recipes,
 			'pages' => ceil( $filtered_recipes / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -1009,10 +1011,10 @@ class WPRM_Api_Manage_Recipes {
 				}
 			}
 
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

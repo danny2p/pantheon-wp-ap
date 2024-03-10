@@ -154,6 +154,15 @@ class WPRM_Admin_Bar {
 					)
 				);
 
+				$wp_admin_bar->add_node(
+					array(
+						'parent' => 'wp-recipe-maker',
+						'id'     => 'wprm-create-recipe',
+						'title'  => __( 'Create Recipe', 'wp-recipe-maker' ),
+						'href'   => admin_url( 'admin.php?page=wprm_manage&action=create' ),
+					)
+				);
+
 				// Check for pending recipe submissions.
 				if ( WPRM_Settings::get( 'recipe_submission_admin_bar' ) ) {
 					$count_posts = wp_count_posts( WPRM_POST_TYPE );
@@ -170,7 +179,7 @@ class WPRM_Admin_Bar {
 						);
 
 						$label = sprintf( _n( '%s pending recipe submission', '%s pending recipe submissions', $submissions_count, 'wp-recipe-maker' ), number_format_i18n( $submissions_count ) );
-						$badge = ' ' . sprintf( '<span style="float:right" class="wprm-admin-bar-badge"><span aria-hidden="true">%1$d</span><span class="screen-reader-text">%2$s</span></span>', $submissions_count, $label );
+						$badge = ' ' . sprintf( '<span style="display: none;" class="wprm-admin-bar-badge"><span aria-hidden="true">%1$d</span><span class="screen-reader-text">%2$s</span></span>', $submissions_count, $label );
 
 						// Insert badge before last </span>.
 						$pos = strrpos( $main_menu['title'], '</span>' );

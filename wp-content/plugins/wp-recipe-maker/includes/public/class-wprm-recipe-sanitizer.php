@@ -32,7 +32,7 @@ class WPRM_Recipe_Sanitizer {
 		if ( isset( $recipe['video_embed'] ) ) {
 			$embed_code = trim( $recipe['video_embed'] );
 			$embed_code = str_ireplace( '[wprm-recipe-video]', '', $embed_code );
-			$sanitized_recipe['video_embed'] = $embed_code;
+			$sanitized_recipe['video_embed'] = self::sanitize_html( $embed_code );
 		}
 
 		// Boolean fields.
@@ -259,8 +259,8 @@ class WPRM_Recipe_Sanitizer {
 
 						if ( isset( $instruction['video'] ) ) {
 							$sanitized_instruction['video'] = array(
-								'type' => $instruction['video']['type'],
-								'embed' => $instruction['video']['embed'],
+								'type' => sanitize_text_field( $instruction['video']['type'] ),
+								'embed' => self::sanitize_html( $instruction['video']['embed'] ),
 								'id' => intval( $instruction['video']['id'] ),
 								'thumb' => $instruction['video']['thumb'],
 								'start' => $instruction['video']['start'],
@@ -496,14 +496,6 @@ class WPRM_Recipe_Sanitizer {
 
 		// Allow more when user can edit posts to prevent abuse from User Submissions form.
 		if ( current_user_can( 'edit_posts' ) ) {
-			$allowed_tags['iframe'] = array(
-				'src'             => array(),
-				'height'          => array(),
-				'width'           => array(),
-				'frameborder'     => array(),
-				'allowfullscreen' => array(),
-			);
-
 			// Specific data attributes.
 			$allowed_tags['a']['data-optimize-leads-uid'] = true;
 		}

@@ -134,12 +134,14 @@ class WPRM_Api_Manage_Trash {
 		// Got total number of recipes.
 		$total = (array) wp_count_posts( WPRM_POST_TYPE );
 
-		return array(
+		$data = array(
 			'rows' => array_values( $recipes ),
-			'total' => intval( $total->trash ),
+			'total' => intval( $total['trash'] ),
 			'filtered' => intval( $query->found_posts ),
 			'pages' => ceil( $query->found_posts / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -194,10 +196,10 @@ class WPRM_Api_Manage_Trash {
 				}
 			}
 
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

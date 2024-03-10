@@ -136,6 +136,19 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.3.0 =
+* Feature: Patterns for the Template Editor
+* Feature: Expandable block for the Template Editor
+* Feature: Layout element blocks for the Template Editor
+* Feature: Import ratings from All In One Schema Rich Snippets
+* Improvement: Create Recipe link in admin bar
+* Improvement: Set Open Graph type to recipe when using Yoast SEO
+* Fix: Video metadata not found for some Youtube Shorts URLs
+* Fix: Sanitization of video embeds for non-administrators
+* Fix: Timeout issues when converting a lot of Create Reviews
+* Fix: Make sure all custom API endpoints use a WP_REST_Response object
+* Fix: Prevent unstyled submission number in admin bar
+
 = 9.2.1 =
 * Fix: Make sure modal color settings work in all environments
 * Fix: Error when saving Customizer
@@ -1622,6 +1635,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 * Feature: Fallback recipe when the plugin is disabled
 
 == Upgrade notice ==
+= 9.3.0 =
+Some great new features and improvements
+
 = 9.2.1 =
 Fixes a few small issues
 

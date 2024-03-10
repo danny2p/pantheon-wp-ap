@@ -1,6 +1,36 @@
 {
     "news": [
         {
+            "date": "2024-03-07",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.3.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-3-0/"
+        },
+        {
+            "date": "2024-02-29",
+            "label": "Blog",
+            "title": "Mastering Food Photography: Secrets and Tricks Revealed",
+            "url": "https://bootstrapped.ventures/food-photography-tricks/"
+        },
+        {
+            "date": "2024-02-22",
+            "label": "Blog",
+            "title": "Exploring the Key Angles in Food Photography",
+            "url": "https://bootstrapped.ventures/food-photography-angles/"
+        },
+        {
+            "date": "2024-02-15",
+            "label": "Blog",
+            "title": "Marketing Strategies for Professional Chefs",
+            "url": "https://bootstrapped.ventures/chef-marketing/"
+        },
+        {
+            "date": "2024-02-08",
+            "label": "Blog",
+            "title": "6 Effective Digital Marketing Tactics for Food Brands",
+            "url": "https://bootstrapped.ventures/food-digital-marketing/"
+        },
+        {
             "date": "2024-02-06",
             "label": "Release",
             "title": "WP Recipe Maker 9.2.0",

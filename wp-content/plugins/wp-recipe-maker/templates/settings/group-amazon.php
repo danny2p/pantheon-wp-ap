@@ -140,7 +140,7 @@ $amazon = array(
 		array(
 			'id' => 'amazon_partner_tag',
 			'name' => __( 'Amazon Store ID', 'wp-recipe-maker' ),
-			'description' => __( 'Make sure this is the partner tag for the store selected above.', 'wp-recipe-maker' ),
+			'description' => __( 'Make sure this is the partner tag or tracking ID for the store selected above.', 'wp-recipe-maker' ),
 			'type' => 'text',
 			'default' => '',
 		),

@@ -65,6 +65,10 @@ const Menu = (props) => {
                             onClick={ (e) => { props.onChangeMode( 'properties' ) } }
                         ><Icon type='properties' /> Template Properties</a>
                         <a
+                            className={ 'patterns' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                            onClick={ (e) => { props.onChangeMode( 'patterns' ) } }
+                        ><Icon type='patterns' /> Add Patterns</a>
+                        <a
                             className={ 'blocks' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
                             onClick={ (e) => { props.onChangeMode( 'blocks' ) } }
                         ><Icon type='blocks' /> Edit Blocks</a>
@@ -101,6 +105,11 @@ const Menu = (props) => {
                 :
                 null
             }
+            <div
+                id="wprm-add-patterns"
+                style={{ display: 'patterns' !== props.mode ? 'none' : 'block' }}
+                className="wprm-template-properties"
+            ></div>
             <div
                 id="wprm-add-blocks"
                 style={{ display: 'add' !== props.mode ? 'none' : 'block' }}

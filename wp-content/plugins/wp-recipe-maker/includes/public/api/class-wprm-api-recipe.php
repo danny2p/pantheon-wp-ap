@@ -59,6 +59,7 @@ class WPRM_Api_Recipe{
 		// Make sure we're getting the most recent data by invalidating first.
 		WPRM_Recipe_Manager::invalidate_recipe( $object['id'] );
 		$recipe = WPRM_Recipe_Manager::get_recipe( $object['id'] );
+
 		return $recipe->get_data( 'api' );
 	}
 

@@ -91,13 +91,15 @@ export default class SelectShortcode extends Component {
                     className="wprm-select-shortcode"
                     value={allShortcodes.filter(({value}) => this.state.shortcode && value === this.state.shortcode.id)}
                     onChange={(option) => {
+                        const needsClosingShortcode = Shortcodes.contentShortcodes.includes( option.value );
+
                         this.setState({
                             shortcode: {
                                 uid: 0,
                                 id: option.value,
                                 name: option.label,
                                 attributes: {},
-                                full: `[${option.value}]`,
+                                full: needsClosingShortcode ? `[${option.value}][/${option.value}]` : `[${option.value}]`,
                             },
                             input: '',
                         });   

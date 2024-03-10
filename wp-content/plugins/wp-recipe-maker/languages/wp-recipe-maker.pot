@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2024-02-06 15:43+0000\n"
+"POT-Creation-Date: 2024-03-07 10:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,21 +50,21 @@ msgid_plural "%d recipes found"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:124
+#: includes/admin/class-wprm-marketing.php:106
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:126
+#: includes/admin/class-wprm-marketing.php:108
 #, php-format
 msgid "%s hour"
 msgid_plural "%s hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:128
+#: includes/admin/class-wprm-marketing.php:110
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
@@ -78,7 +78,7 @@ msgid_plural "%s new news items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/public/class-wprm-admin-bar.php:172
+#: includes/public/class-wprm-admin-bar.php:181
 #, php-format
 msgid "%s pending recipe submission"
 msgid_plural "%s pending recipe submissions"
@@ -92,7 +92,7 @@ msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/public/class-wprm-metadata.php:712
+#: includes/public/class-wprm-metadata.php:732
 msgid "1 serving"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgid ""
 "permalinks after changing this setting."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:107
+#: templates/settings/group-recipe-roundup.php:110
 msgid ""
 "A third party API is used to automatically retrieve the title, summary and "
 "image of an external site. Their free plan includes a limited number of "
@@ -397,10 +397,10 @@ msgstr ""
 
 #: templates/settings/group-adjustable-servings.php:127 
 #: templates/settings/group-metadata.php:150 
-#: templates/settings/group-recipe-roundup.php:80 
+#: templates/settings/group-recipe-roundup.php:83 
 #: templates/settings/group-recipe-print.php:209 
-#: templates/settings/structure.php:99 
-#: templates/settings/group-recipe-snippets.php:157
+#: templates/settings/structure.php:102 
+#: templates/settings/group-recipe-snippets.php:160
 msgid "Advanced"
 msgstr ""
 
@@ -694,7 +694,7 @@ msgstr ""
 
 #: templates/settings/group-recipe-print.php:66 
 #: templates/settings/group-recipe-times.php:18 
-#: templates/settings/structure.php:63 
+#: templates/settings/structure.php:66 
 #: templates/settings/group-recipe-ratings.php:46 
 #: templates/settings/group-glossary-terms.php:91
 msgid "Appearance"
@@ -773,6 +773,13 @@ msgstr ""
 msgid "Are you sure you want to stop calculating the nutrition facts?"
 msgstr ""
 
+#: templates/settings/group-license.php:21
+msgid ""
+"Are you trying to activate your license key? Only the free plugin is "
+"installed right now, so you would need to install the Premium plugin files "
+"first."
+msgstr ""
+
 #: templates/admin/translations.php:348
 msgid "area"
 msgstr ""
@@ -831,7 +838,7 @@ msgid "Automatically add SmartWithFood Button"
 msgstr ""
 
 #: templates/settings/group-recipe-snippets.php:27 
-#: templates/settings/group-recipe-snippets.php:100
+#: templates/settings/group-recipe-snippets.php:103
 msgid "Automatically add snippets"
 msgstr ""
 
@@ -857,7 +864,7 @@ msgstr ""
 msgid "Back to start."
 msgstr ""
 
-#: templates/settings/structure.php:95
+#: templates/settings/structure.php:98
 msgid "Backend"
 msgstr ""
 
@@ -868,7 +875,7 @@ msgstr ""
 #: templates/settings/group-template-legacy.php:162 
 #: templates/settings/group-custom-style.php:56 
 #: templates/settings/group-custom-style.php:91 
-#: templates/settings/group-recipe-snippets.php:124
+#: templates/settings/group-recipe-snippets.php:127
 msgid "Background Color"
 msgstr ""
 
@@ -932,6 +939,10 @@ msgstr ""
 msgid "Button Background Color"
 msgstr ""
 
+#: includes/public/shortcodes/general/class-wprm-sc-expandable.php:61
+msgid "Button Style"
+msgstr ""
+
 #: templates/settings/group-custom-style.php:115
 msgid "Button Text Color"
 msgstr ""
@@ -989,7 +1000,7 @@ msgid "Categories"
 msgstr ""
 
 #: templates/settings/group-template-legacy.php:88 
-#: templates/settings/group-recipe-snippets.php:117
+#: templates/settings/group-recipe-snippets.php:120
 msgid "Center"
 msgstr ""
 
@@ -1412,6 +1423,7 @@ msgstr ""
 msgid "Create new recipe"
 msgstr ""
 
+#: includes/public/class-wprm-admin-bar.php:161 
 #: templates/admin/translations.php:44
 msgid "Create Recipe"
 msgstr ""
@@ -1482,8 +1494,8 @@ msgstr ""
 msgid "Custom Fields"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:168 
-#: templates/settings/group-recipe-snippets.php:189
+#: templates/settings/group-recipe-snippets.php:171 
+#: templates/settings/group-recipe-snippets.php:192
 msgid "Custom Hash"
 msgstr ""
 
@@ -1659,7 +1671,7 @@ msgstr ""
 msgid "Default recipe to use for the Template Editor preview."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:43
+#: templates/settings/group-recipe-roundup.php:45
 msgid ""
 "Default roundup template to use for the \"other (no metadata)\" recipes on "
 "your website."
@@ -1669,7 +1681,7 @@ msgstr ""
 msgid "Default roundup template to use for the food recipes on your website."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:32
+#: templates/settings/group-recipe-roundup.php:33
 msgid ""
 "Default roundup template to use for the how-to instructions on your website."
 msgstr ""
@@ -1698,7 +1710,7 @@ msgstr ""
 msgid "Default Snippet Template"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:80
+#: templates/settings/group-recipe-snippets.php:82
 msgid ""
 "Default snippet template to use for the \"other (no metadata)\" recipes on "
 "your website."
@@ -1708,7 +1720,7 @@ msgstr ""
 msgid "Default snippet template to use for the food recipes on your website."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:69
+#: templates/settings/group-recipe-snippets.php:70
 msgid ""
 "Default snippet template to use for the how-to instructions on your website."
 msgstr ""
@@ -1773,13 +1785,13 @@ msgstr ""
 msgid "Default value for the Recipe Author field when creating a new recipe."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:66
+#: templates/settings/group-recipe-roundup.php:69
 msgid ""
 "Default value to use for the nofollow attribute when creating a new roundup "
 "item."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:73
+#: templates/settings/group-recipe-roundup.php:76
 msgid ""
 "Default value to use for the open in new tab attribute when creating a new "
 "roundup item."
@@ -1965,7 +1977,7 @@ msgstr ""
 msgid "Do not import to ingredient notes"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:92
+#: templates/settings/group-recipe-roundup.php:95
 msgid ""
 "Do not output the ItemList metadata when there is already recipe metadata on "
 "the same page."
@@ -2083,7 +2095,7 @@ msgstr ""
 msgid "Edit Recipe"
 msgstr ""
 
-#: includes/public/class-wprm-admin-bar.php:197
+#: includes/public/class-wprm-admin-bar.php:206
 msgid "Edit Recipes"
 msgstr ""
 
@@ -2225,13 +2237,13 @@ msgid ""
 "forms"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:162
+#: templates/settings/group-recipe-snippets.php:165
 msgid ""
 "Enable to have the \"Jump to Recipe\" button in the snippet template jump to "
 "#recipe instead of something like #wprm-recipe-container-46783"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:183
+#: templates/settings/group-recipe-snippets.php:186
 msgid ""
 "Enable to have the \"Jump to Video\" button in the snippet template jump to "
 "#recipe-video instead of something like #wprm-recipe-video-container-46783"
@@ -2338,7 +2350,7 @@ msgstr ""
 msgid "External image. Recommended:"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:61
+#: templates/settings/group-recipe-roundup.php:64
 msgid "External Links"
 msgstr ""
 
@@ -2488,7 +2500,7 @@ msgstr ""
 msgid "fluid ounces"
 msgstr ""
 
-#: includes/public/api/class-wprm-api-manage-recipes.php:814
+#: includes/public/api/class-wprm-api-manage-recipes.php:816
 msgid "Follow this link to print all of the selected recipes:"
 msgstr ""
 
@@ -2560,7 +2572,7 @@ msgstr ""
 msgid "Force people to leave a comment"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:99
+#: templates/settings/group-recipe-roundup.php:102
 msgid "Force recipe links to your own site to open in a new tab as well."
 msgstr ""
 
@@ -2804,13 +2816,13 @@ msgstr ""
 msgid "Has Recipe Image"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:169
+#: templates/settings/group-recipe-snippets.php:172
 msgid ""
 "Hash to use for the first recipe on the page. This will become part of the "
 "URL after clicking the \"Jump to Recipe\" button."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:190
+#: templates/settings/group-recipe-snippets.php:193
 msgid ""
 "Hash to use for the first video on the page. This will become part of the "
 "URL after clicking the \"Jump to Recipe\" button."
@@ -2901,6 +2913,10 @@ msgid ""
 "How to handle the name field that Google wants for every instruction step."
 msgstr ""
 
+#: templates/settings/group-license.php:23
+msgid "How to install WP Recipe Maker Premium"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:177
 msgid ""
 "How to prevent spam ratings. Use \"Anonymous ID\" if you do not want to "
@@ -2927,11 +2943,11 @@ msgstr ""
 msgid "How-to Instructions Print Template"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:31
+#: templates/settings/group-recipe-roundup.php:32
 msgid "How-to Instructions Roundup Template"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:68
+#: templates/settings/group-recipe-snippets.php:69
 msgid "How-to Instructions Snippet Template"
 msgstr ""
 
@@ -3253,7 +3269,7 @@ msgstr ""
 msgid "Ingredient Unit"
 msgstr ""
 
-#: includes/admin/class-wprm-notices.php:95 
+#: includes/admin/class-wprm-notices.php:119 
 #: templates/admin/translations.php:140
 msgid "Ingredient Units"
 msgstr ""
@@ -3310,6 +3326,10 @@ msgstr ""
 
 #: templates/settings/group-integrations.php:33
 msgid "Instacart Tastemakers ID"
+msgstr ""
+
+#: templates/settings/group-license.php:20
+msgid "Installing WP Recipe Maker Premium"
 msgstr ""
 
 #: templates/admin/translations.php:323
@@ -3394,7 +3414,7 @@ msgstr ""
 msgid "Interactions (last 7 days)"
 msgstr ""
 
-#: templates/settings/structure.php:79
+#: templates/settings/structure.php:82
 msgid "Interactivity"
 msgstr ""
 
@@ -3454,7 +3474,7 @@ msgstr ""
 msgid "Jump to Video"
 msgstr ""
 
-#: includes/public/class-wprm-metadata.php:701 
+#: includes/public/class-wprm-metadata.php:721 
 #: includes/public/shortcodes/recipe/class-wprm-sc-nutrition.php:89 
 #: templates/recipe/legacy/simple/simple.php:87 
 #: templates/recipe/legacy/clean/clean.php:83 
@@ -3580,7 +3600,7 @@ msgid "leaves"
 msgstr ""
 
 #: templates/settings/group-template-legacy.php:87 
-#: templates/settings/group-recipe-snippets.php:116
+#: templates/settings/group-recipe-snippets.php:119
 msgid "Left"
 msgstr ""
 
@@ -3599,6 +3619,10 @@ msgstr ""
 
 #: templates/settings/group-legacy.php:15
 msgid "Legacy Settings"
+msgstr ""
+
+#: templates/settings/group-license.php:15
+msgid "License Key"
 msgstr ""
 
 #: templates/settings/group-media.php:26
@@ -3761,7 +3785,15 @@ msgid "Make sure the name is different."
 msgstr ""
 
 #: templates/settings/group-amazon.php:143
-msgid "Make sure this is the partner tag for the store selected above."
+msgid ""
+"Make sure this is the partner tag or tracking ID for the store selected "
+"above."
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-chicory.php:55
+msgid ""
+"Make sure to activate the integration on the WP Recipe Maker > Settings > "
+"Integrations page"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:55
@@ -3911,15 +3943,15 @@ msgid "Mexican"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:178 
-#: includes/public/class-wprm-metadata.php:703
+#: includes/public/class-wprm-metadata.php:723
 msgid "mg"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:106
+#: templates/settings/group-recipe-roundup.php:109
 msgid "Microlink API"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:111
+#: templates/settings/group-recipe-roundup.php:114
 msgid "Microlink API Key"
 msgstr ""
 
@@ -4075,7 +4107,7 @@ msgstr ""
 msgid "No lists found"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:91
+#: templates/settings/group-recipe-roundup.php:94
 msgid "No metadata when there is recipe metadata"
 msgstr ""
 
@@ -4129,7 +4161,7 @@ msgstr ""
 msgid "No valid recipe found."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:65
+#: templates/settings/group-recipe-roundup.php:68
 msgid "Nofollow Default"
 msgstr ""
 
@@ -4240,7 +4272,7 @@ msgstr ""
 msgid "Only show metadata for first recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:84
+#: templates/settings/group-recipe-roundup.php:87
 msgid "Only show published posts"
 msgstr ""
 
@@ -4282,11 +4314,11 @@ msgstr ""
 msgid "Open in new tab"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:72
+#: templates/settings/group-recipe-roundup.php:75
 msgid "Open in New Tab Default"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:98
+#: templates/settings/group-recipe-roundup.php:101
 msgid "Open internal links in a new tab"
 msgstr ""
 
@@ -4315,7 +4347,7 @@ msgstr ""
 msgid "Open the Post Author link in a new tab."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:55 
+#: templates/settings/group-recipe-roundup.php:58 
 #: templates/settings/group-template-editor.php:26
 msgid "Open the Template Editor"
 msgstr ""
@@ -4372,7 +4404,7 @@ msgid ""
 "following placeholders:"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:112
+#: templates/settings/group-recipe-roundup.php:115
 msgid ""
 "Optionally add your own microlink.io API key. Leave blank to use the free "
 "plan (limited number of requests per day)."
@@ -4423,11 +4455,11 @@ msgstr ""
 msgid "Other Recipe Print Template"
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:42
+#: templates/settings/group-recipe-roundup.php:44
 msgid "Other Recipe Roundup Template"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:79
+#: templates/settings/group-recipe-snippets.php:81
 msgid "Other Recipe Snippet Template"
 msgstr ""
 
@@ -4634,6 +4666,10 @@ msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:205
 msgid "pints"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-chicory.php:53
+msgid "Placeholder for the Chicory button"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:53
@@ -5065,7 +5101,7 @@ msgstr ""
 msgid "Recipe Submission User"
 msgstr ""
 
-#: includes/public/class-wprm-admin-bar.php:167 
+#: includes/public/class-wprm-admin-bar.php:176 
 #: templates/admin/translations.php:529
 msgid "Recipe Submissions"
 msgstr ""
@@ -5318,7 +5354,7 @@ msgid "Revisions"
 msgstr ""
 
 #: templates/settings/group-template-legacy.php:89 
-#: templates/settings/group-recipe-snippets.php:118
+#: templates/settings/group-recipe-snippets.php:121
 msgid "Right"
 msgstr ""
 
@@ -5822,7 +5858,7 @@ msgstr ""
 msgid "Snack"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:113
+#: templates/settings/group-recipe-snippets.php:116
 msgid "Snippet Alignment"
 msgstr ""
 
@@ -6153,7 +6189,7 @@ msgid "Template Colors"
 msgstr ""
 
 #: includes/public/class-wprm-template-editor.php:36 
-#: templates/settings/group-recipe-roundup.php:52 
+#: templates/settings/group-recipe-roundup.php:55 
 #: templates/settings/group-template-editor.php:15 
 #: templates/settings/group-template-editor.php:23
 msgid "Template Editor"
@@ -6194,7 +6230,7 @@ msgstr ""
 #: templates/settings/group-template-legacy.php:174 
 #: templates/settings/group-custom-style.php:62 
 #: templates/settings/group-glossary-terms.php:102 
-#: templates/settings/group-recipe-snippets.php:140
+#: templates/settings/group-recipe-snippets.php:143
 msgid "Text Color"
 msgstr ""
 
@@ -6210,7 +6246,7 @@ msgstr ""
 msgid "Text Share"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:106
+#: templates/settings/group-recipe-snippets.php:109
 msgid "Text to output"
 msgstr ""
 
@@ -6296,7 +6332,7 @@ msgstr ""
 msgid "The recipe has been imported."
 msgstr ""
 
-#: templates/settings/group-recipe-roundup.php:85
+#: templates/settings/group-recipe-roundup.php:88
 msgid "The roundup item will only show up if it has the \"Published\" status."
 msgstr ""
 
@@ -6500,6 +6536,10 @@ msgstr ""
 msgid "Tried this recipe?"
 msgstr ""
 
+#: includes/admin/class-wprm-notices.php:96
+msgid "Try the new User Ratings Modal!"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:188
 msgid ""
 "Try to clear the site cache after a user rating. Makes sure the vote "
@@ -6680,11 +6720,11 @@ msgid ""
 "instruction images open in a lightbox after clicking on them."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:161
+#: templates/settings/group-recipe-snippets.php:164
 msgid "Use Custom Hash for First Recipe on Page"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:182
+#: templates/settings/group-recipe-snippets.php:185
 msgid "Use Custom Hash for First Video on Page"
 msgstr ""
 
@@ -6816,7 +6856,7 @@ msgstr ""
 msgid "Use SHIFT-click to (un)check multiple recipes at once."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:107
+#: templates/settings/group-recipe-snippets.php:110
 msgid "Use shortcodes where you want the snippets to appear."
 msgstr ""
 
@@ -6846,7 +6886,7 @@ msgid "Use the %comments% placeholder to show the number of comments."
 msgstr ""
 
 #: templates/settings/group-recipe-snippets.php:18 
-#: templates/settings/group-recipe-snippets.php:91
+#: templates/settings/group-recipe-snippets.php:94
 msgid ""
 "Use the [wprm-recipe-snippet] shortcode or automatically add a snippet at "
 "the top of your post with the setting. Can be used for the Jump to Recipe "
@@ -7314,7 +7354,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: includes/public/class-wprm-compatibility.php:164
+#: includes/public/class-wprm-compatibility.php:168
 msgid "WP Recipe Maker"
 msgstr ""
 
@@ -7396,6 +7436,13 @@ msgstr ""
 #: templates/admin/translations.php:13
 msgid ""
 "You don't have the servings field set for your recipe under \"General\"."
+msgstr ""
+
+#: templates/settings/group-license.php:16
+msgid ""
+"You have the free version of the plugin installed right now, which does not "
+"need a license key. If interested, you can learn more about our paid bundles "
+"here:"
 msgstr ""
 
 #: templates/admin/translations.php:66

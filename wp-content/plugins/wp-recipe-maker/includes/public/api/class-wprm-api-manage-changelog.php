@@ -129,12 +129,14 @@ class WPRM_Api_Manage_Changelog {
 			}
 		}
 
-		return array(
+		$data = array(
 			'rows' => $rows,
 			'total' => WPRM_Changelog_Database::count(),
 			'filtered' => $total,
 			'pages' => ceil( $total / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 }
 

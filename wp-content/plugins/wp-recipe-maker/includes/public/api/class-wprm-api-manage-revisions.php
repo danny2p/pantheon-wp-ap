@@ -166,12 +166,14 @@ class WPRM_Api_Manage_Revisions {
 			}
 		}
 
-		return array(
+		$data = array(
 			'rows' => array_values( $revisions ),
 			'total' => false,
 			'filtered' => intval( $query->found_posts ),
 			'pages' => ceil( $query->found_posts / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -220,11 +222,13 @@ class WPRM_Api_Manage_Revisions {
 			$parent = get_post( $revision_parent );
 
 			if ( WPRM_POST_TYPE === $parent->post_type && current_user_can( 'delete_post', $parent->ID ) ) {
-				return wp_delete_post( $revision_id, true );
+				$deleted = wp_delete_post( $revision_id, true );
+
+				return rest_ensure_response( $deleted );
 			}
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -249,10 +253,10 @@ class WPRM_Api_Manage_Revisions {
 				}
 			}
 
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

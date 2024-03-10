@@ -12,7 +12,7 @@ export default class Block extends Component {
     constructor(props) {
         super(props);
 
-        const blockMode = props.hasOwnProperty('mode') ? props.mode : 'edit';
+        const blockMode = props.hasOwnProperty('mode') && props.mode ? props.mode : 'edit';
 
         this.state = {
             fullShortcode: '',
@@ -41,7 +41,7 @@ export default class Block extends Component {
     }
 
     checkShortcodeChange() {
-        const fullShortcode = Helpers.getFullShortcode(this.props.shortcode);
+        const fullShortcode = Helpers.getFullShortcode( this.props.shortcode, true );
 
         if ( fullShortcode !== this.state.fullShortcode ) {
             this.setState({
@@ -149,6 +149,14 @@ export default class Block extends Component {
                                     }
                                     domNode.attribs.class = domNode.attribs.class ? domNode.attribs.class + ' wprm-template-block-hovering' : 'wprm-template-block-hovering';
                                     return domToReact(domNode);
+                                }
+                                
+                                // Could be other shortcodes inside this block.
+                                if ( domNode.name == 'wprm-replace-shortcode-with-block' ) {
+                                    return this.props.replaceDomNodeWithBlock( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
+                                }
+                                if ( domNode.name == 'div' && domNode.attribs.class && 'wprm-layout-' === domNode.attribs.class.substring( 0, 12 ) ) {
+                                    return this.props.replaceDomNodeWithElement( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
                                 }
                             }.bind(this)
                         }) }

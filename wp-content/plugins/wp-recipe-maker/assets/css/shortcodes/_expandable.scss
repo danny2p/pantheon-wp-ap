@@ -1,0 +1,13 @@
+.wprm-expandable-container {
+    &.wprm-expandable-collapsed {
+        .wprm-expandable-content,
+        .wprm-expandable-button-hide {
+            display: none;
+        }
+    }
+    &.wprm-expandable-expanded {
+        .wprm-expandable-button-show {
+            display: none;
+        }
+    }
+}

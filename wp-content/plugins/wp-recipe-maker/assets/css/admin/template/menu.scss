@@ -58,6 +58,20 @@
         &:last-child {
             border-bottom: none;
         }
+
+        &.wprm-template-menu-block-content {
+            cursor: default;
+        }
+
+        .wprm-template-menu-block-inside {
+            margin-left: 10px;
+            font-weight: normal;
+            cursor: pointer;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
     }
 
     .wprm-template-menu-block-details {

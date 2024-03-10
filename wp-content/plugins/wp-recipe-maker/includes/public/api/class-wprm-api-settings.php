@@ -64,7 +64,7 @@ class WPRM_Api_Settings {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_settings( $request ) {
-		return WPRM_Settings::get_settings_with_defaults();
+		return rest_ensure_response( WPRM_Settings::get_settings_with_defaults() );
 	}
 
 	/**
@@ -76,7 +76,7 @@ class WPRM_Api_Settings {
 	public static function api_update_settings( $request ) {
 		$params = $request->get_params();
 		$settings = isset( $params['settings'] ) ? $params['settings'] : array();
-		return WPRM_Settings::update_settings( $settings );
+		return rest_ensure_response( WPRM_Settings::update_settings( $settings ) );
 	}
 }
 

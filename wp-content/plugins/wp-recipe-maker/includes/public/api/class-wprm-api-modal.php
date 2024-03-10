@@ -148,9 +148,11 @@ class WPRM_Api_Modal {
 			return $a['count'] > $b['count'] ? -1 : 1;
 		} );
 
-		return array(
+		$data = array(
 			'suggestions' => array_slice( $suggestions, 0, 10 ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -170,9 +172,11 @@ class WPRM_Api_Modal {
 			$parsed[ $index ] = WPRM_Recipe_Parser::parse_ingredient( $ingredient );
 		}
 
-		return array(
+		$data = array(
 			'parsed' => $parsed,
 		);
+
+		return rest_ensure_response( $data );
 	}
 }
 

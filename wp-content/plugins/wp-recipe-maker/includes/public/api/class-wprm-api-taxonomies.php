@@ -59,13 +59,15 @@ class WPRM_Api_Taxonomies {
 	public static function api_get_term_meta( $object, $field_name, $request ) {
 		$meta = get_term_meta( $object[ 'id' ] );
 
-		return apply_filters( 'wprm_get_term_meta', array(
+		$data = apply_filters( 'wprm_get_term_meta', array(
 			'eafl' => isset( $meta['wprmp_term_eafl'] ) ? $meta['wprmp_term_eafl'] : '',
 			'link' => isset( $meta['wprmp_term_link'] ) ? $meta['wprmp_term_link'] : '',
 			'link_nofollow' => isset( $meta['wprmp_term_link_nofollow'] ) ? $meta['wprmp_term_link_nofollow'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
 		), $object, $meta );
+
+		return $data;
 	}
 	
 	/**

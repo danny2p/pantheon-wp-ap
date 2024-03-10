@@ -32,18 +32,22 @@ const SettingDropdownTemplateModern = (props) => {
         }
     });
 
-    let selectOptions = [
-        {
+    // Groups to use in dropdown.
+    let dropdownGroups = {
+        general: false,
+        recipe: {
             label: 'Full Recipe Templates',
             options: templateGroups.recipe,
-        },{
+        },
+        snippet: {
             label: 'Snippet Templates',
             options: templateGroups.snippet,
-        },{
+        },
+        roundup: {
             label: 'Roundup Templates',
             options: templateGroups.roundup,
         },
-    ];
+    };
 
     // Optional General Options.
     if ( props.setting.hasOwnProperty( 'options' ) ) {
@@ -59,11 +63,27 @@ const SettingDropdownTemplateModern = (props) => {
             allSettings.push(generalOption);
         }
 
-        selectOptions.unshift({
+        dropdownGroups.general = {
             label: 'General',
             options: generalOptions,
-        });
+        };
     }
+
+    // Put in groups for dropdown.
+    let selectOptions = [];
+    const priority = props.setting.hasOwnProperty( 'priority' ) && props.setting.priority && dropdownGroups.hasOwnProperty( props.setting.priority )? props.setting.priority : false;
+
+    // First put priority templates.
+    if ( priority ) {
+        selectOptions.push( dropdownGroups[priority] );
+    }
+
+    // Then the rest of the templates.]
+    Object.entries(dropdownGroups).forEach(([key, group]) => {    
+        if ( key !== priority && group !== false ) {
+            selectOptions.push( group );
+        }
+    });
 
     return (
         <Select

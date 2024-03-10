@@ -69,5 +69,48 @@ $integrations = array(
 				),
 			),
 		),
+		// array(
+		// 	'name' => __( 'Shoppable Recipes with Chicory', 'wp-recipe-maker' ),
+		// 	'description' => 'Chicory is the industry-leading recipe monetization solution, driving incremental revenue for content creators from top food brands and grocery retailers. Unlock our Shoppable Recipe Button and Chicory Premium in-recipe ad placements to present site visitors with unobtrusive, hyper-relevant contextual ads and the ability to cart ingredients at 70+ retailers. Available in the U.S. only.',
+		// 	'documentation' => 'https://chicory.co/chicory-for-content-creators',
+		// 	'settings' => array(
+		// 		array(
+		// 			'name' => '',
+		// 			'type' => 'button',
+		// 			'button' => __( 'Sign Up with Chicory', 'wp-recipe-maker' ),
+		// 			'link' => 'https://chicoryapp.com/become-a-chicory-recipe-partner/?plugin=WP%20Recipe%20Maker',
+		// 		),
+		// 		array(
+		// 			'id' => 'integration_chicory_activate',
+		// 			'name' => __( 'Activate Chicory', 'wp-recipe-maker' ),
+		// 			'description' => __( 'Enable to activate Chicory on your site after signing up for a Chicory partner account by clicking the button above.', 'wp-recipe-maker' ),
+		// 			'documentation' => 'https://chicoryapp.com/become-a-chicory-recipe-partner/?plugin=WP%20Recipe%20Maker',
+		// 			'type' => 'toggle',
+		// 			'default' => false,
+		// 		),
+		// 		array(
+		// 			'id' => 'integration_chicory_shoppable_button',
+		// 			'name' => __( 'Enable Chicory Shoppable Button', 'wp-recipe-maker' ),
+		// 			'description' => __( "Enable Chicory's Shoppable Recipe Button to appear below your recipes' ingredient lists, allowing users to cart the ingredients for your recipes at 70+ retailers.", 'wp-recipe-maker' ),
+		// 			'type' => 'toggle',
+		// 			'default' => false,
+		// 			'dependency' => array(
+		// 				'id' => 'integration_chicory_activate',
+		// 				'value' => true,
+		// 			),
+		// 		),
+		// 		array(
+		// 			'id' => 'integration_chicory_premium_ads',
+		// 			'name' => __( 'Enable Chicory Premium Ads', 'wp-recipe-maker' ),
+		// 			'description' => __( "Enable Chicory Premium in-recipe contextual ad units to appear within and below your recipes' ingredient lists to earn incremental revenue from top food brand advertisers.", 'wp-recipe-maker' ),
+		// 			'type' => 'toggle',
+		// 			'default' => false,
+		// 			'dependency' => array(
+		// 				'id' => 'integration_chicory_activate',
+		// 				'value' => true,
+		// 			),
+		// 		),
+		// 	),
+		// ),
 	),
 );

@@ -56,7 +56,7 @@ class WPRM_Api_Equipment {
 	public static function api_get_equipment_meta( $object, $field_name, $request ) {
 		$meta = get_term_meta( $object[ 'id' ] );
 
-		return apply_filters( 'wprm_get_term_meta', array(
+		$data = apply_filters( 'wprm_get_term_meta', array(
 			'image_id' => isset( $meta['wprmp_equipment_image_id'] ) ? $meta['wprmp_equipment_image_id'] : '',
 			'eafl' => isset( $meta['wprmp_equipment_eafl'] ) ? $meta['wprmp_equipment_eafl'] : '',
 			'link' => isset( $meta['wprmp_equipment_link'] ) ? $meta['wprmp_equipment_link'] : '',
@@ -69,6 +69,8 @@ class WPRM_Api_Equipment {
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
 		), $object, $meta );
+
+		return $data;
 	}
 	
 	/**
