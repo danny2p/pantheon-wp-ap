@@ -55,8 +55,8 @@ class WPRM_Changelog_Track {
 	 *
 	 * @since	9.2.0
 	 */
-	public static function delete_post( $id, $post ) {
-		if ( WPRM_POST_TYPE === $post->post_type ) {
+	public static function delete_post( $id, $post = false ) {
+		if ( $post && WPRM_POST_TYPE === $post->post_type ) {
 			WPRM_Changelog::log( 'recipe_deleted', $id );
 		}
 	}

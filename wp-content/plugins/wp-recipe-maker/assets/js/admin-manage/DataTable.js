@@ -23,6 +23,16 @@ const initState = {
     selectedAllRows: 0,
 };
 
+const shouldRunOnce = (() => {
+    let executed = false;
+    return () => {
+        if ( ! executed ) {
+            return true;
+        }
+        return false;
+    };
+})();
+
 export default class DataTable extends Component {
     constructor(props) {
         super(props);
@@ -43,6 +53,28 @@ export default class DataTable extends Component {
 
     componentDidMount() {
         this.initDataTable();
+
+        // check if action query paramater is set.
+        const urlParams = new URLSearchParams( window.location.search );
+        const action = urlParams.get( 'action' );
+
+        if ( 'create' === action ) {
+            if ( this.props.options.createButton ) {
+                if ( shouldRunOnce() ) {
+                    setTimeout(() => {
+                        this.props.options.createButton( this );
+                    });
+                }
+            }
+        }
+
+        // Remove query parameter again.
+        if ( history.replaceState ) {
+            urlParams.delete( 'action' );
+            const searchString = urlParams.toString().length > 0 ? '?' + urlParams.toString() : '';
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + searchString + window.location.hash;
+            history.replaceState (null, '', newUrl );
+        }
     }
 
     componentDidUpdate( prevProps ) {

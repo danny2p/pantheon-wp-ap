@@ -161,12 +161,14 @@ class WPRM_Api_Manage_Lists {
 		// Totals.
 		$filtered_lists = intval( $query->found_posts );
 
-		return array(
+		$data = array(
 			'rows' => array_values( $lists ),
 			'total' => array_sum( $total ),
 			'filtered' => $filtered_lists,
 			'pages' => ceil( $filtered_lists / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**

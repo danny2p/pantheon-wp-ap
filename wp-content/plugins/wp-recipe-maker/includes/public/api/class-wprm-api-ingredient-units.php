@@ -56,9 +56,11 @@ class WPRM_Api_Ingredient_Units {
 	public static function api_get_ingredient_unit_meta( $object, $field_name, $request ) {
 		$meta = get_term_meta( $object[ 'id' ] );
 
-		return array(
+		$data = array(
 			'abbr' => isset( $meta['wprm_ingredient_unit_abbr'] ) ? $meta['wprm_ingredient_unit_abbr'] : '',
 		);
+
+		return $data;
 	}
 	
 	/**

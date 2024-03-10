@@ -113,10 +113,12 @@ class WPRM_Api_Utilities {
 			$image_url = '';
 		}
 
-		return array(
+		$data = array(
 			'id' => $image_id,
 			'url' => $image_url,
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -135,10 +137,10 @@ class WPRM_Api_Utilities {
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-feedback.php' );
 
 			WPRM_Feedback::set_feedback( $feedback );
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -159,13 +161,15 @@ class WPRM_Api_Utilities {
 			$image_url = get_the_post_thumbnail_url( $post_id, 'full' );
 		}
 
-		return array(
+		$data = array(
 			'post' => array(
 				'id' => $post_id,
 				'name' => $name,
 				'image_url' => $image_url,
 			),
 		);
+
+		return rest_ensure_response( $data );
 	}
 }
 

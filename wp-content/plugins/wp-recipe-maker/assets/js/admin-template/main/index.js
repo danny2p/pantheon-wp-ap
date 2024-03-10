@@ -48,6 +48,7 @@ const Main = (props) => {
                     mode={ props.mode }
                     template={ props.template }
                     onChangeHTML={ props.onChangeHTML }
+                    onChangeCSS={ props.onChangeCSS }
                     onChangeMode={ props.onChangeMode }
                 />
             }

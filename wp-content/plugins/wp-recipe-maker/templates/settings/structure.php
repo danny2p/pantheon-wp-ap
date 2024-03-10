@@ -12,6 +12,8 @@
 $premium_active = class_exists( 'WPRM_Addons' ) && WPRM_Addons::is_active( 'premium' );
 $premium_only = $premium_active ? '' : ' (' . __( 'WP Recipe Maker Premium only', 'wp-recipe-maker' ) . ')';
 
+require_once( 'group-license.php' );
+
 // Appearance.
 // Appearance - Legacy.
 require_once( 'group-template-mode.php' );
@@ -60,6 +62,7 @@ require_once( 'group-legacy.php' );
 require_once( 'group-settings-tools.php' );
 
 $settings_structure = array(
+	$license,
 	array( 'header' => __( 'Appearance', 'wp-recipe-maker' ) ),
 	// Legacy Only.
 	$template_mode,

@@ -86,7 +86,7 @@ class WPRM_Api_Analytics {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_delete_action( $request ) {
-		return WPRM_Analytics_Database::delete( $request['id'] );
+		return rest_ensure_response( WPRM_Analytics_Database::delete( $request['id'] ) );
 	}
 
 	/**
@@ -121,7 +121,7 @@ class WPRM_Api_Analytics {
 		$meta = isset( $params['meta'] ) ? $params['meta'] : array();
 		$uid = isset( $params['uid'] ) ? sanitize_key( $params['uid'] ) : '';
 
-		return WPRM_Analytics::register_action( $recipe_id, $post_id, $type, $meta, $uid );
+		return rest_ensure_response( WPRM_Analytics::register_action( $recipe_id, $post_id, $type, $meta, $uid ) );
 	}
 
 	/**
@@ -214,7 +214,7 @@ class WPRM_Api_Analytics {
 			$action->recipe = $recipe_details;
 		} 
 
-		return $sync;
+		return rest_ensure_response( $sync );
 	}
 }
 

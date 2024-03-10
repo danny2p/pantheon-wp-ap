@@ -85,7 +85,7 @@ class WPRM_Tools_Create_Reviews {
 
 				if ( count( $posts ) > 0 ) {
 					$posts_left = $posts;
-					$posts_processed = array_map( 'intval', array_splice( $posts_left, 0, 1 ) );
+					$posts_processed = array_splice( $posts_left, 0, 1 );
 
 					$result = self::import_reviews( $posts_processed );
 
@@ -93,6 +93,12 @@ class WPRM_Tools_Create_Reviews {
 						wp_send_json_error( array(
 							'redirect' => add_query_arg( array( 'sub' => 'advanced' ), admin_url( 'admin.php?page=wprm_tools' ) ),
 						) );
+						wp_die();
+					}
+
+					if ( is_array( $result ) ) {
+						// Put posts that need further processing in front.
+						$posts_left = $result + $posts_left;
 					}
 				}
 
@@ -116,7 +122,15 @@ class WPRM_Tools_Create_Reviews {
 		global $wpdb;
 		$mv_reviews_table = $wpdb->prefix . 'mv_reviews';
 
-		foreach ( $recipes as $recipe_id ) {
+		$needs_further_processing = array();
+		$max_reviews_at_once = 100;
+
+		foreach ( $recipes as $recipe_id_with_page ) {
+			$recipe_id_with_page = explode( '-', $recipe_id_with_page );
+			$recipe_id = intval( $recipe_id_with_page[0] );
+			$page = isset( $recipe_id_with_page[1] ) ? intval( $recipe_id_with_page[1] ) : 0;
+			$current_offset = $page * $max_reviews_at_once;
+
 			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
 			if ( $recipe ) {
@@ -129,7 +143,7 @@ class WPRM_Tools_Create_Reviews {
 					$mv_creation_id = intval( $import_backup['mv_creation_id'] );
 					
 					// Get reviews for this MV ID.
-					$reviews = $wpdb->get_results( 'SELECT * FROM ' . $mv_reviews_table . ' WHERE review_content IS NOT NULL AND creation = ' . $mv_creation_id );
+					$reviews = $wpdb->get_results( 'SELECT * FROM ' . $mv_reviews_table . ' WHERE review_content IS NOT NULL AND creation = ' . intval( $mv_creation_id ) . ' ORDER BY id ASC LIMIT ' . intval( $max_reviews_at_once ) . ' OFFSET ' . intval( $current_offset ) );
 
 					if ( $reviews ) {
 						foreach ( $reviews as $review ) {
@@ -176,10 +190,17 @@ class WPRM_Tools_Create_Reviews {
 								WPRM_Comment_Rating::add_or_update_rating_for( $comment_id, ceil( floatval( $review->rating ) ) );
 							}
 						}
+
+						// Check if there are more reviews to process.
+						if ( count( $reviews ) >= $max_reviews_at_once ) {
+							$needs_further_processing[] = $recipe_id . '-' . ( $page + 1 );
+						}
 					}
 				}
 			}
 		}
+
+		return $needs_further_processing;
 	}
 }
 

@@ -430,12 +430,14 @@ class WPRM_Api_Manage_Taxonomies {
 			}
 		}
 
-		return array(
+		$data = array(
 			'rows' => $rows,
 			'total' => intval( $total_terms ),
 			'filtered' => intval( $filtered_terms ),
 			'pages' => ceil( $filtered_terms / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -595,11 +597,11 @@ class WPRM_Api_Manage_Taxonomies {
 
 				// Delete old term.
 				wp_delete_term( $old_term->term_id, $taxonomy );
-				return true;
+				return rest_ensure_response( true );
 			}
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 
@@ -641,12 +643,12 @@ class WPRM_Api_Manage_Taxonomies {
 					$sql = $wpdb->prepare( sprintf( "INSERT INTO %s (`term_id`, `meta_key`, `meta_value`) SELECT %%d, `meta_key`, `meta_value` FROM %s WHERE `term_id` = %%d", $wpdb->termmeta, $wpdb->termmeta ), $new_term['term_id'], $existing_id );
 					$wpdb->query( $sql );
 
-					return true;
+					return rest_ensure_response( true );
 				}
 			}
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -671,10 +673,10 @@ class WPRM_Api_Manage_Taxonomies {
 
 		if ( $id && $label ) {
 			update_term_meta( $id, 'wprm_term_label', $label );
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -768,10 +770,10 @@ class WPRM_Api_Manage_Taxonomies {
 				}
 			}
 
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

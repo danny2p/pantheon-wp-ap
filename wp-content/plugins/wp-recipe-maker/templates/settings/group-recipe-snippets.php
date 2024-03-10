@@ -61,6 +61,7 @@ $recipe_snippets = array(
 					'name' => __( 'Food Recipe Snippet Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default snippet template to use for the food recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
+					'priority' => 'snippet',
 					'default' => 'snippet-basic-buttons',
 				),
 				array(
@@ -68,6 +69,7 @@ $recipe_snippets = array(
 					'name' => __( 'How-to Instructions Snippet Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default snippet template to use for the how-to instructions on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
+					'priority' => 'snippet',
 					'default' => 'snippet-basic-buttons',
 					'dependency' => array(
 						'id' => 'recipe_template_show_types',
@@ -79,6 +81,7 @@ $recipe_snippets = array(
 					'name' => __( 'Other Recipe Snippet Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default snippet template to use for the "other (no metadata)" recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
+					'priority' => 'snippet',
 					'default' => 'snippet-basic-buttons',
 					'dependency' => array(
 						'id' => 'recipe_template_show_types',

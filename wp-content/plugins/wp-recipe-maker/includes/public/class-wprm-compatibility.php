@@ -39,6 +39,10 @@ class WPRM_Compatibility {
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'smartwithfood_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'smartwithfood_assets' ) );
 
+		// Chicory.
+		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'chicory_after_ingredients' ), 9 );
+		// add_action( 'wp_footer', array( __CLASS__, 'chicory_assets' ) );
+
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
 		add_action( 'elementor/controls/register', array( __CLASS__, 'elementor_controls' ) );
@@ -329,6 +333,51 @@ class WPRM_Compatibility {
 				echo '<script src="https://unpkg.com/@smartwithfood/js-sdk@2.0.0/dist/index.min.js"></script>';
 				echo '<script src="' . WPRM_URL . 'assets/js/other/smart-with-food.js?ver=' . WPRM_VERSION .'"></script>';
 				echo '<script>window.wprm_smartwithfood_token = "' . esc_attr( WPRM_Settings::get( 'integration_smartwithfood_token' ) ).'";</script>';
+			}
+		}
+	}
+
+	/**
+	 * Add Chicory button after the ingredients.
+	 *
+	 * @since	9.3.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function chicory_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'integration_chicory_activate' ) && WPRM_Settings::get( 'integration_chicory_shoppable_button' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-chicory]' );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Chicory assets in footer.
+	 *
+	 * @since    9.3.0
+	 */
+	public static function chicory_assets() {
+		if ( apply_filters( 'wprm_load_chicory', false ) ) {
+			// Make sure to only load JS if they actually agree to the terms.
+			if ( WPRM_Settings::get( 'integration_chicory_activate' ) ) {
+				$ads_enabled = WPRM_Settings::get( 'integration_chicory_premium_ads' );
+				$chicory_config = array(
+					'desktop' => array(
+						'pairingAdsEnabled' => $ads_enabled,
+						'inlineAdsEnabled' => $ads_enabled,
+						'inlineAdsRefresh' => $ads_enabled,
+						'pairingAdsRefresh' => $ads_enabled,
+					),
+					'mobile' => array(
+						'pairingAdsEnabled' => $ads_enabled,
+						'inlineAdsEnabled' => $ads_enabled,
+						'inlineAdsRefresh' => $ads_enabled,
+						'pairingAdsRefresh' => $ads_enabled,
+					),
+				);
+
+				echo '<script>window.ChicoryConfig = ' . json_encode( $chicory_config ) . ';</script>';
+				echo '<script defer src="//www.chicoryapp.com/widget_v2/"></script>';
 			}
 		}
 	}

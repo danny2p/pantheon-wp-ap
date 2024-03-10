@@ -224,7 +224,7 @@ class WPRM_Tools_Find_Ratings {
 
 				// Get user ratings.
 				// SRP User Ratings.
-				$srp_user_ratings = get_post_meta( $recipe->parent_post_id(), '_ratings', true );
+				$srp_user_ratings = $recipe->parent_post_id() ? get_post_meta( $recipe->parent_post_id(), '_ratings', true ) : false;
 
 				if ( $srp_user_ratings ) {
 					$srp_user_ratings = json_decode( $srp_user_ratings, true );
@@ -264,6 +264,22 @@ class WPRM_Tools_Find_Ratings {
 							'user_id' => $user_id,
 							'ip' => '',
 							'rating' => $rating_value,
+						);
+	
+						WPRM_Rating_Database::add_or_update_rating( $rating );
+					}
+				}
+
+				// All In One Schema Rich Snippets plugin.
+				$schema_ratings = $recipe->parent_post_id() ? get_post_meta( $recipe->parent_post_id(), 'post-rating', false ) : false;
+
+				if ( $schema_ratings ) {
+					foreach ( $schema_ratings as $schema_rating ) {
+						$rating = array(
+							'recipe_id' => $recipe->id(),
+							'user_id' => 0,
+							'ip' => $schema_rating['user_ip'],
+							'rating' => intval( $schema_rating['user_rating'] ),
 						);
 	
 						WPRM_Rating_Database::add_or_update_rating( $rating );

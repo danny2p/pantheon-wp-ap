@@ -146,7 +146,7 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_ratings( $request ) {
-		return WPRM_Rating_Database::get_ratings( array() );
+		return rest_ensure_response( WPRM_Rating_Database::get_ratings( array() ) );
 	}
 
 	/**
@@ -158,7 +158,7 @@ class WPRM_Api_Rating {
 	public static function api_add_or_update_rating( $request ) {
 		$params = $request->get_params();
 		$rating = isset( $params['rating'] ) ? $params['rating'] : array();
-		return WPRM_Rating_Database::add_or_update_rating( $rating );
+		return rest_ensure_response( WPRM_Rating_Database::add_or_update_rating( $rating ) );
 	}
 
 	/**
@@ -168,9 +168,9 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_rating( $request ) {
-		return WPRM_Rating_Database::get_rating(array(
+		return rest_ensure_response( WPRM_Rating_Database::get_rating(array(
 			'where' => 'id = ' . $request['id'],
-		));
+		)) );
 	}
 
 	/**
@@ -180,7 +180,7 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_delete_rating( $request ) {
-		return WPRM_Rating_Database::delete_rating( $request['id'] );
+		return rest_ensure_response( WPRM_Rating_Database::delete_rating( $request['id'] ) );
 	}
 
 	/**
@@ -190,9 +190,9 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_ratings_for_recipe( $request ) {
-		return WPRM_Rating_Database::get_ratings(array(
+		return rest_ensure_response( WPRM_Rating_Database::get_ratings(array(
 			'where' => 'recipe_id = ' . $request['id'],
-		));
+		)) );
 	}
 
 	/**
@@ -202,7 +202,7 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_delete_ratings_for_recipe( $request ) {
-		return WPRM_Rating_Database::delete_ratings_for( $request['id'] );
+		return rest_ensure_response( WPRM_Rating_Database::delete_ratings_for( $request['id'] ) );
 	}
 
 	/**
@@ -212,9 +212,9 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_rating_for_comment( $request ) {
-		return WPRM_Rating_Database::get_rating(array(
+		return rest_ensure_response( WPRM_Rating_Database::get_rating(array(
 			'where' => 'comment_id = ' . $request['id'],
-		));
+		)) );
 	}
 
 	/**
@@ -231,12 +231,12 @@ class WPRM_Api_Rating {
 
 		if ( $comment_id && false !== $rating ) {
 			WPRM_Comment_Rating::add_or_update_rating_for( $comment_id, $rating );
-			return array(
+			return rest_ensure_response( array(
 				'rating' => $rating,
-			);
+			) );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 
 	/**
@@ -246,7 +246,7 @@ class WPRM_Api_Rating {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_delete_rating_for_comment( $request ) {
-		return WPRM_Rating_Database::delete_ratings_for_comment( $request['id'] );
+		return rest_ensure_response( WPRM_Rating_Database::delete_ratings_for_comment( $request['id'] ) );
 	}
 }
 

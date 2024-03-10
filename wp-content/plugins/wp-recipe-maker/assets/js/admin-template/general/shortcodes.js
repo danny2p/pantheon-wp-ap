@@ -1,9 +1,29 @@
+import Elements from './elements';
+
+// Shortcodes that include content.
+const contentShortcodes = [
+    'wprm-expandable',
+];
+
+// Shortcodes that still exist but should not get added to the "Add Blocks" section.
+const ignoreShortcodes = [
+    'wprm-recipe-chicory',
+    'wprm-recipe-my-emissions-label',
+];
+
 // Sort shortcodes for "Add Blocks" section.
 const shortcodeGroups = {
+    layout: {
+        group: 'Layout',
+        shortcodes: [
+            'wprm-spacer',
+            'wprm-expandable',
+            ...Elements.layoutElements,
+        ],
+    },
     general: {
         group: 'General',
         shortcodes: [
-            'wprm-spacer',
             'wprm-text',
             'wprm-link',
             'wprm-image',
@@ -87,24 +107,19 @@ const shortcodeGroups = {
             'wprm-recipe-smart-with-food',
         ],
     },
-    deprecated: {
-        group: 'Deprecated',
-        shortcodes: [
-            'wprm-recipe-my-emissions-label',
-        ],
-    },
 };
 
 const generalShortcodeKeys = Object.values( shortcodeGroups ).flatMap( ( { shortcodes = [] } ) => shortcodes );
 const shortcodeKeysAlphebetically = Object.keys( wprm_admin_template.shortcodes ).sort();
 
 for ( let shortcode of shortcodeKeysAlphebetically ) {
-    if ( ! generalShortcodeKeys.includes( shortcode ) ) {
+    if ( ! generalShortcodeKeys.includes( shortcode ) && ! ignoreShortcodes.includes( shortcode ) ) {
         shortcodeGroups.recipe.shortcodes.push( shortcode );
     }
 }
 
 export default {
+    contentShortcodes,
     shortcodeGroups,
     shortcodeKeysAlphebetically,
 };

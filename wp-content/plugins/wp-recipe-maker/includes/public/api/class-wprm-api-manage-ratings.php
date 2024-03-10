@@ -184,12 +184,14 @@ class WPRM_Api_Manage_Ratings {
 			}
 		}
 
-		return array(
+		$data = array(
 			'rows' => $rows,
 			'total' => WPRM_Rating_Database::count_ratings(),
 			'filtered' => $total,
 			'pages' => ceil( $total / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -212,10 +214,10 @@ class WPRM_Api_Manage_Ratings {
 					break;
 			}
 
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

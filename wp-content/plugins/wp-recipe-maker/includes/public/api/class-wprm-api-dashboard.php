@@ -61,9 +61,9 @@ class WPRM_Api_Dashboard {
 	public static function api_get_analytics( $request ) {
 		$data = WPRM_Analytics::get_dashboard_chart_data();
 
-		return array(
+		return rest_ensure_response( array(
 			'data' => $data
-		);
+		) );
 	}
 }
 

@@ -59,6 +59,7 @@ class WPRM_Api_List {
 		// Make sure we're getting the most recent data by invalidating first.
 		WPRM_List_Manager::invalidate_list( $object['id'] );
 		$list = WPRM_List_Manager::get_list( $object['id'] );
+
 		return $list->get_data();
 	}
 

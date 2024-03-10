@@ -58,10 +58,10 @@ class WPRM_Api_Notices {
 
 		if ( $id && $user_id ) {
 			add_user_meta( $user_id, 'wprm_dismissed_notices', $id );
-			return true;
+			return rest_ensure_response( true );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

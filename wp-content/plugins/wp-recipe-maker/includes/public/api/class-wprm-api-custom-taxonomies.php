@@ -84,12 +84,14 @@ class WPRM_Api_Custom_Taxonomies {
 			$counter++;
 		}
 
-		return array(
+		$data = array(
 			'rows' => $rows,
 			'total' => count( $taxonomies ),
 			'filtered' => count( $taxonomies ),
 			'pages' => ceil( count( $taxonomies ) / $page_size ),
 		);
+
+		return rest_ensure_response( $data );
 	}
 
 	/**
@@ -121,16 +123,18 @@ class WPRM_Api_Custom_Taxonomies {
 			update_option( 'wprm_custom_taxonomies', $taxonomies );
 			set_transient( 'wprm_custom_taxonomies_flush_needed', true, 60 * 60 * 24 );
 
-			return array(
+			$data = array(
 				'key' => $key,
 				'singular_name' => $singular_name,
 				'name' => $name,
 				'slug' => $slug,
 				'archive' => $archive,
 			);
+
+			return rest_ensure_response( $data );
 		}
 
-		return false;
+		return rest_ensure_response( false );
 	}
 }
 

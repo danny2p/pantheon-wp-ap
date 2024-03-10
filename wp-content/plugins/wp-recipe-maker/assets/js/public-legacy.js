@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 
 import './public/analytics';
 import './public/comment-rating';
+import './public/expandable';
 import './public/grow';
 import './public/manager';
 import './public/modal';

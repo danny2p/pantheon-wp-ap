@@ -28,24 +28,6 @@ class WPRM_Marketing {
 	 */
 	public static function init() {
 		$campaigns = array(
-			'black-friday-2023' => array(
-				'start' => new DateTime( '2023-11-22 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'end' => new DateTime( '2023-11-29 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'notice_title' => 'Black Friday & Cyber Monday Deal',
-				'notice_text' => 'Get a 30% discount right now!',
-				'page_title' => 'Black Friday Discount!',
-				'page_text' => 'Good news: we\'re having a Black Friday & Cyber Monday sale and you can get a <strong>30% discount on any of our plugins</strong>.',
-				'url' => 'https://bootstrapped.ventures/black-friday/',
-			),
-			'birthday-2024' => array(
-				'start' => new DateTime( '2024-01-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'end' => new DateTime( '2024-01-31 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'notice_title' => 'Celebrating my birthday',
-				'notice_text' => 'Get a 30% discount right now!',
-				'page_title' => 'Birthday Discount!',
-				'page_text' => 'Good news: I\'m celebrating my birthday with a <strong>30% discount on any of our plugins</strong>.',
-				'url' => 'https://bootstrapped.ventures/birthday-discount/',
-			),
 			'black-friday-2024' => array(
 				'start' => new DateTime( '2024-11-26 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
 				'end' => new DateTime( '2024-12-04 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),

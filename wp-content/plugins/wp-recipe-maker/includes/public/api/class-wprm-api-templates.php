@@ -74,7 +74,7 @@ class WPRM_Api_Templates {
 	 * @param WP_REST_Request $request Current request.
 	 */
 	public static function api_get_templates( $request ) {
-		return WPRM_Template_Manager::get_templates();
+		return rest_ensure_response( WPRM_Template_Manager::get_templates() );
 	}
 
 	/**
@@ -86,7 +86,7 @@ class WPRM_Api_Templates {
 	public static function api_update_template( $request ) {
 		$params = $request->get_params();
 		$template = isset( $params['template'] ) ? $params['template'] : array();
-		return WPRM_Template_Editor::prepare_template_for_editor( WPRM_Template_Manager::save_template( $template ) );
+		return rest_ensure_response( WPRM_Template_Editor::prepare_template_for_editor( WPRM_Template_Manager::save_template( $template ) ) );
 	}
 	
 	/**
@@ -98,7 +98,7 @@ class WPRM_Api_Templates {
 	public static function api_delete_template( $request ) {
 		$params = $request->get_params();
 		$slug = isset( $params['slug'] ) ? $params['slug'] : false;
-		return WPRM_Template_Manager::delete_template( $slug );
+		return rest_ensure_response( WPRM_Template_Manager::delete_template( $slug ) );
 	}
 
 	/**
@@ -123,9 +123,9 @@ class WPRM_Api_Templates {
 			}
 		}
 
-		return array(
+		return rest_ensure_response( array(
 			'preview' => (object) $preview,
-		);
+		) );
 	}
 }
 

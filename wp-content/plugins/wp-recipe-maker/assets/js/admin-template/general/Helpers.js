@@ -20,6 +20,7 @@ export default {
     getShortcodeName(id) {
         let name = id;
 
+        name = name.replace('wprm-layout-', '');
         name = name.replace('wprm-recipe-', '');
         name = name.replace('wprm-', '');
 
@@ -51,7 +52,7 @@ export default {
 
         return shortcode_atts;
     },
-    getFullShortcode(shortcode) {
+    getFullShortcode(shortcode, withContent = false) {
         let fullShortcode = '[' + shortcode.id;
 
         // Add shortcode attributes.
@@ -68,6 +69,11 @@ export default {
 
         // Close shortcode.
         fullShortcode += ']';
+
+        if ( withContent && false !== shortcode.content ) {
+            fullShortcode += shortcode.content;
+            fullShortcode += '[/' + shortcode.id + ']';
+        }
 
         return fullShortcode;
     },
