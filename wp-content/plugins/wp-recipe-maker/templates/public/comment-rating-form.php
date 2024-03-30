@@ -44,8 +44,8 @@ if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
 // Uses random ID instead of fixed to prevent duplicate ID issues when form is on the page multiple times (happens with wpDiscuz).
 $label_id = $displaying_in_admin ? false : 'wprm-comment-rating-' . rand();
 
-// Name for the input element.
-$name = $displaying_in_admin && isset( $comment_id ) && $comment_id ? 'wprm-comment-rating-' . $comment_id : 'wprm-comment-rating';
+// Name for the input element. Don't set on admin to prevent all inputs from becoming part of the URL when doing a search.
+$name = $displaying_in_admin ? '' : 'wprm-comment-rating';
 
 // Currently selected rating.
 $selected = isset( $rating ) && $rating ? $rating : 0;

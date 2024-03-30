@@ -154,17 +154,6 @@ $recipe_ratings = array(
 			'description' => __( 'The User Ratings feature allows visitors to vote on your recipes by simply clicking on the stars inside of the recipe card.', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
-					'id' => 'user_ratings_mode',
-					'name' => __( 'User Ratings Mode', 'wp-recipe-maker' ),
-					'description' => __( 'What type of user ratings to use.', 'wp-recipe-maker' ),
-					'type' => 'dropdown',
-					'options' => array(
-						'modal' => __( 'Open a modal when clicking on the stars (recommended)', 'wp-recipe-maker' ),
-						'click' => __( 'Immediately rate when clicking on the stars', 'wp-recipe-maker' ),
-					),
-					'default' => 'modal',
-				),
-				array(
 					'id' => 'user_ratings_indicate_not_voted',
 					'name' => __( 'Transparent Stars when not Voted', 'wp-recipe-maker' ),
 					'description' => __( 'Make the stars transparent when the current user has not voted yet.', 'wp-recipe-maker' ),
@@ -200,82 +189,10 @@ $recipe_ratings = array(
 						'value' => false,
 					),
 				),
-				array(
-					'id' => 'user_ratings_force_comment',
-					'name' => __( 'Force visitors to leave a comment', 'wp-recipe-maker' ),
-					'description' => __( 'Redirect visitors to the comment form instead of allowing them to vote by just clicking.', 'wp-recipe-maker' ),
-					'type' => 'dropdown',
-					'options' => array(
-						'never' => __( 'Never, allow any user rating', 'wp-recipe-maker' ),
-						'1_star' => __( 'If they want to give 1 star', 'wp-recipe-maker' ),
-						'2_star' => __( 'If they want to give 2 stars or less', 'wp-recipe-maker' ),
-						'3_star' => __( 'If they want to give 3 stars or less', 'wp-recipe-maker' ),
-						'4_star' => __( 'If they want to give 4 stars or less', 'wp-recipe-maker' ),
-						'always' => __( 'Always redirect to the comment form', 'wp-recipe-maker' ),
-					),
-					'default' => 'never',
-					'dependency' => array(
-						array(
-							'id' => 'features_comment_ratings',
-							'value' => true,
-						),
-						array(
-							'id' => 'user_ratings_mode',
-							'value' => 'click',
-						),
-					),
-				),
-				array(
-					'id' => 'user_ratings_force_comment_scroll_to',
-					'name' => __( 'HTML Element to scroll to', 'wp-recipe-maker' ),
-					'description' => __( 'Optionally set a custom HTML element to scroll to. Can be useful when using lazy loading your comments, for example.', 'wp-recipe-maker' ),
-					'type' => 'text',
-					'default' => '',
-					'dependency' => array(
-						array(
-							'id' => 'features_comment_ratings',
-							'value' => true,
-						),
-						array(
-							'id' => 'user_ratings_mode',
-							'value' => 'click',
-						),
-					),
-				),
 			),
 			'dependency' => array(
 				'id' => 'features_user_ratings',
 				'value' => true,
-			),
-		),
-		array(
-			'name' => __( 'User Ratings Tooltip', 'wp-recipe-maker' ),
-			'description' => __( 'Settings related to the tooltip that pops up when a visitors clicks on the stars.', 'wp-recipe-maker' ),
-			'settings' => array(
-				array(
-					'id' => 'user_ratings_thank_you_message',
-					'name' => __( 'Thank You Message', 'wp-recipe-maker' ),
-					'description' => __( 'Thank you message to show after clicking on the stars. Make empty to not show anything.', 'wp-recipe-maker' ),
-					'type' => 'richTextarea',
-					'default' => __( 'Thank you for voting!', 'wp-recipe-maker' ),
-				),
-				array(
-					'id' => 'user_ratings_problem_message',
-					'name' => __( 'Problem Message', 'wp-recipe-maker' ),
-					'description' => __( 'Message to show when there was a problem with rating the recipe. Make empty to not show anything.', 'wp-recipe-maker' ),
-					'type' => 'richTextarea',
-					'default' => __( 'There was a problem rating this recipe. Please try again later.', 'wp-recipe-maker' ),
-				),
-			),
-			'dependency' => array(
-				array(
-					'id' => 'features_user_ratings',
-					'value' => true,
-				),
-				array(
-					'id' => 'user_ratings_mode',
-					'value' => 'click',
-				),
 			),
 		),
 		array(
@@ -342,8 +259,22 @@ $recipe_ratings = array(
 				),
 				array(
 					'id' => 'user_ratings_thank_you_message',
-					'name' => __( 'Thank You Message', 'wp-recipe-maker' ),
-					'description' => __( 'Thank you message to show after clicking on the stars. Make empty to not show anything.', 'wp-recipe-maker' ),
+					'name' => __( 'Thank You Message Without Comment', 'wp-recipe-maker' ),
+					'description' => __( 'Thank you message to show after voting without a comment. Make empty to not show anything.', 'wp-recipe-maker' ),
+					'type' => 'richTextarea',
+					'default' => __( 'Thank you for voting!', 'wp-recipe-maker' ),
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_force_comment',
+							'value' => 'always',
+							'type' => 'inverse',
+						),
+					),
+				),
+				array(
+					'id' => 'user_ratings_thank_you_message_with_comment',
+					'name' => __( 'Thank You Message With Comment', 'wp-recipe-maker' ),
+					'description' => __( 'Thank you message to show after voting with a comment. Make empty to not show anything.', 'wp-recipe-maker' ),
 					'type' => 'richTextarea',
 					'default' => __( 'Thank you for voting!', 'wp-recipe-maker' ),
 				),
@@ -359,10 +290,6 @@ $recipe_ratings = array(
 				array(
 					'id' => 'features_user_ratings',
 					'value' => true,
-				),
-				array(
-					'id' => 'user_ratings_mode',
-					'value' => 'modal',
 				),
 			),
 		),

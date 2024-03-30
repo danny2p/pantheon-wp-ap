@@ -512,6 +512,18 @@ class WPRM_Import_Create extends WPRM_Import {
 				}
 			}
 
+			// Classic Editor Deprecated Shortcode.
+			$classic_pattern = '/\[mv_recipe\s.*?post_id=\"?\'?(\d+)\"?\'?.*?\]/mi';
+			preg_match_all( $classic_pattern, $content, $classic_matches );
+
+			if ( isset( $classic_matches[1] ) ) {
+				foreach ( $classic_matches[1] as $index => $mv_id ) {
+					if ( $mv_recipe['original_object_id'] === $mv_id ) {
+						$content = str_ireplace( $classic_matches[0][ $index ], '[wprm-recipe id="' . $wprm_id . '"]', $content );
+					}
+				}
+			}
+
 			// Update post with new content including our shortcodes.
 			if ( $content !== $post->post_content ) {
 				$update_content = array(

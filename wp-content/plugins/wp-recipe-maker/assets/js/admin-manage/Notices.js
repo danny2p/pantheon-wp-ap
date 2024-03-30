@@ -20,6 +20,12 @@ export default class Notices extends Component {
                             return null;
                         }
 
+                        const dismissNotice = () => {
+                            Api.general.dismissNotice( notice.id );
+                            notice.dismissed = true;
+                            this.forceUpdate();
+                        }
+
                         return (
                             <div className="wprm-admin-notice" key={ index }>
                                 <div className="wprm-admin-notice-content">
@@ -34,16 +40,17 @@ export default class Notices extends Component {
                                         className="wprm-admin-notice-text"
                                         dangerouslySetInnerHTML={ { __html: notice.text } }
                                     />
+                                    <a
+                                        className="button"
+                                        href="#"
+                                        onClick={ dismissNotice }
+                                    >{ __wprm( 'Remove Notice' ) }</a>
                                 </div>
                                 <div className="wprm-admin-notice-dismiss">
                                     <Icon
                                         title={ __wprm( 'Remove Notice' ) }
                                         type="close"
-                                        onClick={() => {
-                                            Api.general.dismissNotice( notice.id );
-                                            notice.dismissed = true;
-                                            this.forceUpdate();
-                                        }}
+                                        onClick={ dismissNotice }
                                     />
                                 </div>
                             </div>

@@ -1,6 +1,18 @@
 {
     "news": [
         {
+            "date": "2024-03-15",
+            "label": "Blog",
+            "title": "How to Set Up Lights for Cooking Videos (Complete Guide)",
+            "url": "https://bootstrapped.ventures/best-lighting-for-cooking-videos/"
+        },
+        {
+            "date": "2024-03-07",
+            "label": "Blog",
+            "title": "Top 10 Strategies for a Successful Food Vlog",
+            "url": "https://bootstrapped.ventures/food-vlog/"
+        },
+        {
             "date": "2024-03-07",
             "label": "Release",
             "title": "WP Recipe Maker 9.3.0",
