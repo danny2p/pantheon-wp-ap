@@ -132,6 +132,9 @@ class WPRM_Migrations {
 				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-9-2-0-collection-add-layout.php' );
 				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-9-2-0-user-ratings-mode.php' );
 			}
+			if ( version_compare( $migrated_to_version, '9.3.1' ) < 0 ) {
+				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-9-3-1-user-ratings-thank-you.php' );
+			}
 
 			// Specific migrations.
 			if ( ! self::is_migrated_to( 'ratings_db' ) ) {

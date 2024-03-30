@@ -49,12 +49,6 @@ class WPRM_Template_Shortcode {
 		$text = str_ireplace( '<p><br></p>', '', $text );
 		$text = str_ireplace( '<p><br/></p>', '', $text );
 
-		// Replace last occurence of </p> by </span>. Use span and not div to prevent layouts from breaking.
-		$pos = strripos( $text, '</p>' );
-		if( false !== $pos ) {
-			$text = substr_replace( $text, '</span>', $pos, 4 );
-		}
-
 		// Replace <p> by <span> while keeping any attributes (text-align!).
 		$text = preg_replace_callback(
 			'/<p(\s[^>]*>|>)/mi',
@@ -73,8 +67,16 @@ class WPRM_Template_Shortcode {
 			$text
 		);
 
-		// Replace remaining </p> with spacer.
+		// Replace </p> with closing span and spacer.
 		$text = str_ireplace( '</p>', '</span>[wprm-spacer]', $text );
+
+		// Trim.
+		$text = trim( $text );
+
+		// If spacer is at the very end of the text, remove it.
+		if ( substr( $text, -13 ) === '[wprm-spacer]' ) {
+			$text = substr( $text, 0, -13 );
+		}
 
 		return trim( do_shortcode( $text ) );
 	}

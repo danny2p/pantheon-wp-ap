@@ -35,6 +35,10 @@ class WPRM_Compatibility {
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
+		// Emeals.
+		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'emeals_after_ingredients' ), 9 );
+		// add_action( 'wp_footer', array( __CLASS__, 'emeals_assets' ) );
+
 		// Smart With Food.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'smartwithfood_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'smartwithfood_assets' ) );
@@ -304,6 +308,38 @@ class WPRM_Compatibility {
 			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
 				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle-v2.js"; js.async = true; js.dataset.source_origin = "recipemaker"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
 			}
+		}
+	}
+
+	/**
+	 * Add eMeals Walmart button after the ingredients.
+	 *
+	 * @since	9.4.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function emeals_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'emeals_walmart_button' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-emeals]' );
+		}
+
+		return $output;
+	}
+	
+	/**
+	 * Emeals assets in footer.
+	 *
+	 * @since    9.0.0
+	 */
+	public static function emeals_assets() {
+		if ( apply_filters( 'wprm_load_emeals', false ) ) {
+			// Optional partner ID.
+			$partner_id = WPRM_Settings::get( 'emeals_partner_id' );
+
+			if ( ! $partner_id ) {
+				$partner_id = 'wprecipemaker';
+			}
+			
+			echo '<script type="text/javascript" src="https://emeals.com/shopping/button/bundle.min.js" partner="' . esc_attr( $partner_id ) . '"></script>';
 		}
 	}
 

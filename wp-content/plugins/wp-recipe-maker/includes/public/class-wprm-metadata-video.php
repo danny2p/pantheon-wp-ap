@@ -224,13 +224,13 @@ class WPRM_MetadataVideo {
 		$found_youtube_id = false;
 
 		// Check for YT Shorts URL.
-		preg_match( '/youtube\.com\/shorts\/(.*)$/i', $embed_code, $matches );
+		preg_match( '/youtube\.com\/shorts\/(.*?)(?:\?|$)/i', $embed_code, $matches );
 		if ( $matches && isset( $matches[1] ) ) {
 			$found_youtube_id = $matches[1];
 		}
 
 		// Check for shortened URL.
-		preg_match( '/youtu\.be\/(.*)$/i', $embed_code, $matches );
+		preg_match( '/youtu\.be\/(.*?)(?:\?|$)/i', $embed_code, $matches );
 		if ( $matches && isset( $matches[1] ) ) {
 			$found_youtube_id = $matches[1];
 		}
