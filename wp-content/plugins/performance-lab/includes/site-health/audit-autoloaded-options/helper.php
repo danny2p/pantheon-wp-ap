@@ -61,7 +61,7 @@ function perflab_aao_autoloaded_options_test() {
 		'<p>' . esc_html( $base_description ) . ' ' . __( 'Your site has %1$s autoloaded options (size: %2$s) in the options table, which could cause your site to be slow. You can reduce the number of autoloaded options by cleaning up your site\'s options table.', 'performance-lab' ) . '</p>',
 		$autoloaded_options_count,
 		size_format( $autoloaded_options_size )
-	) . perflab_aao_get_autoloaded_options_table();
+	) . perflab_aao_get_autoloaded_options_table() . perflab_aao_get_disabled_autoloaded_options_table();
 
 	/**
 	 * Filters description to be shown on Site Health warning when threshold is met.
@@ -101,7 +101,18 @@ function perflab_aao_autoloaded_options_test() {
  */
 function perflab_aao_autoloaded_options_size() {
 	global $wpdb;
-	return (int) $wpdb->get_var( 'SELECT SUM(LENGTH(option_value)) FROM ' . $wpdb->prefix . 'options WHERE autoload = \'yes\'' );
+
+	$autoload_values = perflab_aao_get_autoload_values_to_autoload();
+
+	return (int) $wpdb->get_var(
+		$wpdb->prepare(
+			sprintf(
+				"SELECT SUM(LENGTH(option_value)) FROM $wpdb->options WHERE autoload IN (%s)",
+				implode( ',', array_fill( 0, count( $autoload_values ), '%s' ) )
+			),
+			$autoload_values
+		)
+	);
 }
 
 /**
@@ -130,7 +141,17 @@ function perflab_aao_query_autoloaded_options() {
 	 */
 	$option_threshold = apply_filters( 'perflab_aao_autoloaded_options_table_threshold', 100 );
 
-	return $wpdb->get_results( $wpdb->prepare( "SELECT option_name, LENGTH(option_value) AS option_value_length FROM {$wpdb->options} WHERE autoload='yes' AND LENGTH(option_value) > %d ORDER BY option_value_length DESC LIMIT 20", $option_threshold ) );
+	$autoload_values = perflab_aao_get_autoload_values_to_autoload();
+
+	return $wpdb->get_results(
+		$wpdb->prepare(
+			sprintf(
+				"SELECT option_name, LENGTH(option_value) AS option_value_length FROM {$wpdb->options} WHERE autoload IN (%s)",
+				implode( ',', array_fill( 0, count( $autoload_values ), '%s' ) )
+			) . ' AND LENGTH(option_value) > %d ORDER BY option_value_length DESC LIMIT 20',
+			array_merge( $autoload_values, array( $option_threshold ) )
+		)
+	);
 }
 
 /**
@@ -144,15 +165,101 @@ function perflab_aao_get_autoloaded_options_table() {
 	$autoload_summary = perflab_aao_query_autoloaded_options();
 
 	$html_table = sprintf(
-		'<table class="widefat striped"><thead><tr><th scope="col">%s</th><th scope="col">%s</th></tr></thead><tbody>',
-		__( 'Option Name', 'performance-lab' ),
-		__( 'Size', 'performance-lab' )
+		'<table class="widefat striped"><thead><tr><th scope="col">%s</th><th scope="col">%s</th><th scope="col">%s</th></tr></thead><tbody>',
+		esc_html__( 'Option Name', 'performance-lab' ),
+		esc_html__( 'Size', 'performance-lab' ),
+		esc_html__( 'Action', 'performance-lab' )
 	);
 
+	$nonce = wp_create_nonce( 'perflab_aao_update_autoload' );
 	foreach ( $autoload_summary as $value ) {
-		$html_table .= sprintf( '<tr><td>%s</td><td>%s</td></tr>', $value->option_name, size_format( $value->option_value_length, 2 ) );
+		$url            = esc_url_raw(
+			add_query_arg(
+				array(
+					'action'      => 'perflab_aao_update_autoload',
+					'_wpnonce'    => $nonce,
+					'option_name' => $value->option_name,
+					'autoload'    => 'false',
+				),
+				admin_url( 'site-health.php' )
+			)
+		);
+		$disable_button = sprintf( '<a class="button" href="%s">%s</a>', esc_url( $url ), esc_html__( 'Disable Autoload', 'performance-lab' ) );
+		$html_table    .= sprintf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $value->option_name ), size_format( $value->option_value_length, 2 ), $disable_button );
 	}
 	$html_table .= '</tbody></table>';
 
 	return $html_table;
+}
+
+/**
+ * Gets disabled autoload options table.
+ *
+ * @since 3.0.0
+ *
+ * @global wpdb $wpdb WordPress database abstraction object.
+ *
+ * @return string HTML formatted table.
+ */
+function perflab_aao_get_disabled_autoloaded_options_table() {
+	global $wpdb;
+
+	$disabled_options = get_option( 'perflab_aao_disabled_options', array() );
+
+	if ( empty( $disabled_options ) ) {
+		return '';
+	}
+
+	$disabled_options_summary = $wpdb->get_results(
+		$wpdb->prepare(
+			sprintf(
+				"SELECT option_name, LENGTH(option_value) AS option_value_length FROM $wpdb->options WHERE option_name IN (%s) ORDER BY option_value_length DESC",
+				implode( ',', array_fill( 0, count( $disabled_options ), '%s' ) )
+			),
+			$disabled_options
+		)
+	);
+
+	$html_table = sprintf(
+		'<p>%s</p><table class="widefat striped"><thead><tr><th scope="col">%s</th><th scope="col">%s</th><th scope="col">%s</th></tr></thead><tbody>',
+		__( 'The following table shows the options for which you have previously disabled Autoload.', 'performance-lab' ),
+		esc_html__( 'Option Name', 'performance-lab' ),
+		esc_html__( 'Size', 'performance-lab' ),
+		esc_html__( 'Action', 'performance-lab' )
+	);
+
+	$nonce = wp_create_nonce( 'perflab_aao_update_autoload' );
+	foreach ( $disabled_options_summary as $value ) {
+		$url            = esc_url_raw(
+			add_query_arg(
+				array(
+					'action'      => 'perflab_aao_update_autoload',
+					'_wpnonce'    => $nonce,
+					'option_name' => $value->option_name,
+					'autoload'    => 'true',
+				),
+				admin_url( 'site-health.php' )
+			)
+		);
+		$disable_button = sprintf( '<a class="button" href="%s">%s</a>', esc_url( $url ), esc_html__( 'Revert to Autoload', 'performance-lab' ) );
+		$html_table    .= sprintf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $value->option_name ), size_format( $value->option_value_length, 2 ), $disable_button );
+	}
+	$html_table .= '</tbody></table>';
+
+	return $html_table;
+}
+
+/**
+ * Gets the autoload values in the database that should trigger their option to be autoloaded.
+ *
+ * @since 3.0.0
+ *
+ * @return array List of autoload values.
+ */
+function perflab_aao_get_autoload_values_to_autoload() {
+	if ( function_exists( 'wp_autoload_values_to_autoload' ) ) {
+		return wp_autoload_values_to_autoload();
+	}
+
+	return array( 'yes' );
 }
