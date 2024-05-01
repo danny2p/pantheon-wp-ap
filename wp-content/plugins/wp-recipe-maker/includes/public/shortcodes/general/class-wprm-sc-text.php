@@ -79,8 +79,9 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 	public static function shortcode( $atts ) {
 		$atts = parent::get_attributes( $atts );
 
+		$header_text = $atts['header'];
 		$text = $atts['text'];
-		if ( ! $text ) {
+		if ( ! $text && ! $header_text ) {
 			return '';
 		}
 
@@ -116,7 +117,9 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 			$output .= $header;
 		}
 
-		$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</' . $tag . '>';
+		if ( $text ) {
+			$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</' . $tag . '>';
+		}
 
 		if ( $header ) {
 			$output .= '</div>';

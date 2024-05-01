@@ -52,7 +52,7 @@ class WPRM_SC_Emeals extends WPRM_Template_Shortcode {
 			return '<div class="wprm-template-editor-premium-only">' . __( 'Placeholder for the Emeals button', 'wp-recipe-maker' ) . '</div>';
 		}
 
-		// Make sure Instacart integration gets loaded.
+		// Make sure eMeals integration gets loaded.
 		add_filter( 'wprm_load_emeals', '__return_true' );
 
 		$style = 'border-radius: 100px; background-color: #0071CE; border: 0; box-sizing: border-box; color: #ffffff; font-family: Poppins, sans-serif; font-size: 15px; font-weight: normal; line-height: 1.25rem; padding: 16px 12px; text-align: center; text-decoration-thickness: auto; text-transform: none; cursor: pointer; user-select: none; touch-action: manipulation; width: 300px;';

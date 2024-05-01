@@ -640,6 +640,58 @@ class WPRM_Metadata {
 				'ratingValue' => $rating['average'],
 				'ratingCount' => $rating['count'],
 			);
+
+			// Get comments given to parent post.
+			if ( $recipe->parent_post_id() ) {
+				$args = array(
+					'post_id' => $recipe->parent_post_id(),
+					'status' => 'approve',
+					'number' => 20,
+					'meta_query' => array(
+						array(
+							'key'     => 'wprm-comment-rating',
+							'compare' => '!=',
+							'value'   => '',
+						),
+					),
+				);
+
+				$comments_query = new WP_Comment_Query;
+				$comments = $comments_query->query( $args );
+
+				if ( $comments ) {
+					$reviews = array();
+
+					foreach ( $comments as $comment ) {
+						$author = $comment->comment_author;
+						$body = $comment->comment_content;
+			
+						if ( $author && $body ) {
+							$rating = intval( get_comment_meta( $comment->comment_ID, 'wprm-comment-rating', true ) );
+						
+							if ( $rating ) {
+								$reviews[] = array(
+									'@type' => 'Review',
+									'reviewRating' => array(
+										'@type' => 'Rating',
+										'ratingValue' => $rating,
+									),
+									'reviewBody' => $body,
+									'author' => array(
+										'@type' => 'Person',
+										'name' => $author,
+									),
+									'datePublished' => gmdate( 'Y-m-d', strtotime( $comment->comment_date ) ),
+								);
+							}
+						}
+					}
+
+					if ( $reviews ) {
+						$metadata['review'] = $reviews;
+					}
+				}
+			}
 		}
 
 		// Food Recipe only metadata.

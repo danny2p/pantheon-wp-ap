@@ -52,6 +52,11 @@ class WPRM_Popup {
 	 * @since    9.2.0
 	 */
 	public static function output_html_for_all_modals() {
+		// Make sure default assets are loaded, if there are any modals to output.
+		if ( self::$modals ) {
+			WPRM_Assets::load();
+		}
+
 		foreach ( self::$modals as $uid => $modal ) {
 			// Set variables.
 			$id = 'wprm-popup-modal-' . $uid;

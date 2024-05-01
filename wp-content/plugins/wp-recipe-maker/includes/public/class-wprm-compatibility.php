@@ -36,8 +36,8 @@ class WPRM_Compatibility {
 		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
 		// Emeals.
-		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'emeals_after_ingredients' ), 9 );
-		// add_action( 'wp_footer', array( __CLASS__, 'emeals_assets' ) );
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'emeals_after_ingredients' ), 9 );
+		add_action( 'wp_footer', array( __CLASS__, 'emeals_assets' ) );
 
 		// Smart With Food.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'smartwithfood_after_ingredients' ), 9 );

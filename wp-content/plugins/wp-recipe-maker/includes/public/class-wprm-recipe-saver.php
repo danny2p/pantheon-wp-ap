@@ -201,13 +201,17 @@ class WPRM_Recipe_Saver {
 			if ( isset( $recipe['slug'] ) && $recipe['slug'] ) {
 				$post['post_name'] = $recipe['slug'];
 			}
+
+			if ( isset( $recipe['date'] ) && $recipe['date'] ) {
+				$post['post_date'] = $recipe['date'];
+			}
 	
 			if ( isset( $recipe['post_status'] ) && $recipe['post_status'] ) {
 				$post['post_status'] = $recipe['post_status'];
 
 				// Need to update post date if publishing and post date is still set to the future (scheduled).
 				if ( 'publish' === $post['post_status'] ) {
-					$post_date_timestamp = get_the_date( 'U', $id );
+					$post_date_timestamp = isset( $post['post_date'] ) ? strtotime( $post['post_date'] ) : get_the_date( 'U', $id );
 					$current_timestamp = time();
 
 					if ( $post_date_timestamp && $current_timestamp < $post_date_timestamp ) {

@@ -17,19 +17,25 @@ window.WPRecipeMaker.pinterest = {
         const pinUtils = this.getPinUtils();
 
         if ( pinUtils ) {
-            const url = el.dataset.url;
-            const media = el.dataset.media;
-            const description = el.dataset.description;
-            const repin = el.dataset.repin;
-
-            if ( repin ) {
-                PinUtils.repin( repin );
+            if ( el.dataset.hasOwnProperty( 'pinAction' ) && 'any' === el.dataset.pinAction ) {
+                PinUtils.pinAny();
             } else {
-                pinUtils.pinOne({
-                    url,
-                    media,
-                    description,
-                });
+                const url = el.dataset.url;
+                const media = el.dataset.media;
+                const description = el.dataset.description;
+                const repin = el.dataset.repin;
+
+                if ( repin ) {
+                    PinUtils.repin( repin );
+                } else {
+                    if ( media ) {
+                        pinUtils.pinOne({
+                            url,
+                            media,
+                            description,
+                        });
+                    }
+                }
             }
         } else {
             // Default popup to open when pinit.js is not loaded.

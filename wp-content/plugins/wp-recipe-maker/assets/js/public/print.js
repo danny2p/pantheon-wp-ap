@@ -80,7 +80,22 @@ window.WPRecipeMaker.print = {
 		WPRecipeMaker.print.recipe( id, servings, system, advancedServings, template );
 	},
 	recipe: ( id, servings = false, system = 1, advancedServings = false, template = '' ) => {
-		let urlArgs = id;
+		let slug = false;
+		if ( 'slug' === wprm_public.settings.print_recipe_identifier ) {
+			const recipe = window.WPRecipeMaker.manager.getRecipeImmediately( id );
+			
+			if ( recipe && recipe.data.slug ) {
+				slug = recipe.data.slug;
+
+				// Remove optional wprm- prefix.
+				if ( slug.startsWith( 'wprm-' ) ) {
+					slug = slug.substring( 5 );
+				}
+			}
+		}
+
+		// Use slug in print URL if set.
+		let urlArgs = slug ? slug : id;
 		if ( template ) {
 			urlArgs += `/${template}`;
 		}

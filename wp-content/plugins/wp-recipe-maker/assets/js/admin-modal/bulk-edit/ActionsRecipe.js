@@ -67,7 +67,6 @@ const ActionsRecipe = (props) => {
 
     if ( wprm_admin.addons.premium ) {
         actionOptions.push(      
-            { value: 'user-rating', label: __wprm( 'Set User Rating by Author' ), default: '5' },
             { value: 'custom-nutrition-ingredient', label: __wprm( 'Create Custom Nutrition Ingredient' ), default: false },
         );
     }

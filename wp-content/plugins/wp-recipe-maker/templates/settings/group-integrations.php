@@ -42,20 +42,20 @@ $integrations = array(
 				),
 			),
 		),
-		// array(
-		// 	'name' => __( 'Shoppable Recipes with Walmart', 'wp-recipe-maker' ),
-		// 	'description' => 'Make your recipes shoppable with the largest retailer in North America by adding a Walmart Shoppable button powered by eMeals, which will be placed directly in line with your recipe instructions. Available in the US only.',
-		// 	'documentation' => 'https://support.emeals.com/portal/en/kb/articles/grocery-connect-shoppable-recipes-with-walmart',
-		// 	'settings' => array(
-		// 		array(
-		// 			'id' => 'emeals_walmart_button',
-		// 			'name' => __( 'Automatically add Shop Ingredients with Walmart Button', 'wp-recipe-maker' ),
-		// 			'description' => __( 'Enable to automatically output the Shop Ingredients with Walmart button after the ingredients section. Alternatively, add the button in the Template Editor.', 'wp-recipe-maker' ),
-		// 			'type' => 'toggle',
-		// 			'default' => false,
-		// 		),
-		// 	),
-		// ),
+		array(
+			'name' => __( 'Shoppable Recipes with Walmart', 'wp-recipe-maker' ),
+			'description' => 'Make your recipes shoppable with the largest retailer in North America by adding a Walmart Shoppable button powered by eMeals, which will be placed directly in line with your recipe instructions. Available in the US only.',
+			'documentation' => 'https://support.emeals.com/portal/en/kb/articles/grocery-connect-shoppable-recipes-with-walmart',
+			'settings' => array(
+				array(
+					'id' => 'emeals_walmart_button',
+					'name' => __( 'Automatically add Shop Ingredients with Walmart Button', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the Shop Ingredients with Walmart button after the ingredients section. Alternatively, add the button in the Template Editor.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+			),
+		),
 		array(
 			'name' => __( 'SmartWithFood', 'wp-recipe-maker' ),
 			'description' => 'SmartWithFood presents a widget that enables the automated translation of recipe ingredients into actual products within the Collect&Go platform, all via an embedded button. This feature seamlessly integrates the ingredients into the digital shopping basket, streamlining the user experience.',

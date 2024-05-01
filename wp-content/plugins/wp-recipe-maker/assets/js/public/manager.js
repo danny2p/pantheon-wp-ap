@@ -13,6 +13,22 @@ window.WPRecipeMaker.manager = {
 
 		return Promise.resolve( window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] );
 	},
+	getRecipeImmediately: ( id ) => {
+		id = parseInt( id );
+
+		let recipe = window.WPRecipeMaker.manager.recipes.hasOwnProperty( `recipe-${id}` ) ? window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] : false;
+
+		// Check if data does not need to be loaded through API.
+		if ( ! recipe ) {
+			if ( window.hasOwnProperty( 'wprm_recipes' ) && window.wprm_recipes.hasOwnProperty( `recipe-${id}` ) ) {
+				const recipeData = window.wprm_recipes[ `recipe-${id}` ];
+				recipe = window.WPRecipeMaker.manager.loadRecipeObject( id, recipeData );
+				window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] = recipe;
+			}
+		}
+
+		return recipe;
+	},
 	loadRecipe: ( id ) => {
 		return new Promise((resolveRecipe, rejectRecipe) => {
 			// Check for data added in PHP of try loading through API.

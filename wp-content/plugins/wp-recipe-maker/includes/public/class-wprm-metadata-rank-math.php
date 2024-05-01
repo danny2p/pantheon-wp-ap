@@ -33,6 +33,7 @@ class WPRM_Metadata_Rank_Math {
 	 */
 	public static function init() {
 		add_filter( 'rank_math/json_ld', array( __CLASS__, 'rank_math_json_ld' ), 99, 2 );
+		add_filter( 'rank_math/sitemap/content_before_parse_html_images', array( __CLASS__, 'sitemap_content_before_parse_html_images' ), 1 );
 	}
 
 	/**
@@ -148,6 +149,22 @@ class WPRM_Metadata_Rank_Math {
 		}
 
 		return $metadata;
+	}
+
+	/**
+	 * Alter the content before parsing HTML images for the Rank Math sitemap. Only use fallback so that our code doesn't need to run.
+	 *
+	 * @since   9.4.0
+	 */
+	public static function sitemap_content_before_parse_html_images( $content ) {
+		// Remove opening and closing block comment.
+		$content = preg_replace( '/<!-- wp:wp-recipe-maker\/recipe(.*?)-->/', '', $content );
+		$content = str_ireplace( '<!-- /wp:wp-recipe-maker/recipe -->', '', $content );
+
+		// Make sure fallback is shown, if not already there.
+		$content = WPRM_Fallback_Recipe::replace_shortcode_with_fallback( $content );
+
+		return $content;
 	}
 }
 

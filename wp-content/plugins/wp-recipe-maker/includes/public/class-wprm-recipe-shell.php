@@ -152,7 +152,7 @@ class WPRM_Recipe_Shell {
 			$img = '<img src="' . esc_url( $this->image_url() ) . '" alt="' . esc_attr( $this->name() ) .'"' . $style . '/>';
 
 			// Disable external recipe image pinning.
-			if ( WPRM_Settings::get( 'pinterest_nopin_external_roundup_image' ) ) {
+			if ( $this->parent_external() && WPRM_Settings::get( 'pinterest_nopin_external_roundup_image' ) ) {
 				$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
 			}
 
@@ -171,7 +171,7 @@ class WPRM_Recipe_Shell {
 		}
 
 		// Disable external recipe image pinning.
-		if ( WPRM_Settings::get( 'pinterest_nopin_external_roundup_image' ) ) {
+		if ( $this->parent_external() && WPRM_Settings::get( 'pinterest_nopin_external_roundup_image' ) ) {
 			$img = str_ireplace( '<img ', '<img data-pin-nopin="true" ', $img );
 		}
 
@@ -271,6 +271,7 @@ class WPRM_Recipe_Shell {
 	 * @param	string $text Text to replace the placeholders in.
 	 */
 	public function replace_placeholders( $text ) {
+		$text = str_ireplace( '%recipe_id%', $this->id(), $text );
 		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
 		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );

@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.5
 Requires PHP: 5.4
-Stable tag: 9.3.1
+Stable tag: 9.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,7 +61,7 @@ Looking for some more advanced functionality? We also have the [WP Recipe Maker 
 *   Use **ingredient links** for linking to products or other recipes
 *   **Adjustable servings** make it easy for your visitors
 *   Display all nutrition data in a **nutrition label**
-*   **User Ratings** allow visitors to vote without commenting
+*   **User Ratings** make it easier for visitors to vote
 *   Add a mobile-friendly **kitchen timer** to your recipes
 *   More **Premium templates** for a unique recipe template
 *   Create custom **recipe taxonomies** like price level, difficulty, ...
@@ -80,6 +80,7 @@ Even more add-ons can add the following functionality:
 Currently using another recipe plugin? No problem! You can easily migrate all your existing recipes to WP Recipe Maker if you're using any of the following plugins:
 
 *   Tasty Recipes
+*   WP Delicious
 *   Create by Mediavine
 *   EasyRecipe
 *   WP Ultimate Recipe
@@ -136,6 +137,27 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.4.1 =
+* Improvement: New rating related settings
+* Fix: Prevent memory issue with incorrect template setting
+
+= 9.4.0 =
+* Feature: Shoppable Recipes with Walmart powered by eMeals
+* Feature: Import recipes from WP Delicious
+* Feature: Include reviews in recipe metadata
+* Feature: Use recipe slug in print URL
+* Feature: Change date when recipe post type is set to public
+* Feature: Optionally set pin button to pin any image on the page
+* Improvement: Recognize equipment amounts during import from text
+* Improvement: Allow text block with only header text set
+* Improvement: Better replacement of blocks imported from other plugins
+* Improvement: Ability to cache API requests by non-logged in users
+* Fix: Editing comment rating stars when editing comments
+* Fix: External recipe roundup image pinning setting affecting own posts
+* Fix: Assigning parent post when using Site Origin Page Builder
+* Fix: Sanitization of recipe roundup credit attribute
+* Fix: Prevent Rank Math sitemap generation from timing out
+
 = 9.3.1 =
 * Improvement: Consistency of spacing in recipe notes
 * Fix: Prevent PHP error when using old versions of Yoast SEO
@@ -229,6 +251,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.4.1 =
+Fixes a potential memory issue
+
+= 9.4.0 =
+Some great new features and improvements
+
 = 9.3.1 =
 Fixes a few small issues
 

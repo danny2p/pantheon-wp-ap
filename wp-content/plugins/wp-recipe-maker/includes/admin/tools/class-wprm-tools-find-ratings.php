@@ -205,9 +205,18 @@ class WPRM_Tools_Find_Ratings {
 					}
 					
 					if ( ! $comment_rating ) {
-						// Check for WPSSO rating.
+						// Check for WPSSO and WP Delicious rating.
 						$comment_rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
 					}
+
+					// RecipePress Reloaded uses comment_karma field, but only use this if we're sure that plugin was used. Comment Karma could be anything.
+					// if ( ! $comment_rating ) {
+					// 	$comment_karma = intval( $comment->comment_karma );
+
+					// 	if ( 0 < $comment_karma && $comment_karma <= 5 ) {
+					// 		$comment_rating = $comment_karma;
+					// 	}
+					// }
 
 					if ( $comment_rating && 0 < $comment_rating && $comment_rating <= 5 ) {
 						$rating = array(

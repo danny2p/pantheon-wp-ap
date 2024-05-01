@@ -35,6 +35,8 @@ class WPRM_Shortcode {
 	public static function init() {
 		add_shortcode( 'wprm-recipe', array( __CLASS__, 'recipe_shortcode' ) );
 
+		add_action( 'admin_init', array( __CLASS__, 'register_rest_prepare' ) );
+
 		add_filter( 'content_edit_pre', array( __CLASS__, 'replace_imported_shortcodes' ) );
 		add_filter( 'the_content', array( __CLASS__, 'replace_tasty_shortcode' ), 1 );
 		add_filter( 'the_content', array( __CLASS__, 'replace_ziplist_shortcode' ), 1 );
@@ -45,6 +47,18 @@ class WPRM_Shortcode {
 		add_filter( 'get_the_excerpt', array( __CLASS__, 'after_generating_excerpt' ), 11 );
 
 		add_action( 'init', array( __CLASS__, 'fallback_shortcodes' ), 99 );
+	}
+
+	/**
+	 * Register REST prepare hooks.
+	 *
+	 * @since	9.4.0
+	 */
+	public static function register_rest_prepare() {
+		$post_types = get_post_types();
+		foreach ( $post_types as $key => $label ) {
+			add_filter( 'rest_prepare_' . $key, array( __CLASS__, 'replace_imported_shortcodes_rest_api' ), 10, 3 );
+		}
 	}
 
 	/**
@@ -122,6 +136,25 @@ class WPRM_Shortcode {
 	}
 
 	/**
+	 * Replace imported shortcodes in the rest API.
+	 *
+	 * @since	9.4.0
+	 * @param WP_REST_Response $response The response object.
+	 * @param WP_Post          $post     Post object.
+	 * @param WP_REST_Request  $request  Request object.
+	 */
+	public static function replace_imported_shortcodes_rest_api( $response, $post, $request ) {
+		$params = $request->get_params();
+
+		if ( isset( $params['context'] ) && 'edit' === $params['context'] ) {
+			if ( isset( $response->data['content']['raw'] ) ) {
+				$response->data['content']['raw'] = self::replace_imported_shortcodes( $response->data['content']['raw'] );
+			}
+		}
+		return $response;
+	}
+
+	/**
 	 * Replace WP Ultimate Recipe shortcode with ours.
 	 *
 	 * @since    1.3.0
@@ -162,7 +195,8 @@ class WPRM_Shortcode {
 					$id = $blocks[0]['attrs']['id'];
 
 					if ( $id && WPRM_POST_TYPE === get_post_type( $id ) ) {
-						$content = str_replace( $match, '[wprm-recipe id="' . $id . '"]', $content );
+						$wprm_block = self::get_block_replacement( $id );
+						$content = str_replace( $match, $wprm_block, $content );
 					}
 				}
 			}			
@@ -208,7 +242,8 @@ class WPRM_Shortcode {
 						$post_id = $zl_recipe ? $zl_recipe->post_id : false;
 		
 						if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {
-							$content = str_replace( $match, '[wprm-recipe id="' . $post_id . '"]', $content );
+							$wprm_block = self::get_block_replacement( $post_id );
+							$content = str_replace( $match, $wprm_block, $content );
 						}
 					}
 				}
@@ -265,7 +300,8 @@ class WPRM_Shortcode {
 						$wprm_imported_to = get_post_meta( $id, 'wprm_imported_to', true );
 
 						if ( $wprm_imported_to ) {
-							$content = str_replace( $match, '[wprm-recipe id="' . $wprm_imported_to . '"]', $content );
+							$wprm_block = self::get_block_replacement( $wprm_imported_to );
+							$content = str_replace( $match, $wprm_block, $content );
 						}
 					}
 				}
@@ -275,6 +311,24 @@ class WPRM_Shortcode {
 		return $content;
 	}
 
+	/**
+	 * Get block replacement to use for imported recipes.
+	 *
+	 * @since    9.4.0
+	 * @param	 int $recipe_id Recipe ID to get the block for.
+	 */
+	public static function get_block_replacement( $recipe_id ) {
+		$block = '';
+
+		$recipe_id = intval( $recipe_id ); // Make sure it's an integer.
+		$updated = time() * 1000; // Match JavaScript time in milliseconds.
+
+		$block .= '<!-- wp:wp-recipe-maker/recipe {"id":' . $recipe_id . ',"updated":' . $updated .'} -->';
+		$block .= '[wprm-recipe id="' . $recipe_id . '"]';
+		$block .= '<!-- /wp:wp-recipe-maker/recipe -->';
+
+		return $block;
+	}
 
 	/**
 	 * Replace blocks by other recipe plugins with ours, if they have been imported.

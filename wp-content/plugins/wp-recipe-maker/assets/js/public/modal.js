@@ -10,6 +10,10 @@ window.WPRecipeMaker.modal = {
                 const type = modal.dataset.type;
                 document.dispatchEvent( new CustomEvent( 'wprm-modal-open', { detail: { type, uid, modal, data } } ) );
             },
+            onClose: modal => {
+                const type = modal.dataset.type;
+                document.dispatchEvent( new CustomEvent( 'wprm-modal-close', { detail: { type, uid, modal, data } } ) );
+            },
             awaitCloseAnimation: true,
         });
     },

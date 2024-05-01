@@ -9,6 +9,7 @@
     input[type=number],
     input[type=url],
     input[type=email],
+    input[type=datetime-local],
     textarea {
         width: 100%;
         height: auto;
@@ -24,6 +25,10 @@
 
         &[type=number] {
             padding-right: 5px;
+        }
+
+        &[type=datetime-local] {
+            width: auto;
         }
     }
 

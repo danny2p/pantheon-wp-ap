@@ -22,7 +22,7 @@
 			<li>Use <strong>ingredient links</strong> for linking to products or other recipes</li>
 			<li><strong>Adjustable servings</strong> make it easy for your visitors</li>
 			<li>Display all nutrition data in a <strong>nutrition label</strong></li>
-			<li><strong>User Ratings</strong> allow visitors to vote without commenting</li>
+			<li><strong>User Ratings</strong> make it easier for visitors to vote</li>
 			<li>Add a mobile-friendly <strong>kitchen timer</strong> to your recipes</li>
 			<li>More <strong>Premium templates</strong> for a unique recipe template</li>
 			<li>Display a <strong>Call to Action</strong> in your recipes</li>

@@ -8,7 +8,6 @@ const contentShortcodes = [
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
 const ignoreShortcodes = [
     'wprm-recipe-chicory',
-    'wprm-recipe-emeals',
     'wprm-recipe-my-emissions-label',
 ];
 
@@ -103,6 +102,7 @@ const shortcodeGroups = {
         shortcodes: [
             'wprm-recipe-grow.me',
             'wprm-recipe-shop-instacart',
+            'wprm-recipe-emeals',
             'wprm-recipe-slickstream-favorites',
             'wprm-recipe-smart-with-food',
         ],
