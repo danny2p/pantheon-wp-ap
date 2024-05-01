@@ -458,6 +458,14 @@ class WPRM_Recipe_Manager {
 		preg_match_all( WPRM_Fallback_Recipe::get_fallback_regex(), $content, $matches );
 		$classic_matches = isset( $matches[1] ) ? array_map( 'intval', $matches[1] ) : array();
 
+		// Site Origin Page Builder Compatibility.
+		$content = str_ireplace( '\&quot;', '"', $content );
+
+		// Match shortcodes (need for Site Origin Page Builder, for example).
+		$shortcode_pattern = '/\[wprm-recipe\s.*?id=\"?\'?(\d+)\"?\'?.*?\]/mi';
+		preg_match_all( $shortcode_pattern, $content, $matches );
+		$shortcode_matches = isset( $matches[1] ) ? array_map( 'intval', $matches[1] ) : array();
+
 		// Divi Builder.
 		// $divi_matches = array();
 		// if ( function_exists( 'et_core_is_builder_used_on_current_request' ) ) {
@@ -476,7 +484,7 @@ class WPRM_Recipe_Manager {
 		// 	}
 		// }
 
-		return $gutenberg_matches + $classic_matches;
+		return $gutenberg_matches + $classic_matches + $shortcode_matches;
 	}
 
 	/**

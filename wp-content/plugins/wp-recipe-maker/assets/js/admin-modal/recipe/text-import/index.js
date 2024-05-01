@@ -118,9 +118,20 @@ export default class TextImport extends Component {
             let equipment = [];
 
             this.state.equipment.map( ( equipmentItem, index ) => {
+                let amount = '';
+                let name = equipmentItem.text;
+
+                // Use regex to check if the equipment text starts with an amount, followed by a space.
+                const amountMatch = name.match( /^(\d+\/\d+|\d+\.?\d*)\s/ );
+                if ( amountMatch ) {
+                    amount = amountMatch[1];
+                    name = name.replace(amountMatch[0], '');
+                }
+
                 equipment.push({
                     uid: index,
-                    name: equipmentItem.text,
+                    amount,
+                    name,
                 });
             });
 

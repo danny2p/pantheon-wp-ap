@@ -26,6 +26,9 @@ class WPRM_Cache {
 	public static function clear( $post_id = false, $clear_all = true ) {
 		// Clear cache for specific post ID.
 		if ( $post_id ) {
+			// Make sure $post_id is an integer.
+			$post_id = intval( $post_id );
+
 			// WP Rocket.
 			if ( function_exists( 'rocket_clean_post' ) ) {
 				rocket_clean_post( $post_id );
@@ -69,6 +72,11 @@ class WPRM_Cache {
 						FlyingPress\Purge::purge_by_urls( array( $post_link ) );
 					}
 				}
+			}
+
+			// BigScoots.
+			if ( class_exists('BigScoots_Cache') && method_exists('BigScoots_Cache', 'clear_cache') ) {
+				\BigScoots_Cache::clear_cache( $post_id );
 			}
 		}
 

@@ -384,8 +384,8 @@ class WPRM_Template_Manager {
 				}
 		}
 
-		// Account for "Use same as Default Recipe Template" setting.
-		if ( 'default_recipe_template' === $template_slug ) {
+		// Account for "Use same as Default Recipe Template" setting, but prevent infinite loop.
+		if ( 'default_recipe_template' === $template_slug && 'single' !== $type ) {
 			return self::get_template_by_type( 'single', $recipe_type );
 		}
 
@@ -456,8 +456,8 @@ class WPRM_Template_Manager {
 					}
 			}
 
-			// Account for "Use same as Default Recipe Template" setting.
-			if ( 'default_recipe_template' === $template_slug ) {
+			// Account for "Use same as Default Recipe Template" setting, but prevent infinite loop.
+			if ( 'default_recipe_template' === $template_slug && 'single' !== $type ) {
 				return self::get_template_by_type( 'single', $recipe_type );
 			}
 

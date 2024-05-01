@@ -58,10 +58,19 @@ class WPRM_Print {
 		// Get individual print args.
 		$print_query = str_ireplace( '?', '/', $print_query );
 		$print_query = str_ireplace( '&', '/', $print_query );
-		$print_args = explode( '/', $print_query );
+		$print_args = $print_query ? explode( '/', $print_query ) : array();
 
 		// Backwards compatibility with old /wprm_print/123 URL
-		if ( '' . intval( $print_args[0] ) === $print_args[0] ) {
+		if ( $print_args && '' . intval( $print_args[0] ) === $print_args[0] ) {
+			$print_args = array_merge(
+				array( 'recipe' ),
+				$print_args
+			);
+		}
+
+		// Assume we're printing a single recipe if only 1 argument is set.
+		$print_arg_options = array( 'recipe', 'recipes', 'collection', 'shopping-list' );
+		if ( $print_args && ! in_array( $print_args[0], $print_arg_options ) ) {
 			$print_args = array_merge(
 				array( 'recipe' ),
 				$print_args
@@ -70,6 +79,25 @@ class WPRM_Print {
 
 		if ( $print_args && 1 <= count( $print_args ) && $print_args[0] ) {
 			WPRM_Context::set( 'print' );
+
+			// Convert slug to ID if we're printing a single recipe.
+			if ( 'recipe' === $print_args[0] && 'slug' === WPRM_Settings::get( 'print_recipe_identifier' ) ) {
+				// Don't do anything if it's actually an ID.
+				if ( '' . intval( $print_args[1] ) !== $print_args[1] ) {
+					$slug = $print_args[1];
+
+					// Test with wprm- prefix first, as that could have been removed.
+					$recipe = get_page_by_path( 'wprm-' . $slug, OBJECT, WPRM_POST_TYPE );
+
+					if ( ! $recipe ) {
+						$recipe = get_page_by_path( $slug, OBJECT, WPRM_POST_TYPE );
+					}
+
+					if ( $recipe ) {
+						$print_args[1] = $recipe->ID;
+					}
+				}
+			}
 
 			// Get assets to output while making sure nothing gets output yet.
 			ob_start();

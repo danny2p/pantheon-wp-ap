@@ -61,6 +61,8 @@ class WPRM_Recipe {
 		// Post Type.
 		$recipe['slug'] = $this->slug();
 		$recipe['post_status'] = $this->post_status();
+		$recipe['date'] = $this->date();
+		$recipe['date_formatted'] = $this->date_formatted();
 		$recipe['post_password'] = $this->post_password();
 		$recipe['post_author'] = $this->post_author();
 		$recipe['language'] = $this->language();
@@ -126,11 +128,10 @@ class WPRM_Recipe {
 
 		if ( 'api' === $context ) {
 			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
+			$recipe['parent_post_id'] = $this->parent_post_id();
 		} elseif ( 'manage' === $context ) {
 			$recipe['editable'] = current_user_can( 'edit_post', $this->id() );
 
-			$recipe['date'] = $this->date();
-			$recipe['date_formatted'] = $this->date_formatted();
 			$recipe['seo'] = $this->seo();
 			$recipe['seo_priority'] = $this->seo_priority();
 			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
@@ -191,6 +192,7 @@ class WPRM_Recipe {
 
 		$recipe['type'] = $this->type();
 		$recipe['name'] = $this->name();
+		$recipe['slug'] = $this->slug();
 
 		$recipe['servings'] = $this->servings();
 		$recipe['rating'] = $this->rating();
@@ -1557,8 +1559,25 @@ class WPRM_Recipe {
 			$query_params = $home_url_parts[1];
 		}
 
+		// Check if we should use ID or slug.
+		$identifier = $this->id();
+
+		if ( 'slug' === WPRM_Settings::get( 'print_recipe_identifier' ) ) {
+			$slug = $this->slug();
+
+			// Remove optional wprm- prefix.
+			if ( 0 === strpos( $slug, 'wprm-' ) ) {
+				$slug = substr( $slug, 5 );
+			}
+
+			if ( $slug ) {
+				$identifier = $slug;
+			}
+		}
+
+		// Construct URL.
 		if ( get_option( 'permalink_structure' ) ) {
-			$print_url = $home_url . WPRM_Print::slug() . '/' . $this->id();
+			$print_url = $home_url . WPRM_Print::slug() . '/' . $identifier;
 
 			if ( $template ) {
 				$print_url .= '/' . $template;
@@ -1568,7 +1587,7 @@ class WPRM_Recipe {
 				$print_url .= '?' . $query_params;
 			}
 		} else {
-			$print_url = $home_url . '?' . WPRM_Print::slug() . '=' . $this->id();
+			$print_url = $home_url . '?' . WPRM_Print::slug() . '=' . $identifier;
 
 			if ( $template ) {
 				$print_url .= '/' . $template;
@@ -1598,6 +1617,7 @@ class WPRM_Recipe {
 	 * @param	string $text Text to replace the placeholders in.
 	 */
 	public function replace_placeholders( $text ) {
+		$text = str_ireplace( '%recipe_id%', $this->id(), $text );
 		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
 		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );

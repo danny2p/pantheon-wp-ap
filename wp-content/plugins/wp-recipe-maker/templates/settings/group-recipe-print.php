@@ -226,6 +226,17 @@ $recipe_print = array(
 					},
 				),
 				array(
+					'id' => 'print_recipe_identifier',
+					'name' => __( 'Print Recipe Identifier', 'wp-recipe-maker' ),
+					'description' => __( 'How to identify the recipe in the print URL.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'id' => __( 'Use the recipe ID in the print URL', 'wp-recipe-maker' ),
+						'slug' => __( 'Use the recipe slug in the print URL', 'wp-recipe-maker' ),
+					),
+					'default' => 'slug',
+				),
+				array(
 					'id' => 'metadata_pinterest_disable_print_page',
 					'name' => __( 'Disable pinning on print page', 'wp-recipe-maker' ),
 					'description' => __( 'Enable this setting if you want to prevent people from pinning your print page to Pinterest.', 'wp-recipe-maker' ),

@@ -331,6 +331,15 @@ class WPRM_Recipe_Sanitizer {
 			if ( isset( $recipe['language'] ) ) {
 				$sanitized_recipe['language'] = $recipe['language'] ? sanitize_text_field( $recipe['language'] ) : false;
 			}
+
+			if ( isset( $recipe['date'] ) ) {
+				$format = 'Y-m-d\TH:i:s';
+				$datetime = DateTime::createFromFormat( $format, $recipe['date'] );
+
+				if ( $datetime ) {
+					$sanitized_recipe['date'] = $datetime->format( $format );
+				}
+			}
 		}
 
 		// Other fields.

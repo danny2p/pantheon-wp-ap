@@ -1,6 +1,54 @@
 {
     "news": [
         {
+            "date": "2024-04-30",
+            "label": "Blog",
+            "title": "The Art of Engaging: Creative Food Quotes for Food Bloggers",
+            "url": "https://bootstrapped.ventures/food-blogging-captions/"
+        },
+        {
+            "date": "2024-04-29",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.4.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-4-0/"
+        },
+        {
+            "date": "2024-04-25",
+            "label": "Blog",
+            "title": "Your Guide to AI-Generated Recipes",
+            "url": "https://bootstrapped.ventures/ai-for-cooking/"
+        },
+        {
+            "date": "2024-04-22",
+            "label": "Blog",
+            "title": "Navigating copyright and your recipes: What’s protected",
+            "url": "https://bootstrapped.ventures/recipe-copyright/"
+        },
+        {
+            "date": "2024-04-18",
+            "label": "Blog",
+            "title": "Master the Art of Recipe Testing: A Comprehensive Guide",
+            "url": "https://bootstrapped.ventures/recipe-testing/"
+        },
+        {
+            "date": "2024-04-11",
+            "label": "Blog",
+            "title": "Beyond Cooking: Exploring the Science of Recipe Development",
+            "url": "https://bootstrapped.ventures/how-to-develop-a-recipe/"
+        },
+        {
+            "date": "2024-04-08",
+            "label": "Blog",
+            "title": "The Essential Food Blogging Courses for Aspiring Bloggers",
+            "url": "https://bootstrapped.ventures/food-blogging-course/"
+        },
+        {
+            "date": "2024-03-28",
+            "label": "Blog",
+            "title": "Unlocking the Secrets of Food Videography: Essential Gear and Tools",
+            "url": "https://bootstrapped.ventures/food-videography-equipment/"
+        },
+        {
             "date": "2024-03-15",
             "label": "Blog",
             "title": "How to Set Up Lights for Cooking Videos (Complete Guide)",

@@ -118,11 +118,11 @@ class WPRM_SC_Roundup_Credit extends WPRM_Template_Shortcode {
 		// Get optional label.
 		$label = '';
 		if ( $atts['label'] ) {
-			$label = '<span class="wprm-block-text-' . esc_attr( $atts['label_style'] ) . ' wprm-recipe-roundup-credit-label">' . $atts['label'] . '</span> ';
+			$label = '<span class="wprm-block-text-' . esc_attr( $atts['label_style'] ) . ' wprm-recipe-roundup-credit-label">' . WPRM_Shortcode_Helper::sanitize_html( $atts['label'] ) . '</span> ';
 		}
 
 		// Get credit text.
-		$credit = '<span class="wprm-block-text-' . esc_attr( $atts['credit_style'] ) . ' wprm-recipe-roundup-credit-credit">' . $credit . '</span>';
+		$credit = '<span class="wprm-block-text-' . esc_attr( $atts['credit_style'] ) . ' wprm-recipe-roundup-credit-credit">' . WPRM_Shortcode_Helper::sanitize_html( $credit ) . '</span>';
 
 		// Output.
 		$classes = array(

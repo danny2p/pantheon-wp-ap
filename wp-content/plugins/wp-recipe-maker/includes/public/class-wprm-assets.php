@@ -99,6 +99,7 @@ class WPRM_Assets {
 				'analytics_enabled' => WPRM_Settings::get( 'analytics_enabled' ),
 				'google_analytics_enabled' => WPRM_Settings::get( 'google_analytics_enabled' ),
 				'print_new_tab' => WPRM_Settings::get( 'print_new_tab' ),
+				'print_recipe_identifier' => WPRM_Settings::get( 'print_recipe_identifier' ),
 			),
 			'post_id' => get_the_ID(),
 			'home_url' => WPRM_Compatibility::get_home_url(),

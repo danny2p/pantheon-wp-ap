@@ -79,37 +79,61 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 					'facebook' => 'Facebook',
 					'pinterest' => 'Pinterest',
 					'custom' => 'Custom Link',
+					'rating' => 'Open Rating Modal',
 				),
 			),
 			'social_text' => array(
 				'default' => __( 'Mention %handle% or tag %tag%!', 'wp-recipe-maker' ),
+				'help' => __( 'Use the %handle% and %tag% placeholders where you want them to show up.', 'wp-recipe-maker' ),
 				'type' => 'text',
 				'dependency' => array(
-					'id' => 'action',
-					'value' => 'custom',
-					'type' => 'inverse',
+					array(
+						'id' => 'action',
+						'value' => 'custom',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'action',
+						'value' => 'rating',
+						'type' => 'inverse',
+					),
 				),
 			),
 			'social_handle' => array(
 				'default' => 'WPRecipeMaker',
 				'type' => 'text',
 				'dependency' => array(
-					'id' => 'action',
-					'value' => 'custom',
-					'type' => 'inverse',
+					array(
+						'id' => 'action',
+						'value' => 'custom',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'action',
+						'value' => 'rating',
+						'type' => 'inverse',
+					),
 				),
 			),
 			'social_tag' => array(
 				'default' => 'wprecipemaker',
 				'type' => 'text',
 				'dependency' => array(
-					'id' => 'action',
-					'value' => 'custom',
-					'type' => 'inverse',
+					array(
+						'id' => 'action',
+						'value' => 'custom',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'action',
+						'value' => 'rating',
+						'type' => 'inverse',
+					),
 				),
 			),
 			'custom_text' => array(
 				'default' => __( 'Check out %link%!', 'wp-recipe-maker' ),
+				'help' => __( 'Use the %link% placeholder where the link should show up.', 'wp-recipe-maker' ),
 				'type' => 'text',
 				'dependency' => array(
 					'id' => 'action',
@@ -154,6 +178,23 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				'dependency' => array(
 					'id' => 'action',
 					'value' => 'custom',
+				),
+			),
+			'rating_text' => array(
+				'default' => __( 'Please consider %link%!', 'wp-recipe-maker' ),
+				'help' => __( 'Use the %link% placeholder where the link should show up.', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'action',
+					'value' => 'rating',
+				),
+			),
+			'rating_link_text' => array(
+				'default' => 'Leaving a Review',
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'action',
+					'value' => 'rating',
 				),
 			),
 		);

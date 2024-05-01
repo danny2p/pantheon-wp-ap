@@ -16,7 +16,7 @@
 			echo $container;
 		} else {
 	?>
-	<div class="wprm-popup-modal__overlay" tabindex="-1" data-micromodal-close>
+	<div class="wprm-popup-modal__overlay" tabindex="-1">
 		<div class="wprm-popup-modal__container" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $id ); ?>-title">
 			<header class="wprm-popup-modal__header">
 				<h2 class="wprm-popup-modal__title" id="<?php echo esc_attr( $id ); ?>-title">

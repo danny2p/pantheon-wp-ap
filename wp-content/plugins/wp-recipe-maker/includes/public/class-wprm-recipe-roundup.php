@@ -285,6 +285,7 @@ class WPRM_Recipe_Roundup {
 				'type' => 'food',
 				'parent_id' => true,
 				'parent_url' => rawurldecode( $atts['link'] ),
+				'parent_external' => true,
 				'permalink' => rawurldecode( $atts['link'] ),
 				'name' => rawurldecode( $atts['name'] ),
 				'summary' => rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),

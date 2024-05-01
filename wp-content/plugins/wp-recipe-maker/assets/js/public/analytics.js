@@ -158,14 +158,20 @@ window.WPRecipeMaker.analytics = {
 				return;
 			}
 
+			let headers = {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			};
+	
+			// Only require nonce when logged in to prevent caching problems for regular visitors.
+			if ( 0 < parseInt( wprmp_public.user ) ) {
+				headers['X-WP-Nonce'] = wprm_public.api_nonce;
+			}
+
 			// Register action through API.
 			fetch( wprm_public.endpoints.analytics, {
 				method: 'POST',
-				headers: {
-					'X-WP-Nonce': wprm_public.api_nonce,
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
+				headers,
 				credentials: 'same-origin',
 				body: JSON.stringify({
 					recipeId,

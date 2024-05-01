@@ -135,6 +135,9 @@ class WPRM_Migrations {
 			if ( version_compare( $migrated_to_version, '9.3.1' ) < 0 ) {
 				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-9-3-1-user-ratings-thank-you.php' );
 			}
+			if ( version_compare( $migrated_to_version, '9.4.0' ) < 0 ) {
+				require_once( WPRM_DIR . 'includes/admin/migrations/wprm-9-4-0-user-ratings-thank-you-title.php' );
+			}
 
 			// Specific migrations.
 			if ( ! self::is_migrated_to( 'ratings_db' ) ) {

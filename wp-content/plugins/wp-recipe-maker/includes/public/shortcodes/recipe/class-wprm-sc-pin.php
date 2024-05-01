@@ -25,6 +25,14 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'action' => array(
+				'default' => 'one',
+				'type' => 'dropdown',
+				'options' => array(
+					'one' => 'Pin one image',
+					'any' => 'Pin any image from page (only works when loading pinit.js)',
+				),
+			),
 			'style' => array(
 				'default' => 'text',
 				'type' => 'dropdown',
@@ -125,7 +133,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$atts = parent::get_attributes( $atts );
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
-		if ( ! $recipe || ( ! $recipe->pin_image_url() && ! $recipe->pin_image_repin_id() ) ) {
+		if ( ! $recipe || ( ! $recipe->pin_image_url() && ! $recipe->pin_image_repin_id() && 'any' !== $atts['action'] ) ) {
 			return '';
 		}
 
@@ -133,15 +141,20 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		add_filter( 'wprm_load_pinit', '__return_true' );
 
 		// Build pin URL.
+		$pin_url = '#';
+		$media = $recipe->pin_image_url();
+
 		$url = $recipe->permalink();
 		$url = $url ? $url : get_permalink();
 		$url = $url ? $url : get_home_url();
-
-		$pin_url = 'https://www.pinterest.com/pin/create/bookmarklet/';
-		$pin_url .= '?url=' . urlencode( $url );
-		$pin_url .= '&media=' . urlencode( $recipe->pin_image_url() );
-		$pin_url .= '&description=' . urlencode( $recipe->pin_image_description() );
-		$pin_url .= '&is_video=false';
+		
+		if ( $media ) {
+			$pin_url = 'https://www.pinterest.com/pin/create/bookmarklet/';
+			$pin_url .= '?url=' . urlencode( $url );
+			$pin_url .= '&media=' . urlencode( $media );
+			$pin_url .= '&description=' . urlencode( $recipe->pin_image_description() );
+			$pin_url .= '&is_video=false';
+		}
 
 		// Get optional icon.
 		$icon = '';
@@ -191,10 +204,14 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' rel="nofollow noopener"';
 		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
 		$attributes .= ' data-url="' . esc_attr( $url ) . '"';
-		$attributes .= ' data-media="' . esc_attr( $recipe->pin_image_url() ) . '"';
+		$attributes .= ' data-media="' . esc_attr( $media ) . '"';
 		$attributes .= ' data-description="' . esc_attr( $recipe->pin_image_description() ) . '"';
 		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
 		$attributes .= $aria_label;
+
+		if ( 'any' === $atts['action'] ) {
+			$attributes .= ' data-pin-action="any"';
+		}
 
 		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );

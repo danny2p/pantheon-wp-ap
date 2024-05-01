@@ -631,7 +631,7 @@ class WPRM_Shortcode_Helper {
 
 			$original_image = wp_get_attachment_image_src( $image_id, 'full' );
 
-			if ( $original_image ) {
+			if ( $original_image && $original_image[1] && $original_image[2] ) {
 				$original_image_ratio = $original_image[1] / $original_image[2];
 
 				if ( $ratio > $original_image_ratio ) {
