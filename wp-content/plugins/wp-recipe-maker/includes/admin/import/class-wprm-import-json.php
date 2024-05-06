@@ -28,7 +28,7 @@ class WPRM_Import_Json extends WPRM_Import {
 	}
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since    5.8.0
 	 */

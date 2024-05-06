@@ -24,7 +24,7 @@ class WPRM_Import_Manager {
 	 *
 	 * @since    1.25.0
 	 * @access   private
-	 * @var      boolean    $debugging    Wether or not we are debugging the import.
+	 * @var      boolean    $debugging    Whether or not we are debugging the import.
 	 */
 	private static $debugging = false;
 
@@ -254,7 +254,7 @@ class WPRM_Import_Manager {
 	 *
 	 * @since    1.0.0
 	 * @param		 int     $uid UID of the importer.
-	 * @param		 boolean $exclude_checked Wether to exclude recipes that have already been checked.
+	 * @param		 boolean $exclude_checked Whether to exclude recipes that have already been checked.
 	 */
 	public static function get_imported_recipes( $uid, $exclude_checked = false ) {
 		$args = array(

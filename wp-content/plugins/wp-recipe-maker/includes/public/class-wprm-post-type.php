@@ -85,7 +85,7 @@ class WPRM_Post_Type {
 	 * Set comments open for recipes when enabled.
 	 *
 	 * @since	7.5.0
-	 * @param	boolean	$open Wether or not the comments are open.
+	 * @param	boolean	$open Whether or not the comments are open.
 	 * @param	int		$post_id The post ID.
 	 */
 	public static function comments_open( $open, $post_id ) {

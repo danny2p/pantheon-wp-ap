@@ -169,7 +169,7 @@ class WPRM_Taxonomies {
 	 * Get the recipe taxonomies.
 	 *
 	 * @since    1.10.0
-	 * @param    boolean $include_internal Wether to include taxonomies used internally.
+	 * @param    boolean $include_internal Whether to include taxonomies used internally.
 	 */
 	public static function get_taxonomies( $include_internal = false ) {
 		$taxonomies = self::get_taxonomies_to_register();

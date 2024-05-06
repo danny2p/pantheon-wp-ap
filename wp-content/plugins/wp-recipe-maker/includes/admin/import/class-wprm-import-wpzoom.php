@@ -28,7 +28,7 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 	}
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since   7.4.0
 	 */
@@ -477,7 +477,7 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 	 *
 	 * @since	7.4.0
 	 * @param	mixed	$parts Parts of text to parse.
-	 * @param	boolean $flat Wether to return as a flat string.
+	 * @param	boolean $flat Whether to return as a flat string.
 	 * @param	mixed	$post_id Optional post ID to assign the image to.
 	 */
 	private function parse_rich_text( $parts, $flat = false, $post_id = false ) {

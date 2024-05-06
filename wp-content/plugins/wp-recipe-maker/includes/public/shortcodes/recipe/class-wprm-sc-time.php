@@ -89,7 +89,7 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 	 * @since    3.2.0
 	 * @param	 mixed  	$type 		Type of time we're displaying.
 	 * @param	 int    	$time 		Total minutes of time to display.
-	 * @param	 boolean    $show_zero 	Wether or not to show when value is zero.
+	 * @param	 boolean    $show_zero 	Whether or not to show when value is zero.
 	 * @param    mixed 		$atts 		Shortcode attributes.
 	 */
 	private static function get_time( $type, $time, $show_zero, $atts ) {

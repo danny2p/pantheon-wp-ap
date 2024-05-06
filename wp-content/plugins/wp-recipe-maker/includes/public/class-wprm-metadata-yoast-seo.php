@@ -35,7 +35,7 @@ class WPRM_Metadata_Yoast_Seo extends \Yoast\WP\SEO\Generators\Schema\Abstract_S
 	public $recipe = false;
 
 	/**
-	 * Wether or not an article is used.
+	 * Whether or not an article is used.
 	 *
 	 * @var boolean
 	 */

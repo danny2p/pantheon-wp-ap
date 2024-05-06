@@ -28,7 +28,7 @@ class WPRM_Import_Create extends WPRM_Import {
 	}
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since    5.4.0
 	 */

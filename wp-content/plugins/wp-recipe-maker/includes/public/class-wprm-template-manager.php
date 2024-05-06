@@ -684,8 +684,8 @@ class WPRM_Template_Manager {
 	 * @since    1.2.0
 	 * @param		 mixed 	 $dir 	  Directory to load the template from.
 	 * @param		 mixed 	 $url 	  URL to load the template from.
-	 * @param		 boolean $custom  Wether or not this is a custom template included by the user.
-	 * @param		 boolean $premium Wether or not this is a premium template.
+	 * @param		 boolean $custom  Whether or not this is a custom template included by the user.
+	 * @param		 boolean $premium Whether or not this is a premium template.
 	 */
 	private static function load_template( $dir, $url, $custom = false, $premium = false ) {
 		$slug = basename( $dir );

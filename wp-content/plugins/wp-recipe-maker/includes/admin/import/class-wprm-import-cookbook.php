@@ -28,7 +28,7 @@ class WPRM_Import_Cookbook extends WPRM_Import {
 	}
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since	2.1.0
 	 */

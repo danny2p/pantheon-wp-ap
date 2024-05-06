@@ -26,7 +26,20 @@ class WPRM_Comment_Rating {
 	 */
 	public static function init() {
 		add_filter( 'comment_text', array( __CLASS__, 'add_stars_to_comment' ), 10, 2 );
-		add_filter( 'comment_form_field_comment', array( __CLASS__, 'add_rating_field_to_comment_form' ), 10, 2 );
+
+		// Add stars to comment form.
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+			add_filter( 'comment_form_field_comment', array( __CLASS__, 'add_rating_field_to_comment_form' ), 10, 2 );
+			add_action( 'comment_form_after_fields', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
+			add_action( 'comment_form_logged_in_after', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
+
+			// WPDiscuz compatibility.
+			add_action( 'init', array( __CLASS__, 'wpdiscuz_compatibility' ) );
+			add_action( 'wpdiscuz_button', array( __CLASS__, 'add_rating_field_to_comments' ) );
+
+			// Thrive Comments compatibility.
+			add_action( 'tcm_comment_extra_fields', array( __CLASS__, 'add_rating_field_to_thrive_comments' ) );
+		}
 		
 		// Rating column on admin comments list.
 		add_filter( 'manage_edit-comments_columns', array( __CLASS__, 'comments_list_columns' ) );
@@ -34,8 +47,6 @@ class WPRM_Comment_Rating {
 		add_filter( 'pre_get_comments', array( __CLASS__, 'comments_list_sort' ) );
 		add_filter( 'manage_comments_custom_column', array( __CLASS__, 'comments_list_column' ), 10, 2 );
 
-		add_action( 'comment_form_after_fields', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
-		add_action( 'comment_form_logged_in_after', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
 		add_action( 'add_meta_boxes_comment', array( __CLASS__, 'add_rating_field_to_admin_comments' ) );
 
 		add_action( 'comment_post', array( __CLASS__, 'save_comment_rating' ), 10, 3 );
@@ -54,13 +65,6 @@ class WPRM_Comment_Rating {
 		add_action( 'comment_approved_comment', array( __CLASS__, 'update_comment_rating_on_change' ) );
 
 		add_action( 'handle_bulk_actions-edit-comments', array( __CLASS__, 'update_comment_ratings_bulk' ), 10, 3 );
-		
-		// WPDiscuz compatibility.
-		add_action( 'init', array( __CLASS__, 'wpdiscuz_compatibility' ) );
-		add_action( 'wpdiscuz_button', array( __CLASS__, 'add_rating_field_to_comments' ) );
-
-		// Thrive Comments compatibility.
-		add_action( 'tcm_comment_extra_fields', array( __CLASS__, 'add_rating_field_to_thrive_comments' ) );
 	}
 
 	/**
