@@ -66,7 +66,7 @@ class WPRM_Template_Helper {
 	 *
 	 * @since    1.5.0
 	 * @param		 array   $ingredient Ingredient to display.
-	 * @param		 boolean $show_link  Wether to display the ingredient link if present.
+	 * @param		 boolean $show_link  Whether to display the ingredient link if present.
 	 */
 	public static function ingredient_name( $ingredient, $show_link = false, $recipe = false ) {
 		$name = $ingredient['name'];
@@ -123,8 +123,8 @@ class WPRM_Template_Helper {
 	 * @since    1.6.0
 	 * @param	 mixed   $type Type of time we're displaying.
 	 * @param	 int     $time Total minutes of time to display.
-	 * @param	 boolean $show_zero Wether or not to show when value is zero.
-	 * @param    boolean $shorthand Wether to use shorthand for the unit text.
+	 * @param	 boolean $show_zero Whether or not to show when value is zero.
+	 * @param    boolean $shorthand Whether to use shorthand for the unit text.
 	 */
 	public static function time( $type, $time, $show_zero, $shorthand ) {
 		$time = intval( $time );
@@ -190,7 +190,7 @@ class WPRM_Template_Helper {
 	 *
 	 * @since    1.6.0
 	 * @param    array 	 $rating       Rating to display.
-	 * @param    boolean $show_details Wether to display the rating details.
+	 * @param    boolean $show_details Whether to display the rating details.
 	 */
 	public static function rating_stars( $rating, $show_details = false ) {
 		$user_ratings = WPRM_Addons::is_active( 'premium' ) && WPRM_Settings::get( 'features_user_ratings' );

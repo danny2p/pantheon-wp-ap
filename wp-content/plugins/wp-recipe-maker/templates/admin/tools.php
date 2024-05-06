@@ -48,19 +48,6 @@
 					</p>
 				</td>
 			</tr>
-		<?php if ( 'uid' === WPRM_Settings::get( 'user_ratings_spam_prevention' ) ) : ?>
-			<tr>
-				<th scope="row">
-					<?php esc_html_e( 'Anonymize Ratings', 'wp-recipe-maker' ); ?>
-				</th>
-				<td>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_anonymize_ratings' ) ); ?>" class="button" id="tools_anonymize_ratings"><?php esc_html_e( 'Anonymize Ratings (irreversible!)', 'wp-recipe-maker' ); ?></a>
-					<p class="description" id="tagline-tools_anonymize_ratings">
-						<?php esc_html_e( 'Go through all ratings and remove any IP Addresses. This action is irreversible.', 'wp-recipe-maker' ); ?>
-					</p>
-				</td>
-			</tr>
-		<?php endif; ?>
 			<tr>
 				<th scope="row">
 					<?php esc_html_e( 'Refresh Video Metadata', 'wp-recipe-maker' ); ?>

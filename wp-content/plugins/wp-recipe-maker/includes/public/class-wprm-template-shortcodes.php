@@ -56,11 +56,11 @@ class WPRM_Template_Shortcodes {
 	public static $defaults = array();
 
 	/**
-	 * Wether or not the shortcodes have been parsed.
+	 * Whether or not the shortcodes have been parsed.
 	 *
 	 * @since	4.0.0
 	 * @access	private
-	 * @var		array $parsed Wether or not the shortcodes have been parsed.
+	 * @var		array $parsed Whether or not the shortcodes have been parsed.
 	 */
 	private static $parsed = false;
 

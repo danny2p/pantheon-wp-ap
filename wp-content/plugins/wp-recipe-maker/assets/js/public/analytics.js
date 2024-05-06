@@ -164,7 +164,7 @@ window.WPRecipeMaker.analytics = {
 			};
 	
 			// Only require nonce when logged in to prevent caching problems for regular visitors.
-			if ( 0 < parseInt( wprmp_public.user ) ) {
+			if ( 0 < parseInt( wprm_public.user ) ) {
 				headers['X-WP-Nonce'] = wprm_public.api_nonce;
 			}
 

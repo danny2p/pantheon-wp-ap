@@ -57,7 +57,7 @@ class WPRM_Recipe_Saver {
 	 * @since	1.0.0
 	 * @param	int		$id Post ID of the recipe.
 	 * @param	array	$recipe Recipe fields to save.
-	 * @param	boolean $ignore_log Wether this edit should be ignored for the changelog.
+	 * @param	boolean $ignore_log Whether this edit should be ignored for the changelog.
 	 */
 	public static function update_recipe( $id, $recipe, $ignore_log = false ) {
 		$meta = array();

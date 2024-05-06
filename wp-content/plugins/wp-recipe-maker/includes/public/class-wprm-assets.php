@@ -87,6 +87,7 @@ class WPRM_Assets {
 	 */
 	public static function localize_public() {
 		return array(
+			'user' => get_current_user_id(),
 			'endpoints' => array(
 				'analytics' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/analytics' ), '/' ),
 				'manage' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/manage' ), '/' ),

@@ -193,22 +193,11 @@ $recipe_ratings = array(
 					'default' => false,
 				),
 				array(
-					'id' => 'user_ratings_spam_prevention',
-					'name' => __( 'Spam Prevention Method', 'wp-recipe-maker' ),
-					'description' => __( 'How to prevent spam ratings. Use "Anonymous ID" if you do not want to store IP addresses in the database.', 'wp-recipe-maker' ),
-					'type' => 'dropdown',
-					'options' => array(
-						'ip' => __( 'Check IP address', 'wp-recipe-maker' ),
-						'uid' => __( 'Anonymous ID stored in cookie', 'wp-recipe-maker' ),
-					),
-					'default' => 'ip',
-				),
-				array(
-					'id' => 'user_ratings_clear_cache',
-					'name' => __( 'Clear Cache after Rating', 'wp-recipe-maker' ),
-					'description' => __( 'Try to clear the site cache after a user rating. Makes sure the vote increases immediately after refreshing the page.', 'wp-recipe-maker' ),
+					'id' => 'user_ratings_automatically_approve',
+					'name' => __( 'Automatically Approve Ratings', 'wp-recipe-maker' ),
+					'description' => __( 'Automatically approve comments and ratings given through the modal.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
-					'default' => true,
+					'default' => false,
 				),
 			),
 			'dependency' => array(
@@ -267,9 +256,22 @@ $recipe_ratings = array(
 				),
 				array(
 					'id' => 'user_ratings_modal_submit_comment_button',
-					'name' => __( 'Submit Comment Button', 'wp-recipe-maker' ),
+					'name' => __( 'Submit Button', 'wp-recipe-maker' ),
 					'type' => 'text',
 					'default' => __( 'Rate and Review Recipe', 'wp-recipe-maker' ),
+				),
+				array(
+					'id' => 'user_ratings_modal_submit_no_comment_button',
+					'name' => __( 'Submit Button without Comment', 'wp-recipe-maker' ),
+					'description' => __( 'Text to show if no comment was written (yet).', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => __( 'Rate Recipe', 'wp-recipe-maker' ),
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_require_comment',
+							'value' => false,
+						),
+					),
 				),
 				array(
 					'id' => 'user_ratings_thank_you_message_with_comment',
@@ -300,21 +302,21 @@ $recipe_ratings = array(
 				array(
 					'id' => 'user_ratings_require_comment',
 					'name' => __( 'Require Comment Text', 'wp-recipe-maker' ),
-					'description' => __( 'Wether comment text is required to leave a rating', 'wp-recipe-maker' ),
+					'description' => __( 'Whether comment text is required to leave a rating', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => true,
 				),
 				array(
 					'id' => 'user_ratings_require_name',
 					'name' => __( 'Require Visitor Name', 'wp-recipe-maker' ),
-					'description' => __( 'Wether the name of the visitor is required to leave a rating', 'wp-recipe-maker' ),
+					'description' => __( 'Whether the name of the visitor is required to leave a rating', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => true,
 				),
 				array(
 					'id' => 'user_ratings_require_email',
 					'name' => __( 'Require Visitor Email', 'wp-recipe-maker' ),
-					'description' => __( 'Wether the name of the visitor is required to leave a rating', 'wp-recipe-maker' ),
+					'description' => __( 'Whether the name of the visitor is required to leave a rating', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => true,
 				),

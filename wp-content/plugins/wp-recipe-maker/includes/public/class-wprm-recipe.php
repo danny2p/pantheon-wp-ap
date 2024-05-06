@@ -273,7 +273,7 @@ class WPRM_Recipe {
 	 * Get the recipe author display option.
 	 *
 	 * @since    1.5.0
-	 * @param    boolean $keep_default Wether to replace the default value with the actual one.
+	 * @param    boolean $keep_default Whether to replace the default value with the actual one.
 	 */
 	public function author_display( $keep_default = false ) {
 		$default_author_display = WPRM_Settings::get( 'recipe_author_display_default' );
@@ -628,7 +628,7 @@ class WPRM_Recipe {
 	 * Get the recipe pin image ID.
 	 *
 	 * @since	4.0.0
-	 * @param   boolean $for_editing Wether or not we're retrieving the value for editing.
+	 * @param   boolean $for_editing Whether or not we're retrieving the value for editing.
 	 */
 	public function pin_image_id( $for_editing = false ) {
 		$image_id = '';
@@ -1165,7 +1165,7 @@ class WPRM_Recipe {
 	 *
 	 * @since   1.0.0
 	 * @param	mixed $taxonomy Taxonomy to get the tags for.
-	 * @param	mixed $names_only Wether to return the names only.
+	 * @param	mixed $names_only Whether to return the names only.
 	 */
 	public function tags( $taxonomy, $names_only = false ) {
 		$taxonomy = 'wprm_' . $taxonomy;
@@ -1251,7 +1251,7 @@ class WPRM_Recipe {
 	 * Get the recipe unit system.
 	 *
 	 * @since    7.0.0
-	 * @param    boolean $keep_default Wether to replace the default value with the actual one.
+	 * @param    boolean $keep_default Whether to replace the default value with the actual one.
 	 */
 	public function unit_system( $keep_default = false ) {
 		$unit_system = $this->meta( 'wprm_unit_system', 'default' );
@@ -1602,7 +1602,7 @@ class WPRM_Recipe {
 	}
 
 	/**
-	 * Wether or not to show the My Emissions label.
+	 * Whether or not to show the My Emissions label.
 	 *
 	 * @since	 7.0.0
 	 */

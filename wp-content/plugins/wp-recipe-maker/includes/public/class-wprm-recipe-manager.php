@@ -385,7 +385,7 @@ class WPRM_Recipe_Manager {
 	 *
 	 * @since	4.2.0
 	 * @param	mixed	$post_id Optional post ID. Uses current post if not set.
-	 * @param	boolean	$ignore_cache Wether the cache should be ignored.
+	 * @param	boolean	$ignore_cache Whether the cache should be ignored.
 	 */
 	public static function get_recipe_ids_from_post( $post_id = false, $ignore_cache = false ) {
 		// Default to current post ID and sanitize.

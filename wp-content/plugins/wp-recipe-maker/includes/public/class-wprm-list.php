@@ -219,7 +219,7 @@ class WPRM_List {
 	}
 
 	/**
-	 * Wether or not to output list metadata.
+	 * Whether or not to output list metadata.
 	 *
 	 * @since	9.0.0
 	 */

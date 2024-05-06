@@ -155,7 +155,7 @@ class WPRM_Settings {
 	 * Get the default settings.
 	 *
 	 * @since   1.5.0
-	 * @param	boolean $force_update Wether to force an update of the cache.
+	 * @param	boolean $force_update Whether to force an update of the cache.
 	 */
 	public static function get_defaults( $force_update = false ) {
 		if ( $force_update || empty( self::$defaults ) ) {

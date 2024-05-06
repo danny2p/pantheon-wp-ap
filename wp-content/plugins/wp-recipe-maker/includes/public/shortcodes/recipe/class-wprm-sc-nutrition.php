@@ -107,7 +107,14 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $nutrient['value'] .  '</span>';
+		$display_value = $nutrient['value'];
+		if ( 'comma' === WPRM_Settings::get( 'decimal_separator' ) ) {
+			$display_value = str_replace( '.', '|', $display_value );
+			$display_value = str_replace( ',', '.', $display_value );
+			$display_value = str_replace( '|', ',', $display_value );
+		}
+
+		$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $display_value .  '</span>';
 
 		if ( $show_unit && $nutrient['unit'] ) {
 			$classes = array(

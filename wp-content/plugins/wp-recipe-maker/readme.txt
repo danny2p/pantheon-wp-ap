@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.5
 Requires PHP: 5.4
-Stable tag: 9.4.1
+Stable tag: 9.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,13 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.4.3 =
+* Fix: Print button not always working
+
+= 9.4.2 =
+* Improvement: Extra settings related to ratings
+* Improvement: Better compatibility with Akismet for ratings
+
 = 9.4.1 =
 * Improvement: New rating related settings
 * Fix: Prevent memory issue with incorrect template setting
@@ -251,6 +258,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.4.3 =
+Update to fix issues with print button
+
+= 9.4.2 =
+Improved compatibility for ratings
+
 = 9.4.1 =
 Fixes a potential memory issue
 

@@ -33,7 +33,7 @@ abstract class WPRM_Import {
 	abstract public function get_name();
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since    1.10.0
 	 */

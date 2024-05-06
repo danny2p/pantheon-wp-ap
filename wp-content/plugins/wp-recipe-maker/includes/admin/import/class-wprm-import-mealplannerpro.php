@@ -28,7 +28,7 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 	}
 
 	/**
-	 * Wether or not this importer requires a manual search for recipes.
+	 * Whether or not this importer requires a manual search for recipes.
 	 *
 	 * @since    1.10.0
 	 */

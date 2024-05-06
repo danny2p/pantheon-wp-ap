@@ -29,7 +29,7 @@ class WPRM_Feedback {
 	private static $feedback_key = 'wprm_feedback_20210906';
 
 	/**
-	 * Wether to show feedback request.
+	 * Whether to show feedback request.
 	 *
 	 * @since	7.6.0
 	 */

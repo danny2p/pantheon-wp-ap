@@ -149,7 +149,7 @@ class WPRM_Metadata {
 	}
 
 	/**
-	 * Wether or not to use Rank Math integration.
+	 * Whether or not to use Rank Math integration.
 	 *
 	 * @since	8.7.0
 	 */
@@ -158,7 +158,7 @@ class WPRM_Metadata {
 	}
 
 	/**
-	 * Wether or not to use Yoast SEO 11 integration.
+	 * Whether or not to use Yoast SEO 11 integration.
 	 *
 	 * @since	5.1.0
 	 */

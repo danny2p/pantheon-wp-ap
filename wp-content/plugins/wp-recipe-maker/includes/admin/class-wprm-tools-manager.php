@@ -24,7 +24,7 @@ class WPRM_Tools_Manager {
 	 *
 	 * @since    2.1.0
 	 * @access   private
-	 * @var      boolean    $debugging    Wether or not we are debugging the tools.
+	 * @var      boolean    $debugging    Whether or not we are debugging the tools.
 	 */
 	public static $debugging = false;
 
