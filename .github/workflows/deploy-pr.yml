@@ -1,0 +1,47 @@
+name: Deploy to Dev
+on:
+  pull_request:
+    types: [opened]
+jobs:
+  build:
+    if: github.event.commits[0].author.name != 'Pantheon' && github.event.commits[0].author.name != 'Pantheon Automation' && github.event.commits[0].author.name != 'Autopilot' && github.event.commits[0].author.name != 'Github Action'
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.PANTHEON_SSH_KEY }}
+        config: ${{ vars.SSH_CONFIG }}
+        known_hosts: ${{ vars.KNOWN_HOSTS }}
+    - name: Install Terminus
+      uses: pantheon-systems/terminus-github-actions@main
+      with:
+        pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+    - name: Deployment Processing
+      env:
+        CI_BRANCH: ${{ github.ref_name }}
+        TERMINUS_MACHINE_TOKEN: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+        PANTHEON_SITE: ${{ vars.PANTHEON_SITE }}
+        PANTHEON_REPO: ${{ secrets.PANTHEON_REPO }}
+        PR_NUM: "pr-${{ github.event.pull_request.number }}"
+      run: |
+        #!/bin/bash
+        set +e
+        # Push our github code to Pantheon
+        echo "Deploying $PANTHEON_SITE to Pantheon ${PR_NUM} multidev"
+        git fetch --unshallow origin
+        git push --force $PANTHEON_REPO ${PR_NUM}
+        if [ "$CI_BRANCH" != "master" ]; then
+          terminus env:info $PANTHEON_SITE.${PR_NUM} --quiet
+          command_status=$?
+          echo "${PR_NUM} Multidev does not exist. Attempting to create."
+          if [ $command_status -ne 0 ]; then
+            terminus multidev:create $PANTHEON_SITE.dev ${PR_NUM}
+          else
+            echo "Multidev environment ${PR_NUM} already exists."
+          fi
+          echo "MULTIDEV_URL = https://${PR_NUM}-${PANTHEON_SITE}.pantheonsite.io" 
+        fi
