@@ -15,8 +15,8 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.PANTHEON_SSH_KEY }}
-        config: ${{ secrets.SSH_CONFIG }}
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+        config: $SSH_CONFIG
+        known_hosts: $KNOWN_HOSTS
     - name: Install Terminus
       uses: pantheon-systems/terminus-github-actions@main
       with:
@@ -25,7 +25,7 @@ jobs:
       env:
         CI_BRANCH: ${{ github.ref_name }}
         TERMINUS_MACHINE_TOKEN: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
-        PANTHEON_SITE: ${{ secrets.PANTHEON_SITE }}
+        PANTHEON_SITE: $PANTHEON_SITE
         PANTHEON_REPO: ${{ secrets.PANTHEON_REPO }}
       run: |
         # Push our github code to Pantheon
