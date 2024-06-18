@@ -51,13 +51,13 @@ jobs:
         fi
     - uses: actions/github-script@v6
       with:
-        script: |
+        run: |
           if [ "$CI_BRANCH" != "master" ]; then
             URL_FRAGMENT="dev"
           else
             URL_FRAGMENT=${{ github.ref_name }}
           fi
-
+        script: |
           github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
