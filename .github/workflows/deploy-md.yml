@@ -6,6 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      id-token: write
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
@@ -21,6 +26,7 @@ jobs:
       with:
         pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
     - name: Deployment Processing
+      id: branch-processor
       env:
         CI_BRANCH: ${{ github.ref_name }}
         TERMINUS_MACHINE_TOKEN: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
@@ -33,9 +39,11 @@ jobs:
         echo "Deploying $PANTHEON_SITE to Pantheon $CI_BRANCH branch"
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
+        echo "URL_FRAGMENT=dev" >> $GITHUB_OUTPUT
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.$CI_BRANCH --quiet
           command_status=$?
+          echo "URL_FRAGMENT=${CI_BRANCH}" >> $GITHUB_OUTPUT
           if [ $command_status -ne 0 ]; then
             echo "${CI_BRANCH} Multidev does not exist. Attempting to create."
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
@@ -44,3 +52,8 @@ jobs:
           fi
           echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
         fi
+    - name: Create commit comment
+      uses: peter-evans/commit-comment@v1
+      with:
+        body: |
+          Pantheon Multidev updated - https://${{ steps.branch-processor.outputs.URL_FRAGMENT }}-${{ vars.PANTHEON_SITE }}.pantheonsite.io
