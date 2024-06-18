@@ -49,14 +49,8 @@ jobs:
           fi
           echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
         fi
-    - uses: actions/github-script@v6
+      uses: actions/github-script@v6
       with:
-        run: |
-          if [ "$CI_BRANCH" != "master" ]; then
-            URL_FRAGMENT="dev"
-          else
-            URL_FRAGMENT=${{ github.ref_name }}
-          fi
         script: |
           github.rest.issues.createComment({
             issue_number: context.issue.number,
