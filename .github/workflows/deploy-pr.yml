@@ -41,6 +41,10 @@ jobs:
             terminus multidev:create $PANTHEON_SITE.dev ${PR_NUM}
           else
             echo "Multidev environment ${PR_NUM} already exists."
-          fi
-          echo "MULTIDEV_URL = https://${PR_NUM}-${PANTHEON_SITE}.pantheonsite.io" 
+          fi 
+          URL="https://${PR_NUM}-${PANTHEON_SITE}.pantheonsite.io"
+          echo "MULTIDEV_URL = ${URL}"
+          MESSAGE="Pantheon Multidev site link: ${URL}"
+          DATA="{\"name\":\"PR Status Message\",\"head_sha\":\"${GITHUB_SHA}\",\"status\":\"completed\",\"conclusion\":\"success\",\"output\":{\"title\":\"Status Message\",\"summary\":\"$MESSAGE\"}}"
+          curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d "$DATA" $URL
         fi
