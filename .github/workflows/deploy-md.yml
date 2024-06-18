@@ -6,6 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      id-token: write
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
@@ -44,3 +49,18 @@ jobs:
           fi
           echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
         fi
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          if [ "$CI_BRANCH" != "master" ]; then
+            URL_FRAGMENT="dev"
+          else
+            URL_FRAGMENT=${{ github.ref_name }}
+          fi
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "Pantheon Multidev updated - https://${URL_FRAGMENT}-${{ vars.PANTHEON_SITE }}.pantheonsite.io"
+          })

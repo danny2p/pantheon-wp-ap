@@ -36,7 +36,7 @@ jobs:
         set +e
         # Push our github code to Pantheon
         echo "Deploying $PANTHEON_SITE to Pantheon ${PR_NUM} multidev"
-        git fetch $PANTHEON_REPO
+        git fetch $PANTHEON_REPO ${PR_NUM}
         git push --force $PANTHEON_REPO ${PR_NUM}
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.${PR_NUM} --quiet
