@@ -36,6 +36,7 @@ jobs:
         set +e
         # Push our github code to Pantheon
         echo "Deploying $PANTHEON_SITE to Pantheon ${PR_NUM} multidev"
+        git fetch --unshallow origin
         git branch ${PR_NUM}
         git checkout ${PR_NUM}
         git fetch $PANTHEON_REPO
