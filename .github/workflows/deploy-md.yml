@@ -33,7 +33,7 @@ jobs:
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
         if [ "$CI_BRANCH" != "master" ]; then
-          terminus env:info $PANTHEON_SITE.$CI_BRANCH || true
+          terminus env:info $PANTHEON_SITE.$CI_BRANCH --quiet || true
           command_status=$?
           echo "Command Status: ${command_status}"
           if [ $command_status -ne 0 ]; then
