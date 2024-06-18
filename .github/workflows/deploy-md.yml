@@ -33,12 +33,11 @@ jobs:
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
         if [ "$CI_BRANCH" != "master"]; then
-          MULTIDEV_EXISTS=$(terminus env:info $PANTHEON_SITE.$CI_BRANCH)
-          if [ !$MULTIDEV_EXISTS ]; then
+          terminus env:info $PANTHEON_SITE.$CI_BRANCH
+          if [ $? -ne 0 ]; then
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
           else
             echo "Environment $CI_BRANCH already exists."
           fi
+          echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
         fi
-        MULTIDEV_URL=$(echo "https://$CI_BRANCH-$PANTHEON_SITE.pantheonsite.io")
-        echo "MULTIDEV_URL=$MULTIDEV_URL" >> "$GITHUB_ENV"
