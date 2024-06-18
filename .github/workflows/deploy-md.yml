@@ -29,7 +29,7 @@ jobs:
         PANTHEON_REPO: ${{ secrets.PANTHEON_REPO }}
       run: |
         #!/bin/bash
-        set -e
+        set +e
         # Push our github code to Pantheon
         echo "Deploying $PANTHEON_SITE to Pantheon $CI_BRANCH branch"
         git fetch --unshallow origin
@@ -37,7 +37,7 @@ jobs:
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.$CI_BRANCH --quiet
           command_status=$?
-          echo "Command Status: ${command_status}"
+          echo "terminus env:info ${PANTHEON_SITE}.${CI_BRANCH} command returns status code: ${command_status}"
           if [ $command_status -ne 0 ]; then
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
           else
