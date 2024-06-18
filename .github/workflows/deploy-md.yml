@@ -1,11 +1,10 @@
-name: Deploy to Dev
+name: Deploy (Code Push) to Pantheon
 on:
   push:
     branches:
       - '*'
 jobs:
   build:
-    if: github.event.commits[0].author.name != 'Pantheon' && github.event.commits[0].author.name != 'Pantheon Automation' && github.event.commits[0].author.name != 'Autopilot' && github.event.commits[0].author.name != 'Github Action'
     runs-on: ubuntu-latest
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
