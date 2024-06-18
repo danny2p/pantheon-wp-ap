@@ -36,15 +36,16 @@ jobs:
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.${PR_NUM} --quiet
           command_status=$?
-          echo "${PR_NUM} Multidev does not exist. Attempting to create."
           if [ $command_status -ne 0 ]; then
+            echo "${PR_NUM} Multidev does not exist. Attempting to create."
             terminus multidev:create $PANTHEON_SITE.dev ${PR_NUM}
           else
             echo "Multidev environment ${PR_NUM} already exists."
           fi 
-          URL="https://${PR_NUM}-${PANTHEON_SITE}.pantheonsite.io"
-          echo "MULTIDEV_URL = ${URL}"
-          MESSAGE="Pantheon Multidev site link: ${URL}"
+          MULTIDEV="https://${PR_NUM}-${PANTHEON_SITE}.pantheonsite.io"
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs/${GITHUB_RUN_ID}"
+          echo "MULTIDEV_URL = ${MULTIDEV}"
+          MESSAGE="Pantheon Multidev site link: ${MULTIDEV}"
           DATA="{\"name\":\"PR Status Message\",\"head_sha\":\"${GITHUB_SHA}\",\"status\":\"completed\",\"conclusion\":\"success\",\"output\":{\"title\":\"Status Message\",\"summary\":\"$MESSAGE\"}}"
           curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d "$DATA" $URL
         fi
