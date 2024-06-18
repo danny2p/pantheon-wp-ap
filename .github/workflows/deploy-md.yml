@@ -33,7 +33,7 @@ jobs:
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
         if [ "$CI_BRANCH" != "master" ]; then
-          terminus env:info $PANTHEON_SITE.$CI_BRANCH --no-ansi
+          terminus env:info $PANTHEON_SITE.$CI_BRANCH  > /dev/null
           if [ $? -ne 0 ]; then
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
           else
