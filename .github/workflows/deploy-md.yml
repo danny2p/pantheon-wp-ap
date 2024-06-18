@@ -38,9 +38,11 @@ jobs:
         echo "Deploying $PANTHEON_SITE to Pantheon $CI_BRANCH branch"
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
+        URL_FRAGMENT="dev"
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.$CI_BRANCH --quiet
           command_status=$?
+          URL_FRAGMENT=${$CI_BRANCH}
           if [ $command_status -ne 0 ]; then
             echo "${CI_BRANCH} Multidev does not exist. Attempting to create."
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
