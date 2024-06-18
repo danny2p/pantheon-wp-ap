@@ -33,8 +33,9 @@ jobs:
         git fetch --unshallow origin
         git push --force $PANTHEON_REPO $CI_BRANCH
         if [ "$CI_BRANCH" != "master" ]; then
-          terminus env:info $PANTHEON_SITE.$CI_BRANCH || true
-          if [ $? -ne 0 ]; then
+          terminus env:info $PANTHEON_SITE.$CI_BRANCH
+          command_status=$?
+          if [ $command_status -ne 0 ]; then
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
           else
             echo "Environment $CI_BRANCH already exists."
