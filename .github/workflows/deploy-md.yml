@@ -51,13 +51,9 @@ jobs:
             echo "Multidev environment $CI_BRANCH already exists."
           fi
           echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
-        fi
-    - uses: actions/github-script@v6
+        fif
+    - name: Create commit comment
+      uses: peter-evans/commit-comment@v1
       with:
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: "Pantheon Multidev updated - https://${{ steps.branch-processor.outputs.URL_FRAGMENT }}-${{ vars.PANTHEON_SITE }}.pantheonsite.io"
-          })
+        body: |
+          Pantheon Multidev updated - https://${{ steps.branch-processor.outputs.URL_FRAGMENT }}-${{ vars.PANTHEON_SITE }}.pantheonsite.io
