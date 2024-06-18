@@ -37,11 +37,11 @@ jobs:
         if [ "$CI_BRANCH" != "master" ]; then
           terminus env:info $PANTHEON_SITE.$CI_BRANCH --quiet
           command_status=$?
-          echo "terminus env:info ${PANTHEON_SITE}.${CI_BRANCH} command returns status code: ${command_status}"
+          echo "${CI_BRANCH} Multidev does not exist. Attempting to create."
           if [ $command_status -ne 0 ]; then
             terminus multidev:create $PANTHEON_SITE.dev $CI_BRANCH
           else
-            echo "Environment $CI_BRANCH already exists."
+            echo "Multidev environment $CI_BRANCH already exists."
           fi
           echo "MULTIDEV_URL = https://${CI_BRANCH}-${PANTHEON_SITE}.pantheonsite.io" 
         fi
