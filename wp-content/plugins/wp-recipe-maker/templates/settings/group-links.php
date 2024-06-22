@@ -132,11 +132,22 @@ $links = array(
 			'documentation' => 'https://help.bootstrapped.ventures/article/29-ingredient-links',
 			'settings' => array(
 				array(
+					'id' => 'ingredient_links_enabled',
+					'name' => __( 'Use Ingredient Links', 'wp-recipe-maker' ),
+					'description' => __( 'Can be used to toggle off the usage of all ingredient links in the recipe card at once.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'ingredient_links_open_in_new_tab',
 					'name' => __( 'Open in New Tab', 'wp-recipe-maker' ),
 					'description' => __( 'Open custom ingredient links in a new tab.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
+					'dependency' => array(
+						'id' => 'ingredient_links_enabled',
+						'value' => true,
+					),
 				),
 				array(
 					'id' => 'ingredient_links_nofollow',
@@ -149,6 +160,10 @@ $links = array(
 						'sponsored' => __( 'Use Sponsored', 'wp-recipe-maker' ),
 					),
 					'default' => 'follow',
+					'dependency' => array(
+						'id' => 'ingredient_links_enabled',
+						'value' => true,
+					),
 				),
 			),
 		),
@@ -159,11 +174,22 @@ $links = array(
 			'documentation' => 'https://help.bootstrapped.ventures/article/193-equipment-links',
 			'settings' => array(
 				array(
+					'id' => 'equipment_links_enabled',
+					'name' => __( 'Use Equipment Links', 'wp-recipe-maker' ),
+					'description' => __( 'Can be used to toggle off the usage of all equipment links in the recipe card at once.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'equipment_links_open_in_new_tab',
 					'name' => __( 'Open in New Tab', 'wp-recipe-maker' ),
 					'description' => __( 'Open custom equipment links in a new tab.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
+					'dependency' => array(
+						'id' => 'equipment_links_enabled',
+						'value' => true,
+					),
 				),
 				array(
 					'id' => 'equipment_links_nofollow',
@@ -176,6 +202,10 @@ $links = array(
 						'sponsored' => __( 'Use Sponsored', 'wp-recipe-maker' ),
 					),
 					'default' => 'follow',
+					'dependency' => array(
+						'id' => 'equipment_links_enabled',
+						'value' => true,
+					),
 				),
 			),
 		),

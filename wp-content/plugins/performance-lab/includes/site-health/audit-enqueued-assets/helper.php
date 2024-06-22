@@ -15,15 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  *
- * @return array
+ * @return array{label: string, status: string, badge: array{label: string, color: string}, description: string, actions: string, test: string}|array{omitted: true} Result.
  */
-function perflab_aea_enqueued_js_assets_test() {
+function perflab_aea_enqueued_js_assets_test(): array {
 	/**
 	 * If the test didn't run yet, deactivate.
 	 */
 	$enqueued_scripts = perflab_aea_get_total_enqueued_scripts();
-	if ( false === $enqueued_scripts ) {
-		return array();
+	$bytes_enqueued   = perflab_aea_get_total_size_bytes_enqueued_scripts();
+	if ( false === $enqueued_scripts || false === $bytes_enqueued ) {
+		// The return value is validated in JavaScript at:
+		// <https://github.com/WordPress/wordpress-develop/blob/d1e0a6241dcc34f4a5ed464a741116461a88d43b/src/js/_enqueues/admin/site-health.js#L65-L114>
+		// If the value lacks the required keys of test, label, and description then it is omitted.
+		return array( 'omitted' => true );
 	}
 
 	$result = array(
@@ -45,7 +49,7 @@ function perflab_aea_enqueued_js_assets_test() {
 						'performance-lab'
 					),
 					$enqueued_scripts,
-					size_format( perflab_aea_get_total_size_bytes_enqueued_scripts() )
+					size_format( $bytes_enqueued )
 				)
 			)
 		),
@@ -71,7 +75,7 @@ function perflab_aea_enqueued_js_assets_test() {
 	 */
 	$scripts_size_threshold = apply_filters( 'perflab_aea_enqueued_scripts_byte_size_threshold', 300000 );
 
-	if ( $enqueued_scripts > $scripts_threshold || perflab_aea_get_total_size_bytes_enqueued_scripts() > $scripts_size_threshold ) {
+	if ( $enqueued_scripts > $scripts_threshold || $bytes_enqueued > $scripts_size_threshold ) {
 		$result['status'] = 'recommended';
 
 		$result['description'] = sprintf(
@@ -86,7 +90,7 @@ function perflab_aea_enqueued_js_assets_test() {
 						'performance-lab'
 					),
 					$enqueued_scripts,
-					size_format( perflab_aea_get_total_size_bytes_enqueued_scripts() )
+					size_format( $bytes_enqueued )
 				)
 			)
 		);
@@ -109,15 +113,17 @@ function perflab_aea_enqueued_js_assets_test() {
  *
  * @since 1.0.0
  *
- * @return array
+ * @return array{label: string, status: string, badge: array{label: string, color: string}, description: string, actions: string, test: string}|array{omitted: true} Result.
  */
-function perflab_aea_enqueued_css_assets_test() {
-	/**
-	 * If the test didn't run yet, deactivate.
-	 */
+function perflab_aea_enqueued_css_assets_test(): array {
+	// Omit if the test didn't run yet, omit.
 	$enqueued_styles = perflab_aea_get_total_enqueued_styles();
-	if ( false === $enqueued_styles ) {
-		return array();
+	$bytes_enqueued  = perflab_aea_get_total_size_bytes_enqueued_styles();
+	if ( false === $enqueued_styles || false === $bytes_enqueued ) {
+		// The return value is validated in JavaScript at:
+		// <https://github.com/WordPress/wordpress-develop/blob/d1e0a6241dcc34f4a5ed464a741116461a88d43b/src/js/_enqueues/admin/site-health.js#L65-L114>
+		// If the value lacks the required keys of test, label, and description then it is omitted.
+		return array( 'omitted' => true );
 	}
 	$result = array(
 		'label'       => __( 'Enqueued styles', 'performance-lab' ),
@@ -138,7 +144,7 @@ function perflab_aea_enqueued_css_assets_test() {
 						'performance-lab'
 					),
 					$enqueued_styles,
-					size_format( perflab_aea_get_total_size_bytes_enqueued_styles() )
+					size_format( $bytes_enqueued )
 				)
 			)
 		),
@@ -178,7 +184,7 @@ function perflab_aea_enqueued_css_assets_test() {
 						'performance-lab'
 					),
 					$enqueued_styles,
-					size_format( perflab_aea_get_total_size_bytes_enqueued_styles() )
+					size_format( $bytes_enqueued )
 				)
 			)
 		);
@@ -206,7 +212,7 @@ function perflab_aea_enqueued_css_assets_test() {
 function perflab_aea_get_total_enqueued_scripts() {
 	$enqueued_scripts      = false;
 	$list_enqueued_scripts = get_transient( 'aea_enqueued_front_page_scripts' );
-	if ( $list_enqueued_scripts ) {
+	if ( is_array( $list_enqueued_scripts ) ) {
 		$enqueued_scripts = count( $list_enqueued_scripts );
 	}
 	return $enqueued_scripts;
@@ -222,10 +228,12 @@ function perflab_aea_get_total_enqueued_scripts() {
 function perflab_aea_get_total_size_bytes_enqueued_scripts() {
 	$total_size            = false;
 	$list_enqueued_scripts = get_transient( 'aea_enqueued_front_page_scripts' );
-	if ( $list_enqueued_scripts ) {
+	if ( is_array( $list_enqueued_scripts ) ) {
 		$total_size = 0;
 		foreach ( $list_enqueued_scripts as $enqueued_script ) {
-			$total_size += $enqueued_script['size'];
+			if ( is_array( $enqueued_script ) && array_key_exists( 'size', $enqueued_script ) && is_int( $enqueued_script['size'] ) ) {
+				$total_size += $enqueued_script['size'];
+			}
 		}
 	}
 	return $total_size;
@@ -257,10 +265,12 @@ function perflab_aea_get_total_enqueued_styles() {
 function perflab_aea_get_total_size_bytes_enqueued_styles() {
 	$total_size           = false;
 	$list_enqueued_styles = get_transient( 'aea_enqueued_front_page_styles' );
-	if ( $list_enqueued_styles ) {
+	if ( is_array( $list_enqueued_styles ) ) {
 		$total_size = 0;
 		foreach ( $list_enqueued_styles as $enqueued_style ) {
-			$total_size += $enqueued_style['size'];
+			if ( is_array( $enqueued_style ) && array_key_exists( 'size', $enqueued_style ) && is_int( $enqueued_style['size'] ) ) {
+				$total_size += $enqueued_style['size'];
+			}
 		}
 	}
 	return $total_size;
@@ -276,7 +286,7 @@ function perflab_aea_get_total_size_bytes_enqueued_styles() {
  * @param string $resource_url URl resource link.
  * @return string Returns absolute path to the resource.
  */
-function perflab_aea_get_path_from_resource_url( $resource_url ) {
+function perflab_aea_get_path_from_resource_url( string $resource_url ): string {
 	if ( ! $resource_url ) {
 		return '';
 	}

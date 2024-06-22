@@ -648,155 +648,143 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $ingredient_group['name'] . '</' . $tag . '>';
 			}
 
-			$output .= '<ul class="wprm-recipe-ingredients">';
+			if ( isset( $ingredient_group['ingredients'] ) && $ingredient_group['ingredients'] ) {
+				$output .= '<ul class="wprm-recipe-ingredients">';
 
-			foreach ( $ingredient_group['ingredients'] as $ingredient ) {
-				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
-				$style = 'list-style-type: ' . $list_style_type . ';';
+				foreach ( $ingredient_group['ingredients'] as $ingredient ) {
+					$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
+					$style = 'list-style-type: ' . $list_style_type . ';';
 
-				$uid = '';
-				if ( isset( $ingredient['uid'] ) ) {
-					$uid = ' data-uid="' . esc_attr( $ingredient['uid'] ) . '"';
-				}
-
-				// Add group width if set to grouped style.
-				if ( 'grouped' === $atts['ingredients_style'] ) {
-					$style .= 'flex-basis: ' . $atts['group_width'] . ';';
-				}
-
-				$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';
-
-				// Maybe replace fractions in amount.
-				if ( WPRM_Settings::get( 'automatic_amount_fraction_symbols' ) ) {
-					$ingredient['amount'] = WPRM_Recipe_Parser::replace_any_fractions_with_symbol( $ingredient['amount'] );
-				}
-
-				// Ingredient images.
-				$image = apply_filters( 'wprm_recipe_ingredients_shortcode_image', '', $atts, $ingredient );
-				
-				// Amount & Unit.
-				$amount_unit = '';
-
-				if ( $ingredient['amount'] || ( isset( $ingredient['converted'] ) && isset( $ingredient['converted'][2] ) && $ingredient['converted'][2]['amount'] ) ) {
-					$amount_unit .= '<span class="wprm-recipe-ingredient-amount">' . $ingredient['amount'] . '</span>&#32;';
-				}
-				if ( $ingredient['unit'] || ( isset( $ingredient['converted'] ) && isset( $ingredient['converted'][2] ) && $ingredient['converted'][2]['unit'] ) ) {
-					$amount_unit .= '<span class="wprm-recipe-ingredient-unit">' . $ingredient['unit'] . '</span>&#32;';
-				}
-
-				// Allow filtering for second unit system.
-				$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', $amount_unit, $atts, $ingredient );
-
-				// Surround with container if not regular or grouped style.
-				if ( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
-					$amount_unit = '<span class="wprm-recipe-ingredient-amount-unit" style="flex-basis: ' . esc_attr( $atts['table_amount_width'] ) .';">' . trim( $amount_unit ) . '</span> ';
-				}
-
-				// Ingredient name.
-				$name_output = '';
-				$name = '';
-				$separator = '';
-
-				if ( $ingredient['name'] ) {
-					$separator = '';
-					if ( $ingredient['notes'] ) {
-						switch ( $atts['ingredient_notes_separator'] ) {
-							case 'comma':
-								$separator = ',&#32;';
-								break;
-							case 'dash':
-								$separator = '&#32;-&#32;';
-								break;
-							default:
-								$separator = '&#32;';
-						}	
+					$uid = '';
+					if ( isset( $ingredient['uid'] ) ) {
+						$uid = ' data-uid="' . esc_attr( $ingredient['uid'] ) . '"';
 					}
 
-					// Ingredient link.
-					$name = apply_filters( 'wprm_recipe_ingredients_shortcode_link', $ingredient['name'], $ingredient, $recipe );
-				}
+					// Add group width if set to grouped style.
+					if ( 'grouped' === $atts['ingredients_style'] ) {
+						$style .= 'flex-basis: ' . $atts['group_width'] . ';';
+					}
 
-				// Check for plural.
-				$plural_data = '';
-				if ( isset( $ingredient['id'] ) && $ingredient['id'] && '' === $ingredient['unit'] ) {
-					$ingredient_term = get_term( $ingredient['id'] );
+					$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';
 
-					if ( $ingredient_term && ! is_wp_error( $ingredient_term ) ) {
-						$singular = $ingredient_term->name;
-						$plural = get_term_meta( $ingredient['id'], 'wprm_ingredient_plural', true );
+					// Maybe replace fractions in amount.
+					if ( WPRM_Settings::get( 'automatic_amount_fraction_symbols' ) ) {
+						$ingredient['amount'] = WPRM_Recipe_Parser::replace_any_fractions_with_symbol( $ingredient['amount'] );
+					}
 
-						if ( $singular && $plural ) {
-							$plural_data = ' data-name-singular="' . esc_attr( $singular ) . '" data-name-plural="' . esc_attr( $plural ) . '"';
+					// Ingredient images.
+					$image = apply_filters( 'wprm_recipe_ingredients_shortcode_image', '', $atts, $ingredient );
+					
+					// Amount & Unit.
+					$amount_unit = '';
+
+					if ( $ingredient['amount'] || ( isset( $ingredient['converted'] ) && isset( $ingredient['converted'][2] ) && $ingredient['converted'][2]['amount'] ) ) {
+						$amount_unit .= '<span class="wprm-recipe-ingredient-amount">' . $ingredient['amount'] . '</span>&#32;';
+					}
+					if ( $ingredient['unit'] || ( isset( $ingredient['converted'] ) && isset( $ingredient['converted'][2] ) && $ingredient['converted'][2]['unit'] ) ) {
+						$amount_unit .= '<span class="wprm-recipe-ingredient-unit">' . $ingredient['unit'] . '</span>&#32;';
+					}
+
+					// Allow filtering for second unit system.
+					$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', $amount_unit, $atts, $ingredient );
+
+					// Surround with container if not regular or grouped style.
+					if ( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
+						$amount_unit = '<span class="wprm-recipe-ingredient-amount-unit" style="flex-basis: ' . esc_attr( $atts['table_amount_width'] ) .';">' . trim( $amount_unit ) . '</span> ';
+					}
+
+					// Ingredient name.
+					$name_output = '';
+					$name = '';
+					$separator = '';
+
+					if ( $ingredient['name'] ) {
+						$separator = '';
+						if ( $ingredient['notes'] ) {
+							switch ( $atts['ingredient_notes_separator'] ) {
+								case 'comma':
+									$separator = ',&#32;';
+									break;
+								case 'dash':
+									$separator = '&#32;-&#32;';
+									break;
+								default:
+									$separator = '&#32;';
+							}	
+						}
+
+						// Ingredient link.
+						$name = apply_filters( 'wprm_recipe_ingredients_shortcode_link', $ingredient['name'], $ingredient, $recipe );
+					}
+
+					if ( $name || ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
+						if ( 'table-3' === substr( $atts['ingredients_style'], 0, 7 ) ) {
+							$name_output = '<span class="wprm-recipe-ingredient-name" style="flex-basis: ' . esc_attr( $atts['table_name_width'] ) .';">' . $name . '</span>'  . $separator;
+						} else {
+							$name_output = '<span class="wprm-recipe-ingredient-name">' . $name . '</span>'  . $separator;
 						}
 					}
-				}
 
-				if ( $name || ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
-					if ( 'table-3' === substr( $atts['ingredients_style'], 0, 7 ) ) {
-						$name_output = '<span class="wprm-recipe-ingredient-name" style="flex-basis: ' . esc_attr( $atts['table_name_width'] ) .';"' . $plural_data . '>' . $name . '</span>'  . $separator;
-					} else {
-						$name_output = '<span class="wprm-recipe-ingredient-name"' . $plural_data . '>' . $name . '</span>'  . $separator;
+					// Ingredient Notes.
+					$notes_output = '';
+
+					if ( $ingredient['notes'] ) {
+						if ( 'parentheses' === $atts['ingredient_notes_separator'] ) {
+							$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">(' . $ingredient['notes'] . ')</span>';
+						} else {
+							$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">' . $ingredient['notes'] . '</span>';
+						}
+					} elseif( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
+						$notes_output .= '<span class="wprm-recipe-ingredient-notes"></span>';
 					}
-				}
 
-				// Ingredient Notes.
-				$notes_output = '';
-
-				if ( $ingredient['notes'] ) {
-					if ( 'parentheses' === $atts['ingredient_notes_separator'] ) {
-						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">(' . $ingredient['notes'] . ')</span>';
-					} else {
-						$notes_output .= '<span class="wprm-recipe-ingredient-notes wprm-recipe-ingredient-notes-' . esc_attr( $atts['notes_style'] ) . '">' . $ingredient['notes'] . '</span>';
+					// Table layout.
+					$names_notes = $name_output . $notes_output;
+					if ( 'table-2' === substr( $atts['ingredients_style'], 0, 7 ) ) {
+						$names_notes = '<span class="wprm-recipe-ingredient-name-notes">' . $names_notes . '</span>';
 					}
-				} elseif( ! in_array( $atts['ingredients_style'], array( 'regular', 'grouped' ) ) ) {
-					$notes_output .= '<span class="wprm-recipe-ingredient-notes"></span>';
+
+					// Output in order.
+					$ingredient_output = '';
+
+					if ( 'names-first' === $atts['ingredients_order'] ) {
+						$ingredient_output .= $names_notes;
+						$ingredient_output .= '&#32;';
+						$ingredient_output .= $amount_unit;
+					} else {
+						$ingredient_output .= $amount_unit;
+						$ingredient_output .= $names_notes;
+					}
+
+					// Have image separate when using the grouped style.
+					if ( 'grouped' === $atts['ingredients_style'] ) {
+						$ingredient_output = '<span class="wprm-recipe-ingredient-details">' . $ingredient_output . '</span>';
+					}
+
+					// Output optional ingredient image.
+					if ( 'before' === $atts['image_position'] ) {
+						$ingredient_output = $image . $ingredient_output;
+					} elseif ( 'after' === $atts['image_position'] ) {
+						$ingredient_output .= $image;
+					}
+
+					// Output checkbox.
+					if ( 'checkbox' === $atts['list_style'] ) {
+						$ingredient_output = apply_filters( 'wprm_recipe_ingredients_shortcode_checkbox', $ingredient_output );
+					}
+
+					// Add container when using the grouped style.
+					if ( 'grouped' === $atts['ingredients_style'] ) {
+						$ingredient_output = '<span class="wprm-recipe-ingredient-details-container">' . $ingredient_output . '</span>';
+					}
+
+					$output .= $ingredient_output;
+					$output .= '</li>';
 				}
 
-				// Table layout.
-				$names_notes = $name_output . $notes_output;
-				if ( 'table-2' === substr( $atts['ingredients_style'], 0, 7 ) ) {
-					$names_notes = '<span class="wprm-recipe-ingredient-name-notes">' . $names_notes . '</span>';
-				}
-
-				// Output in order.
-				$ingredient_output = '';
-
-				if ( 'names-first' === $atts['ingredients_order'] ) {
-					$ingredient_output .= $names_notes;
-					$ingredient_output .= '&#32;';
-					$ingredient_output .= $amount_unit;
-				} else {
-					$ingredient_output .= $amount_unit;
-					$ingredient_output .= $names_notes;
-				}
-
-				// Have image separate when using the grouped style.
-				if ( 'grouped' === $atts['ingredients_style'] ) {
-					$ingredient_output = '<span class="wprm-recipe-ingredient-details">' . $ingredient_output . '</span>';
-				}
-
-				// Output optional ingredient image.
-				if ( 'before' === $atts['image_position'] ) {
-					$ingredient_output = $image . $ingredient_output;
-				} elseif ( 'after' === $atts['image_position'] ) {
-					$ingredient_output .= $image;
-				}
-
-				// Output checkbox.
-				if ( 'checkbox' === $atts['list_style'] ) {
-					$ingredient_output = apply_filters( 'wprm_recipe_ingredients_shortcode_checkbox', $ingredient_output );
-				}
-
-				// Add container when using the grouped style.
-				if ( 'grouped' === $atts['ingredients_style'] ) {
-					$ingredient_output = '<span class="wprm-recipe-ingredient-details-container">' . $ingredient_output . '</span>';
-				}
-
-				$output .= $ingredient_output;
-				$output .= '</li>';
+				$output .= '</ul>';
 			}
 
-			$output .= '</ul>';
 			$output .= '</div>';
 		}
 

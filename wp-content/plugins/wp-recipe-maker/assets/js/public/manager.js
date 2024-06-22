@@ -4,6 +4,26 @@ window.WPRecipeMaker.manager = {
 	init: () => {
 	},
 	recipes: {},
+	findRecipesOnPage: () => {
+		let recipes = [];
+		const potentialRecipes = document.querySelectorAll( '*[data-recipe-id]' );
+
+		for ( let potentialRecipe of potentialRecipes ) {
+			const id = parseInt( potentialRecipe.dataset.recipeId );
+
+			if ( id ) {
+				recipes.push( id );
+			}
+		}
+
+		// Return unique IDs.
+		return [ ...new Set( recipes ) ];
+	},
+	resetRecipe: ( id ) => {
+		if ( window.WPRecipeMaker.manager.recipes.hasOwnProperty( `recipe-${id}` ) ) {
+			delete window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ];
+		}
+	},
 	getRecipe: ( id ) => {
 		id = parseInt( id );
 

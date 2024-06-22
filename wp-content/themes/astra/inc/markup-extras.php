@@ -152,6 +152,11 @@ if ( ! function_exists( 'astra_body_classes' ) ) {
 			}
 		}
 
+		// Add class for logo svg icon.
+		if ( astra_logo_svg_icon() ) {
+			$classes[] = 'has-logo-svg-icon';
+		}
+
 		return $classes;
 	}
 }
@@ -173,6 +178,11 @@ function astra_is_content_style_boxed( $post_id = false ) {
 	$meta_content_style   = astra_get_option_meta( 'site-content-style', '', true );
 	$is_boxed             = false;
 	$is_third_party_shop  = false;
+
+	// If post type is empty and is WooCommerce page. Applicable for WC category archives page having no products.
+	if ( ! $post_type && function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+		$post_type = 'product';
+	}
 
 	// Editor compatibility.
 	if ( $post_id ) {
@@ -290,6 +300,11 @@ function astra_is_sidebar_style_boxed( $post_id = false ) {
 	$meta_sidebar_style   = astra_get_option_meta( 'site-sidebar-style', '', true );
 	$is_sidebar_boxed     = false;
 	$is_third_party_shop  = false;
+
+	// If post type is empty and is WooCommerce page. Applicable for WC category archives page having no products.
+	if ( ! $post_type && function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+		$post_type = 'product';
+	}
 
 	// Editor compatibility.
 	if ( $post_id ) {
@@ -529,6 +544,7 @@ if ( ! function_exists( 'astra_logo' ) ) {
 	 */
 	function astra_logo( $device = 'desktop', $echo = true ) {
 
+		$logo_svg_icon        = astra_logo_svg_icon();
 		$site_tagline         = astra_get_option( 'display-site-tagline-responsive' );
 		$display_site_tagline = ( $site_tagline['desktop'] || $site_tagline['tablet'] || $site_tagline['mobile'] ) ? true : false;
 		$site_title           = astra_get_option( 'display-site-title-responsive' );
@@ -554,6 +570,10 @@ if ( ! function_exists( 'astra_logo' ) ) {
 			if ( apply_filters( 'astra_replace_logo_width', true ) ) {
 				remove_filter( 'wp_get_attachment_image_src', 'astra_replace_header_logo', 10 );
 			}
+		}
+
+		if ( (bool) $logo_svg_icon ) {
+			$html .= "<div class='ast-logo-svg-icon'>{$logo_svg_icon}</div>";
 		}
 
 		$html .= astra_get_site_title_tagline( $display_site_title, $display_site_tagline, $device );
@@ -584,6 +604,50 @@ function astra_add_custom_logo_attributes( $html ) {
 }
 
 add_filter( 'get_custom_logo', 'astra_add_custom_logo_attributes' );
+
+/**
+ * Provides the logo svg icon according to the user's selection.
+ *
+ * @return string
+ * @since 4.7.0
+ */
+function astra_logo_svg_icon() {
+
+	if ( ! apply_filters( 'astra_enable_logo_svg_icon', astra_get_option( 'use-logo-svg-icon' ) ) ) {
+		return '';
+	}
+
+	if ( has_custom_logo() ) {
+		return '';
+	}
+
+	$logo_svg_code = '';
+	$logo_svg_icon = astra_get_option( 'logo-svg-icon' );
+
+	if ( ! isset( $logo_svg_icon['value'] ) ) {
+		return $logo_svg_code;
+	}
+
+	switch ( $logo_svg_icon['type'] ) {
+		case 'icon-library':
+			$svg_icons = function_exists( 'astra_get_logo_svg_icons_array' ) ? astra_get_logo_svg_icons_array() : array();
+
+			if ( ! empty( $svg_icons[ $logo_svg_icon['value'] ] ) ) {
+				$logo_svg_code = $svg_icons[ $logo_svg_icon['value'] ]['rendered'];
+			}
+			break;
+
+		case 'custom':
+			$logo_svg_code = $logo_svg_icon['value'];
+			break;
+
+		default:
+			$logo_svg_code = '';
+			break;
+	}
+
+	return $logo_svg_code;
+}
 
 /**
  * Return or echo site logo markup.
@@ -1248,7 +1312,7 @@ add_action( 'astra_masthead_content', 'astra_primary_navigation_markup', 10 );
 /**
  * Add CSS classes for all menu links inside WP Nav menu items.
  *
- * Right now, if Addon is active we add 'menu-link' class through walker_nav_menu_start_el, but if only theme is being used no clas is assigned to anchors.
+ * Right now, if Addon is active we add 'menu-link' class through walker_nav_menu_start_el, but if only theme is being used no class is assigned to anchors.
  *
  * As we are replacing tag based selector assets to class selector, adding 'menu-link' selector to all anchors inside menu items.
  * Ex. .main-header-menu a => .main-header-menu .menu-link
@@ -1541,15 +1605,26 @@ if ( ! function_exists( 'astra_comment_form_default_fields_markup' ) ) {
 		$req       = get_option( 'require_name_email' );
 		$aria_req  = ( $req ? " aria-required='true'" : '' );
 
+		// Comment form default labels without '*' symbol.
+		$name_label    = astra_default_strings( 'string-comment-label-name', false );
+		$email_label   = astra_default_strings( 'string-comment-label-email', false );
+		$website_label = astra_default_strings( 'string-comment-label-website', false );
+
+		// Add '*' symbol for required fields.
+		if ( $req ) {
+			$name_label  .= '*';
+			$email_label .= '*';
+		}
+
 		$fields['author'] = '<div class="ast-comment-formwrap ast-row"><p class="comment-form-author ' . astra_attr( 'comment-form-grid-class' ) . '">' .
-					'<label for="author" class="screen-reader-text">' . esc_html( astra_default_strings( 'string-comment-label-name', false ) ) . '</label><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
-					'" placeholder="' . esc_attr( astra_default_strings( 'string-comment-label-name', false ) ) . '" size="30"' . $aria_req . ' /></p>';
+					'<label for="author" class="screen-reader-text">' . esc_html( $name_label ) . '</label><input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+					'" placeholder="' . esc_attr( $name_label ) . '" size="30"' . $aria_req . ' /></p>';
 		$fields['email']  = '<p class="comment-form-email ' . astra_attr( 'comment-form-grid-class' ) . '">' .
-					'<label for="email" class="screen-reader-text">' . esc_html( astra_default_strings( 'string-comment-label-email', false ) ) . '</label><input id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) .
-					'" placeholder="' . esc_attr( astra_default_strings( 'string-comment-label-email', false ) ) . '" size="30"' . $aria_req . ' /></p>';
+					'<label for="email" class="screen-reader-text">' . esc_html( $email_label ) . '</label><input id="email" name="email" type="text" value="' . esc_attr( $commenter['comment_author_email'] ) .
+					'" placeholder="' . esc_attr( $email_label ) . '" size="30"' . $aria_req . ' /></p>';
 		$fields['url']    = '<p class="comment-form-url ' . astra_attr( 'comment-form-grid-class' ) . '"><label for="url">' .
-					'<label for="url" class="screen-reader-text">' . esc_html( astra_default_strings( 'string-comment-label-website', false ) ) . '</label><input id="url" name="url" type="text" value="' . esc_url( $commenter['comment_author_url'] ) .
-					'" placeholder="' . esc_attr( astra_default_strings( 'string-comment-label-website', false ) ) . '" size="30" /></label></p></div>';
+					'<label for="url" class="screen-reader-text">' . esc_html( $website_label ) . '</label><input id="url" name="url" type="text" value="' . esc_url( $commenter['comment_author_url'] ) .
+					'" placeholder="' . esc_attr( $website_label ) . '" size="30" /></label></p></div>';
 
 		return apply_filters( 'astra_comment_form_default_fields_markup', $fields );
 	}
@@ -2046,7 +2121,7 @@ add_action( 'activate_elementor/elementor.php', 'astra_skip_elementor_onboarding
 
 
 /**
- * BBPress Multiple user profile compatibility issue.
+ * BBPress & BuddyPress Multiple user profile compatibility issue.
  *
  * @param bool $value For checking this issue is still persist or not.
  *
@@ -2060,6 +2135,14 @@ function astra_bbpress_issue( $value ) {
 		/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			return false;
 	}
+
+	// BuddyPress login page looping issue resolution
+	if ( function_exists( 'buddypress' ) && is_buddypress() ) {
+		/** @psalm-suppress UndefinedFunction  */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			return false;
+	}
+
 	return $value;
 }
 
@@ -2168,3 +2251,24 @@ function astra_setup_article_featured_image() {
 }
 
 add_action( 'astra_header_after', 'astra_setup_article_featured_image' );
+
+/**
+ * Add aria-expanded attribute to menu items that have submenus.
+ *
+ * @since 4.6.15
+ * @param string $output The HTML output of the menu item.
+ * @param object $item Menu item data object.
+ * @param int    $depth Depth of the current menu item.
+ * @param array  $args An array of arguments.
+ *
+ * @return string $output Menu item markup output.
+ */
+function astra_add_aria_expanded_submenu_items_attr( $output, $item, $depth, $args ) {
+	$classes = empty( $item->classes ) ? array() : (array) $item->classes; // forming classes array if string.
+	if ( in_array( 'menu-item-has-children', $classes ) ) {
+		$output = str_replace( '<a', '<a aria-expanded="false"', $output );
+	}
+	return $output;
+}
+
+add_filter( 'walker_nav_menu_start_el', 'astra_add_aria_expanded_submenu_items_attr', 10, 4 );

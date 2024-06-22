@@ -206,14 +206,14 @@ class WPRM_Recipe_Sanitizer {
 
 								// Link unit.
 								if ( $sanitized_ingredient['converted'][ $system ]['unit'] ) {
-									$sanitized_ingredient['converted'][ $system ]['unit_id'] = self::get_term_id_by_name( 'wprm_ingredient_unit', $sanitized_ingredient['converted'][ $system ]['unit'] );
+									$sanitized_ingredient['converted'][ $system ]['unit_id'] = self::get_ingredient_unit_id( $sanitized_ingredient['converted'][ $system ]['unit'] );
 								}
 							}
 						}
 
 						// Link unit.
 						if ( $sanitized_ingredient['unit'] ) {
-							$sanitized_ingredient['unit_id'] = self::get_term_id_by_name( 'wprm_ingredient_unit', $sanitized_ingredient['unit'] );
+							$sanitized_ingredient['unit_id'] = self::get_ingredient_unit_id( $sanitized_ingredient['unit'] );
 						}
 
 						// Add to ingredients if name is set.
@@ -379,6 +379,38 @@ class WPRM_Recipe_Sanitizer {
 		}
 
 		return self::get_term_id_by_name( 'wprm_ingredient', $name );
+	}
+
+	/**
+	 * Get ingredient unit ID from its name.
+	 *
+	 * @since	9.5.0
+	 * @param	mixed $name Name of the ingredient unit.
+	 */
+	public static function get_ingredient_unit_id( $name ) {
+		// Check if this is a plural of another ingredient unit first.
+		$name = self::sanitize_html( $name );
+
+		$args = array(
+			'hide_empty' => false,
+			'meta_query' => array(
+				array(
+				   'key'       => 'wprm_ingredient_unit_plural',
+				   'value'     => $name,
+				   'compare'   => '='
+				)
+			),
+			'taxonomy'  => 'wprm_ingredient_unit',
+			'fields' => 'ids',
+		);
+		$terms = get_terms( $args );
+
+		if ( ! is_wp_error( $terms ) && isset( $terms[0] ) && $terms[0] ) {
+			// Match found. Return singular term ID.
+			return $terms[0];
+		}
+
+		return self::get_term_id_by_name( 'wprm_ingredient_unit', $name );
 	}
 
 	/**

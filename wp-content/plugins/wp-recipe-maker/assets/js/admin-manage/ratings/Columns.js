@@ -136,6 +136,30 @@ export default {
                     </div>
                 ),
             },{
+                Header: __wprm( 'Has Comment' ),
+                id: 'has_comment',
+                accessor: 'has_comment',
+                width: 100,
+                sortable: false,
+                Filter: ({ filter, onChange }) => (
+                    <select
+                        onChange={event => onChange(event.target.value)}
+                        style={{ width: '100%', fontSize: '1em' }}
+                        value={filter ? filter.value : 'all'}
+                    >
+                        <option value="all">{ __wprm( 'All' ) }</option>
+                        <option value="yes">{ __wprm( 'Has Comment' ) }</option>
+                        <option value="no">{ __wprm( 'No Comment' ) }</option>
+                    </select>
+                ),
+                Cell: row => {
+                    return (
+                        <div>
+                            { 1 == row.value ? __wprm( 'Yes' ) : ( 0 == row.value ? __wprm( 'No' ) : __wprm( 'n/a' ) ) }
+                        </div>
+                    )
+                },
+            },{
                 Header: __wprm( 'User ID' ),
                 id: 'user_id',
                 accessor: 'user_id',

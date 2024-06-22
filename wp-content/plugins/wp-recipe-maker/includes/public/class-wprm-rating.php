@@ -51,17 +51,39 @@ class WPRM_Rating {
 			'count' => 0,
 			'total' => 0,
 			'average' => 0,
+			'type' => array(
+				'comment' => 0,
+				'no_comment' => 0,
+				'user' => 0,
+			),
 		);
 
 		if ( ! $recipe ) {
 			return $recipe_rating;
 		}
 
+		// Update comment ratings without text.
+		$parent_post_id = $recipe->parent_post_id();
+		if ( $parent_post_id ) {
+			self::update_comment_ratings_no_text( $parent_post_id );
+		}
+
+		// Get ratings.
 		$ratings = self::get_ratings_for( $recipe_id );
 
 		foreach ( $ratings['ratings'] as $rating ) {
 			$recipe_rating['count']++;
 			$recipe_rating['total'] += intval( $rating->rating );
+
+			if ( 0 < intval( $rating->recipe_id ) ) {
+				$recipe_rating['type']['user']++;
+			} else {
+				if ( '1' === $rating->has_comment ) {
+					$recipe_rating['type']['comment']++;
+				} else {
+					$recipe_rating['type']['no_comment']++;
+				}
+			}
 		}
 
 		// Calculate average.
@@ -75,14 +97,94 @@ class WPRM_Rating {
 		update_post_meta( $recipe_id, 'wprm_rating_count', $recipe_rating['count'] );
 
 		// Update parent post with rating data (TODO account for multiple recipes in a post).
-		update_post_meta( $recipe->parent_post_id(), 'wprm_rating', $recipe_rating );
-		update_post_meta( $recipe->parent_post_id(), 'wprm_rating_average', $recipe_rating['average'] );
-		update_post_meta( $recipe->parent_post_id(), 'wprm_rating_count', $recipe_rating['count'] );
+		if ( $parent_post_id ) {
+			update_post_meta( $parent_post_id, 'wprm_rating', $recipe_rating );
+			update_post_meta( $parent_post_id, 'wprm_rating_average', $recipe_rating['average'] );
+			update_post_meta( $parent_post_id, 'wprm_rating_count', $recipe_rating['count'] );
+		}
 
 		// Update SEO checker.
 		WPRM_Seo_Checker::update_seo_for( $recipe_id );
 
 		return $recipe_rating;
+	}
+
+	/**
+	 * Update the comment ratings without text.
+	 *
+	 * @since    9.5.0
+	 * @param	 int $post_id Post ID to check the comment ratings for.
+	 */
+	public static function update_comment_ratings_no_text( $post_id ) {
+		$post_id = intval( $post_id );
+
+		$ratings = WPRM_Rating_Database::get_ratings( array(
+			'where' => 'post_id = ' . $post_id . ' AND approved = 1',
+		) );
+
+		$comment_ratings_without_text = array();
+		$ratings_need_migration = array();
+
+		foreach ( $ratings['ratings'] as $rating ) {
+			// Keep track of comments without text.
+			if ( is_null( $rating->has_comment ) && '0' !== $rating->comment_id ) {
+				$ratings_need_migration[] = $rating;
+			} else {
+				if ( '0' === $rating->has_comment ) {
+					$comment_ratings_without_text[] = $rating->comment_id;
+				}
+			}
+		}
+
+		// Check if there are comment ratings that haven't been checked for text yet.
+		if ( $ratings_need_migration ) {
+			$comment_ids = wp_list_pluck( $ratings_need_migration, 'comment_id' );
+
+			$comments = get_comments( array(
+				'comment__in' => $comment_ids,
+			) );
+
+			// Check which comments have text.
+			$comments_status = array();
+
+			foreach ( $comments as $comment ) {
+				$comment_text = trim( $comment->comment_content );
+
+				if ( $comment_text ) {
+					$comments_status[ $comment->comment_ID ] = '1';
+				} else {
+					$comments_status[ $comment->comment_ID ] = '0';
+				}
+			}
+
+			$update_rating_database_has_comment = array();
+			$update_rating_database_no_comment = array();
+			foreach ( $ratings_need_migration as $rating ) {
+				if ( isset( $comments_status[ $rating->comment_id ] ) ) {
+					if ( '1' === $comments_status[ $rating->comment_id ] ) {
+						$update_rating_database_has_comment[] = $rating->id;
+					} else {
+						$update_rating_database_no_comment[] = $rating->id;
+						$comment_ratings_without_text[] = $rating->comment_id;
+					}
+				}
+			}
+
+			global $wpdb;
+			$table_name = WPRM_Rating_Database::get_table_name();
+
+			// Update ratings in database.
+			if ( $update_rating_database_has_comment ) {
+				$wpdb->query( "UPDATE $table_name SET has_comment = '1' WHERE id IN (" . implode( ',', $update_rating_database_has_comment ) . ")" );
+			}
+			if ( $update_rating_database_no_comment ) {
+				$wpdb->query( "UPDATE $table_name SET has_comment = '0' WHERE id IN (" . implode( ',', $update_rating_database_no_comment ) . ")" );
+			}
+		}
+
+		update_post_meta( $post_id, 'wprm_rating_no_text_comments', $comment_ratings_without_text );
+
+		return $comment_ratings_without_text;
 	}
 
 	/**

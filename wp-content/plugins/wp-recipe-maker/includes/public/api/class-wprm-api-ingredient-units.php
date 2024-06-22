@@ -58,6 +58,7 @@ class WPRM_Api_Ingredient_Units {
 
 		$data = array(
 			'abbr' => isset( $meta['wprm_ingredient_unit_abbr'] ) ? $meta['wprm_ingredient_unit_abbr'] : '',
+			'plural' => isset( $meta['wprm_ingredient_unit_plural'] ) ? $meta['wprm_ingredient_unit_plural'] : '',
 		);
 
 		return $data;
@@ -74,6 +75,10 @@ class WPRM_Api_Ingredient_Units {
 		if ( isset( $meta['abbr'] ) ) {
 			$abbr = sanitize_text_field( $meta['abbr'] );
 			update_term_meta( $term->term_id, 'wprm_ingredient_unit_abbr', $abbr );
+		}
+		if ( isset( $meta['plural'] ) ) {
+			$plural = sanitize_text_field( $meta['plural'] );
+			update_term_meta( $term->term_id, 'wprm_ingredient_unit_plural', $plural );
 		}
 	}
 
@@ -115,14 +120,34 @@ class WPRM_Api_Ingredient_Units {
 	
 					foreach ( $ingredient_group['ingredients'] as $ingredient ) {
 						if ( isset( $ingredient['unit_id'] ) && intval( $ingredient['unit_id'] ) === $term->term_id ) {
-							$ingredient['unit'] = $term->name;
+							$new_name = $term->name;
+
+							// Check if we need to use plural.
+							if ( 1.0 !== floatval( $ingredient['amount'] ) ) {
+								$plural = get_term_meta( $term->term_id, 'wprm_ingredient_unit_plural', true );
+
+								if ( $plural ) {
+									$new_name = $plural;
+								}
+							}
+							$ingredient['unit'] = $new_name;
 						}
 
 						// Check converted as well.
 						if ( isset( $ingredient['converted'] ) ) {
 							foreach ( $ingredient['converted'] as $system => $conversion ) {
 								if ( isset( $ingredient['converted'][ $system ]['unit_id'] ) && intval( $ingredient['converted'][ $system ]['unit_id'] ) === $term->term_id ) {
-									$ingredient['converted'][ $system ]['unit'] = $term->name;
+									$new_name = $term->name;
+
+									// Check if we need to use plural.
+									if ( 1.0 !== floatval( $ingredient['converted'][ $system ]['amount'] ) ) {
+										$plural = get_term_meta( $term->term_id, 'wprm_ingredient_unit_plural', true );
+
+										if ( $plural ) {
+											$new_name = $plural;
+										}
+									}
+									$ingredient['converted'][ $system ]['unit'] = $new_name;
 								}
 							}
 						}

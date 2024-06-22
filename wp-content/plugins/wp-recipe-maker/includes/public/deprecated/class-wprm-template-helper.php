@@ -70,7 +70,7 @@ class WPRM_Template_Helper {
 	 */
 	public static function ingredient_name( $ingredient, $show_link = false, $recipe = false ) {
 		$name = $ingredient['name'];
-		$show_link = WPRM_Addons::is_active( 'premium' ) ? $show_link : false;
+		$show_link = WPRM_Addons::is_active( 'premium' ) && WPRM_Settings::get( 'ingredient_links_enabled' ) ? $show_link : false;
 
 		$link = array();
 		if ( $show_link ) {
@@ -378,12 +378,12 @@ class WPRM_Template_Helper {
 
 				$unit_systems_output = array();
 				foreach ( $unit_systems as $unit_system => $value ) {
-					$active = 1 === $unit_system ? ' wprmpuc-active' : '';
-					$unit_system_label = 2 === $recipe_unit_system ? WPRM_Settings::get( 'unit_conversion_system_' . ( 3 - $unit_system ) ) : WPRM_Settings::get( 'unit_conversion_system_' . $unit_system );
+					$active = $recipe_unit_system === $unit_system ? ' wprmpuc-active' : '';
+					$unit_system_label = WPRM_Settings::get( 'unit_conversion_system_' . $unit_system );
 					$unit_systems_output[] = '<a href="#" class="wprm-unit-conversion' . esc_attr( $active ) . '" data-system="' . esc_attr( $unit_system ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">' . $unit_system_label . '</a>';
 				}
 
-				$output = '<div class="wprm-unit-conversion-container" data-recipe-unit-system="' . esc_attr( $recipe_unit_system ) . '">' . implode( ' - ', $unit_systems_output ) . '</div>';
+				$output = '<div class="wprm-unit-conversion-container">' . implode( ' - ', $unit_systems_output ) . '</div>';
 
 				WPRM_Assets::add_js_data( 'wprmpuc_recipe_' . $recipe->id(), array(
 					'ingredients' => $ingredients,

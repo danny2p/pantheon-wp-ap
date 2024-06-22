@@ -83,6 +83,35 @@ export default {
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => row.value ? he.decode(row.value) : null,
             },{
+                Header: __wprm( 'Plural' ),
+                id: 'plural',
+                accessor: 'plural',
+                width: 200,
+                Filter: (props) => (<TextFilter {...props}/>),
+                Cell: row => {
+                    return (
+                        <div className="wprm-manage-ingredient-units-group-container">
+                            <Icon
+                                type="pencil"
+                                title={ __wprm( 'Change Plural' ) }
+                                onClick={() => {
+                                    const newPlural = prompt( `${ __wprm( 'What do you want the plural to be for' ) } "${row.original.name}"?`, row.value );
+                                    if( false !== newPlural ) {
+                                        Api.manage.updateTaxonomyMeta(datatable.props.options.id, row.original.term_id, { plural: newPlural }).then(() => datatable.refreshData());
+                                    }
+                                }}
+                            />
+                            {
+                                row.value
+                                ?
+                                <span>{ row.value }</span>
+                                :
+                                null
+                            }
+                        </div>
+                    )
+                },
+            },{
                 Header: __wprm( 'Recipes' ),
                 id: 'count',
                 accessor: 'count',

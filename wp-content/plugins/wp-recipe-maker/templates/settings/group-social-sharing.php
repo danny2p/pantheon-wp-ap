@@ -130,6 +130,13 @@ $social_sharing = array(
 						'value' => 'custom',
 					),
 				),
+				array(
+					'id' => 'pinterest_use_image_from_other_plugins',
+					'name' => __( 'Use Image & Description from Other Plugins', 'wp-recipe-maker' ),
+					'description' => __( 'If a specific Pinterest image and description are set for the parent post of the recipe, use that one instead.', 'wp-recipe-maker' ) . ' ' . __( 'These plugins are supported:', 'wp-recipe-maker' ) . ' Hubbub Pro',
+					'type' => 'toggle',
+					'default' => false,
+				),
 			),
 		),
 	),

@@ -58,26 +58,24 @@ window.WPRecipeMaker.print = {
 			system = 1,
 			advancedServings = false;
 
-		// Get recipe servings.
-		if ( window.WPRecipeMaker.hasOwnProperty( 'quantities' ) ) {
-			const recipe = WPRecipeMaker.quantities.getRecipe( id );
-
+		window.WPRecipeMaker.manager.getRecipe( id ).then( ( recipe ) => {
 			if ( recipe ) {
-				system = recipe.system;
+				// Unit System.
+				if ( recipe.data.hasOwnProperty( 'currentSystem' ) ) {
+					system = recipe.data.currentSystem;
+				}
 
 				// Only if servings changed.
-				if ( recipe.servings !== recipe.originalServings ) {
-					servings = recipe.servings;
+				if ( recipe.data.currentServingsParsed !== recipe.data.originalServingsParsed ) {
+					servings = recipe.data.currentServingsParsed;
 				}
+
+				// Advanced Servings.
+				advancedServings = recipe.data.currentAdvancedServings;
 			}
-		}
 
-		// Get advanced servings.
-		if ( window.WPRecipeMaker.hasOwnProperty( 'advancedServings' ) ) {
-			advancedServings = WPRecipeMaker.advancedServings.getRecipe( id );
-		}
-
-		WPRecipeMaker.print.recipe( id, servings, system, advancedServings, template );
+			WPRecipeMaker.print.recipe( id, servings, system, advancedServings, template );
+		} );
 	},
 	recipe: ( id, servings = false, system = 1, advancedServings = false, template = '' ) => {
 		let slug = false;
@@ -119,6 +117,10 @@ window.WPRecipeMaker.print = {
 		if ( '_blank' === target ) {
 			printWindow.onload = () => {
 				printWindow.focus();
+
+				if ( printWindow.hasOwnProperty( 'WPRMPrint' ) ) {
+					printWindow.WPRMPrint.setArgs( printArgs );
+				}
 			};
 		}
 	},

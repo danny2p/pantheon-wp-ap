@@ -553,8 +553,9 @@ class WPRM_Import_Create extends WPRM_Import {
  				$rating = array(
 					'recipe_id' => $wprm_id,
 					'user_id' => '',
-					'ip' => 'mv-create-' . $mv_rating['id'],
+					'ip' => 'mediavine-create-' . $mv_rating['id'],
 					'rating' => ceil( floatval( $mv_rating['rating'] ) ),
+					'date' => $mv_rating['created'],
 				);
 
 				WPRM_Rating_Database::add_or_update_rating( $rating );

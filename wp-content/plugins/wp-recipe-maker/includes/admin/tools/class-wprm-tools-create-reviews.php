@@ -177,7 +177,7 @@ class WPRM_Tools_Create_Reviews {
 							if ( $comment_id ) {
 								// Changing to comment rating, so remove from user ratings.
 								$existing_user_ratings = WPRM_Rating_Database::get_ratings( array(
-									'where' => 'ip = "mv-create-' . intval( $review->id ) . '"',
+									'where' => 'ip = "mv-create-' . intval( $review->id ) . '" OR ip = "mediavine-create-' . intval( $review->id ) . '"',
 								) );
 
 								$existing_user_ratings_ids = wp_list_pluck( $existing_user_ratings['ratings'], 'id' );

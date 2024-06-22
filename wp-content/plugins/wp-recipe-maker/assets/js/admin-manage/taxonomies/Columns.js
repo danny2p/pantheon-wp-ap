@@ -683,8 +683,6 @@ export default {
                     </select>
                 ),
                 Cell: row => {
-                    console.log( row.value );
-
                     return (
                         <div className="wprm-manage-product-container">
                             <Icon

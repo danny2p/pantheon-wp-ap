@@ -199,6 +199,31 @@ $recipe_ratings = array(
 					'type' => 'toggle',
 					'default' => false,
 				),
+				array(
+					'id' => 'user_ratings_automatically_approve_type',
+					'name' => __( 'Which Ratings to Automatically Approve', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'all' => __( 'All ratings, with or without comment text', 'wp-recipe-maker' ),
+						'5_star' => __( 'Only 5 star ratings without comment text', 'wp-recipe-maker' ),
+						'4_star' => __( 'Only 4+ star ratings without comment text', 'wp-recipe-maker' ),
+						'3_star' => __( 'Only 3+ star ratings without comment text', 'wp-recipe-maker' ),
+						'2_star' => __( 'Only 2+ star ratings without comment text', 'wp-recipe-maker' ),
+						'1_star' => __( 'Any rating without comment text', 'wp-recipe-maker' ),
+					),
+					'default' => 'all',
+					'dependency' => array(
+						'id' => 'user_ratings_automatically_approve',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'user_ratings_open_url_parameter',
+					'name' => __( 'Open Modal through URL Parameter', 'wp-recipe-maker' ),
+					'description' => __( 'Immediately open rating modal for first recipe on the page if this specific URL parameter is set. For example:', 'wp-recipe-maker' ) . ' https://demo.wprecipemaker.com/amazing-vegetable-pizza/?rate',
+					'type' => 'text',
+					'default' => 'rate',
+				),
 			),
 			'dependency' => array(
 				'id' => 'features_user_ratings',
@@ -253,6 +278,18 @@ $recipe_ratings = array(
 					'name' => __( 'Comment Placeholder', 'wp-recipe-maker' ),
 					'type' => 'textarea',
 					'default' => __( 'Share your thoughts! What did you like about this recipe?', 'wp-recipe-maker' ),
+				),
+				array(
+					'id' => 'user_ratings_modal_name_placeholder',
+					'name' => __( 'Name Field Placeholder', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => '',
+				),
+				array(
+					'id' => 'user_ratings_modal_email_placeholder',
+					'name' => __( 'Email Field Placeholder', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => '',
 				),
 				array(
 					'id' => 'user_ratings_modal_submit_comment_button',
@@ -316,7 +353,7 @@ $recipe_ratings = array(
 				array(
 					'id' => 'user_ratings_require_email',
 					'name' => __( 'Require Visitor Email', 'wp-recipe-maker' ),
-					'description' => __( 'Whether the name of the visitor is required to leave a rating', 'wp-recipe-maker' ),
+					'description' => __( 'Whether the email of the visitor is required to leave a rating', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => true,
 				),
@@ -450,6 +487,96 @@ $recipe_ratings = array(
 							'id' => 'user_ratings_comment_suggestions_enabled',
 							'value' => 'never',
 							'type' => 'inverse',
+						),
+					),
+				),
+			),
+			'dependency' => array(
+				array(
+					'id' => 'features_user_ratings',
+					'value' => true,
+				),
+			),
+		),
+		array(
+			'name' => __( 'User Ratings without Comment Text', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'user_ratings_no_comment_display',
+					'name' => __( 'Display', 'wp-recipe-maker' ),
+					'description' => __( 'How to display ratings without comment text.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'comment' => __( 'Between regular comments', 'wp-recipe-maker' ),
+						'summary' => __( 'Show as aggregate summary, showing details in modal', 'wp-recipe-maker' ),
+					),
+					'default' => 'summary',
+				),
+				array(
+					'id' => 'user_ratings_summary_position',
+					'name' => __( 'Summary Position', 'wp-recipe-maker' ),
+					'description' => __( 'Where to the display the recipe ratings summary.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'above_form' => __( 'Above the comment input form', 'wp-recipe-maker' ),
+						'below_form' => __( 'Below the comment input form', 'wp-recipe-maker' ),
+					),
+					'default' => 'above_form',
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_no_comment_display',
+							'value' => 'summary',
+						),
+					),
+				),
+				array(
+					'id' => 'user_ratings_summary_star_color',
+					'name' => __( 'Star Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#343434',
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_no_comment_display',
+							'value' => 'summary',
+						),
+					),
+				),
+				array(
+					'id' => 'user_ratings_summary_star_size',
+					'name' => __( 'Star Size', 'wp-recipe-maker' ),
+					'type' => 'number',
+					'suffix' => 'px',
+					'default' => '18',
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_no_comment_display',
+							'value' => 'summary',
+						),
+					),
+				),
+				array(
+					'id' => 'user_ratings_summary_star_padding',
+					'name' => __( 'Star Padding', 'wp-recipe-maker' ),
+					'type' => 'number',
+					'suffix' => 'px',
+					'default' => '0',
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_no_comment_display',
+							'value' => 'summary',
+						),
+					),
+				),
+				array(
+					'id' => 'user_ratings_summary_modal_title',
+					'name' => __( 'Summary Modal Title', 'wp-recipe-maker' ),
+					'description' => __( 'Title for the modal that shows the rating details.', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => __( 'Recipe Ratings without Comment', 'wp-recipe-maker' ),
+					'dependency' => array(
+						array(
+							'id' => 'user_ratings_no_comment_display',
+							'value' => 'summary',
 						),
 					),
 				),

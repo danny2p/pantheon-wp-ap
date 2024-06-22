@@ -1,6 +1,72 @@
 {
     "news": [
         {
+            "date": "2024-06-14",
+            "label": "Blog",
+            "title": "A Foodie's Guide to Instagram Bio Brilliance",
+            "url": "https://bootstrapped.ventures/bio-for-food-bloggers/"
+        },
+        {
+            "date": "2024-06-11",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.5.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-5-0/"
+        },
+        {
+            "date": "2024-05-30",
+            "label": "Blog",
+            "title": "Cook Mode: How To Keep Your Screen Bright While Cooking",
+            "url": "https://bootstrapped.ventures/cook-mode/"
+        },
+        {
+            "date": "2024-05-27",
+            "label": "Blog",
+            "title": "Understanding the Differences Between Food Bloggers and Vloggers",
+            "url": "https://bootstrapped.ventures/food-blogger-or-vlogger/"
+        },
+        {
+            "date": "2024-05-23",
+            "label": "Blog",
+            "title": "Top Recipe Sharing Sites for Home Cooks",
+            "url": "https://bootstrapped.ventures/recipe-sharing-website/"
+        },
+        {
+            "date": "2024-05-21",
+            "label": "Blog",
+            "title": "Find Your Food Blog Niche: Expert Tips",
+            "url": "https://bootstrapped.ventures/find-your-food-blog-niche-expert-tips/"
+        },
+        {
+            "date": "2024-05-15",
+            "label": "Blog",
+            "title": "Turn Your Food Blogs into Profit: Top Affiliate Programs",
+            "url": "https://bootstrapped.ventures/food-blog-affiliate-programs/"
+        },
+        {
+            "date": "2024-05-13",
+            "label": "Blog",
+            "title": "The Art of Recipe Writing: Strategies for Success",
+            "url": "https://bootstrapped.ventures/recipe-guidelines/"
+        },
+        {
+            "date": "2024-05-09",
+            "label": "Blog",
+            "title": "Food Blogs and the Intent Behind Lengthy Stories",
+            "url": "https://bootstrapped.ventures/why-do-recipe-blogs-have-stories/"
+        },
+        {
+            "date": "2024-05-07",
+            "label": "Blog",
+            "title": "Boost Your Cooking Recognition: Recipe Submission Tips",
+            "url": "https://bootstrapped.ventures/submit-recipe/"
+        },
+        {
+            "date": "2024-05-04",
+            "label": "Blog",
+            "title": "Pave Your Way in the Food Industry: How to Sell a Recipe to a Company",
+            "url": "https://bootstrapped.ventures/sell-your-recipe/"
+        },
+        {
             "date": "2024-05-02",
             "label": "Blog",
             "title": "Maximizing Your Recipes: How Much Should You Sell For",
