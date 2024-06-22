@@ -66,6 +66,15 @@ $permissions = array(
 					},
 				),
 				array(
+					'id' => 'features_reports_access',
+					'name' => __( 'Access to Reports Page', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => 'manage_options',
+					'sanitize' => function( $value ) {
+						return preg_replace( '/[,\s]/', '', $value );
+					},
+				),
+				array(
 					'id' => 'features_import_access',
 					'name' => __( 'Access to Import Page', 'wp-recipe-maker' ),
 					'type' => 'text',

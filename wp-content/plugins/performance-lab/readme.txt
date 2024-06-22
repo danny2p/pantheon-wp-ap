@@ -3,8 +3,8 @@
 Contributors:      wordpressdotorg
 Requires at least: 6.4
 Tested up to:      6.5
-Requires PHP:      7.0
-Stable tag:        3.0.0
+Requires PHP:      7.2
+Stable tag:        3.2.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Tags:              performance, site health, measurement, optimization, diagnostics
@@ -59,6 +59,37 @@ To report a security issue, please visit the [WordPress HackerOne](https://hacke
 Contributions are always welcome! Learn more about how to get involved in the [Core Performance Team Handbook](https://make.wordpress.org/performance/handbook/get-involved/).
 
 == Changelog ==
+
+= 3.2.0 =
+
+**Enhancements**
+
+* Add install note after each PerfLab feature plugin in the plugin list table. ([1265](https://github.com/WordPress/performance/pull/1265))
+* Update plugins with new banners and icons. ([1272](https://github.com/WordPress/performance/pull/1272))
+
+**Bug Fixes**
+
+* Fix Server-Timing compatibility with other plugins that do output buffering. ([1260](https://github.com/WordPress/performance/pull/1260))
+* Harden autoloaded-options site health test for incorrectly implemented external object cache plugins. ([1238](https://github.com/WordPress/performance/pull/1238))
+
+= 3.1.0 =
+
+**Enhancements**
+
+* Add progress indicator when activating a feature. ([1190](https://github.com/WordPress/performance/pull/1190))
+* Display plugin settings links in the features screen and fix responsive layout for mobile. ([1208](https://github.com/WordPress/performance/pull/1208))
+* Add plugin dependency support for activating performance features. ([1184](https://github.com/WordPress/performance/pull/1184))
+* Add support for AVIF image format in site health. ([1177](https://github.com/WordPress/performance/pull/1177))
+* Add server timing to REST API response. ([1206](https://github.com/WordPress/performance/pull/1206))
+* Bump minimum PHP requirement to 7.2. ([1130](https://github.com/WordPress/performance/pull/1130))
+* Refine logic in perflab_install_activate_plugin_callback() to rely only on validated slug. ([1170](https://github.com/WordPress/performance/pull/1170))
+* Improve overall code quality with stricter static analysis checks. ([775](https://github.com/WordPress/performance/issues/775))
+
+**Bug Fixes**
+
+* Avoid passing incomplete data to perflab_render_plugin_card() and show error when plugin directory API query fails. ([1175](https://github.com/WordPress/performance/pull/1175))
+* Do not show admin pointer on the Performance screen and dismiss the pointer when visited. ([1147](https://github.com/WordPress/performance/pull/1147))
+* Fix `WordPress.DB.DirectDatabaseQuery.DirectQuery` warning for Autoloaded Options Health Check. ([1179](https://github.com/WordPress/performance/pull/1179))
 
 = 3.0.0 =
 
@@ -464,6 +495,10 @@ Contributions are always welcome! Learn more about how to get involved in the [C
 * Infrastructure: Define module specification in documentation. ([26](https://github.com/WordPress/performance/pull/26))
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+
+This release introduces a new feature plugin called Image Prioritizer which optimizes the loading of images to improve LCP.
 
 = 3.0.0 =
 

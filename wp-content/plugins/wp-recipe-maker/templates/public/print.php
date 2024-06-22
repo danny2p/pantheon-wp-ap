@@ -94,6 +94,9 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 		echo apply_filters( 'wprm_print_output_html', $html );
 
 		echo '</div>';
+
+		// Recipes we need the data for.
+		WPRM_Recipe_Manager::recipe_data_in_footer( $output['recipe_ids'] );
 		?>
 		<?php
 		$print_ad = trim( WPRM_Settings::get( 'print_footer_ad' ) );

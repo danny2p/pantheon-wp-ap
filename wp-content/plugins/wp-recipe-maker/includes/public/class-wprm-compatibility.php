@@ -44,8 +44,8 @@ class WPRM_Compatibility {
 		add_action( 'wp_footer', array( __CLASS__, 'smartwithfood_assets' ) );
 
 		// Chicory.
-		// add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'chicory_after_ingredients' ), 9 );
-		// add_action( 'wp_footer', array( __CLASS__, 'chicory_assets' ) );
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'chicory_after_ingredients' ), 9 );
+		add_action( 'wp_footer', array( __CLASS__, 'chicory_assets' ) );
 
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );

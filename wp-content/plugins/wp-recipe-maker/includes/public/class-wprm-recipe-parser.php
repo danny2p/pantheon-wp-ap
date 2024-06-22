@@ -280,6 +280,28 @@ class WPRM_Recipe_Parser {
 		// Strip HTML and shortcodes.
 		$raw = wp_strip_all_tags( strip_shortcodes( $raw ) );
 
+		// Ignore thousands seperators to make sure it's not interpreted as decimal separator.
+		if ( 'comma' === WPRM_Settings::get( 'decimal_separator' ) ) {
+			// Find . and see if it's used as a thousands separator (more than 3 numbers after it).
+			$thousandsPos = strpos( $raw, '.' );
+			if ( -1 !== $thousandsPos && strlen( $raw ) - $thousandsPos > 3 ) {
+				// Make sure number before supposed thousands separator is not 0.
+				$before = substr( $raw, 0, $thousandsPos );
+				if ( 0 !== intval( $before ) ) {
+					$raw = str_replace( '.', '', $raw );
+				}
+			}
+		} else {
+			$thousandsPos = strpos( $raw, ',' );
+			if ( -1 !== $thousandsPos && strlen( $raw ) - $thousandsPos > 3 ) {
+				// Make sure number before supposed thousands separator is not 0.
+				$before = substr( $raw, 0, $thousandsPos );
+				if ( 0 !== intval( $before ) ) {
+					$raw = str_replace( ',', '', $raw );
+				}
+			}
+		}
+
 		// Use . for decimals.
 		$raw = str_replace( ',', '.', $raw );
 
@@ -351,7 +373,11 @@ class WPRM_Recipe_Parser {
 					$formatted_fraction = '';
 
 					if ( 0 < $fraction_parts[0] ) {
-						$formatted_fraction .= $fraction_parts[0] . ' ';
+						$formatted_fraction .= number_format( $fraction_parts[0], 0 ) . ' ';
+
+						if ( 'comma' === WPRM_Settings::get( 'decimal_separator' ) ) {
+							$formatted_fraction = str_replace( ',', '.', $formatted_fraction );
+						}
 					}
 
 					if ( 0 < $fraction_parts[1] ) {

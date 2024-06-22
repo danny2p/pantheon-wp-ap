@@ -11,7 +11,6 @@ export default {
             headers: {
                 'X-WP-Nonce': nonce,
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
                 // Don't cache API calls.
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
                 'Pragma': 'no-cache',
@@ -28,6 +27,7 @@ export default {
 
         // Add optional body data.
         if ( body ) {
+            args.headers['Content-Type'] = 'application/json';
             args.body = JSON.stringify(body);
         }
 

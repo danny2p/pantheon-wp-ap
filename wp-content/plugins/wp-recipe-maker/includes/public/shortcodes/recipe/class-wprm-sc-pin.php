@@ -136,23 +136,49 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		if ( ! $recipe || ( ! $recipe->pin_image_url() && ! $recipe->pin_image_repin_id() && 'any' !== $atts['action'] ) ) {
 			return '';
 		}
+		
+		// Values in recipe.
+		$media = $recipe->pin_image_url();
+		$repin_id = $recipe->pin_image_repin_id();
+		$description = $recipe->pin_image_description();
 
-		// Make sure pinit.js gets loaded.
-		add_filter( 'wprm_load_pinit', '__return_true' );
+		// Check if we want to override media from other plugins.
+		if ( WPRM_Settings::get( 'pinterest_use_image_from_other_plugins' ) ) {
+			$parent_post_id = $recipe->parent_post_id();
+
+			if ( $parent_post_id ) {
+				// Hubbub Pro.
+				$hubbub = get_post_meta( $parent_post_id, 'dpsp_share_options', true );
+				if ( is_array( $hubbub ) ) {
+					if ( isset( $hubbub['custom_image_pinterest'] ) && is_array( $hubbub['custom_image_pinterest'] ) && $hubbub['custom_image_pinterest']['src'] ) {
+						$media = $hubbub['custom_image_pinterest']['src'];
+
+						if ( isset( $hubbub['custom_description_pinterest'] ) && $hubbub['custom_description_pinterest'] ) {
+							$description = $hubbub['custom_description_pinterest'];
+						}
+					}
+				}
+
+				
+			}
+		}
+
+		// Make sure we have something to pin, otherwise return.
+		if ( ! $media && ! $repin_id && 'any' !== $atts['action'] ) {
+			return '';
+		}
 
 		// Build pin URL.
-		$pin_url = '#';
-		$media = $recipe->pin_image_url();
-
 		$url = $recipe->permalink();
 		$url = $url ? $url : get_permalink();
 		$url = $url ? $url : get_home_url();
-		
+
+		$pin_url = '#';
 		if ( $media ) {
 			$pin_url = 'https://www.pinterest.com/pin/create/bookmarklet/';
 			$pin_url .= '?url=' . urlencode( $url );
 			$pin_url .= '&media=' . urlencode( $media );
-			$pin_url .= '&description=' . urlencode( $recipe->pin_image_description() );
+			$pin_url .= '&description=' . urlencode( $description );
 			$pin_url .= '&is_video=false';
 		}
 
@@ -205,13 +231,16 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
 		$attributes .= ' data-url="' . esc_attr( $url ) . '"';
 		$attributes .= ' data-media="' . esc_attr( $media ) . '"';
-		$attributes .= ' data-description="' . esc_attr( $recipe->pin_image_description() ) . '"';
-		$attributes .= ' data-repin="' . esc_attr( $recipe->pin_image_repin_id() ) . '"';
+		$attributes .= ' data-description="' . esc_attr( $description ) . '"';
+		$attributes .= ' data-repin="' . esc_attr( $repin_id ) . '"';
 		$attributes .= $aria_label;
 
 		if ( 'any' === $atts['action'] ) {
 			$attributes .= ' data-pin-action="any"';
 		}
+
+		// Make sure pinit.js gets loaded.
+		add_filter( 'wprm_load_pinit', '__return_true' );
 
 		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );

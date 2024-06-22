@@ -292,7 +292,7 @@ class Astra_Admin_Ajax {
 		$plugin_init = ( isset( $_POST['init'] ) ) ? sanitize_text_field( wp_unslash( $_POST['init'] ) ) : '';
 		/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
-		$activate = activate_plugin( $plugin_init, '', false, true );
+		$activate = activate_plugin( $plugin_init );
 
 		if ( is_wp_error( $activate ) ) {
 			/** @psalm-suppress PossiblyNullReference */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -303,6 +303,15 @@ class Astra_Admin_Ajax {
 				)
 			);
 			/** @psalm-suppress PossiblyNullReference */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		}
+
+		/**
+		 * Added this flag as tracker to track onboarding and funnel stats for SureCart owners.
+		 *
+		 * @since 4.7.0
+		 */
+		if ( 'surecart/surecart.php' === $plugin_init ) {
+			update_option( 'surecart_source', 'astra', false );
 		}
 
 		wp_send_json_success(
@@ -354,7 +363,7 @@ class Astra_Admin_Ajax {
 		$plugin_init = ( isset( $_POST['init'] ) ) ? sanitize_text_field( wp_unslash( $_POST['init'] ) ) : '';
 		/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
-		$deactivate = deactivate_plugins( $plugin_init, true, false );
+		$deactivate = deactivate_plugins( $plugin_init );
 
 		if ( is_wp_error( $deactivate ) ) {
 			wp_send_json_error(

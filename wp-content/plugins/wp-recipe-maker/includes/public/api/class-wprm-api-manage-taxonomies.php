@@ -136,7 +136,7 @@ class WPRM_Api_Manage_Taxonomies {
 				break;
 			case 'plural':
 				$args['orderby'] = 'meta_value';
-				$args['meta_key'] = 'wprm_ingredient_plural';
+				$args['meta_key'] = 'wprm_' . $type . '_plural';
 				break;
 			case 'group':
 				$args['orderby'] = 'meta_value';
@@ -199,7 +199,7 @@ class WPRM_Api_Manage_Taxonomies {
 					case 'plural':
 						if ( '' !== $value ) {
 							$args['meta_query'][] = array(
-								'key' => 'wprm_ingredient_plural',
+								'key' => 'wprm_' . $type . '_plural',
 								'compare' => 'LIKE',
 								'value' => $value,
 							);
@@ -408,6 +408,9 @@ class WPRM_Api_Manage_Taxonomies {
 						$row->group = get_term_meta( $row->term_id, 'wprmp_ingredient_group', true );
 						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
+					case 'ingredient_unit':
+						$row->plural = get_term_meta( $row->term_id, 'wprm_ingredient_unit_plural', true );
+						break;
 					case 'equipment':
 						$row->affiliate_html = get_term_meta( $row->term_id, 'wprmp_equipment_affiliate_html', true );
 						$row->amazon_asin = get_term_meta( $row->term_id, 'wprmp_amazon_asin', true );
@@ -544,7 +547,17 @@ class WPRM_Api_Manage_Taxonomies {
 							foreach ( $ingredient_group['ingredients'] as $ingredient ) {
 								if ( isset( $ingredient['unit_id'] ) && intval( $ingredient['unit_id'] ) === $old_term->term_id ) {
 									$ingredient['unit_id'] = $new_term->term_id;
-									$ingredient['unit'] = $new_term->name;
+									$new_name = $new_term->name;
+
+									// Check if we need to use plural.
+									if ( 1.0 !== floatval( $ingredient['amount'] ) ) {
+										$plural = get_term_meta( $new_term->term_id, 'wprm_ingredient_unit_plural', true );
+
+										if ( $plural ) {
+											$new_name = $plural;
+										}
+									}
+									$ingredient['unit'] = $new_name;
 
 									$new_ingredient_unit_ids[] = intval( $ingredient['unit_id'] );
 								}
@@ -554,7 +567,18 @@ class WPRM_Api_Manage_Taxonomies {
 									foreach ( $ingredient['converted'] as $system => $conversion ) {
 										if ( isset( $ingredient['converted'][ $system ]['unit_id'] ) && intval( $ingredient['converted'][ $system ]['unit_id'] ) === $old_term->term_id ) {
 											$ingredient['converted'][ $system ]['unit_id'] = $new_term->term_id;
-											$ingredient['converted'][ $system ]['unit'] = $new_term->name;
+
+											$new_name = $new_term->name;
+
+											// Check if we need to use plural.
+											if ( 1.0 !== floatval( $ingredient['converted'][ $system ]['amount'] ) ) {
+												$plural = get_term_meta( $new_term->term_id, 'wprm_ingredient_unit_plural', true );
+
+												if ( $plural ) {
+													$new_name = $plural;
+												}
+											}
+											$ingredient['converted'][ $system ]['unit'] = $new_name;
 
 											$new_ingredient_unit_ids[] = intval( $ingredient['converted'][ $system ]['unit_id'] );
 										}

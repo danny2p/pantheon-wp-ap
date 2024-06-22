@@ -25,7 +25,7 @@ class WPRM_Rating_Database {
 	 * @access   private
 	 * @var      mixed $database_version Current version of the rating database structure.
 	 */
-	private static $database_version = '3.0';
+	private static $database_version = '4.0';
 
 	/**
 	 * Fields in the rating database table.
@@ -34,7 +34,7 @@ class WPRM_Rating_Database {
 	 * @access   private
 	 * @var      mixed $fields Fields in the rating database table.
 	 */
-	private static $fields = array( 'id', 'date', 'recipe_id', 'comment_id', 'user_id', 'ip', 'rating', 'approved' );
+	private static $fields = array( 'id', 'date', 'recipe_id', 'comment_id', 'user_id', 'ip', 'rating', 'approved', 'has_comment' );
 
 	/**
 	 * Cache for queries.
@@ -86,6 +86,7 @@ class WPRM_Rating_Database {
 		post_id bigint(20) unsigned NOT NULL,
 		comment_id bigint(20) unsigned NOT NULL,
 		approved tinyint(1) DEFAULT '1' NOT NULL,
+		has_comment tinyint(1) NULL,
 		user_id bigint(20) unsigned NOT NULL DEFAULT '0',
 		ip varchar(39) DEFAULT '' NOT NULL,
 		rating tinyint(1) DEFAULT '0' NOT NULL,
@@ -131,10 +132,14 @@ class WPRM_Rating_Database {
 		// Get post ID for comment.
 		$rating['post_id'] = 0;
 		$rating['approved'] = 1;
+		$rating['has_comment'] = 0;
 		if ( $rating['comment_id'] ) {
 			$comment = get_comment( $rating['comment_id'] );
 
 			if ( $comment ) {
+				$content = trim( $comment->comment_content );
+
+				$rating['has_comment'] = $content ? '1' : '0';
 				$rating['post_id'] = $comment->comment_post_ID;
 				$rating['approved'] = '1' === $comment->comment_approved || 'approve' === $comment->comment_approved ? 1 : 0;
 			} else {

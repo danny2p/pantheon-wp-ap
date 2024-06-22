@@ -27,95 +27,22 @@
 		} );
 	} );
 
-	/**
-	 * Transparent Header Bottom Border width
-	 */
-	wp.customize( 'astra-settings[transparent-header-main-sep]', function( value ) {
-		value.bind( function( border ) {
-
-			if( isAstraHFBuilderActive ) {
-
-				var selector = '';
-				var displayOn = (typeof ( wp.customize._value['astra-settings[transparent-header-on-devices]'] ) != 'undefined') ? wp.customize._value['astra-settings[transparent-header-on-devices]']._value : 'both';
-
-				switch( displayOn ) {
-					case 'both':
-						selector = '.ast-theme-transparent-header #ast-desktop-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"], .ast-theme-transparent-header.ast-header-break-point #ast-mobile-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-					case 'desktop':
-						selector = '.ast-theme-transparent-header #ast-desktop-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-					case 'mobile':
-						selector = '.ast-theme-transparent-header.ast-header-break-point #ast-mobile-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-				}
-
-				var dynamicStyle = selector + '{';
-				dynamicStyle += 'border-bottom-width: ' + border + 'px';
-				dynamicStyle += '}';
-
-				astra_add_dynamic_css( 'transparent-header-main-sep', dynamicStyle );
-
-			} else {
-
-				var dynamicStyle = ' body.ast-theme-transparent-header.ast-header-break-point .main-header-bar { border-bottom-width: ' + border + 'px } ';
-
-				dynamicStyle += 'body.ast-theme-transparent-header.ast-desktop .main-header-bar {';
-				dynamicStyle += 'border-bottom-width: ' + border + 'px';
-				dynamicStyle += '}';
-
-				astra_add_dynamic_css( 'transparent-header-main-sep', dynamicStyle );
-			}
-		} );
-	} );
-
-	/**
-	 * Transparent Header Bottom Border color
-	 */
-	wp.customize( 'astra-settings[transparent-header-main-sep-color]', function( value ) {
-		value.bind( function( color ) {
-			if (color == '') {
-				wp.customize.preview.send( 'refresh' );
-			}
-
-			if( isAstraHFBuilderActive ) {
-
-				var selector = '';
-				var displayOn = (typeof ( wp.customize._value['astra-settings[transparent-header-on-devices]'] ) != 'undefined') ? wp.customize._value['astra-settings[transparent-header-on-devices]']._value : 'both';
-
-				switch( displayOn ) {
-					case 'both':
-						selector = '.ast-theme-transparent-header #ast-desktop-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"], .ast-theme-transparent-header.ast-header-break-point #ast-mobile-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-					case 'desktop':
-						selector = '.ast-theme-transparent-header #ast-desktop-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-					case 'mobile':
-						selector = '.ast-theme-transparent-header.ast-header-break-point #ast-mobile-header > [CLASS*="-header-wrap"]:nth-last-child(2) > [CLASS*="-header-bar"]';
-					break;
-				}
-
-				var dynamicStyle = selector + '{';
-				dynamicStyle += 'border-bottom-color: ' + color;
-				dynamicStyle += '}';
-
-				astra_add_dynamic_css( 'transparent-header-main-sep-color', dynamicStyle );
-			} else {
-
-				var dynamicStyle = ' body.ast-theme-transparent-header.ast-desktop .main-header-bar { border-bottom-color: ' + color + '; } ';
-					dynamicStyle += ' body.ast-theme-transparent-header.ast-header-break-point .main-header-bar { border-bottom-color: ' + color + '; } ';
-
-				astra_add_dynamic_css( 'transparent-header-main-sep-color', dynamicStyle );
-			}
-
-		} );
-	} );
-
+	// Transparent header for device.
+	const device = AstraBuilderTransparentData.transparent_header_devices;
+	let deviceSelector = '';
+	switch( device ) {
+		case 'mobile' :
+			deviceSelector = '.ast-header-break-point';
+			break;
+		case 'desktop' :
+			deviceSelector = ':not(.ast-header-break-point)';
+			break;
+	}
 
 	/* Transparent Header Colors */
 	astra_color_responsive_css( 'colors-background', 'astra-settings[primary-menu-a-bg-color-responsive]', 	'background-color', 	'.main-header-menu .current-menu-item > .menu-link, .main-header-menu .current-menu-ancestor > .menu-link,.ast-header-sections-navigation .menu-item.current-menu-item > .menu-link,.ast-header-sections-navigation .menu-item.current-menu-ancestor > .menu-link' );
 
-	astra_color_responsive_css( 'transparent-primary-header', 'astra-settings[transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header .main-header-bar, .ast-theme-transparent-header.ast-header-break-point .main-header-bar-wrap .main-header-menu, .ast-theme-transparent-header.ast-header-break-point .main-header-bar-wrap .main-header-bar, .ast-theme-transparent-header.ast-header-break-point .ast-mobile-header-wrap .main-header-bar' );
+	astra_color_responsive_css( 'transparent-primary-header', 'astra-settings[transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header' + deviceSelector + ' .main-header-bar, .ast-theme-transparent-header.ast-header-break-point .main-header-bar-wrap .main-header-menu, .ast-theme-transparent-header' + deviceSelector + ' .main-header-bar-wrap .main-header-bar, .ast-theme-transparent-header' + ( device === 'both' ? '.ast-header-break-point' : deviceSelector ) + ' .ast-mobile-header-wrap .main-header-bar' );
 	astra_color_responsive_css( 'transparent-primary-header', 'astra-settings[transparent-header-color-site-title-responsive]', 'color', '.ast-theme-transparent-header .site-title a, .ast-theme-transparent-header .site-title a:focus, .ast-theme-transparent-header .site-title a:hover, .ast-theme-transparent-header .site-title a:visited, .ast-theme-transparent-header .site-header .site-description' );
 	astra_color_responsive_css( 'transparent-primary-header', 'astra-settings[transparent-header-color-h-site-title-responsive]', 'color', '.ast-theme-transparent-header .site-header .site-title a:hover' );
 
@@ -140,10 +67,8 @@
 	// Primary Content Section link hover color
 	astra_color_responsive_css( 'transparent-primary-header', 'astra-settings[transparent-content-section-link-h-color-responsive]', 'color', '.ast-theme-transparent-header div.ast-masthead-custom-menu-items a:hover, .ast-theme-transparent-header div.ast-masthead-custom-menu-items .widget a:hover, .ast-theme-transparent-header .site-header-section [CLASS*="ast-header-html-"] .ast-builder-html-element a:hover' );
 
-
-
 	// Above Header Menu
-	astra_color_responsive_css( 'transparent-above-header', 'astra-settings[transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header .ast-above-header-wrap .ast-above-header' );
+	astra_color_responsive_css( 'transparent-above-header', 'astra-settings[hba-transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header' + deviceSelector + ' .ast-above-header-wrap .ast-above-header, .ast-theme-transparent-header.ast-header-break-point .ast-above-header-wrap .main-header-menu' );
 
 	astra_color_responsive_css( 'transparent-above-header', 'astra-settings[transparent-menu-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header .ast-above-header-menu, .ast-theme-transparent-header.ast-header-break-point .ast-above-header-section-separated .ast-above-header-navigation ul, .ast-flyout-above-menu-enable.ast-header-break-point.ast-theme-transparent-header .ast-above-header-navigation-wrap .ast-above-header-navigation, .ast-fullscreen-above-menu-enable.ast-header-break-point.ast-theme-transparent-header .ast-above-header-section-separated .ast-above-header-navigation-wrap' );
 	astra_color_responsive_css( 'transparent-above-header', 'astra-settings[transparent-menu-color-responsive]', 'color', '.ast-theme-transparent-header .ast-above-header-navigation a, .ast-header-break-point.ast-theme-transparent-header .ast-above-header-navigation a, .ast-header-break-point.ast-theme-transparent-header .ast-above-header-navigation > ul.ast-above-header-menu > .menu-item-has-children:not(.current-menu-item) > .ast-menu-toggle' );
@@ -161,7 +86,7 @@
 	astra_color_responsive_css( 'transparent-above-header', 'astra-settings[transparent-content-section-link-h-color-responsive]', 'color', '.ast-theme-transparent-header .ast-above-header-section .user-select a:hover, .ast-theme-transparent-header .ast-above-header-section .widget a:hover' );
 
 	// below Header Menu
-	astra_color_responsive_css( 'transparent-below-header', 'astra-settings[transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header .ast-below-header-wrap .ast-below-header' );
+	astra_color_responsive_css( 'transparent-below-header', 'astra-settings[hbb-transparent-header-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header' + deviceSelector + ' .ast-below-header-wrap .ast-below-header, .ast-theme-transparent-header.ast-header-break-point .ast-below-header-wrap .main-header-menu' );
 
 	astra_color_responsive_css( 'transparent-below-header', 'astra-settings[transparent-menu-bg-color-responsive]', 'background-color', '.ast-theme-transparent-header.ast-no-toggle-below-menu-enable.ast-header-break-point .ast-below-header-navigation-wrap, .ast-theme-transparent-header .ast-below-header-actual-nav, .ast-theme-transparent-header.ast-header-break-point .ast-below-header-actual-nav, .ast-flyout-below-menu-enable.ast-header-break-point.ast-theme-transparent-header .ast-below-header-navigation-wrap .ast-below-header-actual-nav, .ast-fullscreen-below-menu-enable.ast-header-break-point.ast-theme-transparent-header .ast-below-header-section-separated .ast-below-header-navigation-wrap' );
 	astra_color_responsive_css( 'transparent-below-header', 'astra-settings[transparent-menu-color-responsive]', 'color', '.ast-theme-transparent-header .ast-below-header-menu, .ast-theme-transparent-header .ast-below-header-menu a, .ast-header-break-point.ast-theme-transparent-header .ast-below-header-menu a, .ast-header-break-point.ast-theme-transparent-header .ast-below-header-menu' );

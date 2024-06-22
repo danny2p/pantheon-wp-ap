@@ -1,3 +1,54 @@
+v4.7.1
+- New: Social Icons - Introduced "Nextdoor" & "WeChat" icons in the social icons list.
+- New: Added an option to disable page structure and meta elements on the site's front page.
+- Improvement: Option to add separate background color for the transparent header's above, main and below headers.
+- Improvement: Updated Starter Templates brand logo under theme dashboard.
+- Improvement: Removed default rel="nofollow" from duplicated menu links & added filter `astra_disable_nofollow_markup` to enable it.
+- Fix: The Underline Content Links option is not working for links under WooCommerce product short description.
+- Fix: Console error related to inner block with GeoDirectory and The Events Calendar plugins.
+- Fix: Blog - Read More structure's sub-section appears to be empty if Astra Addon's Blog Pro addon is disabled.
+- Fix: Block Editor - There is inconsistency between editor & frontend Google Fonts.
+- Fix: WooCommerce - Cart - Background color not applying to dropdown style on the frontend.
+- Fix: Header Builder - Toggle button don't work when the primary header is disabled via meta setting.
+- Fix: Header Builder - Toggle button not functioning when custom header is enabled partially for display devices.
+- Fix: Site Identity - Logo image width setting fails to resize beyond original image dimensions.
+- Fix: Admin Dashboard - Activation of Recommended & Useful Plugins from dashboard skips the activation hooks.
+
+v4.7.0
+- New: Header Builder - Introducing Header Presets for a quick start with pre-designed headers. ( https://wpastra.com/docs/header-presets/ )
+- New: Header Builder - Introducing "Logo SVG Icon" option in "Header Builder > Site Title & Logo". ( https://wpastra.com/docs/logo-svg-icon/ )
+- Improvement: Updated "Useful Plugins" recommendations on the theme Dashboard for better site owner's experience.
+- Improvement: Making EDD downloadable product featured image by default enable.
+- Improvement: Switched input field to dropdown menu for Link REL, making it easier to choose options.
+- Fix: WooCommerce - The layout type not working on the categories page having 0 products.
+- Fix: Header Builder - Account element is overlapping with the header menu on responsive devices.
+- Fix: Image Block - UI misaligned issue when the alignment set as Left or Right.
+- Fix: WooCommerce - Quantity Selector - With increasing/decreasing quantity there is a violating node error.
+- Fix: All headings created by the Heading block in the widget areas had no difference in font size.
+
+v4.6.16
+- Fix: If dashboard gets white labelled from addon, screen turns blank.
+- Fix: PHP uncaught type error with in_array() due to astra_add_aria_expanded_submenu_items_attr() function.
+- Fix: Transparent Header - Bottom border logic refined for consideration of last header row as bottom border.
+
+v4.6.15
+- New: Introduced color palette for background image overlay option to sync overlay-color with Global Color Palette.
+- New: Introduced separate overlay opacity setting for background image overlay option to control opacity when overlay-color synced with Global Color Palette.
+- New: Header Builder - Account Element - Introducing a new option to show Text along with Icon / Avatar.
+- Improvement: Added aria-expanded attribute for menu items to improve accessibility.
+- Improvement: Responsive device logo support added to the Site Logo block.
+- Improvement: Off-Canvas section in Flyout/Full-Screen affecting the source code even with custom header.
+- Improvement: Replaced default Whats New section with the Whats New Library for better consistency and performance.
+- Improvement: Added object-fit cover styling to the single post featured image while the Image ratio is set to custom.
+- Fix: Changing the logo width increase the logo height inside the customizer settings.
+- Fix: Blog/Archive - Column layouts break the sizes of post structures which are built by Beaver Themer column modal.
+- Fix: The plus icons are not displaying in customizer when using Spectra's grid builder under widget area.
+- Fix: Resolved an issue where theme activation caused infinite loop on BuddyPress member login page loading login form.
+- Fix: The Post Filter design tab styling options not showing.
+- Fix: Asterisk(*) symbol visible on comment form even after disabling the settings.
+- Fix: Submenu divider adding unintended bottom border to last menu item.
+- Fix: Customizer's few controls are misaligned with the Russian language setup.
+
 v4.6.14
 - Improvement: Improved accessibility for navigational menus.
 - Improvement: Header Builder - Menu - Navigation creates duplicated identical links.

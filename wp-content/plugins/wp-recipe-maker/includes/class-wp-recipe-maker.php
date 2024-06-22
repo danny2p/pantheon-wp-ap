@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.4.3' );
+		define( 'WPRM_VERSION', '9.5.1' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -171,6 +171,9 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/menu/class-wprm-admin-menu-preview.php' );
 			require_once( WPRM_DIR . 'includes/admin/menu/class-wprm-admin-menu.php' );
 
+			// Reports.
+			require_once( WPRM_DIR . 'includes/admin/reports/class-wprm-reports-recipe-interactions.php' );
+
 			// Tools.
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-anonymize-ratings.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-create-lists.php' );
@@ -194,6 +197,7 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-modal.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-notices.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-privacy.php' );
+			require_once( WPRM_DIR . 'includes/admin/class-wprm-reports-manager.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-tools-manager.php' );
 		}
 	}

@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  *
- * @return array
+ * @return array{label: string, status: string, badge: array{label: string, color: string}, description: string, actions: string, test: string} Result.
  */
-function perflab_aao_autoloaded_options_test() {
+function perflab_aao_autoloaded_options_test(): array {
 
 	$autoloaded_options_size  = perflab_aao_autoloaded_options_size();
 	$autoloaded_options_count = count( wp_load_alloptions() );
@@ -73,7 +73,7 @@ function perflab_aao_autoloaded_options_test() {
 	$result['description'] = apply_filters( 'perflab_aao_autoloaded_options_limit_description', $result['description'] );
 
 	$result['actions'] = sprintf(
-	/* translators: 1: HelpHub URL. 2: Link description. */
+		/* translators: 1: HelpHub URL. 2: Link description. */
 		'<p><a target="_blank" href="%1$s">%2$s</a></p>',
 		esc_url( __( 'https://wordpress.org/support/article/optimization/#autoloaded-options', 'performance-lab' ) ),
 		__( 'More info about performance optimization', 'performance-lab' )
@@ -95,24 +95,26 @@ function perflab_aao_autoloaded_options_test() {
  *
  * @since 1.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
- *
  * @return int autoloaded data in bytes.
  */
-function perflab_aao_autoloaded_options_size() {
-	global $wpdb;
+function perflab_aao_autoloaded_options_size(): int {
+	/**
+	 * External object cache plugins may return mixed values including arrays and objects instead of them being serialized.
+	 *
+	 * @var array<string, string|array<int|string, mixed>|object> $all_options
+	 */
+	$all_options = wp_load_alloptions();
 
-	$autoload_values = perflab_aao_get_autoload_values_to_autoload();
+	$total_length = 0;
 
-	return (int) $wpdb->get_var(
-		$wpdb->prepare(
-			sprintf(
-				"SELECT SUM(LENGTH(option_value)) FROM $wpdb->options WHERE autoload IN (%s)",
-				implode( ',', array_fill( 0, count( $autoload_values ), '%s' ) )
-			),
-			$autoload_values
-		)
-	);
+	foreach ( $all_options as $option_value ) {
+		if ( is_array( $option_value ) || is_object( $option_value ) ) {
+			$option_value = serialize( $option_value ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
+		}
+		$total_length += strlen( (string) $option_value );
+	}
+
+	return $total_length;
 }
 
 /**
@@ -120,12 +122,9 @@ function perflab_aao_autoloaded_options_size() {
  *
  * @since 1.5.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
- *
- * @return array Autoloaded data as option names and their sizes.
+ * @return array<object{option_name: string, option_value_length: int}> Autoloaded data as option names and their sizes.
  */
-function perflab_aao_query_autoloaded_options() {
-	global $wpdb;
+function perflab_aao_query_autoloaded_options(): array {
 
 	/**
 	 * Filters the threshold for an autoloaded option to be considered large.
@@ -141,17 +140,27 @@ function perflab_aao_query_autoloaded_options() {
 	 */
 	$option_threshold = apply_filters( 'perflab_aao_autoloaded_options_table_threshold', 100 );
 
-	$autoload_values = perflab_aao_get_autoload_values_to_autoload();
+	$all_options = wp_load_alloptions();
 
-	return $wpdb->get_results(
-		$wpdb->prepare(
-			sprintf(
-				"SELECT option_name, LENGTH(option_value) AS option_value_length FROM {$wpdb->options} WHERE autoload IN (%s)",
-				implode( ',', array_fill( 0, count( $autoload_values ), '%s' ) )
-			) . ' AND LENGTH(option_value) > %d ORDER BY option_value_length DESC LIMIT 20',
-			array_merge( $autoload_values, array( $option_threshold ) )
-		)
+	$large_options = array();
+
+	foreach ( $all_options as $option_name => $option_value ) {
+		if ( strlen( $option_value ) > $option_threshold ) {
+			$large_options[] = (object) array(
+				'option_name'         => $option_name,
+				'option_value_length' => strlen( $option_value ),
+			);
+		}
+	}
+
+	usort(
+		$large_options,
+		static function ( $a, $b ) {
+			return $b->option_value_length - $a->option_value_length;
+		}
 	);
+
+	return array_slice( $large_options, 0, 20 );
 }
 
 /**
@@ -161,7 +170,7 @@ function perflab_aao_query_autoloaded_options() {
  *
  * @return string HTML formatted table.
  */
-function perflab_aao_get_autoloaded_options_table() {
+function perflab_aao_get_autoloaded_options_table(): string {
 	$autoload_summary = perflab_aao_query_autoloaded_options();
 
 	$html_table = sprintf(
@@ -197,28 +206,35 @@ function perflab_aao_get_autoloaded_options_table() {
  *
  * @since 3.0.0
  *
- * @global wpdb $wpdb WordPress database abstraction object.
- *
  * @return string HTML formatted table.
  */
-function perflab_aao_get_disabled_autoloaded_options_table() {
-	global $wpdb;
-
+function perflab_aao_get_disabled_autoloaded_options_table(): string {
 	$disabled_options = get_option( 'perflab_aao_disabled_options', array() );
 
-	if ( empty( $disabled_options ) ) {
+	if ( ! is_array( $disabled_options ) ) {
 		return '';
 	}
 
-	$disabled_options_summary = $wpdb->get_results(
-		$wpdb->prepare(
-			sprintf(
-				"SELECT option_name, LENGTH(option_value) AS option_value_length FROM $wpdb->options WHERE option_name IN (%s) ORDER BY option_value_length DESC",
-				implode( ',', array_fill( 0, count( $disabled_options ), '%s' ) )
-			),
-			$disabled_options
-		)
-	);
+	$disabled_options_summary = array();
+	wp_prime_option_caches( $disabled_options );
+
+	foreach ( $disabled_options as $option_name ) {
+		if ( ! is_string( $option_name ) ) {
+			continue;
+		}
+		$option_value = get_option( $option_name );
+
+		if ( false !== $option_value ) {
+			$option_length                            = strlen( maybe_serialize( $option_value ) );
+			$disabled_options_summary[ $option_name ] = $option_length;
+		}
+	}
+
+	if ( count( $disabled_options_summary ) === 0 ) {
+		return '';
+	}
+
+	arsort( $disabled_options_summary );
 
 	$html_table = sprintf(
 		'<p>%s</p><table class="widefat striped"><thead><tr><th scope="col">%s</th><th scope="col">%s</th><th scope="col">%s</th></tr></thead><tbody>',
@@ -229,21 +245,23 @@ function perflab_aao_get_disabled_autoloaded_options_table() {
 	);
 
 	$nonce = wp_create_nonce( 'perflab_aao_update_autoload' );
-	foreach ( $disabled_options_summary as $value ) {
+
+	foreach ( $disabled_options_summary as $option_name => $option_length ) {
 		$url            = esc_url_raw(
 			add_query_arg(
 				array(
 					'action'      => 'perflab_aao_update_autoload',
 					'_wpnonce'    => $nonce,
-					'option_name' => $value->option_name,
+					'option_name' => $option_name,
 					'autoload'    => 'true',
 				),
 				admin_url( 'site-health.php' )
 			)
 		);
 		$disable_button = sprintf( '<a class="button" href="%s">%s</a>', esc_url( $url ), esc_html__( 'Revert to Autoload', 'performance-lab' ) );
-		$html_table    .= sprintf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $value->option_name ), size_format( $value->option_value_length, 2 ), $disable_button );
+		$html_table    .= sprintf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $option_name ), size_format( $option_length, 2 ), $disable_button );
 	}
+
 	$html_table .= '</tbody></table>';
 
 	return $html_table;
@@ -254,9 +272,9 @@ function perflab_aao_get_disabled_autoloaded_options_table() {
  *
  * @since 3.0.0
  *
- * @return array List of autoload values.
+ * @return string[] List of autoload values.
  */
-function perflab_aao_get_autoload_values_to_autoload() {
+function perflab_aao_get_autoload_values_to_autoload(): array {
 	if ( function_exists( 'wp_autoload_values_to_autoload' ) ) {
 		return wp_autoload_values_to_autoload();
 	}

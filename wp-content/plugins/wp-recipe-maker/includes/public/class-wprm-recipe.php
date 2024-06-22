@@ -194,7 +194,14 @@ class WPRM_Recipe {
 		$recipe['name'] = $this->name();
 		$recipe['slug'] = $this->slug();
 
-		$recipe['servings'] = $this->servings();
+		// Servings related data.
+		$recipe['originalServings'] = $this->servings();
+		$recipe['originalServingsParsed'] = WPRM_Recipe_Parser::parse_quantity( $this->servings() );
+		$recipe['currentServings'] = $recipe['originalServings'];
+		$recipe['currentServingsParsed'] = $recipe['originalServingsParsed'];
+		$recipe['currentServingsFormatted'] = $recipe['originalServings'];
+		$recipe['currentServingsMultiplier'] = 1;
+
 		$recipe['rating'] = $this->rating();
 
 		return apply_filters( 'wprm_recipe_frontend_data', $recipe, $this );

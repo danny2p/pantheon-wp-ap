@@ -15,6 +15,11 @@ window.WPRecipeMaker.recipe = {
 		}
 	},
 	initFeatures: ( args = {} ) => {
+		// If we're initting a specific recipe, reset it first.
+		if ( args.hasOwnProperty( 'id' ) ) {
+			window.WPRecipeMaker.manager.resetRecipe( args.id );
+		}
+
 		if ( window.WPRecipeMaker ) {
 			if ( window.WPRecipeMaker.hasOwnProperty( 'advancedServings' ) ) {
 				window.WPRecipeMaker.advancedServings.init();
@@ -22,14 +27,14 @@ window.WPRecipeMaker.recipe = {
 			if ( window.WPRecipeMaker.hasOwnProperty( 'quantities' ) ) {
 				window.WPRecipeMaker.quantities.init();
 	
-				if ( args.hasOwnProperty( 'id' ) ) {
-					window.WPRecipeMaker.quantities.initRecipe( args.id );
-	
+				if ( args.hasOwnProperty( 'id' ) ) {	
 					if ( args.hasOwnProperty( 'servings' ) ) {
 						const servings = parseInt( args.servings );
 	
 						if ( servings ) {
-							window.WPRecipeMaker.quantities.setServings( args.id, servings );
+							setTimeout( () => {
+								window.WPRecipeMaker.quantities.setServings( args.id, servings );
+							}, 100 );
 						}
 					}
 				}

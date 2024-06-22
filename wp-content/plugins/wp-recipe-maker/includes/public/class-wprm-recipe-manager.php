@@ -504,8 +504,11 @@ class WPRM_Recipe_Manager {
 	 *
 	 * @since	8.10.0
 	 */
-	public static function recipe_data_in_footer() {
-		$recipes = apply_filters( 'wprm_recipes_on_page', array() );
+	public static function recipe_data_in_footer( $recipe_ids = array() ) {
+		// add_action will pass along empty string, so make sure we have an array.
+		$recipe_ids = is_array( $recipe_ids ) ? $recipe_ids : array();
+
+		$recipes = apply_filters( 'wprm_recipes_on_page', $recipe_ids );
 
 		if ( $recipes ) {
 			$recipe_data = array();

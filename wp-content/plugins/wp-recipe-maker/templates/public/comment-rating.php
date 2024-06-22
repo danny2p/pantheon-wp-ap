@@ -25,7 +25,10 @@ if ( WPRM_Settings::get( 'performance_use_combined_stars' ) ) :
 <?php endif; // WP Rocket lazy loading. ?>
 <?php else :
 
-$padding = intval( WPRM_Settings::get( 'comment_rating_star_padding' ) );
+// Use padding from settings but allow overriding if already set.
+if ( ! isset( $padding ) ) {
+	$padding = intval( WPRM_Settings::get( 'comment_rating_star_padding' ) );
+}
 $padding = 0 < $padding ? $padding : 0;	
 
 $container_style = $padding ? ' style="margin: 0 -' . $padding . 'px;"' : '';

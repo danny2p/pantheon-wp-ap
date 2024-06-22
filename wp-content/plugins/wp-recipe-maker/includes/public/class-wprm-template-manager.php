@@ -461,6 +461,11 @@ class WPRM_Template_Manager {
 				return self::get_template_by_type( 'single', $recipe_type );
 			}
 
+			// Still no slug found? Fall back to single template, but prevent infinite loop.
+			if ( false === $template_slug && 'single' !== $type ) {
+				return self::get_template_by_type( 'single', $recipe_type );
+			}
+
 			$template = self::get_template_by_slug( $template_slug );
 		}
 

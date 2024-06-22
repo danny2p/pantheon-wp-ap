@@ -110,6 +110,13 @@ class WPRM_Api_Manage_Ratings {
 							$args['filter'][] = 'approved = 0';
 						}
 						break;
+					case 'has_comment':
+						if ( 'yes' === $value ) {
+							$args['filter'][] = 'has_comment = 1';
+						} elseif ( 'no' === $value ) {
+							$args['filter'][] = 'has_comment = 0';
+						}
+						break;
 					case 'user_id':
 						$args['filter'][] = 'user_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
 						break;

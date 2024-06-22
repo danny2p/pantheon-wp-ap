@@ -82,8 +82,8 @@ class WPRM_Print {
 
 			// Convert slug to ID if we're printing a single recipe.
 			if ( 'recipe' === $print_args[0] && 'slug' === WPRM_Settings::get( 'print_recipe_identifier' ) ) {
-				// Don't do anything if it's actually an ID.
-				if ( '' . intval( $print_args[1] ) !== $print_args[1] ) {
+				// Don't do anything if it's actually an ID. Unless that ID is not actually a recipe.
+				if ( '' . intval( $print_args[1] ) !== $print_args[1] || WPRM_POST_TYPE !== get_post_type( intval( $print_args[1] ) ) ) {
 					$slug = $print_args[1];
 
 					// Test with wprm- prefix first, as that could have been removed.
@@ -104,6 +104,7 @@ class WPRM_Print {
 			$output = apply_filters( 'wprm_print_output', array(
 				'type' => false,
 				'assets' => array(),
+				'recipe_ids' => array(),
 				''
 			), $print_args );
 			$prevent_from_getting_output = ob_get_contents();
@@ -210,9 +211,10 @@ class WPRM_Print {
 				$output['header'] = self::print_header_images( $recipe );
 				$output['type'] = 'recipe';
 				$output['recipe'] = $recipe;
+				$output['recipe_ids'][] = $recipe_id;
 				$output['title'] = $recipe->name() . ' - ' . get_bloginfo( 'name' );
 				$output['url'] = $recipe->permalink();
-				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '" data-recipe-unit-system="' . esc_attr( $recipe->unit_system() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print', $template['slug'] ) . '</div>';
+				$output['html'] = '<div id="wprm-print-recipe-0" data-recipe-id="' . $recipe_id . '" class="wprm-print-recipe wprm-print-recipe-' . $recipe_id . '"  data-servings="' . esc_attr( $recipe->servings() ) . '">' . WPRM_Template_Manager::get_template( $recipe, 'print', $template['slug'] ) . '</div>';
 			}
 		}
 
@@ -277,7 +279,12 @@ class WPRM_Print {
 						$recipe_template = str_replace( 'wprm-recipe-adjustable-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-adjustable-servings-' . $uid . '-container', $recipe_template );
 						$recipe_template = str_replace( 'wprm-recipe-advanced-servings-' . $unique_recipe['id'] . '-container', 'wprm-recipe-advanced-servings-' . $uid . '-container', $recipe_template );
 
-						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '" data-recipe-unit-system="' . esc_attr( $recipe->unit_system() ) . '">' . $recipe_template . '</div>';
+						// Update ID for linked ingriedents.
+						$recipe_template = str_replace( 'wprm-recipe-instruction-ingredient-' . $unique_recipe['id'] . '-', 'wprm-recipe-instruction-ingredient-' . $uid . '-', $recipe_template );
+						$recipe_template = str_replace( 'wprm-inline-ingredient-' . $unique_recipe['id'] . '-', 'wprm-inline-ingredient-' . $uid . '-', $recipe_template );
+
+						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '">' . $recipe_template . '</div>';
+						$output['recipe_ids'][] = $unique_recipe['id'];
 						$uid++;
 					}
 				}
