@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.5
 Requires PHP: 5.4
-Stable tag: 9.5.1
+Stable tag: 9.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.5.3 =
+* Fix: Fatal error in settings
+
+= 9.5.2 =
+* Fix: Scheduling of recipes when their post type is public
+
 = 9.5.1 =
 * Fix: Interpretation of thousands separator when using decimal comma
 
@@ -269,6 +275,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.5.3 =
+Prevents fatal error
+
+= 9.5.2 =
+Fixes a few small issues
+
 = 9.5.1 =
 Fixes a few small issues
 

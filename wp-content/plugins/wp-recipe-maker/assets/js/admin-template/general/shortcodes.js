@@ -8,6 +8,7 @@ const contentShortcodes = [
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
 const ignoreShortcodes = [
     'wprm-recipe-my-emissions-label',
+    'wprm-recipe-shop-instacart',
 ];
 
 // Sort shortcodes for "Add Blocks" section.

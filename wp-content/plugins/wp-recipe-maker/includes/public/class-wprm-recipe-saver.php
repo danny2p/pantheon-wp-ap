@@ -204,6 +204,13 @@ class WPRM_Recipe_Saver {
 
 			if ( isset( $recipe['date'] ) && $recipe['date'] ) {
 				$post['post_date'] = $recipe['date'];
+				$post['post_date_gmt'] = get_gmt_from_date( $recipe['date'] );
+
+				// If date is in the future, post status should be future.
+				$post_date_timestamp = strtotime( $post['post_date'] );
+				if ( $post_date_timestamp && time() < $post_date_timestamp ) {
+					$recipe['post_status'] = 'future';
+				}
 			}
 	
 			if ( isset( $recipe['post_status'] ) && $recipe['post_status'] ) {
@@ -219,7 +226,6 @@ class WPRM_Recipe_Saver {
 						$post['post_date_gmt'] = gmdate( 'Y-m-d H:i:s',  $current_timestamp );
 					}
 				}
-
 			} else {
 				if ( isset( $recipe['name'] ) ) {
 					// Don't use wprm- in front by default for "public" recipe type.
