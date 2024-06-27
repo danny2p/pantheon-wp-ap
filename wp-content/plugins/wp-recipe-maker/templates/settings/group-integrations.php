@@ -1,4 +1,12 @@
 <?php
+
+$home_url = home_url();
+$current_user_email = '?';
+$current_user = function_exists( 'wp_get_current_user' ) ? wp_get_current_user() : false;
+if ( $current_user ) {
+	$current_user_email = $current_user->user_email;
+}
+
 $integrations = array(
 	'id' => 'integrations',
 	'icon' => 'plug',
@@ -124,6 +132,20 @@ $integrations = array(
 						'value' => '',
 						'type' => 'inverse',
 					),
+				),
+			),
+		),
+		array(
+			'name' => __( 'Your own Recipe App with NAKKO Recipe to App', 'wp-recipe-maker' ),
+			'description' => 'Provide your users with a dedicated app to increase traffic and foster loyalty. Our native apps, available for both iOS and Android, seamlessly integrate with your WP Recipe Maker backend, offering an outstanding mobile experience for your visitors. Additionally, an app store presence enhances your brand visibility and you can take advantage of the profitable monetization opportunities available within the app. Ensure your website is optimized and compatible with our services for converting your recipe site into a mobile app by performing a free preliminary compatibility scan.',
+			'documentation' => 'https://recipetoapp.com',
+			'settings' => array(
+				array(
+					'name' => '',
+					'description' => __( 'Click the button to the right to request the free compatibility check.', 'wp-recipe-maker' ),
+					'type' => 'button',
+					'button' => __( 'Do the Compatibility Check', 'wp-recipe-maker' ),
+					'link' => 'mailto:wprm@nakko.com?subject=RecipeToApp%20for%20' . esc_url( $home_url ) . '&body=Domain%3A%20' . esc_url( $home_url ) . '%0AMy%20email%20address%3A%20' . urlencode( $current_user_email ) . '%0A%0AI%20would%20love%20to%20learn%20more%20about%20the%20RecipeToApp%20solution!',
 				),
 			),
 		),

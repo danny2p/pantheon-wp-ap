@@ -193,10 +193,14 @@ class WPRM_Recipe {
 		$recipe['type'] = $this->type();
 		$recipe['name'] = $this->name();
 		$recipe['slug'] = $this->slug();
+		$recipe['image_url'] = $this->image_url( 'full' );
 
 		// Servings related data.
 		$recipe['originalServings'] = $this->servings();
-		$recipe['originalServingsParsed'] = WPRM_Recipe_Parser::parse_quantity( $this->servings() );
+		
+		$parsed_servings = WPRM_Recipe_Parser::parse_quantity( $this->servings() );
+		$recipe['originalServingsParsed'] = is_numeric( $parsed_servings ) && 0 < $parsed_servings ? $parsed_servings : 1;
+
 		$recipe['currentServings'] = $recipe['originalServings'];
 		$recipe['currentServingsParsed'] = $recipe['originalServingsParsed'];
 		$recipe['currentServingsFormatted'] = $recipe['originalServings'];

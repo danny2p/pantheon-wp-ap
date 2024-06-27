@@ -333,11 +333,12 @@ class WPRM_Recipe_Sanitizer {
 			}
 
 			if ( isset( $recipe['date'] ) ) {
-				$format = 'Y-m-d\TH:i:s';
-				$datetime = DateTime::createFromFormat( $format, $recipe['date'] );
+				$datetime = false;
+				$datetime = $datetime ? $datetime : DateTime::createFromFormat( 'Y-m-d\TH:i:s', $recipe['date'] );
+				$datetime = $datetime ? $datetime : DateTime::createFromFormat( 'Y-m-d\TH:i', $recipe['date'] );
 
 				if ( $datetime ) {
-					$sanitized_recipe['date'] = $datetime->format( $format );
+					$sanitized_recipe['date'] = $datetime->format( 'Y-m-d H:i:s' );
 				}
 			}
 		}

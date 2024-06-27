@@ -90,6 +90,7 @@ class WPRM_Assets {
 			'user' => get_current_user_id(),
 			'endpoints' => array(
 				'analytics' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/analytics' ), '/' ),
+				'integrations' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/integrations' ), '/' ),
 				'manage' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/manage' ), '/' ),
 			),
 			'settings' => array(
@@ -196,6 +197,7 @@ class WPRM_Assets {
 				'modal' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/modal' ), '/' ),
 				'notices' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/notice' ), '/' ),
 				'analytics' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/analytics' ), '/' ),
+				'integrations' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/integrations' ), '/' ),
 				'custom_taxonomies' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/custom-taxonomies' ), '/' ),
 				'rating' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/rating' ), '/' ),
 				'setting' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/setting' ), '/' ),

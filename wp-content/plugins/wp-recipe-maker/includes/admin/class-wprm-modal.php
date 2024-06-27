@@ -257,6 +257,11 @@ class WPRM_Modal {
 			);
 		}
 
+		$options[] = array(
+			'value' => 'future',
+			'label' => __( 'Scheduled' ),
+		);
+
 		return $options;
 	}
 
