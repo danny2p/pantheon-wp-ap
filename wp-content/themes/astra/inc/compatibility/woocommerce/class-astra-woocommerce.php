@@ -2464,7 +2464,7 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 					array(
 						'.widget_product_search button' => array(
 							'flex'    => '0 0 auto',
-							'padding' => '10px 20px;',
+							'padding' => '10px 20px',
 						),
 					)
 				);
@@ -3391,11 +3391,6 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 			$cart_count = null !== WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
 			/** @psalm-suppress RedundantConditionGivenDocblockType */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			$aria_label = $cart_count > 0 ? "View Shopping Cart, {$cart_count} items" : 'View Shopping Cart, empty';
-
-			// Do not redirect to Cart Page in Customizer Preview & when 'Cart Page' option is not selected.
-			if ( is_customize_preview() && 'redirect' !== astra_get_option( 'woo-header-cart-click-action' ) ) {
-				$woo_cart_link = '#';
-			}
 
 			$cart_total_label_position = astra_get_option( 'woo-header-cart-icon-total-label-position' );
 			?>

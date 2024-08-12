@@ -3,8 +3,8 @@
 Contributors: husainahmedqureshi
 Tags: upload_max_filesize, post_max_size, max_upload_size, post max size, upload limit, upload file size more and more
 Donate link: https://www.paypal.com/cgi-bin/webscrcmd=_xclick&business=husain.ahmed25@gmail.com&item_name=Donation For Plugin
-Requires at least: 3.9
-Tested up to: 6.0
+Requires at least: 5.9
+Tested up to: 6.6.1
 Requires PHP: 7.1
 License: GPLv2 or later
 

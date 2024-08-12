@@ -3,7 +3,7 @@
  * Plugin Name:WP Upload Size
  * Description: Increase upload media file size in wordpress
  * Author:Husain Ahmed
- * Version: 2.0
+ * Version: 2.0.2
  * Author URI: https://husain25.wordpress.com/
  * Author Email: husain.ahmed25@gmail.com
  * License: HAQV1
