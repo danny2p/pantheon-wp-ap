@@ -2,7 +2,7 @@
 
 Contributors: wordpressdotorg
 Tested up to: 6.6
-Stable tag:   3.3.1
+Stable tag:   3.4.0
 License:      GPLv2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Tags:         performance, site health, measurement, optimization, diagnostics
@@ -11,7 +11,19 @@ Performance plugin from the WordPress Performance Team, which is a collection of
 
 == Description ==
 
-The Performance Lab plugin is a collection of features focused on enhancing performance of your site, most of which should eventually be merged into WordPress core. The plugin allows to individually enable and test the features to get their benefits before they become available in WordPress core, and to provide feedback to further improve the solutions.
+The Performance Lab plugin is a collection of features focused on enhancing performance of your site, most of which should eventually be merged into WordPress core. The plugin facilitates the discovery and activation of the individual performance feature plugins which the performance team is developing. In this way you can test the features to get their benefits before they become available in WordPress core. You can also play an important role by providing feedback to further improve the solutions. 
+
+The feature plugins which are currently featured by this plugin are:
+
+* [Image Placeholders](https://wordpress.org/plugins/dominant-color-images/)
+* [Modern Image Formats](https://wordpress.org/plugins/webp-uploads/)
+* [Performant Translations](https://wordpress.org/plugins/performant-translations/)
+* [Speculative Loading](https://wordpress.org/plugins/speculation-rules/)
+* [Embed Optimizer](https://wordpress.org/plugins/embed-optimizer/) _(experimental)_
+* [Enhanced Responsive Images](https://wordpress.org/plugins/auto-sizes/) _(experimental)_
+* [Image Prioritizer](https://wordpress.org/plugins/image-prioritizer/) _(experimental)_
+
+These plugins can also be installed separately from installing Performance Lab, but having the Performance Lab plugin also active will ensure you find out about new performance features as they are developed.
 
 == Installation ==
 
@@ -57,6 +69,18 @@ To report a security issue, please visit the [WordPress HackerOne](https://hacke
 Contributions are always welcome! Learn more about how to get involved in the [Core Performance Team Handbook](https://make.wordpress.org/performance/handbook/get-involved/).
 
 == Changelog ==
+
+= 3.4.0 =
+
+**Enhancements**
+
+* Remove Server-Timing metric for the autoloaded options query time. ([1456](https://github.com/WordPress/performance/pull/1456))
+
+**Bug Fixes**
+
+* Avoid sending Server-Timing header when buffer is being cleaned. ([1443](https://github.com/WordPress/performance/pull/1443))
+* Fix disabled options from reappearing in Site Health after external update. ([1374](https://github.com/WordPress/performance/pull/1374))
+* Improve Performance screen when external requests to WordPress.org fail. ([1474](https://github.com/WordPress/performance/pull/1474))
 
 = 3.3.1 =
 
