@@ -1,4 +1,4 @@
-name: Deploy (PR) to Pantheon
+name: (Auto) Deploy PR to Pantheon
 on:
   pull_request:
     types: [opened,edited,synchronize]

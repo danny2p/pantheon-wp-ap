@@ -1,4 +1,4 @@
-name: Deploy to Test
+name: (Manual) Deploy to Test
 on: 
   workflow_dispatch:
     inputs:
@@ -7,17 +7,17 @@ on:
         required: true
         type: choice
         options: 
-          - Yes
-          - No
-        default: Yes
+          - 'Yes'
+          - 'No'
+        default: 'Yes'
       do_notify:
         description: 'Notify Slack Deploy Channel?'
         required: true
         type: choice
         options: 
-          - Yes
-          - No
-        default: Yes
+          - 'Yes'
+          - 'No'
+        default: 'Yes'
 env:
   DO_BACKUP: ${{ github.event.inputs.do_backup }}
   DO_NOTIFY: ${{ github.event.inputs.do_notify }}
@@ -58,7 +58,7 @@ jobs:
         if  [ $DO_NOTIFY == "Yes" ]
         then
           # Tell slack we're starting this site
-          SLACK_START="Beginning ${SITE} TEST deployment workflow"
+          SLACK_START="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Beginning ${SITE} TEST deployment workflow"
           curl -X POST -H 'Content-type: application/json' --data "{'text':'${SLACK_START}'}" $SLACK_WEBHOOK
           echo -e "Starting ${SITE}";
         fi

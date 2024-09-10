@@ -1,4 +1,4 @@
-name: Deploy to Pantheon Dev
+name: (Auto) Deploy to Pantheon Dev
 on:
   push:
     branches:

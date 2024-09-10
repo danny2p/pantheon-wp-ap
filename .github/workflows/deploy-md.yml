@@ -1,4 +1,4 @@
-name: Deploy to Multidev
+name: (Auto) Deploy to Multidev
 on: 
   push:
     # branches-ignore: ["master", "main"]
