@@ -58,8 +58,8 @@ jobs:
         if  [ $DO_NOTIFY == "Yes" ]
         then
           # Tell slack we're starting this site
-          SLACK_START="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Beginning ${SITE} LIVE deployment workflow \n"
-          echo -e "Starting ${SITE}";
+          SLACK_START="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n Beginning ${PANTHEON_SITE} LIVE deployment workflow \n"
+          echo -e "Starting ${PANTHEON_SITE}";
         fi
 
         if  [ $DO_BACKUP == "Yes" ] 
@@ -68,14 +68,14 @@ jobs:
           # Backup DB prior to deploy, 30 day retention
           if  [ $DO_NOTIFY == "Yes" ]
           then
-            SLACK_START+="Backing up ${SITE} LIVE database before deploying"
+            SLACK_START+="Backing up ${PANTHEON_SITE} LIVE database before deploying"
           fi
           curl -X POST -H 'Content-type: application/json' --data "{'text':'${SLACK_START}'}" $SLACK_WEBHOOK
           terminus backup:create --element database --keep-for 30 -- $PANTHEON_SITE.live
         fi
         if  [ $DO_NOTIFY == "Yes" ]
         then
-          SLACK=""Deploying ${SITE} site code to LIVE"
+          SLACK=""Deploying ${PANTHEON_SITE} site code to LIVE"
           curl -X POST -H 'Content-type: application/json' --data "{'text':'${SLACK}'}" $SLACK_WEBHOOK
         fi
         terminus env:deploy --sync-content --note "Live Deployment from Github Actions" --cc --updatedb -- $PANTHEON_SITE.live
