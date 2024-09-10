@@ -75,7 +75,7 @@ jobs:
         fi
         if  [ $DO_NOTIFY == "Yes" ]
         then
-          SLACK=""Deploying ${PANTHEON_SITE} site code to LIVE"
+          SLACK="Deploying ${PANTHEON_SITE} site code to LIVE"
           curl -X POST -H 'Content-type: application/json' --data "{'text':'${SLACK}'}" $SLACK_WEBHOOK
         fi
         terminus env:deploy --sync-content --note "Live Deployment from Github Actions" --cc --updatedb -- $PANTHEON_SITE.live
