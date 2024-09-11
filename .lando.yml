@@ -1,0 +1,6 @@
+name: dp-wp-ap
+recipe: pantheon
+config:
+  framework: wordpress
+  site: dp-wp-ap
+  id: b5122a14-30ce-45a2-9026-2b2c739d61ef
