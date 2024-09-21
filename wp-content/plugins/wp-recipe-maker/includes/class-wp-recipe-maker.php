@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.5.3' );
+		define( 'WPRM_VERSION', '9.6.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -76,6 +76,7 @@ class WP_Recipe_Maker {
 
 		// API.
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-analytics.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-comments.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-custom-taxonomies.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-dashboard.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-equipment.php' );
@@ -112,7 +113,9 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-assets.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-blocks.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-cache.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-moderation.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-rating.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-review.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-compatibility.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-context.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-cron.php' );
@@ -132,6 +135,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-nutrition.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-popup.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-post-type.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-preview.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-print.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-rating-database.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-rating.php' );

@@ -250,6 +250,21 @@ class WPRM_Print {
 					$unique_recipes = array_intersect_key( $all_recipes, $unique );
 				}
 
+				// Get template to output.
+				$custom_template = false;
+				if ( isset( $args[2] ) ) {
+					$template_slug = sanitize_key( $args[2] );
+					$custom_template = WPRM_Template_Manager::get_template_by_slug( $template_slug );
+				}
+
+				if ( $custom_template ) {
+					// Add styling for this recipe's print template.
+					$output['assets'][] = array(
+						'type' => 'custom',
+						'html' => '<style type="text/css">' . WPRM_Template_Manager::get_template_css( $custom_template ) . '</style>',
+					);
+				}
+
 				$uid = 1;
 				$output['html'] = '';
 				foreach ( $unique_recipes as $unique_recipe ) {
@@ -268,11 +283,13 @@ class WPRM_Print {
 						);
 	
 						// Add styling for this recipe's print template.
-						$output['assets'][] = array(
-							'type' => 'custom',
-							'html' => WPRM_Template_Manager::get_template_styles( $recipe, 'print-collection' ),
-						);
-						$recipe_template = WPRM_Template_Manager::get_template( $recipe, 'print-collection' );
+						if ( ! $custom_template ) {
+							$output['assets'][] = array(
+								'type' => 'custom',
+								'html' => WPRM_Template_Manager::get_template_styles( $recipe, 'print-collection' ),
+							);
+						}
+						$recipe_template = WPRM_Template_Manager::get_template( $recipe, 'print-collection', $custom_template['slug'] );
 
 						// Update ID for adjustable servings.
 						$recipe_template = str_replace( 'wprm-recipe-servings-' . $unique_recipe['id'], 'wprm-recipe-servings-' . $uid, $recipe_template );
@@ -339,6 +356,36 @@ class WPRM_Print {
 			$header .= '</div>';
 		}
 
+		// Equipment toggle.
+		if ( false === $recipe || $recipe->equipment() ) {
+			$checked = WPRM_Settings::get( 'print_show_equipment' ) ? ' checked="checked"' : '';
+
+			$header .= '<div class="wprm-print-toggle-container">';
+			$header .= '<input type="checkbox" id="wprm-print-toggle-recipe-equipment" class="wprm-print-toggle" value="1" ' . $checked . '/><label for="wprm-print-toggle-recipe-equipment">' . __( 'Equipment', 'wp-recipe-maker' ) . '</label>';
+			$header .= '</div>';
+		}
+
+		// Ingredient images toggle.
+		$has_ingredient_images = false;
+		$ingredients_flat = $recipe ? $recipe->ingredients_flat() : array();
+
+		foreach( $ingredients_flat as $ingredient ) {
+			$image_id = intval( get_term_meta( $ingredient['id'], 'wprmp_ingredient_image_id', true ) );
+
+			if ( $image_id ) {
+				$has_ingredient_images = true;
+				break;
+			}
+		}
+
+		if ( false === $recipe || $has_ingredient_images ) {
+			$checked = WPRM_Settings::get( 'print_show_ingredient_images' ) ? ' checked="checked"' : '';
+
+			$header .= '<div class="wprm-print-toggle-container">';
+			$header .= '<input type="checkbox" id="wprm-print-toggle-recipe-ingredient-media" class="wprm-print-toggle" value="1" ' . $checked . '/><label for="wprm-print-toggle-recipe-ingredient-media">' . __( 'Ingredient Images', 'wp-recipe-maker' ) . '</label>';
+			$header .= '</div>';
+		}
+
 		// Instruction images toggle.
 		$has_instructions_media = false;
 		$instructions_flat = $recipe ? $recipe->instructions_flat() : array();
@@ -391,8 +438,12 @@ class WPRM_Print {
 				}
 			}
 
-			// Add optional print credit.
+			// Add optional QR code and print credit.
 			if ( 'recipe' === $args[0] && isset( $output['html'] ) ) {
+				$footer_html = '';
+				$recipe = WPRM_Recipe_Manager::get_recipe( intval( $args[1] ) );
+
+				// Optional print credit.
 				if ( WPRM_Settings::get( 'print_credit_use_html' ) ) {
 					$credit = WPRM_Settings::get( 'print_credit_html' );
 				} else {
@@ -400,7 +451,6 @@ class WPRM_Print {
 				}
 
 				if ( $credit ) {
-					$recipe = WPRM_Recipe_Manager::get_recipe( intval( $args[1] ) );
 					$output['html'] .= '<div id="wprm-print-footer">' . $recipe->replace_placeholders( $credit ) . '</div>';
 
 					// Add class to indicate there's a print credit.
@@ -408,6 +458,25 @@ class WPRM_Print {
 						$output['classes'] = array();
 					}
 					$output['classes'][] = 'wprm-print-has-footer';
+				}
+
+				// Optional QR Code.
+				if ( WPRM_Settings::get( 'print_qr_code' ) ) {
+					$url = $recipe->permalink();
+
+					if ( ! $url && WPRM_Settings::get( 'print_qr_code_use_homepage' ) ) {
+						$url = WPRM_Compatibility::get_home_url();
+					}
+
+					if ( $url ) {
+						// Generate QR code.
+						require_once( WPRM_DIR . 'vendor/phpqrcode/phpqrcode.php' );
+						$img = QRCode::png( $url );
+
+						$output['html'] .= '<div class="wprm-qr-code-container"><img class="wprm-qr-code" src="data:image/jpg;base64,' . base64_encode( $img ) . '" alt="' . esc_attr( __( 'QR Code linking back to recipe', 'wp-recipe-maker' ) ) . '"></div>';
+
+						$output['classes'][] = 'wprm-print-has-qr-code';
+					}
 				}
 			}
 
@@ -481,14 +550,19 @@ class WPRM_Print {
 			$query_params = $home_url_parts[1];
 		}
 
+		$template = '';
+		if ( 'default_recipe_template' !== WPRM_Settings::get( 'default_print_template_admin' ) ) {
+			$template = '/' . WPRM_Settings::get( 'default_print_template_admin' );
+		}
+
 		if ( get_option( 'permalink_structure' ) ) {
-			$print_url = $home_url . WPRM_Print::slug() . '/recipes/' . $encoded;
+			$print_url = $home_url . WPRM_Print::slug() . '/recipes/' . $encoded . $template;
 
 			if ( $query_params ) {
 				$print_url .= '?' . $query_params;
 			}
 		} else {
-			$print_url = $home_url . '?' . WPRM_Print::slug() . '=recipes&' . $encoded;
+			$print_url = $home_url . '?' . WPRM_Print::slug() . '=recipes&' . $encoded . $template;
 
 			if ( $query_params ) {
 				$print_url .= '&' . $query_params;

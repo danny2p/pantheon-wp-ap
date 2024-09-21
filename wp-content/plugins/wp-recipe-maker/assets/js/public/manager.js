@@ -25,7 +25,7 @@ window.WPRecipeMaker.manager = {
 		}
 	},
 	getRecipe: ( id ) => {
-		id = parseInt( id );
+		id = 'preview' === id ? id : parseInt( id );
 
 		if ( ! window.WPRecipeMaker.manager.recipes.hasOwnProperty( `recipe-${id}` ) ) {
 			return window.WPRecipeMaker.manager.loadRecipe( id );
@@ -34,7 +34,7 @@ window.WPRecipeMaker.manager = {
 		return Promise.resolve( window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] );
 	},
 	getRecipeImmediately: ( id ) => {
-		id = parseInt( id );
+		id = 'preview' === id ? id : parseInt( id );
 
 		let recipe = window.WPRecipeMaker.manager.recipes.hasOwnProperty( `recipe-${id}` ) ? window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] : false;
 
@@ -82,7 +82,7 @@ window.WPRecipeMaker.manager = {
 		};
 
 		// Only require nonce when logged in to prevent caching problems for regular visitors.
-		if ( 0 < parseInt( wprmp_public.user ) ) {
+		if ( 0 < parseInt( wprm_public.user ) ) {
 			headers['X-WP-Nonce'] = wprm_public.api_nonce;
 		}
 

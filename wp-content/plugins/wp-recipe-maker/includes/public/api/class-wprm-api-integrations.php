@@ -58,6 +58,23 @@ class WPRM_Api_Integrations {
 		$data = isset( $params['data'] ) ? $params['data'] : false;
 
 		if ( $data ) {
+			$recipe_id = intval( $data['recipeId'] );
+			$servings_system_combination = sanitize_key( $data['servingsSystemCombination'] );
+
+			// Look for existing combination first.
+			$existing_combinations = get_post_meta( $recipe_id, 'wprm_instacart_combinations', true );
+			$existing_combinations = $existing_combinations ? maybe_unserialize( $existing_combinations ) : array();
+
+			foreach ( $existing_combinations as $combination => $result ) {
+				if ( $combination === $servings_system_combination ) {
+					// Use cached result if it's less than a month old.
+					if ( strtotime( '-1 month' ) < $result['timestamp'] ) {
+						return rest_ensure_response( $result['response'] );
+					}
+				}
+			}
+			
+			// No cached result, get a new one through the Instacart API.
 			$sanitized_data = array(
 				'title' => sanitize_text_field( $data['title'] ),
 				'image_url' => esc_url( $data['image_url'] ),
@@ -101,8 +118,17 @@ class WPRM_Api_Integrations {
 				return rest_ensure_response( false );
 			}
 
-			$instacart_data = json_decode( wp_remote_retrieve_body( $response ) );
-			return rest_ensure_response( $instacart_data );
+			$instacart_response = json_decode( wp_remote_retrieve_body( $response ) );
+
+			// Store result for future use.
+			$existing_combinations[ $servings_system_combination ] = array(
+				'response' => $instacart_response,
+				'timestamp' => time(),
+			);
+			update_post_meta( $recipe_id, 'wprm_instacart_combinations', $existing_combinations );
+
+			// Return Instacart URL.
+			return rest_ensure_response( $instacart_response );
 		}
 
 		return rest_ensure_response( false );

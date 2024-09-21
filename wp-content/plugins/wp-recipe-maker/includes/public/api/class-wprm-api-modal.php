@@ -67,12 +67,25 @@ class WPRM_Api_Modal {
 		// Parameters.
 		$params = $request->get_params();
 
-		$taxonomy = isset( $params['type'] ) && 'equipment' === $params['type'] ? 'wprm_equipment' : 'wprm_ingredient';
+		$type = isset( $params['type'] ) ? $params['type'] : 'ingredient';
 		$search = isset( $params['search'] ) ? $params['search'] : '';
 		$search = trim( strip_tags( $search ) );
 
 		// ' is stored differently in the database. Make sure picks up.
 		$search = str_replace( '&#39;', '&#039;', $search );
+
+		// Get taxonomy.
+		switch ( $type ) {
+			case 'ingredient-unit':
+				$taxonomy = 'wprm_ingredient_unit';
+				break;
+			case 'equipment':
+				$taxonomy = 'wprm_equipment';
+				break;
+			default:
+				$taxonomy = 'wprm_ingredient';
+				break;
+		}
 
 		// Regular search.
 		$args = array(
@@ -90,8 +103,10 @@ class WPRM_Api_Modal {
 		$terms = $query->get_terms();
 		$suggestions = array();
 
-		// Search plural for ingredients.
-		if ( 'wprm_ingredient' === $taxonomy ) {
+		// Search plural for ingredients and ingredient units.
+		if ( 'wprm_ingredient' === $taxonomy || 'wprm_ingredient_unit' === $taxonomy ) {
+			$plural_key = $taxonomy . '_plural';
+
 			$args = array(
 				'taxonomy' => $taxonomy,
 				'hide_empty' => false,
@@ -102,7 +117,7 @@ class WPRM_Api_Modal {
 				'order' => 'DESC',
 				'meta_query' => array(
 					array(
-						'key' => 'wprm_ingredient_plural',
+						'key' => $plural_key,
 						'compare' => 'LIKE',
 						'value' => $search,
 					),
@@ -114,7 +129,7 @@ class WPRM_Api_Modal {
 
 			if ( $plural_terms && is_array( $plural_terms ) ) {
 				foreach ( $plural_terms as $plural_term ) {
-					$plural = get_term_meta( $plural_term->term_id, 'wprm_ingredient_plural', true );
+					$plural = get_term_meta( $plural_term->term_id, $plural_key, true );
 
 					if ( $plural ) {
 						$suggestions[ $plural ] = array(

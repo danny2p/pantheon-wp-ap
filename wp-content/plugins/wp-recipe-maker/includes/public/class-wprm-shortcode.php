@@ -431,35 +431,43 @@ class WPRM_Shortcode {
 	public static function recipe_shortcode( $atts ) {
 		$atts = shortcode_atts( array(
 			'id' => 'random',
+			'preview' => '',
 			'align' => '',
 			'template' => '',
 		), $atts, 'wprm_recipe' );
 
 		$recipe_template = trim( $atts['template'] );
+		$recipe = false;
 
-		// Get recipe.
-		if ( 'random' === $atts['id'] ) {
-			$posts = get_posts( array(
-				'post_type' => WPRM_POST_TYPE,
-				'posts_per_page' => 1,
-				'orderby' => 'rand',
-			) );
-
-			$recipe_id = isset( $posts[0] ) ? $posts[0]->ID : 0;
-		} elseif ( 'latest' === $atts['id'] ) {
-			$posts = get_posts(array(
-				'post_type' => WPRM_POST_TYPE,
-				'posts_per_page' => 1,
-			));
-
-			$recipe_id = isset( $posts[0] ) ? $posts[0]->ID : 0;
-		} elseif ( 'demo' === $atts['id'] ) {
-			$recipe_id = 'demo';
+		// Check if we're previewing a recipe.
+		if ( $atts['preview'] ) {
+			$recipe_id = $atts['preview'];
+			$recipe = WPRM_Preview::get_preview_recipe( $atts['preview'] );
 		} else {
-			$recipe_id = intval( $atts['id'] );
-		}
+			// Not previewing, get recipe from ID.
+			if ( 'random' === $atts['id'] ) {
+				$posts = get_posts( array(
+					'post_type' => WPRM_POST_TYPE,
+					'posts_per_page' => 1,
+					'orderby' => 'rand',
+				) );
 
-		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+				$recipe_id = isset( $posts[0] ) ? $posts[0]->ID : 0;
+			} elseif ( 'latest' === $atts['id'] ) {
+				$posts = get_posts(array(
+					'post_type' => WPRM_POST_TYPE,
+					'posts_per_page' => 1,
+				));
+
+				$recipe_id = isset( $posts[0] ) ? $posts[0]->ID : 0;
+			} elseif ( 'demo' === $atts['id'] ) {
+				$recipe_id = 'demo';
+			} else {
+				$recipe_id = intval( $atts['id'] );
+			}
+
+			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+		}
 
 		if ( $recipe ) {			
 			WPRM_Assets::load();

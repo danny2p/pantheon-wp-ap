@@ -63,6 +63,20 @@ export default {
             filterable: false,
             Cell: row => row.value ? he.decode(row.value) : null,
         },{
+            Header: __wprm( 'Order' ),
+            id: 'order',
+            accessor: 'order',
+            sortable: false,
+            filterable: false,
+            width: 80,
+            Cell: (row) => {
+                const order = row.value ? row.value : 0;
+
+                return (
+                    <span>{ order }</span>
+                )
+            },
+        },{
             Header: __wprm( 'Archive' ),
             id: 'archive',
             accessor: 'archive',

@@ -1,3 +1,4 @@
+import './admin/comment-moderation';
 import './admin/comments';
 import './admin/editor';
 import './admin/feedback';

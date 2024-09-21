@@ -79,14 +79,20 @@ export default {
                                 const urlParts = wprm_admin.home_url.split(/\?(.+)/);
                                 let printUrl = urlParts[0];
 
+                                // Maybe use customt template.
+                                let customTemplate = '';
+                                if ( 'default_recipe_template' !== wprm_admin.settings.default_print_template_admin ) {
+                                    customTemplate = '/' + wprm_admin.settings.default_print_template_admin;
+                                }
+
                                 if ( wprm_admin.permalinks ) {
-                                    printUrl += wprm_admin.print_slug + '/' + row.original.id;
+                                    printUrl += wprm_admin.print_slug + '/' + row.original.id + customTemplate;
 
                                     if ( urlParts[1] ) {
                                         printUrl += '?' + urlParts[1];
                                     }
                                 } else {
-                                    printUrl += '?' + wprm_admin.print_slug + '=' + row.original.id;
+                                    printUrl += '?' + wprm_admin.print_slug + '=' + row.original.id + customTemplate;
 
                                     if ( urlParts[1] ) {
                                         printUrl += '&' + urlParts[1];

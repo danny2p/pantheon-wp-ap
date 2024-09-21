@@ -343,6 +343,8 @@ class WPRM_Api_Manage_Taxonomies {
 			// Only get permalinks if has archive pages.
 			$has_archive_pages = WPRM_Taxonomies::has_archive_pages( $taxonomy );
 
+			$default_suitablefordiet_terms = WPRM_Taxonomies::get_diet_taxonomy_terms();
+
 			// Extra information needed for most other taxonomies.
 			foreach( $rows as $index => $row ) {
 				// Permalink if archive is enabled.
@@ -424,6 +426,7 @@ class WPRM_Api_Manage_Taxonomies {
 						if ( isset( $row->actual_name ) ) {
 							$row->name = $row->actual_name;
 						}
+						$row->is_default = in_array( $row->name, array_keys( $default_suitablefordiet_terms ) );
 
 						break;
 					case 'glossary_term':

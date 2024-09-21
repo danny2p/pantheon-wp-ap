@@ -179,6 +179,21 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'output' => array(
+				'default' => 'markup',
+				'type' => 'dropdown',
+				'options' => array(
+					'raw' => 'Raw content of custom field (advanced)',
+					'markup' => 'Marked up with container element (default)',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'key',
+						'value' => 'actual_values_set_in_parse_shortcode_below',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
@@ -209,6 +224,9 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 				);
 
 				switch ( $custom_field['type'] ) {
+					case 'text':
+						$shortcodes[ $shortcode ]['output']['dependency'][] = $this_key_dependency;
+						break;
 					case 'image':
 						$shortcodes[ $shortcode ]['image_size']['dependency'][] = $this_key_dependency;
 						break;

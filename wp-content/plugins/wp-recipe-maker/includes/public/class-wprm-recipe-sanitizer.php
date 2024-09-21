@@ -188,10 +188,20 @@ class WPRM_Recipe_Sanitizer {
 
 						// Custom ingredient link.
 						if ( isset( $ingredient['link'] ) ) {
-							$sanitized_ingredient['link'] = array(
+							$link = array(
 								'url' => isset( $ingredient['link']['url'] ) ? esc_url_raw( $ingredient['link']['url'] ) : '',
 								'nofollow' => isset( $ingredient['link']['nofollow'] ) ? sanitize_text_field( $ingredient['link']['nofollow'] ) : 'default',
 							);
+
+							if ( isset( $ingredient['link']['eafl'] ) ) {
+								$eafl = intval( $ingredient['link']['eafl'] );
+
+								if ( $eafl ) {
+									$link['eafl'] = $eafl;
+								}
+							}
+
+							$sanitized_ingredient['link'] = $link;
 						}
 
 						// Unit Conversion.

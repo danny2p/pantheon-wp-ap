@@ -22,7 +22,7 @@
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.6);
-    z-index: 2147483647;
+    z-index: 2147483646;
 
     display: flex;
     justify-content: center;
@@ -112,6 +112,13 @@
     transition: -webkit-transform .25s ease-out;
     transition: transform .25s ease-out;
     transition: transform .25s ease-out,-webkit-transform .25s ease-out;
+
+    &.wprm-popup-modal__btn--secondary {
+        margin-left: 20px;
+        background-color: var( --wprm-popup-button-text );
+        color: var( --wprm-popup-button-background );
+        border: 1px solid var( --wprm-popup-button-background );
+    }
 }
 
 .wprm-popup-modal__btn:focus, .wprm-popup-modal__btn:hover {

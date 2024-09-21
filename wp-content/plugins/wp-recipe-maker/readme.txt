@@ -3,9 +3,9 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.4
-Stable tag: 9.5.3
+Stable tag: 9.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,31 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.6.0 =
+* Feature: QR Code block for the template editor
+* Feature: Optional QR Code on the print page
+* Feature: Preview recipe before saving changes
+* Feature: Mark comments as featured or excluded for Recipe Review Metadata
+* Feature: Author Bio block for the Template Editor
+* Feature: Comment moderation tools
+* Feature: Hubbub Pro Save This block in Template Editor
+* Feature: Jupiter Integration
+* Feature: Modal toolbar suggestions for ingredient units
+* Feature: Import comment ratings from WP Zoom
+* Feature: Toggle for equipment on the print page
+* Feature: Toggle for ingredient images on the print page
+* Feature: Change default order of taxonomies
+* Feature: Set different template to use when printing from manage page
+* Feature: Rating condition for the template editor
+* Improvement: Conditional shortcode support for more recipe fields
+* Improvement: View and edit recipe from analytics on dashboard
+* Improvement: Include comment rating for comments REST API call
+* Improvement: Toggle image and nutrition label condition shortcode on print page
+* Improvement: Show comment author on ratings manage page
+* Improvement: Allow merging of unexpected non-default diet terms
+* Improvement: Remember page size of manage page table on reload
+* Fix: WPML PHP error when saving recipes as a public post type
+
 = 9.5.3 =
 * Fix: Fatal error in settings
 
@@ -275,6 +300,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.6.0 =
+Some great new features and improvements
+
 = 9.5.3 =
 Prevents fatal error
 

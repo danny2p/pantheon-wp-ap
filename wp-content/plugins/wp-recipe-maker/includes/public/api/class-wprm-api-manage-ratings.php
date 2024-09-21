@@ -182,6 +182,7 @@ class WPRM_Api_Manage_Ratings {
 
 					$row->comment = $content;
 					$row->comment_link = get_edit_comment_link( $row->comment_id );
+					$row->comment_author = $comment->comment_author;
 				}
 			}
 

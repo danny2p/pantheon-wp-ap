@@ -252,6 +252,9 @@ class WPRM_Recipe_Saver {
 
 		// Update recipe SEO values afterwards.
 		WPRM_Seo_Checker::update_seo_for( $id );
+
+		// Remove cached Instacart data.
+		delete_post_meta( $id, 'wprm_instacart_combinations' );
 	}
 
 	/**

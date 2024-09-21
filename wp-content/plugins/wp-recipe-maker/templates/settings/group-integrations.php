@@ -13,6 +13,19 @@ $integrations = array(
 	'name' => __( 'Integrations', 'wp-recipe-maker' ),
 	'subGroups' => array(
 		array(
+			'name' => __( 'Access exclusive brands with Jupiter', 'wp-recipe-maker' ),
+			'description' => 'Collaborate with top brands and give your subscribers access to product coupons through our exclusive recipe campaigns. We handle the legwork, securing partnerships with CPG brands so you can focus on creating great recipes. Available in the US and Canada only.',
+			'documentation' => 'https://www.jupiter.co/creators',
+			'settings' => array(
+				array(
+					'id' => 'integration_jupiter',
+					'name' => __( 'Activate Jupiter', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Shoppable Recipes with Instacart', 'wp-recipe-maker' ),
 			'description' => 'Make your recipes shoppable by adding an Instacart Shoppable Recipe button next to your ingredient list and monetize your content by signing up for the Instacart Tastemakers Affiliate Marketing Program. Available in the US only at the moment.',
 			'documentation' => 'https://help.bootstrapped.ventures/article/323-shop-with-instacart-button',

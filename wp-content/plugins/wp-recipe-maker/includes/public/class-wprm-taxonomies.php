@@ -160,7 +160,13 @@ class WPRM_Taxonomies {
 			$taxonomies[ $key ]['key'] = substr( $key, 5 );
 			$taxonomies[ $key ]['slug'] = isset( $options['slug'] ) && $options['slug'] ? $options['slug'] : $taxonomies[ $key ]['key'];
 			$taxonomies[ $key ]['archive'] = isset( $options['archive'] ) ? $options['archive'] : false;
+			$taxonomies[ $key ]['order'] = isset( $options['order'] ) ? $options['order'] : 0;
 		}
+
+		// Sort by order.
+		uasort( $taxonomies, function( $a, $b ) {
+			return $a['order'] - $b['order'];
+		});
 
 		return $taxonomies;
 	}
@@ -243,25 +249,34 @@ class WPRM_Taxonomies {
 	}
 
 	/**
+	 * Get default diet taxonomy terms.
+	 *
+	 * @since	9.6.0
+	 */
+	public static function get_diet_taxonomy_terms() {
+		return array(
+			'DiabeticDiet' 		=> __( 'Diabetic', 'wp-recipe-maker' ),
+			'GlutenFreeDiet'	=> __( 'Gluten Free', 'wp-recipe-maker' ),
+			'HalalDiet'			=> __( 'Halal', 'wp-recipe-maker' ),
+			'HinduDiet'			=> __( 'Hindu', 'wp-recipe-maker' ),
+			'KosherDiet'		=> __( 'Kosher', 'wp-recipe-maker' ),
+			'LowCalorieDiet'	=> __( 'Low Calorie', 'wp-recipe-maker' ),
+			'LowFatDiet'		=> __( 'Low Fat', 'wp-recipe-maker' ),
+			'LowLactoseDiet'	=> __( 'Low Lactose', 'wp-recipe-maker' ),
+			'LowSaltDiet'		=> __( 'Low Salt', 'wp-recipe-maker' ),
+			'VeganDiet'			=> __( 'Vegan', 'wp-recipe-maker' ),
+			'VegetarianDiet'	=> __( 'Vegetarian', 'wp-recipe-maker' ),
+		);
+	}
+
+	/**
 	 * Check diet taxonomy terms.
 	 *
-	 * @since    5.9.0
+	 * @since	5.9.0
 	 */
 	public static function check_diet_taxonomy_terms() {
 		if ( taxonomy_exists( 'wprm_suitablefordiet' ) ) {
-			$terms = array(
-				'DiabeticDiet' 		=> __( 'Diabetic', 'wp-recipe-maker' ),
-				'GlutenFreeDiet'	=> __( 'Gluten Free', 'wp-recipe-maker' ),
-				'HalalDiet'			=> __( 'Halal', 'wp-recipe-maker' ),
-				'HinduDiet'			=> __( 'Hindu', 'wp-recipe-maker' ),
-				'KosherDiet'		=> __( 'Kosher', 'wp-recipe-maker' ),
-				'LowCalorieDiet'	=> __( 'Low Calorie', 'wp-recipe-maker' ),
-				'LowFatDiet'		=> __( 'Low Fat', 'wp-recipe-maker' ),
-				'LowLactoseDiet'	=> __( 'Low Lactose', 'wp-recipe-maker' ),
-				'LowSaltDiet'		=> __( 'Low Salt', 'wp-recipe-maker' ),
-				'VeganDiet'			=> __( 'Vegan', 'wp-recipe-maker' ),
-				'VegetarianDiet'	=> __( 'Vegetarian', 'wp-recipe-maker' ),
-			);
+			$terms = self::get_diet_taxonomy_terms();
 
 			if ( count( array_keys( $terms ) ) !== wp_count_terms( 'wprm_suitablefordiet', array( 'hide_empty' => false ) ) ) {
 				foreach ( $terms as $term => $label ) {

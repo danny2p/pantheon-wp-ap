@@ -309,6 +309,8 @@ class WPRM_Recipe_Parser {
 		$range_keyword = trim( WPRM_Settings::get( 'import_range_keyword' ) );
 		$range_keyword = $range_keyword ? $range_keyword : 'to';
 		$raw = str_replace( ' ' . $range_keyword . ' ', '-', $raw );
+		$raw = str_replace( '–', '-', $raw );
+		$raw = str_replace( '—', '-', $raw );
 		$raw = str_replace( ' - ', '-', $raw );
 
 		// Replace fraction symbols.

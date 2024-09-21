@@ -101,6 +101,26 @@ window.WPRMPrint = {
             }
         }
 
+        // Check if recipe equipment is present.
+        const equipment = document.querySelectorAll( '.wprm-recipe-equipment-container' );
+
+        if ( ! equipment.length ) {
+            const toggle = document.querySelector( '#wprm-print-toggle-equipment' );
+            if ( toggle ) {
+                toggle.parentNode.style.display = 'none';
+            }
+        }
+
+        // Check if ingredient images are present.
+        const ingredientMedia = document.querySelectorAll( '.wprm-recipe-ingredient-image' );
+
+        if ( ! ingredientMedia.length ) {
+            const toggle = document.querySelector( '#wprm-print-toggle-recipe-ingredient-media' );
+            if ( toggle ) {
+                toggle.parentNode.style.display = 'none';
+            }
+        }
+
         // Check if notes are present.
         const notes = document.querySelectorAll( '.wprm-recipe-notes-container' );
 
@@ -125,13 +145,17 @@ window.WPRMPrint = {
         // Get elements to toggle.
         let elems = [];
         if ( 'wprm-print-toggle-recipe-image' === toggle.id ) {
-            elems = document.querySelectorAll( '.wprm-recipe-image' );
+            elems = document.querySelectorAll( '.wprm-recipe-image, .wprm-condition-field-image:not(.wprm-condition-inverse)' );
+        } else if ( 'wprm-print-toggle-recipe-equipment' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprm-recipe-equipment-container' );
+        } else if ( 'wprm-print-toggle-recipe-ingredient-media' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprm-recipe-ingredient-image' );
         } else if ( 'wprm-print-toggle-recipe-instruction-media' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-instruction-media' );
         } else if ( 'wprm-print-toggle-recipe-notes' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-notes-container' );
         } else if ( 'wprm-print-toggle-recipe-nutrition' === toggle.id ) {
-            elems = document.querySelectorAll( '.wprm-recipe-nutrition-header, .wprm-nutrition-label-container' );
+            elems = document.querySelectorAll( '.wprm-recipe-nutrition-header, .wprm-nutrition-label-container, .wprm-condition-field-nutrition:not(.wprm-condition-inverse)' );
         } else if ( 'wprm-print-toggle-collection-name' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-container-header-container' );
         } else if ( 'wprm-print-toggle-collection-description' === toggle.id ) {

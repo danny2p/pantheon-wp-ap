@@ -175,8 +175,10 @@ class WPRM_Comment_Rating {
 						'rating' => $comment_rating,
 					);
 
+					WPRM_Comment_Moderation::log_change( $comment_id, 'stars-added', $comment_rating );
 					WPRM_Rating_Database::add_or_update_rating( $rating );
 				} else {
+					WPRM_Comment_Moderation::log_change( $comment_id, 'stars-removed' );
 					WPRM_Rating_Database::delete_ratings_for_comment( $comment_id );
 				}
 			} else {
@@ -201,6 +203,12 @@ class WPRM_Comment_Rating {
 
 			if ( $comment ) {
 				update_comment_meta( $comment_id, 'wprm-comment-rating', $comment_rating );
+
+				if ( ' ' === $comment->comment_content ) {
+					update_comment_meta( $comment_id, 'wprm-comment-rating-empty', '1' );
+				} else {
+					delete_comment_meta( $comment_id, 'wprm-comment-rating-empty' );
+				}
 
 				// FlyingPress compatibility.
 				if ( class_exists( 'FlyingPress\Purge' ) ) {
@@ -338,6 +346,8 @@ class WPRM_Comment_Rating {
 
 		wp_nonce_field( 'wprm-comment-rating-nonce', 'wprm-comment-rating-nonce', false );
 		require( WPRM_DIR . 'templates/public/comment-rating-form.php' );
+
+		do_action( 'wprm_comment_rating_admin_form', $comment, $rating );
 	}
 
 	/**

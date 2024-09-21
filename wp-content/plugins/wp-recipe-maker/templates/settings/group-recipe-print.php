@@ -60,6 +60,16 @@ $recipe_print = array(
 						'value' => true,
 					),
 				),
+				array(
+					'id' => 'default_print_template_admin',
+					'name' => __( 'Admin Print Template', 'wp-recipe-maker' ),
+					'description' => __( 'Default print template to use when printing recipes through the WP Recipe Maker > Manage page.', 'wp-recipe-maker' ),
+					'type' => 'dropdownTemplateModern',
+					'options' => array(
+						'default_recipe_template' => __( 'Use same as Default Recipe Template', 'wp-recipe-maker' ),
+					),
+					'default' => 'default_recipe_template',
+				),
 			),
 		),
 		array(
@@ -127,6 +137,24 @@ $recipe_print = array(
 					),
 				),
 				array(
+					'id' => 'print_qr_code',
+					'name' => __( 'Show QR Code Link to Recipe', 'wp-recipe-maker' ),
+					'description' => __( 'Display a QR code at the bottom of the printed recipe, linking back to the parent post of the recipe.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'print_qr_code_use_homepage',
+					'name' => __( 'Fallback to Homepage Link for QR Code', 'wp-recipe-maker' ),
+					'description' => __( 'If the parent post is not set for a recipe, link to the homepage instead.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+					'dependency' => array(
+						'id' => 'print_qr_code',
+						'value' => true,
+					),
+				),
+				array(
 					'id' => 'print_footer_ad',
 					'name' => __( 'Print Footer Ad', 'wp-recipe-maker' ),
 					'description' => __( 'Optional ad to show in the footer of the print page. Does not get printed. Use any HTML code.', 'wp-recipe-maker' ),
@@ -155,6 +183,20 @@ $recipe_print = array(
 				array(
 					'id' => 'print_show_recipe_image',
 					'name' => __( 'Default Show Recipe Image', 'wp-recipe-maker' ),
+					'description' => __( 'Default value for the checkbox that allows visitors to toggle the image.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'print_show_equipment',
+					'name' => __( 'Default Show Equipment', 'wp-recipe-maker' ),
+					'description' => __( 'Default value for the checkbox that allows visitors to toggle the recipe equipment.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
+					'id' => 'print_show_ingredient_images',
+					'name' => __( 'Default Show Ingredient Images', 'wp-recipe-maker' ),
 					'description' => __( 'Default value for the checkbox that allows visitors to toggle the image.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,

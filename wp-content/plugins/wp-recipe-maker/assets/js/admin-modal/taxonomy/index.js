@@ -166,6 +166,21 @@ export default class Menu extends Component {
                             }}
                         />
                     </FieldContainer>
+                    <FieldContainer id="order" label={ __wprm( 'Order' ) }>
+                        <FieldText
+                            type="number"
+                            placeholder="0"
+                            value={ this.state.taxonomy.order ? this.state.taxonomy.order : 0 }
+                            onChange={ (number) => {
+                                this.setState({
+                                    taxonomy: {
+                                        ...this.state.taxonomy,
+                                        order: parseInt( number ),
+                                    }
+                                });
+                            }}
+                        />
+                    </FieldContainer>
                     <FieldContainer id="archive" label={ __wprm( 'Has Archive Pages' ) }>
                         <FieldCheckbox
                             value={ this.state.taxonomy.archive }

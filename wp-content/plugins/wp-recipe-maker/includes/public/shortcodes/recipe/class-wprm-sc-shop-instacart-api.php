@@ -133,9 +133,6 @@ class WPRM_SC_Shop_Instacart_Api extends WPRM_Template_Shortcode {
 			return '';
 		}
 
-		// TODO add shortcode in Template Editor.
-		// wp-recipe-maker/assets/js/admin-template/general/shortcodes.js
-
 		// Get optional icon.
 		$icon = '';
 		if ( $atts['icon'] ) {

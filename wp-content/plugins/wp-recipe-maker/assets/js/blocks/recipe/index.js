@@ -102,7 +102,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
         if ( lastBlockRefresh < openedBlockEditor ) {
             setTimeout( () => {
                 setAttributes({
-                    updated: Date.now(),
+                    updated: openedBlockEditor,
                 });
             });
         }

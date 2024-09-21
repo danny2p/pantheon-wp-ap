@@ -7,6 +7,7 @@ import Footer from '../../general/Footer';
 
 import Loader from 'Shared/Loader';
 import { __wprm } from 'Shared/Translations';
+import Api from 'Shared/Api';
 
 import FieldGroup from '../../fields/FieldGroup';
 
@@ -239,7 +240,6 @@ const EditRecipe = (props) => {
                         {
                             props.recipe.id
                             ?
-                            
                             `${ __wprm( 'Editing Recipe' ) } #${props.recipe.id}${props.recipe.name ? ` - ${props.recipe.name}` : ''}`
                             :
                             `${ __wprm( 'Creating new Recipe' ) }${props.recipe.name ? ` - ${props.recipe.name}` : ''}`
@@ -336,6 +336,20 @@ const EditRecipe = (props) => {
                         :
                         null
                     }
+                    <button
+                        className="button"
+                        onClick={ () => {
+                            Api.utilities.previewRecipe( JSON.stringify( props.recipe ) ).then((previewUrl) => {
+                                if ( previewUrl ) {
+                                    window.open( previewUrl, '_blank' );
+                                } else {
+                                    alert( __wprm( 'Something went wrong. The preview could not be loaded.' ) );
+                                }
+                            });
+                        } }
+                    >
+                        { __wprm( 'Preview' ) }
+                    </button>
                     <button
                         className="button button-primary"
                         onClick={ () => { props.saveRecipe( false ) } }

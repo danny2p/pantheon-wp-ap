@@ -214,6 +214,13 @@ export default {
                     )
                 },
             },{
+                Header: __wprm( 'Comment Author' ),
+                id: 'comment_author',
+                accessor: 'comment_author',
+                width: 150,
+                sortable: false,
+                filterable: false,
+            },{
                 Header: __wprm( 'Recipe ID' ),
                 id: 'recipe_id',
                 accessor: 'recipe_id',
