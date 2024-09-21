@@ -62,6 +62,41 @@ $metadata = array(
 			),
 		),
 		array(
+			'name' => __( 'Review Metadata', 'wp-recipe-maker' ),
+			'description' => __( 'Reviews are written comments from actual visitors that are specifically reviewing the recipe.', 'wp-recipe-maker' ),
+			'documentation' => 'https://developers.google.com/search/docs/appearance/structured-data/review-snippet#guidelines',
+			'settings' => array(
+				array(
+					'id' => 'metadata_review_include',
+					'name' => __( 'Include Review Metadata', 'wp-recipe-maker' ),
+					'description' => __( 'Include review metadata as part of the recipe metadata.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'always' => __( 'Always include, for any recipe that has comments with ratings', 'wp-recipe-maker' ),
+						'featured_only' => __( 'Only output review metadata with comments that have been specifically set as "Featured Review"', 'wp-recipe-maker' ),
+						'never' => __( 'Never include review metadata', 'wp-recipe-maker' ),
+					),
+					'default' => 'always',
+				),
+				array(
+					'id' => 'metadata_review_append_featured',
+					'name' => __( 'Append Featured Reviews', 'wp-recipe-maker' ),
+					'description' => __( 'Featured Reviews will always be included, optionally appended by regular comments with a rating', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'no' => __( 'No, if there is at least 1 "Featured Review" for this recipe, do not include other comments', 'wp-recipe-maker' ),
+						'yes_5' => __( 'Yes, if there are less than 5 "Featured Reviews", append with other comments', 'wp-recipe-maker' ),
+						'yes_10' => __( 'Yes, if there are less than 10 "Featured Reviews", append with other comments', 'wp-recipe-maker' ),
+					),
+					'default' => 'no',
+					'dependency' => array(
+						'id' => 'metadata_review_include',
+						'value' => 'always',
+					),
+				),
+			),
+		),
+		array(
 			'name' => __( 'Guided Recipes', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(

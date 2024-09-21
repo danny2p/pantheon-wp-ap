@@ -55,6 +55,11 @@ class WPRM_Api_Utilities {
 				),
 				'permission_callback' => array( __CLASS__, 'api_permissions_author' ),
 			));
+			register_rest_route( 'wp-recipe-maker/v1', '/utilities/preview', array(
+				'callback' => array( __CLASS__, 'api_preview_recipe' ),
+				'methods' => 'POST',
+				'permission_callback' => array( __CLASS__, 'api_permissions_author' ),
+			));
 		}
 	}
 
@@ -170,6 +175,31 @@ class WPRM_Api_Utilities {
 		);
 
 		return rest_ensure_response( $data );
+	}
+
+	/**
+	 * Handle preview recipe call to the REST API.
+	 *
+	 * @since 9.6.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_preview_recipe( $request ) {
+		// Parameters.
+		$params = $request->get_params();
+		$recipe_id = $request['id'];
+
+		$json = isset( $params['json'] ) ? $params['json'] : false;
+
+		if ( false !== $json ) {
+			$json_recipe = json_decode( $json, true );
+
+			if ( $json_recipe ) {
+				$preview_url = WPRM_Preview::set_recipe_for_preview_and_get_url( $json_recipe );
+				return rest_ensure_response( $preview_url );
+			}
+		}
+
+		return rest_ensure_response( false );
 	}
 }
 

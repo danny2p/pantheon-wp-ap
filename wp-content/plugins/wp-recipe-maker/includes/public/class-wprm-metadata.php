@@ -641,54 +641,100 @@ class WPRM_Metadata {
 				'ratingCount' => $rating['count'],
 			);
 
-			// Get comments given to parent post.
-			if ( $recipe->parent_post_id() ) {
-				$args = array(
-					'post_id' => $recipe->parent_post_id(),
-					'status' => 'approve',
-					'number' => 20,
-					'meta_query' => array(
-						array(
-							'key'     => 'wprm-comment-rating',
-							'compare' => '!=',
-							'value'   => '',
+			// Check if Review metadata should be included.
+			if ( 'never' !== WPRM_Settings::get( 'metadata_review_include' ) ) {
+				// Get comments given to parent post.
+				if ( $recipe->parent_post_id() ) {
+					// Get featured comments.
+					$args = array(
+						'post_id' => $recipe->parent_post_id(),
+						'status' => 'approve',
+						'meta_query' => array(
+							array(
+								'key'     => 'wprm-comment-review',
+								'value'   => 'featured',
+							),
 						),
-					),
-				);
+					);
 
-				$comments_query = new WP_Comment_Query;
-				$comments = $comments_query->query( $args );
+					$comments_query = new WP_Comment_Query;
+					$comments = $comments_query->query( $args );
+					$nbr_featured_comments = count( $comments );
+					$featured_comment_ids = wp_list_pluck( $comments, 'comment_ID' );
 
-				if ( $comments ) {
-					$reviews = array();
-
-					foreach ( $comments as $comment ) {
-						$author = $comment->comment_author;
-						$body = $comment->comment_content;
-			
-						if ( $author && $body ) {
-							$rating = intval( get_comment_meta( $comment->comment_ID, 'wprm-comment-rating', true ) );
-						
-							if ( $rating ) {
-								$reviews[] = array(
-									'@type' => 'Review',
-									'reviewRating' => array(
-										'@type' => 'Rating',
-										'ratingValue' => $rating,
+					// Maybe append with other comments, if not set to use featured only.
+					if ( 'featured_only' !== WPRM_Settings::get( 'metadata_review_include' ) && 'no' !== WPRM_Settings::get( 'metadata_review_append_featured' ) ) {
+						if (
+								( 'yes_5' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 5 )
+								|| ( 'yes_10' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 10 )
+							) {
+							// Get other comments with ratings, excluding featured comments and excluded comments.
+							$args = array(
+								'post_id' => $recipe->parent_post_id(),
+								'status' => 'approve',
+								'number' => 20,
+								'comment__not_in' => $featured_comment_ids,
+								'meta_query' => array(
+									'relation' => 'AND',
+									array(
+										'key'     => 'wprm-comment-rating',
+										'compare' => '!=',
+										'value'   => '',
 									),
-									'reviewBody' => $body,
-									'author' => array(
-										'@type' => 'Person',
-										'name' => $author,
+									array(
+										'relation' => 'OR',
+										array(
+											'key'     => 'wprm-comment-review',
+											'compare' => 'NOT EXISTS',
+										),
+										array(
+											'key'     => 'wprm-comment-review',
+											'compare' => '!=',
+											'value'   => 'excluded',
+										),
 									),
-									'datePublished' => gmdate( 'Y-m-d', strtotime( $comment->comment_date ) ),
-								);
-							}
+								),
+							);
+
+							$comments_query = new WP_Comment_Query;
+							$non_featured_comments = $comments_query->query( $args );
+
+							$comments = array_merge( $comments, $non_featured_comments );
 						}
 					}
 
-					if ( $reviews ) {
-						$metadata['review'] = $reviews;
+					if ( $comments ) {
+						$reviews = array();
+
+						foreach ( $comments as $comment ) {
+							$author = $comment->comment_author;
+							$body = $comment->comment_content;
+				
+							if ( $author && $body ) {
+								$rating = intval( get_comment_meta( $comment->comment_ID, 'wprm-comment-rating', true ) );
+							
+								if ( $rating ) {
+									$reviews[] = array(
+										'@type' => 'Review',
+										'reviewRating' => array(
+											'@type' => 'Rating',
+											'ratingValue' => $rating,
+										),
+										'reviewBody' => $body,
+										'author' => array(
+											'@type' => 'Person',
+											'name' => $author,
+										),
+										'datePublished' => gmdate( 'Y-m-d', strtotime( $comment->comment_date ) ),
+									);
+								}
+							}
+						}
+
+						if ( $reviews ) {
+							$metadata['review'] = $reviews;
+							$metadata['aggregateRating']['reviewCount'] = count( $reviews );
+						}
 					}
 				}
 			}

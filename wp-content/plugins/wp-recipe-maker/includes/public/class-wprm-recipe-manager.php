@@ -361,6 +361,7 @@ class WPRM_Recipe_Manager {
 		// Fix technical fields.
 		$sanitized_recipe['id'] = 'demo';
 		$sanitized_recipe['parent_url'] = '#';
+		$sanitized_recipe['post_author'] = $json_recipe['post_author'];
 		$sanitized_recipe['ingredients_flat'] = $json_recipe['ingredients_flat'];
 		$sanitized_recipe['instructions_flat'] = $json_recipe['instructions_flat'];
 

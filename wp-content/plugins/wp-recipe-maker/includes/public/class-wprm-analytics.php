@@ -423,6 +423,8 @@ class WPRM_Analytics {
 			if ( $recipe ) {
 				$top_recipes[] = array(
 					'id' => $recipe->id(),
+					'recipeId' => $recipe->id(),
+					'permalink' => $recipe->permalink(),
 					'name' => $recipe->name(),
 					'total' => $interactions['total'],
 					'unique' => $interactions['unique'],

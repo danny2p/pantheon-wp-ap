@@ -1,6 +1,47 @@
 {
     "news": [
         {
+            "date": "2024-09-19",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.6.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-6-0/"
+        },
+        {
+            "date": "2024-09-10",
+            "label": "Blog",
+            "title": "Maximizing Profits: Top Ad Networks for Food Blogs",
+            "url": "https://bootstrapped.ventures/food-blog-networks/"
+        },        {
+            "date": "2024-09-03",
+            "label": "Blog",
+            "title": "Master Overhead Food Shots with These Pro Tricks",
+            "url": "https://bootstrapped.ventures/overhead-photography/"
+        },
+        {
+            "date": "2024-08-29",
+            "label": "Blog",
+            "title": "Navigating the Calories: A Food Blogger's Guide to Staying Healthy",
+            "url": "https://bootstrapped.ventures/how-do-food-bloggers-eat-so-much/"
+        },
+        {
+            "date": "2024-08-13",
+            "label": "Blog",
+            "title": "The Food Bloggers' Guide to Tax Deductions",
+            "url": "https://bootstrapped.ventures/food-blogger-tax-deductions/"
+        },
+        {
+            "date": "2024-08-07",
+            "label": "Blog",
+            "title": "Step Up Your Food Blogging: 7 Key Pieces of Equipment",
+            "url": "https://bootstrapped.ventures/food-blogger-equipment/"
+        },
+        {
+            "date": "2024-07-23",
+            "label": "Blog",
+            "title": "Craft Your Food Blog Media Kit Like a Pro",
+            "url": "https://bootstrapped.ventures/food-blogger-media-kit/"
+        },
+        {
             "date": "2024-06-27",
             "label": "Blog",
             "title": "Culinary Translation Essentials for Food Professionals",

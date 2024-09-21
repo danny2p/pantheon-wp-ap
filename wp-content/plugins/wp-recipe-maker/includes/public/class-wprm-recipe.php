@@ -194,6 +194,17 @@ class WPRM_Recipe {
 		$recipe['name'] = $this->name();
 		$recipe['slug'] = $this->slug();
 		$recipe['image_url'] = $this->image_url( 'full' );
+		$recipe['rating'] = $this->rating();
+
+		// Basic ingredients data.
+		$ingredients = $this->ingredients_flat();
+		$ingredients_only = array();
+		foreach ( $ingredients as $index => $ingredient ) {
+			if ( 'ingredient' === $ingredient['type'] ) {
+				$ingredients_only[] = $ingredients[ $index ];
+			}
+		}
+		$recipe['ingredients'] = $ingredients_only;
 
 		// Servings related data.
 		$recipe['originalServings'] = $this->servings();
@@ -206,7 +217,9 @@ class WPRM_Recipe {
 		$recipe['currentServingsFormatted'] = $recipe['originalServings'];
 		$recipe['currentServingsMultiplier'] = 1;
 
-		$recipe['rating'] = $this->rating();
+		// No Unit Conversion in free plugin.
+		$recipe['originalSystem'] = 1;
+		$recipe['currentSystem'] = 1;
 
 		return apply_filters( 'wprm_recipe_frontend_data', $recipe, $this );
 	}
@@ -1286,7 +1299,7 @@ class WPRM_Recipe {
 		$ingredients_flat = array();
 
 		foreach ( $ingredients as $group_index => $group ) {
-			$group_ingredients = $group['ingredients'];
+			$group_ingredients = isset( $group['ingredients'] ) ? $group['ingredients'] : array();
 
 			if ( 0 !== $group_index || $group['name'] ) {
 				if ( ! isset( $group['uid'] ) || -1 === $group['uid'] ) {
@@ -1337,7 +1350,7 @@ class WPRM_Recipe {
 		$ingredients_without_groups = array();
 
 		foreach ( $ingredients as $ingredient_group ) {
-			if ( is_array( $ingredient_group['ingredients'] ) ) {
+			if ( isset( $ingredient_group['ingredients'] ) && is_array( $ingredient_group['ingredients'] ) ) {
 				$ingredients_without_groups = array_merge( $ingredients_without_groups, $ingredient_group['ingredients'] );				
 			}
 		}
@@ -1634,6 +1647,9 @@ class WPRM_Recipe {
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
 		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
+
+		$current_page = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$text = str_ireplace( '%recipe_current_url%', $current_page, $text );
 
 		return $text;
 	}

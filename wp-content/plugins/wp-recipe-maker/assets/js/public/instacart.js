@@ -33,28 +33,41 @@ window.WPRecipeMaker.instacart = {
             window.WPRecipeMaker.manager.getRecipe( recipeId ).then( ( recipe ) => {
                 console.log( recipe );
                 if ( recipe ) {
-
-                    // Get current ingredient
-                    // TODO Should work in free plugin as well.
-                    const currentIngredients = window.WPRecipeMaker.managerPremiumIngredients.getCurrentIngredients( recipe );
-                    const currentSystemIngredients = currentIngredients.map( ingredient => ingredient[`unit-system-${ recipe.data.currentSystem }`] );
-
-                    console.log( 'currentSystemIngredients', currentSystemIngredients );
-
+                    const servingsSystemCombination = '' + recipe.data.currentServings + '-' + recipe.data.currentSystem;
                     let ingredients = [];
-                    for ( let ingredient of currentSystemIngredients ) {
-                        ingredients.push( {
-                            name: ingredient.name,
-                            quantity: ingredient.amountParsed,
-                            unit: ingredient.unit,
-                        } );
+
+                    // Get the ingredients.
+                    if ( window.WPRecipeMaker.hasOwnProperty( 'managerPremiumIngredients' ) ) {
+                        // Get current ingredients, maybe in a different system and after adjusting servings.
+                        const currentIngredients = window.WPRecipeMaker.managerPremiumIngredients.getCurrentIngredients( recipe );
+                        const currentSystemIngredients = currentIngredients.map( ingredient => ingredient[`unit-system-${ recipe.data.currentSystem }`] );
+
+                        console.log( 'currentSystemIngredients', currentSystemIngredients );
+
+                        for ( let ingredient of currentSystemIngredients ) {
+                            ingredients.push( {
+                                name: ingredient.name,
+                                quantity: ingredient.amountParsed,
+                                unit: ingredient.unit,
+                            } );
+                        }
+                    } else {
+                        for ( let ingredient of recipe.data.ingredients ) {
+                            ingredients.push( {
+                                name: ingredient.name,
+                                quantity: ingredient.amount,
+                                unit: ingredient.unit,
+                            } );
+                        }
                     }
 
                     let data = {
+                        recipeId,
                         title: recipe.data.name,
                         image_url: recipe.data.image_url,
                         link_type: 'recipe',
                         ingredients,
+                        servingsSystemCombination,
                     };
 
                     console.log( 'instacart data', data );
@@ -76,22 +89,11 @@ window.WPRecipeMaker.instacart = {
                     } ).then( ( json ) => {
                         console.log( json );
                         if ( json ) {
+                            if ( json.hasOwnProperty( 'products_link_url' ) ) {
+                                window.open( json.products_link_url, '_blank' );
+                            }
                         }
                     } );
-
-                    // fetch( instacart.url, {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Authorization: Bearer ': instacart.key,
-                    //         'Accept': 'application/json',
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(data),
-                    // })
-                    // .then((response) => response.json())
-                    // .then((json) => {
-                    //     return json.data.lists_with_id;
-                    // });
                 }
             } );
         }

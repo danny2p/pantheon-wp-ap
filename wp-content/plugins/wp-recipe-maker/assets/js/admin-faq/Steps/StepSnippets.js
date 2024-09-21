@@ -31,7 +31,7 @@ export default class StepSnippets extends Component {
         return (
             <div className="wprm-admin-onboarding-step-snippet">
                 <p>
-                    Most people have content before the actual recipe. Often, there are some paragrahs with additional information or backstory. Maybe a few ads in between? You want people to read this, but if they are in a hurry you could <strong>give your visitors the option to jump directly to the recipe as well</strong>!
+                    Most people have content before the actual recipe. Often, there are some paragraphs with additional information or backstory. Maybe a few ads in between? You want people to read this, but if they are in a hurry you could <strong>give your visitors the option to jump directly to the recipe as well</strong>!
                 </p>
                 <p>
                     That's where the Recipe Snippets feature comes in. These snippets usually contain a "Jump to Recipe" and "Print Recipe" button but can include any field you want, really. Have a look at the <em>Snippet Summary</em> template below, for example.

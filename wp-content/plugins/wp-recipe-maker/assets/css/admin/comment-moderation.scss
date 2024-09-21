@@ -1,0 +1,61 @@
+.wprm-comment-moderation-flag {
+	float: right;
+
+	&.wprm-comment-moderation-unflagged {
+		opacity: 0.3;
+	}
+}
+
+.wprm-comment-moderation-input-container {
+	.wprm-comment-moderation-input {
+		margin-top: 5px;
+	}
+
+	textarea {
+		margin-top: 5px;
+		width: 100%;
+		max-width: 600px;
+		min-height: 25px;
+	}
+
+	.wprm-comment-moderation-input-help {
+		font-style: italic;
+		font-size: 0.9em;
+		margin-top: 5px;
+	}
+}
+
+table.wprm-comment-moderation-log {
+	margin-top: 20px;
+	width: 100%;
+	border-collapse: collapse;
+
+	tr {
+		border-bottom: 1px solid #ddd;
+		&:first-child { border-color: #444; }
+		&:last-child { border-bottom: none; }
+	}
+
+	th, td {
+		vertical-align: top;
+		padding: 5px 0;
+	}
+
+	th {
+		text-align: left;
+
+		&:nth-child(1) { width: 150px; }
+		&:nth-child(2) { width: 150px; }
+		&:nth-child(3) { width: 30px; }
+		&:nth-child(4) { min-width: 200px; }
+	}
+
+	td {
+		&:nth-child(3) {
+			text-align: center;
+		}
+		&:nth-child(4) {
+			white-space: pre;
+		}
+	}
+}

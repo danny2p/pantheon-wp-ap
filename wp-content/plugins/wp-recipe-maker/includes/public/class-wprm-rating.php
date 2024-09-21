@@ -208,7 +208,7 @@ class WPRM_Rating {
 		}
 
 		// Get comment ratings.
-		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) || ( WPRM_Addons::is_active( 'premium' ) && WPRM_Settings::get( 'features_user_ratings' ) ) ) {
 			if ( WPRM_Migrations::is_migrated_to( 'ratings_db_post_id' ) ) {
 				// Can be comment ratings both to recipe itself and its parent post.
 				$post_ids = array();
@@ -267,7 +267,7 @@ class WPRM_Rating {
 			'user_ratings' => false,
 		);
 
-		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) || ( WPRM_Addons::is_active( 'premium' ) && WPRM_Settings::get( 'features_user_ratings' ) ) ) {
 			$count = 0;
 			$total = 0;
 

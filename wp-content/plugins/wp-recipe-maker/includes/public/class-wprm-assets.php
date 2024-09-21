@@ -111,6 +111,7 @@ class WPRM_Assets {
 			'nonce' => wp_create_nonce( 'wprm' ),
 			'api_nonce' => wp_create_nonce( 'wp_rest' ),
 			'translations' => self::get_translations( 'public' ),
+			'version' => self::get_version(),
 		);
 	}
 
@@ -222,6 +223,7 @@ class WPRM_Assets {
 				'recipe_name_from_post_title' => WPRM_Settings::get( 'recipe_name_from_post_title' ),
 				'recipe_use_author' => WPRM_Settings::get( 'recipe_use_author' ),
 				'recipe_times_use_days' => WPRM_Settings::get( 'recipe_times_use_days' ),
+				'default_print_template_admin' => WPRM_Settings::get( 'default_print_template_admin' ),
 				'post_type_structure' => WPRM_Settings::get( 'post_type_structure' ),
 				'microlink_api_key' => WPRM_Settings::get( 'microlink_api_key' ),
 				'recipe_roundup_default_nofollow' => WPRM_Settings::get( 'recipe_roundup_default_nofollow' ),
@@ -278,6 +280,27 @@ class WPRM_Assets {
 		}
 
 		return apply_filters( 'wprm_translations_' . $type, $translations );
+	}
+
+	/**
+	 * Get plugin version.
+	 *
+	 * @since	9.6.0
+	 */
+	public static function get_version() {
+		$version = array(
+			'free' => WPRM_VERSION,
+		);
+
+		if ( WPRM_Addons::is_active( 'elite' ) ) {
+			$version['elite'] = WPRMP_VERSION;
+		} elseif ( WPRM_Addons::is_active( 'pro' ) ) {
+			$version['pro'] = WPRMP_VERSION;
+		} elseif ( WPRM_Addons::is_active( 'premium' ) ) {
+			$version['premium'] = WPRMP_VERSION;
+		}
+
+		return $version;
 	}
 
 	/**

@@ -13,6 +13,25 @@
 	}
 }
 
+.comments th#wprm_review,
+.comments td.wprm_review {
+    width: 150px;
+}
+
+.column-wprm_review {
+	.wprm-comment-review-status-na {
+		opacity: 0.3;
+	}
+	.wprm-comment-review-status-featured {
+		color: darkgreen;
+		font-weight: bold;
+	}
+	.wprm-comment-review-status-excluded {
+		color: darkred;
+		font-weight: bold;
+	}
+}
+
 .wp-admin {
 	// Prevent huge stars in backend.
 	fieldset.wprm-comment-ratings-container input[type=radio] {

@@ -107,6 +107,7 @@ class WPRM_Api_Custom_Taxonomies {
 		$key = isset( $params['key'] ) ? sanitize_key( $params['key'] ) : '';
 		$singular_name = isset( $params['singular_name'] ) ? sanitize_text_field( $params['singular_name'] ) : '';
 		$name = isset( $params['name'] ) ? sanitize_text_field( $params['name'] ) : '';
+		$order = isset( $params['order'] ) ? intval( $params['order'] ) : 0;
 		$slug = isset( $params['slug'] ) ? sanitize_key( $params['slug'] ) : '';
 		$archive = isset( $params['archive'] ) && $params['archive'] ? true : false;
 
@@ -117,6 +118,7 @@ class WPRM_Api_Custom_Taxonomies {
 			$taxonomies[ $key ] = array(
 				'name' => $name,
 				'singular_name' => $singular_name,
+				'order' => $order,
 				'slug' => $slug,
 				'archive' => $archive,
 			);
@@ -126,6 +128,7 @@ class WPRM_Api_Custom_Taxonomies {
 			$data = array(
 				'key' => $key,
 				'singular_name' => $singular_name,
+				'order' => $order,
 				'name' => $name,
 				'slug' => $slug,
 				'archive' => $archive,

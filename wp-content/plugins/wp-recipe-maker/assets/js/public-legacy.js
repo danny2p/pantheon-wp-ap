@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 
 import './public/analytics';
 import './public/comment-rating';
+import './public/debug';
 import './public/expandable';
 import './public/grow';
 import './public/instacart';

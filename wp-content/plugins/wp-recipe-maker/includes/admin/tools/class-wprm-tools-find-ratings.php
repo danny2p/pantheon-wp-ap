@@ -209,6 +209,11 @@ class WPRM_Tools_Find_Ratings {
 						$comment_rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
 					}
 
+					if ( ! $comment_rating ) {
+						// Check for WP Zoom rating.
+						$comment_rating = intval( get_comment_meta( $comment->comment_ID, 'wpzoom-rcb-comment-rating', true ) );
+					}
+
 					// RecipePress Reloaded uses comment_karma field, but only use this if we're sure that plugin was used. Comment Karma could be anything.
 					// if ( ! $comment_rating ) {
 					// 	$comment_karma = intval( $comment->comment_karma );

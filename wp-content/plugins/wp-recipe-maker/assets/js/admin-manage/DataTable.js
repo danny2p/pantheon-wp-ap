@@ -33,6 +33,19 @@ const shouldRunOnce = (() => {
     };
 })();
 
+// Get default page size.
+let defaultPageSize = 25;
+const pageSizeOptions = [5, 10, 20, 25, 50, 100, 500];
+let savedPageSize = localStorage.getItem( 'wprm-admin-manage-page-size' );
+
+if ( savedPageSize ) {
+    savedPageSize = parseInt( savedPageSize );
+
+    if ( pageSizeOptions.includes( savedPageSize ) ) {
+        defaultPageSize = savedPageSize;
+    }
+}
+
 export default class DataTable extends Component {
     constructor(props) {
         super(props);
@@ -313,8 +326,11 @@ export default class DataTable extends Component {
                                 } }
                                 loading={ loading }
                                 onFetchData={this.fetchData}
-                                defaultPageSize={ this.props.options.hasOwnProperty( 'defaultPageSize' ) ? this.props.options.defaultPageSize : 25 }
-                                pageSizeOptions={ [5, 10, 20, 25, 50, 100, 500] }
+                                defaultPageSize={ defaultPageSize }
+                                pageSizeOptions={ pageSizeOptions }
+                                onPageSizeChange={ (pageSize) => {
+                                    localStorage.setItem( 'wprm-admin-manage-page-size', pageSize );
+                                }}
                                 defaultSorted={[{
                                     id: 'rating' === this.props.type ? 'date' : 'id',
                                     desc: true

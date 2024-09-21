@@ -23,7 +23,7 @@ const Toolbar = (props) => {
 	// Get values for suggestions.
 	let editor;
 	let value = '';
-	if ( 'ingredient' === props.type || 'equipment' === props.type ) {
+	if ( 'ingredient-unit' === props.type || 'ingredient' === props.type || 'equipment' === props.type ) {
 		editor = useSlate();
 		value = serialize( editor );
 	}
@@ -53,6 +53,11 @@ const Toolbar = (props) => {
 		case 'no-link':
 			hideLink = true;
 			break;
+		case 'ingredient-unit':
+			if ( ! wprm_admin.addons.premium ) {
+				hideLink = true;
+			}
+			break;
 		case 'equipment':
 		case 'ingredient':
 			hideLink = true;
@@ -66,7 +71,7 @@ const Toolbar = (props) => {
 			<ToolbarTemperature/>
 			<ToolbarInlineIngredient/>
 			{
-				( 'ingredient' === props.type || 'equipment' === props.type )
+				( 'ingredient-unit' === props.type || 'ingredient' === props.type || 'equipment' === props.type )
 				&&
 				<ToolbarSuggest
 					value={ value }

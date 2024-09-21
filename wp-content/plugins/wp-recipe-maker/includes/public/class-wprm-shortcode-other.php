@@ -325,8 +325,10 @@ class WPRM_Shortcode_Other {
 		$atts = shortcode_atts( array(
 			'id' => '0',
 			'field' => '',
+			'key' => '',
 			'device' => '',
 			'user' => '',
+			'rating' => '',
 			'taxonomy' => '',
 			'term_ids' => '',
 			'term_slugs' => '',
@@ -335,6 +337,9 @@ class WPRM_Shortcode_Other {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 
+		$classes = array(
+			'wprm-condition',
+		);
 		$matches_conditions = array();
 
 		// Field conditions.
@@ -343,6 +348,9 @@ class WPRM_Shortcode_Other {
 			$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 
 			if ( $recipe ) {
+				$classes[] = 'wprm-condition-field';
+				$classes[] = 'wprm-condition-field-' . $field_condition;
+
 				switch ( $field_condition ) {
 					case 'image':
 						$matches_conditions[] = 0 < intval( $recipe->image_id() ) || 'url' === $recipe->image_id() && $recipe->image_url();
@@ -351,10 +359,28 @@ class WPRM_Shortcode_Other {
 						$matches_conditions[] = '' !== $recipe->video();
 						break;
 					case 'nutrition':
-						$matches_conditions[] = '' !== do_shortcode( '[wprm-nutrition-label id="' . $recipe->id() . '"]' );
+						$matches_conditions[] = '' !== do_shortcode( '[wprm-nutrition-label id="' . $recipe->id() . '" style="simple" nutrition_values="serving"]' );
 						break;
 					case 'unit-conversion':
 						$matches_conditions[] = '' !== do_shortcode( '[wprm-recipe-unit-conversion id="' . $recipe->id() . '"]' );
+						break;
+					case 'custom':
+						$custom_field_key = sanitize_key( $atts['key'] );
+
+						if ( $custom_field_key ) {
+							$custom_field = $recipe->custom_field( $custom_field_key );
+
+							$matches_conditions[] = '' !== $custom_field && false !== $custom_field;
+						} else {
+							$matches_conditions[] = false;
+						}
+						break;
+					default:
+						if ( method_exists( $recipe, $field_condition ) ) {
+							$matches_conditions[] = ! ! $recipe->$field_condition();
+						} else {
+							$matches_conditions[] = false;
+						}
 						break;
 				}
 			}
@@ -369,6 +395,9 @@ class WPRM_Shortcode_Other {
 				$taxonomy = sanitize_key( $atts['taxonomy'] );
 				$taxonomy = 'wprm_' === substr( $taxonomy, 0, 5 ) ? substr( $taxonomy, 5 ) : $taxonomy;
 				$terms = $recipe->tags( $taxonomy );
+
+				$classes[] = 'wprm-condition-taxonomy';
+				$classes[] = '-taxonomy-' . $taxonomy;
 
 				// Get terms to match on.
 				if ( $atts['term_ids'] ) {
@@ -405,13 +434,22 @@ class WPRM_Shortcode_Other {
 				if ( $detect && $detect->isTablet() ) { $device = 'tablet'; }
 
 				$device_condition = strtolower( str_replace( ',', ';', $atts['device'] ) );
-				$matches_conditions[] = in_array( $device, explode( ';', $device_condition ) );
+				$device_conditions = explode( ';', $device_condition );
+				$matches_conditions[] = in_array( $device, $device_conditions );
+
+				$classes[] = 'wprm-condition-device';
+				foreach ( $device_conditions as $device_condition ) {
+					$classes[] = 'wprm-condition-device-' . $device_condition;
+				}
 			}
 		}
 
 		// User conditions.
 		if ( $atts['user'] ) {
 			$user_condition = strtolower( str_replace( '-', '_', $atts['user'] ) );
+
+			$classes[] = 'wprm-condition-user';
+			$classes[] = 'wprm-condition-user-' . str_replace( '_', '-', $user_condition );
 
 			switch( $user_condition ) {
 				case 'logged_in':
@@ -421,6 +459,24 @@ class WPRM_Shortcode_Other {
 				case 'logged_out':
 					$matches_conditions[] = ! is_user_logged_in();
 					break;
+			}
+		}
+
+		// Rating conditions.
+		if ( $atts['rating'] ) {
+			$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
+
+			if ( $recipe ) {
+				// Find boundaries.
+				$rating_condition = explode( '-', $atts['rating'] );
+				$lower_bound = floatval( $rating_condition[0] );
+				$upper_bound = isset( $rating_condition[1] ) ? floatval( $rating_condition[1] ) : $lower_bound;
+
+				// Get recipe rating.
+				$rating = $recipe->rating();
+				$rating = isset( $rating['average'] ) ? floatval( $rating['average'] ) : 0.0;
+
+				$matches_conditions[] = $lower_bound <= $rating && $rating <= $upper_bound;
 			}
 		}
 
@@ -436,12 +492,13 @@ class WPRM_Shortcode_Other {
 		
 		// Optional inverse match.
 		if ( (bool) $atts['inverse'] ) {
+			$classes[] = 'wprm-condition-inverse';
 			$match = ! $match;
 		}
 
 		// Return content if it matches the condition, empty otherwise.
 		if ( $match ) {
-			return do_shortcode( $content );
+			return '<span class="' . esc_attr( implode( ' ', $classes ) ) . '">' . do_shortcode( $content ) . '</span>';
 		} else {
 			return '';
 		}

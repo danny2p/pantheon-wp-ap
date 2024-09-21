@@ -19,4 +19,10 @@ export default {
     getPostSummary(id) {
         return ApiWrapper.call( `${utilitiesEndpoint}/post_summary/${id}` );
     },
+    previewRecipe(json) {
+        const data = {
+            json,
+        }
+        return ApiWrapper.call( `${utilitiesEndpoint}/preview`, 'POST', data );
+    },
 };

@@ -40,16 +40,40 @@ export default {
                         {
                             'suitablefordiet' === datatable.props.options.id
                             ?
-                            <Icon
-                                type="pencil"
-                                title={ `${ __wprm( 'Rename' ) } ${ datatable.props.options.label.singular }` }
-                                onClick={() => {
-                                    let newName = prompt( `${ __wprm( 'What do you want to be the new name for' ) } "${row.original.label}"?`, row.original.label );
-                                    if( newName && newName.trim() ) {
-                                        Api.manage.renameTermLabel(datatable.props.options.id, row.original.term_id, newName).then(() => datatable.refreshData());
-                                    }
-                                }}
-                            />
+                            <Fragment>
+                                <Icon
+                                    type="pencil"
+                                    title={ `${ __wprm( 'Rename' ) } ${ datatable.props.options.label.singular }` }
+                                    onClick={() => {
+                                        let newName = prompt( `${ __wprm( 'What do you want to be the new name for' ) } "${row.original.label}"?`, row.original.label );
+                                        if( newName && newName.trim() ) {
+                                            Api.manage.renameTermLabel(datatable.props.options.id, row.original.term_id, newName).then(() => datatable.refreshData());
+                                        }
+                                    }}
+                                />
+                                {
+                                    ! row.original.is_default
+                                    &&
+                                    <Icon
+                                        type="merge"
+                                        title={ `${ __wprm( 'Merge into another' ) } ${ datatable.props.options.label.singular }` }
+                                        onClick={() => {
+                                            let newId = prompt( `${ __wprm( 'What is the ID of the term you want the merge' ) } "${row.original.name}" ${ __wprm( 'into' ) }?` );
+                                            if( newId && newId != row.original.term_id && newId.trim() ) {
+                                                Api.manage.getTerm(datatable.props.options.id, newId).then(newTerm => {
+                                                    if ( newTerm ) {
+                                                        if ( confirm( `${ __wprm( 'Are you sure you want to merge' ) } "${row.original.name}" ${ __wprm( 'into' ) } "${newTerm.name}"?` ) ) {
+                                                            Api.manage.mergeTerm(datatable.props.options.id, row.original.term_id, newId).then(() => datatable.refreshData());
+                                                        }
+                                                    } else {
+                                                        alert( __wprm( 'We could not find a term with that ID.' ) );
+                                                    }
+                                                });
+                                            }
+                                        }}
+                                    />
+                                }
+                            </Fragment>
                             :
                             <Fragment>
                                 <Icon

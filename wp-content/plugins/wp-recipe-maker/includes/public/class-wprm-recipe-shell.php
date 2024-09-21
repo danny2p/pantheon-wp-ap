@@ -99,6 +99,35 @@ class WPRM_Recipe_Shell {
 	}
 
 	/**
+	 * Get recipe data for the frontend.
+	 *
+	 * @since	8.10.0
+	 */
+	public function get_data_frontend() {
+		$recipe = array();
+
+		$recipe['type'] = $this->type();
+		$recipe['name'] = $this->name();
+		$recipe['slug'] = $this->slug();
+		$recipe['image_url'] = $this->image_url( 'full' );
+
+		// Servings related data.
+		$recipe['originalServings'] = $this->servings();
+		
+		$parsed_servings = WPRM_Recipe_Parser::parse_quantity( $this->servings() );
+		$recipe['originalServingsParsed'] = is_numeric( $parsed_servings ) && 0 < $parsed_servings ? $parsed_servings : 1;
+
+		$recipe['currentServings'] = $recipe['originalServings'];
+		$recipe['currentServingsParsed'] = $recipe['originalServingsParsed'];
+		$recipe['currentServingsFormatted'] = $recipe['originalServings'];
+		$recipe['currentServingsMultiplier'] = 1;
+
+		$recipe['rating'] = $this->rating();
+
+		return apply_filters( 'wprm_recipe_frontend_data', $recipe, $this );
+	}
+
+	/**
 	 * Get metadata value.
 	 *
 	 * @since	5.2.0
@@ -227,6 +256,42 @@ class WPRM_Recipe_Shell {
 	}
 
 	/**
+	 * Get the recipe ingredients without nested groups.
+	 *
+	 * @since    1.0.0
+	 */
+	public function ingredients_without_groups() {
+		$ingredients = $this->ingredients();
+		$ingredients_without_groups = array();
+
+		foreach ( $ingredients as $ingredient_group ) {
+			if ( isset( $ingredient_group['ingredients'] ) && is_array( $ingredient_group['ingredients'] ) ) {
+				$ingredients_without_groups = array_merge( $ingredients_without_groups, $ingredient_group['ingredients'] );				
+			}
+		}
+
+		return $ingredients_without_groups;
+	}
+
+	/**
+	 * Get the recipe instructions without nested groups.
+	 *
+	 * @since    1.0.0
+	 */
+	public function instructions_without_groups() {
+		$instructions = $this->instructions();
+		$instructions_without_groups = array();
+
+		if ( is_array( $instructions ) ) {
+			foreach ( $instructions as $instruction_group ) {
+				$instructions_without_groups = array_merge( $instructions_without_groups, $instruction_group['instructions'] );
+			}
+		}
+
+		return $instructions_without_groups;
+	}
+
+	/**
 	 * Get the recipe tags for a certain tag type.
 	 *
 	 * @since	5.8.0
@@ -277,6 +342,9 @@ class WPRM_Recipe_Shell {
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
 		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
+
+		$current_page = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$text = str_ireplace( '%recipe_current_url%', $current_page, $text );
 
 		return $text;
 	}

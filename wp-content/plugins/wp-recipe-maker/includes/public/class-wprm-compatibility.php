@@ -31,6 +31,9 @@ class WPRM_Compatibility {
 
 		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
 
+		// Jupiter.
+		add_action( 'wp_footer', array( __CLASS__, 'jupiter_assets' ) );
+
 		// Instacart.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
@@ -284,6 +287,17 @@ class WPRM_Compatibility {
 	}
 
 	/**
+	 * Jupiter assets in footer.
+	 *
+	 * @since    8.2.0
+	 */
+	public static function jupiter_assets() {
+		if ( WPRM_Settings::get( 'integration_jupiter' ) ) {
+			echo '<script defer src="https://scripts.jupiter.shop/wp-recipe-maker/bundle.min.js"></script>';
+		}
+	}
+
+	/**
 	 * Add Instacart button after the ingredients.
 	 *
 	 * @since	8.2.0
@@ -530,9 +544,13 @@ class WPRM_Compatibility {
 			if ( $multilingual ) {
 				// WPML.
 				if ( 'wpml' === $multilingual['plugin'] ) {
+					$element_type = 'post_' . WPRM_POST_TYPE;
+					$translation_group_id = apply_filters( 'wpml_element_trid', NULL, $recipe_id, $element_type );
+
 					do_action( 'wpml_set_element_language_details', array(
 						'element_id' => $recipe_id,
-						'element_type' => 'post_' . WPRM_POST_TYPE,
+						'trid' => $translation_group_id ? $translation_group_id : false,
+						'element_type' => $element_type,
 						'language_code' => $language ? $language : null,
 					) );
 				}

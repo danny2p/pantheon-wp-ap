@@ -85,7 +85,7 @@ const ingredient = (props, provided) => {
                 />
                 <FieldRichText
                     singleLine
-                    toolbar={ wprm_admin.addons.premium ? 'all' : 'no-link' }
+                    toolbar="ingredient-unit"
                     value={ unit }
                     placeholder={ 'howto' === props.recipeType ? __wprm( 'piece' ) : __wprm( 'tbsp' ) }
                     onChange={(unit) => {

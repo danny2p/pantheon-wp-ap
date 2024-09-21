@@ -8,7 +8,7 @@ const contentShortcodes = [
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
 const ignoreShortcodes = [
     'wprm-recipe-my-emissions-label',
-    'wprm-recipe-shop-instacart',
+    'wprm-recipe-shop-instacart-api',
 ];
 
 // Sort shortcodes for "Add Blocks" section.
@@ -26,6 +26,7 @@ const shortcodeGroups = {
         shortcodes: [
             'wprm-text',
             'wprm-link',
+            'wprm-qr-code',
             'wprm-image',
             'wprm-call-to-action',
             'wprm-icon',
@@ -40,6 +41,7 @@ const shortcodeGroups = {
             'wprm-recipe-rating',
             'wprm-recipe-date',
             'wprm-recipe-author',
+            'wprm-recipe-author-bio',
             'wprm-recipe-summary',
             'wprm-recipe-meta-container',
             'wprm-recipe-tag',
@@ -107,6 +109,7 @@ const shortcodeGroups = {
             'wprm-recipe-chicory',
             'wprm-recipe-slickstream-favorites',
             'wprm-recipe-smart-with-food',
+            'wprm-hubbub-save-this',
         ],
     },
 };

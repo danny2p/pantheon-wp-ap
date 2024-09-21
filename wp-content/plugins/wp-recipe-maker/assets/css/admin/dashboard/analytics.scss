@@ -30,6 +30,28 @@ table.wprm-admin-dashboard-block-chart-table {
             width: 75px;
             text-align: center;
         }
+
+        .wprm-admin-dashboard-block-chart-table-recipe {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .wprm-admin-dashboard-block-chart-table-recipe-name {
+                flex: 1;
+            }
+
+            .wprm-admin-dashboard-block-chart-table-actions {
+                flex-shrink: 0;
+                margin-left: 5px;
+    
+                display: flex;
+                align-items: center;
+    
+                .wprm-admin-dashboard-block-chart-table-action {
+                    margin-left: 10px;
+                }
+            }
+        }
     }
 
     tbody {
