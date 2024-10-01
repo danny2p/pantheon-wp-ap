@@ -24,6 +24,7 @@ $upload_sizes = array(
 	'3072' => '3 GB',
 	'4096' => '4 GB',
 	'5120' => '5 GB',
+	'10240' => '10 GB',
 );
 
 //$current_max_size = self::get_closest($max_size, $upload_sizes);
