@@ -672,6 +672,15 @@ class WPRM_Api_Manage_Recipes {
 					);
 				}
 				break;
+			case 'notes':
+				if ( '' !== $value ) {
+					$args['meta_query'][] = array(
+						'key' => 'wprm_notes',
+						'compare' => 'LIKE',
+						'value' => $value,
+					);
+				}
+				break;
 			case 'submission_author':
 				if ( 'all' !== $value ) {
 					$compare = 'yes' === $value ? 'EXISTS' : 'NOT EXISTS';

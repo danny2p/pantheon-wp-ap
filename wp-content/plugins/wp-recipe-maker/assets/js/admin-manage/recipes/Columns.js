@@ -958,6 +958,20 @@ export default {
                         }
                     </div>
                 ),
+            },{
+                groupHeader: __wprm( 'Other' ),
+                Header: __wprm( 'Notes' ),
+                id: 'notes',
+                accessor: 'notes',
+                width: 300,
+                sortable: false,
+                Filter: (props) => (<TextFilter {...props}/>),
+                Cell: row => {                    
+                    if ( ! row.value ) {
+                        return ( <div></div> );
+                    }
+                    return ( <div dangerouslySetInnerHTML={ { __html: row.value } } /> );
+                },
             }
         );
 

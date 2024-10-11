@@ -357,6 +357,17 @@ $recipe_ratings = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'user_ratings_comments_closed',
+					'name' => __( 'When Comments are Closed', 'wp-recipe-maker' ),
+					'description' => __( 'What to do when the comments for the parent post of the recipe are closed.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'allow' => __( 'Visitors can still vote and comment through the modal', 'wp-recipe-maker' ),
+						'close' => __( 'Do not allow voting and commenting through the User Rating Modal either', 'wp-recipe-maker' ),
+					),
+					'default' => 'allow',
+				),
 			),
 			'dependency' => array(
 				array(

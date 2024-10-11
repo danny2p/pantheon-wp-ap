@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.6
 Requires PHP: 5.4
-Stable tag: 9.6.0
+Stable tag: 9.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,17 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.6.1 =
+* Feature: PublishPress Revisions compatibility for parent post association
+* Feature: Import ratings from WP-PostRatings plugin
+* Improvement: Show and search through notes on the Manage page
+* Improvement: Clear cache of parent post when a recipe is saved
+* Improvement: Import notes from Cooked plugin
+* Fix: "Append Featured Reviews" setting not handled correctly in some cases
+* Fix: Prevent PHP notice on print page
+* Fix: Prevent unnecessary update of SEO indicator
+* Fix: Prevent PHP warning in QR Code library
+
 = 9.6.0 =
 * Feature: QR Code block for the template editor
 * Feature: Optional QR Code on the print page
@@ -300,6 +311,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.6.1 =
+Fixes a few small issues
+
 = 9.6.0 =
 Some great new features and improvements
 
