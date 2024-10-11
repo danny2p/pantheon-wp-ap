@@ -288,6 +288,12 @@ class WPRM_List_Saver {
 			return;
 		}
 
+		// Skip Revisionary / PublishPress revisions.
+		$revisionary = get_post_meta( $post_id, '_rvy_base_post_id', true );
+		if ( $revisionary && is_plugin_active( 'revisionary/revisionary.php' ) && get_post_status( $revisionary ) ) {
+			return;
+		}
+
 		// Skip Yoast Duplicate Posts Rewrite.
 		$yoast_dp = get_post_meta( $post_id, '_dp_is_rewrite_republish_copy', true );
 		if ( $yoast_dp && is_plugin_active( 'duplicate-post/duplicate-post.php' ) ) {

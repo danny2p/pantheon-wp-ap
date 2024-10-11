@@ -370,11 +370,13 @@ class WPRM_Print {
 		$ingredients_flat = $recipe ? $recipe->ingredients_flat() : array();
 
 		foreach( $ingredients_flat as $ingredient ) {
-			$image_id = intval( get_term_meta( $ingredient['id'], 'wprmp_ingredient_image_id', true ) );
+			if ( isset( $ingredient['id'] ) && $ingredient['id'] ) {
+				$image_id = intval( get_term_meta( $ingredient['id'], 'wprmp_ingredient_image_id', true ) );
 
-			if ( $image_id ) {
-				$has_ingredient_images = true;
-				break;
+				if ( $image_id ) {
+					$has_ingredient_images = true;
+					break;
+				}
 			}
 		}
 

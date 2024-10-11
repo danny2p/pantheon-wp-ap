@@ -663,9 +663,10 @@ class WPRM_Metadata {
 					$featured_comment_ids = wp_list_pluck( $comments, 'comment_ID' );
 
 					// Maybe append with other comments, if not set to use featured only.
-					if ( 'featured_only' !== WPRM_Settings::get( 'metadata_review_include' ) && 'no' !== WPRM_Settings::get( 'metadata_review_append_featured' ) ) {
+					if ( 'featured_only' !== WPRM_Settings::get( 'metadata_review_include' ) ) {
 						if (
-								( 'yes_5' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 5 )
+								( 'no' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 1 )
+								|| ( 'yes_5' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 5 )
 								|| ( 'yes_10' === WPRM_Settings::get( 'metadata_review_append_featured' ) && $nbr_featured_comments < 10 )
 							) {
 							// Get other comments with ratings, excluding featured comments and excluded comments.

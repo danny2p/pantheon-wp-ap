@@ -289,6 +289,16 @@ class WPRM_Recipe_Saver {
 			}
 		}
 
+		if ( WPRM_POST_TYPE === $post->post_type ) {
+			// Maybe clear cache of parent post.
+			$parent_post_id = get_post_meta( $id, 'wprm_parent_post_id', true );
+			$parent_post_id = $parent_post_id ? intval( $parent_post_id ) : false;
+
+			if ( $parent_post_id && $parent_post_id !== $post->ID ) {
+				WPRM_Cache::clear( $parent_post_id, false );
+			}
+		}
+
 		// Fix recipes that have this post as a parent post when they aren't actually inside anymore.
 		$args = array(
 			'post_type' => WPRM_POST_TYPE,
@@ -369,6 +379,12 @@ class WPRM_Recipe_Saver {
 		// Skip Revision Manager TMC revisions.
 		$rm_tmc = get_post_meta( $post_id, 'linked_post_id', true );
 		if ( $rm_tmc && is_plugin_active( 'revision-manager-tmc/revision-manager-tmc.php' ) && get_post_status( $rm_tmc ) ) {
+			return;
+		}
+
+		// Skip Revisionary / PublishPress revisions.
+		$revisionary = get_post_meta( $post_id, '_rvy_base_post_id', true );
+		if ( $revisionary && is_plugin_active( 'revisionary/revisionary.php' ) && get_post_status( $revisionary ) ) {
 			return;
 		}
 

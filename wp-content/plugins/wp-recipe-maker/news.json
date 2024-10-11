@@ -1,6 +1,18 @@
 {
     "news": [
         {
+            "date": "2024-10-01",
+            "label": "Blog",
+            "title": "How to Calculate Nutrition Facts for Recipes: A Complete Guide",
+            "url": "https://bootstrapped.ventures/how-to-calculate-nutrition-facts-for-a-recipe/"
+        },
+        {
+            "date": "2024-09-24",
+            "label": "Blog",
+            "title": "How to Turn Instagram Food Content into Profit",
+            "url": "https://bootstrapped.ventures/how-do-food-bloggers-on-instagram-make-money/"
+        },
+        {
             "date": "2024-09-19",
             "label": "Release",
             "title": "WP Recipe Maker 9.6.0",
@@ -11,7 +23,8 @@
             "label": "Blog",
             "title": "Maximizing Profits: Top Ad Networks for Food Blogs",
             "url": "https://bootstrapped.ventures/food-blog-networks/"
-        },        {
+        },
+        {
             "date": "2024-09-03",
             "label": "Blog",
             "title": "Master Overhead Food Shots with These Pro Tricks",

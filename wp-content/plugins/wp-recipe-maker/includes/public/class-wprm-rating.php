@@ -103,8 +103,10 @@ class WPRM_Rating {
 			update_post_meta( $parent_post_id, 'wprm_rating_count', $recipe_rating['count'] );
 		}
 
-		// Update SEO checker.
-		WPRM_Seo_Checker::update_seo_for( $recipe_id );
+		// Update SEO checker if this is the first rating.
+		if ( 1 === $recipe_rating['count'] ) {
+			WPRM_Seo_Checker::update_seo_for( $recipe_id );
+		}		
 
 		return $recipe_rating;
 	}

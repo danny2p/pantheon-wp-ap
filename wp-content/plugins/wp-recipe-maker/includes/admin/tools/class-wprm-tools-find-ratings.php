@@ -237,6 +237,32 @@ class WPRM_Tools_Find_Ratings {
 				}
 
 				// Get user ratings.
+				// WP-PostRatings.
+				global $wpdb;
+				$wp_postratings_table = $wpdb->prefix . 'ratings';
+				if ( $wp_postratings_table === $wpdb->get_var( "SHOW TABLES LIKE '$wp_postratings_table'" ) ) {
+					if ( $comment_post_ids ) {
+						$postratings = $wpdb->get_results( 'SELECT * FROM ' . $wp_postratings_table . ' WHERE rating_postid IN (' . implode( ',', $comment_post_ids ) . ')' );
+
+						foreach ( $postratings as $postrating ) {
+							$postrating = (array) $postrating;
+							$rating_value = isset( $postrating['rating_rating'] ) ? intval( $postrating['rating_rating'] ) : 0;
+
+							if ( 0 < $rating_value && $rating_value <= 5 ) {
+								$rating = array(
+									'recipe_id' => $recipe->id(),
+									'date' => date( 'Y-m-d H:i:s', $postrating['rating_timestamp'] ),
+									'user_id' => $postrating['rating_userid'],
+									'ip' => $postrating['rating_ip'],
+									'rating' => $rating_value,
+								);
+
+								WPRM_Rating_Database::add_or_update_rating( $rating );
+							}
+						}
+					}
+				}
+
 				// SRP User Ratings.
 				$srp_user_ratings = $recipe->parent_post_id() ? get_post_meta( $recipe->parent_post_id(), '_ratings', true ) : false;
 

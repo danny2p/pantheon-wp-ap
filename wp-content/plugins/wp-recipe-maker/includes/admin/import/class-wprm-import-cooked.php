@@ -172,6 +172,7 @@ class WPRM_Import_Cooked extends WPRM_Import {
 		$recipe['name'] = $post->post_title;
 		$recipe['summary'] = isset( $cooked_recipe['excerpt'] ) ? $cooked_recipe['excerpt'] : '';
 		$recipe['servings'] = isset( $cooked_recipe['nutrition']['servings'] ) ? $cooked_recipe['nutrition']['servings'] : '';
+		$recipe['notes'] = isset( $cooked_recipe['notes'] ) ? $cooked_recipe['notes'] : '';
 
 		// Recipe Times.
 		$recipe['prep_time'] = isset( $cooked_recipe['prep_time'] ) ? $cooked_recipe['prep_time'] : '';
