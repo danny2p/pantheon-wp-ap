@@ -30,9 +30,10 @@ jobs:
         pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
     - name: Clean up multidev
       if: github.event_name == 'pull_request'
-      run: |
-        PR_NUM="pr-${{ github.event.pull_request.number }}"
+      env:
+        PR_NUM: "pr-${{ github.event.pull_request.number }}"
         PANTHEON_SITE: ${{ vars.PANTHEON_SITE }}
+      run: |
         terminus env:info $PANTHEON_SITE.$PR_NUM --quiet
         command_status=$?
         if [ $command_status -ne 0 ]; then
@@ -47,9 +48,6 @@ jobs:
           echo "The PR was closed without merging. Exiting..."
           exit 78 # Use exit code 78 to halt the workflow without failing
         fi
-      env:
-        ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
-        UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
     - name: Deployment Processing
       id: branch-processor
       env:
