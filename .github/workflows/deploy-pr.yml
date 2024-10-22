@@ -46,7 +46,7 @@ jobs:
           command_status=$?
           if [ $command_status -ne 0 ]; then
             echo "${PR_NUM} Multidev does not exist. Attempting to create."
-            terminus multidev:create $PANTHEON_SITE.dev ${PR_NUM}
+            terminus multidev:create $PANTHEON_SITE.live ${PR_NUM}
           else
             echo "Multidev environment ${PR_NUM} already exists."
           fi 

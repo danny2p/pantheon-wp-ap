@@ -1,5 +1,8 @@
 name: (Auto) Deploy to Pantheon Dev
 on:
+  pull_request:
+    types: [closed]
+    branches: ["master", "main"]
   push:
     branches:
       - 'master'
@@ -25,6 +28,27 @@ jobs:
       uses: pantheon-systems/terminus-github-actions@main
       with:
         pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+    - name: Clean up multidev
+      if: github.event_name == 'pull_request'
+      run: |
+        PR_BRANCH_NAME="pr-${{ github.event.pull_request.number }}"
+        terminus env:info $PANTHEON_SITE.${PR_NUM} --quiet
+        command_status=$?
+        if [ $command_status -ne 0 ]; then
+          echo "${PR_NUM} Multidev does not exist. Nothing to delete."
+        else
+         terminus env:delete $CANARY_SITE.$PR_BRANCH_NAME -y --delete-branch
+        fi 
+        # Check if PR was merged
+        if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+          echo "The PR was merged, continuing with deployment..."
+        else
+          echo "The PR was closed without merging. Exiting..."
+          exit 78 # Use exit code 78 to halt the workflow without failing
+        fi
+      env:
+        ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
+        UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
     - name: Deployment Processing
       id: branch-processor
       env:
