@@ -31,13 +31,14 @@ jobs:
     - name: Clean up multidev
       if: github.event_name == 'pull_request'
       run: |
-        PR_BRANCH_NAME="pr-${{ github.event.pull_request.number }}"
-        terminus env:info $PANTHEON_SITE.${PR_NUM} --quiet
+        PR_NUM="pr-${{ github.event.pull_request.number }}"
+        PANTHEON_SITE: ${{ vars.PANTHEON_SITE }}
+        terminus env:info $PANTHEON_SITE.$PR_NUM --quiet
         command_status=$?
         if [ $command_status -ne 0 ]; then
           echo "${PR_NUM} Multidev does not exist. Nothing to delete."
         else
-         terminus env:delete $CANARY_SITE.$PR_BRANCH_NAME -y --delete-branch
+         terminus env:delete $PANTHEON_SITE.$PR_NUM -y --delete-branch
         fi 
         # Check if PR was merged
         if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
