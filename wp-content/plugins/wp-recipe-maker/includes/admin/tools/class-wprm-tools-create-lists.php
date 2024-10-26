@@ -251,6 +251,13 @@ class WPRM_Tools_Create_Lists {
 				}
 
 				if ( 'external' === $mv_item['content_type'] ) {
+					$image = isset( $mv_item['thumbnail_id'] ) ? intval( $mv_item['thumbnail_id'] ) : 0;
+					$image_url = isset( $mv_item['thumbnail_uri'] ) && $mv_item['thumbnail_uri'] ? $mv_item['thumbnail_uri'] : '';
+
+					if ( $image_url && ! $image ) {
+						$image = -1; // Use external image URL.
+					}
+
 					$wprm_items[] = array(
 						'type' => 'roundup',
 						'data' => array(
@@ -259,8 +266,8 @@ class WPRM_Tools_Create_Lists {
 							'link' => isset( $mv_item['url'] ) && $mv_item['url'] ? $mv_item['url'] : '',
 							'nofollow' => isset( $mv_item['nofollow'] ) && $mv_item['nofollow'] ? '1' : '',
 							'new_tab' => $open_external_in_new_tab ? '1' : '',
-							'image' => isset( $mv_item['thumbnail_id'] ) ? intval( $mv_item['thumbnail_id'] ) : 0,
-							'image_url' => isset( $mv_item['thumbnail_uri'] ) && $mv_item['thumbnail_uri'] ? $mv_item['thumbnail_uri'] : '',
+							'image' => $image,
+							'image_url' => $image_url,
 							'credit' => isset( $mv_item['thumbnail_credit'] ) && $mv_item['thumbnail_credit'] ? $mv_item['thumbnail_credit'] : '',
 							'name' => isset( $mv_item['title'] ) && $mv_item['title'] ? $mv_item['title'] : '',
 							'summary' => isset( $mv_item['description'] ) && $mv_item['description'] ? $mv_item['description'] : '',

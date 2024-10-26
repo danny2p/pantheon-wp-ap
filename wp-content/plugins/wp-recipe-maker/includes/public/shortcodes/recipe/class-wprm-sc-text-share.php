@@ -134,7 +134,7 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Only on mobile (and in Template Editor).
@@ -146,7 +146,7 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 		}
 
 		if ( false === $detect || ( ! $detect->isMobile() && ! $atts['is_template_editor_preview'] ) ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Build text message body.

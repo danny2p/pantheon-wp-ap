@@ -103,7 +103,7 @@ class WPRM_SC_Tag extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->tags( $key ) ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$terms = $recipe->tags( $key );

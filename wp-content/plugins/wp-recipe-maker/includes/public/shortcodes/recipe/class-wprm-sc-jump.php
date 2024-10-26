@@ -138,7 +138,7 @@ class WPRM_SC_Jump extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->id() ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Get optional icon.

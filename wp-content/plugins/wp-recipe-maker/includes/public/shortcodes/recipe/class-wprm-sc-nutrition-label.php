@@ -240,7 +240,7 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || 'disabled' === $atts['align'] ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$output = '';

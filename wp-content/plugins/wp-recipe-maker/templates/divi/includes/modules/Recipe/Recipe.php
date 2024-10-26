@@ -14,7 +14,7 @@ class WPRM_Divi_Module_Recipe extends ET_Builder_Module {
 	public function init() {
 		$this->name = 'WPRM Recipe';
 
-		$this->settings_modal_toggles  = array(
+		$this->settings_modal_toggles = array(
 			// Content tab's slug is "general"
 			'general'  => array(
 				'toggles' => array(
@@ -74,7 +74,7 @@ class WPRM_Divi_Module_Recipe extends ET_Builder_Module {
 		);
 	}
 
-	public function render( $attrs, $content = null, $render_slug ) {
+	public function render( $attrs, $content, $render_slug ) {
 		$recipe_id = intval( $this->props['recipe_id'] );
 
 		if ( ! $recipe_id ) {

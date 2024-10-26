@@ -60,6 +60,16 @@ class WPRM_Api_Utilities {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_permissions_author' ),
 			));
+			register_rest_route( 'wp-recipe-maker/v1', '/utilities/preview/(?P<id>\d+)', array(
+				'callback' => array( __CLASS__, 'api_preview_recipe_html' ),
+				'methods' => 'POST',
+				'args' => array(
+					'id' => array(
+						'validate_callback' => array( __CLASS__, 'api_validate_numeric' ),
+					),
+				),
+				'permission_callback' => '__return_true',
+			));
 		}
 	}
 
@@ -186,7 +196,6 @@ class WPRM_Api_Utilities {
 	public static function api_preview_recipe( $request ) {
 		// Parameters.
 		$params = $request->get_params();
-		$recipe_id = $request['id'];
 
 		$json = isset( $params['json'] ) ? $params['json'] : false;
 
@@ -197,6 +206,55 @@ class WPRM_Api_Utilities {
 				$preview_url = WPRM_Preview::set_recipe_for_preview_and_get_url( $json_recipe );
 				return rest_ensure_response( $preview_url );
 			}
+		}
+
+		return rest_ensure_response( false );
+	}
+
+	/**
+	 * Handle preview recipe HTML call to the REST API.
+	 *
+	 * @since 9.7.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_preview_recipe_html( $request ) {
+		$recipe_id = intval( $request['id'] );
+
+		// Check if we should continue with request.
+		$params = $request->get_params();
+		$template_slug = isset( $params['template'] ) ? sanitize_key( $params['template'] ) : false;
+
+		// Allow if current user can edit posts.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return rest_ensure_response( false );
+		}
+
+		// Get recipe.
+		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
+
+		if ( $recipe ) {
+			$template = false;
+
+			if ( $template_slug ) {
+				$template = WPRM_Template_Manager::get_template_by_slug( $atts['template'] );
+			}
+
+			if ( ! $template ) {
+				$template = WPRM_Template_Manager::get_template_by_type( 'single', $recipe->type() );
+			}
+
+			$html = '';
+			$style = WPRM_Template_Manager::get_template_css( $template );
+
+			if ( $style ) {
+				$html .= '<style type="text/css">' . $style . '</style>';
+			}
+
+			$html .= '<div id="wprm-recipe-container-' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-container" data-recipe-id="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
+			$html .= do_shortcode( WPRM_Template_Manager::get_template( $recipe, 'single', $template['slug'] ) );
+			$html .= '</div>';
+
+			return rest_ensure_response( $html );
 		}
 
 		return rest_ensure_response( false );

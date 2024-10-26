@@ -67,7 +67,7 @@ class WPRM_SC_Smart_With_Food extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->id() ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$token = WPRM_Settings::get( 'integration_smartwithfood_token' );
@@ -80,7 +80,7 @@ class WPRM_SC_Smart_With_Food extends WPRM_Template_Shortcode {
 		}
 
 		if ( ! $token ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Make sure Smart with Food integration gets loaded.

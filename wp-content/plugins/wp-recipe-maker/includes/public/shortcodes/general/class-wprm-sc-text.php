@@ -82,7 +82,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 		$header_text = $atts['header'];
 		$text = $atts['text'];
 		if ( ! $text && ! $header_text ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Output.

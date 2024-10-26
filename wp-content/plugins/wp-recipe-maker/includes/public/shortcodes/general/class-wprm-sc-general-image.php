@@ -102,7 +102,7 @@ class WPRM_SC_Regular_Image extends WPRM_Template_Shortcode {
 		$img = wp_get_attachment_image( $image_id, $thumbnail_size );
 
 		if ( ! $img ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Output.

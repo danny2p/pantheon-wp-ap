@@ -131,12 +131,12 @@ class WPRM_SC_User_Ratings_Modal extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->id() ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Make sure modal is actually enabled.
 		if ( ! WPRM_Addons::is_active( 'premium' ) || ! WPRM_Settings::get( 'features_user_ratings' ) ) {
-			return;
+			return '';
 		}
 
 		// Get optional icon.

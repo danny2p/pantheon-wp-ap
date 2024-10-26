@@ -186,6 +186,23 @@ $recipe_ratings = array(
 					),
 				),
 				array(
+					'id' => 'user_ratings_force_comment_scroll_to_smooth',
+					'name' => __( 'Use Smooth Scroll', 'wp-recipe-maker' ),
+					'description' => __( 'Use smooth scrolling when jumping to the comment form.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+					'dependency' => array(
+						array(
+							'id' => 'features_comment_ratings',
+							'value' => true,
+						),
+						array(
+							'id' => 'user_ratings_type',
+							'value' => 'scroll',
+						),
+					),
+				),
+				array(
 					'id' => 'user_ratings_indicate_not_voted',
 					'name' => __( 'Transparent Stars when not Voted', 'wp-recipe-maker' ),
 					'description' => __( 'Make the stars transparent when the current user has not voted yet.', 'wp-recipe-maker' ),
