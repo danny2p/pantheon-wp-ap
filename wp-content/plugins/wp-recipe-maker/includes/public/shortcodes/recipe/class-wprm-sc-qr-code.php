@@ -120,7 +120,7 @@ class WPRM_SC_Qr_Code extends WPRM_Template_Shortcode {
 		}
 
 		if ( ! $data ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Generate QR code.

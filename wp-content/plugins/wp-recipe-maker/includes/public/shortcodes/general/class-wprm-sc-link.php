@@ -148,7 +148,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 
 		$link = esc_url_raw( $atts['link'] );
 		if ( ! $link ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Get optional icon.

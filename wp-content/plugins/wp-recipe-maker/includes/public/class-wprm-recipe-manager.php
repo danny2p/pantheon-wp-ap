@@ -468,24 +468,24 @@ class WPRM_Recipe_Manager {
 		$shortcode_matches = isset( $matches[1] ) ? array_map( 'intval', $matches[1] ) : array();
 
 		// Divi Builder.
-		// $divi_matches = array();
-		// if ( function_exists( 'et_core_is_builder_used_on_current_request' ) ) {
-		// 	$pattern = get_shortcode_regex( array( 'divi_wprm_recipe' ) );
+		$divi_matches = array();
+		if ( function_exists( 'et_core_is_builder_used_on_current_request' ) ) {
+			$pattern = get_shortcode_regex( array( 'divi_wprm_recipe' ) );
 
-		// 	if ( preg_match_all( '/' . $pattern . '/s', $content, $matches ) && array_key_exists( 2, $matches ) ) {
-		// 		foreach ( $matches[2] as $key => $value ) {
-		// 			if ( 'divi_wprm_recipe' === $value ) {
-		// 				$divi_atts = shortcode_parse_atts( stripslashes( $matches[3][ $key ] ) );
+			if ( preg_match_all( '/' . $pattern . '/s', $content, $matches ) && array_key_exists( 2, $matches ) ) {
+				foreach ( $matches[2] as $key => $value ) {
+					if ( 'divi_wprm_recipe' === $value ) {
+						$divi_atts = shortcode_parse_atts( stripslashes( $matches[3][ $key ] ) );
 
-		// 				if ( isset( $divi_atts['recipe_id'] ) ) {
-		// 					$divi_matches[] = intval( $divi_atts['recipe_id'] );
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
+						if ( isset( $divi_atts['recipe_id'] ) ) {
+							$divi_matches[] = intval( $divi_atts['recipe_id'] );
+						}
+					}
+				}
+			}
+		}
 
-		return $gutenberg_matches + $classic_matches + $shortcode_matches;
+		return $gutenberg_matches + $classic_matches + $shortcode_matches + $divi_matches;
 	}
 
 	/**

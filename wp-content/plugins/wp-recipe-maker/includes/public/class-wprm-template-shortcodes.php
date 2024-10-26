@@ -71,6 +71,18 @@ class WPRM_Template_Shortcodes {
 	 */
 	public static function init() {
 		self::load_shortcodes();
+
+		add_action( 'the_post', array( __CLASS__, 'reset_current_recipe_id' ) );
+	}
+
+	/**
+	 * Reset the current recipe ID.
+	 *
+	 * @since	9.7.0
+	 */
+	public static function reset_current_recipe_id() {
+		// A new post was loaded, reset current recipe ID. This ensures compatibility with the Query Loop.
+		self::$current_recipe_id = false;
 	}
 
 	/**

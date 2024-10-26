@@ -138,7 +138,7 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 		}
 
 		if ( ! $icon ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Output.

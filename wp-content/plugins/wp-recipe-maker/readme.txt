@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.6
 Requires PHP: 5.4
-Stable tag: 9.6.1
+Stable tag: 9.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,21 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.7.2 =
+* Fix: Divi trying to load unexisting CSS file
+
+= 9.7.1 =
+* Fix: PHP notice when using free plugin with some caching plugins
+
+= 9.7.0 =
+* Feature: Output shortcode for current recipe when in the loop
+* Feature: WPRM Recipe block for Divi
+* Feature: Automatic locking of the recipe parent post
+* Improvement: Prevent JavaScript problems caused by caching plugin optimization features
+* Improvement: Make sure shortcode filter hook is called when returning empty as well
+* Fix: Importing external images from Create Lists
+* Fix: Prevent misuse of tooltip by contributors
+
 = 9.6.1 =
 * Feature: PublishPress Revisions compatibility for parent post association
 * Feature: Import ratings from WP-PostRatings plugin
@@ -311,6 +326,15 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.7.2 =
+Update recommended when using Divi
+
+= 9.7.1 =
+Fixes a PHP notice
+
+= 9.7.0 =
+Some great new features and improvements
+
 = 9.6.1 =
 Fixes a few small issues
 

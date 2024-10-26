@@ -85,7 +85,7 @@ class WPRM_SC_Roundup_Credit extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$credit = $recipe->credit();
@@ -97,12 +97,12 @@ class WPRM_SC_Roundup_Credit extends WPRM_Template_Shortcode {
 
 		// Make sure there actually is a credit set.
 		if ( ! $credit ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Make sure there actually is an image.
 		if ( intval( $recipe->image_id() ) <= 0 && ! $recipe->image_url() ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Get optional icon.

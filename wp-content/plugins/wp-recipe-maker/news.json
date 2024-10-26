@@ -1,6 +1,24 @@
 {
     "news": [
         {
+            "date": "2024-10-22",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.7.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-7-0/"
+        },
+        {
+            "date": "2024-10-15",
+            "label": "Blog",
+            "title": "How to Fix Common Food Photo Issues with These Editing Tips",
+            "url": "https://bootstrapped.ventures/editing-food-photography/"
+        },
+        {
+            "date": "2024-10-08",
+            "label": "Blog",
+            "title": "Enhance Your Food Blog with These Top WordPress Recipe Plugins",
+            "url": "https://bootstrapped.ventures/best-wordpress-recipe-plugin/"
+        },
+        {
             "date": "2024-10-01",
             "label": "Blog",
             "title": "How to Calculate Nutrition Facts for Recipes: A Complete Guide",

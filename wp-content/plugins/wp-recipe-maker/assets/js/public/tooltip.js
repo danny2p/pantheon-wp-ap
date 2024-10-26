@@ -1,3 +1,4 @@
+import sanitizeHtml from 'sanitize-html';
 import tippy, { inlinePositioning } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
@@ -26,9 +27,24 @@ window.WPRecipeMaker.tooltip = {
             if ( tooltip ) {
                 container.role = "button"; // Needed for accessibility.
 
+                const sanitized = sanitizeHtml( tooltip, {
+                    allowedTags: [
+                        'b', 'i', 'em', 'strong', 'a', 'img', 'p', 'ul', 'ol', 'li', 'br',
+                    ],
+                    allowedAttributes: {
+                        a: ['href', 'title', 'target', 'rel'],
+                        img: ['src', 'alt', 'title', 'width', 'height'],
+                        '*': ['style', 'class'],
+                    },
+                    allowedSchemes: ['http', 'https'],
+                    allowedSchemesByTag: {
+                        img: ['data', 'http', 'https'],
+                    },
+                } );
+
                 tippy( container, {
                     theme: 'wprm',
-                    content: tooltip,
+                    content: sanitized,
                     allowHTML: true,
                     interactive: true,
                     onCreate(instance) {

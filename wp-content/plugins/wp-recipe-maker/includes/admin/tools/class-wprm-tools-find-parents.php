@@ -130,8 +130,20 @@ class WPRM_Tools_Find_Parents {
 					$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
 					if ( $recipe ) {
-						if ( $recipe->parent_post_id() !== $post_id && $post_id !== $recipe_id ) {
-							update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+						$current_parent_post_id = $recipe->parent_post_id();
+						if ( $current_parent_post_id !== $post_id && $post_id !== $recipe_id ) {
+							// Check if we should actually update the parent post ID.
+							$should_update_parent_post = true;
+							if ( WPRM_Settings::get( 'parent_post_autolock' ) ) {
+								if ( $current_parent_post_id && false !== get_post_type( $current_parent_post_id ) ) {
+									// A current parent exists and is still a valid post, so do not update.
+									$should_update_parent_post = false;
+								}
+							}
+
+							if ( $should_update_parent_post ) {
+								update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+							}
 						}
 					}
 				}

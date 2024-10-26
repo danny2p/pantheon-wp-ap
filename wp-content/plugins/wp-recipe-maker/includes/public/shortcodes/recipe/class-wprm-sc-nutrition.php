@@ -73,7 +73,7 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$show_unit = (bool) $atts['unit'];
@@ -93,7 +93,7 @@ class WPRM_SC_Nutrition extends WPRM_Template_Shortcode {
 		$nutrient = apply_filters( 'wprm_nutrition_shortcode_nutrient', $nutrient, $atts, $recipe );
 
 		if ( $nutrient['value'] === false || ( ! $nutrient['value'] && ! WPRM_Settings::get( 'nutrition_label_zero_values' ) ) ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Output.
