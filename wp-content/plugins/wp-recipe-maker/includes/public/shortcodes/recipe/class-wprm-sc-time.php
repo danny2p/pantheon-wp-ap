@@ -53,7 +53,7 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$output = '';
@@ -75,7 +75,7 @@ class WPRM_SC_Time extends WPRM_Template_Shortcode {
 
 		// Only continue if there actually is a time set.
 		if ( ! $output ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$output = WPRM_Shortcode_Helper::get_label_container( $atts, array( 'time', $atts['type']. '-time' ), $output );

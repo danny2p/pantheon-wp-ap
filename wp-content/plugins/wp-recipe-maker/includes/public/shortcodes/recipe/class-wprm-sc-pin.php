@@ -134,7 +134,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ( ! $recipe->pin_image_url() && ! $recipe->pin_image_repin_id() && 'any' !== $atts['action'] ) ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 		
 		// Values in recipe.
@@ -165,7 +165,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 
 		// Make sure we have something to pin, otherwise return.
 		if ( ! $media && ! $repin_id && 'any' !== $atts['action'] ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Build pin URL.

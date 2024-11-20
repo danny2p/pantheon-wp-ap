@@ -90,6 +90,20 @@ $post_type = array(
 			),
 		),
 		array(
+			'name' => __( 'Parent Post', 'wp-recipe-maker' ),
+			'description' => __( 'The parent post of a recipe is the post, page or custom post type that has the recipe card in it as part of its content.', 'wp-recipe-maker' ),
+			'documentation' => 'https://help.bootstrapped.ventures/article/279-recipes-and-their-parent-post',
+			'settings' => array(
+				array(
+					'id' => 'parent_post_autolock',
+					'name' => __( 'Automatically Lock First Parent Post', 'wp-recipe-maker' ),
+					'description' => __( 'Once a parent post is set, keep this post as the parent for that recipe until the recipe is removed from that post, or that post is removed.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Taxonomies', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(

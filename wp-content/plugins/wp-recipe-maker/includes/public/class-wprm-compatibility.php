@@ -27,9 +27,13 @@ class WPRM_Compatibility {
 	public static function init() {
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'yoast_seo' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'rank_math' ) );
-		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
 
 		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
+
+		// Caching plugins.
+		add_filter( 'litespeed_optimize_js_excludes', array( __CLASS__, 'cache_js_excludes' ) );
+		add_filter( 'rocket_exclude_js', array( __CLASS__, 'cache_js_excludes' ) );
+		add_filter( 'wp-optimize-minify-default-exclusions', array( __CLASS__, 'cache_js_excludes' ) );
 
 		// Jupiter.
 		add_action( 'wp_footer', array( __CLASS__, 'jupiter_assets' ) );
@@ -49,6 +53,10 @@ class WPRM_Compatibility {
 		// Chicory.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'chicory_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'chicory_assets' ) );
+
+		// Divi.
+		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi_assets' ) );
 
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
@@ -108,6 +116,22 @@ class WPRM_Compatibility {
 	}
 
 	/**
+	 * Caching plugin compatibility.
+	 *
+	 * @since	9.7.0
+	 */
+	public static function cache_js_excludes( $excludes ) {
+		if ( WPRM_Settings::get( 'assets_prevent_caching_optimization' ) && is_array( $excludes ) ) {
+			$excludes[] = 'wp-recipe-maker/dist/public-modern.js';
+			if ( defined( 'WPRMP_BUNDLE' ) ) {
+				$excludes[] = 'wp-recipe-maker-premium/dist/public-' . strtolower( WPRMP_BUNDLE ) . '.js';
+			}
+		}
+
+		return $excludes;
+	}
+
+	/**
 	 * Rank Math Compatibility.
 	 *
 	 * @since	6.6.0
@@ -122,7 +146,18 @@ class WPRM_Compatibility {
 	 * @since	5.1.0
 	 */
 	public static function divi() {
-		// require_once( WPRM_DIR . 'templates/divi/includes/extension.php' );
+		require_once( WPRM_DIR . 'templates/divi/includes/extension.php' );
+	}
+
+	/**
+	 * Divi Builder assets.
+	 *
+	 * @since	9.7.0
+	 */
+	public static function divi_assets() {
+		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
+			WPRM_Assets::load();
+		}
 	}
 
 

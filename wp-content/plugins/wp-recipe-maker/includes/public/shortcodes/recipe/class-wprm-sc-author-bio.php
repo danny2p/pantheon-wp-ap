@@ -82,7 +82,7 @@ class WPRM_SC_Author_Bio extends WPRM_Template_Shortcode {
 		}
 
 		if ( ! $recipe || ! $bio ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Output.

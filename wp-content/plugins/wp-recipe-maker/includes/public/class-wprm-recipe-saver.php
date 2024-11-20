@@ -428,8 +428,22 @@ class WPRM_Recipe_Saver {
 					$recipe['post_author'] = $post->post_author;
 				}
 
+				// Check if parent post for this recipe should be updated.
 				wp_update_post( $recipe );
-				update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+
+				$should_update_parent_post = true;
+				if ( WPRM_Settings::get( 'parent_post_autolock' ) ) {
+					$current_parent_id = get_post_meta( $recipe_id, 'wprm_parent_post_id', true );
+
+					if ( $current_parent_id && false !== get_post_type( $current_parent_id ) ) {
+						// A current parent exists and is still a valid post, so do not update.
+						$should_update_parent_post = false;
+					}
+				}
+
+				if ( $should_update_parent_post ) {
+					update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+				}
 
 				// Optionally associate categories with recipes.
 				if ( is_object_in_taxonomy( WPRM_POST_TYPE, 'category' ) ) {

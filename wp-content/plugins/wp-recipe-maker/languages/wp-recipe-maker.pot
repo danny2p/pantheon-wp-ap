@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2024-09-18 14:16+0000\n"
+"POT-Creation-Date: 2024-10-22 08:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -100,7 +100,7 @@ msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/public/class-wprm-metadata.php:829
+#: includes/public/class-wprm-metadata.php:830
 msgid "1 serving"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Above the comment field"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:521
+#: templates/settings/group-recipe-ratings.php:549
 msgid "Above the comment input form"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 msgid "All Ratings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:207
+#: templates/settings/group-recipe-ratings.php:224
 msgid "All ratings, with or without comment text"
 msgstr ""
 
@@ -622,7 +622,7 @@ msgstr ""
 msgid "Alternative Image"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:383
+#: templates/settings/group-recipe-ratings.php:411
 msgid "Always"
 msgstr ""
 
@@ -634,7 +634,7 @@ msgstr ""
 msgid "Amazon Access Key"
 msgstr ""
 
-#: templates/admin/tools.php:102
+#: templates/admin/tools.php:108
 msgid "Amazon Affiliate Links Migration for Equipment"
 msgstr ""
 
@@ -718,7 +718,7 @@ msgstr ""
 msgid "Any Rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:212
+#: templates/settings/group-recipe-ratings.php:229
 msgid "Any rating without comment text"
 msgstr ""
 
@@ -755,11 +755,11 @@ msgid "Archive Page Links"
 msgstr ""
 
 #: templates/settings/group-metadata.php:126 
-#: templates/settings/group-post-type.php:105
+#: templates/settings/group-post-type.php:119
 msgid "Archive Pages"
 msgstr ""
 
-#: templates/settings/group-post-type.php:116
+#: templates/settings/group-post-type.php:130
 msgid "Archive Pages Template"
 msgstr ""
 
@@ -867,6 +867,13 @@ msgstr ""
 msgid "Automatic ItemList Metadata"
 msgstr ""
 
+#: templates/admin/tools.php:29
+msgid ""
+"Automatic locking of the parent post is enabled on the WP Recipe Maker > "
+"Settings > Post Type & Taxonomies page, so the parent post will only change "
+"for recipes that do not have a parent post set."
+msgstr ""
+
 #: templates/settings/group-integrations.php:43
 msgid "Automatically add Instacart Button"
 msgstr ""
@@ -888,11 +895,11 @@ msgstr ""
 msgid "Automatically Adding Terms"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:198
+#: templates/settings/group-recipe-ratings.php:215
 msgid "Automatically approve comments and ratings given through the modal."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:197
+#: templates/settings/group-recipe-ratings.php:214
 msgid "Automatically Approve Ratings"
 msgstr ""
 
@@ -900,6 +907,10 @@ msgstr ""
 msgid ""
 "Automatically have the default snippet template appear at the start of posts "
 "that include a recipe."
+msgstr ""
+
+#: templates/settings/group-post-type.php:99
+msgid "Automatically Lock First Parent Post"
 msgstr ""
 
 #: templates/settings/group-metadata.php:131
@@ -949,11 +960,11 @@ msgstr ""
 msgid "Below the comment field"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:522
+#: templates/settings/group-recipe-ratings.php:550
 msgid "Below the comment input form"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:510
+#: templates/settings/group-recipe-ratings.php:538
 msgid "Between regular comments"
 msgstr ""
 
@@ -1373,7 +1384,7 @@ msgstr ""
 msgid "Comment Not Flagged"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:278
+#: templates/settings/group-recipe-ratings.php:295
 msgid "Comment Placeholder"
 msgstr ""
 
@@ -1387,27 +1398,27 @@ msgstr ""
 msgid "Comment Ratings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:403
+#: templates/settings/group-recipe-ratings.php:431
 msgid "Comment Suggestion 1"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:416
+#: templates/settings/group-recipe-ratings.php:444
 msgid "Comment Suggestion 2"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:429
+#: templates/settings/group-recipe-ratings.php:457
 msgid "Comment Suggestion 3"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:442
+#: templates/settings/group-recipe-ratings.php:470
 msgid "Comment Suggestion 4"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:455
+#: templates/settings/group-recipe-ratings.php:483
 msgid "Comment Suggestion 5"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:468
+#: templates/settings/group-recipe-ratings.php:496
 msgid "Comment Suggestion 6"
 msgstr ""
 
@@ -1431,7 +1442,7 @@ msgstr ""
 msgid "Content Text Color"
 msgstr ""
 
-#: templates/admin/tools.php:110
+#: templates/admin/tools.php:116
 msgid "Convert Affiliate HTML Code"
 msgstr ""
 
@@ -1439,24 +1450,24 @@ msgstr ""
 msgid "Convert decimal numbers to fractions after adjusting."
 msgstr ""
 
-#: templates/admin/tools.php:131
+#: templates/admin/tools.php:137
 msgid "Convert Regular Links"
 msgstr ""
 
-#: templates/admin/tools.php:219
+#: templates/admin/tools.php:225
 msgid "Convert Reviews"
 msgstr ""
 
-#: templates/admin/tools.php:222
+#: templates/admin/tools.php:228
 msgid "Convert Reviews to Comments"
 msgstr ""
 
-#: templates/admin/tools.php:114 templates/admin/tools.php:116 
-#: templates/admin/tools.php:135 templates/admin/tools.php:137
+#: templates/admin/tools.php:120 templates/admin/tools.php:122 
+#: templates/admin/tools.php:141 templates/admin/tools.php:143
 msgid "Convert to Products"
 msgstr ""
 
-#: templates/admin/tools.php:114 templates/admin/tools.php:116
+#: templates/admin/tools.php:120 templates/admin/tools.php:122
 msgid "Convert to Regular Links"
 msgstr ""
 
@@ -1468,25 +1479,25 @@ msgstr ""
 msgid "Converted Ingredients"
 msgstr ""
 
-#: templates/admin/tools.php:123 templates/admin/tools.php:144
+#: templates/admin/tools.php:129 templates/admin/tools.php:150
 msgid ""
 "Converting to products is only possible when the PA-API credentials are set "
 "on the WP Recipe Maker > Settings > Amazon Products page."
 msgstr ""
 
-#: templates/admin/tools.php:120
+#: templates/admin/tools.php:126
 msgid ""
 "Converts Amazon Affiliate HTML code to either products or regular links."
 msgstr ""
 
-#: templates/admin/tools.php:224
+#: templates/admin/tools.php:230
 msgid ""
 "Converts MV Create reviews to regular comments with a comment rating. Will "
 "only do this after recipes have been imported to WPRM. Comments will be "
 "created for the parent post of the WPRM recipe."
 msgstr ""
 
-#: templates/admin/tools.php:141
+#: templates/admin/tools.php:147
 msgid ""
 "Converts regular Amazon equipment links to products. Does not work for short "
 "links."
@@ -1532,7 +1543,7 @@ msgstr ""
 msgid "Create Custom Nutrition Ingredient"
 msgstr ""
 
-#: templates/admin/tools.php:230 templates/admin/menu/tools/create-lists.php:15
+#: templates/admin/tools.php:236 templates/admin/menu/tools/create-lists.php:15
 msgid "Create Lists"
 msgstr ""
 
@@ -1803,7 +1814,7 @@ msgstr ""
 msgid "Default Recipe Template"
 msgstr ""
 
-#: templates/settings/group-performance.php:51
+#: templates/settings/group-performance.php:58
 msgid "Default Recipe Templates in Footer"
 msgstr ""
 
@@ -1873,7 +1884,7 @@ msgid ""
 "Default snippet template to use for the how-to instructions on your website."
 msgstr ""
 
-#: templates/settings/group-performance.php:44
+#: templates/settings/group-performance.php:51
 msgid "Default Snippet Templates in Footer"
 msgstr ""
 
@@ -2096,7 +2107,7 @@ msgstr ""
 msgid "Disc"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:506
+#: templates/settings/group-recipe-ratings.php:534
 msgid "Display"
 msgstr ""
 
@@ -2137,6 +2148,10 @@ msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:192
 msgid "dl"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:384
+msgid "Do not allow voting and commenting through the User Rating Modal either"
 msgstr ""
 
 #: templates/settings/group-import.php:52
@@ -2293,7 +2308,7 @@ msgstr ""
 msgid "Editing Recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:290
+#: templates/settings/group-recipe-ratings.php:307
 msgid "Email Field Placeholder"
 msgstr ""
 
@@ -2342,7 +2357,7 @@ msgstr ""
 msgid "Enable Chicory Shoppable Recipe Button"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:374
+#: templates/settings/group-recipe-ratings.php:402
 msgid "Enable Comment Suggestions"
 msgstr ""
 
@@ -2458,7 +2473,7 @@ msgid ""
 "recipe has been set."
 msgstr ""
 
-#: templates/settings/group-post-type.php:98
+#: templates/settings/group-post-type.php:112
 msgid ""
 "Enable to show the default WordPress UI for any taxonomies that have their "
 "archive pages enabled on the WP Recipe Maker > Manage > Your Custom Fields "
@@ -2519,6 +2534,10 @@ msgstr ""
 
 #: templates/settings/group-glossary-terms.php:83
 msgid "Exact match only"
+msgstr ""
+
+#: templates/settings/group-performance.php:33
+msgid "Exclude Assets from Caching Optimization"
 msgstr ""
 
 #: templates/settings/group-analytics.php:50
@@ -2624,7 +2643,7 @@ msgstr ""
 msgid "filtered of"
 msgstr ""
 
-#: templates/admin/tools.php:64 templates/admin/tools.php:67 
+#: templates/admin/tools.php:70 templates/admin/tools.php:73 
 #: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38 
 #: includes/admin/tools/class-wprm-tools-find-ingredient-units.php:38
 msgid "Find Ingredient Units"
@@ -2645,7 +2664,7 @@ msgstr ""
 msgid "Find Parent Posts"
 msgstr ""
 
-#: templates/admin/tools.php:31 templates/admin/tools.php:34 
+#: templates/admin/tools.php:37 templates/admin/tools.php:40 
 #: templates/admin/menu/tools/finding-ratings.php:17
 msgid "Find Recipe Ratings"
 msgstr ""
@@ -2703,7 +2722,7 @@ msgstr ""
 msgid "First Unit System"
 msgstr ""
 
-#: templates/admin/tools.php:42 templates/admin/tools.php:45 
+#: templates/admin/tools.php:48 templates/admin/tools.php:51 
 #: includes/admin/tools/class-wprm-tools-fix-comment-ratings.php:38 
 #: includes/admin/tools/class-wprm-tools-fix-comment-ratings.php:38 
 #: templates/admin/menu/tools/fixing-comment-ratings.php:14
@@ -2742,7 +2761,7 @@ msgstr ""
 msgid "fluid ounces"
 msgstr ""
 
-#: includes/public/api/class-wprm-api-manage-recipes.php:816
+#: includes/public/api/class-wprm-api-manage-recipes.php:825
 msgid "Follow this link to print all of the selected recipes:"
 msgstr ""
 
@@ -2783,7 +2802,7 @@ msgstr ""
 msgid "foot"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:235
+#: templates/settings/group-recipe-ratings.php:252
 msgid "For colors and fonts, check out the Appearance > Custom Style section."
 msgstr ""
 
@@ -2800,7 +2819,7 @@ msgid ""
 "is not shown in the recipe template."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:337
+#: templates/settings/group-recipe-ratings.php:354
 msgid ""
 "For the strongest trust signal, and to have ratings show up as reviews in "
 "the recipe metadata, we recommend requiring a comment text and visitor "
@@ -2946,19 +2965,19 @@ msgstr ""
 msgid "Go Back"
 msgstr ""
 
-#: templates/admin/tools.php:47
+#: templates/admin/tools.php:53
 msgid ""
 "Go through all comment ratings and remove any rating where the associated "
 "comment does not exist anymore."
 msgstr ""
 
-#: templates/admin/tools.php:25
+#: templates/admin/tools.php:26
 msgid ""
 "Go through all posts and pages on your website to find and link recipes to "
 "their parent."
 msgstr ""
 
-#: templates/admin/tools.php:36
+#: templates/admin/tools.php:42
 msgid "Go through all recipes on your website to find any missing ratings."
 msgstr ""
 
@@ -3022,7 +3041,7 @@ msgstr ""
 msgid "Handle archive pages for all post types or just the recipe post type."
 msgstr ""
 
-#: templates/settings/group-post-type.php:109
+#: templates/settings/group-post-type.php:123
 msgid "Handle Archive Pages Output"
 msgstr ""
 
@@ -3086,7 +3105,7 @@ msgstr ""
 msgid "Header Font"
 msgstr ""
 
-#: templates/admin/tools.php:75 templates/admin/translations.php:47 
+#: templates/admin/tools.php:81 templates/admin/translations.php:47 
 #: includes/admin/tools/class-wprm-tools-health-check.php:38 
 #: includes/admin/tools/class-wprm-tools-health-check.php:38
 msgid "Health Check"
@@ -3158,7 +3177,7 @@ msgstr ""
 msgid "How the recipe post type should exist."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:507
+#: templates/settings/group-recipe-ratings.php:535
 msgid "How to display ratings without comment text."
 msgstr ""
 
@@ -3266,19 +3285,19 @@ msgstr ""
 msgid "If there is a parent post for the recipe, link to that parent"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:382
+#: templates/settings/group-recipe-ratings.php:410
 msgid "If they want to give 2 stars or more"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:381
+#: templates/settings/group-recipe-ratings.php:409
 msgid "If they want to give 3 stars or more"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:380
+#: templates/settings/group-recipe-ratings.php:408
 msgid "If they want to give 4 stars or more"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:379
+#: templates/settings/group-recipe-ratings.php:407
 msgid "If they want to give 5 stars"
 msgstr ""
 
@@ -3323,7 +3342,7 @@ msgstr ""
 msgid "Image to use for the Pin Recipe shortcode."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:223
+#: templates/settings/group-recipe-ratings.php:240
 msgid ""
 "Immediately open rating modal for first recipe on the page if this specific "
 "URL parameter is set. For example:"
@@ -3335,21 +3354,21 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: templates/admin/tools.php:177
+#: templates/admin/tools.php:183
 msgid "Import all ingredients that have a plural set."
 msgstr ""
 
-#: templates/admin/tools.php:188
+#: templates/admin/tools.php:194
 msgid ""
 "Import all ingredients that have a shopping list group set for use in the "
 "Recipe Collections feature."
 msgstr ""
 
-#: templates/admin/tools.php:166
+#: templates/admin/tools.php:172
 msgid "Import all ingredients that have ingredient links set."
 msgstr ""
 
-#: templates/admin/tools.php:200
+#: templates/admin/tools.php:206
 msgid ""
 "Import all ingredients that have nutrition facts set. These will become "
 "Custom Nutrition Ingredients"
@@ -3367,15 +3386,15 @@ msgstr ""
 msgid "Import from Text"
 msgstr ""
 
-#: templates/admin/tools.php:161 templates/admin/tools.php:164
+#: templates/admin/tools.php:167 templates/admin/tools.php:170
 msgid "Import Ingredient Links"
 msgstr ""
 
-#: templates/admin/tools.php:172 templates/admin/tools.php:175
+#: templates/admin/tools.php:178 templates/admin/tools.php:181
 msgid "Import Ingredient Plural"
 msgstr ""
 
-#: templates/admin/tools.php:195 templates/admin/tools.php:198
+#: templates/admin/tools.php:201 templates/admin/tools.php:204
 msgid "Import Nutrition Facts"
 msgstr ""
 
@@ -3406,12 +3425,16 @@ msgstr ""
 msgid "Import Settings"
 msgstr ""
 
-#: templates/admin/tools.php:183 templates/admin/tools.php:186
+#: templates/admin/tools.php:189 templates/admin/tools.php:192
 msgid "Import Shopping List Groups"
 msgstr ""
 
 #: templates/settings/group-import.php:34
 msgid "Import Units"
+msgstr ""
+
+#: templates/admin/tools.php:28
+msgid "Important:"
 msgstr ""
 
 #: templates/admin/menu/import/importing.php:16
@@ -3506,7 +3529,7 @@ msgstr ""
 msgid "Ingredient Group Header"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:385 
+#: includes/public/class-wprm-print.php:387 
 #: includes/public/shortcodes/recipe/class-wprm-sc-ingredients.php:183
 msgid "Ingredient Images"
 msgstr ""
@@ -3618,7 +3641,7 @@ msgstr ""
 msgid "Instruction Image Size"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:404 
+#: includes/public/class-wprm-print.php:406 
 #: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:211
 msgid "Instruction Images"
 msgstr ""
@@ -3754,7 +3777,7 @@ msgstr ""
 msgid "Jump to Video"
 msgstr ""
 
-#: includes/public/class-wprm-metadata.php:818 
+#: includes/public/class-wprm-metadata.php:819 
 #: includes/public/shortcodes/recipe/class-wprm-sc-nutrition.php:89 
 #: templates/recipe/legacy/simple/simple.php:87 
 #: templates/recipe/legacy/clean/clean.php:83 
@@ -3819,7 +3842,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:512
+#: includes/public/class-wprm-print.php:517
 msgid "Larger"
 msgstr ""
 
@@ -3913,7 +3936,7 @@ msgstr ""
 msgid "Legacy Settings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:392
+#: templates/settings/group-recipe-ratings.php:420
 msgid "Let us know what you thought of this recipe:"
 msgstr ""
 
@@ -3992,7 +4015,7 @@ msgstr ""
 msgid "Load pinit.js (required for Repin ID pinning)"
 msgstr ""
 
-#: templates/settings/group-performance.php:35
+#: templates/settings/group-performance.php:42
 msgid ""
 "Load template assets in footer to improve page loading speeds (recommended). "
 "Disabling can prevent CLS issues but also cause compatibility styling "
@@ -4000,11 +4023,11 @@ msgid ""
 "needed\" as well."
 msgstr ""
 
-#: templates/settings/group-performance.php:52
+#: templates/settings/group-performance.php:59
 msgid "Load the default recipe templates in the footer to improve performance."
 msgstr ""
 
-#: templates/settings/group-performance.php:45
+#: templates/settings/group-performance.php:52
 msgid ""
 "Load the default snippet templates in the footer to improve performance."
 msgstr ""
@@ -4072,12 +4095,12 @@ msgstr ""
 msgid "Make a selection using the buttons above first."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:370
+#: templates/settings/group-recipe-ratings.php:398
 msgid ""
 "Make it easier for visitors to leave a comment by giving them suggestions."
 msgstr ""
 
-#: includes/public/class-wprm-print.php:517
+#: includes/public/class-wprm-print.php:522
 msgid "Make print size"
 msgstr ""
 
@@ -4135,7 +4158,7 @@ msgid ""
 "page"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:191
+#: templates/settings/group-recipe-ratings.php:208
 msgid "Make the stars transparent when the current user has not voted yet."
 msgstr ""
 
@@ -4205,7 +4228,7 @@ msgstr ""
 msgid "Media Toggle"
 msgstr ""
 
-#: templates/admin/tools.php:214
+#: templates/admin/tools.php:220
 msgid "Mediavine Create Migration"
 msgstr ""
 
@@ -4229,7 +4252,7 @@ msgstr ""
 msgid "Message to show when the visitor is not logged in."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:323
+#: templates/settings/group-recipe-ratings.php:340
 msgid ""
 "Message to show when there was a problem with rating the recipe. Make empty "
 "to not show anything."
@@ -4261,7 +4284,7 @@ msgid "Mexican"
 msgstr ""
 
 #: includes/public/class-wprm-recipe-parser.php:178 
-#: includes/public/class-wprm-metadata.php:820
+#: includes/public/class-wprm-metadata.php:821
 msgid "mg"
 msgstr ""
 
@@ -4335,11 +4358,11 @@ msgstr ""
 msgid "mm"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:239
+#: templates/settings/group-recipe-ratings.php:256
 msgid "Modal Title"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:245
+#: templates/settings/group-recipe-ratings.php:262
 msgid "Modal Title After Voting"
 msgstr ""
 
@@ -4360,7 +4383,7 @@ msgstr ""
 msgid "Multiple Ratings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:418
+#: templates/settings/group-recipe-ratings.php:446
 msgid "My family loved this!"
 msgstr ""
 
@@ -4373,7 +4396,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:284
+#: templates/settings/group-recipe-ratings.php:301
 msgid "Name Field Placeholder"
 msgstr ""
 
@@ -4387,7 +4410,7 @@ msgid "Name of post author"
 msgstr ""
 
 #: includes/admin/class-wprm-health-check.php:48 
-#: templates/settings/group-recipe-ratings.php:378
+#: templates/settings/group-recipe-ratings.php:406
 msgid "Never"
 msgstr ""
 
@@ -4518,7 +4541,7 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:511
+#: includes/public/class-wprm-print.php:516
 msgid "Normal"
 msgstr ""
 
@@ -4542,7 +4565,7 @@ msgstr ""
 msgid "Note: not all options will affect every recipe template."
 msgstr ""
 
-#: includes/public/class-wprm-print.php:413 
+#: includes/public/class-wprm-print.php:415 
 #: templates/admin/translations.php:172
 msgid "Notes"
 msgstr ""
@@ -4596,23 +4619,29 @@ msgstr ""
 msgid "olive oil"
 msgstr ""
 
+#: templates/settings/group-post-type.php:100
+msgid ""
+"Once a parent post is set, keep this post as the parent for that recipe "
+"until the recipe is removed from that post, or that post is removed."
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:57
 msgid "One Rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:211
+#: templates/settings/group-recipe-ratings.php:228
 msgid "Only 2+ star ratings without comment text"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:210
+#: templates/settings/group-recipe-ratings.php:227
 msgid "Only 3+ star ratings without comment text"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:209
+#: templates/settings/group-recipe-ratings.php:226
 msgid "Only 4+ star ratings without comment text"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:208
+#: templates/settings/group-recipe-ratings.php:225
 msgid "Only 5 star ratings without comment text"
 msgstr ""
 
@@ -4705,7 +4734,7 @@ msgstr ""
 msgid "Open link in new tab"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:222
+#: templates/settings/group-recipe-ratings.php:239
 msgid "Open Modal through URL Parameter"
 msgstr ""
 
@@ -4770,7 +4799,7 @@ msgid ""
 "apply."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:272
+#: templates/settings/group-recipe-ratings.php:289
 msgid "Optional text to show above the input fields."
 msgstr ""
 
@@ -4820,7 +4849,7 @@ msgid ""
 "Leave the setting blank to use the default shared key."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:484
+#: templates/settings/group-recipe-ratings.php:512
 msgid "Or write in your own words:"
 msgstr ""
 
@@ -4927,6 +4956,10 @@ msgstr ""
 msgid "Parent Name"
 msgstr ""
 
+#: templates/settings/group-post-type.php:93
+msgid "Parent Post"
+msgstr ""
+
 #: templates/admin/translations.php:500
 msgid "Parent Post ID"
 msgstr ""
@@ -4975,7 +5008,7 @@ msgstr ""
 msgid "Per serving"
 msgstr ""
 
-#: templates/admin/tools.php:80
+#: templates/admin/tools.php:86
 msgid "Perform a health check of the plugin and your recipes."
 msgstr ""
 
@@ -5221,7 +5254,7 @@ msgstr ""
 msgid "Private Notes"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:322
+#: templates/settings/group-recipe-ratings.php:339
 msgid "Problem Message"
 msgstr ""
 
@@ -5252,11 +5285,11 @@ msgid ""
 "Put your cursor in the instruction text and click on an ingredient to add it."
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-qr-code.php:127
+#: includes/public/shortcodes/recipe/class-wprm-sc-qr-code.php:130
 msgid "QR Code"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:473
+#: includes/public/class-wprm-print.php:478
 msgid "QR Code linking back to recipe"
 msgstr ""
 
@@ -5280,15 +5313,15 @@ msgstr ""
 msgid "Range Keyword"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:298
+#: templates/settings/group-recipe-ratings.php:315
 msgid "Rate and Review Recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:305
+#: templates/settings/group-recipe-ratings.php:322
 msgid "Rate Recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:241
+#: templates/settings/group-recipe-ratings.php:258
 msgid "Rate This Recipe"
 msgstr ""
 
@@ -5505,7 +5538,7 @@ msgstr ""
 msgid "Recipe Rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:575
+#: templates/settings/group-recipe-ratings.php:603
 msgid "Recipe Ratings without Comment"
 msgstr ""
 
@@ -5604,7 +5637,7 @@ msgstr ""
 msgid "Recommended to run occassionally by clicking on the blue button."
 msgstr ""
 
-#: templates/admin/tools.php:233
+#: templates/admin/tools.php:239
 msgid "Recreate Lists in WP Recipe Maker"
 msgstr ""
 
@@ -5629,11 +5662,11 @@ msgid ""
 "able to use the comment star color setting."
 msgstr ""
 
-#: templates/admin/tools.php:58
+#: templates/admin/tools.php:64
 msgid "Refresh the video metadata for all recipes on your website."
 msgstr ""
 
-#: templates/admin/tools.php:53 templates/admin/tools.php:56 
+#: templates/admin/tools.php:59 templates/admin/tools.php:62 
 #: includes/admin/tools/class-wprm-tools-refresh-video-metadata.php:38 
 #: includes/admin/tools/class-wprm-tools-refresh-video-metadata.php:38 
 #: templates/admin/menu/tools/refresh-video-metadata.php:14
@@ -5757,15 +5790,15 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:341
+#: templates/settings/group-recipe-ratings.php:358
 msgid "Require Comment Text"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:355
+#: templates/settings/group-recipe-ratings.php:372
 msgid "Require Visitor Email"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:348
+#: templates/settings/group-recipe-ratings.php:365
 msgid "Require Visitor Name"
 msgstr ""
 
@@ -5777,11 +5810,11 @@ msgstr ""
 msgid "Required by WP Recipe Maker Premium"
 msgstr ""
 
-#: templates/admin/tools.php:86
+#: templates/admin/tools.php:92
 msgid "Reset Settings"
 msgstr ""
 
-#: templates/admin/tools.php:89
+#: templates/admin/tools.php:95
 msgid "Reset Settings to Default"
 msgstr ""
 
@@ -5865,7 +5898,7 @@ msgstr ""
 msgid "Run Check"
 msgstr ""
 
-#: templates/admin/tools.php:78
+#: templates/admin/tools.php:84
 msgid "Run Health Check"
 msgstr ""
 
@@ -6106,7 +6139,7 @@ msgstr ""
 msgid "Set the loop option for uploaded (not embedded) videos."
 msgstr ""
 
-#: templates/admin/tools.php:104
+#: templates/admin/tools.php:110
 msgid ""
 "Set your Amazon Store ID on the WP Recipe Maker > Settings > Amazon Products "
 "page to enable these tools."
@@ -6116,7 +6149,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:235
+#: templates/settings/group-recipe-ratings.php:252
 msgid ""
 "Settings related to the modal that pops up when a visitors clicks on the "
 "stars."
@@ -6146,7 +6179,7 @@ msgstr ""
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:280
+#: templates/settings/group-recipe-ratings.php:297
 msgid "Share your thoughts! What did you like about this recipe?"
 msgstr ""
 
@@ -6230,11 +6263,11 @@ msgid ""
 "them."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:511
+#: templates/settings/group-recipe-ratings.php:539
 msgid "Show as aggregate summary, showing details in modal"
 msgstr ""
 
-#: templates/settings/group-post-type.php:97
+#: templates/settings/group-post-type.php:111
 msgid "Show default WordPress UI"
 msgstr ""
 
@@ -6333,7 +6366,7 @@ msgid ""
 "other pages!"
 msgstr ""
 
-#: includes/public/class-wprm-print.php:510
+#: includes/public/class-wprm-print.php:515
 msgid "Smaller"
 msgstr ""
 
@@ -6421,13 +6454,13 @@ msgstr ""
 msgid "star"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:534
+#: templates/settings/group-recipe-ratings.php:562
 msgid "Star Color"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:107 
-#: templates/settings/group-recipe-ratings.php:264 
-#: templates/settings/group-recipe-ratings.php:559
+#: templates/settings/group-recipe-ratings.php:281 
+#: templates/settings/group-recipe-ratings.php:587
 msgid "Star Padding"
 msgstr ""
 
@@ -6448,8 +6481,8 @@ msgid "Star Ratings"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:99 
-#: templates/settings/group-recipe-ratings.php:257 
-#: templates/settings/group-recipe-ratings.php:546
+#: templates/settings/group-recipe-ratings.php:274 
+#: templates/settings/group-recipe-ratings.php:574
 msgid "Star Size"
 msgstr ""
 
@@ -6458,7 +6491,7 @@ msgid "stars"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:88 
-#: templates/settings/group-recipe-ratings.php:251
+#: templates/settings/group-recipe-ratings.php:268
 msgid "Stars Color"
 msgstr ""
 
@@ -6500,11 +6533,11 @@ msgstr ""
 msgid "Styling for glossary terms"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:296
+#: templates/settings/group-recipe-ratings.php:313
 msgid "Submit Button"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:302
+#: templates/settings/group-recipe-ratings.php:319
 msgid "Submit Button without Comment"
 msgstr ""
 
@@ -6520,11 +6553,11 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:572
+#: templates/settings/group-recipe-ratings.php:600
 msgid "Summary Modal Title"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:517
+#: templates/settings/group-recipe-ratings.php:545
 msgid "Summary Position"
 msgstr ""
 
@@ -6556,7 +6589,7 @@ msgstr ""
 msgid "Tag Term Fields"
 msgstr ""
 
-#: templates/settings/group-post-type.php:110
+#: templates/settings/group-post-type.php:124
 msgid ""
 "Take control of the output for recipe archive pages. Disable to let your "
 "theme handle things."
@@ -6566,7 +6599,7 @@ msgstr ""
 msgid "Take over author of parent post"
 msgstr ""
 
-#: templates/settings/group-post-type.php:93 
+#: templates/settings/group-post-type.php:107 
 #: templates/admin/translations.php:592 
 #: includes/admin/menu/class-wprm-admin-menu.php:74 
 #: includes/admin/menu/class-wprm-admin-menu.php:74
@@ -6698,7 +6731,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: templates/settings/group-performance.php:34
+#: templates/settings/group-performance.php:41
 msgid "Template Assets Location"
 msgstr ""
 
@@ -6723,7 +6756,7 @@ msgstr ""
 msgid "Template Options"
 msgstr ""
 
-#: templates/settings/group-post-type.php:117
+#: templates/settings/group-post-type.php:131
 msgid "Template to output on recipe archive pages."
 msgstr ""
 
@@ -6745,15 +6778,15 @@ msgstr ""
 msgid "Terms"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:271
+#: templates/settings/group-recipe-ratings.php:288
 msgid "Text above input fields"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:481
+#: templates/settings/group-recipe-ratings.php:509
 msgid "Text after suggestions"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:389
+#: templates/settings/group-recipe-ratings.php:417
 msgid "Text before suggestions"
 msgstr ""
 
@@ -6776,12 +6809,12 @@ msgstr ""
 msgid "Text Share"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:482
+#: templates/settings/group-recipe-ratings.php:510
 msgid ""
 "Text to display after the list of suggestions, before the comment field."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:390
+#: templates/settings/group-recipe-ratings.php:418
 msgid "Text to display before the list of suggestions."
 msgstr ""
 
@@ -6789,29 +6822,29 @@ msgstr ""
 msgid "Text to output"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:303
+#: templates/settings/group-recipe-ratings.php:320
 msgid "Text to show if no comment was written (yet)."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:431
+#: templates/settings/group-recipe-ratings.php:459
 msgid "Thank you for sharing this recipe"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:318
+#: templates/settings/group-recipe-ratings.php:335
 msgid "Thank you for voting!"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:315
+#: templates/settings/group-recipe-ratings.php:332
 msgid "Thank You Message"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:316
+#: templates/settings/group-recipe-ratings.php:333
 msgid ""
 "Thank you message to show after voting with a comment. Make empty to not "
 "show anything."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:247
+#: templates/settings/group-recipe-ratings.php:264
 msgid "Thank You!"
 msgstr ""
 
@@ -6870,6 +6903,12 @@ msgstr ""
 msgid "The main recipe video"
 msgstr ""
 
+#: templates/settings/group-post-type.php:94
+msgid ""
+"The parent post of a recipe is the post, page or custom post type that has "
+"the recipe card in it as part of its content."
+msgstr ""
+
 #: templates/admin/translations.php:229
 msgid ""
 "The recipe has been copied and can be used in the \"Import from JSON\" "
@@ -6899,7 +6938,7 @@ msgstr ""
 msgid "The weight of 1 serving. Does not affect the calculation."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:325
+#: templates/settings/group-recipe-ratings.php:342
 msgid "There was a problem rating this recipe. Please try again later."
 msgstr ""
 
@@ -6998,7 +7037,7 @@ msgid ""
 "replaced)."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:405
+#: templates/settings/group-recipe-ratings.php:433
 msgid "This worked exactly as written, thanks!"
 msgstr ""
 
@@ -7025,7 +7064,7 @@ msgid ""
 "Tip: use the TAB key to move from field to field and easily add instructions."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:573
+#: templates/settings/group-recipe-ratings.php:601
 msgid "Title for the modal that shows the rating details."
 msgstr ""
 
@@ -7095,7 +7134,7 @@ msgstr ""
 msgid "Translation API"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:190
+#: templates/settings/group-recipe-ratings.php:207
 msgid "Transparent Stars when not Voted"
 msgstr ""
 
@@ -7121,7 +7160,14 @@ msgid ""
 "including ingredient notes if they get too long."
 msgstr ""
 
-#: templates/admin/tools.php:91
+#: templates/settings/group-performance.php:34
+msgid ""
+"Try to prevent the WP Recipe Maker assets from being optimized by caching "
+"plugins as our assets are already minified and combined. Enabling this "
+"setting can prevent compatibility problems."
+msgstr ""
+
+#: templates/admin/tools.php:97
 msgid "Try using this if the settings page is not working at all."
 msgstr ""
 
@@ -7447,6 +7493,14 @@ msgstr ""
 msgid "Use shortcodes where you want the snippets to appear."
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:190
+msgid "Use Smooth Scroll"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:191
+msgid "Use smooth scrolling when jumping to the comment form."
+msgstr ""
+
 #: includes/admin/class-wprm-modal.php:349 
 #: includes/admin/class-wprm-modal.php:382 
 #: includes/admin/class-wprm-modal.php:415 
@@ -7530,7 +7584,7 @@ msgstr ""
 msgid "Use the website link as set on the user's profile page"
 msgstr ""
 
-#: templates/admin/tools.php:156
+#: templates/admin/tools.php:162
 msgid "Use these buttons to migrate from our old WP Ultimate Recipe plugin."
 msgstr ""
 
@@ -7556,7 +7610,7 @@ msgid ""
 "to fill in the Recipe ID field above"
 msgstr ""
 
-#: templates/admin/tools.php:69
+#: templates/admin/tools.php:75
 msgid ""
 "Use to make sure the WP Recipe Maker > Manage > Recipe Fields > Ingredient "
 "Units page is up to date."
@@ -7646,11 +7700,11 @@ msgstr ""
 msgid "User Ratings"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:369
+#: templates/settings/group-recipe-ratings.php:397
 msgid "User Ratings Comment Suggestions"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:234
+#: templates/settings/group-recipe-ratings.php:251
 msgid "User Ratings Modal"
 msgstr ""
 
@@ -7658,11 +7712,11 @@ msgstr ""
 msgid "User Ratings Mode"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:336
+#: templates/settings/group-recipe-ratings.php:353
 msgid "User Ratings Requirements"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:502
+#: templates/settings/group-recipe-ratings.php:530
 msgid "User Ratings without Comment Text"
 msgstr ""
 
@@ -7718,6 +7772,10 @@ msgstr ""
 
 #: templates/admin/translations.php:652
 msgid "Visitor UID"
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:383
+msgid "Visitors can still vote and comment through the modal"
 msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:59 
@@ -7841,6 +7899,11 @@ msgstr ""
 msgid "What is the ID of the term you want the merge"
 msgstr ""
 
+#: templates/settings/group-recipe-ratings.php:380
+msgid ""
+"What to do when the comments for the parent post of the recipe are closed."
+msgstr ""
+
 #: templates/settings/group-private-notes.php:33
 msgid ""
 "What to do with the \"Private Notes\" section when the visitor is not logged "
@@ -7871,6 +7934,10 @@ msgstr ""
 msgid ""
 "When comment ratings are enabled we store the rating a user has given to a "
 "recipe along with the personal data WordPress core stores."
+msgstr ""
+
+#: templates/settings/group-recipe-ratings.php:379
+msgid "When Comments are Closed"
 msgstr ""
 
 #: templates/settings/group-recipe-defaults.php:24
@@ -7907,7 +7974,7 @@ msgstr ""
 msgid "When not logged in"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:375
+#: templates/settings/group-recipe-ratings.php:403
 msgid "When to show comment suggestions."
 msgstr ""
 
@@ -7945,27 +8012,27 @@ msgid ""
 "whenever you update the recipe)."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:518
+#: templates/settings/group-recipe-ratings.php:546
 msgid "Where to the display the recipe ratings summary."
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:342
+#: templates/settings/group-recipe-ratings.php:359
 msgid "Whether comment text is required to leave a rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:356
+#: templates/settings/group-recipe-ratings.php:373
 msgid "Whether the email of the visitor is required to leave a rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:349
+#: templates/settings/group-recipe-ratings.php:366
 msgid "Whether the name of the visitor is required to leave a rating"
 msgstr ""
 
-#: templates/settings/group-recipe-ratings.php:204
+#: templates/settings/group-recipe-ratings.php:221
 msgid "Which Ratings to Automatically Approve"
 msgstr ""
 
-#: templates/admin/tools.php:235
+#: templates/admin/tools.php:241
 msgid ""
 "Will create a WPRM Roundup List for your Create Lists. Make sure to import "
 "the recipes themselves first. Will not automatically replace the Create List "
@@ -7988,7 +8055,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: includes/public/class-wprm-compatibility.php:175
+#: includes/public/class-wprm-compatibility.php:208
 msgid "WP Recipe Maker"
 msgstr ""
 
@@ -8008,7 +8075,7 @@ msgstr ""
 msgid "WP Recipe Maker Plugin Preview"
 msgstr ""
 
-#: includes/public/class-wprm-template-shortcodes.php:213 
+#: includes/public/class-wprm-template-shortcodes.php:225 
 #: templates/settings/structure.php:13
 msgid "WP Recipe Maker Premium only"
 msgstr ""
@@ -8021,7 +8088,7 @@ msgstr ""
 msgid "WP Recipe Maker Tools"
 msgstr ""
 
-#: templates/admin/tools.php:155
+#: templates/admin/tools.php:161
 msgid "WP Ultimate Recipe Migration"
 msgstr ""
 

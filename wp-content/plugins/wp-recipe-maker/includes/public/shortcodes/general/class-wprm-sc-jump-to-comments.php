@@ -139,7 +139,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 		$atts = parent::get_attributes( $atts );
 
 		if ( ! comments_open() && ! $atts['is_template_editor_preview'] ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Get optional icon.

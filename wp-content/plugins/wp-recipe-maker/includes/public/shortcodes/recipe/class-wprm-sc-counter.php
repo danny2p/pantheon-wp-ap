@@ -70,7 +70,7 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		$text = $atts['text'];
 		if ( ! $recipe || ! $text ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Output.

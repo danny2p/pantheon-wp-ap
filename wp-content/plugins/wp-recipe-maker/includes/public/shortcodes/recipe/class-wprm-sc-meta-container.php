@@ -573,7 +573,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		// Get all possible fields (but only when needed).
@@ -679,7 +679,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 		}
 
 		if ( ! $fields_output ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
 		$show_container = (bool) $atts['container'];

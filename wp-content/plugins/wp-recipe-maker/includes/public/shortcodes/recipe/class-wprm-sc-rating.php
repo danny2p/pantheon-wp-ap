@@ -143,7 +143,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->rating() ) {
-			return '';
+			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 		
 		$rating = $recipe->rating();
@@ -153,7 +153,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 			$output = self::get_stars( $rating, $atts, $recipe );
 
 			if ( ! $output ) {
-				return '';
+				return apply_filters( parent::get_hook(), '', $atts, $recipe );
 			}
 		} else {
 			$output = '<div class="wprm-recipe-rating wprm-recipe-rating-recipe-' . esc_attr( $recipe->id() ) . '" data-decimals="' . esc_attr( $decimals ) . '">';

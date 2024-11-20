@@ -48,9 +48,21 @@ const Editors = (props) => {
                             When you click on "Create or edit Recipe" it will take you to the <strong>WP Recipe Maker Manage page explained below</strong>, as recipes can't be created or edited in the Elementor interface.
                         </p>
                         <p>
-                            Once you've create a recipe you can just <strong>search for its name</strong> to insert it.
+                            Once you've created a recipe you can just <strong>search for its name</strong> to insert it.
                         </p>
                         <img src={ imgUrl + 'elementor-select-recipe.png' } />
+                    </Fragment>
+                },{
+                    header: 'Divi Page Builder',
+                    content: <Fragment>
+                        <p>
+                            We integrate with the Divi Page Builder so you can simply <strong>add a WPRM Recipe module to your post</strong>.
+                        </p>
+                        <img src={ imgUrl + 'divi-insert.png' } />
+                        <p>
+                            Set the <strong>recipe ID</strong> to display the recipe.
+                        </p>
+                        <img src={ imgUrl + 'divi-module.png' } />
                     </Fragment>
                 },{
                     header: 'Other Page Builder',

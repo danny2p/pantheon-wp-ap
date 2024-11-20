@@ -22,7 +22,13 @@
 				<td>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_finding_parents' ) ); ?>" class="button" id="tools_finding_parents"><?php esc_html_e( 'Find Parent Posts', 'wp-recipe-maker' ); ?></a>
 					<p class="description" id="tagline-tools_finding_parents">
-						<?php esc_html_e( 'Go through all posts and pages on your website to find and link recipes to their parent.', 'wp-recipe-maker' ); ?>
+						<?php
+							esc_html_e( 'Go through all posts and pages on your website to find and link recipes to their parent.', 'wp-recipe-maker' );
+							if ( WPRM_Settings::get( 'parent_post_autolock' ) ) {
+								echo '<br/><strong>' . __( 'Important:', 'wp-recipe-maker' ) . '</strong> ';
+								esc_html_e( 'Automatic locking of the parent post is enabled on the WP Recipe Maker > Settings > Post Type & Taxonomies page, so the parent post will only change for recipes that do not have a parent post set.', 'wp-recipe-maker' );
+							}
+						?>
 					</p>
 				</td>
 			</tr>

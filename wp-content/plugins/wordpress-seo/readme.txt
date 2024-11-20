@@ -4,8 +4,8 @@ Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
-Tested up to: 6.6
-Stable tag: 23.6
+Tested up to: 6.7
+Stable tag: 23.8
 Requires PHP: 7.2.5
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -274,42 +274,44 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 23.6 =
+= 23.8 =
 
-Release date: 2024-10-08
+Release date: 2024-11-05
 
-Yoast SEO 23.6 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/release-8-10-24).
+Yoast SEO 23.8 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/release-5-11-24).
 
 #### Enhancements
 
-* Adds a filter to modify the sitemap's URL. Props to [ashujangra](https://github.com/ashujangra).
-* Improves the _transition words_ assessment for Turkish and English by expanding the relevant lists of transitions words. Props to [abulu](https://wordpress.org/support/users/abulu/).
-* Uses the full-sized counterpart when a resized first content image is used for Open Graph and X images.
+* Introduces a new, redesigned General page.
+* Adds a notification to inform the user when an error occurs while changing the visibility of a notification or a problem.
 
 #### Bugfixes
 
-* Fixes a bug where the content analysis would error when removing an image caption in the default editor.
-* Fixes a bug where the link popover would be hidden when editing a post in tablet/mobile view. Props to [stokesman](https://github.com/stokesman).
-* Fixes a visual inconsistency where the descriptions of the disabled Premium policy settings would look enabled, when they are not enabled.
+* Fixes a bug in our Elementor integration where previously saved slug values of drafts would be ignored.
 
 #### Other
 
-* Sets the minimum supported WordPress version to 6.5.
+* Sets the _WordPress tested up to_ version to 6.7.
 
-= 23.5 =
+= 23.7 =
 
-Release date: 2024-09-24
+Release date: 2024-10-22
 
-Yoast SEO 23.5 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/release-24-9-24).
+Yoast SEO 23.7 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/release-22-10-24).
 
 #### Enhancements
 
-* Improves analysis score feedback labels in the publish sections.
-* Improves our integration with cache plugins by preventing flushing their cache when not needed.
+* Removes the _keyphrase in slug_ assessment for static home pages.
 
 #### Bugfixes
 
-* Fixes a bug where Arabic keyphrases containing certain function words were not correctly matched.
+* Fixes a bug where a database error would occur when there were no public taxonomies available for indexing.
+* Fixes a bug where another plugin running the `exit()` function inside the `plugin_loaded` hook would result in a fatal error. Props to [menno-ll](https://github.com/menno-ll).
+
+#### Other
+
+* Removes translation strings that are not meant for the Yoast SEO Free version from the plugin.
+* Resets the notice for search engines discouraged when changing Search engine visibility to visible.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

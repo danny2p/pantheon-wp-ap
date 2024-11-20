@@ -28,6 +28,13 @@ $performance = array(
 					'type' => 'toggle',
 					'default' => false,
 				),
+				array(
+					'id' => 'assets_prevent_caching_optimization',
+					'name' => __( 'Exclude Assets from Caching Optimization', 'wp-recipe-maker' ),
+					'description' => __( 'Try to prevent the WP Recipe Maker assets from being optimized by caching plugins as our assets are already minified and combined. Enabling this setting can prevent compatibility problems.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 		array(

@@ -100,8 +100,11 @@ class WPRM_MetadataVideo {
 				'thumbnailUrl' => $thumbnail_url,
 				'contentUrl' => $video_url,
 				'uploadDate' => date( 'c', strtotime( $attachment->post_date ) ),
-				'duration' => 'PT' . $video_data['length'] . 'S',
 			);
+
+			if ( $video_data && isset( $video_data['length'] ) ) {
+				$metadata['duration'] = 'PT' . $video_data['length'] . 'S';
+			}
 		}
 
 		return $metadata;
