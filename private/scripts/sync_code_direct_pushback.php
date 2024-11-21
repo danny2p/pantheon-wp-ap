@@ -8,7 +8,7 @@ if ($_ENV['PANTHEON_ENVIRONMENT'] == "autopilot") {
   $pantheon_site = $_ENV['PANTHEON_SITE_NAME'];
   $pantheon_env = $_ENV['PANTHEON_ENVIRONMENT'];
   $pantheon_site_uuid = $_ENV['PANTHEON_SITE'];
-  $platform_domain = "https://" . $pantheon_env . "." . $pantheon_site . ".pantheonsite.io";
+  $platform_domain = "https://" . $pantheon_env . "-" . $pantheon_site . ".pantheonsite.io";
   $site_dashboard = "https://dashboard.pantheon.io/sites/" . $pantheon_site_uuid . "#" . $pantheon_env;
 
   if ( function_exists('pantheon_get_secret') && !empty($slack_webhook = pantheon_get_secret('slack-webhook')) ) {
