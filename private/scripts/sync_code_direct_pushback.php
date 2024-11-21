@@ -14,10 +14,10 @@ if ($_ENV['PANTHEON_ENVIRONMENT'] == "autopilot") {
   return;
 }
 
-
-$git_token = pantheon_get_secret('git-token');
-if (empty($git_token)) {
-  print "The secret 'git-token' is not set.";
+if ( function_exists('pantheon_get_secret') && !empty($gh_token = pantheon_get_secret('github-token')) ) {
+  print "The secret 'github-token' is set, attempting to push.";
+} else {
+  print "The secret 'github-token' is not set or pantheon_get_secret() is unavailable.";
   return;
 }
 
@@ -31,7 +31,7 @@ if (empty($git_token)) {
 *
 */
 
-$github_remote="https://danny2p:$git_token@github.com/danny2p/dp-d91.git";
+$github_remote="https://danny2p:$gh_token@github.com/danny2p/dp-d91.git";
 exec("git pull $github_remote");
 exec("git push --set-upstream $github_remote");
 print "\n Pushed to remote repository.";
