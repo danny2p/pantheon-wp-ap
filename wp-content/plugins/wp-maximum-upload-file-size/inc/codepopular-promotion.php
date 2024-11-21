@@ -20,9 +20,23 @@ if ( ! function_exists( 'codepopular_dashboard_widget_render' ) ) {
 	 * Function to get dashboard widget data.
 	 */
 	function codepopular_dashboard_widget_render() {
+        // Fetch the JSON data
+        $response = wp_remote_get('https://raw.githubusercontent.com/shamimbdpro/promotion/main/promotion.json', array('timeout' => 10));
 
+        // Decode the JSON response
+        $data = json_decode(wp_remote_retrieve_body($response), true);
+
+        if (isset($data['active']) && $data['active'] === 'yes'){
+        ?>
+        <div class="codepopular-pro-widget">
+            <a href="<?php echo esc_url($data['link']);?>" target="_blank">
+                <img src="<?php echo esc_url($data['square_banner'])?>" alt="CodePopular" style="width: 100%;"/>
+            </a>
+        </div>
+        <?php
+        }
 		// Enter the name of your blog here followed by /wp-json/wp/v2/posts and add filters like this one that limits the result to 2 posts.
-		$response = wp_remote_get( 'https://codepopular.com/wp-json/wp/v2/posts?per_page=4&categories=19' );
+		$response = wp_remote_get( 'https://codepopular.com/wp-json/wp/v2/posts?per_page=4&categories=19', array( 'timeout' => 10 ));
 
 		// Exit if error.
 		if ( is_wp_error( $response ) ) {

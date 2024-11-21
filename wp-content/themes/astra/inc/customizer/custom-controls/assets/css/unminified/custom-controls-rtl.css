@@ -1591,11 +1591,10 @@ input[type="text"], input[type="password"], input[type="color"], input[type="dat
   margin-top: 15px;
 }
 
-.components-base-control .components-base-control__field {
+#customize-controls .components-base-control .components-base-control__field {
   margin-bottom: 0;
 }
-
-.components-base-control .components-base-control__field .components-input-control__backdrop {
+#customize-controls .components-base-control .components-base-control__field .components-input-control__backdrop {
   border-color: #D1D5DB !important;
 }
 
@@ -1805,6 +1804,11 @@ input[type="text"].select2-search__field {
 #customize-theme-controls .accordion-section-title, #customize-outer-theme-controls .accordion-section-title,
 #customize-controls .control-section.control-section-ast_section .accordion-section-title {
   border-bottom: 1px solid var(--ast-customizer-color-7);
+}
+
+/* To remove extra spacing for customizer button */
+#customize-theme-controls .accordion-section-title button.accordion-trigger {
+  max-height: fit-content;
 }
 
 .wp-core-ui #customize-controls .control-section:hover > .accordion-section-title,
