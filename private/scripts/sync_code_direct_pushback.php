@@ -31,7 +31,14 @@ if ( function_exists('pantheon_get_secret') && !empty($gh_token = pantheon_get_s
 *
 */
 
-$github_remote="https://danny2p:$gh_token@github.com/danny2p/dp-d91.git";
+if ($_ENV['PANTHEON_ENVIRONMENT'] == "dev") {
+  $git_branch = "master";
+} else { #multidev case
+  $git_branch = $_ENV['PANTHEON_ENVIRONMENT'];
+}
+
+$github_remote="https://danny2p:$gh_token@github.com/danny2p/pantheon-wp-ap.git";
+print "github_remote";
 exec("git pull $github_remote");
-exec("git push --set-upstream $github_remote");
+exec("git push --set-upstream $github_remote $git_branch");
 print "\n Pushed to remote repository.";
