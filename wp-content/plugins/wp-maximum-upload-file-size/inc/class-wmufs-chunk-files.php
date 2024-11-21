@@ -30,10 +30,6 @@ class WMUFS_File_Chunk{
         add_filter( 'upload_post_params', array( $this, 'wmufs_filter_plupload_params' ) );
     }
 
-
-
-
-
     /**
      * @param $plupload_params
      * @return mixed
@@ -56,222 +52,71 @@ class WMUFS_File_Chunk{
      *
      * Mirrors /wp-admin/async-upload.php
      *
+     * @return void
      */
-    public function wmufs_ajax_chunk_receiver() {
+    public function wmufs_ajax_chunk_receiver(){
 
         /** Check that we have an upload and there are no errors. */
-        if ( empty( $_FILES ) || $_FILES['async-upload']['error'] ) {
+        if (empty($_FILES) || $_FILES['async-upload']['error']) {
             /** Failed to move uploaded file. */
             die();
         }
 
         /** Authenticate user. */
-        if ( ! is_user_logged_in() || ! current_user_can( 'upload_files' ) ) {
-            wp_die( __( 'Sorry, you are not allowed to upload files.' ) );
+        if (!is_user_logged_in() || !current_user_can('upload_files')) {
+            wp_die(__('Sorry, you are not allowed to upload files.'));
         }
-        check_admin_referer( 'media-form' );
+        check_admin_referer('media-form');
 
         /** Check and get file chunks. */
-        $chunk  = isset( $_REQUEST['chunk'] ) ? intval( $_REQUEST['chunk'] ) : 0; //zero index
+        $chunk = isset($_REQUEST['chunk']) ? intval($_REQUEST['chunk']) : 0; //zero index
         $current_part = $chunk + 1;
-        $chunks = isset( $_REQUEST['chunks'] ) ? intval( $_REQUEST['chunks'] ) : 0;
+        $chunks = isset($_REQUEST['chunks']) ? intval($_REQUEST['chunks']) : 0;
 
         /** Get file name and path + name. */
-        $fileName = isset( $_REQUEST['name'] ) ? $_REQUEST['name'] : $_FILES['async-upload']['name'];
+        $fileName = $_REQUEST['name'] ?? $_FILES['async-upload']['name'];
 
 
-        $wmufs_temp_dir = apply_filters( 'wmufs_temp_dir', WP_CONTENT_DIR . '/wmufs-temp' );
+        $wmufs_temp_dir = apply_filters('wmufs_temp_dir', WP_CONTENT_DIR . '/wmufs-temp');
 
         //only run on first chunk
-        if ( $chunk === 0 ) {
+        if ($chunk === 0) {
             // Create temp directory if it doesn't exist
-            if ( ! @is_dir( $wmufs_temp_dir ) ) {
-                wp_mkdir_p( $wmufs_temp_dir );
-            }
-
-            // Protect temp directory from browsing.
-            $index_pathname = $wmufs_temp_dir . '/index.php';
-            if ( ! file_exists( $index_pathname ) ) {
-                $file = fopen( $index_pathname, 'w' );
-                if ( false !== $file ) {
-                    fwrite( $file, "<?php\n// Silence is golden.\n" );
-                    fclose( $file );
-                }
-            }
+            $this->create_temp_directory($wmufs_temp_dir);
 
             //scan temp dir for files older than 24 hours and delete them.
-            $files = glob( $wmufs_temp_dir . '/*.part' );
-            if ( is_array( $files ) ) {
-                foreach ( $files as $file ) {
-                    if ( @filemtime( $file ) < time() - DAY_IN_SECONDS ) {
-                        @unlink( $file );
-                    }
-                }
-            }
+            $this->cleanup_old_files($wmufs_temp_dir);
         }
 
-        $filePath = sprintf( '%s/%d-%s.part', $wmufs_temp_dir, get_current_blog_id(), sha1( $fileName ) );
-
-        //debugging
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            $size = file_exists( $filePath ) ? size_format( filesize( $filePath ), 3 ) : '0 B';
-            error_log( "WMUFS: Processing \"$fileName\" part $current_part of $chunks as $filePath. $size processed so far." );
-        }
-
-        $wmufs_max_upload_size = $this->get_upload_limit();
-        if ( file_exists( $filePath ) && filesize( $filePath ) + filesize( $_FILES['async-upload']['tmp_name'] ) > $wmufs_max_upload_size ) {
-            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-                error_log( "WMUFS: File size limit exceeded." );
-            }
-
-            if ( ! $chunks || $chunk == $chunks - 1 ) {
-                @unlink( $filePath );
-
-                if ( ! isset( $_REQUEST['short'] ) || ! isset( $_REQUEST['type'] ) ) {
-                    echo wp_json_encode( array(
-                        'success' => false,
-                        'data'    => array(
-                            'message'  => __( 'The file size has exceeded the maximum file size setting.', 'tuxedo-big-file-uploads' ),
-                            'filename' => $fileName,
-                        ),
-                    ) );
-                    wp_die();
-                } else {
-                    status_header( 202 );
-                    printf(
-                        '<div class="error-div error">%s <strong>%s</strong><br />%s</div>',
-                        sprintf(
-                            '<button type="button" class="dismiss button-link" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">%s</button>',
-                            __( 'Dismiss' )
-                        ),
-                        sprintf(
-                        /* translators: %s: Name of the file that failed to upload. */
-                            __( '&#8220;%s&#8221; has failed to upload.' ),
-                            esc_html( $fileName )
-                        ),
-                        __( 'The file size has exceeded the maximum file size setting.', 'tuxedo-big-file-uploads' )
-                    );
-                    exit;
-                }
-}
-
-            die();
+        $filePath = sprintf('%s/%d-%s.part', $wmufs_temp_dir, get_current_blog_id(), sha1($fileName));
+        if ($this->is_file_size_exceeded($filePath, $_FILES['async-upload']['tmp_name'])) {
+            $this->handle_file_size_exceeded($filePath, $fileName, $chunk, $chunks);
         }
 
         /** Open temp file. */
-        if ( $chunk == 0 ) {
-            $out = @fopen( $filePath, 'wb');
-        } elseif ( is_writable( $filePath ) ) { //
-            $out = @fopen( $filePath, 'ab' );
+        $out = $this->open_output_stream($filePath, $chunk);
+
+        if ($out) {
+            $this->write_file_chunk($filePath, $out, $_FILES['async-upload']['tmp_name'], $current_part, $chunks);
         } else {
-            $out = false;
-        }
-
-        if ( $out ) {
-
-            /** Read binary input stream and append it to temp file. */
-            $in = @fopen( $_FILES['async-upload']['tmp_name'], 'rb' );
-
-            if ( $in ) {
-                while ( $buff = fread( $in, 4096 ) ) {
-                    fwrite( $out, $buff );
-                }
-            } else {
-                /** Failed to open input stream. */
-                /** Attempt to clean up unfinished output. */
-                @fclose( $out );
-                @unlink( $filePath );
-                error_log( "WMUFS: Error reading uploaded part $current_part of $chunks." );
-
-                if ( ! isset( $_REQUEST['short'] ) || ! isset( $_REQUEST['type'] ) ) {
-                    echo wp_json_encode(
-                        array(
-                            'success' => false,
-                            'data'    => array(
-                                'message'  => sprintf( __( 'There was an error reading uploaded part %1$d of %2$d.', 'tuxedo-big-file-uploads' ), $current_part, $chunks ),
-                                'filename' => esc_html( $fileName ),
-                            ),
-                        )
-                    );
-                    wp_die();
-                } else {
-                    status_header( 202 );
-                    printf(
-                        '<div class="error-div error">%s <strong>%s</strong><br />%s</div>',
-                        sprintf(
-                            '<button type="button" class="dismiss button-link" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">%s</button>',
-                            __( 'Dismiss' )
-                        ),
-                        sprintf(
-                        /* translators: %s: Name of the file that failed to upload. */
-                            __( '&#8220;%s&#8221; has failed to upload.' ),
-                            esc_html( $fileName )
-                        ),
-                        sprintf( __( 'There was an error reading uploaded part %1$d of %2$d.', 'tuxedo-big-file-uploads' ), $current_part, $chunks )
-                    );
-                    exit;
-                }
-            }
-
-            @fclose( $in );
-            @fclose( $out );
-            @unlink( $_FILES['async-upload']['tmp_name'] );
-        } else {
-            /** Failed to open output stream. */
-            error_log( "BFU: Failed to open output stream $filePath to write part $current_part of $chunks." );
-
-            if ( ! isset( $_REQUEST['short'] ) || ! isset( $_REQUEST['type'] ) ) {
-                echo wp_json_encode(
-                    array(
-                        'success' => false,
-                        'data'    => array(
-                            'message'  => sprintf( __( 'There was an error opening the temp file %s for writing. Available temp directory space may be exceeded or the temp file was cleaned up before the upload completed.', 'tuxedo-big-file-uploads' ), esc_html( $filePath ) ),
-                            'filename' => esc_html( $fileName ),
-                        ),
-                    )
-                );
-                wp_die();
-            } else {
-                status_header( 202 );
-                printf(
-                    '<div class="error-div error">%s <strong>%s</strong><br />%s</div>',
-                    sprintf(
-                        '<button type="button" class="dismiss button-link" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">%s</button>',
-                        __( 'Dismiss' )
-                    ),
-                    sprintf(
-                    /* translators: %s: Name of the file that failed to upload. */
-                        __( '&#8220;%s&#8221; has failed to upload.' ),
-                        esc_html( $fileName )
-                    ),
-                    sprintf( __( 'There was an error opening the temp file %s for writing. Available temp directory space may be exceeded or the temp file was cleaned up before the upload completed.', 'tuxedo-big-file-uploads' ), esc_html( $filePath ) )
-                );
-                exit;
-            }
+            $this->handle_file_open_error($filePath);
         }
 
         /** Check if file has finished uploading all parts. */
-        if ( ! $chunks || $chunk == $chunks - 1 ) {
-
-            //debugging
-            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-                $size = file_exists( $filePath ) ? size_format( filesize( $filePath ), 3 ) : '0 B';
-                error_log( "BFU: Completing \"$fileName\" upload with a $size final size." );
-            }
-
+        if (!$chunks || $chunk == $chunks - 1) {
             /** Recreate upload in $_FILES global and pass off to WordPress. */
             $_FILES['async-upload']['tmp_name'] = $filePath;
             $_FILES['async-upload']['name'] = $fileName;
-            $_FILES['async-upload']['size'] = filesize( $_FILES['async-upload']['tmp_name'] );
-            $wp_filetype = wp_check_filetype_and_ext( $_FILES['async-upload']['tmp_name'], $_FILES['async-upload']['name'] );
+            $_FILES['async-upload']['size'] = filesize($_FILES['async-upload']['tmp_name']);
+            $wp_filetype = wp_check_filetype_and_ext($_FILES['async-upload']['tmp_name'], $_FILES['async-upload']['name']);
             $_FILES['async-upload']['type'] = $wp_filetype['type'];
 
-            header( 'Content-Type: text/plain; charset=' . get_option( 'blog_charset' ) );
+            header('Content-Type: text/plain; charset=' . get_option('blog_charset'));
 
-            if ( ! isset( $_REQUEST['short'] ) || ! isset( $_REQUEST['type'] ) ) { //ajax like media uploader in modal
+            if (!isset($_REQUEST['short']) || !isset($_REQUEST['type'])) { //ajax like media uploader in modal
 
                 // Compatibility with Easy Digital Downloads plugin.
-                if ( function_exists( 'edd_change_downloads_upload_dir' ) ) {
+                if (function_exists('edd_change_downloads_upload_dir')) {
                     global $pagenow;
                     $pagenow = 'async-upload.php';
                     edd_change_downloads_upload_dir();
@@ -281,66 +126,162 @@ class WMUFS_File_Chunk{
                 nocache_headers();
 
                 $this->wp_ajax_upload_attachment();
-                die( '0' );
+                die('0');
 
             } else { //non-ajax like add new media page
                 $post_id = 0;
-                if ( isset( $_REQUEST['post_id'] ) ) {
-                    $post_id = absint( $_REQUEST['post_id'] );
-                    if ( ! get_post( $post_id ) || ! current_user_can( 'edit_post', $post_id ) )
+                if (isset($_REQUEST['post_id'])) {
+                    $post_id = absint($_REQUEST['post_id']);
+                    if (!get_post($post_id) || !current_user_can('edit_post', $post_id))
                         $post_id = 0;
                 }
 
-                $id = media_handle_upload( 'async-upload', $post_id, [], [
-					'action' => 'wp_handle_sideload',
-					'test_form' => false,
-				] );
-                if ( is_wp_error( $id ) ) {
+                $id = media_handle_upload('async-upload', $post_id, [], [
+                    'action' => 'wp_handle_sideload',
+                    'test_form' => false,
+                ]);
+                if (is_wp_error($id)) {
                     printf(
                         '<div class="error-div error">%s <strong>%s</strong><br />%s</div>',
                         sprintf(
                             '<button type="button" class="dismiss button-link" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">%s</button>',
-                            __( 'Dismiss' )
+                            __('Dismiss')
                         ),
                         sprintf(
                         /* translators: %s: Name of the file that failed to upload. */
-                            __( '&#8220;%s&#8221; has failed to upload.' ),
-                            esc_html( $_FILES['async-upload']['name'] )
+                            __('&#8220;%s&#8221; has failed to upload.'),
+                            esc_html($_FILES['async-upload']['name'])
                         ),
-                        esc_html( $id->get_error_message() )
+                        esc_html($id->get_error_message())
                     );
                     exit;
                 }
 
-                if ( $_REQUEST['short'] ) {
+                if ($_REQUEST['short']) {
                     // Short form response - attachment ID only.
                     echo $id;
                 } else {
                     // Long form response - big chunk of HTML.
                     $type = $_REQUEST['type'];
-
-                    /**
-                     * Filters the returned ID of an uploaded attachment.
-                     *
-                     * The dynamic portion of the hook name, `$type`, refers to the attachment type.
-                     *
-                     * Possible hook names include:
-                     *
-                     *  - `async_upload_audio`
-                     *  - `async_upload_file`
-                     *  - `async_upload_image`
-                     *  - `async_upload_video`
-                     *
-                     * @since 1.1.0
-                     *
-                     * @param int $id Uploaded attachment ID.
-                     */
-                    echo apply_filters( "async_upload_{$type}", $id );
+                    echo apply_filters("async_upload_{$type}", $id);
                 }
-}
-}
+            }
+        }
 
         die();
+    }
+
+    /**
+     * Create temporary directory. wp-content/wmufs-temp
+     * @param $dir
+     * @return void
+     */
+    private function create_temp_directory( $dir ) {
+        if ( ! @is_dir( $dir ) ) {
+            wp_mkdir_p( $dir );
+        }
+
+        // Ensure temp dir is not browsable
+        $index_pathname = $dir . '/index.php';
+        if ( ! file_exists( $index_pathname ) ) {
+            file_put_contents( $index_pathname, "<?php\n// Silence is golden.\n" );
+        }
+    }
+
+    /** Clean up 24 our oldest files.
+     * @param $dir
+     * @return void
+     */
+    private function cleanup_old_files( $dir ) {
+        $files = glob( $dir . '/*.part' );
+        if ( is_array( $files ) ) {
+            foreach ( $files as $file ) {
+                if ( @filemtime( $file ) < time() - DAY_IN_SECONDS ) {
+                    @unlink( $file );
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if file size exceeded the limit.
+     * @param $filePath
+     * @param $tempFile
+     * @return bool
+     */
+    private function is_file_size_exceeded( $filePath, $tempFile ): bool
+    {
+        $wmufs_max_upload_size = $this->get_upload_limit();
+        return file_exists( $filePath ) && filesize( $filePath ) + filesize( $tempFile ) > $wmufs_max_upload_size;
+    }
+
+    /**
+     * @param $filePath
+     * @param $fileName
+     * @param $chunk
+     * @param $chunks
+     * @return void
+     */
+    private function handle_file_size_exceeded($filePath, $fileName, $chunk, $chunks ) {
+        @unlink( $filePath );
+        if ( ! $chunks || $chunk == $chunks - 1 ) {
+            echo wp_json_encode( array(
+                'success' => false,
+                'data'    => array(
+                    'message'  => __( 'The file size has exceeded the maximum file size setting.', 'wp-maximum-upload-file-size' ),
+                    'filename' => $fileName,
+                ),
+            ) );
+            wp_die();
+        }
+    }
+
+    /**
+     * @param $filePath
+     * @param $chunk
+     * @return false|resource
+     */
+    private function open_output_stream( $filePath, $chunk ) {
+        if ( $chunk === 0 ) {
+            return @fopen( $filePath, 'wb' );
+        } elseif ( is_writable( $filePath ) ) {
+            return @fopen( $filePath, 'ab' );
+        }
+        return false;
+    }
+
+    /**
+     * @param $filePath
+     * @param $out
+     * @param $tempFile
+     * @param $current_part
+     * @param $chunks
+     * @return void
+     */
+    private function write_file_chunk($filePath, $out, $tempFile, $current_part, $chunks ) {
+        $in = @fopen( $tempFile, 'rb' );
+        if ( $in ) {
+            while ( $buff = fread( $in, 4096 ) ) {
+                fwrite( $out, $buff );
+            }
+            fclose( $in );
+            fclose( $out );
+            @unlink( $tempFile );
+        } else {
+            @fclose( $out );
+            @unlink( $filePath );
+            error_log( "Error reading part $current_part of $chunks" );
+            wp_die();
+        }
+    }
+
+    /**
+     * @param $filePath
+     * @return void
+     */
+    private function handle_file_open_error( $filePath) {
+        error_log( "Failed to open output stream for $filePath" );
+        wp_die();
     }
 
     /**
@@ -350,7 +291,8 @@ class WMUFS_File_Chunk{
      *
      * @return integer
      */
-    function get_upload_limit() {
+    function get_upload_limit(): int
+    {
         $max_size = (int) get_option('max_file_size');
         if ( ! $max_size ) {
             $max_size = wp_max_upload_size();

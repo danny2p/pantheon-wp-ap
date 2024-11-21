@@ -5,8 +5,6 @@
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package     Astra
- * @author      Astra
- * @copyright   Copyright (c) 2022, Astra
  * @link        http://wpastra.com/
  * @since       Astra 3.8.0
  */
@@ -460,6 +458,9 @@ class Astra_WP_Editor_CSS {
 			'.has-text-color .block-editor-block-list__block' => array(
 				'color' => 'inherit',
 			),
+			'.wp-block-cover .wp-block-cover__inner-container .block-editor-rich-text__editable.wp-block-paragraph' => array(
+				'color' => esc_attr( $text_color ),
+			),
 			// Global selection CSS.
 			'.block-editor-block-list__layout .block-editor-block-list__block ::selection,.block-editor-block-list__layout .block-editor-block-list__block.is-multi-selected .editor-block-list__block-edit:before' => array(
 				'background-color' => esc_attr( $theme_color ),
@@ -480,6 +481,8 @@ class Astra_WP_Editor_CSS {
 				'letter-spacing'  => esc_attr( $body_letter_spacing ),
 			),
 			'.editor-styles-wrapper h1, .editor-styles-wrapper h2, .editor-styles-wrapper h3, .editor-styles-wrapper h4, .editor-styles-wrapper h5, .editor-styles-wrapper h6' => astra_get_font_array_css( astra_get_option( 'headings-font-family' ), astra_get_option( 'headings-font-weight' ), array(), 'headings-font-extras', $heading_base_color ),
+
+			".wp-block-cover:not([class*='background-color']) .block-editor-block-list__block" => astra_get_font_array_css( astra_get_option( 'headings-font-family' ), astra_get_option( 'headings-font-weight' ), array(), 'headings-font-extras', $heading_base_color ),
 
 			// Headings H1 - H6 typography.
 			'.editor-styles-wrapper h1'        => array(
@@ -837,11 +840,15 @@ class Astra_WP_Editor_CSS {
 			$alignwide_left_negative_margin  = $astra_continer_left_spacing ? 'calc(-1 * min(' . $astra_continer_left_spacing . ', 40px))' : '-40px';
 			$alignwide_right_negative_margin = $astra_continer_right_spacing ? 'calc(-1 * min(' . $astra_continer_right_spacing . ', 40px))' : '-40px';
 			$heading_width_comp              = Astra_Dynamic_CSS::astra_4_8_0_compatibility() ? 'none' : 'var(--wp--custom--ast-content-width-size)';
+			$container_width_comp            = Astra_Dynamic_CSS::astra_4_8_4_compatibility() ? 'var(--wp--custom--ast-content-width-size)' : '';
 
 
 			$desktop_css['.editor-styles-wrapper .wp-block-latest-posts > li > a'] = array(
 				'text-decoration' => 'none',
 				'font-size'       => '1.25rem',
+			);
+			$desktop_css['.ast-plain-container.ast-no-sidebar .editor-styles-wrapper .is-root-container.block-editor-block-list__layout > .alignwide.uagb-is-root-container '] = array(
+				'max-width' => $container_width_comp,
 			);
 			$desktop_css['.ast-separate-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignwide, .ast-plain-container .editor-styles-wrapper .block-editor-block-list__layout.is-root-container .alignwide'] = array(
 				'margin-left'  => $alignwide_left_negative_margin,
