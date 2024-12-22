@@ -29,7 +29,7 @@ if ( ! function_exists( 'codepopular_dashboard_widget_render' ) ) {
         if (isset($data['active']) && $data['active'] === 'yes'){
         ?>
         <div class="codepopular-pro-widget">
-            <a href="<?php echo esc_url($data['link']);?>" target="_blank">
+            <a href="<?php echo esc_url($data['link']);?>?utm_source=maxuploader_dashboard_feed_banner" target="_blank">
                 <img src="<?php echo esc_url($data['square_banner'])?>" alt="CodePopular" style="width: 100%;"/>
             </a>
         </div>

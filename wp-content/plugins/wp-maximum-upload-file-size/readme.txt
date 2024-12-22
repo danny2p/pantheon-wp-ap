@@ -1,15 +1,15 @@
-=== Increase Maximum Upload File Size | Increase Execution Time ===
+=== MaxUploader - Increase Media Upload File Size | Increase Execution Time ===
 Contributors: codepopular, shamimtpi, rajubdpro,bitpressadmin
-Tags: max upload file size, increase upload limit, increase file size limit, upload limit, post max size, upload file size, upload_max_filesize, Increase Maximum Execution Time
+Tags: max uploader, increase upload limit, big file upload, upload limit, Increase Maximum Execution Time
 Donate link: https://ko-fi.com/codepopular
 Requires at least: 3.0
 Requires PHP: 5.6
-Tested up to: 6.6
-Stable tag: 1.1.4
+Tested up to: 6.7
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Increase maximum upload file size limit to any value. Increase upload limit - upload large files.
+MaxUploader - Increase maximum upload file size limit to any value. Increase upload limit - upload large files.
 
 
 == Description==
@@ -60,6 +60,10 @@ Or if needed, install manually;
 
 == Changelog ==
 
+
+1.1.5
+-------------
+* Warning fixed in wp version 6.7
 
 1.1.4
 -------------
