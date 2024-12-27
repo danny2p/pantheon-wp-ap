@@ -31,6 +31,10 @@ if (empty($app_guid)) {
 $user = "bot@getpantheon.com";
 $description = 'Deploy to environment triggered via Pantheon';
 
+print "<pre>";
+print_r($_POST);
+print "</pre>";
+
 if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build'])) {
   // commit 'subject'
   $description = trim(`git log --pretty=format:"%s" -1`);
