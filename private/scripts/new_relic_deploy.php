@@ -61,8 +61,9 @@ elseif ($_POST['wf_type'] == 'deploy') {
 }
 elseif ($_POST['wf_type'] == 'merge_cloud_development_environment_into_dev') {
   $description = 'Merge multidev into dev';
-  $revision = "merge commit";
-  $changelog = 'Merge multidev into dev';
+  $description = trim(`git log --pretty=format:"%s" -1`);
+  $revision = trim(`git log --pretty=format:"%h" -1`);
+  $changelog = trim(`git log --pretty=format:"%b" -1`);
 }
 // clean up the git output
 $revision = rtrim($revision, "\n");
