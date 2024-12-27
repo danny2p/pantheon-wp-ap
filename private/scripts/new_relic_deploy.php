@@ -30,10 +30,8 @@ if (empty($app_guid)) {
 // Default required variables
 $user = "bot@getpantheon.com";
 $description = 'Deploy to environment triggered via Pantheon';
-
-print "<pre>";
-print_r($_POST);
-print "</pre>";
+$revision = 'unknown';
+$changelog = 'Pantheon Automation';
 
 if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build'])) {
   // commit 'subject'
@@ -61,7 +59,11 @@ elseif ($_POST['wf_type'] == 'deploy') {
   $changelog = `git tag -l -n99 $revision`;
   $user = $_POST['user_email'];
 }
-
+elseif ($_POST['wf_type'] == 'merge_cloud_development_environment_into_dev') {
+  $description = 'Merge multidev into dev';
+  $revision = "merge commit";
+  $changelog = 'Merge multidev into dev';
+}
 // clean up the git output
 $revision = rtrim($revision, "\n");
 $changelog = rtrim($changelog, "\n");
