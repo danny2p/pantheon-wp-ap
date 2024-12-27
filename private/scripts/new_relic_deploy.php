@@ -27,10 +27,14 @@ if (empty($app_guid)) {
 // have good deploy markers, we gather data differently depending
 // on the context.
 
+// Default $user to pantheon bot unless otherwise set
+$user = "bot@getpantheon.com";
+
 if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build'])) {
   // commit 'subject'
   $description = trim(`git log --pretty=format:"%s" -1`);
   $revision = trim(`git log --pretty=format:"%h" -1`);
+
   if ($_POST['user_role'] == 'super') {
     // This indicates an in-dashboard SFTP commit.
     $user = trim(`git log --pretty=format:"%ae" -1`);
