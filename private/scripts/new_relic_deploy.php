@@ -33,7 +33,7 @@ $description = 'Deploy to environment triggered via Pantheon';
 $revision = 'unknown';
 $changelog = 'Pantheon Automation';
 
-if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build'])) {
+if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build','merge_cloud_development_environment_into_dev'])) {
   // commit 'subject'
   $description = trim(`git log --pretty=format:"%s" -1`);
   $revision = trim(`git log --pretty=format:"%h" -1`);
@@ -59,12 +59,7 @@ elseif ($_POST['wf_type'] == 'deploy') {
   $changelog = `git tag -l -n99 $revision`;
   $user = $_POST['user_email'];
 }
-elseif ($_POST['wf_type'] == 'merge_cloud_development_environment_into_dev') {
-  $description = 'Merge multidev into dev';
-  $description = trim(`git log --pretty=format:"%s" -1`);
-  $revision = trim(`git log --pretty=format:"%h" -1`);
-  $changelog = trim(`git log --pretty=format:"%b" -1`);
-}
+
 // clean up the git output
 $revision = rtrim($revision, "\n");
 $changelog = rtrim($changelog, "\n");
