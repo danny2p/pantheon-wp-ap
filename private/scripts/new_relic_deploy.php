@@ -27,8 +27,9 @@ if (empty($app_guid)) {
 // have good deploy markers, we gather data differently depending
 // on the context.
 
-// Default $user to pantheon bot unless otherwise set
+// Default required variables
 $user = "bot@getpantheon.com";
+$description = 'Deploy to environment triggered via Pantheon';
 
 if (in_array($_POST['wf_type'], ['sync_code','sync_code_with_build'])) {
   // commit 'subject'
