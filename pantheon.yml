@@ -4,6 +4,8 @@ api_version: 1
 php_version: 8.2
 database:
   version: 10.6
+object_cache:
+  version: 6.2
 workflows:
   sync_code:
     after:
