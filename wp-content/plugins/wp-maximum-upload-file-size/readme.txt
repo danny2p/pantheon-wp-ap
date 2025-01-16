@@ -5,7 +5,7 @@ Donate link: https://ko-fi.com/codepopular
 Requires at least: 3.0
 Requires PHP: 5.6
 Tested up to: 6.7
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,10 @@ Or if needed, install manually;
 
 == Changelog ==
 
+
+1.1.6
+-------------
+* Security issue fixed.
 
 1.1.5
 -------------

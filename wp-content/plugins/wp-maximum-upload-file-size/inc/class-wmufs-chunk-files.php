@@ -53,18 +53,24 @@ class WMUFS_File_Chunk{
      * Mirrors /wp-admin/async-upload.php
      *
      * @return void
+     * @throws WP_Exception
      */
     public function wmufs_ajax_chunk_receiver(){
 
         /** Check that we have an upload and there are no errors. */
         if (empty($_FILES) || $_FILES['async-upload']['error']) {
-            /** Failed to move uploaded file. */
-            die();
+           wp_die(esc_html__('No file uploaded, or upload error.', 'wp-maximum-upload-file-size'));
+        }
+
+        /** Ensure WordPress media upload nonce is valid */
+        if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'media-form' ) ) {
+           wp_trigger_error( 'Invalid nonce', 403 );
+          wp_die( esc_html__( 'Invalid nonce.', 'wp-maximum-upload-file-size' ) );
         }
 
         /** Authenticate user. */
         if (!is_user_logged_in() || !current_user_can('upload_files')) {
-            wp_die(__('Sorry, you are not allowed to upload files.'));
+            wp_die(esc_html__('Sorry, you are not allowed to upload files.', 'wp-maximum-upload-file-size'));
         }
         check_admin_referer('media-form');
 
@@ -145,11 +151,11 @@ class WMUFS_File_Chunk{
                         '<div class="error-div error">%s <strong>%s</strong><br />%s</div>',
                         sprintf(
                             '<button type="button" class="dismiss button-link" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">%s</button>',
-                            __('Dismiss')
+                            esc_html__('Dismiss', 'wp-maximum-upload-file-size')
                         ),
                         sprintf(
                         /* translators: %s: Name of the file that failed to upload. */
-                            __('&#8220;%s&#8221; has failed to upload.'),
+                            esc_html__('&#8220;%s&#8221; has failed to upload.', 'wp-maximum-upload-file-size'),
                             esc_html($_FILES['async-upload']['name'])
                         ),
                         esc_html($id->get_error_message())
@@ -159,12 +165,14 @@ class WMUFS_File_Chunk{
 
                 if ($_REQUEST['short']) {
                     // Short form response - attachment ID only.
-                    echo $id;
+                    echo esc_html( $id );
                 } else {
-                    // Long form response - big chunk of HTML.
+                    // Validate and sanitize the 'type' parameter.
                     $type = $_REQUEST['type'];
-                    echo apply_filters("async_upload_{$type}", $id);
+                    // Apply the appropriate filter and escape the output.
+                    echo esc_html( apply_filters( "async_upload_{$type}", $id ) );
                 }
+
             }
         }
 
@@ -228,7 +236,7 @@ class WMUFS_File_Chunk{
             echo wp_json_encode( array(
                 'success' => false,
                 'data'    => array(
-                    'message'  => __( 'The file size has exceeded the maximum file size setting.', 'wp-maximum-upload-file-size' ),
+                    'message'  => esc_html__( 'The file size has exceeded the maximum file size setting.', 'wp-maximum-upload-file-size' ),
                     'filename' => $fileName,
                 ),
             ) );
@@ -318,7 +326,7 @@ class WMUFS_File_Chunk{
                 array(
                     'success' => false,
                     'data'    => array(
-                        'message'  => __( 'Sorry, you are not allowed to upload files.' ),
+                        'message'  => esc_html__( 'Sorry, you are not allowed to upload files.', 'wp-maximum-upload-file-size' ),
                         'filename' => esc_html( $_FILES['async-upload']['name'] ),
                     ),
                 )
@@ -335,7 +343,7 @@ class WMUFS_File_Chunk{
                     array(
                         'success' => false,
                         'data'    => array(
-                            'message'  => __( 'Sorry, you are not allowed to attach files to this post.' ),
+                            'message'  => esc_html__( 'Sorry, you are not allowed to attach files to this post.', 'wp-maximum-upload-file-size' ),
                             'filename' => esc_html( $_FILES['async-upload']['name'] ),
                         ),
                     )
@@ -350,7 +358,7 @@ class WMUFS_File_Chunk{
         $post_data = ! empty( $_REQUEST['post_data'] ) ? _wp_get_allowed_postdata( _wp_translate_postdata( false, (array) $_REQUEST['post_data'] ) ) : array();
 
         if ( is_wp_error( $post_data ) ) {
-            wp_die( $post_data->get_error_message() );
+            wp_die( esc_html( $post_data->get_error_message() ) );
         }
 
         // If the context is custom header or background, make sure the uploaded file is an image.
@@ -362,7 +370,7 @@ class WMUFS_File_Chunk{
                     array(
                         'success' => false,
                         'data'    => array(
-                            'message'  => __( 'The uploaded file is not a valid image. Please try again.' ),
+                            'message'  => esc_html__( 'The uploaded file is not a valid image. Please try again.', 'wp-maximum-upload-file-size' ),
                             'filename' => esc_html( $_FILES['async-upload']['name'] ),
                         ),
                     )

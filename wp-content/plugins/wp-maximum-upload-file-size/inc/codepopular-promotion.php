@@ -58,14 +58,14 @@ if ( ! function_exists( 'codepopular_dashboard_widget_render' ) ) {
 			// For each post.
 			foreach ( $posts as $post ) {
 				$fordate = gmdate( 'M j, Y', strtotime( $post->modified ) ); ?>
-				<p class="codepopular-blog-feeds"> <a style="text-decoration: none;font-weight: bold" href="<?php echo esc_url( $post->link ); ?>?utm_source=wp-dashboard-feed" target=_balnk><?php echo esc_html( $post->title->rendered ); ?></a> - <?php echo esc_html( $fordate ); ?></p>
+				<p class="codepopular-blog-feeds"> <a style="text-decoration: none;font-weight: bold" href="<?php echo esc_url( $post->link ); ?>?utm_source=maxuploader-dashboard-feed" target=_balnk><?php echo esc_html( $post->title->rendered ); ?></a> - <?php echo esc_html( $fordate ); ?></p>
 				<span><?php echo wp_trim_words( $post->content->rendered, 25, '...' );  //phpcs:ignore ?></span>
 				<?php
 			}
 			?>
 			<hr>
-			<p> <a style="text-decoration: none;font-weight: bold" href="<?php echo esc_url( 'https://codepopular.com/blog/' ); ?>?utm_source=wp-dashboard-feed" target=_balnk><?php echo esc_html__( 'Get more WordPress tips & news on our blog...', 'wp-maximum-upload-file-size' ); ?></a></p>
-			<a style="text-decoration: none; font-weight: bold; color: #fff; border: 1px solid #ccc; padding: 6px 10px; border-radius: 4px; background: #39b54a; " href="<?php echo esc_url_raw('https://codepopular.com/contact');?>?utm_source=wp-dashboard-feed" target="_balnk"><?php echo esc_html('Talk with WordPress Expert');?></a>
+			<p> <a style="text-decoration: none;font-weight: bold" href="<?php echo esc_url( 'https://codepopular.com/blog/' ); ?>?utm_source=maxuploader-dashboard-feed" target=_balnk><?php echo esc_html__( 'Get more WordPress tips & news on our blog...', 'wp-maximum-upload-file-size' ); ?></a></p>
+			<a style="text-decoration: none; font-weight: bold; color: #fff; border: 1px solid #ccc; padding: 6px 10px; border-radius: 4px; background: #39b54a; " href="<?php echo esc_url_raw('https://codepopular.com/contact');?>?utm_source=maxuploader-dashboard-feed" target="_balnk"><?php echo esc_html('Talk with WordPress Expert');?></a>
 			<?php
 		}
 	}
@@ -94,12 +94,12 @@ if ( ! function_exists('codepopular_wmufs_promotions') ) {
 				<h4>Thank you for using our Plugin to Increase Upload Size!</h4>
 				<p>We are glad that you are using our plugin and we hope you are satisfied with it. If you want, you can support us in the development of the plugin by buying us a coffee and adding a plugin review. This is very important and gives us the opportunity to create even better tools for you. Thank you to everyone. </p>
 				<div class="codepopular__buttons">
-					<a href="https://ko-fi.com/codepopular" target="_blank" class="codepopular__button btn__green dashicons-heart">
+					<a href="https://ko-fi.com/codepopular?utm_source=maxuploader-dashboard-feed" target="_blank" class="codepopular__button btn__green dashicons-heart">
 						Buy me a coffee </a>
 					<a href="https://wordpress.org/support/plugin/wp-maximum-upload-file-size/reviews/#new-post" target="_blank" class="codepopular__button btn__yellow dashicons-star-filled">
 						Add a Plugin review </a>
 
-					<a href="https://codepopular.com/contact?utm_source=wp-dashboard-feed" target="_blank" class="codepopular__button btn__dark dashicons-email">Contact Us</a>
+					<a href="https://codepopular.com/contact?utm_source=maxuploader-dashboard-feed" target="_blank" class="codepopular__button btn__dark dashicons-email">Contact Us</a>
 					<button type="button" id="hideWmufsNotice" class="codepopular__button btn__blue dashicons-no">Hide for 6 month</button>
 				</div>
 			</div>
