@@ -34,23 +34,6 @@
 }
 
 
-.wmufs_support_btn {
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #525252 !important;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 20px 10px;
-
-    .dashicons {
-        padding-right: 10px
-    }
-}
-
-
-
 .wmufs_mb_50 {
     margin-bottom: 50px;
 }
@@ -106,16 +89,18 @@ Button Design
 */
 
 .wmufs-btn {
-    background: #6d0eff;
+    background: #2271b1;
     text-align: center;
 
-    .wmufs-btn a {
+    a {
         color: #fff;
         text-decoration: none;
         padding: 10px;
-        display: inline-block;
         font-weight: bold;
         font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     a:hover,
