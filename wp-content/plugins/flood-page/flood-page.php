@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Slow Page
+ * Plugin Name: Flood Page
  */
 
 // Register the shortcode
-add_shortcode( 'slow-page', 'slow_page_shortcode' );
+add_shortcode( 'flood-page', 'flood_page_shortcode' );
 
-function slow_page_shortcode() {
+function flood_page_shortcode() {
   if ( is_user_logged_in() ) {
     ob_start();
     ?>
