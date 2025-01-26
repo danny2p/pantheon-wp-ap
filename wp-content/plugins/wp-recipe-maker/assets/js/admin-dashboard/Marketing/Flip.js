@@ -11,7 +11,8 @@ export default class Flip extends React.Component {
 
   componentDidMount() {
     this._tickInstance = Tick.DOM.create(this._tickRef.current, {
-      value: this.props.value
+      value: this.props.value,
+      credits: false,
     });
   }
 

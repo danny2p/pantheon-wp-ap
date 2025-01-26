@@ -3,9 +3,9 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.4
-Stable tag: 9.7.2
+Stable tag: 9.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,23 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.8.0 =
+* Feature: Non-public recipes shoppable with Instacart
+* Feature: Filter by recipe content on Posts overview page
+* Feature: Setting to disable URL Hash after jumping
+* Feature: Share with WhatsApp button
+* Feature: Share on Messenger button (mobile only)
+* Feature: Share on Bluesky button
+* Improvement: Significantly reduced publicly loaded assets for increased for performance
+* Improvement: Handle tooltip sanitization through API to improve performance
+* Improvement: X icon for template editor
+* Improvement: Optimization plugins compatibility (Jetpack Boost, Perfmatters, SiteGround Optimizer)
+* Fix: Incorrect interactions on dashboard around end of year
+* Fix: Prevent loading translations too early
+* Fix: Compatibility with Thrive Architect for parent post association
+* Fix: Ability to dismiss marketing related menu item during sale
+* Fix: Some dropdown options not always visible in shortcode generator
+
 = 9.7.2 =
 * Fix: Divi trying to load unexisting CSS file
 
@@ -326,6 +343,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.8.0 =
+Some great new features and improvements
+
 = 9.7.2 =
 Update recommended when using Divi
 

@@ -1,4 +1,4 @@
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import React, { Component, Fragment } from 'react';
 

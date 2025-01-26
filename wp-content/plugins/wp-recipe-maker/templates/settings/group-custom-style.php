@@ -69,6 +69,54 @@ $custom_style = array(
 					'type' => 'color',
 					'default' => '#FFFFFF',
 				),
+				array(
+					'id' => 'tooltip_dropdown_styling',
+					'name' => __( 'Style dropdown in tooltip', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to apply custom styling on any dropdowns that appear in our tooltips.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'tooltip_dropdown_background_color',
+					'name' => __( 'Dropdown Background Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#333333',
+					'dependency' => array(
+						'id' => 'tooltip_dropdown_styling',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'tooltip_dropdown_border_color',
+					'name' => __( 'Dropdown Border Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#333333',
+					'dependency' => array(
+						'id' => 'tooltip_dropdown_styling',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'tooltip_dropdown_text_color',
+					'name' => __( 'Dropdown Text Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#FFFFFF',
+					'dependency' => array(
+						'id' => 'tooltip_dropdown_styling',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'tooltip_dropdown_font_size',
+					'name' => __( 'Dropdown Font Size', 'wp-recipe-maker' ),
+					'type' => 'number',
+					'suffix' => 'px',
+					'default' => '16',
+					'dependency' => array(
+						'id' => 'tooltip_dropdown_styling',
+						'value' => true,
+					),
+				),
 			),
 			'dependency' => array(
 				'id' => 'features_custom_style',

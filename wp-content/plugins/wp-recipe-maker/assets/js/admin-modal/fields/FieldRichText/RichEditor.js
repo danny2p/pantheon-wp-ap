@@ -1,5 +1,3 @@
-import 'core-js/features/array/flat';
-
 import React, { useCallback, useMemo, useState } from 'react';
 import { Editor, Path, Range, Transforms, createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';

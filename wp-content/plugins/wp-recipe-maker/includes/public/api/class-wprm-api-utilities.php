@@ -70,6 +70,11 @@ class WPRM_Api_Utilities {
 				),
 				'permission_callback' => '__return_true',
 			));
+			register_rest_route( 'wp-recipe-maker/v1', '/utilities/sanitize', array(
+				'callback' => array( __CLASS__, 'api_sanitize' ),
+				'methods' => 'POST',
+				'permission_callback' => '__return_true',
+			));
 		}
 	}
 
@@ -258,6 +263,23 @@ class WPRM_Api_Utilities {
 		}
 
 		return rest_ensure_response( false );
+	}
+
+	/**
+	 * Handle sanitize call to the REST API.
+	 *
+	 * @since 9.8.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_sanitize( $request ) {
+		// Parameters.
+		$params = $request->get_params();
+
+		$text = isset( $params['text'] ) ? $params['text'] : '';
+
+		$sanitized = WPRM_Recipe_Sanitizer::sanitize_html( $text );
+
+		return rest_ensure_response( $sanitized );
 	}
 }
 

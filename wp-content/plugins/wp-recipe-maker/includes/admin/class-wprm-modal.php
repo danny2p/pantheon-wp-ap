@@ -39,9 +39,6 @@ class WPRM_Modal {
 	public static function load_public() {
 		// Change context of modal.
 		self::$context = 'public';
-		
-		// Required admin classes.
-		require_once( WPRM_DIR . 'includes/admin/class-wprm-notices.php' );
 
 		// Make sure regular admin assets are loaded.
 		add_filter( 'wprm_should_load_admin_assets', '__return_true' );

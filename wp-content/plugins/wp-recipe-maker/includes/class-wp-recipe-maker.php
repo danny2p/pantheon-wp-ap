@@ -31,7 +31,7 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.7.2' );
+		define( 'WPRM_VERSION', '9.8.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -122,6 +122,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-custom-hash.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-fallback-recipe.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-icon.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-instacart.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-list-manager.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-list-post-type.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-list-saver.php' );
@@ -132,6 +133,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata-video.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-metadata.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-migrations.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-notices.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-nutrition.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-popup.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-post-type.php' );
@@ -156,6 +158,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-manager.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-shortcode.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-shortcodes.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-tooltip.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-version.php' );
 
 		// Deprecated.
@@ -198,9 +201,9 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-import-helper.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-import-manager.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-marketing.php' );
+			require_once( WPRM_DIR . 'includes/admin/class-wprm-manage-posts.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-manage.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-modal.php' );
-			require_once( WPRM_DIR . 'includes/admin/class-wprm-notices.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-privacy.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-reports-manager.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-tools-manager.php' );

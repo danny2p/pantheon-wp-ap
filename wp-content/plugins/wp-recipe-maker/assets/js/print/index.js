@@ -166,6 +166,8 @@ window.WPRMPrint = {
             elems = document.querySelectorAll( '.wprmprc-collection-item-servings' );
         } else if ( 'wprm-print-toggle-collection-nutrition' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-collection-column-nutrition, .wprmprc-collection-item-nutrition' );
+        } else if ( 'wprm-print-toggle-collection-qr' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprmprc-collection-item-qr' );
         } else if ( 'wprm-print-toggle-shopping-list-collection' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-shopping-list-collection' );
         } else if ( 'wprm-print-toggle-shopping-list' === toggle.id ) {
@@ -194,7 +196,7 @@ window.WPRMPrint = {
         // Use setTimeout to prevent print window going blank in Safari.
         setTimeout( () => {
             window.print();
-        });
+        }, 200 );
 
         if ( currentUrl ) {
             window.history.replaceState( {}, document.title, currentUrl );

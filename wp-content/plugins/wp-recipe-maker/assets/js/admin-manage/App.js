@@ -8,7 +8,7 @@ import ErrorBoundary from 'Shared/ErrorBoundary';
 
 import '../../css/admin/manage/app.scss';
 import defaultDatatables from './DataTableConfig';
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 export default class App extends Component {
     render() {

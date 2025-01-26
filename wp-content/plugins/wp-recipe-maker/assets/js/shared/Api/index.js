@@ -1,4 +1,4 @@
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import Analytics from './Analytics';
 import CustomTaxonomy from './CustomTaxonomy';

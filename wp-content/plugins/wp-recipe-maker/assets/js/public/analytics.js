@@ -41,6 +41,13 @@ window.WPRecipeMaker.analytics = {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'facebook-share-button' );
 			}
 			return true;
+		} else if ( target.matches( '.wprm-recipe-messenger-share' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'messenger-share-button' );
+			}
+			return true;
 		} else if ( target.matches( '.wprm-recipe-twitter-share' ) ) {
 			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
 
@@ -48,11 +55,25 @@ window.WPRecipeMaker.analytics = {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'twitter-share-button' );
 			}
 			return true;
+		} else if ( target.matches( '.wprm-recipe-bluesky-share' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'bluesky-share-button' );
+			}
+			return true;
 		} else if ( target.matches( '.wprm-recipe-text-share' ) ) {
 			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
 
 			if ( recipeId ) {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'text-share-button' );
+			}
+			return true;
+		} else if ( target.matches( '.wprm-recipe-whatsapp-share' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'whatsapp-share-button' );
 			}
 			return true;
 		} else if ( target.matches( '.wprm-recipe-email-share' ) ) {

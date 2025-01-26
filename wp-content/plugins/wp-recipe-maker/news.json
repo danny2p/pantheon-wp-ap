@@ -1,6 +1,72 @@
 {
     "news": [
         {
+            "date": "2025-01-22",
+            "label": "Release",
+            "title": "WP Recipe Maker 9.8.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-9-8-0/"
+        },
+        {
+            "date": "2025-01-17",
+            "label": "Blog",
+            "title": "Essential Equipment for Scaling Recipes Successfully",
+            "url": "https://bootstrapped.ventures/scaling-recipe/"
+        },
+        {
+            "date": "2024-12-19",
+            "label": "Blog",
+            "title": "Easy and Quick Ingredient Substitution Guide",
+            "url": "https://bootstrapped.ventures/ingredient-substitution-chart/"
+        },
+        {
+            "date": "2024-12-12",
+            "label": "Blog",
+            "title": "How to Use Natural Light for Professional Food Shots",
+            "url": "https://bootstrapped.ventures/food-photography-natural-light/"
+        },
+        {
+            "date": "2024-12-06",
+            "label": "Blog",
+            "title": "Turn Your Culinary Skills into a Recipe Development Career",
+            "url": "https://bootstrapped.ventures/how-to-become-a-recipe-developer/"
+        },
+        {
+            "date": "2024-11-28",
+            "label": "Blog",
+            "title": "Creative Ideas for Stunning Food Photography Composition",
+            "url": "https://bootstrapped.ventures/food-photography-composition/"
+        },
+        {
+            "date": "2024-11-21",
+            "label": "Blog",
+            "title": "Driving Traffic to Your Food Blog: Fast and Easy Tips",
+            "url": "https://bootstrapped.ventures/food-blog-traffic/"
+        },
+        {
+            "date": "2024-11-15",
+            "label": "Blog",
+            "title": "Grow Your Food Blog: Expert Social Media Tips & Tricks",
+            "url": "https://bootstrapped.ventures/social-media-for-food-bloggers/"
+        },
+        {
+            "date": "2024-11-08",
+            "label": "Blog",
+            "title": "How to Choose the Best Recipe Format for Your Audience",
+            "url": "https://bootstrapped.ventures/recipe-format-types/"
+        },
+        {
+            "date": "2024-11-05",
+            "label": "Blog",
+            "title": "Optimize Your Recipe Index for Better SEO",
+            "url": "https://bootstrapped.ventures/recipe-index-wordpress/"
+        },
+        {
+            "date": "2024-10-24",
+            "label": "Blog",
+            "title": "Top 10 Recipe Websites Without the Clutter",
+            "url": "https://bootstrapped.ventures/top-recipe-sites/"
+        },
+        {
             "date": "2024-10-22",
             "label": "Release",
             "title": "WP Recipe Maker 9.7.0",

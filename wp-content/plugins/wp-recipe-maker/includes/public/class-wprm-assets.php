@@ -56,7 +56,8 @@ class WPRM_Assets {
 
 		// Only include scripts when not AMP page.
 		if ( ! function_exists( 'is_amp_endpoint' ) || ! is_amp_endpoint() ) {
-			wp_register_script( 'wprm-public', WPRM_URL . 'dist/public-' . $template_mode . '.js', array(), WPRM_VERSION, true );
+			// Always load the modern JS file. Legacy JS is basically the same thing, just different CSS.
+			wp_register_script( 'wprm-public', WPRM_URL . 'dist/public-modern.js', array(), WPRM_VERSION, true );
 			wp_localize_script( 'wprm-public', 'wprm_public', self::localize_public() );
 		}
 		
@@ -92,8 +93,10 @@ class WPRM_Assets {
 				'analytics' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/analytics' ), '/' ),
 				'integrations' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/integrations' ), '/' ),
 				'manage' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/manage' ), '/' ),
+				'utilities' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/utilities' ), '/' ),
 			),
 			'settings' => array(
+				'jump_output_hash' => WPRM_Settings::get( 'jump_output_hash' ),
 				'features_comment_ratings' => WPRM_Settings::get( 'features_comment_ratings' ),
 				'template_color_comment_rating' => WPRM_Settings::get( 'template_color_comment_rating' ),
 				'instruction_media_toggle_default' => WPRM_Settings::get( 'instruction_media_toggle_default' ),
@@ -513,6 +516,10 @@ class WPRM_Assets {
 		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="left"] > .tippy-arrow::before { border-left-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
 		$output .= ' .tippy-box[data-theme~="wprm"][data-placement^="right"] > .tippy-arrow::before { border-right-color: ' . WPRM_Settings::get( 'tooltip_background_color' ) . '; }';
 		$output .= ' .tippy-box[data-theme~="wprm"] a { color: ' . WPRM_Settings::get( 'tooltip_link_color' ) . '; }';
+
+		if ( WPRM_Settings::get( 'tooltip_dropdown_styling' ) ) {
+			$output .= ' .tippy-box[data-theme~="wprm"] select { font-size: ' . intval( WPRM_Settings::get( 'tooltip_dropdown_font_size' ) ) . 'px; background-color: ' . WPRM_Settings::get( 'tooltip_dropdown_background_color' ) . '; border: 1px solid ' . WPRM_Settings::get( 'tooltip_dropdown_background_color' ) . '; color: ' . WPRM_Settings::get( 'tooltip_dropdown_text_color' ) . '; }';
+		}
 
 		// Comment ratings.
 		$output .= ' .wprm-comment-rating svg { width: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; height: ' . WPRM_Settings::get( 'comment_rating_star_size' ) . 'px !important; }';

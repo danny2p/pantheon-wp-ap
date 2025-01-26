@@ -46,6 +46,24 @@ class WPRM_Marketing {
 				'page_text' => 'Good news: I\'m celebrating my birthday with a <strong>30% discount on any of our plugins</strong>.',
 				'url' => 'https://bootstrapped.ventures/birthday-discount/',
 			),
+			'black-friday-2025' => array(
+				'start' => new DateTime( '2024-11-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'end' => new DateTime( '2024-12-02 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'notice_title' => 'Black Friday & Cyber Monday Deal',
+				'notice_text' => 'Get a 30% discount right now!',
+				'page_title' => 'Black Friday Discount!',
+				'page_text' => 'Good news: we\'re having a Black Friday & Cyber Monday sale and you can get a <strong>30% discount on any of our plugins</strong>.',
+				'url' => 'https://bootstrapped.ventures/black-friday/',
+			),
+			'birthday-2026' => array(
+				'start' => new DateTime( '2026-01-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'end' => new DateTime( '2026-01-31 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'notice_title' => 'Celebrating my birthday',
+				'notice_text' => 'Get a 30% discount right now!',
+				'page_title' => 'Birthday Discount!',
+				'page_text' => 'Good news: I\'m celebrating my birthday with a <strong>30% discount on any of our plugins</strong>.',
+				'url' => 'https://bootstrapped.ventures/birthday-discount/',
+			),
 		);
 
 		$now = new DateTime();
@@ -86,7 +104,9 @@ class WPRM_Marketing {
 	 * @since    5.8.1
 	 */
 	public static function add_submenu_page() {
-		if ( ! WPRM_Addons::is_active( 'elite' ) ) {
+		$dismissed = WPRM_Notices::is_dismissed( 'menu_' . self::$campaign['id'] );
+
+		if ( ! WPRM_Addons::is_active( 'elite' ) && ! $dismissed ) {
 			add_submenu_page( 'wprecipemaker', 'WPRM Discount', '~ 30% Discount! ~', 'manage_options', 'wprm_marketing', array( __CLASS__, 'page_template' ) );
 		}
 	}
@@ -112,6 +132,9 @@ class WPRM_Marketing {
 
 		// CTA.
 		echo '<a href="' . esc_url( self::$campaign['url'] ) . '" target="_blank" class="button button-primary" style="font-size: 14px;">Learn more about the sale!</a>';
+
+		// Dismiss notice.
+		echo '<br/><br/><a href="' . esc_url( admin_url( 'admin.php?page=wprecipemaker&wprm_dismiss=menu_' . esc_attr( self::$campaign['id'] ) ) ) . '" style="font-size: 12px;">Not interested right now, remove this page from my menu...</a>';
 		
 		echo '</div>';
 	}

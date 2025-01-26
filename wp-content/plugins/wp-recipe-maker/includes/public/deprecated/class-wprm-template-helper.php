@@ -212,6 +212,10 @@ class WPRM_Template_Helper {
 			$functions .= ' onblur="window.WPRecipeMaker.userRating.leave(this)"';
 			$functions .= ' onclick="window.WPRecipeMaker.userRating.click(this, event)"';
 			$functions .= ' onkeypress="window.WPRecipeMaker.userRating.click(this, event)"';
+
+			// Add Modal details.
+			$modal_uid = WPRMP_User_Rating::get_modal_uid();
+			$data .= ' data-modal-uid="' . esc_attr( $modal_uid ) . '"';
 		} elseif ( $user_ratings ) {
 			$class = ' wprm-user-rating';
 			$data = '';
@@ -383,7 +387,7 @@ class WPRM_Template_Helper {
 					$unit_systems_output[] = '<a href="#" class="wprm-unit-conversion' . esc_attr( $active ) . '" data-system="' . esc_attr( $unit_system ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">' . $unit_system_label . '</a>';
 				}
 
-				$output = '<div class="wprm-unit-conversion-container">' . implode( ' - ', $unit_systems_output ) . '</div>';
+				$output = '<div class="wprm-unit-conversion-container wprm-unit-conversion-container-' . esc_attr( $recipe->id() ) . '">' . implode( ' - ', $unit_systems_output ) . '</div>';
 
 				WPRM_Assets::add_js_data( 'wprmpuc_recipe_' . $recipe->id(), array(
 					'ingredients' => $ingredients,

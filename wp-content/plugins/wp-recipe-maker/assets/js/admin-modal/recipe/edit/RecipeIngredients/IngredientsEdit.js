@@ -4,7 +4,6 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { __wprm } from 'Shared/Translations';
 import InlineIngredientsHelper from '../RecipeInstructions/InlineIngredientsHelper';
 import FieldIngredient from '../../../fields/FieldIngredient';
-import { update } from 'immutable';
 
 export default class IngredientsEdit extends Component {
     constructor(props) {

@@ -15,7 +15,7 @@ const PropertyDropdown = (props) => {
     return (
         <Select
             className="wprm-template-property-input"
-            menuPlacement="top"
+            menuPlacement="auto"
             value={selectOptions.filter(({value}) => value === props.value)}
             onChange={(option) => props.onValueChange(option.value)}
             options={selectOptions}
