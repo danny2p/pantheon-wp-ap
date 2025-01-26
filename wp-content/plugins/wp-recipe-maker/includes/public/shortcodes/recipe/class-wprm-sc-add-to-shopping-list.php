@@ -17,7 +17,7 @@
  * @subpackage WP_Recipe_Maker/includes/public/shortcodes/recipe
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
-class WPRM_SC_Add_To_Shopping_LIst extends WPRM_Template_Shortcode {
+class WPRM_SC_Add_To_Shopping_List extends WPRM_Template_Shortcode {
 	public static $shortcode = 'wprm-recipe-add-to-shopping-list';
 
 	public static function init() {

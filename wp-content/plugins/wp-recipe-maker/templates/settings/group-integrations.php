@@ -50,6 +50,23 @@ $integrations = array(
 					),
 				),
 				array(
+					'id' => 'integration_instacart_shopping_list',
+					'name' => __( 'Shop Collections Shopping List', 'wp-recipe-maker' ),
+					'description' => __( 'Show a button to shop the shopping list in the Recipe Collections feature.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+					'dependency' => array(
+						array(
+							'id' => 'integration_instacart_agree',
+							'value' => true,
+						),
+						array(
+							'id' => 'recipe_collections_shopping_list',
+							'value' => true,
+						),
+					),
+				),
+				array(
 					'id' => 'integration_instacart_affiliate_id',
 					'name' => __( 'Instacart Tastemakers ID', 'wp-recipe-maker' ),
 					'description' => __( 'Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms apply.', 'wp-recipe-maker' ),

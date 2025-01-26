@@ -4,7 +4,7 @@ import '../../../../../css/admin/modal/recipe/fields/equipment.scss';
 
 import EditMode from '../../../general/EditMode';
 import { __wprm } from 'Shared/Translations';
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import EquipmentEdit from './EquipmentEdit';
 

@@ -40,6 +40,10 @@ window.WPRecipeMaker.recipe = {
 				}
 			}
 	
+			if ( window.WPRecipeMaker.hasOwnProperty( 'instacart' ) ) {
+				window.WPRecipeMaker.instacart.init();
+			}
+
 			if ( window.WPRecipeMaker.hasOwnProperty( 'timer' ) ) {
 				window.WPRecipeMaker.timer.init();
 			}

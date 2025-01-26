@@ -1,5 +1,4 @@
-import sanitizeHtml from 'sanitize-html';
-import tippy, { inlinePositioning } from 'tippy.js';
+import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
 import '../../css/public/tooltip.scss';
@@ -27,30 +26,62 @@ window.WPRecipeMaker.tooltip = {
             if ( tooltip ) {
                 container.role = "button"; // Needed for accessibility.
 
-                const sanitized = sanitizeHtml( tooltip, {
-                    allowedTags: [
-                        'b', 'i', 'em', 'strong', 'a', 'img', 'p', 'ul', 'ol', 'li', 'br',
-                    ],
-                    allowedAttributes: {
-                        a: ['href', 'title', 'target', 'rel'],
-                        img: ['src', 'alt', 'title', 'width', 'height'],
-                        '*': ['style', 'class'],
-                    },
-                    allowedSchemes: ['http', 'https'],
-                    allowedSchemesByTag: {
-                        img: ['data', 'http', 'https'],
-                    },
-                } );
+                const hasHtml = container.dataset.hasOwnProperty( 'tooltipHtml' ) && '1' === container.dataset.tooltipHtml;
+
+                let content = tooltip;
+                if ( hasHtml ) {
+                    // Strip HTML tags.
+                    content = content.replace( /<[^>]*>/g, '' );
+                }
 
                 tippy( container, {
                     theme: 'wprm',
-                    content: sanitized,
-                    allowHTML: true,
+                    content,
+                    allowHTML: false,
                     interactive: true,
                     onCreate(instance) {
                         // Prevents the tooltip from breaking ingredients into multiple lines.
                         instance.popper.style.display = 'inline-block';
+
+                        // State of fetching.
+                        instance._isFetching = false;
+                        instance._fetchedContent = false;
                     },
+                    onShow(instance) {
+                        if ( instance._isFetching || instance._fetchedContent ) {
+                            return;
+                        }
+
+                        if ( hasHtml ) {
+                            instance._isFetching = true;
+
+                            fetch( `${wprm_public.endpoints.utilities}/sanitize`, {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                                credentials: 'same-origin',
+                                body: JSON.stringify( { text: tooltip } ),
+                            } ).then( ( response ) => {
+                                if ( response.ok ) {
+                                    return response.json();
+                                } else {
+                                    return false;
+                                }
+                            } ).then( ( html ) => {
+                                instance._isFetching = false;
+                                instance._fetchedContent = true;
+
+                                if ( html ) {
+                                    instance.setContent( html );
+
+                                    // Change allowHTML to true to show HTML.
+                                    instance.setProps( { allowHTML: true } );
+                                }
+                            } );
+                        }
+                    }
                 });
             }
         }

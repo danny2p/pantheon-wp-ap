@@ -1,10 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import Parser from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
+import React, { Fragment } from 'react';
 
-import Api from 'Shared/Api';
-import Loader from 'Shared/Loader';
-import Helpers from '../../general/Helpers';
 import BlockProperties from '../../menu/BlockProperties';
 import Property from '../../menu/Property';
 

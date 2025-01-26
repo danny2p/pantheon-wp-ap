@@ -405,6 +405,14 @@ class WPRM_Recipe_Manager {
 				} else {
 					$recipe_ids = self::get_recipe_ids_from_content( $post->post_content );
 
+					// Thrive Architect compatibility.
+					if ( function_exists( 'tve_get_post_meta' ) ) {
+						$content = tve_get_post_meta( get_the_ID(), 'tve_updated_post', true );
+						$thrive_recipe_ids = self::get_recipe_ids_from_content( $content );
+
+						$recipe_ids = array_unique( $recipe_ids + $thrive_recipe_ids );
+					}
+
 					// Themify Builder compatibility.
 					if ( '<!-- wp:themify-builder/canvas /-->' === substr( $post->post_content, 0, 38 ) ) {
 						$ThemifyBuilder = isset( $GLOBALS['ThemifyBuilder'] ) ? $GLOBALS['ThemifyBuilder'] : false;

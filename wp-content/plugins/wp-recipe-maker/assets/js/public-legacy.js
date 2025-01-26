@@ -1,6 +1,3 @@
-// Polyfills.
-import 'whatwg-fetch';
-
 import './public/analytics';
 import './public/comment-rating';
 import './public/debug';

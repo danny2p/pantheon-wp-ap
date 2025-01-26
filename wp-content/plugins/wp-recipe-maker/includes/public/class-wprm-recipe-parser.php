@@ -52,7 +52,7 @@ class WPRM_Recipe_Parser {
 	 * @since    1.0.0
 	 * @param	mixed $raw Text to parse into an ingredient.
 	 */
-	public static function parse_ingredient( $raw ) {
+	public static function parse_ingredient( $raw, $ignore_missing_name = false ) {
 		// Replace non-breaking spaces with regular ones and trim.
 		$raw = trim( preg_replace( '/\xc2\xa0/', ' ', $raw ) );
 
@@ -143,7 +143,7 @@ class WPRM_Recipe_Parser {
 		$name = trim( $raw );
 
 		// Make sure name is always filled in.
-		if ( ! $name ) {
+		if ( ! $name && ! $ignore_missing_name ) {
 			$amount = '';
 			$unit = '';
 			$name = $raw_original;
@@ -315,7 +315,7 @@ class WPRM_Recipe_Parser {
 
 		// Replace fraction symbols.
 		foreach ( self::$fraction_symbols_map as $unicode => $normal ) {
-			$raw = preg_replace( '/\x{' . $unicode . '}/ u', ' ' . $normal, $raw );
+			$raw = preg_replace( '/\x{' . $unicode . '}/ u', ' ' . $normal . ' ', $raw );
 		}
 
 		// Remove any leftover characters we're not expecting.

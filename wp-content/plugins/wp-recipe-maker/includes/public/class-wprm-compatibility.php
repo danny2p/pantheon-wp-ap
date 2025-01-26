@@ -34,13 +34,12 @@ class WPRM_Compatibility {
 		add_filter( 'litespeed_optimize_js_excludes', array( __CLASS__, 'cache_js_excludes' ) );
 		add_filter( 'rocket_exclude_js', array( __CLASS__, 'cache_js_excludes' ) );
 		add_filter( 'wp-optimize-minify-default-exclusions', array( __CLASS__, 'cache_js_excludes' ) );
+		add_filter( 'perfmatters_minify_js_exclusions', array( __CLASS__, 'cache_js_excludes' ) );
+		add_filter( 'sgo_js_minify_exclude', array( __CLASS__, 'cache_js_excludes' ) );
+		add_filter( 'js_do_concat', array( __CLASS__, 'jetpack_boost_exclude' ), 10, 2 );
 
 		// Jupiter.
 		add_action( 'wp_footer', array( __CLASS__, 'jupiter_assets' ) );
-
-		// Instacart.
-		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'instacart_after_ingredients' ), 9 );
-		add_action( 'wp_footer', array( __CLASS__, 'instacart_assets' ) );
 
 		// Emeals.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'emeals_after_ingredients' ), 9 );
@@ -129,6 +128,23 @@ class WPRM_Compatibility {
 		}
 
 		return $excludes;
+	}
+
+/**
+  * Excludes WPRM assets from Jetpack Boost's concatenation.
+  *
+  * @param bool   $do_concat Whether Jetpack Boost should concatenate the asset.
+  * @param string $handle    The handle of the JavaScript asset.
+  * @return bool  Whether the asset should be excluded from concatenation.
+  */
+ public static function jetpack_boost_exclude( $do_concat, $handle ) {
+		if ( WPRM_Settings::get( 'assets_prevent_caching_optimization' ) ) {
+			if ( 'wprm-public' === $handle || 'wprmp-public' === $handle ) {
+				$do_concat = false;
+			}
+		}
+
+		return $do_concat;
 	}
 
 	/**
@@ -329,34 +345,6 @@ class WPRM_Compatibility {
 	public static function jupiter_assets() {
 		if ( WPRM_Settings::get( 'integration_jupiter' ) ) {
 			echo '<script defer src="https://scripts.jupiter.shop/wp-recipe-maker/bundle.min.js"></script>';
-		}
-	}
-
-	/**
-	 * Add Instacart button after the ingredients.
-	 *
-	 * @since	8.2.0
-	 * @param	mixed $output Current ingredients output.
-	 */
-	public static function instacart_after_ingredients( $output ) {
-		if ( WPRM_Settings::get( 'integration_instacart_agree' ) && WPRM_Settings::get( 'integration_instacart' ) ) {
-			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-shop-instacart]' );
-		}
-
-		return $output;
-	}
-
-	/**
-	 * Instacart assets in footer.
-	 *
-	 * @since    8.2.0
-	 */
-	public static function instacart_assets() {
-		if ( apply_filters( 'wprm_load_instacart', false ) ) {
-			// Make sure to only load JS if they actually agree to the terms.
-			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
-				echo '<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = "https://widgets.instacart.com/widget-bundle-v2.js"; js.async = true; js.dataset.source_origin = "recipemaker"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "standard-instacart-widget-v1");</script>';
-			}
 		}
 	}
 

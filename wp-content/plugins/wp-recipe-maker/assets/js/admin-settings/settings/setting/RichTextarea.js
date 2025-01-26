@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
-// Import doesn't work after minify. Using @import statement in settings.scss file instead.
+import 'react-quill/dist/quill.snow.css';
 
 const SettingRichTextarea = (props) => {
     return (
         <ReactQuill
             className="wprm-setting-input"
+            theme="snow"
             value={props.value}
             onChange={(content, delta, source) => {
                 if('<p></p>' === content || '<p><br></p>' === content || '<p><br/></p>' === content) {

@@ -20,21 +20,25 @@
 class WPRM_Analytics {
 
 	/**
-	 * List of action types with their name.
-	 *
-	 * @since    7.4.0
-	 * @access   private
-	 * @var      mixed $types List of action types.
-	 */
-	private static $types = array();
-
-	/**
 	 * Register actions and filters.
 	 *
 	 * @since    6.7.0
 	 */
 	public static function init() {
-		self::$types = array(
+		add_filter( 'wprm_settings_update', array( __CLASS__, 'check_hh_token_on_settings_update' ), 10, 2 );
+
+		add_action( 'wprm_daily_cron', array( __CLASS__, 'remove_old_actions' ) );
+	}
+
+	
+	/**
+	 * Returns an array of available action types for recipe analytics.
+	*
+	* @since	9.8.0
+	* @return	array Array of action types.
+	*/
+	public static function get_types() {
+		return array(
 			'print' => __( 'Print', 'wp-recipe-maker' ),
 
 			'equipment-link' => __( 'Equipment Link', 'wp-recipe-maker' ),
@@ -52,17 +56,16 @@ class WPRM_Analytics {
 
 			'pin-button' => __( 'Pin Button', 'wp-recipe-maker' ),
 			'facebook-share-button' => __( 'Facebook Share', 'wp-recipe-maker' ),
+			'messenger-share-button' => __( 'Messenger Share', 'wp-recipe-maker' ),
 			'twitter-share-button' => __( 'Twitter Share', 'wp-recipe-maker' ),
+			'bluesky-share-button' => __( 'Bluesky Share', 'wp-recipe-maker' ),
 			'text-share-button' => __( 'Text Share', 'wp-recipe-maker' ),
+			'whatsapp-share-button' => __( 'WhatsApp Share', 'wp-recipe-maker' ),
 			'email-share-button' => __( 'Email Share', 'wp-recipe-maker' ),
 
 			'add-to-collections-button' => __( 'Add to Recipe Collections', 'wp-recipe-maker' ),
 			'add-to-shopping-list-button' => __( 'Add to Quick Access Shopping List', 'wp-recipe-maker' ),
 		);
-
-		add_filter( 'wprm_settings_update', array( __CLASS__, 'check_hh_token_on_settings_update' ), 10, 2 );
-
-		add_action( 'wprm_daily_cron', array( __CLASS__, 'remove_old_actions' ) );
 	}
 
 	/**
@@ -339,14 +342,16 @@ class WPRM_Analytics {
 
 		for ( $i = 7; $i >= 0; $i-- ) {
 			$datetime = new DateTime( $i . ' days ago' );
-			$date = $datetime->format( $date_format );
+
+			$date_display = $datetime->format( $date_format );
+			$date_database = $datetime->format( 'Y-m-d' );
 
 			$per_day_date = array(
-				'date' => $date,
+				'date' => $date_display,
 				'total' => 0,
 			);
 
-			$actions = WPRM_Analytics_Database::get_aggregated_actions_for( $date );
+			$actions = WPRM_Analytics_Database::get_aggregated_actions_for( $date_database );
 
 			foreach ( $actions as $action ) {
 				$total = intval( $action->total );
@@ -402,12 +407,13 @@ class WPRM_Analytics {
 
 		// Get names for top types.
 		$top_types = array();
+		$types = self::get_types();
 
 		foreach ( $per_type as $type => $interactions ) {
-			if ( array_key_exists( $type, self::$types ) ) {
+			if ( array_key_exists( $type, $types ) ) {
 				$top_types[] = array(
 					'id' => $type,
-					'name' => self::$types[ $type ],
+					'name' => $types[ $type ],
 					'total' => $interactions['total'],
 					'unique' => $interactions['unique'],
 				);

@@ -28,7 +28,7 @@ class WPRM_i18n {
 	 * @since    1.0.0
 	 */
 	public static function init() {
-		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin_textdomain' ) );
+		add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
 	}
 
 	/**

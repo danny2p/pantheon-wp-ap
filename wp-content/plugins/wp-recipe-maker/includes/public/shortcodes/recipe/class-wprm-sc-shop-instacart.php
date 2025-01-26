@@ -25,6 +25,15 @@ class WPRM_SC_Shop_Instacart extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'style' => array(
+				'default' => 'dark',
+				'type' => 'dropdown',
+				'options' => array(
+					'dark' => 'Dark',
+					'light' => 'Light',
+					'white' => 'White',
+				),
+			),
 		);
 
 		self::$attributes = $atts;
@@ -47,29 +56,31 @@ class WPRM_SC_Shop_Instacart extends WPRM_Template_Shortcode {
 			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 
-		// Placeholder in template editor.
-		if ( $atts['is_template_editor_preview'] ) {
-			if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
-				return '<div class="wprm-template-editor-premium-only">' . __( 'Placeholder for the Instacart button', 'wp-recipe-maker' ) . '</div>';
+		// Check if agreed to Instacart Button terms.
+		if ( ! WPRM_Settings::get( 'integration_instacart_agree' ) ) {
+			if ( $atts['is_template_editor_preview'] ) {
+				return '<div class="wprm-template-editor-premium-only">' . __( 'Make sure to agree to the Instacart terms on the WP Recipe Maker > Settings > Integrations page first', 'wp-recipe-maker' ) . '</div>';
 			} else {
-				return '<div class="wprm-template-editor-premium-only">' . __( 'Make sure to agree with the terms on the WP Recipe Maker > Settings > Integrations page', 'wp-recipe-maker' ) . '</div>';
+				return '';
 			}
 		}
 
-		// Make sure Instacart integration gets loaded.
-		add_filter( 'wprm_load_instacart', '__return_true' );
+		// Output.
+		$classes = array(
+			'wprm-recipe-shop-instacart',
+			'wprm-recipe-shop-instacart-' . $atts['style'],
+		);
 
-		// Optional affiliate ID output.
-		$affiliate_attributes = '';
-		$affiliate_id = WPRM_Settings::get( 'integration_instacart_affiliate_id' );
-
-		if ( $affiliate_id ) {
-			$affiliate_attributes = ' data-affiliate_id="' . esc_attr( $affiliate_id ) . '" data-affiliate_platform="recipe_widget"';
+		// Hide by default if not in Template Editor.
+		$style = '';
+		if ( ! $atts['is_template_editor_preview'] ) {
+			$style .= 'visibility: hidden;';
 		}
 
+		// Button.
+		$button = '<img src="' . WPRM_URL . 'assets/icons/integrations/instacart.svg" alt="" /><span>Get Recipe Ingredients</span>';
 
-		// Actual output.
-		$output = '<div id="shop-with-instacart-v1"' . $affiliate_attributes . '></div>';
+		$output = '<div role="button" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $button . '</div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

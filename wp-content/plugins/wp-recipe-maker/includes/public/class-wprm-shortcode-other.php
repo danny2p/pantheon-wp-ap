@@ -111,7 +111,7 @@ class WPRM_Shortcode_Other {
 		$data = '';
 		$data .= ' data-value="' . esc_attr( $value ) .  '"';
 		$data .= ' data-unit="' . esc_attr( $unit ) .  '"';
-		$data .= ' data-tooltip="' . esc_attr( $help ) .  '"';
+		$data .= WPRM_Tooltip::get_tooltip_data( $help );
 
 		// Construct output.
 		$output = '';
@@ -179,7 +179,7 @@ class WPRM_Shortcode_Other {
 
 				if ( $tooltip ) { 
 					$classes[] = 'wprm-tooltip';
-					$data_tooltip = ' data-tooltip="' . esc_attr( $tooltip ) . '"';
+					$data_tooltip = WPRM_Tooltip::get_tooltip_data( $tooltip );
 				}
 
 				$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $data_tooltip . '>' . $name . '</span>';

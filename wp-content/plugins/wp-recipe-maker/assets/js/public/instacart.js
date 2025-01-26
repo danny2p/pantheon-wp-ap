@@ -26,12 +26,18 @@ window.WPRecipeMaker.instacart = {
 	onClickButton: ( el, e ) => {
         e.preventDefault()
 
+        // Prevent double clicks.
+        if ( el.classList.contains( 'wprm-recipe-shop-instacart-loading' ) ) {
+            return;
+        }
+
         // Get recipe ID.
         const recipeId = parseInt( el.dataset.recipe );
 
         if ( recipeId ) {
+            el.classList.add( 'wprm-recipe-shop-instacart-loading' );
+
             window.WPRecipeMaker.manager.getRecipe( recipeId ).then( ( recipe ) => {
-                console.log( recipe );
                 if ( recipe ) {
                     const servingsSystemCombination = '' + recipe.data.currentServings + '-' + recipe.data.currentSystem;
                     let ingredients = [];
@@ -41,8 +47,6 @@ window.WPRecipeMaker.instacart = {
                         // Get current ingredients, maybe in a different system and after adjusting servings.
                         const currentIngredients = window.WPRecipeMaker.managerPremiumIngredients.getCurrentIngredients( recipe );
                         const currentSystemIngredients = currentIngredients.map( ingredient => ingredient[`unit-system-${ recipe.data.currentSystem }`] );
-
-                        console.log( 'currentSystemIngredients', currentSystemIngredients );
 
                         for ( let ingredient of currentSystemIngredients ) {
                             ingredients.push( {
@@ -65,12 +69,9 @@ window.WPRecipeMaker.instacart = {
                         recipeId,
                         title: recipe.data.name,
                         image_url: recipe.data.image_url,
-                        link_type: 'recipe',
                         ingredients,
                         servingsSystemCombination,
                     };
-
-                    console.log( 'instacart data', data );
 
                     fetch( `${wprm_public.endpoints.integrations}/instacart`, {
                         method: 'POST',
@@ -86,12 +87,15 @@ window.WPRecipeMaker.instacart = {
                         } else {
                             return false;
                         }
-                    } ).then( ( json ) => {
-                        console.log( json );
-                        if ( json ) {
-                            if ( json.hasOwnProperty( 'products_link_url' ) ) {
-                                window.open( json.products_link_url, '_blank' );
-                            }
+                    } ).then( ( link ) => {
+                        // Remove loading class.
+                        el.classList.remove( 'wprm-recipe-shop-instacart-loading' );
+
+                        // Open link in new tab.
+                        if ( link ) {
+                            window.open( link, '_blank' );
+                        } else {
+                            alert( 'Something went wrong. Please try again later.' );
                         }
                     } );
                 }

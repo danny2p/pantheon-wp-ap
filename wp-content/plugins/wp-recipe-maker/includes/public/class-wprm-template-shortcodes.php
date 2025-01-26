@@ -70,7 +70,7 @@ class WPRM_Template_Shortcodes {
 	 * @since    3.2.0
 	 */
 	public static function init() {
-		self::load_shortcodes();
+		add_action( 'after_setup_theme', array( __CLASS__, 'load_shortcodes' ), 1 );
 
 		add_action( 'the_post', array( __CLASS__, 'reset_current_recipe_id' ) );
 	}
@@ -162,7 +162,7 @@ class WPRM_Template_Shortcodes {
 	 *
 	 * @since    3.2.0
 	 */
-	private static function load_shortcodes() {
+	public static function load_shortcodes() {
 		$dirs = array(
 			WPRM_DIR . 'includes/public/shortcodes/deprecated',
 			WPRM_DIR . 'includes/public/shortcodes/general',

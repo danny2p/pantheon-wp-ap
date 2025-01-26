@@ -8,7 +8,6 @@ const contentShortcodes = [
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
 const ignoreShortcodes = [
     'wprm-recipe-my-emissions-label',
-    'wprm-recipe-shop-instacart-api',
 ];
 
 // Sort shortcodes for "Add Blocks" section.
@@ -96,8 +95,11 @@ const shortcodeGroups = {
             'wprm-recipe-pin',
             'wprm-recipe-email-share',
             'wprm-recipe-facebook-share',
+            'wprm-recipe-messenger-share',
             'wprm-recipe-twitter-share',
+            'wprm-recipe-bluesky-share',
             'wprm-recipe-text-share',
+            'wprm-recipe-whatsapp-share',
         ],
     },
     integration: {

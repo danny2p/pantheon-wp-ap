@@ -5,7 +5,7 @@ import '../../../css/admin/modal/recipe.scss';
 
 import Api from 'Shared/Api';
 import { __wprm } from 'Shared/Translations';
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import EditRecipe from './edit';
 import TextImport from './text-import';

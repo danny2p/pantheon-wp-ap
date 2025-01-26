@@ -160,6 +160,13 @@ $recipe_snippets = array(
 			'name' => __( 'Advanced', 'wp-recipe-maker' ),
 			'settings' => array(
 				array(
+					'id' => 'jump_output_hash',
+					'name' => __( 'Add Hash to end of URL when jumping', 'wp-recipe-maker' ),
+					'description' => __( 'Will add something like #recipe at the end of the URL when using the jump button', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+				array(
 					'id' => 'jump_to_recipe_use_custom_hash',
 					'name' => __( 'Use Custom Hash for First Recipe on Page', 'wp-recipe-maker' ),
 					'description' => __( 'Enable to have the "Jump to Recipe" button in the snippet template jump to #recipe instead of something like #wprm-recipe-container-46783', 'wp-recipe-maker' ),

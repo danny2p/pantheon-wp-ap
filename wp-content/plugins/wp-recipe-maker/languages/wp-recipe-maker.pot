@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Recipe Maker 1.10.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-recipe-maker\n"
-"POT-Creation-Date: 2024-10-22 08:25+0000\n"
+"POT-Creation-Date: 2025-01-22 09:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,21 +58,21 @@ msgid_plural "%d stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:106
+#: includes/admin/class-wprm-marketing.php:126
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:108
+#: includes/admin/class-wprm-marketing.php:128
 #, php-format
 msgid "%s hour"
 msgid_plural "%s hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wprm-marketing.php:110
+#: includes/admin/class-wprm-marketing.php:130
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: templates/settings/group-integrations.php:94
+#: templates/settings/group-integrations.php:111
 msgid "Activate Chicory"
 msgstr ""
 
@@ -301,6 +301,10 @@ msgid ""
 "Add glossary terms through the WP Recipe Maker > Manage > Features > "
 "Glossary Terms page. Wherever you insert them, a tooltip can show up to "
 "explain these terms to your readers."
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:164
+msgid "Add Hash to end of URL when jumping"
 msgstr ""
 
 #: templates/admin/translations.php:375
@@ -395,11 +399,11 @@ msgstr ""
 msgid "Add to Collection"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:60
+#: includes/public/class-wprm-analytics.php:67
 msgid "Add to Quick Access Shopping List"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:59
+#: includes/public/class-wprm-analytics.php:66
 msgid "Add to Recipe Collections"
 msgstr ""
 
@@ -417,7 +421,7 @@ msgstr ""
 msgid "Added flag for moderation"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:44
+#: includes/public/class-wprm-analytics.php:48
 msgid "Adjust Servings"
 msgstr ""
 
@@ -549,6 +553,10 @@ msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:224
 msgid "All ratings, with or without comment text"
+msgstr ""
+
+#: includes/admin/class-wprm-manage-posts.php:48
+msgid "All recipe types"
 msgstr ""
 
 #: templates/settings/group-media.php:70 templates/settings/group-media.php:83
@@ -803,7 +811,7 @@ msgstr ""
 msgid "Are you sure you want to merge"
 msgstr ""
 
-#: includes/public/class-wprm-assets.php:241
+#: includes/public/class-wprm-assets.php:244
 msgid "Are you sure you want to remove this recipe?"
 msgstr ""
 
@@ -878,11 +886,11 @@ msgstr ""
 msgid "Automatically add Instacart Button"
 msgstr ""
 
-#: templates/settings/group-integrations.php:73
+#: templates/settings/group-integrations.php:90
 msgid "Automatically add Shop Ingredients with Walmart Button"
 msgstr ""
 
-#: templates/settings/group-integrations.php:138
+#: templates/settings/group-integrations.php:155
 msgid "Automatically add SmartWithFood Button"
 msgstr ""
 
@@ -939,7 +947,7 @@ msgstr ""
 
 #: templates/settings/group-template-legacy.php:162 
 #: templates/settings/group-custom-style.php:56 
-#: templates/settings/group-custom-style.php:91 
+#: templates/settings/group-custom-style.php:139 
 #: templates/settings/group-recipe-snippets.php:127
 msgid "Background Color"
 msgstr ""
@@ -966,6 +974,10 @@ msgstr ""
 
 #: templates/settings/group-recipe-ratings.php:538
 msgid "Between regular comments"
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:61
+msgid "Bluesky Share"
 msgstr ""
 
 #: templates/admin/translations.php:368
@@ -1008,7 +1020,7 @@ msgstr ""
 msgid "Bulk Edit"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:109
+#: templates/settings/group-custom-style.php:157
 msgid "Button Background Color"
 msgstr ""
 
@@ -1016,7 +1028,7 @@ msgstr ""
 msgid "Button Style"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:115
+#: templates/settings/group-custom-style.php:163
 msgid "Button Text Color"
 msgstr ""
 
@@ -1117,7 +1129,7 @@ msgstr ""
 msgid "Change Details"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:102
+#: includes/public/class-wprm-changelog.php:86
 msgid "Change detected that you wanted to be notified about."
 msgstr ""
 
@@ -1206,9 +1218,11 @@ msgstr ""
 msgid "Check out %link%!"
 msgstr ""
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-bluesky-share.php:115 
 #: includes/public/shortcodes/recipe/class-wprm-sc-email-share.php:115 
 #: includes/public/shortcodes/recipe/class-wprm-sc-text-share.php:115 
-#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:115
+#: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:115 
+#: includes/public/shortcodes/recipe/class-wprm-sc-whatsapp-share.php:115
 msgid "Check out this recipe!"
 msgstr ""
 
@@ -1223,14 +1237,14 @@ msgid ""
 "combination with membership plugins."
 msgstr ""
 
-#: templates/settings/group-integrations.php:114
+#: templates/settings/group-integrations.php:131
 msgid ""
 "Chicory's in-recipe ads will appear within and below your recipes' "
 "ingredient lists, allowing you to secure earnings from relevant grocery "
 "advertisers."
 msgstr ""
 
-#: templates/settings/group-integrations.php:103
+#: templates/settings/group-integrations.php:120
 msgid ""
 "Chicory's Shoppable Recipe Button will appear below your recipes' ingredient "
 "lists, allowing users to cart the ingredients for your recipes at 70+ "
@@ -1281,7 +1295,7 @@ msgstr ""
 msgid "Click on the stars to vote!"
 msgstr ""
 
-#: templates/settings/group-integrations.php:87
+#: templates/settings/group-integrations.php:104
 msgid ""
 "Click the button to the right to register directly with Chicory and set up "
 "revenue payment. Please note that enabling the Activate Chicory toggle below "
@@ -1289,7 +1303,7 @@ msgid ""
 "can enable Chicory directly through your Mediavine dashboard."
 msgstr ""
 
-#: templates/settings/group-integrations.php:158
+#: templates/settings/group-integrations.php:175
 msgid "Click the button to the right to request the free compatibility check."
 msgstr ""
 
@@ -1359,7 +1373,7 @@ msgstr ""
 msgid "Comma or parentheses, whichever comes first"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:47 
+#: includes/public/class-wprm-analytics.php:51 
 #: includes/public/class-wprm-comment-moderation.php:138
 msgid "Comment"
 msgstr ""
@@ -1438,7 +1452,7 @@ msgstr ""
 msgid "Container Style"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:103
+#: templates/settings/group-custom-style.php:151
 msgid "Content Text Color"
 msgstr ""
 
@@ -1609,7 +1623,7 @@ msgstr ""
 msgid "cups"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:315
+#: includes/admin/class-wprm-modal.php:312
 msgid "Custom author name"
 msgstr ""
 
@@ -1634,8 +1648,8 @@ msgstr ""
 msgid "Custom Fields"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:171 
-#: templates/settings/group-recipe-snippets.php:192
+#: templates/settings/group-recipe-snippets.php:178 
+#: templates/settings/group-recipe-snippets.php:199
 msgid "Custom Hash"
 msgstr ""
 
@@ -2170,12 +2184,16 @@ msgid ""
 "line."
 msgstr ""
 
-#: templates/settings/group-integrations.php:160
+#: templates/settings/group-integrations.php:177
 msgid "Do the Compatibility Check"
 msgstr ""
 
 #: templates/admin/translations.php:39
 msgid "Documentation in our knowledge base"
+msgstr ""
+
+#: includes/admin/class-wprm-manage-posts.php:49
+msgid "Does not have a recipe"
 msgstr ""
 
 #: templates/admin/translations.php:574
@@ -2212,15 +2230,15 @@ msgstr ""
 msgid "Don't rate this recipe"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:313 
+#: includes/admin/class-wprm-modal.php:310 
 #: templates/settings/group-recipe-defaults.php:52 
 #: templates/settings/group-nutrition-label.php:36
 msgid "Don't show"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:347 
-#: includes/admin/class-wprm-modal.php:380 
-#: includes/admin/class-wprm-modal.php:413 
+#: includes/admin/class-wprm-modal.php:344 
+#: includes/admin/class-wprm-modal.php:377 
+#: includes/admin/class-wprm-modal.php:410 
 #: templates/settings/group-links.php:120 
 #: templates/settings/group-links.php:158 
 #: templates/settings/group-links.php:200
@@ -2233,6 +2251,22 @@ msgstr ""
 
 #: includes/public/class-wprm-taxonomies.php:234
 msgid "Drinks"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:81
+msgid "Dropdown Background Color"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:91
+msgid "Dropdown Border Color"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:111
+msgid "Dropdown Font Size"
+msgstr ""
+
+#: templates/settings/group-custom-style.php:101
+msgid "Dropdown Text Color"
 msgstr ""
 
 #: templates/admin/translations.php:621
@@ -2324,7 +2358,7 @@ msgstr ""
 msgid "Email our support team"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:57
+#: includes/public/class-wprm-analytics.php:64
 msgid "Email Share"
 msgstr ""
 
@@ -2349,11 +2383,11 @@ msgstr ""
 msgid "Enable Changelog"
 msgstr ""
 
-#: templates/settings/group-integrations.php:113
+#: templates/settings/group-integrations.php:130
 msgid "Enable Chicory In-Recipe Ads"
 msgstr ""
 
-#: templates/settings/group-integrations.php:102
+#: templates/settings/group-integrations.php:119
 msgid "Enable Chicory Shoppable Recipe Button"
 msgstr ""
 
@@ -2403,7 +2437,7 @@ msgid ""
 "page to Pinterest."
 msgstr ""
 
-#: templates/settings/group-integrations.php:95
+#: templates/settings/group-integrations.php:112
 msgid ""
 "Enable to activate Chicory on your site after registering by clicking the "
 "sign-up link above."
@@ -2415,6 +2449,11 @@ msgid ""
 "following link for more information:"
 msgstr ""
 
+#: templates/settings/group-custom-style.php:75
+msgid ""
+"Enable to apply custom styling on any dropdowns that appear in our tooltips."
+msgstr ""
+
 #: templates/settings/group-integrations.php:44
 msgid ""
 "Enable to automatically output the Instacart Shoppable Recipe button after "
@@ -2422,14 +2461,14 @@ msgid ""
 "the Template Editor."
 msgstr ""
 
-#: templates/settings/group-integrations.php:74
+#: templates/settings/group-integrations.php:91
 msgid ""
 "Enable to automatically output the Shop Ingredients with Walmart button "
 "after the ingredients section. Alternatively, add the button in the Template "
 "Editor."
 msgstr ""
 
-#: templates/settings/group-integrations.php:139
+#: templates/settings/group-integrations.php:156
 msgid ""
 "Enable to automatically output the Smart with Food button after the "
 "ingredients section. Alternatively, add the button in the Template Editor."
@@ -2451,13 +2490,13 @@ msgid ""
 "forms"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:165
+#: templates/settings/group-recipe-snippets.php:172
 msgid ""
 "Enable to have the \"Jump to Recipe\" button in the snippet template jump to "
 "#recipe instead of something like #wprm-recipe-container-46783"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:186
+#: templates/settings/group-recipe-snippets.php:193
 msgid ""
 "Enable to have the \"Jump to Video\" button in the snippet template jump to "
 "#recipe-video instead of something like #wprm-recipe-video-container-46783"
@@ -2493,7 +2532,7 @@ msgstr ""
 msgid "Equipment Affiliate Fields"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:40 
+#: includes/public/class-wprm-analytics.php:44 
 #: templates/admin/translations.php:145
 msgid "Equipment Link"
 msgstr ""
@@ -2589,7 +2628,7 @@ msgstr ""
 msgid "extra virgin"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:54
+#: includes/public/class-wprm-analytics.php:58
 msgid "Facebook Share"
 msgstr ""
 
@@ -2649,7 +2688,7 @@ msgstr ""
 msgid "Find Ingredient Units"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:104
+#: includes/public/class-wprm-changelog.php:88
 msgid "Find out more"
 msgstr ""
 
@@ -2765,7 +2804,7 @@ msgstr ""
 msgid "Follow this link to print all of the selected recipes:"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:84
+#: templates/settings/group-custom-style.php:132
 msgid "Font Size"
 msgstr ""
 
@@ -2859,7 +2898,7 @@ msgstr ""
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
 #: templates/admin/translations.php:584 
-#: includes/public/deprecated/class-wprm-template-helper.php:238
+#: includes/public/deprecated/class-wprm-template-helper.php:242
 msgid "from"
 msgstr ""
 
@@ -2927,10 +2966,6 @@ msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-emeals.php:59
 msgid "Get ingredients with"
-msgstr ""
-
-#: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart-api.php:43
-msgid "Get ingredients with Instacart"
 msgstr ""
 
 #: templates/admin/translations.php:37
@@ -3045,12 +3080,28 @@ msgstr ""
 msgid "Handle Archive Pages Output"
 msgstr ""
 
+#: includes/admin/class-wprm-manage-posts.php:52
+msgid "Has a food recipe"
+msgstr ""
+
+#: includes/admin/class-wprm-manage-posts.php:53
+msgid "Has a how-to instruction"
+msgstr ""
+
+#: includes/admin/class-wprm-manage-posts.php:54
+msgid "Has a recipe of the \"other\" type"
+msgstr ""
+
 #: templates/admin/translations.php:573
 msgid "Has an embedded video"
 msgstr ""
 
 #: templates/admin/translations.php:572
 msgid "Has an uploaded video"
+msgstr ""
+
+#: includes/admin/class-wprm-manage-posts.php:50
+msgid "Has any recipe"
 msgstr ""
 
 #: templates/admin/translations.php:571
@@ -3073,6 +3124,10 @@ msgstr ""
 msgid "Has Image"
 msgstr ""
 
+#: includes/admin/class-wprm-manage-posts.php:56
+msgid "Has more than 1 recipe"
+msgstr ""
+
 #: templates/admin/translations.php:463
 msgid "Has Parent Post"
 msgstr ""
@@ -3085,13 +3140,17 @@ msgstr ""
 msgid "Has Recipe Image"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:172
+#: includes/admin/class-wprm-manage-posts.php:57
+msgid "Has roundup recipe items"
+msgstr ""
+
+#: templates/settings/group-recipe-snippets.php:179
 msgid ""
 "Hash to use for the first recipe on the page. This will become part of the "
 "URL after clicking the \"Jump to Recipe\" button."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:193
+#: templates/settings/group-recipe-snippets.php:200
 msgid ""
 "Hash to use for the first video on the page. This will become part of the "
 "URL after clicking the \"Jump to Recipe\" button."
@@ -3534,7 +3593,7 @@ msgstr ""
 msgid "Ingredient Images"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:41 
+#: includes/public/class-wprm-analytics.php:45 
 #: templates/admin/translations.php:139
 msgid "Ingredient Link"
 msgstr ""
@@ -3566,7 +3625,7 @@ msgstr ""
 msgid "Ingredient Unit"
 msgstr ""
 
-#: includes/admin/class-wprm-notices.php:95 
+#: includes/public/class-wprm-notices.php:132 
 #: templates/admin/translations.php:152
 msgid "Ingredient Units"
 msgstr ""
@@ -3621,7 +3680,7 @@ msgid ""
 "appear. The term ID can be found through the Manage page."
 msgstr ""
 
-#: templates/settings/group-integrations.php:54
+#: templates/settings/group-integrations.php:71
 msgid "Instacart Tastemakers ID"
 msgstr ""
 
@@ -3650,7 +3709,7 @@ msgstr ""
 msgid "Instruction is part of the main video"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:42
+#: includes/public/class-wprm-analytics.php:46
 msgid "Instruction Link"
 msgstr ""
 
@@ -3755,7 +3814,7 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:50 
+#: includes/public/class-wprm-analytics.php:54 
 #: includes/public/class-wprm-blocks.php:215 
 #: templates/admin/translations.php:318 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump.php:43 
@@ -3769,7 +3828,7 @@ msgid ""
 "comments are not available"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:51 
+#: includes/public/class-wprm-analytics.php:55 
 #: includes/public/class-wprm-blocks.php:230 
 #: templates/admin/translations.php:319 
 #: includes/public/shortcodes/recipe/class-wprm-sc-jump-video.php:43 
@@ -4134,10 +4193,10 @@ msgid ""
 "Integrations page"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:55
+#: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:62
 msgid ""
-"Make sure to agree with the terms on the WP Recipe Maker > Settings > "
-"Integrations page"
+"Make sure to agree to the Instacart terms on the WP Recipe Maker > Settings >"
+" Integrations page first"
 msgstr ""
 
 #: templates/settings/group-recipe-snippets.php:53
@@ -4256,6 +4315,10 @@ msgstr ""
 msgid ""
 "Message to show when there was a problem with rating the recipe. Make empty "
 "to not show anything."
+msgstr ""
+
+#: includes/public/class-wprm-analytics.php:59
+msgid "Messenger Share"
 msgstr ""
 
 #: templates/admin/translations.php:245
@@ -4404,7 +4467,7 @@ msgstr ""
 msgid "Name for this video part"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:314 
+#: includes/admin/class-wprm-modal.php:311 
 #: templates/settings/group-recipe-defaults.php:53
 msgid "Name of post author"
 msgstr ""
@@ -4721,7 +4784,7 @@ msgstr ""
 msgid "Open internal links in a new tab"
 msgstr ""
 
-#: includes/public/deprecated/class-wprm-template-helper.php:343 
+#: includes/public/deprecated/class-wprm-template-helper.php:347 
 #: includes/public/shortcodes/recipe/class-wprm-sc-instructions.php:655
 msgid "Open larger version of the instruction image"
 msgstr ""
@@ -4793,7 +4856,7 @@ msgstr ""
 msgid "Optional rel attribute to add to custom links by default."
 msgstr ""
 
-#: templates/settings/group-integrations.php:55
+#: templates/settings/group-integrations.php:72
 msgid ""
 "Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms "
 "apply."
@@ -5045,7 +5108,7 @@ msgstr ""
 msgid "pieces"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:53
+#: includes/public/class-wprm-analytics.php:57
 msgid "Pin Button"
 msgstr ""
 
@@ -5099,10 +5162,6 @@ msgstr ""
 msgid "Placeholder for the Emeals button"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart.php:53
-msgid "Placeholder for the Instacart button"
-msgstr ""
-
 #: includes/public/shortcodes/general/class-wprm-sc-call-to-action.php:184
 msgid "Please consider %link%!"
 msgstr ""
@@ -5115,7 +5174,7 @@ msgstr ""
 msgid "Plural Name"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:79
+#: templates/settings/group-custom-style.php:127
 msgid "Popup Modal"
 msgstr ""
 
@@ -5209,7 +5268,7 @@ msgstr ""
 msgid "Previewing recipe ID:"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:38 templates/public/print.php:82 
+#: includes/public/class-wprm-analytics.php:42 templates/public/print.php:82 
 #: includes/public/deprecated/class-wprm-template-helper.php:44
 msgid "Print"
 msgstr ""
@@ -5410,7 +5469,6 @@ msgid ""
 "used for collecting favorites, meal planning and much more!"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:38 
 #: templates/settings/group-changelog.php:38
 msgid "Recipe Created"
 msgstr ""
@@ -5427,12 +5485,10 @@ msgstr ""
 msgid "Recipe Date"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:41 
 #: templates/settings/group-changelog.php:41
 msgid "Recipe Deleted"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:39 
 #: templates/settings/group-changelog.php:39
 msgid "Recipe Edited"
 msgstr ""
@@ -5599,7 +5655,6 @@ msgstr ""
 msgid "Recipe Times"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:40 
 #: templates/settings/group-changelog.php:40
 msgid "Recipe Trashed"
 msgstr ""
@@ -5681,7 +5736,7 @@ msgstr ""
 msgid "Regular Font"
 msgstr ""
 
-#: templates/settings/group-integrations.php:81
+#: templates/settings/group-integrations.php:98
 msgid "Relevant In-Recipe Ads and Shoppability with Chicory"
 msgstr ""
 
@@ -5806,7 +5861,7 @@ msgstr ""
 msgid "required"
 msgstr ""
 
-#: includes/class-wp-recipe-maker.php:240
+#: includes/class-wp-recipe-maker.php:243
 msgid "Required by WP Recipe Maker Premium"
 msgstr ""
 
@@ -5910,7 +5965,7 @@ msgstr ""
 msgid "Salad"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:316 
+#: includes/admin/class-wprm-modal.php:313 
 #: templates/settings/group-recipe-defaults.php:55
 msgid "Same author for every recipe"
 msgstr ""
@@ -6169,9 +6224,18 @@ msgstr ""
 msgid "Share by Text"
 msgstr ""
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-bluesky-share.php:43 
+#: includes/public/shortcodes/recipe/class-wprm-sc-bluesky-share.php:187
+msgid "Share on Bluesky"
+msgstr ""
+
 #: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:43 
 #: includes/public/shortcodes/recipe/class-wprm-sc-facebook-share.php:179
 msgid "Share on Facebook"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-messenger-share.php:190
+msgid "Share on Messenger"
 msgstr ""
 
 #: includes/public/shortcodes/recipe/class-wprm-sc-twitter-share.php:43 
@@ -6179,12 +6243,21 @@ msgstr ""
 msgid "Share on Twitter"
 msgstr ""
 
+#: includes/public/shortcodes/recipe/class-wprm-sc-messenger-share.php:43
+msgid "Share with Messenger"
+msgstr ""
+
+#: includes/public/shortcodes/recipe/class-wprm-sc-whatsapp-share.php:43 
+#: includes/public/shortcodes/recipe/class-wprm-sc-whatsapp-share.php:215
+msgid "Share with WhatsApp"
+msgstr ""
+
 #: templates/settings/group-recipe-ratings.php:297
 msgid "Share your thoughts! What did you like about this recipe?"
 msgstr ""
 
-#: includes/public/shortcodes/recipe/class-wprm-sc-shop-instacart-api.php:177
-msgid "Shop ingredients with Instacart"
+#: templates/settings/group-integrations.php:54
+msgid "Shop Collections Shopping List"
 msgstr ""
 
 #: templates/settings/group-integrations.php:29 
@@ -6192,7 +6265,7 @@ msgstr ""
 msgid "Shoppable Recipes with Instacart"
 msgstr ""
 
-#: templates/settings/group-integrations.php:67
+#: templates/settings/group-integrations.php:84
 msgid "Shoppable Recipes with Walmart"
 msgstr ""
 
@@ -6235,6 +6308,11 @@ msgstr ""
 
 #: templates/settings/group-nutrition-label.php:39
 msgid "Show - Aligned Right"
+msgstr ""
+
+#: templates/settings/group-integrations.php:55
+msgid ""
+"Show a button to shop the shopping list in the Recipe Collections feature."
 msgstr ""
 
 #: templates/settings/group-private-notes.php:37
@@ -6322,7 +6400,7 @@ msgstr ""
 msgid "Side Dish"
 msgstr ""
 
-#: templates/settings/group-integrations.php:89
+#: templates/settings/group-integrations.php:106
 msgid "Sign Up with Chicory"
 msgstr ""
 
@@ -6370,11 +6448,11 @@ msgstr ""
 msgid "Smaller"
 msgstr ""
 
-#: templates/settings/group-integrations.php:125
+#: templates/settings/group-integrations.php:142
 msgid "SmartWithFood"
 msgstr ""
 
-#: templates/settings/group-integrations.php:131
+#: templates/settings/group-integrations.php:148
 msgid "SmartWithFood Token"
 msgstr ""
 
@@ -6394,7 +6472,7 @@ msgstr ""
 msgid "Social Sharing"
 msgstr ""
 
-#: templates/settings/group-custom-style.php:80
+#: templates/settings/group-custom-style.php:128
 msgid ""
 "Some plugin features will make a modal pop up for users to interact with. "
 "With these settings you can change how that modal will appear to match the "
@@ -6527,6 +6605,10 @@ msgstr ""
 msgid ""
 "Store actions locally in your own database. Does not send data to other "
 "servers."
+msgstr ""
+
+#: templates/settings/group-custom-style.php:74
+msgid "Style dropdown in tooltip"
 msgstr ""
 
 #: templates/settings/group-glossary-terms.php:95
@@ -6805,7 +6887,7 @@ msgstr ""
 msgid "Text Labels"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:56
+#: includes/public/class-wprm-analytics.php:62
 msgid "Text Share"
 msgstr ""
 
@@ -6923,7 +7005,7 @@ msgstr ""
 msgid "The roundup item will only show up if it has the \"Published\" status."
 msgstr ""
 
-#: templates/settings/group-integrations.php:132
+#: templates/settings/group-integrations.php:149
 msgid ""
 "The token provided by SmartWithFood. Required to make the button show up."
 msgstr ""
@@ -7068,7 +7150,7 @@ msgstr ""
 msgid "Title for the modal that shows the rating details."
 msgstr ""
 
-#: templates/settings/group-custom-style.php:97
+#: templates/settings/group-custom-style.php:145
 msgid "Title Text Color"
 msgstr ""
 
@@ -7183,7 +7265,7 @@ msgstr ""
 msgid "tsps"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:55
+#: includes/public/class-wprm-analytics.php:60
 msgid "Twitter Share"
 msgstr ""
 
@@ -7238,7 +7320,7 @@ msgstr ""
 msgid "Unit"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:45 
+#: includes/public/class-wprm-analytics.php:49 
 #: templates/settings/group-adjustable-servings.php:74 
 #: templates/settings/group-unit-conversion.php:15 
 #: templates/admin/translations.php:206 
@@ -7340,11 +7422,11 @@ msgid ""
 "instruction images open in a lightbox after clicking on them."
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:164
+#: templates/settings/group-recipe-snippets.php:171
 msgid "Use Custom Hash for First Recipe on Page"
 msgstr ""
 
-#: templates/settings/group-recipe-snippets.php:185
+#: templates/settings/group-recipe-snippets.php:192
 msgid "Use Custom Hash for First Video on Page"
 msgstr ""
 
@@ -7364,10 +7446,10 @@ msgstr ""
 msgid "Use decimal point - 0.5"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:324 
-#: includes/admin/class-wprm-modal.php:357 
-#: includes/admin/class-wprm-modal.php:390 
-#: includes/admin/class-wprm-modal.php:423 templates/admin/translations.php:126
+#: includes/admin/class-wprm-modal.php:321 
+#: includes/admin/class-wprm-modal.php:354 
+#: includes/admin/class-wprm-modal.php:387 
+#: includes/admin/class-wprm-modal.php:420 templates/admin/translations.php:126
 msgid "Use Default"
 msgstr ""
 
@@ -7424,9 +7506,9 @@ msgstr ""
 msgid "Use Mixed Fractions"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:348 
-#: includes/admin/class-wprm-modal.php:381 
-#: includes/admin/class-wprm-modal.php:414 
+#: includes/admin/class-wprm-modal.php:345 
+#: includes/admin/class-wprm-modal.php:378 
+#: includes/admin/class-wprm-modal.php:411 
 #: templates/settings/group-links.php:121 
 #: templates/settings/group-links.php:159 
 #: templates/settings/group-links.php:201
@@ -7501,9 +7583,9 @@ msgstr ""
 msgid "Use smooth scrolling when jumping to the comment form."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:349 
-#: includes/admin/class-wprm-modal.php:382 
-#: includes/admin/class-wprm-modal.php:415 
+#: includes/admin/class-wprm-modal.php:346 
+#: includes/admin/class-wprm-modal.php:379 
+#: includes/admin/class-wprm-modal.php:412 
 #: templates/settings/group-links.php:122 
 #: templates/settings/group-links.php:160 
 #: templates/settings/group-links.php:202
@@ -7642,25 +7724,25 @@ msgstr ""
 msgid "Used in the recipe metadata. Should be an image of the completed dish."
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:236
+#: includes/admin/class-wprm-modal.php:233
 msgid ""
 "Used in the recipe metadata. Should describe the recipe, but not fit in "
 "\"Courses\" or \"Cuisines\". Examples: summer, quick, nutmeg crust"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:229
+#: includes/admin/class-wprm-modal.php:226
 msgid ""
 "Used in the recipe metadata. The region associated with your recipe. "
 "Examples: French, Mediterranean, American"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:226
+#: includes/admin/class-wprm-modal.php:223
 msgid ""
 "Used in the recipe metadata. The type of meal or course for this recipe. "
 "Examples: dinner, entree, snack"
 msgstr ""
 
-#: includes/admin/class-wprm-modal.php:232
+#: includes/admin/class-wprm-modal.php:229
 msgid ""
 "Used in the recipe metadata. This is a restricted list of diets whose label "
 "can be changed on the Manage > Recipe Fields page."
@@ -7690,7 +7772,7 @@ msgstr ""
 msgid "User Not Voted"
 msgstr ""
 
-#: includes/public/class-wprm-analytics.php:48 
+#: includes/public/class-wprm-analytics.php:52 
 #: templates/admin/translations.php:489
 msgid "User Rating"
 msgstr ""
@@ -7781,7 +7863,7 @@ msgstr ""
 #: templates/settings/group-recipe-ratings.php:59 
 #: templates/settings/group-recipe-ratings.php:65 
 #: templates/admin/translations.php:588 
-#: includes/public/deprecated/class-wprm-template-helper.php:238
+#: includes/public/deprecated/class-wprm-template-helper.php:242
 msgid "vote"
 msgid_plural "votes"
 msgstr[0] ""
@@ -7924,6 +8006,10 @@ msgstr ""
 msgid "What type of user ratings to use."
 msgstr ""
 
+#: includes/public/class-wprm-analytics.php:63
+msgid "WhatsApp Share"
+msgstr ""
+
 #: templates/settings/group-private-notes.php:22
 msgid ""
 "When a visitor is not logged in the data is stored in their own browser's "
@@ -8032,6 +8118,12 @@ msgstr ""
 msgid "Which Ratings to Automatically Approve"
 msgstr ""
 
+#: templates/settings/group-recipe-snippets.php:165
+msgid ""
+"Will add something like #recipe at the end of the URL when using the jump "
+"button"
+msgstr ""
+
 #: templates/admin/tools.php:241
 msgid ""
 "Will create a WPRM Roundup List for your Create Lists. Make sure to import "
@@ -8055,11 +8147,11 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: includes/public/class-wprm-compatibility.php:208
+#: includes/public/class-wprm-compatibility.php:226
 msgid "WP Recipe Maker"
 msgstr ""
 
-#: includes/public/class-wprm-changelog.php:101
+#: includes/public/class-wprm-changelog.php:85
 msgid "WP Recipe Maker Change:"
 msgstr ""
 
@@ -8187,7 +8279,7 @@ msgstr ""
 msgid "Your Custom Fields"
 msgstr ""
 
-#: templates/settings/group-integrations.php:152
+#: templates/settings/group-integrations.php:169
 msgid "Your own Recipe App with NAKKO Recipe to App"
 msgstr ""
 

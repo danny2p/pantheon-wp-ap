@@ -176,7 +176,7 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 					$ingredient_text .= ' (' . $ingredient['notes'] . ')';
 				}
 
-				$body .= str_replace( '  ', ' ', strip_shortcodes( wp_strip_all_tags( $ingredient_text ) ) );
+				$body .= str_replace( '  ', ' ', wp_strip_all_tags( do_shortcode( $ingredient_text ) ) );
 				$body .= "\n";
 			}
 		}

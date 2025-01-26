@@ -20,27 +20,11 @@
 class WPRM_Changelog {
 
 	/**
-	 * List of change types with their name.
-	 *
-	 * @since 	9.2.0
-	 * @access  private
-	 * @var     mixed $types List of change types.
-	 */
-	private static $types = array();
-
-	/**
 	 * Register actions and filters.
 	 *
 	 * @since	9.2.0
 	 */
 	public static function init() {
-		self::$types = array(
-			'recipe_created' => __( 'Recipe Created', 'wp-recipe-maker' ),
-			'recipe_edited' => __( 'Recipe Edited', 'wp-recipe-maker' ),
-			'recipe_trashed' => __( 'Recipe Trashed', 'wp-recipe-maker' ),
-			'recipe_deleted' => __( 'Recipe Deleted', 'wp-recipe-maker' ),
-		);
-
 		add_action( 'wprm_daily_cron', array( __CLASS__, 'remove_old_logs' ) );
 	}
 

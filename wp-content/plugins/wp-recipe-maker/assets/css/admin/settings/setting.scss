@@ -1,12 +1,9 @@
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.snow.css';
-
 .wprm-setting-input {
     .ql-editor p {
         margin-bottom: 10px;
     }
 
-    .CodeMirror {
+    .cm-editor {
         height: 200px;
         border: 1px solid #ddd;
     }

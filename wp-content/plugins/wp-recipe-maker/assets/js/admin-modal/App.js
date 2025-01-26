@@ -11,7 +11,7 @@ import '../../css/admin/modal/general/fields.scss';
 
 import ErrorBoundary from 'Shared/ErrorBoundary';
 import { __wprm } from 'Shared/Translations';
-const { hooks } = WPRecipeMaker['wp-recipe-maker/dist/shared'];
+const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import BulkEdit from './bulk-edit';
 import InputFields from './input-fields';

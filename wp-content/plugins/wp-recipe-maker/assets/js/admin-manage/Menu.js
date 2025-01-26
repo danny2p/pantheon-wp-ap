@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import '../../css/admin/manage/menu.scss';
 

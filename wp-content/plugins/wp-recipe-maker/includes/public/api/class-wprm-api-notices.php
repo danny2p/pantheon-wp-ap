@@ -52,16 +52,11 @@ class WPRM_Api_Notices {
 	public static function api_dismiss_notice( $request ) {
 		// Parameters.
 		$params = $request->get_params();
-
+	
 		$id = isset( $params['id'] ) ? $params['id'] : '';
-		$user_id = get_current_user_id();
+		$result = WPRM_Notices::dismiss( $id );
 
-		if ( $id && $user_id ) {
-			add_user_meta( $user_id, 'wprm_dismissed_notices', $id );
-			return rest_ensure_response( true );
-		}
-
-		return rest_ensure_response( false );
+		return rest_ensure_response( $result );
 	}
 }
 
