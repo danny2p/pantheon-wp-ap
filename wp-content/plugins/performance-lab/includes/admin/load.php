@@ -5,9 +5,11 @@
  * @package performance-lab
  */
 
+// @codeCoverageIgnoreStart
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+// @codeCoverageIgnoreEnd
 
 /**
  * Adds the features page to the Settings menu.
@@ -264,7 +266,7 @@ function perflab_enqueue_features_page_scripts(): void {
 	// Enqueue plugin activate AJAX script and localize script data.
 	wp_enqueue_script(
 		'perflab-plugin-activate-ajax',
-		plugin_dir_url( PERFLAB_MAIN_FILE ) . perflab_get_asset_path( 'includes/admin/plugin-activate-ajax.js' ),
+		plugins_url( perflab_get_asset_path( 'includes/admin/plugin-activate-ajax.js' ), PERFLAB_MAIN_FILE ),
 		array( 'wp-i18n', 'wp-a11y', 'wp-api-fetch' ),
 		PERFLAB_VERSION,
 		true
