@@ -212,13 +212,22 @@ class WPRM_Shortcode {
 	 * @param	 mixed $content Content we want to filter before it gets passed along.
 	 */
 	public static function replace_ziplist_shortcode( $content ) {
+		global $wpdb;
+		$zl_table = $wpdb->prefix . 'amd_zlrecipe_recipes';
+
 		preg_match_all( "/\[zrdn-recipe\s.*?id='?\"?(\d+).*?]/im", $content, $matches );
 		foreach ( $matches[0] as $key => $match ) {
 			$zl_id = intval( $matches[1][ $key ] );
 
 			if ( $zl_id ) {
-				global $wpdb;
-				$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $zl_id );
+				$zl_recipe = $wpdb->get_row( $wpdb->prepare(
+					"SELECT post_id FROM `%1s`
+					WHERE recipe_id = %d",
+					array(
+						$zl_table,
+						$zl_id,
+					)
+				) );
 				$post_id = $zl_recipe ? $zl_recipe->post_id : false;
 
 				if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {
@@ -238,7 +247,15 @@ class WPRM_Shortcode {
 
 					if ( $zl_id ) {
 						global $wpdb;
-						$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $zl_id );
+						$zl_recipe = $wpdb->get_row( $wpdb->prepare(
+							"SELECT post_id FROM `%1s`
+							WHERE recipe_id = %d",
+							array(
+								$zl_table,
+								$zl_id,
+							)
+						) );
+						
 						$post_id = $zl_recipe ? $zl_recipe->post_id : false;
 		
 						if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {
@@ -353,7 +370,17 @@ class WPRM_Shortcode {
 
 			if ( $zl_id ) {
 				global $wpdb;
-				$zl_recipe = $wpdb->get_row( 'SELECT post_id FROM ' . $wpdb->prefix . 'amd_zlrecipe_recipes WHERE recipe_id=' . $zl_id );
+
+				$zl_table = $wpdb->prefix . 'amd_zlrecipe_recipes';
+				$zl_recipe = $wpdb->get_row( $wpdb->prepare(
+					"SELECT post_id FROM `%1s`
+					WHERE recipe_id = %d",
+					array(
+						$zl_table,
+						$zl_id,
+					)
+				) );
+
 				$post_id = $zl_recipe ? $zl_recipe->post_id : false;
 
 				if ( $post_id && WPRM_POST_TYPE === get_post_type( $post_id ) ) {

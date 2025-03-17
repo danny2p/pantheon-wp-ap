@@ -163,7 +163,7 @@ class WPRM_Comment_Review {
 				}
 			}
 			
-			echo '<span class="wprm-comment-review-status wprm-comment-review-status-' . $status . '">' . $statusses[ $status ] . '</span>';
+			echo '<span class="wprm-comment-review-status wprm-comment-review-status-' . esc_attr( $status ) . '">' . esc_html( $statusses[ $status ] ) . '</span>';
 		}
 
 		return $column;
@@ -178,9 +178,9 @@ class WPRM_Comment_Review {
 				$comment_review_status = get_comment_meta( $comment->comment_ID , 'wprm-comment-review', true );
 				?>
 				<select name="wprm-comment-review" id="wprm-comment-review">
-					<option value="default"><?php _e( 'This is a regular comment (default)', 'wp-recipe-maker' ); ?></option>
-					<option value="featured"<?php if ( 'featured' === $comment_review_status ) { echo ' selected="selected"'; } ?>><?php _e( 'Mark as a "Featured Review" to always use in the metadata', 'wp-recipe-maker' ); ?></option>
-					<option value="excluded"<?php if ( 'excluded' === $comment_review_status ) { echo ' selected="selected"'; } ?>><?php _e( 'Exclude this comment from the review metadata', 'wp-recipe-maker' ); ?></option>
+					<option value="default"><?php esc_html_e( 'This is a regular comment (default)', 'wp-recipe-maker' ); ?></option>
+					<option value="featured"<?php if ( 'featured' === $comment_review_status ) { echo ' selected="selected"'; } ?>><?php esc_html_e( 'Mark as a "Featured Review" to always use in the metadata', 'wp-recipe-maker' ); ?></option>
+					<option value="excluded"<?php if ( 'excluded' === $comment_review_status ) { echo ' selected="selected"'; } ?>><?php esc_html_e( 'Exclude this comment from the review metadata', 'wp-recipe-maker' ); ?></option>
 				</select>
 				<?php
 			}

@@ -17,7 +17,7 @@ if ( count( $args ) > 0 ) {
 	foreach ( $args as $key => $value ) {
 		$fallback_args[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
 	}
-	echo '<!--' . implode( ' ', $fallback_args ) . '-->';
+	echo '<!--' . wp_kses_post( implode( ' ', $fallback_args ) ) . '-->';
 }
 ?>
 <div class="wprm-fallback-recipe">
@@ -128,8 +128,8 @@ if ( count( $args ) > 0 ) {
 			$terms = $recipe->tags( $key, true );
 
 			if ( $terms ) {
-				echo '<div class="wprm-fallback-recipe-meta-' . $key . '">';
-				echo implode( ', ', $terms );
+				echo '<div class="wprm-fallback-recipe-meta-' . esc_attr( $key ) . '">';
+				echo wp_kses_post( implode( ', ', $terms ) );
 				echo '</div>';
 			}
 		}

@@ -141,6 +141,10 @@ class WPRM_Assets {
 			return true;
 		}
 
+		if ( $screen && 'plugins' === $screen->id ) {
+			return true;
+		}
+
 		global $pagenow;
 		if ( 'post.php' === $pagenow || 'post-new.php' === $pagenow || 'comment.php' === $pagenow || 'edit-comments.php' === $pagenow ) {
 			return true;
@@ -242,8 +246,8 @@ class WPRM_Assets {
 			'translations' => self::get_translations( 'admin' ),
 			'text' => array(
 				'shortcode_remove' => __( 'Are you sure you want to remove this recipe?', 'wp-recipe-maker' ),
-				'nutrition_label_servings' => __( 'Amount per Serving', 'wp-recipe-maker-premium' ),
-				'nutrition_label_100g' => __( 'Amount per 100g', 'wp-recipe-maker-premium' ),
+				'nutrition_label_servings' => __( 'Amount per Serving', 'wp-recipe-maker' ),
+				'nutrition_label_100g' => __( 'Amount per 100g', 'wp-recipe-maker' ),
 			),
 		);
 
@@ -350,12 +354,8 @@ class WPRM_Assets {
 
 		foreach ( self::$js_data as $variable => $data ) {
 			if ( $data ) {
-				$js .= 'var ' . $variable . ' = ' . wp_json_encode( $data ) . ';';
+				wp_add_inline_script( 'wprm-public', 'var ' . $variable . ' = ' . wp_json_encode( $data ) . ';', 'before' );
 			}
-		}
-
-		if ( $js ) {
-			echo '<script type="text/javascript">' . $js . '</script>';
 		}
 	}
 

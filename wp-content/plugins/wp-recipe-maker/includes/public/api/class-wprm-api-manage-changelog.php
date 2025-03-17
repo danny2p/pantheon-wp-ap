@@ -84,16 +84,16 @@ class WPRM_Api_Manage_Changelog {
 				$value = $filter['value'];
 				switch( $filter['id'] ) {
 					case 'created_at':
-						$args['filter'][] = 'DATE_FORMAT(created_at, "%Y-%m-%d %T") LIKE "%' . esc_sql( like_escape( esc_attr( $value ) ) ) . '%"';
+						$args['filter'][] = 'DATE_FORMAT(created_at, "%Y-%m-%d %T") LIKE "%' . esc_sql( $wpdb->esc_like( esc_attr( $value ) ) ) . '%"';
 						break;
 					case 'type':
-						$args['filter'][] = 'type LIKE "%' . esc_sql( like_escape( $value ) ) . '%"';
+						$args['filter'][] = 'type LIKE "%' . esc_sql( $wpdb->esc_like( $value ) ) . '%"';
 						break;
 					case 'object_id':
-						$args['filter'][] = 'object_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ). '%"';
+						$args['filter'][] = 'object_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ). '%"';
 						break;
 					case 'user_id':
-						$args['filter'][] = 'user_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
+						$args['filter'][] = 'user_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ) . '%"';
 						break;
 				}
 			}

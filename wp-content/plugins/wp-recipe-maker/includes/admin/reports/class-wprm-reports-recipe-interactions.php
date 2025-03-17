@@ -44,7 +44,7 @@ class WPRM_Reports_Recipe_Interactions {
 	 * @since    9.5.0
 	 */
 	public static function report_template() {
-		$report_finished = isset( $_GET['wprm_report_finished'] ) && $_GET['wprm_report_finished'];
+		$report_finished = isset( $_GET['wprm_report_finished'] ) ? (bool) sanitize_key( $_GET['wprm_report_finished'] ) : false;
 
 		if ( $report_finished ) {
 			$data = WPRM_Reports_Manager::get_data();
@@ -65,7 +65,7 @@ class WPRM_Reports_Recipe_Interactions {
 			// Only when debugging.
 			if ( WPRM_Reports_Manager::$debugging ) {
 				$result = self::report_recipe_interactions( $posts ); // Input var okay.
-				var_dump( $result );
+				WPRM_Debug::log( $result );
 				die();
 			}
 	
@@ -152,15 +152,20 @@ class WPRM_Reports_Recipe_Interactions {
 				);
 
 				foreach ( $timeframes as $timeframe => $start ) {
-					$sql = "SELECT
-								count(*) as total,
-								count(distinct visitor_id) as total_unique
-							FROM
-								$table_name
-							WHERE
-								created_at >= '$start'
-								AND recipe_id = $recipe_id";
-					$actions = $wpdb->get_results( $sql );
+					$actions = $wpdb->get_results( $wpdb->prepare(
+						"SELECT
+							count(*) as total,
+							count(distinct visitor_id) as total_unique
+						FROM `%1s`
+						WHERE
+							created_at >= %s
+							AND recipe_id = %d",
+						array(
+							$table_name,
+							$start,
+							$recipe_id
+						)
+					) );
 
 					// Count totals.
 					$data[ 'total_' . $timeframe ] = $actions ? array_sum( array_map( function( $action ) {
@@ -170,16 +175,21 @@ class WPRM_Reports_Recipe_Interactions {
 						return intval( $action->total_unique );
 					}, $actions ) ) : 0;
 
-					$sql = "SELECT
-								count(*) as total,
-								count(distinct visitor_id) as total_unique
-							FROM
-								$table_name
-							WHERE
-								created_at >= '$start'
-								AND recipe_id = $recipe_id
-								AND type = 'print'";
-					$actions = $wpdb->get_results( $sql );
+					$actions = $wpdb->get_results( $wpdb->prepare(
+						"SELECT
+							count(*) as total,
+							count(distinct visitor_id) as total_unique
+						FROM `%1s`
+						WHERE
+							created_at >= %s
+							AND recipe_id = %d
+							AND type = 'print'",
+						array(
+							$table_name,
+							$start,
+							$recipe_id
+						)
+					) );
 
 					// Count totals.
 					$data[ 'print_' . $timeframe ] = $actions ? array_sum( array_map( function( $action ) {

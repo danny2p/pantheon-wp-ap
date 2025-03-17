@@ -42,7 +42,7 @@ if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
 }
 
 // Uses random ID instead of fixed to prevent duplicate ID issues when form is on the page multiple times (happens with wpDiscuz).
-$label_id = $displaying_in_admin ? false : 'wprm-comment-rating-' . rand();
+$label_id = $displaying_in_admin ? false : 'wprm-comment-rating-' . wp_rand();
 
 // Name for the input element.
 $name = $displaying_in_admin && isset( $comment_id ) && $comment_id ? 'wprm-comment-rating-' . $comment_id : 'wprm-comment-rating';
@@ -51,15 +51,15 @@ $name = $displaying_in_admin && isset( $comment_id ) && $comment_id ? 'wprm-comm
 // Currently selected rating.
 $selected = isset( $rating ) && $rating ? $rating : 0;
 ?>
-<div class="comment-form-wprm-rating"<?php echo $hide_form; ?>>
+<div class="comment-form-wprm-rating"<?php echo wp_kses_post( $hide_form ); ?>>
 	<?php
 	if ( $label_id ) {
-		echo '<label for="' . esc_attr( $label_id ) .'">' . WPRM_Template_Helper::label( 'comment_rating' ) . '</label>';
+		echo '<label for="' . esc_attr( $label_id ) .'">' . esc_html( WPRM_Template_Helper::label( 'comment_rating' ) ) . '</label>';
 	}
 	?>
 	<span class="wprm-rating-stars">
-		<fieldset class="wprm-comment-ratings-container" data-original-rating="<?php echo $selected; ?>" data-current-rating="<?php echo $selected; ?>">
-			<legend><?php echo WPRM_Template_Helper::label( 'comment_rating' ); ?></legend>
+		<fieldset class="wprm-comment-ratings-container" data-original-rating="<?php echo esc_attr( $selected ); ?>" data-current-rating="<?php echo esc_attr( $selected ); ?>">
+			<legend><?php echo esc_html( WPRM_Template_Helper::label( 'comment_rating' ) ); ?></legend>
 			<?php
 			$labels = array(
 				0 => __( "Don't rate this recipe", 'wp-recipe-maker' ),
@@ -109,9 +109,9 @@ $selected = isset( $rating ) && $rating ? $rating : 0;
 				}
 
 				// Output HTML.
-				echo '<input aria-label="' . esc_attr( $labels[ $star ] ) . '" name="' . esc_attr( $name ) .'" value="' . $star . '" type="radio"' . $onclick;
+				echo '<input aria-label="' . esc_attr( $labels[ $star ] ) . '" name="' . esc_attr( $name ) .'" value="' . esc_attr( $star ) . '" type="radio"' . wp_kses_post( $onclick );
 				echo 5 === $star && $label_id ? ' id="' . esc_attr( $label_id ) . '"' : '';
-				echo 0 === $star ? $first_input_style : $input_style;
+				echo wp_kses_post( 0 === $star ? $first_input_style : $input_style );
 				echo $selected === $star ? ' checked="checked"' : '';
 
 				// Prevent all inputs from becoming part of the URL when doing a search.
@@ -124,7 +124,7 @@ $selected = isset( $rating ) && $rating ? $rating : 0;
 				}
 
 				echo '>';
-				echo '<span aria-hidden="true"' . $span_style . '>' . apply_filters( 'wprm_rating_stars_svg', $svg, $star ) . '</span>';
+				echo '<span aria-hidden="true"' . wp_kses_post( $span_style ) . '>' . apply_filters( 'wprm_rating_stars_svg', $svg, $star ) . '</span>';
 
 				if ( ( is_rtl() && 0 !== $star ) || ( ! is_rtl() && 5 !== $star ) ) {
 					echo '<br>';

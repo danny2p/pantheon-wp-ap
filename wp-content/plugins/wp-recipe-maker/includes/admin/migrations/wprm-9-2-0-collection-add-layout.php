@@ -24,8 +24,8 @@ if ( isset( $user_settings['recipe_collections_link'] ) && $user_settings['recip
 					'id' => 'recipe_collections_appearance_adding_layout',
 					'type' => 'dropdown',
 					'options' => array(
-						'column' => __( 'Add directly in column (backwards compatibility)', 'wp-recipe-maker-premium' ),
-						'modal' => __( 'Open modal to select the item to add', 'wp-recipe-maker-premium' ),
+						'column' => __( 'Add directly in column (backwards compatibility)', 'wp-recipe-maker' ),
+						'modal' => __( 'Open modal to select the item to add', 'wp-recipe-maker' ),
 					),
 					'default' => 'modal',
 				),

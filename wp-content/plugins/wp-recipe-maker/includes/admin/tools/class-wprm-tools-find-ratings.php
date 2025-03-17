@@ -59,7 +59,7 @@ class WPRM_Tools_Find_Ratings {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::find_ratings( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 
@@ -240,9 +240,13 @@ class WPRM_Tools_Find_Ratings {
 				// WP-PostRatings.
 				global $wpdb;
 				$wp_postratings_table = $wpdb->prefix . 'ratings';
-				if ( $wp_postratings_table === $wpdb->get_var( "SHOW TABLES LIKE '$wp_postratings_table'" ) ) {
+				if ( $wp_postratings_table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wp_postratings_table ) ) ) {
 					if ( $comment_post_ids ) {
-						$postratings = $wpdb->get_results( 'SELECT * FROM ' . $wp_postratings_table . ' WHERE rating_postid IN (' . implode( ',', $comment_post_ids ) . ')' );
+						$postratings = $wpdb->get_results( $wpdb->prepare(
+							"SELECT * FROM `%1s`
+							WHERE rating_postid IN (" . implode( ', ', array_fill( 0, count( $comment_post_ids ), '%d' ) ) . ")",
+							array_merge( array( $wp_postratings_table ), $comment_post_ids )
+						) );
 
 						foreach ( $postratings as $postrating ) {
 							$postrating = (array) $postrating;

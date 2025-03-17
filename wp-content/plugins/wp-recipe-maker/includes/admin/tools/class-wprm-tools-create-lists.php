@@ -48,8 +48,14 @@ class WPRM_Tools_Create_Lists {
 		$table = $wpdb->prefix . 'mv_creations';
 
 		$mv_lists = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$mv_lists = $wpdb->get_results( 'SELECT id FROM ' . $table . ' WHERE type IN ("list")' );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$mv_lists = $wpdb->get_results( $wpdb->prepare(
+				"SELECT id FROM `%1s`
+				WHERE type IN ('list')",
+				array(
+					$table,
+				)
+			) );
 		}
 
 		$mv_lists = array_map( function ( $list ) { return intval( $list->id ); }, $mv_lists );
@@ -57,7 +63,7 @@ class WPRM_Tools_Create_Lists {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::import_lists( $mv_lists ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 
@@ -121,8 +127,15 @@ class WPRM_Tools_Create_Lists {
 			global $wpdb;
 			$table = $wpdb->prefix . 'mv_creations';
 
-			if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-				$rows = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE id=' . intval( $mv_list_id ) );
+			if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+				$rows = $wpdb->get_results( $wpdb->prepare(
+					"SELECT * FROM `%1s`
+					WHERE id = %d",
+					array(
+						$table,
+						$mv_list_id,
+					)
+				) );
 
 				if ( is_array( $rows ) && 1 === count( $rows ) ) {
 					$mv_list = (array) $rows[0];
@@ -130,7 +143,7 @@ class WPRM_Tools_Create_Lists {
 			}
 
 			// Get MV list data.
-			$mv_data = json_decode( $mv_list['published'], true );
+			$mv_data = $mv_list ? json_decode( $mv_list['published'], true ) : false;
 
 			if ( ! $mv_data ) {
 				continue;
@@ -194,7 +207,14 @@ class WPRM_Tools_Create_Lists {
 
 					// Find related MV recipe card.
 					if ( $relation_id ) {
-						$rows = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE id=' . intval( $relation_id ) );
+						$rows = $wpdb->get_results( $wpdb->prepare(
+							"SELECT * FROM `%1s`
+							WHERE id = %d",
+							array(
+								$table,
+								$relation_id,
+							)
+						) );
 
 						if ( is_array( $rows ) && 1 === count( $rows ) ) {
 							$mv_recipe = (array) $rows[0];

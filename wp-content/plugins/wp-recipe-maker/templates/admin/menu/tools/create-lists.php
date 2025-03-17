@@ -13,7 +13,10 @@
 
 <div class="wrap wprm-tools">
 	<h2><?php esc_html_e( 'Create Lists', 'wp-recipe-maker' ); ?></h2>
-	<?php printf( esc_html( _n( 'Searching %d Create List', 'Searching %d Create Lists', count( $mv_lists ), 'wp-recipe-maker' ) ), count( $mv_lists ) ); ?>.
+	<?php
+	// translators: %d: number of lists left to search through.
+	printf( esc_html( _n( 'Searching %d Create List', 'Searching %d Create Lists', count( $mv_lists ), 'wp-recipe-maker' ) ), count( $mv_lists ) );
+	?>.
 	<div id="wprm-tools-progress-container">
 		<div id="wprm-tools-progress-bar"></div>
 	</div>

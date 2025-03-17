@@ -278,7 +278,7 @@ class WPRM_Taxonomies {
 		if ( taxonomy_exists( 'wprm_suitablefordiet' ) ) {
 			$terms = self::get_diet_taxonomy_terms();
 
-			if ( count( array_keys( $terms ) ) !== wp_count_terms( 'wprm_suitablefordiet', array( 'hide_empty' => false ) ) ) {
+			if ( count( array_keys( $terms ) ) !== wp_count_terms( array( 'taxonomy' => 'wprm_suitablefordiet', 'hide_empty' => false ) ) ) {
 				foreach ( $terms as $term => $label ) {
 					$existing_term = term_exists( $term, 'wprm_suitablefordiet' );
 					if ( $existing_term ) {

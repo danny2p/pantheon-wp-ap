@@ -103,7 +103,7 @@ class WPRM_SC_Smart_With_Food extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = __( $atts['text'], 'wp-recipe-maker' );
+		$text = $atts['text'];
 
 		$aria_label = '';
 		if ( ! $text ) {

@@ -75,7 +75,7 @@ class WPRM_Manage {
 			$authors = get_users( $args );
 
 			$post_statuses = get_post_statuses();
-			$post_statuses['future'] = __( 'Scheduled' );
+			$post_statuses['future'] = __( 'Scheduled', 'wp-recipe-maker' );
 
 			$revisions = defined( 'WP_POST_REVISIONS' ) && ! ! WP_POST_REVISIONS;
 			$count_posts = wp_count_posts( WPRM_POST_TYPE );

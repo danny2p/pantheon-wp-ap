@@ -23,8 +23,8 @@
 		Things you can <strong>check out in this preview</strong>:
 	</p>
 	<ul style="list-style: disc; margin-left: 23px;">
-		<li>Have a <a href="<?php echo get_permalink( $preview_post_id ); ?>">look at the example post</a> to see what a recipe could look like on your site</li>
-		<li>Check out the <a href="<?php echo admin_url( 'admin.php?page=wprm_manage' ); ?>">WP Recipe Maker > Manage page</a>, where you'll find an overview of all recipes and can edit them</li>
+		<li>Have a <a href="<?php echo esc_attr( get_permalink( $preview_post_id ) ); ?>">look at the example post</a> to see what a recipe could look like on your site</li>
+		<li>Check out the <a href="<?php echo esc_attr( admin_url( 'admin.php?page=wprm_manage' ) ); ?>">WP Recipe Maker > Manage page</a>, where you'll find an overview of all recipes and can edit them</li>
 	</ul>
 	<br/>
 	<p>

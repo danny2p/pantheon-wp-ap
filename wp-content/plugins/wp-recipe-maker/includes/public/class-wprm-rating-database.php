@@ -209,8 +209,7 @@ class WPRM_Rating_Database {
 		global $wpdb;
 		$table_name = self::get_table_name();
 
-		$query = 'SELECT count(*) FROM ' . $table_name;
-		$count = $wpdb->get_var( $query );
+		$count = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM `%1s`", $table_name ) );
 
 		return intval( $count );
 	}

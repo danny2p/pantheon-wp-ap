@@ -105,7 +105,7 @@ class WPRM_Import_Manager {
 				// Only when debugging.
 				if ( self::$debugging ) {
 					$result = self::import_recipes( $importer, $recipes, $_POST ); // Input var okay.
-					var_dump( $result );
+					WPRM_Debug::log( $result );
 					die();
 				}
 

@@ -3,6 +3,7 @@ import './admin/comments';
 import './admin/editor';
 import './admin/feedback';
 import './admin/import';
+import './admin/notices';
 import './admin/settings';
 import './admin/reports';
 import './admin/reports/index.js';

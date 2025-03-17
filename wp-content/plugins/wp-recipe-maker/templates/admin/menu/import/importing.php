@@ -12,8 +12,11 @@
 ?>
 
 <div class="wrap wprm-import">
-	<h2><?php echo __( 'Import', 'wp-recipe-maker' ) . ' - ' . esc_html( $importer->get_name() ); ?></h2>
-	<?php printf( esc_html( _n( 'Importing %d recipe', 'Importing %d recipes', count( $recipes ), 'wp-recipe-maker' ) ), count( $recipes ) ); ?>.
+	<h2><?php echo esc_html( __( 'Import', 'wp-recipe-maker' ) . ' - ' . $importer->get_name() ); ?></h2>
+	<?php
+	// translators: %d: number of recipes left to import.
+	printf( esc_html( _n( 'Importing %d recipe', 'Importing %d recipes', count( $recipes ), 'wp-recipe-maker' ) ), count( $recipes ) );
+	?>.
 	<div id="wprm-import-progress-container">
 		<div id="wprm-import-progress-bar"></div>
 	</div>

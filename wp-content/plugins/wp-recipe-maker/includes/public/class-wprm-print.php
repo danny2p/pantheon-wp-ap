@@ -52,7 +52,8 @@ class WPRM_Print {
 	 * @since    1.3.0
 	 */
 	public static function print_page() {
-		preg_match( '/[\/\?]' . self::slug() . '[\/=](.+?)(\/)?$/', $_SERVER['REQUEST_URI'], $print_url ); // Input var okay.
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		preg_match( '/[\/\?]' . self::slug() . '[\/=](.+?)(\/)?$/', $request_uri, $print_url ); // Input var okay.
 		$print_query = isset( $print_url[1] ) ? $print_url[1] : '';
 
 		// Get individual print args.
@@ -300,7 +301,7 @@ class WPRM_Print {
 						$recipe_template = str_replace( 'wprm-recipe-instruction-ingredient-' . $unique_recipe['id'] . '-', 'wprm-recipe-instruction-ingredient-' . $uid . '-', $recipe_template );
 						$recipe_template = str_replace( 'wprm-inline-ingredient-' . $unique_recipe['id'] . '-', 'wprm-inline-ingredient-' . $uid . '-', $recipe_template );
 
-						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '">' . $recipe_template . '</div>';
+						$output['html'] .= '<div id="wprm-print-recipe-' . $uid . '" data-original-recipe-id="' . $unique_recipe['id'] . '" data-recipe-id="' . $uid . '" class="wprm-print-recipe wprm-print-recipe-' . $uid . '" data-servings="' . esc_attr( $recipe->servings() ) . '">' . $recipe_template . '</div>';
 						$output['recipe_ids'][] = $unique_recipe['id'];
 						$uid++;
 					}

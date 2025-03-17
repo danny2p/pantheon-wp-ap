@@ -56,7 +56,7 @@ class WPRM_Tools_Refresh_Video_Metadata {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::refreshing_video_metadata( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

@@ -13,7 +13,10 @@
 
 <div class="wrap wprm-tools">
 	<h2><?php esc_html_e( 'Find Parent Posts', 'wp-recipe-maker' ); ?></h2>
-	<?php printf( esc_html( _n( 'Searching %d post', 'Searching %d posts', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) ); ?>.
+	<?php
+	// translators: %d: number of posts left to search through.
+	printf( esc_html( _n( 'Searching %d post', 'Searching %d posts', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) );
+	?>.
 	<div id="wprm-tools-progress-container">
 		<div id="wprm-tools-progress-bar"></div>
 	</div>

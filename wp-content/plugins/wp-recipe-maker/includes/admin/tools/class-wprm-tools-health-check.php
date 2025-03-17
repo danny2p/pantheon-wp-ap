@@ -62,7 +62,7 @@ class WPRM_Tools_Health_Check {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::run_health_check( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

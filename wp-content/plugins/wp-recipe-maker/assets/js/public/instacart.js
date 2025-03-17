@@ -37,6 +37,35 @@ window.WPRecipeMaker.instacart = {
         if ( recipeId ) {
             el.classList.add( 'wprm-recipe-shop-instacart-loading' );
 
+            // Open window immediately on click to prevent popup blocking.
+            const newWindow = window.open('about:blank', '_blank');
+
+            // Add loading message with some basic styling
+            newWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Loading Instacart...</title>
+                        <style>
+                            body {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: 100vh;
+                                margin: 0;
+                                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                            }
+                            .loading {
+                                font-size: 24px;
+                                color: #333;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="loading">Loading Instacart...</div>
+                    </body>
+                </html>
+            `);
+
             window.WPRecipeMaker.manager.getRecipe( recipeId ).then( ( recipe ) => {
                 if ( recipe ) {
                     const servingsSystemCombination = '' + recipe.data.currentServings + '-' + recipe.data.currentSystem;
@@ -93,7 +122,7 @@ window.WPRecipeMaker.instacart = {
 
                         // Open link in new tab.
                         if ( link ) {
-                            window.open( link, '_blank' );
+                            newWindow.location.href = link;
                         } else {
                             alert( 'Something went wrong. Please try again later.' );
                         }

@@ -47,7 +47,8 @@ class WPRM_Preview {
 	 */
 	public static function check_for_preview() {
 		$slug = 'wprm-recipe-preview';
-		preg_match( '/[\/\?]' . $slug . '[\/=](.+?)(\/)?$/', $_SERVER['REQUEST_URI'], $preview_url ); // Input var okay.
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		preg_match( '/[\/\?]' . $slug . '[\/=](.+?)(\/)?$/', $request_uri, $preview_url ); // Input var okay.
 		$previewing_id = isset( $preview_url[1] ) ? $preview_url[1] : false;
 
 		if ( false !== $previewing_id ) {
@@ -202,7 +203,7 @@ class WPRM_Preview {
 			// Prevent other frontend data.
 			add_filter( 'wprm_recipes_on_page', '__return_false', 999 );
 		} else {
-			echo '<script>alert("' . __( 'Something went wrong. The preview could not be loaded.', 'wp-recipe-maker' ) . '");</script>';
+			echo '<script>alert("' . esc_attr( __( 'Something went wrong. The preview could not be loaded.', 'wp-recipe-maker' ) ) . '");</script>';
 		}
 
 		return $recipe;

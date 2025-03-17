@@ -76,8 +76,8 @@ class WPRM_Import_Ziplist extends WPRM_Import {
 		$table = $wpdb->prefix . 'amd_zlrecipe_recipes';
 
 		$zl_recipes = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$zl_recipes = $wpdb->get_results( 'SELECT recipe_id, post_id, recipe_title FROM ' . $table );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$zl_recipes = $wpdb->get_results( $wpdb->prepare( "SELECT recipe_id, post_id, recipe_title FROM `%1s`", $table ) );
 		}
 
 		foreach ( $zl_recipes as $zl_recipe ) {
@@ -296,8 +296,15 @@ class WPRM_Import_Ziplist extends WPRM_Import {
 		$table = $wpdb->prefix . 'zrdn_visitor_ratings';
 
 		$ratings = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$ratings = $wpdb->get_results( 'SELECT rating, ip FROM ' . $table . ' WHERE recipe_id=' . intval( $id ) );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$ratings = $wpdb->get_results( $wpdb->prepare(
+				"SELECT rating, ip FROM `%1s`
+				WHERE recipe_id = %d",
+				array(
+					$table,
+					$id,
+				)
+			) );
 		}
 
 		foreach ( $ratings as $rating ) {

@@ -32,7 +32,7 @@ $template_editor = array(
 			'description' => __( 'Default recipe to use for the Template Editor preview.', 'wp-recipe-maker' ),
 			'type' => 'dropdownRecipe',
 			'options' => array(
-				'demo' => __( 'Use WPRM Demo Recipe'),
+				'demo' => __( 'Use WPRM Demo Recipe', 'wp-recipe-maker' ),
 			),
 			'default' => 'demo',
 		),

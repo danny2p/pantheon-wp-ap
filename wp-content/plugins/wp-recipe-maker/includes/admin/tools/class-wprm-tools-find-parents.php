@@ -56,7 +56,7 @@ class WPRM_Tools_Find_Parents {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::find_parents( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

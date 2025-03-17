@@ -56,7 +56,7 @@ class WPRM_Tools_Create_Reviews {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::import_reviews( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 
@@ -143,7 +143,20 @@ class WPRM_Tools_Create_Reviews {
 					$mv_creation_id = intval( $import_backup['mv_creation_id'] );
 					
 					// Get reviews for this MV ID.
-					$reviews = $wpdb->get_results( 'SELECT * FROM ' . $mv_reviews_table . ' WHERE review_content IS NOT NULL AND creation = ' . intval( $mv_creation_id ) . ' ORDER BY id ASC LIMIT ' . intval( $max_reviews_at_once ) . ' OFFSET ' . intval( $current_offset ) );
+					$reviews = $wpdb->get_results( $wpdb->prepare(
+						"SELECT * FROM `%1s`
+						WHERE review_content IS NOT NULL
+						AND creation = %d
+						ORDER BY id ASC
+						LIMIT %d
+						OFFSET %d",
+						array(
+							$mv_reviews_table,
+							$mv_creation_id,
+							$max_reviews_at_once,
+							$current_offset,
+						)
+					) );
 
 					if ( $reviews ) {
 						foreach ( $reviews as $review ) {

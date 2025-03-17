@@ -164,9 +164,12 @@ class WPRM_Analytics_Database {
 		$table_name = self::get_table_name();
 
 		$ids = is_array( $id_or_ids ) ? $id_or_ids : array( $id_or_ids );
-		$ids = implode( ',', array_map( 'intval', $ids ) );
 
-		$wpdb->query( 'DELETE FROM ' . $table_name . ' WHERE ID IN (' . $ids . ')' );
+		$wpdb->query( $wpdb->prepare(
+			"DELETE FROM `%1s`
+			WHERE ID IN (" . implode( ', ', array_fill( 0, count( $ids ), '%d' ) ) . ")",
+			array_merge( array( $table_name ), $ids )
+		) );
 
 		return true;
 	}
@@ -247,20 +250,25 @@ class WPRM_Analytics_Database {
 		$start = $datetime->format( 'Y-m-d 00:00:00' );
 		$end = $datetime->format( 'Y-m-d 23:59:59' );
 
-		$sql = "SELECT
-					type,
-					recipe_id,
-					count(*) as total,
-					count(distinct visitor_id) as total_unique
-				FROM
-					$table_name
-				WHERE
-					created_at >= '$start'
-					AND created_at <= '$end'
-				GROUP BY
-					type,
-					recipe_id";
-		$actions = $wpdb->get_results( $sql );
+		$actions = $wpdb->get_results( $wpdb->prepare(
+			"SELECT
+				type,
+				recipe_id,
+				count(*) as total,
+				count(distinct visitor_id) as total_unique
+			FROM `%1s`
+			WHERE
+				created_at >= %s
+				AND created_at <= %s
+			GROUP BY
+				type,
+				recipe_id",
+			array(
+				$table_name,
+				$start,
+				$end,
+			)
+		) );
 
 		return $actions;
 	}

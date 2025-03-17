@@ -26,6 +26,7 @@ class WPRM_Notices {
 	 */
 	public static function init() {
 		add_action( 'admin_init', array( __CLASS__, 'check_for_dismiss' ) );
+		add_action( 'admin_notices', array( __CLASS__, 'admin_notices' ) );
 
 		add_filter( 'wprm_admin_notices', array( __CLASS__, 'ingredient_units_notice' ) );
 	}
@@ -48,8 +49,11 @@ class WPRM_Notices {
 					continue;
 				}
 
+				// Check if notice is dismissable.
+				$notice['dismissable'] = isset( $notice['dismissable'] ) ? $notice['dismissable'] : true;
+
 				// Check if user has already dismissed notice.
-				if ( isset( $notice['id'] ) && self::is_dismissed( $notice['id'] ) ) {
+				if ( isset( $notice['id'] ) && $notice['dismissable'] && self::is_dismissed( $notice['id'] ) ) {
 					continue;
 				}
 
@@ -67,7 +71,7 @@ class WPRM_Notices {
 	 */
 	public static function check_for_dismiss() {
 		if ( isset( $_GET['wprm_dismiss'] ) ) {
-			$notice_id = sanitize_text_field( $_GET['wprm_dismiss'] );
+			$notice_id = sanitize_text_field( wp_unslash( $_GET['wprm_dismiss'] ) );
 			self::dismiss( $notice_id );
 		}
 	}
@@ -77,9 +81,12 @@ class WPRM_Notices {
 	 *
 	 * @since	9.8.0
 	 * @param	mixed $id Notice to dismiss.
+	 * @param	int   $user_id Optional. User ID to dismiss the notice for. Default current user.
 	 */
-	public static function dismiss( $id ) {
-		$user_id = get_current_user_id();
+	public static function dismiss( $id, $user_id = 0 ) {
+		if ( ! $user_id ) {
+			$user_id = get_current_user_id();
+		}
 
 		if ( $id && $user_id ) {
 			add_user_meta( $user_id, 'wprm_dismissed_notices', $id );
@@ -136,6 +143,38 @@ class WPRM_Notices {
 		}
 
 		return $notices;
+	}
+
+	/**
+	 * Show notices on plugins page.
+	 * 
+	 * @since	9.8.1
+	 */
+	public static function admin_notices() {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+		$notices = self::get_notices();
+		$current_user_id = get_current_user_id();
+
+		if ( $screen && 'plugins' === $screen->id ) {
+			foreach ( $notices as $notice ) {
+				// Check if notice should be displayed on this page.
+				if ( isset( $notice['location'] ) && is_array( $notice['location'] ) && in_array( 'plugins', $notice['location'], true ) ) {
+					$dismissable = isset( $notice['dismissable'] ) ? $notice['dismissable'] : true;
+					$notice_id = isset( $notice['id'] ) ? $notice['id'] : '';
+					$title = isset( $notice['title'] ) ? $notice['title'] : '';
+					$text = isset( $notice['text'] ) ? $notice['text'] : '';
+					
+					echo '<div class="notice notice-error wprm-notice' . ( $dismissable ? ' is-dismissible' : '' ) . '" data-notice-id="' . esc_attr( $notice_id ) . '" data-user-id="' . esc_attr( $current_user_id ) . '">';
+					
+					if ( $title ) {
+						echo '<p><strong>' . esc_html( $title ) . '</strong></p>';
+					}
+					
+					echo '<p>' . wp_kses_post( $text ) . '</p>';
+					echo '</div>';
+				}
+			}
+		}
 	}
 }
 

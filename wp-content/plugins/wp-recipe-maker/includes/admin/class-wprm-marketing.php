@@ -47,8 +47,8 @@ class WPRM_Marketing {
 				'url' => 'https://bootstrapped.ventures/birthday-discount/',
 			),
 			'black-friday-2025' => array(
-				'start' => new DateTime( '2024-11-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'end' => new DateTime( '2024-12-02 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'start' => new DateTime( '2025-11-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'end' => new DateTime( '2025-12-02 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
 				'notice_title' => 'Black Friday & Cyber Monday Deal',
 				'notice_text' => 'Get a 30% discount right now!',
 				'page_title' => 'Black Friday Discount!',
@@ -118,16 +118,19 @@ class WPRM_Marketing {
 	 */
 	public static function page_template() {
 		echo '<div class="wrap">';
-		echo '<h1>' . self::$campaign['page_title'] . '</h1>';
-		echo '<p style="font-size: 14px; max-width: 600px;">' . self::$campaign['page_text'] . '</p>';
+		echo '<h1>' . esc_html( self::$campaign['page_title'] ) . '</h1>';
+		echo '<p style="font-size: 14px; max-width: 600px;">' . wp_kses_post( self::$campaign['page_text'] ) . '</p>';
 
 		// Countdown.
 		echo '<p style="color: darkred; font-size: 14px;"><strong>Don\'t miss out!</strong><br/>Only ';
-		printf( _n( '%s day', '%s days', self::$campaign['countdown']['days'], 'wp-recipe-maker' ), number_format_i18n( self::$campaign['countdown']['days'] ) );
+		// translators: %s: days until and of sale.
+		printf( esc_html( _n( '%s day', '%s days', self::$campaign['countdown']['days'], 'wp-recipe-maker' ) ), esc_html( number_format_i18n( self::$campaign['countdown']['days'] ) ) );
 		echo ' ';
-		printf( _n( '%s hour', '%s hours', self::$campaign['countdown']['hours'], 'wp-recipe-maker' ), number_format_i18n( self::$campaign['countdown']['hours'] ) );
+		// translators: %s: hours until and of sale.
+		printf( esc_html( _n( '%s hour', '%s hours', self::$campaign['countdown']['hours'], 'wp-recipe-maker' ) ), esc_html( number_format_i18n( self::$campaign['countdown']['hours'] ) ) );
 		echo ' ';
-		printf( _n( '%s minute', '%s minutes', self::$campaign['countdown']['minutes'], 'wp-recipe-maker' ), number_format_i18n( self::$campaign['countdown']['minutes'] ) );
+		// translators: %s: minutes until and of sale.
+		printf( esc_html( _n( '%s minute', '%s minutes', self::$campaign['countdown']['minutes'], 'wp-recipe-maker' ) ), esc_html( number_format_i18n( self::$campaign['countdown']['minutes'] ) ) );
 		echo ' left.</p>';
 
 		// CTA.

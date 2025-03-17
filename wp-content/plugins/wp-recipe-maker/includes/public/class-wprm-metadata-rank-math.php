@@ -46,7 +46,6 @@ class WPRM_Metadata_Rank_Math {
 	public static function rank_math_json_ld( $data, $jsonld ) {
 		if ( WPRM_Settings::get( 'rank_math_integration' ) ) {
 			$recipe = self::get_recipe();
-			// var_dump( $recipe );
 
 			if ( $recipe ) {
 				$metadata = self::get_recipe_metadata( $data );

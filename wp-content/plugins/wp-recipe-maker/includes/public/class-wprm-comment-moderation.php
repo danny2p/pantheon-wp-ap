@@ -62,6 +62,9 @@ class WPRM_Comment_Moderation {
 	 */
 	public static function comment_types_dropdown( $types ) {
 		$types['wprm_flagged'] = __( 'Flagged Comments', 'wp-recipe-maker' );
+		$types['wprm_with_comment_text'] = __( 'Comments with Text', 'wp-recipe-maker' );
+		$types['wprm_rating_with_comment_text'] = __( 'Comment Ratings with Text', 'wp-recipe-maker' );
+		$types['wprm_rating_no_comment_text'] = __( 'Comment Ratings without Text', 'wp-recipe-maker' );
 
 		return $types;
 	}
@@ -86,6 +89,69 @@ class WPRM_Comment_Moderation {
 			}
 		}
 
+		if ( isset( $wp_comment_query->query_vars['type'] ) && 'wprm_rating_with_comment_text' === $wp_comment_query->query_vars['type'] ) {
+			$wp_comment_query->query_vars['type'] = 'comment';
+
+			// When looking for a count, don't add the query conditions. This makes sure the option shows up in the dropdown.
+			if ( ! isset( $wp_comment_query->query_vars['count'] ) || false === $wp_comment_query->query_vars['count'] ) {
+				// Find comments with empty content but with a WPRM rating
+				add_filter( 'comments_clauses', function( $clauses ) {
+					global $wpdb;
+					
+					// Join with comment meta table to find comments with ratings
+					$clauses['join'] .= " INNER JOIN $wpdb->commentmeta AS cm ON $wpdb->comments.comment_ID = cm.comment_id AND cm.meta_key = 'wprm-comment-rating'";
+					
+					// Only get comments with empty content
+					$clauses['where'] .= " AND $wpdb->comments.comment_content != '' AND $wpdb->comments.comment_content != ' ' AND $wpdb->comments.comment_content IS NOT NULL";
+
+					// Only get comments with ratings not equal to 0
+					$clauses['where'] .= " AND cm.meta_value != '0'";
+					
+					return $clauses;
+				} );
+			}
+		}
+
+		if ( isset( $wp_comment_query->query_vars['type'] ) && 'wprm_rating_no_comment_text' === $wp_comment_query->query_vars['type'] ) {
+			$wp_comment_query->query_vars['type'] = 'comment';
+
+			// When looking for a count, don't add the query conditions. This makes sure the option shows up in the dropdown.
+			if ( ! isset( $wp_comment_query->query_vars['count'] ) || false === $wp_comment_query->query_vars['count'] ) {
+				// Find comments with empty content but with a WPRM rating
+				add_filter( 'comments_clauses', function( $clauses ) {
+					global $wpdb;
+					
+					// Join with comment meta table to find comments with ratings
+					$clauses['join'] .= " INNER JOIN $wpdb->commentmeta AS cm ON $wpdb->comments.comment_ID = cm.comment_id AND cm.meta_key = 'wprm-comment-rating'";
+					
+					// Only get comments with empty content
+					$clauses['where'] .= " AND ($wpdb->comments.comment_content = '' OR $wpdb->comments.comment_content = ' ' OR $wpdb->comments.comment_content IS NULL)";
+
+					// Only get comments with ratings not equal to 0
+					$clauses['where'] .= " AND cm.meta_value != '0'";
+					
+					return $clauses;
+				} );
+			}
+		}
+		
+		if ( isset( $wp_comment_query->query_vars['type'] ) && 'wprm_with_comment_text' === $wp_comment_query->query_vars['type'] ) {
+			$wp_comment_query->query_vars['type'] = 'comment';
+
+			// When looking for a count, don't add the query conditions. This makes sure the option shows up in the dropdown.
+			if ( ! isset( $wp_comment_query->query_vars['count'] ) || false === $wp_comment_query->query_vars['count'] ) {
+				// Find comments that have text content
+				add_filter( 'comments_clauses', function( $clauses ) {
+					global $wpdb;
+					
+					// Only get comments with non-empty content (more than whitespace)
+					$clauses['where'] .= " AND $wpdb->comments.comment_content != '' AND $wpdb->comments.comment_content != ' ' AND $wpdb->comments.comment_content IS NOT NULL";
+					
+					return $clauses;
+				} );
+			}
+		}
+
 		return $wp_comment_query;
 	}
 
@@ -104,8 +170,8 @@ class WPRM_Comment_Moderation {
 			$icon = $flag ? 'flag' : 'unflag';
 			$alt = $flag ? __( 'Comment Flagged', 'wp-recipe-maker' ) : __( 'Comment Not Flagged', 'wp-recipe-maker' );
 
-			echo '<span class="wprm-comment-moderation-flag ' . $class .'">';
-			echo '<img src="' . WPRM_URL . 'assets/icons/comment-moderation/' . $icon . '.svg" alt="' . esc_attr( $alt ).  '" title="' . esc_attr( $alt ) . '" />';
+			echo '<span class="wprm-comment-moderation-flag ' . esc_attr( $class ) .'">';
+			echo '<img src="' . WPRM_URL . 'assets/icons/comment-moderation/' . esc_attr( $icon ) . '.svg" alt="' . esc_attr( $alt ).  '" title="' . esc_attr( $alt ) . '" />';
 			echo '</span>';
 		}
 
@@ -119,10 +185,10 @@ class WPRM_Comment_Moderation {
 	 * @param	int $comment_id ID of the comment being saved.
 	 */
 	public static function save_moderation( $comment_id ) {
-		if ( isset( $_POST['wprm-comment-moderation-nonce'] ) && wp_verify_nonce( sanitize_key( $_POST['wprm-comment-moderation-nonce'] ), 'wprm-comment-moderation-nonce' ) ) { // Input var okay.
-			$note = isset( $_POST['wprm-comment-moderation-note'] ) ? trim( $_POST['wprm-comment-moderation-note'] ) : false; // Input var okay.
-			$flag = isset( $_POST['wprm-comment-moderation-flag'] ) && '1' === $_POST['wprm-comment-moderation-flag'] ? 1 : 0; // Input var okay.
-			$email = isset( $_POST['wprm-comment-moderation-email'] ) && '1' === $_POST['wprm-comment-moderation-email'] ? true : false; // Input var okay.
+		if ( isset( $_POST['wprm-comment-moderation-nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_POST['wprm-comment-moderation-nonce'] ) ), 'wprm-comment-moderation-nonce' ) ) {
+			$note = isset( $_POST['wprm-comment-moderation-note'] ) ? trim( sanitize_textarea_field( wp_unslash( $_POST['wprm-comment-moderation-note'] ) ) ) : false;
+			$flag = isset( $_POST['wprm-comment-moderation-flag'] ) && '1' === $_POST['wprm-comment-moderation-flag'] ? 1 : 0;
+			$email = isset( $_POST['wprm-comment-moderation-email'] ) && '1' === $_POST['wprm-comment-moderation-email'] ? true : false;
 
 			$changed_flag = self::maybe_flag( $comment_id, $flag );
 			if ( $note ) {
@@ -134,6 +200,7 @@ class WPRM_Comment_Moderation {
 					$comment = get_comment( $comment_id );
 					$comment_post = get_post( $comment->comment_post_ID );
 
+					// translators: %s: title of the post the comment was given to.
 					$subject = sprintf( __( 'WPRM Comment Moderation: %s', 'wp-recipe-maker' ), $comment_post->post_title );
 					$message = __( 'Comment', 'wp-recipe-maker' );
 					$message .= ': ' . get_edit_comment_link( $comment_id );
@@ -216,6 +283,7 @@ class WPRM_Comment_Moderation {
 		// Check if we're logging the adding of stars.
 		if ( 'stars-added' === $type ) {
 			$new_rating = intval( $text );
+			// translators: %d: number of stars for this recipe.
 			$text = sprintf( esc_html( _n( '%d star', '%d stars', $new_rating, 'wp-recipe-maker' ) ), $new_rating );
 
 			// Check if there was an old rating, if so, the stars changed.
@@ -228,6 +296,7 @@ class WPRM_Comment_Moderation {
 				}
 
 				$type = 'stars-changed';
+				// translators: %d: number of stars for this recipe.
 				$text = sprintf( esc_html( _n( '%d star', '%d stars', $old_rating, 'wp-recipe-maker' ) ), $old_rating ) . ' &rArr; ' . $text;
 			}
 		}
@@ -238,6 +307,7 @@ class WPRM_Comment_Moderation {
 			$old_rating = $old_rating ? intval( $old_rating ) : 0;
 
 			if ( 0 < $old_rating ) {
+				// translators: %d: number of stars for this recipe.
 				$text = sprintf( esc_html( _n( '%d star', '%d stars', $old_rating, 'wp-recipe-maker' ) ), $old_rating );
 			} else {
 				return;

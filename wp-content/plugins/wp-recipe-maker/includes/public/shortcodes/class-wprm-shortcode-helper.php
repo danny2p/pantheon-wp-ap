@@ -198,7 +198,7 @@ class WPRM_Shortcode_Helper {
 				$aria_hidden = ' aria-hidden="true"';
 			}
 
-			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '"' . $aria_hidden . '>' . self::sanitize_html( __( $atts['label'], 'wp-recipe-maker' ) ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
+			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '"' . $aria_hidden . '>' . self::sanitize_html( $atts['label'] ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
 		}
 
 		// Inline style.
@@ -419,7 +419,7 @@ class WPRM_Shortcode_Helper {
 			}
 
 			// Header text with optional placeholders.
-			$header_text = __( $atts['header'], 'wp-recipe-maker' );
+			$header_text = $atts['header'];
 			if ( isset( $atts['id'] ) ) {
 				$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 				if ( $recipe ) {
@@ -446,7 +446,7 @@ class WPRM_Shortcode_Helper {
 
 		if ( isset( $args['class'] ) ) {
 			// UID for this toggle.
-			$uid = isset( $args['uid'] ) ? $args['uid'] : rand();
+			$uid = isset( $args['uid'] ) ? $args['uid'] : wp_rand();
 
 			$width = intval( $atts['switch_width'] );
 			$width = $width < 20 ? 40 : $width;

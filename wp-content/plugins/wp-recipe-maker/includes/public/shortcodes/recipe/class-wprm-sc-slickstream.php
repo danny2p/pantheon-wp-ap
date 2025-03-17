@@ -185,8 +185,8 @@ class WPRM_SC_Slickstream extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = __( $atts['text'], 'wp-recipe-maker' );
-		$text_added = __( $atts['text_added'], 'wp-recipe-maker' );
+		$text = $atts['text'];
+		$text_added = $atts['text_added'];
 
 		$aria_label = '';
 		if ( ! $text ) {

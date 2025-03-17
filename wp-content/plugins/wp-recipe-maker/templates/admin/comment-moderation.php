@@ -18,7 +18,7 @@
 		<div class="wprm-comment-moderation-input">
 			<label for="wprm-comment-moderation-flag">
 				<input type="checkbox" id="wprm-comment-moderation-flag" name="wprm-comment-moderation-flag" value="1" <?php checked( get_comment_meta( $comment->comment_ID, 'wprm_comment_moderation_flag', true ), 1 ); ?> />
-				<?php _e( 'Flag this comment', 'wp-recipe-maker' ); ?>
+				<?php esc_html_e( 'Flag this comment', 'wp-recipe-maker' ); ?>
 			</label>
 		</div>
 		<?php
@@ -29,7 +29,7 @@
 		<div class="wprm-comment-moderation-input">
 			<label for="wprm-comment-moderation-email">
 				<input type="checkbox" id="wprm-comment-moderation-email" name="wprm-comment-moderation-email" value="1" />
-				<?php _e( 'Send email warning to:', 'wp-recipe-maker' ); ?> <span class="wprm-comment-moderation-admin-email"><?php echo implode( ', ', $admin_email ); ?></span>
+				<?php esc_html_e( 'Send email warning to:', 'wp-recipe-maker' ); ?> <span class="wprm-comment-moderation-admin-email"><?php echo esc_html( implode( ', ', $admin_email ) ); ?></span>
 			</label>
 			
 		</div>
@@ -41,10 +41,10 @@
 	if ( $log ) {
 		echo '<table class="wprm-comment-moderation-log">';
 		echo '<tr>';
-		echo '<th>' . __( 'Date', 'wp-recipe-maker' ) . '</th>';
-		echo '<th>' . __( 'User', 'wp-recipe-maker' ) . '</th>';
+		echo '<th>' . esc_html( __( 'Date', 'wp-recipe-maker' ) ) . '</th>';
+		echo '<th>' . esc_html( __( 'User', 'wp-recipe-maker' ) ) . '</th>';
 		echo '<th>&nbsp;</th>';
-		echo '<th>' . __( 'Description', 'wp-recipe-maker' ) . '</th>';
+		echo '<th>' . esc_html( __( 'Description', 'wp-recipe-maker' ) ) . '</th>';
 		echo '</tr>';
 
 		$default_text = array(
@@ -57,7 +57,7 @@
 
 		foreach ( $log as $line ) {
 			echo '<tr>';
-			echo '<td>' . $line['datetime'] . '</td>';
+			echo '<td>' . esc_html( $line['datetime'] ) . '</td>';
 
 			// Display user.
 			$user = get_user_by( 'id', $line['user'] );
@@ -68,14 +68,14 @@
 			if ( $user_edit_link ) {
 				$user_display = '<a href="' . $user_edit_link . '">' . $user_display . '</a>';
 			}
-			echo '<td>' . $user_display . '</td>';
+			echo '<td>' . wp_kses_post( $user_display ) . '</td>';
 
 			// Display type icon.
 			echo '<td>';
 			$type = sanitize_key( $line['type'] );
 			if ( $type && file_exists( WPRM_DIR . 'assets/icons/comment-moderation/' . $type . '.svg' ) ) {
 				echo '<span class="wprm-comment-moderation-icon">';
-				echo '<img src="' . WPRM_URL . 'assets/icons/comment-moderation/' . $type . '.svg" alt="" />';
+				echo '<img src="' . esc_attr( WPRM_URL ) . 'assets/icons/comment-moderation/' . esc_attr( $type ) . '.svg" alt="" />';
 				echo '</span>';
 			}
 

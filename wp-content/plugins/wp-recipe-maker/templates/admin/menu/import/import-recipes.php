@@ -25,7 +25,7 @@
 		<input type="hidden" name="action" value="wprm_import_recipes">
 		<input type="hidden" name="importer" value="<?php echo esc_attr( $importer->get_uid() ); ?>">
 		<?php wp_nonce_field( 'wprm_import_recipes', 'wprm_import_recipes', false ); ?>
-		<h2><?php echo __( 'Import', 'wp-recipe-maker' ) . ' - ' . esc_html( $importer->get_name() ); ?></h2>
+		<h2><?php echo esc_html( __( 'Import', 'wp-recipe-maker' ) . ' - ' . $importer->get_name() ); ?></h2>
 		<?php
 		$error = isset( $_GET['error'] ) ? sanitize_text_field( wp_unslash( $_GET['error'] ) ) : ''; // Input var okay.
 		if ( $error ) :
@@ -47,13 +47,13 @@
 		$has_search = method_exists( $importer, 'get_recipes_search' );
 		
 		if ( $has_search ) :
-			$search = isset( $_GET['s'] ) ? sanitize_text_field( urldecode( $_GET['s'] ) ) : '';
+			$search = isset( $_GET['s'] ) ? urldecode( sanitize_text_field( wp_unslash( $_GET['s'] ) ) ) : '';
 		?>
-		<p><a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search"><?php _e( 'Click to search the recipes to import', 'wp-recipe-maker' ); ?></a></p>
+		<p><a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search"><?php esc_html_e( 'Click to search the recipes to import', 'wp-recipe-maker' ); ?></a></p>
 		<?php
 			if ( $search ) :
 			?>
-			<p><?php echo __( 'Searching', 'wp-recipe-maker' ) . ': ' . $search; ?> <a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search-stop">(<?php _e( 'cancel', 'wp-recipe-maker' ); ?>)</a></p>
+			<p><?php echo esc_html( __( 'Searching', 'wp-recipe-maker' ) . ': ' . $search ); ?> <a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search-stop">(<?php esc_html_e( 'cancel', 'wp-recipe-maker' ); ?>)</a></p>
 			<?php endif;
 		endif; ?>
 		<p><em><?php esc_html_e( 'Use SHIFT-click to (un)check multiple recipes at once.', 'wp-recipe-maker' ); ?></em></p>
@@ -90,6 +90,7 @@
 		if ( ! $searching && $importer->get_recipe_count() > count( $recipes ) ) {
 			$recipes_left = $importer->get_recipe_count() - count( $recipes );
 			echo '<em>';
+			// translators: %d: number of recipes left to import.
 			printf( esc_html( _n( '%d more recipe', '%d more recipes', $recipes_left, 'wp-recipe-maker' ) ), intval( $recipes_left ) );
 
 			if ( 0 === count( $recipes ) ) {

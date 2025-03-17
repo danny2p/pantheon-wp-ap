@@ -178,6 +178,7 @@ class WPRM_Admin_Bar {
 							)
 						);
 
+						// translators: %s: Number of pending recipe submissions.
 						$label = sprintf( _n( '%s pending recipe submission', '%s pending recipe submissions', $submissions_count, 'wp-recipe-maker' ), number_format_i18n( $submissions_count ) );
 						$badge = ' ' . sprintf( '<span style="display: none;" class="wprm-admin-bar-badge"><span aria-hidden="true">%1$d</span><span class="screen-reader-text">%2$s</span></span>', $submissions_count, $label );
 

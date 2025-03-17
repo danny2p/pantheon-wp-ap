@@ -71,6 +71,17 @@ class WPRM_List_Saver {
 						$nbr_items++;
 						$nbr_items_external++;
 					}
+
+					// Sanitize item fields.
+					$data['link'] = sanitize_text_field( $data['link'] );
+					$data['nofollow'] = $data['nofollow'] ? '1' : '';
+					$data['newtab'] = $data['newtab'] ? '1' : '';
+					$data['image'] = intval( $data['image'] );
+					$data['image_url'] = sanitize_text_field( $data['image_url'] );
+					$data['credit'] = sanitize_text_field( $data['credit'] );
+					$data['name'] = sanitize_text_field( $data['name'] );
+					$data['button'] = sanitize_text_field( $data['button'] );
+					$data['summary'] = WPRM_Recipe_Sanitizer::sanitize_html( $data['summary'] );
 				}
 				
 				if ( 'text' === $item['type'] ) {
@@ -84,7 +95,7 @@ class WPRM_List_Saver {
 
 				if ( $valid_item ) {
 					$sanitized_items[] = array(
-						'uid' => intval( $item['uid'] ),
+						'uid' => isset( $item['uid'] ) ? intval( $item['uid'] ) : 0,
 						'type' => sanitize_key( $item['type'] ),
 						'data' => $data,
 					);

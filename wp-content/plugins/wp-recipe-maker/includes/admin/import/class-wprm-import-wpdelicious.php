@@ -57,15 +57,15 @@ class WPRM_Import_Wpdelicious extends WPRM_Import {
 		$html .= '<h4>Recipe Tags</h4>';
 
 		$delicious_taxonomies = array(
-			'recipe-keyword' => __( 'Recipe Keywords', 'delicious-recipes' ),
-			'recipe-difficulty' => __( 'Difficulty Level', 'delicious-recipes' ),
-			'recipe-key' => __( 'Recipe Key', 'delicious-recipes' ),
-			'recipe-tag' => __( 'Recipe Tag', 'delicious-recipes' ),
-			'recipe-cooking-method' => __( 'Recipe Cooking Method', 'delicious-recipes' ),
-			'recipe-cuisine' => __( 'Recipe Cuisine', 'delicious-recipes' ),
-			'recipe-course' => __( 'Recipe Course', 'delicious-recipes' ),
-			'recipe-badge' => __( 'Recipe Badge', 'delicious-recipes' ),
-			'recipe-dietary' => __( 'Recipe Dietary', 'delicious-recipes' ),
+			'recipe-keyword' => 'Recipe Keywords',
+			'recipe-difficulty' => 'Difficulty Level',
+			'recipe-key' => 'Recipe Key',
+			'recipe-tag' => 'Recipe Tag',
+			'recipe-cooking-method' => 'Recipe Cooking Method',
+			'recipe-cuisine' => 'Recipe Cuisine',
+			'recipe-course' => 'Recipe Course',
+			'recipe-badge' => 'Recipe Badge',
+			'recipe-dietary' => 'Recipe Dietary',
 		);
 
 		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();

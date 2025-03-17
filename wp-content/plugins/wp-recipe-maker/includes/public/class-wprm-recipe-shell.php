@@ -343,7 +343,10 @@ class WPRM_Recipe_Shell {
 		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );
 
-		$current_page = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$http_host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$current_page = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . '://' . $http_host . $request_uri;
+
 		$text = str_ireplace( '%recipe_current_url%', $current_page, $text );
 
 		return $text;

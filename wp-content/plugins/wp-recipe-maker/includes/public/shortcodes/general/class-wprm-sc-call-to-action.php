@@ -83,7 +83,9 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				),
 			),
 			'social_text' => array(
+				// translators: %handle% and %tag% should stay as is.
 				'default' => __( 'Mention %handle% or tag %tag%!', 'wp-recipe-maker' ),
+				// translators: %handle% and %tag% should stay as is.
 				'help' => __( 'Use the %handle% and %tag% placeholders where you want them to show up.', 'wp-recipe-maker' ),
 				'type' => 'text',
 				'dependency' => array(

@@ -73,7 +73,7 @@ const Setting = (props) => {
                 {
                     props.setting.hasOwnProperty('documentation')
                     ?
-                    <a href={props.setting.documentation} target="_blank" className="wprm-setting-documentation">Learn More</a>
+                    <a href={props.setting.documentation} target="_blank" className="wprm-setting-documentation">{ props.setting.hasOwnProperty('documentation_text' ) ? props.setting.documentation_text : 'Learn More' }</a>
                     :
                     null
                 }

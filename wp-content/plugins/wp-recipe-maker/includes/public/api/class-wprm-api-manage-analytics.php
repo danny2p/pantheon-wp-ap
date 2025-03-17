@@ -89,7 +89,7 @@ class WPRM_Api_Manage_Analytics {
 				$value = $filter['value'];
 				switch( $filter['id'] ) {
 					case 'created_at':
-						$args['filter'][] = 'DATE_FORMAT(created_at, "%Y-%m-%d %T") LIKE "%' . esc_sql( like_escape( esc_attr( $value ) ) ) . '%"';
+						$args['filter'][] = 'DATE_FORMAT(created_at, "%Y-%m-%d %T") LIKE "%' . esc_sql( $wpdb->esc_like( esc_attr( $value ) ) ) . '%"';
 						break;
 					case 'rating':
 						if ( 'all' !== $value ) {
@@ -97,7 +97,7 @@ class WPRM_Api_Manage_Analytics {
 						}
 						break;
 					case 'type':
-						$args['filter'][] = 'type LIKE "%' . esc_sql( like_escape( $value ) ) . '%"';
+						$args['filter'][] = 'type LIKE "%' . esc_sql( $wpdb->esc_like( $value ) ) . '%"';
 						break;
 					case 'approved':
 						if ( 'yes' === $value ) {
@@ -107,19 +107,19 @@ class WPRM_Api_Manage_Analytics {
 						}
 						break;
 					case 'user_id':
-						$args['filter'][] = 'user_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
+						$args['filter'][] = 'user_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ) . '%"';
 						break;
 					case 'ip':
-						$args['filter'][] = 'ip LIKE "%' . esc_sql( like_escape( $value ) ) . '%"';
+						$args['filter'][] = 'ip LIKE "%' . esc_sql( $wpdb->esc_like( $value ) ) . '%"';
 						break;
 					case 'comment_id':
-						$args['filter'][] = 'comment_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
+						$args['filter'][] = 'comment_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ) . '%"';
 						break;
 					case 'recipe_id':
-						$args['filter'][] = 'recipe_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ). '%"';
+						$args['filter'][] = 'recipe_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ). '%"';
 						break;
 					case 'post_id':
-						$args['filter'][] = 'post_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ). '%"';
+						$args['filter'][] = 'post_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ). '%"';
 						break;
 				}
 			}
@@ -189,6 +189,23 @@ class WPRM_Api_Manage_Analytics {
 				case 'delete':
 					WPRM_Analytics_Database::delete( $ids );
 					break;
+				case 'export_csv':
+					// Create a unique transient key
+					$transient_key = 'wprm_analytics_export_' . wp_create_nonce( 'wprm_analytics_export_csv_' . get_current_user_id() );
+					
+					// Store IDs in a transient (expires after 1 hour = 3600 seconds)
+					set_transient( $transient_key, $ids, 3600 );
+					
+					$filename = 'wprm-analytics-export-' . date( 'Y-m-d' ) . '.csv';
+					$export_url = add_query_arg( array(
+						'action' => 'wprm_analytics_export_csv',
+						'export_key' => $transient_key,
+						'_wpnonce' => wp_create_nonce( 'wprm_analytics_export_csv' ),
+					), admin_url( 'admin-ajax.php' ) );
+					
+					return rest_ensure_response( array(
+						'result' => __( 'Follow this link to download the CSV with all selected analytics:', 'wp-recipe-maker' ) . '<br/><a href="' . esc_url( $export_url ) . '" target="_blank">' . $filename . '</a>',
+					) );
 			}
 
 			return rest_ensure_response( true );

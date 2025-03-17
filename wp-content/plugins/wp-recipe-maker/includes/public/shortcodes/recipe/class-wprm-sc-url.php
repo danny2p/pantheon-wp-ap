@@ -82,7 +82,7 @@ class WPRM_SC_Url extends WPRM_Template_Shortcode {
 
 		// Text to show.
 		$text = $url;
-		$url_parts = parse_url( $url );
+		$url_parts = wp_parse_url( $url );
 
 		if ( $url_parts ) {
 			$url_parts_text = '';

@@ -76,8 +76,8 @@ class WPRM_Import_Recipecard extends WPRM_Import {
 		$table = $wpdb->prefix . 'yumprint_recipe_recipe';
 
 		$rc_recipes = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$rc_recipes = $wpdb->get_results( 'SELECT id, recipe, post_id FROM ' . $table );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$rc_recipes = $wpdb->get_results( $wpdb->prepare( "SELECT id, recipe, post_id FROM `%1s`", $table ) );
 		}
 
 		foreach ( $rc_recipes as $rc_recipe ) {

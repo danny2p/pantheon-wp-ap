@@ -31,7 +31,8 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.8.0' );
+		define( 'WPRM_VERSION', '9.8.2' );
+		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '9.8.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -48,7 +49,7 @@ class WP_Recipe_Maker {
 		$this->define_constants();
 		$this->load_dependencies();
 		add_action( 'plugins_loaded', array( $this, 'wprm_init' ), 1 );
-		add_action( 'admin_notices', array( $this, 'admin_notice_required_version' ) );
+		add_filter( 'wprm_admin_notices', array( $this, 'admin_notices' ) );
 	}
 
 	/**
@@ -107,6 +108,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-admin-bar.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics-database.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-analytics-csv.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog-database.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog-track.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-changelog.php' );
@@ -215,19 +217,43 @@ class WP_Recipe_Maker {
 	 *
 	 * @since    1.9.0
 	 */
-	public function admin_notice_required_version() {
+	public function admin_notices( $notices ) {
+		if ( defined( 'WPRMP_VERSION' ) ) {
+			if ( version_compare( WPRMP_VERSION, WPRM_PREMIUM_VERSION_REQUIRED ) < 0 ) {
+				// Require version.
+				$text = '<p>' . __( 'Please update to at least the following plugin versions:', 'wp-recipe-maker' );
+				$text .= '<br/>WP Recipe Maker Premium ' . WPRM_PREMIUM_VERSION_REQUIRED . '</p>';
+				$text .= '<p>';
+				$text .= '<a href="https://help.bootstrapped.ventures/docs/wp-recipe-maker/updating-wp-recipe-maker/" target="_blank">' . __( 'More information on updating add-ons', 'wp-recipe-maker' ) . '</a>';
+				$text .= '</p>';
 
-		if ( defined( 'WPRMP_VERSION' ) && version_compare( WPRMP_VERSION, WPRM_PREMIUM_VERSION_REQUIRED ) < 0 ) {
-			echo '<div class="notice notice-error"><p>';
-			echo '<strong>WP Recipe Maker</strong></br>';
-			esc_html_e( 'Please update to at least the following plugin versions:', 'wp-recipe-maker-premium' );
-			echo '<br/>WP Recipe Maker Premium ' . esc_html( WPRM_PREMIUM_VERSION_REQUIRED );
-			echo '</p><p>';
-			echo '<a href="https://help.bootstrapped.ventures/article/62-updating-wp-recipe-maker" target="_blank">';
-			esc_html_e( 'More information on updating add-ons', 'wp-recipe-maker-premium' );
-			echo '</a>';
-			echo '</p></div>';
+				$notices[] = array(
+					'id' => 'update_required_' . WPRM_PREMIUM_VERSION_REQUIRED,
+					'title' => 'WP Recipe Maker Premium - ' . __( 'Update Required', 'wp-recipe-maker' ),
+					'text' => $text,
+					'dismissable' => false,
+					'capability' => 'update_plugins',
+					'location' => array( 'wprm_manage', 'plugins' ),
+				);
+			} else if ( version_compare( WPRMP_VERSION, WPRM_PREMIUM_VERSION_RECOMMENDED ) < 0 ) {
+				// Recommended version.
+				$text = '<p>' . __( 'Please update to at least the following plugin versions:', 'wp-recipe-maker' );
+				$text .= '<br/>WP Recipe Maker Premium ' . WPRM_PREMIUM_VERSION_RECOMMENDED . '</p>';
+				$text .= '<p>';
+				$text .= '<a href="https://help.bootstrapped.ventures/docs/wp-recipe-maker/updating-wp-recipe-maker/" target="_blank">' . __( 'More information on updating add-ons', 'wp-recipe-maker' ) . '</a>';
+				$text .= '</p>';
+
+				$notices[] = array(
+					'id' => 'update_recommended_' . WPRM_PREMIUM_VERSION_RECOMMENDED,
+					'title' => 'WP Recipe Maker Premium - ' . __( 'Update Recommended', 'wp-recipe-maker' ),
+					'text' => $text,
+					'capability' => 'update_plugins',
+					'location' => array( 'wprm_manage', 'plugins' ),
+				);
+			}
 		}
+
+		return $notices;
 	}
 
 	/**

@@ -195,7 +195,7 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 
 			// Simple text fields.
 			$recipe['summary'] = isset( $atts['summary'] ) ? $atts['summary'] : '';
-			$recipe['notes'] = isset( $atts['notes'] ) ? $atts['notes'] : '';
+			$recipe['notes'] = isset( $atts['notes'] ) ? $this->fix_content_tags_conflict( $atts['notes'] ) : '';
 
 			// Make sure nutrition exists.
 			$recipe['nutrition'] = array();
@@ -436,8 +436,16 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'wpzoom_rating_stars';
 
-		$query_ratings = 'SELECT * FROM ' . $table_name . ' WHERE recipe_id = ' . intval( $id ) . ' OR post_id = ' . intval( $id );
-		$ratings = $wpdb->get_results( $query_ratings );
+		$ratings = $wpdb->get_results( $wpdb->prepare(
+			"SELECT * FROM `%1s`
+			WHERE recipe_id = %d
+			OR post_id = %d",
+			array(
+				$table_name,
+				$id,
+				$id,
+			)
+		) );
 
 		foreach ( $ratings as $rating ) {
 			if ( '1' === $rating->approved ) {
@@ -518,5 +526,25 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 		} else {
 			return $parsed;
 		}
+	}
+
+	/**
+	 * Fix tags convert '<' & '>' to unicode.
+	 * Source: recipe-card-blocks-by-wpzoom/elementor/widgets/recipe-card-cpt/recipe-card-cpt.php
+	 */
+	public function fix_content_tags_conflict( $content ) {
+		$content = preg_replace_callback(
+			'#(?<!\\\\)(u003c|u003e)#',
+			function( $matches ) {
+				if ( 'u003c' === $matches[1] ) {
+					return '<';
+				} else {
+					return '>';
+				}
+			},
+			$content
+		);
+
+		return $content;
 	}
 }

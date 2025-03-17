@@ -29,12 +29,18 @@ window.WPRecipeMaker.grow = {
         window.growMe(() => {
             isBookmarked = window.growMe.getIsBookmarked();
 
-            window.growMe.on("isBookmarkedChanged", (params) => {
-                isBookmarked = params.isBookmarked;
+            // Only do once, otherwise anytime a recipe is saved, it will mark all recipes on the page as saved.
+            let doneOnce = false;
 
-                if ( isBookmarked ) {
-                    // Don't know which recipe ID exactly, so triggers all.
-                    WPRecipeMaker.grow.markAsSaved( false, true );
+            window.growMe.on("isBookmarkedChanged", (params) => {
+                if ( ! doneOnce ) {
+                    doneOnce = true;
+                    isBookmarked = params.isBookmarked;
+
+                    if ( isBookmarked ) {
+                        // Don't know which recipe ID exactly, so triggers all.
+                        WPRecipeMaker.grow.markAsSaved( false, true );
+                    }
                 }
             });
         });

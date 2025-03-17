@@ -12,7 +12,10 @@
 
 <div class="wrap wprm-tools">
 	<h2><?php esc_html_e( 'Anonymize Ratings', 'wp-recipe-maker' ); ?></h2>
-	<?php printf( esc_html( _n( 'Searching %d rating', 'Searching %d ratings', count( $ratings ), 'wp-recipe-maker' ) ), count( $ratings ) ); ?>.
+	<?php
+	// translators: %d: number of ratings left to search through.
+	printf( esc_html( _n( 'Searching %d rating', 'Searching %d ratings', count( $ratings ), 'wp-recipe-maker' ) ), count( $ratings ) );
+	?>.
 	<div id="wprm-tools-progress-container">
 		<div id="wprm-tools-progress-bar"></div>
 	</div>

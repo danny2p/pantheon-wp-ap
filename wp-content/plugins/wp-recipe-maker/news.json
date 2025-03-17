@@ -1,6 +1,42 @@
 {
     "news": [
         {
+            "date": "2025-03-10",
+            "label": "Blog",
+            "title": "6 Best AI Recipe Generators for Home Cooks",
+            "url": "https://bootstrapped.ventures/best-ai-recipe-generator/"
+        },
+        {
+            "date": "2025-02-28",
+            "label": "Blog",
+            "title": "7 Food Blog Design Trends That Boost Reader Engagement",
+            "url": "https://bootstrapped.ventures/food-blog-design/"
+        },
+        {
+            "date": "2025-02-18",
+            "label": "Blog",
+            "title": "YouTube Keyword Strategies for Recipe Video Success",
+            "url": "https://bootstrapped.ventures/keyword-for-cooking-channel/"
+        },
+        {
+            "date": "2025-02-06",
+            "label": "Blog",
+            "title": "Food Blog Keyword Research: Beyond the Basics",
+            "url": "https://bootstrapped.ventures/keywords-for-food-blogs/"
+        },
+        {
+            "date": "2025-01-30",
+            "label": "Blog",
+            "title": "How to Craft Unique Narratives in Creative Food Writing",
+            "url": "https://bootstrapped.ventures/creative-writing-food/"
+        },
+        {
+            "date": "2025-01-24",
+            "label": "Blog",
+            "title": "How to Write a Recipe Blog Post: A Complete Guide",
+            "url": "https://bootstrapped.ventures/recipe-blog-post-template/"
+        },
+        {
             "date": "2025-01-22",
             "label": "Release",
             "title": "WP Recipe Maker 9.8.0",

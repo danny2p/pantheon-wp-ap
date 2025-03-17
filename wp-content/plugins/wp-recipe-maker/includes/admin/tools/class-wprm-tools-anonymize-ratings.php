@@ -54,7 +54,7 @@ class WPRM_Tools_Anonymize_Ratings {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::anonymize_ratings( $ratings ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

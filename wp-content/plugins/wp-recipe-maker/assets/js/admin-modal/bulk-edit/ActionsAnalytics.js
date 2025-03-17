@@ -6,6 +6,7 @@ const ActionsAnalytics = (props) => {
     const selectedAction = props.action ? props.action.type : false;
     const actionOptions = [
         { value: 'delete', label: __wprm( 'Delete Actions' ), default: false },
+        { value: 'export_csv', label: __wprm( 'Export to CSV' ), default: false },
     ];
 
     return (

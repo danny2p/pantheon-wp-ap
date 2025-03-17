@@ -134,7 +134,7 @@ class WPRM_SC_Facebook_Share extends WPRM_Template_Shortcode {
 		$url = $url ? $url : get_permalink();
 		$url = $url ? $url : get_home_url();
 
-		$share_url = 'http://www.facebook.com/share.php';
+		$share_url = 'https://www.facebook.com/share.php';
 		$share_url .= '?u=' . urlencode( $url );
 
 		$facebook_script = "onclick=\"window.open(this.href,'targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=500,height=500'); return false;\"";
@@ -172,7 +172,7 @@ class WPRM_SC_Facebook_Share extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = __( $atts['text'], 'wp-recipe-maker' );
+		$text = $atts['text'];
 
 		$aria_label = '';
 		if ( ! $text ) {

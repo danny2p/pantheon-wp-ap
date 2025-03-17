@@ -256,7 +256,7 @@ class WPRM_Modal {
 
 		$options[] = array(
 			'value' => 'future',
-			'label' => __( 'Scheduled' ),
+			'label' => __( 'Scheduled', 'wp-recipe-maker' ),
 		);
 
 		return $options;
