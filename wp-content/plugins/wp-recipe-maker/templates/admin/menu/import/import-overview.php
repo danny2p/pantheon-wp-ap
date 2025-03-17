@@ -25,7 +25,7 @@
 	<p>
 		<?php
 		if ( ! WPRM_Addons::is_active( 'premium' ) ) {
-			echo __( 'These importers are only available in', 'wp-recipe-maker' ) . ' <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>:<br/>';
+			echo esc_html( __( 'These importers are only available in', 'wp-recipe-maker' ) ) . ' <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a>:<br/>';
 
 			echo '<br/>';
 			echo 'Import recipes from JSON<br/>';
@@ -33,10 +33,10 @@
 			echo '<br/>';
 			echo 'Import recipes from Paprika';
 		} else {
-			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_json' ) . '">Import recipes from JSON</a><br/>';
-			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_taxonomies' ) . '">Import taxonomy terms from JSON</a><br/>';
+			echo '<a href="' . esc_attr( admin_url( 'admin.php?page=wprm_import_json' ) ) . '">Import recipes from JSON</a><br/>';
+			echo '<a href="' . esc_attr( admin_url( 'admin.php?page=wprm_import_taxonomies' ) ) . '">Import taxonomy terms from JSON</a><br/>';
 			echo '<br/>';
-			echo '<a href="' . admin_url( 'admin.php?page=wprm_import_paprika' ) . '">Import recipes from Paprika</a><br/>';
+			echo '<a href="' . esc_attr( admin_url( 'admin.php?page=wprm_import_paprika' ) ) . '">Import recipes from Paprika</a><br/>';
 		}
 		?>
 	</p>
@@ -68,9 +68,10 @@
 			<?php if ( intval( $importer['count'] ) > 0 ) : ?>
 			<?php
 			if ( is_int( $importer['count'] ) ) {
+				// translators: %d: number of recipes found to import.
 				printf( esc_html( _n( '%d recipe found', '%d recipes found', $importer['count'], 'wp-recipe-maker' ) ), intval( $importer['count'] ) );
 			} else {
-				echo esc_html( $importer['count'] ) . ' ' . esc_html__( ' recipes found' );
+				echo esc_html( $importer['count'] ) . ' ' . esc_html__( ' recipes found', 'wp-recipe-maker' );
 			}
 			?><br />
 			<a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid, 'p' => 0 ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>"><?php esc_html_e( 'Explore import options', 'wp-recipe-maker' ); ?></a>
@@ -124,7 +125,7 @@
 							</td>
 							<td>
 								<?php if ( $recipe->parent_post_id() > 0 ) : ?>
-								<a href="<?php echo esc_url( get_edit_post_link( $recipe->parent_post_id() ) ); ?>" target="_blank"><span class="dashicons dashicons-edit"></span></a> <a href="<?php echo esc_url( get_permalink( $recipe->parent_post_id() ) ); ?>" target="_blank"><span class="dashicons dashicons-visibility"></span></a> <?php echo get_the_title( $recipe->parent_post_id() ); ?>
+								<a href="<?php echo esc_url( get_edit_post_link( $recipe->parent_post_id() ) ); ?>" target="_blank"><span class="dashicons dashicons-edit"></span></a> <a href="<?php echo esc_url( get_permalink( $recipe->parent_post_id() ) ); ?>" target="_blank"><span class="dashicons dashicons-visibility"></span></a> <?php echo esc_html( get_the_title( $recipe->parent_post_id() ) ); ?>
 								<?php else : ?>
 								<?php esc_html_e( 'no parent post found', 'wp-recipe-maker' ); ?>
 								<?php endif; // Parent Post ID. ?>

@@ -89,7 +89,7 @@ class WPRM_Api_Manage_Ratings {
 				$value = $filter['value'];
 				switch( $filter['id'] ) {
 					case 'date':
-						$args['filter'][] = 'date LIKE "%' . esc_sql( like_escape( esc_attr( $value ) ) ) . '%"';
+						$args['filter'][] = 'date LIKE "%' . esc_sql( $wpdb->esc_like( esc_attr( $value ) ) ) . '%"';
 						break;
 					case 'rating':
 						if ( 'all' !== $value ) {
@@ -118,19 +118,19 @@ class WPRM_Api_Manage_Ratings {
 						}
 						break;
 					case 'user_id':
-						$args['filter'][] = 'user_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
+						$args['filter'][] = 'user_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ) . '%"';
 						break;
 					case 'ip':
-						$args['filter'][] = 'ip LIKE "%' . esc_sql( like_escape( $value ) ) . '%"';
+						$args['filter'][] = 'ip LIKE "%' . esc_sql( $wpdb->esc_like( $value ) ) . '%"';
 						break;
 					case 'comment_id':
-						$args['filter'][] = 'comment_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ) . '%"';
+						$args['filter'][] = 'comment_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ) . '%"';
 						break;
 					case 'recipe_id':
-						$args['filter'][] = 'recipe_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ). '%"';
+						$args['filter'][] = 'recipe_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ). '%"';
 						break;
 					case 'post_id':
-						$args['filter'][] = 'post_id LIKE "%' . esc_sql( like_escape( intval( $value ) ) ). '%"';
+						$args['filter'][] = 'post_id LIKE "%' . esc_sql( $wpdb->esc_like( intval( $value ) ) ). '%"';
 						break;
 				}
 			}

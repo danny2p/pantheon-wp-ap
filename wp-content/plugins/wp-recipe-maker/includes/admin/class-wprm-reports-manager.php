@@ -130,8 +130,7 @@ class WPRM_Reports_Manager {
 		global $wpdb;
 		$table_name = self::get_table_name();
 
-		$query_actions = 'SELECT object_id, meta FROM ' . $table_name;
-		$rows = $wpdb->get_results( $query_actions );
+		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT object_id, meta FROM `%1s`", $table_name ) );
 
 		// Construct data array.
 		$data = array();

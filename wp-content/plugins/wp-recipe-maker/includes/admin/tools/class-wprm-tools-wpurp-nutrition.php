@@ -50,7 +50,7 @@ class WPRM_Tools_WPURP_Nutrition {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::import_nutrition( $ingredients ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

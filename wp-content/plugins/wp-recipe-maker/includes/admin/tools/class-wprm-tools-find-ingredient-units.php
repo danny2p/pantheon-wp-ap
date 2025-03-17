@@ -56,7 +56,7 @@ class WPRM_Tools_Find_Ingredient_Units {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::finding_ingredient_units( $posts ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

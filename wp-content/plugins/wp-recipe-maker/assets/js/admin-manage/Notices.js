@@ -40,19 +40,27 @@ export default class Notices extends Component {
                                         className="wprm-admin-notice-text"
                                         dangerouslySetInnerHTML={ { __html: notice.text } }
                                     />
-                                    <a
-                                        className="button"
-                                        href="#"
-                                        onClick={ dismissNotice }
-                                    >{ __wprm( 'Remove Notice' ) }</a>
+                                    {
+                                        notice.dismissable
+                                        &&
+                                        <a
+                                            className="button"
+                                            href="#"
+                                            onClick={ dismissNotice }
+                                        >{ __wprm( 'Remove Notice' ) }</a>
+                                    }
                                 </div>
-                                <div className="wprm-admin-notice-dismiss">
-                                    <Icon
-                                        title={ __wprm( 'Remove Notice' ) }
-                                        type="close"
-                                        onClick={ dismissNotice }
-                                    />
-                                </div>
+                                {
+                                    notice.dismissable
+                                    &&
+                                    <div className="wprm-admin-notice-dismiss">
+                                        <Icon
+                                            title={ __wprm( 'Remove Notice' ) }
+                                            type="close"
+                                            onClick={ dismissNotice }
+                                        />
+                                    </div>
+                                }
                             </div>
                         )
                     })

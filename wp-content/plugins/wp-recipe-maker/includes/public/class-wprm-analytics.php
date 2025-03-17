@@ -83,7 +83,7 @@ class WPRM_Analytics {
 			if ( $new_token !== $old_token ) {
 				// Activate new token.
 				if ( $new_token ) {
-					$domain = $_SERVER['SERVER_NAME'];
+					$domain = isset( $_SERVER['SERVER_NAME'] ) ? sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ) ) : '';
 					$response = wp_remote_get( 'https://dailygrub.com/api/verifyDomain?id=' . urlencode( $new_token ) . '&domain=' . urlencode( $domain ) );
 
 					$status = false;
@@ -213,7 +213,7 @@ class WPRM_Analytics {
 		);
 
 		if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-			$visitor['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+			$visitor['user_agent'] = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
 		}
 
 		return $visitor;
@@ -228,7 +228,8 @@ class WPRM_Analytics {
 	public static function get_user_ip() {
 		foreach ( array( 'REMOTE_ADDR', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED' ) as $key ) {
 			if ( array_key_exists( $key, $_SERVER ) === true ) {
-				foreach ( array_map( 'trim', explode( ',', $_SERVER[ $key ] ) ) as $ip ) { // Input var ok.
+				$server_value = sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
+				foreach ( array_map( 'trim', explode( ',', $server_value ) ) as $ip ) {
 					if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) !== false ) {
 						return $ip;
 					}
@@ -296,10 +297,10 @@ class WPRM_Analytics {
 	 * @since    6.5.0
 	 */
 	public static function get_frontend_meta() {
-		$cookie = isset( $_COOKIE[ 'wprm_analytics_meta' ] ) ? $_COOKIE[ 'wprm_analytics_meta' ] : false;
+		$cookie = isset( $_COOKIE[ 'wprm_analytics_meta' ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ 'wprm_analytics_meta' ] ) ) : false;
 
 		if ( $cookie ) {
-			$decoded = json_decode( stripslashes( $_COOKIE[ 'wprm_analytics_meta' ] ), true );
+			$decoded = json_decode( stripslashes( $cookie ), true );
 
 			if ( $decoded ) {
 				return $decoded;

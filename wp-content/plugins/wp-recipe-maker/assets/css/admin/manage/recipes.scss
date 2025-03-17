@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .wprm-admin-manage-shortcode-container {
     display: flex;
     align-items: center;
@@ -67,11 +69,11 @@
         text-align: center;
     }
     &.wprm-admin-manage-seo-indicator-missing {
-        border-color: darken( #e74c3c, 25% );
-        color: darken( #e74c3c, 25% );
+        border-color: color.adjust( #e74c3c, $lightness: -25%, $space: hsl );
+        color: color.adjust( #e74c3c, $lightness: -25%, $space: hsl );
     }
     &.wprm-admin-manage-seo-indicator-bad {
-        border-color: darken( #e74c3c, 25% );
+        border-color: color.adjust( #e74c3c, $lightness: -25%, $space: hsl );
         .wprm-admin-manage-seo-indicator-block {
             &:nth-child(1) {
                 background-color: #e74c3c;
@@ -79,7 +81,7 @@
         }
     }
     &.wprm-admin-manage-seo-indicator-warning {
-        border-color: darken( #e67e22, 25% );
+        border-color: color.adjust( #e67e22, $lightness: -25%, $space: hsl );
         .wprm-admin-manage-seo-indicator-block {
             &:nth-child(1), &:nth-child(2) {
                 background-color: #e67e22;
@@ -87,7 +89,7 @@
         }
     }
     &.wprm-admin-manage-seo-indicator-rating {
-        border-color: darken( #f1c40f, 25% );
+        border-color: color.adjust( #f1c40f, $lightness: -25%, $space: hsl );
         .wprm-admin-manage-seo-indicator-block {
             &:nth-child(1), &:nth-child(2), &:nth-child(3) {
                 background-color: #f1c40f;
@@ -95,7 +97,7 @@
         }
     }
     &.wprm-admin-manage-seo-indicator-good {
-        border-color: darken( #27ae60, 25% );
+        border-color: color.adjust( #27ae60, $lightness: -25%, $space: hsl );
         .wprm-admin-manage-seo-indicator-block {
             background-color: #27ae60;
         }

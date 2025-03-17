@@ -650,9 +650,10 @@ abstract class WPRM_WP_Background_Process extends WPRM_WP_Async_Request {
 		}
 
 		if ( 1 === $interval ) {
-			$display = __( 'Every Minute' );
+			$display = __( 'Every Minute', 'wp-recipe-maker' );
 		} else {
-			$display = sprintf( __( 'Every %d Minutes' ), $interval );
+			// translators: %d: the number of minutes.
+			$display = sprintf( __( 'Every %d Minutes', 'wp-recipe-maker' ), $interval );
 		}
 
 		// Adds an "Every NNN Minute(s)" schedule to the existing cron schedules.

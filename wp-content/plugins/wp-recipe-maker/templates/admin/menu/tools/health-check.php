@@ -13,7 +13,10 @@
 
 <div class="wrap wprm-tools">
 	<h2><?php esc_html_e( 'Running Health Check', 'wp-recipe-maker' ); ?></h2>
-	<?php printf( esc_html( _n( 'Processing %d post', 'Processing %d posts', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) ); ?>.
+	<?php
+	// translators: %d: number of posts left to process.
+	printf( esc_html( _n( 'Processing %d post', 'Processing %d posts', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) );
+	?>.
 	<div id="wprm-tools-progress-container">
 		<div id="wprm-tools-progress-bar"></div>
 	</div>

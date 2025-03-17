@@ -445,8 +445,16 @@ class WPRM_Import_Wpzoom extends WPRM_Import {
 			global $wpdb;
         	$table_name = $wpdb->prefix . 'wpzoom_rating_stars';
 
-			$query_ratings = 'SELECT * FROM ' . $table_name . ' WHERE recipe_id = ' . intval( $post_id ) . ' OR post_id = ' . intval( $post_id );
-        	$ratings = $wpdb->get_results( $query_ratings );
+        	$ratings = $wpdb->get_results( $wpdb->prepare(
+				"SELECT * FROM `%1s`
+				WHERE recipe_id = %d
+				OR post_id = %d",
+				array(
+					$table_name,
+					$post_id,
+					$post_id,
+				)
+			) );
 
 			foreach ( $ratings as $rating ) {
 				if ( '1' === $rating->approved ) {

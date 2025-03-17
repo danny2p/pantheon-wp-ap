@@ -239,6 +239,7 @@ class WPRM_Template_Helper {
 		}
 
 		if ( $show_details ) {
+			// translators: %d: number of votes for this recipe.
 			$output .= '<div class="wprm-recipe-rating-details"><span class="wprm-recipe-rating-average">' . $rating['average'] . '</span> ' . __( 'from', 'wp-recipe-maker' ) . ' <span class="wprm-recipe-rating-count">' . $rating['count'] . '</span> ' . _n( 'vote', 'votes', $rating['count'], 'wp-recipe-maker' ) . '</div>';
 		}
 
@@ -388,10 +389,6 @@ class WPRM_Template_Helper {
 				}
 
 				$output = '<div class="wprm-unit-conversion-container wprm-unit-conversion-container-' . esc_attr( $recipe->id() ) . '">' . implode( ' - ', $unit_systems_output ) . '</div>';
-
-				WPRM_Assets::add_js_data( 'wprmpuc_recipe_' . $recipe->id(), array(
-					'ingredients' => $ingredients,
-				));
 			}
 		}
 		return $output;

@@ -18,10 +18,10 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 
 ?>
 <!DOCTYPE html>
-<html <?php echo get_language_attributes(); ?>>
+<html <?php echo wp_kses_post( get_language_attributes() ); ?>>
 	<head>
-		<title><?php echo isset( $output['title'] ) && $output['title'] ? $output['title'] : get_bloginfo( 'name' ); ?></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo get_bloginfo( 'charset' ); ?>" />
+		<title><?php echo esc_html( isset( $output['title'] ) && $output['title'] ? $output['title'] : get_bloginfo( 'name' ) ); ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<meta name="robots" content="noindex">
 		<?php if ( WPRM_Settings::get( 'metadata_pinterest_disable_print_page' ) ) : ?>
@@ -37,10 +37,10 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 			foreach ( $output['assets'] as $asset ) {
 				switch ( $asset['type'] ) {
 					case 'css':
-						echo '<link rel="stylesheet" type="text/css" href="' . $asset['url'] . '?ver=' . WPRM_VERSION . '"/>';
+						echo '<link rel="stylesheet" type="text/css" href="' . esc_attr( $asset['url'] . '?ver=' . WPRM_VERSION ) . '"/>';
 						break;
 					case 'js':
-						echo '<script src="' . $asset['url'] . '?ver=' . WPRM_VERSION . '"></script>';
+						echo '<script src="' . esc_attr( $asset['url'] . '?ver=' . WPRM_VERSION ) . '"></script>';
 						break;
 					case 'custom':
 						echo $asset['html'];
@@ -50,18 +50,22 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 		}
 		?>
 	</head>
-	<body class="wprm-print<?php echo is_rtl() ? ' rtl' : ''; ?> wprm-print-<?php echo esc_attr( $output['type'] ); ?>">
+	<body class="wprm-print<?php echo esc_attr( is_rtl() ? ' rtl' : '' ); ?> wprm-print-<?php echo esc_attr( $output['type'] ); ?>">
 		<div id="wprm-print-header">
 			<div id="wprm-print-header-main">
 				<?php
 				$back_link = isset( $output['url'] ) ? $output['url'] : home_url();
-				if ( isset( $_SERVER['HTTP_REFERER'] ) && $_SERVER['HTTP_REFERER'] ) {
-					$host_parts = explode( ':', $_SERVER['HTTP_HOST'] );
+
+				$http_referer = isset( $_SERVER['HTTP_REFERER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : false;
+
+				if ( $http_referer ) {
+					$http_host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+					$host_parts = explode( ':', $http_host );
 					$host_without_port = $host_parts[0];
 
 					// Check if same domain.
-					if ( $host_without_port === parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_HOST ) ) {
-						$back_link = $_SERVER['HTTP_REFERER'];
+					if ( $host_without_port === wp_parse_url( $http_referer, PHP_URL_HOST ) ) {
+						$back_link = $http_referer;
 					} else {
 						wprm_maybe_redirect_to_parent_post( $output );
 					}
@@ -70,16 +74,16 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 					wprm_maybe_redirect_to_parent_post( $output );
 				}
 				?>
-				<a href="<?php echo esc_url( $back_link ); ?>" id="wprm-print-button-back" class="wprm-print-button"><?php _e( 'Go Back', 'wp-recipe-maker' );?></a>
+				<a href="<?php echo esc_url( $back_link ); ?>" id="wprm-print-button-back" class="wprm-print-button"><?php esc_html_e( 'Go Back', 'wp-recipe-maker' );?></a>
 				<?php
 				if ( ! isset( $output['no-email'] ) && WPRM_Settings::get( 'print_email_link_button' ) ) {
-					echo '<a href="#" id="wprm-print-button-email" class="wprm-print-button">' . __( 'Email Link', 'wp-recipe-maker' ) . '</a>';
+					echo '<a href="#" id="wprm-print-button-email" class="wprm-print-button">' . esc_html( __( 'Email Link', 'wp-recipe-maker' ) ) . '</a>';
 				}
 				// if ( WPRM_Settings::get( 'print_download_pdf_button' ) ) {
 				// 	echo '<a href="#" id="wprm-print-button-pdf" class="wprm-print-button">' . __( 'Download PDF', 'wp-recipe-maker' ) . '</a>';
 				// }
 				?>
-				<button id="wprm-print-button-print" class="wprm-print-button" type="button"><?php _e( 'Print', 'wp-recipe-maker' );?></button>
+				<button id="wprm-print-button-print" class="wprm-print-button" type="button"><?php esc_html_e( 'Print', 'wp-recipe-maker' );?></button>
 			</div>
 			<?php if ( isset( $output['header'] ) ) : ?>
 			<div id="wprm-print-header-options"><?php echo $output['header']; ?></div>
@@ -88,7 +92,7 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 		<?php
 		$classes = isset( $output['classes'] ) ? $output['classes'] : array();
 
-		echo '<div id="wprm-print-content" class="' . implode( ' ', $classes ) . '">';
+		echo '<div id="wprm-print-content" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 
 		$html = do_shortcode( $output['html'] );
 		echo apply_filters( 'wprm_print_output_html', $html );

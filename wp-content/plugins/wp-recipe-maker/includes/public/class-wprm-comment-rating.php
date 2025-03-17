@@ -429,7 +429,7 @@ class WPRM_Comment_Rating {
 			wp_nonce_field( 'wprm-comment-rating-nonce', 'wprm-comment-rating-nonce', false );
 			require( WPRM_DIR . 'templates/public/comment-rating-form.php' );
 
-			echo '<a href="#" class="wprm-rating-change-save" data-comment-id="' . esc_attr( $comment_id ) . '" role="button" onclick="WPRecipeMaker.comments.save(this)">' . __( 'Save changed rating', 'wp-recipe-maker' ) . '<span class="wprm-rating-change"></span></a>';
+			echo '<a href="#" class="wprm-rating-change-save" data-comment-id="' . esc_attr( $comment_id ) . '" role="button" onclick="WPRecipeMaker.comments.save(this)">' . esc_html( __( 'Save changed rating', 'wp-recipe-maker' ) ) . '<span class="wprm-rating-change"></span></a>';
 		}
 
 		return $column;

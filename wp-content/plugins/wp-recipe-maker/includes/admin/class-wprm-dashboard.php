@@ -211,6 +211,7 @@ class WPRM_Dashboard {
 		
 		$label = '';
 		if ( 0 < $news_count ) {
+			// translators: %s: the number of new news items.
 			$news = sprintf( _n( '%s new news item', '%s new news items', $news_count, 'wp-recipe-maker' ), number_format_i18n( $news_count ) );
 			$label = ' ' . sprintf( '<span style="float:right" class="update-plugins count-%1$d"><span class="plugin-count" aria-hidden="true">%1$d</span><span class="screen-reader-text">%2$s</span></span>', $news_count, $news );
 		}

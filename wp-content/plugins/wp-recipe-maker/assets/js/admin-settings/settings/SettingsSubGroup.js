@@ -18,7 +18,7 @@ const SettingsSubGroup = (props) => {
             {
                 props.subgroup.hasOwnProperty('documentation')
                 ?
-                <a href={props.subgroup.documentation} target="_blank" className="wprm-setting-documentation">Learn More</a>
+                <a href={props.subgroup.documentation} target="_blank" className="wprm-setting-documentation">{ props.subgroup.hasOwnProperty('documentation_text' ) ? props.subgroup.documentation_text : 'Learn More' }</a>
                 :
                 null
             }

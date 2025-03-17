@@ -62,7 +62,7 @@ class WPRM_Tools_WPURP_Ingredients {
 		// Only when debugging.
 		if ( WPRM_Tools_Manager::$debugging ) {
 			$result = self::import_ingredients( $ingredients, $field ); // Input var okay.
-			var_dump( $result );
+			WPRM_Debug::log( $result );
 			die();
 		}
 

@@ -47,20 +47,20 @@ $nutrition_label = array(
 			'settings' => array(
 				array(
 					'id' => 'nutrition_label_style',
-					'name' => __( 'Nutrition Label Style', 'wp-recipe-maker-premium' ),
-					'description' => __( 'Modern style was released in WP Recipe Maker 6.8.0 and the recommended option. Legacy style is around for backwards compatibility.', 'wp-recipe-maker-premium' ),
+					'name' => __( 'Nutrition Label Style', 'wp-recipe-maker' ),
+					'description' => __( 'Modern style was released in WP Recipe Maker 6.8.0 and the recommended option. Legacy style is around for backwards compatibility.', 'wp-recipe-maker' ),
 					'type' => 'dropdown',
 					'options' => array(
-						'legacy' => __( 'Legacy - Fixed layout', 'wp-recipe-maker-premium' ),
-						'modern' => __( 'Modern - Editable layout', 'wp-recipe-maker-premium' ),
+						'legacy' => __( 'Legacy - Fixed layout', 'wp-recipe-maker' ),
+						'modern' => __( 'Modern - Editable layout', 'wp-recipe-maker' ),
 					),
 					'default' => 'modern',
 				),
 				array(
-					'name' => __( 'Nutrition Label Layout', 'wp-recipe-maker-premium' ),
-					'description' => __( 'This is the layout that will get used if "Modern" nutrition label style is selected above.', 'wp-recipe-maker-premium' ),
+					'name' => __( 'Nutrition Label Layout', 'wp-recipe-maker' ),
+					'description' => __( 'This is the layout that will get used if "Modern" nutrition label style is selected above.', 'wp-recipe-maker' ),
 					'type' => 'button',
-					'button' => __( 'Edit the Nutrition Label Layout', 'wp-recipe-maker-premium' ),
+					'button' => __( 'Edit the Nutrition Label Layout', 'wp-recipe-maker' ),
 					'link' => admin_url( 'admin.php?page=wprmp_nutrition_label_layout' ),
 					'required' => 'premium',
 				),
@@ -73,8 +73,8 @@ $nutrition_label = array(
 				),
 				array(
 					'id' => 'nutrition_label_legacy_servings_type',
-					'name' => __( 'Show nutrition values', 'wp-recipe-maker-premium' ),
-					'description' => __( 'How to display the nutrition values in the label.', 'wp-recipe-maker-premium' ),
+					'name' => __( 'Show nutrition values', 'wp-recipe-maker' ),
+					'description' => __( 'How to display the nutrition values in the label.', 'wp-recipe-maker' ),
 					'type' => 'dropdown',
 					'options' => array(
 						'serving' => __( 'Per serving', 'wp-recipe-maker' ),
@@ -97,7 +97,7 @@ $nutrition_label = array(
 					'id' => 'nutrition_label_custom_daily_values_disclaimer',
 					'name' => __( 'Daily Values Disclaimer', 'wp-recipe-maker' ),
 					'type' => 'text',
-					'default' => __( 'Percent Daily Values are based on a 2000 calorie diet.', 'wp-recipe-maker-premium' ),
+					'default' => __( 'Percent Daily Values are based on a 2000 calorie diet.', 'wp-recipe-maker' ),
 					'dependency' => array(
 						'id' => 'nutrition_label_style',
 						'value' => 'legacy',

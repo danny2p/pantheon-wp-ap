@@ -133,7 +133,7 @@ class WPRM_Changelog {
 		);
 
 		if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-			$user['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+			$user['user_agent'] = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
 		}
 
 		return $user;
@@ -148,7 +148,8 @@ class WPRM_Changelog {
 	public static function get_user_ip() {
 		foreach ( array( 'REMOTE_ADDR', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED' ) as $key ) {
 			if ( array_key_exists( $key, $_SERVER ) === true ) {
-				foreach ( array_map( 'trim', explode( ',', $_SERVER[ $key ] ) ) as $ip ) { // Input var ok.
+				$server_value = sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) );
+				foreach ( array_map( 'trim', explode( ',', $server_value ) ) as $ip ) {
 					if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) !== false ) {
 						return $ip;
 					}

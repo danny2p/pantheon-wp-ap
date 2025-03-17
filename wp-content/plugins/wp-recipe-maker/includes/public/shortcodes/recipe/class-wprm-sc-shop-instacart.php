@@ -78,7 +78,7 @@ class WPRM_SC_Shop_Instacart extends WPRM_Template_Shortcode {
 		}
 
 		// Button.
-		$button = '<img src="' . WPRM_URL . 'assets/icons/integrations/instacart.svg" alt="" /><span>Get Recipe Ingredients</span>';
+		$button = '<img src="' . WPRM_URL . 'assets/icons/integrations/instacart.svg" alt="" data-pin-nopin="true" /><span>Get Recipe Ingredients</span>';
 
 		$output = '<div role="button" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $button . '</div>';
 

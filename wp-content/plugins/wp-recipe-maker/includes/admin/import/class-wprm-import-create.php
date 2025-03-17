@@ -76,8 +76,14 @@ class WPRM_Import_Create extends WPRM_Import {
 		$table = $wpdb->prefix . 'mv_creations';
 
 		$mv_recipes = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$mv_recipes = $wpdb->get_results( 'SELECT id, object_id, title, type FROM ' . $table . ' WHERE type IN ("recipe","diy")' );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$mv_recipes = $wpdb->get_results( $wpdb->prepare(
+				"SELECT id, object_id, title, type FROM `%1s`
+				WHERE type IN ('recipe','diy')",
+				array(
+					$table,
+				)
+			) );
 		}
 
 		foreach ( $mv_recipes as $mv_recipe ) {
@@ -105,8 +111,16 @@ class WPRM_Import_Create extends WPRM_Import {
 		$table = $wpdb->prefix . 'mv_creations';
 
 		$mv_recipes = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$mv_recipes = $wpdb->get_results( 'SELECT id, object_id, title, type FROM ' . $table . ' WHERE type IN ("recipe","diy") AND title LIKE \'%' . esc_sql( $search ) . '%\'' );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$mv_recipes = $wpdb->get_results( $wpdb->prepare(
+				"SELECT id, object_id, title, type FROM `%1s`
+				WHERE type IN ('recipe','diy')
+				AND title LIKE %s",
+				array(
+					$table,
+					'%' . $wpdb->esc_like( $search ) . '%',
+				)
+			) );
 		}
 
 		foreach ( $mv_recipes as $mv_recipe ) {
@@ -133,8 +147,15 @@ class WPRM_Import_Create extends WPRM_Import {
 		$table = $wpdb->prefix . 'mv_creations';
 
 		$mv_recipe = false;
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$rows = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE id=' . intval( $id ) );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT * FROM `%1s`
+				WHERE id = %d",
+				array(
+					$table,
+					$id,
+				)
+			) );
 
 			if ( is_array( $rows ) && 1 === count( $rows ) ) {
 				$mv_recipe = (array) $rows[0];
@@ -173,14 +194,18 @@ class WPRM_Import_Create extends WPRM_Import {
 
 		// Servings.
 		$mv_yield = $mv_recipe['yield'];
-		$match = preg_match( '/^\s*\d+/', $mv_yield, $servings_array );
-		if ( 1 === $match ) {
-				$servings = str_replace( ' ','', $servings_array[0] );
-		} else {
-				$servings = '';
-		}
 
-		$servings_unit = preg_replace( '/^\s*\d+\s*/', '', $mv_yield );
+		$servings = '';
+		$servings_unit = '';
+
+		if ( $mv_yield ) {
+			$match = preg_match( '/^\s*\d+/', $mv_yield, $servings_array );
+			if ( 1 === $match ) {
+				$servings = str_replace( ' ','', $servings_array[0] );
+			}
+
+			$servings_unit = preg_replace( '/^\s*\d+\s*/', '', $mv_yield );
+		}
 
 		$recipe['servings'] = $servings;
 		$recipe['servings_unit'] = $servings_unit;
@@ -458,8 +483,15 @@ class WPRM_Import_Create extends WPRM_Import {
 		$table = $wpdb->prefix . 'mv_creations';
 
 		$mv_recipe = false;
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$rows = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE id=' . intval( $id ) );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT * FROM `%1s`
+				WHERE id = %d",
+				array(
+					$table,
+					$id,
+				)
+			) );
 
 			if ( is_array( $rows ) && 1 === count( $rows ) ) {
 				$mv_recipe = (array) $rows[0];
@@ -538,8 +570,15 @@ class WPRM_Import_Create extends WPRM_Import {
 		$table = $wpdb->prefix . 'mv_reviews';
 
 		$mv_ratings = false;
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$rows = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE creation=' . intval( $id ) );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT * FROM `%1s`
+				WHERE creation = %d",
+				array(
+					$table,
+					$id,
+				)
+			) );
 
 			if ( is_array( $rows ) ) {
 				$mv_ratings = (array) $rows;

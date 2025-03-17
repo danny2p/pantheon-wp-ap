@@ -64,8 +64,8 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 		$table = $wpdb->prefix . 'mpprecipe_recipes';
 
 		$nbr_recipes = 0;
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$nbr_recipes = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $table . ' WHERE (server_recipe_id IS NULL OR LEFT( server_recipe_id, 5 ) <> "wprm-")' );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$nbr_recipes = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM `%1s` WHERE (server_recipe_id IS NULL OR LEFT( server_recipe_id, 5 ) <> 'wprm-')", $table ) );
 		}
 
 		return $nbr_recipes;
@@ -81,7 +81,8 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 		$recipes = array();
 
 		global $wpdb;
-		$mpp_recipes = $wpdb->get_results( 'SELECT recipe_id, post_id, server_recipe_id, recipe_title FROM ' . $wpdb->prefix . 'mpprecipe_recipes' );
+		$table = $wpdb->prefix . 'mpprecipe_recipes';
+		$mpp_recipes = $wpdb->get_results( $wpdb->prepare( "SELECT recipe_id, post_id, server_recipe_id, recipe_title FROM `%1s`", $table ) );
 
 		foreach ( $mpp_recipes as $mpp_recipe ) {
 			if ( 'wprm-' !== substr( $mpp_recipe->server_recipe_id, 0, 5 ) ) {
@@ -265,8 +266,15 @@ class WPRM_Import_Mealplannerpro extends WPRM_Import {
 		$table = $wpdb->prefix . 'mpprecipe_ratings';
 
 		$ratings = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$ratings = $wpdb->get_results( 'SELECT rating, comment_id FROM ' . $table . ' WHERE recipe_id=' . intval( $id ) );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$ratings = $wpdb->get_results( $wpdb->prepare(
+				"SELECT rating, comment_id FROM `%1s`
+				WHERE recipe_id = %d",
+				array(
+					$table,
+					$id,
+				)
+			) );
 		}
 
 		foreach ( $ratings as $rating ) {

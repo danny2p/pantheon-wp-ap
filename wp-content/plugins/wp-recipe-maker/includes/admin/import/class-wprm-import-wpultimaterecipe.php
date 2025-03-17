@@ -64,8 +64,8 @@ class WPRM_Import_Wpultimaterecipe extends WPRM_Import {
 		$wpurp_taxonomies = get_option( 'wpurp_taxonomies', array() );
 		unset( $wpurp_taxonomies['ingredient'] );
 
-		$wpurp_taxonomies['post_tag'] = array( 'labels' => array( 'name' => __( 'Tags' ) ) );
-		$wpurp_taxonomies['category'] = array( 'labels' => array( 'name' => __( 'Categories' ) ) );
+		$wpurp_taxonomies['post_tag'] = array( 'labels' => array( 'name' => __( 'Tags', 'wp-recipe-maker' ) ) );
+		$wpurp_taxonomies['category'] = array( 'labels' => array( 'name' => __( 'Categories', 'wp-recipe-maker' ) ) );
 
 		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
 
@@ -399,8 +399,8 @@ class WPRM_Import_Wpultimaterecipe extends WPRM_Import {
 			$unit = $text_in_time;
 		}
 
-		if ( strtolower( $unit ) === strtolower( __( 'hour', 'wp-ultimate-recipe' ) )
-				|| strtolower( $unit ) === strtolower( __( 'hours', 'wp-ultimate-recipe' ) )
+		if ( strtolower( $unit ) === strtolower( __( 'hour', 'wp-recipe-maker' ) )
+				|| strtolower( $unit ) === strtolower( __( 'hours', 'wp-recipe-maker' ) )
 				|| strtolower( $unit ) === 'h'
 				|| strtolower( $unit ) === 'hr'
 				|| strtolower( $unit ) === 'hrs' ) {

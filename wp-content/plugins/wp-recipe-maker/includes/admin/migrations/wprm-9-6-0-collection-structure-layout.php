@@ -24,8 +24,8 @@ if ( isset( $user_settings['recipe_collections_link'] ) && $user_settings['recip
 					'id' => 'recipe_collections_appearance_structure_layout',
 					'type' => 'dropdown',
 					'options' => array(
-						'icons' => __( 'Inline icons for changing the structure (backwards compatibility)', 'wp-recipe-maker-premium' ),
-						'modal' => __( 'Change the structure in a separate modal', 'wp-recipe-maker-premium' ),
+						'icons' => __( 'Inline icons for changing the structure (backwards compatibility)', 'wp-recipe-maker' ),
+						'modal' => __( 'Change the structure in a separate modal', 'wp-recipe-maker' ),
 					),
 					'default' => 'modal',
 				),

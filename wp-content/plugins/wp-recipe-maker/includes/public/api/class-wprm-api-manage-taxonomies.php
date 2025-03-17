@@ -317,10 +317,10 @@ class WPRM_Api_Manage_Taxonomies {
 
 		unset( $args['number'] );
 		unset( $args['offset'] );
-		$filtered_terms = wp_count_terms( $taxonomy, $args );
+		$filtered_terms = wp_count_terms( $args );
 		remove_filter( 'terms_clauses', array( __CLASS__, 'api_manage_taxonomies_query' ), 10, 3 );
 
-		$total_terms = wp_count_terms( $taxonomy, array( 'hide_empty' => false ) );
+		$total_terms = wp_count_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false ) );
 		$rows = $query->terms ? array_values( $query->terms ) : array();
 
 		// Extra information needed.
@@ -454,7 +454,7 @@ class WPRM_Api_Manage_Taxonomies {
 	public static function api_manage_taxonomies_query( $pieces, $taxonomies, $args ) {		
 		$id_search = isset( $args['wprm_search_id'] ) ? $args['wprm_search_id'] : false;
 		if ( $id_search ) {
-			$pieces['where'] .= ' AND t.term_id LIKE \'%' . esc_sql( like_escape( $id_search ) ) . '%\'';
+			$pieces['where'] .= ' AND t.term_id LIKE \'%' . esc_sql( $wpdb->esc_like( $id_search ) ) . '%\'';
 		}
 
 		return $pieces;
@@ -667,8 +667,7 @@ class WPRM_Api_Manage_Taxonomies {
 					// Copy all term metadata through Database.
 					global $wpdb;
 
-					$sql = $wpdb->prepare( sprintf( "INSERT INTO %s (`term_id`, `meta_key`, `meta_value`) SELECT %%d, `meta_key`, `meta_value` FROM %s WHERE `term_id` = %%d", $wpdb->termmeta, $wpdb->termmeta ), $new_term['term_id'], $existing_id );
-					$wpdb->query( $sql );
+					$wpdb->query( $wpdb->prepare( sprintf( "INSERT INTO %s (`term_id`, `meta_key`, `meta_value`) SELECT %%d, `meta_key`, `meta_value` FROM %s WHERE `term_id` = %%d", $wpdb->termmeta, $wpdb->termmeta ), $new_term['term_id'], $existing_id ) );
 
 					return rest_ensure_response( true );
 				}

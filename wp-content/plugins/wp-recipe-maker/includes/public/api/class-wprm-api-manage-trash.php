@@ -154,17 +154,17 @@ class WPRM_Api_Manage_Trash {
 
 		$id_search = $wp_query->get( 'wprm_search_id' );
 		if ( $id_search ) {
-			$where .= ' AND ' . $wpdb->posts . '.ID LIKE \'%' . esc_sql( like_escape( $id_search ) ) . '%\'';
+			$where .= ' AND ' . $wpdb->posts . '.ID LIKE \'%' . esc_sql( $wpdb->esc_like( $id_search ) ) . '%\'';
 		}
 
 		$date_search = $wp_query->get( 'wprm_search_date' );
 		if ( $date_search ) {
-			$where .= ' AND DATE_FORMAT(' . $wpdb->posts . '.post_date, \'%Y-%m-%d %T\') LIKE \'%' . esc_sql( like_escape( $date_search ) ) . '%\'';
+			$where .= ' AND DATE_FORMAT(' . $wpdb->posts . '.post_date, \'%Y-%m-%d %T\') LIKE \'%' . esc_sql( $wpdb->esc_like( $date_search ) ) . '%\'';
 		}
 
 		$title_search = $wp_query->get( 'wprm_search_title' );
 		if ( $title_search ) {
-			$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( like_escape( $title_search ) ) . '%\'';
+			$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $title_search ) ) . '%\'';
 		}
 
 		return $where;

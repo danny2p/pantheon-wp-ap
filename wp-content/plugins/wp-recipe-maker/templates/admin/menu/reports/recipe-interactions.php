@@ -15,7 +15,10 @@
 	<?php
 		if ( ! $report_finished ) :
 	?>
-	<?php printf( esc_html( _n( 'Searching %d recipe', 'Searching %d recipes', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) ); ?>.
+	<?php
+	// translators: %d: number of recipes left to search through.
+	printf( esc_html( _n( 'Searching %d recipe', 'Searching %d recipes', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) );
+	?>.
 	<div id="wprm-reports-progress-container">
 		<div id="wprm-reports-progress-bar"></div>
 	</div>

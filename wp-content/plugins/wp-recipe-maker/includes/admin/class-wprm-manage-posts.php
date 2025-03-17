@@ -41,7 +41,7 @@ class WPRM_Manage_Posts {
 		}
 
 		$select_id = 'wprm_has_recipe';
-		$selected = isset( $_GET[ $select_id ] ) && '-' !== substr( $_GET[ $select_id ], 0, 1 ) ? $_GET[ $select_id ] : '';
+		$selected = isset( $_GET[ $select_id ] ) && '-' !== substr( sanitize_key( wp_unslash( $_GET[ $select_id ] ) ), 0, 1 ) ? sanitize_key( wp_unslash( $_GET[ $select_id ] ) ) : '';
 
 		// Options.
 		$options = array(
@@ -80,7 +80,7 @@ class WPRM_Manage_Posts {
 			return $posts;
 		}
 
-		$recipe_filter = $_REQUEST['wprm_has_recipe'];
+		$recipe_filter = sanitize_key( wp_unslash( $_REQUEST['wprm_has_recipe'] ) );
 		unset( $_REQUEST['wprm_has_recipe'] ); // Prevent infinite loop later on.
 
 		if ( '-' === substr( $recipe_filter, 0, 1 ) || 0 === $recipe_filter || '0' === $recipe_filter ){

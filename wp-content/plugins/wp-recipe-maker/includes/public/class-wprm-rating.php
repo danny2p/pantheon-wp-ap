@@ -177,10 +177,20 @@ class WPRM_Rating {
 
 			// Update ratings in database.
 			if ( $update_rating_database_has_comment ) {
-				$wpdb->query( "UPDATE $table_name SET has_comment = '1' WHERE id IN (" . implode( ',', $update_rating_database_has_comment ) . ")" );
+				$wpdb->query( $wpdb->prepare(
+					"UPDATE `%1s`
+					SET has_comment = '1'
+					WHERE id IN (" . implode( ', ', array_fill( 0, count( $update_rating_database_has_comment ), '%d' ) ) . ")",
+					array_merge( array( $table_name ), $update_rating_database_has_comment )
+				) );
 			}
 			if ( $update_rating_database_no_comment ) {
-				$wpdb->query( "UPDATE $table_name SET has_comment = '0' WHERE id IN (" . implode( ',', $update_rating_database_no_comment ) . ")" );
+				$wpdb->query( $wpdb->prepare(
+					"UPDATE `%1s`
+					SET has_comment = '0'
+					WHERE id IN (" . implode( ', ', array_fill( 0, count( $update_rating_database_no_comment ), '%d' ) ) . ")",
+					array_merge( array( $table_name ), $update_rating_database_no_comment )
+				) );
 			}
 		}
 

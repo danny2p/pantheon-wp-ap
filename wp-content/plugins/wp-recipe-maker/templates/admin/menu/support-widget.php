@@ -8,8 +8,8 @@ $current_user = wp_get_current_user();
 if ( $current_user->exists() ) :
 ?>
     window.Beacon("prefill", {
-        name: "<?php echo $current_user->user_firstname . ' ' . $current_user->user_lastname; ?>",
-        email: "<?php echo $current_user->user_email; ?>"
+        name: "<?php echo esc_attr( $current_user->user_firstname . ' ' . $current_user->user_lastname ); ?>",
+        email: "<?php echo esc_attr( $current_user->user_email ); ?>"
     });
 <?php endif; ?>
 </script>

@@ -183,7 +183,7 @@ class WPRM_SC_Messenger_Share extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = __( $atts['text'], 'wp-recipe-maker' );
+		$text = $atts['text'];
 
 		$aria_label = '';
 		if ( ! $text ) {

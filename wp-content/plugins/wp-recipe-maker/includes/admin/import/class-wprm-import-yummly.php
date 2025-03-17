@@ -76,8 +76,8 @@ class WPRM_Import_Yummly extends WPRM_Import {
 		$table = $wpdb->prefix . 'amd_yrecipe_recipes';
 
 		$yum_recipes = array();
-		if ( $table === $wpdb->get_var( "SHOW TABLES LIKE '$table'" ) ) {
-			$yum_recipes = $wpdb->get_results( 'SELECT recipe_id, post_id, recipe_title FROM ' . $table );
+		if ( $table === $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) ) {
+			$yum_recipes = $wpdb->get_results( $wpdb->prepare( "SELECT recipe_id, post_id, recipe_title FROM `%1s`", $table ) );
 		}
 
 		foreach ( $yum_recipes as $yum_recipe ) {

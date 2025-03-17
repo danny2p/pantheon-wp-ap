@@ -54,7 +54,9 @@ class WPRM_Api_Notices {
 		$params = $request->get_params();
 	
 		$id = isset( $params['id'] ) ? $params['id'] : '';
-		$result = WPRM_Notices::dismiss( $id );
+		$user_id = isset( $params['user_id'] ) ? intval( $params['user_id'] ) : get_current_user_id();
+		
+		$result = WPRM_Notices::dismiss( $id, $user_id );
 
 		return rest_ensure_response( $result );
 	}

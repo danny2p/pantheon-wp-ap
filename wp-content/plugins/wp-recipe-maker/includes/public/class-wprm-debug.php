@@ -123,15 +123,15 @@ class WPRM_Debug {
 
 				foreach ( self::$log as $log ) {
 					echo '<div class="wprm-debug-log-entry">';
-					echo '<div class="wprm-debug-log-entry-timestamp">' . $log['timestamp'] . '</div>';
-					echo '<div class="wprm-debug-log-entry-caller">' . $log['caller'] . '</div>';
-					echo '<div class="wprm-debug-log-entry-context">' . $log['context'] . '</div>';
+					echo '<div class="wprm-debug-log-entry-timestamp">' . esc_html( $log['timestamp'] ) . '</div>';
+					echo '<div class="wprm-debug-log-entry-caller">' . esc_html( $log['caller'] ) . '</div>';
+					echo '<div class="wprm-debug-log-entry-context">' . esc_html( $log['context'] ) . '</div>';
 
 					echo '<div class="wprm-debug-log-entry-message">';
 					if ( is_string( $log['message'] ) ) {
-						echo '<pre>' . var_export( htmlspecialchars( $log['message'] ), true ) . '</pre>';
+						echo '<pre>' . esc_html( var_export( htmlspecialchars( $log['message'] ), true ) ) . '</pre>';
 					} else {
-						echo '<pre>' . var_export( $log['message'], true ) . '</pre>';
+						echo '<pre>' . esc_html( var_export( $log['message'], true ) ) . '</pre>';
 					}
 					echo '</div>';
 
@@ -153,7 +153,7 @@ class WPRM_Debug {
 		$left_position = is_admin() ? '160px' : '0';
 
 		echo '<style>';
-		echo '#wprm-debug-info { position: fixed; bottom: 0; left: ' . $left_position . '; right: 0; background-color: white; border-top: 2px dotted darkred; z-index: 9999999; height: 250px; overflow-y: scroll; padding: 20px; font-size: 12px; }';
+		echo '#wprm-debug-info { position: fixed; bottom: 0; left: ' . esc_attr( $left_position ) . '; right: 0; background-color: white; border-top: 2px dotted darkred; z-index: 9999999; height: 250px; overflow-y: scroll; padding: 20px; font-size: 12px; }';
 		echo '.wprm-debug-log-entry { display: flex; border-top: 1px dashed black; padding: 5px; }';
 		echo '.wprm-debug-log-entry:first-child { border-top: none; }';
 		echo '.wprm-debug-log-entry-timestamp { flex-basis: 80px; margin-right: 10px; }';

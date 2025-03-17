@@ -34,12 +34,12 @@ $recipe_defaults = array(
 				),
 				array(
 					'id' => 'default_temperature_unit',
-					'name' => __( 'Default Temperature Unit', 'wp-recipe-maker-premium' ),
-					'description' => __( 'The default unit to use when adding a temperature', 'wp-recipe-maker-premium' ),
+					'name' => __( 'Default Temperature Unit', 'wp-recipe-maker' ),
+					'description' => __( 'The default unit to use when adding a temperature', 'wp-recipe-maker' ),
 					'type' => 'dropdown',
 					'options' => array(
-						'F' => __( 'Fahrenheit', 'wp-recipe-maker-premium' ) . ' - °F',
-						'C' => __( 'Celcius', 'wp-recipe-maker-premium' ) . ' - °C',
+						'F' => __( 'Fahrenheit', 'wp-recipe-maker' ) . ' - °F',
+						'C' => __( 'Celcius', 'wp-recipe-maker' ) . ' - °C',
 					),
 					'default' => 'F',
 				),

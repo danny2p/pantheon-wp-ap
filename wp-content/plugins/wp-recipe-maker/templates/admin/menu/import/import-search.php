@@ -26,6 +26,7 @@
 		if ( $search_result['finished'] ) {
 			esc_html_e( 'Search finished.', 'wp-recipe-maker' );
 			echo '<br/>';
+			// translators: %d: number of recipes found to import.
 			printf( esc_html( _n( '%d recipe found', '%d recipes found', $search_result['recipes'], 'wp-recipe-maker' ) ), intval( $search_result['recipes'] ) );
 			echo '<br/>';
 			?>
@@ -34,10 +35,11 @@
 		} else {
 			esc_html_e( 'Still searching, keep this page open.', 'wp-recipe-maker' );
 			echo '<br/>';
+			// translators: %d: number of recipes found to import.
 			printf( esc_html( _n( '%d recipe found', '%d recipes found', $search_result['recipes'], 'wp-recipe-maker' ) ), intval( $search_result['recipes'] ) );
 			?>
 			<script>
-			window.location = '<?php echo add_query_arg( array( 'from' => $uid, 'p' => ($page + 1) ), admin_url( 'admin.php?page=wprm_import_search' ) ); ?>';
+			window.location = '<?php echo esc_url( add_query_arg( array( 'from' => $uid, 'p' => ($page + 1) ), admin_url( 'admin.php?page=wprm_import_search' ) ) ); ?>';
 			</script>
 			<?php
 		}

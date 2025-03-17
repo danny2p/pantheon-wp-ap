@@ -1,5 +1,5 @@
-@import 'elementor';
-@import 'public';
+@use 'elementor';
+@use 'public';
 
 .wprm-admin-modal-overlay {
     position: fixed;

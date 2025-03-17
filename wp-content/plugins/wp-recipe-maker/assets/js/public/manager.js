@@ -24,11 +24,11 @@ window.WPRecipeMaker.manager = {
 			delete window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ];
 		}
 	},
-	getRecipe: ( id ) => {
+	getRecipe: ( id, loadDifferentId = false ) => {
 		id = 'preview' === id ? id : parseInt( id );
 
 		if ( ! window.WPRecipeMaker.manager.recipes.hasOwnProperty( `recipe-${id}` ) ) {
-			return window.WPRecipeMaker.manager.loadRecipe( id );
+			return window.WPRecipeMaker.manager.loadRecipe( id, loadDifferentId );
 		}
 
 		return Promise.resolve( window.WPRecipeMaker.manager.recipes[ `recipe-${id}` ] );
@@ -49,14 +49,16 @@ window.WPRecipeMaker.manager = {
 
 		return recipe;
 	},
-	loadRecipe: ( id ) => {
+	loadRecipe: ( id, loadDifferentId = false ) => {
 		return new Promise((resolveRecipe, rejectRecipe) => {
 			// Check for data added in PHP of try loading through API.
 			const getRecipeData = new Promise((resolveData, rejectData) => {
-				if ( window.hasOwnProperty( 'wprm_recipes' ) && window.wprm_recipes.hasOwnProperty( `recipe-${id}` ) ) {
-					resolveData( window.wprm_recipes[ `recipe-${id}` ] );
+				const idToGetDataFor = loadDifferentId ? loadDifferentId : id;
+
+				if ( window.hasOwnProperty( 'wprm_recipes' ) && window.wprm_recipes.hasOwnProperty( `recipe-${idToGetDataFor}` ) ) {
+					resolveData( window.wprm_recipes[ `recipe-${idToGetDataFor}` ] );
 				} else {
-					window.WPRecipeMaker.manager.loadRecipeDataFromAPI( id ).then( ( result ) => {
+					window.WPRecipeMaker.manager.loadRecipeDataFromAPI( idToGetDataFor ).then( ( result ) => {
 						resolveData( result );
 					});
 				}

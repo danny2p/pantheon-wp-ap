@@ -215,7 +215,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = __( $atts['text'], 'wp-recipe-maker' );
+		$text = $atts['text'];
 
 		$aria_label = '';
 		if ( ! $text ) {
@@ -233,6 +233,7 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 		$attributes .= ' data-media="' . esc_attr( $media ) . '"';
 		$attributes .= ' data-description="' . esc_attr( $description ) . '"';
 		$attributes .= ' data-repin="' . esc_attr( $repin_id ) . '"';
+		$attributes .= ' role="button"';
 		$attributes .= $aria_label;
 
 		if ( 'any' === $atts['action'] ) {

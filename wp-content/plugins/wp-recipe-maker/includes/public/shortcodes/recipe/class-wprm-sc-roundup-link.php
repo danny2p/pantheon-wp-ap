@@ -165,7 +165,6 @@ class WPRM_SC_Roundup_Link extends WPRM_Template_Shortcode {
 		$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
 		$text = $recipe->replace_placeholders( $atts['text'] );
-		$text = __( $text, 'wp-recipe-maker' );
 		$text = apply_filters( 'wprm_recipe_roundup_link_text', $text );
 
 		$output = '<a href="' . esc_url( $recipe->permalink() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $target . $nofollow . ' aria-label="' . esc_attr( $recipe->name() ) . '">' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';

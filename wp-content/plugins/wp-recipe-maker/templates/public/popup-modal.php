@@ -20,10 +20,10 @@
 		<div class="wprm-popup-modal__container" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $id ); ?>-title">
 			<header class="wprm-popup-modal__header">
 				<h2 class="wprm-popup-modal__title" id="<?php echo esc_attr( $id ); ?>-title">
-					<?php echo $title; ?>
+					<?php echo esc_html( $title ); ?>
 				</h2>
 
-				<button class="wprm-popup-modal__close" aria-label="<?php _e( 'Close', 'wp-recipe-maker' ) ?>" data-micromodal-close></button>
+				<button class="wprm-popup-modal__close" aria-label="<?php esc_html_e( 'Close', 'wp-recipe-maker' ) ?>" data-micromodal-close></button>
 			</header>
 
 			<div class="wprm-popup-modal__content" id="<?php echo esc_attr( $id ); ?>-content">
@@ -43,7 +43,7 @@
 					if ( isset( $button['primary'] ) && $button['primary'] ) { $button_classes[] = 'wprm-popup-modal__btn-primary'; }
 					if ( isset( $button['class'] ) ) { $button_classes[] = $button['class']; }
 
-					echo '<button class="' . esc_attr( implode( ' ', $button_classes ) ) . '">' . $button['text'] . '</button>';
+					echo '<button class="' . esc_attr( implode( ' ', $button_classes ) ) . '">' . esc_html( $button['text'] ) . '</button>';
 				}
 				?>
 			</footer>

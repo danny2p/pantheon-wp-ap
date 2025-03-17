@@ -24,8 +24,8 @@ $changelog = array(
 		),
 		array(
 			'id' => 'changelog_admin_email',
-			'name' => __( 'Send email to', 'wp-recipe-maker-premium' ),
-			'description' => __( 'Optional email address to notify when a specific change occurs.', 'wp-recipe-maker-premium' ),
+			'name' => __( 'Send email to', 'wp-recipe-maker' ),
+			'description' => __( 'Optional email address to notify when a specific change occurs.', 'wp-recipe-maker' ),
 			'type' => 'email',
 			'default' => '',
 		),

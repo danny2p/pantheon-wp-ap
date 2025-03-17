@@ -23,8 +23,11 @@ switch ( $field ) {
 ?>
 
 <div class="wrap wprm-tools">
-	<h2><?php esc_html_e( 'Importing WP Ultimate Recipe Ingredients', 'wp-recipe-maker' ); ?> - <?php echo $label; ?></h2>
-	<?php printf( esc_html( _n( 'Searching %d ingredient', 'Searching %d ingredients', count( $ingredients ), 'wp-recipe-maker' ) ), count( $ingredients ) ); ?>.
+	<h2><?php esc_html_e( 'Importing WP Ultimate Recipe Ingredients', 'wp-recipe-maker' ); ?> - <?php echo esc_html( $label ); ?></h2>
+	<?php
+	// translators: %d: number of ingredients left to search through.
+	printf( esc_html( _n( 'Searching %d ingredient', 'Searching %d ingredients', count( $ingredients ), 'wp-recipe-maker' ) ), count( $ingredients ) );
+	?>.
 	<div id="wprm-tools-progress-container">
 		<div id="wprm-tools-progress-bar"></div>
 	</div>

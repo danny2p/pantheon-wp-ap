@@ -33,8 +33,9 @@ $integrations = array(
 				array(
 					'id' => 'integration_instacart_agree',
 					'name' => __( 'Agree to Instacart Button terms', 'wp-recipe-maker' ),
-					'description' => __( 'Enable to agree to the applicable terms of use for the button. Click the following link for more information:', 'wp-recipe-maker' ),
-					'documentation' => 'https://widgets.instacart.com/widget-terms.pdf',
+					'description' => __( 'Enable to agree with the', 'wp-recipe-maker' ),
+					'documentation' => 'https://docs.instacart.com/developer_platform_api/guide/terms_and_policies/developer_terms/',
+					'documentation_text' => 'Instacart Developer Platform Terms and Conditions',
 					'type' => 'toggle',
 					'default' => false,
 				),
@@ -68,9 +69,9 @@ $integrations = array(
 				),
 				array(
 					'id' => 'integration_instacart_affiliate_id',
-					'name' => __( 'Instacart Tastemakers ID', 'wp-recipe-maker' ),
-					'description' => __( 'Optional Tastemakers ID to monetize your Shoppable Recipe button. Terms apply.', 'wp-recipe-maker' ),
-					'documentation' => 'https://www.instacart.com/tastemakers',
+					'name' => __( 'Impact.com Partner ID', 'wp-recipe-maker' ),
+					'description' => __( 'Optional Impact.com Partner ID to monetize your Shoppable Recipe button. You agree to be bound by the Instacart Developer Platform Affiliate Marketing Terms and Conditions', 'wp-recipe-maker' ),
+					'documentation' => 'https://docs.instacart.com/developer_platform_api/guide/concepts/launch_activities/conversions_and_payments/',
 					'type' => 'text',
 					'default' => '',
 					'dependency' => array(
