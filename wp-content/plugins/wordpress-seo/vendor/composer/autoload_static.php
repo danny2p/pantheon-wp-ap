@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5f4a5446ea71a232d9b78e343286134d
+class ComposerStaticInitd903d122543724f32436759eb718e3bd
 {
     public static $files = array (
         '81db02b30f563b92907e271b66bd7559' => __DIR__ . '/..' . '/yoast/whip/src/Facades/wordpress.php',
@@ -682,6 +682,10 @@ class ComposerStaticInit5f4a5446ea71a232d9b78e343286134d
         'Yoast\\WP\\SEO\\Dashboard\\Application\\Search_Rankings\\Top_Page_Repository' => __DIR__ . '/../..' . '/src/dashboard/application/search-rankings/top-page-repository.php',
         'Yoast\\WP\\SEO\\Dashboard\\Application\\Search_Rankings\\Top_Query_Repository' => __DIR__ . '/../..' . '/src/dashboard/application/search-rankings/top-query-repository.php',
         'Yoast\\WP\\SEO\\Dashboard\\Application\\Taxonomies\\Taxonomies_Repository' => __DIR__ . '/../..' . '/src/dashboard/application/taxonomies/taxonomies-repository.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Application\\Traffic\\Organic_Sessions_Repository' => __DIR__ . '/../..' . '/src/dashboard/application/traffic/organic-sessions-repository.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Analytics_4\\Failed_Request_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/analytics-4/failed-request-exception.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Analytics_4\\Invalid_Request_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/analytics-4/invalid-request-exception.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Analytics_4\\Unexpected_Response_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/analytics-4/unexpected-response-exception.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Content_Types\\Content_Type' => __DIR__ . '/../..' . '/src/dashboard/domain/content-types/content-type.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Content_Types\\Content_Types_List' => __DIR__ . '/../..' . '/src/dashboard/domain/content-types/content-types-list.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Data_Provider\\Dashboard_Repository_Interface' => __DIR__ . '/../..' . '/src/dashboard/domain/data-provider/dashboard-repository-interface.php',
@@ -711,10 +715,17 @@ class ComposerStaticInit5f4a5446ea71a232d9b78e343286134d
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Score_Results\\Score_Result' => __DIR__ . '/../..' . '/src/dashboard/domain/score-results/score-result.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Score_Results\\Score_Results_Not_Found_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/score-results/score-results-not-found-exception.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Search_Console\\Failed_Request_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/search-console/failed-request-exception.php',
-        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Search_Rankings\\Search_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/search-rankings/search-data.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Search_Console\\Unexpected_Response_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/search-console/unexpected-response-exception.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Search_Rankings\\Search_Ranking_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/search-rankings/search-ranking-data.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Search_Rankings\\Top_Page_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/search-rankings/top-page-data.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Taxonomies\\Taxonomy' => __DIR__ . '/../..' . '/src/dashboard/domain/taxonomies/taxonomy.php',
         'Yoast\\WP\\SEO\\Dashboard\\Domain\\Time_Based_SEO_Metrics\\Repository_Not_Found_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/time-based-seo-metrics/repository-not-found-exception.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Time_Based_Seo_Metrics\\Data_Source_Not_Available_Exception' => __DIR__ . '/../..' . '/src/dashboard/domain/time-based-seo-metrics/data-source-not-available-exception.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Traffic\\Comparison_Traffic_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/traffic/comparison-traffic-data.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Traffic\\Daily_Traffic_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/traffic/daily-traffic-data.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Domain\\Traffic\\Traffic_Data' => __DIR__ . '/../..' . '/src/dashboard/domain/traffic/traffic-data.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Infrastructure\\Analytics_4\\Analytics_4_Parameters' => __DIR__ . '/../..' . '/src/dashboard/infrastructure/analytics-4/analytics-4-parameters.php',
+        'Yoast\\WP\\SEO\\Dashboard\\Infrastructure\\Analytics_4\\Site_Kit_Analytics_4_Adapter' => __DIR__ . '/../..' . '/src/dashboard/infrastructure/analytics-4/site-kit-analytics-4-adapter.php',
         'Yoast\\WP\\SEO\\Dashboard\\Infrastructure\\Configuration\\Permanently_Dismissed_Site_Kit_Configuration_Repository' => __DIR__ . '/../..' . '/src/dashboard/infrastructure/configuration/permanently-dismissed-site-kit-configuration-repository.php',
         'Yoast\\WP\\SEO\\Dashboard\\Infrastructure\\Configuration\\Permanently_Dismissed_Site_Kit_Configuration_Repository_Interface' => __DIR__ . '/../..' . '/src/dashboard/infrastructure/configuration/permanently-dismissed-site-kit-configuration-repository-interface.php',
         'Yoast\\WP\\SEO\\Dashboard\\Infrastructure\\Configuration\\Site_Kit_Consent_Repository' => __DIR__ . '/../..' . '/src/dashboard/infrastructure/configuration/site-kit-consent-repository.php',
@@ -1226,9 +1237,9 @@ class ComposerStaticInit5f4a5446ea71a232d9b78e343286134d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5f4a5446ea71a232d9b78e343286134d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5f4a5446ea71a232d9b78e343286134d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5f4a5446ea71a232d9b78e343286134d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd903d122543724f32436759eb718e3bd::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd903d122543724f32436759eb718e3bd::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd903d122543724f32436759eb718e3bd::$classMap;
 
         }, null, ClassLoader::class);
     }
