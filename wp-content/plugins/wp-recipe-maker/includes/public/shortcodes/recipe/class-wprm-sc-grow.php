@@ -178,8 +178,8 @@ class WPRM_SC_Grow extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = $atts['text'];
-		$text_added = $atts['text_added'];
+		$text = WPRM_i18n::maybe_translate( $atts['text'] );
+		$text_added = WPRM_i18n::maybe_translate( $atts['text_added'] );
 
 		$aria_label = '';
 		if ( ! $text ) {

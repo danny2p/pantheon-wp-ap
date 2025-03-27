@@ -15,7 +15,7 @@
  * Plugin Name:       WP Recipe Maker
  * Plugin URI:        http://bootstrapped.ventures/wp-recipe-maker/
  * Description:       The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD metadata for better SEO will get you more visitors!
- * Version:           9.8.2
+ * Version:           9.8.3
  * Author:            Bootstrapped Ventures
  * Author URI:        http://bootstrapped.ventures/
  * License:           GPL-2.0+

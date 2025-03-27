@@ -52,7 +52,7 @@ class WPRM_Print {
 	 * @since    1.3.0
 	 */
 	public static function print_page() {
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
 		preg_match( '/[\/\?]' . self::slug() . '[\/=](.+?)(\/)?$/', $request_uri, $print_url ); // Input var okay.
 		$print_query = isset( $print_url[1] ) ? $print_url[1] : '';
 

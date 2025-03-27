@@ -198,7 +198,8 @@ class WPRM_Shortcode_Helper {
 				$aria_hidden = ' aria-hidden="true"';
 			}
 
-			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '"' . $aria_hidden . '>' . self::sanitize_html( $atts['label'] ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
+			$translated_label = WPRM_i18n::maybe_translate( $atts['label'] );
+			$label = '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '"' . $aria_hidden . '>' . self::sanitize_html( $translated_label ) . self::sanitize_html( $atts['label_separator'] ) . '</span>';
 		}
 
 		// Inline style.
@@ -419,7 +420,7 @@ class WPRM_Shortcode_Helper {
 			}
 
 			// Header text with optional placeholders.
-			$header_text = $atts['header'];
+			$header_text = WPRM_i18n::maybe_translate( $atts['header'] );
 			if ( isset( $atts['id'] ) ) {
 				$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 				if ( $recipe ) {

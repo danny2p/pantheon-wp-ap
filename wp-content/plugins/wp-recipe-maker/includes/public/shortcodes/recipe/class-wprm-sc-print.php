@@ -182,7 +182,7 @@ class WPRM_SC_Print extends WPRM_Template_Shortcode {
 		}
 
 		// Text and optional aria-label.
-		$text = $atts['text'];
+		$text = WPRM_i18n::maybe_translate( $atts['text'] );
 
 		$aria_label = '';
 		if ( ! $text ) {
