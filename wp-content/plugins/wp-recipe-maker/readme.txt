@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.7
 Requires PHP: 5.4
-Stable tag: 9.8.2
+Stable tag: 9.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,11 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 6. Fully compatible with the Classic Editor.
 
 == Changelog ==
+= 9.8.3 =
+* Fix: Headers not translated when using default template
+* Fix: Print problem with special characters in slug
+* Fix: Error when filtering on ratings manage page
+
 = 9.8.2 =
 * Fix: Potential styling problems when using special characters in custom CSS
 
@@ -355,6 +360,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 9.8.3 =
+Some small fixes
+
 = 9.8.2 =
 Update recommended when using any custom CSS code
 

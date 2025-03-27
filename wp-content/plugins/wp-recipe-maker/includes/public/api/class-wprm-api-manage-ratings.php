@@ -64,6 +64,8 @@ class WPRM_Api_Manage_Ratings {
 	 * @param    WP_REST_Request $request Current request.
 	 */
 	public static function api_manage_ratings( $request ) {
+		global $wpdb;
+
 		// Parameters.
 		$params = $request->get_params();
 

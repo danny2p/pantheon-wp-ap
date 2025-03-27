@@ -183,7 +183,7 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 		}
 
 		// Optionally display number of comments.
-		$text = $atts['text'];
+		$text = WPRM_i18n::maybe_translate( $atts['text'] );
 		if ( false !== strpos( $text, '%comments%' ) ) {
 			$nbr_comments = $atts['is_template_editor_preview'] ? 2 : get_comments_number();
 			$text = str_ireplace( '%comments%', $nbr_comments, $text );
