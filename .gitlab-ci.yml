@@ -98,9 +98,9 @@ deploy_to_dev:
     - git fetch --unshallow origin || git fetch origin # Fetch unshallow if possible, otherwise just fetch
 
     # Push our code to the Pantheon Dev environment.
-    # The target branch on Pantheon for Dev is 'dev'.
+    # The target branch on Pantheon for Dev is 'master'.
     - echo "Deploying $CI_BRANCH to Pantheon Dev environment for site $PANTHEON_SITE"
-    - git push --force $PANTHEON_REPO $CI_BRANCH:dev # Push the current branch to the 'dev' branch on Pantheon
+    - git push --force $PANTHEON_REPO $CI_BRANCH:master # Push the current branch to the 'master' branch on Pantheon
 
     # Set output variable for the URL fragment.
     # In GitLab CI, we use dotenv variables for this.
