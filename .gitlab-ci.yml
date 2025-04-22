@@ -12,9 +12,7 @@ cleanup_multidev:
   image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2 # Use the Pantheon build tools image
 
   variables:
-    # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
     TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
-    # Variable for the Pantheon site name (configured in GitLab CI/CD Variables).
     PANTHEON_SITE: "$PANTHEON_SITE"
     # GitLab predefined variable for the source branch name of the merge request.
     # This is used to construct the multidev environment name.
@@ -46,9 +44,6 @@ cleanup_multidev:
         echo "Multidev environment $PANTHEON_SITE.$MULTIDEV_ENV_NAME does not exist. Nothing to delete."
       fi
 
-  # Rules to trigger this job only for merge request events targeting master or main.
-  # Note: This job runs when the MR is created, updated, or closed.
-  # The script logic will handle checking if the environment exists before deleting.
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")
       when: on_success # Run if the rules match and previous stages (if any) succeed
@@ -61,16 +56,10 @@ deploy_to_dev:
     # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
     TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
     PANTHEON_REPO: "$PANTHEON_REPO" # The Git URL for your Pantheon repository
-    # Variable for the Pantheon site name (configured in GitLab CI/CD Variables).
     PANTHEON_SITE: "$PANTHEON_SITE"
-    # GitLab predefined variable for the current branch name.
     CI_BRANCH: "$CI_COMMIT_BRANCH"
-    # GitLab predefined variable for the commit SHA. Used for the commit comment.
     COMMIT_SHA: "$CI_COMMIT_SHA"
-    # Personal Access Token with 'api' scope for creating commit comments via GitLab API.
-    # Configure this as a secret variable in GitLab CI/CD Settings.
     GITLAB_TOKEN: "$GITLAB_TOKEN"
-    # GitLab predefined variable for the project ID.
     GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
 
   # Rules to trigger this job only for push events to master or main.
@@ -104,7 +93,6 @@ deploy_to_dev:
     - git push --force $PANTHEON_REPO $CI_COMMIT_SHA:master # Push the current branch to the 'master' branch on Pantheon
   
     # Set output variable for the URL fragment.
-    # In GitLab CI, we use dotenv variables for this.
     - echo "URL_FRAGMENT=dev" >> deploy.env
 
 # --- Job to create a commit comment ---
@@ -154,5 +142,5 @@ create_commit_comment:
 # - TERMINUS_MACHINE_TOKEN (Masked, Protected)
 # - PANTHEON_SITE (Masked, Protected)
 # - PANTHEON_REPO (Masked, Protected)
-# - PANTHEON_SSH_KEY (Masked, Protected - consider using a File variable if possible)
+# - PANTHEON_SSH_KEY (File - which masks by default)
 # - GITLAB_TOKEN (Masked, Protected - needs 'api' scope)
