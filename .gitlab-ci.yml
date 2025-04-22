@@ -80,7 +80,7 @@ deploy_to_dev:
 
   # Corrected indentation for before_script:
   before_script:
-    - mkdir -p ~/.ssh && echo "StrictHostKeyChecking no" >> "~/.ssh/config"
+    - mkdir -p ~/.ssh && && touch ~/.ssh/config && echo "StrictHostKeyChecking no" >> "~/.ssh/config"
     - echo "$PANTHEON_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     # Start the SSH agent and add the key.
