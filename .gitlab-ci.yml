@@ -80,7 +80,7 @@ deploy_to_dev:
 
   # Corrected indentation for before_script:
   before_script:
-    - mkdir -p ~/.ssh && touch ~/.ssh/config && echo "StrictHostKeyChecking no" >> "~/.ssh/config"
+    - mkdir -p ~/.ssh && echo "StrictHostKeyChecking no" >> ~/.ssh/config
     - echo "$PANTHEON_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     # Start the SSH agent and add the key.
@@ -105,11 +105,6 @@ deploy_to_dev:
     # Set output variable for the URL fragment.
     # In GitLab CI, we use dotenv variables for this.
     - echo "URL_FRAGMENT=dev" >> deploy.env
-
-  # Use artifacts to pass the dotenv file to subsequent jobs.
-  artifacts:
-    reports:
-      dotenv: deploy.env
 
 # --- Job to create a commit comment ---
 # This job depends on the deploy_to_dev job to get the URL fragment.
