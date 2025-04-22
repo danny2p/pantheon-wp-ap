@@ -99,9 +99,10 @@ deploy_to_dev:
 
     # Push our code to the Pantheon Dev environment.
     # The target branch on Pantheon for Dev is 'master'.
+    - git log
     - echo "Deploying $CI_BRANCH to Pantheon Dev environment for site $PANTHEON_SITE"
-    - git push --force $PANTHEON_REPO $CI_BRANCH:master # Push the current branch to the 'master' branch on Pantheon
-
+    - git push --force $PANTHEON_REPO $CI_COMMIT_SHA:master # Push the current branch to the 'master' branch on Pantheon
+  
     # Set output variable for the URL fragment.
     # In GitLab CI, we use dotenv variables for this.
     - echo "URL_FRAGMENT=dev" >> deploy.env
