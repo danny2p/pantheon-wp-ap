@@ -1,0 +1,197 @@
+# This file is a GitLab CI/CD pipeline configuration.
+# It converts the logic from the second GitHub Actions workflow.
+
+# Define the stages in the pipeline. Cleanup runs before deployment.
+stages:
+  - cleanup
+  - deploy
+
+# --- Job to clean up multidev environments on MR events ---
+cleanup_multidev:
+  stage: cleanup
+  image: ubuntu:latest # Use an Ubuntu image for consistency
+
+  variables:
+    # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
+    TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
+    # Variable for the Pantheon site name (configured in GitLab CI/CD Variables).
+    PANTHEON_SITE: "$PANTHEON_SITE"
+    # GitLab predefined variable for the source branch name of the merge request.
+    # This is used to construct the multidev environment name.
+    MERGE_REQUEST_SOURCE_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
+
+  # Rules to trigger this job only for merge request events targeting master or main.
+  # Note: This job runs when the MR is created, updated, or closed.
+  # The script logic will handle checking if the environment exists before deleting.
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")
+      when: on_success # Run if the rules match and previous stages (if any) succeed
+
+  script:
+    # --- Dependency Installation ---
+    # Update package list and install necessary tools: curl.
+    - apt-get update -y
+    - apt-get install -y curl
+
+    # Install Terminus globally.
+    - curl https://github.com/pantheon-systems/terminus-installer/releases/download/2.6.0/builds.zip -L -o terminus.zip
+    - unzip terminus.zip
+    - rm terminus.zip
+    - mv terminus /usr/local/bin/terminus
+    - chmod +x /usr/local/bin/terminus
+
+    # Configure Terminus with the machine token.
+    - terminus auth:login --machine-token $TERMINUS_MACHINE_TOKEN
+
+    # --- Cleanup Logic ---
+    # Construct the multidev environment name from the source branch name.
+    # Replace non-alphanumeric characters with hyphens and convert to lowercase.
+    # This replicates the typical Pantheon multidev naming convention from branch names.
+    - MULTIDEV_ENV_NAME=$(echo "$MERGE_REQUEST_SOURCE_BRANCH" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g' | sed 's/--/-/g' | sed 's/^-//;s/-$//')
+
+    # Check if the multidev environment exists.
+    # terminus env:info returns non-zero exit code if the environment does not exist.
+    - echo "Checking for multidev environment: $PANTHEON_SITE.$MULTIDEV_ENV_NAME"
+    - terminus env:info "$PANTHEON_SITE.$MULTIDEV_ENV_NAME" --quiet
+    - command_status=$?
+
+    # If the environment exists (command_status is 0), delete it.
+    - if [ $command_status -eq 0 ]; then
+        echo "Multidev environment $PANTHEON_SITE.$MULTIDEV_ENV_NAME exists. Deleting..."
+        # Delete the environment and its associated branch on Pantheon.
+        terminus env:delete "$PANTHEON_SITE.$MULTIDEV_ENV_NAME" -y --delete-branch
+        echo "Multidev environment $PANTHEON_SITE.$MULTIDEV_ENV_NAME deleted."
+      else
+        echo "Multidev environment $PANTHEON_SITE.$MULTIDEV_ENV_NAME does not exist. Nothing to delete."
+      fi
+
+# --- Job to deploy code to Pantheon Dev ---
+deploy_to_dev:
+  stage: deploy
+  image: ubuntu:latest # Use an Ubuntu image
+
+  variables:
+    # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
+    TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
+    PANTHEON_REPO: "$PANTHEON_REPO" # The Git URL for your Pantheon repository
+    # Variable for the Pantheon site name (configured in GitLab CI/CD Variables).
+    PANTHEON_SITE: "$PANTHEON_SITE"
+    # GitLab predefined variable for the current branch name.
+    CI_BRANCH: "$CI_COMMIT_BRANCH"
+    # GitLab predefined variable for the commit SHA. Used for the commit comment.
+    COMMIT_SHA: "$CI_COMMIT_SHA"
+    # Personal Access Token with 'api' scope for creating commit comments via GitLab API.
+    # Configure this as a secret variable in GitLab CI/CD Settings.
+    GITLAB_TOKEN: "$GITLAB_TOKEN"
+    # GitLab predefined variable for the project ID.
+    GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
+
+  # Rules to trigger this job only for push events to master or main.
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
+      when: on_success # Run if the rules match and previous stages succeed
+
+  # Set up SSH before the script runs.
+  before_script:
+    # Install necessary tools: git, openssh-client, curl.
+    - apt-get update -y
+    - apt-get install -y git openssh-client curl
+
+    # --- SSH Key Setup ---
+    # Create the .ssh directory and set permissions.
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # Add the Pantheon SSH key from GitLab CI/CD variables.
+    # Ensure PANTHEON_SSH_KEY is configured as a File variable in GitLab CI/CD Settings.
+    - ssh-keyscan -H ssh.pantheon.io >> ~/.ssh/known_hosts
+    - chmod 600 ~/.ssh/known_hosts
+    # Assuming PANTHEON_SSH_KEY is a File variable, its path is available at $PANTHEON_SSH_KEY.
+    # If it's a standard variable, you'd echo it into a file: echo "$PANTHEON_SSH_KEY" > ~/.ssh/id_rsa
+    # Let's assume it's a File variable as per the original workflow's hint about config/known_hosts vars.
+    # If PANTHEON_SSH_KEY is a File variable, its path is $PANTHEON_SSH_KEY
+    # If PANTHEON_SSH_KEY is a standard variable containing the key content, use:
+    - echo "$PANTHEON_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+
+    # Start the SSH agent and add the key.
+    - eval $(ssh-agent -s)
+    - ssh-add ~/.ssh/id_rsa
+
+    # --- Terminus Installation ---
+    # Install Terminus globally.
+    - curl https://github.com/pantheon-systems/terminus-installer/releases/download/2.6.0/builds.zip -L -o terminus.zip
+    - unzip terminus.zip
+    - rm terminus.zip
+    - mv terminus /usr/local/bin/terminus
+    - chmod +x /usr/local/bin/terminus
+
+    # Configure Terminus with the machine token.
+    - terminus auth:login --machine-token $TERMINUS_MACHINE_TOKEN
+
+  script:
+    # --- Deployment Processing ---
+    # Fetch history to ensure the push works correctly.
+    - git fetch --unshallow origin || git fetch origin # Fetch unshallow if possible, otherwise just fetch
+
+    # Push our code to the Pantheon Dev environment.
+    # The target branch on Pantheon for Dev is 'dev'.
+    - echo "Deploying $CI_BRANCH to Pantheon Dev environment for site $PANTHEON_SITE"
+    - git push --force $PANTHEON_REPO $CI_BRANCH:dev # Push the current branch to the 'dev' branch on Pantheon
+
+    # Set output variable for the URL fragment.
+    # In GitLab CI, we use dotenv variables for this.
+    - echo "URL_FRAGMENT=dev" >> deploy.env
+
+  # Use artifacts to pass the dotenv file to subsequent jobs.
+  artifacts:
+    reports:
+      dotenv: deploy.env
+
+# --- Job to create a commit comment ---
+# This job depends on the deploy_to_dev job to get the URL fragment.
+create_commit_comment:
+  stage: deploy # Run in the deploy stage after the deployment
+  image: curlimages/curl:latest # Use a minimal image with curl
+
+  variables:
+    # Variables needed for the API call and URL construction.
+    PANTHEON_SITE: "$PANTHEON_SITE"
+    GITLAB_TOKEN: "$GITLAB_TOKEN"
+    GITLAB_PROJECT_ID: "$CI_PROJECT_ID"
+    COMMIT_SHA: "$CI_COMMIT_SHA"
+    # URL_FRAGMENT will be loaded from the dotenv artifact of the previous job.
+
+  # This job depends on the deploy_to_dev job completing successfully.
+  dependencies:
+    - deploy_to_dev
+
+  # Rules to trigger this job only when deploy_to_dev runs (i.e., on push to master/main).
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
+      when: on_success
+
+  script:
+    # The URL_FRAGMENT variable is automatically loaded from the deploy.env artifact.
+    # Construct the Pantheon Dev URL.
+    - PANTHEON_DEV_URL="https://${URL_FRAGMENT}-${PANTHEON_SITE}.pantheonsite.io"
+
+    # Construct the comment body.
+    - COMMENT_BODY="Pantheon Dev updated - $PANTHEON_DEV_URL"
+
+    # Use curl to call the GitLab API to create a commit comment.
+    # API documentation: https://docs.gitlab.com/ee/api/commits.html#post-a-comment-to-a-commit
+    - |
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data '{ "note": "'"$COMMENT_BODY"'" }' \
+        "$CI_API_V4_URL/projects/$GITLAB_PROJECT_ID/repository/commits/$COMMIT_SHA/comments"
+      echo "Commit comment created on commit $COMMIT_SHA"
+
+# Important:
+# You need to configure the following variables in your GitLab project's CI/CD Settings:
+# - TERMINUS_MACHINE_TOKEN (Masked, Protected)
+# - PANTHEON_SITE (Masked, Protected)
+# - PANTHEON_REPO (Masked, Protected)
+# - PANTHEON_SSH_KEY (Masked, Protected - consider using a File variable if possible)
+# - GITLAB_TOKEN (Masked, Protected - needs 'api' scope)
