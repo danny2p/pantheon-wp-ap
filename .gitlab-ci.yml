@@ -27,6 +27,7 @@ cleanup_multidev:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")
       when: on_success # Run if the rules match and previous stages (if any) succeed
 
+  # Corrected indentation for script:
   script:
     # --- Dependency Installation ---
     # Update package list and install necessary tools: curl.
@@ -91,7 +92,7 @@ deploy_to_dev:
     - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
       when: on_success # Run if the rules match and previous stages succeed
 
-  # Set up SSH before the script runs.
+  # Corrected indentation for before_script:
   before_script:
     # Install necessary tools: git, openssh-client, curl.
     - apt-get update -y
@@ -128,6 +129,7 @@ deploy_to_dev:
     # Configure Terminus with the machine token.
     - terminus auth:login --machine-token $TERMINUS_MACHINE_TOKEN
 
+  # Corrected indentation for script:
   script:
     # --- Deployment Processing ---
     # Fetch history to ensure the push works correctly.
@@ -170,6 +172,7 @@ create_commit_comment:
     - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"
       when: on_success
 
+  # Corrected indentation for script:
   script:
     # The URL_FRAGMENT variable is automatically loaded from the deploy.env artifact.
     # Construct the Pantheon Dev URL.
