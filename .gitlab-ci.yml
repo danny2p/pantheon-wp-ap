@@ -20,6 +20,8 @@ cleanup_multidev:
     # This is used to construct the multidev environment name.
     MERGE_REQUEST_SOURCE_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
   script:
+    - echo "These script commands execute after the default `before_script`,"
+    - echo "and before the default `after_script`."
     - apt-get update -y
     #- apt-get update -y
     - apt-get install -y curl
