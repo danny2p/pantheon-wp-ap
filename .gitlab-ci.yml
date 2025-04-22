@@ -81,11 +81,11 @@ deploy_to_dev:
   # Corrected indentation for before_script:
   before_script:
     - mkdir -p ~/.ssh && echo "StrictHostKeyChecking no" >> ~/.ssh/config
-    - echo "$PANTHEON_SSH_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
     # Start the SSH agent and add the key.
     - eval $(ssh-agent -s)
-    - ssh-add ~/.ssh/id_rsa
+    - ssh-add "$PANTHEON_SSH_KEY" # Use the variable directly as the file path
+
     # Configure Git with the GitLab user email and name.
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "Gitlab CI"
