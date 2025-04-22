@@ -9,7 +9,7 @@ stages:
 # --- Job to clean up multidev environments on MR events ---
 cleanup_multidev:
   stage: cleanup
-  image: quay.io/pantheon-public/build-tools-ci:8.x # Use the Pantheon build tools image
+  image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2 # Use the Pantheon build tools image
 
   variables:
     # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
@@ -56,7 +56,7 @@ cleanup_multidev:
 # --- Job to deploy code to Pantheon Dev ---
 deploy_to_dev:
   stage: deploy
-  image: quay.io/pantheon-public/build-tools-ci:8.x # Use the Pantheon build tools image
+  image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2 # Use the Pantheon build tools image
   variables:
     # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
     TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
