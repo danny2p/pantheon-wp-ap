@@ -19,10 +19,9 @@ cleanup_multidev:
     # GitLab predefined variable for the source branch name of the merge request.
     # This is used to construct the multidev environment name.
     MERGE_REQUEST_SOURCE_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
-
-  # Corrected indentation for script:
   script:
     - apt-get update -y
+    #- apt-get update -y
     - apt-get install -y curl
     # --- Dependency Installation ---
     # Update package list and install necessary tools: curl.
