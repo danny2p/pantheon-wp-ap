@@ -31,7 +31,7 @@ cleanup_multidev:
 
     # Check if the multidev environment exists.
     # terminus env:info returns non-zero exit code if the environment does not exist.
-    - echo "Checking for multidev environment: $PANTHEON_SITE.$MULTIDEV_ENV_NAME"
+    - echo "Checking for multidev environment:".$PANTHEON_SITE . "." . $MULTIDEV_ENV_NAME
     - terminus env:info "$PANTHEON_SITE.$MULTIDEV_ENV_NAME" --quiet
     - command_status=$?
 
