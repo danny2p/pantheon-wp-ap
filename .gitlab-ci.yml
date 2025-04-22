@@ -20,13 +20,6 @@ cleanup_multidev:
     # This is used to construct the multidev environment name.
     MERGE_REQUEST_SOURCE_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
 
-  # Rules to trigger this job only for merge request events targeting master or main.
-  # Note: This job runs when the MR is created, updated, or closed.
-  # The script logic will handle checking if the environment exists before deleting.
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")
-      when: on_success # Run if the rules match and previous stages (if any) succeed
-
   # Corrected indentation for script:
   script:
     - apt-get update -y
@@ -66,6 +59,13 @@ cleanup_multidev:
         echo "Multidev environment $PANTHEON_SITE.$MULTIDEV_ENV_NAME does not exist. Nothing to delete."
       fi
 
+  # Rules to trigger this job only for merge request events targeting master or main.
+  # Note: This job runs when the MR is created, updated, or closed.
+  # The script logic will handle checking if the environment exists before deleting.
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main")
+      when: on_success # Run if the rules match and previous stages (if any) succeed
+      
 # --- Job to deploy code to Pantheon Dev ---
 deploy_to_dev:
   stage: deploy
