@@ -29,10 +29,10 @@ cleanup_multidev:
 
   # Corrected indentation for script:
   script:
-    # --- Dependency Installation ---
-    # Update package list and install necessary tools: curl.
     - apt-get update -y
     - apt-get install -y curl
+    # --- Dependency Installation ---
+    # Update package list and install necessary tools: curl.
 
     # Install Terminus globally.
     - curl https://github.com/pantheon-systems/terminus-installer/releases/download/2.6.0/builds.zip -L -o terminus.zip
