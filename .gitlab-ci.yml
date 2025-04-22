@@ -10,17 +10,8 @@ stages:
 cleanup_multidev:
   stage: cleanup
   image: ubuntu:latest # Use an Ubuntu image for consistency
-
-  variables:
-    # Secret variables - configure in GitLab CI/CD Settings -> CI/CD -> Variables.
-    TERMINUS_MACHINE_TOKEN: "$TERMINUS_MACHINE_TOKEN"
-    # Variable for the Pantheon site name (configured in GitLab CI/CD Variables).
-    PANTHEON_SITE: "$PANTHEON_SITE"
-    # GitLab predefined variable for the source branch name of the merge request.
-    # This is used to construct the multidev environment name.
-    MERGE_REQUEST_SOURCE_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
   script:
-    - echo "These script commands execute after the default `before_script`,"
+    - echo "hello world"
     - echo "and before the default `after_script`."
     - apt-get update -y
     #- apt-get update -y
