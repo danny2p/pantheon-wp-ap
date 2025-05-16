@@ -19,7 +19,7 @@ if ( ! function_exists( 'codepopular_dashboard_widget_render' ) ) {
 	/**
 	 * Function to get dashboard widget data.
 	 */
-	function codepopular_dashboard_widget_render() {
+	function codepopular_dashboard_widget_render(): void {
         // Fetch the JSON data
         $response = wp_remote_get('https://raw.githubusercontent.com/shamimbdpro/promotion/main/promotion.json', array('timeout' => 10));
 
@@ -65,7 +65,7 @@ if ( ! function_exists( 'codepopular_dashboard_widget_render' ) ) {
 			?>
 			<hr>
 			<p> <a style="text-decoration: none;font-weight: bold" href="<?php echo esc_url( 'https://codepopular.com/blog/' ); ?>?utm_source=maxuploader-dashboard-feed" target=_balnk><?php echo esc_html__( 'Get more WordPress tips & news on our blog...', 'wp-maximum-upload-file-size' ); ?></a></p>
-			<a style="text-decoration: none; font-weight: bold; color: #fff; border: 1px solid #ccc; padding: 6px 10px; border-radius: 4px; background: #39b54a; " href="<?php echo esc_url_raw('https://codepopular.com/contact');?>?utm_source=maxuploader-dashboard-feed" target="_balnk"><?php echo esc_html('Talk with WordPress Expert');?></a>
+			<a class="button" href="<?php echo esc_url_raw('https://codepopular.com/contact');?>?utm_source=maxuploader-dashboard-feed" target="_balnk"><?php echo esc_html('Talk with WordPress Expert');?></a>
 			<?php
 		}
 	}

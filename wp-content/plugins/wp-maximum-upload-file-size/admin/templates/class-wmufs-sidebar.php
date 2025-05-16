@@ -1,58 +1,42 @@
 
-<!--Recommend Dostart Theme-->
-<div class="wmufs_card_mini">
-    <div class="wmufs-title">
-        <div class="wmufs-recommended-content">
-            <div  class="wmufs-btn">
-                <a target="_blank" href="<?php echo esc_url_raw('https://ko-fi.com/codepopular');?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><style>svg{fill:#ffffff}</style><path d="M192 384h192c53 0 96-43 96-96h32c70.6 0 128-57.4 128-128S582.6 32 512 32H120c-13.3 0-24 10.7-24 24v232c0 53 43 96 96 96zM512 96c35.3 0 64 28.7 64 64s-28.7 64-64 64h-32V96h32zm47.7 384H48.3c-47.6 0-61-64-36-64h583.3c25 0 11.8 64-35.9 64z"/></svg> &nbsp
-                    <?php esc_html_e(' Buy Me a Coffee', 'wp-maximum-upload-file-size'); ?>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- Premium Features List -->
 <div class="wmufs_card_mini wmufs_mb_20">
-    <div class="wmufs-title">
-        <h3><?php esc_html_e('Get Free WordPress Theme', 'wp-maximum-upload-file-size') ?></h3>
-        <div class="wmufs-recommended-content">
-            <a href="<?php echo esc_url_raw('https://wordpress.org/themes/dostart');?>" target="_blank">
-            <img src="<?php echo esc_url(  WMUFS_PLUGIN_URL . 'assets/images/dostart.png' ); ?>" alt="<?php echo esc_html('dostart');?>">
-            </a>
-            <div class="wmufs-btn">
-                <a target="_blank" href="<?php echo esc_url_raw('https://wordpress.org/themes/dostart');?>"><?php esc_html_e('Download Now', 'wp-maximum-upload-file-size'); ?></a>
-            </div>
-        </div>
-    </div>
+    <h3 style="font-size: 20px; margin-bottom: 15px;"><?php echo esc_html__('Included in the Pro Extension:', 'wp-maximum-upload-file-size'); ?></h3>
+    <ul style="list-style: disc; padding-left: 20px; font-size: 15px; line-height: 1.7;">
+        <li><?php echo esc_html__('Set upload limits by user role', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Advanced system status dashboard', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Track total uploaded files per user', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Calculate total storage used', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Restrict file types by user role', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Premium support from our expert team', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Calculate file size in media list and grid', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('Maleware scane in media libreary', 'wp-maximum-upload-file-size'); ?></li>
+        <li><?php echo esc_html__('And many more enhancements to come!', 'wp-maximum-upload-file-size'); ?></li>
+    </ul>
+	<p>Pro Extention will keep your media libreary protected and clean</p>
+    <a href="https://codepopular.com/product/maxuploader/?utm_source=wp_dashboard&utm_medium=plugin&utm_campaign=pro_upgrade_button"
+       target="_blank"
+       class="button"
+       style="font-size: 15px; margin-top: 15px;">
+		<?php echo esc_html__('Learn More About Pro', 'wp-maximum-upload-file-size'); ?>
+    </a>
 </div>
 
-<!--Recommend Unlimited Theme Addons-->
-
+<!-- Create Support Ticket -->
+<!-- Create Support Ticket -->
 <div class="wmufs_card_mini wmufs_mb_20">
-    <div class="wmufs-title">
-        <h3><?php esc_html_e('Try Free Elementor Addons', 'wp-maximum-upload-file-size') ?></h3>
-        <div class="wmufs-recommended-content">
-            <a href="<?php echo esc_url_raw('https://wordpress.org/plugins/unlimited-theme-addons/');?>" target="_blank">
-                <img src="<?php echo esc_url(  WMUFS_PLUGIN_URL . 'assets/images/unlimited-theme-addon.png' ); ?>" alt="<?php echo esc_html('dostart');?>">
+    <div class="support-ticket">
+        <h2><?php echo esc_html__('Do you need any free help?', 'wp-maximum-upload-file-size'); ?></h2>
+        <div class="support-buttons">
+            <a target="_blank" class="button" href="<?php echo esc_url_raw('https://wordpress.org/support/plugin/wp-maximum-upload-file-size/');?>">
+                <span class="dashicons dashicons-sos"></span>&nbsp;<?php echo esc_html__('Open Ticket', 'wp-maximum-upload-file-size'); ?>
             </a>
-            <div class="wmufs-btn">
-                <a target="_blank" href="<?php echo esc_url_raw('https://wordpress.org/plugins/unlimited-theme-addons/');?>"><?php esc_html_e('Download Now', 'wp-maximum-upload-file-size'); ?></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Recommend Unlimited Theme Addons-->
-
-<div class="wmufs_card_mini">
-    <div class="wmufs-title">
-        <div class="wmufs-recommended-content">
-            <div  class="wmufs-btn">
-                <a target="_blank" href="<?php echo esc_url_raw('https://codepopular.com/contact/');?>">
-                    <span class="dashicons dashicons-email"> </span>  &nbsp  <?php esc_html_e(' Contact Us', 'wp-maximum-upload-file-size'); ?>
-                </a>
-            </div>
+            <a target="_blank" class="button" href="<?php echo esc_url_raw('https://codepopular.com/contact/?utm_source=wp_dashboard&utm_medium=plugin&utm_campaign=contact_us_button');?>">
+                <span class="dashicons dashicons-email"></span>&nbsp;<?php esc_html_e('Contact Us', 'wp-maximum-upload-file-size'); ?>
+            </a>
+            <a target="_blank" class="button button-primary" href="<?php echo esc_url_raw('https://ko-fi.com/codepopular');?>">
+                <span class="dashicons dashicons-smiley"></span>&nbsp;<?php esc_html_e('Buy Me a Coffee', 'wp-maximum-upload-file-size'); ?>
+            </a>
         </div>
     </div>
 </div>

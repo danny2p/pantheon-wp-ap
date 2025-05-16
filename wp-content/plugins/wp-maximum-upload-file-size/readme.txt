@@ -1,11 +1,11 @@
 === MaxUploader - Increase Media Upload File Size | Increase Execution Time ===
-Contributors: codepopular, shamimtpi, rajubdpro,bitpressadmin
+Contributors: codepopular, shamimtpi, rajubdpro
 Tags: max uploader, increase upload limit, big file upload, upload limit, Increase Maximum Execution Time
 Donate link: https://ko-fi.com/codepopular
 Requires at least: 3.0
-Requires PHP: 5.6
-Tested up to: 6.7
-Stable tag: 1.1.7
+Requires PHP: 7.0
+Tested up to: 6.8
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,22 +19,17 @@ Plugin automatically detects upload limits set by WordPress and by the server / 
 
 Access plugin's settings from the main WP admin menu.
 
-You can easily increase maximum upload file size. And also you can increase WordPress maximum execution time. some time extended maximum execution time when upload any attachment. From now with this plugin you can simply avoid this problem.
+You can increase the maximum upload file size. And also you can increase WordPress maximum execution time. Some time extended maximum execution time when upload any attachment. From now with this plugin you can simply avoid this problem.
 
 ### **Where to find Option to Increase Upload Limit.**
-Ok, After install the plugin then activate it. After activate the plugin go to your dashboard and go to media> Increase Upload Limit.
+Ok, After install the plugin then activate it. After activating the plugin, go to your dashboard and go to media> MaxUploader.
 
 ### **Increase Maximum Execution Time.**
-Some time WordPress user can't upload new file with media due to extended execution time. With this plugin you can increase the execution time to avoid these issue. You need to set the execution time in input filed to set your own execution time according to your need.
+Some time WordPress user can't upload a new file with media due to extended execution time. With this plugin, you can increase the execution time to avoid these issue. You need to set the execution time in input filed to set your own execution time according to your need.
 
 = Necessary Elementor Plugin for your store =
 
 > * [Unlimited Theme Addons](https://wordpress.org/plugins/unlimited-theme-addons/)
-
-
-= Necessary WooCommerce Plugin for your store =
-
-> * [Variation Price Display Range for WooCommerce](https://wordpress.org/plugins/variation-price-display/)
 
 
 == Installation ==
@@ -43,14 +38,14 @@ The usual, automatic way;
 
 1. Open WordPress admin, go to Plugins, click Add New
 2. Enter "increase maximum upload" in search and hit Enter
-3. Plugin will show up as the first on the list, click "Install Now"
+3. The Plugin will show up as the first on the list, click "Install Now"
 4. Activate & open plugin's settings page located in the main admin menu
 
 Or if needed, install manually;
 
 1. Download the plugin.
 2. Unzip it and upload to _/wp-content/plugins/_
-3. Open WordPress admin - Plugins and click "Activate" next to the plugin
+3. Open WordPress admin - Plugins and click "Activate" next to plugin
 4. Activate & open plugin's settings from Media>Increase Upload Size.
 
 
@@ -60,6 +55,13 @@ Or if needed, install manually;
 
 == Changelog ==
 
+
+2.0.0
+-------------
+* Overwrite php ini file.
+* Show in details info in system status.
+* Improve UI
+* offer a premium version.
 
 1.1.7
 -------------
