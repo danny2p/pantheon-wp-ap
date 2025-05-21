@@ -13,7 +13,7 @@
         <li><?php echo esc_html__('Maleware scane in media libreary', 'wp-maximum-upload-file-size'); ?></li>
         <li><?php echo esc_html__('And many more enhancements to come!', 'wp-maximum-upload-file-size'); ?></li>
     </ul>
-	<p>Pro Extention will keep your media libreary protected and clean</p>
+	<p>Pro Extention will keep your media library protected and clean</p>
     <a href="https://codepopular.com/product/maxuploader/?utm_source=wp_dashboard&utm_medium=plugin&utm_campaign=pro_upgrade_button"
        target="_blank"
        class="button"
@@ -22,7 +22,6 @@
     </a>
 </div>
 
-<!-- Create Support Ticket -->
 <!-- Create Support Ticket -->
 <div class="wmufs_card_mini wmufs_mb_20">
     <div class="support-ticket">

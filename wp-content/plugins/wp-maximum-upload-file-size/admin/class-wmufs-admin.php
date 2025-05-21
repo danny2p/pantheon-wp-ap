@@ -25,29 +25,40 @@ class MaxUploader_Admin {
      * Handle form submission for max uploader settings.
      * @return void
      */
-    static function max_uploader_form_submission(): void {
-        if (
-            ! isset($_POST['upload_max_file_size_nonce']) ||
-            ! wp_verify_nonce(sanitize_text_field($_POST['upload_max_file_size_nonce']), 'upload_max_file_size_action')
-        ) {
-            return;
-        }
+	static function max_uploader_form_submission(): void {
+		if (
+			! isset($_POST['upload_max_file_size_nonce']) ||
+			! wp_verify_nonce(sanitize_text_field($_POST['upload_max_file_size_nonce']), 'upload_max_file_size_action')
+		) {
+			return;
+		}
 
-        if ( isset($_POST['upload_max_file_size_field']) ) {
-            $max_upload_size = (int) sanitize_text_field($_POST['upload_max_file_size_field']) * 1024 * 1024;
-            update_option('max_file_size', $max_upload_size);
-        }
+		$settings = [];
 
-        if ( isset($_POST['wmufs_maximum_execution_time']) ) {
-            $max_execution_time = sanitize_text_field($_POST['wmufs_maximum_execution_time']);
-            update_option('wmufs_maximum_execution_time', $max_execution_time);
-        }
+		if ( isset($_POST['max_file_size_field']) ) {
+			$limit = (int) sanitize_text_field($_POST['max_file_size_field']) * 1024 * 1024;
+            $settings['max_limits'] = [
+              'all' => $limit,
+            ];
+		}
 
-        set_transient('wmufs_settings_updated', 'Settings saved successfully.', 30);
-        wp_safe_redirect(admin_url('admin.php?page=max_uploader'));
+		if ( isset($_POST['max_execution_time_field']) ) {
+			$settings['max_execution_time'] = (int) sanitize_text_field($_POST['max_execution_time_field']);
+		}
 
-        exit;
-    }
+		if ( isset($_POST['max_memory_limit_field']) ) {
+			$settings['max_memory_limit'] = (int) sanitize_text_field($_POST['max_memory_limit_field']) * 1024 * 1024;
+		}
+
+		// Save as JSON string or array. WordPress can handle arrays (auto-serialized).
+		update_option('wmufs_settings', $settings);
+
+		set_transient('wmufs_settings_updated', 'Settings saved successfully.', 30);
+		wp_safe_redirect(admin_url('admin.php?page=max_uploader'));
+
+		exit;
+	}
+
 
     static function show_admin_notice(): void {
         if ( $message = get_transient('wmufs_settings_updated') ) {
@@ -137,7 +148,7 @@ class MaxUploader_Admin {
                 <?php include_once WMUFS_PLUGIN_PATH . 'inc/MaxUploaderSystemStatus.php'; ?>
                 <div id="max-uploader-tab-general" class="max-uploader-tab-content" <?php echo $active_tab !== 'general' ? 'style="display:none;"' : ''; ?>>
                     <?php
-                    include WMUFS_PLUGIN_PATH . 'admin/templates/max-uploader-handle-form.php';
+                    include WMUFS_PLUGIN_PATH . 'admin/templates/MaxUploaderForm.php';
                     ?>
                 </div>
                 <div id="max-uploader-tab-system_status" class="max-uploader-tab-content" <?php echo $active_tab !== 'system_status' ? 'style="display:none;"' : ''; ?>>
@@ -166,26 +177,30 @@ class MaxUploader_Admin {
 	 */
 	static function upload_max_increase_upload(): void {
 
-		$max_upload_size = (int) get_option('max_file_size'); // bytes
-		$max_upload_size_mb = round($max_upload_size / 1048576); // convert to MB
+        $settings = get_option('wmufs_settings') ?? [];
+        $max_upload_size = (int) ($settings['max_limits']['all'] ?? get_option('max_file_size')); // bytes
+        $max_execution_time = (int) ($settings['max_execution_time'] ??  get_option('wmufs_maximum_execution_time'));
+        $memory_limit = (int) ($settings['max_memory_limit'] ?? get_option('wmufs_memory_limit'));
 
-
+        // Set max upload size
 		add_filter('upload_size_limit', function ($data) use ($max_upload_size) {
 			return $max_upload_size > 0 ? $max_upload_size : $data;
 		});
 
-		$execution_time = get_option('wmufs_maximum_execution_time');
-		$execution_time = !empty($execution_time) ? $execution_time : ini_get('max_execution_time');
-		set_time_limit((int) $execution_time);
-
-		if ($max_upload_size_mb > 0) {
-			@ini_set('upload_max_filesize', $max_upload_size_mb . 'M');
-			@ini_set('post_max_size', $max_upload_size_mb . 'M');
-
-			// Optional set memory_limit separately
-			@ini_set('memory_limit', ($max_upload_size_mb * 2) . 'M'); // buffer
-
+        // Set max execution time
+		if ( !empty($max_execution_time) && $max_execution_time > 0) {
+			// Only try to set a time limit if the function is available
+			if (function_exists('set_time_limit')) {
+				@set_time_limit( $max_execution_time ); // Suppress errors if the host restricts
+			}
 		}
+
+        // Set a memory limit
+		if ( !empty($memory_limit) && $memory_limit > 0) {
+            $memory_limit_mb = round($memory_limit / 1048576); // convert to MB ex: 2048
+			@ini_set('memory_limit', ((int) $memory_limit_mb) . 'M'); // e.g., 512M, 1024M
+		}
+
 
 	}
 
