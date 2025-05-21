@@ -10,7 +10,7 @@
             <!-- Start Content Area -->
             <div class="wmufs_admin_left wmufs_card wmufs-col-8" style="text-align: center; padding: 40px;">
 
-                <h2 style="font-size: 26px; margin-bottom: 20px;">
+                <h2 style="font-size: 25px; margin-bottom: 20px;">
 					<?php echo esc_html__('Introducing MaxUploader Pro – The Powerful Extension to Maximize WordPress Uploads', 'wp-maximum-upload-file-size'); ?>
                 </h2>
 

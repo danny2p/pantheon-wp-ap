@@ -301,7 +301,8 @@ class WMUFS_File_Chunk{
      */
     function get_upload_limit(): int
     {
-        $max_size = (int) get_option('max_file_size');
+	    $settings = get_option('wmufs_settings') ?? [];
+	    $max_size = (int) ($settings['max_limits']['all'] ?? get_option('max_file_size')); // bytes
         if ( ! $max_size ) {
             $max_size = wp_max_upload_size();
         }
@@ -361,7 +362,7 @@ class WMUFS_File_Chunk{
             wp_die( esc_html( $post_data->get_error_message() ) );
         }
 
-        // If the context is custom header or background, make sure the uploaded file is an image.
+        // If the context is a custom header or background, make sure the uploaded file is an image.
         if ( isset( $post_data['context'] ) && in_array( $post_data['context'], array( 'custom-header', 'custom-background' ), true ) ) {
             $wp_filetype = wp_check_filetype_and_ext( $_FILES['async-upload']['tmp_name'], $_FILES['async-upload']['name'] );
 
