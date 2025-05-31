@@ -1,5 +1,6 @@
 .wprm-icon-decoration-line,
-.wprm-header-decoration-line {
+.wprm-header-decoration-line,
+.wprm-header-decoration-spacer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -29,4 +30,7 @@
     height: 1px;
 
     border-bottom: 1px solid black
+}
+.wprm-decoration-spacer {
+    flex: auto;
 }

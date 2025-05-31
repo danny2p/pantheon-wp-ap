@@ -8,6 +8,10 @@ window.WPRecipeMaker.media = {
 					WPRecipeMaker.media.onClick( target, e );
 					break;
 				}
+				if ( target.matches( '.wprm-media-toggle-checkbox' ) ) {
+					WPRecipeMaker.media.onSwitch( target, e );
+					break;
+				}
 			}
         }, false );
 
@@ -20,8 +24,14 @@ window.WPRecipeMaker.media = {
         const newState = el.dataset.state;
         WPRecipeMaker.media.setState( newState, el );
     },
+    onSwitch: ( el, e ) => {
+        // Check if checkbox is enabled.
+        const newState = el.checked ? 'on' : 'off';
+        WPRecipeMaker.media.setState( newState, el );
+    },
     setState: ( newState, el = false ) => {
         const currentState = WPRecipeMaker.media.state;
+
         if ( ( 'on' === newState || 'off' === newState ) && newState !== currentState ) {
             // Check position of element before toggle.
             let elDistanceToTopBefore = 0;
@@ -61,6 +71,13 @@ window.WPRecipeMaker.media = {
 				} else {
 					button.classList.remove( 'wprm-toggle-active' );
 				}
+            }
+
+            // Toggle switches.
+            const switches = document.querySelectorAll( '.wprm-media-toggle-checkbox' );
+
+            for ( let switchEl of switches ) {
+                switchEl.checked = newState === 'on';
             }
 
             // Update current state.

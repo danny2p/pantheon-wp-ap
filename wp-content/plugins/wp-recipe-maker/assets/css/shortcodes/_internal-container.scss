@@ -1,0 +1,37 @@
+.wprm-internal-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    border: 0px solid #ffffff;
+
+    ul li {
+        margin-left: 16px !important;
+    }
+
+    .wprm-recipe-ingredient-group:first-child,
+    .wprm-recipe-instruction-group:first-child,
+    .wprm-internal-container-toggle + .wprm-recipe-ingredient-group,
+    .wprm-internal-container-toggle + .wprm-recipe-instruction-group {
+        .wprm-recipe-group-name {
+            margin-top: 0 !important;
+        }
+    }
+
+    .wprm-internal-container-toggle {
+        position: relative;
+        z-index: 2;
+        float: right;
+
+        a.wprm-expandable-button {
+            color: #333333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    &.wprm-expandable-collapsed {
+        max-height: 60px;
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+}

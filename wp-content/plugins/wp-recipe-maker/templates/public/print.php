@@ -49,8 +49,10 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 			}
 		}
 		?>
+		<?php do_action( 'wprm_print_head' ); ?>
 	</head>
 	<body class="wprm-print<?php echo esc_attr( is_rtl() ? ' rtl' : '' ); ?> wprm-print-<?php echo esc_attr( $output['type'] ); ?>">
+		<?php do_action( 'wprm_print_body_open' ); ?>
 		<div id="wprm-print-header">
 			<div id="wprm-print-header-main">
 				<?php
@@ -110,5 +112,6 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 		}
 		?>
 		<div id="print-pdf"></div>
+		<?php do_action( 'wprm_print_footer' ); ?>
 	</body>
 </html>

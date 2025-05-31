@@ -45,7 +45,7 @@ $recipe_template = array(
 					'name' => __( 'Food Recipe Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default template to use for the food recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
-					'default' => 'chic',
+					'default' => 'meadow',
 				),
 				array(
 					'id' => 'default_howto_recipe_template_modern',
@@ -63,7 +63,7 @@ $recipe_template = array(
 					'name' => __( 'Other Recipe Template', 'wp-recipe-maker' ),
 					'description' => __( 'Default template to use for the "other (no metadata)" recipes on your website.', 'wp-recipe-maker' ),
 					'type' => 'dropdownTemplateModern',
-					'default' => 'chic',
+					'default' => 'meadow',
 					'dependency' => array(
 						'id' => 'recipe_template_show_types',
 						'value' => true,

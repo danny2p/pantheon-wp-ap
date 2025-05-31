@@ -35,6 +35,9 @@
     color: #000000; /* wprm_header_text type=color */
     line-height: 1.3em; /* wprm_header_line_height type=font_size */
 }
+.wprm-recipe .wprm-recipe-header * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* wprm_main_font_family type=font */
+}
 .wprm-recipe h1,
 .wprm-recipe h2,
 .wprm-recipe h3,

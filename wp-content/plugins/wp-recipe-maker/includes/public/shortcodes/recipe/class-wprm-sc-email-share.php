@@ -195,16 +195,16 @@ class WPRM_SC_Email_Share extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$style = 'color: ' . $atts['text_color'] . ';';
+		$css = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
 			$classes[] = 'wprm-recipe-email-share-' . $atts['style'];
 			$classes[] = 'wprm-recipe-link-' . $atts['style'];
 			$classes[] = 'wprm-color-accent';
 
-			$style .= 'background-color: ' . $atts['button_color'] . ';';
-			$style .= 'border-color: ' . $atts['border_color'] . ';';
-			$style .= 'border-radius: ' . $atts['border_radius'] . ';';
-			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
+			$css .= 'background-color: ' . $atts['button_color'] . ';';
+			$css .= 'border-color: ' . $atts['border_color'] . ';';
+			$css .= 'border-radius: ' . $atts['border_radius'] . ';';
+			$css .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
 		// Text and optional aria-label.
@@ -215,7 +215,8 @@ class WPRM_SC_Email_Share extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Share by Email', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_attr( $mailto_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css );
+		$output = '<a href="' . esc_attr( $mailto_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $style . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

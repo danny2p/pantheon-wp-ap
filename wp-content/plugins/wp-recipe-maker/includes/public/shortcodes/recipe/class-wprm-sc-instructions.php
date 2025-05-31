@@ -25,6 +25,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'group_header' => array(
+				'type' => 'header',
+				'default' => __( 'Instruction Groups', 'wp-recipe-maker' ),
+			),
 			'group_tag' => array(
 				'default' => 'h4',
 				'type' => 'dropdown',
@@ -35,9 +39,29 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'text_styles',
 			),
+			'group_custom_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'group_color' => array(
+				'default' => '#444444',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'group_custom_color',
+					'value' => '1',
+				),
+			),
+			'group_bottom_margin' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
 			'text_margin' => array(
 				'default' => '0px',
 				'type' => 'size',
+			),
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Instruction Container', 'wp-recipe-maker' ),
 			),
 			'list_style_header' => array(
 				'type' => 'header',
@@ -117,6 +141,24 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'value' => '1',
 				),
 			),
+			'inline_show_notes' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'inline_notes_separator' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'None',
+					'comma' => 'Comma',
+					'dash' => 'Dash',
+					'parentheses' => 'Parentheses',
+				),
+				'dependency' => array(
+					'id' => 'inline_show_notes',
+					'value' => '1',
+				),
+			),
 			'associated_ingredients_header' => array(
 				'type' => 'header',
 				'default' => __( 'Associated Ingredients', 'wp-recipe-maker' ),
@@ -177,6 +219,31 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'ingredients_show_notes' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'ingredient_notes_separator' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'None',
+					'comma' => 'Comma',
+					'dash' => 'Dash',
+					'parentheses' => 'Parentheses',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'ingredients_position',
+						'value' => 'none',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'ingredients_show_notes',
+						'value' => '1',
+					),
+				),
+			),
 			'ingredients_unit_conversion_header' => array(
 				'type' => 'header',
 				'default' => __( 'Unit Conversion', 'wp-recipe-maker' ),
@@ -214,6 +281,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'default' => 'thumbnail',
 				'type' => 'image_size',
 			),
+			'image_border_radius' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
 			'image_alignment' => array(
 				'default' => 'left',
 				'type' => 'dropdown',
@@ -244,6 +315,19 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'before' => 'Show media toggle before the instructions',
 				),
 			),
+			'toggle_style' => array(
+				'default' => 'buttons',
+				'type' => 'dropdown',
+				'options' => array(
+					'buttons' => __( 'Buttons', 'wp-recipe-maker' ),
+					'switch' => __( 'Switch', 'wp-recipe-maker' ),
+				),
+				'dependency' => array(
+					'id' => 'media_toggle',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
 			'toggle_text_style' => array(
 				'default' => 'normal',
 				'type' => 'dropdown',
@@ -258,23 +342,183 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
-					'id' => 'media_toggle',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'buttons',
+					),
 				),
 			),
 			'toggle_button_accent' => array(
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
-					'id' => 'media_toggle',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'buttons',
+					),
 				),
 			),
 			'toggle_button_radius' => array(
 				'default' => '3px',
 				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'buttons',
+					),
+				),
+			),
+			'toggle_switch_style' => array(
+				'default' => 'rounded',
+				'type' => 'dropdown',
+				'options' => array(
+					'square' => 'Square Switch',
+					'rounded' => 'Rounded Switch',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_height' => array(
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_off' => array(
+				'default' => '#cccccc',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_off_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_off_text' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_on' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_on_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_switch_on_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'toggle_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'toggle_off_icon' => array(
+				'default' => 'camera-no',
+				'type' => 'icon',
+				'dependency' => array(
+					'id' => 'media_toggle',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'toggle_off_text' => array(
+				'default' => '',
+				'type' => 'text',
 				'dependency' => array(
 					'id' => 'media_toggle',
 					'value' => '',
@@ -299,27 +543,11 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
-			'toggle_off_icon' => array(
-				'default' => 'camera-no',
-				'type' => 'icon',
-				'dependency' => array(
-					'id' => 'media_toggle',
-					'value' => '',
-					'type' => 'inverse',
-				),
-			),
-			'toggle_off_text' => array(
-				'default' => '',
-				'type' => 'text',
-				'dependency' => array(
-					'id' => 'media_toggle',
-					'value' => '',
-					'type' => 'inverse',
-				),
-			),
 		);
 	
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_checkbox_atts() );
 		self::$attributes = $atts;
 
 		parent::init();
@@ -352,20 +580,37 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		// Args for optional unit conversion and adjustable servings.
 		$media_toggle_atts = array(
 			'id' => $atts['id'],
+			'toggle_style' => $atts['toggle_style'],
 			'text_style' => $atts['toggle_text_style'],
 			'button_background' => $atts['toggle_button_background'],
 			'button_accent' => $atts['toggle_button_accent'],
 			'button_radius' => $atts['toggle_button_radius'],
-			'on_icon' => $atts['toggle_on_icon'],
-			'on_text' => $atts['toggle_on_text'],
+			'switch_style' => $atts['toggle_switch_style'],
+			'switch_height' => $atts['toggle_switch_height'],
+			'switch_off' => $atts['toggle_switch_off'],
+			'switch_off_knob' => $atts['toggle_switch_off_knob'],
+			'switch_off_text' => $atts['toggle_switch_off_text'],
+			'switch_on' => $atts['toggle_switch_on'],
+			'switch_on_knob' => $atts['toggle_switch_on_knob'],
+			'switch_on_text' => $atts['toggle_switch_on_text'],
 			'off_icon' => $atts['toggle_off_icon'],
 			'off_text' => $atts['toggle_off_text'],
+			'on_icon' => $atts['toggle_on_icon'],
+			'on_text' => $atts['toggle_on_text'],
 		);
 
-		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '">';
+		// Custom style.
+		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
+
+		$output = '<div id="recipe-' . esc_attr( $recipe->id() ) . '-instructions" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '"' . $style . '>';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'instructions', array(
 			'media_toggle_atts' => $media_toggle_atts,
 		) );
+
+		if ( (bool) $atts['has_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'instructions' );
+		}
 
 		if ( 'before' === $atts['media_toggle'] ) {
 			$output .= WPRM_SC_Media_Toggle::shortcode( $media_toggle_atts );
@@ -384,8 +629,17 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
+				$style = '';
+				if ( (bool) $atts['group_custom_color'] ) {
+					$style = ' style="color: ' . esc_attr( $atts['group_color'] ) . ';"';
+				}
+
 				$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['group_tag'] );
-				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $instruction_group['name'] . '</' . $tag . '>';
+				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>' . $instruction_group['name'] . '</' . $tag . '>';
+
+				if ( '0px' !== $atts['group_bottom_margin'] ) {
+					$output .= do_shortcode( '[wprm-spacer size="' . $atts['group_bottom_margin'] . '"]' );
+				}
 			}
 
 			$output .= '<' . $list_tag . ' class="wprm-recipe-instructions">';
@@ -434,6 +688,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$output .= '</div>';
 		}
 
+		if ( (bool) $atts['has_container'] ) {
+			$output .= '</div>';
+		}
+
 		$output .= '</div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
@@ -454,12 +712,17 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			$inline_atts .= ' color="' . esc_attr( $atts['inline_custom_color'] ) . '"';
 		}
 
+		// Maybe include notes.
+		if ( (bool) $atts['inline_show_notes'] ) {
+			$inline_atts .= ' notes_separator="' . esc_attr( $atts['inline_notes_separator'] ) . '"';
+		}
+
 		// Unit Conversion related.
 		$show_both_units = (bool) $atts['ingredients_show_both_units'];
 		if ( $show_both_units ) {
 			$inline_atts .= ' unit_conversion="both"';
-			$inline_atts .= ' unit_conversion_both_style="' . $atts['both_units_style'] .'"';
-			$inline_atts .= ' unit_conversion_show_identical="' . $atts['both_units_show_if_identical'] .'"';
+			$inline_atts .= ' unit_conversion_both_style="' . esc_attr( $atts['both_units_style'] ) . '"';
+			$inline_atts .= ' unit_conversion_show_identical="' . esc_attr( $atts['both_units_show_if_identical'] ) . '"';
 		}
 
 		// Add attributes to potential inline ingredients.
@@ -505,7 +768,28 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 							$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $found_ingredient );
 						}
 
-						if ( $found_ingredient['name'] ) { $parts[] = $found_ingredient['name']; };
+						// Ingredient name and maybe notes.
+						$name_with_notes = '';
+						if ( $found_ingredient['name'] ) { $name_with_notes = $found_ingredient['name']; };
+
+						if ( (bool) $atts['ingredients_show_notes'] ) {
+							if ( $found_ingredient['notes'] ) {
+								switch ( $atts['ingredient_notes_separator'] ) {
+									case 'comma':
+										$name_with_notes .= ', ' . $found_ingredient['notes'];
+										break;
+									case 'dash':
+										$name_with_notes .= ' - ' . $found_ingredient['notes'];
+										break;
+									case 'parentheses':
+										$name_with_notes .= ' (' . $found_ingredient['notes'] . ')';
+										break;
+									default:
+										$name_with_notes .= ' ' . $found_ingredient['notes'];
+								}
+							}
+						}
+						$parts[] = $name_with_notes;
 
 						$text_to_show = implode( ' ', $parts );
 
@@ -554,8 +838,15 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 						}
 					}
 
+					// Keep notes?
+					$data_keep_notes = '';
+
+					if ( (bool) $atts['ingredients_show_notes'] ) {
+						$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['ingredient_notes_separator'] ) . '"';
+					}
+
 					// Output.
-					$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $style . '>';
+					$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $data_keep_notes . $style . '>';
 					$output .= wp_strip_all_tags( $text );
 					$output .= $separator;
 
@@ -583,7 +874,16 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$output = '';
 
 		if ( isset( $instruction['image'] ) && $instruction['image'] ) {
-			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-image" style="text-align: ' . esc_attr( $atts['image_alignment'] ) . ';">' . self::instruction_image( $recipe, $instruction, $atts['image_size'] ) . '</div> ';
+			$style = '';
+			if ( 'left' !== $atts['image_alignment'] ) {
+				$style = 'text-align: ' . $atts['image_alignment'] . ';';
+			}
+
+			if ( $style ) {
+				$style = ' style="' . esc_attr( $style ) . '"';
+			}
+
+			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-image"' . $style . '>' . self::instruction_image( $recipe, $instruction, $atts['image_size'], $atts['image_border_radius'] ) . '</div> ';
 		} else if ( isset( $instruction['video'] ) && isset( $instruction['video']['type'] ) && in_array( $instruction['video']['type'], array( 'upload', 'embed' ) ) ) {
 			$output = '<div class="wprm-recipe-instruction-media wprm-recipe-instruction-video">' . self::instruction_video( $recipe, $instruction ) . '</div> ';
 		}
@@ -599,7 +899,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 	 * @param	mixed $instruction		  Instruction to output the image for.
 	 * @param	mixed $default_image_size Default image size to use.
 	 */
-	private static function instruction_image( $recipe, $instruction, $default_image_size ) {
+	private static function instruction_image( $recipe, $instruction, $default_image_size, $border_radius = false ) {
 		$settings_size = 'legacy' === WPRM_Settings::get( 'recipe_template_mode' ) ? WPRM_Settings::get( 'template_instruction_image' ) : false;
 		$size = $settings_size ? $settings_size : $default_image_size;
 		$force_size = false;
@@ -613,20 +913,27 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$thumbnail_size = WPRM_Shortcode_Helper::get_thumbnail_image_size( $instruction['image'], $size, $force_size );
 		$img = wp_get_attachment_image( $instruction['image'], $thumbnail_size );
 
+		// Maybe add border radius.
+		$style = '';
+		if ( false !== $border_radius && '0px' !== $border_radius ) {
+			$style = 'border-radius: ' . $border_radius . ';';
+		}
+
 		// Prevent instruction image from getting stretched in Gutenberg preview.
 		if ( WPRM_Context::is_gutenberg_preview() ) {
 			$image_data = wp_get_attachment_image_src( $instruction['image'], $thumbnail_size );
 			if ( $image_data[1] ) {
-				$style = 'max-width: ' . $image_data[1] . 'px;';
-				$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
+				$style .= 'max-width: ' . $image_data[1] . 'px;';
 			}
 		}
 
 		// Maybe force image size.
 		if ( $force_size ) {
-			$style = WPRM_Shortcode_Helper::get_force_image_size_style( $size );
-			$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
+			$style .= WPRM_Shortcode_Helper::get_force_image_size_style( $size );
 		}
+
+		// Add inline CSS to img.
+		$img = WPRM_Shortcode_Helper::add_inline_style( $img, $style );
 
 		// Prevent lazy image loading on print page.
 		if ( 'print' === WPRM_Context::get() ) {

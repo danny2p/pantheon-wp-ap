@@ -47,6 +47,16 @@ $recipe_ratings = array(
 			'description' => __( 'How the rating details will be displayed in a recipe. The following placeholders can be used:', 'wp-recipe-maker' ) . ' %average%, %votes%, %user%',
 			'settings' => array(
 				array(
+					'id' => 'rating_stars_style',
+					'name' => __( 'Star Icon Style', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'options' => array(
+						'pointy' => __( 'Pointy Stars', 'wp-recipe-maker' ),
+						'rounded' => __( 'Rounded Stars', 'wp-recipe-maker' ),
+					),
+					'default' => 'rounded',
+				),
+				array(
 					'id' => 'rating_details_zero',
 					'name' => __( 'No Ratings', 'wp-recipe-maker' ),
 					'type' => 'text',

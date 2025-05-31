@@ -32,6 +32,7 @@ class WPRM_SC_Unit_Conversion extends WPRM_Template_Shortcode {
 					'links' => 'Links',
 					'dropdown' => 'Dropdown',
 					'buttons' => 'Buttons',
+					'switch' => 'Switch',
 				),
 			),
 			'text_style' => array(
@@ -74,6 +75,75 @@ class WPRM_SC_Unit_Conversion extends WPRM_Template_Shortcode {
 				'dependency' => array(
 					'id' => 'style',
 					'value' => 'buttons',
+				),
+			),
+			'switch_style' => array(
+				'default' => 'rounded',
+				'type' => 'dropdown',
+				'options' => array(
+					'square' => 'Square Switch',
+					'rounded' => 'Rounded Switch',
+				),
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_height' => array(
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_off' => array(
+				'default' => '#cccccc',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_off_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+			
+				),
+			),
+			'switch_off_text' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_on' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_on_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
+				),
+			),
+			'switch_on_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'switch',
 				),
 			),
 		);

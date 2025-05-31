@@ -203,6 +203,15 @@ class WPRM_Api_Manage_Recipes {
 				$args['meta_key'] = 'wprm_servings';
 				break;
 			default:
+				// Check if nutrient. 
+				if ( 'nutrition_' === substr( $sorted[0]['id'], 0, 10 ) ) {
+					$nutrient = substr( $sorted[0]['id'], 10 );
+
+					$args['orderby'] = 'meta_value_num';
+					$args['meta_key'] = 'wprm_nutrition_' . $nutrient;
+					break;
+				}
+
 				// Check if custom field. 
 				if ( 'custom_field_' === substr( $sorted[0]['id'], 0, 13 ) ) {
 					$custom_field_key = substr( $sorted[0]['id'], 13 );
@@ -239,9 +248,11 @@ class WPRM_Api_Manage_Recipes {
 			}
 		}
 
-		// Make sure all recipes show up when using WPML.
+		// Make sure all recipes show up when using WPML, unless filtering by language.
+		$filtering_by_language = isset( $args['lang'] ) && $args['lang'];
+
 		global $wpml_query_filter;
-		if ( $wpml_query_filter ) {
+		if ( $wpml_query_filter && ! $filtering_by_language ) {
 			remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
 			remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
 		}
@@ -250,7 +261,7 @@ class WPRM_Api_Manage_Recipes {
 		$query = new WP_Query( $args );
 		remove_filter( 'posts_where', array( __CLASS__, 'api_manage_recipes_query_where' ), 10, 2 );
 
-		if ( $wpml_query_filter ) {
+		if ( $wpml_query_filter && ! $filtering_by_language ) {
 			add_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10, 2 );
 			add_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10, 2 );
 		}
@@ -553,6 +564,22 @@ class WPRM_Api_Manage_Recipes {
 					}
 				}
 				break;
+			case 'language':
+				if ( 'all' !== $value ) {
+					// Not directly related to recipe, so needs an extra query.
+					$multilingual = WPRM_Compatibility::multilingual();
+
+					if ( $multilingual ) {
+						if ( 'wpml' === $multilingual['plugin'] ) {
+							// Switch language context
+							do_action( 'wpml_switch_language', $value );
+						}						
+
+						// For both WPML and Polylang.
+						$args['lang'] = $value;
+					}
+				}
+				break;
 			case 'rating':
 				if ( 'all' !== $value ) {
 					if ( 'none' === $value ) {
@@ -692,6 +719,17 @@ class WPRM_Api_Manage_Recipes {
 				}
 				break;
 			default:
+				// Check if nutrient. 
+				if ( 'nutrition_' === substr( $filter, 0, 10 ) ) {
+					$nutrient = substr( $filter, 10 );
+
+					if ( '' !== $value ) {
+						$args['meta_query'][] = self::number_filter( 'wprm_nutrition_' . $nutrient, $value );
+					}
+					break;
+				}
+
+				// Check if custom field.
 				if ( 'custom_field_' === substr( $filter, 0, 13 ) ) {
 					$custom_field_key = substr( $filter, 13 );
 
@@ -766,6 +804,63 @@ class WPRM_Api_Manage_Recipes {
 		}
 
 		return $where;
+	}
+
+	/**
+	 * Filter the number filter.
+	 *
+	 * @since    10.0.0
+	 */
+	public static function number_filter( $key, $value ) {
+		// Check if value is a range (e.g. "5-10")
+		if ( strpos( $value, '-' ) !== false ) {
+			$range = explode( '-', $value );
+			if ( count( $range ) === 2) {
+				$start = trim( $range[0] );
+				$end = trim( $range[1] );
+
+				return array(
+					'key' => $key,
+					'value' => array( $start, $end ),
+					'type' => 'numeric',
+					'compare' => 'BETWEEN',
+				);
+			}
+		}
+
+		// Check if value has comparison operator (e.g. "<=5", ">99")
+		$operators = array( '<=', '>=', '<', '>', '=' );
+		foreach ( $operators as $operator ) {
+			if ( 0 === strpos( $value, $operator ) ) {
+				$number = trim( substr( $value, strlen( $operator ) ) );
+
+				if ( is_numeric( $number ) ) {
+					return array(
+						'key' => $key,
+						'value' => $number,
+						'type' => 'numeric',
+						'compare' => $operator,
+					);
+				}
+			}
+		}
+
+		// Default case: exact match for numeric value
+		if ( is_numeric( $value ) ) {
+			return array(
+				'key' => $key,
+				'value' => $value,
+				'type' => 'numeric',
+				'compare' => '=',
+			);
+		}
+
+		// Fallback for non-numeric values
+		return array(
+			'key' => $key,
+			'value' => $value,
+			'compare' => 'LIKE',
+		);
 	}
 
 	/**

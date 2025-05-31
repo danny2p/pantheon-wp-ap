@@ -103,4 +103,16 @@ class WPRM_Template_Shortcode {
 
 		return $atts;
 	}
+
+	protected static function get_defaults() {
+		return WPRM_Template_Shortcodes::get_defaults( static::$shortcode );
+	}
+
+	protected static function get_inline_css_variables( $prefix, $atts, $keys ) {
+		return WPRM_Shortcode_Helper::get_inline_css_variables( $prefix, $atts, static::get_defaults(), $keys );
+	}
+
+	protected static function test_inline_css_variables( $prefix, $atts, $keys ) {
+		return WPRM_Shortcode_Helper::test_inline_css_variables( $prefix, static::get_defaults(), $keys );
+	}
 }

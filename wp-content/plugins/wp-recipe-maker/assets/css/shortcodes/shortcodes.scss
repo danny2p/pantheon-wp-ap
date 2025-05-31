@@ -1,5 +1,6 @@
 @use 'author';
 @use 'call-to-action';
+@use 'conditions';
 @use 'container-block';
 @use 'container';
 @use 'decoration';
@@ -8,10 +9,12 @@
 @use 'general';
 @use 'header';
 @use 'icon';
+@use 'internal-container';
 @use 'image';
 @use 'ingredients';
 @use 'instacart';
 @use 'instructions';
+@use 'jump-to-section';
 @use 'layout-elements';
 @use 'link';
 @use 'nutrition-label';

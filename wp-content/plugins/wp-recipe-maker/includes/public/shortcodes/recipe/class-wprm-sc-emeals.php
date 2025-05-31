@@ -55,12 +55,13 @@ class WPRM_SC_Emeals extends WPRM_Template_Shortcode {
 		// Make sure eMeals integration gets loaded.
 		add_filter( 'wprm_load_emeals', '__return_true' );
 
-		$style = 'border-radius: 100px; background-color: #0071CE; border: 0; box-sizing: border-box; color: #ffffff; font-family: Poppins, sans-serif; font-size: 15px; font-weight: normal; line-height: 1.25rem; padding: 16px 12px; text-align: center; text-decoration-thickness: auto; text-transform: none; cursor: pointer; user-select: none; touch-action: manipulation; width: 300px;';
+		$css = 'border-radius: 100px; background-color: #0071CE; border: 0; box-sizing: border-box; color: #ffffff; font-family: Poppins, sans-serif; font-size: 15px; font-weight: normal; line-height: 1.25rem; padding: 16px 12px; text-align: center; text-decoration-thickness: auto; text-transform: none; cursor: pointer; user-select: none; touch-action: manipulation; width: 300px;';
 		$text = __( 'Get ingredients with', 'wp-recipe-maker' );
 		$img = '<img src="https://emeals-content.s3.amazonaws.com/web-shoppable/walmart-logo.png" style="width: auto; height: 20px; margin-right: 5px; vertical-align: bottom;"/>';
 
 		// Actual output.
-		$output = '<button id="em-shop-button" data-vendor="walmart" style="' . esc_attr( $style ) . '">' . $text . ' ' . $img  . '</button>';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css );
+		$output = '<button id="em-shop-button" data-vendor="walmart"' . $style . '>' . $text . ' ' . $img  . '</button>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}

@@ -42,6 +42,79 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 					'value' => 'grouped',
 				),
 			),
+			'group_column_gap' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'grouped',
+				),
+			),
+			'bottom_border' => array(
+				'default' => '0',
+				'type' => 'toggle',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'grouped',
+				),
+			),
+			'bottom_border_gap' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'bottom_border',
+						'value' => '1',
+					),
+				),
+			),
+			'bottom_border_width' => array(
+				'default' => '1px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'bottom_border',
+						'value' => '1',
+					),
+				),
+			),
+			'bottom_border_style' => array(
+				'default' => 'solid',
+				'type' => 'dropdown',
+				'options' => 'border_styles',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'bottom_border',
+						'value' => '1',
+					),
+				),
+			),
+			'bottom_border_color' => array(
+				'default' => '#eeeeee',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'bottom_border',
+						'value' => '1',
+					),
+				),
+			),
 		);
 
 		if ( 'legacy' === WPRM_Settings::get( 'nutrition_label_style' ) ) {
@@ -106,6 +179,10 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'value' => '',
 						'type' => 'inverse',
 					),
+				),
+				'container_header' => array(
+					'type' => 'header',
+					'default' => __( 'Nutrition Container', 'wp-recipe-maker' ),
 				),
 				'nutrition_header' => array(
 					'type' => 'header',
@@ -224,6 +301,7 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 			)
 		);
 
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		self::$attributes = $atts;
 
 		parent::init();

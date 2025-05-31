@@ -5,12 +5,48 @@ const layoutElements = [
 ];
 
 const propertiesForElement = {
-    container: [ 'float', 'align', 'padding', 'custom' ],
-    'column-container': [ 'column-mobile', 'column-gap', 'custom' ],
-    column: [ 'column-width', 'align', 'padding', 'custom' ],
+    container: [ 'float', 'align', 'padding', 'background-color', 'text-color', 'custom' ],
+    'column-container': [ 'column-gap', 'column-mobile', 'column-mobile-reverse', 'row-gap', 'custom' ],
+    column: [ 'column-width', 'align', 'align-rows', 'padding', 'background-color', 'text-color', 'custom' ],
 }
 
 const potentialProperties = {
+    'text-color': {
+        name: 'Text Color',
+        type: 'color',
+        styleToValue: ( style ) => {
+            for ( let i = 0; i < style.length; i++ ) {
+                if ( style[i].startsWith( 'text-color: ' ) ) {
+                    return style[i].replace( 'text-color: ', '' );
+                }
+            }
+            return 'inherit';
+        },
+        valueToStyle: ( value ) => {
+            if ( 'inherit' === value ) {
+                return [];
+            }
+            return [ 'text-color: ' + value ];
+        },
+    },
+    'background-color': {
+        name: 'Background Color',
+        type: 'color',
+        styleToValue: ( style ) => {
+            for ( let i = 0; i < style.length; i++ ) {
+                if ( style[i].startsWith( 'background-color: ' ) ) {
+                    return style[i].replace( 'background-color: ', '' );
+                }
+            }
+            return 'inherit';
+        },
+        valueToStyle: ( value ) => {
+            if ( 'inherit' === value ) {
+                return [];
+            }
+            return [ 'background-color: ' + value ];
+        },
+    },
     float: {
         name: 'Float',
         type: 'dropdown',
@@ -51,6 +87,28 @@ const potentialProperties = {
             return [ 'wprm-align-' + value ];
         },
     },
+    'align-rows': {
+        name: 'Text Align (switched to rows)',
+        type: 'dropdown',
+        options: {
+            default: 'Same as default',
+            left: 'Left',
+            center: 'Center',
+            right: 'Right',
+        },
+        classesToValue: ( classes ) => {
+            if ( classes.includes( 'wprm-align-rows-left' ) ) { return 'left'; }
+            if ( classes.includes( 'wprm-align-rows-center' ) ) { return 'center'; }
+            if ( classes.includes( 'wprm-align-rows-right' ) ) { return 'right'; }
+            return 'default';
+        },
+        valueToClasses: ( value ) => {
+            if ( 'default' === value ) {
+                return [];
+            }
+            return [ 'wprm-align-rows-' + value ];
+        },
+    },
     padding: {
         name: 'Padding',
         type: 'dropdown',
@@ -85,9 +143,14 @@ const potentialProperties = {
         type: 'dropdown',
         options: {
             never: 'Never',
-            mobile: 'On Mobile',
-            tablet: 'On Tablet',
-            
+            mobile: 'On Mobile (480px screen width)',
+            tablet: 'On Tablet (768px screen width)',
+            'recipe-900': 'At 900px recipe card width',
+            'recipe-800': 'At 800px recipe card width',
+            'recipe-700': 'At 700px recipe card width',
+            'recipe-600': 'At 600px recipe card width',
+            'recipe-500': 'At 500px recipe card width',
+            'recipe-400': 'At 400px recipe card width',
         },
         classesToValue: ( classes ) => {
             const matchingClass = classes.find( ( c ) => c.startsWith( 'wprm-column-rows-' ) );
@@ -101,6 +164,23 @@ const potentialProperties = {
                 return [];
             }
             return [ 'wprm-column-rows-' + value ];
+        },
+    },
+    'column-mobile-reverse': {
+        name: 'Reverse Order on Switch',
+        type: 'toggle',
+        classesToValue: ( classes ) => {
+            const matchingClass = classes.includes( 'wprm-column-rows-reverse' );
+            if ( matchingClass ) {
+                return '1';
+            }
+            return '0';
+        },
+        valueToClasses: ( value ) => {
+            if ( '1' === value ) {
+                return [ 'wprm-column-rows-reverse' ];
+            }
+            return [];
         },
     },
     'column-gap': {
@@ -130,6 +210,35 @@ const potentialProperties = {
                 return [];
             }
             return [ 'wprm-column-gap-' + value ];
+        },
+    },
+    'row-gap': {
+        name: 'Row Gap',
+        type: 'dropdown',
+        options: {
+            none: 'None',
+            '5': '5px',
+            '10': '10px',
+            '20': '20px',
+            '30': '30px',
+            '40': '40px',
+            '50': '50px',
+            
+        },
+        classesToValue: ( classes ) => {
+            const gapClass = classes.find( ( c ) => c.startsWith( 'wprm-row-gap-' ) );
+            if ( gapClass ) {
+                return gapClass.replace( 'wprm-row-gap-', '' );
+            }
+
+            // Default to none.
+            return 'none';
+        },
+        valueToClasses: ( value ) => {
+            if ( 'none' === value ) {
+                return [];
+            }
+            return [ 'wprm-row-gap-' + value ];
         },
     },
     'column-width': {

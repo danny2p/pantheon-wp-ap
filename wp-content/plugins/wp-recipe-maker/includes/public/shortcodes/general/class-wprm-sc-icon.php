@@ -153,10 +153,10 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 		$before_icon = '';
 		$after_icon = '';
 
-		$style = '';
+		$css = '';
 		if ( '16px' !== $atts['icon_size'] ) {
-			$style .= 'font-size: ' . esc_attr( $atts['icon_size'] ) . ';';
-			$style .= 'height: ' . esc_attr( $atts['icon_size'] ) . ';';
+			$css .= 'font-size: ' . esc_attr( $atts['icon_size'] ) . ';';
+			$css .= 'height: ' . esc_attr( $atts['icon_size'] ) . ';';
 		}
 
 		if ( 'separate' === $atts['style'] ) {
@@ -164,16 +164,18 @@ class WPRM_SC_Icon extends WPRM_Template_Shortcode {
 			$classes[] = 'wprm-icon-decoration-' . esc_attr( $atts['decoration'] );
 
 			if ( 'line' === $atts['decoration'] ) {
+				$line_style = WPRM_Shortcode_Helper::get_inline_style( 'border-color: ' . $atts['line_color'] . ';' );
 				if ( 'left' === $atts['align'] || 'center' === $atts['align'] ) {
-					$after_icon = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['line_color'] ) . '"></div>';
+					$after_icon = '<div class="wprm-decoration-line"' . $line_style . '></div>';
 				}
 				if ( 'right' === $atts['align'] || 'center' === $atts['align'] ) {
-					$before_icon = '<div class="wprm-decoration-line" style="border-color: ' . esc_attr( $atts['line_color'] ) . '"></div>';
+					$before_icon = '<div class="wprm-decoration-line"' . $line_style . '></div>';
 				}
 			}
 		}
 
-		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) .'">' . $before_icon . $icon . $after_icon . '</div>';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css );
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>' . $before_icon . $icon . $after_icon . '</div>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

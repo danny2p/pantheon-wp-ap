@@ -170,16 +170,16 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$smooth_scroll_speed = ' data-smooth-scroll="' . intval( $atts['smooth_scroll_speed'] ) . '"';
 		}
 
-		$style = 'color: ' . $atts['text_color'] . ';';
+		$css = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
 			$classes[] = 'wprm-recipe-jump-to-comments-' . $atts['style'];
 			$classes[] = 'wprm-recipe-link-' . $atts['style'];
 			$classes[] = 'wprm-color-accent';
 
-			$style .= 'background-color: ' . $atts['button_color'] . ';';
-			$style .= 'border-color: ' . $atts['border_color'] . ';';
-			$style .= 'border-radius: ' . $atts['border_radius'] . ';';
-			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
+			$css .= 'background-color: ' . $atts['button_color'] . ';';
+			$css .= 'border-color: ' . $atts['border_color'] . ';';
+			$css .= 'border-radius: ' . $atts['border_radius'] . ';';
+			$css .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
 		// Optionally display number of comments.
@@ -202,7 +202,8 @@ class WPRM_SC_Jump_To_Comments extends WPRM_Template_Shortcode {
 			$aria_label = ' aria-label="' . __( 'Rate this Recipe', 'wp-recipe-maker' ) . '"';
 		}
 
-		$output = '<a href="' . esc_url( $atts['link'] ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $smooth_scroll_speed . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css );
+		$output = '<a href="' . esc_url( $atts['link'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . $smooth_scroll_speed . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

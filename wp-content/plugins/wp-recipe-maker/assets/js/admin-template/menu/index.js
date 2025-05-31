@@ -101,6 +101,8 @@ const Menu = (props) => {
                 <TemplateProperties
                     template={props.template}
                     onChangeTemplateProperty={props.onChangeTemplateProperty}
+                    fonts={props.fonts}
+                    onChangeFonts={props.onChangeFonts}
                 />
                 :
                 null

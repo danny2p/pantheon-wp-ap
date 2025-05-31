@@ -100,6 +100,15 @@ export default class App extends Component {
         }
     }
 
+    onChangeFonts( fonts ) {
+        if ( fonts !== this.state.template.fonts ) {
+            let newState = this.state;
+            newState.template.fonts = fonts;
+
+            this.setState(newState);
+        }
+    }
+
     onChangeHTML(html) {
         if ( html !== this.state.template.html ) {
             let newState = this.state;
@@ -199,6 +208,8 @@ export default class App extends Component {
                     template={ this.state.template }
                     onChangeTemplate={ this.onChangeTemplate.bind(this) }
                     onChangeTemplateProperty={ this.onChangeTemplateProperty.bind(this) }
+                    fonts={ this.state.template && this.state.template.fonts ? this.state.template.fonts : [] }
+                    onChangeFonts={ this.onChangeFonts.bind(this) }
                 />
                 <Main
                     mode={ this.state.mode }

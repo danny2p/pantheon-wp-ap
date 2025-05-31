@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="16px" viewBox="0 0 120 24">
+  <defs>
+	<path class="wprm-star-full" id="wprm-star-5" fill="#343434" stroke="#343434" stroke-width="2" stroke-linejoin="round" d="M11.99,1.94c-.35,0-.67.19-.83.51l-2.56,5.2c-.11.24-.34.4-.61.43l-5.75.83c-.35.05-.64.3-.74.64-.11.34,0,.7.22.94l4.16,4.05c.19.19.27.45.22.7l-.98,5.72c-.06.35.1.7.37.9.29.21.66.24.98.08l5.14-2.71h0c.24-.13.51-.13.75,0l5.14,2.71c.32.16.69.13.98-.08.29-.21.43-.56.37-.9l-.98-5.72h0c-.05-.26.05-.53.22-.7l4.16-4.05h0c.26-.24.34-.61.22-.94s-.4-.58-.74-.64l-5.75-.83c-.26-.03-.48-.21-.61-.43l-2.56-5.2c-.16-.32-.48-.53-.83-.51,0,0-.02,0-.02,0Z"/>
+  </defs>
+	<use xlink:href="#wprm-star-5" x="0" y="0" />
+	<use xlink:href="#wprm-star-5" x="24" y="0" />
+	<use xlink:href="#wprm-star-5" x="48" y="0" />
+	<use xlink:href="#wprm-star-5" x="72" y="0" />
+	<use xlink:href="#wprm-star-5" x="96" y="0" />
+</svg>

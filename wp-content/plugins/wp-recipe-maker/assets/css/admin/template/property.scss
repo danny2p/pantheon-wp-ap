@@ -105,7 +105,23 @@
             }
         }
 
-        &.wprm-template-property-value-color,
+        &.wprm-template-property-value-color {
+            .wprm-template-property-input {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .wprm-template-property-input-color-variable-icon {
+                cursor: pointer;
+                line-height: 14px;
+
+                svg {
+                    height: 14px;
+                    width: 14px;
+                }
+            }
+        }
+
         &.wprm-template-property-value-toggle {
             .wprm-template-property-input {
                 display: flex;

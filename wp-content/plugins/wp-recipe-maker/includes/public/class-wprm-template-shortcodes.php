@@ -254,11 +254,15 @@ class WPRM_Template_Shortcodes {
 							$shortcodes[ $shortcode ][ $attribute ]['options'] = array(
 								'normal' => 'Normal',
 								'light' => 'Light',
+								'light-bold' => 'Light Bold',
+								'semi-bold' => 'Semi Bold',
 								'bold' => 'Bold',
 								'italic' => 'Italic',
 								'uppercase' => 'Uppercase',
 								'faded' => 'Faded',
 								'uppercase-faded' => 'Uppercase & Faded',
+								'smaller' => 'Smaller',
+								'larger' => 'Larger',
 							);
 							break;
 						case 'border_styles':

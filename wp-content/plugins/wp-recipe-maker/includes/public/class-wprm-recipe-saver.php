@@ -197,7 +197,7 @@ class WPRM_Recipe_Saver {
 		}
 
 		// Only for "public" recipe type.
-		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) { 
+		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
 			if ( isset( $recipe['slug'] ) && $recipe['slug'] ) {
 				$post['post_name'] = $recipe['slug'];
 			}
@@ -408,6 +408,9 @@ class WPRM_Recipe_Saver {
 				$recipe_post_status = 'draft';
 			}
 
+			// Get language for this post.
+			$parent_language = WPRM_Compatibility::get_language_for( $post_id );
+
 			// Update recipes.
 			foreach ( $recipe_ids as $recipe_id ) {
 				// Prevent infinite loop.
@@ -443,6 +446,13 @@ class WPRM_Recipe_Saver {
 
 				if ( $should_update_parent_post ) {
 					update_post_meta( $recipe_id, 'wprm_parent_post_id', $post_id );
+				}
+
+				// Make sure recipe language matches parent language, unless manually setting the language for public post type.
+				if ( 'public' !== WPRM_Settings::get( 'post_type_structure' ) ) {
+					if ( false !== $parent_language ) {
+						WPRM_Compatibility::set_language_for( $recipe_id, $parent_language );
+					}
 				}
 
 				// Optionally associate categories with recipes.

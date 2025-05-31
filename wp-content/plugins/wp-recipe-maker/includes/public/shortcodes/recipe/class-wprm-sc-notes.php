@@ -25,9 +25,14 @@ class WPRM_SC_Notes extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Notes Container', 'wp-recipe-maker' ),
+			),
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		self::$attributes = $atts;
 
 		parent::init();
@@ -56,14 +61,23 @@ class WPRM_SC_Notes extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+		$output = '<div id="recipe-' . esc_attr( $recipe->id() ) . '-notes" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'notes' );
+		
+		if ( (bool) $atts['has_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'notes' );
+		}
 
 		$notes = parent::clean_paragraphs( $recipe->notes() );
 
 		$output .= '<div class="wprm-recipe-notes">';
 		$output .= do_shortcode( $notes );
 		$output .= '</div>';
+
+		if ( (bool) $atts['has_container'] ) {
+			$output .= '</div>';
+		}
+
 		$output .= '</div>';
 
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );

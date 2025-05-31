@@ -135,7 +135,7 @@ class WPRM_Template_Editor {
 	 * @param	mixed $template Template to extract from.
 	 */
 	private static function extract_style_with_properties( $template ) {
-		$css = WPRM_Template_Manager::get_template_css( $template );
+		$css = WPRM_Template_Manager::get_template_css( $template, false );
 
 		// Find properties in CSS.
 		$properties = array();

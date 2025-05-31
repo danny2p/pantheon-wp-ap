@@ -44,8 +44,10 @@ class WPRM_Tools_Find_Parents {
 	 * @since    2.1.0
 	 */
 	public static function finding_parents() {
+		$post_types = apply_filters( 'wprm_find_parents_post_types', array( 'post', 'page' ) );
+
 		$args = array(
-			'post_type' => array( 'post', 'page' ),
+			'post_type' => $post_types,
 			'post_status' => array( 'publish', 'future', 'draft', 'private' ),
 			'posts_per_page' => -1,
 			'fields' => 'ids',

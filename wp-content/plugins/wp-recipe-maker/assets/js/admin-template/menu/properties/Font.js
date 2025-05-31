@@ -19,6 +19,98 @@ const PropertyFont = (props) => {
             },
         ],
     },{
+        label: 'Google Fonts - Serif',
+        options: [
+            {
+                value: '"Asar", serif',
+                label: 'Asar',
+                loadFont: 'asar',
+            },
+            {
+                value: '"Cormorant Garamond", serif',
+                label: 'Cormorant Garamond',
+                loadFont: 'cormorant-garamond',
+            },
+            {
+                value: '"Gloock", serif',
+                label: 'Gloock',
+                loadFont: 'gloock',
+            },
+            {
+                value: '"Lora", serif',
+                label: 'Lora',
+                loadFont: 'lora',
+            },
+            {
+                value: '"Playfair Display", serif',
+                label: 'Playfair Display',
+                loadFont: 'playfair-display',
+            },
+        ],
+    },{
+        label: 'Google Fonts - Sans Serif',
+        options: [
+            {
+                value: '"Inter", sans-serif',
+                label: 'Inter',
+                loadFont: 'inter',
+            },
+            {
+                value: '"Jost", sans-serif',
+                label: 'Jost',
+                loadFont: 'jost',
+            },
+            {
+                value: '"Mulish", sans-serif',
+                label: 'Mulish',
+                loadFont: 'mulish',
+            },
+            {
+                value: '"Nunito", sans-serif',
+                label: 'Nunito',
+                loadFont: 'nunito',
+            },
+            {
+                value: '"Open Sans", sans-serif',
+                label: 'Open Sans',
+                loadFont: 'open-sans',
+            },
+            {
+                value: '"Poppins", sans-serif',
+                label: 'Poppins',
+                loadFont: 'poppins',
+            },
+            {
+                value: '"Quicksand", sans-serif',
+                label: 'Quicksand',
+                loadFont: 'quicksand',
+            },
+        ],
+    },{
+        label: 'Google Fonts - Cursive',
+        options: [
+            {
+                value: '"Amatic SC", cursive',
+                label: 'Amatic SC',
+                loadFont: 'amatic-sc',
+            },
+            {
+                value: '"Caveat", cursive',
+                label: 'Caveat',
+                loadFont: 'caveat',
+            },
+            {
+                value: '"Dancing Script", cursive',
+                label: 'Dancing Script',
+                loadFont: 'dancing-script',
+            },
+            {
+                value: '"Pacifico", cursive',
+                label: 'Pacifico',
+                loadFont: 'pacifico',
+            },
+        ],
+    },{
         label: 'Default Serif Fonts',
         options: [
             {
@@ -82,6 +174,7 @@ const PropertyFont = (props) => {
     const selectValues = selectOptions.map(option => option.value);
     const custom = ! props.value || ! selectValues.includes(props.value);
     const selectValue = custom ? 'custom' : props.value;
+    const selectedOption = selectOptions.find(({value}) => value === selectValue);
 
     const selectStyles = {
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -99,10 +192,31 @@ const PropertyFont = (props) => {
             <Select
                 className="wprm-template-property-input"
                 menuPlacement="top"
-                value={selectOptions.filter(({value}) => value === selectValue)}
+                value={selectedOption}
                 onChange={(option) => {
-                    const value = 'custom' === option.value ? '' : option.value;
-                    return props.onValueChange(value);
+                    const newValue = 'custom' === option.value ? '' : option.value;
+
+                    // Check if new font should be saved.
+                    if ( option.hasOwnProperty( 'loadFont' ) ) {
+                        let newFonts = props.fonts;
+                        newFonts.push( option.loadFont );
+                        props.onChangeFonts(newFonts);
+                    }
+
+                    // Check if old font should be removed.
+                    if ( selectedOption.hasOwnProperty( 'loadFont' ) && props.fonts.includes( selectedOption.loadFont ) ) {
+                        let newFonts = props.fonts;
+
+                        // Only remove once, could be multiple times in array.
+                        const index = newFonts.indexOf( selectedOption.loadFont );
+                        if ( index !== -1 ) {
+                            newFonts.splice(index, 1);
+                        }
+
+                        props.onChangeFonts(newFonts);
+                    }
+
+                    return props.onValueChange(newValue);
                 }}
                 options={groupedOptions}
                 styles={selectStyles}

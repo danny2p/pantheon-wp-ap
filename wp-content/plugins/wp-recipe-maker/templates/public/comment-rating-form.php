@@ -72,12 +72,15 @@ $selected = isset( $rating ) && $rating ? $rating : 0;
 
 			$rating_icons = array();
 
+			$stars_style = WPRM_Settings::get( 'rating_stars_style' );
+			$star_icon = 'pointy' === $stars_style ? 'stars-' : 'stars-alt-';
+
 			for ( $i = 0; $i <= 5; $i++ ) {
 				// Reverse order for RTL.
 				$star = is_rtl() ? 5 - $i : $i;
 
 				ob_start();
-				include( WPRM_DIR . 'assets/icons/rating/stars-' . $star . '.svg' );
+				include( WPRM_DIR . 'assets/icons/rating/' . $star_icon . $star . '.svg' );
 				$svg = ob_get_contents();
 				ob_end_clean();
 

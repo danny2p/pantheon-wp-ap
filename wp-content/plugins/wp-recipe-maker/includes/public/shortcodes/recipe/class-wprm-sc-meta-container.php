@@ -56,6 +56,86 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'separated' => 'On separate lines',
 					'columns' => 'Columns',
 					'table' => 'Table',
+					'pills' => 'Pills',
+				),
+			),
+			'pills_alignment' => array(
+				'default' => 'flex-start',
+				'type' => 'dropdown',
+				'options' => array(
+					'flex-start' => 'Left',
+					'center' => 'Center',
+					'flex-end' => 'Right',
+					'space-around' => 'Space Around',
+					'space-between' => 'Space Between',
+				),
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_gap' => array(
+				'default' => '10px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_background' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_border_width' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_border_radius' => array(
+				'default' => '100px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_horizontal_padding' => array(
+				'default' => '15px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_vertical_padding' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
 				),
 			),
 			'table_borders' => array(
@@ -696,6 +776,37 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			$style .= 'border-color: ' . $atts['table_border_color'] . ';';
 		}
 
+		if ( 'pills' === $atts['style'] ) {
+			if ( '10px' !== $atts['pills_gap'] ) {
+				$style .= 'gap: ' . $atts['pills_gap'] . ';';
+			}
+			if ( 'flex-start' !== $atts['pills_alignment'] ) {
+				$style .= 'justify-content: ' . $atts['pills_alignment'] . ';';
+			}
+			if ( '5px' !== $atts['pills_vertical_padding'] ) {
+				$style .= '--pill-padding-vertical: ' . $atts['pills_vertical_padding'] . ';';
+			}
+			if ( '15px' !== $atts['pills_horizontal_padding'] ) {
+				$style .= '--pill-padding-horizontal: ' . $atts['pills_horizontal_padding'] . ';';
+			}
+			if ( '#333333' !== $atts['pills_background'] ) {
+				$style .= '--pill-background-color: ' . $atts['pills_background'] . ';';
+			}
+			if ( '#ffffff' !== $atts['pills_text'] ) {
+				$style .= '--pill-text-color: ' . $atts['pills_text'] . ';';
+			}
+			if ( '0px' !== $atts['pills_border_width'] ) {
+				$style .= '--pill-border-width: ' . $atts['pills_border_width'] . ';';
+
+				if ( '#333333' !== $atts['pills_border'] ) {
+					$style .= '--pill-border-color: ' . $atts['pills_border'] . ';';
+				}
+			}
+			if ( '100px' !== $atts['pills_border_radius'] ) {
+				$style .= '--pill-border-radius: ' . $atts['pills_border_radius'] . ';';
+			}
+		}
+
 		// Output.
 		$classes = array(
 			'wprm-recipe-meta-container',
@@ -721,7 +832,16 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 		$output = $show_container ? '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' : '';
 
 		foreach ( $fields_output as $field_output ) {
+
+			if ( 'pills' === $atts['style'] ) {
+				$output .= '<div class="wprm-recipe-meta-container-pill">';
+			}
+
 			$output .= $field_output;
+
+			if ( 'pills' === $atts['style'] ) {
+				$output .= '</div>';
+			}
 		}
 
 		if ( $show_container ) {

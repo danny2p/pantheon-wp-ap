@@ -49,11 +49,11 @@
 		if ( $has_search ) :
 			$search = isset( $_GET['s'] ) ? urldecode( sanitize_text_field( wp_unslash( $_GET['s'] ) ) ) : '';
 		?>
-		<p><a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search"><?php esc_html_e( 'Click to search the recipes to import', 'wp-recipe-maker' ); ?></a></p>
+		<p><a href="<?php echo add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ); ?>" id="wprm-import-recipes-search"><?php esc_html_e( 'Click to search the recipes to import', 'wp-recipe-maker' ); ?></a></p>
 		<?php
 			if ( $search ) :
 			?>
-			<p><?php echo esc_html( __( 'Searching', 'wp-recipe-maker' ) . ': ' . $search ); ?> <a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>" id="wprm-import-recipes-search-stop">(<?php esc_html_e( 'cancel', 'wp-recipe-maker' ); ?>)</a></p>
+			<p><?php echo esc_html( __( 'Searching', 'wp-recipe-maker' ) . ': ' . $search ); ?> <a href="<?php echo add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import' ) ); ?>" id="wprm-import-recipes-search-stop">(<?php esc_html_e( 'cancel', 'wp-recipe-maker' ); ?>)</a></p>
 			<?php endif;
 		endif; ?>
 		<p><em><?php esc_html_e( 'Use SHIFT-click to (un)check multiple recipes at once.', 'wp-recipe-maker' ); ?></em></p>

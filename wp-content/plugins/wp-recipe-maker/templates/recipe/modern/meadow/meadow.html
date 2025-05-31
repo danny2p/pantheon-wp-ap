@@ -1,0 +1,46 @@
+<div class="wprm-layout-container wprm-padding-40 meadow-header">
+  <div class="wprm-layout-column-container wprm-column-gap-20 wprm-column-rows-recipe-600 wprm-column-rows-reverse wprm-row-gap-20 meadow-header-columns">
+    <div class="wprm-layout-column wprm-align-center">
+      [wprm-recipe-image size="300x300!" border_width="0px" style="rounded" rounded_radius="20px"]
+    </div>
+    <div class="wprm-layout-column wprm-column-width-75 wprm-align-rows-center">
+      <div class="wprm-layout-container meadow-header-accent" style="--wprm-layout-container-text-color: var(--meadow-accent-color);">
+        [wprm-recipe-author label_container="0" label="" author_image="1" text_style="semi-bold"]
+      </div>
+      [wprm-recipe-name tag="h2"]
+      [wprm-spacer size="15px"]
+      [wprm-recipe-rating display="stars-details" style="separate" icon_color="var(--meadow-accent-color)" icon="star-alt-empty" icon_size="1.5em" icon_padding="2px"]
+      [wprm-spacer size="15px"]
+      [wprm-recipe-summary]
+      [wprm-spacer size="20px"]
+      <div class="wprm-layout-container">
+        [wprm-recipe-print style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold"]
+        [wprm-recipe-pin style="inline-button" border_radius="50px" horizontal_padding="15px" vertical_padding="5px" text_style="semi-bold"]
+        [wprm-recipe-add-to-collection style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold"]
+      </div>
+    </div>
+  </div>
+  <div class="wprm-layout-container meadow-header-meta">
+    [wprm-spacer size="20px"]
+    [wprm-recipe-meta-container fields="times" style="table" table_borders_inside="0" table_border_style="solid" table_border_color="var(--meadow-accent-color)" time_shorthand="1" text_style="semi-bold"]
+    [wprm-spacer size="20px"]
+    [wprm-recipe-meta-container fields="custom" selected_fields="servings, course, cuisine, calories" style="pills" servings_adjustable="disabled" text_style="smaller" pills_alignment="center" label_style="light" label_separator=": " pills_gap="10px" pills_background="var(--meadow-accent-color)" pills_border_width="0px" pills_border_radius="100px" pills_horizontal_padding="15px" pills_vertical_padding="5px"]
+  </div>
+</div>
+<div class="wprm-layout-container wprm-padding-40 meadow-main" style="--wprm-layout-container-background-color: var(--meadow-main-background-color);">
+  [wprm-recipe-jump-to-section alignment="space-between" background="#ffffff" text_color="var(--meadow-accent-color)" icon_color="var(--meadow-accent-color)" text_style="smaller" border_radius="10px" instructions_text="Method" section_order="ingredients, equipment, instructions, nutrition, video, notes" icon_position="above" icon_size="28px" vertical_padding="5px" wrap_items="scroll"]
+  <div class="wprm-layout-column-container wprm-column-gap-40 wprm-column-rows-recipe-900 meadow-main-columns">
+    <div class="wprm-layout-column wprm-column-width-50 meadow-main-left">
+      [wprm-recipe-ingredients header="Ingredients" notes_style="faded" group_tag="div" unit_conversion="header" unit_conversion_style="switch" adjustable_servings="header" servings_button_radius="5px" has_container="1" header_bottom_margin="15px" container_collapsible="1" list_style="none" bottom_border="1" bottom_border_color="var(--meadow-list-border-color)" group_bottom_margin="5px" group_custom_color="1" group_color="var(--meadow-accent-color)" header_decoration="spacer" servings_style="pills" pills_active_background="var(--meadow-accent-color)" pills_active_border="var(--meadow-accent-color)" pills_height="28px" pills_gap="6px" conversion_switch_off="var(--meadow-accent-color)" conversion_switch_off_text="#ffffff" conversion_switch_on="var(--meadow-accent-color)" serving_options_any_value="?" conversion_switch_height="28px"]
+      [wprm-recipe-equipment header="Equipment" header_bottom_margin="15px" has_container="1" container_collapsible="1" list_style="none" bottom_border="1" bottom_border_color="var(--meadow-list-border-color)"]
+    </div>
+    <div class="wprm-layout-column wprm-column-width-50 meadow-main-right">
+      [wprm-recipe-instructions header="Method" group_tag="div" has_container="0" header_bottom_margin="15px" container_collapsible="0" text_margin="10px" list_style="decimal" list_tag="ol" group_bottom_margin="5px" media_toggle="header" image_border_radius="10px" image_size="medium" group_custom_color="1" group_color="#000000" header_decoration="spacer" toggle_style="switch" toggle_switch_height="28px" toggle_switch_off="#cccccc" toggle_switch_off_text="#000000" toggle_switch_style="rounded" toggle_off_text="" toggle_text_style="normal" toggle_switch_on="var(--meadow-accent-color)"]
+      [wprm-nutrition-label style="grouped" header="Nutrition" has_container="1" container_collapsible="1" label_color="#333333" value_color="var(--meadow-accent-color)" group_width="200px" header_bottom_margin="15px" bottom_border="1" bottom_border_color="var(--meadow-list-border-color)" group_column_gap="20px" bottom_border_style="solid" text_style="normal"]
+      [wprm-recipe-video header="Video" header_bottom_margin="15px"]
+      [wprm-recipe-notes header="Notes" header_bottom_margin="15px" has_container="0"]
+      [wprm-spacer size="40px"]
+      [wprm-call-to-action background_color="var(--meadow-accent-color)" icon_color="#ffffff" header_color="#ffffff" text_color="#ffffff" link_color="#ffffff" action="custom" custom_text="%link% how it was!" custom_link_url="#comment" custom_link_text="Let us know" custom_link_target="_self" icon="heart-empty" padding="30px" border_radius="12px" icon_position="right" header_tag="h3"]
+    </div>
+  </div>
+</div>

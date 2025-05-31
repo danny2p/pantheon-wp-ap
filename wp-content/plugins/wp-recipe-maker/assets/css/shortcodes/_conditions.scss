@@ -1,0 +1,34 @@
+.wprm-condition-width {
+    display: none;
+}
+
+@container (max-width: 800px) {
+    .wprm-condition-max-width-800 { display: block; }
+}
+@container (max-width: 700px) {
+    .wprm-condition-max-width-700 { display: block; }
+}
+@container (max-width: 600px) {
+    .wprm-condition-max-width-600 { display: block; }
+}
+@container (max-width: 500px) {
+    .wprm-condition-max-width-500 { display: block; }
+}
+@container (max-width: 400px) {
+    .wprm-condition-max-width-400 { display: block; }
+}
+@container (min-width: 800px) {
+    .wprm-condition-min-width-800 { display: block; }
+}
+@container (min-width: 700px) {
+    .wprm-condition-min-width-700 { display: block; }
+}
+@container (min-width: 600px) {
+    .wprm-condition-min-width-600 { display: block; }
+}
+@container (min-width: 500px) {
+    .wprm-condition-min-width-500 { display: block; }
+}
+@container (min-width: 400px) {
+    .wprm-condition-min-width-400 { display: block; }
+}

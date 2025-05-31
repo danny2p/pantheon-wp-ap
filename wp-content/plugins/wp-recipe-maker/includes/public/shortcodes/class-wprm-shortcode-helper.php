@@ -18,6 +18,27 @@
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
 class WPRM_Shortcode_Helper {
+	/**
+	 * Insert an array of attributes after a specific key.
+	 *
+	 * @since	10.0.0
+	 * @param	array $atts Attributes to insert into.
+	 * @param	string $key Key to insert after.
+	 * @param	array $atts_to_add Attributes to insert.
+	 */
+	public static function insert_atts_after_key( $atts, $key, $atts_to_add ) {
+		$key_position = array_search( $key, array_keys( $atts ) );
+
+		if ( false === $key_position ) {
+			return $atts;
+		}
+
+		$new_atts = array_merge( array_slice( $atts, 0, $key_position + 1 ), $atts_to_add );
+		$new_atts = array_merge( $new_atts, array_slice( $atts, $key_position + 1 ) );
+
+		return $new_atts;
+	}
+
     /**
 	 * Get attributes for the label container.
 	 *
@@ -287,6 +308,10 @@ class WPRM_Shortcode_Helper {
 					),
 				),
 			),
+			'header_bottom_margin' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
 			'header_decoration' => array(
 				'default' => 'none',
 				'type' => 'dropdown',
@@ -294,6 +319,7 @@ class WPRM_Shortcode_Helper {
 					'none' => 'None',
 					'line' => 'Line',
 					'icon' => 'Icon',
+					'spacer' => 'Spacer',
 				),
 				'dependency' => array(
 					'id' => 'header',
@@ -397,6 +423,13 @@ class WPRM_Shortcode_Helper {
 					}
 				}
 				$before_header = $icon;
+			} elseif ( 'spacer' === $atts['header_decoration'] ) {
+				if ( 'left' === $atts['header_align'] || 'center' === $atts['header_align'] ) {
+					$after_header = '<div class="wprm-decoration-spacer"></div>';
+				}
+				if ( 'right' === $atts['header_align'] || 'center' === $atts['header_align'] ) {
+					$before_header = '<div class="wprm-decoration-spacer"></div>';
+				}
 			}
 
 			// Special for ingredients.
@@ -430,9 +463,283 @@ class WPRM_Shortcode_Helper {
 
 			$tag = self::sanitize_html_element( $atts['header_tag'] );
 			$header .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' . $before_header . self::sanitize_html( $header_text ) . $after_header . '</' . $tag . '>';
+
+			if ( '0px' !== $atts['header_bottom_margin'] ) {
+				$header .= do_shortcode( '[wprm-spacer size="' . $atts['header_bottom_margin'] . '"]' );
+			}
 		}
 
 		return $header;
+	}
+
+	/**
+	 * Get attributes for list checkboxes.
+	 *
+	 * @since	10.0.0
+	 */
+	public static function get_checkbox_atts() {
+		return array(
+			'checkbox_size' => array(
+				'default' => '18px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_left_position' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_top_position' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_background' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_border_width' => array(
+				'default' => '1px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_border_style' => array(
+				'default' => 'solid',
+				'type' => 'dropdown',
+				'options' => 'border_styles',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_border_color' => array(
+				'default' => 'inherit',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_border_radius' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_check_width' => array(
+				'default' => '2px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+			'checkbox_check_color' => array(
+				'default' => 'inherit',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'list_style',
+					'value' => 'checkbox',
+				),
+			),
+		);
+	}
+
+	/**
+	 * Get attributes for an internal container.
+	 *
+	 * @since	10.0.0
+	 */
+	public static function get_internal_container_atts() {
+		return array(
+			'has_container' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'container_background' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_border' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_border_width' => array(
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_border_radius' => array(
+				'default' => '20px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_padding' => array(
+				'default' => '20px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_collapsible' => array(
+				'default' => '0',
+				'type' => 'toggle',
+				'dependency' => array(
+					'id' => 'has_container',
+					'value' => '1',
+				),
+			),
+			'container_icon_collapsed' => array(
+				'default' => 'arrow-small-up',
+				'type' => 'icon',
+				'dependency' => array(
+					array(
+						'id' => 'has_container',
+						'value' => '1',
+					),
+					array(
+						'id' => 'container_collapsible',
+						'value' => '1',
+					),
+				),
+			),
+			'container_icon_expanded' => array(
+				'default' => 'arrow-small-down',
+				'type' => 'icon',
+				'dependency' => array(
+					array(
+						'id' => 'has_container',
+						'value' => '1',
+					),
+					array(
+						'id' => 'container_collapsible',
+						'value' => '1',
+					),
+				),
+			),
+			'container_icon_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'has_container',
+						'value' => '1',
+					),
+					array(
+						'id' => 'container_collapsible',
+						'value' => '1',
+					),
+				),
+			),
+		);
+	}
+	
+	/**
+	 * Get internal container to output.
+	 *
+	 * @since	10.0.0
+	 * @param	mixed $atts Attributes for the shortcode.
+	 * @param	string $field Field to get the container for.
+	 */
+	public static function get_internal_container( $atts, $field ) {
+		$classes = array(
+			'wprm-internal-container',
+			'wprm-internal-container-' . $field,
+		);
+
+		$style = '';
+
+		if ( '#ffffff' !== $atts['container_background'] ) {
+			$style .= 'background-color: ' . $atts['container_background'] . ';';
+		}
+		if ( '20px' !== $atts['container_padding'] ) {
+			$style .= 'padding: ' . $atts['container_padding'] . ';';
+		}
+		if ( '#ffffff' !== $atts['container_border'] ) {
+			$style .= 'border-color: ' . $atts['container_border'] . ';';
+		}
+		if ( '0px' !== $atts['container_border_width'] ) {
+			$style .= 'border-width: ' . $atts['container_border_width'] . ';';
+		}
+		if ( '20px' !== $atts['container_border_radius'] ) {
+			$style .= 'border-radius: ' . $atts['container_border_radius'] . ';';
+		}
+
+		// Check if collapsible.
+		$collapsible_output = '';
+		if ( (bool) $atts['container_collapsible'] ) {
+			$icon_collapsed = '';
+			if ( $atts['container_icon_collapsed'] ) {
+				$icon_collapsed = WPRM_Icon::get( $atts['container_icon_collapsed'], $atts['container_icon_color'] );
+
+				if ( $icon_collapsed ) {
+					$icon_collapsed = '<span class="wprm-recipe-icon wprm-container-icon">' . $icon_collapsed . '</span> ';
+				}
+			}
+
+			$icon_expanded = '';
+			if ( $atts['container_icon_expanded'] ) {
+				$icon_expanded = WPRM_Icon::get( $atts['container_icon_expanded'], $atts['container_icon_color'] );
+
+				if ( $icon_expanded ) {
+					$icon_expanded = '<span class="wprm-recipe-icon wprm-container-icon">' . $icon_expanded . '</span> ';
+				}
+			}
+
+			if ( $icon_collapsed && $icon_expanded ) {
+				$classes[] = 'wprm-expandable-container';
+				$classes[] = 'wprm-expandable-expanded';
+
+				$button_style = '';
+				if ( '#333333' !== $atts['container_icon_color'] ) {
+					$button_style = ' style="color: ' . esc_attr( $atts['container_icon_color'] ) . ';"';
+				}
+
+				$collapsible_output = '<div class="wprm-internal-container-toggle">';
+				$collapsible_output .= '<a role="button" aria-expanded="false" class="wprm-expandable-button wprm-expandable-button-show"' . esc_attr( $button_style ) . ' aria-label="' . esc_attr__( 'Show Section', 'wp-recipe-maker' ) . '">' . $icon_collapsed . '</a>';
+				$collapsible_output .= '<a role="button" aria-expanded="true" class="wprm-expandable-button wprm-expandable-button-hide"' . esc_attr( $button_style ) . ' aria-label="' . esc_attr__( 'Hide Section', 'wp-recipe-maker' ) . '">' . $icon_expanded . '</a>';
+				$collapsible_output .= '</div>';
+			}
+		}
+
+		// Construct output.
+		$container = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">';
+		$container .= $collapsible_output;
+
+		return $container;
 	}
 
 	/**
@@ -449,42 +756,111 @@ class WPRM_Shortcode_Helper {
 			// UID for this toggle.
 			$uid = isset( $args['uid'] ) ? $args['uid'] : wp_rand();
 
-			$width = intval( $atts['switch_width'] );
-			$width = $width < 20 ? 40 : $width;
+			// Type of switch.
+			$type = isset( $args['type'] ) ? $args['type'] : 'outside';
 
-			// Calculate other sizes.
-			$height = ceil( $width / 2 );
-
-			// Custom style for the slider.
+			// Custom styling.
 			$slider_style = '';
-			$slider_style .= 'width: ' . $width . 'px;';
-			$slider_style .= 'height: ' . $height . 'px;';
-			$slider_style .= 'margin-top: -' . ( $height / 2 ) . 'px;';
-			$slider_style .= 'background-color: ' . $atts['switch_inactive'] . ';';
 
-			if ( 'rounded' === $atts['switch_style'] ) {
-				$slider_style .= 'border-radius: ' . ( $height / 2 ) . 'px;';
+			if ( 'outside' === $type ) {
+				$width = intval( $atts['switch_width'] );
+				$width = $width < 20 ? 40 : $width;
+
+				// Calculate other sizes.
+				$height = ceil( $width / 2 );
+
+				// Custom style for the slider.
+				if ( 28 !== $height ) {
+					$slider_style .= '--switch-height: ' . $height . 'px;';
+				}
+			} elseif ( 'inside' === $type ) {
+				// Set height for switch.
+				$height = intval( $atts['switch_height'] );
+				if ( 28 !== $height ) {
+					$slider_style .= '--switch-height: ' . $height . 'px;';
+				}
+
+				if ( '#333333' !== $atts['switch_off_text'] ) {
+					$slider_style .= '--switch-off-text: ' . $atts['switch_off_text'] . ';';
+				}
+				if ( '#ffffff' !== $atts['switch_on_text'] ) {
+					$slider_style .= '--switch-on-text: ' . $atts['switch_on_text'] . ';';
+				}
 			}
 
-			// Custom style for the label.
-			$label_style = '';
-			$label_style .= 'margin-left: ' . ( $width + 10 ) . 'px;';
+			// Backwards compatibility.
+			$off_color = isset( $atts['switch_off'] ) ? $atts['switch_off'] : $atts['switch_inactive'];
+			$on_color = isset( $atts['switch_on'] ) ? $atts['switch_on'] : $atts['switch_active'];
+			$off_knob_color = isset( $atts['switch_off_knob'] ) ? $atts['switch_off_knob'] : $atts['switch_inactive_knob'];
+			$on_knob_color = isset( $atts['switch_on_knob'] ) ? $atts['switch_on_knob'] : $atts['switch_active_knob'];
+
+			// Custom colors.
+			if ( '#cccccc' !== $off_color ) 		{ $slider_style .= '--switch-off-color: ' . $off_color . ';'; }
+			if ( '#ffffff' !== $off_knob_color ) 	{ $slider_style .= '--switch-off-knob: ' . $off_knob_color . ';'; }
+			if ( '#333333' !== $on_color ) 			{ $slider_style .= '--switch-on-color: ' . $on_color . ';'; }
+			if ( '#ffffff' !== $on_knob_color ) 	{ $slider_style .= '--switch-on-knob: ' . $on_knob_color . ';'; }
 
 			// Classes.
 			$classes = array(
 				'wprm-toggle-switch',
 				'wprm-toggle-switch-' . $atts['switch_style'],
+				'wprm-toggle-switch-' . $type,
 			);
 
-			if ( '#333333' !== $atts['switch_active'] ) {
-				$output .= '<style type="text/css">#wprm-toggle-switch-' . $uid . ' input:checked + .wprm-toggle-switch-slider { background-color: ' . esc_html( $atts['switch_active'] ) . ' !important; }</style>';
+			// Data attributes.
+			$data = '';
+			if ( isset( $args['data'] ) ) {
+				foreach ( $args['data'] as $key => $value ) {
+					$data .= ' data-' . $key . '="' . esc_attr( $value ) . '"';
+				}
 			}
 
-			$output .= '<label id="wprm-toggle-switch-' . esc_attr( $uid ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
-			$output .= '<input type="checkbox" id="' . esc_attr( $args['class'] . '-' . $uid ) . '" class="' . esc_attr( $args['class'] ) . '" />';
-			$output .= '<span class="wprm-toggle-switch-slider" style="' . esc_attr( $slider_style ) . '"></span>';
+			// Aria label.
+			$aria_label = '';
+			if ( isset( $args['aria_label'] ) ) {
+				$aria_label = ' aria-label="' . esc_attr( $args['aria_label'] ) . '"';
+			}
+
+			// Checked?
+			$checked = isset( $args['checked'] ) ? $args['checked'] : false;
+			$checked_html = $checked ? ' checked="checked"' : '';
+
+			$output .= '<label id="wprm-toggle-switch-' . esc_attr( $uid ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $aria_label . '>';
+			$output .= '<input type="checkbox" id="' . esc_attr( $args['class'] . '-' . $uid ) . '" class="' . esc_attr( $args['class'] ) . '"' . $checked_html . $data . ' />';
+			$output .= '<span class="wprm-toggle-switch-slider" style="' . esc_attr( $slider_style ) . '">';
+
+			if ( 'inside' === $type ) {
+				// Get optional icons.
+				$off_icon = '';
+				if ( isset( $atts['off_icon'] ) && $atts['off_icon'] ) {
+					$icon = WPRM_Icon::get( $atts['off_icon'], $atts['switch_off_text'] );
+
+					if ( $icon ) {
+						$off_icon = '<span class="wprm-recipe-icon wprm-media-toggle-off-icon">' . $icon . '</span> ';
+					}
+				}
+				$on_icon = '';
+				if ( isset( $atts['on_icon'] ) && $atts['on_icon'] ) {
+					$icon = WPRM_Icon::get( $atts['on_icon'], $atts['switch_on_text'] );
+
+					if ( $icon ) {
+						$on_icon = '<span class="wprm-recipe-icon wprm-media-toggle-on-icon">' . $icon . '</span> ';
+					}
+				}
+				
+				$off_text = isset( $atts['off_text'] ) ? $atts['off_text'] : '';
+				$on_text = isset( $atts['on_text'] ) ? $atts['on_text'] : '';
+
+				$output .= '<span class="wprm-toggle-switch-text">';
+				$output .= '<span class="wprm-toggle-switch-off">' . $off_icon . WPRM_Shortcode_Helper::sanitize_html( $off_text ) . '</span>';
+				$output .= '<span class="wprm-toggle-switch-on">' . $on_icon . WPRM_Shortcode_Helper::sanitize_html( $on_text ) . '</span>';
+				$output .= '</span>';
+			}
+
+			// $output .= '<span class="wprm-toggle-knob"></span>';
+			$output .= '</span>';
 			
-			if ( isset( $args['label'] ) ) {
+			if ( 'outside' === $type && isset( $args['label'] ) ) {
 				$label_classes = array(
 					'wprm-toggle-switch-label',
 				);
@@ -493,7 +869,7 @@ class WPRM_Shortcode_Helper {
 					$label_classes = array_merge( $label_classes, $args['label_classes'] );
 				}
 
-				$output .= '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '" style="' . esc_attr( $label_style ) . '">';
+				$output .= '<span class="' . esc_attr( implode( ' ', $label_classes ) ) . '">';
 				$output .= $args['label'];
 				$output .= '</span>';
 			}
@@ -527,8 +903,16 @@ class WPRM_Shortcode_Helper {
 				'default' => '#cccccc',
 				'type' => 'color',
 			),
+			'switch_inactive_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+			),
 			'switch_active' => array(
 				'default' => '#333333', // Update if statement above when changing.
+				'type' => 'color',
+			),
+			'switch_active_knob' => array(
+				'default' => '#ffffff',
 				'type' => 'color',
 			),
 		);
@@ -646,5 +1030,63 @@ class WPRM_Shortcode_Helper {
 		}
 
 		return $thumbnail_size;
+	}
+
+	/**
+	 * Get inline style.
+	 *
+	 * @since	10.0.0
+	 * @param string $inline_css CSS to add to the style attribute.
+	 */
+	public static function get_inline_style( $inline_css ) {
+		$style = '';
+
+		// TODO Add setting.
+		if ( true ) {
+			if ( $inline_css ) {
+				$style = ' style="' . esc_attr( $inline_css ) . '"';
+			}
+		}
+
+		return $style;
+	}
+
+	/**
+	 * Get inline CSS variables to set.
+	 *
+	 * @since	10.0.0
+	 * @param string $prefix 			Prefix for the variables.
+	 * @param array  $atts   			Attributes for the shortcode.
+	 * @param array  $defaults 			Default values for the attributes.
+	 * @param array  $keys   			Keys to include in the variables.
+	 */
+	public static function get_inline_css_variables( $prefix, $atts, $defaults, $keys ) {
+		$output = '';
+
+		foreach ( $keys as $key ) {
+			if ( isset( $atts[ $key ] ) ) {
+				$value = $atts[ $key ];
+				$default = isset( $defaults[ $key ] ) ? $defaults[ $key ] : null;
+
+				if ( is_null( $default ) || $value !== $default ) {
+					$variable_key = strtolower( str_replace( '_', '-', $key ) );
+					$variable = '--wprm-' . $prefix . '-' . $variable_key;
+					$output .= $variable . ': ' . $value . ';';
+				}
+			}
+		}
+
+		return $output;
+	}
+
+	public static function test_inline_css_variables( $prefix, $defaults, $keys ) {
+		foreach ( $keys as $key ) {
+			$default = isset( $defaults[ $key ] ) ? $defaults[ $key ] : 'DEFAULT NOT FOUND';
+
+			$variable_key = strtolower( str_replace( '_', '-', $key ) );
+			$variable = '--wprm-' . $prefix . '-' . $variable_key;
+			echo $variable . ': ' . $default . ';<br/>';
+		}
+		die();
 	}
 }

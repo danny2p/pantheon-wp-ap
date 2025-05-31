@@ -10,6 +10,7 @@ const getProperties = ( shortcode ) => {
     const elementId = shortcode.id.replace('wprm-layout-', '');
     const structure = Elements.propertiesForElement.hasOwnProperty( elementId ) ? Elements.propertiesForElement[ elementId ] : false;
     const classes = shortcode.hasOwnProperty( 'classes' ) ? shortcode.classes : [];
+    const style = shortcode.hasOwnProperty( 'style' ) ? shortcode.style : [];
 
     if ( structure ) {
         for ( let id of structure ) {
@@ -17,7 +18,12 @@ const getProperties = ( shortcode ) => {
 
             if ( property ) {
                 property.id = id;
-                property.value = property.classesToValue( classes );
+
+                if ( property.hasOwnProperty( 'classesToValue' ) ) {
+                    property.value = property.classesToValue( classes );
+                } else if ( property.hasOwnProperty( 'styleToValue' ) ) {
+                    property.value = property.styleToValue( style );
+                }
 
                 properties[id] = property;
             }
@@ -39,6 +45,18 @@ const getClasses = ( properties ) => {
     return classes;
 }
 
+const getStyle = ( properties ) => {
+    let style = [];
+
+    for ( let property of Object.values(properties) ) {
+        if ( property.value && property.hasOwnProperty( 'valueToStyle' ) ) {
+            style = style.concat( property.valueToStyle( property.value ) );
+        }
+    }
+
+    return style;
+}
+
 const Element = (props) => {
     const properties = getProperties( props.shortcode );
 
@@ -54,10 +72,21 @@ const Element = (props) => {
         classes.push( 'wprm-template-block-hovering' );
     }
 
+    // Styles.
+    let inlineStyle = {};
+    if ( props.shortcode.hasOwnProperty( 'style' ) && props.shortcode.style.length ) {
+        for ( let style of props.shortcode.style ) {
+            const parts = style.split( ': ', 2 );
+            inlineStyle[ '--' + props.shortcode.id + '-' + parts[0] ] = parts[1];
+        } ';';
+    }
+    console.log( 'Style to add', inlineStyle );
+
     return (
         <Fragment>
             <div
                 className={ classes.join( ' ' ) }
+                style={ inlineStyle }
             >
                 { props.children }
             </div>
@@ -75,9 +104,15 @@ const Element = (props) => {
                                             const newProperties = { ...properties };
                                             newProperties[propertyId].value = value;
 
-                                            const newClasses = getClasses( newProperties );
+                                            console.log( 'newValue', value );
 
-                                            props.onClassesChange( props.shortcode.uid, newClasses );
+                                            if ( property.hasOwnProperty( 'valueToClasses' ) ) {
+                                                const newClasses = getClasses( newProperties );
+                                                props.onClassesChange( props.shortcode.uid, newClasses );
+                                            } else if ( property.hasOwnProperty( 'valueToStyle' ) ) {
+                                                const newStyle = getStyle( newProperties );
+                                                props.onStyleChange( props.shortcode.uid, newStyle );
+                                            }
                                         }}
                                         key={i}
                                     />;

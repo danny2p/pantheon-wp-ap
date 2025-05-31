@@ -83,9 +83,9 @@ class WPRM_Comment_Review {
 	 * @param	array $columns Current columns.
 	 */
 	public static function comments_list_columns( $columns ) {
-		$new_columns = array();
-
 		if ( 'never' !== WPRM_Settings::get( 'metadata_review_include' ) ) {
+			$new_columns = array();
+
 			// Try to add after comment column.
 			$added = false;
 			foreach ( $columns as $id => $label ) {
@@ -101,9 +101,11 @@ class WPRM_Comment_Review {
 			if ( ! $added ) {
 				$new_columns['wprm_review'] = __( 'Review Metadata', 'wp-recipe-maker' );
 			}
+
+			$columns = $new_columns;
 		}
 
-		return $new_columns;
+		return $columns;
 	}
 
 	/**

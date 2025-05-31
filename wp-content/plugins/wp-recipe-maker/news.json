@@ -1,6 +1,60 @@
 {
     "news": [
         {
+            "date": "2025-05-27",
+            "label": "Blog",
+            "title": "How to Price Food Photography for Small Business Clients",
+            "url": "https://bootstrapped.ventures/food-photography-pricing/"
+        },
+        {
+            "date": "2025-05-26",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.0.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-0-0/"
+        },
+        {
+            "date": "2025-05-23",
+            "label": "Blog",
+            "title": "How to Start a Nutrition Blog and Share Your Knowledge",
+            "url": "https://bootstrapped.ventures/how-to-start-a-nutrition-blog/"
+        },
+        {
+            "date": "2025-05-21",
+            "label": "Blog",
+            "title": "5 Proven Ways to Make Money in Nutrition",
+            "url": "https://bootstrapped.ventures/how-to-make-money-in-nutrition/"
+        },
+        {
+            "date": "2025-05-15",
+            "label": "Blog",
+            "title": "How to Create a Professional Culinary Portfolio",
+            "url": "https://bootstrapped.ventures/culinary-portfolio/"
+        },
+        {
+            "date": "2025-05-01",
+            "label": "Blog",
+            "title": "Best Lenses for Food Photography: From 50mm to Macro",
+            "url": "https://bootstrapped.ventures/best-lenses-for-food-photography/"
+        },
+        {
+            "date": "2025-04-23",
+            "label": "Blog",
+            "title": "Food Photography Foundations: Stepping Up Your Game",
+            "url": "https://bootstrapped.ventures/food-photography-basics/"
+        },
+        {
+            "date": "2025-04-15",
+            "label": "Blog",
+            "title": "Artificial Light Food Photography: Pro Tricks and Tips",
+            "url": "https://bootstrapped.ventures/artificial-light-food-photography/"
+        },
+        {
+            "date": "2025-04-03",
+            "label": "Blog",
+            "title": "How to Easily Implement Shoppable Recipes on Your Blog",
+            "url": "https://bootstrapped.ventures/shoppable-recipe/"
+        },
+        {
             "date": "2025-03-14",
             "label": "Blog",
             "title": "How to Become a Recipe Tester: 7 Steps to Success",
