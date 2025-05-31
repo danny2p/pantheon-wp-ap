@@ -185,19 +185,20 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		$style = 'color: ' . $atts['text_color'] . ';';
+		$css = 'color: ' . $atts['text_color'] . ';';
 		if ( 'text' !== $atts['style'] ) {
 			$classes[] = 'wprm-recipe-link-' . esc_attr( $atts['style'] );
 			$classes[] = 'wprm-color-accent';
 
-			$style .= 'background-color: ' . $atts['button_color'] . ';';
-			$style .= 'border-color: ' . $atts['border_color'] . ';';
-			$style .= 'border-radius: ' . $atts['border_radius'] . ';';
-			$style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
+			$css .= 'background-color: ' . $atts['button_color'] . ';';
+			$css .= 'border-color: ' . $atts['border_color'] . ';';
+			$css .= 'border-radius: ' . $atts['border_radius'] . ';';
+			$css .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
 		}
 
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css );
 		$nofollow = 'nofollow' === $atts['link_nofollow'] ? ' rel="nofollow"' : '';
-		$output = '<a href="' . $link . '" target="' . esc_attr( $atts['link_target'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ). '"' . $nofollow . ' style="' . esc_attr( $style ) . '">' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+		$output = '<a href="' . $link . '" target="' . esc_attr( $atts['link_target'] ) . '" class="' . esc_attr( implode( ' ', $classes ) ). '"' . $nofollow . $style . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts );
 	}
 }

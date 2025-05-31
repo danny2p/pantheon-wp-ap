@@ -11,6 +11,15 @@
             stroke: var(--comment-rating-star-color);
         }
     }
+
+    .wprm-rating-star-full svg path {
+        stroke: var(--comment-rating-star-color);
+        fill: var(--comment-rating-star-color);
+    }
+    .wprm-rating-star-empty svg path {
+        stroke: var(--comment-rating-star-color);
+        fill: none;
+    }
 }
 
 .wprm-comment-ratings-container svg .wprm-star-full {

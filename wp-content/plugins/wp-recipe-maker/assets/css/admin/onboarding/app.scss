@@ -3,17 +3,17 @@
         box-sizing: border-box;
     }
 
-    p {
+    p:not(.wprm-admin-onboarding-step-template-preview p) {
         margin: 15px 0;
         text-align: left;
         font-size: 15px;
     }
 
-    h2 {
+    h2:not(.wprm-admin-onboarding-step-template-preview h2) {
         margin: 2em 0 1em 0;
     }
 
-    img {
+    img:not(.wprm-admin-onboarding-step-template-preview img) {
         display: block;
 
         max-width: 90%;
@@ -23,10 +23,14 @@
         border: 1px solid #ccc;
     }
 
-    ul {
+    ul:not(.wprm-admin-onboarding-step-template-preview ul) {
         list-style: square;
         padding-left: 23px;
         font-size: 15px;
+    }
+
+    .wprm-recipe-template-meadow {
+        max-width: 800px;
     }
 
     .wprm-drip-form {

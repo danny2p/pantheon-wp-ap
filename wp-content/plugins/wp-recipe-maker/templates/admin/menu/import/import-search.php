@@ -30,7 +30,7 @@
 			printf( esc_html( _n( '%d recipe found', '%d recipes found', $search_result['recipes'], 'wp-recipe-maker' ) ), intval( $search_result['recipes'] ) );
 			echo '<br/>';
 			?>
-			<a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid, 'p' => 0 ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>"><?php esc_html_e( 'Explore import options', 'wp-recipe-maker' ); ?></a>
+			<a href="<?php echo add_query_arg( array( 'from' => $uid, 'p' => 0 ), admin_url( 'admin.php?page=wprm_import' ) ); ?>"><?php esc_html_e( 'Explore import options', 'wp-recipe-maker' ); ?></a>
 			<?php
 		} else {
 			esc_html_e( 'Still searching, keep this page open.', 'wp-recipe-maker' );
@@ -39,7 +39,7 @@
 			printf( esc_html( _n( '%d recipe found', '%d recipes found', $search_result['recipes'], 'wp-recipe-maker' ) ), intval( $search_result['recipes'] ) );
 			?>
 			<script>
-			window.location = '<?php echo esc_url( add_query_arg( array( 'from' => $uid, 'p' => ($page + 1) ), admin_url( 'admin.php?page=wprm_import_search' ) ) ); ?>';
+			window.location = '<?php echo add_query_arg( array( 'from' => $uid, 'p' => ($page + 1) ), admin_url( 'admin.php?page=wprm_import_search' ) ); ?>';
 			</script>
 			<?php
 		}

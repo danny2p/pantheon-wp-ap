@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { __wprm } from 'Shared/Translations';
+import Tooltip from 'Shared/Tooltip';
 
+import Icon from '../../general/Icon';
 import reactCSS from 'reactcss';
 import { SketchPicker } from 'react-color';
 
@@ -7,8 +10,12 @@ export default class PropertyColor extends Component {
     constructor(props) {
         super(props);
 
+        // Check if value is hex color
+        const isHexColor = /^#([A-Fa-f0-9]{3}){1,2}$/.test(this.props.value);
+
         this.state = {
             displayColorPicker: false,
+            isHexColor,
         }
     }
 
@@ -21,6 +28,7 @@ export default class PropertyColor extends Component {
     };
     
     handleChange(color) {
+        this.setState({ isHexColor: true });
         this.props.onValueChange(color.hex);
     };
 
@@ -31,7 +39,10 @@ export default class PropertyColor extends Component {
                     width: '36px',
                     height: '14px',
                     borderRadius: '2px',
-                    background: `${ this.props.value }`,
+                    background: `${ this.state.isHexColor ? this.props.value : '#ffffff' }`,
+                    textAlign: 'center',
+                    fontSize: '8px',
+                    overflow: 'hidden',
                 },
                 swatch: {
                     padding: '5px',
@@ -58,25 +69,51 @@ export default class PropertyColor extends Component {
         });
 
         return (
-            <div className="wprm-template-property-input">
-                <div style={ styles.swatch } onClick={ this.handleClick.bind(this) }>
-                    <div style={ styles.color } />
-                </div>
-                {
-                    this.state.displayColorPicker
-                    ?
-                    <div style={ styles.popover }>
-                        <div style={ styles.cover } onClick={ this.handleClose.bind(this) }/>
-                        <SketchPicker
-                            color={ this.props.value }
-                            onChange={ this.handleChange.bind(this) }
-                            disableAlpha={ true }
-                        />
+            <Fragment>
+                <div className="wprm-template-property-input">
+                    <div
+                        className="wprm-template-property-input-color-variable-icon"
+                        onClick={() => {
+                            const newColor = prompt( __wprm( 'Set color manually, for example when using CSS variables:' ), this.props.value);
+                            
+                            if ( newColor !== null ) {
+                                // Check if value is hex color for UI state
+                                const isHexColor = /^#([A-Fa-f0-9]{3}){1,2}$/.test(newColor);
+                                this.setState({ isHexColor });
+
+                                // Update the color value
+                                this.props.onValueChange(newColor);
+                            }
+                        }}
+                    >
+                        <Icon type="html" />
                     </div>
-                    :
-                    null
-                }
-            </div>
+                    <Tooltip content={ this.props.value }>
+                        <div style={ styles.swatch } onClick={ this.handleClick.bind(this) }>
+                            <div style={ styles.color }>
+                                {
+                                    ! this.state.isHexColor
+                                    && this.props.value
+                                }
+                            </div>
+                        </div>
+                    </Tooltip>
+                    {
+                        this.state.displayColorPicker
+                        ?
+                        <div style={ styles.popover }>
+                            <div style={ styles.cover } onClick={ this.handleClose.bind(this) }/>
+                            <SketchPicker
+                                color={ this.props.value }
+                                onChange={ this.handleChange.bind(this) }
+                                disableAlpha={ true }
+                            />
+                        </div>
+                        :
+                        null
+                    }
+                </div>
+            </Fragment>
         );
     }
 }

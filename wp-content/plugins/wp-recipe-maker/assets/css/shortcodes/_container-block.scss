@@ -32,6 +32,32 @@
 	display: inline;
 }
 
+.wprm-recipe-details-container-pills {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+
+	--pill-padding-vertical: 5px;
+	--pill-padding-horizontal: 15px;
+	--pill-border-radius: 100px;
+	--pill-background-color: #333333;
+	--pill-text-color: #ffffff;
+	--pill-border-color: #333333;
+	--pill-border-width: 0px;
+
+	.wprm-recipe-meta-container-pill {
+		padding: var(--pill-padding-vertical) var(--pill-padding-horizontal);
+		border-radius: var(--pill-border-radius);
+		background-color: var(--pill-background-color);
+		color: var(--pill-text-color);
+
+		border-width: var(--pill-border-width);
+		border-style: solid;
+		border-color: var(--pill-border-color);
+	}
+}
+
 .wprm-recipe-details-container-table {
 	display: flex;
 

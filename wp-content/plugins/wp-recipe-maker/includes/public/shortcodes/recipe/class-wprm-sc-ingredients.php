@@ -25,6 +25,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'group_header' => array(
+				'type' => 'header',
+				'default' => __( 'Ingredient Groups', 'wp-recipe-maker' ),
+			),
 			'group_tag' => array(
 				'default' => 'h4',
 				'type' => 'dropdown',
@@ -34,6 +38,26 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'default' => 'bold',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
+			),
+			'group_custom_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'group_color' => array(
+				'default' => '#444444',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'group_custom_color',
+					'value' => '1',
+				),
+			),
+			'group_bottom_margin' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Ingredient Container', 'wp-recipe-maker' ),
 			),
 			'list_style_header' => array(
 				'type' => 'header',
@@ -82,6 +106,43 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'dependency' => array(
 					'id' => 'list_style',
 					'value' => 'advanced',
+				),
+			),
+			'bottom_border' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'bottom_border_gap' => array(
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'bottom_border',
+					'value' => '1',
+				),
+			),
+			'bottom_border_width' => array(
+				'default' => '1px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'bottom_border',
+					'value' => '1',
+				),
+			),
+			'bottom_border_style' => array(
+				'default' => 'solid',
+				'type' => 'dropdown',
+				'options' => 'border_styles',
+				'dependency' => array(
+					'id' => 'bottom_border',
+					'value' => '1',
+				),
+			),
+			'bottom_border_color' => array(
+				'default' => '#eeeeee',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'bottom_border',
+					'value' => '1',
 				),
 			),
 			'ingredient_fields_header' => array(
@@ -320,6 +381,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'links' => 'Links',
 					'dropdown' => 'Dropdown',
 					'buttons' => 'Buttons',
+					'switch' => 'Switch',
 				),
 				'dependency' => array(
 					array(
@@ -436,6 +498,130 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'conversion_switch_style' => array(
+				'default' => 'rounded',
+				'type' => 'dropdown',
+				'options' => array(
+					'square' => 'Square Switch',
+					'rounded' => 'Rounded Switch',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_height' => array(
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_off' => array(
+				'default' => '#cccccc',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_off_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_off_text' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_on' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_on_knob' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
+			'conversion_switch_on_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'media_toggle',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'unit_conversion_style',
+						'value' => 'switch',
+					),
+				),
+			),
 			'unit_conversion_both_style' => array(
 				'default' => 'parentheses',
 				'type' => 'dropdown',
@@ -470,6 +656,19 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'before' => 'Show adjustable servings before the ingredients',
 				),
 			),
+			'servings_style' => array (
+				'default' => 'buttons',
+				'type' => 'dropdown',
+				'options' => array(
+					'buttons' => 'Buttons',
+					'pills' => 'Pills',
+				),
+				'dependency' => array(
+					'id' => 'adjustable_servings',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
 			'servings_text_style' => array(
 				'default' => 'normal',
 				'type' => 'dropdown',
@@ -502,27 +701,180 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
-					'id' => 'adjustable_servings',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'buttons',
+					),
 				),
 			),
 			'servings_button_accent' => array(
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
-					'id' => 'adjustable_servings',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'buttons',
+					),
 				),
 			),
 			'servings_button_radius' => array(
 				'default' => '3px',
 				'type' => 'size',
 				'dependency' => array(
-					'id' => 'adjustable_servings',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'buttons',
+					),
+				),
+			),
+			'pills_height' => array(
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_gap' => array(
+				'default' => '10px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_radius' => array(
+				'default' => '999px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_background' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_text' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_active_background' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_active_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_active_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'adjustable_servings',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'servings_style',
+						'value' => 'pills',
+					),
 				),
 			),
 			'advanced_servings' => array(
@@ -558,6 +910,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 		);
 
 		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_checkbox_atts() );
+
 		self::$attributes = $atts;
 
 		parent::init();
@@ -601,15 +956,33 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'button_background' => $atts['unit_conversion_button_background'],
 			'button_accent' => $atts['unit_conversion_button_accent'],
 			'button_radius' => $atts['unit_conversion_button_radius'],
+			'switch_style' => $atts['conversion_switch_style'],
+			'switch_height' => $atts['conversion_switch_height'],
+			'switch_off' => $atts['conversion_switch_off'],
+			'switch_off_knob' => $atts['conversion_switch_off_knob'],
+			'switch_off_text' => $atts['conversion_switch_off_text'],
+			'switch_on' => $atts['conversion_switch_on'],
+			'switch_on_knob' => $atts['conversion_switch_on_knob'],
+			'switch_on_text' => $atts['conversion_switch_on_text'],
 		);
 		$adjustable_servings_atts = array(
 			'id' => $atts['id'],
+			'style' => $atts['servings_style'],
 			'text_style' => $atts['servings_text_style'],
 			'serving_options' => $atts['servings_options'],
 			'serving_options_any_value' => $atts['serving_options_any_value'],
 			'button_background' => $atts['servings_button_background'],
 			'button_accent' => $atts['servings_button_accent'],
 			'button_radius' => $atts['servings_button_radius'],
+			'pills_height' => $atts['pills_height'],
+			'pills_gap' => $atts['pills_gap'],
+			'pills_radius' => $atts['pills_radius'],
+			'pills_background' => $atts['pills_background'],
+			'pills_border' => $atts['pills_border'],
+			'pills_text' => $atts['pills_text'],
+			'pills_active_background' => $atts['pills_active_background'],
+			'pills_active_border' => $atts['pills_active_border'],
+			'pills_active_text' => $atts['pills_active_text'],
 		);
 		$advanced_servings_atts = array(
 			'id' => $atts['id'],
@@ -617,7 +990,11 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'text_style' => $atts['advanced_servings_text_style'],
 		);
 
-		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '">';
+		// Custom style.
+		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
+
+		$output = '<div id="recipe-' . esc_attr( $recipe->id() ) . '-ingredients" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" data-servings="' . esc_attr( $recipe->servings() ) . '"' . $style .'>';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'ingredients', array(
 			'unit_conversion_atts' => $unit_conversion_atts,
 			'adjustable_servings_atts' => $adjustable_servings_atts,
@@ -633,6 +1010,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			$output .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
 		}
 
+		if ( (bool) $atts['has_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'ingredients' );
+		}
+
 		$ingredients = $recipe->ingredients();
 		foreach ( $ingredients as $ingredient_group ) {
 			$output .= '<div class="wprm-recipe-ingredient-group">';
@@ -644,14 +1025,23 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'wprm-block-text-' . $atts['group_style'],
 				);
 
+				$style = '';
+				if ( (bool) $atts['group_custom_color'] ) {
+					$style = ' style="color: ' . esc_attr( $atts['group_color'] ) . ';"';
+				}
+
 				$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['group_tag'] );
-				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $ingredient_group['name'] . '</' . $tag . '>';
+				$output .= '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>' . $ingredient_group['name'] . '</' . $tag . '>';
+
+				if ( '0px' !== $atts['group_bottom_margin'] ) {
+					$output .= do_shortcode( '[wprm-spacer size="' . $atts['group_bottom_margin'] . '"]' );
+				}
 			}
 
 			if ( isset( $ingredient_group['ingredients'] ) && $ingredient_group['ingredients'] ) {
 				$output .= '<ul class="wprm-recipe-ingredients">';
 
-				foreach ( $ingredient_group['ingredients'] as $ingredient ) {
+				foreach ( $ingredient_group['ingredients'] as $index => $ingredient ) {
 					$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
 					$style = 'list-style-type: ' . $list_style_type . ';';
 
@@ -663,6 +1053,16 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					// Add group width if set to grouped style.
 					if ( 'grouped' === $atts['ingredients_style'] ) {
 						$style .= 'flex-basis: ' . $atts['group_width'] . ';';
+					}
+
+					// Add bottom border.
+					if ( (bool) $atts['bottom_border'] ) {
+						// Only if this is not the last item.
+						if ( $index !== count( $ingredient_group['ingredients'] ) - 1 ) {
+							$style .= 'border-bottom: ' . esc_attr( $atts['bottom_border_width'] ) . ' ' . esc_attr( $atts['bottom_border_style'] ) . ' ' . esc_attr( $atts['bottom_border_color'] ) . ';';
+							$style .= 'padding-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
+							$style .= 'margin-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
+						}
 					}
 
 					$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';
@@ -796,6 +1196,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 		}
 
 		$output .= '</div>';
+
+		if ( (bool) $atts['has_container'] ) {
+			$output .= '</div>';
+		}
 
 		// Make sure shortcodes work.
 		$output = do_shortcode( $output );

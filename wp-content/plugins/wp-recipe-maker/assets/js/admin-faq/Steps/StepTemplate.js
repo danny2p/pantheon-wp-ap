@@ -9,8 +9,8 @@ export default class StepTemplate extends Component {
         super(props);
 
         let template = false;
-        if ( wprm_admin_template.templates.hasOwnProperty( 'chic' ) ) {
-            template = wprm_admin_template.templates['chic'];
+        if ( wprm_admin_template.templates.hasOwnProperty( 'meadow' ) ) {
+            template = wprm_admin_template.templates['meadow'];
         }
 
         this.state = {
@@ -31,7 +31,7 @@ export default class StepTemplate extends Component {
         return (
             <div className="wprm-admin-onboarding-step-template">
                 <p>
-                    WP Recipe Maker includes a <strong>full Template Editor to customize the entire look and feel of your recipes</strong> to match your needs. It can be accessed through the <em>WP Recipe Maker > Settings</em> page.
+                    WP Recipe Maker includes a <strong>full Template Editor to customize the entire look and feel of your recipes</strong> to match your needs. It can be accessed through the <em>WP Recipe Maker &gt; Settings</em> page.
                 </p>
                 <p>
                     For now let's just start by choosing one of our default templates. You'll have time to dive into the customization rabbit hole later!

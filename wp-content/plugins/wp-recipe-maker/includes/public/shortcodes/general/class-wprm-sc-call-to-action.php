@@ -37,6 +37,10 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				'default' => '0px',
 				'type' => 'size',
 			),
+			'border_radius' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
 			'background_color' => array(
 				'default' => '',
 				'type' => 'color',
@@ -44,6 +48,19 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 			'icon' => array(
 				'default' => 'instagram',
 				'type' => 'icon',
+			),
+			'icon_position' => array(
+				'default' => 'left',
+				'type' => 'dropdown',
+				'options' => array(
+					'left' => 'Left',
+					'right' => 'Right',
+				),
+				'dependency' => array(
+					'id' => 'icon',
+					'value' => '',
+					'type' => 'inverse',
+				),
 			),
 			'icon_color' => array(
 				'default' => '#333333',
@@ -69,6 +86,16 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 			'header' => array(
 				'default' => __( 'Tried this recipe?', 'wp-recipe-maker' ),
 				'type' => 'text',
+			),
+			'header_tag' => array(
+				'default' => 'span',
+				'type' => 'dropdown',
+				'options' => 'header_tags',
+				'dependency' => array(
+					'id' => 'header',
+					'value' => '',
+					'type' => 'inverse',
+				),
 			),
 			'action' => array(
 				'default' => 'instagram',

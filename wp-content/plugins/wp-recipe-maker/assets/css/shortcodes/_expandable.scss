@@ -1,4 +1,23 @@
 .wprm-expandable-container {
+    --wprm-expandable-text-color: #333333;
+    --wprm-expandable-button-color: #ffffff;
+    --wprm-expandable-border-color: #333333;
+    --wprm-expandable-border-radius: 0px;
+    --wprm-expandable-vertical-padding: 5px;
+    --wprm-expandable-horizontal-padding: 5px;
+
+    a.wprm-expandable-button,
+    button.wprm-expandable-button {
+        color: var(--wprm-expandable-text-color);
+    }
+
+    button.wprm-expandable-button {
+        background-color: var(--wprm-expandable-button-color);
+        border-color: var(--wprm-expandable-border-color);
+        border-radius: var(--wprm-expandable-border-radius);
+        padding: var(--wprm-expandable-vertical-padding) var(--wprm-expandable-horizontal-padding);
+    }
+
     &.wprm-expandable-collapsed {
         .wprm-expandable-content,
         .wprm-expandable-button-hide {

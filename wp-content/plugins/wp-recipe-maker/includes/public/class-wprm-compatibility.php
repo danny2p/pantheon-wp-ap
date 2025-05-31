@@ -25,9 +25,14 @@ class WPRM_Compatibility {
 	 * @since	3.2.0
 	 */
 	public static function init() {
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'yoast_seo' ) );
+		// Shortcode block in query loop.
+		add_filter( 'render_block', array( __CLASS__, 'shortcode_block_query_loop' ), 10, 2 );
+
+		// Rank Math.
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'rank_math' ) );
 
+		// Yoast SEO.
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'yoast_seo' ) );
 		add_filter( 'wpseo_video_index_content', array( __CLASS__, 'yoast_video_seo' ) );
 
 		// Caching plugins.
@@ -77,6 +82,23 @@ class WPRM_Compatibility {
 		// WP Ultimate Post Grid & WP Extended Search combination.
 		add_filter( 'wpes_post_types', array( __CLASS__, 'wpupg_extended_search_post_types' ) );
 		add_filter( 'wpes_tax', array( __CLASS__, 'wpupg_extended_search_taxonomies' ) );
+	}
+
+	/**
+	 * Render WPRM shortcode for query loop compatibility.
+	 *
+	 * @since	10.0.0
+	 * @param	string $block_content	Current block content.
+	 * @param	array $block			Current block.
+	 */
+	public static function shortcode_block_query_loop( $block_content, $block ) {
+		if ( $block['blockName'] === 'core/shortcode' ) {
+			// Check if it contains "[wprm-"
+			if ( strpos( $block_content, '[wprm-' ) !== false ) {
+				return do_shortcode( $block_content );
+			}
+		}
+		return $block_content;
 	}
 
 	/**

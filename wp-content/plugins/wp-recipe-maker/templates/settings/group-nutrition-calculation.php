@@ -25,5 +25,12 @@ $nutrition_calculation = array(
 			'suffix' => 'decimals',
 			'default' => '0',
 		),
+		array(
+			'id' => 'nutrition_facts_calculation_ignore_small_quantity',
+			'name' => __( 'Ignore small quantities', 'wp-recipe-maker' ),
+			'description' => __( 'Ignore quantities smaller than this value when calculating nutrition facts.', 'wp-recipe-maker' ),
+			'type' => 'number',
+			'default' => '0',
+		),
 	),
 );

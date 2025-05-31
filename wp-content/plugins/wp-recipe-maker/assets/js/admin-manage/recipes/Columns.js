@@ -590,6 +590,43 @@ export default {
                     },
                 }
             );
+            columns.push(
+                {
+                    groupHeader: __wprm( 'General' ),
+                    Header: __wprm( 'Recipe Language' ),
+                    id: 'language',
+                    accessor: 'language',
+                    width: 150,
+                    sortable: false,
+                    Filter: ({ filter, onChange }) => (
+                        <select
+                            onChange={event => onChange(event.target.value)}
+                            style={{ width: '100%', fontSize: '1em' }}
+                            value={filter ? filter.value : 'all'}
+                        >
+                            <option value="all">{ __wprm( 'All Languages' ) }</option>
+                            {
+                                Object.values(wprm_admin_manage.multilingual.languages).map((language, index) => {
+                                    return (
+                                        <option value={ language.value } key={index}>{ `${ language.value } - ${ he.decode( language.label ) }` }</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    ),
+                    Cell: row => {
+                        const language = wprm_admin_manage.multilingual.languages.hasOwnProperty( row.value ) ? wprm_admin_manage.multilingual.languages[ row.value ] : false;
+                
+                        if ( ! language ) {
+                            return (<div></div>);
+                        } else {
+                            return (
+                                <div>{ `${ language.value } - ${ he.decode( language.label ) }` }</div>
+                            )
+                        }
+                    },
+                }
+            );
         }
         
         columns.push({
@@ -916,50 +953,6 @@ export default {
                 ),
             },{
                 groupHeader: __wprm( 'Other' ),
-                Header: __wprm( 'Nutrition' ),
-                id: 'nutrition',
-                accessor: 'nutrition',
-                width: 250,
-                sortable: false,
-                filterable: false,
-                Cell: row => (
-                    <div className="wprm-manage-recipes-nutrition-container">
-                        {
-                            Object.keys(wprm_admin_modal.nutrition).map((nutrient, index ) => {
-                                const options = wprm_admin_modal.nutrition[nutrient];
-                                const value = row.value.hasOwnProperty(nutrient) ? row.value[nutrient] : false;
-                                let unit = options.unit;
-
-                                if ( 'serving_size' === nutrient && row.value.hasOwnProperty( 'serving_unit' ) && row.value.serving_unit ) {
-                                    unit = row.value.serving_unit;
-                                }
-        
-                                if ( false === value ) {
-                                    return null;
-                                }
-        
-                                if ( 'calories' !== nutrient && ! wprm_admin.addons.premium ) {
-                                    return null;
-                                }
-        
-                                return (
-                                    <div
-                                        className="wprm-manage-recipes-nutrition"
-                                        key={index}
-                                    >
-                                        <div className="wprm-manage-recipes-nutrition-label">{ options.label }</div>
-                                        <div className="wprm-manage-recipes-nutrition-value-unit">
-                                            <span className="wprm-manage-recipes-nutrition-value">{ value }</span>
-                                            <span className="wprm-manage-recipes-nutrition-unit">{ unit }</span>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                ),
-            },{
-                groupHeader: __wprm( 'Other' ),
                 Header: __wprm( 'Notes' ),
                 id: 'notes',
                 accessor: 'notes',
@@ -1032,6 +1025,93 @@ export default {
                 },
             });
         }
+
+        columns.push({
+            groupHeader: __wprm( 'Nutrition' ),
+            Header: __wprm( 'Nutrition' ),
+            id: 'nutrition',
+            accessor: 'nutrition',
+            width: 250,
+            sortable: false,
+            filterable: false,
+            Cell: row => (
+                <div className="wprm-manage-recipes-nutrition-container">
+                    {
+                        Object.keys(wprm_admin_modal.nutrition).map((nutrient, index ) => {
+                            const options = wprm_admin_modal.nutrition[nutrient];
+                            const value = row.value.hasOwnProperty(nutrient) ? row.value[nutrient] : false;
+                            let unit = options.unit;
+
+                            if ( 'serving_size' === nutrient && row.value.hasOwnProperty( 'serving_unit' ) && row.value.serving_unit ) {
+                                unit = row.value.serving_unit;
+                            }
+    
+                            if ( false === value ) {
+                                return null;
+                            }
+    
+                            if ( 'calories' !== nutrient && ! wprm_admin.addons.premium ) {
+                                return null;
+                            }
+    
+                            return (
+                                <div
+                                    className="wprm-manage-recipes-nutrition"
+                                    key={index}
+                                >
+                                    <div className="wprm-manage-recipes-nutrition-label">{ options.label }</div>
+                                    <div className="wprm-manage-recipes-nutrition-value-unit">
+                                        <span className="wprm-manage-recipes-nutrition-value">{ value }</span>
+                                        <span className="wprm-manage-recipes-nutrition-unit">{ unit }</span>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            ),
+        });
+
+        Object.keys(wprm_admin_modal.nutrition).map((nutrient, index ) => {
+            const options = wprm_admin_modal.nutrition[nutrient];
+            let active = options.hasOwnProperty( 'active' ) ? options.active : false;
+            let calculated = options.hasOwnProperty( 'type' ) && 'calculated' === options.type;
+
+            if ( active && ( 'calories' === nutrient || wprm_admin.addons.premium ) ) {
+                columns.push({
+                    groupHeader: __wprm( 'Nutrition' ),
+                    Header: options.label,
+                    id: `nutrition_${ nutrient }`,
+                    accessor: 'nutrition',
+                    width: 100,
+                    sortable: ! calculated,
+                    Filter: (props) => {
+                        if ( calculated ) {
+                            return null;
+                        }
+                        return (<TextFilter {...props}/>);
+                    },
+                    Cell: row => {
+                        if ( ! row.value.hasOwnProperty( nutrient ) || ! row.value[ nutrient ] ) {
+                            return null;
+                        }
+    
+                        const value = row.value[ nutrient ];
+                        let unit = options.unit;
+
+                        if ( 'serving_size' === nutrient && row.value.hasOwnProperty( 'serving_unit' ) && row.value.serving_unit ) {
+                            unit = row.value.serving_unit;
+                        }
+
+                        if ( false === value ) {
+                            return null;
+                        }
+
+                        return ( <div className="wprm-manage-recipes-nutrient">{ value }<span className="wprm-manage-recipes-nutrient-unit">{ unit }</span></div> );
+                    },
+                });
+            }
+        })
 
         const customFields = wprm_admin_modal.custom_fields && wprm_admin_modal.custom_fields.fields ? Object.values( wprm_admin_modal.custom_fields.fields ) : [];
 

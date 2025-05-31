@@ -427,6 +427,25 @@ class WPRM_Recipe_Manager {
 						}
 					}
 
+					// Bricks Builder compatibility.
+					if (class_exists('\Bricks\Frontend') && method_exists('\Bricks\Frontend', 'render_content')) {
+						$bricks_builder_used = get_post_meta( $post_id, '_bricks_editor_mode', true );
+
+						if ( $bricks_builder_used && 'bricks' === $bricks_builder_used ) {
+							$bricks_data = get_post_meta( $post_id, '_bricks_page_content_2', true );
+	
+							if ( $bricks_data ) {
+								ob_start();
+								\Bricks\Frontend::render_content( $bricks_data );
+								$bricks_output = ob_get_contents();
+								ob_end_clean();
+	
+								$bricks_recipe_ids = self::get_recipe_ids_from_content( $bricks_output );
+								$recipe_ids = array_unique( $recipe_ids + $bricks_recipe_ids );
+							}
+						}
+					}
+					
 					self::$posts[ $post_id ] = $recipe_ids;
 				}
 			} else {

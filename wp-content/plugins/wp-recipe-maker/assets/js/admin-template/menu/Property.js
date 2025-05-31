@@ -76,6 +76,8 @@ const Property = (props) => {
                             property={props.property}
                             value={props.property.value}
                             onValueChange={(value) => { props.onPropertyChange(props.property.id, value); } }
+                            fonts={props.fonts}
+                            onChangeFonts={props.onChangeFonts}
                         />
                     </div>
                 </Fragment>

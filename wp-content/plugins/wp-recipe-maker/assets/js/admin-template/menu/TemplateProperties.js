@@ -84,6 +84,8 @@ const TemplateProperties = (props) => {
                                                 return <Property
                                                             property={property}
                                                             onPropertyChange={props.onChangeTemplateProperty}
+                                                            fonts={props.fonts}
+                                                            onChangeFonts={props.onChangeFonts}
                                                             key={j}
                                                         />;
                                             })

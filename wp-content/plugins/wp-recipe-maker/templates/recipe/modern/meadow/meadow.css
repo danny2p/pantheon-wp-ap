@@ -1,0 +1,85 @@
+.wprm-recipe-template-meadow {
+    margin: 20px auto;
+    background-color: #ffffff; /* wprm_background type=color */
+    font-family: "Inter", sans-serif; /* wprm_main_font_family type=font */
+    font-size: 16px; /* wprm_main_font_size type=font_size */
+    line-height: 1.5em; /* wprm_main_line_height type=font_size */
+    color: #000000; /* wprm_main_text type=color */
+    max-width: 1600px; /* wprm_max_width type=size */
+
+    --meadow-accent-color: #747B2D; /* wprm_accent_color type=color */
+    --meadow-main-background-color: #F3F4EC; /* wprm_main_background_color type=color */
+
+    border: 0;
+    border-top: 1px solid var(--meadow-accent-color);
+
+    --meadow-list-border-color: #DEB538; /* wprm_list_border_color type=color */
+}
+.wprm-recipe-template-meadow a {
+    color: #000000; /* wprm_link type=color */
+}
+.wprm-recipe-template-meadow p, .wprm-recipe-template-meadow li {
+    font-family: "Inter", sans-serif; /* wprm_main_font_family type=font */
+    font-size: 1em;
+    line-height: 1.5em; /* wprm_main_line_height type=font_size */
+}
+.wprm-recipe-template-meadow li {
+    margin: 0 0 0 32px;
+    padding: 0;
+}
+.rtl .wprm-recipe-template-meadow li {
+    margin: 0 32px 0 0;
+}
+.wprm-recipe-template-meadow ol, .wprm-recipe-template-meadow ul {
+    margin: 0;
+    padding: 0;
+}
+.wprm-recipe-template-meadow br {
+    display: none;
+}
+.wprm-recipe-template-meadow .wprm-recipe-name,
+.wprm-recipe-template-meadow .wprm-recipe-header {
+    font-family: "Gloock", serif; /* wprm_header_font_family type=font */
+    color: #1e1e1e; /* wprm_header_text type=color */
+    line-height: 1.3em; /* wprm_header_line_height type=font_size */
+}
+.wprm-recipe-template-meadow .wprm-recipe-header * {
+    font-family: "Inter", sans-serif; /* wprm_main_font_family type=font */
+}
+.wprm-recipe-template-meadow h1,
+.wprm-recipe-template-meadow h2,
+.wprm-recipe-template-meadow h3,
+.wprm-recipe-template-meadow h4,
+.wprm-recipe-template-meadow h5,
+.wprm-recipe-template-meadow h6 {
+    font-family: "Gloock", serif; /* wprm_header_font_family type=font */
+    color: #1e1e1e; /* wprm_header_text type=color */
+    line-height: 1.3em; /* wprm_header_line_height type=font_size */
+    margin: 0;
+    padding: 0;
+}
+.wprm-recipe-template-meadow .wprm-recipe-header {
+    margin-top: 1.2em;
+}
+.wprm-recipe-template-meadow h1 {
+    font-size: 2.2em; /* wprm_h1_size type=font_size */
+}
+.wprm-recipe-template-meadow h2 {
+    font-size: 2.2em; /* wprm_h2_size type=font_size */
+}
+.wprm-recipe-template-meadow h3 {
+    font-size: 1.8em; /* wprm_h3_size type=font_size */
+}
+.wprm-recipe-template-meadow h4 {
+    font-size: 1em; /* wprm_h4_size type=font_size */
+}
+.wprm-recipe-template-meadow h5 {
+    font-size: 1em; /* wprm_h5_size type=font_size */
+}
+.wprm-recipe-template-meadow h6 {
+    font-size: 1em; /* wprm_h6_size type=font_size */
+}
+.wprm-recipe-template-meadow .meadow-header-meta {
+    max-width: 800px;
+    margin: 0 auto;
+}

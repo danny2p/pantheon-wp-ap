@@ -202,6 +202,7 @@ class WPRM_Shortcode_Other {
 			'text' => '',
 			'style' => 'bold',
 			'color' => '',
+			'notes_separator' => '',
 			'unit_conversion' => '',
 			'unit_conversion_both_style' => '',
 			'unit_conversion_show_identical' => '',
@@ -234,7 +235,28 @@ class WPRM_Shortcode_Other {
 						$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $found_ingredient );
 					}
 
-					if ( $found_ingredient['name'] ) { $parts[] = $found_ingredient['name']; };
+					// Ingredient name and maybe notes.
+					$name_with_notes = '';
+					if ( $found_ingredient['name'] ) { $name_with_notes = $found_ingredient['name']; };
+
+					if ( '' !== $atts['notes_separator'] ) {
+						if ( $found_ingredient['notes'] ) {
+							switch ( $atts['notes_separator'] ) {
+								case 'comma':
+									$name_with_notes .= ', ' . $found_ingredient['notes'];
+									break;
+								case 'dash':
+									$name_with_notes .= ' - ' . $found_ingredient['notes'];
+									break;
+								case 'parentheses':
+									$name_with_notes .= ' (' . $found_ingredient['notes'] . ')';
+									break;
+								default:
+									$name_with_notes .= ' ' . $found_ingredient['notes'];
+							}
+						}
+					}
+					$parts[] = $name_with_notes;
 
 					$text_to_show = implode( ' ', $parts );
 
@@ -246,18 +268,26 @@ class WPRM_Shortcode_Other {
 						);
 
 						// Custom CSS style.
-						$style = '';
+						$css = '';
 
 						if ( $atts['color'] ) {
-							$style = ' style="color: ' . esc_attr( $atts['color'] ) . ';"';
+							$css = 'color: ' . $atts['color'] . ';';
 						}
+						$style = WPRM_Shortcode_Helper::get_inline_style( $css );
 
 						// Needed to show both units?
 						if ( $show_both_units ) {
 							$text_to_show = $amount_unit . ' ' . $found_ingredient['name'];
 						}
-					
-						$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $style . '>' . $text_to_show . '</span>';
+
+						// Keep notes?
+						$data_keep_notes = '';
+
+						if ( '' !== $atts['notes_separator'] ) {
+							$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['notes_separator'] ) . '"';
+						}
+
+						$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $data_keep_notes . $style . '>' . $text_to_show . '</span>';
 					}
 				}
 			}
@@ -327,6 +357,8 @@ class WPRM_Shortcode_Other {
 			'field' => '',
 			'key' => '',
 			'device' => '',
+			'min_width' => '',
+			'max_width' => '',
 			'user' => '',
 			'rating' => '',
 			'taxonomy' => '',
@@ -441,6 +473,21 @@ class WPRM_Shortcode_Other {
 				foreach ( $device_conditions as $device_condition ) {
 					$classes[] = 'wprm-condition-device-' . $device_condition;
 				}
+			}
+		}
+
+		// Width conditions.
+		if ( $atts['min_width'] || $atts['max_width'] ) {
+			$classes[] = 'wprm-condition-width';
+			$matches_conditions[] = true;
+
+			if ( $atts['min_width'] ) {
+				$value = intval( $atts['min_width'] );
+				$classes[] = 'wprm-condition-min-width-' . $value;
+			}
+			if ( $atts['max_width'] ) {
+				$value = intval( $atts['max_width'] );
+				$classes[] = 'wprm-condition-max-width-' . $value;
 			}
 		}
 

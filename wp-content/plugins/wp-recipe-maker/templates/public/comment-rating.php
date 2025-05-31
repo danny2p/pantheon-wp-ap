@@ -11,8 +11,12 @@
 
 ?>
 <?php
+$stars_style = WPRM_Settings::get( 'rating_stars_style' );
+
 if ( WPRM_Settings::get( 'performance_use_combined_stars' ) ) :
-	$svg = WPRM_URL . 'assets/icons/rating/stars-' . $rating . '.svg';
+	$star_icon = 'pointy' === $stars_style ? 'stars-' : 'stars-alt-';
+
+	$svg = WPRM_URL . 'assets/icons/rating/' . $star_icon . $rating . '.svg';
 	// translators: %s: number of stars for this recipe.
 	$alt = sprintf( _n( '%s star', '%s stars', $rating, 'wp-recipe-maker' ), $rating );
 
@@ -36,20 +40,23 @@ $container_style = $padding ? ' style="margin: 0 -' . $padding . 'px;"' : '';
 ?>
 <div class="wprm-comment-rating">
 	<span class="wprm-rating-stars"<?php echo wp_kses_post( $container_style ); ?>><?php
+		$star_icon_name = 'pointy' === $stars_style ? 'star-' : 'star-alt-';
+	
 		for ( $i = 1; $i <= 5; $i++ ) {
 			$style = $padding ? ' style="padding: 0 ' . $padding . 'px;"' : '';
+			$star_type = $i <= $rating ? 'full' : 'empty';
 
-			echo '<span class="wprm-rating-star"' . wp_kses_post( $style ) . '>';
+			echo '<span class="wprm-rating-star wprm-rating-star-' . esc_attr( $star_type ) . '"' . wp_kses_post( $style ) . '>';
 			if ( $i <= $rating ) {
 					ob_start();
-					include( WPRM_DIR . 'assets/icons/star-full.svg' );
+					include( WPRM_DIR . 'assets/icons/' . $star_icon_name . 'full.svg' );
 					$star_icon = ob_get_contents();
 					ob_end_clean();
 
 					echo apply_filters( 'wprm_comment_rating_star_full_icon', $star_icon );
 			} else {
 					ob_start();
-					include( WPRM_DIR . 'assets/icons/star-empty.svg' );
+					include( WPRM_DIR . 'assets/icons/' . $star_icon_name . 'empty.svg' );
 					$star_icon = ob_get_contents();
 					ob_end_clean();
 

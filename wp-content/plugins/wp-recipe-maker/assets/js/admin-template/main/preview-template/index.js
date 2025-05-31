@@ -102,7 +102,7 @@ export default class PreviewTemplate extends Component {
     parseHtml(html) {
         // Find shortcodes in HTML.
         let shortcodes = [];
-        const regex = /\[([^\s\]]*)\s*([^\]]*?)\]|<div class="(wprm-layout-[^\s"]*)\s?(.*?)">/gmi;
+        const regex = /\[([^\s\]]*)\s*([^\]]*?)\]|<div class="(wprm-layout-[^\s"]*)\s?(.*?)"(?: style="(.*?)")?>/gmi;
 
         // Loop over all the matches we found and replace in HTML to parse.
         let htmlToParse = html;
@@ -188,12 +188,23 @@ export default class PreviewTemplate extends Component {
                 let id = match[3];
                 let content;
                 let classes = match[4] ? match[4].split( ' ' ) : [];
+                let style = match[5] ? match[5].split( ';' ) : [];
                 let name = Helpers.getShortcodeName(id);
 
                 const customClass = classes.find( (c) => ! c.startsWith( 'wprm-' ) );
                 if ( customClass ) {
                     name += ' (' + customClass + ')';
                 }
+
+                // Remove prefix from style.
+                style = style.map( (s) => {
+                    return s.replace( '--' + id + '-', '' );
+                } );
+
+                // Remove empty from style.
+                style = style.filter( (s) => {
+                    return s.trim() !== '';
+                } );
 
                 const elementWithUid = match[0].replace( '">', '" uid="' + uid + '">' );
 
@@ -217,8 +228,9 @@ export default class PreviewTemplate extends Component {
                     id,
                     name,
                     classes,
+                    style,
                     content,
-                };                
+                };
             }
         }
 
@@ -284,6 +296,7 @@ export default class PreviewTemplate extends Component {
                     shortcode={ shortcode }
                     shortcodes={ shortcodes }
                     onClassesChange={ this.onClassesChange.bind(this) }
+                    onStyleChange={ this.onStyleChange.bind(this) }
                     editingBlock={this.state.editingBlock}
                     onChangeEditingBlock={this.onChangeEditingBlock.bind(this)}
                     hoveringBlock={this.state.hoveringBlock}
@@ -339,7 +352,20 @@ export default class PreviewTemplate extends Component {
                         classes = classes.concat( shortcode.classes );
                     }
 
-                    const elementToOutput = '<div class="' + classes.join( ' ' ) + '">';
+                    // Inline style to add.
+                    let style = '';
+                    if ( shortcode.hasOwnProperty( 'style' ) && shortcode.style.length ) {
+
+                        let prefixedStyle = shortcode.style.map( (style) => {
+                            return '--' + shortcode.id + '-' + style;
+                        } );
+
+                        style = ' style="' + prefixedStyle.join( ';' ) + ';"';
+
+                        console.log( 'unparsed style', style );
+                    }
+
+                    const elementToOutput = '<div class="' + classes.join( ' ' ) + '"' + style + '>';
                     
                     html = html.replace( elementMatch[0], elementToOutput );
                     html = html.replace('<!--wprm-closing-' + shortcode.uid + '-->', '');
@@ -366,6 +392,18 @@ export default class PreviewTemplate extends Component {
     onClassesChange(uid, classes) {
         let newState = this.state;
         newState.shortcodes[uid].classes = classes;
+
+        this.setState(newState,
+            () => {
+                let newHtml = this.unparseHtml();
+                this.props.onChangeHTML(newHtml);
+            }
+        );
+    }
+
+    onStyleChange(uid, style) {
+        let newState = this.state;
+        newState.shortcodes[uid].style = style;
 
         this.setState(newState,
             () => {

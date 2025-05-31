@@ -31,8 +31,8 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '9.8.3' );
-		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '9.8.0' );
+		define( 'WPRM_VERSION', '10.0.2' );
+		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '10.0.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -157,6 +157,7 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-shortcode.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-taxonomies.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-editor.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-template-fonts.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-manager.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-shortcode.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-template-shortcodes.php' );

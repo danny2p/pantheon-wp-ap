@@ -82,7 +82,7 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 				),
 			),
 			'icon' => array(
-				'default' => 'star-empty',
+				'default' => 'star-alt-empty',
 				'type' => 'icon',
 			),
 			'icon_color' => array(

@@ -59,6 +59,8 @@ class WPRM_Api_Manage_Changelog {
 	 * @param    WP_REST_Request $request Current request.
 	 */
 	public static function api_manage_changelog( $request ) {
+		global $wpdb;
+
 		// Parameters.
 		$params = $request->get_params();
 

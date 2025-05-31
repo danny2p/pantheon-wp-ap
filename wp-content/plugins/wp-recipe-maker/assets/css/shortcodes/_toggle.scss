@@ -1,13 +1,6 @@
 .wprm-toggle-container {
-    display: inline-flex;
-    align-items: stretch;
-    border: 1px solid #333333;
-    flex-shrink: 0;
-    overflow: hidden;
-
     button.wprm-toggle {
         display: inline-block;
-        padding: 5px 10px;
         font-size: inherit;
         line-height: inherit;
         font-weight: inherit;
@@ -18,6 +11,40 @@
         border: none;
         border-radius: 0;
         box-shadow: none;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.wprm-toggle-buttons-container {
+    --wprm-toggle-button-background: #ffffff;
+    --wprm-toggle-button-accent: #333333;
+    --wprm-toggle-button-radius: 3px;
+
+    display: inline-flex;
+    align-items: stretch;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid var( --wprm-toggle-button-accent );
+    border-radius: var( --wprm-toggle-button-radius );
+    background-color: var( --wprm-toggle-button-background );
+    color: var( --wprm-toggle-button-accent );
+
+    button.wprm-toggle {
+        padding: 5px 10px;
+
+        background-color: var( --wprm-toggle-button-accent );
+        color: var( --wprm-toggle-button-background );
+
+        border-left: 1px solid var( --wprm-toggle-button-accent );
+
+        &:first-child {
+            border-left: 0;
+            border-right: 0;
+        }
 
         &.wprm-toggle-active {
             .wprm-toggle-icon-inactive {
@@ -44,6 +71,56 @@
             & + .wprm-toggle-text {
                 margin-left: 10px;
             }
+        }
+    }
+}
+
+.rtl .wprm-toggle-buttons-container {
+    button.wprm-toggle {
+        border-left: 0;
+        border-right: 1px solid var( --wprm-toggle-button-accent );
+    }
+}
+
+.wprm-toggle-pills-container {
+    --wprm-toggle-pills-height: 28px;
+    --wprm-toggle-pills-gap: 10px;
+    --wprm-toggle-pills-radius: 999px;
+
+    --wprm-toggle-pills-background: #ffffff;
+    --wprm-toggle-pills-border: #333333;
+    --wprm-toggle-pills-text: #333333;
+    --wprm-toggle-pills-active-background: #333333;
+    --wprm-toggle-pills-active-border: #333333;
+    --wprm-toggle-pills-active-text: #ffffff;
+
+    display: inline-flex;
+    align-items: center;
+    gap: var( --wprm-toggle-pills-gap );
+
+    button.wprm-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        height: var( --wprm-toggle-pills-height );
+        width: auto;
+        min-width: var( --wprm-toggle-pills-height );
+
+        border-radius: var( --wprm-toggle-pills-radius );
+        font-size: calc( var( --wprm-toggle-pills-height ) * 0.5 );
+
+        border: 1px solid var( --wprm-toggle-pills-border );
+        background-color: var( --wprm-toggle-pills-background );
+        color: var( --wprm-toggle-pills-text );
+
+        padding: 0;
+        margin: 0;
+
+        &.wprm-toggle-active {
+            border: 1px solid var( --wprm-toggle-pills-active-border );
+            background-color: var( --wprm-toggle-pills-active-background );
+            color: var( --wprm-toggle-pills-active-text );
         }
     }
 }

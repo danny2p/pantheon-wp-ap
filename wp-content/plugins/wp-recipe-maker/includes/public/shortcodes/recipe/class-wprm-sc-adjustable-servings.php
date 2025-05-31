@@ -25,6 +25,14 @@ class WPRM_SC_Adjustable_Servings extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'style' => array (
+				'default' => 'buttons',
+				'type' => 'dropdown',
+				'options' => array(
+					'buttons' => 'Buttons',
+					'pills' => 'Pills',
+				),
+			),
 			'text_style' => array(
 				'default' => 'normal',
 				'type' => 'dropdown',
@@ -41,15 +49,100 @@ class WPRM_SC_Adjustable_Servings extends WPRM_Template_Shortcode {
 			'button_background' => array(
 				'default' => '#ffffff',
 				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'buttons',
+				),
 			),
 			'button_accent' => array(
 				'default' => '#333333',
 				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'buttons',
+				),
 			),
 			'button_radius' => array(
 				'default' => '3px',
 				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'buttons',
+				),
 			),
+			'pills_height' => array(
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_gap' => array(
+				'default' => '10px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_radius' => array(
+				'default' => '999px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_background' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_text' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_active_background' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_active_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			'pills_active_text' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'pills',
+				),
+			),
+			
 		);
 		parent::init();
 	}

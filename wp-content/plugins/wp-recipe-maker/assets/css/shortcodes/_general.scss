@@ -6,6 +6,12 @@
 .wprm-block-text-light {
     font-weight: 300 !important;
 }
+.wprm-block-text-light-bold {
+    font-weight: 500 !important;
+}
+.wprm-block-text-semi-bold {
+    font-weight: 600 !important;
+}
 .wprm-block-text-bold {
     font-weight: bold !important;
 }
@@ -22,13 +28,25 @@
     text-transform: uppercase !important;
     opacity: 0.7;
 }
+.wprm-block-text-smaller {
+    font-size: 0.9em;
+}
+.wprm-block-text-larger {
+    font-size: 1.1em;
+}
 
-// Prevent double fading.
+// Prevent double application.
 .wprm-block-text-faded .wprm-block-text-faded {
     opacity: 1;
 }
 .wprm-block-text-uppercase-faded .wprm-block-text-uppercase-faded {
     opacity: 1;
+}
+.wprm-block-text-smaller .wprm-block-text-smaller {
+    font-size: 1em;
+}
+.wprm-block-text-larger .wprm-block-text-larger {
+    font-size: 1em;
 }
 
 .wprm-align-left {

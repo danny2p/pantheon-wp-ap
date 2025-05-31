@@ -28,18 +28,16 @@ class WPRM_Comment_Rating {
 		add_filter( 'comment_text', array( __CLASS__, 'add_stars_to_comment' ), 10, 2 );
 
 		// Add stars to comment form.
-		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
-			add_filter( 'comment_form_field_comment', array( __CLASS__, 'add_rating_field_to_comment_form' ), 10, 2 );
-			add_action( 'comment_form_after_fields', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
-			add_action( 'comment_form_logged_in_after', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
+		add_filter( 'comment_form_field_comment', array( __CLASS__, 'add_rating_field_to_comment_form' ), 10, 2 );
+		add_action( 'comment_form_after_fields', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
+		add_action( 'comment_form_logged_in_after', array( __CLASS__, 'add_rating_field_to_comments_legacy' ) );
 
-			// WPDiscuz compatibility.
-			add_action( 'init', array( __CLASS__, 'wpdiscuz_compatibility' ) );
-			add_action( 'wpdiscuz_button', array( __CLASS__, 'add_rating_field_to_comments' ) );
+		// WPDiscuz compatibility.
+		add_action( 'init', array( __CLASS__, 'wpdiscuz_compatibility' ) );
+		add_action( 'wpdiscuz_button', array( __CLASS__, 'add_rating_field_to_comments' ) );
 
-			// Thrive Comments compatibility.
-			add_action( 'tcm_comment_extra_fields', array( __CLASS__, 'add_rating_field_to_thrive_comments' ) );
-		}
+		// Thrive Comments compatibility.
+		add_action( 'tcm_comment_extra_fields', array( __CLASS__, 'add_rating_field_to_thrive_comments' ) );
 		
 		// Rating column on admin comments list.
 		add_filter( 'manage_edit-comments_columns', array( __CLASS__, 'comments_list_columns' ) );
@@ -264,8 +262,10 @@ class WPRM_Comment_Rating {
 	 * @since    1.3.0
 	 */
 	public static function wpdiscuz_compatibility() {
-		if ( ! defined( 'WPDISCUZ_BOTTOM_TOOLBAR' ) ) {
-			define( 'WPDISCUZ_BOTTOM_TOOLBAR', true );
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+			if ( ! defined( 'WPDISCUZ_BOTTOM_TOOLBAR' ) ) {
+				define( 'WPDISCUZ_BOTTOM_TOOLBAR', true );
+			}
 		}
 	}
 
@@ -276,7 +276,7 @@ class WPRM_Comment_Rating {
 	 * @since    4.2.1
 	 */
 	public static function add_rating_field_to_comment_form( $comment_field ) {
-		if ( 'legacy' !== WPRM_Settings::get( 'comment_rating_form_position' ) ) {
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) && 'legacy' !== WPRM_Settings::get( 'comment_rating_form_position' ) ) {
 			$rating = 0;
 			$template = apply_filters( 'wprm_template_comment_rating_form', WPRM_DIR . 'templates/public/comment-rating-form.php' );
 
@@ -301,7 +301,7 @@ class WPRM_Comment_Rating {
 	 * @since    4.3.3
 	 */
 	public static function add_rating_field_to_comments_legacy() {
-		if ( 'legacy' === WPRM_Settings::get( 'comment_rating_form_position' ) ) {
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) && 'legacy' === WPRM_Settings::get( 'comment_rating_form_position' ) ) {
 			self::add_rating_field_to_comments();
 		}
 	}
@@ -312,7 +312,9 @@ class WPRM_Comment_Rating {
 	 * @since    4.3.3
 	 */
 	public static function add_rating_field_to_thrive_comments() {
-		self::add_rating_field_to_comments();
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+			self::add_rating_field_to_comments();
+		}
 	}
 
 	/**
@@ -321,9 +323,11 @@ class WPRM_Comment_Rating {
 	 * @since    1.1.0
 	 */
 	public static function add_rating_field_to_comments() {
-		$rating = 0;
-		$template = apply_filters( 'wprm_template_comment_rating_form', WPRM_DIR . 'templates/public/comment-rating-form.php' );
-		require( $template );
+		if ( WPRM_Settings::get( 'features_comment_ratings' ) ) {
+			$rating = 0;
+			$template = apply_filters( 'wprm_template_comment_rating_form', WPRM_DIR . 'templates/public/comment-rating-form.php' );
+			require( $template );
+		}
 	}
 
 	/**

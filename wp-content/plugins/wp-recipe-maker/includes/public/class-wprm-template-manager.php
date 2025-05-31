@@ -247,7 +247,7 @@ class WPRM_Template_Manager {
 	 * @since	4.0.0
 	 * @param	object $template Template to get the CSS for.
 	 */
-	public static function get_template_css( $template ) {
+	public static function get_template_css( $template, $include_fonts = true ) {
 		$css = '';
 
 		if ( ! $template ) {
@@ -258,14 +258,17 @@ class WPRM_Template_Manager {
 			if ( 'file' === $template['location'] ) {
 
 				if ( ! $template['custom'] && 'recipe' === $template['type'] && 'excerpt' !== $template['slug'] ) {
-					// Get default CSS.
-					ob_start();
-					include( WPRM_DIR . 'templates/recipe/modern/default.css' );
-					$css .= ob_get_contents();
-					ob_end_clean();
+					// Only load default CSS for recipe templates created before the Meadow template.
+					if ( in_array( $template['slug'], array( 'basic', 'blend-in', 'chic', 'classic', 'compact', 'compact-howto', 'boxes', 'columns', 'cutout', 'poster' ) ) ) {
+						// Get default CSS.
+						ob_start();
+						include( WPRM_DIR . 'templates/recipe/modern/default.css' );
+						$css .= ob_get_contents();
+						ob_end_clean();
 
-					// Replace default classic with template specific one.
-					$css = preg_replace( '/\.wprm-recipe(\[|:|\s|\{)/im', '.wprm-recipe-template-' . $template['slug'] . '$1', $css );
+						// Replace default classic with template specific one.
+						$css = preg_replace( '/\.wprm-recipe(\[|:|\s|\{)/im', '.wprm-recipe-template-' . $template['slug'] . '$1', $css );
+					}
 				}
 
 				// Get CSS from stylesheet.
@@ -285,6 +288,11 @@ class WPRM_Template_Manager {
 			require( $template['dir'] . '/' . $template['stylesheet'] );
 			$css .= ob_get_contents();
 			ob_end_clean();
+		}
+
+		// Maybe need to load fonts for template.
+		if ( $include_fonts ) {
+			$css = WPRM_Template_Fonts::get_css_for_fonts_in_template( $template ) . $css;
 		}
 
 		return $css;
@@ -516,6 +524,10 @@ class WPRM_Template_Manager {
 		$sanitized_template['name'] = sanitize_text_field( $template['name'] );
 		$sanitized_template['css'] = trim( $template['css'] );
 		$sanitized_template['html'] = trim( $template['html'] );
+
+		// Fonts.
+		$fonts = isset( $template['fonts'] ) ? $template['fonts'] : array();
+		$sanitized_template['fonts'] = array_map( 'sanitize_text_field', $fonts );
 
 		// Make sure list of templates is up to date.
 		$templates = get_option( 'wprm_templates', array() );

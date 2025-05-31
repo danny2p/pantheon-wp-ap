@@ -841,7 +841,8 @@ class WPRM_Recipe {
 	 * @since    2.5.1
 	 */
 	public function video_embed() {
-		return $this->meta( 'wprm_video_embed', '' );
+		$video_embed = $this->meta( 'wprm_video_embed', '' );
+		return apply_filters( 'wprm_recipe_field', $video_embed, 'video_embed', $this );
 	}
 
 	/**

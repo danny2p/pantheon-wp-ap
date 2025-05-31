@@ -247,26 +247,25 @@ class WPRM_SC_Expandable extends WPRM_Template_Shortcode {
 			'wprm-block-text-' . esc_attr( $atts['text_style'] ),
 		);
 
-		$button_style = 'color: ' . $atts['text_color'] . ';';
+		$css_variables = parent::get_inline_css_variables( 'expandable', $atts, array( 'text_color' ) );
 		$button_tag = 'a';
 		if ( 'text' !== $atts['button_style'] ) {
 			$button_tag = 'button';
 			$button_classes[] = 'wprm-recipe-link-' . esc_attr( $atts['button_style'] );
 			$button_classes[] = 'wprm-color-accent';
 
-			$button_style .= 'background-color: ' . $atts['button_color'] . ';';
-			$button_style .= 'border-color: ' . $atts['border_color'] . ';';
-			$button_style .= 'border-radius: ' . $atts['border_radius'] . ';';
-			$button_style .= 'padding: ' . $atts['vertical_padding'] . ' ' . $atts['horizontal_padding'] . ';';
+			$css_variables .= parent::get_inline_css_variables( 'expandable', $atts, array( 'button_color', 'border_color', 'border_radius', 'vertical_padding', 'horizontal_padding' ) );
 		}
 
+		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
+
 		$output = '';
-		$output .= '<div class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+		$output .= '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>';
 		$output .= '<div class="wprm-expandable-button-container">';
-		$output .= '<' . $button_tag . ' role="button" aria-expanded="false" class="wprm-expandable-button-show ' . esc_attr( implode( ' ', $button_classes ) ). '" style="' . esc_attr( $button_style ) . '">' . $text_collapsed . '</' . $button_tag . '>';
+		$output .= '<' . $button_tag . ' role="button" aria-expanded="false" class="wprm-expandable-button-show ' . esc_attr( implode( ' ', $button_classes ) ). '">' . $text_collapsed . '</' . $button_tag . '>';
 
 		if ( 'disappearing' !== $atts['style'] ) {
-			$output .= '<' . $button_tag . ' role="button" aria-expanded="true" class="wprm-expandable-button-hide ' . esc_attr( implode( ' ', $button_classes ) ). '" style="' . esc_attr( $button_style ) . '">' . $text_expanded . '</' . $button_tag . '>';
+			$output .= '<' . $button_tag . ' role="button" aria-expanded="true" class="wprm-expandable-button-hide ' . esc_attr( implode( ' ', $button_classes ) ). '">' . $text_expanded . '</' . $button_tag . '>';
 		}
 
 		$output .= '</div>';

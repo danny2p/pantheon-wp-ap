@@ -63,7 +63,7 @@
 		<?php foreach ( $recipes_to_import as $uid => $importer ) : ?>
 			<h4 style="margin-bottom: 0"><?php echo esc_html( $importer['name'] ); ?></h4>
 			<?php if ( $importer['requires_search'] ) : ?>
-			<a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import_search' ) ) ); ?>"><?php esc_html_e( 'Search for recipes', 'wp-recipe-maker' ); ?></a><br/?>
+			<a href="<?php echo add_query_arg( array( 'from' => $uid ), admin_url( 'admin.php?page=wprm_import_search' ) ); ?>"><?php esc_html_e( 'Search for recipes', 'wp-recipe-maker' ); ?></a><br/?>
 			<?php endif; // Requires search. ?>
 			<?php if ( intval( $importer['count'] ) > 0 ) : ?>
 			<?php
@@ -74,7 +74,7 @@
 				echo esc_html( $importer['count'] ) . ' ' . esc_html__( ' recipes found', 'wp-recipe-maker' );
 			}
 			?><br />
-			<a href="<?php echo esc_url( add_query_arg( array( 'from' => $uid, 'p' => 0 ), admin_url( 'admin.php?page=wprm_import' ) ) ); ?>"><?php esc_html_e( 'Explore import options', 'wp-recipe-maker' ); ?></a>
+			<a href="<?php echo add_query_arg( array( 'from' => $uid, 'p' => 0 ), admin_url( 'admin.php?page=wprm_import' ) ); ?>"><?php esc_html_e( 'Explore import options', 'wp-recipe-maker' ); ?></a>
 			<?php endif; // Recipe count. ?>
 		<?php endforeach; // Each importer. ?>
 	<?php endif; // Recipes to import. ?>

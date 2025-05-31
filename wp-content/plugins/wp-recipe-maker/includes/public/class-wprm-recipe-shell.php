@@ -171,12 +171,13 @@ class WPRM_Recipe_Shell {
 		$image_id = $this->image_id();
 
 		if ( 'url' === $image_id ) {
-			$style = '';
+			$css = '';
 
 			$width = is_array( $size ) ? $size[0] : get_option( $size . '_size_w' );
 			if ( $width ) {
-				$style = ' style="max-width: ' . $width . 'px; height: auto;"';
+				$css = 'max-width: ' . $width . 'px; height: auto;';
 			}
+			$style = WPRM_Shortcode_Helper::get_inline_style( $css );
 			
 			$img = '<img src="' . esc_url( $this->image_url() ) . '" alt="' . esc_attr( $this->name() ) .'"' . $style . '/>';
 

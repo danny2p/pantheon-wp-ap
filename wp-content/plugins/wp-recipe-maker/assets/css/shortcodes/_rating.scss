@@ -10,6 +10,9 @@
     }
 
     &.wprm-recipe-rating-inline {
+        display: inline-flex;
+        align-items: center;
+
         .wprm-recipe-rating-details {
             display: inline-block;
             margin-left: 10px;
