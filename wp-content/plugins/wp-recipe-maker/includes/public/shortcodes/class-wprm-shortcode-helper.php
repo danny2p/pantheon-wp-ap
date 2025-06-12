@@ -1069,9 +1069,7 @@ class WPRM_Shortcode_Helper {
 				$default = isset( $defaults[ $key ] ) ? $defaults[ $key ] : null;
 
 				if ( is_null( $default ) || $value !== $default ) {
-					$variable_key = strtolower( str_replace( '_', '-', $key ) );
-					$variable = '--wprm-' . $prefix . '-' . $variable_key;
-					$output .= $variable . ': ' . $value . ';';
+					$output .= self::get_inline_css_variable_output( $prefix, $key, $value );
 				}
 			}
 		}
@@ -1083,10 +1081,27 @@ class WPRM_Shortcode_Helper {
 		foreach ( $keys as $key ) {
 			$default = isset( $defaults[ $key ] ) ? $defaults[ $key ] : 'DEFAULT NOT FOUND';
 
-			$variable_key = strtolower( str_replace( '_', '-', $key ) );
-			$variable = '--wprm-' . $prefix . '-' . $variable_key;
-			echo $variable . ': ' . $default . ';<br/>';
+			$output = self::get_inline_css_variable_output( $prefix, $key, $default );
+			echo $output . '<br/>';
 		}
 		die();
+	}
+
+	public static function get_inline_css_variable_output( $prefix, $key, $value ) {
+		$variable_key = strtolower( str_replace( '_', '-', $key ) );
+
+		// Prevent border-width styling problem caused by WordPress.
+		$variable_key = str_replace( 'border-width', 'borderwidth', $variable_key );
+		$variable_key = str_replace( 'border-top-width', 'border-topwidth', $variable_key );
+		$variable_key = str_replace( 'border-right-width', 'border-rightwidth', $variable_key );
+		$variable_key = str_replace( 'border-bottom-width', 'border-bottomwidth', $variable_key );
+		$variable_key = str_replace( 'border-left-width', 'border-leftwidth', $variable_key );
+		$variable_key = str_replace( 'border-top-color', 'border-topcolor', $variable_key );
+		$variable_key = str_replace( 'border-right-color', 'border-rightcolor', $variable_key );
+		$variable_key = str_replace( 'border-bottom-color', 'border-bottomcolor', $variable_key );
+		$variable_key = str_replace( 'border-left-color', 'border-leftcolor', $variable_key );
+
+		$variable = '--wprm-' . $prefix . '-' . $variable_key;
+		return $variable . ': ' . $value . ';';
 	}
 }

@@ -44,7 +44,7 @@
 	--pill-background-color: #333333;
 	--pill-text-color: #ffffff;
 	--pill-border-color: #333333;
-	--pill-border-width: 0px;
+	--pill-borderwidth: 0px;
 
 	.wprm-recipe-meta-container-pill {
 		padding: var(--pill-padding-vertical) var(--pill-padding-horizontal);
@@ -52,7 +52,7 @@
 		background-color: var(--pill-background-color);
 		color: var(--pill-text-color);
 
-		border-width: var(--pill-border-width);
+		border-width: var(--pill-borderwidth);
 		border-style: solid;
 		border-color: var(--pill-border-color);
 	}
