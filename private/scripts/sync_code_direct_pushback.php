@@ -70,6 +70,6 @@ if ($_ENV['PANTHEON_ENVIRONMENT'] == "dev") {
 }
 
 $github_remote="https://danny2p:$gh_token@github.com/danny2p/pantheon-wp-ap.git";
-exec("git pull $github_remote");
-exec("git push --set-upstream $github_remote $git_branch");
+passthru("git pull $github_remote");
+passthru("git push --set-upstream $github_remote $git_branch");
 print "\n Pushed to remote repository.";
