@@ -3,7 +3,7 @@
 	--wprm-jump-to-section-alignment: flex-start;
 	--wprm-jump-to-section-background: #ffffff;
 	--wprm-jump-to-section-text-color: #333333;
-	--wprm-jump-to-section-border-width: 0px;
+	--wprm-jump-to-section-borderwidth: 0px;
 	--wprm-jump-to-section-border: #333333;
 	--wprm-jump-to-section-border-radius: 10px;
 	--wprm-jump-to-section-vertical-padding: 5px;
@@ -57,7 +57,7 @@
 
 		background-color: var(--wprm-jump-to-section-background);
 		color: var(--wprm-jump-to-section-text-color);
-		border-width: var(--wprm-jump-to-section-border-width);
+		border-width: var(--wprm-jump-to-section-borderwidth);
 		border-style: solid;
 		border-color: var(--wprm-jump-to-section-border);
 		border-radius: var(--wprm-jump-to-section-border-radius);

@@ -435,13 +435,22 @@ class WPRM_Recipe_Manager {
 							$bricks_data = get_post_meta( $post_id, '_bricks_page_content_2', true );
 	
 							if ( $bricks_data ) {
-								ob_start();
-								\Bricks\Frontend::render_content( $bricks_data );
-								$bricks_output = ob_get_contents();
-								ob_end_clean();
-	
-								$bricks_recipe_ids = self::get_recipe_ids_from_content( $bricks_output );
-								$recipe_ids = array_unique( $recipe_ids + $bricks_recipe_ids );
+								// Set a flag to prevent infinite recursion
+								static $processing_bricks = false;
+
+								if ( ! $processing_bricks ) {
+									$processing_bricks = true;
+									
+									ob_start();
+									\Bricks\Frontend::render_content( $bricks_data );
+									$bricks_output = ob_get_contents();
+									ob_end_clean();
+		
+									$bricks_recipe_ids = self::get_recipe_ids_from_content( $bricks_output );
+									$recipe_ids = array_unique( $recipe_ids + $bricks_recipe_ids );
+									
+									$processing_bricks = false;
+								}
 							}
 						}
 					}

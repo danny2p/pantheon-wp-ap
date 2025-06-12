@@ -139,7 +139,13 @@ class WPRM_SC_Rating extends WPRM_Template_Shortcode {
 	 * @param	array $atts Options passed along with the shortcode.
 	 */
 	public static function shortcode( $atts ) {
+		$explicit_icon_set = isset( $atts['icon'] );
 		$atts = parent::get_attributes( $atts );
+
+		// Manually set default, based on star icon setting.
+		if ( ! $explicit_icon_set && 'pointy' === WPRM_Settings::get( 'rating_stars_style' ) ) {
+			$atts['icon'] = 'star-empty';
+		}
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
 		if ( ! $recipe || ! $recipe->rating() ) {

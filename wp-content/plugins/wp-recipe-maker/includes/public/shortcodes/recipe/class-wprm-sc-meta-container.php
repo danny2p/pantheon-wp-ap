@@ -796,7 +796,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				$style .= '--pill-text-color: ' . $atts['pills_text'] . ';';
 			}
 			if ( '0px' !== $atts['pills_border_width'] ) {
-				$style .= '--pill-border-width: ' . $atts['pills_border_width'] . ';';
+				$style .= '--pill-borderwidth: ' . $atts['pills_border_width'] . ';';
 
 				if ( '#333333' !== $atts['pills_border'] ) {
 					$style .= '--pill-border-color: ' . $atts['pills_border'] . ';';

@@ -447,7 +447,24 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 			)
 		) );
 
-		foreach ( $ratings as $rating ) {
+		$parent_post_ratings = array();
+
+		if ( $parent_post_id && $id !== $parent_post_id ) {
+			$parent_post_ratings = $wpdb->get_results( $wpdb->prepare(
+				"SELECT * FROM `%1s`
+				WHERE recipe_id = %d
+				OR post_id = %d",
+				array(
+					$table_name,
+					$parent_post_id,
+					$parent_post_id,
+				)
+			) );
+		}
+
+		$all_ratings = array_merge( $ratings, $parent_post_ratings );
+
+		foreach ( $all_ratings as $rating ) {
 			if ( '1' === $rating->approved ) {
 				$comment_id = intval( $rating->comment_id );
 				$user_id = intval( $rating->user_id );

@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.8
 Requires PHP: 5.4
-Stable tag: 10.0.2
+Stable tag: 10.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.0.3 =
+* Fix: Pointy star setting not automatically changing stars in recipe card
+* Fix: Prevent infinite loop when editing Bricks Builder template
+* Fix: Prevent WordPress styling from adding borders in some cases
+* Fix: Not finding all ratings during import from WP Zoom
+
 = 10.0.2 =
 * Fix: wpDiscuz compatibility
 
@@ -393,6 +399,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.0.3 =
+Some small fixes
+
 = 10.0.2 =
 Update recommended to prevent wpDiscuz compatibility issues
 
