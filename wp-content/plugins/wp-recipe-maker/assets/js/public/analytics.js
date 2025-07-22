@@ -216,6 +216,18 @@ window.WPRecipeMaker.analytics = {
 				wprm_recipe_id: '' + recipeId,
 				wprm_post_id: '' + postId,
 			};
+			
+			// Check if recipe object is available.
+			const recipe = window.WPRecipeMaker.manager.getRecipeImmediately( recipeId );
+			
+			if ( recipe ) {
+				if ( recipe.data.hasOwnProperty( 'name' ) ) {
+					eventData.wprm_recipe_name = recipe.data.name;
+				}
+				if ( recipe.data.hasOwnProperty( 'slug' ) ) {
+					eventData.wprm_recipe_slug = recipe.data.slug;
+				}
+			}
 
 			// Special case for ratings.
 			if ( ( 'comment-rating' === type || 'user-rating' === type ) && meta.hasOwnProperty( 'rating' ) ) {

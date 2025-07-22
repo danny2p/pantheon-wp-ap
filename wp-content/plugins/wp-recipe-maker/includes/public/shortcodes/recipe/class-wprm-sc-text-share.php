@@ -143,6 +143,8 @@ class WPRM_SC_Text_Share extends WPRM_Template_Shortcode {
 		if ( ! class_exists( 'Mobile_Detect' ) ) {
 			require_once( WPRM_DIR . 'vendor/Mobile-Detect/Mobile_Detect.php' );
 			$detect = new Mobile_Detect;
+		} else if ( method_exists( 'Mobile_Detect', 'isMobile' ) ) {
+			$detect = new Mobile_Detect;
 		}
 
 		if ( false === $detect || ( ! $detect->isMobile() && ! $atts['is_template_editor_preview'] ) ) {

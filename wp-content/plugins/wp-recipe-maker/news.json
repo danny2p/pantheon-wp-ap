@@ -1,6 +1,24 @@
 {
     "news": [
         {
+            "date": "2025-07-08",
+            "label": "Blog",
+            "title": "8 Critical Steps to Launch Your Online Food Business",
+            "url": "https://bootstrapped.ventures/how-to-sell-food-online/"
+        },
+        {
+            "date": "2025-06-27",
+            "label": "Blog",
+            "title": "Macro vs Regular Lenses for Food Photography",
+            "url": "https://bootstrapped.ventures/macro-lens-for-food-photography/"
+        },
+        {
+            "date": "2025-06-23",
+            "label": "Blog",
+            "title": "How to Start a Successful Food Photography Business",
+            "url": "https://bootstrapped.ventures/food-photography-business/"
+        },
+        {
             "date": "2025-06-10",
             "label": "Blog",
             "title": "How to Make Better Cooking Content for TikTok",

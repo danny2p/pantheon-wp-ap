@@ -114,8 +114,21 @@ export default class Recipe extends Component {
     }
 
     onImportJSON(fields) {
-        // Ignore ID.
+        // If fields is an array, use the the first object.
+        if ( Array.isArray( fields ) ) {
+            fields = fields[0];
+        }
+
+        // Check if we now have a single recipe object.
+        if ( typeof fields !== 'object' || fields === null || Array.isArray( fields ) ) {
+            // Throw error if not an object.
+            throw new Error('Invalid recipe object');
+        }
+
+        // Ignore ID and fields that might be coming from the JSON export feature.
         delete fields.id;
+        delete fields.parent;
+        delete fields.user_ratings;
 
         this.setState((prevState) => ({
             recipe: {
