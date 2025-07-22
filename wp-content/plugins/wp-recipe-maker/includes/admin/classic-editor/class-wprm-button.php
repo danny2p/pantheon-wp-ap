@@ -40,6 +40,10 @@ class WPRM_Button {
 	public static function add_shortcode_button( $editor_id ) {
 		$screen = get_current_screen();
 
+		if ( ! $screen ) {
+			return;
+		}
+
 		if ( 'wprm_recipe_notes' !== $editor_id && in_array( $screen->base, array( 'post', 'page' ), true ) ) {
 			$title = 'WP Recipe Maker';
 

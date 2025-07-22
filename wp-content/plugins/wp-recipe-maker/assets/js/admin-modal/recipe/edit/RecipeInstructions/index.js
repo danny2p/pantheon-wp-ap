@@ -190,13 +190,16 @@ export default class RecipeInstructions extends Component {
                                                     index={ index }
                                                     key={ `instruction-${field.uid}` }
                                                     onTab={(event) => {
-                                                        // Create new instruction if we're tabbing in the last one.
-                                                        if ( index === this.props.instructions.length - 1) {
-                                                            event.preventDefault();
-                                                            // Use timeout to fix focus problem (because of preventDefault?).
-                                                            setTimeout(() => {
-                                                                this.addField( 'instruction' );
-                                                            });
+                                                        // Only if edit mode is not metadata summary or associated ingredients.
+                                                        if ( this.state.editMode !== 'summary' && this.state.editMode !== 'ingredients' ) {
+                                                            // Create new instruction if we're tabbing in the last one.
+                                                            if ( index === this.props.instructions.length - 1) {
+                                                                event.preventDefault();
+                                                                // Use timeout to fix focus problem (because of preventDefault?).
+                                                                setTimeout(() => {
+                                                                    this.addField( 'instruction' );
+                                                                });
+                                                            }
                                                         }
                                                     }}
                                                     editMode={ this.state.editMode }

@@ -171,6 +171,10 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'image_border_radius' => array(
+				'default' => '0px',
+				'type' => 'size',
+			),
 			'image_alignment' => array(
 				'default' => 'left',
 				'type' => 'dropdown',

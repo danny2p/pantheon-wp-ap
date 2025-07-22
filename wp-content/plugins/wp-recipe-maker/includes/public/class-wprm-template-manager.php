@@ -359,8 +359,14 @@ class WPRM_Template_Manager {
 				if ( '_modern' === $mode ) {
 					if ( 'food' === $recipe_type ) { 
 						$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
+						if ( 'default_print_template' === $template_slug ) {
+							$template_slug = WPRM_Settings::get( 'default_print_template' . $mode );
+						}
 					} else {
 						$template_slug = WPRM_Settings::get( 'recipe_collections_print_' . $recipe_type . '_recipes_template' . $mode );
+						if ( 'default_print_template' === $template_slug ) {
+							$template_slug = WPRM_Settings::get( 'default_' . $recipe_type . '_print_template' . $mode );
+						}
 					}
 				} else {
 					$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );

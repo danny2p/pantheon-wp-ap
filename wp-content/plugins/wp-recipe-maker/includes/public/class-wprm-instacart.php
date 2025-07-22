@@ -18,15 +18,6 @@
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
 class WPRM_Instacart {
-	private static $instacart_mode = 'prod';
-	private static $instacart_server = array(
-		'dev' => 'https://connect.dev.instacart.tools',
-		'prod' => 'https://connect.instacart.com',
-	);
-	private static $instacart_key = array(
-		'dev' => 'keys.2EcdyxVp5ryyTXo8gR9sXVUi9V7s0XRLzW6x9pGtbdk',
-		'prod' => 'keys.SN6m6wbXGYEXuICxIG0_6JoGdkoxejfnyliFjtGMEW0',
-	);
 
 	/**
 	 * Register actions and filters.
@@ -49,28 +40,6 @@ class WPRM_Instacart {
 		}
 
 		return $output;
-	}
-
-	/**
-	 * Get the endpoint to use.
-	 *
-	 * @since	9.8.0
-	 * @param	string $type Type of endpoing.
-	 */
-	public static function get_endpoint( $type ) {
-		$endpoint = self::$instacart_server[ self::$instacart_mode ];
-		$endpoint .= '/idp/v1/';
-
-		switch ( $type ) {
-			case 'recipe':
-				$endpoint .= 'products/recipe';
-				break;
-			case 'shopping_list':
-				$endpoint .= 'products/products_link';
-				break;
-		}
-
-		return $endpoint;
 	}
 
 	/**
@@ -244,32 +213,15 @@ class WPRM_Instacart {
 	 * @param	array $data Data to send.
 	 */
 	public static function call_instacart_api( $type, $data ) {
-		$endpoint = self::get_endpoint( $type );
-
 		$data['link_type'] = $type;
 		$data['landing_page_configuration'] = array(
 			'partner_linkback_url' => WPRM_Compatibility::get_home_url(),
 			'enable_pantry_items' => true,
 		);
 
-		$key = self::$instacart_key[ self::$instacart_mode ];
-
-		$response = wp_remote_post( $endpoint, array(
-			'timeout' => 60,
-			'sslverify' => false,
-			'headers' => array(
-				'accept' => 'application/json',
-				'content-type' => 'application/json',
-				'authorization' => 'Bearer ' . $key,
-			),
-			'body' => json_encode( $data ),
+		return WPRM_Proxy::call( 'instacart', $data, array(
+			'X-Instacart-Type' => $type,
 		) );
-
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
-
-		return json_decode( wp_remote_retrieve_body( $response ) );
 	}
 
 	/**
