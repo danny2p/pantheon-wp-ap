@@ -13,14 +13,38 @@ window.WPRecipeMaker.expandable = {
 	},
 	onClick: ( el, e ) => {
 		e.preventDefault();
-        const container = el.closest( '.wprm-expandable-container' );
+        const showingContent = el.classList.contains( 'wprm-expandable-button-show' );
+        let container = el.closest( '.wprm-expandable-container' );
 
-        if ( el.classList.contains( 'wprm-expandable-button-show' ) ) {
-            container.classList.remove( 'wprm-expandable-collapsed' );
-            container.classList.add( 'wprm-expandable-expanded' );
-        } else {
-            container.classList.add( 'wprm-expandable-collapsed' );
-            container.classList.remove( 'wprm-expandable-expanded' );
+        if ( ! container ) {
+            const containerSeparated = el.closest( '.wprm-expandable-container-separated' );
+
+            if ( containerSeparated ) {
+                container = containerSeparated;
+
+                // Hide all next elements
+                let nextElement = container.nextElementSibling;
+
+                while ( nextElement ) {
+                    if ( showingContent ) {
+                        nextElement.classList.remove( 'wprm-expandable-separated-content-collapsed' );
+                    } else {
+                        nextElement.classList.add( 'wprm-expandable-separated-content-collapsed' );
+                    }
+
+                    nextElement = nextElement.nextElementSibling;
+                }
+            }
+        }
+
+        if ( container ) {
+            if ( showingContent ) {
+                container.classList.remove( 'wprm-expandable-collapsed' );
+                container.classList.add( 'wprm-expandable-expanded' );
+            } else {
+                container.classList.add( 'wprm-expandable-collapsed' );
+                container.classList.remove( 'wprm-expandable-expanded' );
+            }
         }
     },
 };

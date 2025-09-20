@@ -172,7 +172,7 @@ class WPRM_List_Saver {
 		}
 
 		if ( isset( $list['note'] ) ) {
-			$post['post_content'] = $list['note'];
+			$post['post_content'] = wp_slash( $list['note'] );
 		}
 
 		// Always update post to make sure revision gets made.

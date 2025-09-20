@@ -25,6 +25,14 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'label_header' => array(
+				'type' => 'header',
+				'default' => __( 'Nutrition Label', 'wp-recipe-maker' ),
+			),
 			'style' => array(
 				'default' => 'label',
 				'type' => 'dropdown',
@@ -35,6 +43,7 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 				),
 			),
 			'group_width' => array(
+				'name' => 'Width',
 				'default' => '180px',
 				'type' => 'size',
 				'dependency' => array(
@@ -42,9 +51,39 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 					'value' => 'grouped',
 				),
 			),
+			'group_alignment' => array(
+				'name' => 'Alignment',
+				'default' => 'flex-start',
+				'type' => 'dropdown',
+				'options' => array(
+					'flex-start' => 'Left',
+					'flex-end' => 'Right',
+					'center' => 'Center',
+					'space-between' => 'Space Between',
+					'space-around' => 'Space Around',
+				),
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'grouped',
+				),
+			),
 			'group_column_gap' => array(
-				'default' => '0px',
+				'name' => 'Column Gap',
+				'default' => '10px',
 				'type' => 'size',
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'grouped',
+				),
+			),
+			'group_item_style' => array(
+				'name' => 'Item Style',
+				'default' => 'text',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Text',
+					'pills' => 'Pills',
+				),
 				'dependency' => array(
 					'id' => 'style',
 					'value' => 'grouped',
@@ -54,8 +93,14 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 				'default' => '0',
 				'type' => 'toggle',
 				'dependency' => array(
-					'id' => 'style',
-					'value' => 'grouped',
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'text',
+					),
 				),
 			),
 			'bottom_border_gap' => array(
@@ -65,6 +110,10 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 					array(
 						'id' => 'style',
 						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'text',
 					),
 					array(
 						'id' => 'bottom_border',
@@ -79,6 +128,10 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 					array(
 						'id' => 'style',
 						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'text',
 					),
 					array(
 						'id' => 'bottom_border',
@@ -96,6 +149,10 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'value' => 'grouped',
 					),
 					array(
+						'id' => 'group_item_style',
+						'value' => 'text',
+					),
+					array(
 						'id' => 'bottom_border',
 						'value' => '1',
 					),
@@ -110,8 +167,112 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'value' => 'grouped',
 					),
 					array(
+						'id' => 'group_item_style',
+						'value' => 'text',
+					),
+					array(
 						'id' => 'bottom_border',
 						'value' => '1',
+					),
+				),
+			),
+			'pills_row_gap' => array(
+				'default' => '10px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_background' => array(
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_border' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_border_width' => array(
+				'default' => '1px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_border_radius' => array(
+				'default' => '100px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_horizontal_padding' => array(
+				'name' => 'Horizontal Padding',
+				'default' => '15px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
+					),
+				),
+			),
+			'pills_vertical_padding' => array(
+				'name' => 'Vertical Padding',
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+					array(
+						'id' => 'group_item_style',
+						'value' => 'pills',
 					),
 				),
 			),
@@ -135,15 +296,6 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 				),
 			);
 		}
-
-		$section_atts = WPRM_Shortcode_Helper::get_section_atts();
-		$section_atts['text_style']['dependency'] = array(
-			'id' => 'style',
-			'value' => 'label',
-			'type' => 'inverse',
-		);
-
-		$atts = array_merge( $atts, WPRM_Shortcode_Helper::get_section_atts() );
 
 		$atts = array_merge( $atts, array(
 				'text_style' => array(
@@ -298,9 +450,18 @@ class WPRM_SC_Nutrition_Label extends WPRM_Template_Shortcode {
 						'right' => 'Aligned right',
 					),
 				),
+				'separate_value_from_label' => array(
+					'default' => '0',
+					'type' => 'toggle',
+					'dependency' => array(
+						'id' => 'style',
+						'value' => 'grouped',
+					),
+				),
 			)
 		);
 
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		self::$attributes = $atts;
 

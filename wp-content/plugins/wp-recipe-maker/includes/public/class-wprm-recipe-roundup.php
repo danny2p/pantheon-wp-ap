@@ -266,6 +266,7 @@ class WPRM_Recipe_Roundup {
 						'image_id' => $image,
 						'parent_url_new_tab' => false,
 						'parent_url_nofollow' => false,
+						'parent_url_noopener' => false,
 					);
 
 					$recipe = new WPRM_Recipe_Shell( $recipe_data );
@@ -293,6 +294,7 @@ class WPRM_Recipe_Roundup {
 				'summary' => rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),
 				'parent_url_new_tab' => $atts['newtab'] ? true : false,
 				'parent_url_nofollow' => $atts['nofollow'] ? true : false,
+				'parent_url_noopener' => WPRM_Settings::get( 'recipe_roundup_external_noopener' ),
 				'credit' => rawurldecode( $atts['credit'] ),
 			);
 

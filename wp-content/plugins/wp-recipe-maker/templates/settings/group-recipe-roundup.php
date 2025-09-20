@@ -77,6 +77,12 @@ $recipe_roundup = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'recipe_roundup_external_noopener',
+					'name' => __( 'Use noopener for external links', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 		array(

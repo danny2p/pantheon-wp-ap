@@ -348,6 +348,13 @@ class WPRM_Print {
 	public static function print_header_images( $recipe = false ) {
 		$header = '';
 
+		// QR code toggle.
+		if ( WPRM_Settings::get( 'print_qr_code' ) && WPRM_Settings::get( 'print_qr_code_toggle' ) ) {
+			$header .= '<div class="wprm-print-toggle-container">';
+			$header .= '<input type="checkbox" id="wprm-print-toggle-qr" class="wprm-print-toggle" value="1" checked="checked"/><label for="wprm-print-toggle-qr">' . __( 'QR Code', 'wp-recipe-maker' ) . '</label>';
+			$header .= '</div>';
+		}
+
 		// Recipe image toggle.
 		if ( false === $recipe || $recipe->image() ) {
 			$checked = WPRM_Settings::get( 'print_show_recipe_image' ) ? 'checked="checked"' : '';

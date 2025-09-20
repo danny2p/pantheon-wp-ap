@@ -56,6 +56,17 @@ $analytics = array(
 						'value' => true,
 					),
 				),
+				array(
+					'id' => 'analytics_exclude_actions',
+					'name' => __( 'Exclude Actions', 'wp-recipe-maker' ),
+					'description' => __( 'Exclude specific actions from being tracked. Use the action name as found on the WP Recipe Maker > Manage > Analytics page. One per line.', 'wp-recipe-maker' ),
+					'type' => 'textarea',
+					'default' => '',
+					'dependency' => array(
+						'id' => 'analytics_enabled',
+						'value' => true,
+					),
+				),
 			),
 		),
 		array(

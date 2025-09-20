@@ -119,6 +119,10 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			// Not actually shown in Template Editor. Only for internal use by share options popup shortcode.
+			'use_in_popup' => array(
+				'default' => '0',
+			),
 		);
 		parent::init();
 	}
@@ -224,8 +228,6 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 
 		// Construct link attributes.
 		$attributes = '';
-		$attributes .= ' style="' . esc_attr( $style ) . '"';
-		$attributes .= ' class="' . esc_attr( implode( ' ', $classes ) ) . '"';
 		$attributes .= ' target="_blank"';
 		$attributes .= ' rel="nofollow noopener"';
 		$attributes .= ' data-recipe="' . esc_attr( $recipe->id() ) . '"';
@@ -242,6 +244,15 @@ class WPRM_SC_Pin extends WPRM_Template_Shortcode {
 
 		// Make sure pinit.js gets loaded.
 		add_filter( 'wprm_load_pinit', '__return_true' );
+
+		// Return for use in popup shortcode.
+		if ( (bool) $atts['use_in_popup'] ) {
+			return '<a href="' . esc_attr( $pin_url ) . '" class="wprm-recipe-pin"' . $attributes . '>%wprm_share_placeholder%</a>';
+		}
+
+		// Those attributes shouldn't be added when used in popup.
+		$attributes .= ' style="' . esc_attr( $style ) . '"';
+		$attributes .= ' class="' . esc_attr( implode( ' ', $classes ) ) . '"';
 
 		$output = '<a href="' . esc_attr( $pin_url ) . '"' . $attributes . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );

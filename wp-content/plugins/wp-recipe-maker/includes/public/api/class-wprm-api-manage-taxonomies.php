@@ -323,6 +323,32 @@ class WPRM_Api_Manage_Taxonomies {
 		$total_terms = wp_count_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false ) );
 		$rows = $query->terms ? array_values( $query->terms ) : array();
 
+		// Get total counts (all post statuses) for returned terms
+		if ( ! empty( $rows ) ) {
+			global $wpdb;
+			$term_ids = wp_list_pluck( $rows, 'term_taxonomy_id' );
+			$term_ids_placeholder = implode( ',', array_fill( 0, count( $term_ids ), '%d') );
+			
+			$total_counts = $wpdb->get_results( $wpdb->prepare("
+				SELECT tt.term_taxonomy_id, COUNT(p.ID) as total_count
+				FROM {$wpdb->term_taxonomy} tt
+				LEFT JOIN {$wpdb->term_relationships} tr ON tt.term_taxonomy_id = tr.term_taxonomy_id
+				LEFT JOIN {$wpdb->posts} p ON tr.object_id = p.ID
+				WHERE tt.term_taxonomy_id IN ({$term_ids_placeholder})
+				AND p.post_status != 'trash'
+				GROUP BY tt.term_taxonomy_id
+			", $term_ids ), OBJECT_K);
+			
+			// Update counts in returned terms
+			foreach ( $rows as $row ) {
+				if ( isset( $total_counts[ $row->term_taxonomy_id ] ) ) {
+					$row->total_count = $total_counts[$row->term_taxonomy_id]->total_count;
+				} else {
+					$row->total_count = 0;
+				}
+			}
+		}
+
 		// Extra information needed.
 		if ( 'nutrition_ingredient' === $type ) {
 			// Nutrition ingredient is a special case.

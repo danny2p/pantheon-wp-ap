@@ -2,6 +2,7 @@ import React from 'react';
 import SVG from 'react-inlinesvg';
 
 import IconArrows from '../../../icons/settings/arrows.svg';
+import IconBasket from '../../../icons/settings/basket.svg';
 import IconBook from '../../../icons/settings/book.svg';
 import IconBrush from '../../../icons/settings/brush.svg';
 import IconButtonClick from '../../../icons/settings/button-click.svg';
@@ -25,10 +26,12 @@ import IconLock from '../../../icons/settings/lock.svg';
 import IconMeasureApple from '../../../icons/settings/measure-apple.svg';
 import IconModal from '../../../icons/settings/modal.svg';
 import IconPainting from '../../../icons/settings/painting.svg';
+import IconPalette from '../../../icons/settings/palette.svg';
 import IconPlug from '../../../icons/settings/plug.svg';
 import IconPrinter from '../../../icons/settings/printer.svg';
 import IconQuestion from '../../../icons/settings/question.svg';
 import IconQuestionBox from '../../../icons/settings/question-box.svg';
+import IconReceipt from '../../../icons/settings/receipt.svg';
 import IconSearch from '../../../icons/settings/search.svg';
 import IconShare from '../../../icons/settings/share.svg';
 import IconShoppingCart from '../../../icons/settings/shopping-cart.svg';
@@ -38,12 +41,14 @@ import IconStar from '../../../icons/settings/star.svg';
 import IconSupport from '../../../icons/settings/support.svg';
 import IconText from '../../../icons/settings/text.svg';
 import IconTimeline from '../../../icons/settings/timeline.svg';
+import IconTouch from '../../../icons/settings/touch.svg';
 import IconUndo from '../../../icons/settings/undo.svg';
 import IconUp from '../../../icons/settings/up.svg';
 import IconWarning from '../../../icons/settings/warning.svg';
 
 const icons = {
     arrows: IconArrows,
+    basket: IconBasket,
     book: IconBook,
     brush: IconBrush,
     'button-click': IconButtonClick,
@@ -67,10 +72,12 @@ const icons = {
     'measure-apple': IconMeasureApple,
     modal: IconModal,
     painting: IconPainting,
+    palette: IconPalette,
     plug: IconPlug,
     printer: IconPrinter,
     question: IconQuestion,
     'question-box': IconQuestionBox,
+    receipt: IconReceipt,
     search: IconSearch,
     share: IconShare,
     'shopping-cart': IconShoppingCart,
@@ -80,6 +87,7 @@ const icons = {
     support: IconSupport,
     text: IconText,
     timeline: IconTimeline,
+    touch: IconTouch,
     undo: IconUndo,
     up: IconUp,
     warning: IconWarning,

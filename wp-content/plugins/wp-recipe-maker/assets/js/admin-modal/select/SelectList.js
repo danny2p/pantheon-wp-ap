@@ -36,6 +36,7 @@ export default class SelectList extends Component {
                 loadOptions={this.getOptions.bind(this)}
                 noOptionsMessage={() => __wprm( 'No lists found' ) }
                 clearable={false}
+                menuPlacement={ this.props.hasOwnProperty( 'menuPlacement' ) ? this.props.menuPlacement : 'auto' }
             />
         );
     }

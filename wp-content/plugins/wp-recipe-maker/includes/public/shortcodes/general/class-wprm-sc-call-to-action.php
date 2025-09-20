@@ -22,6 +22,10 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 
 	public static function init() {
 		self::$attributes = array(
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Container', 'wp-recipe-maker' ),
+			),
 			'style' => array(
 				'default' => 'simple',
 				'type' => 'dropdown',
@@ -45,6 +49,10 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				'default' => '',
 				'type' => 'color',
 			),
+			'icon_header' => array(
+				'type' => 'header',
+				'default' => __( 'Icon', 'wp-recipe-maker' ),
+			),
 			'icon' => array(
 				'default' => 'instagram',
 				'type' => 'icon',
@@ -55,7 +63,18 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				'options' => array(
 					'left' => 'Left',
 					'right' => 'Right',
+					'top' => 'Top',
+					'bottom' => 'Bottom',
 				),
+				'dependency' => array(
+					'id' => 'icon',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'icon_gap' => array(
+				'default' => '20px',
+				'type' => 'size',
 				'dependency' => array(
 					'id' => 'icon',
 					'value' => '',
@@ -71,16 +90,12 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'header_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
 			'header_color' => array(
 				'default' => '#333333',
-				'type' => 'color',
-			),
-			'text_color' => array(
-				'default' => '#333333',
-				'type' => 'color',
-			),
-			'link_color' => array(
-				'default' => '#3498db',
 				'type' => 'color',
 			),
 			'header' => array(
@@ -96,6 +111,18 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 					'value' => '',
 					'type' => 'inverse',
 				),
+			),
+			'text_header' => array(
+				'type' => 'header',
+				'default' => __( 'Text', 'wp-recipe-maker' ),
+			),
+			'text_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+			),
+			'link_color' => array(
+				'default' => '#3498db',
+				'type' => 'color',
 			),
 			'action' => array(
 				'default' => 'instagram',

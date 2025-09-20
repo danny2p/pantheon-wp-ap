@@ -1,6 +1,9 @@
 .wprm-recipe-header {
-    .wprm-recipe-icon {
-        margin-right: 5px;
+    .wprm-recipe-icon:not(.wprm-collapsible-icon) {
+        margin-right: 10px;
+    }
+    .wprm-recipe-icon.wprm-collapsible-icon {
+        margin-left: 10px;
     }
     
     &.wprm-header-has-actions {
@@ -17,5 +20,15 @@
         font-weight: normal;
         opacity: 1;
         font-size: 16px;
+    }
+
+    .wprm-header-toggle {
+        float: right;
+
+        a.wprm-expandable-button {
+            color: #333333;
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
 }

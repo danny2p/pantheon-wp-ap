@@ -1,0 +1,87 @@
+.wprm-recipe-template-glacier {
+    margin: 20px auto;
+    --glacier-background: #ffffff; /*wprm_background type=color*/
+    background-color: var(--glacier-background);
+    font-family: "Nunito", sans-serif; /*wprm_main_font_family type=font*/
+    font-size: 16px; /*wprm_main_font_size type=font_size*/
+    line-height: 1.5em; /*wprm_main_line_height type=font_size*/
+    --glacier-text-color: #1e2543; /*wprm_main_text type=color*/
+    color: var(--glacier-text-color);
+    border: 1px solid var(--glacier-text-color);
+    max-width: 1600px; /*wprm_max_width type=size*/
+
+    --glacier-interactivity-color: #1E1E1E; /*wprm_interactivity_color type=color*/
+    --glacier-accent-color: #518ec7; /*wprm_accent_color type=color*/
+
+    --glacier-header-text: #1e1e1e; /*wprm_header_text type=color*/
+    --glacier-header-background: #F4F4F4; /*wprm_header_background_text type=color*/
+}
+.wprm-recipe-template-glacier a {
+    color: #000000; /*wprm_link type=color*/
+}
+.wprm-recipe-template-glacier p, .wprm-recipe-template-glacier li {
+    font-family: "Nunito", sans-serif; /*wprm_main_font_family type=font*/
+    font-size: 1em;
+    line-height: 1.5em; /*wprm_main_line_height type=font_size*/
+}
+.wprm-recipe-template-glacier li {
+    margin: 0 0 0 32px;
+    padding: 0;
+}
+.rtl .wprm-recipe-template-glacier li {
+    margin: 0 32px 0 0;
+}
+.wprm-recipe-template-glacier ol, .wprm-recipe-template-glacier ul {
+    margin: 0;
+    padding: 0;
+}
+.wprm-recipe-template-glacier br {
+    display: none;
+}
+.wprm-recipe-template-glacier .wprm-recipe-name,
+.wprm-recipe-template-glacier .wprm-recipe-header {
+    font-family: "Nunito", sans-serif; /*wprm_header_font_family type=font*/
+    color: var(--glacier-header-text);
+    line-height: 1.3em; /*wprm_header_line_height type=font_size*/
+}
+.wprm-recipe-template-glacier .wprm-recipe-header * {
+    font-family: "Nunito", sans-serif; /*wprm_main_font_family type=font*/
+}
+.wprm-recipe-template-glacier h1,
+.wprm-recipe-template-glacier h2,
+.wprm-recipe-template-glacier h3,
+.wprm-recipe-template-glacier h4,
+.wprm-recipe-template-glacier h5,
+.wprm-recipe-template-glacier h6 {
+    font-family: "Nunito", sans-serif; /*wprm_header_font_family type=font*/
+    color: #1e1e1e; /*wprm_header_text type=color*/
+    line-height: 1.3em; /*wprm_header_line_height type=font_size*/
+    margin: 0;
+    padding: 0;
+}
+.wprm-recipe-template-glacier h1 {
+    font-size: 2.2em; /*wprm_h1_size type=font_size*/
+}
+.wprm-recipe-template-glacier h2 {
+    font-size: 2.2em; /*wprm_h2_size type=font_size*/
+}
+.wprm-recipe-template-glacier h3 {
+    font-size: 1.8em; /*wprm_h3_size type=font_size*/
+}
+.wprm-recipe-template-glacier h4 {
+    font-size: 1em; /*wprm_h4_size type=font_size*/
+}
+.wprm-recipe-template-glacier h5 {
+    font-size: 1em; /*wprm_h5_size type=font_size*/
+}
+.wprm-recipe-template-glacier h6 {
+    font-size: 1em; /*wprm_h6_size type=font_size*/
+}
+.wprm-recipe-template-glacier.wprm-min-500 .glacier-meta {
+    margin-top: 40px;
+}
+.wprm-recipe-template-glacier.wprm-min-500 .glacier-meta .wprm-layout-column:first-child {
+    border-right: 1px solid var(--glacier-text-color);
+    padding-right: 20px;
+    margin-right: -20px;
+}

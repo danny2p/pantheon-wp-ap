@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.8
 Requires PHP: 5.4
-Stable tag: 10.0.4
+Stable tag: 10.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,23 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.1.0 =
+* Feature: Bulk add recipes to roundup lists
+* Feature: Collapsible icon in section headers
+* Improvement: Total count for taxonomy terms on manage page
+* Improvement: Extra icons for the template editor
+* Improvement: More header styling options in the template editor
+* Improvement: Names and grouping of template editor properties
+* Improvement: Use JS for container size conditions to prevent styling compatibility problems
+* Improvement: Optional QR Code toggle for the print page
+* Improvement: Set noopener for external roundup links
+* Improvement: Setting to exclude specific actions from being tracked by local analytics
+* Fix: Make sure to wp_slash when updating the post content
+* Fix: Automatically remove empty link tags from rich text
+* Fix: Prevent pasted in block markup from messing up recipe notes
+* Fix: Only load Instacart font when integration is enabled
+* Fix: Parent post not linking correctly with some revision plugins
+
 = 10.0.4 =
 * Improvement: Pass along recipe name and slug for Google Analytics events
 * Improvement: Use proxy for Instacart API
@@ -406,6 +423,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.1.0 =
+Some great new features and improvements
+
 = 10.0.4 =
 Some improvements and fixes
 

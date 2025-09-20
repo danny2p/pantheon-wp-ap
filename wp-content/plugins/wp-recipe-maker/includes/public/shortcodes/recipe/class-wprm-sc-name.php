@@ -71,9 +71,13 @@ class WPRM_SC_Name extends WPRM_Template_Shortcode {
 
 		if ( $atts['link'] && $recipe->permalink() ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
-			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
+			
+			$rel = '';
+			if ( $recipe->parent_url_nofollow() ) { $rel .= ' nofollow'; }
+			if ( $recipe->parent_url_noopener() ) { $rel .= ' noopener'; }
+			$rel = $rel ? ' rel="' . trim( $rel ) . '"' : '';
 
-			$name = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . $name . '</a>';
+			$name = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $rel . '>' . $name . '</a>';
 		}
 
 		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $name . '</' . $tag . '>';

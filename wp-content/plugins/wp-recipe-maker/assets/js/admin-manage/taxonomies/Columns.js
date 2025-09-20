@@ -159,11 +159,23 @@ export default {
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => row.value ? he.decode(row.value) : null,
             },{
-                Header: __wprm( 'Recipes' ),
+                Header: __wprm( 'Published' ),
                 id: 'count',
                 accessor: 'count',
                 filterable: false,
-                width: 65,
+                width: 70,
+                Cell: row => {
+                    return (
+                        <NavLink to={ `/recipe/${ datatable.props.options.id }=${row.original.term_id}` }>{ row.value }</NavLink>
+                    )
+                }
+            },{
+                Header: __wprm( 'Total' ),
+                id: 'total_count',
+                accessor: 'total_count',
+                sortable: false,
+                filterable: false,
+                width: 70,
                 Cell: row => {
                     return (
                         <NavLink to={ `/recipe/${ datatable.props.options.id }=${row.original.term_id}` }>{ row.value }</NavLink>

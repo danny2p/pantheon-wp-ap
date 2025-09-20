@@ -97,9 +97,13 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 
 		if ( $atts['link'] && $recipe->permalink() ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
-			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
 
-			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $nofollow . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+			$rel = '';
+			if ( $recipe->parent_url_nofollow() ) { $rel .= ' nofollow'; }
+			if ( $recipe->parent_url_noopener() ) { $rel .= ' noopener'; }
+			$rel = $rel ? ' rel="' . trim( $rel ) . '"' : '';
+
+			$text = '<a href="' . esc_url( $recipe->permalink() ) . '"' . $target . $rel . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		}
 
 		$tag = WPRM_Shortcode_Helper::sanitize_html_element( $atts['tag'] );

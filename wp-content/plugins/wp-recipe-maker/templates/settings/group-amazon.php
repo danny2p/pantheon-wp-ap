@@ -123,7 +123,7 @@ $amazon_stores_dropdown = array_map( function( $store ) {
 
 $amazon = array(
 	'id' => 'amazon',
-	'icon' => 'shopping-cart',
+	'icon' => 'basket',
 	'name' => __( 'Amazon Products', 'wp-recipe-maker' ),
 	'required' => 'premium',
 	'description' => __( 'Use the Amazon Product API to easily search for Amazon products to link to your equipment.', 'wp-recipe-maker' ),

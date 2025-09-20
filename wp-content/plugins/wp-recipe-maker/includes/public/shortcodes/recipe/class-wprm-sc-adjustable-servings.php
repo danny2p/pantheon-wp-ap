@@ -45,6 +45,7 @@ class WPRM_SC_Adjustable_Servings extends WPRM_Template_Shortcode {
 			'serving_options_any_value' => array(
 				'default' => '',
 				'type' => 'text',
+				'help' => 'Optional text for button to click on to set any serving size the visitor wants. Leave blank to disable.',
 			),
 			'button_background' => array(
 				'default' => '#ffffff',

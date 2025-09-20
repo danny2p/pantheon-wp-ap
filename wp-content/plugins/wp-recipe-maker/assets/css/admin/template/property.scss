@@ -22,6 +22,12 @@
         margin-top: 30px;
     }
 
+    &:first-child {
+        .wprm-template-property-header {
+            margin-top: 0;
+        }
+    }
+
     .wprm-template-property-label {
         font-weight: bold;
         padding: 4px 0;

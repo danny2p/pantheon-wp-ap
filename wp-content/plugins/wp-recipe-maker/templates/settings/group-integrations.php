@@ -23,6 +23,39 @@ $integrations = array(
 					'type' => 'toggle',
 					'default' => false,
 				),
+				array(
+					'id' => 'jupiter_handle',
+					'name' => __( 'Jupiter Handle', 'wp-recipe-maker' ),
+					'description' => __( 'Enter your Jupiter handle (shortName) ONLY if your website URL doesn’t match your handle. Otherwise, leave this blank.', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => '',
+					'dependency' => array(
+						'id' => 'integration_jupiter',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'jupiter_print_button',
+					'name' => __( 'Show Print Button', 'wp-recipe-maker' ),
+					'description' => __( 'Show brand coupons on your print recipe page', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+					'dependency' => array(
+						'id' => 'integration_jupiter',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'jupiter_shop_ingredients_button',
+					'name' => __( 'Show Shop Ingredients Button', 'wp-recipe-maker' ),
+					'description' => __( 'Add the "Shop Ingredients" button so readers can buy ingredients directly.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+					'dependency' => array(
+						'id' => 'integration_jupiter',
+						'value' => true,
+					),
+				),
 			),
 		),
 		array(

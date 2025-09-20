@@ -454,6 +454,9 @@ class WPRM_Recipe_Manager {
 							}
 						}
 					}
+
+					// Allow for filtering of recipe IDs found in the post.
+					$recipe_ids = apply_filters( 'wprm_get_recipe_ids_from_post', $recipe_ids, $post_id );
 					
 					self::$posts[ $post_id ] = $recipe_ids;
 				}
@@ -521,7 +524,12 @@ class WPRM_Recipe_Manager {
 			}
 		}
 
-		return $gutenberg_matches + $classic_matches + $shortcode_matches + $divi_matches;
+		$recipe_ids = $gutenberg_matches + $classic_matches + $shortcode_matches + $divi_matches;
+
+		// Allow for filtering of recipe IDs found in the content.
+		$recipe_ids = apply_filters( 'wprm_get_recipe_ids_from_content', $recipe_ids, $content );
+
+		return $recipe_ids;
 	}
 
 	/**

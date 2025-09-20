@@ -99,16 +99,28 @@ export default {
                     const thisDependencyType = dependency.hasOwnProperty('type') ? dependency.type : 'match';
 
                     if ( 'inverse' == thisDependencyType ) {
-                        if ( thisDependencyValue != dependency.value ) {
-                            thisDependencyMet = true;
+                        if ( Array.isArray( dependency.value ) ) {
+                            if ( ! dependency.value.includes( thisDependencyValue ) ) {
+                                thisDependencyMet = true;
+                            }
+                        } else {
+                            if ( thisDependencyValue != dependency.value ) {
+                                thisDependencyMet = true;
+                            }
                         }
                     } else if ( 'includes' == thisDependencyType ) {
                         if ( thisDependencyValue.includes( dependency.value ) ) {
                             thisDependencyMet = true;
                         }
                     } else {
-                        if ( thisDependencyValue == dependency.value ) {
-                            thisDependencyMet = true;
+                        if ( Array.isArray( dependency.value ) ) {
+                            if ( dependency.value.includes( thisDependencyValue ) ) {
+                                thisDependencyMet = true;
+                            }
+                        } else {
+                            if ( thisDependencyValue == dependency.value ) {
+                                thisDependencyMet = true;
+                            }
                         }
                     }
 

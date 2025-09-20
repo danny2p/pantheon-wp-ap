@@ -59,6 +59,37 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					'pills' => 'Pills',
 				),
 			),
+			'inline_separator' => array(
+				'default' => 'none',
+				'type' => 'dropdown',
+				'options' => array(
+					'none' => 'None',
+					'dot' => 'Dot',
+					'short-dash' => 'Short Dash',
+					'long-dash' => 'Long Dash',
+					'short-line' => 'Short Line',
+					'long-line' => 'Long Line',
+				),
+				'dependency' => array(
+					'id' => 'style',
+					'value' => 'inline',
+				),
+			),
+			'separator_color' => array(
+				'default' => '#aaaaaa',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'inline',
+					),
+					array(
+						'id' => 'inline_separator',
+						'value' => 'none',
+						'type' => 'inverse',
+					),
+				),
+			),
 			'pills_alignment' => array(
 				'default' => 'flex-start',
 				'type' => 'dropdown',
@@ -143,6 +174,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => array(
 					'none' => 'None',
+					'inside-only' => 'Inside Only',
 					'all' => 'All around',
 					'top-bottom' => 'Top and Bottom',
 					'left-right' => 'Left and Right',
@@ -167,6 +199,11 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 					array(
 						'id' => 'table_borders',
 						'value' => 'none',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'table_borders',
+						'value' => 'inside-only',
 						'type' => 'inverse',
 					),
 				),
@@ -442,6 +479,46 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 						'id' => 'servings_adjustable',
 						'value' => 'text-buttons',
 					),
+				),
+			),
+			'appearance_header' => array(
+				'type' => 'header',
+				'default' => __( 'Appearance', 'wp-recipe-maker' ),
+			),
+			'custom_block_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'block_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'custom_block_color',
+					'value' => '1',
+				),
+			),
+			'custom_label_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'label_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'custom_label_color',
+					'value' => '1',
+				),
+			),
+			'custom_link_color' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'link_color' => array(
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					'id' => 'custom_link_color',
+					'value' => '1',
 				),
 			),
 			'defaults_header' => array(
@@ -764,73 +841,102 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 
 		$show_container = (bool) $atts['container'];
 
-		// Border style.
-		$style = '';
-		if ( 'table' === $atts['style'] ) {
-			if ( 'none' === $atts['table_borders'] ) {
-				$atts['table_border_width'] = 0;
+		$output = '';
+
+		// Output container.
+		if ( $show_container ) {
+			$classes = array(
+				'wprm-recipe-meta-container',
+				'wprm-recipe-' . $atts['fields'] . '-container',
+				'wprm-recipe-details-container',
+				'wprm-recipe-details-container-' . $atts['style'],
+				'wprm-block-text-' . $atts['text_style'],
+			);
+			$style = '';
+
+			// Add custom class if set.
+			if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
+
+			// Table style classes.
+			if ( 'table' === $atts['style'] ) {
+				$classes[] = 'wprm-recipe-table-borders-' . $atts['table_borders'];
+
+				if ( (bool) $atts['table_borders_inside'] ) {
+					$classes[] = 'wprm-recipe-table-borders-inside';
+				} else {
+					$classes[] = 'wprm-recipe-table-borders-empty';
+				}
+
+				if ( 'none' === $atts['table_borders'] ) {
+					$atts['table_border_width'] = 0;
+				}
+
+				$style .= 'border-width: ' . $atts['table_border_width'] . ';';
+				$style .= 'border-style: ' . $atts['table_border_style'] . ';';
+				$style .= 'border-color: ' . $atts['table_border_color'] . ';';
 			}
 
-			$style .= 'border-width: ' . $atts['table_border_width'] . ';';
-			$style .= 'border-style: ' . $atts['table_border_style'] . ';';
-			$style .= 'border-color: ' . $atts['table_border_color'] . ';';
-		}
+			// Pills style.
+			if ( 'pills' === $atts['style'] ) {
+				if ( '10px' !== $atts['pills_gap'] ) {
+					$style .= 'gap: ' . $atts['pills_gap'] . ';';
+				}
+				if ( 'flex-start' !== $atts['pills_alignment'] ) {
+					$style .= 'justify-content: ' . $atts['pills_alignment'] . ';';
+				}
+				if ( '5px' !== $atts['pills_vertical_padding'] ) {
+					$style .= '--pill-padding-vertical: ' . $atts['pills_vertical_padding'] . ';';
+				}
+				if ( '15px' !== $atts['pills_horizontal_padding'] ) {
+					$style .= '--pill-padding-horizontal: ' . $atts['pills_horizontal_padding'] . ';';
+				}
+				if ( '#333333' !== $atts['pills_background'] ) {
+					$style .= '--pill-background-color: ' . $atts['pills_background'] . ';';
+				}
+				if ( '#ffffff' !== $atts['pills_text'] ) {
+					$style .= '--pill-text-color: ' . $atts['pills_text'] . ';';
+				}
+				if ( '0px' !== $atts['pills_border_width'] ) {
+					$style .= '--pill-borderwidth: ' . $atts['pills_border_width'] . ';';
 
-		if ( 'pills' === $atts['style'] ) {
-			if ( '10px' !== $atts['pills_gap'] ) {
-				$style .= 'gap: ' . $atts['pills_gap'] . ';';
-			}
-			if ( 'flex-start' !== $atts['pills_alignment'] ) {
-				$style .= 'justify-content: ' . $atts['pills_alignment'] . ';';
-			}
-			if ( '5px' !== $atts['pills_vertical_padding'] ) {
-				$style .= '--pill-padding-vertical: ' . $atts['pills_vertical_padding'] . ';';
-			}
-			if ( '15px' !== $atts['pills_horizontal_padding'] ) {
-				$style .= '--pill-padding-horizontal: ' . $atts['pills_horizontal_padding'] . ';';
-			}
-			if ( '#333333' !== $atts['pills_background'] ) {
-				$style .= '--pill-background-color: ' . $atts['pills_background'] . ';';
-			}
-			if ( '#ffffff' !== $atts['pills_text'] ) {
-				$style .= '--pill-text-color: ' . $atts['pills_text'] . ';';
-			}
-			if ( '0px' !== $atts['pills_border_width'] ) {
-				$style .= '--pill-borderwidth: ' . $atts['pills_border_width'] . ';';
-
-				if ( '#333333' !== $atts['pills_border'] ) {
-					$style .= '--pill-border-color: ' . $atts['pills_border'] . ';';
+					if ( '#333333' !== $atts['pills_border'] ) {
+						$style .= '--pill-border-color: ' . $atts['pills_border'] . ';';
+					}
+				}
+				if ( '100px' !== $atts['pills_border_radius'] ) {
+					$style .= '--pill-border-radius: ' . $atts['pills_border_radius'] . ';';
 				}
 			}
-			if ( '100px' !== $atts['pills_border_radius'] ) {
-				$style .= '--pill-border-radius: ' . $atts['pills_border_radius'] . ';';
+
+			// Inline style classes.
+			if ( 'inline' === $atts['style'] ) {
+				if ( 'none' !== $atts['inline_separator'] ) {
+					$classes[] = 'wprm-inline-separator';
+					$classes[] = 'wprm-inline-separator-' . $atts['inline_separator'];
+				}
+
+				$style .= parent::get_inline_css_variables( 'meta-container', $atts, array( 'separator_color' ) );
 			}
+
+			// Custom colors.
+			$variables_to_use = array();
+			
+			if ( (bool) $atts['custom_block_color'] ) { $variables_to_use[] = 'block_color'; }
+			if ( (bool) $atts['custom_label_color'] ) { $variables_to_use[] = 'label_color'; }
+			if ( (bool) $atts['custom_link_color'] ) { $variables_to_use[] = 'link_color'; }
+
+			if ( $variables_to_use ) {
+				$classes[] = 'wprm-meta-container-custom-color';
+				$style .= parent::get_inline_css_variables( 'meta-container', $atts, $variables_to_use );
+			}
+
+			// Maybe need inline style.
+			$inline_style = WPRM_Shortcode_Helper::get_inline_style( $style );
+
+			$output = $show_container ? '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $inline_style . '>' : '';
 		}
 
-		// Output.
-		$classes = array(
-			'wprm-recipe-meta-container',
-			'wprm-recipe-' . $atts['fields'] . '-container',
-			'wprm-recipe-details-container',
-			'wprm-recipe-details-container-' . $atts['style'],
-			'wprm-block-text-' . $atts['text_style'],
-		);
-
-		// Add custom class if set.
-		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
-
-		if ( 'table' === $atts['style'] ) {
-			$classes[] = 'wprm-recipe-table-borders-' . $atts['table_borders'];
-
-			if ( (bool) $atts['table_borders_inside'] ) {
-				$classes[] = 'wprm-recipe-table-borders-inside';
-			} else {
-				$classes[] = 'wprm-recipe-table-borders-empty';
-			}
-		}
-
-		$output = $show_container ? '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $style ) . '">' : '';
-
+		// Output individual fields.
 		foreach ( $fields_output as $field_output ) {
 
 			if ( 'pills' === $atts['style'] ) {
@@ -844,6 +950,7 @@ class WPRM_SC_Meta_Container extends WPRM_Template_Shortcode {
 			}
 		}
 
+		// Maybe close container.
 		if ( $show_container ) {
 			$output .= '</div>';
 		}

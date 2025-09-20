@@ -78,7 +78,7 @@ class WPRM_Instacart {
 		);
 
 		foreach ( $data['ingredients'] as $ingredient ) {
-			$name = trim( strip_tags( html_entity_decode( do_shortcode( $ingredient['name'] ) ) ) );
+			$name = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $ingredient['name'] ) ) ) );
 			$quantity = WPRM_Recipe_Parser::parse_quantity( $ingredient['quantity'] );
 
 			// Default to 1 if no quantity.
@@ -87,7 +87,7 @@ class WPRM_Instacart {
 			}
 
 			if ( $name && $quantity ) {
-				$unit = trim( strip_tags( html_entity_decode( do_shortcode( $ingredient['unit'] ) ) ) );
+				$unit = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $ingredient['unit'] ) ) ) );
 
 				$api_data['ingredients'][] = array(
 					'name' => $name,
@@ -145,7 +145,7 @@ class WPRM_Instacart {
 
 		foreach ( $data['groups'] as $group ) {
 			foreach ( $group['ingredients'] as $ingredient ) {
-				$name = trim( strip_tags( html_entity_decode( do_shortcode( $ingredient['name'] ) ) ) );
+				$name = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $ingredient['name'] ) ) ) );
 
 				// Exclude checked ingredients.
 				if ( isset( $ingredient['checked'] ) && $ingredient['checked'] ) {
@@ -175,7 +175,7 @@ class WPRM_Instacart {
 					}
 
 					if ( $name && $quantity ) {
-						$unit = trim( strip_tags( html_entity_decode( do_shortcode( $variation_unit ) ) ) );
+						$unit = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $variation_unit ) ) ) );
 		
 						$api_data['line_items'][] = array(
 							'name' => $name,
@@ -250,6 +250,27 @@ class WPRM_Instacart {
 		}
 
 		return $link;
+	}
+
+	/**
+	 * Execute safe shortcodes only.
+	 *
+	 * @since	10.1.0
+	 */
+	public static function do_shortcode_safe( $content ) {
+		// No more executing of shortcodes for security reasons, only strip.
+		global $shortcode_tags;
+
+		if ( empty( $shortcode_tags ) || ! is_array( $shortcode_tags ) ) {
+			return $content;
+		}
+
+		$pattern = get_shortcode_regex();
+
+		return preg_replace_callback( "/$pattern/s", function( $matches ) {
+			// $matches[5] is the content between opening/closing tags
+			return isset( $matches[5] ) ? $matches[5] : '';
+		}, $content );
 	}
 }
 

@@ -366,7 +366,17 @@ class WPRM_Compatibility {
 	 */
 	public static function jupiter_assets() {
 		if ( WPRM_Settings::get( 'integration_jupiter' ) ) {
-			echo '<script defer src="https://scripts.jupiter.shop/wp-recipe-maker/bundle.min.js"></script>';
+			$data = '';
+
+			// Jupiter Handle, empty by default.
+			$handle = trim( WPRM_Settings::get( 'jupiter_handle' ) );
+			$data .= ' data-handle="' . esc_attr( $handle ) . '"';
+
+			// Options.
+			$data .= WPRM_Settings::get( 'jupiter_print_button' ) ? ' data-enable-print-link="true"' : ' data-enable-print-link="false"';
+			$data .= WPRM_Settings::get( 'jupiter_shop_ingredients_button' ) ? ' data-enable-shop-ingredients-button="true"' : ' data-enable-shop-ingredients-button="false"';
+
+			echo '<script defer src="https://scripts.jupiter.shop/wp-recipe-maker/bundle.min.js"' . $data . '></script>';
 		}
 	}
 

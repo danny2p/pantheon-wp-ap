@@ -6,7 +6,7 @@ const layoutElements = [
 
 const propertiesForElement = {
     container: [ 'float', 'align', 'padding', 'background-color', 'text-color', 'custom' ],
-    'column-container': [ 'column-gap', 'column-mobile', 'column-mobile-reverse', 'row-gap', 'custom' ],
+    'column-container': [ 'vertical-align', 'column-gap', 'column-mobile', 'column-mobile-reverse', 'row-gap', 'custom' ],
     column: [ 'column-width', 'align', 'align-rows', 'padding', 'background-color', 'text-color', 'custom' ],
 }
 
@@ -65,6 +65,26 @@ const potentialProperties = {
                 return [];
             }
             return [ 'wprm-container-float-' + value ];
+        },
+    },
+    'vertical-align': {
+        name: 'Vertical Align',
+        type: 'dropdown',
+        options: {
+            top: 'Top',
+            middle: 'Middle',
+            bottom: 'Bottom',
+        },
+        classesToValue: ( classes ) => {
+            if ( classes.includes( 'wprm-align-middle' ) ) { return 'middle'; }
+            if ( classes.includes( 'wprm-align-bottom' ) ) { return 'bottom'; }
+            return 'top';
+        },
+        valueToClasses: ( value ) => {
+            if ( 'top' === value ) {
+                return [];
+            }
+            return [ 'wprm-align-' + value ];
         },
     },
     align: {

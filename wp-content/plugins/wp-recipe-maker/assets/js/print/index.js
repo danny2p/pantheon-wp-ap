@@ -156,6 +156,8 @@ window.WPRMPrint = {
             elems = document.querySelectorAll( '.wprm-recipe-notes-container' );
         } else if ( 'wprm-print-toggle-recipe-nutrition' === toggle.id ) {
             elems = document.querySelectorAll( '.wprm-recipe-nutrition-header, .wprm-nutrition-label-container, .wprm-condition-field-nutrition:not(.wprm-condition-inverse)' );
+        } else if ( 'wprm-print-toggle-qr' === toggle.id ) {
+            elems = document.querySelectorAll( '.wprm-qr-code-container' );
         } else if ( 'wprm-print-toggle-collection-name' === toggle.id ) {
             elems = document.querySelectorAll( '.wprmprc-container-header-container' );
         } else if ( 'wprm-print-toggle-collection-description' === toggle.id ) {

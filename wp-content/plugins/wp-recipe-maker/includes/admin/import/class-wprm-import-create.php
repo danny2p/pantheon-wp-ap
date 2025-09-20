@@ -560,7 +560,7 @@ class WPRM_Import_Create extends WPRM_Import {
 			if ( $content !== $post->post_content ) {
 				$update_content = array(
 					'ID' => $post_id,
-					'post_content' => $content,
+					'post_content' => wp_slash( $content ),
 				);
 				wp_update_post( $update_content );
 			}

@@ -55,6 +55,8 @@
     .wprm-layout-column-container:not( .wprm-column-rows-never, .wprm-column-rows-recipe-400 ) {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+        
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
@@ -64,62 +66,76 @@
     .wprm-column-rows-tablet {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
 
-@container (max-width: 900px) {
+.wprm-recipe.wprm-max-900 {
     .wprm-column-rows-recipe-900 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
 
-@container (max-width: 800px) {
+.wprm-recipe.wprm-max-800 {
     .wprm-column-rows-recipe-800 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
-@container (max-width: 700px) {
+.wprm-recipe.wprm-max-700 {
     .wprm-column-rows-recipe-700 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
-@container (max-width: 600px) {
+.wprm-recipe.wprm-max-600 {
     .wprm-column-rows-recipe-600 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
-@container (max-width: 500px) {
+.wprm-recipe.wprm-max-500 {
     .wprm-column-rows-recipe-500 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }
     }
 }
-@container (max-width: 400px) {
+.wprm-recipe.wprm-max-400 {
     .wprm-column-rows-recipe-400 {
         flex-direction: column;
         &.wprm-column-rows-reverse { flex-direction: column-reverse; }
+        .wprm-layout-column { width: 100% }
+        
         & > .wprm-align-rows-left { text-align: left; }
         & > .wprm-align-rows-right { text-align: right; }
         & > .wprm-align-rows-center { text-align: center; }

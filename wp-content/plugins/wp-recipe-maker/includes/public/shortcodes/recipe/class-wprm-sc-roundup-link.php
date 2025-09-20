@@ -162,13 +162,17 @@ class WPRM_SC_Roundup_Link extends WPRM_Template_Shortcode {
 		}
 
 		$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
-		$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
+		
+		$rel = '';
+		if ( $recipe->parent_url_nofollow() ) { $rel .= ' nofollow'; }
+		if ( $recipe->parent_url_noopener() ) { $rel .= ' noopener'; }
+		$rel = $rel ? ' rel="' . trim( $rel ) . '"' : '';
 
 		$text = $recipe->replace_placeholders( $atts['text'] );
 		$text = WPRM_i18n::maybe_translate( $text );
 		$text = apply_filters( 'wprm_recipe_roundup_link_text', $text );
 
-		$output = '<a href="' . esc_url( $recipe->permalink() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $target . $nofollow . ' aria-label="' . esc_attr( $recipe->name() ) . '">' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+		$output = '<a href="' . esc_url( $recipe->permalink() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $target . $rel . ' aria-label="' . esc_attr( $recipe->name() ) . '">' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		return apply_filters( parent::get_hook(), $output, $atts, $recipe );
 	}
 }

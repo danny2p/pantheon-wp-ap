@@ -1,4 +1,5 @@
-.wprm-expandable-container {
+.wprm-expandable-container,
+.wprm-expandable-container-separated {
     --wprm-expandable-text-color: #333333;
     --wprm-expandable-button-color: #ffffff;
     --wprm-expandable-border-color: #333333;
@@ -29,4 +30,8 @@
             display: none;
         }
     }
+}
+
+.wprm-expandable-separated-content-collapsed {
+    display: none !important;
 }

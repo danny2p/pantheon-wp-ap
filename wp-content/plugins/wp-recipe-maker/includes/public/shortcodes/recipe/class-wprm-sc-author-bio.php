@@ -25,6 +25,14 @@ class WPRM_SC_Author_Bio extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'bio_header' => array(
+				'type' => 'header',
+				'default' => __( 'Author Bio', 'wp-recipe-maker' ),
+			),
 			'text_style' => array(
 				'default' => 'normal',
 				'type' => 'dropdown',
@@ -57,7 +65,7 @@ class WPRM_SC_Author_Bio extends WPRM_Template_Shortcode {
 			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		self::$attributes = $atts;
 
 		parent::init();

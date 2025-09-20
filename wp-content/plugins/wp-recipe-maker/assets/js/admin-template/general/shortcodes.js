@@ -27,6 +27,7 @@ const shortcodeGroups = {
             'wprm-link',
             'wprm-qr-code',
             'wprm-image',
+            'wprm-recipe-jump-to-section',
             'wprm-call-to-action',
             'wprm-icon',
             'wprm-prevent-sleep',
@@ -92,6 +93,7 @@ const shortcodeGroups = {
     sharing: {
         group: 'Recipe Sharing',
         shortcodes: [
+            'wprm-recipe-share-options-popup',
             'wprm-recipe-pin',
             'wprm-recipe-email-share',
             'wprm-recipe-facebook-share',

@@ -11,13 +11,34 @@
     
     .wprm-nutrition-label-text-nutrition-container {
         white-space: nowrap;
-        padding-right: 10px;
+    }
+
+    .wprm-nutrition-label-text-nutrition-container-separate {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 5px;
     }
 }
 
-.rtl .wprm-nutrition-label-container-grouped {
-    .wprm-nutrition-label-text-nutrition-container {
-        padding-left: 10px;
-        padding-right: 0;
+.wprm-nutrition-label-container-grouped-pills {
+    --wprm-nutrition-pills-row-gap: 10px;
+
+    --wprm-nutrition-pills-background: #ffffff;
+    --wprm-nutrition-pills-border: #333333;
+    --wprm-nutrition-pills-border-width: 1px;
+    --wprm-nutrition-pills-border-radius: 100px;
+
+    --wprm-nutrition-pills-horizontal-padding: 15px;
+    --wprm-nutrition-pills-vertical-padding: 5px;
+
+    row-gap: var( --wprm-nutrition-pills-row-gap );
+
+    .wprm-nutrition-label-text-nutrition-container:not(.wprm-nutrition-label-text-nutrition-container-empty) {
+        border-radius: var( --wprm-nutrition-pills-border-radius );
+
+        border: var( --wprm-nutrition-pills-border-width ) solid var( --wprm-nutrition-pills-border );
+        background-color: var( --wprm-nutrition-pills-background );
+
+        padding: var( --wprm-nutrition-pills-vertical-padding ) var( --wprm-nutrition-pills-horizontal-padding );
     }
 }

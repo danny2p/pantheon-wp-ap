@@ -25,6 +25,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
 			'group_header' => array(
 				'type' => 'header',
 				'default' => __( 'Ingredient Groups', 'wp-recipe-maker' ),
@@ -40,10 +44,12 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'options' => 'text_styles',
 			),
 			'group_custom_color' => array(
+				'name' => 'Use Custom Color',
 				'default' => '0',
 				'type' => 'toggle',
 			),
 			'group_color' => array(
+				'name' => 'Color',
 				'default' => '#444444',
 				'type' => 'color',
 				'dependency' => array(
@@ -52,6 +58,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'group_bottom_margin' => array(
+				'name' => 'Bottom Margin',
 				'default' => '0px',
 				'type' => 'size',
 			),
@@ -63,49 +70,21 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				'type' => 'header',
 				'default' => __( 'List Style', 'wp-recipe-maker' ),
 			),
-			'list_style' => array(
-				'default' => 'disc',
+			'text_style' => array(
+				'default' => 'normal',
 				'type' => 'dropdown',
-				'options' => 'list_style_types',
+				'options' => 'text_styles',
 			),
-			'list_style_continue_numbers' => array(
+			'force_item_position' => array(
 				'default' => '0',
 				'type' => 'toggle',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
 			),
-			'list_style_background' => array(
-				'default' => '#444444',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_size' => array(
-				'default' => '18px',
+			'list_item_position' => array(
+				'default' => '32px',
 				'type' => 'size',
 				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text' => array(
-				'default' => '#ffffff',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text_size' => array(
-				'default' => '12px',
-				'type' => 'size',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
+					'id' => 'force_item_position',
+					'value' => '1',
 				),
 			),
 			'bottom_border' => array(
@@ -145,6 +124,11 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'value' => '1',
 				),
 			),
+			'list_style' => array(
+				'default' => 'disc',
+				'type' => 'dropdown',
+				'options' => 'list_style_types',
+			),
 			'ingredient_fields_header' => array(
 				'type' => 'header',
 				'default' => __( 'Ingredient Fields', 'wp-recipe-maker' ),
@@ -171,6 +155,14 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			),
 			'group_width' => array(
 				'default' => '250px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'ingredients_style',
+					'value' => 'grouped',
+				),
+			),
+			'group_column_gap' => array(
+				'default' => '10px',
 				'type' => 'size',
 				'dependency' => array(
 					'id' => 'ingredients_style',
@@ -375,6 +367,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_style' => array(
+				'name' => 'Style',
 				'default' => 'links',
 				'type' => 'dropdown',
 				'options' => array(
@@ -397,6 +390,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_text_style' => array(
+				'name' => 'Text Style',
 				'default' => 'normal',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
@@ -419,6 +413,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_separator' => array(
+				'name' => 'Separator',
 				'default' => ' - ',
 				'type' => 'text',
 				'dependency' => array(
@@ -439,6 +434,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_button_background' => array(
+				'name' => 'Button Background',
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
@@ -459,6 +455,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_button_accent' => array(
+				'name' => 'Button Accent',
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
@@ -479,6 +476,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_button_radius' => array(
+				'name' => 'Button Radius',
 				'default' => '3px',
 				'type' => 'size',
 				'dependency' => array(
@@ -499,6 +497,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_style' => array(
+				'name' => 'Switch Style',
 				'default' => 'rounded',
 				'type' => 'dropdown',
 				'options' => array(
@@ -518,6 +517,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_height' => array(
+				'name' => 'Switch Height',
 				'default' => '28px',
 				'type' => 'size',
 				'dependency' => array(
@@ -533,6 +533,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_off' => array(
+				'name' => 'Switch Off',
 				'default' => '#cccccc',
 				'type' => 'color',
 				'dependency' => array(
@@ -548,6 +549,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_off_knob' => array(
+				'name' => 'Switch Off Knob',
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
@@ -563,6 +565,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_off_text' => array(
+				'name' => 'Switch Off Text',
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
@@ -578,6 +581,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_on' => array(
+				'name' => 'Switch On',
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
@@ -593,6 +597,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_on_knob' => array(
+				'name' => 'Switch On Knob',
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
@@ -608,6 +613,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'conversion_switch_on_text' => array(
+				'name' => 'Switch On Text',
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
@@ -623,6 +629,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_both_style' => array(
+				'name' => 'Both Style',
 				'default' => 'parentheses',
 				'type' => 'dropdown',
 				'options' => array(
@@ -636,6 +643,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'unit_conversion_show_identical' => array(
+				'name' => 'Show Identical',
 				'default' => '1',
 				'type' => 'toggle',
 				'dependency' => array(
@@ -670,6 +678,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'servings_text_style' => array(
+				'name' => 'Text Style',
 				'default' => 'normal',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
@@ -689,6 +698,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'serving_options_any_value' => array(
+				'name' => 'Any Value',
 				'default' => '',
 				'type' => 'text',
 				'dependency' => array(
@@ -696,8 +706,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'value' => '',
 					'type' => 'inverse',
 				),
+				'help' => 'Optional text for button to click on to set any serving size the visitor wants. Leave blank to disable.',
 			),
 			'servings_button_background' => array(
+				'name' => 'Button Background',
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
@@ -713,6 +725,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'servings_button_accent' => array(
+				'name' => 'Button Accent',
 				'default' => '#333333',
 				'type' => 'color',
 				'dependency' => array(
@@ -728,6 +741,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'servings_button_radius' => array(
+				'name' => 'Button Radius',
 				'default' => '3px',
 				'type' => 'size',
 				'dependency' => array(
@@ -877,6 +891,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'advanced_servings_header' => array(
+				'type' => 'header',
+				'default' => __( 'Advanced Adjustable Servings', 'wp-recipe-maker' ),
+			),
 			'advanced_servings' => array(
 				'default' => 'after',
 				'type' => 'dropdown',
@@ -887,6 +905,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'advanced_servings_before' => array(
+				'name' => 'Before Text',
 				'default' => __( 'Makes:', 'wp-recipe-maker' ),
 				'type' => 'text',
 				'dependency' => array(
@@ -898,6 +917,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 				),
 			),
 			'advanced_servings_text_style' => array(
+				'name' => 'Text Style',
 				'default' => 'normal',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
@@ -907,11 +927,58 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'before_container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Before Ingredients', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'unit_conversion',
+						'value' => 'before',
+					),
+					array(
+						'id' => 'adjustable_servings',
+						'value' => 'before',
+					),
+					array(
+						'id' => 'advanced_servings',
+						'value' => 'before',
+					),
+					array(
+						'id' => 'interactivity_container',
+						'value' => '1',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_checkbox_atts() );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_advanced_list_atts() );
+
+		// Interactivity container.
+		$interactivity_atts = WPRM_Shortcode_Helper::get_interactivity_container_atts();
+		$interactivity_atts['interactivity_container']['dependency'] = array(
+			array(
+				'id' => 'unit_conversion',
+				'value' => 'before',
+			),
+			array(
+				'id' => 'adjustable_servings',
+				'value' => 'before',
+			),
+			array(
+				'id' => 'advanced_servings',
+				'value' => 'before',
+			),
+			array(
+				'id' => 'interactivity_container',
+				'value' => '1',
+			),
+		);
+		$interactivity_atts['interactivity_container']['dependency_compare'] = 'OR';
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'before_container_header', $interactivity_atts );
 
 		self::$attributes = $atts;
 
@@ -1000,16 +1067,30 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'adjustable_servings_atts' => $adjustable_servings_atts,
 		) );
 
+		$output_before = '';
+
 		if ( 'before' === $atts['adjustable_servings'] ) {
-			$output .= WPRM_SC_Adjustable_Servings::shortcode( $adjustable_servings_atts );
+			$output_before .= WPRM_SC_Adjustable_Servings::shortcode( $adjustable_servings_atts );
 		}
 		if ( 'before' === $atts['advanced_servings'] ) {
-			$output .= WPRM_SC_Advanced_Adjustable_Servings::shortcode( $advanced_servings_atts );
+			$output_before .= WPRM_SC_Advanced_Adjustable_Servings::shortcode( $advanced_servings_atts );
 		}
 		if ( 'before' === $atts['unit_conversion'] ) {
-			$output .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
+			$output_before .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
 		}
 
+		// Output functionality before the ingredients, optionally with container.
+		if ( $output_before && (bool) $atts['interactivity_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_interactivity_container( $atts, 'ingredients-before' );
+		}
+
+		$output .= $output_before;
+
+		if ( $output_before && (bool) $atts['interactivity_container'] ) {
+			$output .= '</div>';
+		}
+
+		// Maybe output container for the ingredients.
 		if ( (bool) $atts['has_container'] ) {
 			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'ingredients' );
 		}
@@ -1039,7 +1120,15 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			}
 
 			if ( isset( $ingredient_group['ingredients'] ) && $ingredient_group['ingredients'] ) {
-				$output .= '<ul class="wprm-recipe-ingredients">';
+				$ul_style = '';
+
+				if ( 'grouped' === $atts['ingredients_style'] ) {
+					if ( '0px' !== $atts['group_column_gap'] ) {
+						$ul_style = ' style="column-gap: ' . esc_attr( $atts['group_column_gap'] ) . ';"';
+					}
+				}
+
+				$output .= '<ul class="wprm-recipe-ingredients"' . $ul_style . '>';
 
 				foreach ( $ingredient_group['ingredients'] as $index => $ingredient ) {
 					$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
@@ -1063,6 +1152,10 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 							$style .= 'padding-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
 							$style .= 'margin-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
 						}
+					}
+
+					if ( (bool) $atts['force_item_position'] ) {
+						$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
 					}
 
 					$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';

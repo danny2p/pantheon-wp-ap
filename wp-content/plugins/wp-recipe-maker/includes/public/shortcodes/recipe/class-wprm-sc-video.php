@@ -25,10 +25,18 @@ class WPRM_SC_Video extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Video Container', 'wp-recipe-maker' ),
+			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
-		unset( $atts['text_style'] );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		self::$attributes = $atts;
 	
 		parent::init();
@@ -59,7 +67,16 @@ class WPRM_SC_Video extends WPRM_Template_Shortcode {
 		$output = '<div id="wprm-recipe-video-container-' . esc_attr( $recipe->id() ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'video' );
 
+		if ( (bool) $atts['has_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'video' );
+		}
+
 		$output .= '<div class="wprm-recipe-video">' . do_shortcode( $recipe->video() ) . '</div>';
+		
+		if ( (bool) $atts['has_container'] ) {
+			$output .= '</div>';
+		}
+
 		$output .= '</div>';
 
 		// Check if force Mediavine video is enabled.

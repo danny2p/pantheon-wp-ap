@@ -129,6 +129,9 @@ class WPRM_Recipe {
 		if ( 'api' === $context ) {
 			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
 			$recipe['parent_post_id'] = $this->parent_post_id();
+		} elseif ( 'export' === $context ) {
+			$recipe['image_url'] = $this->image_url( 'full' );
+			$recipe['pin_image_url'] = $this->pin_image_url( 'full' );
 		} elseif ( 'manage' === $context ) {
 			$recipe['editable'] = current_user_can( 'edit_post', $this->id() );
 
@@ -1555,6 +1558,15 @@ class WPRM_Recipe {
 	 * @since	5.2.0
 	 */
 	public function parent_url_nofollow() {
+		return false;
+	}
+
+	/**
+	 * Get the parent URL noopener preference.
+	 *
+	 * @since	10.1.0
+	 */
+	public function parent_url_noopener() {
 		return false;
 	}
 
