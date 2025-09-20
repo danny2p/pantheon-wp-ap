@@ -25,13 +25,26 @@ class WPRM_SC_Notes extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'notes_header' => array(
+				'type' => 'header',
+				'default' => __( 'Notes', 'wp-recipe-maker' ),
+			),
+			'text_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+			),
 			'container_header' => array(
 				'type' => 'header',
 				'default' => __( 'Notes Container', 'wp-recipe-maker' ),
 			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		self::$attributes = $atts;
 

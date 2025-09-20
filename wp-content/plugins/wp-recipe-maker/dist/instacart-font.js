@@ -1,0 +1,1 @@
+var WPRecipeMaker;(()=>{"use strict";var e={r:e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})}},r={};e.r(r),(WPRecipeMaker=void 0===WPRecipeMaker?{}:WPRecipeMaker)["wp-recipe-maker/dist/instacart-font"]=r})();

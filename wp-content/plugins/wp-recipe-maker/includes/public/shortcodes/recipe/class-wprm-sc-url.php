@@ -110,9 +110,13 @@ class WPRM_SC_Url extends WPRM_Template_Shortcode {
 
 		if ( $atts['link'] ) {
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
-			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
+			
+			$rel = '';
+			if ( $recipe->parent_url_nofollow() ) { $rel .= ' nofollow'; }
+			if ( $recipe->parent_url_noopener() ) { $rel .= ' noopener'; }
+			$rel = $rel ? ' rel="' . trim( $rel ) . '"' : '';
 
-			$text = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
+			$text = '<a href="' . esc_url( $url ) . '"' . $target . $rel . '>' . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';
 		}
 
 		$output = '<' . $tag . ' class="' . esc_attr( implode( ' ', $classes ) ) . '">' . $text . '</' . $tag . '>';

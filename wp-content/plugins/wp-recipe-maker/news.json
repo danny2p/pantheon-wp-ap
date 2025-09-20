@@ -1,6 +1,60 @@
 {
     "news": [
         {
+            "date": "2025-09-17",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.1.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-1-0/"
+        },
+        {
+            "date": "2025-09-16",
+            "label": "Blog",
+            "title": "Recipe Components: A Guide to Better Recipe Writing",
+            "url": "https://bootstrapped.ventures/components-of-a-recipe/"
+        },
+        {
+            "date": "2025-09-09",
+            "label": "Blog",
+            "title": "How to Create QR Codes for Your Recipes",
+            "url": "https://bootstrapped.ventures/recipe-qr-code/"
+        },
+        {
+            "date": "2025-09-09",
+            "label": "Blog",
+            "title": "7 Ways to Boost Your Blog Traffic Using Pinterest",
+            "url": "https://bootstrapped.ventures/how-to-promote-blog-on-pinterest/"
+        },
+        {
+            "date": "2025-09-02",
+            "label": "Blog",
+            "title": "Best WordPress Plugins Food Bloggers Actually Use",
+            "url": "https://bootstrapped.ventures/best-wordpress-plugins-for-food-blogs/"
+        },
+        {
+            "date": "2025-08-29",
+            "label": "Blog",
+            "title": "Niche Vegan Blog Ideas for Finding Your Perfect Audience",
+            "url": "https://bootstrapped.ventures/vegan-blog-ideas/"
+        },
+        {
+            "date": "2025-08-12",
+            "label": "Blog",
+            "title": "Building Your Food Blog Brand Step by Step",
+            "url": "https://bootstrapped.ventures/food-blog-branding/"
+        },
+        {
+            "date": "2025-07-31",
+            "label": "Blog",
+            "title": "How to Build Your Career as a Food Critic",
+            "url": "https://bootstrapped.ventures/how-to-become-a-food-critic/"
+        },
+        {
+            "date": "2025-07-24",
+            "label": "Blog",
+            "title": "8 Easy Steps to Learn Home Cooking",
+            "url": "https://bootstrapped.ventures/learn-to-cook/"
+        },
+        {
             "date": "2025-07-08",
             "label": "Blog",
             "title": "8 Critical Steps to Launch Your Online Food Business",

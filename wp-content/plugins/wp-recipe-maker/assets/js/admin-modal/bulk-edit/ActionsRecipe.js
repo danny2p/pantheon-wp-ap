@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 
+import SelectList from '../select/SelectList';
+
 import FieldContainer from '../fields/FieldContainer';
 import FieldCheckbox from '../fields/FieldCheckbox';
 import FieldDropdown from '../fields/FieldDropdown';
@@ -79,6 +81,7 @@ const ActionsRecipe = (props) => {
 
     // Default options (part 2).
     actionOptions.push(
+        { value: 'add-to-list', label: __wprm( 'Add to Roundup List' ), default: '' },
         { value: 'print', label: __wprm( 'Print Recipes' ), default: false },
         { value: 'export', label: __wprm( 'Export Recipes' ), default: { type: 'recipe', user_ratings: false }, required: 'premium' },
         { value: 'delete', label: __wprm( 'Delete Recipes' ), default: false },
@@ -468,6 +471,23 @@ const ActionsRecipe = (props) => {
                 
                                     props.onActionChange(newAction);
                                 }}
+                            />
+                        }
+                        {
+                            'add-to-list' === selectedAction
+                            &&
+                            <SelectList
+                                value={ props.action.options }
+                                onValueChange={(list) => {
+                                    const newAction = {
+                                        ...props.action,
+                                        options: list ? list : '',
+                                    }
+                
+                                    props.onActionChange(newAction);
+                                }}
+                                options={[]}
+                                menuPlacement="top"
                             />
                         }
                         {

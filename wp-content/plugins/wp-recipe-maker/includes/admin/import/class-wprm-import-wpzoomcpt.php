@@ -422,7 +422,7 @@ class WPRM_Import_Wpzoomcpt extends WPRM_Import {
 			
 					$update_content = array(
 						'ID' => $parent_post_id,
-						'post_content' => $content,
+						'post_content' => wp_slash( $content ),
 					);
 					wp_update_post( $update_content );
 				}

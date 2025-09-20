@@ -54,7 +54,7 @@ class WPRM_Recipe_Sanitizer {
 
 		// HTML fields.
 		if ( isset( $recipe['summary'] ) )	{ $sanitized_recipe['summary'] = self::sanitize_html( $recipe['summary'] ); }
-		if ( isset( $recipe['notes'] ) )	{ $sanitized_recipe['notes'] = self::sanitize_html( $recipe['notes'] ); }
+		if ( isset( $recipe['notes'] ) )	{ $sanitized_recipe['notes'] = self::sanitize_notes( $recipe['notes'] ); }
 
 		// Number fields.
 		if ( isset( $recipe['image_id'] ) )		{ $sanitized_recipe['image_id'] = intval( $recipe['image_id'] ); }
@@ -535,6 +535,22 @@ class WPRM_Recipe_Sanitizer {
 	}
 
 	/**
+	 * Sanitize the recipe notes
+	 *
+	 * @since   10.1.0
+	 * @param	mixed $text Text to sanitize.
+	 */
+	public static function sanitize_notes( $notes ) {
+		// Strip HTML comments to prevent WordPress block markup from breaking things.
+		$notes = preg_replace('/<!--.*?-->/s', '', $notes);
+
+		// Regular HTML sanitization.
+		$notes = self::sanitize_html( $notes );
+
+		return $notes;
+	}
+
+	/**
 	 * Sanitize HTML content.
 	 *
 	 * @since   1.0.0
@@ -556,6 +572,9 @@ class WPRM_Recipe_Sanitizer {
 		$text = str_replace( '<p></p>', '', $text );
 		$text = str_replace( '<p><br></p>', '', $text );
 		$text = str_replace( '<p><br/></p>', '', $text );
+
+		// Remove empty links from HTML.
+		$text = preg_replace( '/<a[^>]*><\/a>/', '', $text );
 
 		// WPRM Code in rich text.
 		preg_match_all( '/<wprm-code>(.*?)<\/wprm-code>/ms', $text, $matches );

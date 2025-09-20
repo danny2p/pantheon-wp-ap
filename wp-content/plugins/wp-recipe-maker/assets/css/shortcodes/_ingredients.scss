@@ -43,10 +43,6 @@
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: center;
-        
-        li.wprm-recipe-ingredient {
-            padding-right: 10px;
-        }
     }
 
     .wprm-recipe-ingredient-details-container {
@@ -55,16 +51,6 @@
 
         .wprm-recipe-ingredient-notes {
             display: block;
-        }
-    }
-}
-
-.rtl .wprm-ingredient-style-grouped {
-    ul.wprm-recipe-ingredients {
-        
-        li.wprm-recipe-ingredient {
-            padding-left: 10px;
-            padding-right: 0;
         }
     }
 }

@@ -3,12 +3,7 @@
     cursor: wait;
 }
 
-@font-face {
-    font-family: 'Instacart';
-    font-weight: 400;
-    font-style: normal;
-    src: url('../../fonts/instacart.woff2') format('woff2');
-}
+// Font face moved to instacart-font.css for conditional loading
 
 .wprm-recipe-shop-instacart {
     display: inline-flex;

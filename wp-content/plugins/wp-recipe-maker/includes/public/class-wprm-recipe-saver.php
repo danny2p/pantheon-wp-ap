@@ -186,7 +186,7 @@ class WPRM_Recipe_Saver {
 		}
 
 		if ( isset( $recipe['summary'] ) ) {
-			$post['post_content'] = $recipe['summary'];
+			$post['post_content'] = wp_slash( $recipe['summary'] );
 		}
 
 		// Only for "public" recipe type or when manually setting author.
@@ -272,6 +272,7 @@ class WPRM_Recipe_Saver {
 		}
 
 		$recipe_ids = WPRM_Recipe_Manager::get_recipe_ids_from_post( $post->ID, true );
+		$recipe_ids = false === $recipe_ids ? array() : $recipe_ids;
 
 		// Make sure post itself is not included.
 		if ( in_array( $post->ID, $recipe_ids ) ) {
@@ -372,19 +373,19 @@ class WPRM_Recipe_Saver {
 
 		// Skip Revisionize revisions.
 		$revisionize = get_post_meta( $post_id, '_post_revision_of', true );
-		if ( $revisionize && is_plugin_active( 'revisionize/revisionize.php' ) && get_post_status( $revisionize ) ) {
+		if ( $revisionize && is_plugin_active( 'revisionize/revisionize.php' ) && get_post_status( $revisionize ) && intval( $revisionize ) !== $post_id ) {
 			return;
 		}
 
 		// Skip Revision Manager TMC revisions.
 		$rm_tmc = get_post_meta( $post_id, 'linked_post_id', true );
-		if ( $rm_tmc && is_plugin_active( 'revision-manager-tmc/revision-manager-tmc.php' ) && get_post_status( $rm_tmc ) ) {
+		if ( $rm_tmc && is_plugin_active( 'revision-manager-tmc/revision-manager-tmc.php' ) && get_post_status( $rm_tmc ) && intval( $rm_tmc ) !== $post_id ) {
 			return;
 		}
 
 		// Skip Revisionary / PublishPress revisions.
 		$revisionary = get_post_meta( $post_id, '_rvy_base_post_id', true );
-		if ( $revisionary && is_plugin_active( 'revisionary/revisionary.php' ) && get_post_status( $revisionary ) ) {
+		if ( $revisionary && is_plugin_active( 'revisionary/revisionary.php' ) && get_post_status( $revisionary ) && intval( $revisionary ) !== $post_id ) {
 			return;
 		}
 

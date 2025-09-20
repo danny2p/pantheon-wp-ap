@@ -365,7 +365,7 @@ class WPRM_Import_Wpultimaterecipe extends WPRM_Import {
 			$update_content = array(
 				'ID' => $id,
 				'post_type' => 'post',
-				'post_content' => $content,
+				'post_content' => wp_slash( $content ),
 			);
 			wp_update_post( $update_content );
 

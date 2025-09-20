@@ -340,7 +340,7 @@ class WPRM_Import_Simplerecipepro extends WPRM_Import {
 
 		$update_content = array(
 			'ID' => $id,
-			'post_content' => $content,
+			'post_content' => wp_slash( $content ),
 		);
 		wp_update_post( $update_content );
 

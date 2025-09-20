@@ -3,9 +3,12 @@ import Parser, { domToReact } from 'html-react-parser';
 
 // Functionality for the preview.
 import '../../../public/expandable';
+import '../../../other/size-conditions';
+import '../../../../../../wp-recipe-maker-premium/assets/js/public/share-options-popup';
 
 // Styles for the preview.
 import '../../../../css/public/template_reset.scss';
+import '../../../../css/public/tooltip.scss';
 import '../../../../css/shortcodes/shortcodes.scss';
 import '../../../../../../wp-recipe-maker-premium/assets/css/shortcodes/shortcodes.scss';
 
@@ -361,8 +364,6 @@ export default class PreviewTemplate extends Component {
                         } );
 
                         style = ' style="' + prefixedStyle.join( ';' ) + ';"';
-
-                        console.log( 'unparsed style', style );
                     }
 
                     const elementToOutput = '<div class="' + classes.join( ' ' ) + '"' + style + '>';

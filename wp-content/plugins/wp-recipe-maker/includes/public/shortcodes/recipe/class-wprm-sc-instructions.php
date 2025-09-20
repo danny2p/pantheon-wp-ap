@@ -25,6 +25,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
 			'group_header' => array(
 				'type' => 'header',
 				'default' => __( 'Instruction Groups', 'wp-recipe-maker' ),
@@ -67,6 +71,11 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'type' => 'header',
 				'default' => __( 'List Style', 'wp-recipe-maker' ),
 			),
+			'text_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+			),
 			'list_tag' => array(
 				'default' => 'ul',
 				'type' => 'dropdown',
@@ -75,65 +84,40 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'ol' => 'ol',
 				),
 			),
+			'force_item_position' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
+			'list_item_position' => array(
+				'default' => '32px',
+				'type' => 'size',
+				'dependency' => array(
+					'id' => 'force_item_position',
+					'value' => '1',
+				),
+			),
 			'list_style' => array(
 				'default' => 'decimal',
 				'type' => 'dropdown',
 				'options' => 'list_style_types',
-			),
-			'list_style_continue_numbers' => array(
-				'default' => '0',
-				'type' => 'toggle',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_background' => array(
-				'default' => '#444444',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_size' => array(
-				'default' => '18px',
-				'type' => 'size',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text' => array(
-				'default' => '#ffffff',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text_size' => array(
-				'default' => '12px',
-				'type' => 'size',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
 			),
 			'inline_ingredients_header' => array(
 				'type' => 'header',
 				'default' => __( 'Inline Ingredients', 'wp-recipe-maker' ),
 			),
 			'inline_text_style' => array(
+				'name' => 'Text Style',
 				'default' => 'bold',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
 			),
 			'inline_use_custom_color' => array(
+				'name' => 'Use Custom Color',
 				'default' => '0',
 				'type' => 'toggle',
 			),
 			'inline_custom_color' => array(
+				'name' => 'Custom Color',
 				'default' => '#000000',
 				'type' => 'color',
 				'dependency' => array(
@@ -142,10 +126,12 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'inline_show_notes' => array(
+				'name' => 'Show Notes',
 				'default' => '0',
 				'type' => 'toggle',
 			),
 			'inline_notes_separator' => array(
+				'name' => 'Notes Separator',
 				'default' => 'none',
 				'type' => 'dropdown',
 				'options' => array(
@@ -173,6 +159,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'ingredients_text_style' => array(
+				'name' => 'Text Style',
 				'default' => 'faded',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
@@ -183,6 +170,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'ingredients_text_margin' => array(
+				'name' => 'Text Margin',
 				'default' => '5px',
 				'type' => 'size',
 				'dependency' => array(
@@ -192,6 +180,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'ingredients_display' => array(
+				'name' => 'Display',
 				'default' => 'inline',
 				'type' => 'dropdown',
 				'options' => array(
@@ -205,6 +194,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'ingredients_separator' => array(
+				'name' => 'Separator',
 				'default' => ', ',
 				'type' => 'text',
 				'dependency' => array(
@@ -220,10 +210,12 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'ingredients_show_notes' => array(
+				'name' => 'Show Notes',
 				'default' => '0',
 				'type' => 'toggle',
 			),
 			'ingredient_notes_separator' => array(
+				'name' => 'Notes Separator',
 				'default' => 'none',
 				'type' => 'dropdown',
 				'options' => array(
@@ -249,6 +241,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'default' => __( 'Unit Conversion', 'wp-recipe-maker' ),
 			),
 			'ingredients_show_both_units' => array(
+				'name' => 'Show Both Units',
 				'default' => '0',
 				'type' => 'toggle',
 			),
@@ -266,6 +259,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				),
 			),
 			'both_units_show_if_identical' => array(
+				'name' => 'Show if Identical',
 				'default' => '0',
 				'type' => 'toggle',
 				'dependency' => array(
@@ -543,11 +537,414 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'prevent_sleep_header' => array(
+				'type' => 'header',
+				'default' => __( 'Prevent Sleep', 'wp-recipe-maker' ),
+			),
+			'prevent_sleep' => array(
+				'default' => '',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'header' => 'Show prevent sleep toggle in the header',
+					'before' => 'Show prevent sleep toggle before the instructions',
+					'after' => 'Show prevent sleep toggle after the instructions',
+				),
+			),
+			'prevent_sleep_switch_type' => array(
+				'name' => 'Switch Type',
+				'default' => 'outside',
+				'type' => 'dropdown',
+				'options' => array(
+					'outside' => 'Label Outside Toggle',
+					'inside' => 'Label Inside Toggle',
+				),
+				'dependency' => array(
+					'id' => 'prevent_sleep',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'prevent_sleep_switch_style' => array(
+				'name' => 'Switch Style',
+				'default' => 'rounded',
+				'type' => 'dropdown',
+				'options' => array(
+					'square' => 'Square Toggle',
+					'rounded' => 'Rounded Toggle',
+				),
+				'dependency' => array(
+					'id' => 'prevent_sleep',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			// Outside toggle type, backwards compatibility.
+			'prevent_sleep_switch_width' => array(
+				'name' => 'Switch Width',
+				'default' => '40',
+				'type' => 'number',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_inactive' => array(
+				'name' => 'Switch Inactive',
+				'default' => '#cccccc',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_inactive_knob' => array(
+				'name' => 'Switch Inactive Knob',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_active' => array(
+				'name' => 'Switch Active',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_active_knob' => array(
+				'name' => 'Switch Active Knob',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			// Inside toggle type.
+			'prevent_sleep_switch_height' => array(
+				'name' => 'Switch Height',
+				'default' => '28px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_off' => array(
+				'name' => 'Switch Off',
+				'default' => '#cccccc',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_off_knob' => array(
+				'name' => 'Switch Off Knob',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_off_text' => array(
+				'name' => 'Switch Off Text',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_on' => array(
+				'name' => 'Switch On',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_on_knob' => array(
+				'name' => 'Switch On Knob',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_switch_on_text' => array(
+				'name' => 'Switch On Text',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_off_icon' => array(
+				'name' => 'Off Icon',
+				'default' => '',
+				'type' => 'icon',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_off_text' => array(
+				'name' => 'Off Text',
+				'default' => 'Prevent Sleep Mode',
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_on_icon' => array(
+				'name' => 'On Icon',
+				'default' => '',
+				'type' => 'icon',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_on_text' => array(
+				'name' => 'On Text',
+				'default' => 'Prevent Sleep Mode',
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'inside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_label' => array(
+				'name' => 'Label',
+				'default' => 'Cook Mode',
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_label_style' => array(
+				'name' => 'Label Style',
+				'default' => 'bold',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_switch_type',
+						'value' => 'outside',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_description' => array(
+				'name' => 'Description',
+				'default' => 'Prevent your screen from going dark',
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'prevent_sleep_description_style' => array(
+				'name' => 'Description Style',
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep_description',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'prevent_sleep',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'before_container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Before Instructions', 'wp-recipe-maker' ),
+				'dependency' => array(
+					array(
+						'id' => 'prevent_sleep',
+						'value' => 'before',
+					),
+					array(
+						'id' => 'media_toggle',
+						'value' => 'before',
+					),
+					array(
+						'id' => 'interactivity_container',
+						'value' => '1',
+					),
+				),
+				'dependency_compare' => 'OR',
+			),
 		);
 	
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_checkbox_atts() );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_advanced_list_atts() );
+
+		// Interactivity container.
+		$interactivity_atts = WPRM_Shortcode_Helper::get_interactivity_container_atts();
+		$interactivity_atts['interactivity_container']['dependency'] = array(
+			array(
+				'id' => 'prevent_sleep',
+				'value' => 'before',
+			),
+			array(
+				'id' => 'media_toggle',
+				'value' => 'before',
+			),
+			array(
+				'id' => 'interactivity_container',
+				'value' => '1',
+			),
+		);
+		$interactivity_atts['interactivity_container']['dependency_compare'] = 'OR';
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'before_container_header', $interactivity_atts );
+
 		self::$attributes = $atts;
 
 		parent::init();
@@ -577,7 +974,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		// Args for optional unit conversion and adjustable servings.
+		// Args for optional media toggle and prevent sleep switch.
 		$media_toggle_atts = array(
 			'id' => $atts['id'],
 			'toggle_style' => $atts['toggle_style'],
@@ -599,6 +996,31 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'on_text' => $atts['toggle_on_text'],
 		);
 
+		$prevent_sleep_atts = array(
+			'switch_type' => $atts['prevent_sleep_switch_type'],
+			'switch_style' => $atts['prevent_sleep_switch_style'],
+			'switch_width' => $atts['prevent_sleep_switch_width'],
+			'switch_inactive' => $atts['prevent_sleep_switch_inactive'],
+			'switch_inactive_knob' => $atts['prevent_sleep_switch_inactive_knob'],
+			'switch_active' => $atts['prevent_sleep_switch_active'],
+			'switch_active_knob' => $atts['prevent_sleep_switch_active_knob'],
+			'switch_height' => $atts['prevent_sleep_switch_height'],
+			'switch_off' => $atts['prevent_sleep_switch_off'],
+			'switch_off_knob' => $atts['prevent_sleep_switch_off_knob'],
+			'switch_off_text' => $atts['prevent_sleep_switch_off_text'],
+			'switch_on' => $atts['prevent_sleep_switch_on'],
+			'switch_on_knob' => $atts['prevent_sleep_switch_on_knob'],
+			'switch_on_text' => $atts['prevent_sleep_switch_on_text'],
+			'off_icon' => $atts['prevent_sleep_off_icon'],
+			'off_text' => $atts['prevent_sleep_off_text'],
+			'on_icon' => $atts['prevent_sleep_on_icon'],
+			'on_text' => $atts['prevent_sleep_on_text'],
+			'label' => $atts['prevent_sleep_label'],
+			'label_style' => $atts['prevent_sleep_label_style'],
+			'description' => $atts['prevent_sleep_description'],
+			'description_style' => $atts['prevent_sleep_description_style'],
+		);
+
 		// Custom style.
 		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
 		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
@@ -606,14 +1028,32 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$output = '<div id="recipe-' . esc_attr( $recipe->id() ) . '-instructions" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '"' . $style . '>';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'instructions', array(
 			'media_toggle_atts' => $media_toggle_atts,
+			'prevent_sleep_atts' => $prevent_sleep_atts,
 		) );
 
-		if ( (bool) $atts['has_container'] ) {
-			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'instructions' );
+		$output_before = '';
+
+		if ( 'before' === $atts['prevent_sleep'] ) {
+			$output_before .= WPRM_SC_Prevent_Sleep::shortcode( $prevent_sleep_atts );
 		}
 
 		if ( 'before' === $atts['media_toggle'] ) {
-			$output .= WPRM_SC_Media_Toggle::shortcode( $media_toggle_atts );
+			$output_before .= WPRM_SC_Media_Toggle::shortcode( $media_toggle_atts );
+		}
+
+		// Output functionality before the instructions, optionally with container.
+		if ( $output_before && (bool) $atts['interactivity_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_interactivity_container( $atts, 'instructions-before' );
+		}
+
+		$output .= $output_before;
+
+		if ( $output_before && (bool) $atts['interactivity_container'] ) {
+			$output .= '</div>';
+		}
+
+		if ( (bool) $atts['has_container'] ) {
+			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'instructions' );
 		}
 
 		$list_tag = 'ol' === $atts['list_tag'] ? 'ol' : 'ul';
@@ -647,6 +1087,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			foreach ( $instruction_group['instructions'] as $index => $instruction ) {
 				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
 				$style = 'list-style-type: ' . $list_style_type . ';';
+				
+				if ( (bool) $atts['force_item_position'] ) {
+					$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
+				}
 
 				$output .= '<li id="wprm-recipe-' . esc_attr( $recipe->id() ) . '-step-' . esc_attr( $group_index ) . '-' . esc_attr( $index ) . '" class="wprm-recipe-instruction" style="' . esc_attr( $style ) . '">';
 
@@ -690,6 +1134,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 		if ( (bool) $atts['has_container'] ) {
 			$output .= '</div>';
+		}
+
+		if ( 'after' === $atts['prevent_sleep'] ) {
+			$output .= WPRM_SC_Prevent_Sleep::shortcode( $prevent_sleep_atts );
 		}
 
 		$output .= '</div>';

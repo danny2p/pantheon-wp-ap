@@ -1084,6 +1084,39 @@ class WPRM_Api_Manage_Recipes {
 						$recipe_data = false;
 						wp_trash_post( $recipe->id() );
 						break;
+					case 'add-to-list':
+						if ( is_array( $action['options'] ) && isset( $action['options']['id'] ) ) {
+							$list_id = intval( $action['options']['id'] );
+							$list = WPRM_List_Manager::get_list( $list_id );
+
+							if ( $list ) {
+								$items = $list->items();
+								$updated_list = array(
+									'items' => $items,
+								);
+
+								$updated_list['items'][] = array(
+									'type' => 'roundup',
+									'data' => array(
+										'type' => 'internal',
+										'id' => $recipe->id(),
+										'link' => '',
+										'nofollow' => '',
+										'new_tab' => '',
+										'image' => '',
+										'image_url' => '',
+										'credit' => '',
+										'name' => '',
+										'summary' => '',
+										'button' => '',
+									),
+								);
+
+								$updated_list = WPRM_List_Saver::sanitize( $updated_list );
+								WPRM_List_Saver::update_list( $list_id, $updated_list );
+							}
+						};
+						break;
 				}
 
 				if ( $recipe_data ) {

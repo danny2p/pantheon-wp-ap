@@ -8,3 +8,9 @@
         }
     }
 }
+
+.tippy-box[data-theme~="wprm-variable"] { background-color: var(--wprm-tippy-background); }
+.tippy-box[data-theme~="wprm-variable"][data-placement^="top"] > .tippy-arrow::before { border-top-color: var(--wprm-tippy-background); }
+.tippy-box[data-theme~="wprm-variable"][data-placement^="bottom"] > .tippy-arrow::before { border-bottom-color: var(--wprm-tippy-background); }
+.tippy-box[data-theme~="wprm-variable"][data-placement^="left"] > .tippy-arrow::before { border-left-color: var(--wprm-tippy-background); }
+.tippy-box[data-theme~="wprm-variable"][data-placement^="right"] > .tippy-arrow::before { border-right-color: var(--wprm-tippy-background); }

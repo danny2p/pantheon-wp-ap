@@ -127,6 +127,14 @@ class WPRM_Analytics {
 				return;
 			}
 
+			// Check if this action is excluded from being tracked.
+			$exclude_actions = WPRM_Settings::get( 'analytics_exclude_actions' );
+			$exclude_actions = preg_split( "/\r\n|\n|\r/", $exclude_actions );
+
+			if ( in_array( $type, $exclude_actions ) ) {
+				return;
+			}
+
 			// Add/sanitize meta.
 			$sanitized_meta = array();
 
@@ -149,6 +157,9 @@ class WPRM_Analytics {
 					$sanitized_meta['comment_id'] = isset( $meta['comment_id'] ) ? intval( $meta['comment_id'] ) : 'unknown';
 				case 'user-rating':
 					$sanitized_meta['rating'] = isset( $meta['rating'] ) ? intval( $meta['rating'] ) : 'unknown';
+					break;
+				case 'generate-shopping-list':
+					$sanitized_meta['collection'] = isset( $meta['collection'] ) ? sanitize_text_field( $meta['collection'] ) : 'unknown';
 					break;
 			}
 

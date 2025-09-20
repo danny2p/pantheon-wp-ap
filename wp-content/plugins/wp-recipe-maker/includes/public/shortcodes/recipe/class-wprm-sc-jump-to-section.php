@@ -25,6 +25,10 @@ class WPRM_SC_Jump_To_Section extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'container_header' => array(
+				'type' => 'header',
+				'default' => __( 'Container', 'wp-recipe-maker' ),
+			),
 			'alignment' => array(
 				'default' => 'flex-start',
 				'type' => 'dropdown',
@@ -72,6 +76,10 @@ class WPRM_SC_Jump_To_Section extends WPRM_Template_Shortcode {
 			'vertical_padding' => array(
 				'default' => '5px',
 				'type' => 'size',
+			),
+			'items_header' => array(
+				'type' => 'header',
+				'default' => __( 'Items', 'wp-recipe-maker' ),
 			),
 			'text_color' => array(
 				'default' => '#333333',
@@ -124,9 +132,10 @@ class WPRM_SC_Jump_To_Section extends WPRM_Template_Shortcode {
 			),
 			'sections_header' => array(
 				'type' => 'header',
-				'default' => __( 'Sections', 'wp-recipe-maker' ),
+				'default' => __( 'Items to Show', 'wp-recipe-maker' ),
 			),
 			'section_order' => array(
+				'name' => 'Order',
 				'default' => 'ingredients, equipment, instructions, nutrition, notes, video',
 				'type' => 'text',
 				'help' => 'Comma seperated list of fields to show. For example: ingredients, equipment, instructions, nutrition, notes, video',

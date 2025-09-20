@@ -54,6 +54,11 @@ class WPRM_Assets {
 
 		wp_register_style( 'wprm-public', WPRM_URL . 'dist/public-' . $template_mode . '.css', array(), WPRM_VERSION, 'all' );
 
+		// Register Instacart font CSS to load conditionally when integration is enabled.
+		if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
+			wp_register_style( 'wprm-instacart-font', WPRM_URL . 'dist/instacart-font.css', array(), WPRM_VERSION, 'all' );
+		}
+
 		// Only include scripts when not AMP page.
 		if ( ! function_exists( 'is_amp_endpoint' ) || ! is_amp_endpoint() ) {
 			// Always load the modern JS file. Legacy JS is basically the same thing, just different CSS.
@@ -73,6 +78,11 @@ class WPRM_Assets {
 	 */
 	public static function load() {
 		wp_enqueue_style( 'wprm-public' );
+
+		// Load Instacart font if integration is enabled.
+		if ( WPRM_Settings::get( 'integration_instacart_agree' ) ) {
+			wp_enqueue_style( 'wprm-instacart-font' );
+		}
 
 		if ( ! function_exists( 'is_amp_endpoint' ) || ! is_amp_endpoint() ) {
 			wp_enqueue_script( 'wprm-public' );

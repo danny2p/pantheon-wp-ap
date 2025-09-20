@@ -35,6 +35,13 @@ $performance = array(
 					'type' => 'toggle',
 					'default' => true,
 				),
+				array(
+					'id' => 'load_size_conditions_js',
+					'name' => __( 'Load Size Conditions JavaScript', 'wp-recipe-maker' ),
+					'description' => __( 'Lightweight JS loaded in the header to apply the correct size condition classes. Disabling can break the recipe template layout.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
 			),
 		),
 		array(

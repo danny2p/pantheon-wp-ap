@@ -45,7 +45,7 @@ export default {
                 Header: __wprm( 'Action' ),
                 id: 'type',
                 accessor: 'type',
-                width: 150,
+                width: 175,
                 sortable: false,
                 Filter: (props) => (<TextFilter {...props}/>),
             },{

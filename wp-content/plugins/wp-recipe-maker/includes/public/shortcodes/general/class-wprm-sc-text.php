@@ -22,6 +22,14 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 
 	public static function init() {
 		$atts = array(
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'text_header' => array(
+				'type' => 'header',
+				'default' => __( 'Text', 'wp-recipe-maker' ),
+			),
 			'text' => array(
 				'default' => '',
 				'type' => 'text',
@@ -64,7 +72,7 @@ class WPRM_SC_Text extends WPRM_Template_Shortcode {
 			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		self::$attributes = $atts;
 
 		parent::init();

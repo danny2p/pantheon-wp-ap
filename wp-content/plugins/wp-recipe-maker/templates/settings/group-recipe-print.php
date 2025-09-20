@@ -155,6 +155,17 @@ $recipe_print = array(
 					),
 				),
 				array(
+					'id' => 'print_qr_code_toggle',
+					'name' => __( 'Add on/off Toggle for QR Code', 'wp-recipe-maker' ),
+					'description' => __( 'Allow visitors to toggle the QR code on the print page.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+					'dependency' => array(
+						'id' => 'print_qr_code',
+						'value' => true,
+					),
+				),
+				array(
 					'id' => 'print_footer_ad',
 					'name' => __( 'Print Footer Ad', 'wp-recipe-maker' ),
 					'description' => __( 'Optional ad to show in the footer of the print page. Does not get printed. Use any HTML code.', 'wp-recipe-maker' ),

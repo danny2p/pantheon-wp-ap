@@ -119,6 +119,10 @@ class WPRM_SC_Whatsapp_Share extends WPRM_Template_Shortcode {
 				'default' => '0',
 				'type' => 'toggle',
 			),
+			// Not actually shown in Template Editor. Only for internal use by share options popup shortcode.
+			'use_in_popup' => array(
+				'default' => '0',
+			),
 		);
 		parent::init();
 	}
@@ -213,6 +217,11 @@ class WPRM_SC_Whatsapp_Share extends WPRM_Template_Shortcode {
 		$aria_label = '';
 		if ( ! $text ) {
 			$aria_label = ' aria-label="' . __( 'Share with WhatsApp', 'wp-recipe-maker' ) . '"';
+		}
+
+		// Return for use in popup shortcode.
+		if ( (bool) $atts['use_in_popup'] ) {
+			return '<a href="' . esc_attr( $whatsapp_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-whatsapp-share" target="_blank" rel="nofollow"' . $aria_label . '>%wprm_share_placeholder%</a>';
 		}
 
 		$output = '<a href="' . esc_attr( $whatsapp_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" style="' . esc_attr( $style ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '" target="_blank" rel="nofollow"' . $aria_label . '>' . $icon . WPRM_Shortcode_Helper::sanitize_html( $text ) . '</a>';

@@ -330,7 +330,7 @@ class WPRM_Import_Cookbook extends WPRM_Import {
 				// Update the parent post content.
 				$update_content = array(
 					'ID' => $parent_post_id,
-					'post_content' => $content,
+					'post_content' => wp_slash( $content ),
 				);
 				wp_update_post( $update_content );
 

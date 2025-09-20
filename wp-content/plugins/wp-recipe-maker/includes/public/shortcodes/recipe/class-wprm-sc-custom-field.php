@@ -25,6 +25,14 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'custom_field_header' => array(
+				'type' => 'header',
+				'default' => __( 'Custom Field', 'wp-recipe-maker' ),
+			),
 			'key' => array(
 				'default' => '',
 				'type' => 'dropdown',
@@ -196,7 +204,7 @@ class WPRM_SC_Custom_Field extends WPRM_Template_Shortcode {
 			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = array_merge( $atts, WPRM_Shortcode_Helper::get_label_container_atts() );
 		self::$attributes = $atts;
 

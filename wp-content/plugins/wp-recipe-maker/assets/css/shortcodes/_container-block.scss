@@ -1,11 +1,65 @@
-.wprm-recipe-block-container-inline {
-    display: inline-block;
-    margin-right: 1.2em;
+.wprm-meta-container-custom-color {
+	--wprm-meta-container-block-color: inherit;
+	--wprm-meta-container-label-color: inherit;
+	--wprm-meta-container-link-color: inherit;
+	
+	.wprm-recipe-block-container {
+		color: var(--wprm-meta-container-block-color);
+		.wprm-recipe-details-label {
+			color: var(--wprm-meta-container-label-color);
+		}
+		* a, a {
+			color: var(--wprm-meta-container-link-color);
+		}
+	}
 }
 
-.rtl .wprm-recipe-block-container-inline {
-    margin-right: 0;
-    margin-left: 1.2em;
+.wprm-recipe-details-container-inline {
+	--wprm-meta-container-separator-color: #aaaaaa;
+
+	.wprm-recipe-block-container-inline {
+		display: inline-block;
+		margin-right: 1.2em;
+	}
+	&.wprm-inline-separator {
+		.wprm-recipe-block-container-inline {
+			margin-right: 0;
+		}
+		.wprm-recipe-block-container-inline:not(:last-child)::after {
+			white-space: nowrap;
+			color: var(--wprm-meta-container-separator-color);
+		}
+	}
+	&.wprm-inline-separator-dot .wprm-recipe-block-container-inline:not(:last-child)::after { content: "\00a0\00a0•\00a0\00a0"; }
+	&.wprm-inline-separator-short-dash .wprm-recipe-block-container-inline:not(:last-child)::after { content: "\00a0\00a0-\00a0\00a0"; }
+	&.wprm-inline-separator-long-dash .wprm-recipe-block-container-inline:not(:last-child)::after { content: "\00a0\00a0—\00a0\00a0"; }
+
+	&.wprm-inline-separator-short-line .wprm-recipe-block-container-inline:not(:last-child)::after,
+	&.wprm-inline-separator-long-line .wprm-recipe-block-container-inline:not(:last-child)::after {
+		content: "";
+		display: inline-block;
+		vertical-align: middle;
+		width: 1px;
+		height: 1em;
+		margin: 0 0.8em;
+		background-color: var(--wprm-meta-container-separator-color);
+	}
+	&.wprm-inline-separator-long-line .wprm-recipe-block-container-inline:not(:last-child)::after {
+		height: 1.3em;
+	}
+}
+.rtl .wprm-recipe-details-container-inline {
+	.wprm-recipe-block-container-inline {
+		margin-right: 0;
+		margin-left: 1.2em;
+	}
+	&.wprm-inline-separator {
+		overflow: hidden;
+
+		.wprm-recipe-block-container-inline {
+			margin-left: 0;
+		}
+	}
 }
 
 .wprm-recipe-block-container-separate {
@@ -102,7 +156,12 @@
 		border-top: none !important;
 		border-bottom: none !important;
 	}
-
+	&.wprm-recipe-table-borders-inside-only {
+		border-left: none !important;
+		border-right: none !important;
+		border-top: none !important;
+		border-bottom: none !important;
+	}
 }
 
 @media all and (min-width: 451px) {
@@ -217,6 +276,14 @@
 				border-top: none !important;
 				border-bottom: none !important;
 				border-left: none !important;
+			}
+		}
+		&.wprm-recipe-table-borders-inside-only {
+			.wprm-recipe-block-container-table {
+				border-top: none !important;
+				border-bottom: none !important;
+				border-left: none !important;
+				border-right: none !important;
 			}
 		}
 	}

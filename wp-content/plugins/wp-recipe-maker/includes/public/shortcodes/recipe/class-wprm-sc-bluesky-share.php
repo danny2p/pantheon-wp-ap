@@ -115,6 +115,10 @@ class WPRM_SC_Bluesky_Share extends WPRM_Template_Shortcode {
 				'default' => __( 'Check out this recipe!', 'wp-recipe-maker' ),
 				'type' => 'text',
 			),
+			// Not actually shown in Template Editor. Only for internal use by share options popup shortcode.
+			'use_in_popup' => array(
+				'default' => '0',
+			),
 		);
 		parent::init();
 	}
@@ -185,6 +189,11 @@ class WPRM_SC_Bluesky_Share extends WPRM_Template_Shortcode {
 		$aria_label = '';
 		if ( ! $text ) {
 			$aria_label = ' aria-label="' . __( 'Share on Bluesky', 'wp-recipe-maker' ) . '"';
+		}
+
+		// Return for use in popup shortcode.
+		if ( (bool) $atts['use_in_popup'] ) {
+			return '<a href="' . esc_attr( $share_url ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '" class="wprm-recipe-bluesky-share" target="_blank" rel="nofollow noopener"' . $aria_label . '>%wprm_share_placeholder%</a>';
 		}
 
 		$style = WPRM_Shortcode_Helper::get_inline_style( $css );

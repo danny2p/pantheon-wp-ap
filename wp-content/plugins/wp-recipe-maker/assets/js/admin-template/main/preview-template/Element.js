@@ -80,7 +80,6 @@ const Element = (props) => {
             inlineStyle[ '--' + props.shortcode.id + '-' + parts[0] ] = parts[1];
         } ';';
     }
-    console.log( 'Style to add', inlineStyle );
 
     return (
         <Fragment>
@@ -103,8 +102,6 @@ const Element = (props) => {
                                         onPropertyChange={(propertyId, value) => {
                                             const newProperties = { ...properties };
                                             newProperties[propertyId].value = value;
-
-                                            console.log( 'newValue', value );
 
                                             if ( property.hasOwnProperty( 'valueToClasses' ) ) {
                                                 const newClasses = getClasses( newProperties );

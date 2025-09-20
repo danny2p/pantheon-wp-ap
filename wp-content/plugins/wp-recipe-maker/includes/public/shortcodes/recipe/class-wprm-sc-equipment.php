@@ -25,6 +25,14 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 			'id' => array(
 				'default' => '0',
 			),
+			'section_header' => array(
+				'type' => 'header',
+				'default' => __( 'Header', 'wp-recipe-maker' ),
+			),
+			'appearance_header' => array(
+				'type' => 'header',
+				'default' => __( 'Appearance', 'wp-recipe-maker' ),
+			),
 			'display_style' => array(
 				'default' => 'list',
 				'type' => 'dropdown',
@@ -32,55 +40,6 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'list' => 'List',
 					'images' => 'Images',
 					'grid' => 'Grid',
-				),
-			),
-			'list_style' => array(
-				'default' => 'disc',
-				'type' => 'dropdown',
-				'options' => 'list_style_types',
-				'dependency' => array(
-					'id' => 'display_style',
-					'value' => 'list',
-				),
-			),
-			'list_style_continue_numbers' => array(
-				'default' => '0',
-				'type' => 'toggle',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_background' => array(
-				'default' => '#444444',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_size' => array(
-				'default' => '18px',
-				'type' => 'size',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text' => array(
-				'default' => '#ffffff',
-				'type' => 'color',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
-				),
-			),
-			'list_style_text_size' => array(
-				'default' => '12px',
-				'type' => 'size',
-				'dependency' => array(
-					'id' => 'list_style',
-					'value' => 'advanced',
 				),
 			),
 			'bottom_border' => array(
@@ -162,6 +121,54 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'value' => 'grid',
 				),
 			),
+			'list_header' => array(
+				'type' => 'header',
+				'default' => __( 'List', 'wp-recipe-maker' ),
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'list',
+				),
+			),
+			'force_item_position' => array(
+				'default' => '0',
+				'type' => 'toggle',
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'list',
+				),
+			),
+			'list_item_position' => array(
+				'default' => '32px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'display_style',
+						'value' => 'list',
+					),
+					array(
+						'id' => 'force_item_position',
+						'value' => '1',
+					),
+				),
+			),
+			'list_style' => array(
+				'default' => 'disc',
+				'type' => 'dropdown',
+				'options' => 'list_style_types',
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'list',
+				),
+			),
+			'image_header' => array(
+				'type' => 'header',
+				'default' => __( 'Images', 'wp-recipe-maker' ),
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'list',
+					'type' => 'inverse',
+				),
+			),
 			'image_size' => array(
 				'default' => '100x100',
 				'type' => 'image_size',
@@ -174,6 +181,11 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 			'image_border_radius' => array(
 				'default' => '0px',
 				'type' => 'size',
+				'dependency' => array(
+					'id' => 'display_style',
+					'value' => 'list',
+					'type' => 'inverse',
+				),
 			),
 			'image_alignment' => array(
 				'default' => 'left',
@@ -189,7 +201,17 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'value' => 'images',
 				),
 			),
+			'text_header' => array(
+				'type' => 'header',
+				'default' => __( 'Text', 'wp-recipe-maker' ),
+			),
+			'text_style' => array(
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+			),
 			'equipment_notes_separator' => array(
+				'name' => 'Notes Separator',
 				'default' => 'none',
 				'type' => 'dropdown',
 				'options' => array(
@@ -215,9 +237,32 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 			),
 		);
 
-		$atts = array_merge( WPRM_Shortcode_Helper::get_section_atts(), $atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'section_header', WPRM_Shortcode_Helper::get_section_atts() );
 		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'container_header', WPRM_Shortcode_Helper::get_internal_container_atts() );
-		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', WPRM_Shortcode_Helper::get_checkbox_atts() );
+
+		// Extra dependencies for list style atts.
+		$checkbox_atts = WPRM_Shortcode_Helper::get_checkbox_atts();
+		$advanced_list_atts = WPRM_Shortcode_Helper::get_advanced_list_atts();
+
+		foreach ( $checkbox_atts as $key => $value ) {
+			$checkbox_atts[ $key ]['dependency'] = array(
+				$value['dependency'],
+				array(
+				'id' => 'display_style',
+				'value' => 'list',
+			));
+		}
+		foreach ( $advanced_list_atts as $key => $value ) {
+			$advanced_list_atts[ $key ]['dependency'] = array(
+				$value['dependency'],
+				array(
+				'id' => 'display_style',
+				'value' => 'list',
+			));
+		}
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', $checkbox_atts );
+		$atts = WPRM_Shortcode_Helper::insert_atts_after_key( $atts, 'list_style', $advanced_list_atts );
+
 		self::$attributes = $atts;
 
 		parent::init();
@@ -271,6 +316,10 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 						$style .= 'padding-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
 						$style .= 'margin-bottom: ' . esc_attr( $atts['bottom_border_gap'] ) . ';';
 					}
+				}
+
+				if ( (bool) $atts['force_item_position'] ) {
+					$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
 				}
 
 				$output .= '<li class="wprm-recipe-equipment-item" style="' . esc_attr( $style ) . '">';

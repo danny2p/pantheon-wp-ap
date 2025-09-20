@@ -22,14 +22,30 @@ class WPRM_SC_Prevent_Sleep extends WPRM_Template_Shortcode {
 
 	public static function init() {
 		$atts = array(
+			'text_header' => array(
+				'type' => 'header',
+				'default' => __( 'Text', 'wp-recipe-maker' ),
+				'dependency' => array(
+					'id' => 'switch_type',
+					'value' => 'outside',
+				),
+			),
 			'label' => array(
 				'default' => 'Cook Mode',
 				'type' => 'text',
+				'dependency' => array(
+					'id' => 'switch_type',
+					'value' => 'outside',
+				),
 			),
 			'label_style' => array(
 				'default' => 'bold',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'switch_type',
+					'value' => 'outside',
+				),
 			),
 			'description' => array(
 				'default' => 'Prevent your screen from going dark',
@@ -39,6 +55,11 @@ class WPRM_SC_Prevent_Sleep extends WPRM_Template_Shortcode {
 				'default' => 'normal',
 				'type' => 'dropdown',
 				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'description',
+					'value' => '',
+					'type' => 'inverse',
+				),
 			),
 		);
 

@@ -139,12 +139,16 @@ class WPRM_SC_Image extends WPRM_Template_Shortcode {
 			$url = $recipe->permalink();
 
 			$target = $recipe->parent_url_new_tab() ? ' target="_blank"' : '';
-			$nofollow = $recipe->parent_url_nofollow() ? ' rel="nofollow"' : '';
+			
+			$rel = '';
+			if ( $recipe->parent_url_nofollow() ) { $rel .= ' nofollow'; }
+			if ( $recipe->parent_url_noopener() ) { $rel .= ' noopener'; }
+			$rel = $rel ? ' rel="' . trim( $rel ) . '"' : '';
 
 			if ( false !== stripos( $img, ' href="' ) ) {
-				$img = preg_replace( '/\shref=\"[^\"]*"/', ' href="' . esc_url( $url ) . '"' . $target . $nofollow, $img );
+				$img = preg_replace( '/\shref=\"[^\"]*"/', ' href="' . esc_url( $url ) . '"' . $target . $rel, $img );
 			} else {
-				$img = '<a href="' . esc_url( $url ) . '"' . $target . $nofollow . '>' . $img . '</a>';
+				$img = '<a href="' . esc_url( $url ) . '"' . $target . $rel . '>' . $img . '</a>';
 			}
 		}
 
