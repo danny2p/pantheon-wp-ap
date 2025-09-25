@@ -65,6 +65,19 @@
 					</p>
 				</td>
 			</tr>
+			<?php if ( 'private' === WPRM_Settings::get( 'post_type_structure' ) && WPRM_Compatibility::multilingual() ) : ?>
+			<tr>
+				<th scope="row">
+					<?php esc_html_e( 'Sync Recipe Language', 'wp-recipe-maker' ); ?>
+				</th>
+				<td>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_sync_recipe_language' ) ); ?>" class="button" id="tools_sync_recipe_language"><?php esc_html_e( 'Sync Recipe Language', 'wp-recipe-maker' ); ?></a>
+					<p class="description" id="tagline-tools_sync_recipe_language">
+						<?php esc_html_e( 'Sync the recipe language to match the parent post language for all recipes on your website.', 'wp-recipe-maker' ); ?>
+					</p>
+				</td>
+			</tr>
+			<?php endif; ?>
 			<tr>
 				<th scope="row">
 					<?php esc_html_e( 'Find Ingredient Units', 'wp-recipe-maker' ); ?>
