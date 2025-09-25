@@ -557,6 +557,14 @@ class WPRM_Recipe_Sanitizer {
 	 * @param	mixed $text Text to sanitize.
 	 */
 	public static function sanitize_html( $text ) {
+		if ( is_array( $text ) || is_object( $text ) ) {
+			return '';
+		}
+
+		if ( ! is_string( $text ) ) {
+			$text = (string) $text;
+		}
+		
 		$allowed_tags = wp_kses_allowed_html( 'post' );
 		$allowed_tags['wprm-code'] = true;
 		$allowed_tags['wprm-temperature'] = true;

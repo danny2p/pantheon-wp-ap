@@ -14,6 +14,15 @@
 	}
 }
 
+.wprm-recipe-block-container-inline {
+	display: inline-block;
+	margin-right: 1.2em;
+}
+.rtl .wprm-recipe-block-container-inline {
+	margin-right: 0;
+	margin-left: 1.2em;
+}
+
 .wprm-recipe-details-container-inline {
 	--wprm-meta-container-separator-color: #aaaaaa;
 

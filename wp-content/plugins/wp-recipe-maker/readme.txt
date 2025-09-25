@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.8
 Requires PHP: 5.4
-Stable tag: 10.1.0
+Stable tag: 10.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,12 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.1.1 =
+* Feature: Sync Recipe Language tool for multilingual plugins
+* Fix: Make sure correct recipe language is shown on manage page
+* Fix: Inline container blocks styling
+* Fix: Prevent PHP error when sanitizing HTML if incorrect type is passed
+
 = 10.1.0 =
 * Feature: Bulk add recipes to roundup lists
 * Feature: Collapsible icon in section headers
@@ -423,6 +429,9 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.1.1 =
+Some improvements and fixes
+
 = 10.1.0 =
 Some great new features and improvements
 

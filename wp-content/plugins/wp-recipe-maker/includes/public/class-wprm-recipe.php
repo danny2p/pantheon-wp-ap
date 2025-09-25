@@ -781,15 +781,7 @@ class WPRM_Recipe {
 	 * @since    7.7.0
 	 */
 	public function language() {
-		$language = false;
-
-		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
-			$language = WPRM_Compatibility::get_language_for( $this->id() );
-		} else {
-			$language = self::parent_post_language();
-		}
-
-		return $language;
+		return WPRM_Compatibility::get_language_for( $this->id() );
 	}
 
 	/**

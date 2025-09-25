@@ -609,6 +609,11 @@ class WPRM_Compatibility {
 						'language_code' => $language ? $language : null,
 					) );
 				}
+
+				// Polylang.
+				if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_set_post_language' ) ) {
+					pll_set_post_language( $recipe_id, $language );
+				}
 			}
 		}
 	}

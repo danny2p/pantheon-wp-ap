@@ -175,6 +175,14 @@ class WPRM_Shortcode_Helper {
 	 * @since	8.6.0
 	 */
 	public static function sanitize_html( $text ) {
+		if ( is_array( $text ) || is_object( $text ) ) {
+			return '';
+		}
+
+		if ( ! is_string( $text ) ) {
+			$text = (string) $text;
+		}
+
 		if ( $text ) {
 			$text = str_replace( '&quot;', '"', $text );
 			$text = wp_kses_post( $text );
