@@ -76,7 +76,11 @@ if ( ! defined( 'WP_DEBUG' ) ) {
 /* That's all, stop editing! Happy Pressing. */
 
 
-
+	// Include for ddev-managed settings in wp-config-ddev.php.
+	$ddev_settings = dirname(__FILE__) . '/wp-config-ddev.php';
+	if (is_readable($ddev_settings) && !defined('DB_USER')) {
+		require_once($ddev_settings);
+	}
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
