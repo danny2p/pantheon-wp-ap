@@ -1,17 +1,6 @@
-/*! elementor - v3.29.0 - 04-06-2025 */
+/*! elementor - v3.32.0 - 05-10-2025 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "@wordpress/i18n":
-/*!**************************!*\
-  !*** external "wp.i18n" ***!
-  \**************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = wp.i18n;
-
-/***/ }),
 
 /***/ "../node_modules/@babel/runtime/helpers/classCallCheck.js":
 /*!****************************************************************!*\
@@ -135,6 +124,17 @@ function _typeof(o) {
   }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
 }
 module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!**************************!*\
+  !*** external "wp.i18n" ***!
+  \**************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = wp.i18n;
 
 /***/ })
 
@@ -267,7 +267,7 @@ var Admin = /*#__PURE__*/function () {
       elementorCommon.dialogsManager.createWidget('confirm', {
         headerMessage: __('Are you sure?', 'elementor'),
         // Translators: %s is the name of the active Kit
-        message: __('Removing %s will permanently delete changes made to the Kit\'s content and site settings', 'elementor').replace('%s', this.activeKitName),
+        message: __('Removing %s will permanently delete changes made to the Websites Template\'s content and site settings', 'elementor').replace('%s', this.activeKitName),
         strings: {
           confirm: __('Delete', 'elementor'),
           cancel: __('Cancel', 'elementor')
@@ -294,10 +294,10 @@ var Admin = /*#__PURE__*/function () {
       }
       if (0 === referrerKitId.length) {
         this.createKitDeletedWidget({
-          message: __('Try a different Kit or build your site from scratch.', 'elementor'),
+          message: __('Try a different Website Template or build your site from scratch.', 'elementor'),
           strings: {
             confirm: __('OK', 'elementor'),
-            cancel: __('Kit Library', 'elementor')
+            cancel: __('Library', 'elementor')
           },
           onCancel: function onCancel() {
             location.href = elementorImportExport.appUrl;

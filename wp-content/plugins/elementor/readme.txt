@@ -1,11 +1,11 @@
 === Elementor Website Builder - More Than Just a Page Builder ===
 Contributors: elemntor
 Tags: page builder, editor, landing page, drag-and-drop, elementor,
-Requires at least: 6.5
-Tested up to: 6.7
+Requires at least: 6.6
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 3.29.2
-Beta tag: 3.29.0-beta4
+Stable tag: 3.32.4
+Beta tag: 3.32.0-beta3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -349,52 +349,50 @@ You can also add a new language via [translate.wordpress.org](https://go.element
 
 == Changelog ==
 
-= 3.29.2 - 2025-06-04 =
+= 3.32.4 - 2025-10-05 =
+* Tweak: Added notice for Load Google Fonts Locally feature to clarify behavior and setup
 
-* Fix: Missing responsive resize handles in responsive mode preventing manual preview adjustments
-* Fix: Style sections expanded by default instead of remaining collapsed - Editor V4
-* Fix: Publish button not triggered when applying a class - Editor V4
+= 3.32.3 - 2025-09-29 =
 
-= 3.29.1 - 2025-05-28 =
+* Fix: Custom post types are imported even when unselected in Website Templates import
+* Fix: Taxonomy queries not connected properly to widgets in Website Templates import
 
-* Tweak: Disabled the ability to use elements caching shortcode via the interface
-* Security Fix: Improved code security enforcement in Shortcode widget
-* Fix: Information modals are not showing as expected in the Editor - Editor V4
-* Fix: Error on the frontend when background overlay is set to hidden - Editor V4
-* Fix: Editor load issue when a widget does not register the "Advanced" tab
+= 3.32.2 - 2025-09-18 =
 
-= 3.29.0 - 2025-05-19 =
+* Tweak: Improved compatibility for 3rd-party plugins serving templates
+* Fix: Structure Panel indicators not visible in RTL layouts
+* Fix: Issues with loading Google Fonts when enabling or disabling Load Google Fonts Locally option ([#32795](https://github.com/elementor/elementor/issues/32795))
+* Fix: Background videos not displaying correctly on RTL websites
 
-* New: Introduced the first Alpha release of the next-generation Editor - a faster, modular, CSS-based infrastructure available as an opt-in experience - Editor V4
-* New: Combine familiar and new Editor elements for a seamless editing experience - Editor V4
-* New: Introduced cleaner code and fewer div wrappers for faster performance and a lighter editing experience - Editor V4
-* New: Gain full responsive control - adjust every style property individually for each device, without limitations - Editor V4
-* New: Introduced Classes - a reusable styling system that brings consistency, modularity, and CSS-based workflows to your designs - Editor V4
-* New: Introduced Class Manager - centrally manage, rename, reorder, and delete Classes across your site - Editor V4
-* New: Introduced States - define hover, focus, and active styles for Classes to create dynamic, interactive designs - Editor V4
-* New: Introduced Local Class - a fixed, non-removable class with highest styling priority, ensuring unique styling for each element - Editor V4
-* New: Introduced Class Indicators - color-coded visual cues that show where styles originate, inherit, or conflict - Editor V4
-* New: Introduced a unified Style Tab - a consistent, CSS-based styling system shared across all elements, streamlining design workflows - Editor V4
-* New: Introduced Style Repeaters - create and manage multiple background and box shadow layers with full control over their order and visibility - Editor V4
-* New: Introduced Actions Floating Bar - a cleaner, context-aware toolbar that appears on hover, starting with Dynamic Tags support - Editor V4
-* New: Introduced Link Control - add and customize links across elements with clean HTML, while preventing nested links - Editor V4
-* New: Introduced Logical Properties - styling adapts automatically to different writing directions for global language support - Editor V4
-* New: Added DIV Block element - a container element for structuring layouts with customizable display options - Editor V4
-* New: Added Flexbox element - a layout element for precise alignment and distribution - Editor V4
-* New: Added Heading element - a standalone heading element with flexible styling - Editor V4
-* New: Added Paragraph element - a simple, dedicated text element for paragraphs - Editor V4
-* New: Added Image element - a modular image element with clean markup and consistent styling - Editor V4
-* New: Added Button element - a customizable button element for modular design - Editor V4
-* New: Added SVG element - a lightweight element for adding scalable vector graphics - Editor V4
-* Tweak: Added `AVIF` image format support to Lightbox ([#28256](https://github.com/elementor/elementor/issues/28256), [#25175](https://github.com/elementor/elementor/issues/25175), [#28169](https://github.com/elementor/elementor/issues/28169), [#29624](https://github.com/elementor/elementor/issues/29624))
-* Tweak: Renamed "My Templates" to "Templates" in the Templates Library
-* Tweak: Marked local templates as "Site Templates" to distinguish them from Cloud Templates
-* Tweak: Excluded Shape Dividers from the accessibility tree
-* Tweak: Improved accessibility with `role` attributes in the Social Icons widget
-* Tweak: Added Display Title control to the Progress Bar widget to enhance accessibility
-* Fix: Strings are not translating properly in the Global Style Guide ([#23237](https://github.com/elementor/elementor/issues/23237))
-* Fix: Mask shape URLs use double slashes instead of single slashes ([#17534](https://github.com/elementor/elementor/issues/17534))
-* Fix: Common scripts are loaded late when using the Theme Builder
-* Fix: 'New Prompt' Button does not work in Generate Code AI feature
+= 3.32.1 - 2025-09-16 =
+
+* Tweak: Disabled Load Google Fonts locally on all sites by default
+* Tweak: Moved the Load Google Fonts locally option to the Performance tab as a feature
+* Fix: Column editing handles appear outside the editing overlay
+* Fix: Full width containers not aligned to the center
+* Fix: Editor stuck on loading when using an Image Box widget with a link ([#32756](https://github.com/elementor/elementor/issues/32756))
+
+= 3.32.0 - 2025-09-15 =
+
+* New: Introducing Transform controls to move, scale, rotate, and skew elements with 2D and 3D support - Editor V4
+* New: Introducing Transitions to control how elements animate between states - Editor V4
+* New: Added filter and sort options in Class Manager - Editor V4
+* New: Introducing advanced import and export customization for Website Templates, with selective import of themes, experiments, custom assets, and content
+* Tweak: Added option to convert local styles into a reusable Global Class - Editor V4
+* Tweak: Variables now update live on the canvas while editing a variable - Editor V4
+* Tweak: Updated custom unit UI and improved functionality - Editor V4
+* Tweak: Enabled typing negative values in style fields - Editor V4
+* Tweak: Added Bottom position option on layout setting in Icon Box widget
+* Tweak: Reduced API-Info size for better performance
+* Tweak: Added option for connected users to install Elementor Pro via the Connect Account tab
+* Tweak: Enabled ZIP download of Website Templates from the library
+* Tweak: Merged Cloud Library feature into version
+* Tweak: Optimized compiled CSS output for background videos
+* Tweak: Merged Element Caching feature and moved to Performance tab
+* Fix: Reaching the Global Class limit prevented page saving - Editor V4 ([#32277](https://github.com/elementor/elementor/issues/32277))
+* Fix: PHP 8.4 deprecation notices when running with `WP_DEBUG` enabled
+* Fix: Indications popover not displaying correctly in repeaters for Background Overlay - Editor V4
+* Fix: Reduced-motion preferences are not applied to entrance and exit animations
+* Fix: Added required PHP and WordPress versions to the plugin header
 
 [See changelog for all versions.](https://go.elementor.com/full-changelog/)
