@@ -1,19 +1,29 @@
 __( 'class', 'elementor' );
 __( 'classes', 'elementor' );
-__( 'More actions', 'elementor' );
-__( 'Rename', 'elementor' );
-__( 'Delete', 'elementor' );
+__( 'Convert to global class', 'elementor' );
+__( 'Sorry, nothing matched.', 'elementor' );
+__( 'Try something else.', 'elementor' );
+__( 'Sorry, nothing matched', 'elementor' );
+__( 'Clear your input and try something else.', 'elementor' );
+__( 'Sorry, nothing matched that search.', 'elementor' );
+__( 'Clear the filters and try something else.', 'elementor' );
+__( 'Clear & try again', 'elementor' );
 __( 'There are no global classes yet.', 'elementor' );
 __(
 				'CSS classes created in the editor panel will appear here. Once they are available, you can arrange their hierarchy, rename them, or delete them as needed.',
 				'elementor'
 			);
+// translators: %1: total usage count, %2: number of pages
+__(
+					'Will permanently remove it from your project and may affect the design across all elements using it. Used %1 times across %2 pages. This action cannot be undone.',
+					'elementor'
+			  );
+__(
+					'Will permanently remove it from your project and may affect the design across all elements using it. This action cannot be undone.',
+					'elementor'
+			  );
 __( 'Delete this class?', 'elementor' );
 __( 'Deleting', 'elementor' );
-__(
-						'will permanently remove it from your project and may affect the design across all elements using it. This action cannot be undone.',
-						'elementor'
-					);
 __( 'Not now', 'elementor' );
 __( 'Delete', 'elementor' );
 __( 'Class Manager', 'elementor' );
@@ -21,7 +31,7 @@ __( 'Save changes', 'elementor' );
 __( 'You have unsaved changes', 'elementor' );
 __( 'You have unsaved changes in the Class Manager.', 'elementor' );
 __( 'To avoid losing your updates, save your changes before leaving.', 'elementor' );
-__( 'Cancel', 'elementor' );
+__( 'Discard', 'elementor' );
 __( 'Save & Continue', 'elementor' );
 __( 'Something went wrong', 'elementor' );
 __( 'Class Manager', 'elementor' );
@@ -41,3 +51,24 @@ __(
 							);
 __( 'Stay here', 'elementor' );
 __( 'Save & Continue', 'elementor' );
+__( 'More actions', 'elementor' );
+__( 'Rename', 'elementor' );
+__( 'Delete', 'elementor' );
+__( 'Show {{number}} {{locations}}', 'elementor' );
+__( 'location', 'elementor' );
+__( 'locations', 'elementor' );
+__( 'This class isn’t being used yet.', 'elementor' );
+__( 'Post', 'elementor' );
+__( 'Page', 'elementor' );
+__( 'Popup', 'elementor' );
+__( 'Header', 'elementor' );
+__( 'Footer', 'elementor' );
+__( 'Locator', 'elementor' );
+__( 'Search', 'elementor' );
+__( 'Unused', 'elementor' );
+__( 'Empty', 'elementor' );
+__( 'On this page', 'elementor' );
+__( 'Filters', 'elementor' );
+__( 'Clear all', 'elementor' );
+__( 'Filters', 'elementor' );
+__( 'Clear Filters', 'elementor' );

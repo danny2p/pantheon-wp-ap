@@ -1,3 +1,12 @@
+:root {
+  --direction-multiplier: 1;
+}
+
+html[dir=rtl],
+body.rtl {
+  --direction-multiplier: -1;
+}
+
 .elementor-hidden {
   display: none;
 }
@@ -88,20 +97,16 @@
 .elementor .elementor-background-video-container.elementor-loading {
   opacity: 0;
 }
+.elementor .elementor-background-video,
 .elementor .elementor-background-video-embed {
   max-width: none;
 }
-.elementor .elementor-background-video-embed, .elementor .elementor-background-video-hosted {
+.elementor .elementor-background-video,
+.elementor .elementor-background-video-embed,
+.elementor .elementor-background-video-hosted {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.elementor .elementor-background-video {
-  max-width: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
 }
 .elementor .elementor-background-video-hosted {
@@ -182,27 +187,11 @@
   visibility: hidden;
 }
 
-.elementor-align-center {
-  text-align: center;
-}
-.elementor-align-right {
-  text-align: right;
-}
-.elementor-align-left {
-  text-align: left;
-}
-.elementor-align-center .elementor-button, .elementor-align-right .elementor-button, .elementor-align-left .elementor-button {
-  width: auto;
-}
-.elementor-align-justify .elementor-button {
-  width: 100%;
-}
-
 .elementor-custom-embed-play {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(calc(-50% * var(--direction-multiplier)), -50%);
 }
 .elementor-custom-embed-play i {
   font-size: 100px;
@@ -251,6 +240,22 @@
 }
 .elementor-ken-burns--active.elementor-ken-burns--in {
   transform: scale(1.3);
+}
+
+.elementor-align-center {
+  text-align: center;
+}
+.elementor-align-right {
+  text-align: right;
+}
+.elementor-align-left {
+  text-align: left;
+}
+.elementor-align-center .elementor-button, .elementor-align-right .elementor-button, .elementor-align-left .elementor-button {
+  width: auto;
+}
+.elementor-align-justify .elementor-button {
+  width: 100%;
 }
 
 @media (min-width: ELEMENTOR_SCREEN_WIDESCREEN_MIN) {
@@ -1475,7 +1480,7 @@
   padding-inline-start: var(--padding-inline-start);
   padding-inline-end: var(--padding-inline-end);
 }
-.e-con:not(.e-div-block-base) {
+.e-con:where(:not(.e-div-block-base)) {
   transition: background var(--background-transition, 0.3s), border var(--border-transition, 0.3s), box-shadow var(--border-transition, 0.3s), transform var(--e-con-transform-transition-duration, 0.4s);
 }
 .e-con {
@@ -1735,9 +1740,9 @@ body.rtl .e-con {
   font-family: "eicons";
   font-size: 15px;
   position: absolute;
-  top: 50%;
+  inset-block-start: 50%;
+  inset-inline-end: 10px;
   transform: translateY(-50%);
-  left: 10px;
   pointer-events: none;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
@@ -1966,7 +1971,7 @@ body.rtl .e-con {
   min-height: 72px;
 }
 
-.elementor-element:not(.e-div-block-base) .elementor-widget-container, .elementor-element:not(.e-div-block-base):not(:has(.elementor-widget-container)) {
+.elementor-element:where(:not(.e-con)):where(:not(.e-div-block-base)) .elementor-widget-container, .elementor-element:where(:not(.e-con)):where(:not(.e-div-block-base)):not(:has(.elementor-widget-container)) {
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s, transform var(--e-transform-transition-duration, 400ms);
 }
 
@@ -2140,7 +2145,7 @@ body.rtl .e-con {
 
 @media (prefers-reduced-motion: reduce) {
   .animated {
-    animation: none;
+    animation: none !important;
   }
 }
 @media (max-width: ELEMENTOR_SCREEN_MOBILE_MAX) {
