@@ -1,27 +1,14 @@
 <?php
 class WMUFS_File_Chunk{
 
-
-    private static $instance = null;
-
-
     protected $max_upload_size;
-
-    /**
-     * Make instance of the admin class.
-     */
-    public static function get_instance() {
-        if ( ! self::$instance)
-            self::$instance = new self();
-        return self::$instance;
-    }
-
 
     /**
      * Load all action and filters.
      * @return void
      */
-    public function init(){
+    public function init()
+    {
         $this->max_upload_size = wp_max_upload_size();
         add_action( 'wp_ajax_wmufs_chunker', array( $this, 'wmufs_ajax_chunk_receiver' ) );
         add_filter( 'plupload_init', array( $this, 'wmufs_filter_plupload_settings' ) );
@@ -34,7 +21,8 @@ class WMUFS_File_Chunk{
      * @param $plupload_params
      * @return mixed
      */
-    public function wmufs_filter_plupload_params( $plupload_params ) {
+    public function wmufs_filter_plupload_params( $plupload_params )
+    {
 
         $plupload_params['action'] = 'wmufs_chunker';
 
@@ -59,13 +47,13 @@ class WMUFS_File_Chunk{
 
         /** Check that we have an upload and there are no errors. */
         if (empty($_FILES) || $_FILES['async-upload']['error']) {
-           wp_die(esc_html__('No file uploaded, or upload error.', 'wp-maximum-upload-file-size'));
+            wp_die(esc_html__('No file uploaded, or upload error.', 'wp-maximum-upload-file-size'));
         }
 
         /** Ensure WordPress media upload nonce is valid */
         if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'media-form' ) ) {
-           wp_trigger_error( 'Invalid nonce', 403 );
-          wp_die( esc_html__( 'Invalid nonce.', 'wp-maximum-upload-file-size' ) );
+            wp_trigger_error( 'Invalid nonce', 403 );
+            wp_die( esc_html__( 'Invalid nonce.', 'wp-maximum-upload-file-size' ) );
         }
 
         /** Authenticate user. */
@@ -80,7 +68,7 @@ class WMUFS_File_Chunk{
         $chunks = isset($_REQUEST['chunks']) ? intval($_REQUEST['chunks']) : 0;
 
         /** Get file name and path + name. */
-        $fileName = $_REQUEST['name'] ?? $_FILES['async-upload']['name'];
+        $fileName = isset($_REQUEST['name']) ? $_REQUEST['name'] : $_FILES['async-upload']['name'];
 
 
         $wmufs_temp_dir = apply_filters('wmufs_temp_dir', WP_CONTENT_DIR . '/wmufs-temp');
@@ -217,7 +205,7 @@ class WMUFS_File_Chunk{
      * @param $tempFile
      * @return bool
      */
-    private function is_file_size_exceeded( $filePath, $tempFile ): bool
+    private function is_file_size_exceeded( $filePath, $tempFile )
     {
         $wmufs_max_upload_size = $this->get_upload_limit();
         return file_exists( $filePath ) && filesize( $filePath ) + filesize( $tempFile ) > $wmufs_max_upload_size;
@@ -278,7 +266,6 @@ class WMUFS_File_Chunk{
         } else {
             @fclose( $out );
             @unlink( $filePath );
-            error_log( "Error reading part $current_part of $chunks" );
             wp_die();
         }
     }
@@ -288,7 +275,6 @@ class WMUFS_File_Chunk{
      * @return void
      */
     private function handle_file_open_error( $filePath) {
-        error_log( "Failed to open output stream for $filePath" );
         wp_die();
     }
 
@@ -299,15 +285,45 @@ class WMUFS_File_Chunk{
      *
      * @return integer
      */
-    function get_upload_limit(): int
-    {
-	    $settings = get_option('wmufs_settings') ?? [];
-	    $max_size = (int) ($settings['max_limits']['all'] ?? get_option('max_file_size')); // bytes
-        if ( ! $max_size ) {
-            $max_size = wp_max_upload_size();
+    function get_upload_limit() {
+        $settings = get_option('wmufs_settings');
+
+        // Ensure the settings structure is valid
+        if ( ! is_array( $settings ) || ! isset( $settings['max_limits'] ) ) {
+            return wp_max_upload_size();
         }
-        return $max_size;
+
+        // Get limit type (global or role_based)
+        $limit_type = isset($settings['limit_type']) ? $settings['limit_type'] : 'global';
+
+        // Default limit fallback - fix: max_limits['all'] is already in bytes
+        $default_limit = isset( $settings['max_limits']['all'] ) ? (int) $settings['max_limits']['all'] : wp_max_upload_size();
+
+        // Check if by-role limits are enabled
+        if ( $limit_type === 'role_based' && is_user_logged_in() ) {
+            $limit = 0;
+            $user  = wp_get_current_user();
+
+            if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+                foreach ( $user->roles as $role ) {
+                    // Fix: max_limits[$role] is already in bytes, not ['bytes']
+                    if ( isset( $settings['max_limits'][ $role ] ) ) {
+                        $role_limit = (int) $settings['max_limits'][ $role ];
+                        if ( $role_limit > $limit ) {
+                            $limit = $role_limit;
+                        }
+                    }
+                }
+            }
+
+            // Return role-specific limit if found, otherwise default
+            return $limit > 0 ? $limit : $default_limit;
+        }
+
+        // Return global limit
+        return $default_limit;
     }
+
 
 
     /**
@@ -383,9 +399,9 @@ class WMUFS_File_Chunk{
 
         //this is the modded function from wp-admin/includes/ajax-actions.php
         $attachment_id = media_handle_upload( 'async-upload', $post_id, $post_data, [
-			'action' => 'wp_handle_sideload',
-			'test_form' => false,
-		] );
+            'action' => 'wp_handle_sideload',
+            'test_form' => false,
+        ] );
 
         if ( is_wp_error( $attachment_id ) ) {
             echo wp_json_encode(
@@ -435,11 +451,14 @@ class WMUFS_File_Chunk{
     public function wmufs_filter_plupload_settings( $plupload_settings ) {
 
         $max_chunk = ( MB_IN_BYTES * 20 ); //20MB max chunk size (to avoid timeouts)
-        if ( $max_chunk > $this->max_upload_size ) {
-            $default_chunk = ( $this->max_upload_size * 0.8 ) / KB_IN_BYTES;
+        $php_server_upload_limit = wp_convert_hr_to_bytes( ini_get( 'upload_max_filesize' ));
+
+        if ( $max_chunk > $php_server_upload_limit ) {
+            $default_chunk = ( $php_server_upload_limit * 0.8 ) / KB_IN_BYTES;
         } else {
             $default_chunk = $max_chunk / KB_IN_BYTES;
         }
+
         //define( 'WMUFS_FILE_UPLOADS_CHUNK_SIZE_KB', 512 );//TODO remove
         if ( ! defined( 'WMUFS_FILE_UPLOADS_CHUNK_SIZE_KB' ) ) {
             define( 'WMUFS_FILE_UPLOADS_CHUNK_SIZE_KB', $default_chunk );
@@ -450,7 +469,7 @@ class WMUFS_File_Chunk{
         }
 
         $plupload_settings['url']                      = admin_url( 'admin-ajax.php' );
-        $plupload_settings['filters']['max_file_size'] = $this->get_upload_limit( '' ) . 'b';
+        $plupload_settings['filters']['max_file_size'] = $this->get_upload_limit() . 'b';
         $plupload_settings['chunk_size']               = WMUFS_FILE_UPLOADS_CHUNK_SIZE_KB . 'kb';
         $plupload_settings['max_retries']              = WMUFS_FILE_UPLOADS_RETRIES;
 
@@ -459,4 +478,9 @@ class WMUFS_File_Chunk{
 
 }
 
-WMUFS_File_Chunk::get_instance()->init();
+add_action('init', function (){
+//    if(WMUFS_Helper::user_can_manage_options()){ //only load for users who can manage options
+    $object = new WMUFS_File_Chunk();
+    $object->init();
+//    }
+});

@@ -7,7 +7,7 @@ class MaxUploaderServerStatus {
 	 *
 	 * @var wpdb
 	 */
-	protected wpdb $wpdb;
+	protected $wpdb;
 
 	public function __construct() {
 		global $wpdb;
@@ -19,10 +19,10 @@ class MaxUploaderServerStatus {
 	 *
 	 * @return array
 	 */
-	public function get_info(): array {
+	public function get_info() {
 		return array(
 		$this->format_item( 'PHP Version', phpversion(), version_compare( phpversion(), '7.4', '>=' ) ),
-		$this->format_item( 'Server Software', $_SERVER['SERVER_SOFTWARE'] ?? 'Unknown' ),
+		$this->format_item( 'Server Software', isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : 'Unknown' ),
 		$this->format_item( 'Memory Limit', ini_get( 'memory_limit' ) ),
 		$this->format_item( 'Max Execution Time', ini_get( 'max_execution_time' ) . 's' ),
 		$this->format_item( 'Max Input Vars', ini_get( 'max_input_vars' ) ),
@@ -49,9 +49,9 @@ class MaxUploaderServerStatus {
 	 *
 	 * @return array
 	 */
-	protected function format_item( string $title, string $value, bool $is_ok = true ): array {
+	protected function format_item( $title, $value, $is_ok = true ) {
 		return array(
-			'title'           => esc_html__( $title, 'wp-maximum-upload-file-size' ),
+			'title'           => esc_html( $title ),
 			'version'         => esc_html( $value ),
 			'status'          => $is_ok ? 1 : 0,
 			'success_message' => $is_ok ? esc_html__( '- ok', 'wp-maximum-upload-file-size' ) : '',

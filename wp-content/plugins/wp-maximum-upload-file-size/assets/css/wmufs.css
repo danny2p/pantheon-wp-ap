@@ -30,6 +30,14 @@
   flex: 0 0 auto;
 }
 
+.wmufs-pro-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
 .wmufs_card_mini {
   border: 1px solid #eee;
   padding: 10px;
@@ -50,7 +58,7 @@
   justify-content: center;
 }
 
-body.post-type-attachment.media_page_max_uploader .notice:not(.wmufs-notice) {
+body.media_page_easy_media .notice:not(.wmufs-notice) {
   display: none !important;
 }
 
@@ -61,7 +69,7 @@ body.post-type-attachment.media_page_max_uploader .notice:not(.wmufs-notice) {
 }
 .wmufs_form_centered .wmufs_inner_form_box {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
 }
 .wmufs_form_centered form {
   background: #fff;
@@ -69,8 +77,18 @@ body.post-type-attachment.media_page_max_uploader .notice:not(.wmufs-notice) {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+.wmufs_form_centered form h2 {
+  padding: 0 !important;
+}
+.wmufs_form_centered form .form-table tbody {
+  width: 100%;
+  display: inline-table;
+}
 .wmufs_form_centered form table.form-table {
   width: 100%;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: block;
 }
 .wmufs_form_centered form table.form-table th {
   text-align: left;
@@ -102,22 +120,23 @@ body.post-type-attachment.media_page_max_uploader .notice:not(.wmufs-notice) {
   }
 }
 .wmufs_faq_section {
-  margin-top: 40px;
-  background: #fff;
-  padding: 20px;
-  border: 1px solid #ccd0d4;
+  margin-top: 20px;
   border-radius: 4px;
 }
 
 .wmufs_faq_section h2 {
   margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 18px;
+  margin-bottom: 25px;
+  font-size: 25px;
   color: #23282d;
+  text-align: center;
 }
 
 .wmufs_faq_item {
-  margin-bottom: 15px;
+  margin-bottom: 13px;
+  border: 1px solid #dadada;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .wmufs_faq_item strong {
@@ -192,6 +211,67 @@ body.post-type-attachment.media_page_max_uploader .notice:not(.wmufs-notice) {
     width: 100%;
   }
 }
+.wmufs-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.wmufs-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.wmufs-toggle-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.wmufs-toggle-btn {
+  padding: 6px 14px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.wmufs-toggle-btn.active {
+  background: #0073aa;
+  color: #fff;
+  border-color: #0073aa;
+}
+
+.wmufs-toggle-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wmufs-pro-label {
+  color: #d54e21;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.wmufs-toggle-section {
+  margin-top: 10px;
+}
+
+.easymedia-pro-badge {
+  border-radius: 1px;
+  padding: 3px 5px !important;
+  display: inline-block;
+  color: #fff;
+  font-size: 12px;
+  margin-left: 5px;
+  background-color: red;
+}
+
 /**----------------------------------------
             CodePopular Promotion.
 --------------------------------------------*/

@@ -2,7 +2,6 @@
     "use strict";
 
     $(document).ready(function () {
-        console.log("Admin script loaded");
         // Hide admin notice
         $('#hideWmufsNotice').on('click', function () {
             $.ajax({

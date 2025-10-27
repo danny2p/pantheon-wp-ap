@@ -7,7 +7,7 @@ class Max_Uploader_Database_Status {
      *
      * @var wpdb
      */
-    protected wpdb $wpdb;
+    protected $wpdb;
 
     public function __construct() {
         global $wpdb;
@@ -19,7 +19,7 @@ class Max_Uploader_Database_Status {
      *
      * @return array
      */
-    public function get_info(): array
+    public function get_info()
     {
         return array(
             array(
