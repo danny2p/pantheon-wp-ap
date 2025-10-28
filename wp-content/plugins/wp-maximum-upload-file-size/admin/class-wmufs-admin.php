@@ -185,18 +185,57 @@ class MaxUploader_Admin {
         return ($current_screen->id === 'media_page_easy_media');
     }
 
-    static function plugin_action_links( $links ) {
-        $settings_link = '<a href="' . admin_url('admin.php?page=easy_media') . '">Settings</a>';
-        array_unshift($links, $settings_link);
+    /**
+     * Add plugin action links (Settings + Upgrade to Pro).
+     *
+     * @param array $links Existing plugin action links.
+     * @return array Modified plugin action links.
+     */
+    public static function plugin_action_links( $links ) {
+        // Settings link (always show).
+        $settings_link = sprintf(
+            '<a href="%s">%s</a>',
+            esc_url( admin_url( 'admin.php?page=easy_media' ) ),
+            esc_html__( 'Settings', 'easy-media' )
+        );
+
+        // Add the Settings link first.
+        array_unshift( $links, $settings_link );
+
+        // Only show "Upgrade to Pro" if premium is NOT active.
+        if ( ! WMUFS_Helper::is_premium_active() ) {
+            $upgrade_link = sprintf(
+                '<a href="%s" target="_blank" style="color:#ff6600;font-weight:bold;">%s</a>',
+                esc_url( 'https://codepopular.com/product/easymedia/?utm_source=upgrade-pro-button' ),
+                esc_html__( 'Upgrade to Pro', 'easy-media' )
+            );
+            array_unshift( $links, $upgrade_link );
+        }
+
         return $links;
     }
 
-    static function plugin_meta_links( $links, $file ) {
-        if ( $file === plugin_basename(__FILE__) ) {
-            $links[] = '<a target="_blank" href="https://wordpress.org/support/plugin/wp-maximum-upload-file-size/">Support</a>';
+
+
+    /**
+     * Add plugin meta links (Support, etc.) under plugin name in Plugins list.
+     *
+     * @param array  $links Existing plugin meta links.
+     * @param string $file  Plugin file path.
+     * @return array Modified plugin meta links.
+     */
+    public static function plugin_meta_links( $links, $file ) {
+        if ( $file === plugin_basename( __FILE__ ) ) {
+            $links[] = sprintf(
+                '<a target="_blank" href="%s">%s</a>',
+                esc_url( 'https://wordpress.org/support/plugin/wp-maximum-upload-file-size/' ),
+                esc_html__( 'Support', 'easy-media' )
+            );
         }
+
         return $links;
     }
+
 
     static function admin_footer_text( $text ) {
         if ( ! self::is_plugin_page() ) {
