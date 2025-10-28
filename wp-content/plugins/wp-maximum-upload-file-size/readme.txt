@@ -5,7 +5,7 @@ Donate link: https://ko-fi.com/codepopular
 Requires at least: 3.0
 Requires PHP: 7.0
 Tested up to: 6.8
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,7 +90,7 @@ Or if needed, install manually:
 
 == Changelog ==
 
-= 3.0.1 =
+= 3.0.2 =
 -------------
 * PHP 7.0 to 8.3 support
 * Pro Extension offer to extend features
