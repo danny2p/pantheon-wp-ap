@@ -15,35 +15,35 @@ if (!defined('ABSPATH')) {
 }
 
 $features = array(
-    'statistics' => array(
-        'title' => __('Statistics', 'wp-maximum-upload-file-size'),
-        'description' => __('Gain deep insights into total uploads, storage usage, and user activity right from your dashboard.', 'wp-maximum-upload-file-size'),
-        'icon' => '📊',
-    ),
     'upload_logs' => array(
         'title' => __('Upload Logs', 'wp-maximum-upload-file-size'),
         'description' => __('Monitor all upload activities including file name, size, user, and timestamp for full transparency.', 'wp-maximum-upload-file-size'),
         'icon' => '🧾',
     ),
     'individual_user_quota_limit' => array(
-        'title' => __('Individual User Quota Limit', 'wp-maximum-upload-file-size'),
-        'description' => __('Set specific upload quotas per user or role to control storage usage efficiently.', 'wp-maximum-upload-file-size'),
+        'title' => __('Individual User Disk Limit', 'wp-maximum-upload-file-size'),
+        'description' => __('Define custom upload limits for each user to manage storage usage more effectively. Control your website disk limit easily.', 'wp-maximum-upload-file-size'),
         'icon' => '👤',
-    ),
-    'media_manager' => array(
-        'title' => __('Media Manager', 'wp-maximum-upload-file-size'),
-        'description' => __('Manage and organize uploaded files seamlessly with advanced search and sorting options.', 'wp-maximum-upload-file-size'),
-        'icon' => '🗂️',
     ),
     'limit_user_file_type_restriction' => array(
         'title' => __('Limit User File Type Restriction', 'wp-maximum-upload-file-size'),
         'description' => __('Restrict users to upload only specific file types to keep your media library clean and secure.', 'wp-maximum-upload-file-size'),
         'icon' => '📁',
     ),
-    'set_role_based_limit' => array(
-        'title' => __('Set Role-Based Limit', 'wp-maximum-upload-file-size'),
-        'description' => __('Assign different upload limits and permissions for admins, editors, and authors effortlessly.', 'wp-maximum-upload-file-size'),
-        'icon' => '🔐',
+    'allow_custom_file' => array(
+        'title' => __('Allow Custom File', 'wp-maximum-upload-file-size'),
+        'description' => __('By default, WordPress allows only specific MIME types. With EasyMedia, you can enable support for custom file types.', 'wp-maximum-upload-file-size'),
+        'icon' => '📄',
+    ),
+    'statistics' => array(
+        'title' => __('Statistics', 'wp-maximum-upload-file-size'),
+        'description' => __('Gain deep insights into total uploads, storage usage, and user activity right from your dashboard.', 'wp-maximum-upload-file-size'),
+        'icon' => '📊',
+    ),
+    'media_manager' => array(
+        'title' => __('Media Manager', 'wp-maximum-upload-file-size'),
+        'description' => __('Manage and organize uploaded files seamlessly with advanced search and sorting options.', 'wp-maximum-upload-file-size'),
+        'icon' => '🗂️',
     ),
 );
 
@@ -78,7 +78,7 @@ $testimonials = array(
         'author' => __('Alex Rivera, Digital Agency Lead', 'wp-maximum-upload-file-size'),
     ),
     array(
-        'quote' => __('"The role-based file restrictions in Pro kept our contributors from uploading risky files, and the media manager makes organization a breeze. Saved us from potential security headaches!"', 'wp-maximum-upload-file-size'),
+        'quote' => __('"The individual user disk limits helped us keep our storage perfectly balanced across the team, while the custom file type restrictions ensured only safe, approved files are uploaded. It’s a perfect blend of control and convenience!"', 'wp-maximum-upload-file-size'),
         'author' => __('Emma Chen, Content Strategist', 'wp-maximum-upload-file-size'),
     ),
     array(
@@ -96,7 +96,7 @@ $testimonials = array(
         <!-- Urgency Banner -->
         <div class="easymedia-urgency-banner">
             <span class="dashicons dashicons-tickets-alt"></span>
-            <span><?php _e('First 100 licenses will be sale for lifetime with regular price, so don\'t miss chance!', 'wp-maximum-upload-file-size'); ?></span>
+            <span><?php _e('Purchase once! Use Lifetime, No Recurring Payment', 'wp-maximum-upload-file-size'); ?></span>
         </div>
 
         <!-- Trust Bar -->
@@ -150,22 +150,6 @@ $testimonials = array(
             </div>
         </div>
 
-        <!-- Developer Note Section -->
-        <div class="easymedia-developer-note">
-            <h3><?php _e('A Note from the Developer', 'wp-maximum-upload-file-size'); ?></h3>
-            <div class="developer-content">
-                <div class="developer-photo">
-                    <img src="<?php echo esc_url(WMUFS_PLUGIN_URL .'assets/images/developer-photo.jpeg'); ?>" alt="<?php _e('Developer Photo', 'wp-maximum-upload-file-size'); ?>" />
-                </div>
-                <div class="developer-text">
-                    <p><?php _e('Hi <strong>Shamim</strong> here! I\'m the solo developer behind <strong>EasyMedia Pro</strong> under CodePopular. As a one-person team, I pour everything into creating tools that make WordPress media management effortless for users like you.', 'wp-maximum-upload-file-size'); ?></p>
-                    <p><?php _e('When you purchase Pro, you\'re not just getting a plugin—you\'re gaining a direct line to me. I connect one-on-one with every paid customer, offering personalized support without the hassle of being passed around. Got a question? I\'m here to help directly.', 'wp-maximum-upload-file-size'); ?></p>
-                    <p><?php _e('Even better, I actively listen to your needs. Suggest a new feature? I\'ll prioritize it based on real user feedback. You\'re getting a reliable helping hand and a close collaborator who\'s invested in your success.', 'wp-maximum-upload-file-size'); ?></p>
-                    <p><em><?php _e('Let\'s build something great together—upgrade today!', 'wp-maximum-upload-file-size'); ?></em></p>
-                </div>
-            </div>
-        </div>
-
         <!-- Comparison Table (Full with Row Borders) -->
         <div class="easymedia-upgrade-compare">
             <h3><?php _e('Free vs Pro Comparison', 'wp-maximum-upload-file-size'); ?></h3>
@@ -192,11 +176,11 @@ $testimonials = array(
                 </tr>
                 <tr class="table-row">
                     <td><?php _e('Role-based upload limits', 'wp-maximum-upload-file-size'); ?></td>
-                    <td class="cross"><span class="dashicons dashicons-no-alt"></span></td>
+                    <td class="check"><span class="dashicons dashicons-yes"></span></td>
                     <td class="check"><span class="dashicons dashicons-yes"></span></td>
                 </tr>
                 <tr class="table-row">
-                    <td><?php _e('User-specific upload limits & quotas', 'wp-maximum-upload-file-size'); ?></td>
+                    <td><?php _e('Set user disk limit', 'wp-maximum-upload-file-size'); ?></td>
                     <td class="cross"><span class="dashicons dashicons-no-alt"></span></td>
                     <td class="check"><span class="dashicons dashicons-yes"></span></td>
                 </tr>
@@ -216,7 +200,7 @@ $testimonials = array(
                     <td class="check"><span class="dashicons dashicons-yes"></span></td>
                 </tr>
                 <tr class="table-row">
-                    <td><?php _e('File type restrictions by role', 'wp-maximum-upload-file-size'); ?></td>
+                    <td><?php _e('File type restrictions by user', 'wp-maximum-upload-file-size'); ?></td>
                     <td class="cross"><span class="dashicons dashicons-no-alt"></span></td>
                     <td class="check"><span class="dashicons dashicons-yes"></span></td>
                 </tr>
@@ -264,7 +248,7 @@ $testimonials = array(
                         <div class="card-header">
                             <h4><?php echo esc_html($tier['label']); ?></h4>
                             <div class="price-tag">
-                                <span class="amount">$<?php echo esc_html($tier['price']); ?></span>
+                                <span class="amount">$<?php echo esc_html($tier['price']); ?> <small class="lifetime-badge">/ LifeTime</small></span>
                             </div>
                         </div>
                         <ul class="card-features">
@@ -482,55 +466,6 @@ $testimonials = array(
         font-size: 0.9rem;
     }
 
-    /* Developer Note Section */
-    .easymedia-developer-note {
-        padding: 50px 40px;
-        background: #f9fafc;
-        text-align: left;
-    }
-
-    .easymedia-developer-note h3 {
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 30px;
-        color: #111827;
-        font-weight: 700;
-    }
-
-    .developer-content {
-        display: grid;
-        grid-template-columns: 20% 80%;
-        gap: 30px;
-        max-width: 900px;
-        margin: 0 auto;
-        align-items: start;
-    }
-
-    .developer-photo {
-        text-align: center;
-    }
-
-    .developer-photo img {
-        width: 100%;
-        max-width: 150px;
-        height: auto;
-        border-radius: 50%;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        object-fit: cover;
-    }
-
-    .developer-text p {
-        margin-bottom: 18px;
-        font-size: 16px;
-        line-height: 1.6;
-        color: #374151;
-    }
-
-    .developer-text em {
-        color: #3b82f6;
-        font-style: italic;
-    }
-
     /* Comparison Table with Row Borders */
     .easymedia-upgrade-compare {
         padding: 50px 40px;
@@ -728,6 +663,13 @@ $testimonials = array(
         font-weight: 600;
         justify-content: center;
         margin-top: 5px;
+    }
+
+    small.lifetime-badge {
+        position: absolute;
+        font-size: 12px;
+        margin-top: 7px;
+        color: #f39c14;
     }
 
     .pricing-btn {

@@ -361,10 +361,8 @@ class MaxUploader_Admin {
                     return $global_limit;
                 });
             }
-        } elseif ($limit_type === 'role_based' && WMUFS_Helper::is_premium_active()) {
-            // Role-based limits (Pro feature only)
+        } elseif ($limit_type === 'role_based') {
             $role_limits = $max_limits;
-            
             add_filter('upload_size_limit', function ($size) use ($role_limits) {
                 if (is_user_logged_in()) {
                     $user = wp_get_current_user();
@@ -375,51 +373,6 @@ class MaxUploader_Admin {
                     }
                 }
                 return $size;
-            });
-        }
-        
-
-        // Add validation of upload limit in pre-upload phase
-        if ($limit_type === 'global') {
-            $global_limit = (int) (isset($max_limits['all']) ? $max_limits['all'] : 0);
-            
-            if ($global_limit > 0) {
-                add_filter('wp_handle_upload_prefilter', function ($file) use ($global_limit) {
-                    if (isset($file['size']) && $file['size'] > $global_limit) {
-                        $file['error'] = sprintf(
-                            __('Upload exceeds the maximum allowed size of %s.', 'wp-maximum-upload-file-size'),
-                            size_format($global_limit)
-                        );
-                    }
-                    return $file;
-                });
-            }
-        } elseif ($limit_type === 'role_based' && WMUFS_Helper::is_premium_active()) {
-            $role_limits = $max_limits;
-            
-            add_filter('wp_handle_upload_prefilter', function ($file) use ($role_limits) {
-
-                error_log("Checking role-based upload limit...");
-
-                $max_size = 0;
-                
-                if (is_user_logged_in()) {
-                    $user = wp_get_current_user();
-                    foreach ($user->roles as $role) {
-                        if (isset($role_limits[$role]) && $role_limits[$role] > 0) {
-                            $max_size = (int) $role_limits[$role];
-                            break;
-                        }
-                    }
-                }
-                
-                if ($max_size > 0 && isset($file['size']) && $file['size'] > $max_size) {
-                    $file['error'] = sprintf(
-                        __('Upload exceeds the maximum allowed size of %s.', 'wp-maximum-upload-file-size'),
-                        size_format($max_size)
-                    );
-                }
-                return $file;
             });
         }
 

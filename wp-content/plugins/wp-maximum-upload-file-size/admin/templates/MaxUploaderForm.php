@@ -99,7 +99,7 @@ $wmufs_limit_type = isset($max_uploader_settings['limit_type']) ? $max_uploader_
 
                         <div class="wmufs-toggle-buttons">
                             <button type="button" class="wmufs-toggle-btn <?php esc_html($wmufs_limit_type === 'global' ? 'active' : '')?>" data-target="#all-users-section">Global Limit</button>
-                            <button type="button" class="wmufs-toggle-btn <?php esc_html($wmufs_limit_type === 'role_based' ? 'active' : '')?>" data-target="#role-based-section">Role-Based Limit <?php if(!$pro_active){?><span class="easymedia-pro-badge">PRO</span><?php } ?></button>
+                            <button type="button" class="wmufs-toggle-btn <?php esc_html($wmufs_limit_type === 'role_based' ? 'active' : '')?>" data-target="#role-based-section">Role-Based Limit</button>
                         </div>
 
                         <div id="all-users-section" class="wmufs-toggle-section">
@@ -159,7 +159,7 @@ $wmufs_limit_type = isset($max_uploader_settings['limit_type']) ? $max_uploader_
                                 ?>
                                 <h2><?php esc_html_e('Role-Based Upload Limits', 'wp-maximum-upload-file-size'); ?></h2>
                                 <?php if (!$pro_active) : ?>
-                                    <p><?php esc_html_e('Upgrade to Pro to edit role-based upload limits.', 'wp-maximum-upload-file-size'); ?> <a href="<?php echo esc_url(WMUFS_Helper::get_upgrade_url()); ?>" target="_blank"><?php _e('Learn More', 'wp-maximum-upload-file-size'); ?></a></p>
+                                    <p><?php esc_html_e('Upgrade to Pro to set individual user disk limit.', 'wp-maximum-upload-file-size'); ?> <a href="<?php echo esc_url(WMUFS_Helper::get_upgrade_url()); ?>" target="_blank"><?php _e('Learn More', 'wp-maximum-upload-file-size'); ?></a></p>
                                 <?php endif; ?>
                                 <table class="wp-list-table widefat fixed striped">
                                     <thead>
@@ -178,30 +178,19 @@ $wmufs_limit_type = isset($max_uploader_settings['limit_type']) ? $max_uploader_
                                             <td><?php echo esc_html($role_key); ?></td>
                                             <td><?php echo esc_html($role_data['name']); ?></td>
                                             <td>
-                                                <?php if ($pro_active) : ?>
                                                     <select name="role_limits[<?php echo esc_attr($role_key); ?>]">
                                                         <?php foreach ($size_options as $key => $label): ?>
                                                             <option value="<?php echo esc_attr($key); ?>" <?php selected($current_limit, $key); ?>><?php echo esc_html($label); ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                <?php else : ?>
-                                                    <span><?php _e('Upgrade Pro', 'wp-maximum-upload-file-size')?></span>
-                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <?php if ($pro_active) : ?>
                                     <input type="hidden" name="type" value="role_based">
                                     <?php wp_nonce_field('easy_media_set_size_action', 'easy_media_set_size_limit'); ?>
                                     <?php submit_button(); ?>
-
-                                <?php else : ?>
-                                    <p class="submit">
-                                        <button type="button" class="button button-primary"><?php _e('Upgrade Pro', 'wp-maximum-upload-file-size'); ?><span class="easymedia-pro-badge">PRO</span></button>
-                                    </p>
-                                <?php endif; ?>
                             </form>
                         </div>
                     </div>
