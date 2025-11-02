@@ -1,3 +1,5 @@
+@use "./promotion";
+
 .wmufs_mb_50 {
     margin-bottom: 50px;
 }
@@ -298,4 +300,90 @@ body.media_page_easy_media .notice:not(.wmufs-notice) {
         background-color: red
     }
 
-@import "./promotion";
+// Pro Feature List Styles
+.wmufs-pro-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0 20px 0;
+    text-align: center;
+}
+
+.wmufs-badge-text {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.wmufs-badge-subtext {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.easymedia-pro-feature-list {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+    }
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f0f1;
+        transition: background-color 0.2s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: #f9f9f9;
+            padding-left: 8px;
+            margin-left: -8px;
+            margin-right: -8px;
+            padding-right: 8px;
+            border-radius: 4px;
+        }
+
+        .dashicons {
+            color: #46b450;
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            color: #2c3338;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    }
+}
+
+.wmufs-upgrade-btn {
+    width: 100%;
+    justify-content: center;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    .dashicons {
+        margin-top: 2px;
+    }
+}
