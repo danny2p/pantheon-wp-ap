@@ -1027,44 +1027,77 @@
 			}
 		}
 
-		public function fix_pre_tag($content, $buffer){
-			if(preg_match("/<pre[^\>]*>/i", $buffer)){
-				preg_match_all("/<pre[^\>]*>((?!<\/pre>).)+<\/pre>/is", $buffer, $pre_buffer);
-				preg_match_all("/<pre[^\>]*>((?!<\/pre>).)+<\/pre>/is", $content, $pre_content);
 
-				if(isset($pre_content[0]) && isset($pre_content[0][0])){
-					foreach ($pre_content[0] as $key => $value){
-						if(isset($pre_buffer[0][$key])){
-							/*
-							location ~ / {
-							    set $path /path/$1/index.html;
-							}
-							*/
-							$pre_buffer[0][$key] = preg_replace('/\$(\d)/', '\\\$$1', $pre_buffer[0][$key]);
+		public function find_tags($data, $start_string, $end_string){
 
-							/*
-							\\\
-							*/
-							$pre_buffer[0][$key] = preg_replace('/\\\\\\\\\\\/', '\\\\\\\\\\\\\\', $pre_buffer[0][$key]);
+			$list = array();
+			$start_index = false;
+			$end_index = false;
 
-							/*
-							\\
-							*/
-							$pre_buffer[0][$key] = preg_replace('/\\\\\\\\/', '\\\\\\\\\\', $pre_buffer[0][$key]);
+			for($i = 0; $i < strlen( $data ); $i++) {
+			    if(substr($data, $i, strlen($start_string)) == $start_string){
+			    	$start_index = $i;
+				}
 
-							/*
-							/\
-							*/
-							$pre_buffer[0][$key] = preg_replace('/\/\\\\/', '/\\\\\\', $pre_buffer[0][$key]);
+				if($start_index && $i > $start_index){
+					if(substr($data, $i, strlen($end_string)) == $end_string){
+						$end_index = $i + strlen($end_string)-1;
+						$text = substr($data, $start_index, ($end_index-$start_index + 1));
+						
 
-							$content = preg_replace("/".preg_quote($value, "/")."/", $pre_buffer[0][$key], $content);
-						}
+						array_push($list, array("start" => $start_index, "end" => $end_index, "text" => $text));
+
+
+						$start_index = false;
+						$end_index = false;
 					}
 				}
 			}
-			
-			return $content;
+
+			return $list;
 		}
+
+		public function fix_pre_tag($content, $buffer){
+
+		    // Check if buffer contains any <pre> tag
+		    if(!preg_match("/<pre[^\>]*>/i", $buffer)){
+		        return $content;
+		    }
+
+		    // Extract <pre> blocks from buffer
+		    $pre_buffer = $this->find_tags($buffer, "<pre", "</pre>");
+
+		    // Extract <pre> blocks from content
+		    $pre_content = $this->find_tags($content, "<pre", "</pre>");
+
+		    // If either side has no <pre> blocks, do nothing
+		    if(empty($pre_buffer) || empty($pre_content)){
+		        return $content;
+		    }
+
+		    // Reverse the order to avoid index shifting during replacement
+		    $pre_content = array_reverse($pre_content, true);
+
+		    foreach ($pre_content as $key => $value){
+		        if(isset($pre_buffer[$key])){
+
+		            // New <pre> block that will replace the old one
+		            $replace_text = $pre_buffer[$key]["text"];
+
+		            // Replace the original <pre> block in the content with the buffer's block
+		            $content = substr_replace(
+		                $content,
+		                $replace_text,
+		                $value["start"],
+		                ($value["end"] - $value["start"] + 1)
+		            );
+		        }
+		    }
+
+		    return $content;
+		}
+
+
 
 		public function cdn_rewrite($content){
 			if($this->cdn){
