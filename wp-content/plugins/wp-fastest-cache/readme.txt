@@ -4,7 +4,7 @@ Donate link: https://profiles.wordpress.org/emrevona/
 Tags: cache, Optimize, performance, PageSpeed, core web vitals
 Requires at least: 5.3
 Tested up to: 6.8
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,9 +67,9 @@ The free version is enough to speed up your site but in the premium version ther
 5. Minify Javascript - Minifying JavaScript files can reduce payload sizes and script parse time
 6. Combine JS Plus
 7. Defer Javascript - Eliminate render-blocking JavaScript resources. Consider delivering critical JS inline and deferring all non-critical JS
-8. Optimize Images - Optimized images load faster and consume less cellular data
-9. Convert WebP - Serve images in next-gen formats. Image formats like JPEG 2000, JPEG XR, and WebP often provide better compression than PNG or JPEG, which means faster downloads and less data consumption
-10. Database Cleanup - The Database Cleanup feature clears out all of the garbage datas such as post revisions, trashed posts & pages, comments from trash & spam, trackbacks and pingbacks, transient options, orphaned post meta, comment meta, user meta, term meta, and term relationship etc.
+8. Optimize Images - Optimized images load faster and consume less cellular data. Looking for an easy image compressor? Our tool lets you compress images instantly, including Compress JPEG and Compress PNG options. Enjoy fast image compression to reduce image size without losing quality. Perfect for quick image optimization with a smart image optimizer designed for all your needs.
+9. Convert WebP - Serve images in next-gen formats. Image formats like JPEG 2000, JPEG XR, and WebP often provide better compression than PNG or JPEG, which means faster downloads and less data consumption. A fast and reliable WebP converter helps you convert to WebP in seconds. Whether you need a WebP convert tool, a JPG to WEBP Converter, PNG to WEBP Converter, or a simple image to WebP option, you can easily optimize your images. Quickly handle JPG to WEBP, PNG to WEBP, jpg convert to webp, and png convert to webp tasks to reduce file size and improve web performance.
+10. Database Cleanup - To keep your system running smoothly, it’s important to clean database structures regularly and ensure you clean DB records that are no longer needed. A database cleaner is essential for effective database cleaning and long-term database optimization. By removing unused entries and organizing data efficiently, you can significantly improve database performance and speed up database operations. Modern db cleaner tools automate the entire db cleaning process, helping developers maintain fast, reliable, and scalable systems. The Database Cleanup feature clears out all of the garbage datas such as post revisions, trashed posts & pages, comments from trash & spam, trackbacks and pingbacks, transient options, orphaned post meta, comment meta, user meta, term meta, and term relationship etc.
 11. Google Fonts Async
 12. Lazy Load - Defer offscreen images. Consider lazy-loading offscreen and hidden images after all critical resources have finished loading to lower time to interactive
 12. Delay JS - The Delay JavaScript feature helps reduce the 'Reduce unused JavaScript' warning in the Google PageSpeed Insights tool
@@ -117,6 +117,10 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 18. Database Cleanup
 
 == Changelog ==
+
+= 1.4.2 =
+* <strong>[Improvement]</strong> Updated the function modifying for url() paths in CSS
+* <strong>[Improvement]</strong> Enhanced the <pre> tag replacement logic for more accurate matching and reliable content updates
 
 = 1.4.1 =
 * Added display of orphaned post meta, comment meta, user meta, term meta, and term relationship counts 
