@@ -1,13 +1,12 @@
 ## Release Notes
 
-
-
 ## Changelog
 
 **Bump Type:** patch
 
-### 🐛 Bug Fixes
-- fix: Add fallback sizes to MediaItemSizeEnum when intermediate sizes are disabled ([#3433](https://github.com/wp-graphql/wp-graphql/pull/3433))
+### 🔄 Other Changes
+- fix(#3438, #1999): Media item privacy inheritance and attachment status queries  ([#3444](https://github.com/wp-graphql/wp-graphql/pull/3444))
+- chore: cleanup orphaned files and configs ([#3442](https://github.com/wp-graphql/wp-graphql/pull/3442))
 
 ### 👏 Contributors
 
