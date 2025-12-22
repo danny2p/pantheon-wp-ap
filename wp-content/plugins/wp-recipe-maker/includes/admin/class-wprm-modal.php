@@ -2,7 +2,7 @@
 /**
  * Handle the recipe modal.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.0.0
  *
  * @package    WP_Recipe_Maker
@@ -67,7 +67,15 @@ class WPRM_Modal {
 		if ( ! WPRM_Assets::should_load_admin_assets() ) {
 			return false;
 		} else {
+			if ( ! function_exists( 'get_current_screen' ) ) {
+				return true;
+			}
+
 			$screen = get_current_screen();
+
+			if ( ! $screen ) {
+				return true;
+			}
 
 			if ( 'toplevel_page_et_bloom_options' === $screen->id
 				|| 'et_theme_builder' === substr( $screen->id, -16 )
@@ -105,7 +113,22 @@ class WPRM_Modal {
 
 		echo '<div id="wprm-admin-modal"></div>';
 		echo '<div id="wprm-admin-modal-notes-placeholder" style="display: none">';
-		wp_editor( '', 'wprm-admin-modal-notes-editor' );
+
+		$settings = array();
+		if ( ! empty( $GLOBALS['wprm_divi5_context'] ) ) {
+			$settings = array(
+				'media_buttons' => false,
+				'tinymce' => array(
+					'toolbar1' => 'bold,italic,bullist,numlist,link',
+					'toolbar2' => '',
+					'toolbar3' => '',
+					'plugins' => 'paste,lists,link,charmap,hr,anchor,image,code',
+				),
+				'quicktags' => false,
+			);
+		}
+
+		wp_editor( '', 'wprm-admin-modal-notes-editor', $settings );
 		echo '</div>';
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Template for the privacy policy.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      2.5.2
  *
  * @package    WP_Recipe_Maker

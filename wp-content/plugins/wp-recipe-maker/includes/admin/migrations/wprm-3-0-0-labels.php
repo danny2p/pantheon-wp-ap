@@ -2,7 +2,7 @@
 /**
  * Migration for the labels to settings.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.0
  *
  * @package    WP_Recipe_Maker

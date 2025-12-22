@@ -2,7 +2,7 @@
 /**
  * Handle the recipe instructions shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.3.0
  *
  * @package    WP_Recipe_Maker
@@ -900,6 +900,194 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					),
 				),
 			),
+			'cook_mode_header' => array(
+				'type' => 'header',
+				'default' => __( 'Cook Mode', 'wp-recipe-maker' ),
+			),
+			'cook_mode' => array(
+				'default' => '',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'header' => 'Show cook mode button in the header',
+					'before' => 'Show cook mode button before the instructions',
+					'after' => 'Show cook mode button after the instructions',
+				),
+			),
+			'cook_mode_style' => array(
+				'label' => __( 'Style', 'wp-recipe-maker' ),
+				'default' => 'text',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Text',
+					'button' => 'Button',
+					'inline-button' => 'Inline Button',
+					'wide-button' => 'Full Width Button',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_icon' => array(
+				'label' => __( 'Icon', 'wp-recipe-maker' ),
+				'default' => '',
+				'type' => 'icon',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_text' => array(
+				'label' => __( 'Text', 'wp-recipe-maker' ),
+				'default' => __( 'Start Cooking', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_text_style' => array(
+				'label' => __( 'Text Style', 'wp-recipe-maker' ),
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_icon_color' => array(
+				'label' => __( 'Icon Color', 'wp-recipe-maker' ),
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_icon',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_text_color' => array(
+				'label' => __( 'Text Color', 'wp-recipe-maker' ),
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_text',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_horizontal_padding' => array(
+				'label' => __( 'Horizontal Padding', 'wp-recipe-maker' ),
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_vertical_padding' => array(
+				'label' => __( 'Vertical Padding', 'wp-recipe-maker' ),
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_button_color' => array(
+				'label' => __( 'Button Color', 'wp-recipe-maker' ),
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_border_color' => array(
+				'label' => __( 'Border Color', 'wp-recipe-maker' ),
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'cook_mode_border_radius' => array(
+				'label' => __( 'Border Radius', 'wp-recipe-maker' ),
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'cook_mode',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'cook_mode_style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+				),
+			),
 			'before_container_header' => array(
 				'type' => 'header',
 				'default' => __( 'Before Instructions', 'wp-recipe-maker' ),
@@ -1021,6 +1209,20 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 			'description_style' => $atts['prevent_sleep_description_style'],
 		);
 
+		$cook_mode_atts = array(
+			'style' => $atts['cook_mode_style'],
+			'icon' => $atts['cook_mode_icon'],
+			'text' => $atts['cook_mode_text'],
+			'text_style' => $atts['cook_mode_text_style'],
+			'icon_color' => $atts['cook_mode_icon_color'],
+			'text_color' => $atts['cook_mode_text_color'],
+			'horizontal_padding' => $atts['cook_mode_horizontal_padding'],
+			'vertical_padding' => $atts['cook_mode_vertical_padding'],
+			'button_color' => $atts['cook_mode_button_color'],
+			'border_color' => $atts['cook_mode_border_color'],
+			'border_radius' => $atts['cook_mode_border_radius'],
+		);
+
 		// Custom style.
 		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
 		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
@@ -1029,9 +1231,14 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'instructions', array(
 			'media_toggle_atts' => $media_toggle_atts,
 			'prevent_sleep_atts' => $prevent_sleep_atts,
+			'cook_mode_atts' => $cook_mode_atts,
 		) );
 
 		$output_before = '';
+
+		if ( 'before' === $atts['cook_mode'] ) {
+			$output_before .= WPRM_SC_Cook_Mode::shortcode( $cook_mode_atts );
+		}
 
 		if ( 'before' === $atts['prevent_sleep'] ) {
 			$output_before .= WPRM_SC_Prevent_Sleep::shortcode( $prevent_sleep_atts );
@@ -1092,13 +1299,14 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
 				}
 
-				$output .= '<li id="wprm-recipe-' . esc_attr( $recipe->id() ) . '-step-' . esc_attr( $group_index ) . '-' . esc_attr( $index ) . '" class="wprm-recipe-instruction" style="' . esc_attr( $style ) . '">';
+				// Build instruction content
+				$instruction_content = '';
 
 				if ( 'before' === $atts['ingredients_position'] ) {
-					$output .= self::instruction_ingredients( $recipe, $instruction, $atts );
+					$instruction_content .= self::instruction_ingredients( $recipe, $instruction, $atts );
 				}
 				if ( 'before' === $atts['image_position'] ) {
-					$output .= self::instruction_media( $recipe, $instruction, $atts );
+					$instruction_content .= self::instruction_media( $recipe, $instruction, $atts );
 				}
 				if ( $instruction['text'] ) {
 					$text = $instruction['text'];
@@ -1116,16 +1324,24 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					if ( 'checkbox' === $atts['list_style'] ) {
 						$instruction_text = apply_filters( 'wprm_recipe_instructions_shortcode_checkbox', $instruction_text );
 					}
-					$output .= $instruction_text;
+					$instruction_content .= $instruction_text;
 				}
 				if ( 'after' === $atts['ingredients_position'] ) {
-					$output .= self::instruction_ingredients( $recipe, $instruction, $atts );
+					$instruction_content .= self::instruction_ingredients( $recipe, $instruction, $atts );
 				}
 				if ( 'after' === $atts['image_position'] ) {
-					$output .= self::instruction_media( $recipe, $instruction, $atts );
+					$instruction_content .= self::instruction_media( $recipe, $instruction, $atts );
 				}
 
-				$output .= '</li>';
+				// Build the complete <li>...</li> structure
+				$li_id = 'wprm-recipe-' . esc_attr( $recipe->id() ) . '-step-' . esc_attr( $group_index ) . '-' . esc_attr( $index );
+				$li_attributes = 'id="' . $li_id . '" class="wprm-recipe-instruction" style="' . esc_attr( $style ) . '"';
+				$instruction_line = '<li ' . $li_attributes . '>' . $instruction_content . '</li>';
+				
+				// Apply filter to the complete instruction line
+				$instruction_line = apply_filters( 'wprm_recipe_instructions_shortcode_instruction', $instruction_line, $atts, $instruction, $recipe );
+				
+				$output .= $instruction_line;
 			}
 
 			$output .= '</' . $list_tag . '>';
@@ -1138,6 +1354,10 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 		if ( 'after' === $atts['prevent_sleep'] ) {
 			$output .= WPRM_SC_Prevent_Sleep::shortcode( $prevent_sleep_atts );
+		}
+
+		if ( 'after' === $atts['cook_mode'] ) {
+			$output .= WPRM_SC_Cook_Mode::shortcode( $cook_mode_atts );
 		}
 
 		$output .= '</div>';

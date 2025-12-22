@@ -2,7 +2,7 @@
 /**
  * Template for the plugin settings structure.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.0
  *
  * @package    WP_Recipe_Maker
@@ -30,6 +30,76 @@ $permissions = array(
 					'description' => __( 'Checks if a recipe is in the post content of its parent post. Can be used in combination with membership plugins.', 'wp-recipe-maker' ),
 					'type' => 'toggle',
 					'default' => false,
+				),
+				array(
+					'id' => 'api_allow_published_only',
+					'name' => __( 'Only allow Published Recipes in API', 'wp-recipe-maker' ),
+					'description' => __( 'Only allow published recipes to be returned by the API. When disabled, some data on all your recipes can be accessed by anyone via the API.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+			),
+		),
+		array(
+			'name' => __( 'Embed API', 'wp-recipe-maker' ),
+			'description' => __( 'Control access to the recipe embedding API. When enabled, recipes can be embedded on external sites using the API endpoint.', 'wp-recipe-maker' ),
+			'documentation' => 'https://help.bootstrapped.ventures/docs/wp-recipe-maker/recipe-embed-api/',
+			'required' => 'premium',
+			'settings' => array(
+				array(
+					'id' => 'embed_api_enabled',
+					'name' => __( 'Enable Embed API', 'wp-recipe-maker' ),
+					'description' => __( 'Allow recipes to be embedded on external sites via the REST API.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+				array(
+					'id' => 'embed_api_auth_method',
+					'name' => __( 'Authentication Method', 'wp-recipe-maker' ),
+					'description' => __( 'Choose how external sites authenticate with the embed API.', 'wp-recipe-maker' ),
+					'type' => 'dropdown',
+					'default' => 'none',
+					'options' => array(
+						'none' => __( 'No Authentication', 'wp-recipe-maker' ),
+						'signature' => __( 'HMAC Signature (Recommended)', 'wp-recipe-maker' ),
+						'passkey' => __( 'Simple Passkey (Less Secure)', 'wp-recipe-maker' ),
+					),
+					'dependency' => array(
+						'id' => 'embed_api_enabled',
+						'value' => true,
+					),
+				),
+				array(
+					'id' => 'embed_api_secret_key',
+					'name' => __( 'Embed API Secret Key', 'wp-recipe-maker' ),
+					'description' => __( 'Secret key used to generate secure signatures for API access. Generate a strong, random key (32+ characters).', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'default' => '',
+					'sanitize' => function( $value ) {
+						return sanitize_text_field( $value );
+					},
+					'dependency' => array(
+						array(
+							'id' => 'embed_api_enabled',
+							'value' => true,
+						),
+						array(
+							'id' => 'embed_api_auth_method',
+							'value' => 'none',
+							'type' => 'inverse',
+						),
+					),
+				),
+				array(
+					'id' => 'embed_api_include_metadata',
+					'name' => __( 'Include Recipe Metadata', 'wp-recipe-maker' ),
+					'description' => __( 'Include recipe JSON-LD metadata in the embed API response.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+					'dependency' => array(
+						'id' => 'embed_api_enabled',
+						'value' => true,
+					),
 				),
 			),
 		),

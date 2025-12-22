@@ -2,7 +2,7 @@
 /**
  * Handle the recipe author shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.2.0
  *
  * @package    WP_Recipe_Maker
@@ -151,7 +151,16 @@ class WPRM_SC_Author extends WPRM_Template_Shortcode {
 				case 'same':
 					$same_author_image = WPRM_Settings::get( 'recipe_author_same_image_user_id' );
 					if ( $same_author_image ) {
-						$author_id = intval( $same_author_image );
+						// If numeric, treat as user ID (priority).
+						if ( is_numeric( $same_author_image ) ) {
+							$author_id = intval( $same_author_image );
+						} else {
+							// Otherwise, treat as username and get user ID.
+							$user = get_user_by( 'login', $same_author_image );
+							if ( $user ) {
+								$author_id = $user->ID;
+							}
+						}
 					}
 					break;
 			}

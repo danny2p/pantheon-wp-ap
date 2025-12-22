@@ -62,6 +62,20 @@ window.WPRecipeMaker.analytics = {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'bluesky-share-button' );
 			}
 			return true;
+		} else if ( target.matches( '.wprm-recipe-mastodon-share' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'mastodon-share-button' );
+			}
+			return true;
+		} else if ( target.matches( '.wprm-recipe-tumblr-share' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'tumblr-share-button' );
+			}
+			return true;
 		} else if ( target.matches( '.wprm-recipe-text-share' ) ) {
 			const recipeId = target.dataset.hasOwnProperty( 'recipe' ) ? target.dataset.recipe : false;
 

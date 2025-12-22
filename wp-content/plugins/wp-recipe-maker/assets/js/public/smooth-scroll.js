@@ -6,7 +6,7 @@ window.WPRecipeMaker.jump = {
 	init: () => {
 		document.addEventListener( 'click', function(e) {
 			for ( var target = e.target; target && target != this; target = target.parentNode ) {
-				if ( target.matches( '.wprm-recipe-jump, .wprm-recipe-jump-to-comments, .wprm-recipe-jump-video, .wprm-jump-smooth-scroll' ) ) {
+				if ( target.matches( '.wprm-recipe-jump, .wprm-recipe-jump-to-comments, .wprm-recipe-jump-video, .wprm-jump-smooth-scroll, .wprm-recipe-jump-to-section' ) ) {
 					WPRecipeMaker.jump.onClick( target, e );
 					break;
 				}

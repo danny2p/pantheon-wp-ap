@@ -2,7 +2,7 @@
 /**
  * Responsible for importing Tasty recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.23.0
  *
  * @package    WP_Recipe_Maker
@@ -182,8 +182,8 @@ class WPRM_Import_Tasty extends WPRM_Import {
 
 		// Simple Matching.
 		$recipe['name'] = $post->post_title;
-		$recipe['summary'] = get_post_meta( $id, 'description', true );
-		$recipe['notes'] = get_post_meta( $id, 'notes', true );
+		$recipe['summary'] = $this->strip_caption_shortcode( get_post_meta( $id, 'description', true ) );
+		$recipe['notes'] = $this->strip_caption_shortcode( get_post_meta( $id, 'notes', true ) );
 		$recipe['author_name'] = get_post_meta( $id, 'author_name', true );
 
 		if ( $recipe['author_name'] ) {
@@ -335,27 +335,48 @@ class WPRM_Import_Tasty extends WPRM_Import {
 				// Find any images.
 				preg_match_all( '/<img[^>]+>/i', $tasty_item, $img_tags );
 
+				$image_ids = array();
 				foreach ( $img_tags[0] as $img_tag ) {
 					preg_match_all( '/src="([^"]*)"/i', $img_tag, $img );
 
 					if ( $img[1] ) {
 						$img_src = $img[1][0];
 						$image_id = WPRM_Import_Helper::get_or_upload_attachment( $id, $img_src );
-
 						if ( $image_id ) {
-							$group['instructions'][] = array(
-								'text' => $text,
-								'image' => $image_id,
-							);
-							$text = ''; // Only add same text once.
+							$image_ids[] = $image_id;
 						}
 					}
 				}
 
+				// If we have text, create instruction with text and first image
 				if ( ! empty( $text ) ) {
-					$group['instructions'][] = array(
-						'text' => $text,
-					);
+					$instruction = array( 'text' => $text );
+					if ( ! empty( $image_ids ) ) {
+						$instruction['image'] = $image_ids[0];
+					}
+					$group['instructions'][] = $instruction;
+					
+					// Add remaining images as separate instructions
+					for ( $i = 1; $i < count( $image_ids ); $i++ ) {
+						$group['instructions'][] = array( 'text' => '', 'image' => $image_ids[ $i ] );
+					}
+				} else if ( ! empty( $image_ids ) ) {
+					// No text, try to add first image to previous instruction
+					$last_instruction_index = count( $group['instructions'] ) - 1;
+					if ( $last_instruction_index >= 0 && ! isset( $group['instructions'][ $last_instruction_index ]['image'] ) ) {
+						// Add first image to previous instruction
+						$group['instructions'][ $last_instruction_index ]['image'] = $image_ids[0];
+						
+						// Add remaining images as separate instructions
+						for ( $i = 1; $i < count( $image_ids ); $i++ ) {
+							$group['instructions'][] = array( 'text' => '', 'image' => $image_ids[ $i ] );
+						}
+					} else {
+						// Create new instructions for all images
+						foreach ( $image_ids as $image_id ) {
+							$group['instructions'][] = array( 'text' => '', 'image' => $image_id );
+						}
+					}
 				}
 			}
 
@@ -470,6 +491,9 @@ class WPRM_Import_Tasty extends WPRM_Import {
 			'items' => array(),
 		);
 
+		// Strip caption shortcodes from the component
+		$component = $this->strip_caption_shortcode( $component );
+
 		// Make sure to split list items.
 		$component = str_ireplace( '</p>', '</p>' . PHP_EOL, $component );
 		$component = str_ireplace( '</li>', '</li>' . PHP_EOL, $component );
@@ -498,6 +522,23 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		$component_list[] = $component_group;
 
 		return $component_list;
+	}
+
+	/**
+	 * Strip [caption] shortcode from text.
+	 *
+	 * @since    1.23.0
+	 * @param	 string $text Text to strip caption shortcode from.
+	 */
+	private function strip_caption_shortcode( $text ) {
+		if ( empty( $text ) ) {
+			return $text;
+		}
+
+		// Remove [caption] shortcode wrapper but keep the image, remove caption text
+		$text = preg_replace( '/\[caption[^\]]*\](<img[^>]*>)\s*[^<]*\[\/caption\]/s', '$1', $text );
+		
+		return $text;
 	}
 
 	/**

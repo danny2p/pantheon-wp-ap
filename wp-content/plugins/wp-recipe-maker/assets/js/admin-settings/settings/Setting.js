@@ -67,9 +67,14 @@ const Setting = (props) => {
         <Element className="wprm-setting-container" name={props.setting.id} >
             <div className="wprm-setting-label-container">
                 <span className="wprm-setting-label">
-                    <RequiredLabel object={props.setting} />{props.setting.name}
+                    <RequiredLabel object={props.setting} />
+                    {props.setting.name && (props.searchQuery ? Helpers.highlightText(props.setting.name, props.searchQuery) : props.setting.name)}
                 </span>
-                <span className="wprm-setting-description">{props.setting.description}</span>
+                {props.setting.description && (
+                    <span className="wprm-setting-description">
+                        {props.searchQuery ? Helpers.highlightText(props.setting.description, props.searchQuery) : props.setting.description}
+                    </span>
+                )}
                 {
                     props.setting.hasOwnProperty('documentation')
                     ?
@@ -112,6 +117,7 @@ Setting.propTypes = {
     setting: PropTypes.object.isRequired,
     onSettingChange: PropTypes.func.isRequired,
     settingsChanged: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string.isRequired,
 }
 
 export default Setting;

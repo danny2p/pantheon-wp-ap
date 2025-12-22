@@ -2,7 +2,7 @@
 /**
  * Responsible for importing Recipe Card recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.12.0
  *
  * @package    WP_Recipe_Maker

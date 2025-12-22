@@ -2,7 +2,7 @@
 /**
  * Responsible for importing WPZOOM recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.4.0
  *
  * @package    WP_Recipe_Maker

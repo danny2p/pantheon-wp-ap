@@ -2,7 +2,7 @@
 /**
  * Handle the recipe counter shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      6.9.0
  *
  * @package    WP_Recipe_Maker
@@ -82,17 +82,22 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
-		// Global count.
-		$count = isset( $GLOBALS['wprm_recipe_counter'] ) ? $GLOBALS['wprm_recipe_counter'] + 1 : 1;
-		$GLOBALS['wprm_recipe_counter'] = $count;
-		
-		$text = str_ireplace( '%count%', $count, $text );
 		$text = $recipe->replace_placeholders( $text );
 
-		// Check if %total% is used.
+		// Check if %count% or %total% is used - replace with placeholders that will be replaced later.
+		// This ensures we count only rendered elements, not items processed by other plugins.
+		$needs_replacement = false;
+		if ( false !== stripos( $text, '%count%' ) ) {
+			$text = str_ireplace( '%count%', '<span class="wprm-recipe-counter-count">1</span>', $text );
+			$needs_replacement = true;
+		}
 		if ( false !== stripos( $text, '%total%' ) ) {
 			$text = str_ireplace( '%total%', '<span class="wprm-recipe-counter-total">1</span>', $text );
-			$GLOBALS['wprm_recipe_counter_using_total'] = true;
+			$needs_replacement = true;
+		}
+		
+		if ( $needs_replacement ) {
+			$GLOBALS['wprm_recipe_counter_needs_replacement'] = true;
 		}
 
 		if ( $atts['link'] && $recipe->permalink() ) {

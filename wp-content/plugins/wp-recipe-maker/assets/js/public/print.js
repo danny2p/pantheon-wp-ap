@@ -126,7 +126,12 @@ window.WPRecipeMaker.print = {
 	},
 	getUrl: ( args ) => {
 		const urlParts = wprm_public.home_url.split(/\?(.+)/);
+		
+		// Ensure base URL always has a trailing slash before appending the slug.
 		let printUrl = urlParts[0];
+		if ( !printUrl.endsWith( '/' ) ) {
+			printUrl += '/';
+		}
 
 		if ( wprm_public.permalinks ) {
 			printUrl += wprm_public.print_slug + '/' + args;

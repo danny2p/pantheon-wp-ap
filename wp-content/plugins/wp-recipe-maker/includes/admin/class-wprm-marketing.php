@@ -2,7 +2,7 @@
 /**
  * Responsible for promoting the plugin.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.8.1
  *
  * @package    WP_Recipe_Maker
@@ -28,24 +28,6 @@ class WPRM_Marketing {
 	 */
 	public static function init() {
 		$campaigns = array(
-			'black-friday-2024' => array(
-				'start' => new DateTime( '2024-11-26 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'end' => new DateTime( '2024-12-04 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'notice_title' => 'Black Friday & Cyber Monday Deal',
-				'notice_text' => 'Get a 30% discount right now!',
-				'page_title' => 'Black Friday Discount!',
-				'page_text' => 'Good news: we\'re having a Black Friday & Cyber Monday sale and you can get a <strong>30% discount on any of our plugins</strong>.',
-				'url' => 'https://bootstrapped.ventures/black-friday/',
-			),
-			'birthday-2025' => array(
-				'start' => new DateTime( '2025-01-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'end' => new DateTime( '2025-01-31 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
-				'notice_title' => 'Celebrating my birthday',
-				'notice_text' => 'Get a 30% discount right now!',
-				'page_title' => 'Birthday Discount!',
-				'page_text' => 'Good news: I\'m celebrating my birthday with a <strong>30% discount on any of our plugins</strong>.',
-				'url' => 'https://bootstrapped.ventures/birthday-discount/',
-			),
 			'black-friday-2025' => array(
 				'start' => new DateTime( '2025-11-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
 				'end' => new DateTime( '2025-12-02 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
@@ -58,6 +40,24 @@ class WPRM_Marketing {
 			'birthday-2026' => array(
 				'start' => new DateTime( '2026-01-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
 				'end' => new DateTime( '2026-01-31 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'notice_title' => 'Celebrating my birthday',
+				'notice_text' => 'Get a 30% discount right now!',
+				'page_title' => 'Birthday Discount!',
+				'page_text' => 'Good news: I\'m celebrating my birthday with a <strong>30% discount on any of our plugins</strong>.',
+				'url' => 'https://bootstrapped.ventures/birthday-discount/',
+			),
+			'black-friday-2026' => array(
+				'start' => new DateTime( '2026-11-23 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'end' => new DateTime( '2026-12-01 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'notice_title' => 'Black Friday & Cyber Monday Deal',
+				'notice_text' => 'Get a 30% discount right now!',
+				'page_title' => 'Black Friday Discount!',
+				'page_text' => 'Good news: we\'re having a Black Friday & Cyber Monday sale and you can get a <strong>30% discount on any of our plugins</strong>.',
+				'url' => 'https://bootstrapped.ventures/black-friday/',
+			),
+			'birthday-2027' => array(
+				'start' => new DateTime( '2027-01-24 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
+				'end' => new DateTime( '2027-01-31 10:00:00', new DateTimeZone( 'Europe/Brussels' ) ),
 				'notice_title' => 'Celebrating my birthday',
 				'notice_text' => 'Get a 30% discount right now!',
 				'page_title' => 'Birthday Discount!',
@@ -171,7 +171,7 @@ class WPRM_Marketing {
 			$notices[] = array(
 				'id' => 'marketing_' . self::$campaign['id'],
 				'title' => self::$campaign['notice_title'],
-				'text' => '<a href="' . esc_url( self::$campaign['url'] ) . '" target="_blank">' . self::$campaign['notice_text'] . '</a>',
+				'text' => '<p><a href="' . esc_url( self::$campaign['url'] ) . '" target="_blank">' . self::$campaign['notice_text'] . '</a></p>',
 			);
 		}
 

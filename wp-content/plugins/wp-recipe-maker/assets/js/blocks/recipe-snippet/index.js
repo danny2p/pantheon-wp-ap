@@ -12,12 +12,15 @@ const { Fragment } = wp.element;
 // Backwards compatibility.
 let InspectorControls;
 let BlockControls;
+let useBlockProps;
 if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 	InspectorControls = wp.blockEditor.InspectorControls;
 	BlockControls = wp.blockEditor.BlockControls;
+	useBlockProps = wp.blockEditor.useBlockProps;
 } else {
 	InspectorControls = wp.editor.InspectorControls;
 	BlockControls = wp.editor.BlockControls;
+	useBlockProps = wp.blockEditor ? wp.blockEditor.useBlockProps : ( () => ( { className: '' } ) );
 }
 
 let ServerSideRender;
@@ -28,6 +31,7 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-snippet', {
+    apiVersion: 3,
     title: __( 'Recipe Snippet', 'wp-recipe-maker' ),
     description: __( 'Displays the recipe snippet template. Usually used for a Jump to Recipe button at the top of the post content.', 'wp-recipe-maker' ),
     icon: 'button',
@@ -58,7 +62,8 @@ registerBlockType( 'wp-recipe-maker/recipe-snippet', {
         ]
     },
     edit: (props) => {
-        const { attributes, setAttributes, isSelected, className } = props;
+        const { attributes, setAttributes, isSelected } = props;
+        const blockProps = useBlockProps();
 
         let templateOptions = [
             { label: 'Use default from settings', value: '' },
@@ -76,7 +81,7 @@ registerBlockType( 'wp-recipe-maker/recipe-snippet', {
         }
 
         return (
-            <div className={ className }>
+            <div { ...blockProps }>
                 <InspectorControls>
                     <PanelBody title={ __( 'Recipe Snippet Details', 'wp-recipe-maker' ) }>
                         <SelectControl

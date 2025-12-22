@@ -2,7 +2,7 @@
 /**
  * Migration for cleaning up potential WP Ultimate Recipe leftovers.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.10.0
  *
  * @package    WP_Recipe_Maker

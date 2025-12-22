@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const OurTooltip = (props) => {
     if ( ! props.content ) {
@@ -10,35 +10,54 @@ const OurTooltip = (props) => {
 
     const style = props.hasOwnProperty( 'style' ) ? props.style : {};
 
+    let child = props.children;
+
+    // Determine whether the child can safely receive a ref from Tippy.
+    const isDomElement = React.isValidElement( child ) && 'string' === typeof child.type;
+    const isClassComponent = React.isValidElement( child ) && child.type && child.type.prototype && child.type.prototype.isReactComponent;
+    const isForwardRef = React.isValidElement( child ) && child.type && child.type.$$typeof && 'Symbol(react.forward_ref)' === child.type.$$typeof.toString();
+    const needsWrapper = ! isDomElement && ! isClassComponent && ! isForwardRef;
+
+    if ( needsWrapper ) {
+        // Ensure Tippy always receives a DOM node so refs work (e.g. when wrapping Icon components).
+        child = <span style={ style }>{ child }</span>;
+    } else if ( React.isValidElement( child ) && React.Children.count( props.children ) === 1 ) {
+        child = React.cloneElement( child, {
+            style: { ...child.props.style, ...style }
+        } );
+    } else {
+        child = <span style={ style }>{ child }</span>;
+    }
+
     return (
-        <Tooltip
-            html={
+        <Tippy
+            content={
                 <div
                     dangerouslySetInnerHTML={ { __html: props.content } }
                 />
             }
+            allowHTML={ true }
             popperOptions={ {
-                modifiers: {
-                    addZIndex: {
-                      enabled: true,
-                      order: 810,
-                      fn: data => ({
-                        ...data,
-                        styles: {
-                          ...data.styles,
-                          zIndex: 100000,
+                modifiers: [
+                    {
+                        name: 'addZIndex',
+                        enabled: true,
+                        phase: 'write',
+                        fn: ({ state }) => {
+                            state.styles.popper.zIndex = '100000';
                         },
-                      })
                     },
-                    preventOverflow: {
-                        boundariesElement: 'window',
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'window',
+                        },
                     },
-                },
+                ],
             } }
-            style={ style }
         >
-            { props.children }
-        </Tooltip>
+            { child }
+        </Tippy>
     );
 }
 export default OurTooltip;

@@ -2,7 +2,7 @@
 /**
  * Different recipe templates by type.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.2.1
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Template for refresh video metadata page.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      6.0.0
  *
  * @package    WP_Recipe_Maker

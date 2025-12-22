@@ -42,6 +42,11 @@
     .wprm-template-block-hovering {
         outline: 2px dashed blue;
         outline-offset: 2px;
+        cursor: pointer;
+    }
+
+    .wprm-template-block-wrapper {
+        display: contents;
     }
 
     &.wprm-template-main-add {

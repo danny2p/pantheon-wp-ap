@@ -2,7 +2,7 @@
 /**
  * Responsible for saving recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -71,13 +71,47 @@ class WPRM_Recipe_Saver {
 			}
 		}
 
+		// Make sure language is set first, before setting taxonomies.
+		$post_type_structure = WPRM_Settings::get( 'post_type_structure' );
+		$language_is_set = array_key_exists( 'language', $recipe );
+
+		if ( 'public' === $post_type_structure ) {
+			if ( $language_is_set ) {
+				WPRM_Compatibility::set_language_for( $id, $recipe['language'] );
+			}
+		} else {
+			if ( $language_is_set ) {
+				WPRM_Compatibility::set_language_for( $id, $recipe['language'] );
+			} else {
+				// Not manually setting the language, so default to the current admin language.
+				$admin_language = WPRM_Compatibility::get_current_admin_language();
+				if ( $admin_language ) {
+					WPRM_Compatibility::set_language_for( $id, $admin_language );
+				}
+			}
+		}
+
 		// Recipe Taxonomies.
 		if ( isset( $recipe['tags'] ) ) {
 			$taxonomies = WPRM_Taxonomies::get_taxonomies();
+
+			$term_language = false;
+			if ( isset( $recipe['language'] ) && $recipe['language'] ) {
+				$term_language = $recipe['language'];
+			} else {
+				$term_language = WPRM_Compatibility::get_language_for( $id );
+			}
+
+			if ( $term_language ) {
+				WPRM_Compatibility::set_new_term_language_context( $term_language );
+			}
+
 			foreach ( $taxonomies as $taxonomy => $options ) {
 				$key = substr( $taxonomy, 5 ); // Get rid of wprm_.
 				wp_set_object_terms( $id, $recipe['tags'][ $key ], $taxonomy, false );
 			}
+
+			WPRM_Compatibility::clear_new_term_language_context();
 		}
 
 		// Recipe Equipment.
@@ -235,10 +269,6 @@ class WPRM_Recipe_Saver {
 
 			if ( isset( $recipe['post_password'] ) ) {
 				$post['post_password'] = $recipe['post_password'];
-			}
-
-			if ( isset( $recipe['language'] ) ) {
-				WPRM_Compatibility::set_language_for( $id, $recipe['language'] );
 			}
 		}
 

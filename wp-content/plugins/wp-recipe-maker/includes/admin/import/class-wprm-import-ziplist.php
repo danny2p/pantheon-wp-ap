@@ -2,7 +2,7 @@
 /**
  * Responsible for importing ZipList recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.8.0
  *
  * @package    WP_Recipe_Maker

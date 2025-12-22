@@ -2,7 +2,7 @@
 /**
  * Responsible for importing MV Create recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.4.0
  *
  * @package    WP_Recipe_Maker

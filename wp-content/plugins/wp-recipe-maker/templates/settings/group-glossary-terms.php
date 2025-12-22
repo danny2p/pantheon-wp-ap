@@ -2,7 +2,7 @@
 /**
  * Template for the plugin settings structure.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      8.9.0
  *
  * @package    WP_Recipe_Maker

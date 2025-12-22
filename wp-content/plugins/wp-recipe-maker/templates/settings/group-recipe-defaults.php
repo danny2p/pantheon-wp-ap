@@ -2,7 +2,7 @@
 /**
  * Template for the plugin settings structure.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.0
  *
  * @package    WP_Recipe_Maker
@@ -102,8 +102,13 @@ $recipe_defaults = array(
 				array(
 					'id' => 'recipe_author_same_image_user_id',
 					'name' => __( 'Author Image', 'wp-recipe-maker' ),
-					'description' => __( 'Use profile image of a specific author on your site by specifying the user ID. Leave blank for no image.', 'wp-recipe-maker' ),
-					'type' => 'number',
+					'description' => __( 'Use profile image of a specific author on your site by specifying the user ID or username. Leave blank for no image.', 'wp-recipe-maker' ),
+					'type' => 'text',
+					'required' => 'premium',
+					'dependency' => array(
+						'id' => 'recipe_author_display_default',
+						'value' => 'same',
+					),
 					'default' => '',
 				),
 			),

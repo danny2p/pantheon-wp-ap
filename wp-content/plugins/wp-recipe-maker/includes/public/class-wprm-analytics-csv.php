@@ -2,7 +2,7 @@
 /**
  * Responsible for the analytics CSV export.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      9.8.1
  *
  * @package    WP_Recipe_Maker

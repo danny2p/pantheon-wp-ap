@@ -2,7 +2,7 @@
 /**
  * Responsible for importing EasyRecipe recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -376,7 +376,22 @@ class WPRM_Import_Easyrecipe extends WPRM_Import {
 
 				if ( is_object( $er_nutrition_data ) ) {
 					$value = trim( $er_nutrition_data->plaintext );
-					$recipe['nutrition'][ $wprm_field ] = $value;
+
+					if ( 'serving_size' === $wprm_field ) {
+						// Serving Size.
+						$match = preg_match( '/^\s*\d+/', $value, $servings_array );
+						if ( 1 === $match ) {
+							$servings = str_replace( ' ','', $servings_array[0] );
+						} else {
+							$servings = '';
+						}
+						$servings_unit = preg_replace( '/^\s*\d+/', '', $value );
+
+						$recipe['nutrition']['serving_size'] = $servings;
+						$recipe['nutrition']['serving_unit'] = $servings_unit;
+					} else {
+						$recipe['nutrition'][ $wprm_field ] = $value;
+					}
 				}
 			}
 		} else {

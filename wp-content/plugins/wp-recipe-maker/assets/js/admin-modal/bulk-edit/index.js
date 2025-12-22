@@ -16,6 +16,7 @@ import ActionsIngredient from './ActionsIngredient';
 import ActionsIngredientUnit from './ActionsIngredientUnit';
 import ActionsRating from './ActionsRating';
 import ActionsRecipe from './ActionsRecipe';
+import ActionsRecipeSubmission from './ActionsRecipeSubmission';
 import ActionsRevision from './ActionsRevision';
 import ActionsTaxonomy from './ActionsTaxonomy';
 import ActionsTrash from './ActionsTrash';
@@ -60,6 +61,10 @@ let actions = {
     'collection': {
         label: __wprm( 'Saved Collections' ),
         elem: ActionsCollection,
+    },
+    'recipe-submission': {
+        label: __wprm( 'Recipe Submissions' ),
+        elem: ActionsRecipeSubmission,
     },
 };
 

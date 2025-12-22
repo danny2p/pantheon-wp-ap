@@ -2,7 +2,7 @@
 /**
  * Handle ingredient units in the WordPress REST API.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.6.0
  *
  * @package    WP_Recipe_Maker

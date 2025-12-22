@@ -2,7 +2,7 @@
 /**
  * Responsible for returning recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -524,12 +524,168 @@ class WPRM_Recipe_Manager {
 			}
 		}
 
-		$recipe_ids = $gutenberg_matches + $classic_matches + $shortcode_matches + $divi_matches;
+		$divi5_matches = self::get_recipe_ids_from_divi5_blocks( $content );
+
+		$recipe_ids = $gutenberg_matches + $classic_matches + $shortcode_matches + $divi_matches + $divi5_matches;
 
 		// Allow for filtering of recipe IDs found in the content.
 		$recipe_ids = apply_filters( 'wprm_get_recipe_ids_from_content', $recipe_ids, $content );
 
 		return $recipe_ids;
+	}
+
+	/**
+	 * Extract recipe IDs from Divi 5 blocks.
+	 *
+	 * @since 10.0.0
+	 * @param mixed $content Content we want to check for recipes.
+	 */
+	private static function get_recipe_ids_from_divi5_blocks( $content ) {
+		if ( false === strpos( $content, 'wprm/recipe' ) ) {
+			return array();
+		}
+
+		if ( ! function_exists( 'parse_blocks' ) ) {
+			return array();
+		}
+
+		$blocks = parse_blocks( $content );
+
+		if ( empty( $blocks ) ) {
+			return array();
+		}
+
+		return self::extract_recipe_ids_from_divi5_blocks( $blocks );
+	}
+
+	/**
+	 * Recursively loop through blocks to find Divi 5 recipe modules.
+	 *
+	 * @since 10.0.0
+	 * @param array $blocks Parsed block list.
+	 */
+	private static function extract_recipe_ids_from_divi5_blocks( $blocks ) {
+		$ids = array();
+
+		foreach ( $blocks as $block ) {
+			if ( ! is_array( $block ) ) {
+				continue;
+			}
+
+			if ( isset( $block['blockName'] ) && 'wprm/recipe' === $block['blockName'] ) {
+				$maybe_id = self::get_recipe_id_from_divi5_attrs( isset( $block['attrs'] ) ? $block['attrs'] : array() );
+
+				if ( $maybe_id ) {
+					$ids[] = $maybe_id;
+				}
+			}
+
+			if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+				$ids = array_merge( $ids, self::extract_recipe_ids_from_divi5_blocks( $block['innerBlocks'] ) );
+			}
+		}
+
+		return $ids;
+	}
+
+	/**
+	 * Attempt to extract a numeric recipe ID from Divi 5 block attributes.
+	 *
+	 * @since 10.0.0
+	 * @param array $attrs Block attributes.
+	 */
+	private static function get_recipe_id_from_divi5_attrs( $attrs ) {
+		if ( empty( $attrs ) || ! is_array( $attrs ) ) {
+			return false;
+		}
+
+		$candidates = array();
+
+		// Native attribute structure when the recipe field is stored as an object.
+		if ( isset( $attrs['recipe']['innerContent']['desktop']['value'] ) ) {
+			$candidates[] = $attrs['recipe']['innerContent']['desktop']['value'];
+		}
+
+		if ( isset( $attrs['recipe']['innerContent']['value'] ) ) {
+			$candidates[] = $attrs['recipe']['innerContent']['value'];
+		}
+
+		if ( isset( $attrs['recipe']['value'] ) ) {
+			$candidates[] = $attrs['recipe']['value'];
+		}
+
+		// Some conversions flatten the property name to a dotted or underscored string.
+		if ( isset( $attrs['recipe.innerContent'] ) ) {
+			$candidates[] = $attrs['recipe.innerContent'];
+		}
+
+		if ( isset( $attrs['recipe_innerContent'] ) ) {
+			$candidates[] = $attrs['recipe_innerContent'];
+		}
+
+		foreach ( $candidates as $candidate ) {
+			$recipe_id = self::normalize_divi5_recipe_candidate( $candidate );
+
+			if ( $recipe_id ) {
+				return $recipe_id;
+			}
+		}
+
+		// As a final fallback, search recursively for a numeric "value" key.
+		foreach ( $attrs as $key => $attr ) {
+			if ( ! is_string( $key ) || false === strpos( $key, 'recipe' ) || ! is_array( $attr ) ) {
+				continue;
+			}
+
+			$maybe_id = self::normalize_divi5_recipe_candidate( $attr );
+
+			if ( $maybe_id ) {
+				return $maybe_id;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Normalize data stored in a Divi 5 attribute to a recipe ID.
+	 *
+	 * @since 10.0.0
+	 * @param mixed $candidate Candidate value to inspect.
+	 */
+	private static function normalize_divi5_recipe_candidate( $candidate ) {
+		if ( is_array( $candidate ) ) {
+			if ( isset( $candidate['value'] ) ) {
+				return self::normalize_divi5_recipe_candidate( $candidate['value'] );
+			}
+
+			foreach ( $candidate as $value ) {
+				$maybe = self::normalize_divi5_recipe_candidate( $value );
+
+				if ( $maybe ) {
+					return $maybe;
+				}
+			}
+
+			return false;
+		}
+
+		if ( is_numeric( $candidate ) ) {
+			$recipe_id = absint( $candidate );
+			return $recipe_id > 0 ? $recipe_id : false;
+		}
+
+		if ( is_string( $candidate ) ) {
+			if ( preg_match( '/id="?(\\d+)"?/', $candidate, $matches ) ) {
+				return absint( $matches[1] );
+			}
+
+			if ( preg_match( '/\\d+/', $candidate, $matches ) ) {
+				return absint( $matches[0] );
+			}
+		}
+
+		return false;
 	}
 
 	/**

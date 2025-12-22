@@ -184,6 +184,52 @@ export default {
             }
         ];
 
+        if ( wprm_admin_manage.multilingual ) {
+            columns.push({
+                Header: __wprm( 'Language' ),
+                id: 'language',
+                accessor: 'language',
+                sortable: false,
+                filterable: false,
+                width: 220,
+                Cell: row => {
+                    const languages = wprm_admin_manage.multilingual.languages || {};
+                    const current = row.value && languages.hasOwnProperty( row.value ) ? row.value : '';
+
+                    return (
+                        <div className="wprm-admin-manage-language-select">
+                            <select
+                                value={ current }
+                                onChange={ (event) => {
+                                    const newLanguage = event.target.value;
+
+                                    if ( ! newLanguage || newLanguage === current ) {
+                                        return;
+                                    }
+
+                                    Api.manage.updateTermLanguage(
+                                        datatable.props.options.id,
+                                        row.original.term_id,
+                                        newLanguage
+                                    ).then(() => datatable.refreshData());
+                                }}
+                                style={{ width: '100%', fontSize: '1em' }}
+                            >
+                                <option value="">{ __wprm( 'Select language' ) }</option>
+                                {
+                                    Object.values( languages ).map((language, index) => (
+                                        <option value={ language.value } key={ index }>
+                                            { `${ language.value } - ${ he.decode( language.label ) }` }
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                    );
+                },
+            });
+        }
+
         if ( 'suitablefordiet' === datatable.props.options.id ) {
             columns.push({
                 Header: __wprm( 'Label' ),
@@ -614,6 +660,17 @@ export default {
                                             Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
                                                 amazon_updated: Date.now(),
                                                 amazon_image: product.image,
+                                                amazon_image_width: product.image_width,
+                                                amazon_image_height: product.image_height,
+                                                amazon_name: product.name,
+                                                amazon_asin: product.asin,
+                                                link: product.link,
+                                            } ).then(() => datatable.refreshData());
+                                            Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
+                                                amazon_updated: Date.now(),
+                                                amazon_image: product.image,
+                                                amazon_image_width: product.image_width,
+                                                amazon_image_height: product.image_height,
                                                 amazon_name: product.name,
                                                 amazon_asin: product.asin,
                                                 link: product.link,
@@ -633,6 +690,8 @@ export default {
                                         Api.manage.updateTaxonomyMeta( 'equipment', row.original.term_id, {
                                             amazon_updated: Date.now(),
                                             amazon_image: '',
+                                            amazon_image_width: '',
+                                            amazon_image_height: '',
                                             amazon_name: '',
                                             amazon_asin: '',
                                             link: '',
@@ -699,8 +758,8 @@ export default {
             });
         }
 
-        // TODO Products.
-        if ( false && wprm_admin.addons.elite && ( 'ingredient' === datatable.props.options.id || 'equipment' === datatable.props.options.id ) ) {
+        // Products column - only show if products integration is available.
+        if ( wprm_admin.addons.elite && wprm_admin_manage.products_integrations_available && ( 'ingredient' === datatable.props.options.id || 'equipment' === datatable.props.options.id ) ) {
             columns.push({
                 Header: __wprm( 'Product' ),
                 id: 'product',
@@ -737,7 +796,42 @@ export default {
                             {
                                 row.value
                                 ?
-                                <a href={ row.value.url } target="_blank">{ row.value.name } (#{ row.value.id })</a>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginLeft: '10px' }}>
+                                    {
+                                        row.value.image_url
+                                        ?
+                                        <img 
+                                            src={ row.value.image_url } 
+                                            alt={ row.value.name }
+                                            style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '4px' }}
+                                        />
+                                        :
+                                        null
+                                    }
+                                    <div>
+                                        <a href={ row.value.url } target="_blank">{ row.value.name } (#{ row.value.id })</a>
+                                        {
+                                            row.value.variation_id && row.value.variation_name
+                                            ?
+                                            <div style={{ fontSize: '0.9em', color: '#666', marginTop: '2px', marginLeft: '5px' }}>
+                                                { __wprm( 'Variation' ) }: { row.value.variation_name } (#{ row.value.variation_id })
+                                                {
+                                                    row.value.variation_image_url
+                                                    ?
+                                                    <img 
+                                                        src={ row.value.variation_image_url } 
+                                                        alt={ row.value.variation_name }
+                                                        style={{ width: '20px', height: '20px', objectFit: 'cover', borderRadius: '2px', marginLeft: '5px', verticalAlign: 'middle' }}
+                                                    />
+                                                    :
+                                                    null
+                                                }
+                                            </div>
+                                            :
+                                            null
+                                        }
+                                    </div>
+                                </div>
                                 :
                                 null
                             }

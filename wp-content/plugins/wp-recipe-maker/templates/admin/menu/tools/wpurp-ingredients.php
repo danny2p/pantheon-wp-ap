@@ -2,7 +2,7 @@
 /**
  * Template for importing ingredients from WP Ultimate Recipe.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.6.0
  *
  * @package    WP_Recipe_Maker

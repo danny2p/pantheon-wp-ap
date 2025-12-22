@@ -2,7 +2,7 @@
 /**
  * Responsible for the analytics database.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      6.5.0
  *
  * @package    WP_Recipe_Maker

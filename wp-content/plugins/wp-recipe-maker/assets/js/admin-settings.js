@@ -1,8 +1,9 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import React from 'react';
 import App from './admin-settings/App';
 
-ReactDOM.render(
-    <App/>,
-	document.getElementById( 'wprm-settings' )
-);
+const container = document.getElementById( 'wprm-settings' );
+if (container) {
+	const root = createRoot(container);
+	root.render(<App/>);
+}

@@ -2,7 +2,7 @@
 /**
  * Represents a recipe.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -138,6 +138,7 @@ class WPRM_Recipe {
 			$recipe['seo'] = $this->seo();
 			$recipe['seo_priority'] = $this->seo_priority();
 			$recipe['rating'] = WPRM_Rating::get_ratings_summary_for( $this->id() );
+			$recipe['image_dimensions'] = $this->image_dimensions();
 	
 			$recipe['permalink'] = $this->permalink( true );
 	
@@ -649,6 +650,38 @@ class WPRM_Recipe {
 		}
 
 		return $image_url;
+	}
+
+	/**
+	 * Get the full-size image dimensions.
+	 *
+	 * @since    9.2.0
+	 */
+	public function image_dimensions() {
+		$dimensions = array(
+			'width' => 0,
+			'height' => 0,
+		);
+
+		$image_id = $this->image_id();
+
+		if ( $image_id ) {
+			$metadata = wp_get_attachment_metadata( $image_id );
+
+			if ( $metadata && isset( $metadata['width'], $metadata['height'] ) ) {
+				$dimensions['width'] = intval( $metadata['width'] );
+				$dimensions['height'] = intval( $metadata['height'] );
+			} else {
+				$full = wp_get_attachment_image_src( $image_id, 'full' );
+
+				if ( $full ) {
+					$dimensions['width'] = isset( $full[1] ) ? intval( $full[1] ) : 0;
+					$dimensions['height'] = isset( $full[2] ) ? intval( $full[2] ) : 0;
+				}
+			}
+		}
+
+		return $dimensions;
 	}
 
 	/**

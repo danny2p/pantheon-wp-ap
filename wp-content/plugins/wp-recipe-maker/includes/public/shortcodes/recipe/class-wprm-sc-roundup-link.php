@@ -2,7 +2,7 @@
 /**
  * Handle the recipe roundup link shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      4.3.0
  *
  * @package    WP_Recipe_Maker

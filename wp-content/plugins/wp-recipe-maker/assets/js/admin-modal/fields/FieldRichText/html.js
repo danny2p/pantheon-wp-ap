@@ -12,6 +12,12 @@ const ELEMENT_TAGS = {
         sponsored: el.getAttribute('rel') && el.getAttribute('rel').includes('sponsored') ? true : false,
     }),
     P: () => ({ type: 'paragraph' }),
+    H1: () => ({ type: 'heading-1', level: 1 }),
+    H2: () => ({ type: 'heading-2', level: 2 }),
+    H3: () => ({ type: 'heading-3', level: 3 }),
+    H4: () => ({ type: 'heading-4', level: 4 }),
+    H5: () => ({ type: 'heading-5', level: 5 }),
+    H6: () => ({ type: 'heading-6', level: 6 }),
     'WPRM-CODE': el => {
         return {
             type: 'code',
@@ -167,6 +173,18 @@ export const serialize = node => {
     switch (node.type) {
         case 'paragraph':
             return `<p>${children}</p>`;
+        case 'heading-1':
+            return `<h1>${children}</h1>`;
+        case 'heading-2':
+            return `<h2>${children}</h2>`;
+        case 'heading-3':
+            return `<h3>${children}</h3>`;
+        case 'heading-4':
+            return `<h4>${children}</h4>`;
+        case 'heading-5':
+            return `<h5>${children}</h5>`;
+        case 'heading-6':
+            return `<h6>${children}</h6>`;
         case 'link':
             let rel = [];
 

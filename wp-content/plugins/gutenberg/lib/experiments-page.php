@@ -209,6 +209,43 @@ function gutenberg_initialize_experiments_settings() {
 		)
 	);
 
+	add_settings_field(
+		'gutenberg-content-only-inspector-fields',
+		__( 'contentOnly: Enable editable inspector fields', 'gutenberg' ),
+		'gutenberg_display_experiment_field',
+		'gutenberg-experiments',
+		'gutenberg_experiments_section',
+		array(
+			'label'    => __( 'Enables editable inspector fields (media, links, alt text, etc.) in the content-only pattern editing interface. Requires "contentOnly: Make patterns contentOnly by default upon insertion" to be enabled.', 'gutenberg' ),
+			'id'       => 'gutenberg-content-only-inspector-fields',
+			'requires' => 'gutenberg-content-only-pattern-insertion',
+		)
+	);
+
+	add_settings_field(
+		'gutenberg-workflow-palette',
+		__( 'Workflow Palette', 'gutenberg' ),
+		'gutenberg_display_experiment_field',
+		'gutenberg-experiments',
+		'gutenberg_experiments_section',
+		array(
+			'label' => __( 'Enables the Workflow Palette for running workflows composed of abilities, from a unified interface.', 'gutenberg' ),
+			'id'    => 'gutenberg-workflow-palette',
+		)
+	);
+
+	add_settings_field(
+		'gutenberg-customizable-navigation-overlays',
+		__( 'Customizable Navigation Overlays', 'gutenberg' ),
+		'gutenberg_display_experiment_field',
+		'gutenberg-experiments',
+		'gutenberg_experiments_section',
+		array(
+			'label' => __( 'Enables custom mobile overlay design and content control for Navigation blocks, allowing you to create flexible, professional menu experiences.', 'gutenberg' ),
+			'id'    => 'gutenberg-customizable-navigation-overlays',
+		)
+	);
+
 	register_setting(
 		'gutenberg-experiments',
 		'gutenberg-experiments'

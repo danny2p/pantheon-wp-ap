@@ -2,7 +2,7 @@
 /**
  * API for utilities.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.11.0
  *
  * @package    WP_Recipe_Maker
@@ -53,7 +53,7 @@ class WPRM_Api_Utilities {
 						'validate_callback' => array( __CLASS__, 'api_validate_numeric' ),
 					),
 				),
-				'permission_callback' => array( __CLASS__, 'api_permissions_author' ),
+				'permission_callback' => array( __CLASS__, 'api_permissions_post_summary' ),
 			));
 			register_rest_route( 'wp-recipe-maker/v1', '/utilities/preview', array(
 				'callback' => array( __CLASS__, 'api_preview_recipe' ),
@@ -75,6 +75,11 @@ class WPRM_Api_Utilities {
 				'methods' => 'POST',
 				'permission_callback' => '__return_true',
 			));
+			register_rest_route( 'wp-recipe-maker/v1', '/utilities/divi5-builder-data', array(
+				'callback' => array( __CLASS__, 'api_get_divi5_builder_data' ),
+				'methods' => 'GET',
+				'permission_callback' => array( __CLASS__, 'api_permissions_divi5_builder_data' ),
+			));
 		}
 	}
 
@@ -94,6 +99,97 @@ class WPRM_Api_Utilities {
 	 */
 	public static function api_permissions_administrator() {
 		return current_user_can( 'manage_options' );
+	}
+
+	/**
+	 * Required permissions for the post summary API.
+	 *
+	 * @since 10.2.2
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_permissions_post_summary( $request ) {
+		$post_id = isset( $request['id'] ) ? intval( $request['id'] ) : 0;
+
+		if ( ! $post_id ) {
+			return new WP_Error( 'wprm_invalid_post', __( 'Invalid post ID.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+
+		$post = get_post( $post_id );
+
+		if ( ! $post ) {
+			return new WP_Error( 'wprm_post_not_found', __( 'Post not found.', 'wp-recipe-maker' ), array( 'status' => 404 ) );
+		}
+
+		if ( self::can_user_access_post_summary( $post_id, $post ) ) {
+			return true;
+		}
+
+		return new WP_Error( 'wprm_forbidden_post', __( 'You are not allowed to access this post.', 'wp-recipe-maker' ), array( 'status' => 403 ) );
+	}
+
+	/**
+	 * Check if current user can access the post summary for a post.
+	 *
+	 * Publicly viewable posts without a password are allowed for everyone.
+	 * For all other posts, the user must be able to read or edit the post.
+	 *
+	 * @since 10.2.2
+	 * @param int     $post_id Post ID.
+	 * @param WP_Post $post    Post object.
+	 */
+	private static function can_user_access_post_summary( $post_id, $post ) {
+		if ( is_post_publicly_viewable( $post ) && ! post_password_required( $post ) ) {
+			return true;
+		}
+
+		if ( current_user_can( 'edit_post', $post_id ) || current_user_can( 'read_post', $post_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Required permissions for Divi 5 builder data API.
+	 * Allows cookie-based authentication for logged-in users.
+	 *
+	 * @since 9.7.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_permissions_divi5_builder_data( $request ) {
+		// First, try standard WordPress REST API authentication
+		// This should work with cookies if user is logged in
+		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
+			return true;
+		}
+
+		// For Visual Builder context, also check if we have a valid nonce in the request
+		// This handles cases where cookies might not work but nonce is provided
+		$nonce = $request->get_header( 'X-WP-Nonce' );
+		if ( $nonce && wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			// Nonce is valid, verify user can edit posts
+			if ( current_user_can( 'edit_posts' ) ) {
+				return true;
+			}
+		}
+
+		// As a fallback for Visual Builder, check if we have WordPress auth cookies
+		// This handles cases where REST API auth isn't working but user is logged in
+		$cookie = '';
+		if ( isset( $_COOKIE[ LOGGED_IN_COOKIE ] ) ) {
+			$cookie = $_COOKIE[ LOGGED_IN_COOKIE ];
+		}
+		if ( $cookie ) {
+			$user_id = wp_validate_auth_cookie( $cookie, 'logged_in' );
+			if ( $user_id ) {
+				$user = get_userdata( $user_id );
+				if ( $user && user_can( $user, 'edit_posts' ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -176,9 +272,13 @@ class WPRM_Api_Utilities {
 
 		$post = get_post( $post_id );
 
-		if ( $post ) {
+		if ( $post && self::can_user_access_post_summary( $post_id, $post ) ) {
 			$name = $post->post_title;
 			$image_url = get_the_post_thumbnail_url( $post_id, 'full' );
+		} elseif ( ! $post ) {
+			return new WP_Error( 'wprm_post_not_found', __( 'Post not found.', 'wp-recipe-maker' ), array( 'status' => 404 ) );
+		} else {
+			return new WP_Error( 'wprm_forbidden_post', __( 'You are not allowed to access this post.', 'wp-recipe-maker' ), array( 'status' => 403 ) );
 		}
 
 		$data = array(
@@ -241,7 +341,7 @@ class WPRM_Api_Utilities {
 			$template = false;
 
 			if ( $template_slug ) {
-				$template = WPRM_Template_Manager::get_template_by_slug( $atts['template'] );
+				$template = WPRM_Template_Manager::get_template_by_slug( $template_slug );
 			}
 
 			if ( ! $template ) {
@@ -280,6 +380,24 @@ class WPRM_Api_Utilities {
 		$sanitized = WPRM_Recipe_Sanitizer::sanitize_html( $text );
 
 		return rest_ensure_response( $sanitized );
+	}
+
+	/**
+	 * Handle get Divi 5 builder data call to the REST API.
+	 *
+	 * @since 9.7.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_get_divi5_builder_data( $request ) {
+		$data = array(
+			'nonce'     => wp_create_nonce( 'wp_rest' ),
+			'endpoints' => array(
+				'preview' => trailingslashit( rest_url( 'wp-recipe-maker/v1/utilities/preview' ) ),
+			),
+			'latestRecipes'   => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
+		);
+
+		return rest_ensure_response( $data );
 	}
 }
 

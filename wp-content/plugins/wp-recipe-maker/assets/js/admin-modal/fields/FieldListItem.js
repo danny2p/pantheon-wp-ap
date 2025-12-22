@@ -91,7 +91,7 @@ export default class FieldListItem extends Component {
                                     &&
                                     <FieldRichText
                                         className="wprm-admin-modal-field-item-text"
-                                        toolbar="all"
+                                        toolbar="list"
                                         value={ item.data.text }
                                         placeholder=""
                                         onChange={ (value) => this.props.onChange( { text: value } ) }

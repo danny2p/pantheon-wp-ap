@@ -2,7 +2,7 @@
 /**
  * Responsible for handling the refresh video metadata tool.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      6.0.0
  *
  * @package    WP_Recipe_Maker

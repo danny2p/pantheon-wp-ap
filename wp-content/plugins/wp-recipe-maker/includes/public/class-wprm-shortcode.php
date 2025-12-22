@@ -2,7 +2,7 @@
 /**
  * Handle the recipe shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -39,6 +39,8 @@ class WPRM_Shortcode {
 
 		add_filter( 'content_edit_pre', array( __CLASS__, 'replace_imported_shortcodes' ) );
 		add_filter( 'the_content', array( __CLASS__, 'replace_tasty_shortcode' ), 1 );
+		add_filter( 'elementor/frontend/builder_content_data', array( __CLASS__, 'replace_tasty_elementor_widget_filter' ), 10, 2 );
+		add_filter( 'elementor/editor/localize_settings', array( __CLASS__, 'replace_tasty_elementor_widget_editor' ), 10, 1 );
 		add_filter( 'the_content', array( __CLASS__, 'replace_ziplist_shortcode' ), 1 );
 
 		add_filter( 'render_block', array( __CLASS__, 'replace_blocks' ), 10, 2 );
@@ -172,6 +174,132 @@ class WPRM_Shortcode {
 	}
 
 	/**
+	 * Filter wrapper for Elementor widget replacement with cache clearing.
+	 *
+	 * @since    1.23.0
+	 * @param	 array $data Elementor builder content data.
+	 * @param	 int   $post_id Post ID.
+	 */
+	public static function replace_tasty_elementor_widget_filter( $data, $post_id ) {
+		$result = self::replace_tasty_elementor_widget( $data, $post_id );
+		
+		// Clear Elementor cache if any widgets were replaced
+		if ( $result['widget_replaced'] ) {
+			// Clear Elementor element cache for this post
+			delete_post_meta( $post_id, '_elementor_element_cache' );
+			
+			// Also clear the global Elementor cache if available
+			if ( class_exists( 'Elementor\Plugin' ) && isset( \Elementor\Plugin::$instance->files_manager ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+		}
+		
+		return $result['data'];
+	}
+
+	/**
+	 * Replace Tasty Recipes Elementor widget in editor.
+	 *
+	 * @since    1.23.0
+	 * @param	 array $settings Editor settings data.
+	 */
+	public static function replace_tasty_elementor_widget_editor( $settings ) {
+		// Check if we're in the editor and have post data
+		if ( ! isset( $settings['initial_document']['elements'] ) ) {
+			return $settings;
+		}
+
+		$post_id = isset( $settings['initial_document']['id'] ) ? $settings['initial_document']['id'] : 0;
+		
+		if ( ! $post_id ) {
+			return $settings;
+		}
+
+		$result = self::replace_tasty_elementor_widget( $settings['initial_document']['elements'], $post_id );
+		
+		if ( $result['widget_replaced'] ) {
+			$settings['initial_document']['elements'] = $result['data'];
+		}
+
+		return $settings;
+	}
+
+	/**
+	 * Replace Tasty Recipes Elementor widget with ours.
+	 *
+	 * @since    1.23.0
+	 * @param	 array $data Elementor builder content data.
+	 * @param	 int   $post_id Post ID.
+	 */
+	public static function replace_tasty_elementor_widget( $data, $post_id ) {
+		if ( ! is_array( $data ) ) {
+			return $data;
+		}
+
+		$widget_replaced = false;
+
+		foreach ( $data as $key => $element ) {
+			if ( isset( $element['widgetType'] ) && 'tasty-recipe' === $element['widgetType'] ) {
+				$id = isset( $element['settings']['recipe_id'] ) ? intval( $element['settings']['recipe_id'] ) : false;
+
+				if ( $id ) {
+					$wprm_recipe_id = self::get_wprm_recipe_id_from_tasty_reference( $id );
+
+					if ( $wprm_recipe_id ) {
+						$data[ $key ] = self::convert_elementor_element_to_wprm_widget( $data[ $key ], $wprm_recipe_id );
+						unset( $data[ $key ]['settings']['recipe_id'] );
+						$widget_replaced = true;
+					}
+				}
+			} elseif ( isset( $element['widgetType'] ) && 'text-editor' === $element['widgetType'] && isset( $element['settings']['editor'] ) ) {
+				$widget_id = self::get_wprm_recipe_id_from_single_tasty_shortcode( $element['settings']['editor'] );
+
+				if ( $widget_id ) {
+					$data[ $key ] = self::convert_elementor_element_to_wprm_widget( $data[ $key ], $widget_id );
+					$widget_replaced = true;
+				} else {
+					$original_content = $element['settings']['editor'];
+					$replaced_content = self::replace_tasty_shortcode( $original_content );
+
+					if ( $replaced_content !== $original_content ) {
+						$data[ $key ]['settings']['editor'] = $replaced_content;
+						$widget_replaced = true;
+					}
+				}
+			} elseif ( isset( $element['widgetType'] ) && 'shortcode' === $element['widgetType'] && isset( $element['settings']['shortcode'] ) ) {
+				$widget_id = self::get_wprm_recipe_id_from_single_tasty_shortcode( $element['settings']['shortcode'] );
+
+				if ( $widget_id ) {
+					$data[ $key ] = self::convert_elementor_element_to_wprm_widget( $data[ $key ], $widget_id );
+					$widget_replaced = true;
+				} else {
+					$original_shortcode = $element['settings']['shortcode'];
+					$replaced_shortcode = self::replace_tasty_shortcode( $original_shortcode );
+
+					if ( $replaced_shortcode !== $original_shortcode ) {
+						$data[ $key ]['settings']['shortcode'] = $replaced_shortcode;
+						$widget_replaced = true;
+					}
+				}
+			}
+
+			// Recursively process nested elements
+			if ( isset( $element['elements'] ) && is_array( $element['elements'] ) ) {
+				$nested_result = self::replace_tasty_elementor_widget( $element['elements'], $post_id );
+				$data[ $key ]['elements'] = $nested_result['data'];
+				if ( $nested_result['widget_replaced'] ) {
+					$widget_replaced = true;
+				}
+			}
+		}
+
+		return array(
+			'data' => $data,
+			'widget_replaced' => $widget_replaced,
+		);
+	}
+
+	/**
 	 * Replace Tasty Recipes shortcode with ours.
 	 *
 	 * @since    1.23.0
@@ -203,6 +331,93 @@ class WPRM_Shortcode {
 		}
 
 		return $content;
+	}
+
+	/**
+	 * Try to get a WPRM recipe ID from a piece of content that only contains a Tasty shortcode.
+	 *
+	 * @since    10.0.0
+	 * @param    string $content Content to inspect.
+	 */
+	private static function get_wprm_recipe_id_from_single_tasty_shortcode( $content ) {
+		$shortcode_id = self::get_single_tasty_shortcode_id_from_content( $content );
+
+		if ( ! $shortcode_id ) {
+			return false;
+		}
+
+		return self::get_wprm_recipe_id_from_tasty_reference( $shortcode_id );
+	}
+
+	/**
+	 * Extract a Tasty shortcode ID when the content only contains that shortcode.
+	 *
+	 * @since    10.0.0
+	 * @param    string $content Content to inspect.
+	 */
+	private static function get_single_tasty_shortcode_id_from_content( $content ) {
+		if ( ! is_string( $content ) ) {
+			return false;
+		}
+
+		$sanitized = html_entity_decode( trim( $content ) );
+		$sanitized = trim( strip_tags( $sanitized ) );
+
+		if ( '' === $sanitized ) {
+			return false;
+		}
+
+		if ( preg_match( '/^\[tasty-recipe\s+.*?id\s*=\s*[\'"]?(\d+).*?\]\s*$/i', $sanitized, $match ) ) {
+			return intval( $match[1] );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Determine the WPRM recipe ID that should replace a Tasty reference.
+	 *
+	 * @since    10.0.0
+	 * @param    int $id Tasty recipe ID.
+	 */
+	private static function get_wprm_recipe_id_from_tasty_reference( $id ) {
+		if ( ! $id ) {
+			return false;
+		}
+
+		if ( WPRM_POST_TYPE === get_post_type( $id ) ) {
+			return $id;
+		}
+
+		$wprm_imported_to = get_post_meta( $id, 'wprm_imported_to', true );
+
+		if ( $wprm_imported_to && WPRM_POST_TYPE === get_post_type( $wprm_imported_to ) ) {
+			return $wprm_imported_to;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Convert an Elementor widget array to the WPRM widget with the provided recipe ID.
+	 *
+	 * @since    10.0.0
+	 * @param    array $element Elementor widget data.
+	 * @param    int   $recipe_id WPRM recipe ID.
+	 */
+	private static function convert_elementor_element_to_wprm_widget( $element, $recipe_id ) {
+		$element['widgetType'] = 'wprm-recipe';
+
+		if ( ! isset( $element['settings'] ) || ! is_array( $element['settings'] ) ) {
+			$element['settings'] = array();
+		}
+
+		$element['settings']['wprm_recipe_id'] = $recipe_id;
+
+		unset( $element['settings']['editor'] );
+		unset( $element['settings']['shortcode'] );
+
+		return $element;
 	}
 
 	/**

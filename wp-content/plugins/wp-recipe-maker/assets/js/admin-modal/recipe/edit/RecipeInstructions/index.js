@@ -31,6 +31,9 @@ export default class RecipeInstructions extends Component {
 
         this.container = React.createRef();
         this.lastAddedIndex = 0;
+
+        // Mutable ref to store instructions without causing re-renders.
+        this.instructionsRef = { current: props.instructions };
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -41,8 +44,11 @@ export default class RecipeInstructions extends Component {
             || JSON.stringify( this.props.instructions ) !== JSON.stringify( nextProps.instructions )
             || JSON.stringify( this.props.ingredients ) !== JSON.stringify( nextProps.ingredients );
     }
-
+    
     componentDidUpdate( prevProps ) {
+        // Update ref on every update.
+        this.instructionsRef.current = this.props.instructions;
+
         if ( this.props.instructions.length > prevProps.instructions.length ) {
             const inputs = this.container.current.querySelectorAll('.wprm-admin-modal-field-richtext:not(.wprm-admin-modal-field-instruction-name)');
 
@@ -113,6 +119,9 @@ export default class RecipeInstructions extends Component {
     }
   
     render() {
+        // Update ref on every render too, to be safe.
+        this.instructionsRef.current = this.props.instructions;
+
         let editModes = {
             media: { label: __wprm( 'Instruction Media' ) },
         };
@@ -189,6 +198,7 @@ export default class RecipeInstructions extends Component {
                                                     { ...field }
                                                     index={ index }
                                                     key={ `instruction-${field.uid}` }
+                                                    instructionsRef={ this.instructionsRef }
                                                     onTab={(event) => {
                                                         // Only if edit mode is not metadata summary or associated ingredients.
                                                         if ( this.state.editMode !== 'summary' && this.state.editMode !== 'ingredients' ) {
@@ -355,7 +365,20 @@ export default class RecipeInstructions extends Component {
                             className="button"
                             onClick={(e) => {
                                 e.preventDefault();
-                                this.props.onModeChange('bulk-add-instructions');
+                                this.props.openSecondaryModal('bulk-add-instructions', {
+                                    field: 'instructions',
+                                    onBulkAdd: (instructions_flat) => {
+                                        const currentInstructions = JSON.parse( JSON.stringify( this.props.instructions ) );
+                                        const newInstructions = this.props.setUids( currentInstructions, instructions_flat );
+
+                                        this.props.onRecipeChange({
+                                            instructions_flat: [
+                                                ...currentInstructions,
+                                                ...newInstructions,
+                                            ],
+                                        });
+                                    }
+                                });
                             } }
                         >{ __wprm( 'Bulk Add Instructions' ) }</button>
                         <p>{ __wprm( 'Tip: use the TAB key to move from field to field and easily add instructions.' ) }</p>

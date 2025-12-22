@@ -2,7 +2,7 @@
 /**
  * Handle the recipe metadata integration with Yoast SEO Schema (version 11+)
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.1.0
  *
  * @package    WP_Recipe_Maker

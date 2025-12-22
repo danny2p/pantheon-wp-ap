@@ -259,7 +259,7 @@ class WPRM_SC_Jump_To_Section extends WPRM_Template_Shortcode {
 		$css_variables = parent::get_inline_css_variables( 'jump-to-section', $atts, array( 'gap', 'alignment', 'background', 'text_color', 'border_width', 'border', 'border_radius', 'vertical_padding', 'horizontal_padding' ) );
 		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
 
-		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '">';
+		$output = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '"' . $style . '>';
 
 		foreach ( $sections as $section ) {
 			// Get text for section.

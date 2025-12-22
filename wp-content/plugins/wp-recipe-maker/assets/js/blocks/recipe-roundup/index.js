@@ -9,10 +9,13 @@ const { Fragment } = wp.element;
 
 // Backwards compatibility.
 let BlockControls;
+let useBlockProps;
 if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 	BlockControls = wp.blockEditor.BlockControls;
+	useBlockProps = wp.blockEditor.useBlockProps;
 } else {
 	BlockControls = wp.editor.BlockControls;
+	useBlockProps = wp.blockEditor ? wp.blockEditor.useBlockProps : ( () => ( { className: '' } ) );
 }
 
 let ServerSideRender;
@@ -35,6 +38,7 @@ const cleanUpShortcodeAttribute = (value) => {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
+    apiVersion: 3,
     title: __( 'WPRM Recipe Roundup Item', 'wp-recipe-maker' ),
     description: __( 'Output your Recipe Roundup as ItemList metadata.', 'wp-recipe-maker' ),
     icon: 'media-document',
@@ -131,7 +135,8 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
         ]
     },
     edit: (props) => {
-        const { attributes, setAttributes, isSelected, className } = props;
+        const { attributes, setAttributes, isSelected } = props;
+        const blockProps = useBlockProps();
 
         const modalCallback = ( fields ) => {
             setAttributes({
@@ -149,7 +154,7 @@ registerBlockType( 'wp-recipe-maker/recipe-roundup-item', {
         }
 
         return (
-            <div className={ className }>{
+            <div { ...blockProps }>{
                 attributes.id || attributes.link
                 ?
                 <Fragment>

@@ -2,7 +2,7 @@
 /**
  * Handle the other shortcodes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.6.0
  *
  * @package    WP_Recipe_Maker
@@ -55,10 +55,12 @@ class WPRM_Shortcode_Other {
 	 * @param	mixed $content Content in between the shortcodes.
 	 */
 	public static function timer_shortcode( $atts, $content ) {
+		$has_label = isset( $atts['label'] );
 		$atts = shortcode_atts( array(
 			'seconds' => '0',
 			'minutes' => '0',
 			'hours' => '0',
+			'label' => '',
 		), $atts, 'wprm_timer' );
 
 		$seconds = intval( $atts['seconds'] );
@@ -68,7 +70,8 @@ class WPRM_Shortcode_Other {
 		$seconds = $seconds + (60 * $minutes) + (60 * 60 * $hours);
 
 		if ( $seconds > 0 ) {
-			return '<span class="wprm-timer" data-seconds="' . esc_attr( $seconds ) . '">' . $content . '</span>';
+			$data_label = $has_label ? ' data-label="' . esc_attr( $atts['label'] ) . '"' : '';
+			return '<span class="wprm-timer" data-seconds="' . esc_attr( $seconds ) . '"' . $data_label . '>' . $content . '</span>';
 		} else {
 			return $content;
 		}
@@ -330,15 +333,44 @@ class WPRM_Shortcode_Other {
 	}
 
 	/**
-	 * Set the total for the recipe counter shortcode.
+nn	 * Set the count and total for the recipe counter shortcode.
 	 *
 	 * @since	8.8.0
 	 * @param	string $content The content to filter.
 	 */
 	public static function recipe_counter_total( $content ) {
-		if ( isset( $GLOBALS['wprm_recipe_counter_using_total'] ) && $GLOBALS['wprm_recipe_counter_using_total'] ) {
-			$count = isset( $GLOBALS['wprm_recipe_counter'] ) ? $GLOBALS['wprm_recipe_counter'] : 1;
-			$content = str_replace( '<span class="wprm-recipe-counter-total">1</span>', $count, $content );
+		if ( isset( $GLOBALS['wprm_recipe_counter_needs_replacement'] ) && $GLOBALS['wprm_recipe_counter_needs_replacement'] ) {
+			// Count the actual roundup items in the rendered content.
+			// This ensures we only count items that are actually output, not items
+			// processed by other plugins that filter the_content and run do_shortcode
+			// without outputting the result.
+			$total_count = 0;
+			
+			// Count roundup items by looking for the class in the rendered HTML.
+			// Handle both single and double quotes for the class attribute.
+			if ( preg_match_all( '/class=["\'][^"\']*\bwprm-recipe-roundup-item\b[^"\']*["\']/', $content, $matches ) ) {
+				$total_count = count( $matches[0] );
+			}
+			
+			// Fallback to 1 if no items found (shouldn't happen, but be safe).
+			if ( 0 === $total_count ) {
+				$total_count = 1;
+			}
+			
+			// Replace %total% placeholders with the actual total count.
+			$content = str_replace( '<span class="wprm-recipe-counter-total">1</span>', $total_count, $content );
+			
+			// Replace %count% placeholders with individual counts.
+			// Find all count placeholders and replace them sequentially.
+			$count = 0;
+			$content = preg_replace_callback(
+				'/<span class="wprm-recipe-counter-count">1<\/span>/',
+				function( $matches ) use ( &$count ) {
+					$count++;
+					return $count;
+				},
+				$content
+			);
 		}
 
 		return $content;
@@ -352,6 +384,11 @@ class WPRM_Shortcode_Other {
 	 * @param	mixed $content	Content in between the shortcodes.
 	 */
 	public static function condition_shortcode( $atts, $content ) {
+		// If we're in the template editor preview, just return the content.
+		if ( isset( $GLOBALS['wp']->query_vars['rest_route'] ) && '/wp-recipe-maker/v1/template/preview' === $GLOBALS['wp']->query_vars['rest_route'] ) {
+			return do_shortcode( $content );
+		}
+
 		$atts = shortcode_atts( array(
 			'id' => '0',
 			'field' => '',

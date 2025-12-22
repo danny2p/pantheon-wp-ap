@@ -3,9 +3,9 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.4
-Stable tag: 10.1.1
+Stable tag: 10.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,9 @@ WP Ultimate Recipe is still in active development and will be maintained alongsi
 
 Yes! We pride ourselves on offering awesome support and almost always answer support questions within 24 hours. Send us an email at [support@bootstrapped.ventures](mailto:support@bootstrapped.ventures) whenever you have a question or suggestion!
 
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the WP Recipe Maker plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/2aa3f3f5-8afc-4851-922c-1c181283227b). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 1. Example recipe using the default Meadow template.
@@ -138,6 +141,45 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.2.4 =
+* Fix: Instruction image preview not showing immediately
+* Fix: Potential misuse of roundup shortcode by contributors
+* Fix: Print link missing forward slash in some edge cases
+
+= 10.2.3 =
+* Fix: Jump to section breaking in some themes
+* Fix: Permissions check to retrieve post summary by authors
+
+= 10.2.2 =
+* Feature: Select blocks to edit by clicking on them in the Template Editor
+* Feature: Search functionality on the settings page
+* Fix: Gap in modal toolbar when editing rich text
+* Fix: Prevent closing condition shortcode from being removed in the template editor
+* Fix: Some missing translations
+* Fix: Lag when typing in Rich Editor
+
+= 10.2.1 =
+* Improvement: Setting current language for new recipes and terms in Polylang
+* Improvement: Suggestions toolbar performance
+* Improvement: Block Editor iFrame compatibility
+* Fix: Lag when typing in Rich Editor
+
+= 10.2.0 =
+* Feature: Divi 5 recipe module
+* Feature: Show warning if ingredients or servings change and a nutrition change might be needed
+* Feature: Export and import settings tool
+* Feature: Export and import templates tool
+* Feature: Bulk add for categories when editing a recipe
+* Feature: Tumblr and Mastodon share buttons
+* Feature: Image size column on Manage page
+* Improvement: Toolbar buttons for adding headers when creating a roundup list
+* Improvement: Expose parent post ID as easily accessible custom field in the REST API
+* Improvement: Auto focus on dropdown in recipe selection modal
+* Fix: Improved counter for recipe roundup items
+* Fix: Automatically replacing Tasty Elementor widget after import
+* Fix: Do not import images captions as text during Tasty import
+* Fix: Prevent empty instruction steps when importing Tasty instruction images
+
 = 10.1.1 =
 * Feature: Sync Recipe Language tool for multilingual plugins
 * Fix: Make sure correct recipe language is shown on manage page
@@ -429,6 +471,21 @@ Yes! We pride ourselves on offering awesome support and almost always answer sup
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.2.4 =
+Some small fixes
+
+= 10.2.3 =
+Some small fixes
+
+= 10.2.2 =
+Some improvements and fixes
+
+= 10.2.1 =
+Some improvements and fixes
+
+= 10.2.0 =
+Some great new features and improvements
+
 = 10.1.1 =
 Some improvements and fixes
 

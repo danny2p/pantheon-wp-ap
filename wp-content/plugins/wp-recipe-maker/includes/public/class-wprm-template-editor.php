@@ -2,7 +2,7 @@
 /**
  * Responsible for the recipe template editor.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      4.0.0
  *
  * @package    WP_Recipe_Maker

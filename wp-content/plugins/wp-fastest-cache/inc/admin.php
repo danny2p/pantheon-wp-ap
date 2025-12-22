@@ -2177,11 +2177,13 @@
 				    				jQuery("#revert-loader-toolbar").show();
 				    				jQuery("div[id='wpfc-modal-maxcdn'], div[id='wpfc-modal-other'], div[id='wpfc-modal-photon']").remove();
 
+				    				let wpfc_cdn_nonce = "<?php echo wp_create_nonce("cdn-nonce"); ?>";
+
 					    			jQuery.ajax({
 										type: 'GET', 
 										url: ajaxurl,
 										cache: false,
-										data : {"action": "wpfc_cdn_options"},
+										data : {"action": "wpfc_cdn_options", "nonce" : wpfc_cdn_nonce},
 										dataType : "json",
 										success: function(data){
 											if(data.id){
@@ -2194,7 +2196,7 @@
 											WpfcCDN.init({"id" : jQuery(e.currentTarget).attr("wpfc-cdn-name"),
 							    				"template_main_url" : "<?php echo plugins_url('wp-fastest-cache/templates/cdn'); ?>",
 							    				"values" : data,
-							    				"nonce" : "<?php echo wp_create_nonce("cdn-nonce"); ?>"
+							    				"nonce" : wpfc_cdn_nonce
 							    			});
 
 

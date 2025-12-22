@@ -20,6 +20,9 @@ export default class ToolbarSuggest extends Component {
 			suggestions: [],
 			loading: false,
 		}
+
+		// Debounce timer for API calls.
+		this.debounceTimer = null;
 	}
 
 	componentDidMount() {
@@ -27,12 +30,34 @@ export default class ToolbarSuggest extends Component {
 	}
 
 	componentDidUpdate() {
-		if ( this.props.value !== this.state.search ) {
-			this.updateSuggestions( this.props.value );
+		// Only update if the search value actually changed (not just on every render).
+		const trimmedValue = this.props.value ? this.props.value.trim() : '';
+		if ( trimmedValue !== this.state.search ) {
+			// Clear any pending debounce timer.
+			if ( this.debounceTimer ) {
+				clearTimeout( this.debounceTimer );
+				this.debounceTimer = null;
+			}
+
+			// Debounce API calls to avoid making requests on every keystroke.
+			// Empty searches will be cached after the first call, so no performance impact.
+			this.debounceTimer = setTimeout(() => {
+				this.updateSuggestions( trimmedValue );
+				this.debounceTimer = null;
+			}, 300); // 300ms debounce delay.
+		}
+	}
+
+	componentWillUnmount() {
+		// Clean up debounce timer on unmount.
+		if ( this.debounceTimer ) {
+			clearTimeout( this.debounceTimer );
+			this.debounceTimer = null;
 		}
 	}
 	
 	updateSuggestions( search ) {
+		// Check cache first - empty searches will be cached after first call.
 		if ( window.wprm_admin_modal_suggestions[ this.props.type ].hasOwnProperty( search ) ) {
 			this.setState({
 				suggestions: window.wprm_admin_modal_suggestions[ this.props.type ][ search ],
@@ -55,7 +80,16 @@ export default class ToolbarSuggest extends Component {
 						suggestions: data.suggestions,
 						loading: false,
 					});
+				} else {
+					this.setState({
+						loading: false,
+					});
 				}
+			}).catch(() => {
+				// Handle errors gracefully.
+				this.setState({
+					loading: false,
+				});
 			});
 		}
 	}

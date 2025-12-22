@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Editor, Path, Range, Transforms, createEditor } from 'slate';
+import React, { useCallback, useMemo, useState, useRef, useEffect } from 'react';
+import { Editor, Path, Range, Transforms, createEditor, Node } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey'
@@ -22,7 +22,7 @@ const HOTKEYS = {
 
 const INLINE_BLOCKS = [ 'link', 'affiliate-link', 'code', 'temperature', 'ingredient' ];
 
-const RichEditor = (props) => {
+const RichEditor = React.memo((props) => {
     if ( isProblemBrowser() ) {
         if ( props.singleLine ) {
             return ( <div className="wprm-admin-modal-field-richtext-legacy"><FieldText {...props} /></div> );
@@ -64,6 +64,30 @@ const RichEditor = (props) => {
     
     const [value, setValue] = useState( initialValue );
 
+    const debounceRef = useRef( null );
+    const propsRef = useRef( props );
+    propsRef.current = props;
+
+    useEffect(() => {
+        return () => {
+            if ( debounceRef.current ) {
+                clearTimeout( debounceRef.current );
+            }
+        };
+    }, []);
+
+    const flushChange = () => {
+        let newValue = serialize( editor );
+
+        if ( propsRef.current.singleLine ) {
+            // Strip surrounding paragraph tags if present.
+            newValue = newValue.replace(/^<p>(.*)<\/p>$/gm, '$1');
+        }
+
+        propsRef.current.onChange( newValue );
+        debounceRef.current = null;
+    };
+
     return (
         <Slate
             spellCheck
@@ -72,14 +96,11 @@ const RichEditor = (props) => {
             onChange={value => {
                     setValue(value);
 
-                    let newValue = serialize( editor );
-
-                    if ( props.singleLine ) {
-                        // Strip surrounding paragraph tags if present.
-                        newValue = newValue.replace(/^<p>(.*)<\/p>$/gm, '$1');
+                    if ( debounceRef.current ) {
+                        clearTimeout( debounceRef.current );
                     }
 
-                    props.onChange( newValue );
+                    debounceRef.current = setTimeout( flushChange, 500 );
                 }
             }
         >
@@ -90,6 +111,7 @@ const RichEditor = (props) => {
                 <InlineIngredients
                     ingredients={ props.hasOwnProperty( 'ingredients' ) ? props.ingredients : null }
                     instructions={ props.hasOwnProperty( 'instructions' ) ? props.instructions : null }
+                    instructionsRef={ props.hasOwnProperty( 'instructionsRef' ) ? props.instructionsRef : null }
                     allIngredients={ props.hasOwnProperty( 'allIngredients' ) ? props.allIngredients : null }
                 />
             }
@@ -97,30 +119,18 @@ const RichEditor = (props) => {
                 type={ props.toolbar ? props.toolbar : 'all' }
                 isMarkActive={ isMarkActive }
                 toggleMark={ toggleMark }
-                // setValue={ value => {
-                //         console.log( setValue( value ) );
-                        
-                        // Convoluted way to force immediate update.
-                    //     Transforms.deselect( editor );
-                    //     Transforms.select( editor, {
-                    //         path: [0,0],
-                    //         offset: 0,
-                    //     });
-                    //     Transforms.move( editor, {
-                    //         unit: 'line',
-                    //         edge: 'end',
-                    //     });
-                    //     Transforms.collapse( editor, {
-                    //         edge: 'end',
-                    //     });
-                    // }
-                // }
             />
             <Editable
                 className={ `wprm-admin-modal-field-richtext${ props.className ? ` ${ props.className }` : ''}${ props.singleLine ? ` wprm-admin-modal-field-richtext-singleline` : ''}` }
                 placeholder={ props.placeholder }
                 renderElement={ useCallback(props => <Element {...props} />, []) }
                 renderLeaf={ useCallback(props => <Leaf {...props} />, []) }
+                onBlur={() => {
+                    if ( debounceRef.current ) {
+                        clearTimeout( debounceRef.current );
+                        flushChange();
+                    }
+                }}
                 onFocus={() => {
                     // Firefox problems:
                     // If used, cursor will always show up at the end of the content, even when clicking inside.
@@ -165,12 +175,32 @@ const RichEditor = (props) => {
                                     path: Path.next( block[1] ),
                                     offset: 0,
                                 };
-                                Transforms.select(editor, afterIngredient );
 
-                                // Simulate text added.
-                                const keyText = event.key;
-                                if ( 1 === keyText.length ) {
-                                    Transforms.insertText( editor, keyText );
+                                // Check if next path exists.
+                                if ( Node.has( editor, afterIngredient.path ) ) {
+                                    Transforms.select(editor, afterIngredient );
+                                    
+                                    // Simulate text added.
+                                    const keyText = event.key;
+                                    if ( 1 === keyText.length ) {
+                                        Transforms.insertText( editor, keyText );
+                                    }
+                                } else {
+                                    // Insert new text node if it doesn't exist.
+                                    const keyText = event.key;
+                                    if ( 1 === keyText.length ) {
+                                        Transforms.insertNodes(
+                                            editor,
+                                            { text: keyText },
+                                            { at: afterIngredient.path }
+                                        );
+                                        
+                                        // Move cursor to end of inserted text.
+                                        Transforms.select(editor, {
+                                            path: afterIngredient.path,
+                                            offset: 1
+                                        });
+                                    }
                                 }
 
                                 event.preventDefault();
@@ -197,7 +227,12 @@ const RichEditor = (props) => {
             />
         </Slate>
     );
-}
+}, (prevProps, nextProps) => {
+    // Re-render when text changes, inline ingredients portal becomes available, or ingredient data changes.
+    return prevProps.value === nextProps.value
+        && prevProps.inlineIngredientsPortalRendered === nextProps.inlineIngredientsPortalRendered
+        && prevProps.allIngredients === nextProps.allIngredients;
+});
 
 const withLinks = editor => {
     const { isInline } = editor;
@@ -323,5 +358,7 @@ const isMarkActive = (editor, format) => {
     const marks = Editor.marks(editor)
     return marks ? marks[format] === true : false
 }
-  
+
+// Wrapper to avoid changing export type if other files expect a component.
+// React.memo returns a component, so this is fine.
 export default RichEditor;

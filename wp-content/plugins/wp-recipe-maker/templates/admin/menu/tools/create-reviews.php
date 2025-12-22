@@ -2,7 +2,7 @@
 /**
  * Template for import MV Create reviews page.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.5.0
  *
  * @package    WP_Recipe_Maker

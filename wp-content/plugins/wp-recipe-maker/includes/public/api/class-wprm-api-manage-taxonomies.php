@@ -55,8 +55,18 @@ class WPRM_Api_Manage_Taxonomies {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			) );
+			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/language', array(
+				'callback' => array( __CLASS__, 'api_manage_taxonomies_language' ),
+				'methods' => 'POST',
+				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+			) );
 			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/bulk', array(
 				'callback' => array( __CLASS__, 'api_manage_taxonomies_bulk_edit' ),
+				'methods' => 'POST',
+				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+			) );
+			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/term-id', array(
+				'callback' => array( __CLASS__, 'api_manage_taxonomies_term_id' ),
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			) );
@@ -380,6 +390,8 @@ class WPRM_Api_Manage_Taxonomies {
 					$row->permalink = is_wp_error( $permalink ) ? false : $permalink;
 				}
 
+				$row->language = WPRM_Compatibility::get_term_language( $row->term_id, $taxonomy );
+
 				// Special meta key naming for ingredient and equipment.
 				$meta_key = 'term';
 				if ( 'ingredient' === $type ) { $meta_key = 'ingredient'; }
@@ -444,6 +456,8 @@ class WPRM_Api_Manage_Taxonomies {
 						$row->amazon_asin = get_term_meta( $row->term_id, 'wprmp_amazon_asin', true );
 						$row->amazon_name = get_term_meta( $row->term_id, 'wprmp_amazon_name', true );
 						$row->amazon_image = get_term_meta( $row->term_id, 'wprmp_amazon_image', true );
+						$row->amazon_image_width = get_term_meta( $row->term_id, 'wprmp_amazon_image_width', true );
+						$row->amazon_image_height = get_term_meta( $row->term_id, 'wprmp_amazon_image_height', true );
 						$row->amazon_updated = get_term_meta( $row->term_id, 'wprmp_amazon_updated', true );
 						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
@@ -732,6 +746,33 @@ class WPRM_Api_Manage_Taxonomies {
 	}
 
 	/**
+	 * Handle taxonomy language change calls to the REST API.
+	 *
+	 * @since	10.8.0
+	 * @param	WP_REST_Request $request Current request.
+	 */
+	public static function api_manage_taxonomies_language( $request ) {
+		$params = $request->get_params();
+
+		$type     = isset( $params['type'] ) ? sanitize_key( $params['type'] ) : '';
+		$taxonomy = 'wprm_' . $type;
+
+		if ( ! taxonomy_exists( $taxonomy ) ) {
+			return rest_ensure_response( false );
+		}
+
+		$id       = isset( $params['id'] ) ? intval( $params['id'] ) : 0;
+		$language = isset( $params['language'] ) && $params['language'] ? sanitize_key( $params['language'] ) : false;
+
+		if ( $id && $language ) {
+			$updated = WPRM_Compatibility::set_term_language( $id, $taxonomy, $language );
+			return rest_ensure_response( (bool) $updated );
+		}
+
+		return rest_ensure_response( false );
+	}
+
+	/**
 	 * Handle taxonomies bulk edit call to the REST API.
 	 *
 	 * @since    5.0.0
@@ -826,6 +867,31 @@ class WPRM_Api_Manage_Taxonomies {
 		}
 
 		return rest_ensure_response( false );
+	}
+
+	/**
+	 * Handle taxonomies term ID call to the REST API.
+	 *
+	 * @since    5.0.0
+	 * @param    WP_REST_Request $request Current request.
+	 */
+	public static function api_manage_taxonomies_term_id( $request ) {
+		// Parameters.
+		$params = $request->get_params();
+
+		$taxonomy = isset( $params['taxonomy'] ) ? sanitize_key( $params['taxonomy'] ) : '';
+		$name = isset( $params['name'] ) ? sanitize_text_field( $params['name'] ) : '';
+
+		if ( ! $taxonomy || ! $name ) {
+			return rest_ensure_response( false );
+		}
+
+		// Get or create term ID using the sanitizer function.
+		$term_id = WPRM_Recipe_Sanitizer::get_term_id_by_name( $taxonomy, $name );
+
+		return rest_ensure_response( array(
+			'term_id' => $term_id,
+		) );
 	}
 }
 

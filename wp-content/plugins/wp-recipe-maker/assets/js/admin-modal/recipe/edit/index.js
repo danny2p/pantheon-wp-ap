@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Element, Link } from 'react-scroll';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -8,6 +8,7 @@ import Footer from '../../general/Footer';
 import Loader from 'Shared/Loader';
 import { __wprm } from 'Shared/Translations';
 import Api from 'Shared/Api';
+import Icon from 'Shared/Icon';
 
 import FieldGroup from '../../fields/FieldGroup';
 
@@ -29,13 +30,18 @@ const EditRecipe = (props) => {
     const hasEmbed = ! hasUpload && ( -1 == props.recipe.video_id || props.recipe.video_embed );
     const hasVideo = hasUpload || hasEmbed;
 
+    const [nutritionWarning, setNutritionWarning] = useState(false);
+
     let structure = [
         {
             id: 'import', name: __wprm( 'Import' ),
             elem: (
                 <RecipeImport
-                    onModeChange={ props.onModeChange }
                     onImportJSON={ props.onImportJSON }
+                    openSecondaryModal={ props.openSecondaryModal }
+                    onRecipeChange={ props.onRecipeChange }
+                    recipe={ props.recipe }
+                    scrollToGroup={ props.scrollToGroup }
                 />
             )
         },
@@ -134,7 +140,9 @@ const EditRecipe = (props) => {
         elem: (
             <RecipeCategories
                 tags={ props.recipe.tags }
+                recipe={ props.recipe }
                 onRecipeChange={ props.onRecipeChange }
+                openSecondaryModal={ props.openSecondaryModal }
             />
         )
     });
@@ -145,7 +153,7 @@ const EditRecipe = (props) => {
                 type={ props.recipe.type }
                 equipment={ props.recipe.equipment }
                 onRecipeChange={ props.onRecipeChange }
-                onModeChange={ props.onModeChange }
+                openSecondaryModal={ props.openSecondaryModal }
             />
         )
     });
@@ -160,7 +168,8 @@ const EditRecipe = (props) => {
                 linkType={ props.recipe.ingredient_links_type }
                 system={ props.recipe.unit_system }
                 onRecipeChange={ props.onRecipeChange }
-                onModeChange={ props.onModeChange }
+                openSecondaryModal={ props.openSecondaryModal }
+                setUids={ props.setUids }
             />
         )
     });
@@ -172,16 +181,32 @@ const EditRecipe = (props) => {
                 ingredients={ props.recipe.ingredients_flat }
                 instructions={ props.recipe.instructions_flat }
                 onRecipeChange={ props.onRecipeChange }
-                onModeChange={ props.onModeChange }
                 allowVideo={ hasVideo && 'other' !== props.recipe.type }
+                openSecondaryModal={ props.openSecondaryModal }
+                setUids={ props.setUids }
             />
         )
     });
 
     // Only show nutrition for food recipes.
     if ( 'howto' !== props.recipe.type ) {
+        let nutritionName = __wprm( 'Nutrition' );
+        let nutritionClassName = 'wprm-admin-modal-recipe-quicklink';
+        
+        if ( nutritionWarning ) {
+            nutritionClassName += ' wprm-admin-modal-recipe-quicklink-warning';
+            nutritionName = (
+                <span style={{ display: 'inline-flex', gap: '5px', alignItems: 'baseline' }}>
+                    <Icon type="warning" color="#8B0000" />
+                    { __wprm( 'Nutrition' ) }
+                </span>
+            );
+        }
+
         structure.push({
-            id: 'nutrition', name: __wprm( 'Nutrition' ),
+            id: 'nutrition', 
+            name: nutritionName,
+            className: nutritionClassName,
             elem: (
                 <RecipeNutrition
                     nutrition={ props.recipe.nutrition }
@@ -189,8 +214,11 @@ const EditRecipe = (props) => {
                         amount: props.recipe.servings,
                         unit: props.recipe.servings_unit,
                     }}
+                    ingredients={ props.recipe.ingredients_flat }
+                    recipe={ props.recipe }
                     onRecipeChange={ props.onRecipeChange }
-                    onModeChange={ props.onModeChange }
+                    openSecondaryModal={ props.openSecondaryModal }
+                    onWarningChange={ setNutritionWarning }
                 />
             )
         });
@@ -253,7 +281,7 @@ const EditRecipe = (props) => {
                         <Link
                             to={ `wprm-admin-modal-fields-group-${ group.id }` }
                             containerId="wprm-admin-modal-recipe-content"
-                            className="wprm-admin-modal-recipe-quicklink"
+                            className={ group.className || 'wprm-admin-modal-recipe-quicklink' }
                             activeClass="active"
                             spy={true}
                             offset={-10}
@@ -352,7 +380,17 @@ const EditRecipe = (props) => {
                     </button>
                     <button
                         className="button button-primary"
-                        onClick={ () => { props.saveRecipe( false ) } }
+                        onClick={ () => {
+                            if ( nutritionWarning ) {
+                                const confirmed = confirm(
+                                    __wprm( 'You have nutrition warnings that indicate changes to ingredients or serving size may require updating the nutrition facts. Are you sure you want to save anyway?' )
+                                );
+                                if ( ! confirmed ) {
+                                    return;
+                                }
+                            }
+                            props.saveRecipe( false );
+                        } }
                         disabled={ ! props.changesMade }
                     >
                         { __wprm( 'Save' ) }
@@ -361,6 +399,14 @@ const EditRecipe = (props) => {
                         className="button button-primary"
                         onClick={ () => {
                             if ( props.changesMade ) {
+                                if ( nutritionWarning ) {
+                                    const confirmed = confirm(
+                                        __wprm( 'You have nutrition warnings that indicate changes to ingredients or serving size may require updating the nutrition facts. Are you sure you want to save anyway?' )
+                                    );
+                                    if ( ! confirmed ) {
+                                        return;
+                                    }
+                                }
                                 props.saveRecipe( true );
                             } else {
                                 props.onCloseModal();

@@ -1,0 +1,80 @@
+.wprm-admin-modal-suggest-tags-container {
+    .wprm-admin-modal-suggest-tags-error {
+        padding: 20px;
+        color: darkred;
+        
+        p {
+            margin: 0;
+            
+            &:first-child {
+                margin-bottom: 10px;
+            }
+        }
+    }
+    
+    .wprm-admin-modal-suggest-tags-category {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d2327;
+            margin: 0;
+            flex-basis: 100px;
+        }
+        
+        .wprm-admin-modal-suggest-tags-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .wprm-admin-modal-suggest-tags-suggestion {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            
+            &:hover {
+                border-color: #2271b1;
+                background-color: #f0f6fc;
+            }
+            
+            &.selected {
+                border-color: #2271b1;
+                background-color: #2271b1;
+                color: #fff;
+                
+                &:hover {
+                    background-color: #135e96;
+                    border-color: #135e96;
+                }
+            }
+        }
+    }
+    
+    .wprm-admin-modal-suggest-tags-replace {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+
+            .wprm-admin-modal-field-checkbox {
+                margin: 0;
+            }
+        }
+    }
+}
+

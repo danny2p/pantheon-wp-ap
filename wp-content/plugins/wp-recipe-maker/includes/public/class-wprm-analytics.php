@@ -2,7 +2,7 @@
 /**
  * Responsible for the recipe analytics.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      6.5.0
  *
  * @package    WP_Recipe_Maker
@@ -59,6 +59,7 @@ class WPRM_Analytics {
 			'messenger-share-button' => __( 'Messenger Share', 'wp-recipe-maker' ),
 			'twitter-share-button' => __( 'Twitter Share', 'wp-recipe-maker' ),
 			'bluesky-share-button' => __( 'Bluesky Share', 'wp-recipe-maker' ),
+			'mastodon-share-button' => __( 'Mastodon Share', 'wp-recipe-maker' ),
 			'text-share-button' => __( 'Text Share', 'wp-recipe-maker' ),
 			'whatsapp-share-button' => __( 'WhatsApp Share', 'wp-recipe-maker' ),
 			'email-share-button' => __( 'Email Share', 'wp-recipe-maker' ),

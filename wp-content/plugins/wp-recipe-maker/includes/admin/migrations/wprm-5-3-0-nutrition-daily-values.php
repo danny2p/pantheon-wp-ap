@@ -2,7 +2,7 @@
 /**
  * New place for storing the nutrition daily values.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.3.0
  *
  * @package    WP_Recipe_Maker

@@ -7,17 +7,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://bootstrapped.ventures/
+ * @link              https://bootstrapped.ventures/
  * @since             1.0.0
  * @package           WP_Recipe_Maker
  *
  * @wordpress-plugin
  * Plugin Name:       WP Recipe Maker
- * Plugin URI:        http://bootstrapped.ventures/wp-recipe-maker/
+ * Plugin URI:        https://bootstrapped.ventures/wp-recipe-maker/
  * Description:       The easy and user-friendly recipe plugin for everyone. Automatic JSON-LD metadata for better SEO will get you more visitors!
- * Version:           10.1.1
+ * Version:           10.2.4
  * Author:            Bootstrapped Ventures
- * Author URI:        http://bootstrapped.ventures/
+ * Author URI:        https://bootstrapped.ventures/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wp-recipe-maker

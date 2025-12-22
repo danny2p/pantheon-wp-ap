@@ -15,7 +15,16 @@ const RecipeImport = (props) => {
                     value={''}
                     onChange={ (value) => {
                         if ( value ) {
-                            props.onModeChange( 'text-import', value );
+                            props.openSecondaryModal( 'text-import', {
+                                text: value,
+                                recipe: props.recipe,
+                                onImportValues: (newRecipe) => {
+                                    // Use onRecipeChange with forceRerender to refresh rich text fields
+                                    props.onRecipeChange(newRecipe, true);
+                                    // Scroll to General section after import
+                                    props.scrollToGroup('general');
+                                }
+                            });
                         }
                     }}
                 />

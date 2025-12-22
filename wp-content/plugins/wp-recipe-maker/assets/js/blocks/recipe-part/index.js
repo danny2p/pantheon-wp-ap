@@ -12,12 +12,15 @@ const { Fragment } = wp.element;
 // Backwards compatibility.
 let InspectorControls;
 let BlockControls;
+let useBlockProps;
 if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 	InspectorControls = wp.blockEditor.InspectorControls;
 	BlockControls = wp.blockEditor.BlockControls;
+	useBlockProps = wp.blockEditor.useBlockProps;
 } else {
 	InspectorControls = wp.editor.InspectorControls;
 	BlockControls = wp.editor.BlockControls;
+	useBlockProps = wp.blockEditor ? wp.blockEditor.useBlockProps : ( () => ( { className: '' } ) );
 }
 
 let ServerSideRender;
@@ -28,6 +31,7 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 }
 
 registerBlockType( 'wp-recipe-maker/recipe-part', {
+    apiVersion: 3,
     title: __( 'Recipe Part', 'wp-recipe-maker' ),
     description: __( 'Display a specific recipe part', 'wp-recipe-maker' ),
     icon: 'shortcode',
@@ -43,7 +47,8 @@ registerBlockType( 'wp-recipe-maker/recipe-part', {
 		html: false,
     },
     edit: (props) => {
-        const { attributes, setAttributes, isSelected, className } = props;
+        const { attributes, setAttributes, isSelected } = props;
+        const blockProps = useBlockProps();
 
         const partOptions = [
             { label: 'Add to Collection Button', value: 'recipe-add-to-collection' },
@@ -71,7 +76,7 @@ registerBlockType( 'wp-recipe-maker/recipe-part', {
         ];
 
         return (
-            <div className={ className }>
+            <div { ...blockProps }>
                 <InspectorControls>
                     <PanelBody title={ __( 'Recipe Part Details', 'wp-recipe-maker' ) }>
                         <TextControl

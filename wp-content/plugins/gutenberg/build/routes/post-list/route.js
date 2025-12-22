@@ -254,6 +254,14 @@ function viewToQuery(view, postType) {
   if (mediaType) {
     result.media_type = mediaType.value;
   }
+  const date = view.filters?.find((filter) => filter.field === "date");
+  if (date && date.value) {
+    if (date.operator === "before") {
+      result.before = date.value;
+    } else if (date.operator === "after") {
+      result.after = date.value;
+    }
+  }
   if (postType === "attachment") {
     result._embed = "wp:attached-to";
   }
@@ -262,6 +270,12 @@ function viewToQuery(view, postType) {
 
 // routes/post-list/route.ts
 var route = {
+  title: async ({ params }) => {
+    const postType = await (0, import_data4.resolveSelect)(import_core_data2.store).getPostType(
+      params.type
+    );
+    return postType?.labels?.name || params.type;
+  },
   async canvas(context) {
     const { params, search } = context;
     const view = await ensureView(params.type, params.slug, {
@@ -272,10 +286,12 @@ var route = {
       return void 0;
     }
     if (search.postIds && search.postIds.length > 0) {
+      const postId = search.postIds[0].toString();
       return {
         postType: params.type,
-        postId: search.postIds[0].toString(),
-        isPreview: true
+        postId,
+        isPreview: true,
+        editLink: `/types/${params.type}/edit/${postId}`
       };
     }
     const query = viewToQuery(view, params.type);
@@ -285,10 +301,12 @@ var route = {
       { ...query, per_page: 1 }
     );
     if (posts && posts.length > 0) {
+      const postId = posts[0].id.toString();
       return {
         postType: params.type,
-        postId: posts[0].id.toString(),
-        isPreview: true
+        postId,
+        isPreview: true,
+        editLink: `/types/${params.type}/edit/${postId}`
       };
     }
     return void 0;

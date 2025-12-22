@@ -2,7 +2,7 @@
 /**
  * Handle equipment in the WordPress REST API.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.2.0
  *
  * @package    WP_Recipe_Maker
@@ -65,6 +65,8 @@ class WPRM_Api_Equipment {
 			'amazon_asin' => isset( $meta['wprmp_amazon_asin'] ) ? $meta['wprmp_amazon_asin'] : '',
 			'amazon_image' => isset( $meta['wprmp_amazon_image'] ) ? $meta['wprmp_amazon_image'] : '',
 			'amazon_name' => isset( $meta['wprmp_amazon_name'] ) ? $meta['wprmp_amazon_name'] : '',
+			'amazon_image_width' => isset( $meta['wprmp_amazon_image_width'] ) ? $meta['wprmp_amazon_image_width'] : '',
+			'amazon_image_height' => isset( $meta['wprmp_amazon_image_height'] ) ? $meta['wprmp_amazon_image_height'] : '',
 			'amazon_updated' => isset( $meta['wprmp_amazon_updated'] ) ? $meta['wprmp_amazon_updated'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
@@ -121,6 +123,22 @@ class WPRM_Api_Equipment {
 		if ( isset( $meta['amazon_image'] ) ) {
 			$amazon_image = $meta['amazon_image'];
 			update_term_meta( $term->term_id, 'wprmp_amazon_image', $amazon_image );
+		}
+		if ( isset( $meta['amazon_image_width'] ) ) {
+			$amazon_image_width = intval( $meta['amazon_image_width'] );
+			if ( $amazon_image_width > 0 ) {
+				update_term_meta( $term->term_id, 'wprmp_amazon_image_width', $amazon_image_width );
+			} else {
+				delete_term_meta( $term->term_id, 'wprmp_amazon_image_width' );
+			}
+		}
+		if ( isset( $meta['amazon_image_height'] ) ) {
+			$amazon_image_height = intval( $meta['amazon_image_height'] );
+			if ( $amazon_image_height > 0 ) {
+				update_term_meta( $term->term_id, 'wprmp_amazon_image_height', $amazon_image_height );
+			} else {
+				delete_term_meta( $term->term_id, 'wprmp_amazon_image_height' );
+			}
 		}
 		if ( isset( $meta['amazon_name'] ) ) {
 			$amazon_name = $meta['amazon_name'];
