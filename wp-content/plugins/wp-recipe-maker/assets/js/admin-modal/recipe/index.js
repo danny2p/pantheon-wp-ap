@@ -8,15 +8,6 @@ import { __wprm } from 'Shared/Translations';
 const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import EditRecipe from './edit';
-import TextImport from './text-import';
-import BulkAdd from './bulk-add';
-
-const modalContent = {
-    'bulk-add-ingredients': BulkAdd,
-    'bulk-add-instructions': BulkAdd,
-    'text-import': TextImport,
-    recipe: EditRecipe,
-};
 export default class Recipe extends Component {
     constructor(props) {
         super(props);
@@ -60,12 +51,10 @@ export default class Recipe extends Component {
             saveResult: false,
             loadingRecipe,
             forceRerender: 0,
-            mode: 'recipe',
         };
 
         // Bind functions.
         this.scrollToGroup = this.scrollToGroup.bind(this);
-        this.onModeChange = this.onModeChange.bind(this);
         this.onRecipeChange = this.onRecipeChange.bind(this);
         this.onImportJSON = this.onImportJSON.bind(this);
         this.saveRecipe = this.saveRecipe.bind(this);
@@ -75,27 +64,11 @@ export default class Recipe extends Component {
     }
 
     componentDidMount() {
-        if ( 'recipe' === this.state.mode && ! this.state.loadingRecipe ) {
+        if ( ! this.state.loadingRecipe ) {
             this.scrollToGroup();
         }
     }
 
-    onModeChange( mode, args = false ) {
-        let newState = {
-            mode,
-        };
-
-        if ( 'text-import' === mode ) {
-            newState['textImportText'] = args;
-        }
-        
-        this.setState(newState, () => {
-            if ( 'recipe' === mode ) {
-                args = args ? args : 'media';
-                this.scrollToGroup( args );
-            }
-        });
-    }
 
     scrollToGroup( group = 'media' ) {
         scroller.scrollTo( `wprm-admin-modal-fields-group-${ group }`, {
@@ -104,12 +77,13 @@ export default class Recipe extends Component {
         } );
     }
 
-    onRecipeChange(fields) {
+    onRecipeChange(fields, forceRerender = false) {
         this.setState((prevState) => ({
             recipe: {
                 ...prevState.recipe,
                 ...fields,
-            }
+            },
+            ...(forceRerender && { forceRerender: prevState.forceRerender + 1 })
         }));
     }
 
@@ -206,29 +180,6 @@ export default class Recipe extends Component {
     }
 
     allowCloseModal() {
-        switch ( this.state.mode ) {
-            case 'nutrition-calculation':
-                if ( confirm( __wprm( 'Are you sure you want to stop calculating the nutrition facts?' ) ) ) {
-                    this.onModeChange( 'recipe', 'nutrition' );
-                }
-                return false;
-            case 'equipment-affiliate':
-                this.onModeChange( 'recipe', 'equipment' );
-                return false;
-            case 'ingredient-links':
-                this.onModeChange( 'recipe', 'ingredients' );
-                return false;
-            case 'text-import':
-                this.onModeChange( 'recipe' );
-                return false;
-            case 'bulk-add-ingredients':
-                this.onModeChange( 'recipe', 'ingredients' );
-                return false;
-            case 'bulk-add-instructions':
-                this.onModeChange( 'recipe', 'instructions' );
-                return false;
-        }
-
         // Closing recipe itself.
         return ! this.state.savingChanges && ( ! this.changesMade() || confirm( __wprm( 'Are you sure you want to close without saving changes?' ) ) );
     }
@@ -242,154 +193,22 @@ export default class Recipe extends Component {
     }
 
     render() {
-        const allModalContent = hooks.applyFilters( 'modalRecipe', modalContent );
-        const Content = allModalContent.hasOwnProperty(this.state.mode) ? allModalContent[this.state.mode] : false;
-
-        if ( ! Content ) {
-            return null;
-        }
-
-        switch ( this.state.mode ) {
-            case 'nutrition-calculation':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        name={ this.state.recipe.name }
-                        servings={ this.state.recipe.servings }
-                        ingredients={ this.state.recipe.ingredients_flat }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe', 'nutrition' );
-                        }}
-                        onNutritionChange={ (calculated) => {
-                            let nutrition = {};
-
-                            Object.keys(wprm_admin_modal.nutrition).map((nutrient, index ) => {
-                                if ( calculated.hasOwnProperty( nutrient ) ) {
-                                    nutrition[ nutrient ] = calculated[ nutrient ];
-                                } else {
-                                    nutrition[ nutrient ] = false;
-                                }
-                            });
-
-                            // Keep serving size and unit.
-                            nutrition['serving_size'] = this.state.recipe.hasOwnProperty( 'nutrition' ) && this.state.recipe.nutrition.hasOwnProperty( 'serving_size' ) ? this.state.recipe.nutrition.serving_size : false;
-                            nutrition['serving_unit'] = this.state.recipe.hasOwnProperty( 'nutrition' ) && this.state.recipe.nutrition.hasOwnProperty( 'serving_unit' ) ? this.state.recipe.nutrition.serving_unit : false;
-
-                            // Overwrite recipe nutrition.
-                            this.onRecipeChange({
-                                nutrition,
-                            });
-                            this.onModeChange( 'recipe', 'nutrition' );
-                        }}
-                    />
-                );
-            case 'equipment-affiliate':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe', 'equipment' );
-                        }}
-                        equipment={ this.state.recipe.equipment }
-                        onEquipmentChange={ (equipment) => {
-                            this.onRecipeChange({
-                                equipment,
-                            });
-                            this.onModeChange( 'recipe', 'equipment' );
-                        }}
-                    />
-                );
-            case 'ingredient-links':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe', 'ingredients' );
-                        }}
-                        ingredients={ this.state.recipe.ingredients_flat }
-                        onIngredientsChange={ (ingredients_flat) => {
-                            this.onRecipeChange({
-                                ingredients_flat,
-                            });
-                            this.onModeChange( 'recipe', 'ingredients' );
-                        }}
-                    />
-                );
-            case 'bulk-add-ingredients':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe', 'ingredients' );
-                        }}
-                        field="ingredients"
-                        onBulkAdd={ (ingredients_flat) => {
-                            const currentIngredients = JSON.parse( JSON.stringify( this.state.recipe.ingredients_flat ) );
-                            const newIngredients = this.setUids( currentIngredients, ingredients_flat );
-
-                            this.onRecipeChange({
-                                ingredients_flat: [
-                                    ...currentIngredients,
-                                    ...newIngredients,
-                                ],
-                            });
-                            this.onModeChange( 'recipe', 'ingredients' );
-                        }}
-                    />
-                );
-            case 'bulk-add-instructions':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe', 'instructions' );
-                        }}
-                        field="instructions"
-                        onBulkAdd={ (instructions_flat) => {
-                            const currentInstructions = JSON.parse( JSON.stringify( this.state.recipe.instructions_flat ) );
-                            const newInstructions = this.setUids( currentInstructions, instructions_flat );
-
-                            this.onRecipeChange({
-                                instructions_flat: [
-                                    ...currentInstructions,
-                                    ...newInstructions,
-                                ],
-                            });
-                            this.onModeChange( 'recipe', 'instructions' );
-                        }}
-                    />
-                );
-            case 'text-import':
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        onCancel={() => {
-                            this.onModeChange( 'recipe' );
-                        }}
-                        text={ this.state.textImportText }
-                        recipe={ this.state.recipe }
-                        onImportValues={ ( newRecipe ) => {
-                            this.onRecipeChange( newRecipe );
-                            this.onModeChange( 'recipe' );
-                        } }
-                    />
-                );
-            default:
-                return (
-                    <Content
-                        onCloseModal={ this.props.maybeCloseModal }
-                        changesMade={ this.changesMade() }
-                        savingChanges={ this.state.savingChanges }
-                        saveResult={ this.state.saveResult }
-                        loadingRecipe={ this.state.loadingRecipe }
-                        recipe={ this.state.recipe }
-                        onRecipeChange={ this.onRecipeChange }
-                        onImportJSON={ this.onImportJSON }
-                        saveRecipe={ this.saveRecipe }
-                        forceRerender={ this.state.forceRerender }
-                        onModeChange={this.onModeChange}
-                    />
-                );
-        }
+        return (
+            <EditRecipe
+                onCloseModal={ this.props.maybeCloseModal }
+                changesMade={ this.changesMade() }
+                savingChanges={ this.state.savingChanges }
+                saveResult={ this.state.saveResult }
+                loadingRecipe={ this.state.loadingRecipe }
+                recipe={ this.state.recipe }
+                onRecipeChange={ this.onRecipeChange }
+                onImportJSON={ this.onImportJSON }
+                saveRecipe={ this.saveRecipe }
+                forceRerender={ this.state.forceRerender }
+                openSecondaryModal={ this.props.openSecondaryModal }
+                setUids={ this.setUids }
+                scrollToGroup={ this.scrollToGroup }
+            />
+        );
     }
 }

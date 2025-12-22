@@ -3,6 +3,7 @@ import Elements from './elements';
 // Shortcodes that include content.
 const contentShortcodes = [
     'wprm-expandable',
+    'wprm-condition',
 ];
 
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
@@ -81,10 +82,12 @@ const shortcodeGroups = {
         shortcodes: [
             'wprm-recipe-add-to-collection',
             'wprm-recipe-add-to-shopping-list',
+            'wprm-recipe-add-products-to-cart',
             'wprm-recipe-adjustable-servings',
             'wprm-recipe-advanced-adjustable-servings',
             'wprm-recipe-unit-conversion',
             'wprm-recipe-media-toggle',
+            'wprm-recipe-cook-mode',
             'wprm-recipe-print',
             'wprm-recipe-user-ratings-modal',
             'wprm-private-notes',
@@ -100,6 +103,8 @@ const shortcodeGroups = {
             'wprm-recipe-messenger-share',
             'wprm-recipe-twitter-share',
             'wprm-recipe-bluesky-share',
+            'wprm-recipe-mastodon-share',
+            'wprm-recipe-tumblr-share',
             'wprm-recipe-text-share',
             'wprm-recipe-whatsapp-share',
         ],

@@ -2,7 +2,7 @@
 /**
  * Helper functions for the plugin version.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.6.0
  *
  * @package    WP_Recipe_Maker

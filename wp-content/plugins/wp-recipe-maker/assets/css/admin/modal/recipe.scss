@@ -19,6 +19,18 @@
                 text-decoration: underline;
                 opacity: 1;
             }
+
+            &.wprm-admin-modal-recipe-quicklink-warning {
+                color: #8B0000;
+                font-weight: bold;
+                opacity: 1;
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                    vertical-align: middle;
+                }
+            }
         }
     }
 

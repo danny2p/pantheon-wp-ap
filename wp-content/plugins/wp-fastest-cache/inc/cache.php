@@ -190,8 +190,23 @@
 
 				foreach ($query_params as $key => $query_param) {
 
-					//to remove query strings for cache if Google Click Identifier are set
-					if(preg_match("/^gclid\=/i", $query_param)){
+					// Google Ads Click & Conversion Parameters
+					if(preg_match("/^(gclid|gbraid|wbraid|gclsrc)\=/i", $query_param)){
+						continue;
+					}
+
+					// Google Analytics / GA4 Parameters
+					if(preg_match("/^(_ga|_gid|_gl|_gac)\=/i", $query_param)){
+						continue;
+					}
+
+					// Google UTM Campaign Parameters
+					if(preg_match("/^utm_(source|medium|campaign|content|term)/i", $query_param)){
+						continue;
+					}
+
+					// Google Merchant Center
+					if(preg_match("/^srsltid\=/i", $query_param)){
 						continue;
 					}
 
@@ -206,16 +221,6 @@
 
 					//to remove query strings for cache if facebook parameters are set
 					if(preg_match("/^fbclid\=/i", $query_param)){
-						continue;
-					}
-
-					//to remove query strings for cache if google analytics parameters are set
-					if(preg_match("/^utm_(source|medium|campaign|content|term)/i", $query_param)){
-						continue;
-					}
-
-					//to remove query strings for cache if google merchant center parameters are set
-					if(preg_match("/^srsltid\=/i", $query_param)){
 						continue;
 					}
 

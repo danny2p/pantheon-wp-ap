@@ -2,7 +2,7 @@
 /**
  * Open up recipe ratings in the WordPress REST API.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      2.4.0
  *
  * @package    WP_Recipe_Maker

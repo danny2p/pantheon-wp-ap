@@ -2,7 +2,7 @@
 /**
  * Template for the plugin settings structure.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.0
  *
  * @package    WP_Recipe_Maker
@@ -163,6 +163,12 @@ $custom_style = array(
 					'name' => __( 'Button Text Color', 'wp-recipe-maker' ),
 					'type' => 'color',
 					'default' => '#ffffff',
+				),
+				array(
+					'id' => 'modal_accent_color',
+					'name' => __( 'Accent Color', 'wp-recipe-maker' ),
+					'type' => 'color',
+					'default' => '#747B2D',
 				),
 			),
 			'dependency' => array(

@@ -1,6 +1,84 @@
 {
     "news": [
         {
+            "date": "2025-12-04",
+            "label": "Blog",
+            "title": "How to Create a Recipe Content Plan That Keeps Readers Coming Back",
+            "url": "https://bootstrapped.ventures/food-blog-content-calendar/"
+        },
+        {
+            "date": "2025-11-27",
+            "label": "Blog",
+            "title": "Recipe Newsletters That Make Meal Planning Effortless",
+            "url": "https://bootstrapped.ventures/recipe-newsletter/"
+        },
+        {
+            "date": "2025-11-24",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.2.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-2-0/"
+        },
+        {
+            "date": "2025-11-21",
+            "label": "Blog",
+            "title": "Food Blogging Resources for Every Stage of Growth",
+            "url": "https://bootstrapped.ventures/food-blogging-resources/"
+        },
+        {
+            "date": "2025-11-17",
+            "label": "Blog",
+            "title": "How To Use Recipe Ratings Strategically As A Food Blogger",
+            "url": "https://bootstrapped.ventures/recipe-rating/"
+        },
+        {
+            "date": "2025-11-06",
+            "label": "Blog",
+            "title": "Food Blog Hosting Guide for Speed, Support and Growth",
+            "url": "https://bootstrapped.ventures/best-web-hosting-for-food-blog/"
+        },
+        {
+            "date": "2025-10-24",
+            "label": "Blog",
+            "title": "Blogger vs WordPress - Which Will Work Better for You?",
+            "url": "https://bootstrapped.ventures/blogger-vs-wordpress/"
+        },
+        {
+            "date": "2025-10-21",
+            "label": "Blog",
+            "title": "Setting Up Your First Recipe Membership Site",
+            "url": "https://bootstrapped.ventures/recipe-membership-site/"
+        },
+        {
+            "date": "2025-10-14",
+            "label": "Blog",
+            "title": "Creating Your Baking Blog From the Ground Up",
+            "url": "https://bootstrapped.ventures/how-to-start-a-baking-blog/"
+        },
+        {
+            "date": "2025-10-07",
+            "label": "Blog",
+            "title": "How to Create a Recipe Database in 5 Easy Steps",
+            "url": "https://bootstrapped.ventures/how-to-create-a-recipe-database/"
+        },
+        {
+            "date": "2025-10-02",
+            "label": "Blog",
+            "title": "How to Start a Vegan Blog and Create Income-Generating Content",
+            "url": "https://bootstrapped.ventures/how-to-start-a-vegan-blog/"
+        },
+        {
+            "date": "2025-09-30",
+            "label": "Blog",
+            "title": "How to Add Amazon Affiliate Links on Pinterest",
+            "url": "https://bootstrapped.ventures/how-to-post-amazon-affiliate-links-on-pinterest/"
+        },
+        {
+            "date": "2025-09-26",
+            "label": "Blog",
+            "title": "7 Ways to Create Truly Valuable Roundup Posts",
+            "url": "https://bootstrapped.ventures/roundup-post/"
+        },
+        {
             "date": "2025-09-17",
             "label": "Release",
             "title": "WP Recipe Maker 10.1.0",

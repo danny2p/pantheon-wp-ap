@@ -2,7 +2,7 @@
 /**
  * The core plugin class.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -31,8 +31,8 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '10.1.1' );
-		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '10.0.0' );
+		define( 'WPRM_VERSION', '10.2.4' );
+		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '10.2.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
@@ -197,6 +197,8 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-fix-comment-ratings.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-health-check.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-refresh-video-metadata.php' );
+			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-settings-transfer.php' );
+			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-templates-transfer.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-sync-recipe-language.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-ingredients.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-nutrition.php' );

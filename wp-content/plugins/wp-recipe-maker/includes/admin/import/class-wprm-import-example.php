@@ -3,7 +3,7 @@
  * Example importer.
  * The importer will automatically be loaded when placed in the /wp-recipe-maker/includes/admin/import/ folder.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.20.0
  *
  * @package    WP_Recipe_Maker

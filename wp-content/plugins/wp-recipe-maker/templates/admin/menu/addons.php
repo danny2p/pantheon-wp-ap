@@ -2,7 +2,7 @@
 /**
  * Template for the addons page.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.5.0
  *
  * @package    WP_Recipe_Maker

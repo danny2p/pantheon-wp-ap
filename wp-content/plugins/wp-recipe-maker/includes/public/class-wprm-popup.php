@@ -73,6 +73,7 @@ class WPRM_Popup {
 			// Or set individual parts.
 			$title = isset( $modal['title'] ) ? $modal['title'] : '';
 			$content = isset( $modal['content'] ) ? $modal['content'] : '';
+			$footer = isset( $modal['footer'] ) ? $modal['footer'] : '';
 			$buttons = isset( $modal['buttons'] ) && is_array( $modal['buttons'] ) ? $modal['buttons'] : array();
 
 			// Allow overriding the template and output.

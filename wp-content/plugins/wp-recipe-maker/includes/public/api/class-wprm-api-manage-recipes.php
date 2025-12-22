@@ -94,8 +94,9 @@ class WPRM_Api_Manage_Recipes {
 
 		if ( $recipe ) {
 			if ( 'frontend' === $format ) {
-				// Only return data if recipe is published or user has permission to edit.
-				if ( 'publish' === $recipe->post_status() || current_user_can( 'edit_post', $recipe->id() ) ) {
+				// Only return data if recipe is published, user has permission to edit, or setting allows non-published recipes.
+				$published_only = WPRM_Settings::get( 'api_allow_published_only' );
+				if ( 'publish' === $recipe->post_status() || current_user_can( 'edit_post', $recipe->id() ) || ! $published_only ) {
 					return rest_ensure_response( $recipe->get_data_frontend() );
 				}
 			}
@@ -1055,17 +1056,23 @@ class WPRM_Api_Manage_Recipes {
 									);
 								}
 
-								// Store in temp variables.
-								$original_amount = $ingredient['amount'];
-								$original_unit = $ingredient['unit'];
-								$converted_amount = $ingredient['converted'][2]['amount'];
-								$converted_unit = $ingredient['converted'][2]['unit'];
+								// Check if converted value is ''.
+								$converted_is_empty = '' === $ingredient['converted'][2]['amount'] && '' === $ingredient['converted'][2]['unit'];
 
-								// Switch around.
-								$ingredient['amount'] = $converted_amount;
-								$ingredient['unit'] = $converted_unit;
-								$ingredient['converted'][2]['amount'] = $original_amount;
-								$ingredient['converted'][2]['unit'] = $original_unit;
+								// Only switch if converted value is not empty. When empty, it just reuses the original value so we can keep that.
+								if ( ! $converted_is_empty ) {
+								// Store in temp variables.
+									$original_amount = $ingredient['amount'];
+									$original_unit = $ingredient['unit'];
+									$converted_amount = $ingredient['converted'][2]['amount'];
+									$converted_unit = $ingredient['converted'][2]['unit'];
+
+									// Switch around.
+									$ingredient['amount'] = $converted_amount;
+									$ingredient['unit'] = $converted_unit;
+									$ingredient['converted'][2]['amount'] = $original_amount;
+									$ingredient['converted'][2]['unit'] = $original_unit;
+								}
 
 								$new_ingredient_group['ingredients'][] = $ingredient;
 							}

@@ -88,6 +88,15 @@ export default {
 
         return ApiWrapper.call( `${manageEndpoint}/taxonomy/label`, 'POST', data );
     },
+    updateTermLanguage(type, id, language) {
+        const data = {
+            type,
+            id,
+            language,
+        };
+
+        return ApiWrapper.call( `${manageEndpoint}/taxonomy/language`, 'POST', data );
+    },
     mergeTerm(type, oldId, newId) {
         const data = {
             type,
@@ -111,5 +120,13 @@ export default {
         };
 
         return ApiWrapper.call( `${manageEndpoint}/${route}/bulk`, 'POST', data );
+    },
+    getTermId(taxonomy, name) {
+        const data = {
+            taxonomy,
+            name,
+        };
+
+        return ApiWrapper.call( `${manageEndpoint}/taxonomy/term-id`, 'POST', data );
     },
 };

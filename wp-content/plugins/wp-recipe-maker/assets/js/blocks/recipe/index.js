@@ -15,12 +15,15 @@ const { select } = wp.data;
 // Backwards compatibility.
 let InspectorControls;
 let BlockControls;
+let useBlockProps;
 if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 	InspectorControls = wp.blockEditor.InspectorControls;
 	BlockControls = wp.blockEditor.BlockControls;
+	useBlockProps = wp.blockEditor.useBlockProps;
 } else {
 	InspectorControls = wp.editor.InspectorControls;
 	BlockControls = wp.editor.BlockControls;
+	useBlockProps = wp.blockEditor ? wp.blockEditor.useBlockProps : ( () => ( { className: '' } ) );
 }
 
 let ServerSideRender;
@@ -36,6 +39,7 @@ const openedBlockEditor = Date.now();
 
 
 registerBlockType( 'wp-recipe-maker/recipe', {
+    apiVersion: 3,
     title: __( 'WPRM Recipe', 'wp-recipe-maker' ),
     description: __( 'Display a recipe box with recipe metadata.', 'wp-recipe-maker' ),
     icon: 'media-document',
@@ -73,7 +77,8 @@ registerBlockType( 'wp-recipe-maker/recipe', {
         ]
     },
     edit: (props) => {
-        const { attributes, setAttributes, isSelected, className } = props;
+        const { attributes, setAttributes, isSelected } = props;
+        const blockProps = useBlockProps();
 
         const modalCallback = ( recipe ) => {
             setAttributes({
@@ -108,7 +113,7 @@ registerBlockType( 'wp-recipe-maker/recipe', {
         }
 
         return (
-            <div className={ className }>{
+            <div { ...blockProps }>{
                 attributes.id
                 ?
                 <Fragment>

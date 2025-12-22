@@ -2,7 +2,7 @@
 /**
  * Migration for removing the categories associated with recipes again.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.23.0
  *
  * @package    WP_Recipe_Maker

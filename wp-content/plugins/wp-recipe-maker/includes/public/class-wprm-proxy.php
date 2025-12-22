@@ -60,6 +60,9 @@ class WPRM_Proxy {
 			return false;
 		}
 
-		return json_decode( wp_remote_retrieve_body( $response ) );
+		$body = wp_remote_retrieve_body( $response );
+		$decoded = json_decode( $body, true ); // true = return as array instead of object
+		
+		return $decoded;
 	}
 }

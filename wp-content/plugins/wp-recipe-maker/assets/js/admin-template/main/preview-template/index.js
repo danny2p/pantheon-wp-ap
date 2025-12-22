@@ -26,6 +26,28 @@ import Shortcodes from '../../general/shortcodes';
 import Elements from '../../general/elements';
 import Patterns from '../../general/patterns';
 
+// Helper function to remove lowercase event handler attributes that React doesn't accept
+const removeLowercaseEventHandlers = (domNode) => {
+    if (domNode.attribs) {
+        // List of common event handlers to check for lowercase versions
+        const eventHandlers = [
+            'onmouseenter', 'onmouseleave', 'onmouseover', 'onmouseout',
+            'onclick', 'ondblclick', 'onmousedown', 'onmouseup',
+            'onfocus', 'onblur', 'onchange', 'oninput', 'onsubmit',
+            'onkeydown', 'onkeyup', 'onkeypress',
+            'ontouchstart', 'ontouchend', 'ontouchmove',
+            'onload', 'onerror', 'onscroll'
+        ];
+        
+        eventHandlers.forEach(handler => {
+            if (domNode.attribs.hasOwnProperty(handler)) {
+                delete domNode.attribs[handler];
+            }
+        });
+    }
+    return domNode;
+};
+
 const { shortcodeGroups, shortcodeKeysAlphebetically } = Shortcodes;
 
 export default class PreviewTemplate extends Component {
@@ -52,6 +74,8 @@ export default class PreviewTemplate extends Component {
             addingBlock: false,
             movingBlock: false,
             hoveringBlock: false,
+            copyPasteMode: false, // 'copy', 'paste', or false
+            copyPasteBlock: false, // uid of block in copy/paste mode
             hasError: false,
         }
     }
@@ -67,7 +91,15 @@ export default class PreviewTemplate extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if ( 'shortcode-generator' === this.props.mode ) {
+        // Clear hover state when mode changes and force HTML update to re-render components with new mode.
+        if ( this.props.mode !== prevProps.mode ) {
+            this.setState({
+                hoveringBlock: false,
+            }, () => {
+                // Force HTML update to ensure components re-render with new mode prop.
+                this.changeHtml();
+            });
+        } else if ( 'shortcode-generator' === this.props.mode ) {
             // Make sure editing block stays on the shortcode.
             if ( this.state.editingBlock !== 0 ) {
                 this.onChangeEditingBlock(0);
@@ -244,6 +276,9 @@ export default class PreviewTemplate extends Component {
 
             const parseOptions = {
                 replace: function(domNode) {
+                    // Remove lowercase event handlers before processing
+                    removeLowercaseEventHandlers(domNode);
+                    
                     if ( domNode.name == 'wprm-replace-shortcode-with-block' ) {
                         return this.replaceDomNodeWithBlock( domNode, shortcodes, recipeId, parseOptions );
                     }
@@ -298,12 +333,17 @@ export default class PreviewTemplate extends Component {
                     recipeId={ recipeId }
                     shortcode={ shortcode }
                     shortcodes={ shortcodes }
+                    mode={ this.props.mode }
                     onClassesChange={ this.onClassesChange.bind(this) }
                     onStyleChange={ this.onStyleChange.bind(this) }
                     editingBlock={this.state.editingBlock}
                     onChangeEditingBlock={this.onChangeEditingBlock.bind(this)}
                     hoveringBlock={this.state.hoveringBlock}
                     onChangeHoveringBlock={this.onChangeHoveringBlock.bind(this)}
+                    onRemoveBlock={this.onRemoveBlock.bind(this)}
+                    onChangeMovingBlock={this.onChangeMovingBlock.bind(this)}
+                    copyPasteMode={this.state.copyPasteMode}
+                    copyPasteBlock={this.state.copyPasteBlock}
                     replaceDomNodeWithElement={this.replaceDomNodeWithElement.bind(this)}
                     replaceDomNodeWithBlock={this.replaceDomNodeWithBlock.bind(this)}
                     parseOptions={parseOptions}
@@ -321,6 +361,7 @@ export default class PreviewTemplate extends Component {
 
         return <Block
                     mode={ 'shortcode-generator' === this.props.mode ? this.props.mode : null }
+                    templateMode={ this.props.mode }
                     recipeId={ recipeId }
                     shortcode={ shortcode }
                     shortcodes={ shortcodes }
@@ -330,6 +371,11 @@ export default class PreviewTemplate extends Component {
                     onChangeEditingBlock={this.onChangeEditingBlock.bind(this)}
                     hoveringBlock={this.state.hoveringBlock}
                     onChangeHoveringBlock={this.onChangeHoveringBlock.bind(this)}
+                    onRemoveBlock={this.onRemoveBlock.bind(this)}
+                    onChangeMovingBlock={this.onChangeMovingBlock.bind(this)}
+                    copyPasteMode={this.state.copyPasteMode}
+                    copyPasteBlock={this.state.copyPasteBlock}
+                    onChangeCopyPasteMode={this.onChangeCopyPasteMode.bind(this)}
                     replaceDomNodeWithElement={this.replaceDomNodeWithElement.bind(this)}
                     replaceDomNodeWithBlock={this.replaceDomNodeWithBlock.bind(this)}
                     parseOptions={parseOptions}
@@ -439,9 +485,21 @@ export default class PreviewTemplate extends Component {
             this.setState({
                 editingBlock: uid,
                 hoveringBlock: false,
+                copyPasteMode: false, // Reset copy/paste mode when switching blocks
+                copyPasteBlock: false,
             }, this.changeHtml);
             // Force HTML update to trickle down editingBlock prop.
         }
+    }
+
+    onChangeCopyPasteMode(mode, blockUid) {
+        // Only update copy/paste state, preserve editing block.
+        this.setState((prevState) => ({
+            copyPasteMode: mode,
+            copyPasteBlock: blockUid,
+            // Explicitly preserve editingBlock to prevent accidental changes.
+            editingBlock: prevState.editingBlock,
+        }));
     }
 
     onChangeHoveringBlock(uid) {
@@ -779,6 +837,11 @@ export default class PreviewTemplate extends Component {
                     ?
                     <BlockProperties>
                         {
+                            'blocks' === this.props.mode
+                            &&
+                            <p>Select block to edit by clicking on it in the template or the list below:</p>
+                        }
+                        {
                             this.state.shortcodes.map((shortcode, i) => {
                                 return (
                                     <div
@@ -953,6 +1016,11 @@ export default class PreviewTemplate extends Component {
                 </AddBlocks>
                 <RemoveBlocks>
                 {
+                    'remove' === this.props.mode
+                    &&
+                    <p>Select block to remove by clicking on it in the template or the list below:</p>
+                }
+                {
                     this.state.shortcodes.map((shortcode, i) => {
                         return (
                             <div
@@ -984,7 +1052,7 @@ export default class PreviewTemplate extends Component {
                                 false === this.state.movingBlock
                                 ?
                                 <Fragment>
-                                    <p>Select block to move:</p>
+                                    <p>Select block to move by clicking on it in the template or the list below:</p>
                                     {
                                         this.state.shortcodes.map((shortcode, i) => {
                                             return (

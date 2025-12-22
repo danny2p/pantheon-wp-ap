@@ -3,8 +3,8 @@ Contributors: emrevona
 Donate link: https://profiles.wordpress.org/emrevona/
 Tags: cache, Optimize, performance, PageSpeed, core web vitals
 Requires at least: 5.3
-Tested up to: 6.8
-Stable tag: 1.4.2
+Tested up to: 6.9
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,9 +118,15 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 
 == Changelog ==
 
+= 1.4.4 =
+* Updated caching behavior to serve URLs with Google Ads Click & Conversion Parameters query strings (e.g., /?gbraid) from the cache, improving performance
+
+= 1.4.3 =
+* Tested and confirmed full compatibility with WordPress 6.9 to ensure smooth and reliable plugin performance
+
 = 1.4.2 =
 * <strong>[Improvement]</strong> Updated the function modifying for url() paths in CSS
-* <strong>[Improvement]</strong> Enhanced the <pre> tag replacement logic for more accurate matching and reliable content updates
+* <strong>[Improvement]</strong> Enhanced the &lt;pre&gt; tag replacement logic for more accurate matching and reliable content updates
 
 = 1.4.1 =
 * Added display of orphaned post meta, comment meta, user meta, term meta, and term relationship counts 
@@ -131,11 +137,11 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 * Fixed: support both old (elementor_experiment-e_element_cache) and new (elementor_element_cache_ttl) Elementor cache options for compatibility
 
 = 1.3.9 =
-* <strong>[Improvement]</strong> Replaced manual <script> output in print_my_inline_script() with wp_print_inline_script_tag() for better compatibility and cleaner code
+* <strong>[Improvement]</strong> Replaced manual &lt;script&gt; output in print_my_inline_script() with wp_print_inline_script_tag() for better compatibility and cleaner code
 * Fixed: RewriteCond syntax to correctly detect HTTPS connections
 
 = 1.3.8 =
-* Added a condition to exclude <script type="module"> tags from js combining 
+* Added a condition to exclude &lt;script type=&quot;module&quot;&gt; tags from js combining 
 * Fixed: Issue where the cache was not being cleared when a page was deleted
 * Fixed: PHP fatal error caused by an undefined function current_datetime() in cache.php on line 1130
 * Added support for fetching and processing multiple pages of Cloudflare zones to ensure all potential matches are considered
@@ -207,7 +213,7 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 * refactoring for getABSPATH()
 * to fix PHP Deprecated:  Creation of dynamic property CssUtilities::$url is deprecated in css-utilities.php on line 348
 * to fix PHP Deprecated:  Creation of dynamic property CssUtilities::$url_for_fix is deprecated in css-utilities.php on line 412
-* to remove duplicate extensions in the <FilesMatch> directive for the browser caching feature
+* to remove duplicate extensions in the &lt;FilesMatch&gt; directive for the browser caching feature
 
 = 1.2.3 =
 * Farewell, StackPath, and a warm welcome to BunnyCDN

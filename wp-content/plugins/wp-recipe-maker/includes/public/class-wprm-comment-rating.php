@@ -2,7 +2,7 @@
 /**
  * Allow visitors to rate the recipe in the comment.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.1.0
  *
  * @package    WP_Recipe_Maker

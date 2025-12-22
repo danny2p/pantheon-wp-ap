@@ -2,7 +2,7 @@
 /**
  * Handle the recipe equipment shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.3.0
  *
  * @package    WP_Recipe_Maker
@@ -231,6 +231,185 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					'smaller-faded' => 'Smaller & Faded',
 				),
 			),
+			'products_header' => array(
+				'type' => 'header',
+				'default' => __( 'eCommerce Products', 'wp-recipe-maker' ),
+			),
+			'products' => array(
+				'default' => '',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'before' => 'Show before the equipment',
+					'after' => 'Show after the equipment',
+				),
+			),
+			'products_style' => array(
+				'name' => 'Style',
+				'default' => 'inline-button',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Text',
+					'button' => 'Button',
+					'inline-button' => 'Inline Button',
+					'wide-button' => 'Full Width Button',
+				),
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_icon' => array(
+				'name' => 'Icon',
+				'default' => 'cart-alt',
+				'type' => 'icon',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_text' => array(
+				'name' => 'Text',
+				'default' => __( 'Add Multiple Products to Cart...', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_text_style' => array(
+				'name' => 'Text Style',
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_icon_color' => array(
+				'name' => 'Icon Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'icon',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_text_color' => array(
+				'name' => 'Text Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'text',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_horizontal_padding' => array(
+				'name' => 'Horizontal Padding',
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_vertical_padding' => array(
+				'name' => 'Vertical Padding',
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_button_color' => array(
+				'name' => 'Button Color',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_border_color' => array(
+				'name' => 'Border Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_border_radius' => array(
+				'name' => 'Border Radius',
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
 			'container_header' => array(
 				'type' => 'header',
 				'default' => __( 'Equipment Container', 'wp-recipe-maker' ),
@@ -291,12 +470,32 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 		// Add custom class if set.
 		if ( $atts['class'] ) { $classes[] = esc_attr( $atts['class'] ); }
 
+		// Args for optional products.
+		$products_atts = array(
+			'id' => $atts['id'],
+			'style' => $atts['products_style'],
+			'icon' => $atts['products_icon'],
+			'text' => $atts['products_text'],
+			'text_style' => $atts['products_text_style'],
+			'icon_color' => $atts['products_icon_color'],
+			'text_color' => $atts['products_text_color'],
+			'horizontal_padding' => $atts['products_horizontal_padding'],
+			'vertical_padding' => $atts['products_vertical_padding'],
+			'button_color' => $atts['products_button_color'],
+			'border_color' => $atts['products_border_color'],
+			'border_radius' => $atts['products_border_radius'],
+		);
+
 		// Custom style.
 		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
 		$style = WPRM_Shortcode_Helper::get_inline_style( $css_variables );
 
 		$output = '<div id="recipe-' . esc_attr( $recipe->id() ) . '-equipment" class="' . esc_attr( implode( ' ', $classes ) ) . '" data-recipe="' . esc_attr( $recipe->id() ) . '"' . $style . '>';
 		$output .= WPRM_Shortcode_Helper::get_section_header( $atts, 'equipment' );
+
+		if ( 'before' === $atts['products'] ) {
+			$output .= WPRM_SC_Add_Products_To_Cart::shortcode( $products_atts );
+		}
 
 		if ( (bool) $atts['has_container'] ) {
 			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'equipment' );
@@ -321,8 +520,6 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 				if ( (bool) $atts['force_item_position'] ) {
 					$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
 				}
-
-				$output .= '<li class="wprm-recipe-equipment-item" style="' . esc_attr( $style ) . '">';
 
 				// Equipment link.
 				$name = apply_filters( 'wprm_recipe_equipment_shortcode_link', $equipment['name'], $equipment );
@@ -358,13 +555,22 @@ class WPRM_SC_Equipment extends WPRM_Template_Shortcode {
 					$equipment_output = apply_filters( 'wprm_recipe_equipment_shortcode_checkbox', $equipment_output );
 				}
 
-				$output .= $equipment_output;
-
-				$output .= '</li>';
+				// Build the complete <li>...</li> structure
+				$li_attributes = 'class="wprm-recipe-equipment-item" style="' . esc_attr( $style ) . '"';
+				$equipment_line = '<li ' . $li_attributes . '>' . $equipment_output . '</li>';
+				
+				// Apply filter to the complete equipment line
+				$equipment_line = apply_filters( 'wprm_recipe_equipment_shortcode_equipment', $equipment_line, $atts, $equipment, $recipe );
+				
+				$output .= $equipment_line;
 			}
 			$output .= '</ul>';
 		} else {
 			$output = apply_filters( 'wprm_recipe_equipment_shortcode_display', $output, $atts, $recipe );
+		}
+
+		if ( 'after' === $atts['products'] ) {
+			$output .= do_shortcode( '[wprm-spacer]' ) . WPRM_SC_Add_Products_To_Cart::shortcode( $products_atts );
 		}
 
 		if ( (bool) $atts['has_container'] ) {

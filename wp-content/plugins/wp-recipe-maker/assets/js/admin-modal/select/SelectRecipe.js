@@ -4,6 +4,11 @@ import AsyncSelect from 'react-select/async';
 import { __wprm } from 'Shared/Translations';
 
 export default class SelectRecipe extends Component {
+    constructor(props) {
+        super(props);
+        this.selectRef = React.createRef();
+    }
+
     getOptions(input) {
         if (!input) {
 			return Promise.resolve({ options: [] });
@@ -24,9 +29,16 @@ export default class SelectRecipe extends Component {
             });
     }
 
+    focus() {
+        if (this.selectRef.current) {
+            this.selectRef.current.focus();
+        }
+    }
+
     render() {
         return (
             <AsyncSelect
+                ref={this.selectRef}
                 placeholder={ __wprm( 'Select or search a recipe' ) }
                 value={this.props.value}
                 onChange={this.props.onValueChange}

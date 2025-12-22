@@ -2,7 +2,7 @@
 /**
  * Handle the private notes shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.7.0
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Responsible for importing Meal Planner Pro recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.7.0
  *
  * @package    WP_Recipe_Maker

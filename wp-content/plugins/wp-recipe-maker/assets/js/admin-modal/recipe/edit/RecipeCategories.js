@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
+import { __wprm } from 'Shared/Translations';
+import Button from 'Shared/Button';
 import FieldContainer from '../../fields/FieldContainer';
 import FieldCategory from '../../fields/FieldCategory';
 
@@ -44,6 +46,32 @@ export default class RecipeCategories extends Component {
                         )
                     })
                 }
+                <div className="wprm-admin-modal-field-category-actions">
+                    <Button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.props.openSecondaryModal('bulk-add-categories', {
+                                tags: this.props.tags,
+                                onBulkAdd: (newTags) => {
+                                    this.props.onRecipeChange({ tags: newTags });
+                                }
+                            });
+                        } }
+                    >{ __wprm( 'Bulk Add Categories' ) }</Button>
+                    <Button
+                        ai
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.props.openSecondaryModal('suggest-tags', {
+                                recipe: this.props.recipe,
+                                tags: this.props.tags,
+                                onSuggestTags: (newTags) => {
+                                    this.props.onRecipeChange({ tags: newTags });
+                                }
+                            });
+                        } }
+                    >{ __wprm( 'Suggest Tags' ) }</Button>
+                </div>
             </Fragment>
         );
     }

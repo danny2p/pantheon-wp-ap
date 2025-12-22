@@ -2,7 +2,7 @@
 /**
  * Calculate and store the recipe rating.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.22.0
  *
  * @package    WP_Recipe_Maker

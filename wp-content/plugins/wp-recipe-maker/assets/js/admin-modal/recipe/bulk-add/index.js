@@ -77,6 +77,10 @@ export default class BulkAdd extends Component {
         return fields;
     }
 
+    getBulkAddCallback() {
+        return this.props.onBulkAdd || this.props.args?.onBulkAdd;
+    }
+
     useValues() {
         // Instructions.
         if ( 'instructions' === this.props.field ) {
@@ -100,7 +104,11 @@ export default class BulkAdd extends Component {
                 }
             });
 
-            this.props.onBulkAdd( instructions_flat );
+            const onBulkAdd = this.getBulkAddCallback();
+            if (onBulkAdd) {
+                onBulkAdd( instructions_flat );
+            }
+            this.props.maybeCloseModal();
             return;
         }
 
@@ -146,7 +154,11 @@ export default class BulkAdd extends Component {
                                 }
                             }
         
-                            this.props.onBulkAdd( ingredients_flat );
+                            const onBulkAdd = this.getBulkAddCallback();
+                            if (onBulkAdd) {
+                                onBulkAdd( ingredients_flat );
+                            }
+                            this.props.maybeCloseModal();
                         } else {
                             this.setState({
                                 isParsing: false,
@@ -155,7 +167,11 @@ export default class BulkAdd extends Component {
                     });
                 });
             } else {
-                this.props.onBulkAdd( ingredients_flat );
+                const onBulkAdd = this.getBulkAddCallback();
+                if (onBulkAdd) {
+                    onBulkAdd( ingredients_flat );
+                }
+                this.props.maybeCloseModal();
             }
         }
     }
@@ -166,7 +182,7 @@ export default class BulkAdd extends Component {
         return (
             <Fragment>
                 <Header
-                    onCloseModal={ this.props.onCloseModal }
+                    onCloseModal={ this.props.maybeCloseModal }
                 >
                     {
                         'ingredients' === this.props.field ? __wprm( 'Bulk Add Ingredients' ) : __wprm( 'Bulk Add Instructions' )
@@ -215,7 +231,7 @@ export default class BulkAdd extends Component {
                 >
                     <button
                         className="button"
-                        onClick={ this.props.onCancel }
+                        onClick={ this.props.maybeCloseModal }
                     >
                         { __wprm( 'Cancel' ) }
                     </button>

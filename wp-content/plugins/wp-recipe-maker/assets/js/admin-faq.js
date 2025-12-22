@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import React from 'react';
 
 import App from './admin-faq/App';
@@ -6,8 +6,6 @@ import App from './admin-faq/App';
 let appContainer = document.getElementById( 'wprm-admin-faq' );
 
 if (appContainer) {
-	ReactDOM.render(
-		<App/>,
-		appContainer
-	);
+	const root = createRoot(appContainer);
+	root.render(<App/>);
 }

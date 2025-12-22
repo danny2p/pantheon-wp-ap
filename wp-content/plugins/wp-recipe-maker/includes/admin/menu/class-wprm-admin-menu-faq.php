@@ -2,7 +2,7 @@
 /**
  * Show a FAQ in the backend menu.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker

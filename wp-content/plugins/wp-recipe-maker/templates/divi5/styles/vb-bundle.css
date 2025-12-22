@@ -1,0 +1,11 @@
+/*!****************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./wp-recipe-maker/templates/divi5/src/components/wprm-recipe/style.scss ***!
+  \****************************************************************************************************************************************************************/
+.wprm-divi5-recipe__inner {
+  padding: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.wprm-divi5-recipe__preview {
+  margin: 0;
+}

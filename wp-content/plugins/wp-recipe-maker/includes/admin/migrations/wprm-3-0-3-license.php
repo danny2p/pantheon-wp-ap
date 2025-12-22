@@ -2,7 +2,7 @@
 /**
  * Migration for the license key.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.3
  *
  * @package    WP_Recipe_Maker

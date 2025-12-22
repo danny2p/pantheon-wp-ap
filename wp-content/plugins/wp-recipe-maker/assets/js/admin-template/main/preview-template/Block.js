@@ -8,6 +8,28 @@ import Helpers from '../../general/Helpers';
 import BlockProperties from '../../menu/BlockProperties';
 import Property from '../../menu/Property';
 
+// Helper function to remove lowercase event handler attributes that React doesn't accept
+const removeLowercaseEventHandlers = (domNode) => {
+    if (domNode.attribs) {
+        // List of common event handlers to check for lowercase versions
+        const eventHandlers = [
+            'onmouseenter', 'onmouseleave', 'onmouseover', 'onmouseout',
+            'onclick', 'ondblclick', 'onmousedown', 'onmouseup',
+            'onfocus', 'onblur', 'onchange', 'oninput', 'onsubmit',
+            'onkeydown', 'onkeyup', 'onkeypress',
+            'ontouchstart', 'ontouchend', 'ontouchmove',
+            'onload', 'onerror', 'onscroll'
+        ];
+        
+        eventHandlers.forEach(handler => {
+            if (domNode.attribs.hasOwnProperty(handler)) {
+                delete domNode.attribs[handler];
+            }
+        });
+    }
+    return domNode;
+};
+
 export default class Block extends Component {
     constructor(props) {
         super(props);
@@ -36,6 +58,27 @@ export default class Block extends Component {
 
         // Make sure we start out in edit mode unless we're in shortcode generator.
         if  ( 'shortcode-generator' !== this.state.blockMode && prevProps.editingBlock !== this.props.editingBlock ) {
+            // If this block is no longer being edited, reset to edit mode.
+            if ( this.props.shortcode.uid !== this.props.editingBlock ) {
+                this.onChangeBlockMode('edit');
+            }
+        }
+        
+        // Reset copy/paste mode if copy/paste mode was cleared in parent.
+        if ( prevProps.copyPasteMode && ! this.props.copyPasteMode ) {
+            // If this block was in copy/paste mode, reset to edit mode.
+            if ( 'copy' === this.state.blockMode || 'paste' === this.state.blockMode ) {
+                this.onChangeBlockMode('edit');
+            }
+        }
+        
+        // Reset copy/paste mode if this block is no longer being edited.
+        if ( prevProps.editingBlock === this.props.shortcode.uid && this.props.editingBlock !== this.props.shortcode.uid ) {
+            this.onChangeBlockMode('edit');
+        }
+        
+        // Reset copy/paste mode if this block is no longer being edited.
+        if ( prevProps.editingBlock === this.props.shortcode.uid && this.props.editingBlock !== this.props.shortcode.uid ) {
             this.onChangeBlockMode('edit');
         }
     }
@@ -99,6 +142,15 @@ export default class Block extends Component {
             this.setState({
                 blockMode
             });
+            
+            // Notify parent when entering/exiting copy/paste mode.
+            if ( this.props.onChangeCopyPasteMode ) {
+                if ( 'copy' === blockMode || 'paste' === blockMode ) {
+                    this.props.onChangeCopyPasteMode( blockMode, this.props.shortcode.uid );
+                } else {
+                    this.props.onChangeCopyPasteMode( false, false );
+                }
+            }
         }
     }
 
@@ -128,10 +180,71 @@ export default class Block extends Component {
         if ( Object.keys(changedProperties).length ) {
             this.props.onBlockPropertiesChange(to, changedProperties);
         }
+        
+        // Don't automatically exit copy/paste mode - user must explicitly stop it.
     }
 
     render() {
         const properties = this.getBlockProperties();
+        
+        // Only enable hover/click in specific modes.
+        // Use templateMode prop for template editor interactivity (separate from Block's internal mode).
+        const templateMode = this.props.templateMode;
+        const interactiveModes = [ 'blocks', 'remove', 'move' ];
+        const isInteractiveMode = templateMode && interactiveModes.includes( templateMode );
+        
+        // Check if we're in copy/paste mode (another block is being copied/pasted from/to).
+        const isInCopyPasteMode = this.props.copyPasteMode && this.props.copyPasteBlock !== this.props.shortcode.uid;
+        
+        // For 'blocks' mode, allow interaction even when editing (to switch blocks).
+        // For 'remove' and 'move' modes, only allow when not editing a block.
+        // Also allow interaction when in copy/paste mode (but handle it separately).
+        const canInteractForRegularModes = isInteractiveMode && ( 'blocks' === templateMode || false === this.props.editingBlock );
+        const canInteract = canInteractForRegularModes || isInCopyPasteMode;
+        
+        // Check if click is inside the preview container
+        const isClickInPreviewContainer = (e) => {
+            const target = e.target;
+            const previewContainer = target.closest('.wprm-main-container-preview-content');
+            return previewContainer !== null;
+        };
+
+        // Handle click based on mode.
+        const handleClick = (e) => {
+            // Only handle clicks inside the preview container
+            if ( ! isClickInPreviewContainer(e) ) {
+                return;
+            }
+
+            // Handle copy/paste mode clicks FIRST, before anything else.
+            if ( isInCopyPasteMode ) {
+                // Always prevent default in copy/paste mode to stop link navigation and other default behaviors.
+                e.preventDefault();
+                
+                // Trigger copy/paste action.
+                const from = 'copy' === this.props.copyPasteMode ? this.props.copyPasteBlock : this.props.shortcode.uid;
+                const to = 'copy' === this.props.copyPasteMode ? this.props.shortcode.uid : this.props.copyPasteBlock;
+                this.onCopyPasteStyle(from, to);
+                return;
+            }
+            
+            if ( ! canInteractForRegularModes ) {
+                return;
+            }
+
+            // Always prevent default in interactive modes to stop link navigation and other default behaviors.
+            e.preventDefault();
+
+            if ( 'blocks' === templateMode ) {
+                this.props.onChangeEditingBlock( this.props.shortcode.uid );
+            } else if ( 'remove' === templateMode ) {
+                if ( confirm( 'Are you sure you want to delete the "' + this.props.shortcode.name + '" block?' ) ) {
+                    this.props.onRemoveBlock( this.props.shortcode.uid );
+                }
+            } else if ( 'move' === templateMode ) {
+                this.props.onChangeMovingBlock( this.props.shortcode );
+            }
+        };
 
         return (
             <Fragment>
@@ -141,25 +254,42 @@ export default class Block extends Component {
                     <Loader/>
                     :
                     <Fragment>
-                        { Parser(this.state.html.trim(), {
-                            replace: function(domNode) {
-                                if ( ! domNode.parent && this.props.shortcode.uid === this.props.hoveringBlock ) {
-                                    if ( ! domNode.attribs ) {
-                                        domNode.attribs = {};
-                                    }
-                                    domNode.attribs.class = domNode.attribs.class ? domNode.attribs.class + ' wprm-template-block-hovering' : 'wprm-template-block-hovering';
-                                    return domToReact(domNode);
-                                }
+                        <div
+                            className="wprm-template-block-wrapper"
+                            onMouseEnter={ canInteract ? (e) => { e.stopPropagation(); this.props.onChangeHoveringBlock( this.props.shortcode.uid ); } : undefined }
+                            onMouseLeave={ canInteract ? (e) => { e.stopPropagation(); this.props.onChangeHoveringBlock( false ); } : undefined }
+                            onClick={ canInteract ? (e) => { 
+                                // Stop propagation immediately to prevent parent handlers
+                                e.stopPropagation();
                                 
-                                // Could be other shortcodes inside this block.
-                                if ( domNode.name == 'wprm-replace-shortcode-with-block' ) {
-                                    return this.props.replaceDomNodeWithBlock( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
-                                }
-                                if ( domNode.name == 'div' && domNode.attribs.class && 'wprm-layout-' === domNode.attribs.class.substring( 0, 12 ) ) {
-                                    return this.props.replaceDomNodeWithElement( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
-                                }
-                            }.bind(this)
-                        }) }
+                                // Call handleClick which handles preventDefault appropriately
+                                handleClick(e);
+                            } : undefined }
+                            style={ isInCopyPasteMode ? { cursor: 'pointer' } : undefined }
+                        >
+                            { Parser(this.state.html.trim(), {
+                                replace: function(domNode) {
+                                    // Remove lowercase event handlers before processing
+                                    removeLowercaseEventHandlers(domNode);
+                                    
+                                    if ( ! domNode.parent && this.props.shortcode.uid === this.props.hoveringBlock ) {
+                                        if ( ! domNode.attribs ) {
+                                            domNode.attribs = {};
+                                        }
+                                        domNode.attribs.class = domNode.attribs.class ? domNode.attribs.class + ' wprm-template-block-hovering' : 'wprm-template-block-hovering';
+                                        return domToReact(domNode);
+                                    }
+                                    
+                                    // Could be other shortcodes inside this block.
+                                    if ( domNode.name == 'wprm-replace-shortcode-with-block' ) {
+                                        return this.props.replaceDomNodeWithBlock( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
+                                    }
+                                    if ( domNode.name == 'div' && domNode.attribs.class && 'wprm-layout-' === domNode.attribs.class.substring( 0, 12 ) ) {
+                                        return this.props.replaceDomNodeWithElement( domNode, this.props.shortcodes, this.props.recipeId, this.props.parseOptions );
+                                    }
+                                }.bind(this)
+                            }) }
+                        </div>
                     </Fragment>
                 }
                 {

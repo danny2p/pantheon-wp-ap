@@ -2,7 +2,7 @@
 /**
  * Handle compabitility with other plugins/themes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.2.0
  *
  * @package    WP_Recipe_Maker
@@ -18,6 +18,27 @@
  * @author     Brecht Vandersmissen <brecht@bootstrapped.ventures>
  */
 class WPRM_Compatibility {
+
+	/**
+	 * Track whether the Divi 5 integration has been initialized.
+	 *
+	 * @var bool
+	 */
+	private static $divi5_initialized = false;
+
+	/**
+	 * Track whether we've localized Divi 5 builder data.
+	 *
+	 * @var bool
+	 */
+	private static $divi5_builder_data_localized = false;
+
+	/**
+	 * Track the language newly created WPRM terms should use.
+	 *
+	 * @var false|string
+	 */
+	private static $new_term_language = false;
 
 	/**
 	 * Register actions and filters.
@@ -61,6 +82,9 @@ class WPRM_Compatibility {
 		// Divi.
 		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi_assets' ) );
+		add_action( 'init', array( __CLASS__, 'divi5_init' ) );
+		add_action( 'divi_visual_builder_assets_before_enqueue_scripts', array( __CLASS__, 'divi5_vb_assets' ) );
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi5_frontend_assets' ) );
 
 		// Elementor.
 		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
@@ -82,6 +106,9 @@ class WPRM_Compatibility {
 		// WP Ultimate Post Grid & WP Extended Search combination.
 		add_filter( 'wpes_post_types', array( __CLASS__, 'wpupg_extended_search_post_types' ) );
 		add_filter( 'wpes_tax', array( __CLASS__, 'wpupg_extended_search_taxonomies' ) );
+
+		// Track created terms for multilingual plugins.
+		add_action( 'created_term', array( __CLASS__, 'maybe_set_new_term_language' ), 10, 3 );
 	}
 
 	/**
@@ -196,6 +223,154 @@ class WPRM_Compatibility {
 		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
 			WPRM_Assets::load();
 		}
+	}
+
+	/**
+	 * Determine if Divi 5 is active.
+	 *
+	 * @return bool
+	 */
+	private static function is_divi5_enabled() {
+		return function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled();
+	}
+
+	/**
+	 * Bootstrap Divi 5 module registration.
+	 */
+	public static function divi5_init() {
+		if ( self::$divi5_initialized || ! self::is_divi5_enabled() ) {
+			return;
+		}
+
+		if ( ! defined( 'WPRM_DIVI5_PATH' ) ) {
+			define( 'WPRM_DIVI5_PATH', WPRM_DIR . 'templates/divi5/' );
+			define( 'WPRM_DIVI5_URL', WPRM_URL . 'templates/divi5/' );
+			define( 'WPRM_DIVI5_JSON_PATH', WPRM_DIVI5_PATH . 'modules-json/' );
+		}
+
+		$modules_bootstrap = WPRM_DIVI5_PATH . 'modules/Modules.php';
+
+		if ( file_exists( $modules_bootstrap ) ) {
+			require_once $modules_bootstrap;
+		}
+
+		self::$divi5_initialized = true;
+	}
+
+	/**
+	 * Enqueue Divi 5 Visual Builder assets.
+	 */
+	public static function divi5_vb_assets() {
+		if ( ! self::is_divi5_enabled() || ! function_exists( 'et_core_is_fb_enabled' ) || ! et_core_is_fb_enabled() ) {
+			return;
+		}
+
+		if ( ! class_exists( '\\ET\\Builder\\VisualBuilder\\Assets\\PackageBuildManager' ) ) {
+			return;
+		}
+
+		self::divi5_init();
+
+		// Ensure the recipe selection modal assets are available inside the builder iframe.
+		if ( ! class_exists( 'WPRM_Modal' ) ) {
+			require_once WPRM_DIR . 'includes/admin/class-wprm-modal.php';
+		}
+
+		if ( ! class_exists( 'WPRM_Assets' ) ) {
+			require_once WPRM_DIR . 'includes/class-wprm-assets.php';
+		}
+
+		// Force admin assets to load for Divi 5.
+		add_filter( 'wprm_should_load_admin_assets', '__return_true' );
+
+		$GLOBALS['wprm_divi5_context'] = true;
+		WPRM_Modal::add_modal_content();
+		unset( $GLOBALS['wprm_divi5_context'] );
+		
+		WPRM_Assets::enqueue_admin();
+		WPRM_Modal::enqueue();
+
+		if ( ! class_exists( 'WPRMP_Assets' ) && defined( 'WPRMP_DIR' ) && file_exists( WPRMP_DIR . 'includes/class-wprmp-assets.php' ) ) {
+			require_once WPRMP_DIR . 'includes/class-wprmp-assets.php';
+		}
+
+		if ( class_exists( 'WPRMP_Assets' ) ) {
+			WPRMP_Assets::enqueue_admin();
+		}
+
+		remove_filter( 'wprm_should_load_admin_assets', '__return_true' );
+
+		$base_url = defined( 'WPRM_DIVI5_URL' ) ? WPRM_DIVI5_URL : WPRM_URL . 'templates/divi5/';
+
+		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+			array(
+				'name'    => 'wprm-divi5-builder-bundle-script',
+				'version' => class_exists( 'WPRM_Debug' ) && WPRM_Debug::debugging() ? time() : WPRM_VERSION,
+				'script'  => array(
+					'src'                => $base_url . 'scripts/bundle.js',
+					'deps'               => array(
+						'divi-module-library',
+						'divi-vendor-wp-hooks',
+					),
+					'enqueue_top_window' => false,
+					'enqueue_app_window' => true,
+				),
+			)
+		);
+
+		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
+			array(
+				'name'   => 'wprm-divi5-builder-style',
+				'version'=> class_exists( 'WPRM_Debug' ) && WPRM_Debug::debugging() ? time() : WPRM_VERSION,
+				'style'  => array(
+					'src'                => $base_url . 'styles/vb-bundle.css',
+					'deps'               => array(),
+					'enqueue_top_window' => false,
+					'enqueue_app_window' => true,
+				),
+			)
+		);
+
+		if ( ! self::$divi5_builder_data_localized ) {
+			$builder_data = array(
+				'nonce'     => wp_create_nonce( 'wp_rest' ),
+				'endpoints' => array(
+					'preview' => trailingslashit( rest_url( 'wp-recipe-maker/v1/utilities/preview' ) ),
+				),
+				'latestRecipes' => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
+			);
+
+			$inline_script = 'window.WPRMDivi5Data = ' . wp_json_encode( $builder_data ) . ';';
+
+			wp_add_inline_script(
+				'divi-module-library',
+				$inline_script,
+				'before'
+			);
+
+			wp_add_inline_script(
+				'divi-module-library',
+				"(function() { if (typeof window !== 'undefined' && !window.WPRMDivi5Data) { " . $inline_script . " } })();",
+				'after'
+			);
+
+			self::$divi5_builder_data_localized = true;
+		}
+	}
+
+	/**
+	 * Load Divi 5 front-end styles.
+	 */
+	public static function divi5_frontend_assets() {
+		if ( ! self::is_divi5_enabled() ) {
+			return;
+		}
+
+		self::divi5_init();
+
+		$style_url = defined( 'WPRM_DIVI5_URL' ) ? WPRM_DIVI5_URL : WPRM_URL . 'templates/divi5/';
+
+		wp_enqueue_style( 'wprm-divi5-modules', $style_url . 'styles/bundle.css', array(), WPRM_VERSION );
 	}
 
 
@@ -533,6 +708,14 @@ class WPRM_Compatibility {
 					'label' => isset( $names[ $index ] ) ? $names[ $index ] : $slug,
 				);
 			}
+
+			if ( function_exists( 'pll_current_language' ) ) {
+				$current_language = pll_current_language( 'slug' );
+			}
+
+			if ( function_exists( 'pll_default_language' ) ) {
+				$default_language = pll_default_language( 'slug' );
+			}
 		}
 
 		// Return either false (no multilingual plugin) or an array with the plugin and activated languages.
@@ -615,6 +798,165 @@ class WPRM_Compatibility {
 					pll_set_post_language( $recipe_id, $language );
 				}
 			}
+		}
+	}
+
+	/**
+	 * Set the language for a specific term ID.
+	 *
+	 * @since	10.8.0
+	 * @param	int         $term_id   Term ID to set the language for.
+	 * @param	string      $taxonomy  Taxonomy the term belongs to.
+	 * @param	false|mixed $language  Language code to set.
+	 */
+	public static function set_term_language( $term_id, $taxonomy, $language ) {
+		$multilingual = self::multilingual();
+
+		if ( ! $term_id || ! $taxonomy || ! $multilingual || ! $language ) {
+			return false;
+		}
+
+		$language = sanitize_key( $language );
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			$element_type = 'tax_' . $taxonomy;
+			$translation_group_id = apply_filters( 'wpml_element_trid', null, $term_id, $element_type );
+
+			do_action( 'wpml_set_element_language_details', array(
+				'element_id'   => $term_id,
+				'trid'         => $translation_group_id ? $translation_group_id : false,
+				'element_type' => $element_type,
+				'language_code'=> $language,
+			) );
+
+			return true;
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_set_term_language' ) ) {
+			pll_set_term_language( $term_id, $language );
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get the language for a specific term ID.
+	 *
+	 * @since	10.8.0
+	 * @param	int    $term_id  Term ID to get the language for.
+	 * @param	string $taxonomy Taxonomy for the term.
+	 */
+	public static function get_term_language( $term_id, $taxonomy = '' ) {
+		$multilingual = self::multilingual();
+
+		if ( ! $term_id || ! $multilingual ) {
+			return false;
+		}
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			$element_type = 'tax_' . ( $taxonomy ? $taxonomy : 'term' );
+			$details = apply_filters( 'wpml_element_language_details', null, array(
+				'element_id'   => $term_id,
+				'element_type' => $element_type,
+			) );
+
+			if ( $details ) {
+				// WPML may return an array or stdClass depending on version.
+				if ( is_object( $details ) ) {
+					$details = (array) $details;
+				}
+
+				if ( is_array( $details ) && isset( $details['language_code'] ) ) {
+					return $details['language_code'];
+				}
+			}
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_get_term_language' ) ) {
+			$language = pll_get_term_language( $term_id, 'slug' );
+
+			if ( $language && ! is_wp_error( $language ) ) {
+				return $language;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get the current admin language.
+	 *
+	 * @since	10.8.0
+	 */
+	public static function get_current_admin_language() {
+		$multilingual = self::multilingual();
+
+		if ( ! $multilingual ) {
+			return false;
+		}
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			$current = apply_filters( 'wpml_current_language', null );
+
+			if ( ! $current && defined( 'ICL_LANGUAGE_CODE' ) ) {
+				$current = ICL_LANGUAGE_CODE;
+			}
+
+			return $current ? sanitize_key( $current ) : false;
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_current_language' ) ) {
+			$current = pll_current_language( 'slug' );
+			return $current ? sanitize_key( $current ) : false;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Set the language context for newly created terms.
+	 *
+	 * @since	10.8.0
+	 * @param	false|string $language Language to assign to new terms.
+	 */
+	public static function set_new_term_language_context( $language ) {
+		self::$new_term_language = $language ? sanitize_key( $language ) : false;
+	}
+
+	/**
+	 * Reset the language context for newly created terms.
+	 *
+	 * @since	10.8.0
+	 */
+	public static function clear_new_term_language_context() {
+		self::$new_term_language = false;
+	}
+
+	/**
+	 * Maybe set the language whenever a term gets created.
+	 *
+	 * @since	10.8.0
+	 * @param	int    $term_id  Term ID that was created.
+	 * @param	int    $tt_id    Term taxonomy ID.
+	 * @param	string $taxonomy Taxonomy of the created term.
+	 */
+	public static function maybe_set_new_term_language( $term_id, $tt_id, $taxonomy ) {
+		// Only handle WPRM taxonomies.
+		if ( 0 !== strpos( $taxonomy, 'wprm_' ) ) {
+			return;
+		}
+
+		$language = self::$new_term_language ? self::$new_term_language : self::get_current_admin_language();
+
+		if ( $language ) {
+			self::set_term_language( $term_id, $taxonomy, $language );
 		}
 	}
 

@@ -7,6 +7,16 @@
     --wprm-popup-button-text: #ffffff;
 }
 
+// Prevent body scroll when modal is open
+body.wprm-popup-modal-open {
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	right: 0;
+}
+
 .wprm-popup-modal {
     display: none;
 
@@ -27,6 +37,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    // Prevent touch scrolling on overlay
+    touch-action: none;
+    overflow: hidden;
 }
 
 .wprm-popup-modal__container {
@@ -35,6 +49,7 @@
     padding: 30px;
     max-width: 100%;
     max-height: 100vh;
+    max-height: 100dvh;
     border-radius: 4px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -119,9 +134,14 @@
         color: var( --wprm-popup-button-background );
         border: 1px solid var( --wprm-popup-button-background );
     }
+
+    &:disabled {
+		cursor: not-allowed;
+		opacity: 0.3;
+	}
 }
 
-.wprm-popup-modal__btn:focus, .wprm-popup-modal__btn:hover {
+.wprm-popup-modal__btn:not(:disabled):focus, .wprm-popup-modal__btn:not(:disabled):hover {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
 }

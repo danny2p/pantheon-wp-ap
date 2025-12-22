@@ -2,7 +2,7 @@
 /**
  * Open up dashboard in the WordPress REST API.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      7.4.0
  *
  * @package    WP_Recipe_Maker

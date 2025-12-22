@@ -32,6 +32,18 @@ export default class Select extends Component {
             type,
             selection,
         };
+
+        this.selectRecipeRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // Focus the dropdown when the modal opens
+        if (this.selectRecipeRef.current && this.selectRecipeRef.current.focus) {
+            // Use setTimeout to ensure the component is fully rendered
+            setTimeout(() => {
+                this.selectRecipeRef.current.focus();
+            }, 100);
+        }
     }
 
     selectionsMade() {
@@ -61,6 +73,7 @@ export default class Select extends Component {
                                 this.props.args.fields.recipe
                                 ?
                                 <SelectRecipe
+                                    ref={this.selectRecipeRef}
                                     options={
                                         this.props.args.fields.recipe.showFirst
                                         ?

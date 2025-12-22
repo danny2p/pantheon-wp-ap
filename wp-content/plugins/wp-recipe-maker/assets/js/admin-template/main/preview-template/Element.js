@@ -72,6 +72,50 @@ const Element = (props) => {
         classes.push( 'wprm-template-block-hovering' );
     }
 
+    // Only enable hover/click in specific modes.
+    const interactiveModes = [ 'blocks', 'remove', 'move' ];
+    const isInteractiveMode = interactiveModes.includes( props.mode );
+    
+    // Don't allow interaction when copy/paste mode is active (let child blocks handle it).
+    const isCopyPasteMode = props.copyPasteMode && props.copyPasteBlock !== false;
+    
+    // For 'blocks' mode, allow interaction even when editing (to switch blocks).
+    // For 'remove' and 'move' modes, only allow when not editing a block.
+    // Don't allow interaction when copy/paste mode is active.
+    const canInteract = isInteractiveMode && ( 'blocks' === props.mode || false === props.editingBlock ) && ! isCopyPasteMode;
+    
+    // Check if click is inside the preview container
+    const isClickInPreviewContainer = (e) => {
+        const target = e.target;
+        const previewContainer = target.closest('.wprm-main-container-preview-content');
+        return previewContainer !== null;
+    };
+
+    // Handle click based on mode.
+    const handleClick = (e) => {
+        // Only handle clicks inside the preview container
+        if ( ! isClickInPreviewContainer(e) ) {
+            return;
+        }
+
+        if ( ! canInteract ) {
+            return;
+        }
+
+        // Always prevent default in interactive modes to stop link navigation and other default behaviors.
+        e.preventDefault();
+
+        if ( 'blocks' === props.mode ) {
+            props.onChangeEditingBlock( props.shortcode.uid );
+        } else if ( 'remove' === props.mode ) {
+            if ( confirm( 'Are you sure you want to delete the "' + props.shortcode.name + '" block?' ) ) {
+                props.onRemoveBlock( props.shortcode.uid );
+            }
+        } else if ( 'move' === props.mode ) {
+            props.onChangeMovingBlock( props.shortcode );
+        }
+    };
+    
     // Styles.
     let inlineStyle = {};
     if ( props.shortcode.hasOwnProperty( 'style' ) && props.shortcode.style.length ) {
@@ -86,6 +130,9 @@ const Element = (props) => {
             <div
                 className={ classes.join( ' ' ) }
                 style={ inlineStyle }
+                onMouseEnter={ canInteract ? (e) => { e.stopPropagation(); props.onChangeHoveringBlock( props.shortcode.uid ); } : undefined }
+                onMouseLeave={ canInteract ? (e) => { e.stopPropagation(); props.onChangeHoveringBlock( false ); } : undefined }
+                onClick={ canInteract ? (e) => { e.stopPropagation(); handleClick(e); } : undefined }
             >
                 { props.children }
             </div>

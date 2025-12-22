@@ -3,15 +3,19 @@ const { registerBlockType } = wp.blocks;
 
 // Backwards compatibility.
 let RichText;
+let useBlockProps;
 if ( wp.hasOwnProperty( 'blockEditor' ) ) {
 	RichText = wp.blockEditor.RichText;
+	useBlockProps = wp.blockEditor.useBlockProps;
 } else {
 	RichText = wp.editor.RichText;
+	useBlockProps = wp.blockEditor ? wp.blockEditor.useBlockProps : ( () => ( { className: '' } ) );
 }
 
 import '../../../css/public/snippets.scss';
 
 registerBlockType( 'wp-recipe-maker/jump-to-video', {
+    apiVersion: 3,
     title: __( 'Jump to Video', 'wp-recipe-maker' ),
     description: __( 'A button to jump to a WPRM Recipe Video on the same page.', 'wp-recipe-maker' ),
     icon: 'button',
@@ -48,8 +52,9 @@ registerBlockType( 'wp-recipe-maker/jump-to-video', {
         ]
     },
     edit: (props) => {
-        const { attributes, setAttributes, isSelected, className } = props;
+        const { attributes, setAttributes, isSelected } = props;
         const { text } = attributes;
+        const blockProps = useBlockProps();
 
         const richToString = ( text ) => {
             setAttributes( {
@@ -58,7 +63,7 @@ registerBlockType( 'wp-recipe-maker/jump-to-video', {
         }
 
         return (
-            <div className={ className }>
+            <div { ...blockProps }>
                 <RichText
                     tagName="a"
                     placeholder="Link Text"

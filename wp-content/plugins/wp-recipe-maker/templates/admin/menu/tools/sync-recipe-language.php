@@ -2,7 +2,7 @@
 /**
  * Template for sync recipe language page.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      10.1.0
  *
  * @package    WP_Recipe_Maker

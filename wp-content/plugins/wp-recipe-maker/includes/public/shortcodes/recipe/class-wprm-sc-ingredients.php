@@ -2,7 +2,7 @@
 /**
  * Handle the recipe ingredients shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.3.0
  *
  * @package    WP_Recipe_Maker
@@ -927,6 +927,185 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'products_header' => array(
+				'type' => 'header',
+				'default' => __( 'eCommerce Products', 'wp-recipe-maker' ),
+			),
+			'products' => array(
+				'default' => '',
+				'type' => 'dropdown',
+				'options' => array(
+					'' => "Don't show",
+					'before' => 'Show before the ingredients',
+					'after' => 'Show after the ingredients',
+				),
+			),
+			'products_style' => array(
+				'name' => 'Style',
+				'default' => 'inline-button',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Text',
+					'button' => 'Button',
+					'inline-button' => 'Inline Button',
+					'wide-button' => 'Full Width Button',
+				),
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_icon' => array(
+				'name' => 'Icon',
+				'default' => 'cart-alt',
+				'type' => 'icon',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_text' => array(
+				'name' => 'Text',
+				'default' => __( 'Add Multiple Products to Cart...', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_text_style' => array(
+				'name' => 'Text Style',
+				'default' => 'normal',
+				'type' => 'dropdown',
+				'options' => 'text_styles',
+				'dependency' => array(
+					'id' => 'products',
+					'value' => '',
+					'type' => 'inverse',
+				),
+			),
+			'products_icon_color' => array(
+				'name' => 'Icon Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'icon',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_text_color' => array(
+				'name' => 'Text Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'text',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_horizontal_padding' => array(
+				'name' => 'Horizontal Padding',
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_vertical_padding' => array(
+				'name' => 'Vertical Padding',
+				'default' => '5px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_button_color' => array(
+				'name' => 'Button Color',
+				'default' => '#ffffff',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_border_color' => array(
+				'name' => 'Border Color',
+				'default' => '#333333',
+				'type' => 'color',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
+			'products_border_radius' => array(
+				'name' => 'Border Radius',
+				'default' => '0px',
+				'type' => 'size',
+				'dependency' => array(
+					array(
+						'id' => 'style',
+						'value' => 'text',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'products',
+						'value' => '',
+						'type' => 'inverse',
+					),
+				),
+			),
 			'before_container_header' => array(
 				'type' => 'header',
 				'default' => __( 'Before Ingredients', 'wp-recipe-maker' ),
@@ -1056,6 +1235,20 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'before_text' => $atts['advanced_servings_before'],
 			'text_style' => $atts['advanced_servings_text_style'],
 		);
+		$products_atts = array(
+			'id' => $atts['id'],
+			'style' => $atts['products_style'],
+			'icon' => $atts['products_icon'],
+			'text' => $atts['products_text'],
+			'text_style' => $atts['products_text_style'],
+			'icon_color' => $atts['products_icon_color'],
+			'text_color' => $atts['products_text_color'],
+			'horizontal_padding' => $atts['products_horizontal_padding'],
+			'vertical_padding' => $atts['products_vertical_padding'],
+			'button_color' => $atts['products_button_color'],
+			'border_color' => $atts['products_border_color'],
+			'border_radius' => $atts['products_border_radius'],
+		);
 
 		// Custom style.
 		$css_variables = 'checkbox' === $atts['list_style'] ? parent::get_inline_css_variables( 'list', $atts, array( 'checkbox_size', 'checkbox_left_position', 'checkbox_top_position', 'checkbox_background', 'checkbox_border_width', 'checkbox_border_style', 'checkbox_border_color', 'checkbox_border_radius', 'checkbox_check_width', 'checkbox_check_color' ) ) : '';
@@ -1069,6 +1262,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 
 		$output_before = '';
 
+		if ( 'before' === $atts['products'] ) {
+			$output_before .= WPRM_SC_Add_Products_To_Cart::shortcode( $products_atts );
+		}
 		if ( 'before' === $atts['adjustable_servings'] ) {
 			$output_before .= WPRM_SC_Adjustable_Servings::shortcode( $adjustable_servings_atts );
 		}
@@ -1157,8 +1353,6 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					if ( (bool) $atts['force_item_position'] ) {
 						$style .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';	
 					}
-
-					$output .= '<li class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid . '>';
 
 					// Maybe replace fractions in amount.
 					if ( WPRM_Settings::get( 'automatic_amount_fraction_symbols' ) ) {
@@ -1271,8 +1465,14 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 						$ingredient_output = '<span class="wprm-recipe-ingredient-details-container">' . $ingredient_output . '</span>';
 					}
 
-					$output .= $ingredient_output;
-					$output .= '</li>';
+					// Build the complete <li>...</li> structure
+					$li_attributes = 'class="wprm-recipe-ingredient" style="' . esc_attr( $style ) . '"' . $uid;
+					$ingredient_line = '<li ' . $li_attributes . '>' . $ingredient_output . '</li>';
+					
+					// Apply filter to the complete ingredient line
+					$ingredient_line = apply_filters( 'wprm_recipe_ingredients_shortcode_ingredient', $ingredient_line, $atts, $ingredient, $recipe );
+					
+					$output .= $ingredient_line;
 				}
 
 				$output .= '</ul>';
@@ -1286,6 +1486,9 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 		}
 	 	if ( 'after' === $atts['unit_conversion'] ) {
 			$output .= WPRM_SC_Unit_Conversion::shortcode( $unit_conversion_atts );
+		}
+		if ( 'after' === $atts['products'] ) {
+			$output .= '[wprm-spacer]' . WPRM_SC_Add_Products_To_Cart::shortcode( $products_atts );
 		}
 
 		$output .= '</div>';

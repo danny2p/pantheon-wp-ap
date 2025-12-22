@@ -27,6 +27,18 @@ export const Element = ({ attributes, children, element }) => {
 			)
 		case 'code':
 			return <wprm-code>{children}</wprm-code>
+		case 'heading-1':
+			return <h1 {...attributes}>{children}</h1>
+		case 'heading-2':
+			return <h2 {...attributes}>{children}</h2>
+		case 'heading-3':
+			return <h3 {...attributes}>{children}</h3>
+		case 'heading-4':
+			return <h4 {...attributes}>{children}</h4>
+		case 'heading-5':
+			return <h5 {...attributes}>{children}</h5>
+		case 'heading-6':
+			return <h6 {...attributes}>{children}</h6>
 		case 'temperature':
 			let icon = null;
 			if ( element.icon && wprm_admin.temperature.icons.hasOwnProperty( element.icon ) ) {

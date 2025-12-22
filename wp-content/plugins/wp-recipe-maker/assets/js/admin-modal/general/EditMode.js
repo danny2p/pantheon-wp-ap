@@ -30,10 +30,16 @@ const EditMode = (props) => {
                         );
                     }
 
+                    // Optional label class for custom styling
+                    let labelClass = '';
+                    if ( mode.hasOwnProperty( 'labelClass' ) ) {
+                        labelClass = ` ${mode.labelClass}`;
+                    }
+
                     return (
                         <a
                             href="#"
-                            className={ `wprm-admin-modal-field-edit-mode${ id === props.mode ? ' wprm-admin-modal-field-edit-mode-selected' : '' }` }
+                            className={ `wprm-admin-modal-field-edit-mode${ id === props.mode ? ' wprm-admin-modal-field-edit-mode-selected' : '' }${labelClass}` }
                             onClick={(e) => {
                                 e.preventDefault();
                                 props.onModeChange( id );

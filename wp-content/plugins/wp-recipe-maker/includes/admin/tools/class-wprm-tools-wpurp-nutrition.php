@@ -2,7 +2,7 @@
 /**
  * Responsible for handling the import WP Ultimate Recipe ingredient nutrition tool.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.6.0
  *
  * @package    WP_Recipe_Maker

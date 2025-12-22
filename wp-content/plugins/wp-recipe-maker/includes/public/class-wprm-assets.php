@@ -2,7 +2,7 @@
 /**
  * Responsible for loading the WPRM assets.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.22.0
  *
  * @package    WP_Recipe_Maker
@@ -37,7 +37,8 @@ class WPRM_Assets {
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ), 1 );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin' ), 1 );
 		add_action( 'amp_post_template_css', array( __CLASS__, 'amp_style' ) );
-		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'block_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'block_editor_assets' ) );
+		add_action( 'enqueue_block_assets', array( __CLASS__, 'block_assets' ) );
 
 		add_action( 'wp_head', array( __CLASS__, 'custom_css' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'footer_assets' ) );
@@ -268,14 +269,25 @@ class WPRM_Assets {
 	}
 
 	/**
-	 * Enqueue Gutenberg block assets.
+	 * Enqueue Gutenberg block editor assets (scripts and editor-only styles).
+	 *
+	 * @since    2.4.0
+	 */
+	public static function block_editor_assets() {
+		wp_enqueue_script( 'wprm-blocks', WPRM_URL . 'dist/blocks.js', array( 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ), WPRM_VERSION );
+		wp_enqueue_style( 'wprm-blocks', WPRM_URL . 'dist/blocks.css', array(), WPRM_VERSION, 'all' );
+	}
+
+	/**
+	 * Enqueue Gutenberg block assets (styles for both editor and frontend).
+	 * This hook loads styles in both contexts, including the iframe editor (API version 3).
 	 *
 	 * @since    2.4.0
 	 */
 	public static function block_assets() {
-		wp_enqueue_style( 'wprm-blocks', WPRM_URL . 'dist/blocks.css', array(), WPRM_VERSION, 'all' );
-		wp_enqueue_script( 'wprm-blocks', WPRM_URL . 'dist/blocks.js', array( 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-editor' ), WPRM_VERSION );
-		wp_enqueue_style( 'wprm-public', WPRM_URL . 'dist/public-' . WPRM_Settings::get( 'recipe_template_mode' ) . '.css', array(), WPRM_VERSION, 'all' );
+		// Public CSS needed for block previews in editor and on frontend.
+		$public_css = WPRM_URL . 'dist/public-' . WPRM_Settings::get( 'recipe_template_mode' ) . '.css';
+		wp_enqueue_style( 'wprm-public', $public_css, array(), WPRM_VERSION, 'all' );
 	}
 
 	/**
@@ -543,6 +555,7 @@ class WPRM_Assets {
 		$output .= ' body { --wprm-popup-content: ' . WPRM_Settings::get( 'modal_content_color' ) . '; }';
 		$output .= ' body { --wprm-popup-button-background: ' . WPRM_Settings::get( 'modal_button_background_color' ) . '; }';
 		$output .= ' body { --wprm-popup-button-text: ' . WPRM_Settings::get( 'modal_button_text_color' ) . '; }';
+		$output .= ' body { --wprm-popup-accent: ' . WPRM_Settings::get( 'modal_accent_color' ) . '; }';
 
 		// Allow add-ons to hook in.
 		$output = apply_filters( 'wprm_custom_css', $output, $type, $selector );

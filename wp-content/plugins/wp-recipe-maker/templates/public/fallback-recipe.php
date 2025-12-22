@@ -2,7 +2,7 @@
 /**
  * Template to be used as a fallback when the plugin is deactivated.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Template to be used for the print page.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      4.0.3
  *
  * @package    WP_Recipe_Maker

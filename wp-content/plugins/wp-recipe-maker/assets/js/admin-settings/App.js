@@ -16,7 +16,11 @@ export default class App extends Component {
             savedSettings: { ...wprm_settings.settings },
             currentSettings: { ...wprm_settings.settings },
             savingChanges: false,
+            searchQuery: '',
         }
+        
+        this.searchTimeout = null;
+        this.searchInputRef = null;
     }
 
     onSettingChange(setting, value) {
@@ -88,6 +92,10 @@ export default class App extends Component {
     
     componentWillUnmount() {
         window.removeEventListener( 'beforeunload', this.beforeWindowClose.bind(this) );
+        // Clear timeout on unmount
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
     }
 
     beforeWindowClose(event) {
@@ -100,7 +108,25 @@ export default class App extends Component {
         return JSON.stringify(this.state.savedSettings) !== JSON.stringify(this.state.currentSettings);
     }
 
+    onSearchChange(query) {
+        // Clear existing timeout
+        if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+        }
+        
+        // Debounce both filtering AND highlighting (200ms delay)
+        // This prevents React re-renders on every keystroke
+        this.searchTimeout = setTimeout(() => {
+            this.setState({
+                searchQuery: query
+            });
+        }, 200);
+    }
+
     render() {
+        // Cache normalized search query to avoid repeated toLowerCase() calls
+        const normalizedSearchQuery = this.state.searchQuery ? this.state.searchQuery.toLowerCase() : '';
+        
         return (
             <div>
                 <MenuContainer
@@ -110,6 +136,9 @@ export default class App extends Component {
                     savingChanges={this.state.savingChanges}
                     onSaveChanges={this.onSaveChanges.bind(this)}
                     onCancelChanges={this.onCancelChanges.bind(this)}
+                    searchQuery={this.state.searchQuery}
+                    normalizedSearchQuery={normalizedSearchQuery}
+                    onSearchChange={this.onSearchChange.bind(this)}
                 />
                 <SettingsContainer
                     structure={wprm_settings.structure}
@@ -117,6 +146,8 @@ export default class App extends Component {
                     settingsChanged={this.settingsChanged()}
                     onSettingChange={this.onSettingChange.bind(this)}
                     onResetDefaults={this.onResetDefaults.bind(this)}
+                    searchQuery={this.state.searchQuery}
+                    normalizedSearchQuery={normalizedSearchQuery}
                 />
                 <a href="#" className="wprm-settings-scroll-to-top" onClick={this.scrollToTop}>
                     <Icon type="up" />

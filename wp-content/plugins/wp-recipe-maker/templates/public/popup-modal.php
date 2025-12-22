@@ -9,7 +9,7 @@
  * @subpackage WP_Recipe_Maker/templates/public
  */
 ?>
-<div id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-type="<?php echo esc_attr( $type ); ?>" aria-hidden="true">
+<div id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-type="<?php echo esc_attr( $type ); ?>"<?php if ( isset( $modal['recipe_id'] ) ) : ?> data-recipe-id="<?php echo esc_attr( $modal['recipe_id'] ); ?>"<?php endif; ?> aria-hidden="true">
 	<?php
 		if ( $container ) {
 			// Overtaking entire modal (for example to handle content in React).
@@ -31,9 +31,10 @@
 			</div>
 
 			<?php
-				if ( $buttons ) :
+				if ( $footer || $buttons ) :
 			?>
 			<footer class="wprm-popup-modal__footer">
+				<?php echo $footer; ?>
 				<?php
 				foreach ( $buttons as $button ) {
 					$button_classes = array(
@@ -43,7 +44,29 @@
 					if ( isset( $button['primary'] ) && $button['primary'] ) { $button_classes[] = 'wprm-popup-modal__btn-primary'; }
 					if ( isset( $button['class'] ) ) { $button_classes[] = $button['class']; }
 
-					echo '<button class="' . esc_attr( implode( ' ', $button_classes ) ) . '">' . esc_html( $button['text'] ) . '</button>';
+					$button_attributes = array(
+						'type' => 'button',
+					);
+
+					if ( isset( $button['attributes'] ) && is_array( $button['attributes'] ) ) {
+						foreach ( $button['attributes'] as $attribute_key => $attribute_value ) {
+							if ( '' !== $attribute_key ) {
+								$button_attributes[ $attribute_key ] = $attribute_value;
+							}
+						}
+					}
+
+					$button_attributes_output = '';
+
+					foreach ( $button_attributes as $attribute_key => $attribute_value ) {
+						$button_attributes_output .= ' ' . esc_attr( $attribute_key );
+
+						if ( null !== $attribute_value && '' !== $attribute_value ) {
+							$button_attributes_output .= '="' . esc_attr( $attribute_value ) . '"';
+						}
+					}
+
+					echo '<button class="' . esc_attr( implode( ' ', $button_classes ) ) . '"' . $button_attributes_output . '>' . esc_html( $button['text'] ) . '</button>';
 				}
 				?>
 			</footer>

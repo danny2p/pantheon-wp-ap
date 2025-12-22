@@ -2,7 +2,7 @@
 /**
  * Santize recipe input fields.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
@@ -145,12 +145,32 @@ class WPRM_Recipe_Sanitizer {
 				$name = isset( $equipment['name'] ) ? self::sanitize_html( $equipment['name'] ) : '';
 
 				if ( $name ) {
-					$sanitized_recipe['equipment'][] = array(
+					$sanitized_equipment = array(
 						'id' => self::get_equipment_id( $name ),
 						'amount' => isset( $equipment['amount'] ) ? self::sanitize_html( $equipment['amount'] ) : '',
 						'name' => $name,
 						'notes' => isset( $equipment['notes'] ) ? self::sanitize_html( $equipment['notes'] ) : '',
 					);
+
+					// Product amount.
+					if ( isset( $equipment['product_amount'] ) && $equipment['product_amount'] !== '' ) {
+						$product_amount = floatval( $equipment['product_amount'] );
+						if ( $product_amount > 0 ) {
+							$sanitized_equipment['product_amount'] = $product_amount;
+						}
+					}
+
+					// Product item snapshot.
+					if ( isset( $equipment['product_item_snapshot'] ) ) {
+						$sanitized_equipment['product_item_snapshot'] = array(
+							'amount' => isset( $equipment['product_item_snapshot']['amount'] ) ? self::sanitize_html( $equipment['product_item_snapshot']['amount'] ) : '',
+							'name' => isset( $equipment['product_item_snapshot']['name'] ) ? self::sanitize_html( $equipment['product_item_snapshot']['name'] ) : '',
+							'notes' => isset( $equipment['product_item_snapshot']['notes'] ) ? self::sanitize_html( $equipment['product_item_snapshot']['notes'] ) : '',
+							'timestamp' => isset( $equipment['product_item_snapshot']['timestamp'] ) ? intval( $equipment['product_item_snapshot']['timestamp'] ) : 0,
+						);
+					}
+
+					$sanitized_recipe['equipment'][] = $sanitized_equipment;
 				}
 			}
 		}
@@ -186,6 +206,25 @@ class WPRM_Recipe_Sanitizer {
 							'notes' => isset( $ingredient['notes'] ) ? self::sanitize_html( $ingredient['notes'] ) : '',
 						);
 
+						// Product amount.
+						if ( isset( $ingredient['product_amount'] ) && $ingredient['product_amount'] !== '' ) {
+							$product_amount = floatval( $ingredient['product_amount'] );
+							if ( $product_amount > 0 ) {
+								$sanitized_ingredient['product_amount'] = $product_amount;
+							}
+						}
+
+						// Product item snapshot.
+						if ( isset( $ingredient['product_item_snapshot'] ) ) {
+							$sanitized_ingredient['product_item_snapshot'] = array(
+								'amount' => isset( $ingredient['product_item_snapshot']['amount'] ) ? self::sanitize_html( $ingredient['product_item_snapshot']['amount'] ) : '',
+								'unit' => isset( $ingredient['product_item_snapshot']['unit'] ) ? self::sanitize_html( $ingredient['product_item_snapshot']['unit'] ) : '',
+								'name' => isset( $ingredient['product_item_snapshot']['name'] ) ? self::sanitize_html( $ingredient['product_item_snapshot']['name'] ) : '',
+								'notes' => isset( $ingredient['product_item_snapshot']['notes'] ) ? self::sanitize_html( $ingredient['product_item_snapshot']['notes'] ) : '',
+								'timestamp' => isset( $ingredient['product_item_snapshot']['timestamp'] ) ? intval( $ingredient['product_item_snapshot']['timestamp'] ) : 0,
+							);
+						}
+
 						// Custom ingredient link.
 						if ( isset( $ingredient['link'] ) ) {
 							$link = array(
@@ -219,6 +258,15 @@ class WPRM_Recipe_Sanitizer {
 									$sanitized_ingredient['converted'][ $system ]['unit_id'] = self::get_ingredient_unit_id( $sanitized_ingredient['converted'][ $system ]['unit'] );
 								}
 							}
+						}
+
+						// Conversion item snapshot.
+						if ( isset( $ingredient['conversion_item_snapshot'] ) ) {
+							$sanitized_ingredient['conversion_item_snapshot'] = array(
+								'amount' => isset( $ingredient['conversion_item_snapshot']['amount'] ) ? self::sanitize_html( $ingredient['conversion_item_snapshot']['amount'] ) : '',
+								'unit' => isset( $ingredient['conversion_item_snapshot']['unit'] ) ? self::sanitize_html( $ingredient['conversion_item_snapshot']['unit'] ) : '',
+								'timestamp' => isset( $ingredient['conversion_item_snapshot']['timestamp'] ) ? intval( $ingredient['conversion_item_snapshot']['timestamp'] ) : 0,
+							);
 						}
 
 						// Link unit.
@@ -338,10 +386,6 @@ class WPRM_Recipe_Sanitizer {
 				$sanitized_recipe['post_password'] = sanitize_text_field( $recipe['post_password'] );
 			}
 
-			if ( isset( $recipe['language'] ) ) {
-				$sanitized_recipe['language'] = $recipe['language'] ? sanitize_text_field( $recipe['language'] ) : false;
-			}
-
 			if ( isset( $recipe['date'] ) ) {
 				$datetime = false;
 				$datetime = $datetime ? $datetime : DateTime::createFromFormat( 'Y-m-d\TH:i:s', $recipe['date'] );
@@ -351,6 +395,10 @@ class WPRM_Recipe_Sanitizer {
 					$sanitized_recipe['date'] = $datetime->format( 'Y-m-d H:i:s' );
 				}
 			}
+		}
+
+		if ( isset( $recipe['language'] ) ) {
+			$sanitized_recipe['language'] = $recipe['language'] ? sanitize_text_field( $recipe['language'] ) : false;
 		}
 
 		// Other fields.
@@ -510,7 +558,11 @@ class WPRM_Recipe_Sanitizer {
 		$group[ $type ] = array();
 
 		foreach ( $flat as $index => $item ) {
-			if ( 'group' === $item['type'] ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+
+			if ( isset( $item['type'] ) && 'group' === $item['type'] ) {
 				// Add previous group.
 				if ( 0 !== $index ) {
 					$unflattened[] = $group;

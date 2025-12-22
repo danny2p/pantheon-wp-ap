@@ -7,6 +7,7 @@ import Api from 'Shared/Api';
 import Icon from 'Shared/Icon';
 import { __wprm } from 'Shared/Translations';
 import CopyToClipboardIcon from 'Shared/CopyToClipboardIcon';
+import Tooltip from 'Shared/Tooltip';
 
 import '../../../css/admin/manage/recipes.scss';
 import SeoIndicator from './SeoIndicator';
@@ -35,6 +36,33 @@ const getFormattedTime = ( timeMins, showZero = false ) => {
 
     return formatted.trim();
 }
+
+const getImageSizeStatus = ( dimensions ) => {
+    if ( ! dimensions || !dimensions.width || !dimensions.height ) {
+        return {
+            label: '',
+            status: 'none',
+            tooltip: '',
+        };
+    }
+
+    const label = `${ dimensions.width }x${ dimensions.height }`;
+    let status = 'ok';
+
+    if ( dimensions.width < 500 || dimensions.height < 500 ) {
+        status = 'danger';
+    } else if ( dimensions.width < 1200 || dimensions.height < 1200 ) {
+        status = 'warning';
+    }
+
+    const tooltip = 'ok' === status ? '' : __wprm( 'We recommend uploading an image that is at least 1200x1200px for best performance on search and social platforms.' );
+
+    return {
+        label,
+        status,
+        tooltip,
+    };
+};
 
 export default {
     getColumns( recipes ) {
@@ -259,6 +287,45 @@ export default {
                         }
                     </div>
                 ),
+            },{
+                groupHeader: __wprm( 'Media' ),
+                Header: __wprm( 'Image Size' ),
+                id: 'image_size',
+                accessor: 'image_dimensions',
+                width: 130,
+                sortable: false,
+                filterable: false,
+                Cell: row => {
+                    const { label, status, tooltip } = getImageSizeStatus( row.value );
+
+                    if ( ! label ) {
+                        return null;
+                    }
+
+                    const classNames = [ 'wprm-admin-manage-image-size' ];
+
+                    if ( 'warning' === status ) {
+                        classNames.push( 'wprm-admin-manage-image-size--warning' );
+                    } else if ( 'danger' === status ) {
+                        classNames.push( 'wprm-admin-manage-image-size--danger' );
+                    }
+
+                    const content = (
+                        <div className={ classNames.join( ' ' ) }>
+                            { label }
+                        </div>
+                    );
+
+                    if ( tooltip ) {
+                        return (
+                            <Tooltip content={ tooltip }>
+                                { content }
+                            </Tooltip>
+                        );
+                    }
+
+                    return content;
+                },
             },{
                 groupHeader: __wprm( 'Media' ),
                 Header: __wprm( 'Pin Image' ),

@@ -8,10 +8,52 @@
 
 return array(
 	array(
+		'name'        => 'font-list',
+		'path'        => '/font-list',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
+	),
+	array(
 		'name'        => 'home',
 		'path'        => '/',
 		'page'        => 'gutenberg-boot',
-		'has_route'   => false,
+		'has_route'   => true,
+		'has_content' => false,
+	),
+	array(
+		'name'        => 'navigation',
+		'path'        => '/navigation',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => false,
+	),
+	array(
+		'name'        => 'navigation-edit',
+		'path'        => '/navigation/edit/$id',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
+	),
+	array(
+		'name'        => 'navigation-list',
+		'path'        => '/navigation/list',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
+	),
+	array(
+		'name'        => 'pattern',
+		'path'        => '/patterns',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => false,
+	),
+	array(
+		'name'        => 'pattern-list',
+		'path'        => '/patterns/list/$type',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
 		'has_content' => true,
 	),
 	array(
@@ -41,5 +83,40 @@ return array(
 		'page'        => 'gutenberg-boot',
 		'has_route'   => true,
 		'has_content' => false,
+	),
+	array(
+		'name'        => 'styles',
+		'path'        => '/styles',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
+	),
+	array(
+		'name'        => 'template',
+		'path'        => '/templates',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => false,
+	),
+	array(
+		'name'        => 'template-list',
+		'path'        => '/templates/list/$activeView',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
+	),
+	array(
+		'name'        => 'template-part',
+		'path'        => '/template-parts',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => false,
+	),
+	array(
+		'name'        => 'template-part-list',
+		'path'        => '/template-parts/list/$area',
+		'page'        => 'gutenberg-boot',
+		'has_route'   => true,
+		'has_content' => true,
 	)
 );

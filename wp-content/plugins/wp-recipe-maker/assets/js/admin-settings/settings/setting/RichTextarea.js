@@ -14,6 +14,12 @@ const SettingRichTextarea = (props) => {
                 if('<p></p>' === content || '<p><br></p>' === content || '<p><br/></p>' === content) {
                     content = '';
                 }
+
+                // Quill injects spellcheck="false" on <pre> blocks; strip to prevent dirty diffs.
+                if ('string' === typeof content) {
+                    content = content.replace(/\s*spellcheck="false"/gi, '');
+                }
+
                 props.onValueChange(content);
             }}
             modules={{

@@ -2,7 +2,7 @@
 /**
  * Responsible for handling migrations when updating the plugin.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.7.1
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Handle the Hubbub Save This shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      9.6.0
  *
  * @package    WP_Recipe_Maker

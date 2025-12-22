@@ -235,7 +235,20 @@ export default class IngredientsEdit extends Component {
                         className="button"
                         onClick={(e) => {
                             e.preventDefault();
-                            this.props.onModeChange('bulk-add-ingredients');
+                            this.props.openSecondaryModal('bulk-add-ingredients', {
+                                field: 'ingredients',
+                                onBulkAdd: (ingredients_flat) => {
+                                    const currentIngredients = JSON.parse( JSON.stringify( this.props.ingredients ) );
+                                    const newIngredients = this.props.setUids( currentIngredients, ingredients_flat );
+
+                                    this.props.onRecipeChange({
+                                        ingredients_flat: [
+                                            ...currentIngredients,
+                                            ...newIngredients,
+                                        ],
+                                    });
+                                }
+                            });
                         } }
                     >{ 'howto' === this.props.type ? __wprm( 'Bulk Add Materials' ) : __wprm( 'Bulk Add Ingredients' ) }</button>
                     <p>{ __wprm( 'Tip: use the TAB key to move from field to field and easily add ingredients.' ) }</p>

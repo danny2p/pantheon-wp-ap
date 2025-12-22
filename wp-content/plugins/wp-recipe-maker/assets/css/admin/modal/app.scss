@@ -1,7 +1,8 @@
 @use 'elementor';
 @use 'public';
 
-.wprm-admin-modal-overlay {
+.wprm-admin-modal-overlay,
+.wprm-admin-modal-overlay-secondary {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -13,6 +14,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.wprm-admin-modal-overlay-dimmed {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.wprm-admin-modal-overlay-secondary {
+    z-index: 100000;
 }
 
 .wprm-admin-modal {

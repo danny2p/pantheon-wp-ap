@@ -19,6 +19,16 @@
         &.wprm-admin-modal-field-edit-mode-selected {
             font-weight: bold;
         }
+
+        &.wprm-admin-modal-field-edit-mode-warning {
+            color: #8B0000;
+            font-weight: bold;
+            
+            &:hover,
+            &.wprm-admin-modal-field-edit-mode-selected {
+                color: #8B0000;
+            }
+        }
     }
 }
 

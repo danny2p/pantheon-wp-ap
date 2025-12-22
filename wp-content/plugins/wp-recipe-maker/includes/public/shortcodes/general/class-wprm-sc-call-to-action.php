@@ -2,7 +2,7 @@
 /**
  * Handle the Call to Action shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      4.0.0
  *
  * @package    WP_Recipe_Maker
@@ -197,7 +197,7 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				),
 			),
 			'custom_link_url' => array(
-				'default' => 'http://bootstrapped.ventures/wp-recipe-maker/',
+				'default' => 'https://bootstrapped.ventures/wp-recipe-maker/',
 				'type' => 'text',
 				'dependency' => array(
 					'id' => 'action',
@@ -251,6 +251,26 @@ class WPRM_SC_Call_to_Action extends WPRM_Template_Shortcode {
 				'dependency' => array(
 					'id' => 'action',
 					'value' => 'rating',
+				),
+			),
+			'link_behavior' => array(
+				'default' => 'text',
+				'type' => 'dropdown',
+				'options' => array(
+					'text' => 'Only part of the text',
+					'entire_text' => 'Entire text',
+					'entire_block' => 'Entire block (including logo)',
+				),
+				'dependency' => array(
+					array(
+						'id' => 'action',
+						'value' => 'custom',
+					),
+					array(
+						'id' => 'action',
+						'value' => 'rating',
+					),
+					'dependency_compare' => 'OR',
 				),
 			),
 		);

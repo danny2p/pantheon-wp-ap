@@ -209,6 +209,7 @@ export default class TextImport extends Component {
                         }
     
                         this.props.onImportValues( newRecipe );
+                        this.props.maybeCloseModal();
                     } else {
                         this.setState({
                             isParsing: false,
@@ -218,6 +219,7 @@ export default class TextImport extends Component {
             });
         } else {
             this.props.onImportValues( newRecipe );
+            this.props.maybeCloseModal();
         }
     }
 
@@ -232,7 +234,7 @@ export default class TextImport extends Component {
         return (
             <Fragment>
                 <Header
-                    onCloseModal={ this.props.onCloseModal }
+                    onCloseModal={ this.props.maybeCloseModal }
                 >
                     {
                         this.props.recipe.name
@@ -380,7 +382,7 @@ export default class TextImport extends Component {
                 >
                     <button
                         className="button"
-                        onClick={ this.props.onCancel }
+                        onClick={ this.props.maybeCloseModal }
                     >
                         { __wprm( 'Cancel' ) }
                     </button>

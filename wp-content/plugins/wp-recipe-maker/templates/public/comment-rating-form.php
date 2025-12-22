@@ -2,7 +2,7 @@
 /**
  * Template to be used for the rating field in the comment form.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.1.0
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Responsible for importing WP Ultimate Recipe recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.3.0
  *
  * @package    WP_Recipe_Maker

@@ -2,7 +2,7 @@
 /**
  * Open up recipes in the WordPress REST API.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.4.0
  *
  * @package    WP_Recipe_Maker
@@ -44,6 +44,13 @@ class WPRM_Api_Recipe{
 				'update_callback' => null,
 				'schema'          => null,
 			));
+
+			// Register wprm_parent_post_id as a separate field for lighter API calls
+			register_rest_field( WPRM_POST_TYPE, 'wprm_parent_post_id', array(
+				'get_callback'    => array( __CLASS__, 'api_get_parent_post_id' ),
+				'update_callback' => null,
+				'schema'          => null,
+			));
 		}
 	}
 
@@ -61,6 +68,18 @@ class WPRM_Api_Recipe{
 		$recipe = WPRM_Recipe_Manager::get_recipe( $object['id'] );
 
 		return $recipe->get_data( 'api' );
+	}
+
+	/**
+	 * Handle wprm_parent_post_id calls to the REST API.
+	 *
+	 * @since 1.4.0
+	 * @param array           $object Details of current post.
+	 * @param mixed           $field_name Name of field.
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_get_parent_post_id( $object, $field_name, $request ) {
+		return get_post_meta( $object['id'], 'wprm_parent_post_id', true );
 	}
 
 	/**

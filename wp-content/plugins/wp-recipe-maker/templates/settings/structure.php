@@ -2,7 +2,7 @@
 /**
  * Template for the plugin settings structure.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      3.0.0
  *
  * @package    WP_Recipe_Maker
@@ -40,6 +40,8 @@ require_once( 'group-adjustable-servings.php' );
 require_once( 'group-social-sharing.php' );
 require_once( 'group-private-notes.php' );
 require_once( 'group-links.php' );
+require_once( 'group-cook-mode.php' );
+require_once( 'group-products.php' );
 require_once( 'group-amazon.php' );
 require_once( 'group-nutrition-calculation.php' );
 require_once( 'group-translate.php' );
@@ -88,6 +90,8 @@ $settings_structure = array(
 	$social_sharing,
 	$private_notes,
 	$links,
+	$cook_mode,
+	$products,
 	$amazon,
 	$nutrition_calculation,
 	$translate,

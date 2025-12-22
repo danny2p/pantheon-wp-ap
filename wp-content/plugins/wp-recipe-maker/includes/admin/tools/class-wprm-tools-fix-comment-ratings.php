@@ -2,7 +2,7 @@
 /**
  * Responsible for handling the fix comment ratings tool.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      5.9.0
  *
  * @package    WP_Recipe_Maker

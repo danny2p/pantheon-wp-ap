@@ -56,7 +56,7 @@
             return {
                 longname : 'WP Recipe Maker',
                 author : 'Bootstrapped Ventures',
-                authorurl : 'http://bootstrapped.ventures',
+                authorurl : 'https://bootstrapped.ventures',
                 infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example',
                 version : "0.1"
             };

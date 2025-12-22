@@ -169,7 +169,7 @@ class WPRM_SC_Share_Options_Popup extends WPRM_Template_Shortcode {
 			'share_options' => array(
 				'default' => 'pinterest, facebook, twitter',
 				'type' => 'text',
-				'help' => __( 'Comma separated list of share options to show.', 'wp-recipe-maker' ) . ' ' . __( 'Available options:', 'wp-recipe-maker' ) . ' pinterest, facebook, twitter, bluesky, messenger, whatsapp, text, email',
+				'help' => __( 'Comma separated list of share options to show.', 'wp-recipe-maker' ) . ' ' . __( 'Available options:', 'wp-recipe-maker' ) . ' pinterest, facebook, twitter, bluesky, mastodon, tumblr, messenger, whatsapp, text, email, line. ' . __( 'Use "others" to include all options not manually specified. Use "line" to insert a horizontal separator.', 'wp-recipe-maker' ),
 			),
 			'pinterest_action' => array(
 				'default' => 'one',
@@ -229,6 +229,33 @@ class WPRM_SC_Share_Options_Popup extends WPRM_Template_Shortcode {
 					'type' => 'includes',
 				),
 			),
+			'twitter_message_intro' => array(
+				'default' => __( 'Check out this recipe!', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'share_options',
+					'value' => 'twitter',
+					'type' => 'includes',
+				),
+			),
+			'mastodon_message_intro' => array(
+				'default' => __( 'Check out this recipe!', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'share_options',
+					'value' => 'mastodon',
+					'type' => 'includes',
+				),
+			),
+			'bluesky_message_intro' => array(
+				'default' => __( 'Check out this recipe!', 'wp-recipe-maker' ),
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'share_options',
+					'value' => 'bluesky',
+					'type' => 'includes',
+				),
+			),
 			'icon_label_header' => array(
 				'type' => 'header',
 				'default' => __( 'Icons & Text', 'wp-recipe-maker' ),
@@ -257,6 +284,8 @@ class WPRM_SC_Share_Options_Popup extends WPRM_Template_Shortcode {
 				'facebook' => __( 'Facebook', 'wp-recipe-maker' ),
 				'twitter' => __( 'Share on X', 'wp-recipe-maker' ),
 				'bluesky' => __( 'Bluesky', 'wp-recipe-maker' ),
+				'mastodon' => __( 'Mastodon', 'wp-recipe-maker' ),
+				'tumblr' => __( 'Tumblr', 'wp-recipe-maker' ),
 				'messenger' => __( 'Messenger', 'wp-recipe-maker' ),
 				'whatsapp' => __( 'WhatsApp', 'wp-recipe-maker' ),
 				'text' => __( 'Text', 'wp-recipe-maker' ),

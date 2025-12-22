@@ -2,7 +2,7 @@
 /**
  * Responsible for the rating database.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      2.2.0
  *
  * @package    WP_Recipe_Maker

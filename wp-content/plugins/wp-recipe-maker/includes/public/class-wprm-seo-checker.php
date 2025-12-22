@@ -2,7 +2,7 @@
 /**
  * Responsible for performing an SEO check on recipes.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.15.0
  *
  * @package    WP_Recipe_Maker

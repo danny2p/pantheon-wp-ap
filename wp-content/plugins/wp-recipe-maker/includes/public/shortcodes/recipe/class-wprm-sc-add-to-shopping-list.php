@@ -2,7 +2,7 @@
 /**
  * Handle the add to shopping list shortcode.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      8.3.0
  *
  * @package    WP_Recipe_Maker

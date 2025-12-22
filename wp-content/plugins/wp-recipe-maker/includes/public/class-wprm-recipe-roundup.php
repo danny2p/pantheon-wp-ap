@@ -2,7 +2,7 @@
 /**
  * Handle the recipe roundup feature.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      4.3.0
  *
  * @package    WP_Recipe_Maker
@@ -241,8 +241,8 @@ class WPRM_Recipe_Roundup {
 			$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
 			if ( $atts['image'] && 0 < intval( $atts['image'] ) ) { self::$roundup_overrides['image_id'] = intval( $atts['image'] ); }
-			if ( $atts['name'] ) 	{ self::$roundup_overrides['name'] = rawurldecode( $atts['name'] ); }
-			if ( $atts['summary'] ) { self::$roundup_overrides['summary'] = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ); }
+			if ( $atts['name'] ) 	{ self::$roundup_overrides['name'] = self::sanitize_roundup_text( $atts['name'] ); }
+			if ( $atts['summary'] ) { self::$roundup_overrides['summary'] = self::sanitize_roundup_text( $atts['summary'], true ); }
 
 			// If no recipe was found, maybe it was of a "post" type instead.
 			if ( ! $recipe ) {
@@ -252,8 +252,8 @@ class WPRM_Recipe_Roundup {
 					$type = 'post';
 
 					$image = $atts['image'] && 0 < intval( $atts['image'] ) ? intval( $atts['image'] ) : get_post_thumbnail_id( $post );
-					$name = rawurldecode( $atts['name'] );
-					$summary = rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) );
+					$name = self::sanitize_roundup_text( $atts['name'] );
+					$summary = self::sanitize_roundup_text( $atts['summary'], true );
 
 					$recipe_data = array(
 						'type' => 'food',
@@ -284,24 +284,25 @@ class WPRM_Recipe_Roundup {
 			}
 		} else {
 			$type = 'external';
+			$link = esc_url_raw( rawurldecode( $atts['link'] ) );
 			$recipe_data = array(
 				'type' => 'food',
 				'parent_id' => true,
-				'parent_url' => rawurldecode( $atts['link'] ),
+				'parent_url' => $link,
 				'parent_external' => true,
-				'permalink' => rawurldecode( $atts['link'] ),
-				'name' => rawurldecode( $atts['name'] ),
-				'summary' => rawurldecode( str_replace( '%0A', '<br/>', $atts['summary'] ) ),
+				'permalink' => $link,
+				'name' => self::sanitize_roundup_text( $atts['name'] ),
+				'summary' => self::sanitize_roundup_text( $atts['summary'], true ),
 				'parent_url_new_tab' => $atts['newtab'] ? true : false,
 				'parent_url_nofollow' => $atts['nofollow'] ? true : false,
 				'parent_url_noopener' => WPRM_Settings::get( 'recipe_roundup_external_noopener' ),
-				'credit' => rawurldecode( $atts['credit'] ),
+				'credit' => self::sanitize_roundup_text( $atts['credit'] ),
 			);
 
 			$image_id = intval( $atts['image'] );
 			if ( -1 === $image_id ) {
 				$recipe_data['image_id'] = 'url';
-				$recipe_data['image_url'] = $atts['image_url'];
+				$recipe_data['image_url'] = esc_url_raw( $atts['image_url'] );
 			} else {
 				$recipe_data['image_id'] = $image_id;
 			}
@@ -310,7 +311,7 @@ class WPRM_Recipe_Roundup {
 		}
 
 		// Both internal and external.
-		if ( $atts['button'] ) { self::$roundup_overrides['roundup_link_button_text'] = rawurldecode( $atts['button'] ); }
+		if ( $atts['button'] ) { self::$roundup_overrides['roundup_link_button_text'] = self::sanitize_roundup_text( $atts['button'] ); }
 
 		if ( $recipe ) {
 			$template = false;
@@ -388,6 +389,31 @@ class WPRM_Recipe_Roundup {
 		}
 
 		return $output;
+	}
+
+	/**
+	 * Sanitize user-supplied text for roundup fields.
+	 *
+	 * @since	10.2.3
+	 * @param	string $text Text to sanitize.
+	 */
+	private static function sanitize_roundup_text( $text, $multiline = false ) {
+		if ( is_array( $text ) || is_object( $text ) ) {
+			return '';
+		}
+
+		if ( ! is_string( $text ) ) {
+			$text = (string) $text;
+		}
+
+		// Decode shortcode-provided values before sanitizing.
+		$text = rawurldecode( $text );
+
+		if ( $multiline ) {
+			$text = str_replace( '%0A', '<br/>', $text );
+		}
+
+		return WPRM_Shortcode_Helper::sanitize_html( $text );
 	}
 }
 

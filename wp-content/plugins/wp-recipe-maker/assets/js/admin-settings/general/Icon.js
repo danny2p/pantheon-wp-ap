@@ -13,6 +13,7 @@ import IconCog from '../../../icons/settings/cog.svg';
 import IconCrane from '../../../icons/settings/crane.svg';
 import IconDocApple from '../../../icons/settings/doc-apple.svg';
 import IconDoc from '../../../icons/settings/doc.svg';
+import IconDollar from '../../../icons/settings/dollar.svg';
 import IconEdit from '../../../icons/settings/edit.svg';
 import IconFiles from '../../../icons/settings/files.svg';
 import IconHealth from '../../../icons/settings/health.svg';
@@ -45,6 +46,7 @@ import IconTouch from '../../../icons/settings/touch.svg';
 import IconUndo from '../../../icons/settings/undo.svg';
 import IconUp from '../../../icons/settings/up.svg';
 import IconWarning from '../../../icons/settings/warning.svg';
+import IconWhisk from '../../../icons/settings/whisk.svg';
 
 const icons = {
     arrows: IconArrows,
@@ -59,6 +61,7 @@ const icons = {
     crane: IconCrane,
     'doc-apple': IconDocApple,
     doc: IconDoc,
+    dollar: IconDollar,
     edit: IconEdit,
     files: IconFiles,
     health: IconHealth,
@@ -91,6 +94,7 @@ const icons = {
     undo: IconUndo,
     up: IconUp,
     warning: IconWarning,
+    whisk: IconWhisk,
 };
 
 const Icon = (props) => {

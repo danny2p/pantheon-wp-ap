@@ -2,7 +2,7 @@
 /**
  * Responsible for showing the WPRM menu in the WP backend.
  *
- * @link       http://bootstrapped.ventures
+ * @link       https://bootstrapped.ventures
  * @since      1.0.0
  *
  * @package    WP_Recipe_Maker
