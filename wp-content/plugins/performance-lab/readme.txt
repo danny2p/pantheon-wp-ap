@@ -1,8 +1,8 @@
 === Performance Lab ===
 
 Contributors: wordpressdotorg
-Tested up to: 6.8
-Stable tag:   4.0.0
+Tested up to: 6.9
+Stable tag:   4.0.1
 License:      GPLv2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Tags:         performance, site health, measurement, optimization, diagnostics
@@ -11,7 +11,7 @@ Performance plugin from the WordPress Performance Team, which is a collection of
 
 == Description ==
 
-The Performance Lab plugin is a collection of features focused on enhancing performance of your site, most of which should eventually be merged into WordPress core. The plugin facilitates the discovery and activation of the individual performance feature plugins which the performance team is developing. In this way you can test the features to get their benefits before they become available in WordPress core. You can also play an important role by providing feedback to further improve the solutions. 
+The Performance Lab plugin is a collection of features focused on enhancing the performance of your site, most of which should eventually be merged into WordPress core. The plugin facilitates the discovery and activation of the individual performance feature plugins which the performance team is developing. In this way you can test the features to get their benefits before they become available in WordPress core. You can also play an important role by providing feedback to further improve the solutions.
 
 The feature plugins which are currently featured by this plugin are:
 
@@ -19,8 +19,8 @@ The feature plugins which are currently featured by this plugin are:
 * [Enhanced Responsive Images](https://wordpress.org/plugins/auto-sizes/)
 * [Image Placeholders](https://wordpress.org/plugins/dominant-color-images/)
 * [Image Prioritizer](https://wordpress.org/plugins/image-prioritizer/)
+* [Instant Back/Forward](https://wordpress.org/plugins/nocache-bfcache/)
 * [Modern Image Formats](https://wordpress.org/plugins/webp-uploads/)
-* [No-cache BFCache](https://wordpress.org/plugins/nocache-bfcache/)
 * [Optimization Detective](https://wordpress.org/plugins/optimization-detective/) (dependency for Embed Optimizer and Image Prioritizer)
 * [Performant Translations](https://wordpress.org/plugins/performant-translations/)
 * [Speculative Loading](https://wordpress.org/plugins/speculation-rules/)
@@ -74,11 +74,19 @@ Contributions are always welcome! Learn more about how to get involved in the [C
 
 == Changelog ==
 
+= 4.0.1 =
+
+**Bug Fixes**
+
+* Add notices and improved type checking for `$wpdb->queries` when attempting to compute server-timing for database queries. ([2159](https://github.com/WordPress/performance/pull/2159))
+* Skip stylesheets with empty `href` attributes in Site Health audit. ([2281](https://github.com/WordPress/performance/pull/2281), [2328](https://github.com/WordPress/performance/pull/2328))
+* Use proper escape function. ([2246](https://github.com/WordPress/performance/pull/2246))
+
 = 4.0.0 =
 
 **Enhancements**
 
-* Add No-cache BFCache to list of performance feature plugins. ([2119](https://github.com/WordPress/performance/pull/2119))
+* Add Instant Back/Forward to list of performance feature plugins. ([2119](https://github.com/WordPress/performance/pull/2119))
 * Add admin pointers to promote new Performance Lab features. ([2122](https://github.com/WordPress/performance/pull/2122))
 * Implement opt-in `PERFLAB_PLACE_OBJECT_CACHE_DROPIN` for  Server-Timing `object-cache.php` placement. ([1996](https://github.com/WordPress/performance/pull/1996))
 * Use `wp_is_rest_endpoint()` to detect if we are handling a REST API request. ([2094](https://github.com/WordPress/performance/pull/2094))
@@ -627,9 +635,9 @@ Contributions are always welcome! Learn more about how to get involved in the [C
 
 == Upgrade Notice ==
 
-= n.e.x.t =
+= 4.0.0 =
 
-This release introduces two new features: View Transitions which adds smooth transitions between navigations on your site, and No-cache BFCache which enables back/forward cache (bfcache) for instant history navigations.
+This release introduces two new features: View Transitions which adds smooth transitions between navigations on your site, and Instant Back/Forward which enables back/forward cache (bfcache) for instant history navigations.
 
 = 3.2.0 =
 
