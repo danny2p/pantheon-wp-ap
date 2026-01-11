@@ -103,7 +103,7 @@ function perflab_get_admin_pointers(): array {
 			'dismiss_if_installed' => true,
 		),
 		'perflab-feature-nocache-bfcache'  => array(
-			'content'              => __( 'New <strong>No-cache BFCache</strong> feature now available.', 'performance-lab' ),
+			'content'              => __( 'New <strong>Instant Back/Forward</strong> feature now available.', 'performance-lab' ),
 			'plugin'               => 'nocache-bfcache',
 			'dismiss_if_installed' => true,
 		),
@@ -595,7 +595,7 @@ function perflab_get_plugin_settings_url( string $plugin_slug ): ?string {
 	}
 
 	/** This filter is documented in wp-admin/includes/class-wp-plugins-list-table.php */
-	$plugin_links = apply_filters( "plugin_action_links_{$plugin_file}", array() );
+	$plugin_links = apply_filters( "plugin_action_links_{$plugin_file}", array() ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Intentionally applying core filter.
 
 	if ( ! is_array( $plugin_links ) || ! array_key_exists( 'settings', $plugin_links ) ) {
 		return null;
