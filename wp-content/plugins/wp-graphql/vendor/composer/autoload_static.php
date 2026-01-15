@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite2274500fb78db53b928b27209e36f4d
+class ComposerStaticInit2b7e687289c1788009a0a17aec7f530e
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -63,10 +63,12 @@ class ComposerStaticInite2274500fb78db53b928b27209e36f4d
         'GraphQL\\Executor\\ExecutionResult' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/ExecutionResult.php',
         'GraphQL\\Executor\\Executor' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Executor.php',
         'GraphQL\\Executor\\ExecutorImplementation' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/ExecutorImplementation.php',
+        'GraphQL\\Executor\\PromiseExecutor' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/PromiseExecutor.php',
         'GraphQL\\Executor\\Promise\\Adapter\\AmpPromiseAdapter' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Adapter/AmpPromiseAdapter.php',
         'GraphQL\\Executor\\Promise\\Adapter\\ReactPromiseAdapter' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Adapter/ReactPromiseAdapter.php',
         'GraphQL\\Executor\\Promise\\Adapter\\SyncPromise' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Adapter/SyncPromise.php',
         'GraphQL\\Executor\\Promise\\Adapter\\SyncPromiseAdapter' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Adapter/SyncPromiseAdapter.php',
+        'GraphQL\\Executor\\Promise\\Adapter\\SyncPromiseQueue' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Adapter/SyncPromiseQueue.php',
         'GraphQL\\Executor\\Promise\\Promise' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/Promise.php',
         'GraphQL\\Executor\\Promise\\PromiseAdapter' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/Promise/PromiseAdapter.php',
         'GraphQL\\Executor\\ReferenceExecutor' => __DIR__ . '/..' . '/webonyx/graphql-php/src/Executor/ReferenceExecutor.php',
@@ -337,6 +339,9 @@ class ComposerStaticInite2274500fb78db53b928b27209e36f4d
         'WPGraphQL\\Experimental\\Admin' => __DIR__ . '/../..' . '/src/Experimental/Admin.php',
         'WPGraphQL\\Experimental\\ExperimentRegistry' => __DIR__ . '/../..' . '/src/Experimental/ExperimentRegistry.php',
         'WPGraphQL\\Experimental\\Experiment\\AbstractExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/AbstractExperiment.php',
+        'WPGraphQL\\Experimental\\Experiment\\EmailAddressScalarExperiment\\EmailAddress' => __DIR__ . '/../..' . '/src/Experimental/Experiment/EmailAddressScalarExperiment/EmailAddress.php',
+        'WPGraphQL\\Experimental\\Experiment\\EmailAddressScalarExperiment\\EmailAddressScalarExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/EmailAddressScalarExperiment/EmailAddressScalarExperiment.php',
+        'WPGraphQL\\Experimental\\Experiment\\EmailAddressScalarFieldsExperiment\\EmailAddressScalarFieldsExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/EmailAddressScalarFieldsExperiment/EmailAddressScalarFieldsExperiment.php',
         'WPGraphQL\\Experimental\\Experiment\\TestDependantExperiment\\TestDependantExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/TestDependantExperiment/TestDependantExperiment.php',
         'WPGraphQL\\Experimental\\Experiment\\TestExperiment\\TestExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/TestExperiment/TestExperiment.php',
         'WPGraphQL\\Experimental\\Experiment\\TestOptionalDependencyExperiment\\TestOptionalDependencyExperiment' => __DIR__ . '/../..' . '/src/Experimental/Experiment/TestOptionalDependencyExperiment/TestOptionalDependencyExperiment.php',
@@ -503,9 +508,9 @@ class ComposerStaticInite2274500fb78db53b928b27209e36f4d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite2274500fb78db53b928b27209e36f4d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite2274500fb78db53b928b27209e36f4d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite2274500fb78db53b928b27209e36f4d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$classMap;
 
         }, null, ClassLoader::class);
     }
