@@ -81,15 +81,30 @@ class WPRM_SC_Author_Bio extends WPRM_Template_Shortcode {
 		$atts = parent::get_attributes( $atts );
 
 		$recipe = WPRM_Template_Shortcodes::get_recipe( $atts['id'] );
-		$author = $recipe ? $recipe->post_author() : false;
-
-		// Get author bio.
-		$bio = false;
-		if ( $author ) {
-			$bio = get_the_author_meta( 'description', $author );
+		if ( ! $recipe ) {
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
-		if ( ! $recipe || ! $bio ) {
+		// Get author bio based on author display option.
+		$bio = false;
+		$author_display = $recipe->author_display();
+
+		switch ( $author_display ) {
+			case 'post_author':
+				$author = $recipe->post_author();
+				if ( $author ) {
+					$bio = get_the_author_meta( 'description', $author );
+				}
+				break;
+			case 'custom':
+				$bio = $recipe->custom_author_bio();
+				break;
+			case 'same':
+				$bio = WPRM_Settings::get( 'recipe_author_same_bio' );
+				break;
+		}
+
+		if ( ! $bio ) {
 			return apply_filters( parent::get_hook(), '', $atts );
 		}
 

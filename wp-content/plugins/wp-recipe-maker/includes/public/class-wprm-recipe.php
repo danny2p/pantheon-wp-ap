@@ -80,6 +80,7 @@ class WPRM_Recipe {
 		$recipe['author_display'] = $this->author_display( true );
 		$recipe['author_name'] = $this->custom_author_name();
 		$recipe['author_link'] = $this->custom_author_link();
+		$recipe['author_bio'] = $this->custom_author_bio();
 		$recipe['cost'] = $this->cost();
 		$recipe['servings'] = $this->servings();
 		$recipe['servings_unit'] = $this->servings_unit();
@@ -363,6 +364,15 @@ class WPRM_Recipe {
 	 */
 	public function custom_author_link() {
 		return $this->meta( 'wprm_author_link', '' );
+	}
+
+	/**
+	 * Get the recipe custom author bio.
+	 *
+	 * @since    9.6.0
+	 */
+	public function custom_author_bio() {
+		return $this->meta( 'wprm_author_bio', '' );
 	}
 
 	/**

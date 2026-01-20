@@ -50,6 +50,7 @@ class WPRM_Recipe_Shell {
 			'author_display' => 'default',
 			'author_name' => 'custom' === WPRM_Settings::get( 'recipe_author_display_default' ) ? WPRM_Settings::get( 'recipe_author_custom_default' ) : '',
 			'author_link' => '',
+			'author_bio' => '',
 			'rating' => false,
 			'servings' => 0,
 			'servings_unit' => '',
@@ -159,6 +160,15 @@ class WPRM_Recipe_Shell {
 		}
 
 		return $author;
+	}
+
+	/**
+	 * Get the recipe custom author bio.
+	 *
+	 * @since    9.6.0
+	 */
+	public function custom_author_bio() {
+		return $this->meta( 'author_bio', '' );
 	}
 
 	/**

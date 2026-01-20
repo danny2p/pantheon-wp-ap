@@ -68,6 +68,7 @@ class WPRM_Api_Equipment {
 			'amazon_image_width' => isset( $meta['wprmp_amazon_image_width'] ) ? $meta['wprmp_amazon_image_width'] : '',
 			'amazon_image_height' => isset( $meta['wprmp_amazon_image_height'] ) ? $meta['wprmp_amazon_image_height'] : '',
 			'amazon_updated' => isset( $meta['wprmp_amazon_updated'] ) ? $meta['wprmp_amazon_updated'] : '',
+			'amazon_status' => isset( $meta['wprmp_amazon_status'] ) ? $meta['wprmp_amazon_status'] : '',
 			'wpupg_custom_link' => isset( $meta['wpupg_custom_link'] ) ? $meta['wpupg_custom_link'] : '',
 			'wpupg_custom_image' => isset( $meta['wpupg_custom_image'] ) ? $meta['wpupg_custom_image'] : '',
 		), $object, $meta );
@@ -143,6 +144,10 @@ class WPRM_Api_Equipment {
 		if ( isset( $meta['amazon_name'] ) ) {
 			$amazon_name = $meta['amazon_name'];
 			update_term_meta( $term->term_id, 'wprmp_amazon_name', $amazon_name );
+		}
+		if ( isset( $meta['amazon_status'] ) ) {
+			$amazon_status = $meta['amazon_status'];
+			update_term_meta( $term->term_id, 'wprmp_amazon_status', $amazon_status );
 		}
 		if ( isset( $meta['wpupg_custom_link'] ) ) {
 			$link = trim( $meta['wpupg_custom_link'] );

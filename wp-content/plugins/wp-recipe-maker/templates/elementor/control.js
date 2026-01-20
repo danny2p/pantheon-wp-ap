@@ -106,7 +106,7 @@ class SelectRecipe extends Component {
     render() {
         return (
             <AsyncSelect
-                placeholder={ 'Select or search a recipe' }
+                placeholder={ 'Select or start typing to search for a recipe' }
                 value={this.props.value}
                 onChange={this.props.onValueChange}
                 getOptionValue={({id}) => id}
@@ -152,7 +152,7 @@ class SelectList extends Component {
     render() {
         return (
             <AsyncSelect
-                placeholder={ 'Select or search a list' }
+                placeholder={ 'Select or start typing to search for a list' }
                 value={this.props.value}
                 onChange={this.props.onValueChange}
                 getOptionValue={({id}) => id}

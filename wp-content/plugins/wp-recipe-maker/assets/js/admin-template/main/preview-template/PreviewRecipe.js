@@ -19,7 +19,7 @@ export default class PreviewRecipe extends Component {
         return (
             <AsyncSelect
                 className="wprm-main-container-preview-recipe"
-                placeholder="Select or search a recipe to preview"
+                placeholder="Select or start typing to search for a recipe to preview"
                 value={this.props.recipe}
                 onChange={this.props.onRecipeChange}
                 getOptionValue={({id}) => id}

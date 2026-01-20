@@ -111,6 +111,13 @@ window.WPRecipeMaker.analytics = {
 				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'add-to-shopping-list-button' );
 			}
 			return true;
+		} else if ( target.matches( '.wprm-recipe-cook-mode' ) ) {
+			const recipeId = target.dataset.hasOwnProperty( 'recipeId' ) ? target.dataset.recipeId : false;
+
+			if ( recipeId ) {
+				window.WPRecipeMaker.analytics.registerAction( recipeId, wprm_public.post_id, 'cook-mode-button' );
+			}
+			return true;
 		} else if ( target.matches( '.wprm-recipe-equipment a' ) ) {
 			const container = target.closest( '.wprm-recipe-equipment-container' );
 

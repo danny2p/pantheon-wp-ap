@@ -5,7 +5,10 @@ export default {
         let updatedText = text;
 
         if ( ingredient.hasOwnProperty( 'uid' ) ) {
-            const uid = parseInt( ingredient.uid );
+            // Support both regular UIDs (number) and split UIDs (format: "uid:splitId")
+            const uid = typeof ingredient.uid === 'string' && ingredient.uid.includes(':') 
+                ? ingredient.uid 
+                : parseInt( ingredient.uid );
 
             const ingredientText = this.getIngredientText( ingredient );
             const atts = {
@@ -18,7 +21,10 @@ export default {
 
             const ingredientsInText = this.findAll( text );
             for ( let ingredientInText of ingredientsInText ) {
-                if ( uid === ingredientInText.uid ) {
+                // Compare UIDs - handle both number and string formats
+                const uidStr = String(uid);
+                const ingredientUidStr = String(ingredientInText.uid);
+                if ( uid === ingredientInText.uid || uidStr === ingredientUidStr ) {
                     if ( 'html' === ingredientInText.type ) {
                         updatedText = text.replace( ingredientInText.full, ingredientHtml );
                     } else {
@@ -34,7 +40,11 @@ export default {
         return Helpers.getIngredientString( ingredient, includeNotes );
     },
     getShortcodeFor( atts ) {
-        const uid = atts.hasOwnProperty( 'uid' ) ? parseInt( atts.uid ) : 0;
+        // Support both regular UIDs (number) and split UIDs (format: "uid:splitId")
+        let uid = atts.hasOwnProperty( 'uid' ) ? atts.uid : 0;
+        if ( typeof uid !== 'string' || ! uid.includes( ':' ) ) {
+            uid = parseInt( uid ) || 0;
+        }
         let text = atts.hasOwnProperty( 'text' ) ? atts.text : '';
         const deleted = atts.hasOwnProperty( 'removed' ) && atts.removed ? true : false;
 
@@ -50,7 +60,11 @@ export default {
         return shortcode;
     },
     getHtmlFor( atts ) {
-        const uid = atts.hasOwnProperty( 'uid' ) ? parseInt( atts.uid ) : 0;
+        // Support both regular UIDs (number) and split UIDs (format: "uid:splitId")
+        let uid = atts.hasOwnProperty( 'uid' ) ? atts.uid : 0;
+        if ( typeof uid !== 'string' || ! uid.includes( ':' ) ) {
+            uid = parseInt( uid ) || 0;
+        }
         const text = atts.hasOwnProperty( 'text' ) ? atts.text : '';
         const deleted = atts.hasOwnProperty( 'removed' ) && atts.removed ? true : false;
 
@@ -109,7 +123,8 @@ export default {
         return ingredients;
     },
     getUidFromAttributes( attributeString ) {
-        const regex = /\suid=['"]?(\d+)['"]/gm;
+        // Support both regular UIDs (number) and split UIDs (format: "uid:splitId")
+        const regex = /\suid=['"]?([^'"]+)['"]/gm;
         let m;
         let uid = false;
 
@@ -118,7 +133,14 @@ export default {
                 regex.lastIndex++;
             }
             
-            uid = parseInt( m[1] );
+            const uidValue = m[1];
+            // If it contains a colon, it's a split (format: "uid:splitId"), return as string
+            // Otherwise, it's a regular UID, return as number for backwards compatibility
+            if ( uidValue.includes( ':' ) ) {
+                uid = uidValue; // Return as string for splits
+            } else {
+                uid = parseInt( uidValue ); // Return as number for regular UIDs
+            }
         }
 
         return uid;

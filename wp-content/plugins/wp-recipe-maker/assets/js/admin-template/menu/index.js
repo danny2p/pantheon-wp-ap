@@ -5,11 +5,23 @@ import '../../../css/admin/template/menu.scss';
 import Helpers from '../general/Helpers';
 import Icon from '../general/Icon';
 import Loader from 'Shared/Loader';
+import Tooltip from 'Shared/Tooltip';
 import TemplateProperties from './TemplateProperties';
 
 const Menu = (props) => {
     return (
-        <div id="wprm-template-sidebar">
+        <div id="wprm-template-sidebar" className={props.sidebarCollapsed ? 'collapsed' : ''}>
+            <Tooltip content={props.sidebarCollapsed ? 'Expand Sidebar' : ''} placement="right">
+                <div 
+                    id="wprm-template-sidebar-toggle"
+                    onClick={() => props.onToggleSidebar()}
+                >
+                    <span className="wprm-template-sidebar-toggle-icon"></span>
+                    <span className="wprm-template-sidebar-toggle-text">
+                        {props.sidebarCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+                    </span>
+                </div>
+            </Tooltip>
             {
                 props.editing
                 &&
@@ -49,49 +61,51 @@ const Menu = (props) => {
                     ! props.editing
                     ?
                     <Fragment>
-                        <a
-                            className={ 'manage' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'manage' ) } }
-                        ><Icon type='manage' /> Manage Templates</a>
-                        <a
-                            className={ 'shortcode' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'shortcode' ) } }
-                        ><Icon type='html' /> Shortcode Generator</a>
+                        <Tooltip content={props.sidebarCollapsed ? 'Manage Templates' : ''} placement="right">
+                            <a
+                                className={ 'manage' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'manage' ) } }
+                            ><Icon type='manage' /> Manage Templates</a>
+                        </Tooltip>
+                        <Tooltip content={props.sidebarCollapsed ? 'Shortcode Generator' : ''} placement="right">
+                            <a
+                                className={ 'shortcode' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'shortcode' ) } }
+                            ><Icon type='html' /> Shortcode Generator</a>
+                        </Tooltip>
                     </Fragment>
                     :
                     <Fragment>
-                        <a
-                            className={ 'properties' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'properties' ) } }
-                        ><Icon type='properties' /> Template Properties</a>
-                        <a
-                            className={ 'patterns' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'patterns' ) } }
-                        ><Icon type='patterns' /> Add Patterns</a>
-                        <a
-                            className={ 'blocks' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'blocks' ) } }
-                        ><Icon type='blocks' /> Edit Blocks</a>
-                        <a
-                            className={ 'add' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'add' ) } }
-                        ><Icon type='add' /> Add Blocks</a>
-                        <a
-                            className={ 'remove' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'remove' ) } }
-                        ><Icon type='remove' /> Remove Blocks</a>
-                        <a
-                            className={ 'move' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'move' ) } }
-                        ><Icon type='move' /> Move Blocks</a>
-                        <a
-                            className={ 'html' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'html' ) } }
-                        ><Icon type='html' /> Edit HTML</a>
-                        <a
-                            className={ 'css' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
-                            onClick={ (e) => { props.onChangeMode( 'css' ) } }
-                        ><Icon type='css' /> Edit CSS</a>
+                        <Tooltip content={props.sidebarCollapsed ? 'Template Properties' : ''} placement="right">
+                            <a
+                                className={ 'properties' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'properties' ) } }
+                            ><Icon type='properties' /> Template Properties</a>
+                        </Tooltip>
+                        <Tooltip content={props.sidebarCollapsed ? 'Edit Blocks' : ''} placement="right">
+                            <a
+                                className={ 'blocks' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'blocks' ) } }
+                            ><Icon type='blocks' /> Edit Blocks</a>
+                        </Tooltip>
+                        <Tooltip content={props.sidebarCollapsed ? 'Add Blocks' : ''} placement="right">
+                            <a
+                                className={ 'add' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'add' ) } }
+                            ><Icon type='add' /> Add Blocks</a>
+                        </Tooltip>
+                        <Tooltip content={props.sidebarCollapsed ? 'Edit HTML' : ''} placement="right">
+                            <a
+                                className={ 'html' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'html' ) } }
+                            ><Icon type='html' /> Edit HTML</a>
+                        </Tooltip>
+                        <Tooltip content={props.sidebarCollapsed ? 'Edit CSS' : ''} placement="right">
+                            <a
+                                className={ 'css' === props.mode ? "wprm-template-menu-group active" : "wprm-template-menu-group" }
+                                onClick={ (e) => { props.onChangeMode( 'css' ) } }
+                            ><Icon type='css' /> Edit CSS</a>
+                        </Tooltip>
                     </Fragment>
                 }
             </div>
@@ -115,16 +129,6 @@ const Menu = (props) => {
             <div
                 id="wprm-add-blocks"
                 style={{ display: 'add' !== props.mode ? 'none' : 'block' }}
-                className="wprm-template-properties"
-            ></div>
-            <div
-                id="wprm-remove-blocks"
-                style={{ display: 'remove' !== props.mode ? 'none' : 'block' }}
-                className="wprm-template-properties"
-            ></div>
-            <div
-                id="wprm-move-blocks"
-                style={{ display: 'move' !== props.mode ? 'none' : 'block' }}
                 className="wprm-template-properties"
             ></div>
             <div

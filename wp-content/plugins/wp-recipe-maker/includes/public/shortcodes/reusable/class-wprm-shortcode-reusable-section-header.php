@@ -377,7 +377,7 @@ class WPRM_Shortcode_Reusable_Section_Header {
 					$atts['header_icon_collapsed'],
 					$atts['header_icon_expanded'],
 					$atts['header_collapsible_icon_color'],
-					'header',
+					'header'
 				);
 
 				if ( $collapsible_output ) {

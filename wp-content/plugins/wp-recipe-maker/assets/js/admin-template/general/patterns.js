@@ -1,6 +1,13 @@
+// Patterns that should be marked as "new" in the Add Blocks view
+const newPatterns = [
+    // Add pattern IDs here, e.g.:
+    // 'ingredient-instruction-columns',
+];
+
 const patterns = {
     'ingredient-instruction-columns': {
-        label: 'Ingredient & Instruction Columns',
+        name: 'Ingredient & Instruction Columns',
+        description: 'Two-column layout with ingredients on the left and instructions on the right.',
         html: '<div class="wprm-layout-column-container wprm-column-rows-tablet wprm-column-gap-10">\n'
             + '\t<div class="wprm-layout-column wprm-column-width-33">\n'
             + '\t\t[wprm-recipe-ingredients header="Ingredients" notes_style="faded" group_style="uppercase-faded" header_style="uppercase" unit_conversion=""]\n'
@@ -12,7 +19,8 @@ const patterns = {
         css: false,
     },
     'image-overlay': {
-        label: 'Image with Name Overlay',
+        name: 'Image with Name Overlay',
+        description: 'Recipe image with the name overlayed on top of the image.',
         html: '<div class="wprm-layout-container image-overlay-container">\n'
             + '\t[wprm-recipe-image size="600x300!"]\n'
             + '\t<div class="wprm-layout-container image-overlay">\n'
@@ -34,4 +42,5 @@ const patterns = {
 
 export default {
     patterns,
+    newPatterns,
 };

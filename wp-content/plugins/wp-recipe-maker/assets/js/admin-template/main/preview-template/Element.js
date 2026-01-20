@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import BlockProperties from '../../menu/BlockProperties';
-import Property from '../../menu/Property';
+import PropertyAccordion from '../../menu/PropertyAccordion';
 
 import Elements from '../../general/elements';
+import PreviewInteractionsContext from './PreviewInteractionsContext';
 
 const getProperties = ( shortcode ) => {
     let properties = {};
@@ -57,7 +58,17 @@ const getStyle = ( properties ) => {
     return style;
 }
 
+const preferContextValue = (contextValue, propValue) => typeof contextValue !== 'undefined' ? contextValue : propValue;
+
 const Element = (props) => {
+    const interactions = useContext(PreviewInteractionsContext) || {};
+    const hoveringBlock = preferContextValue(interactions.hoveringBlock, props.hoveringBlock);
+    const onChangeHoveringBlock = interactions.onChangeHoveringBlock || props.onChangeHoveringBlock;
+    const editingBlock = preferContextValue(interactions.editingBlock, props.editingBlock);
+    const mode = preferContextValue(interactions.mode, props.mode);
+    const copyPasteMode = preferContextValue(interactions.copyPasteMode, props.copyPasteMode);
+    const copyPasteBlock = preferContextValue(interactions.copyPasteBlock, props.copyPasteBlock);
+
     const properties = getProperties( props.shortcode );
 
     let classes = [
@@ -68,21 +79,24 @@ const Element = (props) => {
         classes = classes.concat( props.shortcode.classes );
     }
     
-    if ( props.shortcode.uid === props.hoveringBlock ) {
+    if ( props.shortcode.uid === hoveringBlock ) {
         classes.push( 'wprm-template-block-hovering' );
     }
 
     // Only enable hover/click in specific modes.
-    const interactiveModes = [ 'blocks', 'remove', 'move' ];
-    const isInteractiveMode = interactiveModes.includes( props.mode );
+    const interactiveModes = [ 'blocks', 'add' ];
+    const isInteractiveMode = interactiveModes.includes( mode );
     
     // Don't allow interaction when copy/paste mode is active (let child blocks handle it).
-    const isCopyPasteMode = props.copyPasteMode && props.copyPasteBlock !== false;
+    const isCopyPasteMode = copyPasteMode && copyPasteBlock !== false;
     
     // For 'blocks' mode, allow interaction even when editing (to switch blocks).
+    // For 'add' mode, only allow hover (not click) - clicks are handled by the AddBlocks component.
     // For 'remove' and 'move' modes, only allow when not editing a block.
     // Don't allow interaction when copy/paste mode is active.
-    const canInteract = isInteractiveMode && ( 'blocks' === props.mode || false === props.editingBlock ) && ! isCopyPasteMode;
+    const canInteract = isInteractiveMode && ( 'blocks' === mode || false === editingBlock ) && ! isCopyPasteMode;
+    // In 'add' mode, only enable hover, not click
+    const canHover = canInteract || ( 'add' === mode && isInteractiveMode );
     
     // Check if click is inside the preview container
     const isClickInPreviewContainer = (e) => {
@@ -105,14 +119,8 @@ const Element = (props) => {
         // Always prevent default in interactive modes to stop link navigation and other default behaviors.
         e.preventDefault();
 
-        if ( 'blocks' === props.mode ) {
+        if ( 'blocks' === mode ) {
             props.onChangeEditingBlock( props.shortcode.uid );
-        } else if ( 'remove' === props.mode ) {
-            if ( confirm( 'Are you sure you want to delete the "' + props.shortcode.name + '" block?' ) ) {
-                props.onRemoveBlock( props.shortcode.uid );
-            }
-        } else if ( 'move' === props.mode ) {
-            props.onChangeMovingBlock( props.shortcode );
         }
     };
     
@@ -130,40 +138,39 @@ const Element = (props) => {
             <div
                 className={ classes.join( ' ' ) }
                 style={ inlineStyle }
-                onMouseEnter={ canInteract ? (e) => { e.stopPropagation(); props.onChangeHoveringBlock( props.shortcode.uid ); } : undefined }
-                onMouseLeave={ canInteract ? (e) => { e.stopPropagation(); props.onChangeHoveringBlock( false ); } : undefined }
+                data-wprm-uid={ props.shortcode.uid }
+                onMouseEnter={ canHover && onChangeHoveringBlock ? (e) => { e.stopPropagation(); onChangeHoveringBlock( props.shortcode.uid ); } : undefined }
+                onMouseLeave={ canHover && onChangeHoveringBlock ? (e) => { e.stopPropagation(); onChangeHoveringBlock( false ); } : undefined }
                 onClick={ canInteract ? (e) => { e.stopPropagation(); handleClick(e); } : undefined }
             >
                 { props.children }
             </div>
             {
-                props.shortcode.uid === props.editingBlock
+                props.shortcode.uid === editingBlock
                 ?
                 <BlockProperties>
                     <div className="wprm-template-menu-block-details"><a href="#" onClick={ (e) => { e.preventDefault(); return props.onChangeEditingBlock(false); }}>Blocks</a> &gt; { props.shortcode.name }</div>
                     {
-                        Object.values(properties).map((property, i) => {
-                            return <Property
-                                        properties={properties}
-                                        property={property}
-                                        onPropertyChange={(propertyId, value) => {
-                                            const newProperties = { ...properties };
-                                            newProperties[propertyId].value = value;
+                        Object.keys(properties).length > 0
+                        ?
+                        <PropertyAccordion
+                            properties={properties}
+                            onPropertyChange={(propertyId, value) => {
+                                const newProperties = { ...properties };
+                                newProperties[propertyId].value = value;
 
-                                            if ( property.hasOwnProperty( 'valueToClasses' ) ) {
-                                                const newClasses = getClasses( newProperties );
-                                                props.onClassesChange( props.shortcode.uid, newClasses );
-                                            } else if ( property.hasOwnProperty( 'valueToStyle' ) ) {
-                                                const newStyle = getStyle( newProperties );
-                                                props.onStyleChange( props.shortcode.uid, newStyle );
-                                            }
-                                        }}
-                                        key={i}
-                                    />;
-                        })
-                    }
-                    {
-                        ! Object.keys(properties).length && <p>There are no adjustable properties for this block.</p>
+                                const property = properties[propertyId];
+                                if ( property.hasOwnProperty( 'valueToClasses' ) ) {
+                                    const newClasses = getClasses( newProperties );
+                                    props.onClassesChange( props.shortcode.uid, newClasses );
+                                } else if ( property.hasOwnProperty( 'valueToStyle' ) ) {
+                                    const newStyle = getStyle( newProperties );
+                                    props.onStyleChange( props.shortcode.uid, newStyle );
+                                }
+                            }}
+                        />
+                        :
+                        <p>There are no adjustable properties for this block.</p>
                     }
                 </BlockProperties>
                 :

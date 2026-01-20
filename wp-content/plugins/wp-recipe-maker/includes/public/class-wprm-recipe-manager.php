@@ -46,6 +46,8 @@ class WPRM_Recipe_Manager {
 		add_action( 'wp_ajax_wprm_get_recipe', array( __CLASS__, 'ajax_get_recipe' ) );
 		add_action( 'wp_ajax_wprm_search_recipes', array( __CLASS__, 'ajax_search_recipes' ) );
 		add_action( 'wp_ajax_wprm_search_posts', array( __CLASS__, 'ajax_search_posts' ) );
+		add_action( 'wp_ajax_wprm_create_post_for_recipe', array( __CLASS__, 'ajax_create_post_for_recipe' ) );
+		add_action( 'wp_ajax_wprm_add_recipe_to_post', array( __CLASS__, 'ajax_add_recipe_to_post' ) );
 
 		add_action( 'wp_footer', array( __CLASS__, 'recipe_data_in_footer' ) );
 	}
@@ -82,6 +84,11 @@ class WPRM_Recipe_Manager {
 			$posts = $query->posts;
 
 			foreach ( $posts as $post ) {
+				// Only include recipes the user can read/edit to respect WordPress access controls.
+				if ( ! current_user_can( 'read_post', $post->ID ) ) {
+					continue;
+				}
+
 				$recipes[ $post->ID ] = array(
 					'name' => $post->post_title,
 				);
@@ -124,6 +131,11 @@ class WPRM_Recipe_Manager {
 			$posts = $query->posts;
 
 			foreach ( $posts as $post ) {
+				// Only include recipes the user can read/edit to respect WordPress access controls.
+				if ( ! current_user_can( 'read_post', $post->ID ) ) {
+					continue;
+				}
+
 				// Special case.
 				if ( 'manage' === $display ) {
 					$recipe = self::get_recipe( $post );
@@ -154,12 +166,92 @@ class WPRM_Recipe_Manager {
 	}
 
 	/**
+	 * Get latest posts.
+	 *
+	 * @since    9.0.0
+	 * @param    int    $limit   Number of posts to get.
+	 * @param    string $display Display format ('name' or 'id').
+	 * @return   array  Array of posts with 'id' and 'text' keys.
+	 */
+	public static function get_latest_posts( $limit = 10, $display = 'name' ) {
+		$posts = array();
+
+		// Get allowed post types (exclude recipes and attachments).
+		$ignore_post_types = array(
+			WPRM_POST_TYPE,
+			'attachment',
+		);
+		$public_post_types = get_post_types( array( 'public' => true ), 'names' );
+		$allowed_post_types = array_diff( $public_post_types, $ignore_post_types );
+
+		// If no allowed post types, return empty array.
+		if ( empty( $allowed_post_types ) ) {
+			return array();
+		}
+
+		$args = array(
+			'post_type' => $allowed_post_types,
+			'post_status' => 'any',
+			'orderby' => 'date',
+			'order' => 'DESC',
+			'posts_per_page' => $limit,
+			'offset' => 0,
+			'suppress_filters' => true,
+			'lang' => '',
+		);
+
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			$query_posts = $query->posts;
+			$post_type_cache = array(); // Cache post type objects.
+
+			foreach ( $query_posts as $post ) {
+				// Only include posts the user can read/edit to respect WordPress access controls.
+				if ( ! current_user_can( 'read_post', $post->ID ) ) {
+					continue;
+				}
+
+				// Get post type name (cached).
+				if ( ! isset( $post_type_cache[ $post->post_type ] ) ) {
+					$post_type_object = get_post_type_object( $post->post_type );
+					$post_type_cache[ $post->post_type ] = $post_type_object ? $post_type_object->labels->singular_name : $post->post_type;
+				}
+				$post_type_label = $post_type_cache[ $post->post_type ];
+
+				switch ( $display ) {
+					case 'id':
+						$text = $post_type_label . ' - ' . $post->ID . ' - ' . $post->post_title;
+						break;
+					default:
+						$text = $post->post_title;
+				}
+
+				$posts[] = array(
+					'id' => $post->ID,
+					'text' => $text,
+				);
+			}
+		}
+
+		return $posts;
+	}
+
+	/**
 	 * Search for recipes by keyword.
 	 *
 	 * @since    1.8.0
 	 */
 	public static function ajax_search_recipes() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			// Require edit_posts capability to prevent unauthorized access.
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error( array(
+					'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+				) );
+				wp_die();
+			}
+
 			$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : ''; // Input var okay.
 
 			$recipes = array();
@@ -197,6 +289,11 @@ class WPRM_Recipe_Manager {
 			}
 
 			foreach ( $posts as $post ) {
+				// Only include recipes the user can read/edit to respect WordPress access controls.
+				if ( ! current_user_can( 'read_post', $post->ID ) ) {
+					continue;
+				}
+
 				$recipes[] = array(
 					'id' => $post->ID,
 					'text' => $post->post_title,
@@ -224,13 +321,39 @@ class WPRM_Recipe_Manager {
 	 */
 	public static function ajax_search_posts() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			// Require edit_posts capability to prevent unauthorized access.
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error( array(
+					'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+				) );
+				wp_die();
+			}
+
 			$search = isset( $_POST['search'] ) ? sanitize_text_field( wp_unslash( $_POST['search'] ) ) : ''; // Input var okay.
 
 			$found_posts = array();
 			$found_posts_with_id = array();
+			$seen_post_ids = array(); // Track post IDs to prevent duplicates.
+
+			// Get allowed post types (exclude recipes and attachments).
+			$ignore_post_types = array(
+				WPRM_POST_TYPE,
+				'attachment',
+			);
+			$public_post_types = get_post_types( array( 'public' => true ), 'names' );
+			$allowed_post_types = array_diff( $public_post_types, $ignore_post_types );
+
+			// If no allowed post types, return empty results.
+			if ( empty( $allowed_post_types ) ) {
+				wp_send_json_success( array(
+					'posts' => array(),
+					'posts_with_id' => array(),
+				) );
+				wp_die();
+			}
 
 			$args = array(
-				'post_type' => 'any',
+				'post_type' => $allowed_post_types,
 				'post_status' => 'any',
 				'posts_per_page' => 100,
 				's' => $search,
@@ -248,7 +371,7 @@ class WPRM_Recipe_Manager {
 
 				if ( $id > 0 ) {
 					$args = array(
-						'post_type' => 'any',
+						'post_type' => $allowed_post_types,
 						'post_status' => 'any',
 						'posts_per_page' => 100,
 						'post__in' => array( $id ),
@@ -256,18 +379,33 @@ class WPRM_Recipe_Manager {
 	
 					$query = new WP_Query( $args );
 	
-					$posts = array_merge( $query->posts, $posts );
+					// Merge and deduplicate by post ID.
+					$id_posts = array();
+					foreach ( $query->posts as $id_post ) {
+						$id_posts[ $id_post->ID ] = $id_post;
+					}
+					foreach ( $posts as $post ) {
+						if ( ! isset( $id_posts[ $post->ID ] ) ) {
+							$id_posts[ $post->ID ] = $post;
+						}
+					}
+					$posts = array_values( $id_posts );
 				}
 			}
 
 			foreach ( $posts as $post ) {
-				$ignore_post_types = array(
-					WPRM_POST_TYPE,
-					'attachment',
-				);
-				if ( in_array( $post->post_type, $ignore_post_types ) ) {
+				// Skip if we've already processed this post ID.
+				if ( isset( $seen_post_ids[ $post->ID ] ) ) {
 					continue;
 				}
+
+				// Only include posts the user can read/edit to respect WordPress access controls.
+				if ( ! current_user_can( 'read_post', $post->ID ) ) {
+					continue;
+				}
+
+				// Mark this post ID as seen.
+				$seen_post_ids[ $post->ID ] = true;
 
 				$found_posts[] = array(
 					'id' => $post->ID,
@@ -300,7 +438,25 @@ class WPRM_Recipe_Manager {
 	 */
 	public static function ajax_get_recipe() {
 		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			// Require edit_posts capability to prevent unauthorized access.
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error( array(
+					'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+				) );
+				wp_die();
+			}
+
 			$recipe_id = isset( $_POST['recipe_id'] ) ? intval( $_POST['recipe_id'] ) : 0; // Input var okay.
+
+			if ( $recipe_id > 0 ) {
+				// Only return recipe data if the user can read/edit the recipe.
+				if ( ! current_user_can( 'read_post', $recipe_id ) ) {
+					wp_send_json_error( array(
+						'message' => __( 'You do not have permission to access this recipe.', 'wp-recipe-maker' ),
+					) );
+					wp_die();
+				}
+			}
 
 			$recipe = self::get_recipe( $recipe_id );
 			$recipe_data = $recipe ? $recipe->get_data() : array();
@@ -308,6 +464,269 @@ class WPRM_Recipe_Manager {
 			wp_send_json_success( array(
 				'recipe' => $recipe_data,
 			) );
+		}
+
+		wp_die();
+	}
+
+	/**
+	 * Get user's editor preference (block or classic).
+	 *
+	 * @since    1.0.0
+	 * @return   bool True if user prefers block editor, false for classic editor.
+	 */
+	private static function get_user_editor_preference() {
+		$use_block_editor = true;
+		
+		if ( class_exists( 'Classic_Editor' ) ) {
+			$user_id = get_current_user_id();
+			$user_editor = get_user_meta( $user_id, 'editor', true );
+			$use_block_editor = ( 'classic' !== $user_editor );
+		}
+		
+		return $use_block_editor;
+	}
+
+	/**
+	 * Determine if a post uses block editor.
+	 *
+	 * @since    1.0.0
+	 * @param    WP_Post|int $post Post object or post ID.
+	 * @return   bool True if post uses block editor, false otherwise.
+	 */
+	private static function post_uses_block_editor( $post ) {
+		if ( function_exists( 'use_block_editor_for_post' ) ) {
+			return use_block_editor_for_post( $post );
+		}
+		
+		// Fallback: check meta if Classic Editor plugin is active
+		if ( class_exists( 'Classic_Editor' ) ) {
+			$post_id = is_object( $post ) ? $post->ID : absint( $post );
+			$classic_remember = get_post_meta( $post_id, 'classic-editor-remember', true );
+			return ( 'classic-editor' !== $classic_remember );
+		}
+		
+		// No Classic Editor plugin, assume block editor
+		return true;
+	}
+
+	/**
+	 * Set editor preference meta for a post.
+	 *
+	 * @since    1.0.0
+	 * @param    int  $post_id Post ID.
+	 * @param    bool $use_block_editor Whether to use block editor.
+	 * @return   string Edit link with appropriate query args.
+	 */
+	private static function set_post_editor_preference( $post_id, $use_block_editor ) {
+		$edit_link = admin_url( add_query_arg( array(
+			'post' => $post_id,
+			'action' => 'edit',
+		), 'post.php' ) );
+		
+		// Remove any existing editor preference
+		delete_post_meta( $post_id, 'classic-editor-remember' );
+		delete_post_meta( $post_id, '_wp_use_block_editor_for_post' );
+		
+		if ( class_exists( 'Classic_Editor' ) ) {
+			if ( ! $use_block_editor ) {
+				// User prefers classic editor
+				update_post_meta( $post_id, 'classic-editor-remember', 'classic-editor' );
+			} else {
+				// User prefers block editor (or no preference, default to block)
+				update_post_meta( $post_id, '_wp_use_block_editor_for_post', true );
+				$edit_link = add_query_arg( 'classic-editor__forget', '', $edit_link );
+			}
+		} else {
+			// Classic Editor plugin not active, ensure block editor
+			update_post_meta( $post_id, '_wp_use_block_editor_for_post', true );
+		}
+		
+		return $edit_link;
+	}
+
+	/**
+	 * Format recipe content for insertion into post.
+	 *
+	 * @since    1.0.0
+	 * @param    int  $recipe_id Recipe ID.
+	 * @param    bool $use_block_editor Whether to use block format.
+	 * @return   string Formatted recipe content.
+	 */
+	private static function format_recipe_content( $recipe_id, $use_block_editor ) {
+		if ( $use_block_editor ) {
+			// Use block format for block editor
+			return '<!-- wp:wp-recipe-maker/recipe {"id":' . absint( $recipe_id ) . '} /-->';
+		} else {
+			// Use shortcode for classic editor
+			return '[wprm-recipe id="' . absint( $recipe_id ) . '"]';
+		}
+	}
+
+	/**
+	 * Create a new post for a recipe.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function ajax_create_post_for_recipe() {
+		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			// Require edit_posts capability to prevent unauthorized access.
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error( array(
+					'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+				) );
+				wp_die();
+			}
+
+			$recipe_id = isset( $_POST['recipe_id'] ) ? absint( $_POST['recipe_id'] ) : 0; // Input var okay.
+
+			if ( $recipe_id > 0 ) {
+				// Only create post if the user can read/edit the recipe.
+				if ( ! current_user_can( 'read_post', $recipe_id ) ) {
+					wp_send_json_error( array(
+						'message' => __( 'You do not have permission to access this recipe.', 'wp-recipe-maker' ),
+					) );
+					wp_die();
+				}
+
+				$recipe = self::get_recipe( $recipe_id );
+
+				if ( $recipe ) {
+					// Validate post type capabilities
+					$post_type = 'post';
+					$post_type_object = get_post_type_object( $post_type );
+					
+					if ( ! $post_type_object || ! current_user_can( $post_type_object->cap->create_posts ) ) {
+						wp_send_json_error( array(
+							'message' => __( 'You do not have permission to create posts.', 'wp-recipe-maker' ),
+						) );
+						wp_die();
+					}
+
+					// Determine if post will use block editor
+					$use_block_editor = self::get_user_editor_preference();
+
+					// Format content based on editor type
+					$content = self::format_recipe_content( $recipe_id, $use_block_editor );
+
+					$post = array(
+						'post_type' => $post_type,
+						'post_status' => 'draft',
+						'post_title' => sanitize_text_field( $recipe->name() ),
+						'post_content' => $content,
+					);
+
+					$post_id = wp_insert_post( $post );
+
+					if ( is_wp_error( $post_id ) ) {
+						wp_send_json_error( array(
+							'message' => __( 'Failed to create post: ', 'wp-recipe-maker' ) . $post_id->get_error_message(),
+						) );
+						wp_die();
+					}
+
+					if ( $post_id ) {
+						// Set editor preference and get edit link
+						$edit_link = self::set_post_editor_preference( $post_id, $use_block_editor );
+
+						wp_send_json_success( array(
+							'editLink' => $edit_link,
+						) );
+					} else {
+						wp_send_json_error( array(
+							'message' => __( 'Failed to create post.', 'wp-recipe-maker' ),
+						) );
+					}
+				} else {
+					wp_send_json_error( array(
+						'message' => __( 'Recipe not found.', 'wp-recipe-maker' ),
+					) );
+				}
+			} else {
+				wp_send_json_error( array(
+					'message' => __( 'Invalid recipe ID.', 'wp-recipe-maker' ),
+				) );
+			}
+		}
+
+		wp_die();
+	}
+
+	/**
+	 * Add recipe shortcode to an existing post.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function ajax_add_recipe_to_post() {
+		if ( check_ajax_referer( 'wprm', 'security', false ) ) {
+			// Require edit_posts capability to prevent unauthorized access.
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				wp_send_json_error( array(
+					'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+				) );
+				wp_die();
+			}
+
+			$recipe_id = isset( $_POST['recipe_id'] ) ? absint( $_POST['recipe_id'] ) : 0; // Input var okay.
+			$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0; // Input var okay.
+
+			if ( $recipe_id > 0 && $post_id > 0 ) {
+				// Only add recipe if the user can read/edit both the recipe and the post.
+				if ( ! current_user_can( 'read_post', $recipe_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
+					wp_send_json_error( array(
+						'message' => __( 'You do not have permission to perform this action.', 'wp-recipe-maker' ),
+					) );
+					wp_die();
+				}
+
+				$recipe = self::get_recipe( $recipe_id );
+				$post = get_post( $post_id );
+
+				if ( $recipe && $post ) {
+					// Determine if post uses block editor (consistent with new post creation)
+					$use_block_editor = self::post_uses_block_editor( $post );
+
+					// Format content based on editor type
+					$recipe_block = "\n\n" . self::format_recipe_content( $recipe_id, $use_block_editor );
+
+					// Append recipe to existing content
+					$content = $post->post_content . $recipe_block;
+
+					$updated = wp_update_post( array(
+						'ID' => $post_id,
+						'post_content' => $content,
+					) );
+
+					if ( is_wp_error( $updated ) ) {
+						wp_send_json_error( array(
+							'message' => __( 'Failed to update post: ', 'wp-recipe-maker' ) . $updated->get_error_message(),
+						) );
+						wp_die();
+					}
+
+					if ( $updated ) {
+						// Don't change editor preference for existing posts - use get_edit_post_link
+						// which respects the post's current editor preference
+						$edit_link = get_edit_post_link( $post_id, '' );
+
+						wp_send_json_success( array(
+							'editLink' => $edit_link,
+						) );
+					} else {
+						wp_send_json_error( array(
+							'message' => __( 'Failed to update post.', 'wp-recipe-maker' ),
+						) );
+					}
+				} else {
+					wp_send_json_error( array(
+						'message' => __( 'Recipe or post not found.', 'wp-recipe-maker' ),
+					) );
+				}
+			} else {
+				wp_send_json_error( array(
+					'message' => __( 'Invalid recipe ID or post ID.', 'wp-recipe-maker' ),
+				) );
+			}
 		}
 
 		wp_die();

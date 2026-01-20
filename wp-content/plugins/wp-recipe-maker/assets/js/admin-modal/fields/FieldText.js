@@ -12,6 +12,7 @@ const FieldText = (props) => {
             step={ props.hasOwnProperty( 'step' ) ? props.step : null }
             disabled={ disabled }
             name={props.name}
+            className={props.className || ''}
             value={props.value}
             placeholder={props.placeholder}
             onChange={(e) => {

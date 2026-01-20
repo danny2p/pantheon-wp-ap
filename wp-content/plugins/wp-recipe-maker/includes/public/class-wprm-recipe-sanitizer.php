@@ -54,6 +54,7 @@ class WPRM_Recipe_Sanitizer {
 
 		// HTML fields.
 		if ( isset( $recipe['summary'] ) )	{ $sanitized_recipe['summary'] = self::sanitize_html( $recipe['summary'] ); }
+		if ( isset( $recipe['author_bio'] ) )	{ $sanitized_recipe['author_bio'] = self::sanitize_html( $recipe['author_bio'] ); }
 		if ( isset( $recipe['notes'] ) )	{ $sanitized_recipe['notes'] = self::sanitize_notes( $recipe['notes'] ); }
 
 		// Number fields.
@@ -206,6 +207,31 @@ class WPRM_Recipe_Sanitizer {
 							'notes' => isset( $ingredient['notes'] ) ? self::sanitize_html( $ingredient['notes'] ) : '',
 						);
 
+						// Ingredient splits (using percentages).
+						if ( isset( $ingredient['splits'] ) && is_array( $ingredient['splits'] ) ) {
+							$sanitized_splits = array();
+							$total_percentage = 0;
+							
+							foreach ( $ingredient['splits'] as $split ) {
+								if ( isset( $split['id'] ) && isset( $split['percentage'] ) ) {
+									$percentage = floatval( $split['percentage'] );
+									// Validate percentage is between 0 and 100
+									if ( $percentage >= 0 && $percentage <= 100 ) {
+										$sanitized_split = array(
+											'id' => intval( $split['id'] ),
+											'percentage' => $percentage,
+										);
+										$sanitized_splits[] = $sanitized_split;
+										$total_percentage += $percentage;
+									}
+								}
+							}
+							// Only add splits array if we have at least 2 splits and percentages sum to approximately 100%
+							if ( count( $sanitized_splits ) >= 2 && abs( $total_percentage - 100 ) < 0.01 ) {
+								$sanitized_ingredient['splits'] = $sanitized_splits;
+							}
+						}
+
 						// Product amount.
 						if ( isset( $ingredient['product_amount'] ) && $ingredient['product_amount'] !== '' ) {
 							$product_amount = floatval( $ingredient['product_amount'] );
@@ -307,12 +333,31 @@ class WPRM_Recipe_Sanitizer {
 
 				if ( isset( $instruction_group['instructions'] ) ) {
 					foreach ( $instruction_group['instructions'] as $instruction ) {
+						// Sanitize ingredients - handle both regular UIDs (integers) and splits (strings like "1:2")
+						$sanitized_ingredients = array();
+						if ( isset( $instruction['ingredients'] ) && is_array( $instruction['ingredients'] ) ) {
+							foreach ( $instruction['ingredients'] as $ingredient ) {
+								$ingredient_str = (string) $ingredient;
+								// Check if it's a split (contains colon)
+								if ( strpos( $ingredient_str, ':' ) !== false ) {
+									// Split format: "uid:splitId" - validate and sanitize
+									$parts = explode( ':', $ingredient_str, 2 );
+									if ( count( $parts ) === 2 && is_numeric( $parts[0] ) && is_numeric( $parts[1] ) ) {
+										$sanitized_ingredients[] = intval( $parts[0] ) . ':' . intval( $parts[1] );
+									}
+								} else {
+									// Regular ingredient UID - convert to integer
+									$sanitized_ingredients[] = intval( $ingredient );
+								}
+							}
+						}
+						
 						$sanitized_instruction = array(
 							'uid' => isset( $instruction['uid'] ) ? intval( $instruction['uid'] ) : -1,
 							'name' => isset( $instruction['name'] ) ? sanitize_text_field( $instruction['name'] ) : '',
 							'text' => isset( $instruction['text'] ) ? self::sanitize_html( $instruction['text'] ) : '',
 							'image' => isset( $instruction['image'] ) ? intval( $instruction['image'] ) : 0,
-							'ingredients' => isset( $instruction['ingredients'] ) ? array_map( 'intval', $instruction['ingredients'] ) : array(),
+							'ingredients' => $sanitized_ingredients,
 						);
 
 						if ( isset( $instruction['video'] ) ) {

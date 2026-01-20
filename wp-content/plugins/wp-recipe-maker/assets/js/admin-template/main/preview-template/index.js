@@ -11,20 +11,26 @@ import '../../../../css/public/template_reset.scss';
 import '../../../../css/public/tooltip.scss';
 import '../../../../css/shortcodes/shortcodes.scss';
 import '../../../../../../wp-recipe-maker-premium/assets/css/shortcodes/shortcodes.scss';
+import '../../../../css/admin/shared/dropdown-menu.scss';
 
 import Helpers from '../../general/Helpers';
 import Loader from 'Shared/Loader';
+import Icon from 'Shared/Icon';
+import TemplateIcon from '../../general/Icon';
+import DropdownMenu from 'Shared/DropdownMenu';
 import Block from './Block';
 import Element from './Element';
+import SortableBlockList from './SortableBlockList';
+import PreviewInteractionsContext from './PreviewInteractionsContext';
 import AddPatterns from '../../menu/AddPatterns';
 import AddBlocks from '../../menu/AddBlocks';
-import RemoveBlocks from '../../menu/RemoveBlocks';
-import MoveBlocks from '../../menu/MoveBlocks';
 import BlockProperties from '../../menu/BlockProperties';
 import PreviewRecipe from './PreviewRecipe';
+import AddBlocksView from './AddBlocksView';
 import Shortcodes from '../../general/shortcodes';
 import Elements from '../../general/elements';
 import Patterns from '../../general/patterns';
+import { canHaveChildren } from './treeUtils';
 
 // Helper function to remove lowercase event handler attributes that React doesn't accept
 const removeLowercaseEventHandlers = (domNode) => {
@@ -48,7 +54,7 @@ const removeLowercaseEventHandlers = (domNode) => {
     return domNode;
 };
 
-const { shortcodeGroups, shortcodeKeysAlphebetically } = Shortcodes;
+const { shortcodeGroups, shortcodeKeysAlphebetically, getShortcodeId } = Shortcodes;
 
 export default class PreviewTemplate extends Component {
     constructor(props) {
@@ -69,7 +75,7 @@ export default class PreviewTemplate extends Component {
             htmlMap: '',
             parsedHtml: '',
             shortcodes: [],
-            editingBlock: false,
+            editingBlock: props.editingBlock !== undefined ? props.editingBlock : false,
             addingPattern: false,
             addingBlock: false,
             movingBlock: false,
@@ -77,6 +83,9 @@ export default class PreviewTemplate extends Component {
             copyPasteMode: false, // 'copy', 'paste', or false
             copyPasteBlock: false, // uid of block in copy/paste mode
             hasError: false,
+            addBlocksSearchQuery: '',
+            scrollToCategory: null,
+            showNewBlocksOnly: false,
         }
     }
 
@@ -91,10 +100,19 @@ export default class PreviewTemplate extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        // Sync editingBlock from props (e.g., when URL changes)
+        if ( this.props.editingBlock !== undefined && this.props.editingBlock !== prevProps.editingBlock && this.props.editingBlock !== this.state.editingBlock ) {
+            this.setState({
+                editingBlock: this.props.editingBlock,
+            });
+        }
+        
         // Clear hover state when mode changes and force HTML update to re-render components with new mode.
         if ( this.props.mode !== prevProps.mode ) {
             this.setState({
                 hoveringBlock: false,
+                addBlocksSearchQuery: '', // Clear search when switching modes
+                scrollToCategory: null, // Clear scroll target when switching modes
             }, () => {
                 // Force HTML update to ensure components re-render with new mode prop.
                 this.changeHtml();
@@ -107,9 +125,17 @@ export default class PreviewTemplate extends Component {
                 this.checkHtmlChange();
             }
         } else {
-            // If changing to edit blocks mode, reset the editing blocks.
+            // If changing to edit blocks mode, only reset if not coming from URL navigation
             if ( 'blocks' === this.props.mode && this.props.mode !== prevProps.mode ) {
-                this.onChangeEditingBlock(false);
+                // Only reset if editingBlock prop is not set (not coming from URL)
+                if ( this.props.editingBlock === undefined || this.props.editingBlock === false ) {
+                    this.onChangeEditingBlock(false);
+                } else {
+                    // Sync with prop from URL
+                    this.setState({
+                        editingBlock: this.props.editingBlock,
+                    });
+                }
             } else {
                 this.checkHtmlChange(); // onChangeEditingBlock forces HTML update, so no need to check.
             }
@@ -292,11 +318,73 @@ export default class PreviewTemplate extends Component {
         } catch ( error ) {
             console.log( 'Error parsing HTML', error );
         }
+
+        // Calculate depth for each shortcode based on nesting in HTML structure
+        shortcodes = this.calculateShortcodeDepths(shortcodes, htmlToParse);
+
         return {
             htmlMap: htmlToParse,
             html: parsedHtml,
             shortcodes,
         }
+    }
+
+    calculateShortcodeDepths(shortcodes, htmlToParse) {
+        // Create a map of uid to depth
+        const depthMap = {};
+        
+        // Track the current depth as we parse through the HTML
+        let currentDepth = 0;
+        const uidStack = [];
+        
+        // Regular expression to match opening and closing tags for blocks and elements
+        // Match opening tags: <wprm-replace-shortcode-with-block uid="X"> or <div ... uid="X">
+        // Match closing tags: </wprm-replace-shortcode-with-block> or <!--wprm-closing-X-->
+        const blockRegex = /<wprm-replace-shortcode-with-block\s+uid="(\d+)"|<div[^>]*uid="(\d+)"[^>]*>|<\/wprm-replace-shortcode-with-block>|<!--wprm-closing-(\d+)-->/g;
+        
+        let match;
+        while ((match = blockRegex.exec(htmlToParse)) !== null) {
+            if (match[1]) {
+                // Opening block shortcode: <wprm-replace-shortcode-with-block uid="X">
+                const uid = parseInt(match[1]);
+                depthMap[uid] = currentDepth;
+                uidStack.push({ type: 'block', uid });
+                currentDepth++;
+            } else if (match[2]) {
+                // Opening layout element: <div ... uid="X">
+                const uid = parseInt(match[2]);
+                // Only process if it's a layout element (has wprm-layout- class)
+                if (match[0].includes('wprm-layout-')) {
+                    depthMap[uid] = currentDepth;
+                    uidStack.push({ type: 'element', uid });
+                    currentDepth++;
+                }
+            } else if (match[0].includes('</wprm-replace-shortcode-with-block>')) {
+                // Closing block shortcode
+                if (uidStack.length > 0 && uidStack[uidStack.length - 1].type === 'block') {
+                    uidStack.pop();
+                    currentDepth = Math.max(0, currentDepth - 1);
+                }
+            } else if (match[3]) {
+                // Closing layout element (comment): <!--wprm-closing-X-->
+                const uid = parseInt(match[3]);
+                if (uidStack.length > 0 && uidStack[uidStack.length - 1].uid === uid && uidStack[uidStack.length - 1].type === 'element') {
+                    uidStack.pop();
+                    currentDepth = Math.max(0, currentDepth - 1);
+                }
+            }
+        }
+        
+        // Add depth property to each shortcode
+        return shortcodes.map(shortcode => {
+            if (shortcode && typeof shortcode === 'object') {
+                return {
+                    ...shortcode,
+                    depth: depthMap[shortcode.uid] !== undefined ? depthMap[shortcode.uid] : 0
+                };
+            }
+            return shortcode;
+        });
     }
 
     getIndexOfClosingDiv( html ) {
@@ -487,7 +575,13 @@ export default class PreviewTemplate extends Component {
                 hoveringBlock: false,
                 copyPasteMode: false, // Reset copy/paste mode when switching blocks
                 copyPasteBlock: false,
-            }, this.changeHtml);
+            }, () => {
+                // Notify parent component (App) to update URL
+                if (this.props.onChangeEditingBlock) {
+                    this.props.onChangeEditingBlock(uid);
+                }
+                this.changeHtml();
+            });
             // Force HTML update to trickle down editingBlock prop.
         }
     }
@@ -506,8 +600,7 @@ export default class PreviewTemplate extends Component {
         if (uid !== this.state.hoveringBlock) {
             this.setState({
                 hoveringBlock: uid,
-            }, this.changeHtml);
-            // Force HTML update to trickle down hoveringBlock prop.
+            });
         }
     }
 
@@ -570,6 +663,34 @@ export default class PreviewTemplate extends Component {
             const targetIsLayoutElement = this.state.shortcodes[uid] && Elements.layoutElements.includes( this.state.shortcodes[uid].id );
             const targetIsContentShortcode = ! targetIsLayoutElement && this.state.shortcodes[uid] && false !== this.state.shortcodes[uid].content;
 
+            // Handle 'before' position by finding the previous sibling
+            if ( 'before' === position ) {
+                // Find the opening tag for this shortcode
+                const openingTagRegex = targetIsLayoutElement 
+                    ? new RegExp(`<div[^>]*uid="${uid}"[^>]*>`, 'i')
+                    : new RegExp(`<wprm-replace-shortcode-with-block uid="${uid}"`, 'i');
+                
+                const match = htmlMap.match(openingTagRegex);
+                
+                if (match && match.index !== undefined) {
+                    const insertIndex = match.index;
+                    // Find the previous block/element before this one
+                    const beforeHtml = htmlMap.substring(0, insertIndex);
+                    const beforeMatches = beforeHtml.match(/uid="(\d+)"/gmi);
+                    
+                    if (beforeMatches && beforeMatches.length > 0) {
+                        const prevUid = parseInt(beforeMatches[beforeMatches.length - 1].match(/\d+/gmi)[0]);
+                        // Add after the previous sibling
+                        return this.onAddHTML(code, prevUid, 'after', callback);
+                    } else {
+                        // No previous sibling, add at start
+                        return this.onAddHTML(code, 'start', 'after', callback);
+                    }
+                }
+                // Fallback to 'after' if we can't find the opening tag
+                position = 'after';
+            }
+
             let afterShortcode = targetIsLayoutElement ? '<!--wprm-closing-' + uid + '--></div>' : '<wprm-replace-shortcode-with-block uid="' + uid + '"></wprm-replace-shortcode-with-block>';
             addedShortcodeUid = uid + 1;
 
@@ -621,6 +742,118 @@ export default class PreviewTemplate extends Component {
                     });
                 });
         }
+    }
+
+    onDuplicateBlock(uid) {
+        const shortcode = this.state.shortcodes[uid];
+        if ( !shortcode ) {
+            return;
+        }
+
+        let htmlMap = this.state.htmlMap;
+        const sourceIsLayoutElement = Elements.layoutElements.includes( shortcode.id );
+        const sourceIsContentShortcode = ! sourceIsLayoutElement && false !== shortcode.content;
+
+        let codeToAdd = '';
+
+        if ( sourceIsLayoutElement ) {
+            // Extract full layout element with all nested content (use greedy matching like onMoveBlock)
+            const elementRegex = new RegExp( '<div class="wprm-layout-[^>]*? uid="' + uid + '">.*<!--wprm-closing-' + uid + '--></div>', 'mis' );
+            let elementMatch = elementRegex.exec(htmlMap);
+            
+            if ( elementMatch ) {
+                let extractedHtml = elementMatch[0];
+                
+                // Convert nested shortcode placeholders back to actual shortcodes
+                extractedHtml = this.convertPlaceholdersToShortcodes(extractedHtml);
+                
+                // Remove uid attribute and closing comment to get clean HTML for duplication
+                codeToAdd = extractedHtml
+                    .replace(/\s+uid="\d+"/g, '') // Remove uid attribute
+                    .replace(/<!--wprm-closing-\d+-->/g, ''); // Remove closing comment
+            }
+        } else if ( sourceIsContentShortcode ) {
+            // For content shortcodes, extract the full block including all nested content (use greedy matching)
+            const shortcodeRegex = new RegExp( '<wprm-replace-shortcode-with-block uid="' + uid + '">.*<!--wprm-closing-' + uid + '--></wprm-replace-shortcode-with-block>', 'mis' );
+            let shortcodeMatch = shortcodeRegex.exec(htmlMap);
+            
+            if ( shortcodeMatch ) {
+                // Extract inner content (everything between opening and closing tags, including nested blocks)
+                const fullMatch = shortcodeMatch[0];
+                let innerContent = fullMatch
+                    .replace('<wprm-replace-shortcode-with-block uid="' + uid + '">', '')
+                    .replace('<!--wprm-closing-' + uid + '--></wprm-replace-shortcode-with-block>', '');
+                
+                // Convert nested shortcode placeholders back to actual shortcodes
+                innerContent = this.convertPlaceholdersToShortcodes(innerContent);
+                
+                // Generate the shortcode with content - use the extracted content which includes nested blocks
+                codeToAdd = Helpers.getFullShortcode(shortcode) + '\n' + innerContent + '\n[/' + shortcode.id + ']';
+            }
+        } else {
+            // Regular shortcode - generate it using Helpers
+            codeToAdd = Helpers.getFullShortcode(shortcode);
+        }
+
+        if ( codeToAdd ) {
+            this.onAddHTML( codeToAdd, uid, 'after' );
+        }
+    }
+
+    convertPlaceholdersToShortcodes(html) {
+        // Convert all shortcode placeholders in the given HTML back to actual shortcodes
+        let convertedHtml = html;
+
+        // Process shortcodes in reverse order of uid to avoid replacing nested placeholders incorrectly
+        const sortedShortcodes = [...this.state.shortcodes].sort((a, b) => b.uid - a.uid);
+
+        for ( let shortcode of sortedShortcodes ) {
+            if ( !shortcode ) continue;
+
+            if ( Elements.layoutElements.includes( shortcode.id ) ) {
+                // Convert layout element placeholder
+                const elementRegex = new RegExp( '<div class="wprm-layout-[^>]*? uid="' + shortcode.uid + '">', 'mis' );
+                let elementMatch;
+        
+                if ((elementMatch = elementRegex.exec(convertedHtml)) !== null) {
+                    // Classes to add.
+                    let classes = [
+                        shortcode.id,
+                    ];
+                    if ( shortcode.hasOwnProperty( 'classes' ) && shortcode.classes.length ) {
+                        classes = classes.concat( shortcode.classes );
+                    }
+
+                    // Inline style to add.
+                    let style = '';
+                    if ( shortcode.hasOwnProperty( 'style' ) && shortcode.style.length ) {
+                        let prefixedStyle = shortcode.style.map( (style) => {
+                            return '--' + shortcode.id + '-' + style;
+                        } );
+                        style = ' style="' + prefixedStyle.join( ';' ) + ';"';
+                    }
+
+                    const elementToOutput = '<div class="' + classes.join( ' ' ) + '"' + style + '>';
+                    
+                    convertedHtml = convertedHtml.replace( elementMatch[0], elementToOutput );
+                    convertedHtml = convertedHtml.replace('<!--wprm-closing-' + shortcode.uid + '-->', '');
+                }
+            } else {
+                // Convert shortcode placeholder
+                let fullShortcode = Helpers.getFullShortcode(shortcode);
+
+                if ( false !== shortcode.content ) {
+                    const closingShortcode = '[/' + shortcode.id + ']';
+
+                    convertedHtml = convertedHtml.replace('<wprm-replace-shortcode-with-block uid="' + shortcode.uid + '">', fullShortcode);
+                    convertedHtml = convertedHtml.replace('<!--wprm-closing-' + shortcode.uid + '--></wprm-replace-shortcode-with-block>', closingShortcode);
+                } else {
+                    convertedHtml = convertedHtml.replace('<wprm-replace-shortcode-with-block uid="' + shortcode.uid + '"></wprm-replace-shortcode-with-block>', fullShortcode);
+                }
+            }
+        }
+
+        return convertedHtml;
     }
 
     onRemoveBlock(uid) {
@@ -734,10 +967,20 @@ export default class PreviewTemplate extends Component {
 
     render() {
         const parsedHtml = this.state.hasError ? <Loader /> : this.state.parsedHtml;
+        const interactionContextValue = {
+            hoveringBlock: this.state.hoveringBlock,
+            onChangeHoveringBlock: this.onChangeHoveringBlock.bind(this),
+            editingBlock: this.state.editingBlock,
+            mode: this.props.mode,
+            copyPasteMode: this.state.copyPasteMode,
+            copyPasteBlock: this.state.copyPasteBlock,
+            shortcodes: this.state.shortcodes, // Pass shortcodes with depth from state
+        };
 
         if ( 'onboarding' === this.props.mode ) {
             
             return (
+                <PreviewInteractionsContext.Provider value={ interactionContextValue }>
                 <Fragment>
                     <style>{ Helpers.parseCSS( this.props.template ) }</style>
                     {
@@ -751,85 +994,105 @@ export default class PreviewTemplate extends Component {
                         <div className={`wprm-recipe wprm-recipe-snippet wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
                     }
                 </Fragment>
+                </PreviewInteractionsContext.Provider>
             );
         }
 
+        // Show AddBlocksView when in 'add' mode and no block/pattern is selected yet
+        const showAddBlocksView = 'add' === this.props.mode && !this.state.addingBlock && !this.state.addingPattern;
+
         return (
+            <PreviewInteractionsContext.Provider value={ interactionContextValue }>
             <Fragment>
                 <div className="wprm-main-container">
-                    <h2 className="wprm-main-container-name">Preview at <input type="number" min="1" value={ this.state.width } onChange={ (e) => { this.setState({ width: e.target.value } ); } } />px</h2>
+                    {!showAddBlocksView && (
+                        <h2 className="wprm-main-container-name">Preview at <input type="number" min="1" value={ this.state.width } onChange={ (e) => { this.setState({ width: e.target.value } ); } } />px</h2>
+                    )}
                     <div className="wprm-main-container-preview">
-                        <PreviewRecipe
-                            recipe={ this.state.recipe }
-                            onRecipeChange={ (recipe) => {
-                                if ( recipe !== this.state.recipe ) {
-                                    this.setState( {
-                                        recipe,
-                                        html: '', // Force HTML to update.
-                                    });
-                                }
-                            }}
-                        />
-                        {
-                            this.state.recipe && this.state.recipe.id
-                            ?
-                            <div
-                                className="wprm-main-container-preview-content"
-                                style={{
-                                    width: `${this.state.width}px`,
-                                }}
-                            >
-                                <style>{ Helpers.parseCSS( this.props.template ) }</style>
+                        {showAddBlocksView ? (
+                            <AddBlocksView
+                                onSelectBlock={(blockId) => this.onChangeAddingBlock(blockId)}
+                                onSelectPattern={(patternId) => this.onChangeAddingPattern(patternId)}
+                                searchQuery={this.state.addBlocksSearchQuery}
+                                scrollToCategory={this.state.scrollToCategory}
+                                showNewOnly={this.state.showNewBlocksOnly}
+                                onToggleShowNewOnly={(value) => this.setState({ showNewBlocksOnly: value })}
+                            />
+                        ) : (
+                            <Fragment>
+                                <PreviewRecipe
+                                    recipe={ this.state.recipe }
+                                    onRecipeChange={ (recipe) => {
+                                        if ( recipe !== this.state.recipe ) {
+                                            this.setState( {
+                                                recipe,
+                                                html: '', // Force HTML to update.
+                                            });
+                                        }
+                                    }}
+                                />
                                 {
-                                    'recipe' === this.props.template.type
-                                    &&
-                                    <Fragment>
-                                        <p>This is an example paragraph that could be appearing before the recipe box, just to give some context to this preview. After this paragraph the recipe box will appear.</p>
-                                        <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
-                                        <p>This is a paragraph appearing after the recipe box.</p>
-                                    </Fragment>
+                                    this.state.recipe && this.state.recipe.id
+                                    ?
+                                    <div
+                                        className="wprm-main-container-preview-content"
+                                        style={{
+                                            width: `${this.state.width}px`,
+                                        }}
+                                    >
+                                        <style>{ Helpers.parseCSS( this.props.template ) }</style>
+                                        {
+                                            'recipe' === this.props.template.type
+                                            &&
+                                            <Fragment>
+                                                <p>This is an example paragraph that could be appearing before the recipe box, just to give some context to this preview. After this paragraph the recipe box will appear.</p>
+                                                <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                                                <p>This is a paragraph appearing after the recipe box.</p>
+                                            </Fragment>
+                                        }
+                                        {
+                                            'snippet' === this.props.template.type
+                                            &&
+                                            <Fragment>
+                                                <p>&nbsp;</p>
+                                                <div className={`wprm-recipe wprm-recipe-snippet wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                                                <p>This would be the start of your post content, as the recipe snippets should automatically appear above. We'll be adding some example content below to give you a realistic preview.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo. Mauris nec arcu blandit, ultrices nisi sit amet, scelerisque tortor. Mauris vitae odio sed nisl posuere feugiat eu sit amet nunc. Vivamus varius rutrum tortor, ut viverra mi. Pellentesque sed justo eget lectus eleifend consectetur. Curabitur hendrerit purus velit, ut auctor orci fringilla sed. Phasellus commodo luctus nulla, et rutrum risus lobortis in. Aenean ullamcorper, magna congue viverra consequat, libero elit blandit magna, in ultricies quam risus et magna. Aenean viverra lorem leo, eget laoreet quam suscipit viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque sodales dolor mauris. Ut sed tempus erat. Nulla metus diam, luctus ac erat bibendum, placerat maximus nisi. Nullam hendrerit eleifend lobortis.</p>
+                                                <p>Proin tempus hendrerit orci, tincidunt bibendum justo tincidunt vel. Morbi porttitor finibus magna non imperdiet. Fusce sollicitudin ex auctor interdum ultricies. Proin efficitur eleifend lacus, dapibus eleifend nibh tempus at. Pellentesque feugiat imperdiet turpis, sed consequat diam tincidunt a. Mauris mollis justo nec tellus aliquam, efficitur scelerisque nunc semper. Morbi rhoncus ultricies congue. Sed semper aliquet interdum.</p>
+                                                <p>Nam ultricies, tellus nec vulputate varius, ligula ipsum viverra libero, lacinia ultrices sapien erat id mi. Duis vel dignissim lectus. Aliquam vehicula finibus tortor, cursus fringilla leo sodales ut. Vestibulum nec erat pretium, finibus odio et, porta lorem. Nunc in mi lobortis, aliquet sem sollicitudin, accumsan mi. Nam pretium nibh nunc, vel varius ex sagittis at. Vestibulum ac turpis vitae dui congue iaculis et non massa. Duis sed gravida nunc. Vivamus blandit dapibus orci, eu maximus velit faucibus eu.</p>
+                                                <div id={ `wprm-recipe-container-${this.state.recipe.id}` } className="wprm-preview-snippet-recipe-box">
+                                                    <p>This is an example recipe box.</p>
+                                                    <p id={ `wprm-recipe-video-container-${this.state.recipe.id}` }>It includes an example video.</p>
+                                                </div>
+                                                <p>Some more random content could be appearing after the recipe box. Morbi dignissim euismod vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum eu faucibus lectus. Donec sit amet mattis erat, at vulputate elit. Morbi ullamcorper, justo nec porttitor porta, dui lectus euismod est, convallis tempor lorem elit nec leo. Praesent hendrerit auctor risus sed mollis. Integer suscipit arcu at risus efficitur, et interdum arcu fringilla. Aliquam mollis accumsan blandit. Nam vestibulum urna id velit scelerisque, eu commodo urna imperdiet. Mauris sed risus libero. Integer lacinia nec lectus in posuere. Sed feugiat dolor eros, ac scelerisque tellus hendrerit sit amet. Sed nisl lacus, condimentum id orci eu, malesuada mattis sem. Quisque ipsum velit, viverra et magna a, laoreet porta lorem. Praesent porttitor lorem quis quam lobortis, lacinia tincidunt odio sodales.</p>
+                                            </Fragment>
+                                        }
+                                        {
+                                            'roundup' === this.props.template.type
+                                            &&
+                                            <Fragment>
+                                                <h2>Our first recipe</h2>
+                                                <p>This is the first example recipe in this recipe roundup. We can have as much information and images as we want here and then end with the roundup template for this particular recipe.</p>
+                                                <div className={`wprm-recipe wprm-recipe-roundup-item wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                                                <h2>Our second recipe</h2>
+                                                <p>A roundup would have multiple recipes, so here is another one with some more demo text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo.</p>
+                                                <p>...</p>
+                                            </Fragment>
+                                        }
+                                        {
+                                            'shortcode' === this.props.template.type
+                                            &&
+                                            <Fragment>
+                                                <p>&nbsp;</p>
+                                                <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                                            </Fragment>
+                                        }
+                                    </div>
+                                    :
+                                    <p style={{color: 'darkred', textAlign: 'center'}}>You have to select a recipe to preview the template. Use the dropdown above or set a default recipe to use for the preview on the settings page.</p>
                                 }
-                                {
-                                    'snippet' === this.props.template.type
-                                    &&
-                                    <Fragment>
-                                        <p>&nbsp;</p>
-                                        <div className={`wprm-recipe wprm-recipe-snippet wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
-                                        <p>This would be the start of your post content, as the recipe snippets should automatically appear above. We'll be adding some example content below to give you a realistic preview.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo. Mauris nec arcu blandit, ultrices nisi sit amet, scelerisque tortor. Mauris vitae odio sed nisl posuere feugiat eu sit amet nunc. Vivamus varius rutrum tortor, ut viverra mi. Pellentesque sed justo eget lectus eleifend consectetur. Curabitur hendrerit purus velit, ut auctor orci fringilla sed. Phasellus commodo luctus nulla, et rutrum risus lobortis in. Aenean ullamcorper, magna congue viverra consequat, libero elit blandit magna, in ultricies quam risus et magna. Aenean viverra lorem leo, eget laoreet quam suscipit viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque sodales dolor mauris. Ut sed tempus erat. Nulla metus diam, luctus ac erat bibendum, placerat maximus nisi. Nullam hendrerit eleifend lobortis.</p>
-                                        <p>Proin tempus hendrerit orci, tincidunt bibendum justo tincidunt vel. Morbi porttitor finibus magna non imperdiet. Fusce sollicitudin ex auctor interdum ultricies. Proin efficitur eleifend lacus, dapibus eleifend nibh tempus at. Pellentesque feugiat imperdiet turpis, sed consequat diam tincidunt a. Mauris mollis justo nec tellus aliquam, efficitur scelerisque nunc semper. Morbi rhoncus ultricies congue. Sed semper aliquet interdum.</p>
-                                        <p>Nam ultricies, tellus nec vulputate varius, ligula ipsum viverra libero, lacinia ultrices sapien erat id mi. Duis vel dignissim lectus. Aliquam vehicula finibus tortor, cursus fringilla leo sodales ut. Vestibulum nec erat pretium, finibus odio et, porta lorem. Nunc in mi lobortis, aliquet sem sollicitudin, accumsan mi. Nam pretium nibh nunc, vel varius ex sagittis at. Vestibulum ac turpis vitae dui congue iaculis et non massa. Duis sed gravida nunc. Vivamus blandit dapibus orci, eu maximus velit faucibus eu.</p>
-                                        <div id={ `wprm-recipe-container-${this.state.recipe.id}` } className="wprm-preview-snippet-recipe-box">
-                                            <p>This is an example recipe box.</p>
-                                            <p id={ `wprm-recipe-video-container-${this.state.recipe.id}` }>It includes an example video.</p>
-                                        </div>
-                                        <p>Some more random content could be appearing after the recipe box. Morbi dignissim euismod vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum eu faucibus lectus. Donec sit amet mattis erat, at vulputate elit. Morbi ullamcorper, justo nec porttitor porta, dui lectus euismod est, convallis tempor lorem elit nec leo. Praesent hendrerit auctor risus sed mollis. Integer suscipit arcu at risus efficitur, et interdum arcu fringilla. Aliquam mollis accumsan blandit. Nam vestibulum urna id velit scelerisque, eu commodo urna imperdiet. Mauris sed risus libero. Integer lacinia nec lectus in posuere. Sed feugiat dolor eros, ac scelerisque tellus hendrerit sit amet. Sed nisl lacus, condimentum id orci eu, malesuada mattis sem. Quisque ipsum velit, viverra et magna a, laoreet porta lorem. Praesent porttitor lorem quis quam lobortis, lacinia tincidunt odio sodales.</p>
-                                    </Fragment>
-                                }
-                                {
-                                    'roundup' === this.props.template.type
-                                    &&
-                                    <Fragment>
-                                        <h2>Our first recipe</h2>
-                                        <p>This is the first example recipe in this recipe roundup. We can have as much information and images as we want here and then end with the roundup template for this particular recipe.</p>
-                                        <div className={`wprm-recipe wprm-recipe-roundup-item wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
-                                        <h2>Our second recipe</h2>
-                                        <p>A roundup would have multiple recipes, so here is another one with some more demo text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo.</p>
-                                        <p>...</p>
-                                    </Fragment>
-                                }
-                                {
-                                    'shortcode' === this.props.template.type
-                                    &&
-                                    <Fragment>
-                                        <p>&nbsp;</p>
-                                        <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
-                                    </Fragment>
-                                }
-                            </div>
-                            :
-                            <p style={{color: 'darkred', textAlign: 'center'}}>You have to select a recipe to preview the template. Use the dropdown above or set a default recipe to use for the preview on the settings page.</p>
-                        }
+                            </Fragment>
+                        )}
                     </div>
                 </div>
                 {
@@ -841,19 +1104,16 @@ export default class PreviewTemplate extends Component {
                             &&
                             <p>Select block to edit by clicking on it in the template or the list below:</p>
                         }
-                        {
-                            this.state.shortcodes.map((shortcode, i) => {
-                                return (
-                                    <div
-                                        key={i}
-                                        className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                        onClick={ () => this.onChangeEditingBlock(shortcode.uid) }
-                                        onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                        onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                    >{ shortcode.name }</div>
-                                );
-                            })
-                        }
+                        <SortableBlockList
+                            shortcodes={this.state.shortcodes}
+                            hoveringBlock={this.state.hoveringBlock}
+                            onChangeHoveringBlock={this.onChangeHoveringBlock.bind(this)}
+                            onChangeEditingBlock={this.onChangeEditingBlock.bind(this)}
+                            onDuplicateBlock={this.onDuplicateBlock.bind(this)}
+                            onRemoveBlock={this.onRemoveBlock.bind(this)}
+                            onChangeMovingBlock={this.onChangeMovingBlock.bind(this)}
+                            onMoveBlock={this.onMoveBlock.bind(this)}
+                        />
                         {
                              ! this.state.shortcodes.length && <p>There are no adjustable blocks.</p>
                         }
@@ -873,7 +1133,7 @@ export default class PreviewTemplate extends Component {
                                     key={i}
                                     className="wprm-template-menu-block"
                                     onClick={ () => this.onChangeAddingPattern(id) }
-                                >{ Patterns.patterns[ id ].label }</div>
+                                >{ Patterns.patterns[ id ].name }</div>
                             ) )
                         }
                     </Fragment>
@@ -883,266 +1143,582 @@ export default class PreviewTemplate extends Component {
                             e.preventDefault();
                             this.onChangeAddingPattern(false);
                         }}>Cancel</a>
-                        <p>Add "{ Patterns.patterns[ this.state.addingPattern ].label }" after:</p>
-                        <div
-                            className="wprm-template-menu-block"
-                            onClick={ () => this.onAddPattern( 'start' ) }
-                        >Start of template</div>
+                        <p>Where would you like to add "{ Patterns.patterns[ this.state.addingPattern ].name }"?</p>
                         {
-                            this.state.shortcodes.map((shortcode, i) => {
-                                if ( false !== shortcode.content ) {
-                                    return (
-                                        <div
-                                            key={i}
-                                            className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-content wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-content' }
-                                            onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                            onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                        >
-                                            { shortcode.name }
+                            // Only show "Start of template" if there are no blocks
+                            this.state.shortcodes.length === 0 && (
+                                <div
+                                    className="wprm-template-menu-block wprm-template-menu-block-insert"
+                                    onClick={ () => this.onAddPattern( 'start' ) }
+                                    onMouseEnter={ () => this.onChangeHoveringBlock('start') }
+                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                >
+                                    <span className="wprm-template-menu-block-name">Start of template</span>
+                                    <div className="wprm-template-menu-block-actions">
+                                        <TemplateIcon
+                                            type="arrow-down"
+                                            title="Add at start"
+                                            onClick={ (e) => {
+                                                e.stopPropagation();
+                                                this.onAddPattern( 'start' );
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            (() => {
+                                // Build tree structure from flat shortcodes array
+                                const buildTree = (shortcodes) => {
+                                    const tree = [];
+                                    const stack = [{ node: { children: tree }, depth: -1 }];
+                                    
+                                    shortcodes.forEach((shortcode, i) => {
+                                        if (!shortcode || typeof shortcode !== 'object') return;
+                                        
+                                        const depth = shortcode.depth !== undefined ? shortcode.depth : 0;
+                                        const node = { ...shortcode, children: [] };
+                                        
+                                        // Pop stack until we find the right parent
+                                        while (stack.length > 1 && stack[stack.length - 1].depth >= depth) {
+                                            stack.pop();
+                                        }
+                                        
+                                        // Add to parent's children
+                                        stack[stack.length - 1].node.children.push(node);
+                                        
+                                        // If this can have children, push it to stack
+                                        if (canHaveChildren(shortcode)) {
+                                            stack.push({ node, depth });
+                                        }
+                                    });
+                                    
+                                    return tree;
+                                };
+                                
+                                // Render a node recursively
+                                const renderNode = (node, depth = 0, index = 0, parentUid = null) => {
+                                    const indentStyle = {
+                                        paddingLeft: `${depth * 15}px`
+                                    };
+                                    
+                                    const isContainer = canHaveChildren(node);
+                                    const hasChildren = node.children && node.children.length > 0;
+                                    
+                                    const result = [];
+                                    
+                                    // Render the node itself
+                                    if (isContainer) {
+                                        result.push(
                                             <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddPattern( shortcode.uid, 'inside-start' ) }
-                                            >Add inside, as first block</div>
+                                                key={`container-${node.uid}`}
+                                                className={ node.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-container wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-container' }
+                                                style={indentStyle}
+                                                onMouseEnter={ () => this.onChangeHoveringBlock(node.uid) }
+                                                onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                            >
+                                                <DropdownMenu
+                                                    items={[
+                                                        {
+                                                            label: 'Add before this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, 'before' );
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add inside',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, hasChildren ? 'inside-end' : 'inside-start' );
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add after this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, 'after' );
+                                                            }
+                                                        }
+                                                    ]}
+                                                    placement="top"
+                                                >
+                                                    <span className="wprm-template-menu-block-name wprm-template-menu-block-name-clickable">
+                                                        { node.name }
+                                                    </span>
+                                                </DropdownMenu>
+                                                <div className="wprm-template-menu-block-actions">
+                                                    <TemplateIcon
+                                                        type="arrow-up"
+                                                        title="Add before this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            this.onAddPattern( node.uid, 'before' );
+                                                        }}
+                                                    />
+                                                    {!hasChildren && (
+                                                        <span
+                                                            className="wprm-template-menu-block-placeholder"
+                                                            onClick={ (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, 'inside-start' );
+                                                            }}
+                                                            title="Add inside this container"
+                                                        >
+                                                            Add inside
+                                                        </span>
+                                                    )}
+                                                    <TemplateIcon
+                                                        type="arrow-down"
+                                                        title="Add after this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            this.onAddPattern( node.uid, 'after' );
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                        
+                                        // Render children if they exist
+                                        if (hasChildren) {
+                                            node.children.forEach((child, childIndex) => {
+                                                result.push(...renderNode(child, depth + 1, childIndex, node.uid));
+                                            });
+                                        }
+                                    } else {
+                                        // Regular shortcode (not a container)
+                                        result.push(
                                             <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddPattern( shortcode.uid, 'inside-end' ) }
-                                            >Add inside, as last block</div>
-                                            <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddPattern( shortcode.uid, 'after' ) }
-                                            >Add after</div>
-                                        </div>
-                                    );
-                                }
-
-                                // Regular shortcode.
-                                return (
-                                    <div
-                                        key={i}
-                                        className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                        onClick={ () => this.onAddPattern( shortcode.uid ) }
-                                        onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                        onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                    >{ shortcode.name }</div>
-                                );
-                            })
+                                                key={`block-${node.uid}`}
+                                                className={ node.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-insert wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-insert' }
+                                                style={indentStyle}
+                                                onMouseEnter={ () => this.onChangeHoveringBlock(node.uid) }
+                                                onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                            >
+                                                <DropdownMenu
+                                                    items={[
+                                                        {
+                                                            label: 'Add before this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, 'before' );
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add after this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                this.onAddPattern( node.uid, 'after' );
+                                                            }
+                                                        }
+                                                    ]}
+                                                    placement="top"
+                                                >
+                                                    <span className="wprm-template-menu-block-name wprm-template-menu-block-name-clickable">
+                                                        { node.name }
+                                                    </span>
+                                                </DropdownMenu>
+                                                <div className="wprm-template-menu-block-actions">
+                                                    <TemplateIcon
+                                                        type="arrow-up"
+                                                        title="Add before this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            this.onAddPattern( node.uid, 'before' );
+                                                        }}
+                                                    />
+                                                    <TemplateIcon
+                                                        type="arrow-down"
+                                                        title="Add after this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            this.onAddPattern( node.uid, 'after' );
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                    
+                                    return result;
+                                };
+                                
+                                // Get shortcodes with depth already calculated (from state)
+                                const shortcodesWithDepth = this.state.shortcodes.map(shortcode => ({
+                                    ...shortcode,
+                                    depth: shortcode.depth !== undefined ? shortcode.depth : 0
+                                }));
+                                
+                                // Build tree and render
+                                const tree = buildTree(shortcodesWithDepth);
+                                const renderedNodes = [];
+                                tree.forEach((node, index) => {
+                                    renderedNodes.push(...renderNode(node, 0, index));
+                                });
+                                
+                                return renderedNodes;
+                            })()
                         }
                     </Fragment>
                 }
                 </AddPatterns>
                 <AddBlocks>
                 {
-                    ! this.state.addingBlock
+                    // Show search UI when in 'add' mode but no block/pattern selected yet
+                    'add' === this.props.mode && !this.state.addingBlock && !this.state.addingPattern
                     ?
                     <Fragment>
-                        <p>Select block to add:</p>
-                        {
-                            Object.keys( shortcodeGroups ).map( ( groupKey, i ) => (
-                                <Fragment key={ i }>
-                                    <div className="wprm-template-menu-add-block-group">{ shortcodeGroups[ groupKey ].group }</div>
-                                    {
-                                        shortcodeGroups[ groupKey ].shortcodes.map((id, j) => {
-
-                                            // Make sure shortcode still exists.
-                                            if ( ! shortcodeKeysAlphebetically.includes( id ) && ! Elements.layoutElements.includes( id ) ) {
-                                                return null;
-                                            }
-
-                                            return (
-                                                <div
-                                                    key={j}
-                                                    className="wprm-template-menu-block"
-                                                    onClick={ () => this.onChangeAddingBlock(id) }
-                                                >{ Helpers.getShortcodeName(id) }</div>
-                                            );
-                                        })
+                        <div className="wprm-add-blocks-search">
+                            <input
+                                type="text"
+                                placeholder="Search blocks..."
+                                value={this.state.addBlocksSearchQuery}
+                                onChange={(e) => this.setState({ addBlocksSearchQuery: e.target.value })}
+                                className="wprm-add-blocks-search-input"
+                            />
+                            {this.state.addBlocksSearchQuery && (
+                                <button
+                                    className="wprm-add-blocks-search-clear"
+                                    onClick={() => this.setState({ addBlocksSearchQuery: '' })}
+                                    title="Clear search"
+                                >
+                                    <Icon type="close" />
+                                </button>
+                            )}
+                        </div>
+                        <div className="wprm-add-blocks-filter">
+                            <label className="wprm-add-blocks-filter-checkbox">
+                                <input
+                                    type="checkbox"
+                                    checked={this.state.showNewBlocksOnly}
+                                    onChange={(e) => this.setState({ showNewBlocksOnly: e.target.checked })}
+                                />
+                                <span>Show new blocks only</span>
+                            </label>
+                        </div>
+                        {!this.state.addBlocksSearchQuery && (
+                            <div className="wprm-add-blocks-categories">
+                                <div className="wprm-add-blocks-categories-title">Jump to Category</div>
+                                {['patterns', ...Object.keys(shortcodeGroups)].map((groupKey) => {
+                                    let group;
+                                    if ( 'patterns' === groupKey ) {
+                                        group = {
+                                            group: 'Patterns',
+                                        };
+                                    } else {
+                                        group = shortcodeGroups[groupKey];
                                     }
-                                </Fragment>
-                            ) )
-                        }
+                                    return (
+                                        <a
+                                            key={groupKey}
+                                            href="#"
+                                            className="wprm-add-blocks-category-link"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                this.setState({ scrollToCategory: groupKey }, () => {
+                                                    // Reset after scroll animation completes
+                                                    setTimeout(() => {
+                                                        this.setState({ scrollToCategory: null });
+                                                    }, 1000);
+                                                });
+                                            }}
+                                        >
+                                            {group.group}
+                                        </a>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </Fragment>
                     :
+                    // Show placement selection when a block or pattern has been selected
+                    (this.state.addingBlock || this.state.addingPattern)
+                    &&
                     <Fragment>
                         <a href="#" onClick={(e) => {
                             e.preventDefault();
-                            this.onChangeAddingBlock(false);
+                            if (this.state.addingBlock) {
+                                this.onChangeAddingBlock(false);
+                            }
+                            if (this.state.addingPattern) {
+                                this.onChangeAddingPattern(false);
+                            }
                         }}>Cancel</a>
-                        <p>Add "{ Helpers.getShortcodeName(this.state.addingBlock) }" after:</p>
-                        <div
-                            className="wprm-template-menu-block"
-                            onClick={ () => this.onAddBlock( 'start' ) }
-                        >Start of template</div>
+                        <p>Where would you like to add "{ this.state.addingPattern ? Patterns.patterns[this.state.addingPattern].name : Helpers.getShortcodeName(this.state.addingBlock) }"?</p>
                         {
-                            this.state.shortcodes.map((shortcode, i) => {
-                                if ( false !== shortcode.content ) {
-                                    return (
-                                        <div
-                                            key={i}
-                                            className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-content wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-content' }
-                                            onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                            onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                        >
-                                            { shortcode.name }
+                            // Only show "Start of template" if there are no blocks
+                            this.state.shortcodes.length === 0 && (
+                                <div
+                                    className="wprm-template-menu-block wprm-template-menu-block-insert"
+                                    onClick={ () => {
+                                        if (this.state.addingBlock) {
+                                            this.onAddBlock( 'start' );
+                                        } else if (this.state.addingPattern) {
+                                            this.onAddPattern( 'start' );
+                                        }
+                                    }}
+                                    onMouseEnter={ () => this.onChangeHoveringBlock('start') }
+                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                >
+                                    <span className="wprm-template-menu-block-name">Start of template</span>
+                                    <div className="wprm-template-menu-block-actions">
+                                        <TemplateIcon
+                                            type="arrow-down"
+                                            title="Add at start"
+                                            onClick={ (e) => {
+                                                e.stopPropagation();
+                                                if (this.state.addingBlock) {
+                                                    this.onAddBlock( 'start' );
+                                                } else if (this.state.addingPattern) {
+                                                    this.onAddPattern( 'start' );
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            (() => {
+                                // Build tree structure from flat shortcodes array
+                                const buildTree = (shortcodes) => {
+                                    const tree = [];
+                                    const stack = [{ node: { children: tree }, depth: -1 }];
+                                    
+                                    shortcodes.forEach((shortcode, i) => {
+                                        if (!shortcode || typeof shortcode !== 'object') return;
+                                        
+                                        const depth = shortcode.depth !== undefined ? shortcode.depth : 0;
+                                        const node = { ...shortcode, children: [] };
+                                        
+                                        // Pop stack until we find the right parent
+                                        while (stack.length > 1 && stack[stack.length - 1].depth >= depth) {
+                                            stack.pop();
+                                        }
+                                        
+                                        // Add to parent's children
+                                        stack[stack.length - 1].node.children.push(node);
+                                        
+                                        // If this can have children, push it to stack
+                                        if (canHaveChildren(shortcode)) {
+                                            stack.push({ node, depth });
+                                        }
+                                    });
+                                    
+                                    return tree;
+                                };
+                                
+                                // Render a node recursively
+                                const renderNode = (node, depth = 0, index = 0, parentUid = null) => {
+                                    const indentStyle = {
+                                        paddingLeft: `${depth * 15}px`
+                                    };
+                                    
+                                    const isContainer = canHaveChildren(node);
+                                    const hasChildren = node.children && node.children.length > 0;
+                                    
+                                    const result = [];
+                                    
+                                    // Render the node itself
+                                    if (isContainer) {
+                                        result.push(
                                             <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddBlock( shortcode.uid, 'inside-start' ) }
-                                            >Add inside, as first block</div>
+                                                key={`container-${node.uid}`}
+                                                className={ node.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-container wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-container' }
+                                                style={indentStyle}
+                                                onMouseEnter={ () => this.onChangeHoveringBlock(node.uid) }
+                                                onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                            >
+                                                <DropdownMenu
+                                                    items={[
+                                                        {
+                                                            label: 'Add before this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, 'before' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, 'before' );
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add inside',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, hasChildren ? 'inside-end' : 'inside-start' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, hasChildren ? 'inside-end' : 'inside-start' );
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add after this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, 'after' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, 'after' );
+                                                                }
+                                                            }
+                                                        }
+                                                    ]}
+                                                    placement="top"
+                                                >
+                                                    <span className="wprm-template-menu-block-name wprm-template-menu-block-name-clickable">
+                                                        { node.name }
+                                                    </span>
+                                                </DropdownMenu>
+                                                <div className="wprm-template-menu-block-actions">
+                                                    <TemplateIcon
+                                                        type="arrow-up"
+                                                        title="Add before this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            if (this.state.addingBlock) {
+                                                                this.onAddBlock( node.uid, 'before' );
+                                                            } else if (this.state.addingPattern) {
+                                                                this.onAddPattern( node.uid, 'before' );
+                                                            }
+                                                        }}
+                                                    />
+                                                    {!hasChildren && (
+                                                        <span
+                                                            className="wprm-template-menu-block-placeholder"
+                                                            onClick={ (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, 'inside-start' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, 'inside-start' );
+                                                                }
+                                                            }}
+                                                            title="Add inside this container"
+                                                        >
+                                                            Add inside
+                                                        </span>
+                                                    )}
+                                                    <TemplateIcon
+                                                        type="arrow-down"
+                                                        title="Add after this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            if (this.state.addingBlock) {
+                                                                this.onAddBlock( node.uid, 'after' );
+                                                            } else if (this.state.addingPattern) {
+                                                                this.onAddPattern( node.uid, 'after' );
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                        
+                                        // Render children if they exist
+                                        if (hasChildren) {
+                                            node.children.forEach((child, childIndex) => {
+                                                result.push(...renderNode(child, depth + 1, childIndex, node.uid));
+                                            });
+                                        }
+                                    } else {
+                                        // Regular shortcode (not a container)
+                                        result.push(
                                             <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddBlock( shortcode.uid, 'inside-end' ) }
-                                            >Add inside, as last block</div>
-                                            <div
-                                                className="wprm-template-menu-block-inside"
-                                                onClick={ () => this.onAddBlock( shortcode.uid, 'after' ) }
-                                            >Add after</div>
-                                        </div>
-                                    );
-                                }
-
-                                // Regular shortcode.
-                                return (
-                                    <div
-                                        key={i}
-                                        className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                        onClick={ () => this.onAddBlock( shortcode.uid ) }
-                                        onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                        onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                    >{ shortcode.name }</div>
-                                );
-                            })
+                                                key={`block-${node.uid}`}
+                                                className={ node.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-insert wprm-template-menu-block-hover' : 'wprm-template-menu-block wprm-template-menu-block-insert' }
+                                                style={indentStyle}
+                                                onMouseEnter={ () => this.onChangeHoveringBlock(node.uid) }
+                                                onMouseLeave={ () => this.onChangeHoveringBlock(false) }
+                                            >
+                                                <DropdownMenu
+                                                    items={[
+                                                        {
+                                                            label: 'Add before this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, 'before' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, 'before' );
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            label: 'Add after this block',
+                                                            onClick: (e) => {
+                                                                e.stopPropagation();
+                                                                if (this.state.addingBlock) {
+                                                                    this.onAddBlock( node.uid, 'after' );
+                                                                } else if (this.state.addingPattern) {
+                                                                    this.onAddPattern( node.uid, 'after' );
+                                                                }
+                                                            }
+                                                        }
+                                                    ]}
+                                                    placement="top"
+                                                >
+                                                    <span className="wprm-template-menu-block-name wprm-template-menu-block-name-clickable">
+                                                        { node.name }
+                                                    </span>
+                                                </DropdownMenu>
+                                                <div className="wprm-template-menu-block-actions">
+                                                    <TemplateIcon
+                                                        type="arrow-up"
+                                                        title="Add before this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            if (this.state.addingBlock) {
+                                                                this.onAddBlock( node.uid, 'before' );
+                                                            } else if (this.state.addingPattern) {
+                                                                this.onAddPattern( node.uid, 'before' );
+                                                            }
+                                                        }}
+                                                    />
+                                                    <TemplateIcon
+                                                        type="arrow-down"
+                                                        title="Add after this block"
+                                                        onClick={ (e) => {
+                                                            e.stopPropagation();
+                                                            if (this.state.addingBlock) {
+                                                                this.onAddBlock( node.uid, 'after' );
+                                                            } else if (this.state.addingPattern) {
+                                                                this.onAddPattern( node.uid, 'after' );
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                    
+                                    return result;
+                                };
+                                
+                                // Get shortcodes with depth already calculated (from state)
+                                const shortcodesWithDepth = this.state.shortcodes.map(shortcode => ({
+                                    ...shortcode,
+                                    depth: shortcode.depth !== undefined ? shortcode.depth : 0
+                                }));
+                                
+                                // Build tree and render
+                                const tree = buildTree(shortcodesWithDepth);
+                                const renderedNodes = [];
+                                tree.forEach((node, index) => {
+                                    renderedNodes.push(...renderNode(node, 0, index));
+                                });
+                                
+                                return renderedNodes;
+                            })()
                         }
                     </Fragment>
                 }
                 </AddBlocks>
-                <RemoveBlocks>
-                {
-                    'remove' === this.props.mode
-                    &&
-                    <p>Select block to remove by clicking on it in the template or the list below:</p>
-                }
-                {
-                    this.state.shortcodes.map((shortcode, i) => {
-                        return (
-                            <div
-                                key={i}
-                                className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                onClick={ () => {
-                                    if (confirm( 'Are you sure you want to delete the "' + shortcode.name + '" block?' )) {
-                                        this.onRemoveBlock(shortcode.uid);
-                                    }
-                                }}
-                                onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                            >{ shortcode.name }</div>
-                        );
-                    })
-                }
-                {
-                        ! this.state.shortcodes.length && <p>There are no blocks to remove.</p>
-                }
-                </RemoveBlocks>
-                <MoveBlocks>
-                {
-                        this.state.shortcodes.length <= 1
-                        ?
-                        <p>There are not enough blocks to move.</p>
-                        :
-                        <Fragment>
-                            {
-                                false === this.state.movingBlock
-                                ?
-                                <Fragment>
-                                    <p>Select block to move by clicking on it in the template or the list below:</p>
-                                    {
-                                        this.state.shortcodes.map((shortcode, i) => {
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                                    onClick={ () => {
-                                                        this.onChangeMovingBlock(shortcode);
-                                                    }}
-                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                                >{ shortcode.name }</div>
-                                            );
-                                        })
-                                    }
-                                </Fragment>
-                                :
-                                <Fragment>
-                                    <a href="#" onClick={(e) => {
-                                        e.preventDefault();
-                                        this.onChangeMovingBlock(false);
-                                    }}>Cancel</a>
-                                    <p>Move "{ this.state.movingBlock.name }" inside of:</p>
-                                    {
-                                        this.state.shortcodes.map((shortcode, i) => {
-                                            if ( shortcode.uid === this.state.movingBlock.uid || false === shortcode.content ) {
-                                                return null;
-                                            }
-                                            
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                                    onClick={ () => {
-                                                        this.onMoveBlock( shortcode.uid, 'inside' );
-                                                    }}
-                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                                >{ shortcode.name }</div>
-                                            );
-                                        })
-                                    }
-                                    <br/><br/>
-                                    <p>Move "{ this.state.movingBlock.name }" before:</p>
-                                    {
-                                        this.state.shortcodes.map((shortcode, i) => {
-                                            if ( shortcode.uid === this.state.movingBlock.uid ) {
-                                                return null;
-                                            }
-                                            
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                                    onClick={ () => {
-                                                        this.onMoveBlock( shortcode.uid, 'before' );
-                                                    }}
-                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                                >{ shortcode.name }</div>
-                                            );
-                                        })
-                                    }
-                                    <br/><br/>
-                                    <p>Move "{ this.state.movingBlock.name }" after:</p>
-                                    {
-                                        this.state.shortcodes.map((shortcode, i) => {
-                                            if ( shortcode.uid === this.state.movingBlock.uid ) {
-                                                return null;
-                                            }
-
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className={ shortcode.uid === this.state.hoveringBlock ? 'wprm-template-menu-block wprm-template-menu-block-hover' : 'wprm-template-menu-block' }
-                                                    onClick={ () => {
-                                                        this.onMoveBlock( shortcode.uid, 'after' );
-                                                    }}
-                                                    onMouseEnter={ () => this.onChangeHoveringBlock(shortcode.uid) }
-                                                    onMouseLeave={ () => this.onChangeHoveringBlock(false) }
-                                                >{ shortcode.name }</div>
-                                            );
-                                        })
-                                    }
-                                </Fragment>
-                            }
-                        </Fragment>
-                }
-                </MoveBlocks>
             </Fragment>
+            </PreviewInteractionsContext.Provider>
         );
     }
 }

@@ -368,11 +368,149 @@ class WPRM_Blocks {
 			} else {
 				$output .= '<style type="text/css">' . WPRM_Assets::get_custom_css( 'recipe' ) . '</style>';
 			}
+
+			// Calculate and store the position of this roundup item block for counter display.
+			// This ensures the counter shows the correct number in the backend editor.
+			self::calculate_roundup_block_position( $atts );
 		}
 
 		$output .= WPRM_Recipe_Roundup::shortcode( $atts );
 
 		return $output;
+	}
+
+	/**
+	 * Calculate and store the position of a roundup item block in the post content.
+	 * This is used to display the correct counter number in the backend editor.
+	 *
+	 * @since	10.0.0
+	 * @param	array $atts Block attributes.
+	 */
+	private static function calculate_roundup_block_position( $atts ) {
+		// Initialize static variables to track block positions.
+		static $position_cache = null;
+		static $current_position = 0;
+
+		// Get post content if we haven't cached positions yet.
+		if ( null === $position_cache ) {
+			$position_cache = array();
+			$current_position = 0;
+
+			// Try to get post content from various sources.
+			$post_content = '';
+			$post_id = 0;
+			
+			// Try to get from global post.
+			if ( isset( $GLOBALS['post'] ) && $GLOBALS['post'] ) {
+				$post_id = $GLOBALS['post']->ID;
+				$post_content = $GLOBALS['post']->post_content;
+			}
+			
+			// Try to get from request parameters (REST API).
+			if ( empty( $post_content ) ) {
+				// Check various possible parameter names.
+				$possible_params = array( 'post_id', 'postId', 'context[postId]' );
+				foreach ( $possible_params as $param ) {
+					if ( isset( $_REQUEST[ $param ] ) ) {
+						$post_id = intval( $_REQUEST[ $param ] );
+						break;
+					}
+				}
+				
+				// Also check JSON body for REST API requests.
+				if ( ! $post_id && ! empty( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+					$json_input = file_get_contents( 'php://input' );
+					if ( ! empty( $json_input ) ) {
+						$json_data = json_decode( $json_input, true );
+						if ( $json_data ) {
+							if ( isset( $json_data['post_id'] ) ) {
+								$post_id = intval( $json_data['post_id'] );
+							} elseif ( isset( $json_data['context']['postId'] ) ) {
+								$post_id = intval( $json_data['context']['postId'] );
+							}
+						}
+					}
+				}
+				
+				if ( $post_id ) {
+					$post = get_post( $post_id );
+					if ( $post ) {
+						$post_content = $post->post_content;
+					}
+				}
+			}
+
+			// Parse blocks to find all roundup item blocks.
+			if ( ! empty( $post_content ) && function_exists( 'parse_blocks' ) ) {
+				$blocks = parse_blocks( $post_content );
+				if ( ! empty( $blocks ) ) {
+					self::extract_roundup_blocks( $blocks, $position_cache );
+				}
+			}
+		}
+
+		// Create a unique identifier for this block based on its attributes.
+		// Use a combination of id, link, and other distinguishing attributes.
+		$block_key = '';
+		if ( ! empty( $atts['id'] ) ) {
+			$block_key = 'id_' . $atts['id'];
+		} elseif ( ! empty( $atts['link'] ) ) {
+			$block_key = 'link_' . md5( $atts['link'] );
+		} else {
+			// Fallback: use a hash of all attributes.
+			$block_key = 'hash_' . md5( serialize( $atts ) );
+		}
+
+		// If we have cached positions, use them.
+		if ( isset( $position_cache[ $block_key ] ) ) {
+			$GLOBALS['wprm_roundup_block_position'] = $position_cache[ $block_key ];
+			return;
+		}
+
+		// Otherwise, increment position counter (for blocks not found in cache).
+		$current_position++;
+		$GLOBALS['wprm_roundup_block_position'] = $current_position;
+	}
+
+	/**
+	 * Recursively extract roundup item blocks from parsed blocks.
+	 *
+	 * @since	10.0.0
+	 * @param	array $blocks Parsed block list.
+	 * @param	array $position_cache Reference to position cache array.
+	 */
+	private static function extract_roundup_blocks( $blocks, &$position_cache ) {
+		$position = 0;
+
+		foreach ( $blocks as $block ) {
+			if ( ! is_array( $block ) ) {
+				continue;
+			}
+
+			// Check if this is a roundup item block.
+			if ( isset( $block['blockName'] ) && 'wp-recipe-maker/recipe-roundup-item' === $block['blockName'] ) {
+				$position++;
+				$attrs = isset( $block['attrs'] ) ? $block['attrs'] : array();
+
+				// Create a unique identifier for this block.
+				$block_key = '';
+				if ( ! empty( $attrs['id'] ) ) {
+					$block_key = 'id_' . $attrs['id'];
+				} elseif ( ! empty( $attrs['link'] ) ) {
+					$block_key = 'link_' . md5( $attrs['link'] );
+				} else {
+					$block_key = 'hash_' . md5( serialize( $attrs ) );
+				}
+
+				// Store position for this block.
+				$position_cache[ $block_key ] = $position;
+			}
+
+			// Recursively check inner blocks.
+			if ( ! empty( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+				self::extract_roundup_blocks( $block['innerBlocks'], $position_cache );
+			}
+		}
 	}
 
 	/**

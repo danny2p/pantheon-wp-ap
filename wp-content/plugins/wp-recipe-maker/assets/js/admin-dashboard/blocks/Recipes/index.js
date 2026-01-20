@@ -22,6 +22,11 @@ export default class Recipes extends Component {
                 title={ __wprm( 'Latest Recipes' ) }
                 button={ __wprm( 'Create Recipe' ) }
                 buttonAction={ () => {
+                    // Track if this is a new recipe creation and store the recipe ID and name
+                    let isNewRecipeCreation = true;
+                    let savedRecipeId = null;
+                    let savedRecipeName = null;
+                    
                     WPRM_Modal.open( 'recipe', {
                         saveCallback: ( savedRecipe ) => {
                             let newRecipes = JSON.parse( JSON.stringify( this.state.recipes ) );
@@ -37,6 +42,28 @@ export default class Recipes extends Component {
                             this.setState({
                                 recipes: newRecipes,
                             });
+                            
+                            // Store the recipe ID and name if it was newly created
+                            if (isNewRecipeCreation && savedRecipe && savedRecipe.id) {
+                                savedRecipeId = savedRecipe.id;
+                                savedRecipeName = savedRecipe.name || '';
+                            }
+                            
+                            // After first save, mark as no longer a new creation
+                            isNewRecipeCreation = false;
+                        },
+                        closeCallback: () => {
+                            // Only show modal when recipe modal actually closes
+                            // Check if recipe was newly created and post_type_structure is not 'public'
+                            const postTypeStructure = wprm_admin.settings && wprm_admin.settings.post_type_structure ? wprm_admin.settings.post_type_structure : 'private';
+                            
+                            if (savedRecipeId && 'public' !== postTypeStructure) {
+                                // Open modal immediately to avoid background flash
+                                WPRM_Modal.open( 'add-recipe-to-post', {
+                                    recipeId: savedRecipeId,
+                                    recipeName: savedRecipeName,
+                                } );
+                            }
                         },
                     } );
                 }}

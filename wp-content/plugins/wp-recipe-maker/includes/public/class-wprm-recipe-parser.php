@@ -357,8 +357,11 @@ class WPRM_Recipe_Parser {
 	 *
 	 * @since	6.3.0
 	 * @param	mixed $raw Ingredient amount to format.
+	 * @param	int   $decimals Maximum number of decimals to show.
+	 * @param	bool  $allow_fractions Whether to display fractions if enabled.
+	 * @param	bool  $trim_trailing_zeroes Whether to remove trailing zeroes.
 	 */
-	public static function format_quantity( $raw, $decimals = 2, $allow_fractions = false ) {
+	public static function format_quantity( $raw, $decimals = 2, $allow_fractions = false, $trim_trailing_zeroes = false ) {
 		$formatted = '';
 
 		if ( $raw ) {
@@ -425,6 +428,13 @@ class WPRM_Recipe_Parser {
 					$formatted = str_replace( ',', '.', $formatted );
 					$formatted = str_replace( '|', ',', $formatted );
 				}
+			}
+		}
+
+		if ( $formatted && $trim_trailing_zeroes ) {
+			$decimal_symbol = 'comma' === WPRM_Settings::get( 'decimal_separator' ) ? ',' : '.';
+			if ( false !== strpos( $formatted, $decimal_symbol ) ) {
+				$formatted = rtrim( rtrim( $formatted, '0' ), $decimal_symbol );
 			}
 		}
 

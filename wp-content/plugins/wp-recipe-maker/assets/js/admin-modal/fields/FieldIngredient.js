@@ -65,6 +65,8 @@ const ingredient = (props, provided) => {
     let amount = props.amount;
     let unit = props.unit;
 
+    const hasSplits = props.splits && props.splits.length > 0;
+
     return (
         <div
             className="wprm-admin-modal-field-ingredient"
@@ -119,6 +121,13 @@ const ingredient = (props, provided) => {
             </div>
             <div className="wprm-admin-modal-field-ingredient-after-container">
                 <div className="wprm-admin-modal-field-ingredient-after-container-icons">
+                    <Icon
+                        type={ hasSplits ? 'split-thick' : 'split' }
+                        title={ __wprm( 'Split Ingredient' ) }
+                        onClick={ props.onSplit }
+                        className={ hasSplits ? 'wprm-admin-icon-split-active' : '' }
+                        color={ hasSplits ? '#2271b1' : undefined }
+                    />
                     <Icon
                         type="trash"
                         title={ __wprm( 'Remove' ) }

@@ -4,7 +4,7 @@ import Select from 'react-select';
 import Shortcodes from '../../general/shortcodes';
 import Helpers from '../../general/Helpers';
 
-const { shortcodeGroups, shortcodeKeysAlphebetically } = Shortcodes;
+const { shortcodeGroups, shortcodeKeysAlphebetically, getShortcodeId } = Shortcodes;
 
 let allShortcodes = [];
 let selectShortcodes = [];
@@ -17,7 +17,8 @@ for ( let groupKey of Object.keys( shortcodeGroups ) ) {
         options: [],
     };
 
-    for ( let id of shortcodeGroup.shortcodes ) {
+    for ( let entry of shortcodeGroup.shortcodes ) {
+        const id = getShortcodeId(entry);
         if ( shortcodeKeysAlphebetically.includes( id ) ) {
             const shortcodeOption = {
                 label: Helpers.getShortcodeName(id),

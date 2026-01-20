@@ -206,6 +206,22 @@ export default class IngredientsEdit extends Component {
                                             onAddGroup={() => {
                                                 this.addField('group', index);
                                             }}
+                                                onSplit={() => {
+                                                    this.props.openSecondaryModal('split-ingredient', {
+                                                        ingredient: field,
+                                                        onSave: (splits) => {
+                                                            const findIndex = this.props.ingredients.findIndex( ( i ) => field.uid === i.uid );
+                                                            const ingredientIndex = 0 <= findIndex ? findIndex : index;
+
+                                                            let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
+                                                            newFields[ingredientIndex].splits = splits;
+
+                                                            this.props.onRecipeChange({
+                                                                ingredients_flat: newFields,
+                                                            });
+                                                        }
+                                                    });
+                                                }}
                                         />
                                     )})
                                 }

@@ -14,6 +14,8 @@ if (appContainer) {
 				// Expose secondary modal methods
 				window.WPRM_Modal.openSecondary = app.openSecondary;
 				window.WPRM_Modal.closeSecondary = app.closeSecondary;
+				window.WPRM_Modal.close = app.close;
+				window.WPRM_Modal.closeIfAllowed = app.closeIfAllowed;
 				
 			}}
 		/>

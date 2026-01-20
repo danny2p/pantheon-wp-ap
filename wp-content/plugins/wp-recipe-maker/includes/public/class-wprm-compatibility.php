@@ -79,6 +79,9 @@ class WPRM_Compatibility {
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'chicory_after_ingredients' ), 9 );
 		add_action( 'wp_footer', array( __CLASS__, 'chicory_assets' ) );
 
+		// My Shopping Help.
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'myshoppinghelp_after_ingredients' ), 9 );
+
 		// Divi.
 		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi_assets' ) );
@@ -660,6 +663,20 @@ class WPRM_Compatibility {
 				echo '<script defer src="//www.chicoryapp.com/widget_v2/"></script>';
 			}
 		}
+	}
+
+	/**
+	 * Add My Shopping Help button after the ingredients.
+	 *
+	 * @since	10.3.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function myshoppinghelp_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'integration_myshoppinghelp_add' ) && class_exists( 'Nakko\Msh\MshPlugin' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-my-shopping-help]' );
+		}
+
+		return $output;
 	}
 
 	/**

@@ -176,6 +176,10 @@ class WPRM_Api_Manage_Taxonomies {
 				$args['orderby'] = 'meta_value_num';
 				$args['meta_key'] = 'wprmp_amazon_updated';
 				break;
+			case 'amazon_status':
+				$args['orderby'] = 'meta_value';
+				$args['meta_key'] = 'wprmp_amazon_status';
+				break;
 			case 'wpupg_custom_link':
 				$args['orderby'] = 'meta_value';
 				$args['meta_key'] = 'wpupg_custom_link';
@@ -275,6 +279,43 @@ class WPRM_Api_Manage_Taxonomies {
 								'compare' => 'LIKE',
 								'value' => $value,
 							);
+						}
+						break;
+					case 'amazon_status':
+						if ( 'all' !== $value ) {
+							if ( 'empty' === $value ) {
+								// Filter for items with no ASIN.
+								$args['meta_query'][] = array(
+									'key' => 'wprmp_amazon_asin',
+									'compare' => 'NOT EXISTS',
+								);
+							} else if ( 'not_in_stock' === $value ) {
+								// Filter for any status that is NOT "IN_STOCK".
+								// Use custom WHERE clause to exclude items where status is "IN_STOCK" (plain or JSON).
+								$args['wprm_filter_not_in_stock'] = true;
+								// Also ensure ASIN exists (status only makes sense if ASIN is set).
+								$args['meta_query'][] = array(
+									'key' => 'wprmp_amazon_asin',
+									'compare' => 'EXISTS',
+								);
+								// Ensure status exists.
+								$args['meta_query'][] = array(
+									'key' => 'wprmp_amazon_status',
+									'compare' => 'EXISTS',
+								);
+							} else {
+								// Filter by status type (stored as plain string).
+								$args['meta_query'][] = array(
+									'key' => 'wprmp_amazon_status',
+									'compare' => '=',
+									'value' => $value,
+								);
+								// Also ensure ASIN exists (status only makes sense if ASIN is set).
+								$args['meta_query'][] = array(
+									'key' => 'wprmp_amazon_asin',
+									'compare' => 'EXISTS',
+								);
+							}
 						}
 						break;
 					case 'image_id':
@@ -459,6 +500,13 @@ class WPRM_Api_Manage_Taxonomies {
 						$row->amazon_image_width = get_term_meta( $row->term_id, 'wprmp_amazon_image_width', true );
 						$row->amazon_image_height = get_term_meta( $row->term_id, 'wprmp_amazon_image_height', true );
 						$row->amazon_updated = get_term_meta( $row->term_id, 'wprmp_amazon_updated', true );
+						$row->amazon_status = get_term_meta( $row->term_id, 'wprmp_amazon_status', true );
+						// Get non-affiliate product URL for linking.
+						if ( $row->amazon_asin && class_exists( 'WPRMP_Amazon' ) ) {
+							$row->amazon_product_url = WPRMP_Amazon::get_product_url( $row->amazon_asin );
+						} else {
+							$row->amazon_product_url = '';
+						}
 						$row->product = class_exists( 'WPRMPP_Meta' ) ? WPRMPP_Meta::get_product_from_term_id( $row->term_id ) : false;
 						break;
 					case 'suitablefordiet':
@@ -491,10 +539,24 @@ class WPRM_Api_Manage_Taxonomies {
 	 *
 	 * @since	5.0.0
 	 */
-	public static function api_manage_taxonomies_query( $pieces, $taxonomies, $args ) {		
+	public static function api_manage_taxonomies_query( $pieces, $taxonomies, $args ) {
+		global $wpdb;
+		
 		$id_search = isset( $args['wprm_search_id'] ) ? $args['wprm_search_id'] : false;
 		if ( $id_search ) {
 			$pieces['where'] .= ' AND t.term_id LIKE \'%' . esc_sql( $wpdb->esc_like( $id_search ) ) . '%\'';
+		}
+
+		// Filter for "not_in_stock" - exclude items where status is "IN_STOCK".
+		$filter_not_in_stock = isset( $args['wprm_filter_not_in_stock'] ) ? $args['wprm_filter_not_in_stock'] : false;
+		if ( $filter_not_in_stock ) {
+			// Exclude terms where amazon_status is exactly "IN_STOCK".
+			$pieces['where'] .= " AND NOT EXISTS (
+				SELECT 1 FROM {$wpdb->termmeta} tm
+				WHERE tm.term_id = t.term_id
+				AND tm.meta_key = 'wprmp_amazon_status'
+				AND tm.meta_value = 'IN_STOCK'
+			)";
 		}
 
 		return $pieces;

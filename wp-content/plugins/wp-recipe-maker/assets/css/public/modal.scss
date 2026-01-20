@@ -8,8 +8,8 @@
 }
 
 // Prevent body scroll when modal is open
-body.wprm-popup-modal-open {
-	overflow: hidden;
+html body.wprm-popup-modal-open {
+	overflow: visible;
 	position: fixed;
 	width: 100%;
 	height: 100%;

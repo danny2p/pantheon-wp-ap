@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.9
-Requires PHP: 5.4
-Stable tag: 10.2.4
+Requires PHP: 7.2
+Stable tag: 10.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,30 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.3.2 =
+* Fix: Split amounts when using decimals
+* Fix: Using fractions for split amounts
+
+= 10.3.1 =
+* Fix: Prevent modal flash after creating new recipe
+* Fix: Inline version of first ingredient not always displaying
+
+= 10.3.0 =
+* Feature: Split amounts for inline and associated ingredients
+* Feature: New "Add Blocks" interface for the template editor
+* Feature: Drag and drop blocks in the template editor
+* Feature: Set custom author bio
+* Feature: Easily add recipe to post after creating on Manage or Dashboard page
+* Improvement: Deeplink navigation for the template editor
+* Improvement: Collapsible sidebar for the template editor
+* Improvement: Ability to create blank templates in the template editor
+* Improvement: Different Vimeo embed codes for video metadata
+* Fix: Recipe counter in block editor preview
+* Fix: Make sure only recipes show up in the backend selection when the current user can read those recipes
+* Fix: Prevent missing name when editing roundup lists
+* Fix: Do not change og:type in Yoast SEO
+* Fix: Popup modal background disappearing in some themes
+
 = 10.2.4 =
 * Fix: Instruction image preview not showing immediately
 * Fix: Potential misuse of roundup shortcode by contributors
@@ -471,6 +495,15 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.3.2 =
+Some small fixes
+
+= 10.3.1 =
+Some small fixes
+
+= 10.3.0 =
+Some great new features and improvements
+
 = 10.2.4 =
 Some small fixes
 

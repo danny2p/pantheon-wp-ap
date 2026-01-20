@@ -29,6 +29,8 @@ const OurTooltip = (props) => {
         child = <span style={ style }>{ child }</span>;
     }
 
+    const placement = props.hasOwnProperty( 'placement' ) ? props.placement : 'top';
+
     return (
         <Tippy
             content={
@@ -37,6 +39,7 @@ const OurTooltip = (props) => {
                 />
             }
             allowHTML={ true }
+            placement={ placement }
             popperOptions={ {
                 modifiers: [
                     {

@@ -1,6 +1,7 @@
 const recipeEndpoint = wprm_admin.endpoints.recipe;
 const manageEndpoint = wprm_admin.endpoints.manage;
 import ApiWrapper from '../ApiWrapper';
+import AjaxWrapper from '../AjaxWrapper';
 
 const getMultilingualContext = () => {
     if ( 'undefined' !== typeof wprm_admin_modal && wprm_admin_modal && wprm_admin_modal.multilingual ) {
@@ -103,5 +104,16 @@ export default {
     },
     deleteRevision(id) {
         return ApiWrapper.call( `${manageEndpoint}/revision/${id}`, 'DELETE' );
+    },
+    createPostForRecipe(recipeId) {
+        return AjaxWrapper.call('wprm_create_post_for_recipe', {
+            recipe_id: recipeId,
+        });
+    },
+    addRecipeToPost(recipeId, postId) {
+        return AjaxWrapper.call('wprm_add_recipe_to_post', {
+            recipe_id: recipeId,
+            post_id: postId,
+        });
     },
 };

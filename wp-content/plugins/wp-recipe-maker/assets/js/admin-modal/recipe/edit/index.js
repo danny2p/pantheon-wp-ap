@@ -97,6 +97,7 @@ const EditRecipe = (props) => {
                     display: props.recipe.author_display,
                     name: props.recipe.author_name,
                     link: props.recipe.author_link,
+                    bio: props.recipe.author_bio,
                 }}
                 servings={{
                     amount: props.recipe.servings,

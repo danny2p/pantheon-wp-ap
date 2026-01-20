@@ -80,6 +80,10 @@
 
         .wprm-admin-icon {
             margin-right: 5px;
+
+            &.wprm-admin-icon-split-active {
+                opacity: 1;
+            }
         }
     }
 }
