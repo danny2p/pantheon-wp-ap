@@ -38,7 +38,6 @@ class WPRM_Metadata {
 
 		add_filter( 'wpseo_schema_graph_pieces', array( __CLASS__, 'wpseo_schema_graph_pieces' ), 1, 2 );
 		add_filter( 'wpseo_schema_graph', array( __CLASS__, 'wpseo_schema_graph' ), 99, 2 );
-		add_filter( 'wpseo_opengraph_type', array( __CLASS__, 'wpseo_opengraph_type' ), 99 );
 	}
 
 	/**
@@ -226,24 +225,6 @@ class WPRM_Metadata {
 		}
 	
 		return $graph;
-	}
-
-	/**
-	 * Yoast SEO filter open graph type
-	 *
-	 * @since	9.3.0
-	 * @param string                 $type         The type.
-	 */
-	public static function wpseo_opengraph_type( $type ) {
-		if ( self::use_yoast_seo_integration() ) {
-			$recipe_ids_to_output_metadata_for = self::get_recipe_ids_to_output();
-			
-			if ( $recipe_ids_to_output_metadata_for ) {
-				$type = 'recipe';
-			}
-		}
-
-		return $type;
 	}
 
 	/**

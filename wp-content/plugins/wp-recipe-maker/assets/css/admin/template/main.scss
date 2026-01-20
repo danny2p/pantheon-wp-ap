@@ -65,4 +65,171 @@
         color: darkred;
         font-style: italic;
     }
+
+    // Add Blocks View Styles
+    .wprm-add-blocks-view {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #fff;
+
+        .wprm-add-blocks-view-header {
+            margin-top: 50px;
+            margin-bottom: 30px;
+
+            h2 {
+                margin: 0 0 10px 0;
+                font-size: 24px;
+                font-weight: 600;
+                color: #23282d;
+            }
+
+            > p {
+                margin: 0 0 20px 0;
+                color: #646970;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+        }
+
+        .wprm-add-blocks-view-content {
+            .wprm-add-blocks-view-empty {
+                text-align: center;
+                padding: 60px 20px;
+                color: #646970;
+
+                p {
+                    margin: 0;
+                    font-size: 16px;
+                }
+
+                .wprm-add-blocks-view-empty-link {
+                    color: #2271b1;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #135e96;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .wprm-add-blocks-view-group {
+                margin-bottom: 40px;
+
+                .wprm-add-blocks-view-group-header {
+                    margin-bottom: 20px;
+                }
+
+                .wprm-add-blocks-view-group-title {
+                    margin: 0 0 8px 0;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #1d2327;
+                }
+
+                .wprm-add-blocks-view-group-description {
+                    margin: 0 0 0 0;
+                    font-size: 14px;
+                    color: #646970;
+                    line-height: 1.5;
+                    padding-bottom: 12px;
+                    border-bottom: 2px solid #f0f0f1;
+                }
+
+                .wprm-add-blocks-view-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    gap: 20px;
+
+                    @media (max-width: 782px) {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            }
+        }
+
+        .wprm-add-blocks-view-card {
+            background: #fff;
+            border: 1px solid #c3c4c7;
+            border-radius: 6px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 140px;
+            position: relative;
+
+            &:hover {
+                border-color: #2271b1;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                transform: translateY(-2px);
+            }
+
+            &.wprm-add-blocks-view-card-new {
+                border-color: #2271b1;
+                border-width: 2px;
+            }
+
+            .wprm-add-blocks-view-card-header {
+                margin-bottom: 12px;
+
+                .wprm-add-blocks-view-card-title {
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #1d2327;
+                    line-height: 1.4;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    .wprm-add-blocks-view-card-new-badge {
+                        display: inline-block;
+                        background: #2271b1;
+                        color: #fff;
+                        font-size: 10px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        padding: 2px 6px;
+                        border-radius: 3px;
+                        line-height: 1.4;
+                    }
+                }
+            }
+
+            .wprm-add-blocks-view-card-body {
+                flex: 1;
+                margin-bottom: 12px;
+
+                .wprm-add-blocks-view-card-description {
+                    margin: 0;
+                    font-size: 13px;
+                    color: #646970;
+                    line-height: 1.5;
+                }
+            }
+
+            .wprm-add-blocks-view-card-footer {
+                margin-top: auto;
+                padding-top: 12px;
+                border-top: 1px solid #f0f0f1;
+
+                .wprm-add-blocks-view-card-action {
+                    font-size: 12px;
+                    color: #2271b1;
+                    font-weight: 500;
+                    transition: color 0.2s ease;
+                }
+            }
+
+            &:hover .wprm-add-blocks-view-card-action {
+                color: #135e96;
+            }
+        }
+    }
 }

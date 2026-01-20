@@ -226,6 +226,7 @@ class WPRM_Assets {
 			),
 			'eol' => PHP_EOL,
 			'latest_recipes' => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
+			'latest_posts' => WPRM_Recipe_Manager::get_latest_posts( 20, 'id' ),
 			'latest_lists' => WPRM_List_Manager::get_latest_lists( 20, 'id' ),
 			'recipe_templates' => WPRM_Template_Manager::get_templates(),
 			'addons' => array(
@@ -246,6 +247,12 @@ class WPRM_Assets {
 				'microlink_api_key' => WPRM_Settings::get( 'microlink_api_key' ),
 				'recipe_roundup_default_nofollow' => WPRM_Settings::get( 'recipe_roundup_default_nofollow' ),
 				'recipe_roundup_default_newtab' => WPRM_Settings::get( 'recipe_roundup_default_newtab' ),
+				'adjustable_servings_round_to_decimals' => WPRM_Settings::get( 'adjustable_servings_round_to_decimals' ),
+				'fractions_enabled' => WPRM_Settings::get( 'fractions_enabled' ),
+				'fractions_use_mixed' => WPRM_Settings::get( 'fractions_use_mixed' ),
+				'fractions_use_symbols' => WPRM_Settings::get( 'fractions_use_symbols' ),
+				'fractions_max_denominator' => WPRM_Settings::get( 'fractions_max_denominator' ),
+				'decimal_separator' => WPRM_Settings::get( 'decimal_separator' ),
 			),
 			'manage' => array(
 				'tooltip' => array(

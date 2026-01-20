@@ -180,7 +180,7 @@
 <?php
 	if ( class_exists( 'WPRMP_Amazon_api' ) ) :
 		$partner_tag_set = WPRM_Settings::get( 'amazon_partner_tag' ) ? true : false;
-		$api_credentials_set = WPRMP_Amazon_Api::validate_api_credentials();
+		$api_credentials_set = class_exists( 'WPRMP_Amazon_Api_Factory' ) ? WPRMP_Amazon_Api_Factory::has_api_credentials() : ( class_exists( 'WPRMP_Amazon_Api' ) ? WPRMP_Amazon_Api::validate_api_credentials() : false );
 ?>
 	<h2><?php esc_html_e( 'Amazon Affiliate Links Migration for Equipment', 'wp-recipe-maker' ); ?></h2>
 	<?php if ( ! $partner_tag_set ) : ?>
@@ -203,7 +203,7 @@
 								esc_html_e( 'Converts Amazon Affiliate HTML code to either products or regular links.', 'wp-recipe-maker' );
 								if ( ! $api_credentials_set ) {
 									echo ' ';
-									esc_html_e( 'Converting to products is only possible when the PA-API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
+									esc_html_e( 'Converting to products is only possible when the Amazon API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
 								}
 							?>
 						</p>
@@ -224,7 +224,7 @@
 								esc_html_e( 'Converts regular Amazon equipment links to products. Does not work for short links.', 'wp-recipe-maker' );
 								if ( ! $api_credentials_set ) {
 									echo ' ';
-									esc_html_e( 'Converting to products is only possible when the PA-API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
+									esc_html_e( 'Converting to products is only possible when the Amazon API credentials are set on the WP Recipe Maker > Settings > Amazon Products page.', 'wp-recipe-maker' );
 								}
 							?>
 						</p>

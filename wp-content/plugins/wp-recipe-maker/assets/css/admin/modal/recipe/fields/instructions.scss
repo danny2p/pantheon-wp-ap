@@ -168,6 +168,11 @@
             text-decoration: underline;
         }
 
+        &.wprm-admin-modal-field-instruction-inline-ingredient-split {
+            padding-left: 20px;
+            color: #646970;
+            font-size: 0.95em;
+        }
         &.wprm-admin-modal-field-instruction-inline-ingredient-in-other {
             opacity: 0.5;
         }

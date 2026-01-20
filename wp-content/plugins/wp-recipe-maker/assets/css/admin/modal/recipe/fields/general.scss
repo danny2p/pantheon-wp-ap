@@ -12,7 +12,8 @@
 }
 
 .wprm-admin-modal-field-container-author-name,
-.wprm-admin-modal-field-container-author-link {
+.wprm-admin-modal-field-container-author-link,
+.wprm-admin-modal-field-container-author-bio {
     margin-top: -10px;
 
     .wprm-admin-modal-field-label {
@@ -32,6 +33,13 @@
     margin-bottom: 10px;
 
     input {
+        max-width: 500px;
+    }
+}
+.wprm-admin-modal-field-container-author-bio {
+    margin-bottom: 10px;
+
+    .wprm-admin-modal-field-richtext {
         max-width: 500px;
     }
 }

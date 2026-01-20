@@ -7,6 +7,7 @@ import '../../../../../css/admin/modal/recipe/fields/instructions.scss';
 import { __wprm } from 'Shared/Translations';
 import Icon from 'Shared/Icon';
 import Helpers from 'Shared/Helpers';
+import { parseQuantity } from 'Shared/quantities';
 
 import EditMode from '../../../general/EditMode';
 import FieldContainer from '../../../fields/FieldContainer';
@@ -146,20 +147,67 @@ export default class RecipeInstructions extends Component {
 
         for ( let instruction of this.props.instructions ) {
             if ( instruction.hasOwnProperty( 'ingredients' ) ) {
-                usedIngredients = usedIngredients.concat( instruction.ingredients );
+                // Convert all to strings for consistent comparison
+                const instructionIngredients = instruction.ingredients.map( ing => String( ing ) );
+                usedIngredients = usedIngredients.concat( instructionIngredients );
             }
         }
 
-        // Now get unused ingredients.
+        // Now get unused ingredients (for display purposes only).
         let unusedIngredients = [];
 
         for ( let ingredient of this.props.ingredients ) {
             if ( 'ingredient' === ingredient.type ) {
-                if ( ! usedIngredients.includes( ingredient.uid ) ) {
+                const uidStr = String( ingredient.uid );
+                const hasSplits = ingredient.splits && Array.isArray( ingredient.splits ) && ingredient.splits.length >= 2;
+                
+                // Check if ingredient is used
+                const isIngredientUsed = usedIngredients.includes( uidStr );
+                
+                // Check which splits are used
+                const usedSplitIds = [];
+                if ( hasSplits ) {
+                    usedIngredients.forEach( used => {
+                        const usedStr = String( used );
+                        if ( usedStr.includes( ':' ) ) {
+                            const parts = usedStr.split( ':' );
+                            if ( parts[0] === uidStr ) {
+                                usedSplitIds.push( parseInt( parts[1] ) );
+                            }
+                        }
+                    });
+                }
+                
+                // Count valid splits
+                const validSplits = hasSplits ? ingredient.splits.filter( split => split.percentage !== undefined && split.percentage !== null ) : [];
+                const allSplitsUsed = hasSplits && validSplits.length > 0 && validSplits.every( split => usedSplitIds.includes( split.id ) );
+                
+                // Add full ingredient if not used AND not all splits are used
+                if ( ! isIngredientUsed && ! allSplitsUsed ) {
                     const ingredientString = Helpers.getIngredientString( ingredient );
 
                     if ( ingredientString ) {
                         unusedIngredients.push( ingredientString );
+                    }
+                }
+                
+                // Add unused splits
+                if ( hasSplits ) {
+                    for ( let split of ingredient.splits ) {
+                        if ( split.percentage !== undefined && split.percentage !== null && ! usedSplitIds.includes( split.id ) ) {
+                            // Calculate split amount from parent amount and percentage
+                            const parentAmount = parseQuantity( ingredient.amount || '0' );
+                            const percentage = parseFloat( split.percentage ) || 0;
+                            let splitAmount = '';
+                            if ( parentAmount > 0 && ! isNaN( percentage ) ) {
+                                const calculated = ( parentAmount * percentage ) / 100;
+                                splitAmount = calculated === Math.floor( calculated ) ? String( Math.floor( calculated ) ) : calculated.toFixed( 2 ).replace( /\.?0+$/, '' );
+                            }
+                            const splitUnit = ingredient.unit || '';
+                            const splitName = ingredient.name || '';
+                            const splitString = splitAmount ? `  └ ${splitAmount} ${splitUnit} ${splitName}`.trim() : `  └ ${percentage}% ${splitName}`.trim();
+                            unusedIngredients.push( splitString );
+                        }
                     }
                 }
             }

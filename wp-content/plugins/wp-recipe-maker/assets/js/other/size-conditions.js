@@ -5,8 +5,47 @@
 
   const observed = new Set();
   const hasRO = 'ResizeObserver' in window;
+  
+  // Track pending updates to prevent loops
+  const pendingUpdates = new WeakMap();
+  // Track last known width to avoid unnecessary updates
+  const lastWidths = new WeakMap();
+  
   const ro = hasRO ? new ResizeObserver(entries => {
-    for (const e of entries) apply(e.target);
+    // Use requestAnimationFrame to batch updates and prevent loops
+    requestAnimationFrame(() => {
+      for (const e of entries) {
+        // Skip if this element already has a pending update
+        if (pendingUpdates.has(e.target)) {
+          continue;
+        }
+        
+        // Check if width actually changed to avoid unnecessary DOM modifications
+        const currentWidth = e.target.getBoundingClientRect().width;
+        const lastWidth = lastWidths.get(e.target);
+        
+        // Only process if width changed significantly (more than EPS)
+        if (lastWidth !== undefined && Math.abs(currentWidth - lastWidth) < 0.1) {
+          continue;
+        }
+        
+        // Mark as pending and store width
+        pendingUpdates.set(e.target, true);
+        lastWidths.set(e.target, currentWidth);
+        
+        try {
+          apply(e.target);
+        } catch (error) {
+          // Log unexpected errors (ResizeObserver loop errors are browser warnings, not thrown)
+          console.warn('WPRM size-conditions error:', error);
+        } finally {
+          // Clear pending flag after a frame
+          requestAnimationFrame(() => {
+            pendingUpdates.delete(e.target);
+          });
+        }
+      }
+    });
   }) : null;
 
   // Use border-box width (includes borders), with a DP-aware epsilon to avoid toggle jitter.

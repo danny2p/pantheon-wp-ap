@@ -10,9 +10,129 @@
 }
 
 #wprm-template-sidebar {
+    #wprm-template-sidebar-toggle {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 783px) {
+    #wprm-template-sidebar {
+        #wprm-template-sidebar-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 10px;
+            height: 34px;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 5px;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+
+            &:hover {
+                background-color: #ddd;
+            }
+
+            .wprm-template-sidebar-toggle-icon {
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 5px 6px 5px 0;
+                border-color: transparent #666 transparent transparent;
+                transition: border-width 0.3s ease, border-color 0.3s ease;
+                flex-shrink: 0;
+            }
+
+            .wprm-template-sidebar-toggle-text {
+                flex: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &.collapsed {
+            #wprm-template-sidebar-toggle {
+                padding: 0 2px;
+                justify-content: center;
+
+                .wprm-template-sidebar-toggle-icon {
+                    border-width: 5px 0 5px 6px;
+                    border-color: transparent transparent transparent #666;
+                }
+
+                .wprm-template-sidebar-toggle-text {
+                    display: none;
+                }
+            }
+
+            #wprm-template-buttons,
+            .wprm-template-properties,
+            #wprm-add-patterns,
+            #wprm-add-blocks,
+            #wprm-remove-blocks,
+            #wprm-move-blocks,
+            #wprm-block-properties {
+                display: none !important;
+            }
+
+            .wprm-template-menu-group {
+                text-align: center;
+                padding: 10px 2px;
+                font-size: 0;
+                line-height: 0;
+                white-space: nowrap;
+                overflow: hidden;
+
+                .wprm-template-icon {
+                    margin-right: 0;
+                    margin-left: 0;
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-size: 16px;
+                    line-height: 1;
+
+                    svg {
+                        display: block;
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+
+                // Hide any text content by making it invisible
+                // Text nodes inherit font-size: 0 from parent, making them invisible
+            }
+        }
+    }
+
+    .rtl {
+        #wprm-template-sidebar {
+            #wprm-template-sidebar-toggle {
+                .wprm-template-sidebar-toggle-icon {
+                    border-width: 5px 0 5px 6px;
+                    border-color: transparent transparent transparent #666;
+                }
+            }
+
+            &.collapsed {
+                #wprm-template-sidebar-toggle {
+                    .wprm-template-sidebar-toggle-icon {
+                        border-width: 5px 6px 5px 0;
+                        border-color: transparent #666 transparent transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#wprm-template-sidebar {
     .wprm-template-menu-group {
         padding: 6px;
         border-bottom: 1px solid #ddd;
+        transition: padding 0.3s ease;
 
         &:last-child {
             border-bottom: none;
@@ -21,8 +141,10 @@
 
     .wprm-template-properties {
         padding: 0 5px;
+        overflow-x: hidden; // Prevent horizontal overflow
 
         p {
+            margin: 5px;
             font-weight: bold;
         }
     }
@@ -44,9 +166,14 @@
         padding: 3px 0;
         cursor: pointer;
         border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
 
         &.wprm-template-menu-block-hover {
             font-weight: bold;
+            background-color: rgba(0, 115, 170, 0.1);
         }
 
         &.wprm-template-menu-block-self {
@@ -63,6 +190,56 @@
             cursor: default;
         }
 
+        .wprm-template-menu-block-name {
+            flex: 1;
+            cursor: default;
+            min-width: 0; // Allow text to shrink if needed
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &.wprm-template-menu-block-name-clickable {
+                cursor: pointer;
+                position: relative;
+
+                &:hover {
+                    color: #0073aa;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .wprm-template-menu-block-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0.3; // Always visible but faint
+            transition: opacity 0.2s ease;
+            flex-shrink: 0; // Prevent icons from shrinking
+            margin-left: 8px; // Space between name and icons
+
+            .wprm-admin-icon {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                padding: 2px;
+                flex-shrink: 0; // Prevent individual icons from shrinking
+
+                &:hover {
+                    opacity: 1; // Full opacity on icon hover
+                }
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        &:hover .wprm-template-menu-block-actions {
+            opacity: 0.7; // More visible on block hover
+        }
+
         .wprm-template-menu-block-inside {
             margin-left: 10px;
             font-weight: normal;
@@ -72,7 +249,94 @@
                 font-weight: bold;
             }
         }
+
+        // Insert mode styling
+        &.wprm-template-menu-block-insert {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: rgba(0, 115, 170, 0.05);
+            }
+
+            .wprm-template-menu-block-action {
+                color: #2271b1;
+                font-size: 0.9em;
+                opacity: 0.7;
+                transition: opacity 0.2s ease;
+            }
+
+            &:hover .wprm-template-menu-block-action {
+                opacity: 1;
+            }
+        }
+
+        // Container blocks with actions
+        &.wprm-template-menu-block-container {
+            cursor: default;
+
+            .wprm-template-menu-block-actions {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin-left: 8px;
+                flex-shrink: 0;
+
+                .wprm-template-icon-clickable {
+                    cursor: pointer;
+                    opacity: 0.6;
+                    transition: opacity 0.2s ease;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+                .wprm-template-menu-block-placeholder {
+                    padding: 2px 8px;
+                    border-radius: 3px;
+                    font-size: 0.85em;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    background-color: rgba(0, 115, 170, 0.1);
+                    color: #0073aa;
+                    transition: background-color 0.2s ease, color 0.2s ease;
+
+                    &:hover {
+                        background-color: rgba(0, 115, 170, 0.2);
+                        color: #005177;
+                    }
+                }
+            }
+
+            &:hover .wprm-template-menu-block-actions {
+                opacity: 1;
+            }
+        }
+
+
+        // Insert blocks with icon actions
+        &.wprm-template-menu-block-insert {
+            .wprm-template-menu-block-actions {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                margin-left: auto;
+                flex-shrink: 0;
+
+                .wprm-template-icon-clickable {
+                    cursor: pointer;
+                    opacity: 0.6;
+                    transition: opacity 0.2s ease;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
     }
+
 
     .wprm-template-menu-block-details {
         padding: 5px;
@@ -81,6 +345,7 @@
     }
     .wprm-template-menu-block-quick-edit {
         margin: 5px 0;
+        margin-bottom: 10px;
         text-align: center;
     }
 }
@@ -92,6 +357,9 @@
         text-decoration: none;
         color: #444;
         cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:first-child {
             border-top-left-radius: 5px;
@@ -112,6 +380,7 @@
             margin-right: 2px;
             position: relative;
             top: 1px;
+            flex-shrink: 0;
 
             svg {
                 fill: #ddd;
@@ -127,5 +396,215 @@
     }
     p + .wprm-template-menu-add-block-group {
         margin-top: 0;
+    }
+
+    .wprm-add-blocks-search {
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .wprm-add-blocks-search-input {
+            width: 100%;
+            padding: 8px 30px 8px 10px;
+            border: 1px solid #8c8f94;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: border-color 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: #2271b1;
+                box-shadow: 0 0 0 1px #2271b1;
+            }
+
+            &::placeholder {
+                color: #8c8f94;
+            }
+        }
+
+        .wprm-add-blocks-search-clear {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            color: #8c8f94;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: #1d2327;
+            }
+
+            .wprm-admin-icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .wprm-add-blocks-filter {
+        margin-top: 8px;
+        margin-bottom: 10px;
+
+        .wprm-add-blocks-filter-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 13px;
+            color: #1d2327;
+            user-select: none;
+
+            input[type="checkbox"] {
+                margin: 0 6px 0 0;
+                cursor: pointer;
+            }
+
+            span {
+                line-height: 1.4;
+            }
+
+            &:hover {
+                color: #2271b1;
+            }
+        }
+    }
+
+    .wprm-add-blocks-categories {
+        margin-top: 15px;
+        padding: 5px;
+        border-top: 1px solid #ddd;
+
+        .wprm-add-blocks-categories-title {
+            font-weight: bold;
+        }
+
+        .wprm-add-blocks-category-link {
+            display: block;
+            padding: 3px 0;
+            color: #2271b1;
+            text-decoration: none;
+
+            &:hover {
+                color: #135e96;
+            }
+
+            &:active {
+                color: #0a4b78;
+            }
+        }
+    }
+}
+
+// Sortable Block List Styles
+.wprm-sortable-block-list {
+    position: relative;
+}
+
+#wprm-template-sidebar {
+    // Drag handle styles
+    .wprm-template-menu-block-drag-handle {
+        display: flex;
+        align-items: center;
+        cursor: grab;
+        padding: 2px;
+        opacity: 0.4;
+        transition: opacity 0.2s ease;
+        flex-shrink: 0;
+        touch-action: none; // Important for dnd-kit on touch devices
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:active {
+            cursor: grabbing;
+        }
+
+        .wprm-admin-icon {
+            display: flex;
+            align-items: center;
+            
+            svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    // Dragging state
+    .wprm-template-menu-block-dragging {
+        opacity: 0;
+        background-color: #f5f5f5;
+    }
+
+    // Overlay (the ghost that follows the cursor)
+    .wprm-template-menu-block-overlay {
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        padding: 3px 8px;
+        opacity: 1 !important;
+        border: 1px solid #ddd;
+        width: fit-content;
+        min-width: 200px;
+    }
+
+    // Container blocks (can have children)
+    .wprm-template-menu-block-container {
+        .wprm-template-menu-block-name {
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 0;
+                height: 0;
+                margin-left: 4px;
+                border-style: solid;
+                border-width: 4px 0 4px 5px;
+                border-color: transparent transparent transparent #999;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    // Child count badge (shown in overlay when dragging parent with children)
+    .wprm-template-menu-block-child-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 6px;
+        padding: 1px 6px;
+        font-size: 11px;
+        font-weight: 600;
+        color: white;
+        background-color: #0073aa;
+        border-radius: 10px;
+        min-width: 20px;
+        vertical-align: middle;
+    }
+}
+
+// Drop indicator styles
+.wprm-sortable-drop-indicator {
+    height: 3px;
+    background-color: #0073aa;
+    border-radius: 1px;
+    position: relative;
+    margin: 2px 0;
+    transition: margin-left 0.15s ease;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -3px;
+        width: 8px;
+        height: 8px;
+        background-color: #0073aa;
+        border-radius: 50%;
     }
 }

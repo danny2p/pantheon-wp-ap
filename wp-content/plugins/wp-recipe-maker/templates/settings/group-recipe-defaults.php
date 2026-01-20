@@ -111,6 +111,17 @@ $recipe_defaults = array(
 					),
 					'default' => '',
 				),
+				array(
+					'id' => 'recipe_author_same_bio',
+					'name' => __( 'Author Bio', 'wp-recipe-maker' ),
+					'description' => __( 'Bio text to display for the same author across all recipes.', 'wp-recipe-maker' ),
+					'type' => 'textarea',
+					'dependency' => array(
+						'id' => 'recipe_author_display_default',
+						'value' => 'same',
+					),
+					'default' => '',
+				),
 			),
 		),
 		array(

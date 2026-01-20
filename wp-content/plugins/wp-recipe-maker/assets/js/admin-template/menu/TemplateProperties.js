@@ -1,37 +1,30 @@
-import React, { Fragment} from 'react';
+import React, { Fragment } from 'react';
 
-import Property from './Property';
+import PropertyAccordion from './PropertyAccordion';
 
 const TemplateProperties = (props) => {
-    let propertiesColor = [];
-    let propertiesText = [];
-    let propertiesOther = [];
-
-    for ( let property of Object.values(props.template.style.properties) ) {
+    // Prepare properties with options/suffix modifications
+    const properties = {};
+    for (let property of Object.values(props.template.style.properties)) {
+        const propertyCopy = { ...property };
+        
         switch(property.type) {
-            case 'color':
-                propertiesColor.push(property);
-                break;
             case 'align':
-                property.options = {
+                propertyCopy.options = {
                     left: 'Left',
                     center: 'Center',
                     right: 'Right',
                 };
-            case 'font':
-            case 'font_size':
-                propertiesText.push(property);
                 break;
             case 'float':
-                property.options = {
+                propertyCopy.options = {
                     left: 'Left',
                     none: 'None',
                     right: 'Right',
                 };
-                propertiesOther.push(property);
                 break;
             case 'border':
-                property.options = {
+                propertyCopy.options = {
                     solid: 'Solid',
                     dashed: 'Dashed',
                     dotted: 'Dotted',
@@ -41,61 +34,26 @@ const TemplateProperties = (props) => {
                     inset: 'Inset',
                     outset: 'Outset',
                 };
-                propertiesOther.push(property);
                 break;
             case 'percentage':
-                property.suffix = '%';
-                propertiesOther.push(property);
+                propertyCopy.suffix = '%';
                 break;
-            default:
-                propertiesOther.push(property);
         }
+        
+        properties[property.id] = propertyCopy;
     }
-
-    const groups = [
-        {
-            header: 'Colors',
-            properties: propertiesColor
-        },
-        {
-            header: 'Text',
-            properties: propertiesText
-        },
-        {
-            header: 'Other',
-            properties: propertiesOther
-        },
-    ];
 
     return (
         <div id="wprm-template-properties" className="wprm-template-properties">
             {
-               Object.values(props.template.style.properties).length > 0
+               Object.values(properties).length > 0
                 ?
-                <Fragment>
-                    {
-                        groups.map((group, i) => {
-                            if ( group.properties.length > 0 ) {
-                                return (
-                                    <Fragment key={i}>
-                                        <div className="wprm-template-properties-header">{group.header}</div>
-                                        {
-                                            group.properties.map((property, j) => {
-                                                return <Property
-                                                            property={property}
-                                                            onPropertyChange={props.onChangeTemplateProperty}
-                                                            fonts={props.fonts}
-                                                            onChangeFonts={props.onChangeFonts}
-                                                            key={j}
-                                                        />;
-                                            })
-                                        }
-                                    </Fragment>
-                                )
-                            }
-                        })
-                    }
-                </Fragment>
+                <PropertyAccordion
+                    properties={properties}
+                    onPropertyChange={props.onChangeTemplateProperty}
+                    fonts={props.fonts}
+                    onChangeFonts={props.onChangeFonts}
+                />
                 :
                 <p>This template does not have any adjustable properties.</p>
             }

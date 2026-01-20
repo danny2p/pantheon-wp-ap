@@ -1,0 +1,288 @@
+.wprm-admin-modal-split-ingredient-container {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.wprm-admin-modal-split-ingredient-info {
+    margin-bottom: 20px;
+
+    p {
+        margin: 0 0 10px 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.wprm-admin-modal-split-ingredient-help {
+    font-size: 0.9em;
+    color: #646970;
+    font-style: italic;
+}
+
+.wprm-admin-modal-split-ingredient-parts {
+    margin-top: 20px;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+}
+
+.wprm-admin-modal-split-ingredient-no-parts {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    color: #646970;
+    font-style: italic;
+}
+
+.wprm-admin-modal-split-ingredient-header-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+    .wprm-admin-modal-split-ingredient-header {
+        &:nth-of-type(1) {
+            flex: 0 0 50%;
+        }
+
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4),
+        &:nth-of-type(5) {
+            display: none;
+        }
+
+        &.wprm-admin-modal-split-ingredient-header-converted {
+            display: none;
+        }
+    }
+}
+
+.wprm-admin-modal-split-ingredient-part {
+    .wprm-admin-modal-split-ingredient-part-name {
+        flex: 0 0 50%;
+    }
+}
+
+.wprm-admin-modal-split-ingredient-parts-list {
+    margin-bottom: 15px;
+}
+
+.wprm-admin-modal-split-ingredient-part {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: white;
+    flex-wrap: wrap;
+
+    input.wprm-admin-modal-split-ingredient-percentage-input {
+        flex: 0 0 auto;
+        min-width: 0;
+        width: 80px;
+        max-width: 100%;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        
+        &:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            color: #666;
+        }
+    }
+
+    .wprm-admin-modal-split-ingredient-part-amount {
+        display: none;
+        align-items: center;
+        color: #646970;
+    }
+
+    .wprm-admin-modal-split-ingredient-part-converted-amount {
+        display: none;
+        align-items: center;
+        color: #646970;
+    }
+
+    .wprm-admin-modal-split-ingredient-part-name {
+        display: none;
+        align-items: center;
+    }
+
+    .wprm-admin-modal-split-ingredient-part-after-container {
+        .wprm-admin-modal-split-ingredient-part-after-container-icons {
+            flex-shrink: 0;
+            margin: 5px;
+
+            .wprm-admin-icon {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 550px) {
+    .wprm-admin-modal-split-ingredient-header-container {
+        .wprm-admin-modal-split-ingredient-header {
+            &:nth-of-type(1) {
+                flex: 0 0 20%;
+            }
+
+            &:nth-of-type(2) {
+                display: block;
+                flex: 0 0 25%;
+            }
+
+            &:nth-of-type(3) {
+                display: block;
+                flex: 0 0 50%;
+            }
+
+            &.wprm-admin-modal-split-ingredient-header-converted {
+                display: block;
+                flex: 0 0 25%;
+            }
+        }
+    }
+
+    .wprm-admin-modal-split-ingredient-part {
+        flex-wrap: wrap;
+
+        input.wprm-admin-modal-split-ingredient-percentage-input {
+            flex: 0 0 auto;
+            min-width: 0;
+            width: 80px;
+            max-width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            
+            &:disabled {
+                background-color: #f5f5f5;
+                cursor: not-allowed;
+                color: #666;
+            }
+        }
+
+        .wprm-admin-modal-split-ingredient-part-amount {
+            display: flex;
+            flex: 0 0 25%;
+            margin-right: 10px;
+        }
+
+        .wprm-admin-modal-split-ingredient-part-converted-amount {
+            display: flex;
+            flex: 0 0 25%;
+            margin-right: 10px;
+        }
+
+        .wprm-admin-modal-split-ingredient-part-name {
+            display: flex;
+            flex: 0 0 50%;
+        }
+    }
+}
+
+@media screen and (min-width: 782px) {
+    .wprm-admin-modal-split-ingredient-part {
+        margin-bottom: 5px;
+        flex-wrap: nowrap;
+
+        input.wprm-admin-modal-split-ingredient-percentage-input {
+            flex: 0 0 80px;
+            margin-right: 5px;
+            width: 80px;
+            max-width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            
+            &:disabled {
+                background-color: #f5f5f5;
+                cursor: not-allowed;
+                color: #666;
+            }
+        }
+
+        .wprm-admin-modal-split-ingredient-part-amount {
+            flex: 0 0 100px;
+            margin-right: 5px;
+        }
+
+        .wprm-admin-modal-split-ingredient-part-converted-amount {
+            flex: 0 0 100px;
+            margin-right: 5px;
+        }
+
+        .wprm-admin-modal-split-ingredient-part-name {
+            flex: 0 0 250px;
+            margin-right: 5px;
+        }
+    }
+
+    .wprm-admin-modal-split-ingredient-header-container {
+        .wprm-admin-modal-split-ingredient-header {
+            &:nth-of-type(1) {
+                flex: 0 0 80px;
+                margin-right: 5px;
+            }
+            &:nth-of-type(2) {
+                flex: 0 0 100px;
+                margin-right: 5px;
+            }
+            &.wprm-admin-modal-split-ingredient-header-converted {
+                flex: 0 0 100px;
+                margin-right: 5px;
+            }
+            // Name column - adjust based on whether converted column exists
+            &:nth-of-type(3):not(.wprm-admin-modal-split-ingredient-header-converted),
+            &:nth-of-type(4):not(.wprm-admin-modal-split-ingredient-header-converted) {
+                flex: 0 0 250px;
+                margin-right: 5px;
+            }
+            // Actions column
+            &:last-of-type {
+                display: block;
+                flex: auto;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .wprm-admin-modal-split-ingredient-header-container {
+        .wprm-admin-modal-split-ingredient-header {
+            &:nth-of-type(3):not(.wprm-admin-modal-split-ingredient-header-converted),
+            &:nth-of-type(4):not(.wprm-admin-modal-split-ingredient-header-converted) {
+                flex: 0 0 300px;
+            }
+        }
+    }
+
+    .wprm-admin-modal-split-ingredient-part {
+        .wprm-admin-modal-split-ingredient-part-name {
+            flex: 0 0 300px;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wprm-admin-modal-split-ingredient-header-container {
+        .wprm-admin-modal-split-ingredient-header {
+            &:nth-of-type(3):not(.wprm-admin-modal-split-ingredient-header-converted),
+            &:nth-of-type(4):not(.wprm-admin-modal-split-ingredient-header-converted) {
+                flex: 0 0 350px;
+            }
+        }
+    }
+
+    .wprm-admin-modal-split-ingredient-part {
+        .wprm-admin-modal-split-ingredient-part-name {
+            flex: 0 0 350px;
+        }
+    }
+}

@@ -25,6 +25,8 @@ import BulkAdd from './recipe/bulk-add';
 import BulkAddCategories from './recipe/bulk-add-categories';
 import TextImport from './recipe/text-import';
 import SuggestTags from './recipe/suggest-tags';
+import SplitIngredient from './recipe/split-ingredient';
+import AddRecipeToPost from './add-recipe-to-post';
 
 const contentBlocks = {
     'bulk-edit': BulkEdit,
@@ -40,6 +42,8 @@ const contentBlocks = {
     taxonomy: Taxonomy,
     'text-import': TextImport,
     'suggest-tags': SuggestTags,
+    'split-ingredient': SplitIngredient,
+    'add-recipe-to-post': AddRecipeToPost,
 };
 
 export default class App extends Component {
@@ -72,18 +76,32 @@ export default class App extends Component {
                 mode,
                 args,
             }, () => {
-                window.onbeforeunload = () => __wprm( 'Are you sure you want to leave this page?' );
+                // Don't set onbeforeunload for simple modals that don't have unsaved changes
+                const simpleModals = [ 'add-recipe-to-post', 'select' ];
+                if ( ! simpleModals.includes( mode ) ) {
+                    window.onbeforeunload = () => __wprm( 'Are you sure you want to leave this page?' );
+                }
             });
         }
     }
 
     close(callback = false) { 
+        // Store closeCallback before closing
+        const closeCallback = this.state.args && this.state.args.closeCallback && 'function' === typeof this.state.args.closeCallback ? this.state.args.closeCallback : false;
+        
         this.setState({
             modalIsOpen: false,
         }, () => {
             window.onbeforeunload = null;
+            
+            // Call the provided callback first
             if ( 'function' === typeof callback ) {
                 callback();
+            }
+            
+            // Then call closeCallback if provided (after modal is closed)
+            if ( closeCallback ) {
+                closeCallback();
             }
         });
     }

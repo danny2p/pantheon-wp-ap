@@ -84,3 +84,61 @@
         white-space: normal;
     }
 }
+
+.wprm-manage-equipment-amazon-status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    
+    &-type {
+        font-weight: 600;
+    }
+    
+    &-message {
+        font-size: 11px;
+        opacity: 0.7;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    &-link {
+        opacity: 0.6;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        
+        &:hover {
+            opacity: 1;
+        }
+        
+        .wprm-admin-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+    
+    &.status-in-stock {
+        color: #00a32a;
+    }
+    
+    &.status-out-of-stock,
+    &.status-unavailable,
+    &.status-not-found {
+        color: #d63638;
+    }
+    
+    &.status-preorder,
+    &.status-backorderable {
+        color: #dba617;
+    }
+    
+    &.status-unknown {
+        color: #646970;
+    }
+    
+    &-none {
+        opacity: 0.5;
+    }
+}

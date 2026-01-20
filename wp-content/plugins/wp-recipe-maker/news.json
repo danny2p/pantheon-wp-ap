@@ -1,6 +1,36 @@
 {
     "news": [
         {
+            "date": "2026-01-16",
+            "label": "Blog",
+            "title": "Easy Accessible Recipes Using Picture Cards and Simple Tools",
+            "url": "https://bootstrapped.ventures/accessible-recipes/"
+        },
+        {
+            "date": "2026-01-15",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.3.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-3-0/"
+        },
+        {
+            "date": "2026-01-14",
+            "label": "Blog",
+            "title": "Best WordPress Meal Planner Plugins Ranked with Setup Instructions",
+            "url": "https://bootstrapped.ventures/wordpress-meal-planner/"
+        },
+        {
+            "date": "2026-01-08",
+            "label": "Blog",
+            "title": "Fix WordPress Recipe Rich Snippets When Schema Stops Working",
+            "url": "https://bootstrapped.ventures/wordpress-recipe-schema/"
+        },
+        {
+            "date": "2026-01-05",
+            "label": "Blog",
+            "title": "Guest Post Guidelines That Food Blogs Actually Want",
+            "url": "https://bootstrapped.ventures/guest-post-food/"
+        },
+        {
             "date": "2025-12-04",
             "label": "Blog",
             "title": "How to Create a Recipe Content Plan That Keeps Readers Coming Back",

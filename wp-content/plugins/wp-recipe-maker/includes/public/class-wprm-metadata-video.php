@@ -124,6 +124,7 @@ class WPRM_MetadataVideo {
 		// Only check if there actually is some embed code.
 		if ( $embed_code ) {
 			$metadata = $metadata ? $metadata : self::check_for_youtube_embed( $embed_code );
+			$metadata = $metadata ? $metadata : self::check_for_vimeo_embed( $embed_code );
 			$metadata = $metadata ? $metadata : self::check_for_mediavine_embed( $embed_code, $recipe );
 			$metadata = $metadata ? $metadata : self::check_for_adthrive_embed( $embed_code );
 			$metadata = $metadata ? $metadata : self::check_for_wp_youtube_lyte_embed( $embed_code );
@@ -207,6 +208,75 @@ class WPRM_MetadataVideo {
 					if ( $recipe ) {
 						update_post_meta( $recipe->id(), 'wprm_video_embed', $metadata_disabled_embed_code );
 					}
+				}
+			}
+		}
+
+		return $metadata;
+	}
+
+	/**
+	 * Check the embed code for a Vimeo video.
+	 *
+	 * @since   8.X.X
+	 * @param	string $embed_code Embed code to check.
+	 */
+	private static function check_for_vimeo_embed( $embed_code ) {
+		$metadata = false;
+		$found_vimeo_id = false;
+
+		// Check for Vimeo player URL format: player.vimeo.com/video/ID
+		preg_match( '/player\.vimeo\.com\/video\/(\d+)/i', $embed_code, $matches );
+		if ( $matches && isset( $matches[1] ) ) {
+			$found_vimeo_id = $matches[1];
+		}
+
+		// Check for standard Vimeo URL format: vimeo.com/ID
+		if ( ! $found_vimeo_id ) {
+			preg_match( '/vimeo\.com\/(\d+)/i', $embed_code, $matches );
+			if ( $matches && isset( $matches[1] ) ) {
+				$found_vimeo_id = $matches[1];
+			}
+		}
+
+		// Try oEmbed with standard Vimeo URL format.
+		if ( $found_vimeo_id ) {
+			$vimeo_url = 'https://vimeo.com/' . $found_vimeo_id;
+			$metadata = self::check_for_oembed( $vimeo_url );
+
+			// If oEmbed didn't return all required fields, try to extract from embed code.
+			if ( $metadata && ( ! $metadata['uploadDate'] || ! $metadata['name'] || ! $metadata['thumbnailUrl'] ) ) {
+				// Try to extract title from iframe title attribute.
+				if ( ! $metadata['name'] ) {
+					preg_match( '/title\s*=\s*"([^"]+)"/i', $embed_code, $title_match );
+					if ( $title_match && isset( $title_match[1] ) ) {
+						$metadata['name'] = $title_match[1];
+					}
+				}
+
+				// Try Vimeo oEmbed API directly if WordPress oEmbed didn't work.
+				if ( ! $metadata['uploadDate'] || ! $metadata['thumbnailUrl'] ) {
+					$vimeo_oembed_url = 'https://vimeo.com/api/oembed.json?url=' . urlencode( $vimeo_url );
+					$response = wp_remote_get( $vimeo_oembed_url );
+					$body = ! is_wp_error( $response ) && isset( $response['body'] ) ? json_decode( $response['body'] ) : false;
+
+					if ( $body ) {
+						if ( ! $metadata['name'] && isset( $body->title ) ) {
+							$metadata['name'] = $body->title;
+						}
+						if ( ! $metadata['thumbnailUrl'] && isset( $body->thumbnail_url ) ) {
+							$metadata['thumbnailUrl'] = $body->thumbnail_url;
+						}
+						if ( ! $metadata['uploadDate'] && isset( $body->upload_date ) ) {
+							$metadata['uploadDate'] = date( 'c', strtotime( $body->upload_date ) );
+						}
+					}
+				}
+
+				// If still missing required fields, don't return incomplete metadata.
+				// Google requires uploadDate, name, and thumbnailUrl for VideoObject.
+				if ( ! $metadata['uploadDate'] || ! $metadata['name'] || ! $metadata['thumbnailUrl'] ) {
+					$metadata = false;
 				}
 			}
 		}
@@ -469,10 +539,29 @@ class WPRM_MetadataVideo {
 			return 'https://www.youtube.com/watch?v=' . $match[2];
 		}
 
+		// Check for Vimeo player URL and convert to standard format.
+		preg_match( '/player\.vimeo\.com\/video\/(\d+)/i', $embed_code, $match );
+		if ( $match && isset( $match[1] ) ) {
+			return 'https://vimeo.com/' . $match[1];
+		}
+
+		// Check for standard Vimeo URL.
+		preg_match( '/vimeo\.com\/(\d+)/i', $embed_code, $match );
+		if ( $match && isset( $match[1] ) ) {
+			return 'https://vimeo.com/' . $match[1];
+		}
+
 		// Check for src="" in the embed code.
 		preg_match( '/src\s*=\s*"([^"]+)"/im', $embed_code, $match );
 		if ( $match && isset( $match[1] ) ) {
-			return $match[1];
+			$url = $match[1];
+			
+			// Convert Vimeo player URLs to standard format.
+			if ( preg_match( '/player\.vimeo\.com\/video\/(\d+)/i', $url, $vimeo_match ) ) {
+				return 'https://vimeo.com/' . $vimeo_match[1];
+			}
+			
+			return $url;
 		}		
 
 		return false;

@@ -62,6 +62,32 @@ export default class RecipeCategories extends Component {
                         ai
                         onClick={(e) => {
                             e.preventDefault();
+                            
+                            // Check if ingredients and instructions are filled in
+                            const ingredients = (this.props.recipe.ingredients_flat || []).filter(
+                                (field) => 'ingredient' === field.type && field.name && field.name.trim() !== ''
+                            );
+                            const instructions = (this.props.recipe.instructions_flat || []).filter(
+                                (field) => 'instruction' === field.type && field.text && field.text.trim() !== ''
+                            );
+                            
+                            if (ingredients.length === 0 || instructions.length === 0) {
+                                const missingItems = [];
+                                if (ingredients.length === 0) {
+                                    missingItems.push('howto' === this.props.recipe.type ? __wprm( 'materials' ) : __wprm( 'ingredients' ));
+                                }
+                                if (instructions.length === 0) {
+                                    missingItems.push(__wprm( 'instructions' ));
+                                }
+                                
+                                alert(
+                                    __wprm( 'Please fill in the ' ) + 
+                                    missingItems.join( __wprm( ' and ' ) ) + 
+                                    __wprm( ' before using Suggest Tags. The AI needs this information to provide useful tag suggestions.' )
+                                );
+                                return;
+                            }
+                            
                             this.props.openSecondaryModal('suggest-tags', {
                                 recipe: this.props.recipe,
                                 tags: this.props.tags,

@@ -1,4 +1,5 @@
 import ApiWrapper from '../ApiWrapper';
+import AjaxWrapper from '../AjaxWrapper';
 
 const templateEndpoint = wprm_admin.endpoints.template;
 const debounceTime = 500;
@@ -47,16 +48,12 @@ export default {
         });
     },
     searchRecipes(input) {
-        return fetch(wprm_admin.ajax_url, {
-            method: 'POST',
-            credentials: 'same-origin',
-            body: 'action=wprm_search_recipes&security=' + wprm_admin.nonce + '&search=' + encodeURIComponent( input ),
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-            },
-        })
-        .then((response) => response.json())
+        return AjaxWrapper.call('wprm_search_recipes', {
+            search: input,
+        }).then((data) => {
+            // Return recipes_with_id if available, otherwise empty array.
+            return data && data.recipes_with_id ? data.recipes_with_id : [];
+        });
     },
     save(template) {
         const data = {

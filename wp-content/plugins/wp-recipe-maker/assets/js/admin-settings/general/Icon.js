@@ -38,6 +38,7 @@ import IconShare from '../../../icons/settings/share.svg';
 import IconShoppingCart from '../../../icons/settings/shopping-cart.svg';
 import IconSliders from '../../../icons/settings/sliders.svg';
 import IconSpeed from '../../../icons/settings/speed.svg';
+import IconSparks from '../../../icons/settings/sparks.svg';
 import IconStar from '../../../icons/settings/star.svg';
 import IconSupport from '../../../icons/settings/support.svg';
 import IconText from '../../../icons/settings/text.svg';
@@ -86,6 +87,7 @@ const icons = {
     'shopping-cart': IconShoppingCart,
     sliders: IconSliders,
     speed: IconSpeed,
+    sparks: IconSparks,
     star: IconStar,
     support: IconSupport,
     text: IconText,

@@ -181,6 +181,7 @@ class WPRM_Recipe_Saver {
 		if ( isset( $recipe['author_display'] ) )				{ $meta['wprm_author_display'] = $recipe['author_display']; }
 		if ( isset( $recipe['author_name'] ) )					{ $meta['wprm_author_name'] = $recipe['author_name']; }
 		if ( isset( $recipe['author_link'] ) )					{ $meta['wprm_author_link'] = $recipe['author_link']; }
+		if ( isset( $recipe['author_bio'] ) )					{ $meta['wprm_author_bio'] = $recipe['author_bio']; }
 		if ( isset( $recipe['servings'] ) )						{ $meta['wprm_servings'] = $recipe['servings']; }
 		if ( isset( $recipe['servings_unit'] ) )				{ $meta['wprm_servings_unit'] = $recipe['servings_unit']; }
 		if ( isset( $recipe['servings_advanced_enabled'] ) )	{ $meta['wprm_servings_advanced_enabled'] = $recipe['servings_advanced_enabled']; }

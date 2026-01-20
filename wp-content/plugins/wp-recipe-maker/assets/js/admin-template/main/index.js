@@ -21,6 +21,8 @@ const Main = (props) => {
                     onChangeTemplate={ props.onChangeTemplate }
                     savingTemplate={ props.savingTemplate }
                     onSaveTemplate={ props.onSaveTemplate }
+                    type={ props.manageTemplateType }
+                    onChangeType={ props.onChangeManageTemplateType }
                 />
             }
             {
@@ -50,6 +52,8 @@ const Main = (props) => {
                     onChangeHTML={ props.onChangeHTML }
                     onChangeCSS={ props.onChangeCSS }
                     onChangeMode={ props.onChangeMode }
+                    editingBlock={ props.editingBlock }
+                    onChangeEditingBlock={ props.onChangeEditingBlock }
                 />
             }
         </div>

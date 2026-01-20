@@ -15,6 +15,8 @@ import IconCheckboxEmpty from '../../icons/admin/checkbox-empty.svg';
 import IconCheckmark from '../../icons/admin/checkmark.svg';
 import IconDuplicate from '../../icons/admin/duplicate.svg';
 import IconDrag from '../../icons/admin/drag.svg';
+import IconSplit from '../../icons/admin/split.svg';
+import IconSplitThick from '../../icons/admin/split-thick.svg';
 import IconEaflLink from '../../icons/admin/eafl-link.svg';
 import IconEaflUnlink from '../../icons/admin/eafl-unlink.svg';
 import IconEye from '../../icons/admin/eye.svg';
@@ -63,6 +65,8 @@ const icons = {
     checkmark: IconCheckmark,
     duplicate: IconDuplicate,
     drag: IconDrag,
+    split: IconSplit,
+    'split-thick': IconSplitThick,
     'eafl-link': IconEaflLink,
     'eafl-unlink': IconEaflUnlink,
     eye: IconEye,

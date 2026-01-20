@@ -3,6 +3,7 @@ import './public/comment-rating';
 import './public/debug';
 import './public/expandable';
 import './public/grow';
+import './public/my-shopping-help';
 import './public/instacart';
 import './public/jump-to-section';
 import './public/manager';

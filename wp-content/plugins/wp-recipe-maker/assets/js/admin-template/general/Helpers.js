@@ -1,23 +1,44 @@
+import Shortcodes from './shortcodes';
+
+const { shortcodeGroups, getShortcodeId } = Shortcodes;
+
 export default {
     parseCSS(template) {
+        // Handle case where template doesn't have style property yet (new blank templates)
+        if ( !template.style || !template.style.css ) {
+            return template.css || '';
+        }
+
         let css = template.style.css;
 
         // Reconstruct CSS with new value and comments.
-        for ( let property of Object.values(template.style.properties) ) {
-            let fields = '';
-            Object.entries(property).forEach(([field, value]) => {    
-                if ( ! ['id', 'name', 'default', 'value', 'options'].includes( field ) ) {
-                    fields = ` ${field}=${value}`;
-                }
-            });
+        if ( template.style.properties ) {
+            for ( let property of Object.values(template.style.properties) ) {
+                let fields = '';
+                Object.entries(property).forEach(([field, value]) => {    
+                    if ( ! ['id', 'name', 'default', 'value', 'options'].includes( field ) ) {
+                        fields = ` ${field}=${value}`;
+                    }
+                });
 
-            const replacement = `${property.value}; /*wprm_${property.id}${fields}*/`;
-            css = css.replace( new RegExp( `%wprm_${property.id}%\s*;`, 'g' ), replacement );
+                const replacement = `${property.value}; /*wprm_${property.id}${fields}*/`;
+                css = css.replace( new RegExp( `%wprm_${property.id}%\s*;`, 'g' ), replacement );
+            }
         }
 
         return css;
     },
     getShortcodeName(id) {
+        // Check for custom name in shortcodeGroups first
+        for (const groupKey in shortcodeGroups) {
+            const group = shortcodeGroups[groupKey];
+            const entry = group.shortcodes.find(entry => getShortcodeId(entry) === id);
+            if (entry && entry.name) {
+                return entry.name;
+            }
+        }
+
+        // Fall back to auto-generated name
         let name = id;
 
         name = name.replace('wprm-layout-', '');

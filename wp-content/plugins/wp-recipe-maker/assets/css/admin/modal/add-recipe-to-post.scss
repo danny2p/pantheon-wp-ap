@@ -1,0 +1,79 @@
+.wprm-admin-modal-add-recipe-to-post {
+    max-width: 600px;
+}
+
+.wprm-admin-modal-add-recipe-to-post-container {
+    padding: 20px;
+
+    p {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .wprm-admin-modal-add-recipe-to-post-options {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .wprm-admin-modal-add-recipe-to-post-section {
+            h3 {
+                margin-top: 0;
+                margin-bottom: 15px;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .wprm-admin-modal-add-recipe-to-post-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+
+                button {
+                    flex: 1;
+                    min-width: 200px;
+                }
+
+                @media (max-width: 782px) {
+                    flex-direction: column;
+
+                    button {
+                        width: 100%;
+                        min-width: 0;
+                    }
+                }
+            }
+
+            .wprm-admin-modal-add-recipe-to-post-existing {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: center;
+
+                > div {
+                    flex: 1;
+                    min-width: 200px;
+                }
+
+                button {
+                    flex: 0 0 auto;
+                    min-width: 120px;
+                }
+
+                @media (max-width: 782px) {
+                    flex-direction: column;
+
+                    > div {
+                        width: 100%;
+                        min-width: 0;
+                    }
+
+                    button {
+                        width: 100%;
+                        min-width: 0;
+                    }
+                }
+            }
+        }
+    }
+}

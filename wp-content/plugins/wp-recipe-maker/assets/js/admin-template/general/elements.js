@@ -1,8 +1,18 @@
-const layoutElements = [
-    'wprm-layout-container',
-    'wprm-layout-column-container',
-    'wprm-layout-column',
+// Layout elements with optional descriptions
+const layoutElementsData = [
+    { id: 'wprm-layout-container', description: 'Generic layout container to wrap other elements.' },
+    { id: 'wprm-layout-column-container', description: 'Container that holds multiple columns. Add first to create a column container, then add columns inside of it.' },
+    { id: 'wprm-layout-column', description: 'Single column to add inside of a column container.' },
 ];
+
+// Backward compatible array of IDs
+const layoutElements = layoutElementsData.map(({ id }) => id);
+
+// Quick lookup for descriptions
+const layoutElementDescriptions = layoutElementsData.reduce((acc, { id, description }) => {
+    acc[id] = description || '';
+    return acc;
+}, {});
 
 const propertiesForElement = {
     container: [ 'float', 'align', 'padding', 'background-color', 'text-color', 'custom' ],
@@ -314,6 +324,7 @@ const potentialProperties = {
 
 export default {
     layoutElements,
+    layoutElementDescriptions,
     propertiesForElement,
     potentialProperties,
 };

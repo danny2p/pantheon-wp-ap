@@ -99,6 +99,15 @@ const RecipeGeneral = (props) => {
                             }}
                         />
                     </FieldContainer>
+                    <FieldContainer id="author-bio" label={ __wprm( 'Bio' ) }>
+                        <FieldRichText
+                            placeholder={ __wprm( 'Optional author bio...' ) }
+                            value={ props.author.bio }
+                            onChange={ (author_bio) => {
+                                props.onRecipeChange( { author_bio } );
+                            }}
+                        />
+                    </FieldContainer>
                 </Fragment>
             }
             <FieldContainer id="servings" label={ 'howto' === props.type ? __wprm( 'Yield' ) : __wprm( 'Servings' ) }>
