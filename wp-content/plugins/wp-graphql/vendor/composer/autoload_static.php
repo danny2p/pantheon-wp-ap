@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2b7e687289c1788009a0a17aec7f530e
+class ComposerStaticInit6048624ca616de33c52bfcdf69c2bcdc
 {
     public static $prefixLengthsPsr4 = array (
         'W' =>
@@ -288,6 +288,7 @@ class ComposerStaticInit2b7e687289c1788009a0a17aec7f530e
         'WPGraphQL\\Admin\\Updates\\Updates' => __DIR__ . '/../..' . '/src/Admin/Updates/Updates.php',
         'WPGraphQL\\Admin\\Updates\\UpdatesScreenLoader' => __DIR__ . '/../..' . '/src/Admin/Updates/UpdatesScreenLoader.php',
         'WPGraphQL\\AppContext' => __DIR__ . '/../..' . '/src/AppContext.php',
+        'WPGraphQL\\CLI\\Commands' => __DIR__ . '/../..' . '/src/CLI/Commands.php',
         'WPGraphQL\\Connection\\Comments' => __DIR__ . '/../..' . '/deprecated/Comments.php',
         'WPGraphQL\\Connection\\MenuItems' => __DIR__ . '/../..' . '/deprecated/MenuItems.php',
         'WPGraphQL\\Connection\\PostObjects' => __DIR__ . '/../..' . '/deprecated/PostObjects.php',
@@ -503,14 +504,15 @@ class ComposerStaticInit2b7e687289c1788009a0a17aec7f530e
         'WPGraphQL\\Utils\\Tracing' => __DIR__ . '/../..' . '/src/Utils/Tracing.php',
         'WPGraphQL\\Utils\\Utils' => __DIR__ . '/../..' . '/src/Utils/Utils.php',
         'WPGraphQL\\WPSchema' => __DIR__ . '/../..' . '/src/WPSchema.php',
+        'WPGraphQL_CLI_Command' => __DIR__ . '/../..' . '/deprecated/wp-cli.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2b7e687289c1788009a0a17aec7f530e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6048624ca616de33c52bfcdf69c2bcdc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6048624ca616de33c52bfcdf69c2bcdc::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6048624ca616de33c52bfcdf69c2bcdc::$classMap;
 
         }, null, ClassLoader::class);
     }

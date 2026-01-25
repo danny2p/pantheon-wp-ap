@@ -15214,15 +15214,23 @@ ControlMediaItemView = ControlBaseDataView.extend({
     elementor.config.user.dismissed_editor_notices.push(eventName);
   },
   onPromotionAction: function onPromotionAction(event) {
-    var _JSON$parse = JSON.parse(event.target.closest('button').dataset.settings),
-      _JSON$parse$action_ur = _JSON$parse.action_url,
-      actionURL = _JSON$parse$action_ur === void 0 ? null : _JSON$parse$action_ur;
+    var settings = {};
+    try {
+      settings = JSON.parse(event.target.closest('button').dataset.settings);
+    } catch (e) {
+      // Do nothing.
+    }
+    var _settings = settings,
+      _settings$action_url = _settings.action_url,
+      actionURL = _settings$action_url === void 0 ? null : _settings$action_url,
+      _settings$source = _settings.source,
+      source = _settings$source === void 0 ? 'io-editor-gallery-install' : _settings$source;
     if (actionURL) {
       window.open(actionURL, '_blank');
     }
     elementorCommon.ajax.addRequest('elementor_image_optimization_campaign', {
       data: {
-        source: 'io-editor-gallery-install'
+        source: source
       }
     });
     this.hidePromotion();
@@ -16082,13 +16090,21 @@ ControlMediaItemView = ControlMultipleBaseItemView.extend({
     this.dismissPromotion(this.getDismissPromotionEventName());
   },
   onPromotionAction: function onPromotionAction(event) {
-    var _JSON$parse = JSON.parse(event.target.closest('button').dataset.settings),
-      _JSON$parse$action_ur = _JSON$parse.action_url,
-      actionURL = _JSON$parse$action_ur === void 0 ? null : _JSON$parse$action_ur;
+    var settings = {};
+    try {
+      settings = JSON.parse(event.target.closest('button').dataset.settings);
+    } catch (e) {
+      // Do nothing.
+    }
+    var _settings = settings,
+      _settings$action_url = _settings.action_url,
+      actionURL = _settings$action_url === void 0 ? null : _settings$action_url,
+      _settings$source = _settings.source,
+      source = _settings$source === void 0 ? 'io-editor-image-install' : _settings$source;
     if (actionURL) {
       window.open(actionURL, '_blank');
     }
-    this.hidePromotion();
+    this.hidePromotion(null, source);
   },
   dismissPromotion: function dismissPromotion(eventName) {
     this.hidePromotion(eventName);
@@ -16102,6 +16118,7 @@ ControlMediaItemView = ControlMultipleBaseItemView.extend({
   },
   hidePromotion: function hidePromotion() {
     var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'io-editor-image-install';
     var $promotions = this.ui.promotions;
     $promotions.hide();
     if (!eventName) {
@@ -16109,7 +16126,7 @@ ControlMediaItemView = ControlMultipleBaseItemView.extend({
     }
     elementorCommon.ajax.addRequest('elementor_image_optimization_campaign', {
       data: {
-        source: 'io-editor-image-install'
+        source: source
       }
     });
 

@@ -751,7 +751,7 @@ function Header(props) {
   }, /*#__PURE__*/_react.default.createElement(TitleTag, (0, _extends2.default)({
     className: "eps-app__logo-title-wrapper"
   }, titleAttrs), /*#__PURE__*/_react.default.createElement("i", {
-    className: "eps-app__logo eicon-elementor"
+    className: "eps-app__logo eicon-elementor-circle"
   }), /*#__PURE__*/_react.default.createElement("h1", {
     className: "eps-app__title"
   }, props.title)), /*#__PURE__*/_react.default.createElement(_headerButtons.default, {
@@ -6773,6 +6773,10 @@ var importReducer = function importReducer(state, _ref) {
       return _objectSpread(_objectSpread({}, state), {}, {
         returnTo: payload
       });
+    case 'SET_NO_AUTOMATIC_REDIRECT':
+      return _objectSpread(_objectSpread({}, state), {}, {
+        noAutomaticRedirect: payload
+      });
     case 'SET_RUNNERS_STATE':
       return _objectSpread(_objectSpread({}, state), {}, {
         runnersState: _objectSpread(_objectSpread({}, state.runnersState), payload)
@@ -6815,6 +6819,7 @@ var initialState = {
   kitUploadParams: null,
   actionType: null,
   returnTo: null,
+  noAutomaticRedirect: false,
   plugins: [],
   includes: ['plugins'],
   importStatus: IMPORT_STATUS.PENDING,
@@ -7855,7 +7860,8 @@ function ImportKit() {
     fileUrl = _useQueryParams$getAl.file_url,
     actionType = _useQueryParams$getAl.action_type,
     nonce = _useQueryParams$getAl.nonce,
-    returnToParam = _useQueryParams$getAl.return_to;
+    returnToParam = _useQueryParams$getAl.return_to,
+    noAutomaticRedirectParam = _useQueryParams$getAl.no_automatic_redirect;
   var _useUploadKit = (0, _useUploadKit2.useUploadKit)(),
     uploading = _useUploadKit.uploading,
     error = _useUploadKit.error,
@@ -7960,12 +7966,18 @@ function ImportKit() {
           payload: returnToParam
         });
       }
+      if ('true' === noAutomaticRedirectParam) {
+        dispatch({
+          type: 'SET_NO_AUTOMATIC_REDIRECT',
+          payload: true
+        });
+      }
       dispatch({
         type: 'SET_IMPORT_STATUS',
         payload: _importContext.IMPORT_STATUS.UPLOADING
       });
     }
-  }, [id, referrer, fileUrl, actionType, nonce, returnToParam, dispatch]);
+  }, [id, referrer, fileUrl, actionType, nonce, returnToParam, noAutomaticRedirectParam, dispatch]);
   (0, _react.useEffect)(function () {
     _appsEventTracking.AppsEventTracking.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitImportUploadBox);
   }, []);
@@ -8089,7 +8101,7 @@ function ImportProcess() {
     if (!error) {
       if (_useImportKit2.IMPORT_PROCESSING_STATUS.DONE === status) {
         _appsEventTracking.AppsEventTracking.sendKitImportStatus(null);
-        if (attemptRedirect()) {
+        if (!data.noAutomaticRedirect && attemptRedirect()) {
           return;
         }
         navigate('import-customization/complete');
@@ -8101,7 +8113,7 @@ function ImportProcess() {
     } else {
       _appsEventTracking.AppsEventTracking.sendKitImportStatus(error);
     }
-  }, [status, error, navigate, isProcessing, attemptRedirect]);
+  }, [status, error, navigate, isProcessing, attemptRedirect, data.noAutomaticRedirect]);
   var handleTryAgain = function handleTryAgain() {
     importKit();
   };
@@ -11368,6 +11380,9 @@ var _isValidRedirectUrl = _interopRequireDefault(__webpack_require__(/*! ./is-va
 function safeRedirect(url) {
   try {
     var decodedUrl = decodeURIComponent(url);
+    if (decodedUrl.startsWith('/')) {
+      decodedUrl = window.location.origin + decodedUrl;
+    }
     if ((0, _isValidRedirectUrl.default)(decodedUrl)) {
       window.location.href = decodedUrl;
       return true;
@@ -17408,6 +17423,9 @@ exports["default"] = safeRedirect;
 var _isValidRedirectUrl = _interopRequireDefault(__webpack_require__(/*! ./is-valid-redirect-url */ "../app/modules/import-export/assets/js/shared/utils/is-valid-redirect-url.js"));
 function safeRedirect(url) {
   try {
+    if (url.startsWith('/')) {
+      url = window.location.origin + url;
+    }
     var decodedUrl = decodeURIComponent(url);
     if ((0, _isValidRedirectUrl.default)(decodedUrl)) {
       window.location.href = decodedUrl;
@@ -29216,9 +29234,9 @@ module.exports = ReactDOM;
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "vendors-node_modules_react-query_devtools_index_js") return "e459c6c89c0c0899c850.bundle.js";
-/******/ 			if (chunkId === "kit-library") return "" + chunkId + ".ab2ea8474ed4764e95c7.bundle.js";
+/******/ 			if (chunkId === "kit-library") return "" + chunkId + ".6fbef525614a7b49f293.bundle.js";
 /******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b2e8e6071c9bc14c04e4.bundle.js";
-/******/ 			if (chunkId === "onboarding") return "" + chunkId + ".8bbe239db42fe0d8d99f.bundle.js";
+/******/ 			if (chunkId === "onboarding") return "" + chunkId + ".b9c68f81fb52ea524d8b.bundle.js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

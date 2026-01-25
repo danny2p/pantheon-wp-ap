@@ -233,7 +233,7 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
     key: "revertKit",
     value: function () {
       var _revertKit = (0, _asyncToGenerator2.default)(/*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var activeKitName, confirmed, referrerKitId, _yield$this$callRever, data, _t;
+        var activeKitName, confirmed, referrerKitId, returnTo, noAutomaticRedirect, _yield$this$callRever, data, _t;
         return _regenerator.default.wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -250,7 +250,9 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
             case 2:
               _context.prev = 2;
               referrerKitId = this.getReferrerKitId();
-              this.saveToCache(referrerKitId, activeKitName);
+              returnTo = this.getReturnTo();
+              noAutomaticRedirect = this.getNoAutomaticRedirect();
+              this.saveToCache(referrerKitId, activeKitName, returnTo, noAutomaticRedirect);
               _context.next = 3;
               return this.callRevertAPI();
             case 3:
@@ -393,6 +395,10 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
   }, {
     key: "showReferrerKitDialog",
     value: function showReferrerKitDialog(referrerKitId) {
+      var _this = this;
+      var _this$getDataFromCach2 = this.getDataFromCache(),
+        returnTo = _this$getDataFromCach2.returnTo,
+        noAutomaticRedirect = _this$getDataFromCach2.noAutomaticRedirect;
       elementorCommon.dialogsManager.createWidget('confirm', {
         id: RevertKitHandler.DIALOG_ID,
         headerMessage: this.createSuccessHeaderMessage(),
@@ -402,7 +408,7 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
           cancel: __('Close', 'elementor')
         },
         onConfirm: function onConfirm() {
-          location.href = elementorImportExport.appUrl + '/preview/' + referrerKitId;
+          location.href = _this.buildPreviewUrl(referrerKitId, returnTo, noAutomaticRedirect);
         },
         onCancel: function onCancel() {
           location.reload();
@@ -411,10 +417,23 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
       this.clearCache();
     }
   }, {
+    key: "buildPreviewUrl",
+    value: function buildPreviewUrl(referrerKitId, returnTo, noAutomaticRedirect) {
+      var baseUrl = elementorImportExport.appUrl + '/preview/' + referrerKitId;
+      var url = new URL(baseUrl);
+      if (returnTo) {
+        url.searchParams.append(RevertKitHandler.URL_PARAM_RETURN_TO, returnTo);
+      }
+      if (noAutomaticRedirect) {
+        url.searchParams.append(RevertKitHandler.URL_PARAM_NO_AUTOMATIC_REDIRECT, noAutomaticRedirect);
+      }
+      return url.toString();
+    }
+  }, {
     key: "maybeShowReferrerKitDialog",
     value: function maybeShowReferrerKitDialog() {
-      var _this$getDataFromCach2 = this.getDataFromCache(),
-        referrerKitId = _this$getDataFromCach2.referrerKitId;
+      var _this$getDataFromCach3 = this.getDataFromCache(),
+        referrerKitId = _this$getDataFromCach3.referrerKitId;
       if (undefined === referrerKitId) {
         return;
       }
@@ -463,11 +482,25 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
       return new URL(this.revertButton.href).searchParams.get(RevertKitHandler.URL_PARAM_REFERRER_KIT) || '';
     }
   }, {
+    key: "getReturnTo",
+    value: function getReturnTo() {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(RevertKitHandler.URL_PARAM_RETURN_TO) || '';
+    }
+  }, {
+    key: "getNoAutomaticRedirect",
+    value: function getNoAutomaticRedirect() {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(RevertKitHandler.URL_PARAM_NO_AUTOMATIC_REDIRECT) || '';
+    }
+  }, {
     key: "saveToCache",
-    value: function saveToCache(referrerKitId, activeKitName) {
+    value: function saveToCache(referrerKitId, activeKitName, returnTo, noAutomaticRedirect) {
       sessionStorage.setItem(RevertKitHandler.KIT_DATA_KEY, JSON.stringify({
         referrerKitId: referrerKitId || '',
-        activeKitName: activeKitName || ''
+        activeKitName: activeKitName || '',
+        returnTo: returnTo || '',
+        noAutomaticRedirect: noAutomaticRedirect || ''
       }));
     }
   }, {
@@ -496,6 +529,8 @@ var RevertKitHandler = exports.RevertKitHandler = /*#__PURE__*/function () {
 (0, _defineProperty2.default)(RevertKitHandler, "API_PATH", 'revert');
 (0, _defineProperty2.default)(RevertKitHandler, "DIALOG_ID", 'e-revert-kit-deleted-dialog');
 (0, _defineProperty2.default)(RevertKitHandler, "URL_PARAM_REFERRER_KIT", 'referrer_kit');
+(0, _defineProperty2.default)(RevertKitHandler, "URL_PARAM_RETURN_TO", 'return_to');
+(0, _defineProperty2.default)(RevertKitHandler, "URL_PARAM_NO_AUTOMATIC_REDIRECT", 'no_automatic_redirect');
 (0, _defineProperty2.default)(RevertKitHandler, "KIT_DATA_KEY", 'elementor-kit-data');
 (0, _defineProperty2.default)(RevertKitHandler, "NAME_SEPARATOR_PATTERN", /[-_]+/);
 

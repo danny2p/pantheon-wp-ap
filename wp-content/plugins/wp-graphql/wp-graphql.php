@@ -2,12 +2,10 @@
 /**
  * Plugin Name: WPGraphQL
  * Plugin URI: https://github.com/wp-graphql/wp-graphql
- * GitHub Plugin URI: https://github.com/wp-graphql/wp-graphql
- * Release Asset: true
  * Description: GraphQL API for WordPress
  * Author: WPGraphQL
  * Author URI: http://www.wpgraphql.com
- * Version: 2.6.0
+ * Version: 2.7.0
  * Text Domain: wp-graphql
  * Domain Path: /languages/
  * Requires at least: 6.0
@@ -19,7 +17,7 @@
  * @package  WPGraphQL
  * @category Core
  * @author   WPGraphQL
- * @version  2.6.0
+ * @version  2.7.0
  */
 
 // Exit if accessed directly.
@@ -151,10 +149,6 @@ function graphql_cannot_load_admin_notice_callback(): void {
 		'</div>',
 		esc_html__( 'WPGraphQL appears to have been installed without it\'s dependencies. It will not work properly until dependencies are installed. This likely means you have cloned WPGraphQL from Github and need to run the command `composer install`.', 'wp-graphql' )
 	);
-}
-
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once plugin_dir_path( __FILE__ ) . 'cli/wp-cli.php';
 }
 
 /**

@@ -194,11 +194,14 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 var EXCLUDED_SELECTORS = {
   ADMIN_MENU: '#adminmenu',
   TOP_BAR: '.e-admin-top-bar',
+  TOP_BAR_EDITOR_ONE: '#editor-one-top-bar',
   WP_ADMIN_BAR: '#wpadminbar',
   SUBMENU: '.wp-submenu',
   PROMO_PAGE: '.e-feature-promotion',
   PROMO_BLANK_STATE: '.elementor-blank_state',
-  APP: '.e-app'
+  APP: '.e-app',
+  SIDEBAR_NAVIGATION: '#editor-one-sidebar-navigation',
+  FLYOUT_MENU: '.elementor-submenu-flyout'
 };
 var ActionControlTracking = /*#__PURE__*/function (_BaseTracking) {
   function ActionControlTracking() {
@@ -313,6 +316,11 @@ var ActionControlTracking = /*#__PURE__*/function (_BaseTracking) {
         if (!base) {
           return;
         }
+        var toggle = base.closest('.elementor-role-toggle');
+        if (toggle && !_this2.isExcludedElement(toggle)) {
+          _this2.trackControl(toggle, _wpDashboardTracking.CONTROL_TYPES.TOGGLE);
+          return;
+        }
         var button = base.closest('button, input[type="submit"], input[type="button"], .button, .e-btn');
         if (button && !_this2.isExcludedElement(button)) {
           if (FILTER_BUTTON_IDS.includes(button.id)) {
@@ -335,7 +343,12 @@ var ActionControlTracking = /*#__PURE__*/function (_BaseTracking) {
         if (!base) {
           return;
         }
-        var toggle = base.closest('.components-toggle-control');
+        var toggle = null;
+        if (_wpDashboardTracking.default.isEditorOneActive()) {
+          toggle = base.closest('.MuiSwitch-switchBase');
+        } else {
+          toggle = base.closest('.components-toggle-control');
+        }
         if (toggle && !_this2.isExcludedElement(toggle)) {
           _this2.trackControl(toggle, _wpDashboardTracking.CONTROL_TYPES.TOGGLE);
           return;
@@ -671,11 +684,13 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 var ELEMENTOR_MENU_SELECTORS = {
   ELEMENTOR_TOP_LEVEL: 'li#toplevel_page_elementor',
   TEMPLATES_TOP_LEVEL: 'li#menu-posts-elementor_library',
+  ELEMENTOR_HOME_TOP_LEVEL: 'li#toplevel_page_elementor-home',
   ADMIN_MENU: '#adminmenu',
   TOP_LEVEL_LINK: '.wp-menu-name',
   SUBMENU_CONTAINER: '.wp-submenu',
   SUBMENU_ITEM: '.wp-submenu li a',
-  SUBMENU_ITEM_TOP_LEVEL: '.wp-has-submenu'
+  SUBMENU_ITEM_TOP_LEVEL: '.wp-has-submenu',
+  SIDEBAR_NAVIGATION: '#editor-one-sidebar-navigation'
 };
 var NavigationTracking = /*#__PURE__*/function (_BaseTracking) {
   function NavigationTracking() {
@@ -686,17 +701,13 @@ var NavigationTracking = /*#__PURE__*/function (_BaseTracking) {
   return (0, _createClass2.default)(NavigationTracking, null, [{
     key: "init",
     value: function init() {
-      this.attachElementorMenuTracking();
-      this.attachTemplatesMenuTracking();
-    }
-  }, {
-    key: "attachElementorMenuTracking",
-    value: function attachElementorMenuTracking() {
-      var elementorMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.ELEMENTOR_TOP_LEVEL);
-      if (!elementorMenu) {
-        return;
+      if (_wpDashboardTracking.default.isEditorOneActive()) {
+        this.attachSidebarNavigationTracking();
+        this.attachElementorHomeMenuTracking();
+      } else {
+        this.attachElementorMenuTracking();
+        this.attachTemplatesMenuTracking();
       }
-      this.attachMenuTracking(elementorMenu, 'Elementor');
     }
   }, {
     key: "attachTemplatesMenuTracking",
@@ -708,11 +719,47 @@ var NavigationTracking = /*#__PURE__*/function (_BaseTracking) {
       this.attachMenuTracking(templatesMenu, 'Templates');
     }
   }, {
+    key: "attachElementorHomeMenuTracking",
+    value: function attachElementorHomeMenuTracking() {
+      var elementorHomeMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.ELEMENTOR_HOME_TOP_LEVEL);
+      if (!elementorHomeMenu) {
+        return;
+      }
+      this.attachMenuTracking(elementorHomeMenu, 'Elementor');
+    }
+  }, {
+    key: "attachElementorMenuTracking",
+    value: function attachElementorMenuTracking() {
+      var elementorMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.ELEMENTOR_TOP_LEVEL);
+      if (!elementorMenu) {
+        return;
+      }
+      this.attachMenuTracking(elementorMenu, 'Elementor');
+    }
+  }, {
+    key: "attachSidebarNavigationTracking",
+    value: function attachSidebarNavigationTracking() {
+      var sidebar = document.querySelector(ELEMENTOR_MENU_SELECTORS.SIDEBAR_NAVIGATION);
+      if (sidebar) {
+        this.attachSidebarClickListener(sidebar);
+      }
+    }
+  }, {
+    key: "attachSidebarClickListener",
+    value: function attachSidebarClickListener(sidebar) {
+      var _this = this;
+      this.addEventListenerTracked(sidebar, 'click', function (event) {
+        _this.handleSidebarClick(event);
+      }, {
+        capture: true
+      });
+    }
+  }, {
     key: "attachMenuTracking",
     value: function attachMenuTracking(menuElement, menuName) {
-      var _this = this;
+      var _this2 = this;
       this.addEventListenerTracked(menuElement, 'click', function (event) {
-        _this.handleMenuClick(event, menuName);
+        _this2.handleMenuClick(event, menuName);
       });
     }
   }, {
@@ -728,6 +775,43 @@ var NavigationTracking = /*#__PURE__*/function (_BaseTracking) {
       _wpDashboardTracking.default.trackNavClicked(itemId, isTopLevel ? null : menuName, area);
     }
   }, {
+    key: "handleSidebarClick",
+    value: function handleSidebarClick(event) {
+      var clickedElement = event.target.closest('a, button, [role="button"]');
+      if (!clickedElement) {
+        return;
+      }
+      var itemId = this.extractSidebarItemId(clickedElement);
+      _wpDashboardTracking.default.trackNavClicked(itemId, null, _wpDashboardTracking.NAV_AREAS.SIDEBAR_MENU);
+    }
+  }, {
+    key: "extractSidebarItemId",
+    value: function extractSidebarItemId(element) {
+      var paragraph = element.querySelector('p');
+      if (paragraph) {
+        return paragraph.textContent.trim();
+      }
+      var textContent = element.textContent.trim();
+      if (textContent) {
+        return textContent;
+      }
+      return 'unknown';
+    }
+  }, {
+    key: "extractPageFromUrl",
+    value: function extractPageFromUrl(href) {
+      var urlParams = new URLSearchParams(href.split('?')[1] || '');
+      var page = urlParams.get('page');
+      if (page) {
+        return page;
+      }
+      var postType = urlParams.get('post_type');
+      if (postType) {
+        return postType;
+      }
+      return 'unknown';
+    }
+  }, {
     key: "extractItemId",
     value: function extractItemId(link) {
       var textContent = link.textContent.trim();
@@ -736,19 +820,11 @@ var NavigationTracking = /*#__PURE__*/function (_BaseTracking) {
       }
       var href = link.getAttribute('href');
       if (href) {
-        var urlParams = new URLSearchParams(href.split('?')[1] || '');
-        var page = urlParams.get('page');
-        var postType = urlParams.get('post_type');
-        if (page) {
-          return page;
-        }
-        if (postType) {
-          return postType;
-        }
+        return this.extractPageFromUrl(href);
       }
-      var id = link.getAttribute('id');
-      if (id) {
-        return id;
+      var linkId = link.getAttribute('id');
+      if (linkId) {
+        return linkId;
       }
       return 'unknown';
     }
@@ -1566,9 +1642,9 @@ var _navigation = _interopRequireDefault(__webpack_require__(/*! ./dashboard/nav
 var _pluginActions = _interopRequireDefault(__webpack_require__(/*! ./dashboard/plugin-actions */ "../app/assets/js/event-track/dashboard/plugin-actions.js"));
 var _promotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/promotion */ "../app/assets/js/event-track/dashboard/promotion.js"));
 var _screenView = _interopRequireDefault(__webpack_require__(/*! ./dashboard/screen-view */ "../app/assets/js/event-track/dashboard/screen-view.js"));
-var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 var _menuPromotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/menu-promotion */ "../app/assets/js/event-track/dashboard/menu-promotion.js"));
 var _actionControls = _interopRequireDefault(__webpack_require__(/*! ./dashboard/action-controls */ "../app/assets/js/event-track/dashboard/action-controls.js"));
+var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 var SESSION_TIMEOUT_MINUTES = 30;
 var MINUTE_MS = 60 * 1000;
 var SESSION_TIMEOUT = SESSION_TIMEOUT_MINUTES * MINUTE_MS;
@@ -1588,7 +1664,8 @@ var NAV_AREAS = exports.NAV_AREAS = {
   LEFT_MENU: 'left_menu',
   SUBMENU: 'submenu',
   HOVER_MENU: 'hover_menu',
-  TOP_BAR: 'top_bar'
+  TOP_BAR: 'top_bar',
+  SIDEBAR_MENU: 'sidebar'
 };
 var SCREEN_TYPES = exports.SCREEN_TYPES = {
   TAB: 'tab',
@@ -1630,6 +1707,12 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
       }
       this.processPendingNavClick();
       this.saveSessionToStorage();
+    }
+  }, {
+    key: "isEditorOneActive",
+    value: function isEditorOneActive() {
+      var _elementorCommon$conf, _elementorCommon;
+      return (_elementorCommon$conf = (_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.config) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.editor_events) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.isEditorOneActive) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
     }
   }, {
     key: "processPendingNavClick",
@@ -1685,14 +1768,14 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
   }, {
     key: "isEventsManagerAvailable",
     value: function isEventsManagerAvailable() {
-      var _elementorCommon;
-      return ((_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.eventsManager) && 'function' === typeof elementorCommon.eventsManager.dispatchEvent;
+      var _elementorCommon2;
+      return ((_elementorCommon2 = elementorCommon) === null || _elementorCommon2 === void 0 ? void 0 : _elementorCommon2.eventsManager) && 'function' === typeof elementorCommon.eventsManager.dispatchEvent;
     }
   }, {
     key: "canSendEvents",
     value: function canSendEvents() {
-      var _elementorCommon2;
-      return ((_elementorCommon2 = elementorCommon) === null || _elementorCommon2 === void 0 || (_elementorCommon2 = _elementorCommon2.config) === null || _elementorCommon2 === void 0 || (_elementorCommon2 = _elementorCommon2.editor_events) === null || _elementorCommon2 === void 0 ? void 0 : _elementorCommon2.can_send_events) || false;
+      var _elementorCommon3;
+      return ((_elementorCommon3 = elementorCommon) === null || _elementorCommon3 === void 0 || (_elementorCommon3 = _elementorCommon3.config) === null || _elementorCommon3 === void 0 || (_elementorCommon3 = _elementorCommon3.editor_events) === null || _elementorCommon3 === void 0 ? void 0 : _elementorCommon3.can_send_events) || false;
     }
   }, {
     key: "dispatchEvent",
@@ -1790,6 +1873,10 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
           } else if (_this2.isElementorPage(link.href)) {
             _this2.isNavigatingToElementor = true;
           }
+        }
+        var isSidebar = event.target.closest('#editor-one-sidebar-navigation');
+        if (isSidebar) {
+          _this2.isNavigatingToElementor = true;
         }
       };
       var handleFormSubmit = function handleFormSubmit(event) {
@@ -1932,11 +2019,13 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
         document.removeEventListener(type, handler, true);
       });
       this.navigationListeners = [];
-      _topBar.default.destroy();
       _screenView.default.destroy();
       _promotion.default.destroy();
       _menuPromotion.default.destroy();
       _actionControls.default.destroy();
+      if (!WpDashboardTracking.isEditorOneActive()) {
+        _topBar.default.destroy();
+      }
       this.initialized = false;
     }
   }]);
@@ -1959,11 +2048,13 @@ window.addEventListener('elementor/admin/init', function () {
   _navigation.default.init();
   if (isElementorPage) {
     WpDashboardTracking.init();
-    _topBar.default.init();
     _screenView.default.init();
     _promotion.default.init();
     _menuPromotion.default.init();
     _actionControls.default.init();
+    if (!WpDashboardTracking.isEditorOneActive()) {
+      _topBar.default.init();
+    }
   }
 });
 window.addEventListener('beforeunload', function () {

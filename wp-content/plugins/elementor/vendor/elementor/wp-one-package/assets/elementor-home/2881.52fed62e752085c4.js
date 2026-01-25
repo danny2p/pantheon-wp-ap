@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([["2881"],{72676:function(o){o.exports=JSON.parse('{"copyClipboard":"Copy to clipboard","copyClipboardSuccess":"Copied!","noDataToDisplay":"No data to display","search":"Search","sort":"Sort","pagination":{"rowsPerPage":"Rows per page:","displayedRows":"{from}-{to} of {count}"}}')}}]);
