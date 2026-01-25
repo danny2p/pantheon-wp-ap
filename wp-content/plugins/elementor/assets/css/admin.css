@@ -1530,23 +1530,19 @@ fieldset:disabled a.e-button {
 }
 .e-notice__icon-wrapper {
   display: inline-block;
-  font-size: 0.625rem;
+  font-size: 1.5rem;
   max-height: 1.5rem;
   width: 1.5rem;
   line-height: 1.5rem;
+  color: var(--e-notice-context-color);
   border-radius: 100px;
-  background: var(--e-notice-context-color);
-  color: #fff;
-  text-shadow: 0 0 3px var(--e-notice-context-color-dark), 0 0 1px var(--e-notice-context-color-dark), 0 0 1px var(--e-notice-context-color-dark);
 }
 .e-notice__content {
   padding: 20px;
 }
 .e-notice__actions {
   display: flex;
-}
-.e-notice__actions > * + * {
-  margin-inline-start: 8px;
+  gap: 8px;
 }
 .e-notice__dismiss {
   width: 20px;
@@ -2148,6 +2144,13 @@ fieldset:disabled a.e-button {
 .tab-import-export-kit__container:not(:first-child) {
   margin-block-start: 5px;
 }
+.tab-import-export-kit__container.e-editor-one {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+.tab-import-export-kit__container.e-editor-one:not(:first-child) {
+  margin-block-start: 20px;
+}
 .tab-import-export-kit__container p {
   font-size: 16px;
   margin: 20px 0 25px;
@@ -2491,6 +2494,15 @@ fieldset:disabled a.e-button {
   color: #3f444b;
   margin-block-end: 2px;
 }
+#elementor-role-manager .elementor-role-row.e-editor-one {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-block-end: 20px;
+  border-radius: 8px;
+}
+#elementor-role-manager .elementor-role-row.e-editor-one .elementor-role-controls {
+  border-end-start-radius: 8px;
+  border-end-end-radius: 8px;
+}
 #elementor-role-manager .elementor-role-row .elementor-role-label {
   display: flex;
   padding: 15px 20px;
@@ -2510,6 +2522,7 @@ fieldset:disabled a.e-button {
 #elementor-role-manager .elementor-role-row .elementor-role-controls {
   background-color: #F9FAFA;
   padding: 20px 20px 5px;
+  transition: all 0.3s ease-in-out;
 }
 #elementor-role-manager .elementor-role-row .elementor-role-controls > div {
   margin-block-end: 15px;
@@ -2638,6 +2651,10 @@ fieldset:disabled a.e-button {
 .e-experiment__title__tag__deprecated {
   background: #e66;
   color: white;
+}
+.e-experiment__title__tag.e-editor-one {
+  background: #EBEBEB;
+  color: #3F444B;
 }
 .e-experiment__table-title {
   margin: 30px 0;

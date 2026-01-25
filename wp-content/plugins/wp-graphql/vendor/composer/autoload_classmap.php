@@ -257,6 +257,7 @@ return array(
     'WPGraphQL\\Admin\\Updates\\Updates' => $baseDir . '/src/Admin/Updates/Updates.php',
     'WPGraphQL\\Admin\\Updates\\UpdatesScreenLoader' => $baseDir . '/src/Admin/Updates/UpdatesScreenLoader.php',
     'WPGraphQL\\AppContext' => $baseDir . '/src/AppContext.php',
+    'WPGraphQL\\CLI\\Commands' => $baseDir . '/src/CLI/Commands.php',
     'WPGraphQL\\Connection\\Comments' => $baseDir . '/deprecated/Comments.php',
     'WPGraphQL\\Connection\\MenuItems' => $baseDir . '/deprecated/MenuItems.php',
     'WPGraphQL\\Connection\\PostObjects' => $baseDir . '/deprecated/PostObjects.php',
@@ -472,4 +473,5 @@ return array(
     'WPGraphQL\\Utils\\Tracing' => $baseDir . '/src/Utils/Tracing.php',
     'WPGraphQL\\Utils\\Utils' => $baseDir . '/src/Utils/Utils.php',
     'WPGraphQL\\WPSchema' => $baseDir . '/src/WPSchema.php',
+    'WPGraphQL_CLI_Command' => $baseDir . '/deprecated/wp-cli.php',
 );

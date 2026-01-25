@@ -148,11 +148,14 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 const EXCLUDED_SELECTORS = {
   ADMIN_MENU: '#adminmenu',
   TOP_BAR: '.e-admin-top-bar',
+  TOP_BAR_EDITOR_ONE: '#editor-one-top-bar',
   WP_ADMIN_BAR: '#wpadminbar',
   SUBMENU: '.wp-submenu',
   PROMO_PAGE: '.e-feature-promotion',
   PROMO_BLANK_STATE: '.elementor-blank_state',
-  APP: '.e-app'
+  APP: '.e-app',
+  SIDEBAR_NAVIGATION: '#editor-one-sidebar-navigation',
+  FLYOUT_MENU: '.elementor-submenu-flyout'
 };
 class ActionControlTracking extends _baseTracking.default {
   static init() {
@@ -248,6 +251,11 @@ class ActionControlTracking extends _baseTracking.default {
       if (!base) {
         return;
       }
+      const toggle = base.closest('.elementor-role-toggle');
+      if (toggle && !this.isExcludedElement(toggle)) {
+        this.trackControl(toggle, _wpDashboardTracking.CONTROL_TYPES.TOGGLE);
+        return;
+      }
       const button = base.closest('button, input[type="submit"], input[type="button"], .button, .e-btn');
       if (button && !this.isExcludedElement(button)) {
         if (FILTER_BUTTON_IDS.includes(button.id)) {
@@ -269,7 +277,12 @@ class ActionControlTracking extends _baseTracking.default {
       if (!base) {
         return;
       }
-      const toggle = base.closest('.components-toggle-control');
+      let toggle = null;
+      if (_wpDashboardTracking.default.isEditorOneActive()) {
+        toggle = base.closest('.MuiSwitch-switchBase');
+      } else {
+        toggle = base.closest('.components-toggle-control');
+      }
       if (toggle && !this.isExcludedElement(toggle)) {
         this.trackControl(toggle, _wpDashboardTracking.CONTROL_TYPES.TOGGLE);
         return;
@@ -540,16 +553,37 @@ function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r
 const ELEMENTOR_MENU_SELECTORS = {
   ELEMENTOR_TOP_LEVEL: 'li#toplevel_page_elementor',
   TEMPLATES_TOP_LEVEL: 'li#menu-posts-elementor_library',
+  ELEMENTOR_HOME_TOP_LEVEL: 'li#toplevel_page_elementor-home',
   ADMIN_MENU: '#adminmenu',
   TOP_LEVEL_LINK: '.wp-menu-name',
   SUBMENU_CONTAINER: '.wp-submenu',
   SUBMENU_ITEM: '.wp-submenu li a',
-  SUBMENU_ITEM_TOP_LEVEL: '.wp-has-submenu'
+  SUBMENU_ITEM_TOP_LEVEL: '.wp-has-submenu',
+  SIDEBAR_NAVIGATION: '#editor-one-sidebar-navigation'
 };
 class NavigationTracking extends _baseTracking.default {
   static init() {
-    this.attachElementorMenuTracking();
-    this.attachTemplatesMenuTracking();
+    if (_wpDashboardTracking.default.isEditorOneActive()) {
+      this.attachSidebarNavigationTracking();
+      this.attachElementorHomeMenuTracking();
+    } else {
+      this.attachElementorMenuTracking();
+      this.attachTemplatesMenuTracking();
+    }
+  }
+  static attachTemplatesMenuTracking() {
+    const templatesMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.TEMPLATES_TOP_LEVEL);
+    if (!templatesMenu) {
+      return;
+    }
+    this.attachMenuTracking(templatesMenu, 'Templates');
+  }
+  static attachElementorHomeMenuTracking() {
+    const elementorHomeMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.ELEMENTOR_HOME_TOP_LEVEL);
+    if (!elementorHomeMenu) {
+      return;
+    }
+    this.attachMenuTracking(elementorHomeMenu, 'Elementor');
   }
   static attachElementorMenuTracking() {
     const elementorMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.ELEMENTOR_TOP_LEVEL);
@@ -558,12 +592,18 @@ class NavigationTracking extends _baseTracking.default {
     }
     this.attachMenuTracking(elementorMenu, 'Elementor');
   }
-  static attachTemplatesMenuTracking() {
-    const templatesMenu = document.querySelector(ELEMENTOR_MENU_SELECTORS.TEMPLATES_TOP_LEVEL);
-    if (!templatesMenu) {
-      return;
+  static attachSidebarNavigationTracking() {
+    const sidebar = document.querySelector(ELEMENTOR_MENU_SELECTORS.SIDEBAR_NAVIGATION);
+    if (sidebar) {
+      this.attachSidebarClickListener(sidebar);
     }
-    this.attachMenuTracking(templatesMenu, 'Templates');
+  }
+  static attachSidebarClickListener(sidebar) {
+    this.addEventListenerTracked(sidebar, 'click', event => {
+      this.handleSidebarClick(event);
+    }, {
+      capture: true
+    });
   }
   static attachMenuTracking(menuElement, menuName) {
     this.addEventListenerTracked(menuElement, 'click', event => {
@@ -580,6 +620,37 @@ class NavigationTracking extends _baseTracking.default {
     const area = this.determineNavArea(link);
     _wpDashboardTracking.default.trackNavClicked(itemId, isTopLevel ? null : menuName, area);
   }
+  static handleSidebarClick(event) {
+    const clickedElement = event.target.closest('a, button, [role="button"]');
+    if (!clickedElement) {
+      return;
+    }
+    const itemId = this.extractSidebarItemId(clickedElement);
+    _wpDashboardTracking.default.trackNavClicked(itemId, null, _wpDashboardTracking.NAV_AREAS.SIDEBAR_MENU);
+  }
+  static extractSidebarItemId(element) {
+    const paragraph = element.querySelector('p');
+    if (paragraph) {
+      return paragraph.textContent.trim();
+    }
+    const textContent = element.textContent.trim();
+    if (textContent) {
+      return textContent;
+    }
+    return 'unknown';
+  }
+  static extractPageFromUrl(href) {
+    const urlParams = new URLSearchParams(href.split('?')[1] || '');
+    const page = urlParams.get('page');
+    if (page) {
+      return page;
+    }
+    const postType = urlParams.get('post_type');
+    if (postType) {
+      return postType;
+    }
+    return 'unknown';
+  }
   static extractItemId(link) {
     const textContent = link.textContent.trim();
     if (textContent) {
@@ -587,19 +658,11 @@ class NavigationTracking extends _baseTracking.default {
     }
     const href = link.getAttribute('href');
     if (href) {
-      const urlParams = new URLSearchParams(href.split('?')[1] || '');
-      const page = urlParams.get('page');
-      const postType = urlParams.get('post_type');
-      if (page) {
-        return page;
-      }
-      if (postType) {
-        return postType;
-      }
+      return this.extractPageFromUrl(href);
     }
-    const id = link.getAttribute('id');
-    if (id) {
-      return id;
+    const linkId = link.getAttribute('id');
+    if (linkId) {
+      return linkId;
     }
     return 'unknown';
   }
@@ -1258,9 +1321,9 @@ var _navigation = _interopRequireDefault(__webpack_require__(/*! ./dashboard/nav
 var _pluginActions = _interopRequireDefault(__webpack_require__(/*! ./dashboard/plugin-actions */ "../app/assets/js/event-track/dashboard/plugin-actions.js"));
 var _promotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/promotion */ "../app/assets/js/event-track/dashboard/promotion.js"));
 var _screenView = _interopRequireDefault(__webpack_require__(/*! ./dashboard/screen-view */ "../app/assets/js/event-track/dashboard/screen-view.js"));
-var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 var _menuPromotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/menu-promotion */ "../app/assets/js/event-track/dashboard/menu-promotion.js"));
 var _actionControls = _interopRequireDefault(__webpack_require__(/*! ./dashboard/action-controls */ "../app/assets/js/event-track/dashboard/action-controls.js"));
+var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 const SESSION_TIMEOUT_MINUTES = 30;
 const MINUTE_MS = 60 * 1000;
 const SESSION_TIMEOUT = SESSION_TIMEOUT_MINUTES * MINUTE_MS;
@@ -1280,7 +1343,8 @@ const NAV_AREAS = exports.NAV_AREAS = {
   LEFT_MENU: 'left_menu',
   SUBMENU: 'submenu',
   HOVER_MENU: 'hover_menu',
-  TOP_BAR: 'top_bar'
+  TOP_BAR: 'top_bar',
+  SIDEBAR_MENU: 'sidebar'
 };
 const SCREEN_TYPES = exports.SCREEN_TYPES = {
   TAB: 'tab',
@@ -1323,6 +1387,9 @@ class WpDashboardTracking {
     }
     this.processPendingNavClick();
     this.saveSessionToStorage();
+  }
+  static isEditorOneActive() {
+    return elementorCommon?.config?.editor_events?.isEditorOneActive ?? false;
   }
   static processPendingNavClick() {
     try {
@@ -1449,6 +1516,10 @@ class WpDashboardTracking {
           this.isNavigatingToElementor = true;
         }
       }
+      const isSidebar = event.target.closest('#editor-one-sidebar-navigation');
+      if (isSidebar) {
+        this.isNavigatingToElementor = true;
+      }
     };
     const handleFormSubmit = event => {
       const form = event.target;
@@ -1568,11 +1639,13 @@ class WpDashboardTracking {
       document.removeEventListener(type, handler, true);
     });
     this.navigationListeners = [];
-    _topBar.default.destroy();
     _screenView.default.destroy();
     _promotion.default.destroy();
     _menuPromotion.default.destroy();
     _actionControls.default.destroy();
+    if (!WpDashboardTracking.isEditorOneActive()) {
+      _topBar.default.destroy();
+    }
     this.initialized = false;
   }
 }
@@ -1587,11 +1660,13 @@ window.addEventListener('elementor/admin/init', () => {
   _navigation.default.init();
   if (isElementorPage) {
     WpDashboardTracking.init();
-    _topBar.default.init();
     _screenView.default.init();
     _promotion.default.init();
     _menuPromotion.default.init();
     _actionControls.default.init();
+    if (!WpDashboardTracking.isEditorOneActive()) {
+      _topBar.default.init();
+    }
   }
 });
 window.addEventListener('beforeunload', () => {
