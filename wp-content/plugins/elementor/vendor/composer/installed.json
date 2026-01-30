@@ -36,17 +36,17 @@
         },
         {
             "name": "elementor/wp-one-package",
-            "version": "1.0.46",
-            "version_normalized": "1.0.46.0",
+            "version": "1.0.47",
+            "version_normalized": "1.0.47.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:elementor/wp-one-package.git",
-                "reference": "744191f07ac0dcb266dc4a9ee49bb12616a53bb8"
+                "reference": "79b558c889e20b2dfd7aaff33ddf902746a9aac8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.elementor.com/download/elementor/wp-one-package/1.0.46",
-                "reference": "744191f07ac0dcb266dc4a9ee49bb12616a53bb8",
+                "url": "https://composer.elementor.com/download/elementor/wp-one-package/1.0.47",
+                "reference": "79b558c889e20b2dfd7aaff33ddf902746a9aac8",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "wp-coding-standards/wpcs": "^3.1.0",
                 "yoast/phpunit-polyfills": "^2.0"
             },
-            "time": "2026-01-15T15:47:17+00:00",
+            "time": "2026-01-28T11:16:24+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -77,7 +77,7 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/elementor/wp-one-package/tree/1.0.46"
+                "source": "https://github.com/elementor/wp-one-package/tree/1.0.47"
             },
             "install-path": "../elementor/wp-one-package"
         }

@@ -194,7 +194,8 @@ var AppsEventTracking = exports.AppsEventTracking = /*#__PURE__*/function () {
   return (0, _createClass2.default)(AppsEventTracking, null, [{
     key: "dispatchEvent",
     value: function dispatchEvent(eventName, payload) {
-      return elementorCommon.eventsManager.dispatchEvent(eventName, payload);
+      var _window$elementorComm, _window$elementorComm2;
+      return (_window$elementorComm = window.elementorCommon) === null || _window$elementorComm === void 0 || (_window$elementorComm = _window$elementorComm.eventsManager) === null || _window$elementorComm === void 0 || (_window$elementorComm2 = _window$elementorComm.dispatchEvent) === null || _window$elementorComm2 === void 0 ? void 0 : _window$elementorComm2.call(_window$elementorComm, eventName, payload);
     }
   }, {
     key: "sendPageViewsWebsiteTemplates",
@@ -18406,7 +18407,7 @@ var Onboarding = exports["default"] = /*#__PURE__*/(0, _createClass2.default)(fu
   _router.default.addRoute({
     path: '/onboarding/*',
     component: React.lazy(function () {
-      return Promise.all(/*! import() | onboarding */[__webpack_require__.e("app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js"), __webpack_require__.e("onboarding")]).then(__webpack_require__.bind(__webpack_require__, /*! ./app */ "../app/modules/onboarding/assets/js/app.js"));
+      return Promise.all(/*! import() | onboarding */[__webpack_require__.e("vendors-node_modules_mixpanel-browser_dist_mixpanel_module_js"), __webpack_require__.e("app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js"), __webpack_require__.e("onboarding")]).then(__webpack_require__.bind(__webpack_require__, /*! ./app */ "../app/modules/onboarding/assets/js/app.js"));
     })
   });
 });
@@ -29234,9 +29235,10 @@ module.exports = ReactDOM;
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "vendors-node_modules_react-query_devtools_index_js") return "e459c6c89c0c0899c850.bundle.js";
-/******/ 			if (chunkId === "kit-library") return "" + chunkId + ".6fbef525614a7b49f293.bundle.js";
-/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b2e8e6071c9bc14c04e4.bundle.js";
-/******/ 			if (chunkId === "onboarding") return "" + chunkId + ".b9c68f81fb52ea524d8b.bundle.js";
+/******/ 			if (chunkId === "kit-library") return "" + chunkId + ".9c4bbee79edf32c6fcb3.bundle.js";
+/******/ 			if (chunkId === "vendors-node_modules_mixpanel-browser_dist_mixpanel_module_js") return "e4d209bf3a704ff88e1a.bundle.js";
+/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b423d91809cf7e0cb8b0.bundle.js";
+/******/ 			if (chunkId === "onboarding") return "" + chunkId + ".63cdf72a450944ebd5f7.bundle.js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

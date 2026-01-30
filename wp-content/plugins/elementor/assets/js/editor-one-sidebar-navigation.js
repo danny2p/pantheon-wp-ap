@@ -1155,17 +1155,19 @@ var _default = exports["default"] = SidebarMenuItem;
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
 var _element = __webpack_require__(/*! @wordpress/element */ "../node_modules/@wordpress/element/build-module/index.js");
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 var _menuActiveStateResolver = _interopRequireDefault(__webpack_require__(/*! ../../classes/menu-active-state-resolver */ "../modules/editor-one/assets/js/sidebar-navigation/classes/menu-active-state-resolver.js"));
 var _sidebarMenuItem = _interopRequireDefault(__webpack_require__(/*! ./sidebar-menu-item */ "../modules/editor-one/assets/js/sidebar-navigation/components/menu/sidebar-menu-item.js"));
 var _shared = __webpack_require__(/*! ../shared */ "../modules/editor-one/assets/js/sidebar-navigation/components/shared/index.js");
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 var SidebarMenu = function SidebarMenu(_ref) {
   var menuItems = _ref.menuItems,
     level4Groups = _ref.level4Groups,
@@ -1185,18 +1187,17 @@ var SidebarMenu = function SidebarMenu(_ref) {
     return group.items;
   };
   return /*#__PURE__*/_react.default.createElement(_shared.MenuList, null, menuItems.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, item.has_divider_before && /*#__PURE__*/_react.default.createElement(_ui.Divider, {
-      key: "divider-".concat(item.slug),
+    return /*#__PURE__*/_react.default.createElement(_react.Fragment, {
+      key: item.slug
+    }, item.has_divider_before && /*#__PURE__*/_react.default.createElement(_ui.Divider, {
       sx: {
         my: 1
       }
     }), /*#__PURE__*/_react.default.createElement(_sidebarMenuItem.default, {
-      key: item.slug,
       item: item,
       isActive: activeStateResolver.isMenuActive(item),
-      children: getChildren(item),
       activeChildSlug: activeChildSlug
-    }));
+    }, getChildren(item)));
   }));
 };
 SidebarMenu.propTypes = {

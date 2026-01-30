@@ -1516,6 +1516,11 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
     (0, _classCallCheck2.default)(this, WpDashboardTracking);
   }
   return (0, _createClass2.default)(WpDashboardTracking, null, [{
+    key: "getElementorCommon",
+    value: function getElementorCommon() {
+      return window.elementorCommon;
+    }
+  }, {
     key: "init",
     value: function init() {
       if (this.initialized) {
@@ -1550,8 +1555,9 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
   }, {
     key: "isEditorOneActive",
     value: function isEditorOneActive() {
-      var _elementorCommon$conf, _elementorCommon;
-      return (_elementorCommon$conf = (_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.config) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.editor_events) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.isEditorOneActive) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
+      var _elementorCommon$conf, _elementorCommon$conf2;
+      var elementorCommon = this.getElementorCommon();
+      return (_elementorCommon$conf = elementorCommon === null || elementorCommon === void 0 || (_elementorCommon$conf2 = elementorCommon.config) === null || _elementorCommon$conf2 === void 0 || (_elementorCommon$conf2 = _elementorCommon$conf2.editor_events) === null || _elementorCommon$conf2 === void 0 ? void 0 : _elementorCommon$conf2.isEditorOneActive) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
     }
   }, {
     key: "processPendingNavClick",
@@ -1607,24 +1613,27 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
   }, {
     key: "isEventsManagerAvailable",
     value: function isEventsManagerAvailable() {
-      var _elementorCommon2;
-      return ((_elementorCommon2 = elementorCommon) === null || _elementorCommon2 === void 0 ? void 0 : _elementorCommon2.eventsManager) && 'function' === typeof elementorCommon.eventsManager.dispatchEvent;
+      var elementorCommon = this.getElementorCommon();
+      return (elementorCommon === null || elementorCommon === void 0 ? void 0 : elementorCommon.eventsManager) && 'function' === typeof elementorCommon.eventsManager.dispatchEvent;
     }
   }, {
     key: "canSendEvents",
     value: function canSendEvents() {
-      var _elementorCommon3;
-      return ((_elementorCommon3 = elementorCommon) === null || _elementorCommon3 === void 0 || (_elementorCommon3 = _elementorCommon3.config) === null || _elementorCommon3 === void 0 || (_elementorCommon3 = _elementorCommon3.editor_events) === null || _elementorCommon3 === void 0 ? void 0 : _elementorCommon3.can_send_events) || false;
+      var _elementorCommon$conf3, _elementorCommon$conf4;
+      var elementorCommon = this.getElementorCommon();
+      return (_elementorCommon$conf3 = elementorCommon === null || elementorCommon === void 0 || (_elementorCommon$conf4 = elementorCommon.config) === null || _elementorCommon$conf4 === void 0 || (_elementorCommon$conf4 = _elementorCommon$conf4.editor_events) === null || _elementorCommon$conf4 === void 0 ? void 0 : _elementorCommon$conf4.can_send_events) !== null && _elementorCommon$conf3 !== void 0 ? _elementorCommon$conf3 : false;
     }
   }, {
     key: "dispatchEvent",
     value: function dispatchEvent(eventName) {
+      var _elementorCommon$even;
       var properties = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       if (!this.isEventsManagerAvailable() || !this.canSendEvents()) {
         return;
       }
-      elementorCommon.eventsManager.dispatchEvent(eventName, properties, options);
+      var elementorCommon = this.getElementorCommon();
+      elementorCommon === null || elementorCommon === void 0 || (_elementorCommon$even = elementorCommon.eventsManager) === null || _elementorCommon$even === void 0 || _elementorCommon$even.dispatchEvent(eventName, properties, options);
     }
   }, {
     key: "updateActivity",
@@ -2484,7 +2493,6 @@ GetStartedListItem.propTypes = {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
 
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
@@ -2497,9 +2505,12 @@ var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 var _getStartedListItem = _interopRequireDefault(__webpack_require__(/*! ./get-started-list-item */ "../modules/home/assets/js/components/editor-screen/get-started-list-item.js"));
 var GetStarted = function GetStarted(_ref) {
   var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
+  var hasSidebarPromotion = props.homeScreenData.hasOwnProperty('sidebar_promotion_variants');
+  var mdGridColumns = hasSidebarPromotion ? 'repeat(3, 1fr)' : 'repeat(4, 1fr)';
   return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
     elevation: 0,
     sx: {
@@ -2523,7 +2534,8 @@ var GetStarted = function GetStarted(_ref) {
     sx: {
       display: 'grid',
       gridTemplateColumns: {
-        md: 'repeat(4, 1fr)',
+        xl: 'repeat(4, 1fr)',
+        md: mdGridColumns,
         xs: 'repeat(2, 1fr)'
       },
       columnGap: {
@@ -2543,8 +2555,9 @@ var GetStarted = function GetStarted(_ref) {
 };
 var _default = exports["default"] = GetStarted;
 GetStarted.propTypes = {
-  getStartedData: PropTypes.object.isRequired,
-  adminUrl: PropTypes.string.isRequired
+  getStartedData: _propTypes.default.object.isRequired,
+  adminUrl: _propTypes.default.string.isRequired,
+  homeScreenData: _propTypes.default.object.isRequired
 };
 
 /***/ }),
@@ -2581,7 +2594,7 @@ var HeaderSection = function HeaderSection(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_Typography.default, {
     variant: "h5"
-  }, (0, _i18n.__)('Home', 'elementor')), /*#__PURE__*/_react.default.createElement(_Button.default, {
+  }, (0, _i18n.__)('Quick Start', 'elementor')), /*#__PURE__*/_react.default.createElement(_Button.default, {
     variant: "contained",
     size: "medium",
     color: "primary",
@@ -2659,7 +2672,8 @@ var EditorScreen = function EditorScreen(props) {
     createWithAIData: props.homeScreenData.create_with_ai
   }), /*#__PURE__*/_react.default.createElement(_getStartedSection.default, {
     getStartedData: props.homeScreenData.get_started,
-    adminUrl: props.adminUrl
+    adminUrl: props.adminUrl,
+    homeScreenData: props.homeScreenData
   }), props.homeScreenData.add_ons && /*#__PURE__*/_react.default.createElement(_addonsSection.default, {
     addonsData: props.homeScreenData.add_ons,
     adminUrl: props.adminUrl
@@ -2942,7 +2956,8 @@ var TopSection = function TopSection(_ref) {
       gap: {
         xs: 2,
         sm: 3,
-        lg: 22
+        lg: 10,
+        xl: 22
       },
       borderRadius: 1,
       border: '1px solid rgba(0, 0, 0, 0.12)'

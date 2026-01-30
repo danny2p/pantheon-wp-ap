@@ -4,8 +4,8 @@ Tags: page builder, editor, landing page, drag-and-drop, elementor,
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.34.2
-Beta tag: 3.34.0-beta3
+Stable tag: 3.34.4
+Beta tag: 3.35.0-beta4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -351,6 +351,24 @@ You can also add a new language via [translate.wordpress.org](https://go.element
 6. **Motion Effects** - Add entrance animations and transitions to any element in your website to captivate visitors.
 
 == Changelog ==
+
+= 3.34.4 - 2026-01-29 =
+
+* Tweak: Updated import and export flow for Website Templates
+* Tweak: Optimized configuration loading behavior ([#34206](https://github.com/elementor/elementor/issues/34206))
+* Fix: Editor errors occur when references are undefined ([#34411](https://github.com/elementor/elementor/issues/34411))
+* Security Fix: Improved code security enforcement in request handling
+* Fix: Importing a site containing elements with dynamic tags fails - Editor V4
+
+= 3.34.3 - 2026-01-26 =
+
+* Tweak: Editor home page renamed to Quick Start
+* Fix: Video background does not play on Mobile in Safari browser
+* Fix: Landing Pages do not appear in Editor menu in WordPress Admin
+* Fix: Theme Builder WordPress view does not work as expected
+* Fix: General UI issues in Editor screens in WordPress Admin
+* Fix: Save as Template modal appears blank in some scenarios
+* Fix: Clicking the Templates menu item leads to an incorrect URL
 
 = 3.34.2 - 2026-01-20 =
 

@@ -1992,11 +1992,17 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
   return (0, _createClass2.default)(_default, [{
     key: "onInit",
     value: function onInit() {
-      var _elementorCommon$conf;
       this.config = _eventsConfig.default;
       if (!this.canSendEvents()) {
         return;
       }
+      this.initializeMixpanel();
+      this.enableTracking();
+    }
+  }, {
+    key: "initializeMixpanel",
+    value: function initializeMixpanel() {
+      var _elementorCommon$conf;
       _mixpanelBrowser.default.init((_elementorCommon$conf = elementorCommon.config.editor_events) === null || _elementorCommon$conf === void 0 ? void 0 : _elementorCommon$conf.token, {
         persistence: 'localStorage',
         autocapture: false,
@@ -2009,7 +2015,6 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
           flags: 'https://api-eu.mixpanel.com'
         }
       });
-      this.enableTracking();
     }
   }, {
     key: "enableTracking",

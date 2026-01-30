@@ -348,7 +348,7 @@ class Plugins extends \WP_REST_Plugins_Controller {
 		$plugin_slug = $request->get_url_params()['slug'];
 
 		try {
-			Migration::run( $plugin_slug, $request['force'] );
+			Migration::instance()->run( $plugin_slug, $request['force'] );
 		} catch ( MigrationException $e ) {
 			return RestError::custom_error( 'migration_exception', $e->getMessage(), $e->getCode() );
 		} catch ( \Throwable $th ) {
@@ -367,7 +367,7 @@ class Plugins extends \WP_REST_Plugins_Controller {
 		$plugin_slug = $request->get_url_params()['slug'];
 
 		try {
-			Migration::rollback( $plugin_slug );
+			Migration::instance()->rollback( $plugin_slug );
 		} catch ( MigrationException $e ) {
 			return RestError::custom_error( 'migration_exception', $e->getMessage(), $e->getCode() );
 		} catch ( \Throwable $th ) {
@@ -404,6 +404,15 @@ class Plugins extends \WP_REST_Plugins_Controller {
 	 * @return true|\WP_Error
 	 */
 	public function user_can_manage_plugin_status( \WP_REST_Request $request ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$authorization_required_code = rest_authorization_required_code();
+			return RestError::custom_error(
+				\WP_Http::UNAUTHORIZED === $authorization_required_code ? 'unauthorized' : 'forbidden',
+				'Sorry, you are not allowed to manage plugins for this site.',
+				$authorization_required_code
+			);
+		}
+
 		$plugin_slug = $request->get_url_params()['slug'];
 		$plugin_data = Utils::get_plugin_data( $plugin_slug );
 
@@ -422,6 +431,15 @@ class Plugins extends \WP_REST_Plugins_Controller {
 	 * @return true|\WP_Error
 	 */
 	public function user_can_run_migration( \WP_REST_Request $request ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			$authorization_required_code = rest_authorization_required_code();
+			return RestError::custom_error(
+				\WP_Http::UNAUTHORIZED === $authorization_required_code ? 'unauthorized' : 'forbidden',
+				'Sorry, you are not allowed to manage plugins for this site.',
+				$authorization_required_code
+			);
+		}
+
 		$plugin_slug = $request->get_url_params()['slug'];
 		$plugin_data = Utils::get_plugin_data( $plugin_slug );
 

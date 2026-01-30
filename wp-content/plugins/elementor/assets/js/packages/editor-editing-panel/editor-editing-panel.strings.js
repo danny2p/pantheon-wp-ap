@@ -284,7 +284,7 @@ __( 'Bottom right', 'elementor' );
 __( 'Adjust corners', 'elementor' );
 __( 'Border color', 'elementor' );
 __( 'Background', 'elementor' );
+__( 'Flex direction', 'elementor' );
 __( 'System', 'elementor' );
 __( 'Custom Fonts', 'elementor' );
 __( 'Google Fonts', 'elementor' );
-__( 'Flex direction', 'elementor' );
