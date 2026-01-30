@@ -4,8 +4,8 @@ Tags: increase upload limit, increase file size limit, large file upload, easyme
 Donate link: https://ko-fi.com/codepopular
 Requires at least: 3.0
 Requires PHP: 7.0
-Tested up to: 6.8
-Stable tag: 3.0.3
+Tested up to: 6.9
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,17 +87,17 @@ Take your media management to the next level with [EasyMedia Pro](http://codepop
 
 * **📄 File Type Restriction** - The EasyMedia plugin sets user file type restriction. With this module, you can only allow specific types of files for the user. Sometimes, Editor or Author roles only need specific file types (like images), and ZIP or executable uploads can be disallowed for them. This feature makes that possible.
 
-* **🎭 Role-Based Restrictions** - Configure different upload limits based on WordPress user roles (Administrator, Editor, Author, etc.) This module can help to define the upload limit per role which WordPress by default does not come with.
+* **🎭 Role-Based Restrictions** - Configure different upload limits based on WordPress user roles (Administrator, Editor, Author, etc.) This module can help to define the upload limit per role which WordPress by default does not come with
 
 * **📁 Media Manager** - Display file sizes directly in media library columns and attachment details. This feature is acting as a File management plugin where you can manager your WordPress site all files and folders.
 
 * **📈 Upload Statistics Dashboard** - View comprehensive statistics including top uploads, recent uploads, and overall usage. You can see the graphical interface of your media library and the top uploader list.
 
-* **🔍 Advanced Reporting** - Export upload logs and generate detailed reports for analysis.
+* **🔍 Advanced Reporting** - Export upload logs and generate detailed reports for analysis
 
-* **⚡ Auto-Install Dependency** - Automatically installs and configures the main plugin if needed.
+* **⚡ Auto-Install Dependency** - Automatically installs and configures the main plugin if needed
 
-* **🛡️ Better Security** - Track who uploads what and when for improved security and accountability.
+* **🛡️ Better Security** - Track who uploads what and when for improved security and accountability
 
 * **🎯 Priority Support** - Get faster support and regular updates. We focus on one-to-one priority support.
 
@@ -128,11 +128,15 @@ Or if needed, install manually:
 
 == Screenshots ==
 1. Admin Panel for maximum upload file size.
-2. Set Role Base Upload Limit.
-3. System Status and Overview
+2. Set upload limit by role.
+3. System status dashboard showing current limits.
 
 
 == Changelog ==
+
+= 3.0.4 =
+-------------
+* Latest Version (6.9) Compatible with WordPress
 
 
 = 3.0.3 =
@@ -243,11 +247,7 @@ Or if needed, install manually:
 
 = Does this plugin work with all servers and hosting providers? =
 
-Yes, it works with all servers. However, please note that server-adjusted limits can't be changed from a WordPress plugin. If the server's set limit is 16MB, you can't increase it to 128MB via WordPress. However, in that case, we chunk the large uploaded file into smaller pieces as a reflection of the upload time, which can be slower. But its possible to upload a big file if your server set upload limit is higher. Install the plugin, and it'll inform you of the limits and the necessary actions.
-
-= Increase upload file size, but still not working? =
-
-If the minimum upload limit is set by the hosting provider, then it will not work. Ask your hosting provider to increase the upload size.
+Yes, it works with all servers. However, please note that server-adjusted limits can't be changed from a WordPress plugin. If the server's set limit is 16MB, you can't increase it to 128MB via WordPress. However, in that case, we chunk the large uploaded file into smaller pieces as a reflection of the upload time, which can be slower. But its possible to upload a big file if your server set upload limit is higher. Install the plugin, and it'll inform you of the limits and the necessary actions. inally we upload file files even your site dose not allow it.
 
 = Increase maximum execution time, but not working? =
 

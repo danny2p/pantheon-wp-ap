@@ -4,7 +4,7 @@ __( 'or rename it later.', 'elementor' );
 __( 'New Page', 'elementor' );
 __( 'Cancel', 'elementor' );
 __( 'Save', 'elementor' );
-__( 'Home', 'elementor' );
+__( 'Quick Start', 'elementor' );
 __( 'Edit site', 'elementor' );
 __( 'Name your page', 'elementor' );
 __( 'To proceed, please name your first page,', 'elementor' );

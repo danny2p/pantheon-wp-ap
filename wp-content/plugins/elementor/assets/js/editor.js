@@ -29438,7 +29438,7 @@ var EditorBase = exports["default"] = /*#__PURE__*/function (_Marionette$Applica
               return _context.abrupt("return");
             case 1:
               _context.next = 2;
-              return Promise.all(/*! import() */[__webpack_require__.e("app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js"), __webpack_require__.e("assets_dev_js_editor_utils_post-onboarding-tracking_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ./utils/post-onboarding-tracking */ "../assets/dev/js/editor/utils/post-onboarding-tracking.js"));
+              return Promise.all(/*! import() */[__webpack_require__.e("vendors-node_modules_mixpanel-browser_dist_mixpanel_module_js"), __webpack_require__.e("app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js"), __webpack_require__.e("assets_dev_js_editor_utils_post-onboarding-tracking_js")]).then(__webpack_require__.bind(__webpack_require__, /*! ./utils/post-onboarding-tracking */ "../assets/dev/js/editor/utils/post-onboarding-tracking.js"));
             case 2:
               _yield$import = _context.sent;
               PostOnboardingTracking = _yield$import.default;
@@ -49300,8 +49300,10 @@ var TemplatesModule = exports["default"] = /*#__PURE__*/function (_elementorModu
       elementor.templates.getDefaultTemplateTypeData().then(function (templateTypesData) {
         var _elementor;
         jQuery.each((_elementor = elementor) === null || _elementor === void 0 || (_elementor = _elementor.config) === null || _elementor === void 0 || (_elementor = _elementor.library) === null || _elementor === void 0 ? void 0 : _elementor.doc_types, function (type, title) {
-          var safeData = jQuery.extend(true, {}, templateTypesData, elementor.templates.getDefaultTemplateTypeSafeData(title));
-          elementor.templates.registerTemplateType(type, safeData);
+          elementor.templates.getDefaultTemplateTypeSafeData(title).then(function (defaultData) {
+            var safeData = jQuery.extend(true, {}, templateTypesData, defaultData);
+            elementor.templates.registerTemplateType(type, safeData);
+          });
         });
       });
     }
@@ -63495,7 +63497,8 @@ module.exports = ReactDOM;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b2e8e6071c9bc14c04e4.bundle.js";
+/******/ 			if (chunkId === "vendors-node_modules_mixpanel-browser_dist_mixpanel_module_js") return "e4d209bf3a704ff88e1a.bundle.js";
+/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b423d91809cf7e0cb8b0.bundle.js";
 /******/ 			if (chunkId === "assets_dev_js_editor_utils_post-onboarding-tracking_js") return "e883e6638ef93bfd3204.bundle.js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;

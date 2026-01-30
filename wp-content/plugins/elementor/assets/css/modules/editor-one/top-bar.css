@@ -38,4 +38,10 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  body:has(#editor-one-top-bar) #wpadminbar {
+    position: fixed;
+  }
+}
+
 /*# sourceMappingURL=top-bar.css.map */

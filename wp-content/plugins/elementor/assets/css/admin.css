@@ -2207,12 +2207,9 @@ fieldset:disabled a.e-button {
 }
 .tab-import-export-kit__revert .tab-import-export-kit__kit-item img {
   width: 330px;
-  height: 315px;
-  padding: 0.625rem;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: top;
-     object-position: top;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 330/315;
 }
 .tab-import-export-kit__revert .button, .tab-import-export-kit__revert .button:hover {
   color: #a94442;
@@ -2795,6 +2792,12 @@ fieldset:disabled a.e-button {
   padding-block-end: 20px;
   border-block-end: 1px solid #eee;
 }
+@media screen and (max-width: 782px) {
+  .wrap.elementor-admin-page-license .elementor-license-box h3 {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
 .wrap.elementor-admin-page-license .elementor-license-box h3 span {
   flex-grow: 1;
   padding-inline-start: 5px;
@@ -2814,6 +2817,11 @@ fieldset:disabled a.e-button {
   margin-inline-start: 15px;
   margin-block-end: 0;
 }
+@media screen and (max-width: 782px) {
+  .wrap.elementor-admin-page-license .elementor-license-box .button {
+    margin-inline: 0;
+  }
+}
 .wrap.elementor-admin-page-license .elementor-license-box p.description {
   margin: 10px 0;
 }
@@ -2821,6 +2829,14 @@ fieldset:disabled a.e-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+@media screen and (max-width: 782px) {
+  .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
+    align-items: flex-start;
+  }
+  .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch .button, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch .button {
+    margin-inline-start: 10px;
+  }
 }
 .wrap.elementor-admin-page-license .elementor-license-box .e-row-divider-bottom {
   padding-block-end: 15px;

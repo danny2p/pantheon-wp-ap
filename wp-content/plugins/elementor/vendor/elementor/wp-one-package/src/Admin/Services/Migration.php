@@ -147,7 +147,7 @@ class Migration {
 			}
 
 			try {
-				self::run( $plugin_slug );
+				$this->run( $plugin_slug );
 			} catch ( \Throwable $th ) {
 				$this->logger->error( $th->getMessage() );
 			}
@@ -216,7 +216,7 @@ class Migration {
 	 * @param bool $force Whether to force migration even if the plugin is already connected
 	 * @return void
 	 */
-	public static function run( string $plugin_slug, bool $force = false ): void {
+	public function run( string $plugin_slug, bool $force = false ): void {
 		$migrated_plugins = self::get_migrated_plugins();
 
 		// If the plugin is already migrated, do nothing
@@ -245,7 +245,12 @@ class Migration {
 					if ( ! $force ) {
 						throw new MigrationException( 'Plugin is already connected.', \WP_Http::UNPROCESSABLE_ENTITY );
 					}
-					$facade->service()->deactivate_license();
+					try {
+						$facade->service()->deactivate_license();
+					} catch ( \Throwable $th ) {
+						$facade->data()->clear_session();
+						$this->logger->error( $th->getMessage() );
+					}
 				}
 				break;
 		}
@@ -266,7 +271,7 @@ class Migration {
 	 * @param string $plugin_slug The plugin slug to rollback
 	 * @return array
 	 */
-	public static function rollback( string $plugin_slug ): array {
+	public function rollback( string $plugin_slug ): array {
 		$migrated_plugins = self::get_migrated_plugins();
 
 		if ( self::is_migrated( $plugin_slug, $migrated_plugins ) ) {

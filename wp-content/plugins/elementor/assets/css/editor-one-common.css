@@ -239,6 +239,20 @@
   background-color: var(--e-one-palette-background-default);
   font-family: var(--e-one-typography-fontFamily);
 }
+#wpcontent #submitdiv .button {
+  height: 30px;
+  padding: 5px 16px;
+}
+#wpcontent #submitdiv a:not(.button),
+#wpcontent #submitdiv .eps-button {
+  color: var(--e-one-palette-text-primary);
+  text-decoration: none;
+}
+#wpcontent #submitdiv a:not(.button):hover, #wpcontent #submitdiv a:not(.button):focus,
+#wpcontent #submitdiv .eps-button:hover,
+#wpcontent #submitdiv .eps-button:focus {
+  text-decoration: underline;
+}
 #wpcontent .wrap {
   background-color: var(--e-one-palette-background-default);
   margin: 20px 32px;
@@ -249,16 +263,18 @@
   align-items: center;
   clear: both;
 }
-#wpcontent .wrap .tablenav .actions {
-  display: flex;
-  align-items: center;
-}
 #wpcontent .wrap .tablenav .actions .button,
 #wpcontent .wrap .tablenav .actions input[type=submit].button {
   height: 30px;
   padding-block: 0;
   line-height: 28px;
   box-sizing: border-box;
+}
+@media screen and (min-width: 783px) {
+  #wpcontent .wrap .tablenav .actions {
+    display: flex;
+    align-items: center;
+  }
 }
 #wpcontent .wrap > h1.wp-heading-inline {
   font-family: var(--e-one-typography-fontFamily);
@@ -272,6 +288,12 @@
 }
 #wpcontent .wrap > .page-title-action {
   margin-inline-start: 8px;
+}
+@media screen and (max-width: 782px) {
+  #wpcontent .wrap > .page-title-action {
+    margin-block-start: 12px;
+    margin-inline-start: 0;
+  }
 }
 #wpcontent .wrap > hr.wp-header-end {
   flex-basis: 100%;
@@ -302,9 +324,6 @@
 #wpcontent .form-table td,
 #wpcontent .form-table tr {
   background-color: var(--e-one-palette-background-default);
-}
-#wpcontent #wpbody-content {
-  margin-block-start: 50px;
 }
 #wpcontent #wpbody-content hr:not(.MuiDivider-root) {
   border: none;
@@ -538,5 +557,9 @@
 }
 #wpcontent #elementor-element-manager-wrap {
   width: 100%;
+}
+
+body:has(#editor-one-top-bar > *) #wpcontent #wpbody-content {
+  margin-block-start: 50px;
 }
 /*# sourceMappingURL=editor-one-common.css.map */

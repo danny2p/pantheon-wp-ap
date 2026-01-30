@@ -34,7 +34,7 @@ class Sidebar_Navigation_Handler {
 	}
 
 	public function add_body_class( string $classes ): string {
-		if ( ! $this->menu_data_provider->is_elementor_editor_page() ) {
+		if ( ! $this->menu_data_provider->is_editor_one_admin_page() ) {
 			return $classes;
 		}
 
@@ -48,7 +48,7 @@ class Sidebar_Navigation_Handler {
 	}
 
 	public function enqueue_sidebar_assets(): void {
-		if ( ! $this->menu_data_provider->is_elementor_editor_page() ) {
+		if ( ! $this->menu_data_provider->is_editor_one_admin_page() ) {
 			return;
 		}
 
@@ -85,7 +85,7 @@ class Sidebar_Navigation_Handler {
 	}
 
 	public function render_sidebar_container(): void {
-		if ( ! $this->menu_data_provider->is_elementor_editor_page() ) {
+		if ( ! $this->menu_data_provider->is_editor_one_admin_page() ) {
 			return;
 		}
 
@@ -93,7 +93,9 @@ class Sidebar_Navigation_Handler {
 	}
 
 	private function get_sidebar_config(): array {
-		$flyout_data = $this->menu_data_provider->get_editor_flyout_data();
+		$flyout_data = $this->menu_data_provider->get_third_level_data(
+			Menu_Data_Provider::THIRD_LEVEL_EDITOR_FLYOUT
+		);
 		$level4_groups = $this->menu_data_provider->get_level4_flyout_data();
 		$promotion = $this->get_promotion_data();
 		$active_state = $this->get_active_menu_state( $flyout_data['items'], $level4_groups );

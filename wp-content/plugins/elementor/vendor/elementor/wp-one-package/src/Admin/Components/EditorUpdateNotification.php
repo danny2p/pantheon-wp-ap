@@ -2,6 +2,8 @@
 
 namespace ElementorOne\Admin\Components;
 
+use ElementorOne\Common\SupportedPlugins;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -80,8 +82,7 @@ class EditorUpdateNotification {
 	public function editor_has_wp_one_package(): bool {
 		global $wp_one_package_versions;
 
-		$plugin_slug = dirname( self::EDITOR_PLUGIN_FILE );
-		return isset( $wp_one_package_versions[ $plugin_slug ] );
+		return isset( $wp_one_package_versions[ SupportedPlugins::ELEMENTOR ] );
 	}
 
 	/**
