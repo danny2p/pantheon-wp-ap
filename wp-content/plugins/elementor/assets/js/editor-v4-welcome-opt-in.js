@@ -107,7 +107,7 @@ var WelcomeDialog = exports.WelcomeDialog = function WelcomeDialog(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
     sx: {
       aspectRatio: '2',
-      backgroundImage: 'url(https://assets.elementor.com/v4-promotion/v1/images/v4_opt_in.png)',
+      backgroundImage: 'url(https://assets.elementor.com/v4-promotion/v1/images/v4_welcome.png)',
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }

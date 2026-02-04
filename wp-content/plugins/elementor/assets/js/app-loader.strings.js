@@ -18,10 +18,6 @@ __( 'Loading', 'elementor' );
 __( 'Back to dashboard', 'elementor' );
 __( 'Close', 'elementor' );
 __( 'Elementor', 'elementor' );
-__( 'Add New', 'elementor' );
-__( 'Close', 'elementor' );
-__( 'Tip', 'elementor' );
-__( 'Close', 'elementor' );
 __( 'Header', 'elementor' );
 __( 'What is a Header Template?', 'elementor' );
 __( 'The header template allows you to easily design and edit custom WordPress headers so you are no longer constrained by your theme’s header design limitations.', 'elementor' );
@@ -70,6 +66,10 @@ __( 'Continue to new Kit', 'elementor' );
 __( 'Close', 'elementor' );
 __( '%s was successfully deleted', 'elementor' );
 __( 'Your Kit', 'elementor' );
+__( 'Add New', 'elementor' );
+__( 'Close', 'elementor' );
+__( 'Tip', 'elementor' );
+__( 'Close', 'elementor' );
 __( 'Theme Builder', 'elementor' );
 __( 'Upgrade', 'elementor' );
 __( 'Customize every part of your site', 'elementor' );
@@ -501,8 +501,8 @@ __( 'Show less', 'elementor' );
 __( 'Show more', 'elementor' );
 __( 'What\'s included:', 'elementor' );
 __( 'Import', 'elementor' );
-__( 'Settings up your website templates...', 'elementor' );
-__( 'This usually take a few moments.', 'elementor' );
+__( 'Setting up your website template...', 'elementor' );
+__( 'This usually takes a few moments.', 'elementor' );
 __( 'Don\'t close this window until the process is finished.', 'elementor' );
 __( 'Import', 'elementor' );
 __( 'Import a website template', 'elementor' );
@@ -767,12 +767,9 @@ __( 'Heads up!', 'elementor' );
 __( 'Before applying a new template, we recommend backing up your site so you can roll back any undesired changes.', 'elementor' );
 __( 'Choose a file to import', 'elementor' );
 __( 'Drag & drop the .zip file with your website template', 'elementor' );
-__( 'Import from files' ) }
-						/>
-
-						{ dialog.isOpen &&
-							<Dialog
-								title={ __( 'Warning: JSON or ZIP files may be unsafe', 'elementor' );
+__( 'Or', 'elementor' );
+__( 'Import from files', 'elementor' );
+__( 'Warning: JSON or ZIP files may be unsafe', 'elementor' );
 __( 'Uploading JSON or ZIP files from unknown sources can be harmful and put your site at risk. For maximum safety, upload only JSON or ZIP files from trusted sources.', 'elementor' );
 __( 'Continue', 'elementor' );
 __( 'Cancel', 'elementor' );

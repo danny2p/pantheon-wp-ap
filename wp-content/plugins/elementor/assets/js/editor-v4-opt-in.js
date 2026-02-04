@@ -602,24 +602,25 @@ var OptIn = exports.OptIn = function OptIn(_ref) {
     sx: {
       flex: 1,
       maxWidth: {
-        md: '507px',
+        md: '580px',
         sm: '600px'
       },
       gap: 2.5,
       mx: 'auto'
     }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
-    direction: "row",
-    alignItems: "center",
-    gap: 1
   }, /*#__PURE__*/_react.default.createElement(_optInContent.TextNode, {
     variant: "h4",
     width: "fit-content"
-  }, i18n.title), /*#__PURE__*/_react.default.createElement(_ui.Chip, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, i18n.title), /*#__PURE__*/_react.default.createElement(_ui.Chip, {
     size: "small",
     color: "secondary",
     variant: "filled",
-    label: i18n.chip
+    label: i18n.chip,
+    sx: {
+      verticalAlign: 'baseline',
+      transform: 'translateY(-4px)',
+      ml: 1
+    }
   })), /*#__PURE__*/_react.default.createElement(_ui.Stack, {
     direction: "column",
     gap: 3

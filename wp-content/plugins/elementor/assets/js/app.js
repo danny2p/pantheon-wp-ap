@@ -8140,9 +8140,9 @@ function ImportProcess() {
     size: 30
   }), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
     variant: "h5"
-  }, (0, _i18n.__)('Settings up your website templates...', 'elementor')), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+  }, (0, _i18n.__)('Setting up your website template...', 'elementor')), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
     variant: "subtitle1"
-  }, (0, _i18n.__)('This usually take a few moments.', 'elementor')), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+  }, (0, _i18n.__)('This usually takes a few moments.', 'elementor')), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
     variant: "subtitle1"
   }, (0, _i18n.__)('Don\'t close this window until the process is finished.', 'elementor')))), /*#__PURE__*/_react.default.createElement(_pluginActivation.PluginActivation, {
     plugins: runnersState === null || runnersState === void 0 ? void 0 : runnersState.plugins
@@ -14394,7 +14394,7 @@ function ImportKit() {
     className: "e-app-import__drop-zone",
     heading: __('Choose a file to import', 'elementor'),
     text: __('Drag & drop the .zip file with your website template', 'elementor'),
-    secondaryText: 'Or',
+    secondaryText: __('Or', 'elementor'),
     filetypes: ['zip'],
     onFileChoose: function onFileChoose() {
       return eventTracking('kit-library/choose-file');
@@ -14404,7 +14404,7 @@ function ImportKit() {
       return setErrorType('general');
     },
     isLoading: isLoading,
-    buttonText: __('Import from files')
+    buttonText: __('Import from files', 'elementor')
   }), dialog.isOpen && /*#__PURE__*/_react.default.createElement(_dialog.default, {
     title: __('Warning: JSON or ZIP files may be unsafe', 'elementor'),
     text: __('Uploading JSON or ZIP files from unknown sources can be harmful and put your site at risk. For maximum safety, upload only JSON or ZIP files from trusted sources.', 'elementor'),
@@ -18658,7 +18658,11 @@ var eventsConfig = {
       createCancelled: 'component_creation_cancelled',
       created: 'component_created',
       instanceAdded: 'component_instance_added',
-      edited: 'component_edited'
+      edited: 'component_edited',
+      propertiesPanelOpened: 'component_properties_panel_opened',
+      propertiesGroupCreated: 'component_properties_group_created',
+      propertyExposed: 'component_property_exposed',
+      propertyRemoved: 'component_property_removed'
     },
     global_classes: {
       classApplied: 'class_applied',

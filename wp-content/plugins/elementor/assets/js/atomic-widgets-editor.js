@@ -660,7 +660,7 @@ var createAtomicTabModel = function createAtomicTabModel() {
           paragraph = _elements[0];
         var position = (_this$attributes$edit = this.attributes.editor_settings) === null || _this$attributes$edit === void 0 ? void 0 : _this$attributes$edit.initial_position;
         paragraph.settings.paragraph = {
-          $$type: 'string',
+          $$type: 'html',
           value: "Tab ".concat(position)
         };
         return elements;
@@ -1119,26 +1119,37 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports["default"] = createAtomicElementBaseView;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ "../node_modules/@babel/runtime/regenerator/index.js"));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js"));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "../node_modules/@babel/runtime/helpers/asyncToGenerator.js"));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../node_modules/@babel/runtime/helpers/defineProperty.js"));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "../node_modules/@babel/runtime/helpers/toConsumableArray.js"));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
-var _atomicElementEmptyView = _interopRequireDefault(__webpack_require__(/*! ./container/atomic-element-empty-view */ "../modules/atomic-widgets/assets/js/editor/container/atomic-element-empty-view.js"));
 var _elementTypes = __webpack_require__(/*! elementor-editor/utils/element-types */ "../assets/dev/js/editor/utils/element-types.js");
+var _atomicElementEmptyView = _interopRequireDefault(__webpack_require__(/*! ./container/atomic-element-empty-view */ "../modules/atomic-widgets/assets/js/editor/container/atomic-element-empty-view.js"));
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2.default)(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 var BaseElementView = elementor.modules.elements.views.BaseElement;
 function createAtomicElementBaseView(type) {
+  var resolvedTagCache = new WeakMap();
   var AtomicElementView = BaseElementView.extend({
     template: Marionette.TemplateCache.get("#tmpl-elementor-".concat(type, "-content")),
     emptyView: _atomicElementEmptyView.default,
+    _childrenRenderPromises: [],
     tagName: function tagName() {
-      if (this.haveLink()) {
+      var _resolvedTagCache$get;
+      return (_resolvedTagCache$get = resolvedTagCache.get(this.model)) !== null && _resolvedTagCache$get !== void 0 ? _resolvedTagCache$get : this._resolveTag();
+    },
+    _resolveTag: function _resolveTag() {
+      var _this$getResolverRend, _resolvedTag$value;
+      var renderContext = (_this$getResolverRend = this.getResolverRenderContext) === null || _this$getResolverRend === void 0 ? void 0 : _this$getResolverRend.call(this);
+      var tagSetting = this.model.getSetting('tag');
+      var resolvedTag = this._resolvePropValue(tagSetting, renderContext);
+      var tagValue = (_resolvedTag$value = resolvedTag === null || resolvedTag === void 0 ? void 0 : resolvedTag.value) !== null && _resolvedTag$value !== void 0 ? _resolvedTag$value : resolvedTag;
+      if (this._hasLink(renderContext)) {
         return 'a';
       }
-      var tagControl = this.model.getSetting('tag');
-      var tagControlValue = (tagControl === null || tagControl === void 0 ? void 0 : tagControl.value) || tagControl;
-      var defaultTag = this.model.config.default_html_tag;
-      return tagControlValue || defaultTag;
+      return tagValue || this.model.config.default_html_tag || 'div';
     },
     getChildViewContainer: function getChildViewContainer() {
       this.childViewContainer = '';
@@ -1155,6 +1166,14 @@ function createAtomicElementBaseView(type) {
         return elType;
       });
       return ['widget', 'container'].concat((0, _toConsumableArray2.default)(atomicElements));
+    },
+    getRenderContext: function getRenderContext() {
+      var _this$_parent, _this$_parent$getRend;
+      return (_this$_parent = this._parent) === null || _this$_parent === void 0 || (_this$_parent$getRend = _this$_parent.getRenderContext) === null || _this$_parent$getRend === void 0 ? void 0 : _this$_parent$getRend.call(_this$_parent);
+    },
+    getResolverRenderContext: function getResolverRenderContext() {
+      var _this$_parent2, _this$_parent2$getRes;
+      return (_this$_parent2 = this._parent) === null || _this$_parent2 === void 0 || (_this$_parent2$getRes = _this$_parent2.getResolverRenderContext) === null || _this$_parent2$getRes === void 0 ? void 0 : _this$_parent2$getRes.call(_this$_parent2);
     },
     className: function className() {
       return "".concat(BaseElementView.prototype.className.apply(this), " e-con e-atomic-element ").concat(this.getClassString());
@@ -1174,10 +1193,6 @@ function createAtomicElementBaseView(type) {
       var initialAttributes = (_this$model$config$in = this === null || this === void 0 || (_this$model = this.model) === null || _this$model === void 0 || (_this$model = _this$model.config) === null || _this$model === void 0 ? void 0 : _this$model.initial_attributes) !== null && _this$model$config$in !== void 0 ? _this$model$config$in : {};
       if (cssId) {
         local.id = cssId.value;
-      }
-      var href = this.getHref();
-      if (href) {
-        local.href = href;
       }
       local['data-interaction-id'] = this.model.get('id');
       customAttributes.forEach(function (attribute) {
@@ -1265,15 +1280,132 @@ function createAtomicElementBaseView(type) {
       this._parent.removeChildView(this);
       parent.addChild(this.model, AtomicElementView, this._index);
     },
-    onRender: function onRender() {
+    render: function render() {
       var _this2 = this;
+      this._currentRenderPromise = new Promise(function (resolve) {
+        // Optimize rendering by reusing existing child views instead of recreating them.
+        if (_this2._shouldSkipFullRender()) {
+          _this2._renderWithoutDomRecreation(resolve);
+        } else {
+          _this2._renderWithDomRecreation(resolve);
+        }
+      });
+      return this;
+    },
+    _shouldSkipFullRender: function _shouldSkipFullRender() {
+      var _this$children;
+      return this.isRendered && ((_this$children = this.children) === null || _this$children === void 0 ? void 0 : _this$children.length) > 0;
+    },
+    _renderWithoutDomRecreation: function _renderWithoutDomRecreation(resolve) {
+      var _this3 = this;
+      this._beforeRender();
+      this._renderChildren();
+      this._waitForChildrenToComplete().then(function () {
+        _this3._afterRender();
+        resolve();
+      });
+    },
+    _renderWithDomRecreation: function _renderWithDomRecreation(resolve) {
+      var _this4 = this;
+      BaseElementView.prototype.render.apply(this, arguments);
+      this._waitForChildrenToComplete().then(function () {
+        _this4._applyResolvedAttributes();
+        resolve();
+      });
+    },
+    _beforeRender: function _beforeRender() {
+      this._isRendering = true;
+      this._invalidateTagCache();
+      this.triggerMethod('before:render', this);
+    },
+    _invalidateTagCache: function _invalidateTagCache() {
+      resolvedTagCache.delete(this.model);
+    },
+    _cacheResolvedTag: function _cacheResolvedTag(tag) {
+      resolvedTagCache.set(this.model, tag);
+    },
+    _afterRender: function _afterRender() {
+      this._isRendering = false;
+      this.isRendered = true;
+      this.triggerMethod('render', this);
+      this._applyResolvedAttributes();
+    },
+    _applyResolvedAttributes: function _applyResolvedAttributes() {
+      if (!this._parent) {
+        return;
+      }
+      if (this._shouldRecreateForTagChange()) {
+        return;
+      }
+      this._applyLinkAttributes();
+    },
+    _shouldRecreateForTagChange: function _shouldRecreateForTagChange() {
+      var resolvedTag = this.tagName();
+      var currentTag = this.el.tagName.toLowerCase();
+      if (resolvedTag === currentTag) {
+        return false;
+      }
+      this._cacheResolvedTag(resolvedTag);
+      this.rerenderEntireView();
+      return true;
+    },
+    _applyLinkAttributes: function _applyLinkAttributes() {
+      this.$el.removeAttr('href');
+      this.$el.removeAttr('data-action-link');
+      var link = this.getLink();
+      if (link) {
+        this.$el.attr(link.attr, link.value);
+      }
+    },
+    _waitForChildrenToComplete: function _waitForChildrenToComplete() {
+      var _this5 = this;
+      return (0, _asyncToGenerator2.default)(/*#__PURE__*/_regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function (_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!(_this5._childrenRenderPromises.length > 0)) {
+                _context.next = 1;
+                break;
+              }
+              _context.next = 1;
+              return Promise.all(_this5._childrenRenderPromises);
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
+    },
+    _renderChildren: function _renderChildren() {
+      if (this._shouldSkipFullRender()) {
+        var _this$children2;
+        (_this$children2 = this.children) === null || _this$children2 === void 0 || _this$children2.each(function (childView) {
+          return childView.render();
+        });
+      } else {
+        BaseElementView.prototype._renderChildren.apply(this, arguments);
+      }
+      this._collectChildrenRenderPromises();
+    },
+    _collectChildrenRenderPromises: function _collectChildrenRenderPromises() {
+      var _this$children3,
+        _this6 = this;
+      this._childrenRenderPromises = [];
+      (_this$children3 = this.children) === null || _this$children3 === void 0 || _this$children3.each(function (childView) {
+        if (childView._currentRenderPromise) {
+          _this6._childrenRenderPromises.push(childView._currentRenderPromise);
+        }
+      });
+    },
+    onRender: function onRender() {
+      var _this7 = this;
       this.dispatchPreviewEvent('elementor/element/render');
       BaseElementView.prototype.onRender.apply(this, arguments);
 
       // Defer to wait for everything to render.
       setTimeout(function () {
-        _this2.droppableInitialize();
-        _this2.updateHandlesPosition();
+        _this7.droppableInitialize();
+        _this7.updateHandlesPosition();
       });
     },
     onDestroy: function onDestroy() {
@@ -1290,20 +1422,47 @@ function createAtomicElementBaseView(type) {
         }
       }));
     },
-    haveLink: function haveLink() {
-      var _this$model$getSettin3;
-      return !!((_this$model$getSettin3 = this.model.getSetting('link')) !== null && _this$model$getSettin3 !== void 0 && (_this$model$getSettin3 = _this$model$getSettin3.value) !== null && _this$model$getSettin3 !== void 0 && (_this$model$getSettin3 = _this$model$getSettin3.destination) !== null && _this$model$getSettin3 !== void 0 && _this$model$getSettin3.value);
-    },
-    getHref: function getHref() {
-      if (!this.haveLink()) {
-        return;
+    _hasLink: function _hasLink(renderContext) {
+      var _resolvedLink$value;
+      var linkSetting = this.model.getSetting('link');
+      var resolvedLink = this._resolvePropValue(linkSetting, renderContext);
+      if ('link' !== (resolvedLink === null || resolvedLink === void 0 ? void 0 : resolvedLink.$$type)) {
+        return false;
       }
-      var _this$model$getSettin4 = this.model.getSetting('link').value.destination,
-        $$type = _this$model$getSettin4.$$type,
-        value = _this$model$getSettin4.value;
+      var destination = this._resolvePropValue((_resolvedLink$value = resolvedLink.value) === null || _resolvedLink$value === void 0 ? void 0 : _resolvedLink$value.destination, renderContext);
+      return !!(destination !== null && destination !== void 0 && destination.value);
+    },
+    getLink: function getLink() {
+      var _this$getResolverRend2, _resolvedLink$value2;
+      var renderContext = (_this$getResolverRend2 = this.getResolverRenderContext) === null || _this$getResolverRend2 === void 0 ? void 0 : _this$getResolverRend2.call(this);
+      var linkSetting = this.model.getSetting('link');
+      var resolvedLink = this._resolvePropValue(linkSetting, renderContext);
+      if ('link' !== (resolvedLink === null || resolvedLink === void 0 ? void 0 : resolvedLink.$$type)) {
+        return null;
+      }
+      var destination = this._resolvePropValue((_resolvedLink$value2 = resolvedLink.value) === null || _resolvedLink$value2 === void 0 ? void 0 : _resolvedLink$value2.destination, renderContext);
+      if (!(destination !== null && destination !== void 0 && destination.value)) {
+        return null;
+      }
+      var $$type = destination.$$type,
+        value = destination.value;
+      if ('dynamic' === $$type) {
+        var _value$settings;
+        var resolvedValue = this.handleDynamicLink(value);
+        if (!resolvedValue) {
+          return null;
+        }
+        return {
+          attr: 'action' === ((_value$settings = value.settings) === null || _value$settings === void 0 ? void 0 : _value$settings.group) ? 'data-action-link' : 'href',
+          value: resolvedValue
+        };
+      }
       var isPostId = 'number' === $$type;
       var hrefPrefix = isPostId ? elementor.config.home_url + '/?p=' : '';
-      return hrefPrefix + value;
+      return {
+        attr: 'href',
+        value: hrefPrefix + value
+      };
     },
     droppableInitialize: function droppableInitialize() {
       this.$el.html5Droppable(this.getDroppableOptions());
@@ -1314,25 +1473,26 @@ function createAtomicElementBaseView(type) {
      * @return {Object} groups
      */
     getContextMenuGroups: function getContextMenuGroups() {
-      var _this3 = this,
+      var _this8 = this,
         _elementorCommon$conf;
       var saveActions = [{
         name: 'save',
         title: __('Save as a template', 'elementor'),
-        shortcut: "<span class=\"elementor-context-menu-list__item__shortcut__new-badge\">".concat(__('New', 'elementor'), "</span>"),
         callback: this.saveAsTemplate.bind(this),
         isEnabled: function isEnabled() {
-          return !_this3.getContainer().isLocked();
+          return !_this8.getContainer().isLocked();
         }
       }];
-      if ((_elementorCommon$conf = elementorCommon.config.experimentalFeatures) !== null && _elementorCommon$conf !== void 0 && _elementorCommon$conf.e_components) {
+      var isAdministrator = elementor.config.user.is_administrator;
+      var isExperimentalFeaturesEnabled = (_elementorCommon$conf = elementorCommon.config.experimentalFeatures) === null || _elementorCommon$conf === void 0 ? void 0 : _elementorCommon$conf.e_components;
+      if (isExperimentalFeaturesEnabled && isAdministrator) {
         saveActions.unshift({
           name: 'save-component',
-          title: __('Save as a component', 'elementor'),
+          title: __('Create component', 'elementor'),
           shortcut: "<span class=\"elementor-context-menu-list__item__shortcut__new-badge\">".concat(__('New', 'elementor'), "</span>"),
           callback: this.saveAsComponent.bind(this),
           isEnabled: function isEnabled() {
-            return !_this3.getContainer().isLocked();
+            return !_this8.getContainer().isLocked();
           }
         });
       }
@@ -1392,7 +1552,7 @@ function createAtomicElementBaseView(type) {
       };
     },
     getDroppableOptions: function getDroppableOptions() {
-      var _this4 = this;
+      var _this9 = this;
       var items = '> .elementor-element, > .elementor-empty-view .elementor-first-add';
       return {
         axis: null,
@@ -1404,7 +1564,7 @@ function createAtomicElementBaseView(type) {
         placeholderClass: 'elementor-sortable-placeholder elementor-widget-placeholder',
         hasDraggingOnChildClass: 'e-dragging-over',
         getDropContainer: function getDropContainer() {
-          return _this4.getContainer();
+          return _this9.getContainer();
         },
         onDropping: function onDropping(side, event) {
           event.stopPropagation();
@@ -1416,12 +1576,12 @@ function createAtomicElementBaseView(type) {
             containerElement = event.currentTarget.parentElement,
             elements = Array.from((containerElement === null || containerElement === void 0 ? void 0 : containerElement.querySelectorAll(':scope > .elementor-element')) || []);
           var targetIndex = elements.indexOf(event.currentTarget);
-          if (_this4.isPanelElement(draggedView, draggedElement)) {
+          if (_this9.isPanelElement(draggedView, draggedElement)) {
             var _elementorCommon;
-            if (_this4.draggingOnBottomOrRightSide(side) && !_this4.emptyViewIsCurrentlyBeingDraggedOver()) {
+            if (_this9.draggingOnBottomOrRightSide(side) && !_this9.emptyViewIsCurrentlyBeingDraggedOver()) {
               targetIndex++;
             }
-            _this4.onDrop(event, {
+            _this9.onDrop(event, {
               at: targetIndex
             });
             if ((_elementorCommon = elementorCommon) !== null && _elementorCommon !== void 0 && (_elementorCommon = _elementorCommon.eventsManager) !== null && _elementorCommon !== void 0 && _elementorCommon.dispatchEvent) {
@@ -1441,14 +1601,14 @@ function createAtomicElementBaseView(type) {
             }
             return;
           }
-          if (_this4.isParentElement(draggedView.getContainer().id)) {
+          if (_this9.isParentElement(draggedView.getContainer().id)) {
             return;
           }
-          if (_this4.emptyViewIsCurrentlyBeingDraggedOver()) {
-            _this4.moveDroppedItem(draggedView, 0);
+          if (_this9.emptyViewIsCurrentlyBeingDraggedOver()) {
+            _this9.moveDroppedItem(draggedView, 0);
             return;
           }
-          _this4.moveExistingElement(side, draggedView, containerElement, elements, targetIndex, draggedElement);
+          _this9.moveExistingElement(side, draggedView, containerElement, elements, targetIndex, draggedElement);
         }
       };
     },
@@ -1607,7 +1767,77 @@ function createAtomicElementBaseView(type) {
       return this.container.parent && 'document' === this.container.parent.id;
     },
     isFirstElementInStructure: function isFirstElementInStructure() {
+      if (!this.model.collection) {
+        return true;
+      }
       return 0 === this.model.collection.indexOf(this.model);
+    },
+    getDynamicLinkValue: function getDynamicLinkValue(name, settings) {
+      var simpleTransform = function simpleTransform(props) {
+        var transformed = Object.entries(props).map(function (_ref7) {
+          var _ref8 = (0, _slicedToArray2.default)(_ref7, 2),
+            settingKey = _ref8[0],
+            settingValue = _ref8[1];
+          var value = 'object' === (0, _typeof2.default)(settingValue) && 'value' in settingValue ? settingValue.value : settingValue;
+          return [settingKey, value];
+        });
+        return Object.fromEntries(transformed);
+      };
+      var getTagValue = function getTagValue() {
+        var _elementor$dynamicTag;
+        var tag = elementor.dynamicTags.createTag('v4-dynamic-tag', name, simpleTransform(settings));
+        if (!tag) {
+          return null;
+        }
+        return (_elementor$dynamicTag = elementor.dynamicTags.loadTagDataFromCache(tag)) !== null && _elementor$dynamicTag !== void 0 ? _elementor$dynamicTag : null;
+      };
+      var tagValue = getTagValue();
+      if (tagValue !== null) {
+        return tagValue;
+      }
+      return new Promise(function (resolve) {
+        elementor.dynamicTags.refreshCacheFromServer(function () {
+          resolve(getTagValue());
+        });
+      });
+    },
+    handleDynamicLink: function handleDynamicLink(linkValue) {
+      var _this0 = this;
+      var result = this.getDynamicLinkValue(linkValue.name, linkValue.settings);
+      if (!result) {
+        return null;
+      }
+      if ('string' === typeof result) {
+        return result;
+      }
+      result.then(function (href) {
+        _this0.el.removeAttribute('href');
+        var attribute = 'action' === linkValue.group ? 'data-action-link' : 'href';
+        _this0.el.setAttribute(attribute, href);
+      }).then(function () {
+        return _this0.dispatchPreviewEvent('elementor/element/render');
+      });
+      return null;
+    },
+    _resolvePropValue: function _resolvePropValue(prop, renderContext) {
+      var _window2, _registry$get;
+      if (!prop || (0, _typeof2.default)(prop) !== 'object') {
+        return prop;
+      }
+      if ('overridable' !== prop.$$type) {
+        return prop;
+      }
+      var registry = (_window2 = window) === null || _window2 === void 0 || (_window2 = _window2.elementorV2) === null || _window2 === void 0 || (_window2 = _window2.editorCanvas) === null || _window2 === void 0 ? void 0 : _window2.settingsTransformersRegistry;
+      var transformer = registry === null || registry === void 0 || (_registry$get = registry.get) === null || _registry$get === void 0 ? void 0 : _registry$get.call(registry, 'overridable');
+      if (!transformer) {
+        var _prop$value;
+        return (_prop$value = prop.value) === null || _prop$value === void 0 ? void 0 : _prop$value.origin_value;
+      }
+      var transformed = transformer(prop.value, {
+        key: 'overridable',
+        renderContext: renderContext
+      });
+      return this._resolvePropValue(transformed, renderContext);
     }
   });
   return AtomicElementView;
@@ -1963,6 +2193,19 @@ function regenerateLocalStyleIds(container) {
 
 /***/ }),
 
+/***/ "../node_modules/@babel/runtime/helpers/OverloadYield.js":
+/*!***************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/OverloadYield.js ***!
+  \***************************************************************/
+/***/ ((module) => {
+
+function _OverloadYield(e, d) {
+  this.v = e, this.k = d;
+}
+module.exports = _OverloadYield, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ "../node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
 /*!******************************************************************!*\
   !*** ../node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
@@ -2016,6 +2259,41 @@ function _assertThisInitialized(e) {
   return e;
 }
 module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/asyncToGenerator.js":
+/*!******************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+function asyncGeneratorStep(n, t, e, r, o, a, c) {
+  try {
+    var i = n[a](c),
+      u = i.value;
+  } catch (n) {
+    return void e(n);
+  }
+  i.done ? t(u) : Promise.resolve(u).then(r, o);
+}
+function _asyncToGenerator(n) {
+  return function () {
+    var t = this,
+      e = arguments;
+    return new Promise(function (r, o) {
+      var a = n.apply(t, e);
+      function _next(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "next", n);
+      }
+      function _throw(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "throw", n);
+      }
+      _next(void 0);
+    });
+  };
+}
+module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -2252,6 +2530,342 @@ module.exports = _readOnlyError, module.exports.__esModule = true, module.export
 
 /***/ }),
 
+/***/ "../node_modules/@babel/runtime/helpers/regenerator.js":
+/*!*************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regenerator.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var regeneratorDefine = __webpack_require__(/*! ./regeneratorDefine.js */ "../node_modules/@babel/runtime/helpers/regeneratorDefine.js");
+function _regenerator() {
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */
+  var e,
+    t,
+    r = "function" == typeof Symbol ? Symbol : {},
+    n = r.iterator || "@@iterator",
+    o = r.toStringTag || "@@toStringTag";
+  function i(r, n, o, i) {
+    var c = n && n.prototype instanceof Generator ? n : Generator,
+      u = Object.create(c.prototype);
+    return regeneratorDefine(u, "_invoke", function (r, n, o) {
+      var i,
+        c,
+        u,
+        f = 0,
+        p = o || [],
+        y = !1,
+        G = {
+          p: 0,
+          n: 0,
+          v: e,
+          a: d,
+          f: d.bind(e, 4),
+          d: function d(t, r) {
+            return i = t, c = 0, u = e, G.n = r, a;
+          }
+        };
+      function d(r, n) {
+        for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) {
+          var o,
+            i = p[t],
+            d = G.p,
+            l = i[2];
+          r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0));
+        }
+        if (o || r > 1) return a;
+        throw y = !0, n;
+      }
+      return function (o, p, l) {
+        if (f > 1) throw TypeError("Generator is already running");
+        for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) {
+          i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u);
+          try {
+            if (f = 2, i) {
+              if (c || (o = "next"), t = i[o]) {
+                if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object");
+                if (!t.done) return t;
+                u = t.value, c < 2 && (c = 0);
+              } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1);
+              i = e;
+            } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break;
+          } catch (t) {
+            i = e, c = 1, u = t;
+          } finally {
+            f = 1;
+          }
+        }
+        return {
+          value: t,
+          done: y
+        };
+      };
+    }(r, o, i), !0), u;
+  }
+  var a = {};
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+  t = Object.getPrototypeOf;
+  var c = [][n] ? t(t([][n]())) : (regeneratorDefine(t = {}, n, function () {
+      return this;
+    }), t),
+    u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c);
+  function f(e) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, regeneratorDefine(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e;
+  }
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, regeneratorDefine(u, "constructor", GeneratorFunctionPrototype), regeneratorDefine(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", regeneratorDefine(GeneratorFunctionPrototype, o, "GeneratorFunction"), regeneratorDefine(u), regeneratorDefine(u, o, "Generator"), regeneratorDefine(u, n, function () {
+    return this;
+  }), regeneratorDefine(u, "toString", function () {
+    return "[object Generator]";
+  }), (module.exports = _regenerator = function _regenerator() {
+    return {
+      w: i,
+      m: f
+    };
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _regenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorAsync.js":
+/*!******************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorAsync.js ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var regeneratorAsyncGen = __webpack_require__(/*! ./regeneratorAsyncGen.js */ "../node_modules/@babel/runtime/helpers/regeneratorAsyncGen.js");
+function _regeneratorAsync(n, e, r, t, o) {
+  var a = regeneratorAsyncGen(n, e, r, t, o);
+  return a.next().then(function (n) {
+    return n.done ? n.value : a.next();
+  });
+}
+module.exports = _regeneratorAsync, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorAsyncGen.js":
+/*!*********************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorAsyncGen.js ***!
+  \*********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var regenerator = __webpack_require__(/*! ./regenerator.js */ "../node_modules/@babel/runtime/helpers/regenerator.js");
+var regeneratorAsyncIterator = __webpack_require__(/*! ./regeneratorAsyncIterator.js */ "../node_modules/@babel/runtime/helpers/regeneratorAsyncIterator.js");
+function _regeneratorAsyncGen(r, e, t, o, n) {
+  return new regeneratorAsyncIterator(regenerator().w(r, e, t, o), n || Promise);
+}
+module.exports = _regeneratorAsyncGen, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorAsyncIterator.js":
+/*!**************************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorAsyncIterator.js ***!
+  \**************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var OverloadYield = __webpack_require__(/*! ./OverloadYield.js */ "../node_modules/@babel/runtime/helpers/OverloadYield.js");
+var regeneratorDefine = __webpack_require__(/*! ./regeneratorDefine.js */ "../node_modules/@babel/runtime/helpers/regeneratorDefine.js");
+function AsyncIterator(t, e) {
+  function n(r, o, i, f) {
+    try {
+      var c = t[r](o),
+        u = c.value;
+      return u instanceof OverloadYield ? e.resolve(u.v).then(function (t) {
+        n("next", t, i, f);
+      }, function (t) {
+        n("throw", t, i, f);
+      }) : e.resolve(u).then(function (t) {
+        c.value = t, i(c);
+      }, function (t) {
+        return n("throw", t, i, f);
+      });
+    } catch (t) {
+      f(t);
+    }
+  }
+  var r;
+  this.next || (regeneratorDefine(AsyncIterator.prototype), regeneratorDefine(AsyncIterator.prototype, "function" == typeof Symbol && Symbol.asyncIterator || "@asyncIterator", function () {
+    return this;
+  })), regeneratorDefine(this, "_invoke", function (t, o, i) {
+    function f() {
+      return new e(function (e, r) {
+        n(t, i, e, r);
+      });
+    }
+    return r = r ? r.then(f, f) : f();
+  }, !0);
+}
+module.exports = AsyncIterator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorDefine.js":
+/*!*******************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorDefine.js ***!
+  \*******************************************************************/
+/***/ ((module) => {
+
+function _regeneratorDefine(e, r, n, t) {
+  var i = Object.defineProperty;
+  try {
+    i({}, "", {});
+  } catch (e) {
+    i = 0;
+  }
+  module.exports = _regeneratorDefine = function regeneratorDefine(e, r, n, t) {
+    function o(r, n) {
+      _regeneratorDefine(e, r, function (e) {
+        return this._invoke(r, n, e);
+      });
+    }
+    r ? i ? i(e, r, {
+      value: n,
+      enumerable: !t,
+      configurable: !t,
+      writable: !t
+    }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2));
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _regeneratorDefine(e, r, n, t);
+}
+module.exports = _regeneratorDefine, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorKeys.js":
+/*!*****************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorKeys.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+function _regeneratorKeys(e) {
+  var n = Object(e),
+    r = [];
+  for (var t in n) r.unshift(t);
+  return function e() {
+    for (; r.length;) if ((t = r.pop()) in n) return e.value = t, e.done = !1, e;
+    return e.done = !0, e;
+  };
+}
+module.exports = _regeneratorKeys, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorRuntime.js":
+/*!********************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
+  \********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var OverloadYield = __webpack_require__(/*! ./OverloadYield.js */ "../node_modules/@babel/runtime/helpers/OverloadYield.js");
+var regenerator = __webpack_require__(/*! ./regenerator.js */ "../node_modules/@babel/runtime/helpers/regenerator.js");
+var regeneratorAsync = __webpack_require__(/*! ./regeneratorAsync.js */ "../node_modules/@babel/runtime/helpers/regeneratorAsync.js");
+var regeneratorAsyncGen = __webpack_require__(/*! ./regeneratorAsyncGen.js */ "../node_modules/@babel/runtime/helpers/regeneratorAsyncGen.js");
+var regeneratorAsyncIterator = __webpack_require__(/*! ./regeneratorAsyncIterator.js */ "../node_modules/@babel/runtime/helpers/regeneratorAsyncIterator.js");
+var regeneratorKeys = __webpack_require__(/*! ./regeneratorKeys.js */ "../node_modules/@babel/runtime/helpers/regeneratorKeys.js");
+var regeneratorValues = __webpack_require__(/*! ./regeneratorValues.js */ "../node_modules/@babel/runtime/helpers/regeneratorValues.js");
+function _regeneratorRuntime() {
+  "use strict";
+
+  var r = regenerator(),
+    e = r.m(_regeneratorRuntime),
+    t = (Object.getPrototypeOf ? Object.getPrototypeOf(e) : e.__proto__).constructor;
+  function n(r) {
+    var e = "function" == typeof r && r.constructor;
+    return !!e && (e === t || "GeneratorFunction" === (e.displayName || e.name));
+  }
+  var o = {
+    "throw": 1,
+    "return": 2,
+    "break": 3,
+    "continue": 3
+  };
+  function a(r) {
+    var e, t;
+    return function (n) {
+      e || (e = {
+        stop: function stop() {
+          return t(n.a, 2);
+        },
+        "catch": function _catch() {
+          return n.v;
+        },
+        abrupt: function abrupt(r, e) {
+          return t(n.a, o[r], e);
+        },
+        delegateYield: function delegateYield(r, o, a) {
+          return e.resultName = o, t(n.d, regeneratorValues(r), a);
+        },
+        finish: function finish(r) {
+          return t(n.f, r);
+        }
+      }, t = function t(r, _t, o) {
+        n.p = e.prev, n.n = e.next;
+        try {
+          return r(_t, o);
+        } finally {
+          e.next = n.n;
+        }
+      }), e.resultName && (e[e.resultName] = n.v, e.resultName = void 0), e.sent = n.v, e.next = n.n;
+      try {
+        return r.call(this, e);
+      } finally {
+        n.p = e.prev, n.n = e.next;
+      }
+    };
+  }
+  return (module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
+    return {
+      wrap: function wrap(e, t, n, o) {
+        return r.w(a(e), t, n, o && o.reverse());
+      },
+      isGeneratorFunction: n,
+      mark: r.m,
+      awrap: function awrap(r, e) {
+        return new OverloadYield(r, e);
+      },
+      AsyncIterator: regeneratorAsyncIterator,
+      async: function async(r, e, t, o, u) {
+        return (n(e) ? regeneratorAsyncGen : regeneratorAsync)(a(r), e, t, o, u);
+      },
+      keys: regeneratorKeys,
+      values: regeneratorValues
+    };
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/helpers/regeneratorValues.js":
+/*!*******************************************************************!*\
+  !*** ../node_modules/@babel/runtime/helpers/regeneratorValues.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ "../node_modules/@babel/runtime/helpers/typeof.js")["default"]);
+function _regeneratorValues(e) {
+  if (null != e) {
+    var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"],
+      r = 0;
+    if (t) return t.call(e);
+    if ("function" == typeof e.next) return e;
+    if (!isNaN(e.length)) return {
+      next: function next() {
+        return e && r >= e.length && (e = void 0), {
+          value: e && e[r++],
+          done: !e
+        };
+      }
+    };
+  }
+  throw new TypeError(_typeof(e) + " is not iterable");
+}
+module.exports = _regeneratorValues, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ "../node_modules/@babel/runtime/helpers/setPrototypeOf.js":
 /*!****************************************************************!*\
   !*** ../node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
@@ -2387,6 +3001,31 @@ function _unsupportedIterableToArray(r, a) {
   }
 }
 module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ "../node_modules/@babel/runtime/regenerator/index.js":
+/*!***********************************************************!*\
+  !*** ../node_modules/@babel/runtime/regenerator/index.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = __webpack_require__(/*! ../helpers/regeneratorRuntime */ "../node_modules/@babel/runtime/helpers/regeneratorRuntime.js")();
+module.exports = runtime;
+
+// Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
 
 /***/ }),
 
