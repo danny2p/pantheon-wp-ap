@@ -23,6 +23,7 @@ return [
 		'elementor-v2-mixpanel',
 		'elementor-v2-schema',
 		'elementor-v2-ui',
+		'elementor-v2-utils',
 		'react',
 		'wp-i18n',
 	],

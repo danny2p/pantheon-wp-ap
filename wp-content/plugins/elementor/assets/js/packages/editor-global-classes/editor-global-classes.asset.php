@@ -9,11 +9,13 @@ return [
 	'handle' => 'elementor-v2-editor-global-classes',
 	'deps' => [
 		'elementor-v2-editor',
+		'elementor-v2-editor-canvas',
 		'elementor-v2-editor-current-user',
 		'elementor-v2-editor-documents',
 		'elementor-v2-editor-editing-panel',
 		'elementor-v2-editor-mcp',
 		'elementor-v2-editor-panels',
+		'elementor-v2-editor-props',
 		'elementor-v2-editor-styles',
 		'elementor-v2-editor-styles-repository',
 		'elementor-v2-editor-ui',

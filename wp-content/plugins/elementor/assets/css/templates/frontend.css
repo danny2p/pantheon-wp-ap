@@ -1579,6 +1579,10 @@ body.rtl .e-con {
   --margin-right: auto;
   max-width: min(100%, var(--width));
 }
+:is([data-widget_type="e-component.default"], [data-widget_type="e-component.default"] > .elementor-section-wrap) > .e-con {
+  --margin-right: 0px;
+  --margin-left: 0px;
+}
 .e-con .elementor-widget.elementor-widget {
   margin-block-end: 0;
 }
