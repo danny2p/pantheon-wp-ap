@@ -56,10 +56,6 @@
 
 /*! ../utils.js */
 
-/*! ./../core/settle.js */
-
-/*! ./../utils.js */
-
 /*! ./AxiosError.js */
 
 /*! ./AxiosHeaders.js */
