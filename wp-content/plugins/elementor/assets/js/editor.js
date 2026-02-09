@@ -10029,7 +10029,6 @@ module.exports = Marionette.ItemView.extend({
   template: '#tmpl-elementor-template-library-connect-states',
   id: 'elementor-template-library-connect-states',
   ui: {
-    connect: '#elementor-template-library-connect__button',
     selectSourceFilter: '.elementor-template-library-filter-select-source .source-option',
     title: '.elementor-template-library-blank-title',
     message: '.elementor-template-library-blank-message',
@@ -10049,7 +10048,7 @@ module.exports = Marionette.ItemView.extend({
         title: (_elementorAppConfig$c = (_elementorAppConfig = elementorAppConfig) === null || _elementorAppConfig === void 0 || (_elementorAppConfig = _elementorAppConfig['cloud-library']) === null || _elementorAppConfig === void 0 ? void 0 : _elementorAppConfig.library_connect_title_copy) !== null && _elementorAppConfig$c !== void 0 ? _elementorAppConfig$c : __('Connect to your Elementor account', 'elementor'),
         message: (_elementorAppConfig$c2 = (_elementorAppConfig2 = elementorAppConfig) === null || _elementorAppConfig2 === void 0 || (_elementorAppConfig2 = _elementorAppConfig2['cloud-library']) === null || _elementorAppConfig2 === void 0 ? void 0 : _elementorAppConfig2.library_connect_sub_title_copy) !== null && _elementorAppConfig$c2 !== void 0 ? _elementorAppConfig$c2 : __('Then you can find all your templates in one convenient library.', 'elementor'),
         icon: defaultIcon,
-        button: "<a class=\"elementor-button e-primary\" href=\"".concat((_elementorAppConfig3 = elementorAppConfig) === null || _elementorAppConfig3 === void 0 || (_elementorAppConfig3 = _elementorAppConfig3['cloud-library']) === null || _elementorAppConfig3 === void 0 ? void 0 : _elementorAppConfig3.library_connect_url, "\" target=\"_blank\">").concat((_elementorAppConfig$c3 = (_elementorAppConfig4 = elementorAppConfig) === null || _elementorAppConfig4 === void 0 || (_elementorAppConfig4 = _elementorAppConfig4['cloud-library']) === null || _elementorAppConfig4 === void 0 ? void 0 : _elementorAppConfig4.library_connect_button_copy) !== null && _elementorAppConfig$c3 !== void 0 ? _elementorAppConfig$c3 : __('Connect', 'elementor'), "</a>")
+        button: "<a class=\"elementor-button e-primary connect-button\" href=\"".concat((_elementorAppConfig3 = elementorAppConfig) === null || _elementorAppConfig3 === void 0 || (_elementorAppConfig3 = _elementorAppConfig3['cloud-library']) === null || _elementorAppConfig3 === void 0 ? void 0 : _elementorAppConfig3.library_connect_url, "\" target=\"_blank\">").concat((_elementorAppConfig$c3 = (_elementorAppConfig4 = elementorAppConfig) === null || _elementorAppConfig4 === void 0 || (_elementorAppConfig4 = _elementorAppConfig4['cloud-library']) === null || _elementorAppConfig4 === void 0 ? void 0 : _elementorAppConfig4.library_connect_button_copy) !== null && _elementorAppConfig$c3 !== void 0 ? _elementorAppConfig$c3 : __('Connect', 'elementor'), "</a>")
       },
       connectedNoQuota: {
         title: __('It’s time to level up', 'elementor'),
@@ -10121,13 +10120,21 @@ module.exports = Marionette.ItemView.extend({
     this.ui.icon.html(modeStrings.icon);
   },
   handleElementorConnect: function handleElementorConnect() {
-    this.ui.connect.elementorConnect({
+    var $connectButton = this.$el.find('.connect-button');
+    if (!$connectButton.length) {
+      return;
+    }
+    $connectButton.elementorConnect({
+      popup: {
+        width: 726,
+        height: 534
+      },
       success: function success() {
         elementor.config.library_connect.is_connected = true;
-        $e.run('library/close');
         elementor.notifications.showToast({
           message: __('Connected successfully.', 'elementor')
         });
+        $e.routes.refreshContainer('library');
       },
       error: function error() {
         elementor.config.library_connect.is_connected = false;

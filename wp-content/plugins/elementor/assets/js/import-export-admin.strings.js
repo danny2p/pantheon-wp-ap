@@ -113,9 +113,6 @@ __( 'Version' ) } ${ cellLinkProps.text }` } <Icon className="eicon-editor-exter
 
 		if ( withStatus ) {
 			headers.splice( 1, 0, 'Status' );
-__( 'Importing your content, templates and site settings', 'elementor' );
-__( 'This allows Elementor to scan your SVGs for malicious content. Otherwise, you can skip any SVGs in this import.', 'elementor' );
-__( 'Nothing to worry about, just continue without importing SVGs or go back and start the import again.', 'elementor' );
 __( 'Previous', 'elementor' );
 __( 'Next', 'elementor' );
 __( 'Learn More', 'elementor' );
@@ -124,6 +121,9 @@ __( 'Parts of this kit overlap with your site’s templates, design and settings
 __( 'Note:', 'elementor' );
 __( "Your site's homepage will be determined by the kit. You can change this later.", 'elementor' );
 __( 'Select the items you want to keep and apply:', 'elementor' );
+__( 'Importing your content, templates and site settings', 'elementor' );
+__( 'This allows Elementor to scan your SVGs for malicious content. Otherwise, you can skip any SVGs in this import.', 'elementor' );
+__( 'Nothing to worry about, just continue without importing SVGs or go back and start the import again.', 'elementor' );
 __( 'Activating plugins:', 'elementor' );
 __( 'Select which plugins to include', 'elementor' );
 __( 'All items are already selected by default. Uncheck the ones you don\'t want.', 'elementor' );
@@ -180,10 +180,10 @@ __( 'Is your Elementor Pro ready?', 'elementor' );
 __( 'If you’ve purchased, installed & activated Elementor Pro, we can continue importing all the parts of this site.', 'elementor' );
 __( 'Yes', 'elementor' );
 __( 'Not yet', 'elementor' );
-__( 'Previous', 'elementor' );
-__( 'Next', 'elementor' );
 __( 'Plugins to add:', 'elementor' );
 __( 'Missing Required Plugins:', 'elementor' );
+__( 'Previous', 'elementor' );
+__( 'Next', 'elementor' );
 __( 'Plugins you already have:', 'elementor' );
 __( 'Previous', 'elementor' );
 __( 'Import', 'elementor' );
@@ -207,8 +207,8 @@ __( 'Save to library', 'elementor' );
 __( 'Save to library', 'elementor' );
 __( 'Back', 'elementor' );
 __( 'Export as .zip', 'elementor' );
-__( 'Description (Optional)', 'elementor' );
-__( 'Type description here...', 'elementor' );
 __( 'Must add a name', 'elementor' );
 __( 'Name', 'elementor' );
 __( 'Type name here...', 'elementor' );
+__( 'Description (Optional)', 'elementor' );
+__( 'Type description here...', 'elementor' );

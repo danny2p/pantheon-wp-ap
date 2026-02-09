@@ -4,7 +4,7 @@ Tags: page builder, editor, landing page, drag-and-drop, elementor,
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.35.0
+Stable tag: 3.35.3
 Beta tag: 3.35.0-beta4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -351,6 +351,20 @@ You can also add a new language via [translate.wordpress.org](https://go.element
 6. **Motion Effects** - Add entrance animations and transitions to any element in your website to captivate visitors.
 
 == Changelog ==
+
+= 3.35.3 - 2026-02-05 =
+
+* Fix: Fatal error appears in dashboard widget in WordPress Admin ([#34663](https://github.com/elementor/elementor/issues/34663), [#34659](https://github.com/elementor/elementor/issues/34659))
+
+= 3.35.2 - 2026-02-05 =
+
+* Fix: Editor menu in WordPress admin displays incorrectly in RTL
+
+= 3.35.1 - 2026-02-04 =
+
+* Fix: Editor Top Bar does not appear in various scenarios ([#34623](https://github.com/elementor/elementor/issues/34623))
+* Fix: Fatal error when the PHP `mbstring` module is missing
+* Fix: General UI issues in Editor screens in WordPress Admin
 
 = 3.35.0 - 2026-02-02 =
 

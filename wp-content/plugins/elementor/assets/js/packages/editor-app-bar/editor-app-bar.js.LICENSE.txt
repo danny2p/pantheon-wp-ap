@@ -140,6 +140,8 @@
 
 /*! @elementor/editor-v1-adapters */
 
+/*! @elementor/events */
+
 /*! @elementor/http-client */
 
 /*! @elementor/icons */
@@ -147,8 +149,6 @@
 /*! @elementor/locations */
 
 /*! @elementor/menus */
-
-/*! @elementor/mixpanel */
 
 /*! @elementor/ui */
 
@@ -180,12 +180,12 @@
   !*** external ["elementorV2","editor"] ***!
   \*****************************************/
 
-/*!*******************************************!*\
-  !*** external ["elementorV2","editorUi"] ***!
-  \*******************************************/
+/*!*****************************************!*\
+  !*** external ["elementorV2","events"] ***!
+  \*****************************************/
 
 /*!*******************************************!*\
-  !*** external ["elementorV2","mixpanel"] ***!
+  !*** external ["elementorV2","editorUi"] ***!
   \*******************************************/
 
 /*!********************************************!*\
