@@ -19,6 +19,8 @@ __( 'Variables Manager', 'elementor' );
 __( 'Variables', 'elementor' );
 __( 'Search', 'elementor' );
 /* translators: %s: Variable Type. */
+__( 'Upgrade to continue creating and editing %s variables.', 'elementor' );
+/* translators: %s: Variable Type. */
 __( 'No %s variables yet', 'elementor' );
 /* translators: %s: Variable Type. */
 __( 'Upgrade to create %s variables and maintain consistent element sizing.', 'elementor' );

@@ -73,32 +73,12 @@ class Assets {
 	}
 
 	/**
-	 * Welcome screen completed
-	 * @return bool
-	 */
-	private function welcome_screen_completed(): bool {
-		return (bool) get_option( Fields::SETTING_PREFIX . 'welcome_screen_completed' );
-	}
-
-	/**
 	 * Enqueue app assets
 	 * @param string $package_version
 	 * @return void
 	 */
 	private function enqueue_app_assets( string $package_version ) {
-		if ( ! $this->welcome_screen_completed() ) {
-			// Load the asset file to get dependencies and version
-			$asset_file = ELEMENTOR_ONE_ASSETS_PATH . 'welcome.asset.php';
-			$asset = file_exists( $asset_file ) ? include $asset_file : [
-				'dependencies' => [],
-				'version' => $package_version,
-			];
-
-			wp_enqueue_script( 'elementor-one-admin', ELEMENTOR_ONE_ASSETS_URL . 'welcome.js', $asset['dependencies'], $asset['version'], true );
-			wp_enqueue_style( 'elementor-one-admin', ELEMENTOR_ONE_ASSETS_URL . 'style-welcome.css', [], $package_version );
-		} else {
-			wp_enqueue_script( 'elementor-one-admin', ELEMENTOR_ONE_CLIENT_APP_URL, [], $package_version, true );
-		}
+		wp_enqueue_script( 'elementor-one-admin', ELEMENTOR_ONE_CLIENT_APP_URL, [], $package_version, true );
 	}
 
 	/**

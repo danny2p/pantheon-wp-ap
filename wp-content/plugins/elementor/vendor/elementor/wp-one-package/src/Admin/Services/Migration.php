@@ -226,7 +226,10 @@ class Migration {
 
 		switch ( $plugin_slug ) {
 			case SupportedPlugins::ELEMENTOR:
-				self::update_editor_data( Editor::CONNECT_APP_LIBRARY );
+				$is_connected = (bool) Editor::instance()->get_site_owner_connect_data();
+				if ( ! $is_connected ) {
+					self::update_editor_data( Editor::CONNECT_APP_LIBRARY );
+				}
 				break;
 			case SupportedPlugins::ELEMENTOR_PRO:
 				$is_connected = (bool) Editor::get_active_license_key();
@@ -240,7 +243,8 @@ class Migration {
 				if ( ! $facade ) {
 					throw new MigrationException( 'Plugin version not supported.', \WP_Http::CONFLICT );
 				}
-				$is_connected = $facade->utils()->is_connected();
+				$is_using_original_instance = $facade->get_config( 'plugin_slug' ) === $plugin_slug;
+				$is_connected = $facade->utils()->is_connected() && $is_using_original_instance;
 				if ( $is_connected ) {
 					if ( ! $force ) {
 						throw new MigrationException( 'Plugin is already connected.', \WP_Http::UNPROCESSABLE_ENTITY );

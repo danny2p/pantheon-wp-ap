@@ -6,6 +6,8 @@
 
 /*! ../../../hooks/use-prop-variables */
 
+/*! ../../../hooks/use-quota-permissions */
+
 /*! ../../../hooks/use-variable-bound-prop */
 
 /*! ../../../service */
@@ -20,9 +22,13 @@
 
 /*! ../../context/variable-selection-popover.context */
 
+/*! ../../fields/label-field */
+
 /*! ../../hooks/use-permissions */
 
 /*! ../../hooks/use-quota-permissions */
+
+/*! ../../ui/variable-promotion-chip */
 
 /*! ../../utils/tracking */
 
@@ -74,8 +80,6 @@
 
 /*! ../style-variables-repository */
 
-/*! ../sync/license-info */
-
 /*! ../tags/assigned-tag */
 
 /*! ../tags/warning-variable-tag */
@@ -90,6 +94,8 @@
 
 /*! ../ui/no-search-results */
 
+/*! ../ui/variable-promotion-chip */
+
 /*! ../utils/filter-by-search */
 
 /*! ../utils/tracking */
@@ -97,6 +103,8 @@
 /*! ../utils/validations */
 
 /*! ../utils/variables-to-list */
+
+/*! ../variable-editable-cell */
 
 /*! ../variables-registry/variable-type-registry */
 
@@ -176,9 +184,9 @@
 
 /*! ./ui/styled-menu-list */
 
-/*! ./ui/variable-edit-menu */
-
 /*! ./ui/variable-table-cell */
+
+/*! ./ui/variable-table-row */
 
 /*! ./use-prop-variables */
 
@@ -190,7 +198,9 @@
 
 /*! ./variable-edit */
 
-/*! ./variable-editable-cell */
+/*! ./variable-edit-menu */
+
+/*! ./variable-table-cell */
 
 /*! ./variables-manager-create-menu */
 
@@ -346,10 +356,6 @@
 
 /*!**************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/sync/enqueue-font.ts ***!
-  \**************************************************************************/
-
-/*!**************************************************************************!*\
-  !*** ./packages/packages/core/editor-variables/src/sync/license-info.ts ***!
   \**************************************************************************/
 
 /*!**************************************************************************!*\
@@ -525,6 +531,10 @@
   \***********************************************************************************************/
 
 /*!***********************************************************************************************!*\
+  !*** ./packages/packages/core/editor-variables/src/components/ui/variable-promotion-chip.tsx ***!
+  \***********************************************************************************************/
+
+/*!***********************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/variable-selection-popover.tsx ***!
   \***********************************************************************************************/
 
@@ -582,6 +592,10 @@
 
 /*!************************************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/variables-manager/ui/variable-edit-menu.tsx ***!
+  \************************************************************************************************************/
+
+/*!************************************************************************************************************!*\
+  !*** ./packages/packages/core/editor-variables/src/components/variables-manager/ui/variable-table-row.tsx ***!
   \************************************************************************************************************/
 
 /*!*************************************************************************************************************!*\

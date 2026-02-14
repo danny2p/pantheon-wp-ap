@@ -142,12 +142,11 @@ class Utils {
 
 	/**
 	 * Get authorize URL
-	 * @return array|null
+	 * @return string
 	 */
-	public static function get_authorize_url(): ?array {
+	public static function get_authorize_url(): ?string {
 		$facade = self::get_one_connect();
 		$client_id = $facade->data()->get_client_id();
-		$is_new_client = empty( $client_id );
 
 		if ( ! $client_id ) {
 			try {
@@ -157,10 +156,7 @@ class Utils {
 			}
 		}
 
-		return [
-			'authorize_url' => $facade->utils()->get_authorize_url( $client_id ),
-			'is_new_client' => $is_new_client,
-		];
+		return $facade->utils()->get_authorize_url( $client_id );
 	}
 
 	/**
@@ -184,5 +180,19 @@ class Utils {
 		$decoded = json_decode( $payload, true );
 
 		return is_array( $decoded ) ? $decoded : null;
+	}
+
+	/**
+	 * Check if JWT token is expired
+	 * @param string $jwt
+	 * @param int $buffer Buffer in seconds to account for clock skew
+	 * @return bool
+	 */
+	public static function is_jwt_expired( string $jwt, int $buffer = 30 ): bool {
+		$jwt_payload = self::decode_jwt( $jwt );
+		if ( $jwt_payload && isset( $jwt_payload['exp'] ) ) {
+			return ( time() + $buffer ) >= $jwt_payload['exp'];
+		}
+		return false;
 	}
 }

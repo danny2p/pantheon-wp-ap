@@ -2724,13 +2724,20 @@ fieldset:disabled a.e-button {
     aspect-ratio: 16/9;
   }
 }
-.wrap.elementor-admin-page-license .elementor-license-box {
+#wpcontent .wrap.elementor-admin-page-license {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box {
+  width: 100%;
   max-width: 600px;
   background: white;
   margin: 20px 0;
   padding: 20px 20px;
+  box-sizing: border-box;
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2740,77 +2747,77 @@ fieldset:disabled a.e-button {
   border-block-end: 1px solid #eee;
 }
 @media screen and (max-width: 782px) {
-  .wrap.elementor-admin-page-license .elementor-license-box h3 {
+  #wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 {
     flex-wrap: wrap;
     gap: 15px;
   }
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 span {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 span {
   flex-grow: 1;
   padding-inline-start: 5px;
 }
-.wrap.elementor-admin-page-license .elementor-license-box h3 small {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box h3 small {
   font-size: 13px;
   font-weight: normal;
 }
-.wrap.elementor-admin-page-license .elementor-license-box label {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box label {
   display: block;
   font-size: 1.3em;
   font-weight: 600;
   margin: 1em 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .button {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .button {
   height: 30px;
   margin-inline-start: 15px;
   margin-block-end: 0;
 }
 @media screen and (max-width: 782px) {
-  .wrap.elementor-admin-page-license .elementor-license-box .button {
+  #wpcontent .wrap.elementor-admin-page-license .elementor-license-box .button {
     margin-inline: 0;
   }
 }
-.wrap.elementor-admin-page-license .elementor-license-box p.description {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box p.description {
   margin: 10px 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, #wpcontent .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 @media screen and (max-width: 782px) {
-  .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
+  #wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch, #wpcontent .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch {
     align-items: flex-start;
   }
-  .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch .button, .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch .button {
+  #wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-stretch .button, #wpcontent .wrap.elementor-admin-page-license .elementor-license-box.e-row-stretch .button {
     margin-inline-start: 10px;
   }
 }
-.wrap.elementor-admin-page-license .elementor-license-box .e-row-divider-bottom {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .e-row-divider-bottom {
   padding-block-end: 15px;
   border-block-end: 1px solid #eeeeee;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link {
   color: #93003f;
   border-color: #93003f;
 }
-.wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link:hover {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box .elementor-upgrade-link:hover {
   color: #fff;
   background-color: #93003f;
 }
-.wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion {
   display: flex;
   flex-direction: row;
   gap: 40px;
   justify-content: start;
   align-items: center;
 }
-.wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion h2 {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion h2 {
   line-height: 24px;
 }
-.wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion .elementor-box-action {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion .elementor-box-action {
   justify-content: flex-start;
 }
-.wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion .button-upgrade {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion .button-upgrade {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -2820,18 +2827,18 @@ fieldset:disabled a.e-button {
   background-color: #93003f;
   border: 0;
 }
-.wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion > img {
+#wpcontent .wrap.elementor-admin-page-license .elementor-license-box.elementor-pro-connect-promotion > img {
   width: 45%;
 }
-.wrap.elementor-admin-page-license .elementor-box-action {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action {
   display: flex;
   justify-content: flex-end;
 }
-.wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link {
   color: #72777c;
   margin-inline-end: 15px;
 }
-.wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link:hover {
+#wpcontent .wrap.elementor-admin-page-license .elementor-box-action .elementor-manually-link:hover {
   color: inherit;
 }
 
