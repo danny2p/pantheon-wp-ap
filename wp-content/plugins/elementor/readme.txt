@@ -4,7 +4,7 @@ Tags: page builder, editor, landing page, drag-and-drop, elementor,
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 3.35.3
+Stable tag: 3.35.4
 Beta tag: 3.35.0-beta4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -351,6 +351,12 @@ You can also add a new language via [translate.wordpress.org](https://go.element
 6. **Motion Effects** - Add entrance animations and transitions to any element in your website to captivate visitors.
 
 == Changelog ==
+
+= 3.35.4 - 2026-02-11 =
+
+* Fix: License activation issues in various scenarios
+* Fix: General UI issues in Editor screens in WordPress Admin
+* Fix: Inline editing UI issues on canvas - Editor V4
 
 = 3.35.3 - 2026-02-05 =
 

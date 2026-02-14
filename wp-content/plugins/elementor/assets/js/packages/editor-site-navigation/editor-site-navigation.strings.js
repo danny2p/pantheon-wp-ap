@@ -1,5 +1,5 @@
-__( 'Pages', 'elementor' );
 __( 'Page', 'elementor' );
+__( 'Pages', 'elementor' );
 __( 'Pages', 'elementor' );
 __( 'Recent', 'elementor' );
 __( 'There are no other pages or templates on this site yet.', 'elementor' );

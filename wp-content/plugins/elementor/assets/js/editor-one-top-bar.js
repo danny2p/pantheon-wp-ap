@@ -54,6 +54,26 @@ var _default = exports["default"] = {
 
 /***/ }),
 
+/***/ "../modules/editor-one/assets/js/shared/is-rtl.js":
+/*!********************************************************!*\
+  !*** ../modules/editor-one/assets/js/shared/is-rtl.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = isRTL;
+function isRTL() {
+  var _elementorCommon$conf, _elementorCommon;
+  return (_elementorCommon$conf = (_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.config) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.isRTL) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
+}
+
+/***/ }),
+
 /***/ "../modules/editor-one/assets/js/sidebar-navigation/components/hooks/use-admin-menu-offset.js":
 /*!****************************************************************************************************!*\
   !*** ../modules/editor-one/assets/js/sidebar-navigation/components/hooks/use-admin-menu-offset.js ***!
@@ -63,17 +83,16 @@ var _default = exports["default"] = {
 "use strict";
 
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.useAdminMenuOffset = void 0;
 var _element = __webpack_require__(/*! @wordpress/element */ "../node_modules/@wordpress/element/build-module/index.js");
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../../../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var ADMIN_MENU_WRAP_ID = 'adminmenuwrap';
 var WPCONTENT_ID = 'wpcontent';
 var INITIALIZED_DATA_ATTR = 'data-editor-one-offset-initialized';
-var getIsRTL = function getIsRTL() {
-  return 'rtl' === document.dir || document.body.classList.contains('rtl');
-};
 var useAdminMenuOffset = exports.useAdminMenuOffset = function useAdminMenuOffset() {
   var cleanupRef = (0, _element.useRef)(null);
   (0, _element.useEffect)(function () {
@@ -83,9 +102,9 @@ var useAdminMenuOffset = exports.useAdminMenuOffset = function useAdminMenuOffse
       return;
     }
     var updateOffset = function updateOffset() {
-      var isRTL = getIsRTL();
+      var isRtlLanguage = (0, _isRtl.default)();
       var rect = adminMenuWrap.getBoundingClientRect();
-      var offset = isRTL ? window.innerWidth - rect.left : rect.right;
+      var offset = isRtlLanguage ? document.documentElement.clientWidth - rect.left : rect.right;
       wpcontent.style.setProperty('--editor-one-sidebar-left-offset', "".concat(offset, "px"));
     };
     updateOffset();
@@ -4546,18 +4565,18 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 var _react2 = _interopRequireDefault(__webpack_require__(/*! elementor-utils/react */ "../assets/dev/js/utils/react.js"));
 var _elementorOneAssets = __webpack_require__(/*! @elementor/elementor-one-assets */ "../node_modules/@elementor/elementor-one-assets/index.cjs.js");
 var _useAdminMenuOffset = __webpack_require__(/*! ../sidebar-navigation/components/hooks/use-admin-menu-offset */ "../modules/editor-one/assets/js/sidebar-navigation/components/hooks/use-admin-menu-offset.js");
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var App = function App() {
-  var _elementorCommon$conf, _elementorCommon;
   var _window = window,
     _window$elementorOneT = _window.elementorOneTopBarConfig,
     version = _window$elementorOneT.version,
     title = _window$elementorOneT.title,
     environment = _window$elementorOneT.environment;
-  var isRTL = (_elementorCommon$conf = (_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.config) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.isRTL) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
+  var isRtlLanguage = (0, _isRtl.default)();
   (0, _useAdminMenuOffset.useAdminMenuOffset)();
   return /*#__PURE__*/_react.default.createElement(_elementorOneAssets.ElementorOneAssetsProvider, {
     env: environment,
-    isRTL: isRTL
+    isRTL: isRtlLanguage
   }, /*#__PURE__*/_react.default.createElement(_elementorOneAssets.ElementorOneHeader, {
     appSettings: {
       slug: 'elementor',

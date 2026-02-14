@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class SupportedPlugins extends BasicEnum {
 	const ANGIE = 'angie';
+	const MANAGE = 'manage';
 	const ELEMENTOR = 'elementor';
 	const ELEMENTOR_PRO = 'elementor-pro';
 	const SITE_MAILER = 'site-mailer';

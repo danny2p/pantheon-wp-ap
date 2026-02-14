@@ -5,3 +5,4 @@ __( 'Got it', 'elementor' );
 __( 'Upgrade Now', 'elementor' );
 __( 'Not now', 'elementor' );
 __( 'Delete', 'elementor' );
+__( 'Upgrade now', 'elementor' );

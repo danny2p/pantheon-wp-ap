@@ -54,6 +54,26 @@ var _default = exports["default"] = {
 
 /***/ }),
 
+/***/ "../modules/editor-one/assets/js/shared/is-rtl.js":
+/*!********************************************************!*\
+  !*** ../modules/editor-one/assets/js/shared/is-rtl.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = isRTL;
+function isRTL() {
+  var _elementorCommon$conf, _elementorCommon;
+  return (_elementorCommon$conf = (_elementorCommon = elementorCommon) === null || _elementorCommon === void 0 || (_elementorCommon = _elementorCommon.config) === null || _elementorCommon === void 0 ? void 0 : _elementorCommon.isRTL) !== null && _elementorCommon$conf !== void 0 ? _elementorCommon$conf : false;
+}
+
+/***/ }),
+
 /***/ "../modules/editor-one/assets/js/sidebar-navigation/classes/menu-active-state-resolver.js":
 /*!************************************************************************************************!*\
   !*** ../modules/editor-one/assets/js/sidebar-navigation/classes/menu-active-state-resolver.js ***!
@@ -209,12 +229,14 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
 var _shared = __webpack_require__(/*! ../shared */ "../modules/editor-one/assets/js/sidebar-navigation/components/shared/index.js");
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../../../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var CollapsedMenuItemTooltip = function CollapsedMenuItemTooltip(_ref) {
   var item = _ref.item,
     isActive = _ref.isActive,
     onClick = _ref.onClick,
     IconComponent = _ref.IconComponent,
     onMouseEnter = _ref.onMouseEnter;
+  var isRtlLanguage = (0, _isRtl.default)();
   return /*#__PURE__*/_react.default.createElement(_ui.ListItem, {
     disablePadding: true,
     dense: true,
@@ -222,7 +244,7 @@ var CollapsedMenuItemTooltip = function CollapsedMenuItemTooltip(_ref) {
     onMouseEnter: onMouseEnter
   }, /*#__PURE__*/_react.default.createElement(_ui.Tooltip, {
     title: item.label,
-    placement: "right"
+    placement: isRtlLanguage ? 'left' : 'right'
   }, /*#__PURE__*/_react.default.createElement(_shared.MenuItemButton, {
     onClick: onClick,
     selected: isActive,
@@ -727,17 +749,16 @@ var SearchButton = exports.SearchButton = (0, _ui.styled)(_ui.IconButton)(functi
 "use strict";
 
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.useAdminMenuOffset = void 0;
 var _element = __webpack_require__(/*! @wordpress/element */ "../node_modules/@wordpress/element/build-module/index.js");
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../../../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var ADMIN_MENU_WRAP_ID = 'adminmenuwrap';
 var WPCONTENT_ID = 'wpcontent';
 var INITIALIZED_DATA_ATTR = 'data-editor-one-offset-initialized';
-var getIsRTL = function getIsRTL() {
-  return 'rtl' === document.dir || document.body.classList.contains('rtl');
-};
 var useAdminMenuOffset = exports.useAdminMenuOffset = function useAdminMenuOffset() {
   var cleanupRef = (0, _element.useRef)(null);
   (0, _element.useEffect)(function () {
@@ -747,9 +768,9 @@ var useAdminMenuOffset = exports.useAdminMenuOffset = function useAdminMenuOffse
       return;
     }
     var updateOffset = function updateOffset() {
-      var isRTL = getIsRTL();
+      var isRtlLanguage = (0, _isRtl.default)();
       var rect = adminMenuWrap.getBoundingClientRect();
-      var offset = isRTL ? window.innerWidth - rect.left : rect.right;
+      var offset = isRtlLanguage ? document.documentElement.clientWidth - rect.left : rect.right;
       wpcontent.style.setProperty('--editor-one-sidebar-left-offset', "".concat(offset, "px"));
     };
     updateOffset();
@@ -1302,6 +1323,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports.StyledPopover = exports.SiteIconBox = exports.ScrollableContent = exports.PopoverTitle = exports.PopoverListItemButton = exports.PopoverContent = exports.NavContainer = exports.MenuList = exports.MenuItemButton = exports.MenuIcon = exports.ExpandIcon = exports.CollapsedMenuItemContainer = exports.CollapsedIconButton = exports.CollapsedHeaderContainer = exports.CollapseButton = exports.ChildMenuItemButton = exports.ChildListItem = void 0;
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _ChevronDownSmallIcon = _interopRequireDefault(__webpack_require__(/*! @elementor/icons/ChevronDownSmallIcon */ "@elementor/icons/ChevronDownSmallIcon"));
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../../../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var NavContainer = exports.NavContainer = (0, _ui.styled)(_ui.Box)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -1336,13 +1358,13 @@ var CollapseButton = exports.CollapseButton = (0, _ui.styled)(_ui.IconButton, {
 })(function (_ref3) {
   var theme = _ref3.theme,
     expanded = _ref3.expanded;
-  var isRtl = 'rtl' === theme.direction;
+  var isRtlLanguage = (0, _isRtl.default)();
   var transform = 'none';
-  if (expanded && isRtl) {
+  if (expanded && isRtlLanguage) {
     transform = 'rotate(180deg) scaleX(-1)';
   } else if (expanded) {
     transform = 'rotate(180deg)';
-  } else if (isRtl) {
+  } else if (isRtlLanguage) {
     transform = 'scaleX(-1)';
   }
   return {
@@ -5499,10 +5521,12 @@ var _react2 = _interopRequireDefault(__webpack_require__(/*! elementor-utils/rea
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _index = _interopRequireDefault(__webpack_require__(/*! ./components/index */ "../modules/editor-one/assets/js/sidebar-navigation/components/index.js"));
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _isRtl = _interopRequireDefault(__webpack_require__(/*! ../shared/is-rtl */ "../modules/editor-one/assets/js/shared/is-rtl.js"));
 var App = function App(_ref) {
   var config = _ref.config;
+  var isRtlLanguage = (0, _isRtl.default)();
   return /*#__PURE__*/_react.default.createElement(_ui.DirectionProvider, {
-    rtl: config.isRTL
+    rtl: isRtlLanguage
   }, /*#__PURE__*/_react.default.createElement(_ui.LocalizationProvider, null, /*#__PURE__*/_react.default.createElement(_ui.ThemeProvider, {
     colorScheme: "light"
   }, /*#__PURE__*/_react.default.createElement(_index.default, {
