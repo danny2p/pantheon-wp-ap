@@ -1347,8 +1347,8 @@ function ProgressBar() {
   var _useContext = (0, _react.useContext)(_context.OnboardingContext),
     state = _useContext.state,
     navigate = (0, _router.useNavigate)(),
-    experiment201Variant = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT201_VARIANT),
-    isExperiment201VariantB = 'B' === experiment201Variant,
+    experiment202Variant = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT202_VARIANT),
+    isExperiment202VariantB = 'B' === experiment202Variant,
     experiment401Variant = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT401_VARIANT),
     isExperiment401VariantB = 'B' === experiment401Variant,
     experiment402Variant = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT402_VARIANT),
@@ -1363,7 +1363,7 @@ function ProgressBar() {
   if (!elementorAppConfig.onboarding.helloActivated) {
     progressBarItemsConfig.push({
       id: 'hello',
-      title: isExperiment201VariantB ? __('Choose Theme', 'elementor') : __('Hello Biz Theme', 'elementor'),
+      title: isExperiment202VariantB ? __('Hello Biz Theme', 'elementor') : __('Choose Theme', 'elementor'),
       route: 'hello'
     });
   }
@@ -1597,49 +1597,9 @@ ThemeSelectionCard.propTypes = {
 
 /***/ }),
 
-/***/ "../app/modules/onboarding/assets/js/components/theme-selection-content-a.js":
-/*!***********************************************************************************!*\
-  !*** ../app/modules/onboarding/assets/js/components/theme-selection-content-a.js ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = ThemeSelectionContentA;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
-var _pageContentLayout = _interopRequireDefault(__webpack_require__(/*! ./layout/page-content-layout */ "../app/modules/onboarding/assets/js/components/layout/page-content-layout.js"));
-function ThemeSelectionContentA(_ref) {
-  var actionButton = _ref.actionButton,
-    skipButton = _ref.skipButton,
-    noticeState = _ref.noticeState;
-  return /*#__PURE__*/_react.default.createElement(_pageContentLayout.default, {
-    image: elementorCommon.config.urls.assets + 'images/app/onboarding/Illustration_Hello_Biz.svg',
-    title: __('Every site starts with a theme.', 'elementor'),
-    actionButton: actionButton,
-    skipButton: skipButton,
-    noticeState: noticeState
-  }, /*#__PURE__*/_react.default.createElement("p", null, __('Hello Biz by Elementor helps you launch your professional business website - fast.', 'elementor')), !elementorAppConfig.onboarding.experiment && /*#__PURE__*/_react.default.createElement("p", null, __('Here\'s why:', 'elementor')), /*#__PURE__*/_react.default.createElement("ul", {
-    className: "e-onboarding__feature-list"
-  }, /*#__PURE__*/_react.default.createElement("li", null, __('Get online faster', 'elementor')), /*#__PURE__*/_react.default.createElement("li", null, __('Lightweight and fast loading', 'elementor')), /*#__PURE__*/_react.default.createElement("li", null, __('Great for SEO', 'elementor'))));
-}
-ThemeSelectionContentA.propTypes = {
-  actionButton: _propTypes.default.object.isRequired,
-  skipButton: _propTypes.default.object.isRequired,
-  noticeState: _propTypes.default.object
-};
-
-/***/ }),
-
-/***/ "../app/modules/onboarding/assets/js/components/theme-selection-experiment201-variant-b.js":
+/***/ "../app/modules/onboarding/assets/js/components/theme-selection-experiment202-variant-a.js":
 /*!*************************************************************************************************!*\
-  !*** ../app/modules/onboarding/assets/js/components/theme-selection-experiment201-variant-b.js ***!
+  !*** ../app/modules/onboarding/assets/js/components/theme-selection-experiment202-variant-a.js ***!
   \*************************************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -2455,24 +2415,17 @@ var _context = __webpack_require__(/*! ../context/context */ "../app/modules/onb
 var _router = __webpack_require__(/*! @reach/router */ "../node_modules/@reach/router/es/index.js");
 var _useAjax2 = _interopRequireDefault(__webpack_require__(/*! elementor-app/hooks/use-ajax */ "../app/assets/js/hooks/use-ajax.js"));
 var _layout = _interopRequireDefault(__webpack_require__(/*! ../components/layout/layout */ "../app/modules/onboarding/assets/js/components/layout/layout.js"));
-var _themeSelectionContentA = _interopRequireDefault(__webpack_require__(/*! ../components/theme-selection-content-a */ "../app/modules/onboarding/assets/js/components/theme-selection-content-a.js"));
-var _themeSelectionExperiment201VariantB = _interopRequireDefault(__webpack_require__(/*! ../components/theme-selection-experiment201-variant-b */ "../app/modules/onboarding/assets/js/components/theme-selection-experiment201-variant-b.js"));
+var _themeSelectionExperiment202VariantA = _interopRequireDefault(__webpack_require__(/*! ../components/theme-selection-experiment202-variant-a */ "../app/modules/onboarding/assets/js/components/theme-selection-experiment202-variant-a.js"));
 var _themeSelectionExperiment202VariantB = _interopRequireDefault(__webpack_require__(/*! ../components/theme-selection-experiment202-variant-b */ "../app/modules/onboarding/assets/js/components/theme-selection-experiment202-variant-b.js"));
 var _onboardingEventTracking = __webpack_require__(/*! ../utils/onboarding-event-tracking */ "../app/modules/onboarding/assets/js/utils/onboarding-event-tracking.js");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 /* eslint-disable @wordpress/i18n-ellipsis */
 
-var getContinueButtonText = function getContinueButtonText(isHelloThemeActivated, isVariant201B, isVariant202B) {
+var getContinueButtonText = function getContinueButtonText(isHelloThemeActivated, isVariant202B) {
   if (isHelloThemeActivated) {
     return __('Next', 'elementor');
   }
-  if (isVariant202B) {
-    return __('Install Hello Biz', 'elementor');
-  }
-  if (isVariant201B) {
-    return __('Select theme', 'elementor');
-  }
-  return __('Continue with Hello Biz Theme', 'elementor');
+  return isVariant202B ? __('Install Hello Biz', 'elementor') : __('Select theme', 'elementor');
 };
 function HelloTheme() {
   var _useContext = (0, _react.useContext)(_context.OnboardingContext),
@@ -2511,25 +2464,22 @@ function HelloTheme() {
     setActiveTimeouts = _useState0[1],
     _useState1 = (0, _react.useState)(null),
     _useState10 = (0, _slicedToArray2.default)(_useState1, 2),
-    variant201 = _useState10[0],
-    setVariant201 = _useState10[1],
-    _useState11 = (0, _react.useState)(null),
-    _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
-    variant202 = _useState12[0],
-    setVariant202 = _useState12[1],
+    variant202 = _useState10[0],
+    setVariant202 = _useState10[1],
     navigate = (0, _router.useNavigate)(),
     pageId = 'hello',
     nextStep = elementorAppConfig.onboarding.experiment ? 'chooseFeatures' : 'siteName',
     goToNextScreen = (0, _react.useCallback)(function () {
       return navigate('onboarding/' + nextStep);
     }, [navigate, nextStep]),
-    isVariant201B = 'B' === variant201,
     isVariant202B = 'B' === variant202,
-    continueWithHelloThemeText = getContinueButtonText(state.isHelloThemeActivated, isVariant201B, isVariant202B),
-    _useState13 = (0, _react.useState)(continueWithHelloThemeText),
-    _useState14 = (0, _slicedToArray2.default)(_useState13, 2),
-    actionButtonText = _useState14[0],
-    setActionButtonText = _useState14[1];
+    themeToActivate = selectedTheme || (isVariant202B ? 'hello-biz' : null),
+    themeSlug = 'hello-theme' === themeToActivate ? 'hello-elementor' : 'hello-biz',
+    continueWithHelloThemeText = getContinueButtonText(state.isHelloThemeActivated, isVariant202B),
+    _useState11 = (0, _react.useState)(continueWithHelloThemeText),
+    _useState12 = (0, _slicedToArray2.default)(_useState11, 2),
+    actionButtonText = _useState12[0],
+    setActionButtonText = _useState12[1];
 
   /**
    * Setup
@@ -2545,27 +2495,25 @@ function HelloTheme() {
     }
     _onboardingEventTracking.OnboardingEventTracking.setupAllUpgradeButtons(state.currentStep);
     _onboardingEventTracking.OnboardingEventTracking.onStepLoad(2);
-    var storedVariant201 = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT201_VARIANT);
     var storedVariant202 = localStorage.getItem(_onboardingEventTracking.ONBOARDING_STORAGE_KEYS.EXPERIMENT202_VARIANT);
-    setVariant201(storedVariant201);
     setVariant202(storedVariant202);
-    var currentIsVariant201B = 'B' === storedVariant201;
-    var shouldAutoSelectHelloBiz = !currentIsVariant201B && !selectedTheme;
+    var currentIsVariant202B = 'B' === storedVariant202;
+    var shouldAutoSelectHelloBiz = currentIsVariant202B && !selectedTheme;
     if (shouldAutoSelectHelloBiz) {
       setSelectedTheme('hello-biz');
     }
   }, [getStateObjectToUpdate, goToNextScreen, helloInstalledInOnboarding, pageId, state, updateState, selectedTheme]);
   (0, _react.useEffect)(function () {
-    var updatedButtonText = getContinueButtonText(state.isHelloThemeActivated, isVariant201B, isVariant202B);
+    var updatedButtonText = getContinueButtonText(state.isHelloThemeActivated, isVariant202B);
     setActionButtonText(updatedButtonText);
-  }, [state.isHelloThemeActivated, isVariant201B, isVariant202B]);
+  }, [state.isHelloThemeActivated, isVariant202B]);
   var resetScreenContent = function resetScreenContent() {
     activeTimeouts.forEach(function (timeoutID) {
       return clearTimeout(timeoutID);
     });
     setActiveTimeouts([]);
     setIsInstalling(false);
-    var updatedButtonText = getContinueButtonText(state.isHelloThemeActivated, isVariant201B, isVariant202B);
+    var updatedButtonText = getContinueButtonText(state.isHelloThemeActivated, isVariant202B);
     setActionButtonText(updatedButtonText);
   };
 
@@ -2594,7 +2542,7 @@ function HelloTheme() {
     _onboardingEventTracking.OnboardingEventTracking.sendThemeInstalled(installedThemeValue);
     _onboardingEventTracking.OnboardingEventTracking.sendStepEndState(2);
     goToNextScreen();
-  }, [getStateObjectToUpdate, goToNextScreen, noticeStateSuccess, state, updateState, isVariant201B, selectedTheme]);
+  }, [getStateObjectToUpdate, goToNextScreen, noticeStateSuccess, state, updateState, selectedTheme]);
   var onErrorInstallHelloTheme = function onErrorInstallHelloTheme() {
     elementorCommon.events.dispatchEvent({
       event: 'indication prompt',
@@ -2618,8 +2566,6 @@ function HelloTheme() {
     updateState({
       isHelloThemeInstalled: true
     });
-    var currentTheme = selectedTheme || (!isVariant201B ? 'hello-biz' : null);
-    var themeSlug = 'hello-theme' === currentTheme ? 'hello-elementor' : 'hello-biz';
     setActivateHelloThemeAjaxState({
       data: {
         action: 'elementor_activate_hello_theme',
@@ -2631,8 +2577,6 @@ function HelloTheme() {
     if (!isInstalling) {
       setIsInstalling(true);
     }
-    var currentTheme = selectedTheme || (!isVariant201B ? 'hello-biz' : null);
-    var themeSlug = 'hello-theme' === currentTheme ? 'hello-elementor' : 'hello-biz';
     wp.updates.ajax('install-theme', {
       slug: themeSlug,
       success: function success() {
@@ -2653,10 +2597,10 @@ function HelloTheme() {
       }
     });
   };
-  var handleThemeSelection = function handleThemeSelection(themeSlug) {
-    setSelectedTheme(themeSlug);
-    var themeValue = 'hello-theme' === themeSlug ? 'hello' : 'hellobiz';
-    if (isVariant201B) {
+  var handleThemeSelection = function handleThemeSelection(selectedSlug) {
+    setSelectedTheme(selectedSlug);
+    var themeValue = 'hello-theme' === selectedSlug ? 'hello' : 'hellobiz';
+    if (!isVariant202B) {
       _onboardingEventTracking.OnboardingEventTracking.sendThemeMarked(themeValue);
     }
   };
@@ -2671,7 +2615,7 @@ function HelloTheme() {
   if (isInstalling) {
     actionButton.className = 'e-onboarding__button--processing';
   }
-  if (!state.isHelloThemeActivated && !selectedTheme && isVariant201B) {
+  if (!state.isHelloThemeActivated && !selectedTheme && !isVariant202B) {
     actionButton.disabled = true;
     actionButton.className = actionButton.className ? "".concat(actionButton.className, " e-onboarding__button--disabled") : 'e-onboarding__button--disabled';
   }
@@ -2683,16 +2627,13 @@ function HelloTheme() {
     };
   } else {
     actionButton.onClick = function () {
-      if (!selectedTheme && isVariant201B) {
+      if (!selectedTheme && !isVariant202B) {
         return;
       }
-
-      // For non-variant B, ensure hello-biz is selected if no theme is set
-      var currentTheme = selectedTheme || (!isVariant201B ? 'hello-biz' : null);
-      if (!currentTheme) {
+      if (!themeToActivate) {
         return;
       }
-      if (!selectedTheme && !isVariant201B) {
+      if (!selectedTheme && isVariant202B) {
         setSelectedTheme('hello-biz');
       }
       sendNextButtonEvent();
@@ -2782,12 +2723,7 @@ function HelloTheme() {
       }
     }
   }, [activateHelloThemeAjaxState.status]);
-  var ContentComponent = _themeSelectionContentA.default;
-  if (isVariant202B) {
-    ContentComponent = _themeSelectionExperiment202VariantB.default;
-  } else if (isVariant201B) {
-    ContentComponent = _themeSelectionExperiment201VariantB.default;
-  }
+  var ContentComponent = isVariant202B ? _themeSelectionExperiment202VariantB.default : _themeSelectionExperiment202VariantA.default;
   var getLayoutClassName = function getLayoutClassName() {
     if (isVariant202B) {
       return 'experiment202-variant-b';
@@ -2806,7 +2742,7 @@ function HelloTheme() {
     onThemeSelect: handleThemeSelection,
     onThemeInstallSuccess: onHelloThemeActivationSuccess,
     onThemeInstallError: onErrorInstallHelloTheme
-  }, isVariant201B && {
+  }, !isVariant202B && {
     isInstalling: isInstalling
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "e-onboarding__footnote"
@@ -4674,7 +4610,6 @@ var OnboardingTracker = /*#__PURE__*/function () {
       if (2 === stepNumber || 'hello' === currentStep || 'hello_biz' === currentStep) {
         this.startSessionRecordingIfNeeded();
         this.sendStoredStep1EventsOnStep2();
-        this.sendExperimentStarted(201);
         this.sendExperimentStarted(202);
         this.sendStep2ThemesLoaded();
       }
@@ -4762,12 +4697,6 @@ var OnboardingTracker = /*#__PURE__*/function () {
           enabledKey: 'isExperiment101Enabled',
           variantKey: _storageManager.ONBOARDING_STORAGE_KEYS.EXPERIMENT101_VARIANT,
           startedKey: _storageManager.ONBOARDING_STORAGE_KEYS.EXPERIMENT101_STARTED
-        },
-        201: {
-          name: 'core_onboarding_experiment201',
-          enabledKey: 'isExperiment201Enabled',
-          variantKey: _storageManager.ONBOARDING_STORAGE_KEYS.EXPERIMENT201_VARIANT,
-          startedKey: _storageManager.ONBOARDING_STORAGE_KEYS.EXPERIMENT201_STARTED
         },
         202: {
           name: 'core_onboarding_experiment202',
@@ -5283,4 +5212,4 @@ var addExperimentTrackingToUrl = exports.addExperimentTrackingToUrl = function a
 /***/ })
 
 }]);
-//# sourceMappingURL=onboarding.63cdf72a450944ebd5f7.bundle.js.map
+//# sourceMappingURL=onboarding.1dee18bcb9565fe7a98e.bundle.js.map

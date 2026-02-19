@@ -5,6 +5,7 @@ namespace ElementorOne\Admin\Services;
 use ElementorOne\Admin\Helpers\Utils;
 use ElementorOne\Common\SupportedPlugins;
 use ElementorOne\Connect\Classes\GrantTypes;
+use ElementorOne\Connect\Facade;
 use ElementorOne\Logger;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -59,6 +60,10 @@ class Editor {
 	 */
 	private function __construct() {
 		$this->logger = new Logger( self::class );
+
+		// Set tracker opt-in
+		add_action( 'elementor_one/elementor_one_connected', [ $this, 'set_tracker_opt_in' ] );
+		add_action( 'elementor_one/elementor_one_disconnected', [ $this, 'set_tracker_opt_in' ] );
 
 		// Filter additional connect info
 		add_filter( 'elementor/connect/additional-connect-info', [ $this, 'filter_additional_connect_info' ], 10, 2 );
@@ -317,5 +322,17 @@ class Editor {
 
 		$connect_data = get_user_option( self::COMMON_DATA_USER_OPTION_NAME, $owner_id );
 		return is_array( $connect_data ) ? $connect_data : null;
+	}
+
+	/**
+	 * Sync Elementor tracker opt-in with ONE connect preference
+	 * @param Facade $facade
+	 * @return void
+	 */
+	public function set_tracker_opt_in( Facade $facade ): void {
+		if ( is_callable( '\Elementor\Tracker::set_opt_in' ) ) {
+			$allow_tracking = 'yes' === $facade->data()->get_share_usage_data();
+			\Elementor\Tracker::set_opt_in( $allow_tracking );
+		}
 	}
 }

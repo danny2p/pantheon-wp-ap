@@ -47,12 +47,46 @@ class WPRM_Instacart {
 	 *
 	 * @since	9.8.0
 	 * @param	array $data Recipe data.
+	 * @return	string|WP_Error Instacart URL or error on validation failure.
 	 */
 	public static function get_link_for_recipe( $data ) {
 		$recipe_id = intval( $data['recipeId'] );
+
+		// Validate recipeId: post must exist, be a published recipe.
+		$post = get_post( $recipe_id );
+		if ( ! $post ) {
+			return new WP_Error( 'invalid_recipe', __( 'The specified recipe does not exist.', 'wp-recipe-maker' ), array( 'status' => 404 ) );
+		}
+		if ( WPRM_POST_TYPE !== get_post_type( $recipe_id ) ) {
+			return new WP_Error( 'invalid_recipe', __( 'The specified recipe does not exist.', 'wp-recipe-maker' ), array( 'status' => 404 ) );
+		}
+		if ( 'publish' !== get_post_status( $recipe_id ) ) {
+			return new WP_Error( 'invalid_recipe', __( 'The specified recipe does not exist.', 'wp-recipe-maker' ), array( 'status' => 404 ) );
+		}
+
 		$servings_system_combination = sanitize_key( $data['servingsSystemCombination'] );
 
-		// Look for existing combination first.
+		// Validate servingsSystemCombination: format must be servings-system, system 1 or 2, servings integer in range.
+		$parts = explode( '-', $servings_system_combination, 2 );
+		if ( 2 !== count( $parts ) ) {
+			return new WP_Error( 'invalid_combination', __( 'Invalid servings and system combination.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+		$system = isset( $parts[1] ) ? $parts[1] : '';
+		if ( ! in_array( $system, array( '1', '2' ), true ) ) {
+			return new WP_Error( 'invalid_combination', __( 'Invalid servings and system combination.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+		$servings_raw = isset( $parts[0] ) ? $parts[0] : '';
+		$requested_servings = WPRM_Recipe_Parser::parse_quantity( $servings_raw );
+		if ( ! is_numeric( $requested_servings ) || $requested_servings !== (int) $requested_servings || 1 > $requested_servings ) {
+			return new WP_Error( 'invalid_combination', __( 'Invalid servings and system combination.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+		$requested_servings = (int) $requested_servings;
+		$original_parsed = WPRM_Recipe_Parser::parse_quantity( get_post_meta( $recipe_id, 'wprm_servings', true ) );
+		$original_parsed = is_numeric( $original_parsed ) && 0 < $original_parsed ? (int) $original_parsed : 1;
+		$max_servings = max( 100, $original_parsed * 4 );
+		$within_cache_range = ( $requested_servings <= $max_servings );
+
+		// Look for existing combination first (only in-range combinations are cached).
 		$existing_combinations = get_post_meta( $recipe_id, 'wprm_instacart_combinations', true );
 		$existing_combinations = $existing_combinations ? maybe_unserialize( $existing_combinations ) : array();
 
@@ -102,12 +136,14 @@ class WPRM_Instacart {
 		// Call Instacart API.
 		$instacart_response = self::call_instacart_api( 'recipe', $api_data );
 
-		// Store result for future use.
-		$existing_combinations[ $servings_system_combination ] = array(
-			'response' => $instacart_response,
-			'timestamp' => time(),
-		);
-		update_post_meta( $recipe_id, 'wprm_instacart_combinations', $existing_combinations );
+		// Store result for future use only when within the logical range (out-of-range requests still get the link but are not cached).
+		if ( $within_cache_range ) {
+			$existing_combinations[ $servings_system_combination ] = array(
+				'response' => $instacart_response,
+				'timestamp' => time(),
+			);
+			update_post_meta( $recipe_id, 'wprm_instacart_combinations', $existing_combinations );
+		}
 
 		// Return Instacart URL.
 		return self::get_link_from_response( $instacart_response );

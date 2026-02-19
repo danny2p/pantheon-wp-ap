@@ -165,4 +165,27 @@ class Utils {
 		$data = $this->facade->data();
 		return (bool) $data->get_access_token() && $this->is_valid_home_url();
 	}
+
+	/**
+	 * Decode JWT and return payload without signature verification
+	 * @param string $jwt
+	 * @return array|null
+	 */
+	public static function decode_jwt( string $jwt ): ?array {
+		$parts = explode( '.', $jwt );
+
+		if ( count( $parts ) !== 3 ) {
+			return null;
+		}
+
+		$payload = base64_decode( strtr( $parts[1], '-_', '+/' ) );
+
+		if ( ! $payload ) {
+			return null;
+		}
+
+		$decoded = json_decode( $payload, true );
+
+		return is_array( $decoded ) ? $decoded : null;
+	}
 }

@@ -23,6 +23,7 @@ class Data {
 	const TOKEN_ID = '_token_id';
 	const OPTION_OWNER_USER_ID = '_owner_user_id';
 	const HOME_URL = '_home_url';
+	const SHARE_USAGE_DATA = '_share_usage_data';
 
 	/**
 	 * Facade instance
@@ -273,6 +274,7 @@ class Data {
 			$this->delete_option( self::TOKEN_ID );
 			$this->delete_option( self::OPTION_OWNER_USER_ID );
 			$this->delete_option( self::HOME_URL );
+			$this->delete_option( self::SHARE_USAGE_DATA );
 		} else {
 			$user_id = get_current_user_id();
 			if ( $with_client ) {
@@ -285,6 +287,24 @@ class Data {
 			$this->delete_user_data( $user_id, self::TOKEN_ID );
 			$this->delete_user_data( $user_id, self::OPTION_OWNER_USER_ID );
 			$this->delete_user_data( $user_id, self::HOME_URL );
+			$this->delete_user_data( $user_id, self::SHARE_USAGE_DATA );
 		}
+	}
+
+	/**
+	 * Get share usage data
+	 * @return false|mixed|string|null
+	 */
+	public function get_share_usage_data() {
+		return $this->get_connect_mode_data( self::SHARE_USAGE_DATA, false );
+	}
+
+	/**
+	 * Set share usage data
+	 * @param string $share_usage_data
+	 * @return bool
+	 */
+	public function set_share_usage_data( string $share_usage_data ): bool {
+		return $this->set_connect_mode_data( self::SHARE_USAGE_DATA, $share_usage_data );
 	}
 }

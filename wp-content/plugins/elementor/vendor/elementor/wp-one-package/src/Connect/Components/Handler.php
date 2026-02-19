@@ -3,6 +3,7 @@
 namespace ElementorOne\Connect\Components;
 
 use ElementorOne\Connect\Classes\GrantTypes;
+use ElementorOne\Connect\Classes\Utils;
 use ElementorOne\Connect\Facade;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,6 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Handler
  */
 class Handler {
+
+	const SCOPE_SHARE_USAGE_DATA = 'share_usage_data';
 
 	/**
 	 * Facade instance
@@ -90,7 +93,8 @@ class Handler {
 
 		try {
 			// Exchange the code for an access token and store it
-			$this->facade->service()->get_token( GrantTypes::AUTHORIZATION_CODE, $code );
+			[ 'access_token' => $access_token ] = $this->facade->service()->get_token( GrantTypes::AUTHORIZATION_CODE, $code );
+			$this->facade->data()->set_share_usage_data( $this->is_share_usage_scope_granted( $access_token ) ? 'yes' : 'no' );
 			$this->facade->data()->set_owner_user_id( get_current_user_id() );
 			$this->facade->data()->set_home_url();
 		} catch ( \Throwable $th ) {
@@ -106,5 +110,18 @@ class Handler {
 		wp_safe_redirect( $this->facade->utils()->get_admin_url() );
 
 		exit;
+	}
+
+	/**
+	 * Check if share usage scope is granted
+	 * @param string $access_token
+	 * @return bool
+	 */
+	private function is_share_usage_scope_granted( string $access_token ): bool {
+		$jwt_payload = Utils::decode_jwt( $access_token );
+		if ( $jwt_payload ) {
+			return in_array( self::SCOPE_SHARE_USAGE_DATA, $jwt_payload['scp'] ?? [], true );
+		}
+		return false;
 	}
 }

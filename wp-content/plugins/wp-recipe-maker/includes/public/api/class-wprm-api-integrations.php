@@ -56,6 +56,9 @@ class WPRM_Api_Integrations {
 
 		if ( $data ) {
 			$link = WPRM_Instacart::get_link_for_recipe( $data );
+			if ( is_wp_error( $link ) ) {
+				return $link;
+			}
 			return rest_ensure_response( $link );
 		}
 
