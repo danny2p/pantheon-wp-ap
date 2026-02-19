@@ -14504,7 +14504,7 @@ var _default = exports["default"] = /*#__PURE__*/function (_ControlBaseDataView)
         }).html(_.escape(globalData.title)),
         $colorHex = jQuery('<span>', {
           class: 'e-global__color-hex'
-        }).html(globalData.value);
+        }).text(globalData.value);
       $color.append($colorPreview, $colorTitle, $colorHex);
       return $color;
     }
@@ -63585,7 +63585,7 @@ module.exports = ReactDOM;
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
 /******/ 			if (chunkId === "vendors-node_modules_mixpanel-browser_dist_mixpanel_module_js") return "e4d209bf3a704ff88e1a.bundle.js";
-/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "b423d91809cf7e0cb8b0.bundle.js";
+/******/ 			if (chunkId === "app_modules_onboarding_assets_js_utils_modules_post-onboarding-tracker_js") return "29f5723514661bfdffd8.bundle.js";
 /******/ 			if (chunkId === "assets_dev_js_editor_utils_post-onboarding-tracking_js") return "e883e6638ef93bfd3204.bundle.js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;

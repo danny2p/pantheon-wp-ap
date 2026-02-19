@@ -108,7 +108,7 @@ class Assets {
 				'elementorNewPostNonce' => wp_create_nonce( 'elementor_action_new_post' ),
 				'elementorSiteSettingsRedirectNonce' => wp_create_nonce( 'elementor_action_site_settings_redirect' ),
 				'elementorEditSiteNonce' => wp_create_nonce( 'elementor_action_edit_website' ),
-				'shareUsageData' => 'yes' === get_option( Onboarding::SETTING_SHARE_USAGE_DATA ),
+				'shareUsageData' => 'yes' === Utils::get_one_connect()->data()->get_share_usage_data(),
 				'assetsUIRootUrl' => ELEMENTOR_ONE_UI_ASSETS_ROOT_URL,
 			] ) . ';'
 		);

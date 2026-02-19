@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 10.3.2
+Stable tag: 10.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,9 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.3.3 =
+* Fix: Hardened Instacart link caching
+
 = 10.3.2 =
 * Fix: Split amounts when using decimals
 * Fix: Using fractions for split amounts
@@ -495,6 +498,9 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.3.3 =
+Prevent unnecessary post meta saves related to Instacart caching
+
 = 10.3.2 =
 Some small fixes
 
