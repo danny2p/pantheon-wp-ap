@@ -77,7 +77,7 @@ class WPRM_Instacart {
 		}
 		$servings_raw = isset( $parts[0] ) ? $parts[0] : '';
 		$requested_servings = WPRM_Recipe_Parser::parse_quantity( $servings_raw );
-		if ( ! is_numeric( $requested_servings ) || $requested_servings !== (int) $requested_servings || 1 > $requested_servings ) {
+		if ( ! is_numeric( $requested_servings ) || $requested_servings != (int) $requested_servings || 1 > $requested_servings ) {
 			return new WP_Error( 'invalid_combination', __( 'Invalid servings and system combination.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
 		}
 		$requested_servings = (int) $requested_servings;
