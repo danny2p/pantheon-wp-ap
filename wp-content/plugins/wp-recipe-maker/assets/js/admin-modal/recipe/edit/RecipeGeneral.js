@@ -35,7 +35,11 @@ const RecipeGeneral = (props) => {
                     ]}
                     value={ props.type }
                     onChange={ (type) => {
-                        props.onRecipeChange( { type } );
+                        props.onRecipeChange( { type }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'general:type',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -45,7 +49,17 @@ const RecipeGeneral = (props) => {
                     placeholder={ __wprm( 'Recipe Name' ) }
                     value={ props.name }
                     onChange={ (name) => {
-                        props.onRecipeChange( { name } );
+                        props.onRecipeChange( { name }, {
+                            historyMode: 'debounced',
+                            historyKey: 'general:name',
+                        } );
+                    }}
+                    onBlur={ (name) => {
+                        props.onRecipeChange( { name }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'general:name',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -53,8 +67,12 @@ const RecipeGeneral = (props) => {
                 <FieldRichText
                     placeholder={ __wprm( 'Short description of this recipe...' ) }
                     value={ props.summary }
-                    onChange={ (summary) => {
-                        props.onRecipeChange( { summary } );
+                    onChange={ (summary, changeOptions = {}) => {
+                        props.onRecipeChange( { summary }, {
+                            historyMode: 'debounced',
+                            historyBoundary: !! changeOptions.historyBoundary,
+                            historyKey: 'general:summary',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -68,7 +86,11 @@ const RecipeGeneral = (props) => {
                         options={ wprm_admin_modal.options.author.filter( ( author ) => 'same' !== author.actual ) }
                         value={ props.author.display }
                         onChange={ (author_display) => {
-                            props.onRecipeChange( { author_display } );
+                            props.onRecipeChange( { author_display }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'general:author_display',
+                            } );
                         }}
                         width={ 300 }
                     />
@@ -84,7 +106,17 @@ const RecipeGeneral = (props) => {
                             placeholder={ __wprm( 'Author Name' ) }
                             value={ props.author.name }
                             onChange={ (author_name) => {
-                                props.onRecipeChange( { author_name } );
+                                props.onRecipeChange( { author_name }, {
+                                    historyMode: 'debounced',
+                                    historyKey: 'general:author_name',
+                                } );
+                            }}
+                            onBlur={ (author_name) => {
+                                props.onRecipeChange( { author_name }, {
+                                    historyMode: 'debounced',
+                                    historyBoundary: true,
+                                    historyKey: 'general:author_name',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -95,7 +127,17 @@ const RecipeGeneral = (props) => {
                             type="url"
                             value={ props.author.link }
                             onChange={ (author_link) => {
-                                props.onRecipeChange( { author_link } );
+                                props.onRecipeChange( { author_link }, {
+                                    historyMode: 'debounced',
+                                    historyKey: 'general:author_link',
+                                } );
+                            }}
+                            onBlur={ (author_link) => {
+                                props.onRecipeChange( { author_link }, {
+                                    historyMode: 'debounced',
+                                    historyBoundary: true,
+                                    historyKey: 'general:author_link',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -103,8 +145,12 @@ const RecipeGeneral = (props) => {
                         <FieldRichText
                             placeholder={ __wprm( 'Optional author bio...' ) }
                             value={ props.author.bio }
-                            onChange={ (author_bio) => {
-                                props.onRecipeChange( { author_bio } );
+                            onChange={ (author_bio, changeOptions = {}) => {
+                                props.onRecipeChange( { author_bio }, {
+                                    historyMode: 'debounced',
+                                    historyBoundary: !! changeOptions.historyBoundary,
+                                    historyKey: 'general:author_bio',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -118,7 +164,17 @@ const RecipeGeneral = (props) => {
                     step="any"
                     value={ 0 != props.servings.amount ? props.servings.amount : '' }
                     onChange={ (servings) => {
-                        props.onRecipeChange( { servings } );
+                        props.onRecipeChange( { servings }, {
+                            historyMode: 'debounced',
+                            historyKey: 'general:servings',
+                        } );
+                    }}
+                    onBlur={ (servings) => {
+                        props.onRecipeChange( { servings }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'general:servings',
+                        } );
                     }}
                 />
                 <FieldText
@@ -126,7 +182,17 @@ const RecipeGeneral = (props) => {
                     placeholder={ 'howto' === props.type ? __wprm( 'candles' ) : __wprm( 'people' ) }
                     value={ props.servings.unit }
                     onChange={ (servings_unit) => {
-                        props.onRecipeChange( { servings_unit } );
+                        props.onRecipeChange( { servings_unit }, {
+                            historyMode: 'debounced',
+                            historyKey: 'general:servings_unit',
+                        } );
+                    }}
+                    onBlur={ (servings_unit) => {
+                        props.onRecipeChange( { servings_unit }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'general:servings_unit',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -138,11 +204,19 @@ const RecipeGeneral = (props) => {
                     <FieldAdvancedServings
                         enabled={ props.servings_advanced_enabled }
                         onChangeEnabled={ (servings_advanced_enabled) => {
-                            props.onRecipeChange( { servings_advanced_enabled } );
+                            props.onRecipeChange( { servings_advanced_enabled }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'general:servings_advanced_enabled',
+                            } );
                         }}
                         servings={ props.servings_advanced }
-                        onChangeServings={ (servings_advanced) => {
-                            props.onRecipeChange( { servings_advanced } );
+                        onChangeServings={ (servings_advanced, changeOptions = {}) => {
+                            props.onRecipeChange( { servings_advanced }, {
+                                historyMode: changeOptions.historyMode ? changeOptions.historyMode : 'debounced',
+                                historyBoundary: !! changeOptions.historyBoundary,
+                                historyKey: 'general:servings_advanced',
+                            } );
                         }}
                     />
                 </FieldContainer>
@@ -156,7 +230,17 @@ const RecipeGeneral = (props) => {
                     placeholder={ '$5' }
                     value={ props.cost }
                     onChange={ (cost) => {
-                        props.onRecipeChange( { cost } );
+                        props.onRecipeChange( { cost }, {
+                            historyMode: 'debounced',
+                            historyKey: 'general:cost',
+                        } );
+                    }}
+                    onBlur={ (cost) => {
+                        props.onRecipeChange( { cost }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'general:cost',
+                        } );
                     }}
                 />
             </FieldContainer>

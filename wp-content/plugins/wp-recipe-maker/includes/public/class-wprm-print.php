@@ -70,7 +70,7 @@ class WPRM_Print {
 		}
 
 		// Assume we're printing a single recipe if only 1 argument is set.
-		$print_arg_options = array( 'recipe', 'recipes', 'collection', 'shopping-list' );
+		$print_arg_options = apply_filters( 'wprm_print_arg_options', array( 'recipe', 'recipes', 'collection', 'shopping-list' ) );
 		if ( $print_args && ! in_array( $print_args[0], $print_arg_options ) ) {
 			$print_args = array_merge(
 				array( 'recipe' ),
@@ -120,8 +120,8 @@ class WPRM_Print {
 					Fusion_Images::$lazy_load = false;
 				}
 
-				// Allow overriding of print.php file.
-				$print_file = apply_filters( 'wprm_print_file', WPRM_DIR . 'templates/public/print.php' );
+				// Allow overriding of template file.
+				$print_file = apply_filters( 'wprm_print_output_template_file', apply_filters( 'wprm_print_file', WPRM_DIR . 'templates/public/print.php' ), $output, $print_args );
 
 				// Load print template file.
 				header( 'HTTP/1.1 200 OK' );
@@ -144,18 +144,23 @@ class WPRM_Print {
 	 * @param	array $args	 	Arguments for the print page.
 	 */
 	public static function output_first( $output, $args ) {
+		$is_pdf_download_page = apply_filters( 'wprm_print_is_pdf_download_page', false, $args );
+
 		// Default assets to load.
 		$output['assets'][] = array(
 			'type' => 'css',
 			'url' => WPRM_URL . 'dist/public-' . WPRM_Settings::get( 'recipe_template_mode' ) . '.css',
+			'version' => WPRM_VERSION,
 		);
 		$output['assets'][] = array(
 			'type' => 'css',
 			'url' => WPRM_URL . 'dist/print.css',
+			'version' => WPRM_VERSION,
 		);
 		$output['assets'][] = array(
 			'type' => 'js',
 			'url' => WPRM_URL . 'dist/print.js',
+			'version' => WPRM_VERSION,
 		);
 		$output['assets'][] = array(
 			'type' => 'custom',
@@ -169,6 +174,11 @@ class WPRM_Print {
 			'type' => 'custom',
 			'html' => '<script>var wprm_print_settings = ' . wp_json_encode( array(
 				'print_remove_links' => WPRM_Settings::get( 'print_remove_links' ),
+				'print_new_tab' => WPRM_Settings::get( 'print_new_tab' ),
+				'pdf_download_enabled' => WPRM_Settings::get( 'pdf_download_enabled' ),
+				'utilities_endpoint' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/utilities' ), '/' ),
+				'nonce' => wp_create_nonce( 'wprm' ),
+				'auto_pdf_download' => $is_pdf_download_page,
 			) ) . ';</script>',
 		);
 
@@ -438,7 +448,8 @@ class WPRM_Print {
 		if ( $output ) {
 			// Add optional custom print CSS setting.
 			if ( isset( $output['assets'] ) ) {
-				$custom_print_css = WPRM_Settings::get( 'print_css' );
+				$custom_print_css_setting = apply_filters( 'wprm_print_custom_css_setting', 'print_css', $args, $output );
+				$custom_print_css = WPRM_Settings::get( $custom_print_css_setting );
 
 				if ( $custom_print_css ) {
 					$output['assets'][] = array(

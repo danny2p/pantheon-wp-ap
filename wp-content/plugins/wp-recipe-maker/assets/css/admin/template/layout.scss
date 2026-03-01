@@ -29,7 +29,7 @@
 
 #wprm-template-buttons {
     text-align: center;
-    padding-top: 10px;
+    padding: 10px 10px 6px;
 
     background-color: white;
     border-radius: 5px;
@@ -37,12 +37,36 @@
     p {
         font-weight: bold;
         margin-top: 0;
+        margin-bottom: 8px;
     }
 
     button {
         display: inline-block;
-        margin: 0 3px;
-        margin-bottom: 10px;
+        margin: 0 3px 6px;
+    }
+
+    & > button {
+        min-width: 110px;
+    }
+
+    .wprm-template-history-controls {
+        margin-bottom: 4px;
+
+        button {
+            margin-bottom: 0;
+        }
+    }
+
+    .wprm-template-history-warning {
+        margin: 0 3px 6px;
+        padding: 8px 10px;
+        border: 1px solid #dba617;
+        border-radius: 4px;
+        background-color: #fcf9e8;
+        color: #6e4f00;
+        font-size: 12px;
+        line-height: 1.4;
+        text-align: center;
     }
 }
 

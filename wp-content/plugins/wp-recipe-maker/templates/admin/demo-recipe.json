@@ -217,6 +217,10 @@
             "image_url": ""
         },
         {
+            "text": "<p>Tip: Let the dough rest for an extra 10 minutes if it springs back while shaping.<\/p>",
+            "type": "tip"
+        },
+        {
             "text": "<p>Divide the dough and form pizzas.<\/p>",
             "type": "instruction",
             "image_url": ""

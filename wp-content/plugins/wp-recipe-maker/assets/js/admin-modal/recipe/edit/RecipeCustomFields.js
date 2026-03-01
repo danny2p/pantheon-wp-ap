@@ -31,7 +31,15 @@ const RecipeCustomFields = (props) => {
                                         name={ `recipe-custom-${ field.key }` }
                                         value={ value ? value : '' }
                                         onChange={ (value) => {
-                                            props.onFieldChange( field.key, value );
+                                            props.onFieldChange( field.key, value, {
+                                                historyMode: 'debounced',
+                                            } );
+                                        }}
+                                        onBlur={ (value) => {
+                                            props.onFieldChange( field.key, value, {
+                                                historyMode: 'debounced',
+                                                historyBoundary: true,
+                                            } );
                                         }}
                                     />
                                 </FieldContainer>
@@ -41,8 +49,11 @@ const RecipeCustomFields = (props) => {
                                 <FieldContainer label={ field.name } key={ index }>
                                     <FieldRichText
                                         value={ value ? value : '' }
-                                        onChange={ (value) => {
-                                            props.onFieldChange( field.key, value );
+                                        onChange={ (value, changeOptions = {}) => {
+                                            props.onFieldChange( field.key, value, {
+                                                historyMode: 'debounced',
+                                                historyBoundary: !! changeOptions.historyBoundary,
+                                            } );
                                         }}
                                     />
                                 </FieldContainer>
@@ -53,7 +64,15 @@ const RecipeCustomFields = (props) => {
                                     <FieldTinymce
                                         value={ value ? value : '' }
                                         onChange={ (value) => {
-                                            props.onFieldChange( field.key, value );
+                                            props.onFieldChange( field.key, value, {
+                                                historyMode: 'debounced',
+                                            } );
+                                        }}
+                                        onBlur={ (value) => {
+                                            props.onFieldChange( field.key, value, {
+                                                historyMode: 'debounced',
+                                                historyBoundary: true,
+                                            } );
                                         }}
                                     />
                                 </FieldContainer>
@@ -68,6 +87,9 @@ const RecipeCustomFields = (props) => {
                                             props.onFieldChange( field.key, {
                                                 id,
                                                 url,
+                                            }, {
+                                                historyMode: 'immediate',
+                                                historyBoundary: true,
                                             } );
                                         }}
                                     />

@@ -1,38 +1,93 @@
 import React from 'react';
+import { __wprm } from 'Shared/Translations';
 
 import Advanced from './Advanced';
 import DripForm from './DripForm';
 import Editors from './Editors';
 import GettingStarted from './GettingStarted';
+import Troubleshooting from './Troubleshooting';
 
-const Faq = (props) => {
+const Faq = () => {
+    const showFeatureExplorer = !! wprm_faq.can_access_template_editor;
+    const formAnchorId = 'wprm-faq-email-signup';
+
+    const SignupReminder = () => (
+        <div className="wprm-faq-signup-reminder">
+            <h3>{ __wprm( 'Want more WP Recipe Maker tips?' ) }</h3>
+            <p>
+                { __wprm( 'Join our email course for practical setup tips, feature walkthroughs, and proven ways to get more out of WP Recipe Maker.' ) }
+            </p>
+            <a href={ `#${formAnchorId}` } className="button button-primary">
+                { __wprm( 'Sign up for the email course' ) }
+            </a>
+        </div>
+    );
+
     return (
         <div id="wprm-admin-faq-container">
-            <h1>Get the most out of WP Recipe Maker</h1>
-            <DripForm />
-            <h1>Explainer Videos</h1>
+            <h1>{ __wprm( 'Get the most out of WP Recipe Maker' ) }</h1>
             <p>
-                Are you a visual learner? Make sure to check out the <a href="https://bootstrapped.ventures/wp-recipe-maker/videos/" target="_blank">WP Recipe Maker Explainer Videos</a> we have on several topics. "Introduction to WP Recipe Maker" is a good one to start with:
+                { __wprm( 'This page helps you get results faster with guided setup tips, feature walkthroughs, and direct support resources.' ) }
             </p>
-            <iframe width="640" height="433" src="https://www.loom.com/embed/9f268e92cc064be9a45580a46fc84084" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            <h1>Documentation & Support</h1>
+            <DripForm anchorId={ formAnchorId } />
+            <h2>{ __wprm( 'Demo, Documentation & Support' ) }</h2>
+            {
+                showFeatureExplorer
+                ?
+                <p>
+                    { __wprm( 'See how WP Recipe Maker features look and work together by browsing the demo site or using the built-in Feature Explorer, then jump to the docs for anything you want to enable next.' ) }
+                </p>
+                :
+                <p>
+                    { __wprm( 'See how WP Recipe Maker features look and work together by browsing the demo site, then jump to the docs for anything you want to enable next.' ) }
+                </p>
+            }
+            <div className="wprm-faq-feature-explorer-buttons">
+                {
+                    showFeatureExplorer
+                    &&
+                    <a href={ wprm_faq.template_editor_feature_explorer_url } className="button button-primary">
+                        { __wprm( 'Open Feature Explorer' ) }
+                    </a>
+                }
+                <a href="https://demo.wprecipemaker.com" target="_blank" rel="noopener noreferrer" className="button">
+                    { __wprm( 'Visit the demo site' ) }
+                </a>
+                <a href="https://help.bootstrapped.ventures/docs/wp-recipe-maker/" target="_blank" rel="noopener noreferrer" className="button">
+                    { __wprm( 'Browse documentation' ) }
+                </a>
+            </div>
             <p>
-                We've listed some frequently asked questions below. If you need more help we recommend checking out the <a href="https://help.bootstrapped.ventures/collection/1-wp-recipe-maker" target="_blank">WP Recipe Maker Knowledge Base</a> and the <a href="https://demo.wprecipemaker.com" target="_blank">WPRM Demo Site</a> that shows all features in action.
+                { __wprm( 'Need more help? Use the blue question mark in the bottom-right corner or email support@bootstrapped.ventures directly. We answer all tickets within 24 hours, usually much faster.' ) }
             </p>
+            <h3>{ __wprm( 'Explainer Videos' ) }</h3>
             <p>
-                If you have any other questions or suggestions at all, <strong>contact us using the blue question mark in the bottom right</strong> of this page or by emailing <a href="mailto:support@bootstrapped.ventures">support@bootstrapped.ventures</a> directly. We answer all tickets within 24 hours, and usually a lot faster.
+                { __wprm( 'Prefer video tutorials? Start with our introduction and then explore videos on specific topics.' ) } { ' ' }
+                <a href="https://bootstrapped.ventures/wp-recipe-maker/videos/" target="_blank" rel="noopener noreferrer">{ __wprm( 'WP Recipe Maker Explainer Videos' ) }</a>.
             </p>
-            <h1>Frequently Asked Questions</h1>
-            <p>Just click on the different sections to learn more!</p>
-            <h2>Getting started with WP Recipe Maker</h2>
+            <div className="wprm-faq-video-embed">
+                <iframe
+                    src="https://www.loom.com/embed/9f268e92cc064be9a45580a46fc84084"
+                    title={ __wprm( 'Introduction to WP Recipe Maker video' ) }
+                    allow="fullscreen"
+                    allowFullScreen
+                ></iframe>
+            </div>
+            <h2>{ __wprm( 'Frequently Asked Questions' ) }</h2>
+            <p>{ __wprm( 'Click a section below to expand detailed guidance.' ) }</p>
+            <h3>{ __wprm( 'Getting started with WP Recipe Maker' ) }</h3>
             <GettingStarted />
-            <h2>Adding recipes in different editors</h2>
+            <h3>{ __wprm( 'Adding recipes in different editors' ) }</h3>
             <Editors />
-            <h2>Advanced WPRM Usage</h2>
+            <h3>{ __wprm( 'Advanced WPRM usage' ) }</h3>
             <Advanced />
+            <h3>{ __wprm( 'Troubleshooting' ) }</h3>
+            <Troubleshooting />
             <p>
-                Need more? Go to the <a href="https://help.bootstrapped.ventures/collection/1-wp-recipe-maker" target="_blank">WP Recipe Maker Knowledge Base</a>.
+                { __wprm( 'Need more? Visit the' ) } { ' ' }
+                <a href="https://help.bootstrapped.ventures/collection/1-wp-recipe-maker" target="_blank" rel="noopener noreferrer">{ __wprm( 'WP Recipe Maker Knowledge Base' ) }</a>.
             </p>
+            <SignupReminder />
         </div>
     );
 }

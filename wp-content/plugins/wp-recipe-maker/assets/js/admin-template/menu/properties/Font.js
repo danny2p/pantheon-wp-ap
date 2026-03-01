@@ -198,14 +198,18 @@ const PropertyFont = (props) => {
 
                     // Check if new font should be saved.
                     if ( option.hasOwnProperty( 'loadFont' ) ) {
-                        let newFonts = props.fonts;
-                        newFonts.push( option.loadFont );
-                        props.onChangeFonts(newFonts);
+                        let newFonts = [ ...props.fonts ];
+                        if ( ! newFonts.includes(option.loadFont) ) {
+                            newFonts.push( option.loadFont );
+                            props.onChangeFonts(newFonts, {
+                                historyPropertyId: props.property.id,
+                            });
+                        }
                     }
 
                     // Check if old font should be removed.
                     if ( selectedOption.hasOwnProperty( 'loadFont' ) && props.fonts.includes( selectedOption.loadFont ) ) {
-                        let newFonts = props.fonts;
+                        let newFonts = [ ...props.fonts ];
 
                         // Only remove once, could be multiple times in array.
                         const index = newFonts.indexOf( selectedOption.loadFont );
@@ -213,7 +217,9 @@ const PropertyFont = (props) => {
                             newFonts.splice(index, 1);
                         }
 
-                        props.onChangeFonts(newFonts);
+                        props.onChangeFonts(newFonts, {
+                            historyPropertyId: props.property.id,
+                        });
                     }
 
                     return props.onValueChange(newValue);

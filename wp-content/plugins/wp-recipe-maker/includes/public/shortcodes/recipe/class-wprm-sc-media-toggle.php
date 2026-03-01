@@ -183,7 +183,7 @@ class WPRM_SC_Media_Toggle extends WPRM_Template_Shortcode {
 			}
 		}
 
-		if ( ! $has_instructions_media && 'demo' !== $recipe->id() ) {
+		if ( ! $has_instructions_media && 'demo' !== $recipe->id() && 'feature-explorer' !== $recipe->id() ) {
 			return apply_filters( parent::get_hook(), '', $atts, $recipe );
 		}
 

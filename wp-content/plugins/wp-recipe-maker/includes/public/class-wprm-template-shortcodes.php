@@ -95,6 +95,9 @@ class WPRM_Template_Shortcodes {
 		if ( 'demo' === $id ) {
 			self::$current_recipe_shell = WPRM_Recipe_Manager::get_demo_recipe();
 			return self::$current_recipe_shell;
+		} elseif ( 'feature-explorer' === $id ) {
+			self::$current_recipe_shell = WPRM_Recipe_Manager::get_feature_explorer_demo_recipe();
+			return self::$current_recipe_shell;
 		} else {
 			$recipe_id = intval( $id );
 		}

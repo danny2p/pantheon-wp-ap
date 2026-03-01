@@ -154,5 +154,17 @@ $recipe_defaults = array(
 				),
 			),
 		),
+		array(
+			'name' => __( 'Recipe Modal', 'wp-recipe-maker' ),
+			'settings' => array(
+				array(
+					'id' => 'recipe_modal_undo_redo_history',
+					'name' => __( 'Undo/Redo History', 'wp-recipe-maker' ),
+					'description' => __( 'Store recipe edit history and show Undo/Redo buttons in the recipe modal. Disable this if history tracking causes performance issues on your device.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => true,
+				),
+			),
+		),
 	),
 );

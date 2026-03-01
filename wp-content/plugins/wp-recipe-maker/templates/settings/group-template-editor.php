@@ -36,5 +36,12 @@ $template_editor = array(
 			),
 			'default' => 'demo',
 		),
+		array(
+			'id' => 'template_editor_undo_redo_history',
+			'name' => __( 'Undo/Redo History', 'wp-recipe-maker' ),
+			'description' => __( 'Store template edit history and show Undo/Redo buttons in the Template Editor. Disable this if history tracking causes performance issues on your device.', 'wp-recipe-maker' ),
+			'type' => 'toggle',
+			'default' => true,
+		),
 	),
 );

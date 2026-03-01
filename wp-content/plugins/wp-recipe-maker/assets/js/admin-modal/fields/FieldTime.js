@@ -16,7 +16,14 @@ const FieldTime = (props) => {
     }
 
     return (
-        <div className="wprm-admin-modal-field-time">
+        <div
+            className="wprm-admin-modal-field-time"
+            onBlur={ (e) => {
+                if ( props.onBlur && ! e.currentTarget.contains( e.relatedTarget ) ) {
+                    props.onBlur( props.value.time );
+                }
+            } }
+        >
             <div className="wprm-admin-modal-field-time-parts">
                 {
                     wprm_admin.settings.recipe_times_use_days

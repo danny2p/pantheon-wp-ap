@@ -162,7 +162,7 @@ export default class Block extends Component {
             loading: true,
         });
 
-        Api.template.previewShortcode( this.props.shortcode.uid, this.state.fullShortcode, this.props.recipeId )
+        Api.template.previewShortcode( this.props.shortcode.uid, this.state.fullShortcode, this.props.recipeId, this.props.previewContext )
             .then((data) => {
                 this.setState({
                     html: data.hasOwnProperty( this.props.shortcode.uid ) ? data[ this.props.shortcode.uid ] : '',
@@ -392,7 +392,7 @@ export default class Block extends Component {
                                     ?
                                     <PropertyAccordion
                                         properties={properties}
-                                        onPropertyChange={(propertyId, value) => this.props.onBlockPropertyChange( this.props.shortcode.uid, propertyId, value )}
+                                        onPropertyChange={(propertyId, value, options = {}) => this.props.onBlockPropertyChange( this.props.shortcode.uid, propertyId, value, options )}
                                     />
                                     :
                                     <p>There are no adjustable properties for this block.</p>

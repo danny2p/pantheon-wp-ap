@@ -232,4 +232,89 @@
             }
         }
     }
+
+    .wprm-feature-explorer {
+        .wprm-feature-explorer-post-content {
+            max-width: 650px;
+            margin: 0 auto;
+
+            > p {
+                margin-top: 18px;
+                margin-bottom: 0;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+        }
+
+        .wprm-feature-explorer-snippet-preview,
+        .wprm-feature-explorer-recipe-preview,
+        .wprm-feature-explorer-roundup-preview {
+            margin-top: 18px;
+        }
+
+        .wprm-feature-explorer-roundup-preview {
+            .wprm-recipe-roundup-item {
+                margin: 0;
+            }
+        }
+
+        .wprm-feature-explorer-preview {
+            position: relative;
+
+            .wprm-recipe {
+                overflow: visible;
+            }
+
+            .wprm-glossary-term,
+            .wprm-timer,
+            .wprm-recipe-advanced-servings-input {
+                text-decoration: underline;
+            }
+
+            .wprm-feature-explorer-preview-tooltip {
+                position: absolute;
+                z-index: 20;
+                pointer-events: none;
+                padding: 7px 11px;
+                border-radius: 999px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: rgba(15, 23, 42, 0.94);
+                color: #ffffff;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 1;
+                white-space: nowrap;
+                box-shadow: 0 10px 24px rgba(2, 6, 23, 0.24);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+            }
+
+            .wprm-feature-explorer-preview-tooltip-top {
+                transform: translate(-50%, calc(-100% - 14px));
+            }
+
+            .wprm-feature-explorer-preview-tooltip-bottom {
+                transform: translate(-50%, 14px);
+            }
+
+            .wprm-feature-explorer-highlight-target {
+                position: relative;
+            }
+
+            .wprm-feature-explorer-highlight-target::after {
+                content: "";
+                position: absolute;
+                border: 2px dashed black;
+                inset: -10px;
+                border-radius: 12px;
+            }
+        }
+
+        @media all and (max-width: 640px) {
+            .wprm-feature-explorer-roundup-preview {
+                margin-top: 12px;
+            }
+        }
+
+    }
 }

@@ -26,6 +26,7 @@ require_once( 'group-recipe-template.php' );
 
 // Appearance - Shared.
 require_once( 'group-recipe-print.php' );
+require_once( 'group-pdf-download.php' );
 require_once( 'group-recipe-snippets.php' );
 require_once( 'group-nutrition-label.php' );
 require_once( 'group-glossary-terms.php' );
@@ -42,7 +43,8 @@ require_once( 'group-private-notes.php' );
 require_once( 'group-links.php' );
 require_once( 'group-cook-mode.php' );
 require_once( 'group-products.php' );
-require_once( 'group-amazon.php' );
+// Keep as require: premium can include this file earlier, and we still need $amazon defined in this scope.
+require( 'group-amazon.php' );
 require_once( 'group-nutrition-calculation.php' );
 require_once( 'group-translate.php' );
 require_once( 'group-unit-conversion.php' );
@@ -78,6 +80,7 @@ $settings_structure = array(
 
 	// Shared.
 	$recipe_print,
+	$pdf_download,
 	$recipe_snippets,
 	$nutrition_label,
 	$glossary_terms,

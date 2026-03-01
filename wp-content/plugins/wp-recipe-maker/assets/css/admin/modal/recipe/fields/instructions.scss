@@ -53,6 +53,11 @@
         .wprm-admin-modal-field-instruction-text-name-container {
             display: flex;
 
+            .wprm-admin-modal-field-instruction-text-editor-container {
+                flex: auto;
+                position: relative;
+            }
+
             .wprm-admin-modal-field-instruction-name {
                 min-width: 126px;
                 flex-basis: 126px;
@@ -90,6 +95,55 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
+    }
+
+    &.wprm-admin-modal-field-instruction-tip {
+        .wprm-admin-modal-field-instruction-tip-input-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--wprm-admin-tip-accent, #2b6cb0);
+            position: absolute;
+            left: 14px;
+            top: 18px;
+            z-index: 2;
+            pointer-events: none;
+
+            svg,
+            img {
+                width: 16px;
+                height: 16px;
+                display: block;
+            }
+        }
+
+        .wprm-admin-modal-field-richtext.wprm-admin-modal-field-instruction-text {
+            border-left: 4px solid var(--wprm-admin-tip-accent, #2b6cb0);
+            background: #ffffff;
+            color: var(--wprm-admin-tip-text-color, #000000);
+        }
+
+        .wprm-admin-modal-field-instruction-text-editor-container-tip-icon {
+            .wprm-admin-modal-field-richtext.wprm-admin-modal-field-instruction-text {
+                padding-left: 38px;
+            }
+
+            .wprm-admin-modal-field-richtext-legacy {
+                input,
+                textarea {
+                    padding-left: 38px;
+                }
+            }
+        }
+
+        .wprm-admin-modal-field-richtext-legacy {
+            input,
+            textarea {
+                border-left: 4px solid var(--wprm-admin-tip-accent, #2b6cb0);
+                background: #ffffff;
+                color: var(--wprm-admin-tip-text-color, #000000);
+            }
+        }
     }
 }
 
@@ -146,6 +200,12 @@
             margin-top: 5px;
             width: auto;
             font-size: 14px;
+        }
+
+        &.wprm-admin-modal-field-instruction-after-container-tip {
+            .wprm-admin-modal-field-instruction-after-container-media-icons {
+                margin-left: 0;
+            }
         }
     }
 }

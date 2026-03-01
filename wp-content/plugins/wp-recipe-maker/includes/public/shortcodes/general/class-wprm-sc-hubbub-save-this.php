@@ -22,6 +22,10 @@ class WPRM_SC_Hubbub_Save_This extends WPRM_Template_Shortcode {
 
 	public static function init() {
 		self::$attributes = array(
+			'compact' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
 			'heading' => array(
 				'default' => '',
 				'type' => 'text',
@@ -98,6 +102,7 @@ class WPRM_SC_Hubbub_Save_This extends WPRM_Template_Shortcode {
 
 		if ( $atts['button_text'] ) { $hubbub_atts['button_text'] = $atts['button_text']; }
 		if ( $atts['after_form'] ) { $hubbub_atts['after_form'] = $atts['after_form']; }
+		if ( (bool) $atts['compact'] ) { $hubbub_atts['compact'] = 'yes'; }
 
 		if ( (bool) $atts['custom_button_colors'] ) {
 			if ( $atts['button_background_color'] ) { $hubbub_atts['custom_button_color'] = $atts['button_background_color']; }
@@ -120,7 +125,7 @@ class WPRM_SC_Hubbub_Save_This extends WPRM_Template_Shortcode {
 		if ( $atts['is_template_editor_preview'] ) {
 			if ( $output === $hubbub_shortcode ) {
 				$output = '<div class="wprm-template-editor-premium-only">' . __( 'Make sure the Hubbub Pro plugin is installed', 'wp-recipe-maker' ) . '</div>';
-			} else if ( '' === $output ) {
+			} elseif ( '' === $output ) {
 				$output = '<div class="wprm-template-editor-premium-only">' . __( 'Make sure the "Save This" tool is enabled in Hubbub Pro', 'wp-recipe-maker' ) . '</div>';
 			}
 		} else {

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { __wprm } from 'Shared/Translations';
 
 import PreviewTemplate from '../../admin-template/main/preview-template';
 import Api from 'Shared/Api';
@@ -31,12 +32,12 @@ export default class StepTemplate extends Component {
         return (
             <div className="wprm-admin-onboarding-step-template">
                 <p>
-                    WP Recipe Maker includes a <strong>full Template Editor to customize the entire look and feel of your recipes</strong> to match your needs. It can be accessed through the <em>WP Recipe Maker &gt; Settings</em> page.
+                    { __wprm( 'WP Recipe Maker includes a' ) } <strong>{ __wprm( 'full Template Editor to customize the entire look and feel of your recipes' ) }</strong> { __wprm( 'to match your needs. You can access it through the' ) } <em>{ __wprm( 'WP Recipe Maker > Settings' ) }</em> { __wprm( 'page.' ) }
                 </p>
                 <p>
-                    For now let's just start by choosing one of our default templates. You'll have time to dive into the customization rabbit hole later!
+                    { __wprm( 'For now, start by choosing one of our default templates. You can dive deeper into customization later.' ) }
                 </p>
-                <h2>Select a template for your recipes</h2>
+                <h2>{ __wprm( 'Select a template for your recipes' ) }</h2>
                 <div className="wprm-admin-onboarding-step-template-select">
                     {
                         templates.map((template, index) => {
@@ -69,7 +70,7 @@ export default class StepTemplate extends Component {
                                 <p style={{
                                     color: 'darkred',
                                     textAlign: 'center',
-                                }}>You need <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a> to use this template.</p>
+                                }}>{ __wprm( 'You need' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank" rel="noopener noreferrer">{ __wprm( 'WP Recipe Maker Premium' ) }</a> { __wprm( 'to use this template.' ) }</p>
                             }
                             <PreviewTemplate
                                 template={ this.state.template }
@@ -88,16 +89,16 @@ export default class StepTemplate extends Component {
                         onClick={() => {
                             this.props.jumpToStep(1);
                         }}
-                    >Previous</button>
+                    >{ __wprm( 'Previous' ) }</button>
                     <button
                         type="button"
                         className="button button-primary"
                         id="next-button"
                         onClick={() => {
                             if ( ! this.state.template ) {
-                                alert( 'Please select a template above.' );
+                                alert( __wprm( 'Please select a template above.' ) );
                             } else if ( this.state.template.premium && ! wprm_admin.addons.premium ) {
-                                alert( 'This template is only available in WP Recipe Maker Premium.' );
+                                alert( __wprm( 'This template is only available in WP Recipe Maker Premium.' ) );
                             } else {
                                 Api.settings.save({
                                     recipe_template_mode: 'modern',
@@ -106,7 +107,7 @@ export default class StepTemplate extends Component {
                                 this.props.jumpToStep(3);
                             }
                         }}
-                    >Use the above Template</button>
+                    >{ __wprm( 'Use the above template' ) }</button>
                 </div>
             </div>
         );

@@ -42,6 +42,11 @@ class WPRM_SC_Adjustable_Servings extends WPRM_Template_Shortcode {
 				'default' => '1x;2x;3x',
 				'type' => 'text',
 			),
+			'serving_options_labels' => array(
+				'default' => '',
+				'type' => 'text',
+				'help' => 'Optional semicolon separated labels for serving options. Leave blank to use the option values. For example: Normal;Double;Triple',
+			),
 			'serving_options_any_value' => array(
 				'default' => '',
 				'type' => 'text',

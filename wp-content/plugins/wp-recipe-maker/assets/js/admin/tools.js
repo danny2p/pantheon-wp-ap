@@ -275,6 +275,50 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
+	// Download debug information
+	const downloadDebugButton = document.querySelector('#tools_download_debug_info');
+	if (downloadDebugButton) {
+		downloadDebugButton.addEventListener('click', async (event) => {
+			event.preventDefault();
+			downloadDebugButton.disabled = true;
+
+			const formData = new FormData();
+			formData.append('action', 'wprm_download_debug_info');
+			formData.append('security', wprm_admin.nonce);
+
+			try {
+				const response = await fetch(wprm_admin.ajax_url, {
+					method: 'POST',
+					body: formData,
+				});
+
+				if (!response.ok) {
+					throw new Error('Debug info request failed');
+				}
+
+				const blob = await response.blob();
+				const url = window.URL.createObjectURL(blob);
+				const filename =
+					getFilenameFromHeader(response.headers.get('Content-Disposition')) ||
+					`wprm-debug-${new Date().toISOString().slice(0, 10)}.json`;
+
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = filename;
+				document.body.appendChild(link);
+				link.click();
+				link.remove();
+				window.URL.revokeObjectURL(url);
+			} catch (error) {
+				alert('Could not download debug information. Please try again.');
+				// eslint-disable-next-line no-console
+				console.error('WPRM debug info download failed', error);
+			} finally {
+				downloadDebugButton.disabled = false;
+			}
+		});
+	}
+
 	// Import templates
 	const importTemplatesForm = document.querySelector('#wprm-import-templates-form');
 	if (importTemplatesForm) {

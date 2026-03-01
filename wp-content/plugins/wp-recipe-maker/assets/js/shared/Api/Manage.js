@@ -129,4 +129,14 @@ export default {
 
         return ApiWrapper.call( `${manageEndpoint}/taxonomy/term-id`, 'POST', data );
     },
+    getShoppingGroups(search = '') {
+        const data = {
+            search,
+            limit: 50,
+        };
+
+        return ApiWrapper.call( `${manageEndpoint}/taxonomy/shopping-groups`, 'POST', data ).then((response) => {
+            return response && response.groups ? response.groups : [];
+        });
+    },
 };

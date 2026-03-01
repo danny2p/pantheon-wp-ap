@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import Tooltip from 'Shared/Tooltip';
 
 import '../../../../css/admin/template/manage.scss';
 
@@ -12,6 +13,21 @@ export default class ManageTemplates extends Component {
 
     render() {
         const props = this.props;
+        const defaultTemplateUsages = props.defaultTemplateUsages || {};
+        const escapeTooltipHtml = (value) => value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        const getTemplateUsageLabels = (slug) => {
+            if ( ! slug || ! defaultTemplateUsages.hasOwnProperty( slug ) ) {
+                return [];
+            }
+
+            const labels = defaultTemplateUsages[slug];
+            return Array.isArray( labels ) ? labels : [];
+        };
 
         let templatesGrouped = {
             'Our Default Templates': [],
@@ -172,6 +188,10 @@ export default class ManageTemplates extends Component {
                                                 let classes = 'wprm-manage-templates-template';
                                                 classes += props.template.slug === template.slug ? ' wprm-manage-templates-template-selected' : '';
                                                 classes += template.premium && ! wprm_admin.addons.premium ? ' wprm-manage-templates-template-premium' : '';
+                                                const templateUsages = getTemplateUsageLabels( template.slug );
+                                                const hasDefaultUsage = templateUsages.length > 0;
+                                                const defaultBadgeLabel = 1 === templateUsages.length ? 'Default' : `Default (${ templateUsages.length })`;
+                                                const defaultUsageTooltip = templateUsages.map( (label) => escapeTooltipHtml( label ) ).join( '<br />' );
 
                                                 if ( template.hasOwnProperty( 'brokenSlug' ) && template.brokenSlug ) {
                                                     classes += ' wprm-manage-templates-template-broken';
@@ -185,7 +205,16 @@ export default class ManageTemplates extends Component {
                                                             const newTemplate = props.template.slug === template.slug ? false : template.slug;
                                                             return props.onChangeTemplate(newTemplate);
                                                         }}
-                                                    >{ template.name }</div>
+                                                    >
+                                                        <span className="wprm-manage-templates-template-name">{ template.name }</span>
+                                                        {
+                                                            hasDefaultUsage
+                                                            &&
+                                                            <Tooltip content={ defaultUsageTooltip } placement="top">
+                                                                <span className="wprm-manage-templates-template-default-badge">{ defaultBadgeLabel }</span>
+                                                            </Tooltip>
+                                                        }
+                                                    </div>
                                                 )
                                             })
                                         }

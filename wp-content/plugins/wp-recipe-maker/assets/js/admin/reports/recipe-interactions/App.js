@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 import Icon from 'Shared/Icon';
 import { __wprm } from 'Shared/Translations';
+import { downloadToCsv } from 'Shared/CSV';
 
 let reportData = false;
 
@@ -29,6 +30,21 @@ export default class App extends Component {
 
         const valueType = this.state.valueType;
         const data = Object.values( reportData );
+        const valueOptions = [
+            { value: 'total', label: __wprm( 'Total Interactions' ) },
+            { value: 'unique', label: __wprm( 'Unique Visitor Interactions' ) },
+            { value: 'print', label: __wprm( 'Total Prints' ) },
+            { value: 'print_unique', label: __wprm( 'Unique Visitor Prints' ) },
+        ];
+
+        const selectedValueOption = valueOptions.find(
+            ( option ) => option.value === valueType
+        ) || valueOptions[0];
+
+        const dailyKey = valueType + '_daily';
+        const sevenDayKey = valueType + '_7_days';
+        const thirtyOneDayKey = valueType + '_31_days';
+        const threeHundredSixtyFiveDayKey = valueType + '_365_days';
 
         const columns = [{
             Header: __wprm( 'Sort:' ),
@@ -108,12 +124,7 @@ export default class App extends Component {
         return (
             <div>
                 <div className="wprm-report-table-value-container">
-                    {[
-                        { value: 'total', label: __wprm( 'Total Interactions' ) },
-                        { value: 'unique', label: __wprm( 'Unique Visitor Interactions' ) },
-                        { value: 'print', label: __wprm( 'Total Prints' ) },
-                        { value: 'print_unique', label: __wprm( 'Unique Visitor Prints' ) },
-                    ].map((option) => (
+                    { valueOptions.map((option) => (
                         <label key={option.value}>
                             <input
                                 type="radio"
@@ -124,6 +135,45 @@ export default class App extends Component {
                             {option.label}
                         </label>
                     ))}
+                </div>
+                <div className="wprm-report-table-export-container">
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                            const rows = data
+                                .slice()
+                                .sort((a, b) => {
+                                    const aValue = Number( a[ dailyKey ] ) || 0;
+                                    const bValue = Number( b[ dailyKey ] ) || 0;
+
+                                    return bValue - aValue;
+                                })
+                                .map((recipe) => [
+                                    recipe.recipe_name,
+                                    recipe.recipe_date,
+                                    Math.ceil( ( Number( recipe[ dailyKey ] ) || 0 ) * 100 ) / 100,
+                                    recipe[ sevenDayKey ],
+                                    recipe[ thirtyOneDayKey ],
+                                    recipe[ threeHundredSixtyFiveDayKey ],
+                                ]);
+
+                            downloadToCsv(
+                                `recipe-interactions-${ selectedValueOption.value }`,
+                                [
+                                    __wprm( 'Recipe Name' ),
+                                    __wprm( 'Recipe Date' ),
+                                    __wprm( 'Average per Day' ),
+                                    __wprm( 'Last 7 Days' ),
+                                    __wprm( 'Last 31 Days' ),
+                                    __wprm( 'Last 365 Days' ),
+                                ],
+                                rows
+                            );
+                        }}
+                    >
+                        { __wprm( 'Download to CSV' ) }
+                    </button>
                 </div>
                 <ReactTable
                     data={data}

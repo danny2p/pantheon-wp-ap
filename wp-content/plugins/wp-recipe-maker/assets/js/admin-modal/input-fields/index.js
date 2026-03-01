@@ -8,6 +8,7 @@ import Footer from '../general/Footer';
 
 import FieldText from '../fields/FieldText';
 import FieldTextarea from '../fields/FieldTextarea';
+import FieldAsyncCreatableSingle from '../fields/FieldAsyncCreatableSingle';
 
 export default class InputFields extends Component {
     constructor(props) {
@@ -36,6 +37,9 @@ export default class InputFields extends Component {
                                 case 'textarea':
                                     FieldComponent = FieldTextarea;
                                     break;
+                                case 'async-creatable-single':
+                                    FieldComponent = FieldAsyncCreatableSingle;
+                                    break;
                             }
 
                             return (
@@ -45,6 +49,7 @@ export default class InputFields extends Component {
                                         && <div className="wprm-admin-modal-input-fields-field-label">{ field.label }</div>
                                     }
                                     <FieldComponent
+                                        { ...field }
                                         value={ field.value }
                                         onChange={ (value) => {
                                             let newFields = [ ...this.state.fields ];

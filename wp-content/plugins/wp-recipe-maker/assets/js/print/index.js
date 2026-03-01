@@ -11,10 +11,13 @@ window.WPRMPrint = {
         this.checkToggles();
 
         // On click print button.
-        document.querySelector( '#wprm-print-button-print' ).addEventListener( 'click', (e) => {
-            e.preventDefault();
-            this.onClickPrint();
-        });
+        const printButton = document.querySelector( '#wprm-print-button-print' );
+        if ( printButton ) {
+            printButton.addEventListener( 'click', (e) => {
+                e.preventDefault();
+                this.onClickPrint();
+            });
+        }
 
         // On click toggle.
         const toggles = [ ...document.querySelectorAll( '.wprm-print-toggle' )];
@@ -241,9 +244,11 @@ window.WPRMPrint = {
     },
     setSize( size ) {
         if ( ['small', 'normal', 'large'].includes( size ) ) {
-            const contentOptions = document.querySelectorAll( '#wprm-print-content, .wprm-recipe-collections-layout-grid, .wprm-recipe-collections-layout-classic' );
+            const multiplier = this.getSizeMultiplier( size );
 
-            for ( let content of contentOptions ) {
+            // Collection print layouts don't use recipe templates.
+            const collectionLayouts = document.querySelectorAll( '.wprm-recipe-collections-layout-grid, .wprm-recipe-collections-layout-classic' );
+            for ( let content of collectionLayouts ) {
                 switch ( size ) {
                     case 'small':
                         content.style.fontSize = '0.8em';
@@ -255,7 +260,32 @@ window.WPRMPrint = {
                         content.style.fontSize = '1.2em';
                         break;
                 }
-            }            
+            }
+
+            // Scale each recipe template root independently so templates with a fixed
+            // font-size (like Meadow) still react to the size controls.
+            const printRecipes = document.querySelectorAll( '#wprm-print-content .wprm-print-recipe' );
+            if ( printRecipes.length ) {
+                for ( let printRecipe of printRecipes ) {
+                    const template = this.getPrintRecipeTemplateRoot( printRecipe );
+                    this.setScaledFontSizeForElement( template, multiplier );
+                }
+            } else {
+                const printContent = document.querySelector( '#wprm-print-content' );
+                if ( printContent ) {
+                    switch ( size ) {
+                        case 'small':
+                            printContent.style.fontSize = '0.8em';
+                            break;
+                        case 'normal':
+                            printContent.style.fontSize = '';
+                            break;
+                        case 'large':
+                            printContent.style.fontSize = '1.2em';
+                            break;
+                    }
+                }
+            }
 
             if ( this.sizeChanger ) {
                 const options = this.sizeChanger.querySelectorAll( '.wprm-print-option' );
@@ -267,6 +297,62 @@ window.WPRMPrint = {
                     }
                 }
             }
+        }
+    },
+    getPrintRecipeTemplateRoot( printRecipe ) {
+        if ( ! printRecipe ) {
+            return false;
+        }
+
+        const templateRoot = printRecipe.querySelector( '[class*="wprm-recipe-template-"]' );
+        if ( templateRoot ) {
+            return templateRoot;
+        }
+
+        return printRecipe.firstElementChild ? printRecipe.firstElementChild : false;
+    },
+    getSizeMultiplier( size ) {
+        switch ( size ) {
+            case 'small':
+                return 0.8;
+            case 'large':
+                return 1.2;
+            case 'normal':
+            default:
+                return 1;
+        }
+    },
+    setScaledFontSizeForElement( element, multiplier ) {
+        if ( ! element ) {
+            return;
+        }
+
+        if ( ! element.dataset.hasOwnProperty( 'wprmPrintOriginalInlineFontSize' ) ) {
+            const inlineFontSize = element.style.getPropertyValue( 'font-size' );
+            element.dataset.wprmPrintOriginalInlineFontSize = '' === inlineFontSize
+                ? '__wprm_empty__'
+                : inlineFontSize;
+        }
+
+        if ( ! element.dataset.hasOwnProperty( 'wprmPrintOriginalComputedFontSize' ) ) {
+            const computedFontSize = parseFloat( window.getComputedStyle( element ).fontSize );
+            if ( ! isNaN( computedFontSize ) && 0 < computedFontSize ) {
+                element.dataset.wprmPrintOriginalComputedFontSize = computedFontSize;
+            }
+        }
+
+        if ( 1 === multiplier ) {
+            if ( '__wprm_empty__' === element.dataset.wprmPrintOriginalInlineFontSize ) {
+                element.style.removeProperty( 'font-size' );
+            } else {
+                element.style.setProperty( 'font-size', element.dataset.wprmPrintOriginalInlineFontSize );
+            }
+            return;
+        }
+
+        const originalFontSize = parseFloat( element.dataset.wprmPrintOriginalComputedFontSize );
+        if ( ! isNaN( originalFontSize ) && 0 < originalFontSize ) {
+            element.style.fontSize = `${ originalFontSize * multiplier }px`;
         }
     },
     maybeRedirect( url ) {

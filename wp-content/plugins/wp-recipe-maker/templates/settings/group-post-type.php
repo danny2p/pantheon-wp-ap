@@ -87,6 +87,13 @@ $post_type = array(
 						'value' => 'public',
 					),
 				),
+				array(
+					'id' => 'post_type_enable_default_ui_for_plugins',
+					'name' => __( 'Improve Compatibility with Other Plugins', 'wp-recipe-maker' ),
+					'description' => __( 'Enable a hidden default WordPress UI for recipes so other plugins and themes can detect this post type more easily.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
 			),
 		),
 		array(

@@ -322,4 +322,22 @@
 		</tbody>
 	</table>
 <?php endif; // MV Create Reviews exist. ?>
+<?php if ( current_user_can( 'manage_options' ) ) : ?>
+	<h2><?php esc_html_e( 'Debug Utilities', 'wp-recipe-maker' ); ?></h2>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th scope="row">
+					<?php esc_html_e( 'Download Debug Information', 'wp-recipe-maker' ); ?>
+				</th>
+				<td>
+					<button type="button" class="button" id="tools_download_debug_info"><?php esc_html_e( 'Download Debug Information', 'wp-recipe-maker' ); ?></button>
+					<p class="description">
+						<?php esc_html_e( 'Download a JSON file with diagnostic information to share with our support team.', 'wp-recipe-maker' ); ?>
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<?php endif; ?>
 </div>

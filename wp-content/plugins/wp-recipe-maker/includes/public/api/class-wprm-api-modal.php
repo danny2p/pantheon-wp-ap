@@ -40,11 +40,16 @@ class WPRM_Api_Modal {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			));
-			register_rest_route( 'wp-recipe-maker/v1', '/modal/ingredient/parse', array(
-				'callback' => array( __CLASS__, 'api_modal_parse_ingredients' ),
-				'methods' => 'POST',
-				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
-			));
+		register_rest_route( 'wp-recipe-maker/v1', '/modal/ingredient/parse', array(
+			'callback' => array( __CLASS__, 'api_modal_parse_ingredients' ),
+			'methods' => 'POST',
+			'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+		));
+		register_rest_route( 'wp-recipe-maker/v1', '/modal/categories', array(
+			'callback' => array( __CLASS__, 'api_modal_categories' ),
+			'methods' => 'POST',
+			'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+		));
 		}
 	}
 
@@ -189,6 +194,104 @@ class WPRM_Api_Modal {
 
 		$data = array(
 			'parsed' => $parsed,
+		);
+
+		return rest_ensure_response( $data );
+	}
+
+	/**
+	 * Handle categories call to the REST API.
+	 *
+	 * @since 8.10.0
+	 * @param WP_REST_Request $request Current request.
+	 */
+	public static function api_modal_categories( $request ) {
+		// Parameters.
+		$params = $request->get_params();
+
+		$taxonomy_key = isset( $params['taxonomy'] ) ? sanitize_text_field( $params['taxonomy'] ) : '';
+		$search = isset( $params['search'] ) ? sanitize_text_field( $params['search'] ) : '';
+		
+		// Limit search string length to prevent abuse.
+		if ( strlen( $search ) > 100 ) {
+			$search = substr( $search, 0, 100 );
+		}
+		$term_ids = isset( $params['term_ids'] ) && is_array( $params['term_ids'] ) ? array_map( 'absint', $params['term_ids'] ) : array();
+
+		if ( ! $taxonomy_key ) {
+			return new WP_Error( 'missing_taxonomy', __( 'Taxonomy parameter is required.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+
+		// Get full taxonomy name.
+		$taxonomy = 'wprm_' . $taxonomy_key;
+		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
+
+		if ( ! isset( $wprm_taxonomies[ $taxonomy ] ) ) {
+			return new WP_Error( 'invalid_taxonomy', __( 'Invalid taxonomy.', 'wp-recipe-maker' ), array( 'status' => 400 ) );
+		}
+
+		// Limit term_ids array size to prevent DoS attacks or performance issues.
+		// 100 is a reasonable limit for selected terms when editing a recipe.
+		if ( count( $term_ids ) > 100 ) {
+			$term_ids = array_slice( $term_ids, 0, 100 );
+		}
+
+		// Remove any zero or invalid IDs after sanitization.
+		$term_ids = array_filter( $term_ids, function( $id ) {
+			return $id > 0;
+		} );
+
+		$terms = array();
+
+		// If specific term IDs are requested (for selected values), fetch those first.
+		if ( ! empty( $term_ids ) ) {
+			$args = array(
+				'taxonomy' => $taxonomy,
+				'include' => $term_ids,
+				'hide_empty' => false,
+				'count' => true,
+			);
+
+			$query = new WP_Term_Query( $args );
+			$fetched_terms = $query->get_terms();
+
+			if ( $fetched_terms && is_array( $fetched_terms ) ) {
+				foreach ( $fetched_terms as $term ) {
+					$terms[ $term->term_id ] = $term;
+				}
+			}
+		}
+
+		// If search is provided, fetch matching terms.
+		if ( $search ) {
+			$args = array(
+				'taxonomy' => $taxonomy,
+				'hide_empty' => false,
+				'number' => 50, // Limit results to prevent large queries.
+				'count' => true,
+				'search' => $search,
+				'orderby' => 'name',
+				'order' => 'ASC',
+			);
+
+			$query = new WP_Term_Query( $args );
+			$search_terms = $query->get_terms();
+
+			if ( $search_terms && is_array( $search_terms ) ) {
+				foreach ( $search_terms as $term ) {
+					// Don't duplicate if already fetched.
+					if ( ! isset( $terms[ $term->term_id ] ) ) {
+						$terms[ $term->term_id ] = $term;
+					}
+				}
+			}
+		}
+
+		// Convert to array format expected by frontend.
+		$terms_array = array_values( $terms );
+
+		$data = array(
+			'terms' => $terms_array,
 		);
 
 		return rest_ensure_response( $data );

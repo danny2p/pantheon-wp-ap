@@ -1,0 +1,134 @@
+.wprm-admin-modal-instruction-tip-style {
+    .wprm-admin-modal-instruction-tip-style-container {
+        padding: 20px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-control {
+        margin-bottom: 16px;
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        select {
+            width: 100%;
+            max-width: 260px;
+        }
+    }
+
+    .wprm-admin-modal-instruction-tip-style-icon-picker {
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(36px, 36px));
+        gap: 6px;
+        width: 100%;
+        max-width: none;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-icon-picker-item {
+        border: 1px solid #c3c4c7;
+        background: #fff;
+        border-radius: 4px;
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        cursor: pointer;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    .wprm-admin-modal-instruction-tip-style-icon-picker-item-selected {
+        border-color: #2271b1;
+        box-shadow: 0 0 0 1px #2271b1 inset;
+    }
+
+    input.wprm-admin-modal-instruction-tip-style-custom-input {
+        display: block;
+        margin-top: 14px !important;
+        width: 100%;
+        max-width: 420px;
+    }
+
+    input.wprm-admin-modal-instruction-tip-style-text-input {
+        display: block;
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-control-accent {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-label {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-disclaimer {
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-style: italic;
+        color: #646970;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip {
+        padding: 10px 12px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-left-border,
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-left-border-straight {
+        border-left: 5px solid var(--wprm-admin-tip-preview-accent, #2b6cb0);
+        background: color-mix(in srgb, var(--wprm-admin-tip-preview-accent, #2b6cb0) 9%, transparent);
+        border-radius: 0;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-left-border-rounded {
+        border-left: 5px solid var(--wprm-admin-tip-preview-accent, #2b6cb0);
+        background: color-mix(in srgb, var(--wprm-admin-tip-preview-accent, #2b6cb0) 9%, transparent);
+        border-radius: 4px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-filled {
+        border-radius: 4px;
+        background: color-mix(in srgb, var(--wprm-admin-tip-preview-accent, #2b6cb0) 16%, transparent);
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-outline {
+        border: 1px solid var(--wprm-admin-tip-preview-accent, #2b6cb0);
+        border-radius: 4px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-tip-style-banner {
+        border-top: 2px solid var(--wprm-admin-tip-preview-accent, #2b6cb0);
+        border-bottom: 2px solid var(--wprm-admin-tip-preview-accent, #2b6cb0);
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-icon {
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .wprm-admin-modal-instruction-tip-style-preview-text {
+        line-height: 1.45;
+        color: var(--wprm-admin-tip-preview-text-color, #000000);
+    }
+}

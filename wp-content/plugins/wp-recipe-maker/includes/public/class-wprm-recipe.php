@@ -1438,13 +1438,17 @@ class WPRM_Recipe {
 				}
 	
 				foreach ( $group_instructions as $index => $instruction ) {
-					// Include image for preview in modal.
+					$instruction_type = isset( $instruction['type'] ) && 'tip' === $instruction['type'] ? 'tip' : 'instruction';
 					$image_url = '';
-					if ( isset( $instruction['image'] ) && $instruction['image'] ) {
-						$thumb = wp_get_attachment_image_src( $instruction['image'], array( 150, 999 ) );
+
+					if ( 'instruction' === $instruction_type ) {
+						// Include image for preview in modal.
+						if ( isset( $instruction['image'] ) && $instruction['image'] ) {
+							$thumb = wp_get_attachment_image_src( $instruction['image'], array( 150, 999 ) );
 	
-						if ( $thumb && isset( $thumb[0] ) ) {
-							$image_url = $thumb[0];
+							if ( $thumb && isset( $thumb[0] ) ) {
+								$image_url = $thumb[0];
+							}
 						}
 					}
 
@@ -1453,9 +1457,19 @@ class WPRM_Recipe {
 						$uid++;
 					}
 
-					$instruction['type'] = 'instruction';
+					$instruction['type'] = $instruction_type;
 					$instruction['image_url'] = $image_url;
 					$instruction['text'] = str_ireplace( '<br>', '<br/>', $instruction['text'] ); // Otherwise new editor detects change.
+
+						if ( 'tip' === $instruction_type ) {
+							$instruction['tip_icon'] = isset( $instruction['tip_icon'] ) ? $instruction['tip_icon'] : '';
+							$instruction['tip_style'] = isset( $instruction['tip_style'] ) ? $instruction['tip_style'] : '';
+							$instruction['tip_accent'] = isset( $instruction['tip_accent'] ) ? $instruction['tip_accent'] : '';
+							$instruction['tip_text_color'] = isset( $instruction['tip_text_color'] ) ? $instruction['tip_text_color'] : '';
+							unset( $instruction['image'] );
+							unset( $instruction['video'] );
+						unset( $instruction['ingredients'] );
+					}
 	
 					$instructions_flat[] = $instruction;
 				}
@@ -1488,7 +1502,15 @@ class WPRM_Recipe {
 
 		if ( is_array( $instructions ) ) {
 			foreach ( $instructions as $instruction_group ) {
-				$instructions_without_groups = array_merge( $instructions_without_groups, $instruction_group['instructions'] );
+				if ( isset( $instruction_group['instructions'] ) && is_array( $instruction_group['instructions'] ) ) {
+					foreach ( $instruction_group['instructions'] as $instruction ) {
+						$instruction_type = isset( $instruction['type'] ) ? $instruction['type'] : 'instruction';
+	
+						if ( 'tip' !== $instruction_type ) {
+							$instructions_without_groups[] = $instruction;
+						}
+					}
+				}
 			}
 		}
 

@@ -15,11 +15,13 @@
     font-size: 1em !important;
     line-height: 1.5em !important; /* wprm_main_line_height type=font_size */
 }
-.wprm-recipe li {
+.wprm-recipe li:not(.wprm-recipe-instruction-tip) {
     margin: 0 0 0 32px !important;
+}
+.wprm-recipe li:not(.wprm-recipe-instruction-tip) {
     padding: 0 !important;
 }
-.rtl .wprm-recipe li {
+.rtl .wprm-recipe li:not(.wprm-recipe-instruction-tip) {
     margin: 0 32px 0 0 !important;
 }
 .wprm-recipe ol, .wprm-recipe ul {

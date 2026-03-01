@@ -333,6 +333,9 @@ class WPRM_Template_Manager {
 		if ( in_array( $type, array( 'archive', 'amp' ) ) && '_modern' !== $mode ) {
 			$type = 'single';
 		}
+		if ( 'pdf' === $type && '_modern' !== $mode ) {
+			return self::get_template_by_type( 'print', $recipe_type );
+		}
 
 		switch ( $type ) {
 			case 'amp':
@@ -353,6 +356,13 @@ class WPRM_Template_Manager {
 					}
 				} else {
 					$template_slug = WPRM_Settings::get( 'default_print_template' . $mode );
+				}
+				break;
+			case 'pdf':
+				if ( 'food' === $recipe_type ) {
+					$template_slug = WPRM_Settings::get( 'default_pdf_template' . $mode );
+				} else {
+					$template_slug = WPRM_Settings::get( 'default_' . $recipe_type . '_pdf_template' . $mode );
 				}
 				break;
 			case 'print-collection':
@@ -398,6 +408,11 @@ class WPRM_Template_Manager {
 				}
 		}
 
+		// Account for "Use same as Default Print Template" setting.
+		if ( 'pdf' === $type && 'default_print_template' === $template_slug ) {
+			return self::get_template_by_type( 'print', $recipe_type );
+		}
+
 		// Account for "Use same as Default Recipe Template" setting, but prevent infinite loop.
 		if ( 'default_recipe_template' === $template_slug && 'single' !== $type ) {
 			return self::get_template_by_type( 'single', $recipe_type );
@@ -431,6 +446,13 @@ class WPRM_Template_Manager {
 						}
 					} else {
 						$template_slug = WPRM_Settings::get_default( 'default_print_template' . $mode );
+					}
+					break;
+				case 'pdf':
+					if ( 'food' === $recipe_type ) {
+						$template_slug = WPRM_Settings::get_default( 'default_pdf_template' . $mode );
+					} else {
+						$template_slug = WPRM_Settings::get_default( 'default_' . $recipe_type . '_pdf_template' . $mode );
 					}
 					break;
 				case 'print-collection':
@@ -468,6 +490,11 @@ class WPRM_Template_Manager {
 					} else {
 						$template_slug = WPRM_Settings::get_default( 'default_recipe_template' . $mode );
 					}
+			}
+
+			// Account for "Use same as Default Print Template" setting.
+			if ( 'pdf' === $type && 'default_print_template' === $template_slug ) {
+				return self::get_template_by_type( 'print', $recipe_type );
 			}
 
 			// Account for "Use same as Default Recipe Template" setting, but prevent infinite loop.

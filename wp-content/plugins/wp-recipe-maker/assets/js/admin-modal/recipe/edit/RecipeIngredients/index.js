@@ -174,6 +174,10 @@ export default class RecipeIngredients extends Component {
                         onItemsChange={ ( ingredients_flat ) => {                            
                             this.props.onRecipeChange({
                                 ingredients_flat,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'ingredients:products',
                             });
                         }}
                         openSecondaryModal={ this.props.openSecondaryModal }
@@ -187,12 +191,20 @@ export default class RecipeIngredients extends Component {
                         onIngredientsChange={ ( ingredients_flat ) => {                            
                             this.props.onRecipeChange({
                                 ingredients_flat,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'ingredients:unit_conversion_values',
                             });
                         }}
                         system={ this.props.system }
                         onSystemChange={ ( unit_system ) => {
                             this.props.onRecipeChange({
                                 unit_system,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'ingredients:unit_system',
                             });
                         } }
                     />
@@ -205,12 +217,20 @@ export default class RecipeIngredients extends Component {
                         onIngredientsChange={ ( ingredients_flat ) => {                            
                             this.props.onRecipeChange({
                                 ingredients_flat,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'ingredients:links_values',
                             });
                         }}
                         type={ this.props.linkType }
                         onTypeChange={ ( ingredient_links_type ) => {
                             this.props.onRecipeChange({
                                 ingredient_links_type,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'ingredients:links_type',
                             });
                         } }
                         openSecondaryModal={ this.props.openSecondaryModal }

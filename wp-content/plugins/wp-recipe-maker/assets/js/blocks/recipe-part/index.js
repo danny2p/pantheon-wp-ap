@@ -60,6 +60,7 @@ registerBlockType( 'wp-recipe-maker/recipe-part', {
             { label: 'Equipment', value: 'recipe-equipment' },
             { label: 'Facebook Share', value: 'recipe-facebook-share' },
             { label: 'Grow.me Button', value: 'recipe-grow.me' },
+            { label: 'My Shopping Help Button', value: 'recipe-my-shopping-help' },
             { label: 'Image', value: 'recipe-image' },
             { label: 'Ingredients', value: 'recipe-ingredients' },
             { label: 'Instructions', value: 'recipe-instructions' },

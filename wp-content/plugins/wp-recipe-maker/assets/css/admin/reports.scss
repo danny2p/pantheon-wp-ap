@@ -39,6 +39,23 @@
     }
 }
 
+.wprm-report-table-export-container {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.wprm-report-table-header {
+    margin: 15px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    h2 {
+        margin: 0;
+    }
+}
+
 .wprm-report-table-actions {
     width: 100%;
     display: flex;

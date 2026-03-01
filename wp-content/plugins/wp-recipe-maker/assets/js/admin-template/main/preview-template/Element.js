@@ -155,17 +155,17 @@ const Element = (props) => {
                         ?
                         <PropertyAccordion
                             properties={properties}
-                            onPropertyChange={(propertyId, value) => {
+                            onPropertyChange={(propertyId, value, options = {}) => {
                                 const newProperties = { ...properties };
                                 newProperties[propertyId].value = value;
 
                                 const property = properties[propertyId];
                                 if ( property.hasOwnProperty( 'valueToClasses' ) ) {
                                     const newClasses = getClasses( newProperties );
-                                    props.onClassesChange( props.shortcode.uid, newClasses );
+                                    props.onClassesChange( props.shortcode.uid, newClasses, options );
                                 } else if ( property.hasOwnProperty( 'valueToStyle' ) ) {
                                     const newStyle = getStyle( newProperties );
-                                    props.onStyleChange( props.shortcode.uid, newStyle );
+                                    props.onStyleChange( props.shortcode.uid, newStyle, options );
                                 }
                             }}
                         />

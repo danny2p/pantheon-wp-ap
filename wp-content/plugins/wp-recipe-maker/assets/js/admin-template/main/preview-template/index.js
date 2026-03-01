@@ -56,17 +56,25 @@ const removeLowercaseEventHandlers = (domNode) => {
 
 const { shortcodeGroups, shortcodeKeysAlphebetically, getShortcodeId } = Shortcodes;
 
+const normalizePreviewRecipe = (recipe) => {
+    const recipeId = recipe && recipe.hasOwnProperty( 'id' ) ? recipe.id : false;
+
+    if ( ! recipe || 'demo' === recipe || 'demo' === recipeId || 0 === recipeId ) {
+        return {
+            id: 'demo',
+            text: 'Use WPRM Demo Recipe',
+        };
+    }
+
+    return recipe;
+};
+
 export default class PreviewTemplate extends Component {
     constructor(props) {
         super(props);
+        this.previewContext = `preview-${Math.random().toString(36).slice(2)}`;
 
-        let recipe = wprm_admin_template.preview_recipe;
-        if ( 'demo' === recipe || 0 === recipe.id ) {
-            recipe = {
-                id: 'demo',
-                text: 'Use WPRM Demo Recipe',
-            };
-        }
+        const recipe = normalizePreviewRecipe( props.forcedRecipe ? props.forcedRecipe : wprm_admin_template.preview_recipe );
 
         this.state = {
             recipe,
@@ -100,6 +108,19 @@ export default class PreviewTemplate extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        if ( this.props.forcedRecipe && this.props.forcedRecipe !== prevProps.forcedRecipe ) {
+            const forcedRecipe = normalizePreviewRecipe( this.props.forcedRecipe );
+            const currentRecipeId = this.state.recipe && this.state.recipe.id ? this.state.recipe.id : false;
+
+            if ( forcedRecipe.id !== currentRecipeId ) {
+                this.setState({
+                    recipe: forcedRecipe,
+                    html: '', // Force HTML to update with the new recipe.
+                });
+                return;
+            }
+        }
+
         // Sync editingBlock from props (e.g., when URL changes)
         if ( this.props.editingBlock !== undefined && this.props.editingBlock !== prevProps.editingBlock && this.props.editingBlock !== this.state.editingBlock ) {
             this.setState({
@@ -418,6 +439,7 @@ export default class PreviewTemplate extends Component {
         }
 
         return <Element
+                    key={ shortcode.uid }
                     recipeId={ recipeId }
                     shortcode={ shortcode }
                     shortcodes={ shortcodes }
@@ -448,8 +470,10 @@ export default class PreviewTemplate extends Component {
         }
 
         return <Block
+                    key={ shortcode.uid }
                     mode={ 'shortcode-generator' === this.props.mode ? this.props.mode : null }
                     templateMode={ this.props.mode }
+                    previewContext={ this.previewContext }
                     recipeId={ recipeId }
                     shortcode={ shortcode }
                     shortcodes={ shortcodes }
@@ -524,47 +548,71 @@ export default class PreviewTemplate extends Component {
         return html;
     }
 
-    onClassesChange(uid, classes) {
+    onClassesChange(uid, classes, options = {}) {
         let newState = this.state;
         newState.shortcodes[uid].classes = classes;
 
+        const historyMode = options.historyMode || 'immediate';
+        const historyBoundary = !! options.historyBoundary;
+        const historyPropertyId = options.historyPropertyId || false;
+
         this.setState(newState,
             () => {
                 let newHtml = this.unparseHtml();
-                this.props.onChangeHTML(newHtml);
+                this.props.onChangeHTML(newHtml, {
+                    historyMode,
+                    historyBoundary,
+                    historyPropertyId,
+                });
             }
         );
     }
 
-    onStyleChange(uid, style) {
+    onStyleChange(uid, style, options = {}) {
         let newState = this.state;
         newState.shortcodes[uid].style = style;
 
+        const historyMode = options.historyMode || 'immediate';
+        const historyBoundary = !! options.historyBoundary;
+        const historyPropertyId = options.historyPropertyId || false;
+
         this.setState(newState,
             () => {
                 let newHtml = this.unparseHtml();
-                this.props.onChangeHTML(newHtml);
+                this.props.onChangeHTML(newHtml, {
+                    historyMode,
+                    historyBoundary,
+                    historyPropertyId,
+                });
             }
         );
     }
 
-    onBlockPropertyChange(uid, property, value) {
+    onBlockPropertyChange(uid, property, value, options = {}) {
         let properties = {};
         properties[property] = value;
-        this.onBlockPropertiesChange(uid, properties);
+        this.onBlockPropertiesChange(uid, properties, options);
     }
 
-    onBlockPropertiesChange(uid, properties) {
+    onBlockPropertiesChange(uid, properties, options = {}) {
         let newState = this.state;
         newState.shortcodes[uid].attributes = {
             ...newState.shortcodes[uid].attributes,
             ...properties,
         }
 
+        const historyMode = options.historyMode || 'immediate';
+        const historyBoundary = !! options.historyBoundary;
+        const historyPropertyId = options.historyPropertyId || false;
+
         this.setState(newState,
             () => {
                 let newHtml = this.unparseHtml();
-                this.props.onChangeHTML(newHtml);
+                this.props.onChangeHTML(newHtml, {
+                    historyMode,
+                    historyBoundary,
+                    historyPropertyId,
+                });
             });
     }
 
@@ -623,7 +671,9 @@ export default class PreviewTemplate extends Component {
             if ( pattern.hasOwnProperty( 'css' ) && pattern.css ) {
                 const patternCss = pattern.css.replace( /%template%/g, '.wprm-recipe-template-' + this.props.template.slug );
                 const newCSS = this.props.template.style.css + '\n' + patternCss;
-                this.props.onChangeCSS( newCSS );
+                this.props.onChangeCSS( newCSS, {
+                    historyMode: 'immediate',
+                } );
             }
         }
     }
@@ -728,7 +778,9 @@ export default class PreviewTemplate extends Component {
             },
                 () => {
                     let newHtml = this.unparseHtml();
-                    this.props.onChangeHTML(newHtml);
+                    this.props.onChangeHTML(newHtml, {
+                        historyMode: 'immediate',
+                    });
                     this.props.onChangeMode( 'blocks' );
 
                     this.setState({
@@ -879,7 +931,9 @@ export default class PreviewTemplate extends Component {
             },
                 () => {
                     let newHtml = this.unparseHtml();
-                    this.props.onChangeHTML(newHtml);
+                    this.props.onChangeHTML(newHtml, {
+                        historyMode: 'immediate',
+                    });
                 });
         }
     }
@@ -960,7 +1014,9 @@ export default class PreviewTemplate extends Component {
             },
                 () => {
                     let newHtml = this.unparseHtml();
-                    this.props.onChangeHTML(newHtml);
+                    this.props.onChangeHTML(newHtml, {
+                        historyMode: 'immediate',
+                    });
                 });
         }
     }
@@ -992,6 +1048,11 @@ export default class PreviewTemplate extends Component {
                         'snippet' === this.props.template.type
                         &&
                         <div className={`wprm-recipe wprm-recipe-snippet wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                    }
+                    {
+                        'roundup' === this.props.template.type
+                        &&
+                        <div className={`wprm-recipe wprm-recipe-roundup-item wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
                     }
                 </Fragment>
                 </PreviewInteractionsContext.Provider>

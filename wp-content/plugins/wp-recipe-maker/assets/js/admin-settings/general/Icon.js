@@ -16,6 +16,7 @@ import IconDoc from '../../../icons/settings/doc.svg';
 import IconDollar from '../../../icons/settings/dollar.svg';
 import IconEdit from '../../../icons/settings/edit.svg';
 import IconFiles from '../../../icons/settings/files.svg';
+import IconFloppyDisk from '../../../icons/settings/floppy-disk.svg';
 import IconHealth from '../../../icons/settings/health.svg';
 import IconImport from '../../../icons/settings/import.svg';
 import IconKey from '../../../icons/settings/key.svg';
@@ -65,6 +66,7 @@ const icons = {
     dollar: IconDollar,
     edit: IconEdit,
     files: IconFiles,
+    'floppy-disk': IconFloppyDisk,
     health: IconHealth,
     import: IconImport,
     key: IconKey,

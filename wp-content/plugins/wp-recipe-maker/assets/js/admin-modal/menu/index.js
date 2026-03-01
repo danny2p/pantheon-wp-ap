@@ -161,6 +161,25 @@ export default class Menu extends Component {
                                 }, true );
                             } }
                         >{ __wprm( 'Print Recipe' ) }</Button>
+                        <Button
+                            onClick={ () => {
+                                WPRM_Modal.open( 'select', {
+                                    title: __wprm( 'Download PDF' ),
+                                    button: __wprm( 'Insert' ),
+                                    fields: {
+                                        recipe: { showFirst: true },
+                                    },
+                                    insertCallback: ( fields ) => {
+                                        if ( 'function' === typeof this.props.args.insertCallback ) {
+                                            let shortcode = '[wprm-recipe-download-pdf';
+                                            shortcode += fields.recipe && fields.recipe.id ? ` id="${ fields.recipe.id }"]` : ']';
+
+                                            this.props.args.insertCallback( shortcode );
+                                        }
+                                    },
+                                }, true );
+                            } }
+                        >{ __wprm( 'Download PDF' ) }</Button>
                     </div>
                     <h2>{ __wprm( 'Recipe Parts' ) }</h2>
                     <div className="wprm-admin-modal-menu-buttons">
@@ -218,8 +237,8 @@ export default class Menu extends Component {
                                                 // Default to internal link.
                                                 shortcode += ` id="${ fields.post.id }"`;
 
-                                                // Optional override fields.
-                                                if ( fields.image && 0 < parseInt( fields.image ) ) { shortcode += ` image="${ fields.image }"`; }
+                                                // Optional override fields. (image is { id, url } from Roundup modal)
+                                                if ( fields.image && fields.image.id && 0 < parseInt( fields.image.id, 10 ) ) { shortcode += ` image="${ fields.image.id }"`; }
                                                 if ( fields.name ) { shortcode += ` name="${ cleanUpShortcodeAttribute( fields.name ) }"`; }
                                                 if ( fields.summary ) { shortcode += ` summary="${ cleanUpShortcodeAttribute( fields.summary ) }"`; }
                                             } else {

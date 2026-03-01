@@ -12,7 +12,7 @@ export default class App extends Component {
     render() {
         if ( wprm_faq.onboarded ) {
             return (
-                <Faq />
+                <Faq context="faq_page" />
             );
         } else {
             return (

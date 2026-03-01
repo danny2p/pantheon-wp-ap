@@ -12,6 +12,9 @@
     h2:not(.wprm-admin-onboarding-step-template-preview h2) {
         margin: 2em 0 1em 0;
     }
+    h3:not(.wprm-admin-onboarding-step-template-preview h3) {
+        margin: 1.5em 0 0.7em 0;
+    }
 
     img:not(.wprm-admin-onboarding-step-template-preview img) {
         display: block;
@@ -33,8 +36,9 @@
         max-width: 800px;
     }
 
-    .wprm-drip-form {
-        margin: 20px 0;
+	    .wprm-drip-form {
+	        margin: 12px 0 0;
+	        scroll-margin-top: 20px;
 
         label[for="drip-email"] {
             font-weight: bold;
@@ -59,6 +63,69 @@
 			font-size: 0.8em;
 		}
 	}
+
+    .wprm-faq-feature-explorer-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+
+        .button {
+            margin: 0;
+        }
+    }
+
+    .wprm-faq-signup-reminder {
+        margin: 20px 0;
+        padding: 16px;
+        border: 1px solid #ccd0d4;
+        border-left: 4px solid #1d7f3f;
+        background: #f8fff9;
+
+        h3 {
+            margin-top: 0 !important;
+        }
+
+        .button {
+            margin-top: 5px;
+        }
+    }
+
+    .wprm-faq-signup-form {
+        margin: 20px 0;
+        padding: 16px;
+        border: 1px solid #ccd0d4;
+        border-left: 4px solid #1d7f3f;
+        background: #f8fff9;
+
+        & > p {
+            &:first-child {
+                margin-top: 0 !important;
+            }
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+
+    .wprm-faq-video-embed {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        padding-top: 56.25%;
+        margin: 10px 0 20px;
+        overflow: hidden;
+        background: #000;
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    }
 }
 
 #wprm-admin-faq-container,

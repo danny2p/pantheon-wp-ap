@@ -6,6 +6,7 @@ import ManageTemplates from './manage-templates';
 import EditTemplate from './edit-template';
 import PreviewTemplate from './preview-template';
 import ShortcodeGenerator from './shortcode-generator';
+import FeatureExplorer from './feature-explorer';
 
 const Main = (props) => {
     return (
@@ -23,10 +24,11 @@ const Main = (props) => {
                     onSaveTemplate={ props.onSaveTemplate }
                     type={ props.manageTemplateType }
                     onChangeType={ props.onChangeManageTemplateType }
+                    defaultTemplateUsages={ props.defaultTemplateUsages }
                 />
             }
             {
-                'manage' !== props.mode && props.template
+                'manage' !== props.mode && 'shortcode' !== props.mode && 'feature-explorer' !== props.mode && props.template
                 &&
                 <EditTemplate
                     mode={ props.mode }
@@ -44,7 +46,14 @@ const Main = (props) => {
                 />
             }
             {
-                props.template
+                'feature-explorer' === props.mode
+                &&
+                <FeatureExplorer
+                    templates={ props.templates }
+                />
+            }
+            {
+                'feature-explorer' !== props.mode && props.template
                 &&
                 <PreviewTemplate
                     mode={ props.mode }
