@@ -295,7 +295,15 @@ class WPRM_Recipe_Shell {
 
 		if ( is_array( $instructions ) ) {
 			foreach ( $instructions as $instruction_group ) {
-				$instructions_without_groups = array_merge( $instructions_without_groups, $instruction_group['instructions'] );
+				if ( isset( $instruction_group['instructions'] ) && is_array( $instruction_group['instructions'] ) ) {
+					foreach ( $instruction_group['instructions'] as $instruction ) {
+						$instruction_type = isset( $instruction['type'] ) ? $instruction['type'] : 'instruction';
+	
+						if ( 'tip' !== $instruction_type ) {
+							$instructions_without_groups[] = $instruction;
+						}
+					}
+				}
 			}
 		}
 

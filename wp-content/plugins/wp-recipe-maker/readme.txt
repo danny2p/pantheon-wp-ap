@@ -5,7 +5,7 @@ Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 10.3.4
+Stable tag: 10.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,28 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.4.0 =
+* Feature: Add optional tips in between instruction steps
+* Feature: Undo/Redo history for the recipe edit modal
+* Feature: Undo/Redo history for the Template Editor
+* Feature: My Shopping Help integration
+* Feature: Export to CSV for Manage page datatables
+* Feature: Tip shortcode with easy way to add tips to the recipe notes section
+* Feature: Setting to expose post type to other plugins
+* Feature: Download Recipe Interactions Report to CSV
+* Feature: Any or none option for taxonomy conditions
+* Feature: Hubbub Action Buttons block in Template Editor
+* Improvement: Support Hubbub Save This compact attribute
+* Improvement: Support importing additional time and new tags system for Tasty Recipes
+* Improvement: Show recipe templates used in template editor overview
+* Fix: Part of dropdown could get hidden in Template Editor
+* Fix: Smaller & Larger buttons on print page in combination with some templates
+* Fix: Plural/singular for split ingredients
+* Fix: Fractions incorrect for split ingredient preview when editing
+* Fix: Setting alternative image for roundup item in classic editor
+* Fix: Prevent admin modal performance issues when a site has many category terms
+* Fix: Recipe updated attribute triggering autosave unnecessarily
+
 = 10.3.4 =
 * Fix: Resolved Instacart 400 error caused by strict servings validation
 
@@ -501,6 +523,9 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.4.0 =
+Some great new features and improvements
+
 = 10.3.4 =
 Prevent Instacart button from breaking
 

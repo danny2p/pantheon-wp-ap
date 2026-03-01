@@ -31,21 +31,27 @@ export default class IngredientsEdit extends Component {
 
     onDragEnd(result) {
         if ( result.destination ) {
-            let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
             const sourceIndex = result.source.index;
             const destinationIndex = result.destination.index;
+            this.props.onRecipeChange((recipe) => {
+                const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                let newFields = JSON.parse( JSON.stringify( ingredients ) );
 
-            const field = newFields.splice(sourceIndex, 1)[0];
-            newFields.splice(destinationIndex, 0, field);
+                const field = newFields.splice(sourceIndex, 1)[0];
+                newFields.splice(destinationIndex, 0, field);
 
-            this.props.onRecipeChange({
-                ingredients_flat: newFields,
+                return {
+                    ingredients_flat: newFields,
+                };
+            }, {
+                historyMode: 'immediate',
+                historyBoundary: true,
+                historyKey: 'ingredients:reorder',
             });
         }
     }
 
     addField(type, afterIndex = false) {
-        let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
         let newField;
 
         if ( 'group' === type ) {
@@ -63,21 +69,30 @@ export default class IngredientsEdit extends Component {
             }
         }
 
-        // Give unique UID.
-        let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
-        maxUid = maxUid < 0 ? -1 : maxUid;
-        newField.uid = maxUid + 1;
+        this.props.onRecipeChange((recipe) => {
+            const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+            let newFields = JSON.parse( JSON.stringify( ingredients ) );
 
-        if ( false === afterIndex ) {
-            newFields.push(newField);
-            this.lastAddedIndex = newFields.length - 1;
-        } else {
-            newFields.splice(afterIndex + 1, 0, newField);
-            this.lastAddedIndex = afterIndex + 1;
-        }
+            // Give unique UID.
+            let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
+            maxUid = maxUid < 0 ? -1 : maxUid;
+            newField.uid = maxUid + 1;
 
-        this.props.onRecipeChange({
-            ingredients_flat: newFields,
+            if ( false === afterIndex ) {
+                newFields.push(newField);
+                this.lastAddedIndex = newFields.length - 1;
+            } else {
+                newFields.splice(afterIndex + 1, 0, newField);
+                this.lastAddedIndex = afterIndex + 1;
+            }
+
+            return {
+                ingredients_flat: newFields,
+            };
+        }, {
+            historyMode: 'immediate',
+            historyBoundary: true,
+            historyKey: `ingredients:add:${ type }`,
         });
     }
   
@@ -123,81 +138,116 @@ export default class IngredientsEdit extends Component {
                                                     });
                                                 }
                                             }}
-                                            onChangeName={ ( name ) => {
-                                                const findIndex = this.props.ingredients.findIndex( ( i ) => field.uid === i.uid );
-                                                const ingredientIndex = 0 <= findIndex ? findIndex : index;
+                                            onChangeName={ ( name, changeOptions = {} ) => {
+                                                this.props.onRecipeChange((recipe) => {
+                                                    const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                                                    const findIndex = ingredients.findIndex( ( i ) => field.uid === i.uid );
+                                                    const ingredientIndex = 0 <= findIndex ? findIndex : index;
 
-                                                let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
-                                                newFields[ingredientIndex].name = name;
-
-                                                this.props.onRecipeChange({
-                                                    ingredients_flat: newFields,
-                                                });
-                                            }}
-                                            onChangeIngredient={ ( ingredient ) => {
-                                                const findIndex = this.props.ingredients.findIndex( ( i ) => field.uid === i.uid );
-                                                const ingredientIndex = 0 <= findIndex ? findIndex : index;
-
-                                                let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
-
-                                                newFields[ingredientIndex] = {
-                                                    ...newFields[ingredientIndex],
-                                                    ...ingredient,
-                                                }
-
-                                                // Need to update text for inline ingredients.
-                                                let newInstructions = JSON.parse( JSON.stringify( this.props.instructions ) );
-
-                                                newInstructions.map( ( instruction, i ) => {
-                                                    if ( instruction.hasOwnProperty( 'type' ) && 'instruction' === instruction.type && instruction.hasOwnProperty( 'text' ) ) {
-                                                        const updatedText = InlineIngredientsHelper.updateInlineIngredientInText( newFields[ingredientIndex], instruction.text );
-                                                        if ( instruction.text !== updatedText ) {
-                                                            newInstructions[ i ].text = updatedText;
-                                                            newInstructions[ i ].externalUpdate = Date.now();
-                                                        }
+                                                    if ( ! ingredients[ ingredientIndex ] ) {
+                                                        return {};
                                                     }
-                                                } );
-                                                
-                                                this.props.onRecipeChange({
-                                                    ingredients_flat: newFields,
-                                                    instructions_flat: newInstructions,
+
+                                                    let newFields = JSON.parse( JSON.stringify( ingredients ) );
+                                                    newFields[ingredientIndex].name = name;
+
+                                                    return {
+                                                        ingredients_flat: newFields,
+                                                    };
+                                                }, {
+                                                    historyMode: 'debounced',
+                                                    historyBoundary: !! changeOptions.historyBoundary,
+                                                    historyKey: `ingredients:${ field.uid }:name`,
                                                 });
                                             }}
-                                            onDelete={() => {
-                                                const findIndex = this.props.ingredients.findIndex( ( i ) => field.uid === i.uid );
-                                                const ingredientIndex = 0 <= findIndex ? findIndex : index;
+                                            onChangeIngredient={ ( ingredient, changeOptions = {} ) => {
+                                                this.props.onRecipeChange((recipe) => {
+                                                    const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                                                    const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                    const findIndex = ingredients.findIndex( ( i ) => field.uid === i.uid );
+                                                    const ingredientIndex = 0 <= findIndex ? findIndex : index;
 
-                                                let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
-                                                let newInstructions = JSON.parse( JSON.stringify( this.props.instructions ) );
+                                                    if ( ! ingredients[ ingredientIndex ] ) {
+                                                        return {};
+                                                    }
 
-                                                // Delete ingredient and retrieve.
-                                                const deletedIngredient = newFields.splice(ingredientIndex, 1);
-                                                
-                                                // Need to remove ingredient UID from associated instructions and maybe update inline ingredients.
-                                                if ( deletedIngredient[0] && deletedIngredient[0].hasOwnProperty( 'uid' ) ) {
-                                                    const deletedUid = deletedIngredient[0].uid;
+                                                    let newFields = JSON.parse( JSON.stringify( ingredients ) );
 
-                                                    // Need to update inline ingredients.
+                                                    newFields[ingredientIndex] = {
+                                                        ...newFields[ingredientIndex],
+                                                        ...ingredient,
+                                                    }
+
+                                                    // Need to update text for inline ingredients.
+                                                    let newInstructions = JSON.parse( JSON.stringify( instructions ) );
+
                                                     newInstructions.map( ( instruction, i ) => {
-                                                        // Associated ingredients.
-                                                        if ( instruction.hasOwnProperty( 'ingredients' ) ) {
-                                                            newInstructions[ i ].ingredients = instruction.ingredients.filter( ( ingredient ) => ingredient !== deletedUid );
-                                                        }
-
-                                                        // Inline ingredients.
                                                         if ( instruction.hasOwnProperty( 'type' ) && 'instruction' === instruction.type && instruction.hasOwnProperty( 'text' ) ) {
-                                                            const updatedText = InlineIngredientsHelper.updateInlineIngredientInText( deletedIngredient[0], instruction.text, true );
+                                                            const updatedText = InlineIngredientsHelper.updateInlineIngredientInText( newFields[ingredientIndex], instruction.text );
                                                             if ( instruction.text !== updatedText ) {
                                                                 newInstructions[ i ].text = updatedText;
                                                                 newInstructions[ i ].externalUpdate = Date.now();
                                                             }
                                                         }
                                                     } );
-                                                }
 
-                                                this.props.onRecipeChange({
-                                                    ingredients_flat: newFields,
-                                                    instructions_flat: newInstructions,
+                                                    return {
+                                                        ingredients_flat: newFields,
+                                                        instructions_flat: newInstructions,
+                                                    };
+                                                }, {
+                                                    historyMode: 'debounced',
+                                                    historyBoundary: !! changeOptions.historyBoundary,
+                                                    historyKey: `ingredients:${ field.uid }:fields`,
+                                                });
+                                            }}
+                                            onDelete={() => {
+                                                this.props.onRecipeChange((recipe) => {
+                                                    const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                                                    const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                    const findIndex = ingredients.findIndex( ( i ) => field.uid === i.uid );
+                                                    const ingredientIndex = 0 <= findIndex ? findIndex : index;
+
+                                                    if ( ! ingredients[ ingredientIndex ] ) {
+                                                        return {};
+                                                    }
+
+                                                    let newFields = JSON.parse( JSON.stringify( ingredients ) );
+                                                    let newInstructions = JSON.parse( JSON.stringify( instructions ) );
+
+                                                    // Delete ingredient and retrieve.
+                                                    const deletedIngredient = newFields.splice(ingredientIndex, 1);
+                                                    
+                                                    // Need to remove ingredient UID from associated instructions and maybe update inline ingredients.
+                                                    if ( deletedIngredient[0] && deletedIngredient[0].hasOwnProperty( 'uid' ) ) {
+                                                        const deletedUid = deletedIngredient[0].uid;
+
+                                                        // Need to update inline ingredients.
+                                                        newInstructions.map( ( instruction, i ) => {
+                                                            // Associated ingredients.
+                                                            if ( instruction.hasOwnProperty( 'ingredients' ) ) {
+                                                                newInstructions[ i ].ingredients = instruction.ingredients.filter( ( ingredient ) => ingredient !== deletedUid );
+                                                            }
+
+                                                            // Inline ingredients.
+                                                            if ( instruction.hasOwnProperty( 'type' ) && 'instruction' === instruction.type && instruction.hasOwnProperty( 'text' ) ) {
+                                                                const updatedText = InlineIngredientsHelper.updateInlineIngredientInText( deletedIngredient[0], instruction.text, true );
+                                                                if ( instruction.text !== updatedText ) {
+                                                                    newInstructions[ i ].text = updatedText;
+                                                                    newInstructions[ i ].externalUpdate = Date.now();
+                                                                }
+                                                            }
+                                                        } );
+                                                    }
+
+                                                    return {
+                                                        ingredients_flat: newFields,
+                                                        instructions_flat: newInstructions,
+                                                    };
+                                                }, {
+                                                    historyMode: 'immediate',
+                                                    historyBoundary: true,
+                                                    historyKey: `ingredients:${ field.uid }:delete`,
                                                 });
                                             }}
                                             onAdd={() => {
@@ -210,14 +260,25 @@ export default class IngredientsEdit extends Component {
                                                     this.props.openSecondaryModal('split-ingredient', {
                                                         ingredient: field,
                                                         onSave: (splits) => {
-                                                            const findIndex = this.props.ingredients.findIndex( ( i ) => field.uid === i.uid );
-                                                            const ingredientIndex = 0 <= findIndex ? findIndex : index;
+                                                            this.props.onRecipeChange((recipe) => {
+                                                                const ingredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                                                                const findIndex = ingredients.findIndex( ( i ) => field.uid === i.uid );
+                                                                const ingredientIndex = 0 <= findIndex ? findIndex : index;
 
-                                                            let newFields = JSON.parse( JSON.stringify( this.props.ingredients ) );
-                                                            newFields[ingredientIndex].splits = splits;
+                                                                if ( ! ingredients[ ingredientIndex ] ) {
+                                                                    return {};
+                                                                }
 
-                                                            this.props.onRecipeChange({
-                                                                ingredients_flat: newFields,
+                                                                let newFields = JSON.parse( JSON.stringify( ingredients ) );
+                                                                newFields[ingredientIndex].splits = splits;
+
+                                                                return {
+                                                                    ingredients_flat: newFields,
+                                                                };
+                                                            }, {
+                                                                historyMode: 'immediate',
+                                                                historyBoundary: true,
+                                                                historyKey: `ingredients:${ field.uid }:split`,
                                                             });
                                                         }
                                                     });
@@ -254,14 +315,20 @@ export default class IngredientsEdit extends Component {
                             this.props.openSecondaryModal('bulk-add-ingredients', {
                                 field: 'ingredients',
                                 onBulkAdd: (ingredients_flat) => {
-                                    const currentIngredients = JSON.parse( JSON.stringify( this.props.ingredients ) );
-                                    const newIngredients = this.props.setUids( currentIngredients, ingredients_flat );
+                                    this.props.onRecipeChange((recipe) => {
+                                        const currentIngredients = recipe && recipe.ingredients_flat ? JSON.parse( JSON.stringify( recipe.ingredients_flat ) ) : [];
+                                        const newIngredients = this.props.setUids( currentIngredients, ingredients_flat );
 
-                                    this.props.onRecipeChange({
-                                        ingredients_flat: [
-                                            ...currentIngredients,
-                                            ...newIngredients,
-                                        ],
+                                        return {
+                                            ingredients_flat: [
+                                                ...currentIngredients,
+                                                ...newIngredients,
+                                            ],
+                                        };
+                                    }, {
+                                        historyMode: 'immediate',
+                                        historyBoundary: true,
+                                        historyKey: 'ingredients:bulk_add',
                                     });
                                 }
                             });

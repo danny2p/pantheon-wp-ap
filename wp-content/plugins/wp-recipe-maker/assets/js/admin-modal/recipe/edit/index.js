@@ -31,6 +31,45 @@ const EditRecipe = (props) => {
     const hasVideo = hasUpload || hasEmbed;
 
     const [nutritionWarning, setNutritionWarning] = useState(false);
+    const historyEnabled = !! props.historyEnabled;
+    const historyDisabled = props.loadingRecipe || props.savingChanges || 'waiting' === props.saveResult;
+    const renderHistoryControls = () => (
+        historyEnabled
+        ?
+        <div className="wprm-admin-modal-recipe-history-controls">
+            <button
+                type="button"
+                className="button"
+                disabled={ historyDisabled || ! props.canUndo }
+                aria-label={ __wprm( 'Undo last recipe change' ) }
+                onClick={ () => {
+                    if ( props.onUndo ) {
+                        props.onUndo();
+                    }
+                } }
+            >{ __wprm( 'Undo' ) } ({ props.undoCount || 0 })</button>
+            <button
+                type="button"
+                className="button"
+                disabled={ historyDisabled || ! props.canRedo }
+                aria-label={ __wprm( 'Redo recipe change' ) }
+                onClick={ () => {
+                    if ( props.onRedo ) {
+                        props.onRedo();
+                    }
+                } }
+            >{ __wprm( 'Redo' ) } ({ props.redoCount || 0 })</button>
+            {
+                props.historyLimitNotice
+                &&
+                <span className="wprm-admin-modal-recipe-history-notice" aria-live="polite">
+                    { props.historyLimitNotice }
+                </span>
+            }
+        </div>
+        :
+        null
+    );
 
     let structure = [
         {
@@ -232,12 +271,16 @@ const EditRecipe = (props) => {
             elem: (
                 <RecipeCustomFields
                     fields={ props.recipe.custom_fields }
-                    onFieldChange={( field, value ) => {
-                        let newFields = Object.assign({}, JSON.parse( JSON.stringify( props.recipe.custom_fields ) ) );
-                        newFields[ field ] = value;
-
-                        props.onRecipeChange({
-                            custom_fields: newFields,
+                    onFieldChange={( field, value, changeOptions = {} ) => {
+                        props.onRecipeChange((recipe) => ({
+                            custom_fields: {
+                                ...( recipe.custom_fields || {} ),
+                                [ field ]: value,
+                            },
+                        }), {
+                            historyMode: changeOptions.historyMode ? changeOptions.historyMode : 'debounced',
+                            historyBoundary: !! changeOptions.historyBoundary,
+                            historyKey: `custom_fields:${ field }`,
                         });
                     }}
                 />
@@ -251,6 +294,7 @@ const EditRecipe = (props) => {
             <RecipeNotes
                 notes={ props.recipe.notes }
                 onRecipeChange={ props.onRecipeChange }
+                openSecondaryModal={ props.openSecondaryModal }
             />
         )
     });
@@ -320,12 +364,15 @@ const EditRecipe = (props) => {
             {
                 'waiting' === props.saveResult
                 ?
-                <Footer savingChanges={ false }>
+                <Footer
+                    savingChanges={ false }
+                    leftActions={ historyEnabled ? renderHistoryControls : false }
+                >
                     <CopyToClipboard
                         text={JSON.stringify( props.recipe )}
                         onCopy={(text, result) => {
                             if ( result ) {
-                                alert( __wprm( 'The recipe has been copied and can be used in the "Import from JSON" feature.' ) );
+                                alert( __wprm( 'The recipe has been copied and can be pasted in "Restore Backup" at the top of the modal.' ) );
                             } else {
                                 alert( __wprm( 'Something went wrong. Please contact support.' ) );
                             }
@@ -339,6 +386,7 @@ const EditRecipe = (props) => {
                 :
                 <Footer
                     savingChanges={ props.savingChanges }
+                    leftActions={ historyEnabled ? renderHistoryControls : false }
                 >
                     {
                         'failed' === props.saveResult
@@ -347,7 +395,7 @@ const EditRecipe = (props) => {
                             text={JSON.stringify( props.recipe )}
                             onCopy={(text, result) => {
                                 if ( result ) {
-                                    alert( __wprm( 'The recipe has been copied and can be used in the "Import from JSON" feature.' ) );
+                                    alert( __wprm( 'The recipe has been copied and can be pasted in "Restore Backup" at the top of the modal.' ) );
                                 } else {
                                     alert( __wprm( 'Something went wrong. Please contact support.' ) );
                                 }

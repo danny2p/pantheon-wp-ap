@@ -500,6 +500,11 @@ class WPRM_Metadata {
 				$metadata_instructions = array();
 
 				foreach ( $instruction_group['instructions'] as $index => $instruction ) {
+					$instruction_type = isset( $instruction['type'] ) ? $instruction['type'] : 'instruction';
+					if ( 'tip' === $instruction_type ) {
+						continue;
+					}
+
 					$metadata_instruction = array(
 						'@type' => 'HowToStep',
 						'text' => wp_strip_all_tags( $instruction['text'] ),

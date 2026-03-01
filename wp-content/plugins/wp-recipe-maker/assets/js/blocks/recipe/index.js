@@ -35,9 +35,6 @@ if ( wp.hasOwnProperty( 'serverSideRender' ) ) {
 
 import '../../../css/blocks/recipe.scss';
 
-const openedBlockEditor = Date.now();
-
-
 registerBlockType( 'wp-recipe-maker/recipe', {
     apiVersion: 3,
     title: __( 'WPRM Recipe', 'wp-recipe-maker' ),
@@ -100,16 +97,6 @@ registerBlockType( 'wp-recipe-maker/recipe', {
                     label: templates[template].name,
                 });
             }
-        }
-
-        // Prevent block validation error when post is saved without the post content being changed.
-        const lastBlockRefresh = attributes.hasOwnProperty( 'updated' ) ? attributes.updated : 0;
-        if ( lastBlockRefresh < openedBlockEditor ) {
-            setTimeout( () => {
-                setAttributes({
-                    updated: openedBlockEditor,
-                });
-            });
         }
 
         return (

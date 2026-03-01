@@ -35,12 +35,14 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 			$assets = array_intersect_key( $output['assets'], $unique );
 			
 			foreach ( $output['assets'] as $asset ) {
+				$asset_version = isset( $asset['version'] ) ? $asset['version'] : WPRM_VERSION;
+
 				switch ( $asset['type'] ) {
 					case 'css':
-						echo '<link rel="stylesheet" type="text/css" href="' . esc_attr( $asset['url'] . '?ver=' . WPRM_VERSION ) . '"/>';
+						echo '<link rel="stylesheet" type="text/css" href="' . esc_attr( $asset['url'] . '?ver=' . $asset_version ) . '"/>';
 						break;
 					case 'js':
-						echo '<script src="' . esc_attr( $asset['url'] . '?ver=' . WPRM_VERSION ) . '"></script>';
+						echo '<script src="' . esc_attr( $asset['url'] . '?ver=' . $asset_version ) . '"></script>';
 						break;
 					case 'custom':
 						echo $asset['html'];
@@ -78,13 +80,11 @@ function wprm_maybe_redirect_to_parent_post( $output ) {
 				?>
 				<a href="<?php echo esc_url( $back_link ); ?>" id="wprm-print-button-back" class="wprm-print-button"><?php esc_html_e( 'Go Back', 'wp-recipe-maker' );?></a>
 				<?php
-				if ( ! isset( $output['no-email'] ) && WPRM_Settings::get( 'print_email_link_button' ) ) {
-					echo '<a href="#" id="wprm-print-button-email" class="wprm-print-button">' . esc_html( __( 'Email Link', 'wp-recipe-maker' ) ) . '</a>';
-				}
-				// if ( WPRM_Settings::get( 'print_download_pdf_button' ) ) {
-				// 	echo '<a href="#" id="wprm-print-button-pdf" class="wprm-print-button">' . __( 'Download PDF', 'wp-recipe-maker' ) . '</a>';
-				// }
-				?>
+					if ( ! isset( $output['no-email'] ) && WPRM_Settings::get( 'print_email_link_button' ) ) {
+						echo '<a href="#" id="wprm-print-button-email" class="wprm-print-button">' . esc_html( __( 'Email Link', 'wp-recipe-maker' ) ) . '</a>';
+					}
+					echo apply_filters( 'wprm_print_header_buttons', '', $output );
+					?>
 				<button id="wprm-print-button-print" class="wprm-print-button" type="button"><?php esc_html_e( 'Print', 'wp-recipe-maker' );?></button>
 			</div>
 			<?php if ( isset( $output['header'] ) ) : ?>

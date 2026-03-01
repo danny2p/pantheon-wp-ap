@@ -247,6 +247,10 @@ export default class RecipeNutrition extends Component {
                                     ...this.props.nutrition,
                                     ...data.calculated,
                                 }
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'nutrition:calculate',
                             } );
                         }
                     }
@@ -338,7 +342,22 @@ export default class RecipeNutrition extends Component {
                                         serving_size,
                                     };
 
-                                    props.onRecipeChange( { nutrition } );
+                                    props.onRecipeChange( { nutrition }, {
+                                        historyMode: 'debounced',
+                                        historyKey: 'nutrition:serving_size',
+                                    } );
+                                }}
+                                onBlur={ (serving_size) => {
+                                    const nutrition = {
+                                        ...props.nutrition,
+                                        serving_size,
+                                    };
+
+                                    props.onRecipeChange( { nutrition }, {
+                                        historyMode: 'debounced',
+                                        historyBoundary: true,
+                                        historyKey: 'nutrition:serving_size',
+                                    } );
                                 }}
                             />
                             <FieldText
@@ -351,7 +370,22 @@ export default class RecipeNutrition extends Component {
                                         serving_unit,
                                     };
 
-                                    props.onRecipeChange( { nutrition } );
+                                    props.onRecipeChange( { nutrition }, {
+                                        historyMode: 'debounced',
+                                        historyKey: 'nutrition:serving_unit',
+                                    } );
+                                }}
+                                onBlur={ (serving_unit) => {
+                                    const nutrition = {
+                                        ...props.nutrition,
+                                        serving_unit,
+                                    };
+
+                                    props.onRecipeChange( { nutrition }, {
+                                        historyMode: 'debounced',
+                                        historyBoundary: true,
+                                        historyKey: 'nutrition:serving_unit',
+                                    } );
                                 }}
                             />
                         </FieldContainer>
@@ -389,7 +423,22 @@ export default class RecipeNutrition extends Component {
                                                         [nutrient]: value,
                                                     };
 
-                                                    props.onRecipeChange( { nutrition } );
+                                                    props.onRecipeChange( { nutrition }, {
+                                                        historyMode: 'debounced',
+                                                        historyKey: `nutrition:${ nutrient }`,
+                                                    } );
+                                                }}
+                                                onBlur={ (value) => {
+                                                    const nutrition = {
+                                                        ...props.nutrition,
+                                                        [nutrient]: value,
+                                                    };
+
+                                                    props.onRecipeChange( { nutrition }, {
+                                                        historyMode: 'debounced',
+                                                        historyBoundary: true,
+                                                        historyKey: `nutrition:${ nutrient }`,
+                                                    } );
                                                 }}
                                                 disabled={ 'calculated' === options.type }
                                             /><span className="wprm-admin-modal-field-nutrition-unit">{ options.unit }</span>
@@ -437,6 +486,10 @@ export default class RecipeNutrition extends Component {
                                 // Overwrite recipe nutrition.
                                 props.onRecipeChange({
                                     nutrition,
+                                }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
+                                    historyKey: 'nutrition:from_modal',
                                 });
 
                                 // Mark that nutrition was just recalculated - will update original state in componentDidUpdate

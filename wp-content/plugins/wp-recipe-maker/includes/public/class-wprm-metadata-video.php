@@ -61,6 +61,11 @@ class WPRM_MetadataVideo {
 			foreach ( $instruction_group['instructions'] as $index => $instruction ) {
 				$video_metadata = false;
 
+				if ( isset( $instruction['type'] ) && 'tip' === $instruction['type'] ) {
+					$metadata['instructions'][ $group_index ][ $index ] = $video_metadata;
+					continue;
+				}
+
 				if ( isset( $instruction['video'] ) && isset( $instruction['video']['type'] ) ) {
 					if ( 'upload' === $instruction['video']['type'] && $instruction['video']['id'] ) {
 						$video_metadata = self::get_video_metadata_for_upload( $instruction['video']['id'] );

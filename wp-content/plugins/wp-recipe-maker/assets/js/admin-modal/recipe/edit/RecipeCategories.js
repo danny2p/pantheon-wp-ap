@@ -37,7 +37,11 @@ export default class RecipeCategories extends Component {
 
                                         tags[ category ] = value;
 
-                                        this.props.onRecipeChange( { tags } );
+                                        this.props.onRecipeChange( { tags }, {
+                                            historyMode: 'immediate',
+                                            historyBoundary: true,
+                                            historyKey: `categories:${category}`,
+                                        } );
                                     }}
                                     creatable={ options.creatable }
                                     width="450px"
@@ -53,7 +57,11 @@ export default class RecipeCategories extends Component {
                             this.props.openSecondaryModal('bulk-add-categories', {
                                 tags: this.props.tags,
                                 onBulkAdd: (newTags) => {
-                                    this.props.onRecipeChange({ tags: newTags });
+                                    this.props.onRecipeChange({ tags: newTags }, {
+                                        historyMode: 'immediate',
+                                        historyBoundary: true,
+                                        historyKey: 'categories:bulk_add',
+                                    });
                                 }
                             });
                         } }
@@ -92,7 +100,11 @@ export default class RecipeCategories extends Component {
                                 recipe: this.props.recipe,
                                 tags: this.props.tags,
                                 onSuggestTags: (newTags) => {
-                                    this.props.onRecipeChange({ tags: newTags });
+                                    this.props.onRecipeChange({ tags: newTags }, {
+                                        historyMode: 'immediate',
+                                        historyBoundary: true,
+                                        historyKey: 'categories:suggest_tags',
+                                    });
                                 }
                             });
                         } }

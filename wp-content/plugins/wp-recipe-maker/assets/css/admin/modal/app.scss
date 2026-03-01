@@ -78,6 +78,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
 
         a {
             text-decoration: none;
@@ -94,6 +95,31 @@
         span, a, .button {
             margin: 0 5px;
         }
+
+        .wprm-admin-modal-footer-left,
+        .wprm-admin-modal-footer-right {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .wprm-admin-modal-footer-right {
+            flex: 0 1 auto;
+        }
+
+        &.wprm-admin-modal-footer-has-left {
+            justify-content: space-between;
+
+            .wprm-admin-modal-footer-left {
+                margin-right: auto;
+            }
+
+            .wprm-admin-modal-footer-right {
+                margin-left: auto;
+                justify-content: flex-end;
+            }
+        }
     }
 }
 
@@ -104,6 +130,10 @@
     
             .button:last-child {
                 margin-right: 0;
+            }
+
+            &.wprm-admin-modal-footer-has-left {
+                justify-content: space-between;
             }
         }
     }

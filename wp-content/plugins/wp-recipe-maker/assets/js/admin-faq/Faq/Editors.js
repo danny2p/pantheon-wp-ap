@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { __wprm } from 'Shared/Translations';
 import Accordion from '../General/Accordion';
 
 const imgUrl = wprm_admin.wprm_url + 'assets/images/faq/creating/';
@@ -8,89 +9,89 @@ const Editors = (props) => {
         <Accordion
             items={[
                 {
-                    header: 'Gutenberg Block Editor (WordPress default)',
+                    header: __wprm( 'Gutenberg Block Editor (WordPress default)' ),
                     content: <Fragment>
                         <p>
-                            This is the default editor for WordPress and the one we recommend. To add a recipe you <strong>add a WPRM Recipe block</strong> to the post content.
+                            { __wprm( 'This is the default editor for WordPress and the one we recommend. To add a recipe, you' ) } <strong>{ __wprm( 'add a WPRM Recipe block' ) }</strong> { __wprm( 'to the post content.' ) }
                         </p>
-                        <img src={ imgUrl + 'gutenberg-block.png' } />
+                        <img src={ imgUrl + 'gutenberg-block.png' } alt={ __wprm( 'WPRM block in the Gutenberg block inserter' ) } />
                         <p>
-                            After adding a WPRM Recipe block you can click a button to <strong>create a new recipe or insert an existing one</strong>. The "Create new from Existing Recipe" button can be used to duplicate an existing recipe to start your new recipe from.
+                            { __wprm( 'After adding a WPRM Recipe block, you can click a button to' ) } <strong>{ __wprm( 'create a new recipe or insert an existing one' ) }</strong>. { __wprm( 'The "Create new from Existing Recipe" button can duplicate an existing recipe to use as a starting point.' ) }
                         </p>
-                        <img src={ imgUrl + 'gutenberg-block-buttons.png' } />
+                        <img src={ imgUrl + 'gutenberg-block-buttons.png' } alt={ __wprm( 'Buttons to create or insert recipes in the Gutenberg block' ) } />
                         <p>
-                            Clicking on a button will open up the recipe modal for you to fill in.
+                            { __wprm( 'Clicking a button opens the recipe modal for you to fill in.' ) }
                         </p>
                     </Fragment>
                 },{
-                    header: 'Classic Editor',
+                    header: __wprm( 'Classic Editor' ),
                     content: <Fragment>
                         <p>
-                            You won't get a nice preview of the recipe, but we still fully support the Classic Editor. To add a recipe, <strong>click on the WP Recipe Maker button or icon</strong> in the visual editor.
+                            { __wprm( 'You will not get a live recipe preview, but we still fully support the Classic Editor. To add a recipe,' ) } <strong>{ __wprm( 'click the WP Recipe Maker button or icon' ) }</strong> { __wprm( 'in the visual editor.' ) }
                         </p>
-                        <img src={ imgUrl + 'classic-editor-buttons.png' } />
+                        <img src={ imgUrl + 'classic-editor-buttons.png' } alt={ __wprm( 'WP Recipe Maker button in the Classic Editor toolbar' ) } />
                         <p>
-                            After clicking a modal will show up with all things that WP Recipe Maker can insert for you.
+                            { __wprm( 'After clicking, a modal appears with everything WP Recipe Maker can insert for you.' ) }
                             </p>
-                        <img src={ imgUrl + 'classic-editor-modal.png' } />
+                        <img src={ imgUrl + 'classic-editor-modal.png' } alt={ __wprm( 'Classic Editor WP Recipe Maker modal' ) } />
                         <p>
-                            Click the button to <strong>create a new recipe or insert an existing one</strong>. The "Create new from Existing Recipe" button can be used to duplicate an existing recipe to start your new recipe from.
+                            { __wprm( 'Click the button to' ) } <strong>{ __wprm( 'create a new recipe or insert an existing one' ) }</strong>. { __wprm( 'The "Create new from Existing Recipe" button can duplicate an existing recipe to use as a starting point.' ) }
                         </p>
                     </Fragment>
                 },{
-                    header: 'Elementor Page Builder',
+                    header: __wprm( 'Elementor Page Builder' ),
                     content: <Fragment>
                         <p>
-                            We integrate with the Elementor Page Builder so you can simply <strong>add a WPRM Recipe widget to your post</strong>.
+                            { __wprm( 'We integrate with Elementor so you can simply' ) } <strong>{ __wprm( 'add a WPRM Recipe widget to your post' ) }</strong>.
                         </p>
-                        <img src={ imgUrl + 'elementor-widget.png' } />
+                        <img src={ imgUrl + 'elementor-widget.png' } alt={ __wprm( 'WPRM recipe widget in Elementor' ) } />
                         <p>
-                            When you click on "Create or edit Recipe" it will take you to the <strong>WP Recipe Maker Manage page explained below</strong>, as recipes can't be created or edited in the Elementor interface.
+                            { __wprm( 'When you click "Create or edit Recipe," it takes you to the' ) } <strong>{ __wprm( 'WP Recipe Maker Manage page' ) }</strong> { __wprm( 'because recipes cannot be created or edited directly in the Elementor interface.' ) }
                         </p>
                         <p>
-                            Once you've created a recipe you can just <strong>search for its name</strong> to insert it.
+                            { __wprm( 'Once you have created a recipe, you can' ) } <strong>{ __wprm( 'search for its name' ) }</strong> { __wprm( 'to insert it.' ) }
                         </p>
-                        <img src={ imgUrl + 'elementor-select-recipe.png' } />
+                        <img src={ imgUrl + 'elementor-select-recipe.png' } alt={ __wprm( 'Selecting a recipe in Elementor by searching recipe name' ) } />
                     </Fragment>
                 },{
-                    header: 'Divi Page Builder',
+                    header: __wprm( 'Divi Page Builder' ),
                     content: <Fragment>
                         <p>
-                            We integrate with the Divi Page Builder so you can simply <strong>add a WPRM Recipe module to your post</strong>.
+                            { __wprm( 'We integrate with Divi so you can simply' ) } <strong>{ __wprm( 'add a WPRM Recipe module to your post' ) }</strong>.
                         </p>
-                        <img src={ imgUrl + 'divi-insert.png' } />
+                        <img src={ imgUrl + 'divi-insert.png' } alt={ __wprm( 'WPRM recipe module in Divi builder' ) } />
                         <p>
-                            Set the <strong>recipe ID</strong> to display the recipe.
+                            { __wprm( 'Set the' ) } <strong>{ __wprm( 'recipe ID' ) }</strong> { __wprm( 'to display the recipe.' ) }
                         </p>
-                        <img src={ imgUrl + 'divi-module.png' } />
+                        <img src={ imgUrl + 'divi-module.png' } alt={ __wprm( 'Divi module settings showing recipe ID field' ) } />
                     </Fragment>
                 },{
-                    header: 'Other Page Builder',
+                    header: __wprm( 'Other Page Builder' ),
                     content: <Fragment>
                         <p>
-                            If you're using a page builder that we don't integrate with you can still use WP Recipe Maker. You'll <strong>create a recipe on the WP Recipe Maker Manage page explained below</strong>.
+                            { __wprm( 'If you use a page builder that we do not integrate with, you can still use WP Recipe Maker. You will' ) } <strong>{ __wprm( 'create a recipe on the WP Recipe Maker Manage page' ) }</strong>.
                         </p>
                         <p>
-                            After creating a recipe you <strong>type the recipe shortcode</strong> where you want the recipe to appear.
+                            { __wprm( 'After creating a recipe, you' ) } <strong>{ __wprm( 'type the recipe shortcode' ) }</strong> { __wprm( 'where you want the recipe to appear.' ) }
                         </p>
-                        <img src={ imgUrl + 'page-builder.png' } />
+                        <img src={ imgUrl + 'page-builder.png' } alt={ __wprm( 'Recipe shortcode inserted in a page builder content area' ) } />
                     </Fragment>
                 },{
-                    header: 'WordPress.com Editor',
+                    header: __wprm( 'WordPress.com Editor' ),
                     content: <Fragment>
                         <p>
-                            If your interface <strong>looks like the classic editor but doesn't have the WP Recipe Maker button</strong> you might be using the WordPress.com interface.
+                            { __wprm( 'If your interface' ) } <strong>{ __wprm( 'looks like the classic editor but does not have the WP Recipe Maker button' ) }</strong> { __wprm( 'you might be using the WordPress.com interface.' ) }
                         </p>
-                        <img src={ imgUrl + 'wordpress-com-interface.png' } />
+                        <img src={ imgUrl + 'wordpress-com-interface.png' } alt={ __wprm( 'WordPress.com editor interface without WPRM button' ) } />
                         <p>
-                            One option you have is to <strong>type the recipe shortcode as shown under "Other Page Builder"</strong> above.
+                            { __wprm( 'One option is to' ) } <strong>{ __wprm( 'type the recipe shortcode as shown under "Other Page Builder"' ) }</strong>.
                         </p>
                         <p>
-                            Or you could revert to the <strong>classic WP Admin interface</strong> through the menu link.
+                            { __wprm( 'Or you can switch back to the' ) } <strong>{ __wprm( 'classic WP Admin interface' ) }</strong> { __wprm( 'through the menu link.' ) }
                         </p>
-                        <img src={ imgUrl + 'wordpress-com-admin-link.png' } />
+                        <img src={ imgUrl + 'wordpress-com-admin-link.png' } alt={ __wprm( 'Menu link to switch back to classic WP Admin' ) } />
                         <p>
-                            Once in the classic interface you can follow the <strong>Classic Editor</strong> instructions above.
+                            { __wprm( 'Once in the classic interface, follow the' ) } <strong>{ __wprm( 'Classic Editor' ) }</strong> { __wprm( 'instructions above.' ) }
                         </p>
                     </Fragment>
                 }

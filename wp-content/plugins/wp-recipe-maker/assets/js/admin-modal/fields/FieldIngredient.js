@@ -31,7 +31,7 @@ const group = (props, provided) => (
                 toolbar="no-styling"
                 value={ props.name }
                 placeholder={ 'howto' === props.recipeType ? __wprm( 'Material Group Header' ) : __wprm( 'Ingredient Group Header' ) }
-                onChange={(value) => props.onChangeName(value)}
+                onChange={(value, changeOptions = {}) => props.onChangeName(value, changeOptions)}
                 onKeyDown={(event) => {
                     if ( isTabHotkey(event) ) {
                         props.onTab(event);
@@ -81,8 +81,8 @@ const ingredient = (props, provided) => {
                     className="wprm-admin-modal-field-ingredient-amount"
                     value={ amount }
                     placeholder="1"
-                    onChange={(amount) => {
-                        props.onChangeIngredient({amount});
+                    onChange={(amount, changeOptions = {}) => {
+                        props.onChangeIngredient({amount}, changeOptions);
                     }}
                 />
                 <FieldRichText
@@ -90,8 +90,8 @@ const ingredient = (props, provided) => {
                     toolbar="ingredient-unit"
                     value={ unit }
                     placeholder={ 'howto' === props.recipeType ? __wprm( 'piece' ) : __wprm( 'tbsp' ) }
-                    onChange={(unit) => {
-                        props.onChangeIngredient({unit});
+                    onChange={(unit, changeOptions = {}) => {
+                        props.onChangeIngredient({unit}, changeOptions);
                     }}
                 />
                 <FieldRichText
@@ -99,11 +99,11 @@ const ingredient = (props, provided) => {
                     toolbar="ingredient"
                     value={ props.name }
                     placeholder={ 'howto' === props.recipeType ? __wprm( 'paper' ) : __wprm( 'olive oil' ) }
-                    onChange={(name) => {
+                    onChange={(name, changeOptions = {}) => {
                         props.onChangeIngredient({
                             name,
                             globalLink: false, // Changing names will lead to a different global link.
-                        })
+                        }, changeOptions);
                 }}
                 />
                 <FieldRichText
@@ -111,7 +111,7 @@ const ingredient = (props, provided) => {
                     toolbar={ wprm_admin.addons.premium ? 'all' : 'no-link' }
                     value={ props.notes }
                     placeholder={ 'howto' === props.recipeType ? __wprm( 'any color' ) : __wprm( 'extra virgin' ) }
-                    onChange={(notes) => props.onChangeIngredient({notes})}
+                    onChange={(notes, changeOptions = {}) => props.onChangeIngredient({notes}, changeOptions)}
                     onKeyDown={(event) => {
                         if ( isTabHotkey(event) ) {
                             props.onTab(event);

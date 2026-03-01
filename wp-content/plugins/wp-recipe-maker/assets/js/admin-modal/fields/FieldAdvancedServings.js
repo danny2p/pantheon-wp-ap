@@ -43,6 +43,9 @@ const FieldAdvancedServings = (props) => {
                                 props.onChangeServings( {
                                     ...servings,
                                     shape,
+                                }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
                                 } );
                             }}
                             width={ 147 }
@@ -55,6 +58,9 @@ const FieldAdvancedServings = (props) => {
                                 props.onChangeServings( {
                                     ...servings,
                                     unit,
+                                }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
                                 } );
                             }}
                             width={ 100 }
@@ -77,6 +83,14 @@ const FieldAdvancedServings = (props) => {
                                             diameter,
                                         } );
                                     }}
+                                    onBlur={ (diameter) => {
+                                        props.onChangeServings( {
+                                            ...servings,
+                                            diameter,
+                                        }, {
+                                            historyBoundary: true,
+                                        } );
+                                    }}
                                 />
                                 <div className="wprm-admin-modal-field-advanced-servings-details-text">{ servings.unit } { __wprm( 'diameter' ) }</div>
                             </Fragment>
@@ -94,6 +108,14 @@ const FieldAdvancedServings = (props) => {
                                             width,
                                         } );
                                     }}
+                                    onBlur={ (width) => {
+                                        props.onChangeServings( {
+                                            ...servings,
+                                            width,
+                                        }, {
+                                            historyBoundary: true,
+                                        } );
+                                    }}
                                 />
                                 <div className="wprm-admin-modal-field-advanced-servings-details-text">x</div>
                                 <FieldText
@@ -106,6 +128,14 @@ const FieldAdvancedServings = (props) => {
                                         props.onChangeServings( {
                                             ...servings,
                                             length,
+                                        } );
+                                    }}
+                                    onBlur={ (length) => {
+                                        props.onChangeServings( {
+                                            ...servings,
+                                            length,
+                                        }, {
+                                            historyBoundary: true,
                                         } );
                                     }}
                                 />
@@ -124,6 +154,14 @@ const FieldAdvancedServings = (props) => {
                                 props.onChangeServings( {
                                     ...servings,
                                     height,
+                                } );
+                            }}
+                            onBlur={ (height) => {
+                                props.onChangeServings( {
+                                    ...servings,
+                                    height,
+                                }, {
+                                    historyBoundary: true,
                                 } );
                             }}
                         />

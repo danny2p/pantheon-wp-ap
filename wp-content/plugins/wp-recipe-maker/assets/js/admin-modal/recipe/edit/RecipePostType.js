@@ -28,7 +28,17 @@ const RecipePostType = (props) => {
                             placeholder={ __wprm( 'recipe-slug' ) }
                             value={ props.slug }
                             onChange={ (slug) => {
-                                props.onRecipeChange( { slug } );
+                                props.onRecipeChange( { slug }, {
+                                    historyMode: 'debounced',
+                                    historyKey: 'post_type:slug',
+                                } );
+                            }}
+                            onBlur={ (slug) => {
+                                props.onRecipeChange( { slug }, {
+                                    historyMode: 'debounced',
+                                    historyBoundary: true,
+                                    historyKey: 'post_type:slug',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -37,7 +47,11 @@ const RecipePostType = (props) => {
                             options={ wprm_admin_modal.options.post_status }
                             value={ props.post_status }
                             onChange={ (post_status) => {
-                                props.onRecipeChange( { post_status } );
+                                props.onRecipeChange( { post_status }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
+                                    historyKey: 'post_type:post_status',
+                                } );
                             }}
                             width={ 300 }
                         />
@@ -46,7 +60,11 @@ const RecipePostType = (props) => {
                         <FieldDateTime
                             value={ props.date }
                             onChange={ (date) => {
-                                props.onRecipeChange( { date } );
+                                props.onRecipeChange( { date }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
+                                    historyKey: 'post_type:date',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -55,7 +73,17 @@ const RecipePostType = (props) => {
                             name="post-password"
                             value={ props.post_password }
                             onChange={ (post_password) => {
-                                props.onRecipeChange( { post_password } );
+                                props.onRecipeChange( { post_password }, {
+                                    historyMode: 'debounced',
+                                    historyKey: 'post_type:post_password',
+                                } );
+                            }}
+                            onBlur={ (post_password) => {
+                                props.onRecipeChange( { post_password }, {
+                                    historyMode: 'debounced',
+                                    historyBoundary: true,
+                                    historyKey: 'post_type:post_password',
+                                } );
                             }}
                         />
                     </FieldContainer>
@@ -66,7 +94,11 @@ const RecipePostType = (props) => {
                     options={ wprm_admin_modal.options.post_author }
                     value={ parseInt( props.post_author ) }
                     onChange={ (post_author) => {
-                        props.onRecipeChange( { post_author } );
+                        props.onRecipeChange( { post_author }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'post_type:post_author',
+                        } );
                     }}
                     width={ 300 }
                 />
@@ -80,7 +112,11 @@ const RecipePostType = (props) => {
                         options={ languageOptions }
                         value={ props.language }
                         onChange={ (language) => {
-                            props.onRecipeChange( { language } );
+                            props.onRecipeChange( { language }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'post_type:language',
+                            } );
                         }}
                         width={ 300 }
                     />

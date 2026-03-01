@@ -7,6 +7,44 @@ import FieldTextarea from './FieldTextarea';
 import Media from '../general/Media';
 
 const FieldInstructionMedia = (props) => {
+    const isTip = 'tip' === props.type;
+    const openTipStyleModal = () => {
+        if ( props.openSecondaryModal ) {
+            props.openSecondaryModal( 'instruction-tip-style', {
+                tip_icon: props.tip_icon || '',
+                tip_style: props.tip_style || '',
+                tip_accent: props.tip_accent || '',
+                tip_text_color: props.tip_text_color || '',
+                tip_text: props.text || '',
+                onSave: ( tipStyle ) => {
+                    if ( props.onChangeTipStyle ) {
+                        props.onChangeTipStyle( tipStyle.tip_icon, tipStyle.tip_accent, tipStyle.tip_style, tipStyle.tip_text_color );
+                    } else {
+                        props.onChangeTipIcon( tipStyle.tip_icon );
+                        props.onChangeTipAccent( tipStyle.tip_accent );
+                        if ( props.onChangeTipTextColor ) {
+                            props.onChangeTipTextColor( tipStyle.tip_text_color );
+                        }
+                    }
+                },
+            } );
+        }
+    };
+
+    if ( isTip ) {
+        return (
+            <div className="wprm-admin-modal-field-instruction-after-container-media wprm-admin-modal-field-instruction-after-container-tip">
+                <div className="wprm-admin-modal-field-instruction-after-container-media-icons">
+                    <Icon
+                        type="style"
+                        title={ __wprm( 'Change Tip Style' ) }
+                        onClick={ openTipStyleModal }
+                    />
+                </div>
+            </div>
+        );
+    }
+
     const { video } = props;
     const hasImage = props.image > 0;
 
@@ -38,6 +76,9 @@ const FieldInstructionMedia = (props) => {
                                 type: 'none',
                                 id: 0,
                                 thumb: '',
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
                             });
                         } else {
                             Media.selectVideo((attachment) => {
@@ -46,6 +87,9 @@ const FieldInstructionMedia = (props) => {
                                     type: 'upload',
                                     id: attachment.attributes.id,
                                     thumb: attachment.attributes.thumb.src,
+                                }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
                                 });
                             });
                         }
@@ -61,11 +105,17 @@ const FieldInstructionMedia = (props) => {
                                 ...video,
                                 type: 'none',
                                 embed: '',
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
                             });
                         } else {
                             props.onChangeVideo({
                                 ...video,
                                 type: 'embed',
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
                             });
                         }
                     } }
@@ -81,6 +131,9 @@ const FieldInstructionMedia = (props) => {
                             start: '',
                             end: '',
                             name: '',
+                        }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
                         });
                     } }
                     hidden={ ! props.allowVideo || ( 'none' !== video.type && 'part' !== video.type ) }
@@ -117,6 +170,9 @@ const FieldInstructionMedia = (props) => {
                                                     ...video,
                                                     id: attachment.attributes.id,
                                                     thumb: attachment.attributes.thumb.src,
+                                                }, {
+                                                    historyMode: 'immediate',
+                                                    historyBoundary: true,
                                                 });
                                             });
                                         } }
@@ -132,6 +188,14 @@ const FieldInstructionMedia = (props) => {
                                         props.onChangeVideo({
                                             ...video,
                                             embed,
+                                        });
+                                    }}
+                                    onBlur={(embed) => {
+                                        props.onChangeVideo({
+                                            ...video,
+                                            embed,
+                                        }, {
+                                            historyBoundary: true,
                                         });
                                     }}
                                     placeholder={ __wprm( 'Instruction video URL or embed code' ) }

@@ -76,7 +76,7 @@ const RichEditor = React.memo((props) => {
         };
     }, []);
 
-    const flushChange = () => {
+    const flushChange = (meta = {}) => {
         let newValue = serialize( editor );
 
         if ( propsRef.current.singleLine ) {
@@ -84,7 +84,7 @@ const RichEditor = React.memo((props) => {
             newValue = newValue.replace(/^<p>(.*)<\/p>$/gm, '$1');
         }
 
-        propsRef.current.onChange( newValue );
+        propsRef.current.onChange( newValue, meta );
         debounceRef.current = null;
     };
 
@@ -128,7 +128,14 @@ const RichEditor = React.memo((props) => {
                 onBlur={() => {
                     if ( debounceRef.current ) {
                         clearTimeout( debounceRef.current );
-                        flushChange();
+                        flushChange({
+                            historyBoundary: true,
+                        });
+                    } else if ( props.onChange ) {
+                        // Even without pending debounced changes, notify blur boundary for history handling.
+                        props.onChange( props.value, {
+                            historyBoundary: true,
+                        } );
                     }
                 }}
                 onFocus={() => {

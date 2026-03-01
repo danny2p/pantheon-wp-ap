@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import * as events from '@uiw/codemirror-extensions-events';
 import { html } from '@codemirror/lang-html';
 
 export default class HTML extends Component {
@@ -46,7 +45,9 @@ export default class HTML extends Component {
     }
 
     updateParent() {
-        this.props.onChangeValue( this.state.value );
+        this.props.onChangeValue( this.state.value, {
+            resetHistory: true,
+        } );
     }
 
     render() {
@@ -59,11 +60,6 @@ export default class HTML extends Component {
                     onChange={ this.onChange }
                     extensions={[
                         html(),
-                        events.content({
-                            blur: () => {
-                                this.updateParent();
-                            },
-                        }),
                     ]}
                 />
             </div>

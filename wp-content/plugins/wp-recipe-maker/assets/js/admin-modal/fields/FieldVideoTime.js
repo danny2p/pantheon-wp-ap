@@ -54,6 +54,11 @@ const FieldVideoTime = (props) => {
                     props.onChange( e.target.value );
                 }
             }}
+            onBlur={(e) => {
+                if ( props.onBlur ) {
+                    props.onBlur( e.target.value );
+                }
+            }}
         />
     );
 }

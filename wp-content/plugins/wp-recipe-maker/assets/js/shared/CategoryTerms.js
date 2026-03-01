@@ -4,7 +4,8 @@
 
 /**
  * Convert an array of term names to term objects.
- * Looks up existing terms or creates new ones if the category is creatable.
+ * Creates term objects that will be handled by WordPress when saving.
+ * Note: Terms are no longer pre-loaded to improve performance on sites with many terms.
  * 
  * @param {string} categoryKey - The category key (e.g., 'course', 'cuisine')
  * @param {string[]} termNames - Array of term names to convert
@@ -27,28 +28,15 @@ export function convertTermNamesToObjects(categoryKey, termNames) {
             return;
         }
         
-        // Check if term exists in the category list (case-insensitive match)
-        let term = categoryData.terms.find(t => {
-            const tName = (t.name || '').trim();
-            const tId = String(t.term_id || '').trim();
-            return tName.toLowerCase() === trimmedTermName.toLowerCase() || tId.toLowerCase() === trimmedTermName.toLowerCase();
-        });
+        // For non-creatable categories (like suitablefordiet), WordPress will validate
+        // that the term exists when saving. We'll create the term object here and let
+        // WordPress handle the validation.
         
-        if (!term) {
-            // For non-creatable categories (like suitablefordiet), only allow existing terms
-            if (!isCreatable) {
-                // Skip this term - it doesn't exist in the allowed list
-                return;
-            }
-            
-            // Create new term (similar to how FieldCategory does it)
-            term = {
-                term_id: trimmedTermName,
-                name: trimmedTermName,
-            };
-            // Add to the global categories list
-            categoryData.terms.push(term);
-        }
+        // Create term object - WordPress will match by name or create if needed
+        const term = {
+            term_id: trimmedTermName, // Will be converted to ID by WordPress if term exists
+            name: trimmedTermName,
+        };
         
         terms.push(term);
     });

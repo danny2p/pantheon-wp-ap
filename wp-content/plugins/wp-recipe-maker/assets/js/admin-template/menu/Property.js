@@ -75,7 +75,12 @@ const Property = (props) => {
                         <PropertyComponent
                             property={props.property}
                             value={props.property.value}
-                            onValueChange={(value) => { props.onPropertyChange(props.property.id, value); } }
+                            onValueChange={(value, options = {}) => {
+                                props.onPropertyChange(props.property.id, value, {
+                                    historyPropertyId: props.property.id,
+                                    ...options,
+                                });
+                            } }
                             fonts={props.fonts}
                             onChangeFonts={props.onChangeFonts}
                         />

@@ -53,6 +53,13 @@ class WPRM_Post_Type {
 			'supports' 			 => array( 'title', 'editor', 'author', 'revisions', 'thumbnail' ),
 		));
 
+		// Compatibility mode for plugins that require post types to expose the default WP UI.
+		if ( WPRM_Settings::get( 'post_type_enable_default_ui_for_plugins' ) ) {
+			$args['show_ui']            = true;
+			$args['show_in_menu']       = false;
+			$args['publicly_queryable'] = true;
+		}
+
 		// Special case: public recipe post type.
 		if ( 'public' === WPRM_Settings::get( 'post_type_structure' ) ) {
 			$slug = trim( WPRM_Settings::get( 'post_type_slug' ) );

@@ -25,7 +25,7 @@ class WPRM_Fallback_Recipe {
 	 * @since    1.0.0
 	 */
 	public static function init() {
-		add_action( 'admin_init', array( __CLASS__, 'register_rest_prepare' ) );
+		add_action( 'rest_api_init', array( __CLASS__, 'register_rest_prepare' ) );
 
 		add_filter( 'the_content', array( __CLASS__, 'replace_imported_shortcodes' ), 1 );
 		add_filter( 'the_content', array( __CLASS__, 'replace_fallback_with_shortcode' ), 0 );

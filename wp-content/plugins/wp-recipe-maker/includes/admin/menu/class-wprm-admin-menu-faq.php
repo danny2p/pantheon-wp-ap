@@ -107,13 +107,17 @@ class WPRM_Admin_Menu_Faq {
 			wp_enqueue_script( 'wprm-admin-faq', WPRM_URL . 'dist/admin-faq.js', array( 'wprm-admin', 'wprm-admin-modal', 'wprm-admin-template' ), WPRM_VERSION, true );
 
 			$current_user = wp_get_current_user();
+			// Allow admins to force onboarding steps for testing via ?test_onboarding=1.
+			$test_onboarding = isset( $_GET['test_onboarding'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['test_onboarding'] ) ) && current_user_can( 'manage_options' );
 			wp_localize_script( 'wprm-admin-faq', 'wprm_faq', array(
-				'onboarded' => self::is_onboarded(),
-				'user' => array(
-					'email' => $current_user->user_email,
-					'website' => get_site_url(),
-				),
-			) );
+					'onboarded' => $test_onboarding ? false : self::is_onboarded(),
+					'can_access_template_editor' => current_user_can( 'manage_options' ),
+					'template_editor_feature_explorer_url' => admin_url( 'admin.php?page=wprm_template_editor#explorer' ),
+					'user' => array(
+						'email' => $current_user->user_email,
+						'website' => get_site_url(),
+					),
+				) );
 
 			WPRM_Template_Editor::localize_admin_template();
 		}

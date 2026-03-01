@@ -4,29 +4,40 @@ import AjaxWrapper from '../AjaxWrapper';
 const templateEndpoint = wprm_admin.endpoints.template;
 const debounceTime = 500;
 
-let previewPromises = [];
-let previewRequests = {};
-let previewRequestsTimer = null;
+let previewPromisesByContext = {};
+let previewRequestsByContext = {};
+let previewRequestsTimerByContext = {};
+let previewRecipeByContext = {};
 
 export default {
-    previewShortcode(uid, shortcode, recipeId) {
-        previewRequests[uid] = shortcode;
+    previewShortcode(uid, shortcode, recipeId, previewContext = 'default') {
+        if ( ! previewPromisesByContext[previewContext] ) {
+            previewPromisesByContext[previewContext] = [];
+        }
+        if ( ! previewRequestsByContext[previewContext] ) {
+            previewRequestsByContext[previewContext] = {};
+        }
 
-        clearTimeout(previewRequestsTimer);
-        previewRequestsTimer = setTimeout(() => {
-            this.previewShortcodes( recipeId );
+        previewRequestsByContext[previewContext][uid] = shortcode;
+        previewRecipeByContext[previewContext] = recipeId;
+
+        clearTimeout(previewRequestsTimerByContext[previewContext]);
+        previewRequestsTimerByContext[previewContext] = setTimeout(() => {
+            this.previewShortcodes( previewContext );
         }, debounceTime);
 
-        return new Promise( r => previewPromises.push( r ) );
+        return new Promise( r => previewPromisesByContext[previewContext].push( r ) );
     },
-    previewShortcodes( recipeId ) {
-        const thesePromises = previewPromises;
-        const theseRequests = previewRequests;
-        previewPromises = [];
-        previewRequests = {};
+    previewShortcodes( previewContext = 'default' ) {
+        const thesePromises = previewPromisesByContext[previewContext] || [];
+        const theseRequests = previewRequestsByContext[previewContext] || {};
+        const previewRecipe = previewRecipeByContext[previewContext] || false;
+        previewPromisesByContext[previewContext] = [];
+        previewRequestsByContext[previewContext] = {};
+        previewRecipeByContext[previewContext] = false;
 
         const data = {
-            recipeId,
+            recipeId: previewRecipe,
             shortcodes: theseRequests,
         };
 

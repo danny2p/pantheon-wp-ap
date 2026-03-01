@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { __wprm } from 'Shared/Translations';
 
 import PreviewTemplate from '../../admin-template/main/preview-template';
 import Api from 'Shared/Api';
@@ -31,15 +32,15 @@ export default class StepSnippets extends Component {
         return (
             <div className="wprm-admin-onboarding-step-snippet">
                 <p>
-                    Most people have content before the actual recipe. Often, there are some paragraphs with additional information or backstory. Maybe a few ads in between? You want people to read this, but if they are in a hurry you could <strong>give your visitors the option to jump directly to the recipe as well</strong>!
+                    { __wprm( 'Most people have content before the actual recipe, often with extra information, story, or ads in between. You want visitors to read this, but if they are in a hurry you can still' ) } <strong>{ __wprm( 'give them the option to jump directly to the recipe' ) }</strong>.
                 </p>
                 <p>
-                    That's where the Recipe Snippets feature comes in. These snippets usually contain a "Jump to Recipe" and "Print Recipe" button but can include any field you want, really. Have a look at the <em>Snippet Summary</em> template below, for example.
+                    { __wprm( 'That is where the Recipe Snippets feature comes in. Snippets usually contain "Jump to Recipe" and "Print Recipe" buttons, but can include any fields you want. Have a look at the' ) } <em>{ __wprm( 'Snippet Summary' ) }</em> { __wprm( 'template below.' ) }
                 </p>
                 <p>
-                    These snippets are <strong>fully customizable in the Template Editor</strong> as well. So you can change colors, text and add more information afterwards.
+                    { __wprm( 'These snippets are also' ) } <strong>{ __wprm( 'fully customizable in the Template Editor' ) }</strong>. { __wprm( 'You can change colors, text, and add more information later.' ) }
                 </p>
-                <h2>Select a snippet template</h2>
+                <h2>{ __wprm( 'Select a snippet template' ) }</h2>
                 <div className="wprm-admin-onboarding-step-template-select">
                     {
                         templates.map((template, index) => {
@@ -72,7 +73,7 @@ export default class StepSnippets extends Component {
                                 <p style={{
                                     color: 'darkred',
                                     textAlign: 'center',
-                                }}>You need <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">WP Recipe Maker Premium</a> to use this template.</p>
+                                }}>{ __wprm( 'You need' ) } <a href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank" rel="noopener noreferrer">{ __wprm( 'WP Recipe Maker Premium' ) }</a> { __wprm( 'to use this template.' ) }</p>
                             }
                             <PreviewTemplate
                                 template={ this.state.template }
@@ -80,7 +81,7 @@ export default class StepSnippets extends Component {
                                 onChangeMode={() => {}}
                                 onChangeHTML={() => {}}
                             />
-                            <p>This would be the start of your regular post content, so the snippet appears right at the top of your post.</p>
+                            <p>{ __wprm( 'This would be the start of your regular post content, so the snippet appears right at the top of your post.' ) }</p>
                         </Fragment>
                     }
                 </div>
@@ -92,7 +93,7 @@ export default class StepSnippets extends Component {
                         onClick={() => {
                             this.props.jumpToStep(2);
                         }}
-                    >Previous</button>
+                    >{ __wprm( 'Previous' ) }</button>
                     <button
                         type="button"
                         className="button button-primary"
@@ -100,16 +101,16 @@ export default class StepSnippets extends Component {
                         onClick={() => {
                             this.props.jumpToStep(4);
                         }}
-                    >Do not enable snippets right now</button>
+                    >{ __wprm( 'Do not enable snippets right now' ) }</button>
                     <button
                         type="button"
                         className="button button-primary"
                         id="next-button"
                         onClick={() => {
                             if ( ! this.state.template ) {
-                                alert( 'Please select a template above.' );
+                                alert( __wprm( 'Please select a template above.' ) );
                             } else if ( this.state.template.premium && ! wprm_admin.addons.premium ) {
-                                alert( 'This template is only available in WP Recipe Maker Premium.' );
+                                alert( __wprm( 'This template is only available in WP Recipe Maker Premium.' ) );
                             } else {
                                 Api.settings.save({
                                     recipe_snippets_automatically_add_modern: true,
@@ -118,7 +119,7 @@ export default class StepSnippets extends Component {
                                 this.props.jumpToStep(4);
                             }
                         }}
-                    >Use the above Snippet Template</button>
+                    >{ __wprm( 'Use the above snippet template' ) }</button>
                 </div>
             </div>
         );

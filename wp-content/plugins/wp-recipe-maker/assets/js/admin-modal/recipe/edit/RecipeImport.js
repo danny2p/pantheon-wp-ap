@@ -20,7 +20,12 @@ const RecipeImport = (props) => {
                                 recipe: props.recipe,
                                 onImportValues: (newRecipe) => {
                                     // Use onRecipeChange with forceRerender to refresh rich text fields
-                                    props.onRecipeChange(newRecipe, true);
+                                    props.onRecipeChange(newRecipe, {
+                                        forceRerender: true,
+                                        historyMode: 'immediate',
+                                        historyBoundary: true,
+                                        historyKey: 'import:text',
+                                    });
                                     // Scroll to General section after import
                                     props.scrollToGroup('general');
                                 }
@@ -29,9 +34,9 @@ const RecipeImport = (props) => {
                     }}
                 />
             </FieldContainer>
-            <FieldContainer label={ __wprm( 'Import from JSON' ) }>
+            <FieldContainer label={ __wprm( 'Restore Backup' ) } help={ __wprm( `If something goes wrong during saving, the plugin allows you to copy the recipe to your clipboard. Paste that modal backup here to restore the recipe.` ) }>
                 <FieldTextarea
-                    placeholder={ __wprm( 'Paste the recipe JSON data to import' ) }
+                    placeholder={ __wprm( 'Paste the recipe modal backup to restore the recipe' ) }
                     value={''}
                     onChange={ (value) => {
                         if ( value ) {

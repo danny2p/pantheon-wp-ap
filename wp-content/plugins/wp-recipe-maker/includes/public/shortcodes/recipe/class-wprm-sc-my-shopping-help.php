@@ -38,12 +38,20 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 					'wide-button' => 'Full Width Button',
 				),
 			),
+			'custom_icon' => array(
+				'default' => '0',
+				'type' => 'toggle',
+			),
 			'icon' => array(
-				'default' => 'plus',
+				'default' => 'calendar-plus',
 				'type' => 'icon',
+				'dependency' => array(
+					'id' => 'custom_icon',
+					'value' => '1',
+				),
 			),
 			'text' => array(
-				'default' => __( 'Add to My Shopping Help', 'wp-recipe-maker' ),
+				'default' => __( 'Add to my MSH planner', 'wp-recipe-maker' ),
 				'type' => 'text',
 			),
 			'text_style' => array(
@@ -55,9 +63,15 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 				'default' => '#ffffff',
 				'type' => 'color',
 				'dependency' => array(
-					'id' => 'icon',
-					'value' => '',
-					'type' => 'inverse',
+					array(
+						'id' => 'icon',
+						'value' => '',
+						'type' => 'inverse',
+					),
+					array(
+						'id' => 'custom_icon',
+						'value' => '1',
+					),
 				),
 			),
 			'text_color' => array(
@@ -88,7 +102,7 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 				),
 			),
 			'button_color' => array(
-				'default' => '#212121',
+				'default' => '#4BBC23',
 				'type' => 'color',
 				'dependency' => array(
 					'id' => 'style',
@@ -97,7 +111,7 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 				),
 			),
 			'border_color' => array(
-				'default' => '#212121',
+				'default' => '#4BBC23',
 				'type' => 'color',
 				'dependency' => array(
 					'id' => 'style',
@@ -106,7 +120,7 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 				),
 			),
 			'border_radius' => array(
-				'default' => '6px',
+				'default' => '100px',
 				'type' => 'size',
 				'dependency' => array(
 					'id' => 'style',
@@ -148,11 +162,24 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 
 		// Optional icon.
 		$icon = '';
-		if ( $atts['icon'] ) {
-			$icon = WPRM_Icon::get( $atts['icon'], $atts['icon_color'] );
+		$use_custom_icon = wp_validate_boolean( $atts['custom_icon'] );
 
-			if ( $icon ) {
-				$icon = '<span class="wprm-recipe-icon wprm-recipe-my-shopping-help-icon">' . $icon . '</span> ';
+		if ( $use_custom_icon ) {
+			if ( $atts['icon'] ) {
+				$icon = WPRM_Icon::get( $atts['icon'], $atts['icon_color'] );
+
+				if ( $icon ) {
+					$icon = '<span class="wprm-recipe-icon wprm-recipe-my-shopping-help-icon">' . $icon . '</span> ';
+				}
+			}
+		} else {
+			$svg_path = WPRM_DIR . 'assets/icons/integrations/my-shopping-help.svg';
+			$svg_content = '';
+			if ( file_exists( $svg_path ) ) {
+				$svg_content = file_get_contents( $svg_path );
+			}
+			if ( $svg_content ) {
+				$icon = '<span class="wprm-recipe-icon wprm-recipe-my-shopping-help-icon wprm-recipe-my-shopping-help-default-icon" aria-hidden="true">' . $svg_content . '</span> ';
 			}
 		}
 
@@ -216,4 +243,3 @@ class WPRM_SC_My_Shopping_Help extends WPRM_Template_Shortcode {
 }
 
 WPRM_SC_My_Shopping_Help::init();
-

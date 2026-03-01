@@ -91,10 +91,13 @@ const PropertyAccordion = (props) => {
                 const isExpanded = shouldShowHeader 
                     ? (expandedSection === groupIndex)
                     : true;
+                const groupKey = group.headerProperty && group.headerProperty.id
+                    ? `group-${group.headerProperty.id}`
+                    : `group-${group.properties.map((property) => property.id).join('-')}`;
 
                 return (
                     <div 
-                        key={groupIndex} 
+                        key={groupKey}
                         className={`wprm-template-property-accordion-section ${isExpanded ? 'is-expanded' : 'is-collapsed'}`}
                     >
                         {shouldShowHeader ? (
@@ -115,7 +118,7 @@ const PropertyAccordion = (props) => {
                             className={`wprm-template-property-accordion-content ${isExpanded ? 'expanded' : 'collapsed'}`}
                         >
                             <div className="wprm-template-property-accordion-content-inner">
-                                {group.properties.map((property, propertyIndex) => {
+                                {group.properties.map((property) => {
                                     return (
                                         <Property
                                             properties={props.properties}
@@ -123,7 +126,7 @@ const PropertyAccordion = (props) => {
                                             onPropertyChange={props.onPropertyChange}
                                             fonts={props.fonts}
                                             onChangeFonts={props.onChangeFonts}
-                                            key={propertyIndex}
+                                            key={property.id}
                                         />
                                     );
                                 })}

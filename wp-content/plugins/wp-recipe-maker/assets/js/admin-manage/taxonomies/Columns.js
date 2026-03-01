@@ -17,6 +17,102 @@ export default {
         const link_nofollow_options = wprm_admin_modal.options.hasOwnProperty( `${datatable.props.options.id}_link_nofollow` ) ? wprm_admin_modal.options[`${datatable.props.options.id}_link_nofollow`] : wprm_admin_modal.options.term_link_nofollow;
 
         let columns = [];
+        let shoppingListGroupDefaultOptions = false;
+        let shoppingListGroupDefaultPromise = false;
+
+        const normalizeShoppingListGroupOptions = ( groups = [] ) => {
+            const uniqueGroups = {};
+
+            groups.forEach( ( group ) => {
+                let name = '';
+
+                if ( 'string' === typeof group ) {
+                    name = group.trim();
+                } else if ( group && group.hasOwnProperty( 'name' ) ) {
+                    name = `${ group.name }`.trim();
+                } else if ( group && group.hasOwnProperty( 'value' ) ) {
+                    name = `${ group.value }`.trim();
+                }
+
+                if ( name ) {
+                    const key = name.toLowerCase();
+
+                    if ( ! uniqueGroups.hasOwnProperty( key ) ) {
+                        uniqueGroups[ key ] = name;
+                    }
+                }
+            });
+
+            return Object.values( uniqueGroups ).map( ( name ) => ({
+                value: name,
+                label: name,
+            }) );
+        };
+
+        const loadShoppingListGroupOptions = ( search = '' ) => {
+            return Api.manage.getShoppingGroups( search ).then( ( groups ) => {
+                return normalizeShoppingListGroupOptions( groups );
+            });
+        };
+
+        const getDefaultShoppingListGroupOptions = () => {
+            if ( false !== shoppingListGroupDefaultOptions ) {
+                return Promise.resolve( shoppingListGroupDefaultOptions );
+            }
+
+            if ( shoppingListGroupDefaultPromise ) {
+                return shoppingListGroupDefaultPromise;
+            }
+
+            shoppingListGroupDefaultPromise = loadShoppingListGroupOptions().then( ( options ) => {
+                shoppingListGroupDefaultOptions = options;
+                shoppingListGroupDefaultPromise = false;
+
+                return options;
+            }).catch(() => {
+                shoppingListGroupDefaultOptions = [];
+                shoppingListGroupDefaultPromise = false;
+
+                return [];
+            });
+
+            return shoppingListGroupDefaultPromise;
+        };
+
+        const openShoppingListGroupModal = ( row, defaultOptions = [] ) => {
+            WPRM_Modal.open( 'input-fields', {
+                header: __wprm( 'Change Shopping List Group' ),
+                fields: [{
+                    label: __wprm( 'Shopping List Group' ),
+                    type: 'async-creatable-single',
+                    value: row.value ? row.value : '',
+                    placeholder: __wprm( 'Select from list or type to create...' ),
+                    defaultOptions,
+                    loadOptions: loadShoppingListGroupOptions,
+                }],
+                insertCallback: ( args ) => {
+                    const group = 'string' === typeof args.fields[0].value ? args.fields[0].value.trim() : '';
+
+                    Api.manage.updateTaxonomyMeta('ingredient', row.original.term_id, { group }).then(() => {
+                        if ( false !== shoppingListGroupDefaultOptions && group ) {
+                            const exists = shoppingListGroupDefaultOptions.find( ( option ) => option.value.toLowerCase() === group.toLowerCase() );
+
+                            if ( ! exists ) {
+                                shoppingListGroupDefaultOptions = [
+                                    {
+                                        value: group,
+                                        label: group,
+                                    },
+                                    ...shoppingListGroupDefaultOptions,
+                                ].slice( 0, 50 );
+                            }
+                        }
+
+                        datatable.refreshData();
+                    });
+                },
+            } );
+        };
 
         if ( 'suitablefordiet' !== datatable.props.options.id ) {
             columns.push( bulkEditCheckbox( datatable, 'term_id' ) );
@@ -275,6 +371,8 @@ export default {
         }
 
         if ( 'ingredient' === datatable.props.options.id && wprm_admin.addons.premium ) {
+            getDefaultShoppingListGroupOptions();
+
             columns.push({
                 Header: __wprm( 'Shopping List Group' ),
                 id: 'group',
@@ -288,10 +386,9 @@ export default {
                                 type="pencil"
                                 title={ __wprm( 'Change Group' ) }
                                 onClick={() => {
-                                    const newGroup = prompt( `${ __wprm( 'What do you want to be the new group for' ) } "${row.original.name}"?`, row.value );
-                                    if( false !== newGroup ) {
-                                        Api.manage.updateTaxonomyMeta('ingredient', row.original.term_id, { group: newGroup }).then(() => datatable.refreshData());
-                                    }
+                                    getDefaultShoppingListGroupOptions().then( ( defaultOptions ) => {
+                                        openShoppingListGroupModal( row, defaultOptions );
+                                    });
                                 }}
                             />
                             {

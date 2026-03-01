@@ -9,7 +9,6 @@ const contentShortcodes = [
 // Shortcodes that still exist but should not get added to the "Add Blocks" section.
 const ignoreShortcodes = [
     'wprm-recipe-my-emissions-label',
-    'wprm-recipe-my-shopping-help',
 ];
 
 // Helper function to normalize shortcode entries (handles both string IDs and objects)
@@ -27,11 +26,17 @@ const getShortcodeId = (entry) => {
 
 // Shortcodes that should be marked as "new" in the Add Blocks view
 const newShortcodes = [
-    'wprm-recipe-add-products-to-cart',
-    'wprm-recipe-cook-mode',
+    // New in 10.1.0
     'wprm-recipe-share-options-popup',
     'wprm-recipe-mastodon-share',
     'wprm-recipe-tumblr-share',
+    // New in 10.2.0
+    'wprm-recipe-add-products-to-cart',
+    'wprm-recipe-cook-mode',
+    // New in 10.4.0
+    'wprm-hubbub-action-buttons',
+    'wprm-recipe-download-pdf', 
+    'wprm-recipe-my-shopping-help',
 ];
 
 // Sort shortcodes for "Add Blocks" section.
@@ -58,6 +63,7 @@ const shortcodeGroups = {
             { id: 'wprm-link', description: 'Add a clickable link' },
             { id: 'wprm-qr-code', name: 'QR Code', description: 'Display a QR code for the recipe' },
             { id: 'wprm-image', description: 'Display a custom image' },
+            { id: 'wprm-tip', description: 'Display a styled tip callout with optional icon and accent color' },
             { id: 'wprm-recipe-jump-to-section', description: 'Add a link that jumps to a specific section' },
             { id: 'wprm-call-to-action', description: 'Display a call-to-action button or link' },
             { id: 'wprm-icon', description: 'Display an icon' },
@@ -122,6 +128,7 @@ const shortcodeGroups = {
             { id: 'wprm-recipe-cook-mode', description: 'Open a cook mode popup modal with step-by-step instructions' },
             { id: 'wprm-prevent-sleep', description: 'Prevent device from sleeping while viewing recipe' },
             { id: 'wprm-recipe-print', description: 'Print button for the recipe' },
+            { id: 'wprm-recipe-download-pdf', name: 'Download PDF', description: 'Download a PDF version of the recipe' },
             { id: 'wprm-recipe-user-ratings-modal', description: 'Modal for users to rate the recipe' },
             { id: 'wprm-private-notes', description: 'Allow visitors to add their own private notes about the recipe' },
         ],
@@ -153,7 +160,9 @@ const shortcodeGroups = {
             { id: 'wprm-recipe-chicory', name: 'Chicory', description: 'A button to shop ingredients on Chicory' },
             { id: 'wprm-recipe-slickstream-favorites', name: 'Slickstream', description: 'A button to add the recipe to Slickstream favorites' },
             { id: 'wprm-recipe-smart-with-food', name: 'Smart with Food', description: 'A button to shop ingredients through Smart with Food' },
-            { id: 'wprm-hubbub-save-this', name: 'Hubbub', description: 'Display the Hubbub "Save This" form' },
+            { id: 'wprm-recipe-my-shopping-help', name: 'My Shopping Help', description: 'A button to add the recipe to My Shopping Help' },
+            { id: 'wprm-hubbub-save-this', name: 'Hubbub Save This', description: 'Display the Hubbub "Save This" form' },
+            { id: 'wprm-hubbub-action-buttons', name: 'Hubbub Action Buttons', description: 'Display Hubbub Action Buttons' },
         ],
     },
 };

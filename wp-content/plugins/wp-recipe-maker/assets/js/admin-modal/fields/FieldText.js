@@ -18,6 +18,11 @@ const FieldText = (props) => {
             onChange={(e) => {
                 props.onChange( e.target.value );
             }}
+            onBlur={(e) => {
+                if ( props.onBlur ) {
+                    props.onBlur( e.target.value );
+                }
+            }}
             onKeyDown={(e) => {
                 if ( 'number' === props.type ) {
                     // Don't allow dash in number field as it breaks the value.

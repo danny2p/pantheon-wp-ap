@@ -46,21 +46,21 @@ export default class FieldEquipment extends Component {
                                     className="wprm-admin-modal-field-equipment-amount"
                                     value={ amount }
                                     placeholder="1"
-                                    onChange={ (amount) => this.props.onChangeEquipment( { amount } ) }
+                                    onChange={ (amount, changeOptions = {}) => this.props.onChangeEquipment( { amount }, changeOptions ) }
                                 />
                                 <FieldRichText
                                     singleLine
                                     toolbar="equipment"
                                     value={ this.props.name }
                                     placeholder={ 'howto' === this.props.recipeType ? __wprm( 'Pair of scissors' ) : __wprm( 'Pressure cooker' ) }
-                                    onChange={ (name) => this.props.onChangeEquipment( { name } ) }
+                                    onChange={ (name, changeOptions = {}) => this.props.onChangeEquipment( { name }, changeOptions ) }
                                 />
                                 <FieldRichText
                                     singleLine
                                     toolbar={ wprm_admin.addons.premium ? 'all' : 'no-link' }
                                     value={ notes }
                                     placeholder={ __wprm( 'optional' ) }
-                                    onChange={ (notes) => this.props.onChangeEquipment( { notes } ) }
+                                    onChange={ (notes, changeOptions = {}) => this.props.onChangeEquipment( { notes }, changeOptions ) }
                                     onKeyDown={(event) => {
                                         if ( isTabHotkey(event) ) {
                                             this.props.onTab(event);

@@ -26,6 +26,7 @@ import BulkAddCategories from './recipe/bulk-add-categories';
 import TextImport from './recipe/text-import';
 import SuggestTags from './recipe/suggest-tags';
 import SplitIngredient from './recipe/split-ingredient';
+import InstructionTipStyle from './recipe/instruction-tip-style';
 import AddRecipeToPost from './add-recipe-to-post';
 
 const contentBlocks = {
@@ -43,6 +44,7 @@ const contentBlocks = {
     'text-import': TextImport,
     'suggest-tags': SuggestTags,
     'split-ingredient': SplitIngredient,
+    'instruction-tip-style': InstructionTipStyle,
     'add-recipe-to-post': AddRecipeToPost,
 };
 

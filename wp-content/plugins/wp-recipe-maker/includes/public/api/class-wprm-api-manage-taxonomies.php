@@ -70,6 +70,11 @@ class WPRM_Api_Manage_Taxonomies {
 				'methods' => 'POST',
 				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
 			) );
+			register_rest_route( 'wp-recipe-maker/v1', '/manage/taxonomy/shopping-groups', array(
+				'callback' => array( __CLASS__, 'api_manage_taxonomies_shopping_groups' ),
+				'methods' => 'POST',
+				'permission_callback' => array( __CLASS__, 'api_required_permissions' ),
+			) );
 		}
 	}
 
@@ -832,6 +837,97 @@ class WPRM_Api_Manage_Taxonomies {
 		}
 
 		return rest_ensure_response( false );
+	}
+
+	/**
+	 * Handle shopping list groups call to the REST API.
+	 *
+	 * @since    10.0.0
+	 * @param    WP_REST_Request $request Current request.
+	 */
+	public static function api_manage_taxonomies_shopping_groups( $request ) {
+		global $wpdb;
+
+		$params = $request->get_params();
+
+		$search = isset( $params['search'] ) ? sanitize_text_field( $params['search'] ) : '';
+		$search = trim( $search );
+
+		// Limit search string length to prevent abuse.
+		if ( strlen( $search ) > 100 ) {
+			$search = substr( $search, 0, 100 );
+		}
+
+		$limit = isset( $params['limit'] ) ? intval( $params['limit'] ) : 50;
+		$limit = min( max( 1, $limit ), 100 );
+
+		if ( '' !== $search ) {
+			$query = $wpdb->prepare(
+				"
+					SELECT tm.meta_value as name, COUNT(*) as count
+					FROM {$wpdb->termmeta} tm
+					WHERE tm.meta_key = %s
+					AND tm.meta_value != ''
+					AND tm.meta_value LIKE %s
+					GROUP BY tm.meta_value
+					ORDER BY count DESC, tm.meta_value ASC
+				",
+				'wprmp_ingredient_group',
+				'%' . $wpdb->esc_like( $search ) . '%'
+			);
+		} else {
+			$query = $wpdb->prepare(
+				"
+					SELECT tm.meta_value as name, COUNT(*) as count
+					FROM {$wpdb->termmeta} tm
+					WHERE tm.meta_key = %s
+					AND tm.meta_value != ''
+					GROUP BY tm.meta_value
+					ORDER BY count DESC, tm.meta_value ASC
+				",
+				'wprmp_ingredient_group'
+			);
+		}
+
+		$raw_groups = $wpdb->get_results( $query, ARRAY_A );
+
+		$groups_map = array();
+
+		foreach ( $raw_groups as $raw_group ) {
+			$name = isset( $raw_group['name'] ) ? trim( $raw_group['name'] ) : '';
+			$count = isset( $raw_group['count'] ) ? intval( $raw_group['count'] ) : 0;
+
+			if ( '' === $name ) {
+				continue;
+			}
+
+			$key = strtolower( $name );
+
+			if ( ! isset( $groups_map[ $key ] ) ) {
+				$groups_map[ $key ] = array(
+					'name' => $name,
+					'count' => $count,
+				);
+			} else {
+				$groups_map[ $key ]['count'] += $count;
+			}
+		}
+
+		$groups = array_values( $groups_map );
+
+		usort( $groups, function( $a, $b ) {
+			if ( $a['count'] !== $b['count'] ) {
+				return $a['count'] > $b['count'] ? -1 : 1;
+			}
+
+			return strcasecmp( $a['name'], $b['name'] );
+		});
+
+		$groups = array_slice( $groups, 0, $limit );
+
+		return rest_ensure_response( array(
+			'groups' => $groups,
+		) );
 	}
 
 	/**

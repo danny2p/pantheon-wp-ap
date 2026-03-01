@@ -1,6 +1,48 @@
 {
     "news": [
         {
+            "date": "2026-02-25",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.4.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-4-0/"
+        },
+        {
+            "date": "2026-02-24",
+            "label": "Blog",
+            "title": "What Are Recipe Card Blocks and Why Every Food Blogger Should Use Them",
+            "url": "https://bootstrapped.ventures/recipe-card-blocks/"
+        },
+        {
+            "date": "2026-02-20",
+            "label": "Blog",
+            "title": "How to Turn Your Food Blog into a Business with Traffic and Revenue",
+            "url": "https://bootstrapped.ventures/growing-food-blog-audience/"
+        },
+        {
+            "date": "2026-02-03",
+            "label": "Blog",
+            "title": "Long-Tail and Local Keywords Every Food Creator Needs to Know",
+            "url": "https://bootstrapped.ventures/long-tail-keywords-for-recipes/"
+        },
+        {
+            "date": "2026-01-28",
+            "label": "Blog",
+            "title": "Food Blog Content Strategy That Actually Ranks and Converts",
+            "url": "https://bootstrapped.ventures/food-blog-content-strategy/"
+        },
+        {
+            "date": "2026-01-23",
+            "label": "Blog",
+            "title": "Where to Put Affiliate Links in Recipe Posts While Staying FTC Compliant",
+            "url": "https://bootstrapped.ventures/affiliate-links-food-blog/"
+        },
+        {
+            "date": "2026-01-19",
+            "label": "Blog",
+            "title": "Recipe Writing Checklist to Catch Every Missing Detail Before Publishing",
+            "url": "https://bootstrapped.ventures/recipe-writing-checklist/"
+        },
+        {
             "date": "2026-01-16",
             "label": "Blog",
             "title": "Easy Accessible Recipes Using Picture Cards and Simple Tools",

@@ -6,7 +6,7 @@ import he from 'he';
 
 import { __wprm } from 'Shared/Translations';
 import InlineIngredientsHelper from './InlineIngredientsHelper';
-import { parseQuantity } from 'Shared/quantities';
+import { parseQuantity, formatQuantity } from 'Shared/quantities';
 
 import { serialize } from '../../../fields/FieldRichText/html';
 import { off } from 'medium-editor';
@@ -248,7 +248,9 @@ const InlineIngredientsInner = (props) => {
                                             let splitAmount = '';
                                             if ( parentAmount > 0 && ! isNaN( percentage ) ) {
                                                 const calculated = ( parentAmount * percentage ) / 100;
-                                                splitAmount = calculated === Math.floor( calculated ) ? String( Math.floor( calculated ) ) : calculated.toFixed( 2 ).replace( /\.?0+$/, '' );
+                                                const decimals = typeof wprm_admin !== 'undefined' && wprm_admin.settings ? parseInt( wprm_admin.settings.adjustable_servings_round_to_decimals ) || 2 : 2;
+                                                const allowFractions = typeof wprm_admin !== 'undefined' && wprm_admin.settings ? ( wprm_admin.settings.fractions_enabled || false ) : false;
+                                                splitAmount = formatQuantity( calculated, decimals, allowFractions );
                                             }
                                             const splitUnit = ingredient.unit || '';
                                             const splitName = ingredient.name || '';

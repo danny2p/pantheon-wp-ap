@@ -38,6 +38,33 @@ class WPRM_SC_Notes extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'text_styles',
 			),
+			'tips_header' => array(
+				'type' => 'header',
+				'default' => __( 'Tips', 'wp-recipe-maker' ),
+			),
+			'tips_style' => array(
+				'default' => WPRM_Tip::DEFAULT_STYLE,
+				'type' => 'dropdown',
+				'options' => array(
+					'left-border-straight' => __( 'Left Border Straight', 'wp-recipe-maker' ),
+					'left-border-rounded' => __( 'Left Border Rounded', 'wp-recipe-maker' ),
+					'filled' => __( 'Filled', 'wp-recipe-maker' ),
+					'outline' => __( 'Outline', 'wp-recipe-maker' ),
+					'banner' => __( 'Banner', 'wp-recipe-maker' ),
+				),
+			),
+			'tips_default_icon' => array(
+				'default' => WPRM_Tip::DEFAULT_ICON,
+				'type' => 'icon',
+			),
+			'tips_default_accent' => array(
+				'default' => WPRM_Tip::DEFAULT_ACCENT,
+				'type' => 'color',
+			),
+			'tips_default_text_color' => array(
+				'default' => WPRM_Tip::DEFAULT_TEXT_COLOR,
+				'type' => 'color',
+			),
 			'container_header' => array(
 				'type' => 'header',
 				'default' => __( 'Notes Container', 'wp-recipe-maker' ),
@@ -81,10 +108,24 @@ class WPRM_SC_Notes extends WPRM_Template_Shortcode {
 			$output .= WPRM_Shortcode_Helper::get_internal_container( $atts, 'notes' );
 		}
 
+		$tip_defaults = array(
+			'style' => isset( $atts['tips_style'] ) ? $atts['tips_style'] : WPRM_Tip::DEFAULT_STYLE,
+			'icon' => isset( $atts['tips_default_icon'] ) ? $atts['tips_default_icon'] : WPRM_Tip::DEFAULT_ICON,
+			'accent' => isset( $atts['tips_default_accent'] ) ? $atts['tips_default_accent'] : WPRM_Tip::DEFAULT_ACCENT,
+			'text_color' => isset( $atts['tips_default_text_color'] ) ? $atts['tips_default_text_color'] : WPRM_Tip::DEFAULT_TEXT_COLOR,
+		);
+		$has_tip_shortcode_class = class_exists( 'WPRM_SC_Tip' );
+		if ( $has_tip_shortcode_class ) {
+			WPRM_SC_Tip::push_context_defaults( $tip_defaults );
+		}
+
 		$notes = parent::clean_paragraphs( $recipe->notes() );
 
 		$output .= '<div class="wprm-recipe-notes">';
 		$output .= do_shortcode( $notes );
+		if ( $has_tip_shortcode_class ) {
+			WPRM_SC_Tip::pop_context_defaults();
+		}
 		$output .= '</div>';
 
 		if ( (bool) $atts['has_container'] ) {

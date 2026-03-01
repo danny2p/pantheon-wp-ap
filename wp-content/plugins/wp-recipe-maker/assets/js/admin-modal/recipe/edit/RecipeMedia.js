@@ -23,6 +23,10 @@ const RecipeMedia = (props) => {
                         props.onRecipeChange( {
                             image_id,
                             image_url,
+                        }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'media:image',
                         } );
                     }}
                 />
@@ -46,7 +50,11 @@ const RecipeMedia = (props) => {
                                 image.pin_image_repin_id = pin_image_repin_id;
                             }
 
-                            props.onRecipeChange( image );
+                            props.onRecipeChange( image, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'media:pin_image',
+                            } );
                         }}
                     />
                     
@@ -69,7 +77,11 @@ const RecipeMedia = (props) => {
                             video.video_embed = video_embed;
                         }
 
-                        props.onRecipeChange( video );
+                        props.onRecipeChange( video, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'media:video',
+                        } );
                     }}
                 />
             </FieldContainer>

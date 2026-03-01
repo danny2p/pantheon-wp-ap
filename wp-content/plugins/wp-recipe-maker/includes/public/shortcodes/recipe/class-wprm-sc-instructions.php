@@ -101,6 +101,33 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				'type' => 'dropdown',
 				'options' => 'list_style_types',
 			),
+			'tips_header' => array(
+				'type' => 'header',
+				'default' => __( 'Tips', 'wp-recipe-maker' ),
+			),
+			'tips_style' => array(
+				'default' => 'left-border-straight',
+				'type' => 'dropdown',
+				'options' => array(
+					'left-border-straight' => __( 'Left Border Straight', 'wp-recipe-maker' ),
+					'left-border-rounded' => __( 'Left Border Rounded', 'wp-recipe-maker' ),
+					'filled' => __( 'Filled', 'wp-recipe-maker' ),
+					'outline' => __( 'Outline', 'wp-recipe-maker' ),
+					'banner' => __( 'Banner', 'wp-recipe-maker' ),
+				),
+			),
+			'tips_default_icon' => array(
+				'default' => 'lightbulb',
+				'type' => 'icon',
+			),
+			'tips_default_accent' => array(
+				'default' => '#2b6cb0',
+				'type' => 'color',
+			),
+			'tips_default_text_color' => array(
+				'default' => '#000000',
+				'type' => 'color',
+			),
 			'inline_ingredients_header' => array(
 				'type' => 'header',
 				'default' => __( 'Inline Ingredients', 'wp-recipe-maker' ),
@@ -1291,7 +1318,59 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 			$output .= '<' . $list_tag . ' class="wprm-recipe-instructions">';
 
+			$instruction_number = 1;
 			foreach ( $instruction_group['instructions'] as $index => $instruction ) {
+				$instruction_type = isset( $instruction['type'] ) ? $instruction['type'] : 'instruction';
+
+				if ( 'tip' === $instruction_type ) {
+					$tip_text = isset( $instruction['text'] ) ? $instruction['text'] : '';
+					$tip_text = parent::clean_paragraphs( $tip_text );
+
+					$tip_css = '';
+					if ( (bool) $atts['force_item_position'] ) {
+						$tip_css .= 'margin-left: ' . esc_attr( $atts['list_item_position'] ) . ';';
+					}
+
+					$tip_line = WPRM_Tip::render(
+						$tip_text,
+						array(
+							'id' => 'wprm-recipe-' . $recipe->id() . '-tip-' . $group_index . '-' . $index,
+							'wrapper' => 'li',
+							'classes' => array(
+								'wprm-recipe-instruction',
+								'wprm-recipe-instruction-tip',
+							),
+							'css' => $tip_css,
+							'style' => isset( $instruction['tip_style'] ) ? $instruction['tip_style'] : '',
+							'style_default' => isset( $atts['tips_style'] ) ? $atts['tips_style'] : WPRM_Tip::DEFAULT_STYLE,
+							'style_class_prefixes' => array(
+								'wprm-recipe-tip-style-',
+								'wprm-recipe-instruction-tip-style-',
+							),
+							'accent' => isset( $instruction['tip_accent'] ) ? $instruction['tip_accent'] : '',
+							'accent_default' => isset( $atts['tips_default_accent'] ) ? $atts['tips_default_accent'] : WPRM_Tip::DEFAULT_ACCENT,
+							'text_color' => isset( $instruction['tip_text_color'] ) ? $instruction['tip_text_color'] : '',
+							'text_color_default' => isset( $atts['tips_default_text_color'] ) ? $atts['tips_default_text_color'] : WPRM_Tip::DEFAULT_TEXT_COLOR,
+							'icon' => isset( $instruction['tip_icon'] ) ? $instruction['tip_icon'] : '',
+							'icon_default' => isset( $atts['tips_default_icon'] ) ? $atts['tips_default_icon'] : '',
+							'icon_default_defined' => isset( $atts['tips_default_icon'] ),
+							'icon_classes' => array(
+								'wprm-recipe-icon',
+								'wprm-recipe-tip-icon',
+								'wprm-recipe-instruction-tip-icon',
+							),
+							'text_classes' => array(
+								'wprm-recipe-tip-text',
+								'wprm-recipe-instruction-tip-text',
+							),
+						)
+					);
+
+					$tip_line = apply_filters( 'wprm_recipe_instructions_shortcode_instruction', $tip_line, $atts, $instruction, $recipe );
+					$output .= $tip_line;
+					continue;
+				}
+
 				$list_style_type = 'checkbox' === $atts['list_style'] || 'advanced' === $atts['list_style'] ? 'none' : $atts['list_style'];
 				$style = 'list-style-type: ' . $list_style_type . ';';
 				
@@ -1336,12 +1415,16 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				// Build the complete <li>...</li> structure
 				$li_id = 'wprm-recipe-' . esc_attr( $recipe->id() ) . '-step-' . esc_attr( $group_index ) . '-' . esc_attr( $index );
 				$li_attributes = 'id="' . $li_id . '" class="wprm-recipe-instruction" style="' . esc_attr( $style ) . '"';
+				if ( 'ol' === $list_tag ) {
+					$li_attributes .= ' value="' . esc_attr( $instruction_number ) . '"';
+				}
 				$instruction_line = '<li ' . $li_attributes . '>' . $instruction_content . '</li>';
 				
 				// Apply filter to the complete instruction line
 				$instruction_line = apply_filters( 'wprm_recipe_instructions_shortcode_instruction', $instruction_line, $atts, $instruction, $recipe );
 				
 				$output .= $instruction_line;
+				$instruction_number++;
 			}
 
 			$output .= '</' . $list_tag . '>';
@@ -1439,15 +1522,35 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 				// Find the parent ingredient
 				$index = array_search( $parent_uid, array_column( $ingredients_flat, 'uid' ) );
 				
-				if ( false !== $index && isset( $ingredients_flat[ $index ] ) ) {
-					$found_ingredient = $ingredients_flat[ $index ];
+					if ( false !== $index && isset( $ingredients_flat[ $index ] ) ) {
+						$found_ingredient = $ingredients_flat[ $index ];
 
-					if ( 'ingredient' === $found_ingredient['type'] ) {
-						$parts = array();
-						$amount = '';
-						$unit = '';
-						$output_key = $found_ingredient['uid'];
-						$split_percentage = null;
+						if ( 'ingredient' === $found_ingredient['type'] ) {
+							$get_unit_for_amount = function( $default_unit, $unit_id, $amount_parsed ) {
+								if ( ! $unit_id || $amount_parsed <= 0 ) {
+									return $default_unit;
+								}
+
+								$plural = get_term_meta( $unit_id, 'wprm_ingredient_unit_plural', true );
+								if ( ! $plural ) {
+									return $default_unit;
+								}
+
+								$term = get_term( $unit_id, 'wprm_ingredient_unit' );
+								$singular = ( $term && ! is_wp_error( $term ) ) ? $term->name : $default_unit;
+
+								return $amount_parsed <= 1 ? $singular : $plural;
+							};
+							$decimals = intval( WPRM_Settings::get( 'adjustable_servings_round_to_decimals' ) );
+							if ( $decimals < 0 ) {
+								$decimals = 0;
+							}
+
+							$parts = array();
+							$amount = '';
+							$unit = '';
+							$output_key = $found_ingredient['uid'];
+							$split_percentage = null;
 						
 						// If it's a split, calculate amount from percentage
 						if ( $is_split && isset( $found_ingredient['splits'] ) && is_array( $found_ingredient['splits'] ) ) {
@@ -1464,17 +1567,13 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 								$parent_amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
 								$parent_amount_parsed = WPRM_Recipe_Parser::parse_quantity( $parent_amount );
 								
-								if ( $parent_amount_parsed > 0 ) {
-									$split_percentage = floatval( $found_split['percentage'] );
-									$split_amount_parsed = ( $parent_amount_parsed * $split_percentage ) / 100;
-									$decimals = intval( WPRM_Settings::get( 'adjustable_servings_round_to_decimals' ) );
-									if ( $decimals < 0 ) {
-										$decimals = 0;
-									}
-									
-									// Format the calculated amount.
-									$amount = WPRM_Recipe_Parser::format_quantity( $split_amount_parsed, $decimals, WPRM_Settings::get( 'fractions_enabled' ), true );
-								} else {
+									if ( $parent_amount_parsed > 0 ) {
+										$split_percentage = floatval( $found_split['percentage'] );
+										$split_amount_parsed = ( $parent_amount_parsed * $split_percentage ) / 100;
+										
+										// Format the calculated amount.
+										$amount = WPRM_Recipe_Parser::format_quantity( $split_amount_parsed, $decimals, WPRM_Settings::get( 'fractions_enabled' ), true );
+									} else {
 									$amount = '';
 								}
 								
@@ -1487,14 +1586,39 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 								$amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
 								$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
 							}
-						} else {
-							// Regular ingredient, use parent's amount and unit
-							$amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
-							$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
-						}
+							} else {
+								// Regular ingredient, use parent's amount and unit
+								$amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
+								$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
+							}
+
+							$ingredient_name = isset( $found_ingredient['name'] ) ? $found_ingredient['name'] : '';
+							$split_amount_parsed_for_plural = WPRM_Recipe_Parser::parse_quantity( $amount );
+
+							if ( $is_split && $split_amount_parsed_for_plural > 0 ) {
+								// Split-specific unit singular/plural.
+								if ( isset( $found_ingredient['unit_id'] ) && $found_ingredient['unit_id'] ) {
+									$unit = $get_unit_for_amount( $unit, intval( $found_ingredient['unit_id'] ), $split_amount_parsed_for_plural );
+								}
+
+								// Split-specific ingredient name singular/plural.
+								if ( isset( $found_ingredient['id'] ) && $found_ingredient['id'] ) {
+									$ingredient_term = get_term( intval( $found_ingredient['id'] ), 'wprm_ingredient' );
+									$singular_name = ( $ingredient_term && ! is_wp_error( $ingredient_term ) ) ? $ingredient_term->name : $ingredient_name;
+									$plural_name = get_term_meta( intval( $found_ingredient['id'] ), 'wprm_ingredient_plural', true );
+
+									if ( $split_amount_parsed_for_plural <= 1 ) {
+										$ingredient_name = $singular_name;
+									} elseif ( $plural_name ) {
+										$ingredient_name = $plural_name;
+									} else {
+										$ingredient_name = $singular_name;
+									}
+								}
+							}
 						
-						if ( $amount ) { $parts[] = $amount; };
-						if ( $unit ) { $parts[] = $unit; };
+							if ( $amount ) { $parts[] = $amount; };
+							if ( $unit ) { $parts[] = $unit; };
 
 						// Optionally add second unit system.
 						$show_both_units = (bool) $atts['ingredients_show_both_units'];
@@ -1518,6 +1642,13 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 												// Check system-specific fraction setting, fall back to general setting.
 												$allow_fractions = WPRM_Settings::get( 'unit_conversion_system_' . $system . '_fractions' );
 												$ingredient_for_output['converted'][ $system ]['amount'] = WPRM_Recipe_Parser::format_quantity( $converted_split, $decimals, $allow_fractions, true );
+												if ( isset( $converted['unit_id'] ) && $converted['unit_id'] ) {
+													$ingredient_for_output['converted'][ $system ]['unit'] = $get_unit_for_amount(
+														isset( $converted['unit'] ) ? $converted['unit'] : '',
+														intval( $converted['unit_id'] ),
+														$converted_split
+													);
+												}
 											} else {
 												$ingredient_for_output['converted'][ $system ]['amount'] = '';
 											}
@@ -1529,9 +1660,9 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 							$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $ingredient_for_output );
 						}
 
-						// Ingredient name and maybe notes.
-						$name_with_notes = '';
-						if ( $found_ingredient['name'] ) { $name_with_notes = $found_ingredient['name']; };
+							// Ingredient name and maybe notes.
+							$name_with_notes = '';
+							if ( $ingredient_name ) { $name_with_notes = $ingredient_name; };
 
 						if ( (bool) $atts['ingredients_show_notes'] ) {
 							if ( $found_ingredient['notes'] ) {
@@ -1554,12 +1685,12 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 						$text_to_show = implode( ' ', $parts );
 
-						if ( $text_to_show ) {
-							if ( $show_both_units ) {
-								$text_to_show = $amount_unit . ' ' . $found_ingredient['name'];
+							if ( $text_to_show ) {
+								if ( $show_both_units ) {
+									$text_to_show = $amount_unit . ' ' . $ingredient_name;
+								}
+								$ingredients_to_output[ $output_key ] = $text_to_show;
 							}
-							$ingredients_to_output[ $output_key ] = $text_to_show;
-						}
 					}
 				}
 			}
@@ -1632,14 +1763,25 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 					// Keep notes?
 					$data_keep_notes = '';
 
-					if ( (bool) $atts['ingredients_show_notes'] ) {
-						$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['ingredient_notes_separator'] ) . '"';
-					}
+						if ( (bool) $atts['ingredients_show_notes'] ) {
+							$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['ingredient_notes_separator'] ) . '"';
+						}
 
-					// Output.
-					$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $data_keep_notes . $split_data_attr . $style . '>';
-					$output .= wp_strip_all_tags( $text );
-					$output .= $separator;
+						$show_both_units = (bool) $atts['ingredients_show_both_units'];
+						$both_units_data_attr = ' data-both-units="' . ( $show_both_units ? '1' : '0' ) . '"';
+						if ( $show_both_units ) {
+							$both_units_style = isset( $atts['both_units_style'] ) ? sanitize_key( $atts['both_units_style'] ) : '';
+							if ( ! in_array( $both_units_style, array( 'parentheses', 'slash' ), true ) ) {
+								$both_units_style = '';
+							}
+							$both_units_show_identical = (bool) $atts['both_units_show_if_identical'];
+							$both_units_data_attr .= ' data-both-units-style="' . esc_attr( $both_units_style ) . '" data-both-units-show-identical="' . ( $both_units_show_identical ? '1' : '0' ) . '"';
+						}
+
+						// Output.
+						$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $data_keep_notes . $both_units_data_attr . $split_data_attr . $style . '>';
+						$output .= wp_strip_all_tags( $text );
+						$output .= $separator;
 
 					$output .= '</' . $tag . '>';
 

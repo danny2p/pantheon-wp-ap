@@ -4,7 +4,6 @@
 
 #wprm-admin-modal-field-tinymce-container {
     max-width: 650px;
-    height: 100%;
 
     * {
         box-sizing: content-box;
@@ -15,4 +14,8 @@
         box-sizing: border-box;
         min-height: 350px;
     }
+}
+
+.wprm-admin-modal-field-notes-actions {
+    margin-top: 8px;
 }

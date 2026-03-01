@@ -697,6 +697,17 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 					'type' => 'inverse',
 				),
 			),
+			'servings_options_labels' => array(
+				'name' => 'Option Labels',
+				'default' => '',
+				'type' => 'text',
+				'dependency' => array(
+					'id' => 'adjustable_servings',
+					'value' => '',
+					'type' => 'inverse',
+				),
+				'help' => 'Optional semicolon separated labels for servings options. For example: Normal;Double;Triple',
+			),
 			'serving_options_any_value' => array(
 				'name' => 'Any Value',
 				'default' => '',
@@ -1216,6 +1227,7 @@ class WPRM_SC_Ingredients extends WPRM_Template_Shortcode {
 			'style' => $atts['servings_style'],
 			'text_style' => $atts['servings_text_style'],
 			'serving_options' => $atts['servings_options'],
+			'serving_options_labels' => $atts['servings_options_labels'],
 			'serving_options_any_value' => $atts['serving_options_any_value'],
 			'button_background' => $atts['servings_button_background'],
 			'button_accent' => $atts['servings_button_accent'],

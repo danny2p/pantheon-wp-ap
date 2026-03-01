@@ -17,10 +17,24 @@ const RecipeTimes = (props) => {
                     id="prep"
                     value={ props.prep }
                     onChange={ (prep_time) => {
-                        props.onRecipeChange( { prep_time } );
+                        props.onRecipeChange( { prep_time }, {
+                            historyMode: 'debounced',
+                            historyKey: 'times:prep_time',
+                        } );
+                    }}
+                    onBlur={ (prep_time) => {
+                        props.onRecipeChange( { prep_time }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'times:prep_time',
+                        } );
                     }}
                     onChangeZero={ (prep_time_zero) => {
-                        props.onRecipeChange( { prep_time_zero } );
+                        props.onRecipeChange( { prep_time_zero }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'times:prep_time_zero',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -29,10 +43,24 @@ const RecipeTimes = (props) => {
                     id="cook"
                     value={ props.cook }
                     onChange={ (cook_time) => {
-                        props.onRecipeChange( { cook_time } );
+                        props.onRecipeChange( { cook_time }, {
+                            historyMode: 'debounced',
+                            historyKey: 'times:cook_time',
+                        } );
+                    }}
+                    onBlur={ (cook_time) => {
+                        props.onRecipeChange( { cook_time }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'times:cook_time',
+                        } );
                     }}
                     onChangeZero={ (cook_time_zero) => {
-                        props.onRecipeChange( { cook_time_zero } );
+                        props.onRecipeChange( { cook_time_zero }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'times:cook_time_zero',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -42,7 +70,17 @@ const RecipeTimes = (props) => {
                     placeholder={ __wprm( 'Resting Time' ) }
                     value={ props.customLabel }
                     onChange={ (custom_time_label) => {
-                        props.onRecipeChange( { custom_time_label } );
+                        props.onRecipeChange( { custom_time_label }, {
+                            historyMode: 'debounced',
+                            historyKey: 'times:custom_time_label',
+                        } );
+                    }}
+                    onBlur={ (custom_time_label) => {
+                        props.onRecipeChange( { custom_time_label }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'times:custom_time_label',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -51,10 +89,24 @@ const RecipeTimes = (props) => {
                     id="custom"
                     value={ props.custom }
                     onChange={ (custom_time) => {
-                        props.onRecipeChange( { custom_time } );
+                        props.onRecipeChange( { custom_time }, {
+                            historyMode: 'debounced',
+                            historyKey: 'times:custom_time',
+                        } );
+                    }}
+                    onBlur={ (custom_time) => {
+                        props.onRecipeChange( { custom_time }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'times:custom_time',
+                        } );
                     }}
                     onChangeZero={ (custom_time_zero) => {
-                        props.onRecipeChange( { custom_time_zero } );
+                        props.onRecipeChange( { custom_time_zero }, {
+                            historyMode: 'immediate',
+                            historyBoundary: true,
+                            historyKey: 'times:custom_time_zero',
+                        } );
                     }}
                 />
             </FieldContainer>
@@ -63,7 +115,17 @@ const RecipeTimes = (props) => {
                     id="total"
                     value={ props.total }
                     onChange={ (total_time) => {
-                        props.onRecipeChange( { total_time } );
+                        props.onRecipeChange( { total_time }, {
+                            historyMode: 'debounced',
+                            historyKey: 'times:total_time',
+                        } );
+                    }}
+                    onBlur={ (total_time) => {
+                        props.onRecipeChange( { total_time }, {
+                            historyMode: 'debounced',
+                            historyBoundary: true,
+                            historyKey: 'times:total_time',
+                        } );
                     }}
                 />
                 {
@@ -76,6 +138,10 @@ const RecipeTimes = (props) => {
                                 e.preventDefault();
                                 props.onRecipeChange({
                                     total_time: calculatedTotal,
+                                }, {
+                                    historyMode: 'immediate',
+                                    historyBoundary: true,
+                                    historyKey: 'times:recalculate_total',
                                 });
                             }}
                         >{ __wprm( 'Recalculate Total Time' ) }</a>

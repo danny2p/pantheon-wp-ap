@@ -12,16 +12,24 @@ export default class FieldTinymce extends Component {
 
         this.state = {
             editorHtml: false,
-            addedListeners: false,
             editorId: `wprm-admin-modal-notes-editor-${uid}`,
         }
 
         this.initEditor = this.initEditor.bind(this);
+        this.initTextarea = this.initTextarea.bind(this);
         this.initTinyMCE = this.initTinyMCE.bind(this);
+        this.notifyReady = this.notifyReady.bind(this);
+        this.insertContent = this.insertContent.bind(this);
+
+        this.textareaEventsAttached = false;
     }
 
     componentDidMount() {
         const editor = document.getElementById( 'wprm-admin-modal-notes-placeholder' );
+        if ( ! editor ) {
+            // Placeholder doesn't exist, can't initialize editor.
+            return;
+        }
         let editorHtml = editor.innerHTML;
         editorHtml = editorHtml.replace( /wprm-admin-modal-notes-editor/g, this.state.editorId );
 
@@ -45,7 +53,7 @@ export default class FieldTinymce extends Component {
     }
 
     initTextarea() {
-        const textarea = document.getElementById( this.state.editorId );
+        const textarea = this.getTextarea();
 
         if ( typeof window.quicktags !== 'undefined' ) {
             try {
@@ -58,20 +66,39 @@ export default class FieldTinymce extends Component {
         if ( textarea ) {
             textarea.value = this.props.value;
 
-            ['input', 'blur'].forEach((event) => {
-                textarea.addEventListener(event, () => {
-                    this.props.onChange( textarea.value );
+            if ( ! this.textareaEventsAttached ) {
+                [ 'input', 'blur' ].forEach( ( event ) => {
+                    textarea.addEventListener( event, () => {
+                        this.props.onChange( textarea.value );
+
+                        if ( 'blur' === event && 'function' === typeof this.props.onBlur ) {
+                            this.props.onBlur( textarea.value );
+                        }
+                    } );
                 });
-            });
+                this.textareaEventsAttached = true;
+            }
         }
+
+        this.notifyReady();
     }
 
     initTinyMCE() {
         // Clean up first.
         const container = document.getElementById( `wp-${this.state.editorId}-editor-container` );
+        if ( ! container ) {
+            // Container doesn't exist, fall back to textarea mode.
+            this.initTextarea();
+            return;
+        }
         container.outerHTML = `<textarea id="${this.state.editorId}"></textarea>`;
 
         const $wrap = tinymce.$( `#wp-${this.state.editorId}-wrap` );
+        if ( ! $wrap || $wrap.length === 0 ) {
+            // Wrap doesn't exist, fall back to textarea mode.
+            this.initTextarea();
+            return;
+        }
 
         // Force to text mode and init.
         $wrap.removeClass( 'tmce-active' ).addClass( 'html-active' );
@@ -98,12 +125,82 @@ export default class FieldTinymce extends Component {
             editor.on('change', () => {
                 this.props.onChange( editor.getContent() );
             });
+
+            editor.on('blur', () => {
+                if ( 'function' === typeof this.props.onBlur ) {
+                    this.props.onBlur( editor.getContent() );
+                }
+            });
         }
+
+        this.notifyReady();
+    }
+
+    getTextarea() {
+        return document.getElementById( this.state.editorId );
+    }
+
+    getEditor() {
+        if ( typeof window.tinyMCE !== 'undefined' ) {
+            return window.tinyMCE.get( this.state.editorId );
+        }
+        if ( typeof window.tinymce !== 'undefined' ) {
+            return window.tinymce.get( this.state.editorId );
+        }
+
+        return false;
+    }
+
+    notifyReady() {
+        if ( 'function' === typeof this.props.onReady ) {
+            this.props.onReady({
+                editorId: this.state.editorId,
+                insertContent: this.insertContent,
+            });
+        }
+    }
+
+    insertContent( text ) {
+        const editor = this.getEditor();
+
+        if ( editor && ! editor.isHidden() ) {
+            editor.focus( true );
+            editor.selection.collapse( false );
+            editor.execCommand( 'mceInsertContent', false, text );
+            this.props.onChange( editor.getContent() );
+            return;
+        }
+
+        const textarea = this.getTextarea();
+        if ( ! textarea ) {
+            return;
+        }
+
+        const value = textarea.value || '';
+
+        if ( 'number' === typeof textarea.selectionStart && 'number' === typeof textarea.selectionEnd ) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            textarea.value = `${ value.slice( 0, start ) }${ text }${ value.slice( end ) }`;
+
+            const cursor = start + text.length;
+            textarea.focus();
+            textarea.setSelectionRange( cursor, cursor );
+        } else {
+            textarea.value = `${ value }${ text }`;
+        }
+
+        this.props.onChange( textarea.value );
     }
   
     componentWillUnmount() {
         if ( typeof window.tinyMCE !== 'undefined' ) {
             window.tinyMCE.remove(`#${this.state.editorId}`);
+        }
+
+        if ( 'function' === typeof this.props.onReady ) {
+            this.props.onReady( false );
         }
     }
   

@@ -205,15 +205,29 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		$recipe['servings_unit'] = $servings_unit;
 
 		// Recipe times.
-		$recipe['prep_time'] = $this->get_minutes_for_time( get_post_meta( $id, 'prep_time', true ) );
-		$recipe['cook_time'] = $this->get_minutes_for_time( get_post_meta( $id, 'cook_time', true ) );
-		$recipe['total_time'] = $this->get_minutes_for_time( get_post_meta( $id, 'total_time', true ) );
+		$recipe['prep_time'] = $this->get_minutes_for_time( $this->get_tasty_time_value( $id, array( 'prep_time' ) ) );
+		$recipe['cook_time'] = $this->get_minutes_for_time( $this->get_tasty_time_value( $id, array( 'cook_time' ) ) );
+		$recipe['total_time'] = $this->get_minutes_for_time( $this->get_tasty_time_value( $id, array( 'total_time' ) ) );
+
+		$custom_time = $this->get_minutes_for_time( $this->get_tasty_time_value( $id, array( 'additional_time_value', 'additional_time' ) ) );
+		if ( $custom_time > 0 ) {
+			$recipe['custom_time'] = $custom_time;
+
+			$custom_time_label = trim( get_post_meta( $id, 'additional_time_label', true ) );
+			if ( '' !== $custom_time_label ) {
+				$recipe['custom_time_label'] = $custom_time_label;
+			}
+		}
+
+		if ( ! $recipe['total_time'] && ( $recipe['prep_time'] || $recipe['cook_time'] || $custom_time ) ) {
+			$recipe['total_time'] = intval( $recipe['prep_time'] ) + intval( $recipe['cook_time'] ) + intval( $custom_time );
+		}
 
 		// Recipe tags.
 		$recipe['tags'] = array();
-		$recipe['tags']['course'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'category', true ) ) );
-		$recipe['tags']['cuisine'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'cuisine', true ) ) );
-		$recipe['tags']['keyword'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'keywords', true ) ) );
+		$recipe['tags']['course'] = $this->get_tasty_tag_values( $id, 'category', 'tasty_recipe_category' );
+		$recipe['tags']['cuisine'] = $this->get_tasty_tag_values( $id, 'cuisine', 'tasty_recipe_cuisine' );
+		$recipe['tags']['keyword'] = $this->parse_comma_separated_values( get_post_meta( $id, 'keywords', true ) );
 
 		// Custom tags.
 		$wprm_taxonomies = WPRM_Taxonomies::get_taxonomies();
@@ -222,12 +236,16 @@ class WPRM_Import_Tasty extends WPRM_Import {
 			$tag = isset( $post_data[ 'tasty-tags-' . $wprm_key ] ) ? $post_data[ 'tasty-tags-' . $wprm_key ] : false;
 
 			if ( $tag ) {
-				$recipe['tags'][ $wprm_key ] = array_map( 'trim', explode( ',', get_post_meta( $id, $tag, true ) ) );
+				if ( 'method' === $tag ) {
+					$recipe['tags'][ $wprm_key ] = $this->get_tasty_tag_values( $id, 'method', 'tasty_recipe_method' );
+				} else {
+					$recipe['tags'][ $wprm_key ] = $this->parse_comma_separated_values( get_post_meta( $id, $tag, true ) );
+				}
 			}
 		}
 
 		// Diet tag.
-		$recipe['tags']['suitablefordiet'] = array_map( 'trim', explode( ',', get_post_meta( $id, 'diet', true ) ) );
+		$recipe['tags']['suitablefordiet'] = $this->get_tasty_tag_values( $id, 'diet', 'tasty_recipe_diet' );
 
 		$tasty_to_wprm = array(
 			'Diabetic'    => 'DiabeticDiet',
@@ -476,6 +494,96 @@ class WPRM_Import_Tasty extends WPRM_Import {
 		$time = $this->strtotime( $time, $now );
 
 		return ( $time - $now ) / 60;
+	}
+
+	/**
+	 * Get the first non-empty value for one or more Tasty time keys.
+	 *
+	 * @since    10.4.0
+	 * @param	 int          $id Recipe ID.
+	 * @param	 string|array $meta_keys Meta key or array of keys to check.
+	 */
+	private function get_tasty_time_value( $id, $meta_keys ) {
+		$meta_keys = is_array( $meta_keys ) ? $meta_keys : array( $meta_keys );
+
+		foreach ( $meta_keys as $meta_key ) {
+			$value = get_post_meta( $id, $meta_key, true );
+
+			if ( is_array( $value ) ) {
+				$value = reset( $value );
+			}
+
+			if ( is_string( $value ) ) {
+				$value = trim( $value );
+			}
+
+			if ( is_scalar( $value ) && '' !== strval( $value ) ) {
+				return $value;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Parse comma separated values.
+	 *
+	 * @since    10.4.0
+	 * @param	 string|array $value Value to parse.
+	 */
+	private function parse_comma_separated_values( $value ) {
+		$values = array();
+		$lookup = array();
+		$raw_values = is_array( $value ) ? $value : array( $value );
+
+		foreach ( $raw_values as $raw_value ) {
+			if ( is_array( $raw_value ) ) {
+				$raw_value = implode( ',', $raw_value );
+			}
+
+			if ( ! is_scalar( $raw_value ) ) {
+				continue;
+			}
+
+			$parts = explode( ',', strval( $raw_value ) );
+			foreach ( $parts as $part ) {
+				$part = trim( $part );
+
+				if ( '' !== $part && ! isset( $lookup[ $part ] ) ) {
+					$values[] = $part;
+					$lookup[ $part ] = true;
+				}
+			}
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Get Tasty tag values with taxonomy fallback support.
+	 *
+	 * @since    10.4.0
+	 * @param	 int    $id Recipe ID.
+	 * @param	 string $legacy_meta_key Legacy meta key.
+	 * @param	 string $taxonomy Optional taxonomy name.
+	 */
+	private function get_tasty_tag_values( $id, $legacy_meta_key, $taxonomy = '' ) {
+		if ( $taxonomy ) {
+			$terms = get_the_terms( $id, $taxonomy );
+
+			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+				$values = $this->parse_comma_separated_values( wp_list_pluck( $terms, 'name' ) );
+				if ( ! empty( $values ) ) {
+					return $values;
+				}
+			}
+		}
+
+		if ( ! $legacy_meta_key ) {
+			return array();
+		}
+
+		return $this->parse_comma_separated_values( get_post_meta( $id, $legacy_meta_key, true ) );
 	}
 
 	/**

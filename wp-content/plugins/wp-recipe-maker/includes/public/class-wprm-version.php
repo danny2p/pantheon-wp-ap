@@ -19,6 +19,15 @@
  */
 class WPRM_Version {
 	/**
+	 * Register actions and filters.
+	 *
+	 * @since    10.4.0
+	 */
+	public static function init() {
+		add_action( 'plugins_loaded', array( __CLASS__, 'track_update' ), 1 );
+	}
+
+	/**
 	 * Convert version to number.
 	 *
 	 * @since	7.6.0
@@ -36,6 +45,78 @@ class WPRM_Version {
 		}
 
 		return $number;
+	}
+
+	/**
+	 * Track plugin updates by comparing stored version to current version.
+	 * Called on plugins_loaded to record the date of each update.
+	 *
+	 * The very first entry also records whether this is a new or existing install,
+	 * so support staff can tell if the user had WPRM before tracking began.
+	 *
+	 * @since	10.4.0
+	 */
+	public static function track_update() {
+		$tracked_version = get_option( 'wprm_tracked_version', '' );
+
+		if ( $tracked_version !== WPRM_VERSION ) {
+			$history = get_option( 'wprm_update_history', array() );
+
+			$entry = array(
+				'version' => WPRM_VERSION,
+				'date'    => gmdate( 'c' ),
+			);
+
+			// First time tracking: record whether this is a new or existing install.
+			if ( empty( $history ) ) {
+				$first_recipe_date = self::get_earliest_recipe_date();
+
+				if ( null === $first_recipe_date ) {
+					$entry['type'] = 'new_install';
+				} else {
+					$entry['type']              = 'existing_install';
+					$entry['first_recipe_date'] = $first_recipe_date;
+				}
+			}
+
+			$history[] = $entry;
+
+			update_option( 'wprm_update_history', $history, false );
+			update_option( 'wprm_tracked_version', WPRM_VERSION, false );
+		}
+	}
+
+	/**
+	 * Get the ISO 8601 date of the earliest wprm_recipe post, or null if none exist.
+	 *
+	 * @since	10.4.0
+	 */
+	private static function get_earliest_recipe_date() {
+		$args = array(
+			'post_type'      => WPRM_POST_TYPE,
+			'post_status'    => 'any',
+			'posts_per_page' => 1,
+			'orderby'        => 'date',
+			'order'          => 'ASC',
+			'fields'         => 'ids',
+		);
+
+		$query = new WP_Query( $args );
+
+		if ( 0 === $query->found_posts ) {
+			return null;
+		}
+
+		return get_the_date( 'c', $query->posts[0] );
+	}
+
+	/**
+	 * Get the stored plugin update history.
+	 *
+	 * @since	10.4.0
+	 */
+	public static function get_update_history() {
+		return get_option( 'wprm_update_history', array() );
 	}
 
 	/**
@@ -95,3 +176,5 @@ class WPRM_Version {
 		return 0 < $query->found_posts;
 	}
 }
+
+WPRM_Version::init();

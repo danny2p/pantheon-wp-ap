@@ -38,16 +38,24 @@ $custom_style = array(
 						'value' => true,
 					),
 				),
-				array(
-					'id' => 'print_css',
-					'name' => __( 'Recipe Print CSS', 'wp-recipe-maker' ),
-					'description' => __( 'This custom styling will be output on the recipe print page.', 'wp-recipe-maker' ),
-					'type' => 'code',
-					'code' => 'css',
-					'default' => '',
+					array(
+						'id' => 'print_css',
+						'name' => __( 'Recipe Print CSS', 'wp-recipe-maker' ),
+						'description' => __( 'This custom styling will be output on the recipe print page.', 'wp-recipe-maker' ),
+						'type' => 'code',
+						'code' => 'css',
+						'default' => '',
+					),
+					array(
+						'id' => 'pdf_download_css',
+						'name' => __( 'PDF Download CSS', 'wp-recipe-maker' ),
+						'description' => __( 'This custom styling will be output on the recipe PDF download page.', 'wp-recipe-maker' ),
+						'type' => 'code',
+						'code' => 'css',
+						'default' => '',
+					),
 				),
 			),
-		),
 		array(
 			'name' => __( 'Tooltips', 'wp-recipe-maker' ),
 			'settings' => array(

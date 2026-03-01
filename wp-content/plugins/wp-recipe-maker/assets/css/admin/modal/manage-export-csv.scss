@@ -1,0 +1,36 @@
+.wprm-admin-modal-manage-export-csv {
+    max-width: 540px;
+
+    .wprm-admin-modal-input-fields-container {
+        padding: 16px 18px 12px;
+    }
+
+    .wprm-admin-modal-bulk-edit-label {
+        font-weight: bold;
+        font-size: 16px;
+        margin: 0 0 12px;
+    }
+
+    .wprm-admin-modal-bulk-edit-action {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 8px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        input {
+            margin: 1px 8px 0 0;
+        }
+
+        label {
+            line-height: 20px;
+        }
+    }
+
+    .wprm-admin-modal-export-csv-description {
+        margin-top: 10px;
+        font-style: italic;
+    }
+}

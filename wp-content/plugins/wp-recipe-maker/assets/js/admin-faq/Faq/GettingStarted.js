@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { __wprm } from 'Shared/Translations';
 import Accordion from '../General/Accordion';
 
 const imgUrl = wprm_admin.wprm_url + 'assets/images/faq/getting-started/';
@@ -8,83 +9,83 @@ const GettingStarted = (props) => {
         <Accordion
             items={[
                 {
-                    header: 'Using WPRM in a different language (or multilingual site)',
+                    header: __wprm( 'Using WPRM in a different language (or multilingual site)' ),
                     content: <Fragment>
                         <p>
-                            We follow WordPress standards to make sure all text in WP Recipe Maker can be translated to fit your needs. Learn more here:
+                            { __wprm( 'We follow WordPress standards to make sure all text in WP Recipe Maker can be translated to fit your needs. Learn more here:' ) }
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/128-translating-text-in-the-plugin" target="_blank">Translating any text in WP Recipe Maker</a></li>
-                            <li><a href="https://help.bootstrapped.ventures/article/132-how-to-use-this-for-a-multilingual-blog" target="_blank">Using WPRM on a multilingual website</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/128-translating-text-in-the-plugin" target="_blank" rel="noopener noreferrer">{ __wprm( 'Translating any text in WP Recipe Maker' ) }</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/132-how-to-use-this-for-a-multilingual-blog" target="_blank" rel="noopener noreferrer">{ __wprm( 'Using WPRM on a multilingual website' ) }</a></li>
                         </ul>
                     </Fragment>
                 },{
-                    header: 'Importing recipes from another plugin',
+                    header: __wprm( 'Importing recipes from another plugin' ),
                     content: <Fragment>
                         <p>
-                            Already have recipes on your website that were created in a different plugin? There's a good chance we can import them for you! If there are recipes we can import, you will find them on the <em>WP Recipe Maker > Import Recipes</em>.
+                            { __wprm( 'Already have recipes on your website that were created in a different plugin? There is a good chance we can import them for you. If there are recipes we can import, you will find them on' ) } <em>{ __wprm( 'WP Recipe Maker > Import Recipes' ) }</em>.
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/69-importing-recipes-from-other-plugins" target="_blank">All the plugins we can import from</a></li>
-                            <li><a href="https://help.bootstrapped.ventures/article/86-custom-recipe-importer" target="_blank">Develop your own recipe importer</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/69-importing-recipes-from-other-plugins" target="_blank" rel="noopener noreferrer">{ __wprm( 'All the plugins we can import from' ) }</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/86-custom-recipe-importer" target="_blank" rel="noopener noreferrer">{ __wprm( 'Develop your own recipe importer' ) }</a></li>
                         </ul>
                     </Fragment>
                 },{
-                    header: 'Adding recipes from Word, Google Docs, ...',
+                    header: __wprm( 'Adding recipes from Word, Google Docs, ...' ),
                     content: <Fragment>
                         <p>
-                            If you already have your recipes in another document, filling in all the individual fields can be a bit tedious. Use our <strong>import recipe from text feature</strong> to paste in that recipe entirely and speed up the process.
+                            { __wprm( 'If you already have your recipes in another document, filling in all the individual fields can be a bit tedious. Use our' ) } <strong>{ __wprm( 'import recipe from text feature' ) }</strong> { __wprm( 'to paste in that recipe entirely and speed up the process.' ) }
                         </p>
                         <p>
-                            The field to paste in the recipe can be found after scrolling up all the way in the recipe modal:
+                            { __wprm( 'The field to paste in the recipe can be found after scrolling all the way up in the recipe modal:' ) }
                         </p>
-                        <img src={ imgUrl + 'import-from-text.png' } />
+                        <img src={ imgUrl + 'import-from-text.png' } alt={ __wprm( 'Import from text field in the recipe modal' ) } />
                         <p>
-                            This will open up a new modal where you can follow the steps to import.
+                            { __wprm( 'This will open a new modal where you can follow the steps to import.' ) }
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/70-import-recipe-from-text" target="_blank">Learn more about the import recipe from text feature</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/70-import-recipe-from-text" target="_blank" rel="noopener noreferrer">{ __wprm( 'Learn more about the import recipe from text feature' ) }</a></li>
                         </ul>
                     </Fragment>
                 },{
-                    header: 'Recipe metadata and SEO',
+                    header: __wprm( 'Recipe metadata and SEO' ),
                     content: <Fragment>
                         <p>
-                            An important reason for using a recipe plugin is to have it <strong>automatically add the recipe metadata that Google wants to see</strong>. 
+                            { __wprm( 'An important reason for using a recipe plugin is to have it' ) } <strong>{ __wprm( 'automatically add the recipe metadata that Google wants to see' ) }</strong>.
                         </p>
                         <p>
-                            But WP Recipe Maker can only add that metadata if you actually fill in all the fields. To find out if you've done that, have a look at the SEO column on the <em>WP Recipe Maker > Manage</em> page and make sure you <strong>get a green light there</strong>.
+                            { __wprm( 'WP Recipe Maker can only add that metadata if you actually fill in all the relevant fields. To verify this, check the SEO column on' ) } <em>{ __wprm( 'WP Recipe Maker > Manage' ) }</em> { __wprm( 'and make sure you' ) } <strong>{ __wprm( 'get a green light there' ) }</strong>.
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/51-recipe-metadata-for-seo" target="_blank">Learn more about Recipe Metadata for SEO</a></li>
-                            <li><a href="https://help.bootstrapped.ventures/article/74-recipe-metadata-checker" target="_blank">Using the Recipe Metadata Checker</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/51-recipe-metadata-for-seo" target="_blank" rel="noopener noreferrer">{ __wprm( 'Learn more about Recipe Metadata for SEO' ) }</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/74-recipe-metadata-checker" target="_blank" rel="noopener noreferrer">{ __wprm( 'Using the Recipe Metadata Checker' ) }</a></li>
                         </ul>
                     </Fragment>
                 },{
-                    header: 'Using the Template Editor',
+                    header: __wprm( 'Using the Template Editor' ),
                     content: <Fragment>
                         <p>
-                            Everyone is unique so we want you to be able to <strong>completely change the recipe template to your liking</strong>. Not everyone will have the budget for a completely custom-coded template though, so that's what we built the Template Editor for!
+                            { __wprm( 'Everyone is unique, so we want you to be able to' ) } <strong>{ __wprm( 'completely change the recipe template to your liking' ) }</strong>. { __wprm( 'Not everyone has the budget for a completely custom-coded template, so that is what the Template Editor is for.' ) }
                         </p>
                         <p>
-                            With a little bit of a learning curve everyone should be able to add or remove specific parts of the recipe box, change labels and colors or add custom text. The Template Editor can be accessed through the <em>WP Recipe Maker > Settings</em> page.
+                            { __wprm( 'With a bit of learning, most users can add or remove parts of the recipe card, change labels and colors, and add custom text. The Template Editor can be accessed through' ) } <em>{ __wprm( 'WP Recipe Maker > Settings' ) }</em>.
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/118-template-editor-101" target="_blank">Go through the Template Editor 101 documentation first</a></li>
-                            <li><a href="https://help.bootstrapped.ventures/category/25-template-editor-faq" target="_blank">Learn more in these Template Editor FAQs</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/118-template-editor-101" target="_blank" rel="noopener noreferrer">{ __wprm( 'Go through the Template Editor 101 documentation first' ) }</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/category/25-template-editor-faq" target="_blank" rel="noopener noreferrer">{ __wprm( 'Learn more in these Template Editor FAQs' ) }</a></li>
                         </ul>
                     </Fragment>
                 },{
-                    header: 'WPRM for recipe roundup posts',
+                    header: __wprm( 'WPRM for recipe roundup posts' ),
                     content: <Fragment>
                         <p>
-                            WP Recipe Maker can also be used for recipe roundup posts (think "Easy Valentine's Day Menu" or "10 Scary Halloween Recipes"), <strong>linking to both recipes on your own website and others</strong>.
+                            { __wprm( 'WP Recipe Maker can also be used for recipe roundup posts (for example "Easy Valentine\'s Day Menu" or "10 Scary Halloween Recipes"),' ) } <strong>{ __wprm( 'linking to both recipes on your own website and external websites' ) }</strong>.
                         </p>
                         <p>
-                            A good reason for using WPRM for these kind of posts is that we'll automatically include the <strong>ItemList metadata that Google needs to display your recipes in a Carousel</strong>. That should definitely get you some extra visits!
+                            { __wprm( 'A great reason to use WPRM for these posts is that it automatically includes the' ) } <strong>{ __wprm( 'ItemList metadata Google needs for carousel display' ) }</strong>.
                         </p>
                         <ul>
-                            <li><a href="https://help.bootstrapped.ventures/article/182-itemlist-metadata-for-recipe-roundup-posts" target="_blank">Learn about using recipe roundup feature</a></li>
+                            <li><a href="https://help.bootstrapped.ventures/article/182-itemlist-metadata-for-recipe-roundup-posts" target="_blank" rel="noopener noreferrer">{ __wprm( 'Learn about the recipe roundup feature' ) }</a></li>
                         </ul>
                     </Fragment>
                 }

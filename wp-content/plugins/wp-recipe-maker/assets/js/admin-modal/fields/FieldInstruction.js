@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { isKeyHotkey } from 'is-hotkey';
+import SVG from 'react-inlinesvg';
 
 const isTabHotkey = isKeyHotkey('tab');
+const isValidHexColor = ( value ) => /^#[0-9a-f]{3,6}$/i.test( value );
+const noTipIconValue = '__none__';
 
 import Icon from 'Shared/Icon';
 import { __wprm } from 'Shared/Translations';
@@ -38,7 +41,7 @@ const group = (props, provided) => (
                     toolbar="no-styling"
                     value={ props.name }
                     placeholder={ __wprm( 'Instruction Group Header' ) }
-                    onChange={(value) => props.onChangeName(value)}
+                    onChange={(value, changeOptions = {}) => props.onChangeName(value, changeOptions)}
                     onKeyDown={(event) => {
                         if ( isTabHotkey(event) ) {
                             props.onTab(event);
@@ -70,6 +73,20 @@ const group = (props, provided) => (
 );
 
 const instruction = (props, provided) => {
+    const isTip = 'tip' === props.type;
+    const tipAccent = isTip && isValidHexColor( props.tip_accent ) ? props.tip_accent : '#2b6cb0';
+    const tipTextColor = isTip && isValidHexColor( props.tip_text_color ) ? props.tip_text_color : '#000000';
+    const allIcons = wprm_admin_modal && wprm_admin_modal.icons ? wprm_admin_modal.icons : {};
+    const rawTipIcon = isTip && props.tip_icon ? props.tip_icon.trim() : '';
+    const tipIconIsNone = rawTipIcon && noTipIconValue === rawTipIcon.toLowerCase();
+    const tipIconIsKnown = ! tipIconIsNone && rawTipIcon && allIcons.hasOwnProperty( rawTipIcon );
+    const tipIconIsUrl = ! tipIconIsNone && rawTipIcon && /^https?:\/\//i.test( rawTipIcon );
+    const defaultTipIcon = allIcons.hasOwnProperty( 'lightbulb' ) ? allIcons.lightbulb.url : '';
+    const tipIconUrl = tipIconIsNone ? '' : ( tipIconIsKnown ? allIcons[ rawTipIcon ].url : ( tipIconIsUrl ? rawTipIcon : defaultTipIcon ) );
+    const tipIconSvg = ! tipIconIsNone && ( tipIconIsKnown || ( ! rawTipIcon && defaultTipIcon ) );
+    const draggableProps = provided.draggableProps ? provided.draggableProps : {};
+    const draggableStyle = draggableProps.style ? draggableProps.style : {};
+    const instructionStyle = isTip ? { ...draggableStyle, '--wprm-admin-tip-accent': tipAccent, '--wprm-admin-tip-text-color': tipTextColor } : draggableStyle;
     let video = {
         type: 'none',
         embed: '',
@@ -94,33 +111,54 @@ const instruction = (props, provided) => {
 
     return (
         <div
-            className="wprm-admin-modal-field-instruction"
+            className={ `wprm-admin-modal-field-instruction${ isTip ? ' wprm-admin-modal-field-instruction-tip' : '' }` }
             ref={provided.innerRef}
-            {...provided.draggableProps}
+            {...draggableProps}
+            style={ instructionStyle }
         >
             <div className="wprm-admin-modal-field-instruction-main-container">
                 { handle(provided) }
                 <div className="wprm-admin-modal-field-instruction-text-container">
                     <div className="wprm-admin-modal-field-instruction-text-name-container">
-                        <FieldRichText
-                            className="wprm-admin-modal-field-instruction-text"
-                            ingredients={ props.ingredients }
-                            instructionsRef={ props.instructionsRef }
-                            allIngredients={ props.hasOwnProperty( 'allIngredients' ) ? props.allIngredients : null }
-                            inlineIngredientsPortalRendered={ props.inlineIngredientsPortalRendered }
-                            inlineIngredientsPortal={ props.hasOwnProperty( 'inlineIngredientsPortal' ) ? props.inlineIngredientsPortal : null }
-                            value={ props.text }
-                            placeholder={ __wprm( 'This is one step of the instructions.' ) }
-                            onChange={(value) => props.onChangeText(value)}
-                            onKeyDown={(event) => {
-                                if ( isTabHotkey(event) ) {
-                                    props.onTab(event);
-                                }
-                            }}
-                            key={ props.hasOwnProperty( 'externalUpdate' ) ? props.externalUpdate : null }
-                        />
+                        <div className={ `wprm-admin-modal-field-instruction-text-editor-container${ isTip && tipIconUrl ? ' wprm-admin-modal-field-instruction-text-editor-container-tip-icon' : '' }` }>
+                            {
+                                isTip && tipIconUrl
+                                &&
+                                <span className="wprm-admin-modal-field-instruction-tip-input-icon" aria-hidden="true">
+                                    {
+                                        tipIconSvg
+                                        ?
+                                        <SVG
+                                            src={ tipIconUrl }
+                                            preProcessor={ ( code ) => code.replace(/#[0-9a-f]{3,6}/gi, tipAccent ) }
+                                        />
+                                        :
+                                        <img src={ tipIconUrl } alt="" />
+                                    }
+                                </span>
+                            }
+                            <FieldRichText
+                                className="wprm-admin-modal-field-instruction-text"
+                                ingredients={ isTip ? [] : props.ingredients }
+                                instructionsRef={ props.instructionsRef }
+                                allIngredients={ isTip ? null : ( props.hasOwnProperty( 'allIngredients' ) ? props.allIngredients : null ) }
+                                inlineIngredientsPortalRendered={ isTip ? false : props.inlineIngredientsPortalRendered }
+                                inlineIngredientsPortal={ props.hasOwnProperty( 'inlineIngredientsPortal' ) ? props.inlineIngredientsPortal : null }
+                                value={ props.text }
+                                placeholder={ isTip ? __wprm( 'Tip to clarify this instruction step.' ) : __wprm( 'This is one step of the instructions.' ) }
+                                onChange={(value, changeOptions = {}) => props.onChangeText(value, changeOptions)}
+                                onKeyDown={(event) => {
+                                    if ( isTabHotkey(event) ) {
+                                        props.onTab(event);
+                                    }
+                                }}
+                                key={ props.hasOwnProperty( 'externalUpdate' ) ? props.externalUpdate : null }
+                            />
+                        </div>
                     </div>
                     {
+                        ! isTip
+                        &&
                         props.allowVideo
                         && 'part' === video.type
                         && 'media' === props.editMode
@@ -134,6 +172,14 @@ const instruction = (props, provided) => {
                                         start,
                                     });
                                 }}
+                                onBlur={ (start) => {
+                                    props.onChangeVideo({
+                                        ...video,
+                                        start,
+                                    }, {
+                                        historyBoundary: true,
+                                    });
+                                }}
                             />
                             <FieldVideoTime
                                 value={ video.end }
@@ -141,6 +187,14 @@ const instruction = (props, provided) => {
                                     props.onChangeVideo({
                                         ...video,
                                         end,
+                                    });
+                                }}
+                                onBlur={ (end) => {
+                                    props.onChangeVideo({
+                                        ...video,
+                                        end,
+                                    }, {
+                                        historyBoundary: true,
                                     });
                                 }}
                             />
@@ -154,6 +208,14 @@ const instruction = (props, provided) => {
                                         props.onChangeVideo({
                                             ...video,
                                             name,
+                                        });
+                                    }}
+                                    onBlur={ (name) => {
+                                        props.onChangeVideo({
+                                            ...video,
+                                            name,
+                                        }, {
+                                            historyBoundary: true,
                                         });
                                     }}
                                 />
@@ -186,6 +248,8 @@ const instruction = (props, provided) => {
                     />
                 </div>
                 {
+                    ! isTip
+                    &&
                     'summary' === props.editMode
                     &&
                     <div className="wprm-admin-modal-field-instruction-after-container-summary">
@@ -195,7 +259,7 @@ const instruction = (props, provided) => {
                             toolbar={ 'none' }
                             value={ props.hasOwnProperty( 'name' ) ? props.name : '' }
                             placeholder={ __wprm( 'Step Summary' ) }
-                            onChange={(value) => props.onChangeName(value)}
+                            onChange={(value, changeOptions = {}) => props.onChangeName(value, changeOptions)}
                         />
                     </div>
                 }
@@ -208,6 +272,8 @@ const instruction = (props, provided) => {
                     />
                 }
                 {
+                    ! isTip
+                    &&
                     'ingredients' === props.editMode
                     &&
                     <FieldInstructionIngredients
@@ -225,6 +291,7 @@ export default class FieldInstruction extends Component {
         if (
             this.props.uid !== nextProps.uid
             || this.props.index !== nextProps.index
+            || this.props.type !== nextProps.type
             || this.props.editMode !== nextProps.editMode
             || this.props.allowVideo !== nextProps.allowVideo
         ) {
@@ -232,7 +299,7 @@ export default class FieldInstruction extends Component {
         }
 
         // Check text content specifically.
-        if ( this.props.name !== nextProps.name || this.props.text !== nextProps.text ) {
+        if ( this.props.name !== nextProps.name || this.props.text !== nextProps.text || this.props.tip_icon !== nextProps.tip_icon || this.props.tip_style !== nextProps.tip_style || this.props.tip_accent !== nextProps.tip_accent || this.props.tip_text_color !== nextProps.tip_text_color ) {
             return true;
         }
 

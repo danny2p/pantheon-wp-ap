@@ -25,6 +25,82 @@
     }
 }
 
+.wprm-recipe-tip,
+.wprm-recipe-instructions .wprm-recipe-instruction-tip {
+    list-style: none !important;
+    counter-increment: none !important;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    &::before,
+    &::marker {
+        display: none !important;
+        content: none !important;
+    }
+}
+
+.wprm-recipe-tip .wprm-recipe-tip-icon,
+.wprm-recipe-tip .wprm-recipe-instruction-tip-icon,
+.wprm-recipe-instructions .wprm-recipe-instruction-tip .wprm-recipe-tip-icon,
+.wprm-recipe-instructions .wprm-recipe-instruction-tip .wprm-recipe-instruction-tip-icon {
+    flex-shrink: 0;
+    font-size: 1.1em;
+    line-height: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.25em;
+    min-height: 1lh;
+}
+
+.wprm-recipe-tip .wprm-recipe-tip-text,
+.wprm-recipe-tip .wprm-recipe-instruction-tip-text,
+.wprm-recipe-instructions .wprm-recipe-instruction-tip .wprm-recipe-tip-text,
+.wprm-recipe-instructions .wprm-recipe-instruction-tip .wprm-recipe-instruction-tip-text {
+    flex: 1;
+    min-width: 0;
+    color: var(--wprm-tip-text-color, #000000);
+}
+
+.wprm-recipe-tip-style-left-border,
+.wprm-recipe-tip-style-left-border-straight,
+.wprm-recipe-instruction-tip-style-left-border,
+.wprm-recipe-instruction-tip-style-left-border-straight {
+    border-left: 5px solid var(--wprm-tip-accent, #2b6cb0);
+    background: color-mix(in srgb, var(--wprm-tip-accent, #2b6cb0) 9%, transparent);
+    border-radius: 0;
+}
+
+.wprm-recipe-tip-style-left-border-rounded,
+.wprm-recipe-instruction-tip-style-left-border-rounded {
+    border-left: 5px solid var(--wprm-tip-accent, #2b6cb0);
+    background: color-mix(in srgb, var(--wprm-tip-accent, #2b6cb0) 9%, transparent);
+    border-radius: 4px;
+}
+
+.wprm-recipe-tip-style-filled,
+.wprm-recipe-instruction-tip-style-filled {
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--wprm-tip-accent, #2b6cb0) 16%, transparent);
+}
+
+.wprm-recipe-tip-style-outline,
+.wprm-recipe-instruction-tip-style-outline {
+    border: 1px solid var(--wprm-tip-accent, #2b6cb0);
+    border-radius: 4px;
+}
+
+.wprm-recipe-tip-style-banner,
+.wprm-recipe-instruction-tip-style-banner {
+    border-top: 2px solid var(--wprm-tip-accent, #2b6cb0);
+    border-bottom: 2px solid var(--wprm-tip-accent, #2b6cb0);
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
 .rtl {
     .wprm-recipe-instruction-ingredients-inline {
         .wprm-recipe-instruction-ingredient {
@@ -34,5 +110,15 @@
     
             &:first-child{ padding-left: 5px; }
         }
+    }
+
+    .wprm-recipe-tip-style-left-border,
+    .wprm-recipe-tip-style-left-border-straight,
+    .wprm-recipe-tip-style-left-border-rounded,
+    .wprm-recipe-instruction-tip-style-left-border,
+    .wprm-recipe-instruction-tip-style-left-border-straight,
+    .wprm-recipe-instruction-tip-style-left-border-rounded {
+        border-left: 0;
+        border-right: 5px solid var(--wprm-tip-accent, #2b6cb0);
     }
 }

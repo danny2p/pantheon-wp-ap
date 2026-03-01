@@ -200,6 +200,28 @@ $integrations = array(
 			),
 		),
 		array(
+			'name' => __( 'MyShopping.Help', 'wp-recipe-maker' ),
+			'description' => 'Let your visitors add your (and other) recipes to their Personal Mealplanning and Shopping list from MyShopping.help. With MSH, users can easily add recipes to their calendar or shopping list directly from the recipe page. Users will return to your recipe page each time they use MSH and click on your recipe.',
+			'documentation' => 'https://www.myshopping.help/content-creators',
+			'settings' => array(
+				array(
+					'name' => 'Sign up for free as a business with MSH',
+					'description' => __( 'Signing up your website in MSH helps to offer your users a smoother user experience.', 'wp-recipe-maker' ),
+					'type' => 'button',
+					'button' => __( 'Sign up for free', 'wp-recipe-maker' ),
+					'link' => 'https://business.myshopping.help/',
+					'documentation' => 'https://www.myshopping.help/content-creators',
+				),
+				array(
+					'id' => 'integration_myshoppinghelp_add',
+					'name' => __( 'Automatically add Myshopping.help Button', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the MSH button after the ingredients section. Alternatively, add the button wherever you want in the Template Editor.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Your own Recipe App with NAKKO Recipe to App', 'wp-recipe-maker' ),
 			'description' => 'Provide your users with a dedicated app to increase traffic and foster loyalty. Our native apps, available for both iOS and Android, seamlessly integrate with your WP Recipe Maker backend, offering an outstanding mobile experience for your visitors. Additionally, an app store presence enhances your brand visibility and you can take advantage of the profitable monetization opportunities available within the app. Ensure your website is optimized and compatible with our services for converting your recipe site into a mobile app by performing a free preliminary compatibility scan.',
 			'documentation' => 'https://recipetoapp.com',

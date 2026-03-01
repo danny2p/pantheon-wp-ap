@@ -59,6 +59,11 @@ window.WPRecipeMaker.modal = {
         });
     },
     close( uid ) {
+        // Ignore duplicate close requests for modals that are no longer open.
+        if ( `${ this.currentOpenUid }` !== `${ uid }` ) {
+            return;
+        }
+
         MicroModal.close('wprm-popup-modal-' + uid);
         // Clear the currently open modal tracking if this was the open one
         if ( this.currentOpenUid === uid ) {

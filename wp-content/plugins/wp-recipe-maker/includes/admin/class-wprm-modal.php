@@ -207,6 +207,7 @@ class WPRM_Modal {
 			'images' => array(
 				'video' => includes_url( 'images/media/video.png' ),
 			),
+			'icons' => WPRM_Icon::get_all(),
 		) );
 
 		wp_localize_script( 'wprm-shared', 'wprm_admin_modal', $localize_data );
@@ -214,6 +215,8 @@ class WPRM_Modal {
 
 	/**
 	 * Get all category options.
+	 * Returns taxonomy metadata with top 50 most frequently used terms for quick access.
+	 * Additional terms are loaded on-demand via API to prevent performance issues.
 	 *
 	 * @since    5.0.0
 	 */
@@ -224,14 +227,19 @@ class WPRM_Modal {
 		foreach ( $wprm_taxonomies as $wprm_taxonomy => $options ) {
 			$wprm_key = substr( $wprm_taxonomy, 5 );
 
+			// Load top 50 most frequently used terms for quick access.
+			// Additional terms are loaded on-demand via API to prevent performance issues.
 			$terms = get_terms( array(
 				'taxonomy' => $wprm_taxonomy,
 				'hide_empty' => false,
+				'number' => 50, // Limit to 50 most popular terms.
+				'orderby' => 'count',
+				'order' => 'DESC',
 				'count' => true,
 			) );
 
 			if ( is_wp_error( $terms ) ) {
-				continue;
+				$terms = array();
 			}
 
 			$categories[ $wprm_key ] = array(

@@ -115,13 +115,19 @@ class WPRM_Api_Templates {
 		$preview = array();
 		$recipe = WPRM_Recipe_Manager::get_recipe( $recipe_id );
 
-		if ( $recipe ) {
-			WPRM_Template_Shortcodes::set_current_recipe_id( $recipe->id() );
-
-			foreach ( $shortcodes as $uid => $shortcode ) {
-				$preview[ $uid ] = do_shortcode( $shortcode );
-			}
+		if ( ! $recipe ) {
+			return rest_ensure_response( array(
+				'preview' => (object) $preview,
+			) );
 		}
+
+		WPRM_Template_Shortcodes::set_current_recipe_id( $recipe->id() );
+
+		foreach ( $shortcodes as $uid => $shortcode ) {
+			$preview[ $uid ] = do_shortcode( $shortcode );
+		}
+
+		WPRM_Template_Shortcodes::set_current_recipe_id( false );
 
 		return rest_ensure_response( array(
 			'preview' => (object) $preview,

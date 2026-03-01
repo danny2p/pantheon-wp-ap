@@ -140,12 +140,113 @@
     }
 
     .wprm-template-properties {
-        padding: 0 5px;
-        overflow-x: hidden; // Prevent horizontal overflow
+        padding: 2px 5px;
+        overflow: visible;
 
         p {
             margin: 5px;
             font-weight: bold;
+        }
+    }
+
+    .wprm-feature-explorer-sidebar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 0 2px;
+        margin-bottom: 8px;
+    }
+
+    .wprm-feature-explorer-sidebar-category {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .wprm-feature-explorer-sidebar-category-title {
+        margin: 0 4px;
+        color: #646970;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .wprm-feature-explorer-sidebar-category-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .wprm-feature-explorer-sidebar-item-container {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .wprm-feature-explorer-sidebar-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        text-align: left;
+        border: 1px solid #dcdcde;
+        border-radius: 6px;
+        padding: 8px 10px;
+        background: #fff;
+        cursor: pointer;
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            border-color: #2271b1;
+        }
+    }
+
+    .wprm-feature-explorer-sidebar-item-name {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .wprm-feature-explorer-sidebar-item-badge {
+        flex-shrink: 0;
+        border-radius: 999px;
+        padding: 2px 7px;
+        background: #2271b1;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        line-height: 1.2;
+    }
+
+    .wprm-feature-explorer-sidebar-item-hovered,
+    .wprm-feature-explorer-sidebar-item-selected {
+        border-color: #2271b1;
+        background: #f0f6fc;
+    }
+
+    .wprm-feature-explorer-sidebar-item-selected {
+        box-shadow: inset 0 0 0 1px #2271b1;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .wprm-feature-explorer-sidebar-item-panel {
+        margin: 0;
+        padding: 10px 12px;
+        border: 1px solid #dcdcde;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        background: #f6f7f7;
+
+        p {
+            margin: 0 0 6px;
+            font-weight: normal;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 

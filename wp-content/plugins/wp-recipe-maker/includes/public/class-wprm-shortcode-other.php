@@ -245,14 +245,34 @@ class WPRM_Shortcode_Other {
 			$ingredients_flat = $recipe->ingredients_flat();
 			$index = array_search( $parent_uid, array_column( $ingredients_flat, 'uid' ) );
 
-			if ( false !== $index && isset( $ingredients_flat[ $index ] ) ) {
-				$found_ingredient = $ingredients_flat[ $index ];
+				if ( false !== $index && isset( $ingredients_flat[ $index ] ) ) {
+					$found_ingredient = $ingredients_flat[ $index ];
 
-				if ( 'ingredient' === $found_ingredient['type'] ) {
-					// If this is a split, find the split and calculate amount
-					if ( $is_split ) {
-						$found_split = null;
-						if ( isset( $found_ingredient['splits'] ) && is_array( $found_ingredient['splits'] ) ) {
+					if ( 'ingredient' === $found_ingredient['type'] ) {
+						$get_unit_for_amount = function( $default_unit, $unit_id, $amount_parsed ) {
+							if ( ! $unit_id || $amount_parsed <= 0 ) {
+								return $default_unit;
+							}
+
+							$plural = get_term_meta( $unit_id, 'wprm_ingredient_unit_plural', true );
+							if ( ! $plural ) {
+								return $default_unit;
+							}
+
+							$term = get_term( $unit_id, 'wprm_ingredient_unit' );
+							$singular = ( $term && ! is_wp_error( $term ) ) ? $term->name : $default_unit;
+
+							return $amount_parsed <= 1 ? $singular : $plural;
+						};
+						$decimals = intval( WPRM_Settings::get( 'adjustable_servings_round_to_decimals' ) );
+						if ( $decimals < 0 ) {
+							$decimals = 0;
+						}
+
+						// If this is a split, find the split and calculate amount
+						if ( $is_split ) {
+							$found_split = null;
+							if ( isset( $found_ingredient['splits'] ) && is_array( $found_ingredient['splits'] ) ) {
 							foreach ( $found_ingredient['splits'] as $split ) {
 								if ( isset( $split['id'] ) && intval( $split['id'] ) === $split_id && isset( $split['percentage'] ) ) {
 									$found_split = $split;
@@ -271,27 +291,48 @@ class WPRM_Shortcode_Other {
 						$parent_amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
 						$parent_amount_parsed = WPRM_Recipe_Parser::parse_quantity( $parent_amount );
 						
-						$split_amount = '';
-						if ( $parent_amount_parsed > 0 ) {
-							$split_amount_parsed = ( $parent_amount_parsed * $split_percentage ) / 100;
-							$decimals = intval( WPRM_Settings::get( 'adjustable_servings_round_to_decimals' ) );
-							if ( $decimals < 0 ) {
-								$decimals = 0;
+							$split_amount = '';
+							if ( $parent_amount_parsed > 0 ) {
+								$split_amount_parsed = ( $parent_amount_parsed * $split_percentage ) / 100;
+								
+								// Format the calculated amount.
+								$split_amount = WPRM_Recipe_Parser::format_quantity( $split_amount_parsed, $decimals, WPRM_Settings::get( 'fractions_enabled' ), true );
 							}
-							
-							// Format the calculated amount.
-							$split_amount = WPRM_Recipe_Parser::format_quantity( $split_amount_parsed, $decimals, WPRM_Settings::get( 'fractions_enabled' ), true );
-						}
 						
 						// Use parent's unit
 						$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
-					} else {
-						// Regular ingredient
-						$split_amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
-						$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
-					}
+						} else {
+							// Regular ingredient
+							$split_amount = isset( $found_ingredient['amount'] ) ? $found_ingredient['amount'] : '';
+							$unit = isset( $found_ingredient['unit'] ) ? $found_ingredient['unit'] : '';
+						}
+
+						$ingredient_name = isset( $found_ingredient['name'] ) ? $found_ingredient['name'] : '';
+						$split_amount_parsed_for_plural = WPRM_Recipe_Parser::parse_quantity( $split_amount );
+
+						if ( $is_split && $split_amount_parsed_for_plural > 0 ) {
+							// Split-specific unit singular/plural.
+							if ( isset( $found_ingredient['unit_id'] ) && $found_ingredient['unit_id'] ) {
+								$unit = $get_unit_for_amount( $unit, intval( $found_ingredient['unit_id'] ), $split_amount_parsed_for_plural );
+							}
+
+							// Split-specific ingredient name singular/plural.
+							if ( isset( $found_ingredient['id'] ) && $found_ingredient['id'] ) {
+								$ingredient_term = get_term( intval( $found_ingredient['id'] ), 'wprm_ingredient' );
+								$singular_name = ( $ingredient_term && ! is_wp_error( $ingredient_term ) ) ? $ingredient_term->name : $ingredient_name;
+								$plural_name = get_term_meta( intval( $found_ingredient['id'] ), 'wprm_ingredient_plural', true );
+
+								if ( $split_amount_parsed_for_plural <= 1 ) {
+									$ingredient_name = $singular_name;
+								} elseif ( $plural_name ) {
+									$ingredient_name = $plural_name;
+								} else {
+									$ingredient_name = $singular_name;
+								}
+							}
+						}
 					
-					$parts = array();
+						$parts = array();
 
 					if ( $split_amount ) { $parts[] = $split_amount; };
 					if ( $unit ) { $parts[] = $unit; };
@@ -301,34 +342,41 @@ class WPRM_Shortcode_Other {
 					if ( $show_both_units ) {
 						$ingredient_for_output = $found_ingredient;
 
-						if ( $is_split && null !== $split_percentage ) {
-							$ingredient_for_output['amount'] = $split_amount;
-							$ingredient_for_output['unit'] = $unit;
+							if ( $is_split && null !== $split_percentage ) {
+								$ingredient_for_output['amount'] = $split_amount;
+								$ingredient_for_output['unit'] = $unit;
 
-							if ( isset( $ingredient_for_output['converted'] ) && is_array( $ingredient_for_output['converted'] ) ) {
-								foreach ( $ingredient_for_output['converted'] as $system => $converted ) {
-									if ( isset( $converted['amount'] ) && '' !== $converted['amount'] ) {
-										$converted_amount = WPRM_Recipe_Parser::parse_quantity( $converted['amount'] );
+								if ( isset( $ingredient_for_output['converted'] ) && is_array( $ingredient_for_output['converted'] ) ) {
+									foreach ( $ingredient_for_output['converted'] as $system => $converted ) {
+										if ( isset( $converted['amount'] ) && '' !== $converted['amount'] ) {
+											$converted_amount = WPRM_Recipe_Parser::parse_quantity( $converted['amount'] );
 
-										if ( $converted_amount > 0 ) {
-											$converted_split = ( $converted_amount * $split_percentage ) / 100;
-											// Check system-specific fraction setting, fall back to general setting.
-											$allow_fractions = WPRM_Settings::get( 'unit_conversion_system_' . $system . '_fractions' );
-											$ingredient_for_output['converted'][ $system ]['amount'] = WPRM_Recipe_Parser::format_quantity( $converted_split, $decimals, $allow_fractions, true );
-										} else {
-											$ingredient_for_output['converted'][ $system ]['amount'] = '';
+											if ( $converted_amount > 0 ) {
+												$converted_split = ( $converted_amount * $split_percentage ) / 100;
+												// Check system-specific fraction setting, fall back to general setting.
+												$allow_fractions = WPRM_Settings::get( 'unit_conversion_system_' . $system . '_fractions' );
+												$ingredient_for_output['converted'][ $system ]['amount'] = WPRM_Recipe_Parser::format_quantity( $converted_split, $decimals, $allow_fractions, true );
+												if ( isset( $converted['unit_id'] ) && $converted['unit_id'] ) {
+													$ingredient_for_output['converted'][ $system ]['unit'] = $get_unit_for_amount(
+														isset( $converted['unit'] ) ? $converted['unit'] : '',
+														intval( $converted['unit_id'] ),
+														$converted_split
+													);
+												}
+											} else {
+												$ingredient_for_output['converted'][ $system ]['amount'] = '';
+											}
 										}
 									}
-								}
 							}
 						}
 
 						$amount_unit = apply_filters( 'wprm_recipe_ingredients_shortcode_amount_unit', implode( ' ', $parts ), $atts, $ingredient_for_output );
 					}
 
-					// Ingredient name and maybe notes.
-					$name_with_notes = '';
-					if ( $found_ingredient['name'] ) { $name_with_notes = $found_ingredient['name']; };
+						// Ingredient name and maybe notes.
+						$name_with_notes = '';
+						if ( $ingredient_name ) { $name_with_notes = $ingredient_name; };
 
 					if ( '' !== $atts['notes_separator'] ) {
 						if ( $found_ingredient['notes'] ) {
@@ -372,27 +420,37 @@ class WPRM_Shortcode_Other {
 
 						// Needed to show both units?
 						if ( $show_both_units ) {
-							$text_to_show = $amount_unit . ' ' . $found_ingredient['name'];
+							$text_to_show = $amount_unit . ' ' . $ingredient_name;
 						}
 
 						// Keep notes?
 						$data_keep_notes = '';
 
-						if ( '' !== $atts['notes_separator'] ) {
-							$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['notes_separator'] ) . '"';
-						}
-						
-						// Add split data attributes for adjustable servings
-						$split_data_attr = '';
-						if ( $is_split && $split_percentage !== null ) {
-							$split_data_attr = ' data-split-percentage="' . esc_attr( $split_percentage ) . '" data-split-id="' . esc_attr( $split_id ) . '"';
-						}
+							if ( '' !== $atts['notes_separator'] ) {
+								$data_keep_notes = ' data-notes-separator="' . esc_attr( $atts['notes_separator'] ) . '"';
+							}
 
-						$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $data_keep_notes . $split_data_attr . $style . '>' . $text_to_show . '</span>';
+							$both_units_data_attr = ' data-both-units="' . ( $show_both_units ? '1' : '0' ) . '"';
+							if ( $show_both_units ) {
+								$both_units_style = isset( $atts['unit_conversion_both_style'] ) ? sanitize_key( $atts['unit_conversion_both_style'] ) : '';
+								if ( ! in_array( $both_units_style, array( 'parentheses', 'slash' ), true ) ) {
+									$both_units_style = '';
+								}
+								$both_units_show_identical = ! empty( $atts['unit_conversion_show_identical'] );
+								$both_units_data_attr .= ' data-both-units-style="' . esc_attr( $both_units_style ) . '" data-both-units-show-identical="' . ( $both_units_show_identical ? '1' : '0' ) . '"';
+							}
+							
+							// Add split data attributes for adjustable servings
+							$split_data_attr = '';
+							if ( $is_split && $split_percentage !== null ) {
+								$split_data_attr = ' data-split-percentage="' . esc_attr( $split_percentage ) . '" data-split-id="' . esc_attr( $split_id ) . '"';
+							}
+
+							$output = '<span class="' . esc_attr( implode( ' ', $classes ) ) .'"' . $data_keep_notes . $both_units_data_attr . $split_data_attr . $style . '>' . $text_to_show . '</span>';
+						}
 					}
 				}
 			}
-		}
 
 		return $output;
 	}
@@ -566,23 +624,33 @@ nn	 * Set the count and total for the recipe counter shortcode.
 				$classes[] = 'wprm-condition-taxonomy';
 				$classes[] = '-taxonomy-' . $taxonomy;
 
-				// Get terms to match on.
-				if ( $atts['term_ids'] ) {
-					$terms_to_match = wp_list_pluck( $terms, 'term_id' );
-
-					$values = explode( ';', str_replace( ',', ';', trim( $atts['term_ids'] ) ) );
-					$values = array_map( 'intval', $values );
+				// Special cases on term_ids.
+				$term_ids = strtolower( trim( $atts['term_ids'] ) );
+				if ( 'any' === $term_ids ) {
+					$classes[] = 'wprm-condition-taxonomy-has-terms';
+					$matches_conditions[] = 0 < count( $terms );
+				} elseif ( 'none' === $term_ids ) {
+					$classes[] = 'wprm-condition-taxonomy-no-terms';
+					$matches_conditions[] = 0 === count( $terms );
 				} else {
-					$terms_to_match = wp_list_pluck( $terms, 'slug' );
+					// Get terms to match on.
+					if ( $atts['term_ids'] ) {
+						$terms_to_match = wp_list_pluck( $terms, 'term_id' );
 
-					$values = explode( ';', str_replace( ',', ';', trim( $atts['term_slugs'] ) ) );
+						$values = explode( ';', str_replace( ',', ';', trim( $atts['term_ids'] ) ) );
+						$values = array_map( 'intval', $values );
+					} else {
+						$terms_to_match = wp_list_pluck( $terms, 'slug' );
+
+						$values = explode( ';', str_replace( ',', ';', trim( $atts['term_slugs'] ) ) );
+					}
+
+					// Check for match.
+					$matches = array_intersect( $values, $terms_to_match );
+
+					// Matches if there is at least one.
+					$matches_conditions[] = 0 < count( $matches );
 				}
-
-				// Check for match.
-				$matches = array_intersect( $values, $terms_to_match );
-
-				// Matches if there is at least one.
-				$matches_conditions[] = 0 < count( $matches );
 			}
 		}
 

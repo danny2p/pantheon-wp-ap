@@ -1,21 +1,22 @@
 import React from 'react';
+import { __wprm } from 'Shared/Translations';
 import Faq from '../Faq';
 
 const StepNext = (props) => {
     return (
         <div className="wprm-admin-onboarding-step-next">
             <p>
-                You made it to the end of the onboarding! There is a lot left to explore, but we recommend just starting by creating a recipe now. And don't forget to <strong>sign up for the email course</strong> below to get the most out of this plugin. You won't regret it!
+                { __wprm( 'You made it to the end of onboarding. There is still a lot to explore, but we recommend starting by creating a recipe now. And do not forget to' ) } <strong>{ __wprm( 'sign up for the email course' ) }</strong> { __wprm( 'below to get the most out of this plugin.' ) }
             </p>
             <p>
-                No need to worry about leaving this page either. The information below will be available on the <em>WP Recipe Maker > FAQ & Support</em> page at any time.
+                { __wprm( 'No need to worry about leaving this page. The information below is always available on' ) } <em>{ __wprm( 'WP Recipe Maker > FAQ & Support' ) }</em>.
             </p>
-            <Faq />
+            <Faq context="onboarding" />
             <div className="footer-buttons">
                     <a
                         href={ wprm_admin.manage_url + '&skip_onboarding=1' }
                         className="button button-primary"
-                    >Continue to the Manage page</a>
+                    >{ __wprm( 'Continue to the Manage page' ) }</a>
                 </div>
         </div>
     );

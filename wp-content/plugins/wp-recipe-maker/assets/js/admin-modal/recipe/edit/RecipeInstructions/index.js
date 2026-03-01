@@ -7,7 +7,7 @@ import '../../../../../css/admin/modal/recipe/fields/instructions.scss';
 import { __wprm } from 'Shared/Translations';
 import Icon from 'Shared/Icon';
 import Helpers from 'Shared/Helpers';
-import { parseQuantity } from 'Shared/quantities';
+import { parseQuantity, formatQuantity } from 'Shared/quantities';
 
 import EditMode from '../../../general/EditMode';
 import FieldContainer from '../../../fields/FieldContainer';
@@ -68,27 +68,43 @@ export default class RecipeInstructions extends Component {
 
     onDragEnd(result) {
         if ( result.destination ) {
-            let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
             const sourceIndex = result.source.index;
             const destinationIndex = result.destination.index;
+            this.props.onRecipeChange((recipe) => {
+                const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                let newFields = JSON.parse( JSON.stringify( instructions ) );
 
-            const field = newFields.splice(sourceIndex, 1)[0];
-            newFields.splice(destinationIndex, 0, field);
+                const field = newFields.splice(sourceIndex, 1)[0];
+                newFields.splice(destinationIndex, 0, field);
 
-            this.props.onRecipeChange({
-                instructions_flat: newFields,
+                return {
+                    instructions_flat: newFields,
+                };
+            }, {
+                historyMode: 'immediate',
+                historyBoundary: true,
+                historyKey: 'instructions:reorder',
             });
         }
     }
 
     addField(type, afterIndex = false) {
-        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
         let newField;
 
         if ( 'group' === type ) {
             newField = {
                 type: 'group',
                 name: '',
+            };
+        } else if ( 'tip' === type ) {
+            newField = {
+                type: 'tip',
+                name: '',
+                text: '',
+                tip_icon: '',
+                tip_style: '',
+                tip_accent: '',
+                tip_text_color: '',
             };
         } else {
             newField = {
@@ -101,21 +117,30 @@ export default class RecipeInstructions extends Component {
             }
         }
 
-        // Give unique UID.
-        let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
-        maxUid = maxUid < 0 ? -1 : maxUid;
-        newField.uid = maxUid + 1;
+        this.props.onRecipeChange((recipe) => {
+            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+            let newFields = JSON.parse( JSON.stringify( instructions ) );
 
-        if ( false === afterIndex ) {
-            newFields.push(newField);
-            this.lastAddedIndex = newFields.length - 1;
-        } else {
-            newFields.splice(afterIndex + 1, 0, newField);
-            this.lastAddedIndex = afterIndex + 1;
-        }
+            // Give unique UID.
+            let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
+            maxUid = maxUid < 0 ? -1 : maxUid;
+            newField.uid = maxUid + 1;
 
-        this.props.onRecipeChange({
-            instructions_flat: newFields,
+            if ( false === afterIndex ) {
+                newFields.push(newField);
+                this.lastAddedIndex = newFields.length - 1;
+            } else {
+                newFields.splice(afterIndex + 1, 0, newField);
+                this.lastAddedIndex = afterIndex + 1;
+            }
+
+            return {
+                instructions_flat: newFields,
+            };
+        }, {
+            historyMode: 'immediate',
+            historyBoundary: true,
+            historyKey: `instructions:add:${ type }`,
         });
     }
   
@@ -201,7 +226,9 @@ export default class RecipeInstructions extends Component {
                             let splitAmount = '';
                             if ( parentAmount > 0 && ! isNaN( percentage ) ) {
                                 const calculated = ( parentAmount * percentage ) / 100;
-                                splitAmount = calculated === Math.floor( calculated ) ? String( Math.floor( calculated ) ) : calculated.toFixed( 2 ).replace( /\.?0+$/, '' );
+                                const decimals = typeof wprm_admin !== 'undefined' && wprm_admin.settings ? parseInt( wprm_admin.settings.adjustable_servings_round_to_decimals ) || 2 : 2;
+                                const allowFractions = typeof wprm_admin !== 'undefined' && wprm_admin.settings ? ( wprm_admin.settings.fractions_enabled || false ) : false;
+                                splitAmount = formatQuantity( calculated, decimals, allowFractions );
                             }
                             const splitUnit = ingredient.unit || '';
                             const splitName = ingredient.name || '';
@@ -261,50 +288,95 @@ export default class RecipeInstructions extends Component {
                                                         }
                                                     }}
                                                     editMode={ this.state.editMode }
-                                                    onChangeName={ ( name ) => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                    openSecondaryModal={ this.props.openSecondaryModal }
+                                                    onChangeName={ ( name, changeOptions = {} ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                                        newFields[instructionIndex].name = name;
-                                                        
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].name = name;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'debounced',
+                                                            historyBoundary: !! changeOptions.historyBoundary,
+                                                            historyKey: `instructions:${ field.uid }:name`,
                                                         });
                                                     }}
-                                                    onChangeText={ ( text ) => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                    onChangeText={ ( text, changeOptions = {} ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                                        newFields[instructionIndex].text = text;
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
 
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].text = text;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'debounced',
+                                                            historyBoundary: !! changeOptions.historyBoundary,
+                                                            historyKey: `instructions:${ field.uid }:text`,
                                                         });
                                                     }}
                                                     onChangeImage={ ( image, url ) => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
 
-                                                        newFields[instructionIndex].image = image;
-                                                        newFields[instructionIndex].image_url = url;
-                                                        
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+
+                                                            newFields[instructionIndex].image = image;
+                                                            newFields[instructionIndex].image_url = url;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'immediate',
+                                                            historyBoundary: true,
+                                                            historyKey: `instructions:${ field.uid }:image`,
                                                         });
                                                     }}
                                                     onDelete={() => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                                        newFields.splice(instructionIndex, 1);
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
 
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields.splice(instructionIndex, 1);
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'immediate',
+                                                            historyBoundary: true,
+                                                            historyKey: `instructions:${ field.uid }:delete`,
                                                         });
                                                     }}
                                                     onAdd={() => {
@@ -314,29 +386,120 @@ export default class RecipeInstructions extends Component {
                                                         this.addField('group', index);
                                                     }}
                                                     allowVideo={ this.props.allowVideo }
-                                                    onChangeVideo={ ( video ) => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                    onChangeVideo={ ( video, changeOptions = {} ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                                        newFields[instructionIndex].video = video;
-                                                        
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].video = video;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: changeOptions.historyMode ? changeOptions.historyMode : 'debounced',
+                                                            historyBoundary: !! changeOptions.historyBoundary,
+                                                            historyKey: `instructions:${ field.uid }:video`,
                                                         });
                                                     }}
                                                     instructions={ this.props.instructions }
                                                     allIngredients={ allIngredients }
                                                     usedIngredients={ usedIngredients }
                                                     onChangeIngredients={ ( ingredients ) => {
-                                                        const findIndex = this.props.instructions.findIndex( ( i ) => field.uid === i.uid );
-                                                        const instructionIndex = 0 <= findIndex ? findIndex : index;
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
 
-                                                        let newFields = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                                        newFields[instructionIndex].ingredients = ingredients;
-                                                        
-                                                        this.props.onRecipeChange({
-                                                            instructions_flat: newFields,
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].ingredients = ingredients;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'immediate',
+                                                            historyBoundary: true,
+                                                            historyKey: `instructions:${ field.uid }:ingredients`,
+                                                        });
+                                                    }}
+                                                    onChangeTipIcon={ ( tipIcon ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
+
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].tip_icon = tipIcon;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'immediate',
+                                                            historyBoundary: true,
+                                                            historyKey: `instructions:${ field.uid }:tip_icon`,
+                                                        });
+                                                    }}
+                                                    onChangeTipAccent={ ( tipAccent, changeOptions = {} ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
+
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].tip_accent = tipAccent;
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'debounced',
+                                                            historyBoundary: !! changeOptions.historyBoundary,
+                                                            historyKey: `instructions:${ field.uid }:tip_accent`,
+                                                        });
+                                                    }}
+                                                    onChangeTipStyle={ ( tipIcon, tipAccent, tipStyle, tipTextColor ) => {
+                                                        this.props.onRecipeChange((recipe) => {
+                                                            const instructions = recipe && recipe.instructions_flat ? recipe.instructions_flat : [];
+                                                            const findIndex = instructions.findIndex( ( i ) => field.uid === i.uid );
+                                                            const instructionIndex = 0 <= findIndex ? findIndex : index;
+
+                                                            if ( ! instructions[ instructionIndex ] ) {
+                                                                return {};
+                                                            }
+
+                                                            let newFields = JSON.parse( JSON.stringify( instructions ) );
+                                                            newFields[instructionIndex].tip_icon = tipIcon;
+                                                            newFields[instructionIndex].tip_accent = tipAccent;
+                                                            newFields[instructionIndex].tip_style = tipStyle;
+                                                            newFields[instructionIndex].tip_text_color = tipTextColor || '';
+
+                                                            return {
+                                                                instructions_flat: newFields,
+                                                            };
+                                                        }, {
+                                                            historyMode: 'immediate',
+                                                            historyBoundary: true,
+                                                            historyKey: `instructions:${ field.uid }:tip_style`,
                                                         });
                                                     }}
                                                     inlineIngredientsPortalRendered={ this.state.inlineIngredientsPortalRendered }
@@ -413,17 +576,30 @@ export default class RecipeInstructions extends Component {
                             className="button"
                             onClick={(e) => {
                                 e.preventDefault();
+                                this.addField( 'tip' );
+                            } }
+                        >{ __wprm( 'Add Tip' ) }</button>
+                        <button
+                            className="button"
+                            onClick={(e) => {
+                                e.preventDefault();
                                 this.props.openSecondaryModal('bulk-add-instructions', {
                                     field: 'instructions',
                                     onBulkAdd: (instructions_flat) => {
-                                        const currentInstructions = JSON.parse( JSON.stringify( this.props.instructions ) );
-                                        const newInstructions = this.props.setUids( currentInstructions, instructions_flat );
+                                        this.props.onRecipeChange((recipe) => {
+                                            const currentInstructions = recipe && recipe.instructions_flat ? JSON.parse( JSON.stringify( recipe.instructions_flat ) ) : [];
+                                            const newInstructions = this.props.setUids( currentInstructions, instructions_flat );
 
-                                        this.props.onRecipeChange({
-                                            instructions_flat: [
-                                                ...currentInstructions,
-                                                ...newInstructions,
-                                            ],
+                                            return {
+                                                instructions_flat: [
+                                                    ...currentInstructions,
+                                                    ...newInstructions,
+                                                ],
+                                            };
+                                        }, {
+                                            historyMode: 'immediate',
+                                            historyBoundary: true,
+                                            historyKey: 'instructions:bulk_add',
                                         });
                                     }
                                 });

@@ -31,40 +31,55 @@ export default class EquipmentEdit extends Component {
 
     onDragEnd(result) {
         if ( result.destination ) {
-            let newFields = JSON.parse( JSON.stringify( this.props.equipment ) );
             const sourceIndex = result.source.index;
             const destinationIndex = result.destination.index;
+            this.props.onRecipeChange((recipe) => {
+                const equipment = recipe && recipe.equipment ? recipe.equipment : [];
+                let newFields = JSON.parse( JSON.stringify( equipment ) );
 
-            const field = newFields.splice(sourceIndex, 1)[0];
-            newFields.splice(destinationIndex, 0, field);
+                const field = newFields.splice(sourceIndex, 1)[0];
+                newFields.splice(destinationIndex, 0, field);
 
-            this.props.onRecipeChange({
-                equipment: newFields,
+                return {
+                    equipment: newFields,
+                };
+            }, {
+                historyMode: 'immediate',
+                historyBoundary: true,
+                historyKey: 'equipment:reorder',
             });
         }
     }
 
     addField( afterIndex = false ) {
-        let newFields = JSON.parse( JSON.stringify( this.props.equipment ) );
         let newField = {
             name: '',
         };
 
-        // Give unique UID.
-        let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
-        maxUid = maxUid < 0 ? -1 : maxUid;
-        newField.uid = maxUid + 1;
+        this.props.onRecipeChange((recipe) => {
+            const equipment = recipe && recipe.equipment ? recipe.equipment : [];
+            let newFields = JSON.parse( JSON.stringify( equipment ) );
 
-        if ( false === afterIndex ) {
-            newFields.push(newField);
-            this.lastAddedIndex = newFields.length - 1;
-        } else {
-            newFields.splice(afterIndex + 1, 0, newField);
-            this.lastAddedIndex = afterIndex + 1;
-        }
+            // Give unique UID.
+            let maxUid = Math.max.apply( Math, newFields.map( function(field) { return field.uid; } ) );
+            maxUid = maxUid < 0 ? -1 : maxUid;
+            newField.uid = maxUid + 1;
 
-        this.props.onRecipeChange({
-            equipment: newFields,
+            if ( false === afterIndex ) {
+                newFields.push(newField);
+                this.lastAddedIndex = newFields.length - 1;
+            } else {
+                newFields.splice(afterIndex + 1, 0, newField);
+                this.lastAddedIndex = afterIndex + 1;
+            }
+
+            return {
+                equipment: newFields,
+            };
+        }, {
+            historyMode: 'immediate',
+            historyBoundary: true,
+            historyKey: 'equipment:add',
         });
     }
   
@@ -111,24 +126,48 @@ export default class EquipmentEdit extends Component {
                                             onAdd={ () => {
                                                 this.addField(index);
                                             }}
-                                            onChangeEquipment={ ( equipment ) => {
-                                                let newFields = JSON.parse( JSON.stringify( this.props.equipment ) );
+                                            onChangeEquipment={ ( equipment, changeOptions = {} ) => {
+                                                this.props.onRecipeChange((recipe) => {
+                                                    const currentEquipment = recipe && recipe.equipment ? recipe.equipment : [];
 
-                                                newFields[index] = {
-                                                    ...newFields[index],
-                                                    ...equipment,
-                                                }
-                                                
-                                                this.props.onRecipeChange({
-                                                    equipment: newFields,
+                                                    if ( ! currentEquipment[index] ) {
+                                                        return {};
+                                                    }
+
+                                                    let newFields = JSON.parse( JSON.stringify( currentEquipment ) );
+
+                                                    newFields[index] = {
+                                                        ...newFields[index],
+                                                        ...equipment,
+                                                    }
+
+                                                    return {
+                                                        equipment: newFields,
+                                                    };
+                                                }, {
+                                                    historyMode: 'debounced',
+                                                    historyBoundary: !! changeOptions.historyBoundary,
+                                                    historyKey: `equipment:${ field.uid }:fields`,
                                                 });
                                             }}
                                             onDelete={() => {
-                                                let newFields = JSON.parse( JSON.stringify( this.props.equipment ) );
-                                                newFields.splice(index, 1);
+                                                this.props.onRecipeChange((recipe) => {
+                                                    const currentEquipment = recipe && recipe.equipment ? recipe.equipment : [];
 
-                                                this.props.onRecipeChange({
-                                                    equipment: newFields,
+                                                    if ( ! currentEquipment[index] ) {
+                                                        return {};
+                                                    }
+
+                                                    let newFields = JSON.parse( JSON.stringify( currentEquipment ) );
+                                                    newFields.splice(index, 1);
+
+                                                    return {
+                                                        equipment: newFields,
+                                                    };
+                                                }, {
+                                                    historyMode: 'immediate',
+                                                    historyBoundary: true,
+                                                    historyKey: `equipment:${ field.uid }:delete`,
                                                 });
                                             }}
                                         />

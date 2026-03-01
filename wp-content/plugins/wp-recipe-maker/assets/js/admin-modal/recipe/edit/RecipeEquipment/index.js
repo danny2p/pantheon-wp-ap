@@ -103,6 +103,10 @@ export default class RecipeEquipment extends Component {
                         onItemsChange={ ( equipment ) => {                            
                             this.props.onRecipeChange({
                                 equipment,
+                            }, {
+                                historyMode: 'immediate',
+                                historyBoundary: true,
+                                historyKey: 'equipment:products',
                             });
                         }}
                         openSecondaryModal={ this.props.openSecondaryModal }

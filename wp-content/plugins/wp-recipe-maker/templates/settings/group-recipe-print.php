@@ -184,13 +184,18 @@ $recipe_print = array(
 					'type' => 'toggle',
 					'default' => false,
 				),
-				// array(
-				// 	'id' => 'print_download_pdf_button',
-				// 	'name' => __( 'Download PDF Button', 'wp-recipe-maker' ),
-				// 	'description' => __( 'This is an experimental feature and might not look as expected with every recipe template.', 'wp-recipe-maker' ),
-				// 	'type' => 'toggle',
-				// 	'default' => false,
-				// ),
+				array(
+					'id' => 'print_download_pdf_button',
+					'required' => 'premium',
+					'name' => __( 'Download PDF Button', 'wp-recipe-maker' ),
+					'description' => __( 'Allow visitors to download a PDF version of the recipe from the print page.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+					'dependency' => array(
+						'id' => 'pdf_download_enabled',
+						'value' => true,
+					),
+				),
 				array(
 					'id' => 'print_show_recipe_image',
 					'name' => __( 'Default Show Recipe Image', 'wp-recipe-maker' ),

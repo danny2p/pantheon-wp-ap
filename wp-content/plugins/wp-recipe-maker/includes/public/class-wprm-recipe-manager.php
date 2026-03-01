@@ -741,6 +741,8 @@ class WPRM_Recipe_Manager {
 	public static function get_recipe( $post_or_recipe_id ) {
 		if ( 'demo' === $post_or_recipe_id ) {
 			return self::get_demo_recipe();
+		} elseif ( 'feature-explorer' === $post_or_recipe_id ) {
+			return self::get_feature_explorer_demo_recipe();
 		} else {
 			$recipe_id = is_object( $post_or_recipe_id ) && $post_or_recipe_id instanceof WP_Post ? $post_or_recipe_id->ID : intval( $post_or_recipe_id );
 		}
@@ -798,6 +800,217 @@ class WPRM_Recipe_Manager {
 		WPRM_Template_Shortcodes::set_current_recipe_shell( $demo_recipe );
 
 		return $demo_recipe;
+	}
+
+	/**
+	 * Get Feature Explorer demo recipe.
+	 *
+	 * @since	10.5.0
+	 */
+	public static function get_feature_explorer_demo_recipe() {
+		ob_start();
+		include( WPRM_DIR . 'templates/admin/feature-explorer-demo-recipe.json' );
+		$json = ob_get_contents();
+		ob_end_clean();
+
+		$json_recipe = json_decode( $json, true );
+		$json_recipe = apply_filters( 'wprm_feature_explorer_demo_recipe', $json_recipe );
+
+		$sanitized_recipe = WPRM_Recipe_Sanitizer::sanitize( $json_recipe );
+
+		// Fix technical fields.
+		$sanitized_recipe['id'] = 'feature-explorer';
+		$sanitized_recipe['parent_url'] = '#';
+		$sanitized_recipe['post_author'] = $json_recipe['post_author'];
+		$sanitized_recipe['ingredients_flat'] = $json_recipe['ingredients_flat'];
+		$sanitized_recipe['instructions_flat'] = $json_recipe['instructions_flat'];
+
+		// Feature Explorer specific taxonomy icons (inline SVG) for tag image rendering.
+		$sanitized_recipe['feature_explorer_taxonomy_icons'] = self::get_feature_explorer_taxonomy_icons();
+
+		// Set some additional fields.
+		$sanitized_recipe['image_url'] = WPRM_URL . 'assets/images/demo-recipe.jpg';
+		$sanitized_recipe['pin_image_url'] = WPRM_URL . 'assets/images/demo-recipe.jpg';
+		$sanitized_recipe['rating'] = array(
+			'count' => 8,
+			'total' => 30,
+			'average' => 3.75,
+		);
+		$sanitized_recipe['permalink'] = home_url() . '/feature-explorer-demo-recipe/';
+
+		$demo_recipe = new WPRM_Recipe_Shell( $sanitized_recipe );
+		WPRM_Template_Shortcodes::set_current_recipe_shell( $demo_recipe );
+
+		return $demo_recipe;
+	}
+
+	/**
+	 * Get sanitized Feature Explorer taxonomy icon map.
+	 *
+	 * @since	10.5.0
+	 */
+	public static function get_feature_explorer_taxonomy_icons() {
+		static $sanitized_icons = null;
+
+		if ( null !== $sanitized_icons ) {
+			return $sanitized_icons;
+		}
+
+		ob_start();
+		include( WPRM_DIR . 'templates/admin/feature-explorer-demo-recipe.json' );
+		$json = ob_get_contents();
+		ob_end_clean();
+
+		$json_recipe = json_decode( $json, true );
+		$json_recipe = apply_filters( 'wprm_feature_explorer_demo_recipe', $json_recipe );
+
+		$sanitized_icons = self::sanitize_feature_explorer_taxonomy_icons(
+			isset( $json_recipe['feature_explorer_taxonomy_icons'] ) ? $json_recipe['feature_explorer_taxonomy_icons'] : array()
+		);
+
+		return $sanitized_icons;
+	}
+
+	/**
+	 * Sanitize Feature Explorer taxonomy icon map.
+	 *
+	 * @since	10.5.0
+	 * @param	mixed $icon_map Raw icon map from JSON.
+	 */
+	private static function sanitize_feature_explorer_taxonomy_icons( $icon_map ) {
+		$sanitized = array();
+
+		if ( ! is_array( $icon_map ) ) {
+			return $sanitized;
+		}
+
+		foreach ( $icon_map as $taxonomy_key => $terms ) {
+			$taxonomy_key = sanitize_key( $taxonomy_key );
+			if ( ! $taxonomy_key || ! is_array( $terms ) ) {
+				continue;
+			}
+
+			$sanitized[ $taxonomy_key ] = array();
+
+			foreach ( $terms as $term_slug => $svg ) {
+				$term_slug = sanitize_key( $term_slug );
+				$svg = self::sanitize_feature_explorer_inline_svg( $svg );
+
+				if ( $term_slug && $svg ) {
+					$sanitized[ $taxonomy_key ][ $term_slug ] = $svg;
+				}
+			}
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Sanitize inline SVG markup for Feature Explorer demo icons.
+	 *
+	 * @since	10.5.0
+	 * @param	mixed $svg Raw SVG markup.
+	 */
+	private static function sanitize_feature_explorer_inline_svg( $svg ) {
+		if ( ! is_string( $svg ) ) {
+			return '';
+		}
+
+		$allowed_svg_tags = array(
+			'svg' => array(
+				'xmlns' => true,
+				'viewbox' => true,
+				'viewBox' => true,
+				'width' => true,
+				'height' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'stroke-linecap' => true,
+				'stroke-linejoin' => true,
+				'aria-hidden' => true,
+				'role' => true,
+				'focusable' => true,
+				'class' => true,
+			),
+			'g' => array(
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'stroke-linecap' => true,
+				'stroke-linejoin' => true,
+				'transform' => true,
+				'class' => true,
+			),
+			'path' => array(
+				'd' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'stroke-linecap' => true,
+				'stroke-linejoin' => true,
+				'fill-rule' => true,
+				'clip-rule' => true,
+				'transform' => true,
+				'class' => true,
+			),
+			'circle' => array(
+				'cx' => true,
+				'cy' => true,
+				'r' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'class' => true,
+			),
+			'rect' => array(
+				'x' => true,
+				'y' => true,
+				'width' => true,
+				'height' => true,
+				'rx' => true,
+				'ry' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'class' => true,
+			),
+			'line' => array(
+				'x1' => true,
+				'y1' => true,
+				'x2' => true,
+				'y2' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'stroke-linecap' => true,
+				'class' => true,
+			),
+			'polygon' => array(
+				'points' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'class' => true,
+			),
+			'polyline' => array(
+				'points' => true,
+				'fill' => true,
+				'stroke' => true,
+				'stroke-width' => true,
+				'class' => true,
+			),
+			'title' => array(),
+			'desc' => array(),
+		);
+
+		$svg = trim( $svg );
+		$svg = wp_kses( $svg, $allowed_svg_tags );
+
+		if ( false === stripos( $svg, '<svg' ) ) {
+			return '';
+		}
+
+		return $svg;
 	}
 
 	/**
