@@ -665,6 +665,44 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 var eventsConfig = {
+  appTypes: {
+    editor: 'editor',
+    wpAdmin: 'wpadmin'
+  },
+  targetTypes: {
+    dropdownItem: 'dropdown_item',
+    button: 'button',
+    tab: 'tab',
+    toggle: 'toggle',
+    searchInput: 'search_input',
+    searchResult: 'search_result',
+    buttons: 'buttons',
+    searchWidget: 'search_widget'
+  },
+  interactionResults: {
+    actionSelected: 'action_selected',
+    navigate: 'navigate',
+    create: 'create',
+    sessionEnd: 'session_end',
+    tabChanged: 'tab_changed',
+    assetInserted: 'asset_inserted',
+    assetFavorite: 'asset_favorite',
+    aiGenerate: 'ai_generate',
+    resultsUpdated: 'results_updated',
+    noResults: 'no_results',
+    selected: 'selected'
+  },
+  targetNames: {
+    publishDropdown: {
+      saveDraft: 'save_draft',
+      saveAsTemplate: 'save_as_template',
+      viewPage: 'view_page',
+      copyAndShare: 'copy_and_share'
+    },
+    pageList: {
+      addNewPage: 'add_new_page'
+    }
+  },
   triggers: {
     click: 'Click',
     rightClick: 'Right Click',
@@ -674,11 +712,15 @@ var eventsConfig = {
     dropdownClick: 'Click Dropdown',
     editorLoaded: 'Editor Loaded',
     visible: 'Visible',
-    pageLoaded: 'Page Loaded'
+    pageLoaded: 'Page Loaded',
+    typing: 'Typing',
+    tabSelect: 'Tab Select',
+    insert: 'Insert'
   },
   locations: {
     widgetPanel: 'Widget Panel',
     topBar: 'Top Bar',
+    sidebar: 'Sidebar',
     elementorEditor: 'Elementor Editor',
     templatesLibrary: {
       library: 'Templates Library'
@@ -693,7 +735,9 @@ var eventsConfig = {
     variablesManager: 'Variables Manager',
     admin: 'WP admin',
     structurePanel: 'Structure Panel',
-    canvas: 'Canvas'
+    canvas: 'Canvas',
+    leftPanel: 'Left Panel',
+    elementorLibrary: 'Elementor Library'
   },
   secondaryLocations: {
     layout: 'Layout Section',
@@ -768,7 +812,14 @@ var eventsConfig = {
       pluginWebsiteTemplatesTab: 'plugin_website_templates_tab'
     },
     componentsTab: 'Components Tab',
-    canvasElement: 'Canvas Element'
+    canvasElement: 'Canvas Element',
+    publishDropdown: 'Publish Dropdown',
+    pageListDropdown: 'Page List Dropdown',
+    emptyBox: 'Empty Box',
+    searchBar: 'Search Bar',
+    finderResults: 'Finder Results',
+    libraryTabs: 'Library Tabs',
+    assetCard: 'Asset Card'
   },
   elements: {
     accordionSection: 'Accordion section',
@@ -867,6 +918,19 @@ var eventsConfig = {
       classStateClicked: 'class_state_clicked',
       classUsageClicked: 'class_usage_clicked',
       classDuplicate: 'class_duplicate'
+    },
+    editorOne: {
+      topBarPublishDropdown: 'top_bar_publish_dropdown',
+      topBarPageList: 'top_bar_page_list',
+      siteSettingsSession: 'site_settings_session',
+      eLibraryNav: 'e_library_nav',
+      eLibraryInsert: 'e_library_insert',
+      eLibraryFavorite: 'e_library_favorite',
+      eLibraryGenerateAi: 'e_library_generate_ai',
+      finderSearchInput: 'finder_search_input',
+      finderResultSelect: 'finder_result_select',
+      canvasEmptyBoxAction: 'canvas_empty_box_action',
+      widgetPanelSearch: 'widget_panel_search'
     }
   }
 };

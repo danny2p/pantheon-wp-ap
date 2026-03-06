@@ -7,10 +7,6 @@
 
 /*! ../../../composition-builder/composition-builder */
 
-/*! ../../../hooks/use-bind-react-props-to-element */
-
-/*! ../../../hooks/use-floating-on-element */
-
 /*! ../../renderers/multi-props */
 
 /*! ../../resources/widgets-schema-resource */

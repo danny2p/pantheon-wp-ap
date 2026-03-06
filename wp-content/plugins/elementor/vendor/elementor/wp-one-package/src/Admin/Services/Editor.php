@@ -30,6 +30,7 @@ class Editor {
 	const LICENSE_KEY_OPTION_NAME = 'elementor_pro_license_key';
 	const LICENSE_DATA_OPTION_NAME = '_elementor_pro_license_v2_data';
 	const LICENSE_DATA_FALLBACK_OPTION_NAME = self::LICENSE_DATA_OPTION_NAME . '_fallback';
+	const API_REQUESTS_LOCK_OPTION_NAME = '_elementor_pro_api_requests_lock';
 	const COMMON_DATA_USER_OPTION_NAME = 'elementor_connect_common_data';
 
 	/**
@@ -146,16 +147,20 @@ class Editor {
 				}
 			);
 
+			// Delete license key and data if license is being deactivated
+			if ( $deactivate_license ) {
+				delete_option( self::LICENSE_KEY_OPTION_NAME );
+				delete_option( self::LICENSE_DATA_OPTION_NAME );
+				delete_option( self::LICENSE_DATA_FALLBACK_OPTION_NAME );
+				delete_option( self::API_REQUESTS_LOCK_OPTION_NAME );
+			}
+
 			// Update common data user option
 			update_user_option( $owner_id, self::COMMON_DATA_USER_OPTION_NAME, (array) $response['connectData'] );
 
 			// Update license key if it exists
 			if ( isset( $response['licenseKey'] ) ) {
 				update_option( self::LICENSE_KEY_OPTION_NAME, $response['licenseKey'] );
-			} elseif ( $deactivate_license ) {
-				delete_option( self::LICENSE_KEY_OPTION_NAME );
-				delete_option( self::LICENSE_DATA_OPTION_NAME );
-				delete_option( self::LICENSE_DATA_FALLBACK_OPTION_NAME );
 			}
 		} catch ( \Throwable $th ) {
 			$this->logger->error( $th->getMessage() );
@@ -186,6 +191,7 @@ class Editor {
 			delete_option( self::LICENSE_KEY_OPTION_NAME );
 			delete_option( self::LICENSE_DATA_OPTION_NAME );
 			delete_option( self::LICENSE_DATA_FALLBACK_OPTION_NAME );
+			delete_option( self::API_REQUESTS_LOCK_OPTION_NAME );
 		} catch ( \Throwable $th ) {
 			$this->logger->error( $th->getMessage() );
 		}

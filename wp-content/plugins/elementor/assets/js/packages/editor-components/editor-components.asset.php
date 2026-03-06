@@ -21,6 +21,7 @@ return [
 		'elementor-v2-editor-panels',
 		'elementor-v2-editor-props',
 		'elementor-v2-editor-styles-repository',
+		'elementor-v2-editor-templates',
 		'elementor-v2-editor-ui',
 		'elementor-v2-editor-v1-adapters',
 		'elementor-v2-events',
