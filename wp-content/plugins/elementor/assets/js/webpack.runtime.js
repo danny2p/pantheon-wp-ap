@@ -122,8 +122,9 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "lightbox") return "" + chunkId + ".a1f44406e887981f48c7.bundle.js";
-/******/ 			if (chunkId === "text-path") return "" + chunkId + ".eb787fc2b296f56e6e5f.bundle.js";
+/******/ 			if (chunkId === "vendors-node_modules_dompurify_dist_purify_cjs_js") return "6caa76d2f6eec6c4e665.bundle.js";
+/******/ 			if (chunkId === "lightbox") return "" + chunkId + ".d9ea72d232a14f514ee2.bundle.js";
+/******/ 			if (chunkId === "text-path") return "" + chunkId + ".6db73cc0a10a70f128eb.bundle.js";
 /******/ 			if (chunkId === "accordion") return "" + chunkId + ".b9a0ab19c7c872c405d7.bundle.js";
 /******/ 			if (chunkId === "alert") return "" + chunkId + ".fd509aa768e7b35a8e32.bundle.js";
 /******/ 			if (chunkId === "counter") return "" + chunkId + ".7310c276bc7865a3d438.bundle.js";
