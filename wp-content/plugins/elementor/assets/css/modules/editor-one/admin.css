@@ -373,6 +373,10 @@
   bottom: 1px;
   padding: 0;
   vertical-align: middle;
+  height: 10px;
+  font: normal 20px/0.5 dashicons;
+  bottom: 2px;
+  position: relative;
 }
 #wpcontent #screen-meta-links + .wrap {
   margin-block-start: 0;
@@ -426,6 +430,7 @@
   box-shadow: none;
   height: auto;
   line-height: normal;
+  min-height: 34px;
 }
 #wpcontent .button-primary:hover, #wpcontent .button-primary:focus,
 #wpcontent .wrap .page-title-action:not(.button-secondary):hover,
@@ -465,6 +470,7 @@
   box-shadow: none;
   height: auto;
   line-height: normal;
+  min-height: 34px;
 }
 #wpcontent .button:hover, #wpcontent .button:focus,
 #wpcontent .button-secondary:hover,
@@ -735,11 +741,12 @@ select,
   color: var(--e-one-palette-text-primary);
   background-color: var(--e-one-palette-background-default);
   border-radius: 3px;
-  height: 30px;
+  height: 34px;
   font-size: 13px;
   font-family: var(--e-one-typography-fontFamily);
   font-weight: 400;
   line-height: 1.2;
+  min-height: 34px;
   transition: var(--e-a-transition-hover);
 }
 select:hover,

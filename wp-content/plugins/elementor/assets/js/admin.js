@@ -4197,7 +4197,7 @@ __webpack_require__(/*! elementor-app/event-track/wp-dashboard-tracking */ "../a
           placeholderText = $rollbackButton.data('placeholder-text'),
           placeholderUrl = $rollbackButton.data('placeholder-url');
         $rollbackButton.html(placeholderText.replace('{VERSION}', $this.val()));
-        $rollbackButton.attr('href', placeholderUrl.replace('VERSION', $this.val()));
+        $rollbackButton.data('href', placeholderUrl.replace('VERSION', $this.val()));
       }).trigger('change');
       $('.elementor-rollback-button').on('click', function (event) {
         event.preventDefault();
@@ -4211,7 +4211,7 @@ __webpack_require__(/*! elementor-app/event-track/wp-dashboard-tracking */ "../a
           },
           onConfirm: function onConfirm() {
             $this.addClass('loading');
-            location.href = $this.attr('href');
+            location.href = $this.data('href');
           }
         }).show();
       });
