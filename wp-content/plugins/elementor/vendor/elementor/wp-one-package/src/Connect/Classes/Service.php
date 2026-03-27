@@ -69,6 +69,35 @@ class Service {
 	}
 
 	/**
+	 * Get client
+	 * @return array
+	 * @throws ServiceException
+	 */
+	public function get_client(): array {
+		$data = $this->facade->data();
+		$utils = $this->facade->utils();
+		$client_id = $data->get_client_id();
+
+		if ( ! $client_id ) {
+			throw new ServiceException( 'Missing client ID' );
+		}
+
+		[ 'access_token' => $access_token ] = $this->get_token( GrantTypes::CLIENT_CREDENTIALS, null, false );
+
+		if ( ! $access_token ) {
+			throw new ServiceException( 'Missing client token' );
+		}
+
+		return $this->request( $utils->get_clients_url( $client_id ), [
+			'method' => 'GET',
+			'headers' => [
+				'Content-Type' => 'application/json',
+				'Authorization' => "Bearer {$access_token}",
+			],
+		], 200 );
+	}
+
+	/**
 	 * Deactivate license
 	 *
 	 * @return void
@@ -291,5 +320,27 @@ class Service {
 
 		// Trigger the switched domain event for the app prefix
 		do_action( 'elementor_one/' . $this->get_app_config( 'app_prefix' ) . '_switched_domain', $this->facade );
+	}
+
+	/**
+	 * Get license info
+	 * @return array
+	 * @throws ServiceException
+	 */
+	public function get_license_info(): array {
+		$utils = $this->facade->utils();
+
+		[ 'access_token' => $access_token ] = $this->get_token( GrantTypes::CLIENT_CREDENTIALS, null, false );
+
+		if ( ! $access_token ) {
+			throw new ServiceException( 'Missing access token' );
+		}
+
+		return $this->request( $utils->get_license_info_url(), [
+			'method' => 'GET',
+			'headers' => [
+				'Authorization' => "Bearer {$access_token}",
+			],
+		] );
 	}
 }

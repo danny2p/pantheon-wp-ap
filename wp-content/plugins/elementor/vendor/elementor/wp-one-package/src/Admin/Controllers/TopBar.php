@@ -81,6 +81,10 @@ class TopBar extends \WP_REST_Controller {
 							'type' => 'string',
 							'required' => true,
 						],
+						'countryCode' => [
+							'type' => 'string',
+							'required' => false,
+						],
 					],
 				],
 			]
@@ -121,8 +125,9 @@ class TopBar extends \WP_REST_Controller {
 			$subject = $request->get_param( 'subject' );
 			$title = $request->get_param( 'title' );
 			$description = $request->get_param( 'description' );
+			$country_code = $request->get_param( 'countryCode' );
 
-			FeedbackService::instance()->send_product_feedback( $product, $subject, $title, $description );
+			FeedbackService::instance()->send_product_feedback( $product, $subject, $title, $description, $country_code );
 
 			return new \WP_REST_Response( null, \WP_Http::NO_CONTENT );
 		} catch ( \Throwable $th ) {
