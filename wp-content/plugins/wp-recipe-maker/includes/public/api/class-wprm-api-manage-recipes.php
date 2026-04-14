@@ -80,6 +80,17 @@ class WPRM_Api_Manage_Recipes {
 	}
 
 	/**
+	 * Check if Elite AI features are available.
+	 *
+	 * @since    10.5.0
+	 *
+	 * @return   boolean
+	 */
+	private static function has_elite_ai_access() {
+		return class_exists( 'WPRM_Addons' ) && WPRM_Addons::is_active( 'elite' );
+	}
+
+	/**
 	 * Handle manage get recipe call to the REST API.
 	 *
 	 * @since    9.2.0
@@ -1038,6 +1049,10 @@ class WPRM_Api_Manage_Recipes {
 							WPRMPN_Ingredient_Manager::save_ingredient( 0, $amount, $unit, $name, $nutrients );
 						}
 						break;
+					case 'ai-nutrition-review':
+					case 'ai-unit-conversion-review':
+						$recipe_data = false;
+						break;
 					case 'switch-unit-system':
 						$new_ingredients = array();
 						foreach ( $recipe->ingredients() as $ingredient_group ) {
@@ -1130,6 +1145,45 @@ class WPRM_Api_Manage_Recipes {
 					$recipe_data = WPRM_Recipe_Sanitizer::sanitize( $recipe_data );
 					WPRM_Recipe_Saver::update_recipe( $recipe->id(), $recipe_data );
 				}
+			}
+
+			if ( 'ai-nutrition-review' === $action['type'] ) {
+				if ( self::has_elite_ai_access() && class_exists( 'WPRMP_AI_Nutrition_Review' ) ) {
+					$batch = WPRMP_AI_Nutrition_Review::start_batch(
+						array(
+							'scope' => 'selected',
+							'recipe_ids' => $ids,
+							'force_review' => false,
+						)
+					);
+
+					if ( ! is_wp_error( $batch ) ) {
+						return array(
+							'result' => __( 'The AI nutrition review batch was started. Open the review queue here:', 'wp-recipe-maker' ) . '<br/><a href="' . esc_url( $batch['url'] ) . '">' . esc_html( $batch['url'] ) . '</a>',
+						);
+					}
+				}
+
+				return false;
+			}
+
+			if ( 'ai-unit-conversion-review' === $action['type'] ) {
+				if ( self::has_elite_ai_access() && class_exists( 'WPRMP_AI_Unit_Conversion_Review' ) ) {
+					$batch = WPRMP_AI_Unit_Conversion_Review::start_batch(
+						array(
+							'scope' => 'selected',
+							'recipe_ids' => $ids,
+						)
+					);
+
+					if ( ! is_wp_error( $batch ) ) {
+						return array(
+							'result' => __( 'The AI unit conversion review batch was started. Open the review queue here:', 'wp-recipe-maker' ) . '<br/><a href="' . esc_url( $batch['url'] ) . '">' . esc_html( $batch['url'] ) . '</a>',
+						);
+					}
+				}
+
+				return false;
 			}
 
 			return rest_ensure_response( true );

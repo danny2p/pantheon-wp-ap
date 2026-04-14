@@ -23,8 +23,8 @@ export default class App extends Component {
                             steps={ steps }
                             stepsNavigation={ false }
                             prevBtnOnLastStep={ false }
-                            backButtonCls="button"
-                            nextButtonCls="button button-primary"
+                            backButtonCls="button button-secondary button-compact"
+                            nextButtonCls="button button-primary button-compact"
                             // startAtStep={ 4 }
                             onStepChange={ (step) => {
                                 if ( step === steps.length - 1 ) {

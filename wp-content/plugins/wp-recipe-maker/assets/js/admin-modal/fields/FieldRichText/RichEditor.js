@@ -131,9 +131,9 @@ const RichEditor = React.memo((props) => {
                         flushChange({
                             historyBoundary: true,
                         });
-                    } else if ( props.onChange ) {
+                    } else if ( propsRef.current.onChange ) {
                         // Even without pending debounced changes, notify blur boundary for history handling.
-                        props.onChange( props.value, {
+                        propsRef.current.onChange( propsRef.current.value, {
                             historyBoundary: true,
                         } );
                     }
@@ -235,8 +235,9 @@ const RichEditor = React.memo((props) => {
         </Slate>
     );
 }, (prevProps, nextProps) => {
-    // Re-render when text changes, inline ingredients portal becomes available, or ingredient data changes.
+    // Re-render when text or callbacks change, or inline ingredients portal becomes available.
     return prevProps.value === nextProps.value
+        && prevProps.onChange === nextProps.onChange
         && prevProps.inlineIngredientsPortalRendered === nextProps.inlineIngredientsPortalRendered
         && prevProps.allIngredients === nextProps.allIngredients;
 });

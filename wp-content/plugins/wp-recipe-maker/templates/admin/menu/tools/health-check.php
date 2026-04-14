@@ -17,8 +17,9 @@
 	// translators: %d: number of posts left to process.
 	printf( esc_html( _n( 'Processing %d post', 'Processing %d posts', count( $posts ), 'wp-recipe-maker' ) ), count( $posts ) );
 	?>.
-	<div id="wprm-tools-progress-container">
-		<div id="wprm-tools-progress-bar"></div>
-	</div>
+	<?php
+	$progress_bar_type = 'tools';
+	include WPRM_DIR . 'templates/admin/progress-bar.php';
+	?>
 	<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprecipemaker' ) ); ?>" id="wprm-tools-finished"><?php esc_html_e( 'Finished succesfully. Click here to continue.', 'wp-recipe-maker' ); ?></a>
 </div>

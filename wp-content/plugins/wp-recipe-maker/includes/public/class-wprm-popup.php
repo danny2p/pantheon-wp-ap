@@ -52,8 +52,23 @@ class WPRM_Popup {
 	 * @since    9.2.0
 	 */
 	public static function output_html_for_all_modals() {
+		echo self::get_html_for_all_modals( true, true );
+	}
+
+	/**
+	 * Get HTML needed for all registered modals.
+	 *
+	 * @since    10.2.2
+	 * @param    bool $load_assets Whether to load the default modal assets first.
+	 * @param    bool $clear       Whether to clear the registered modals afterwards.
+	 *
+	 * @return   string
+	 */
+	public static function get_html_for_all_modals( $load_assets = false, $clear = false ) {
+		ob_start();
+
 		// Make sure default assets are loaded, if there are any modals to output.
-		if ( self::$modals ) {
+		if ( self::$modals && $load_assets ) {
 			WPRM_Assets::load();
 		}
 
@@ -80,6 +95,14 @@ class WPRM_Popup {
 			$template = apply_filters( 'wprm_template_popup_modal', WPRM_DIR . 'templates/public/popup-modal.php' );
 			include( $template );
 		}
+
+		$html = ob_get_clean();
+
+		if ( $clear ) {
+			self::$modals = array();
+		}
+
+		return $html;
 	}
 
 }

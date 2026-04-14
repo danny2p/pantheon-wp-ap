@@ -382,6 +382,23 @@ class WPRM_Template_Manager {
 					$template_slug = WPRM_Settings::get( 'recipe_collections_print_recipes_template' . $mode );
 				}
 				break;
+			case 'favorites-list':
+				if ( '_modern' === $mode ) {
+					if ( 'food' === $recipe_type ) {
+						$template_slug = WPRM_Settings::get( 'favorite_recipes_template' . $mode );
+						if ( 'default_recipe_template' === $template_slug ) {
+							$template_slug = WPRM_Settings::get( 'default_recipe_template' . $mode );
+						}
+					} else {
+						$template_slug = WPRM_Settings::get( 'favorite_recipes_' . $recipe_type . '_template' . $mode );
+						if ( 'default_recipe_template' === $template_slug ) {
+							$template_slug = WPRM_Settings::get( 'default_' . $recipe_type . '_recipe_template' . $mode );
+						}
+					}
+				} else {
+					return self::get_template_by_type( 'single', $recipe_type );
+				}
+				break;
 			case 'snippet':
 				if ( 'food' === $recipe_type ) { 
 					$template_slug = WPRM_Settings::get( 'recipe_snippets_template' );
@@ -771,6 +788,8 @@ class WPRM_Template_Manager {
 			$type = 'snippet';
 		} elseif ( 'modern' === $mode && ! $custom && 'roundup-' === substr( $slug, 0, 8 ) ) {
 			$type = 'roundup';
+		} elseif ( 'modern' === $mode && ! $custom && 'favorites-' === substr( $slug, 0, 10 ) ) {
+			$type = 'favorites';
 		}
 
 		return array(

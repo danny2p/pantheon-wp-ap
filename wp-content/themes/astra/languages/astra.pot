@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra 4.12.6\n"
+"Project-Id-Version: Astra 4.12.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/astra\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-20T10:55:39+00:00\n"
+"POT-Creation-Date: 2026-04-08T07:27:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: astra\n"
@@ -41,49 +41,49 @@ msgstr ""
 msgid "https://wpastra.com/about/?utm_source=theme_preview&utm_medium=author_link&utm_campaign=astra_theme"
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:107
+#: admin/class-astra-bsf-analytics.php:132
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:282
 msgid "This is a temporary deactivation for testing."
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:108
+#: admin/class-astra-bsf-analytics.php:133
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:283
 msgid "How can we assist you?"
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:113
+#: admin/class-astra-bsf-analytics.php:138
 msgid "The theme isn't working properly."
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:114
+#: admin/class-astra-bsf-analytics.php:139
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:289
 msgid "Please tell us more about what went wrong?"
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:119
+#: admin/class-astra-bsf-analytics.php:144
 msgid "I found a better alternative theme."
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:120
+#: admin/class-astra-bsf-analytics.php:145
 msgid "Could you please specify which theme?"
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:125
+#: admin/class-astra-bsf-analytics.php:150
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:300
 msgid "It's missing a specific feature."
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:126
+#: admin/class-astra-bsf-analytics.php:151
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:301
 msgid "Please tell us more about the feature."
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:131
+#: admin/class-astra-bsf-analytics.php:156
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:306
 msgid "Other"
 msgstr ""
 
-#: admin/class-astra-bsf-analytics.php:132
+#: admin/class-astra-bsf-analytics.php:157
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:132
 #: inc/lib/bsf-analytics/modules/deactivation-survey/classes/class-deactivation-survey-feedback.php:307
 msgid "Please tell us more details."
@@ -133,11 +133,11 @@ msgstr ""
 msgid "Plugin Successfully Deactivated"
 msgstr ""
 
-#: admin/includes/class-astra-api-init.php:227
+#: admin/includes/class-astra-api-init.php:235
 msgid "Progress saved successfully."
 msgstr ""
 
-#: admin/includes/class-astra-api-init.php:243
+#: admin/includes/class-astra-api-init.php:251
 msgid "Sorry, you cannot list resources."
 msgstr ""
 
@@ -8074,16 +8074,48 @@ msgstr ""
 
 #: inc/abilities/admin/postmeta/class-astra-get-postmeta.php:137
 #: inc/abilities/admin/postmeta/class-astra-update-postmeta.php:166
-#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:159
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:97
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:88
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:88
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:88
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:108
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:109
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:108
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:110
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder.php:94
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:147
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:319
+#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:156
 #: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:230
 #: inc/abilities/customizer/globals/colors/class-astra-update-background-colors.php:212
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:121
+#: inc/abilities/customizer/header/class-astra-get-header-builder.php:105
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:100
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:149
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:320
 msgid "Astra theme is not active."
 msgstr ""
 
 #: inc/abilities/admin/postmeta/class-astra-get-postmeta.php:138
 #: inc/abilities/admin/postmeta/class-astra-update-postmeta.php:167
-#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:160
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:98
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:89
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:89
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:89
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:109
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:110
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:109
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:111
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder.php:95
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:148
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:320
+#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:157
 #: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:231
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:122
+#: inc/abilities/customizer/header/class-astra-get-header-builder.php:106
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:101
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:150
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:321
 msgid "Please activate the Astra theme to use this feature."
 msgstr ""
 
@@ -8118,7 +8150,7 @@ msgid "Post with ID %d does not exist."
 msgstr ""
 
 #. translators: 1: post title, 2: post ID
-#: inc/abilities/admin/postmeta/class-astra-get-postmeta.php:329
+#: inc/abilities/admin/postmeta/class-astra-get-postmeta.php:344
 #, php-format
 msgid "Retrieved post meta settings for \"%1$s\" (ID: %2$d)"
 msgstr ""
@@ -8161,6 +8193,170 @@ msgstr ""
 msgid "Updated \"%1$s\" to \"%2$s\" for \"%3$s\" (ID: %4$d)"
 msgstr ""
 
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:26
+msgid "Flush Astra Local Fonts Cache"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:27
+msgid "Flushes the local fonts cache and regenerates font files for the Astra theme."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:104
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:95
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:95
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:95
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:115
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:116
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:115
+msgid "Astra API not available."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:105
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:96
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:96
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:96
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:116
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:117
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:116
+msgid "Please ensure Astra theme is properly loaded."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:113
+msgid "Cannot flush local fonts cache."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:114
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:145
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:133
+msgid "Load Google Fonts Locally must be enabled first."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-flush-local-fonts.php:127
+msgid "Local fonts cache flushed successfully."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:25
+msgid "Get Astra Load Google Fonts Locally Status"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:26
+msgid "Retrieves the Load Google Fonts Locally setting for the Astra theme (enabled or disabled)."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-load-google-fonts-locally.php:103
+msgid "Retrieved Load Google Fonts Locally status successfully."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:25
+msgid "Get Astra Performance Settings"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:26
+msgid "Retrieves all performance settings for the Astra theme including font loading options."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-performance.php:104
+msgid "Retrieved performance settings successfully."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:25
+msgid "Get Astra Preload Local Fonts Status"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:26
+msgid "Retrieves the Preload Local Fonts setting for the Astra theme (enabled or disabled)."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-get-preload-local-fonts.php:104
+msgid "Retrieved Preload Local Fonts status successfully."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:26
+msgid "Update Astra Load Google Fonts Locally Status"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:27
+msgid "Updates the Load Google Fonts Locally setting for the Astra theme (enable or disable)."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:122
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:122
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:110
+msgid "Enabled status is required."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:123
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:123
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:111
+msgid "Please provide enabled as true or false."
+msgstr ""
+
+#. translators: %s: enabled or disabled
+#: inc/abilities/admin/settings/performance/class-astra-update-load-google-fonts-locally.php:132
+#, php-format
+msgid "Load Google Fonts Locally %s."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:26
+msgid "Update Astra Performance Settings"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:27
+msgid "Updates performance settings for the Astra theme including font loading options."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:132
+msgid "Cannot enable Preload Local Fonts when Load Google Fonts Locally is disabled."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:133
+msgid "Please enable Load Google Fonts Locally first or set preload_local_fonts to false."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:144
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:132
+msgid "Cannot enable Preload Local Fonts."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:156
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:213
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:482
+#: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:401
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:199
+#: inc/abilities/customizer/globals/buttons/class-astra-update-global-buttons.php:281
+#: inc/abilities/customizer/globals/colors/class-astra-update-global-palette.php:265
+#: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:182
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:215
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:385
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:216
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-page.php:246
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-post.php:276
+msgid "No changes specified."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-performance.php:157
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:483
+#: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:402
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:200
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-page.php:247
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-post.php:277
+msgid "Please provide at least one setting to update."
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:26
+msgid "Update Astra Preload Local Fonts Status"
+msgstr ""
+
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:27
+msgid "Updates the Preload Local Fonts setting for the Astra theme (enable or disable)."
+msgstr ""
+
+#. translators: %s: enabled or disabled
+#: inc/abilities/admin/settings/performance/class-astra-update-preload-local-fonts.php:140
+#, php-format
+msgid "Preload Local Fonts %s."
+msgstr ""
+
 #: inc/abilities/class-astra-abilities-init.php:84
 #: inc/class-astra-memory-limit-notice.php:251
 msgid "Astra Theme"
@@ -8186,6 +8382,173 @@ msgstr ""
 msgid "A system error occurred: %s"
 msgstr ""
 
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:23
+msgid "Get Astra Footer Builder Design Options"
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:24
+msgid "Retrieves design options for Astra footer builder sections (above, primary, below) including background, border color, border size, padding and margin."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:120
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:164
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:131
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:166
+msgid "Invalid section provided."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:121
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:165
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:132
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:167
+msgid "Section must be one of: above, primary, below."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder-design.php:142
+msgid "Retrieved footer builder design options successfully. IMPORTANT: When presenting any colors to the user, you MUST show visual color previews using this markdown format if valid color code: ![#HEXCODE](https://via.placeholder.com/15/HEXCODE/000000?text=+) `#HEXCODE` - Replace HEXCODE with the actual hex color value."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder.php:23
+msgid "Get Astra Footer Builder Settings"
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder.php:24
+msgid "Retrieves the current Astra theme footer builder configuration including desktop and mobile layouts with components like buttons, HTML blocks, widgets, social icons, footer menu, and copyright positioned in above footer, primary footer, and below footer sections."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-get-footer-builder.php:169
+msgid "Retrieved footer builder settings successfully."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:23
+msgid "Update Astra Footer Builder Design Options"
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:24
+msgid "Updates design options for Astra footer builder sections (above, primary, below) including background, border color, border size, padding and margin."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:154
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:156
+msgid "Section is required."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:155
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:157
+msgid "Please provide a section: above, primary, or below."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:214
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:216
+msgid "Please provide at least one design option to update."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder-design.php:220
+#, php-format
+msgid "%1$s footer design updated: %2$s."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:24
+msgid "Update Astra Footer Builder Settings"
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:25
+msgid "Updates the Astra theme footer builder configuration for desktop and mobile layouts. Allows positioning components like buttons, HTML blocks, widgets, social icons, footer menu, and copyright in above footer, primary footer, and below footer sections with column-based placements. Also configures column counts and layout widths for each footer section."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:327
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:327
+msgid "Astra theme helper functions not available."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:328
+msgid "The astra_get_option and astra_update_option functions are required but not found."
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:392
+#, php-format
+msgid "Invalid above_footer_columns: %d."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:393
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:408
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:423
+msgid "Value must be between 1 and 5."
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:399
+#, php-format
+msgid "Above footer columns set to %d"
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:407
+#, php-format
+msgid "Invalid primary_footer_columns: %d."
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:414
+#, php-format
+msgid "Primary footer columns set to %d"
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:422
+#, php-format
+msgid "Invalid below_footer_columns: %d."
+msgstr ""
+
+#. translators: %d: column count
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:429
+#, php-format
+msgid "Below footer columns set to %d"
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:438
+#, php-format
+msgid "Invalid above_footer_layout: %s."
+msgstr ""
+
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:439
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:455
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:471
+msgid "Valid options: full, content"
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:445
+#, php-format
+msgid "Above footer layout set to %s"
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:454
+#, php-format
+msgid "Invalid primary_footer_layout: %s."
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:461
+#, php-format
+msgid "Primary footer layout set to %s"
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:470
+#, php-format
+msgid "Invalid below_footer_layout: %s."
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/footer/class-astra-update-footer-builder.php:477
+#, php-format
+msgid "Below footer layout set to %s"
+msgstr ""
+
 #: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:25
 msgid "Get Astra Breadcrumb Settings"
 msgstr ""
@@ -8194,7 +8557,7 @@ msgstr ""
 msgid "Retrieves the current Astra theme breadcrumb settings including position, alignment, display settings, separator, typography, colors, and spacing."
 msgstr ""
 
-#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:218
+#: inc/abilities/customizer/general/breadcrumb/class-astra-get-breadcrumb.php:215
 msgid "Retrieved breadcrumb settings successfully. IMPORTANT: When presenting any colors to the user, you MUST show visual color previews using this markdown format if valid color code: ![#HEXCODE](https://via.placeholder.com/15/HEXCODE/000000?text=+) `#HEXCODE` - Replace HEXCODE with the actual hex color value."
 msgstr ""
 
@@ -8272,26 +8635,210 @@ msgstr ""
 msgid "Spacing updated"
 msgstr ""
 
-#: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:401
-#: inc/abilities/customizer/globals/buttons/class-astra-update-global-buttons.php:281
-#: inc/abilities/customizer/globals/colors/class-astra-update-global-palette.php:265
-#: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:182
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:216
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-page.php:246
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-post.php:276
-msgid "No changes specified."
-msgstr ""
-
-#: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:402
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-page.php:247
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-single-post.php:277
-msgid "Please provide at least one setting to update."
-msgstr ""
-
 #. translators: %s: comma-separated list of updated settings
 #: inc/abilities/customizer/general/breadcrumb/class-astra-update-breadcrumb.php:407
 #, php-format
 msgid "Breadcrumb settings updated: %s."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-layout.php:25
+msgid "Get Astra Sidebar Layout"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-layout.php:26
+msgid "Retrieves the default sidebar layout setting for the Astra theme (no sidebar, left sidebar, or right sidebar)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-layout.php:95
+msgid "Retrieved sidebar layout successfully."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-style.php:25
+msgid "Get Astra Sidebar Style"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-style.php:26
+msgid "Retrieves the sidebar style setting for the Astra theme (boxed or unboxed)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-style.php:94
+msgid "Retrieved sidebar style successfully."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-width.php:25
+msgid "Get Astra Sidebar Width"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-width.php:26
+msgid "Retrieves the sidebar width setting for the Astra theme (15-50%)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar-width.php:89
+msgid "Retrieved sidebar width successfully."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar.php:25
+msgid "Get Astra Sidebar Settings"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar.php:26
+msgid "Retrieves all sidebar settings for the Astra theme including layout, style, width, and sticky sidebar."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sidebar.php:103
+msgid "Retrieved sidebar settings successfully."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sticky-sidebar.php:25
+msgid "Get Astra Sticky Sidebar Status"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sticky-sidebar.php:26
+msgid "Retrieves the sticky sidebar setting for the Astra theme (enabled or disabled)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-get-sticky-sidebar.php:89
+msgid "Retrieved sticky sidebar status successfully."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:26
+msgid "Update Astra Sidebar Layout"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:27
+msgid "Updates the default sidebar layout setting for the Astra theme (no sidebar, left sidebar, or right sidebar)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:111
+msgid "Layout is required."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:112
+msgid "Please provide a layout: no-sidebar, left-sidebar, or right-sidebar."
+msgstr ""
+
+#. translators: %s: layout value
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:123
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:134
+#, php-format
+msgid "Invalid layout: %s."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:126
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:137
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:163
+msgid "Valid options: no-sidebar, left-sidebar, right-sidebar"
+msgstr ""
+
+#. translators: %s: layout label
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-layout.php:140
+#, php-format
+msgid "Sidebar layout set to %s."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:26
+msgid "Update Astra Sidebar Style"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:27
+msgid "Updates the sidebar style setting for the Astra theme (boxed or unboxed)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:111
+msgid "Style is required."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:112
+msgid "Please provide a style: unboxed or boxed."
+msgstr ""
+
+#. translators: %s: style value
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:123
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:159
+#, php-format
+msgid "Invalid style: %s."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:126
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:162
+#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:185
+msgid "Valid options: unboxed, boxed"
+msgstr ""
+
+#. translators: %s: style label
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-style.php:139
+#, php-format
+msgid "Sidebar style set to %s."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:26
+msgid "Update Astra Sidebar Width"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:27
+msgid "Updates the sidebar width setting for the Astra theme (15-50%)."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:112
+msgid "Width is required."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:113
+msgid "Please provide a width value between 15 and 50."
+msgstr ""
+
+#. translators: %d: width value
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:123
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:178
+#, php-format
+msgid "Invalid width: %d."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:126
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:181
+msgid "Width must be between 15 and 50 percent."
+msgstr ""
+
+#. translators: %d: width percentage
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar-width.php:134
+#, php-format
+msgid "Sidebar width set to %d%%."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:26
+msgid "Update Astra Sidebar Settings"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sidebar.php:27
+msgid "Updates sidebar settings for the Astra theme including layout, style, width, and sticky sidebar."
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:26
+msgid "Update Astra Sticky Sidebar Status"
+msgstr ""
+
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:27
+msgid "Updates the sticky sidebar setting for the Astra theme (enable or disable)."
+msgstr ""
+
+#. translators: %s: enabled or disabled
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:121
+#, php-format
+msgid "Sticky sidebar %s."
+msgstr ""
+
+#. translators: %s: enabled or disabled
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:122
+#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:84
+#: inc/abilities/customizer/globals/typography/class-astra-toggle-underline-links.php:115
+msgid "enabled"
+msgstr ""
+
+#. translators: %s: enabled or disabled
+#: inc/abilities/customizer/general/sidebar/class-astra-update-sticky-sidebar.php:122
+#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:84
+#: inc/abilities/customizer/globals/typography/class-astra-toggle-underline-links.php:115
+msgid "disabled"
 msgstr ""
 
 #: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:25
@@ -8302,59 +8849,59 @@ msgstr ""
 msgid "Retrieves the current Astra theme global button settings for both primary and secondary buttons including text colors, background colors, border colors, padding, border width, and border radius."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:50
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:47
 msgid "Button settings object."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:54
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:51
 msgid "Button preset style key."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:58
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:55
 msgid "Human-readable preset label."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:62
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:59
 msgid "Button text color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:66
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:63
 msgid "Button text hover color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:70
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:67
 msgid "Button background color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:74
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:71
 msgid "Button background hover color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:78
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:75
 msgid "Button border color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:82
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:79
 msgid "Button border hover color."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:86
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:83
 msgid "Button padding values."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:90
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:87
 msgid "Button border width values."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:94
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:91
 msgid "Button border radius values."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:105
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:102
 msgid "Available button preset options."
 msgstr ""
 
-#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:166
+#: inc/abilities/customizer/globals/buttons/class-astra-get-global-buttons.php:163
 msgid "Retrieved global button settings successfully."
 msgstr ""
 
@@ -8442,7 +8989,7 @@ msgstr ""
 msgid "Retrieves the current Astra theme background color settings including site background and content background configurations."
 msgstr ""
 
-#: inc/abilities/customizer/globals/colors/class-astra-get-background-colors.php:91
+#: inc/abilities/customizer/globals/colors/class-astra-get-background-colors.php:88
 msgid "Retrieved background color settings successfully."
 msgstr ""
 
@@ -8585,8 +9132,8 @@ msgstr ""
 msgid "Retrieves the current Astra theme container layout settings including container layout, container style, container width, and narrow container width."
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:111
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:129
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:108
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:126
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:120
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:193
 #: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:132
@@ -8687,8 +9234,8 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:112
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:130
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:109
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:127
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:121
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:197
 #: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:133
@@ -8703,8 +9250,8 @@ msgstr ""
 msgid "Narrow"
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:113
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:131
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:110
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:128
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:122
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:133
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:201
@@ -8738,8 +9285,8 @@ msgstr ""
 msgid "Full Width"
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:117
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:134
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:114
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:131
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:127
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:209
 #: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:138
@@ -8768,8 +9315,8 @@ msgstr ""
 msgid "Boxed"
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:118
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:135
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:115
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:132
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:128
 #: inc/abilities/customizer/globals/container/class-astra-list-container-settings.php:213
 #: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:139
@@ -8797,11 +9344,11 @@ msgstr ""
 msgid "Unboxed"
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:122
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:119
 msgid "Retrieved container layout settings successfully."
 msgstr ""
 
-#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:137
+#: inc/abilities/customizer/globals/container/class-astra-get-container-layout.php:134
 #: inc/abilities/customizer/globals/container/class-astra-update-container-layout.php:201
 msgid "Container style applies only when layout is set to Normal or Narrow."
 msgstr ""
@@ -9002,7 +9549,7 @@ msgstr ""
 msgid "Retrieves the current Astra theme body font settings including font family, weight, size, line height, and other typography properties."
 msgstr ""
 
-#: inc/abilities/customizer/globals/typography/class-astra-get-body-font.php:96
+#: inc/abilities/customizer/globals/typography/class-astra-get-body-font.php:93
 msgid "Retrieved body font settings successfully."
 msgstr ""
 
@@ -9019,7 +9566,7 @@ msgid "Retrieves the current Astra theme H%d heading font settings including fon
 msgstr ""
 
 #. translators: %s: heading tag
-#: inc/abilities/customizer/globals/typography/class-astra-get-heading-font.php:133
+#: inc/abilities/customizer/globals/typography/class-astra-get-heading-font.php:130
 #, php-format
 msgid "Retrieved %s font settings successfully."
 msgstr ""
@@ -9032,7 +9579,7 @@ msgstr ""
 msgid "Retrieves the current Astra theme headings font settings including font family, weight, line height, and other typography properties for all headings."
 msgstr ""
 
-#: inc/abilities/customizer/globals/typography/class-astra-get-headings-font.php:90
+#: inc/abilities/customizer/globals/typography/class-astra-get-headings-font.php:87
 msgid "Retrieved headings font settings successfully."
 msgstr ""
 
@@ -9045,7 +9592,7 @@ msgid "Retrieves the current paragraph margin bottom setting in the Astra theme.
 msgstr ""
 
 #. translators: %s: margin bottom value
-#: inc/abilities/customizer/globals/typography/class-astra-get-paragraph-margin.php:87
+#: inc/abilities/customizer/globals/typography/class-astra-get-paragraph-margin.php:84
 #, php-format
 msgid "Current paragraph margin bottom: %s em"
 msgstr ""
@@ -9059,21 +9606,9 @@ msgid "Retrieves whether content link underlines are enabled or disabled in the 
 msgstr ""
 
 #. translators: %s: enabled or disabled
-#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:87
+#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:84
 #, php-format
 msgid "Content link underlines are %s."
-msgstr ""
-
-#. translators: %s: enabled or disabled
-#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:87
-#: inc/abilities/customizer/globals/typography/class-astra-toggle-underline-links.php:115
-msgid "enabled"
-msgstr ""
-
-#. translators: %s: enabled or disabled
-#: inc/abilities/customizer/globals/typography/class-astra-get-underline-links-status.php:87
-#: inc/abilities/customizer/globals/typography/class-astra-toggle-underline-links.php:115
-msgid "disabled"
 msgstr ""
 
 #: inc/abilities/customizer/globals/typography/class-astra-list-font-families.php:23
@@ -9176,6 +9711,101 @@ msgstr ""
 msgid "Paragraph margin bottom updated to %s em."
 msgstr ""
 
+#: inc/abilities/customizer/header/builder/class-astra-list-header-builder-settings.php:35
+msgid "List Header Builder Settings"
+msgstr ""
+
+#: inc/abilities/customizer/header/builder/class-astra-list-header-builder-settings.php:36
+msgid "Lists all available header builder widgets/elements, current layout configuration, available positions, and complete metadata about the header builder structure. Shows which widgets can be added, current widget placements in all header positions (above/primary/below headers), and position availability for both desktop and mobile headers. Use this to discover what elements are available, what are already in use, and what can be added to the header."
+msgstr ""
+
+#. translators: 1: widget count, 2: layout count
+#: inc/abilities/customizer/header/builder/class-astra-list-header-builder-settings.php:209
+#, php-format
+msgid "Retrieved header builder settings. %1$d widgets available, %2$d layouts configured."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:25
+msgid "Get Astra Header Builder Design Options"
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:26
+msgid "Retrieves design options for Astra header builder sections (above, primary, below) including background, border color, border size, padding and margin."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder-design.php:153
+msgid "Retrieved header builder design options successfully. IMPORTANT: When presenting any colors to the user, you MUST show visual color previews using this markdown format if valid color code: ![#HEXCODE](https://via.placeholder.com/15/HEXCODE/000000?text=+) `#HEXCODE` - Replace HEXCODE with the actual hex color value."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder.php:25
+msgid "Get Astra Header Builder Settings"
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder.php:26
+msgid "Retrieves the current Astra theme header builder configuration including desktop and mobile layouts with components like buttons, HTML blocks, menus, widgets, social icons, and search positioned in above header, primary header, and below header sections."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-get-header-builder.php:197
+msgid "Retrieved header builder settings successfully."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:29
+msgid "Migrate Astra Header Component IDs"
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:30
+msgid "Scans and fixes incorrect header builder component IDs. Automatically converts variations like menu_secondary to menu-2, social_1 to social-icons-1, etc. Use this when header components are not showing in customizer/frontend due to incorrect IDs."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:141
+msgid "No component IDs need migration. All component IDs are already correct."
+msgstr ""
+
+#. translators: %d: number of fixes
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:159
+#, php-format
+msgid "Successfully migrated %d component ID. Changes are now visible in customizer and frontend."
+msgid_plural "Successfully migrated %d component IDs. Changes are now visible in customizer and frontend."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of fixes
+#: inc/abilities/customizer/header/class-astra-migrate-header-components.php:170
+#, php-format
+msgid "Found %d component ID that needs migration. Run without dry_run to apply changes."
+msgid_plural "Found %d component IDs that need migration. Run without dry_run to apply changes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:25
+msgid "Update Astra Header Builder Design Options"
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:26
+msgid "Updates design options for Astra header builder sections (above, primary, below) including background, border color, border size, padding and margin."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder-design.php:222
+#, php-format
+msgid "%1$s header design updated: %2$s."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:26
+msgid "Update Astra Header Builder Settings"
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:27
+msgid "Updates the Astra theme header builder configuration for desktop and mobile layouts. Allows positioning components like buttons, HTML blocks, menus, widgets, social icons, and search in popup (mobile drawer), above header, primary header, and below header sections with specific zone placements."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:328
+msgid "The astra_get_option function is required but not found."
+msgstr ""
+
+#: inc/abilities/customizer/header/class-astra-update-header-builder.php:386
+msgid "Please provide at least one layout to update (desktop or mobile)."
+msgstr ""
+
 #: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:25
 msgid "Get Astra Blog Archive Settings"
 msgstr ""
@@ -9184,63 +9814,63 @@ msgstr ""
 msgid "Retrieves the current Astra theme blog archive settings including blog layout, posts per page, sidebar layout, sidebar style, and sidebar width."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:52
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:49
 msgid "Current blog layout key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:56
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:53
 msgid "Human-readable blog layout name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:60
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:57
 msgid "Number of posts per page."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:64
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:68
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:68
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:61
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:65
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:65
 msgid "Current sidebar layout key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:68
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:72
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:72
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:65
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:69
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:69
 msgid "Human-readable sidebar layout name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:72
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:76
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:76
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:69
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:73
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:73
 msgid "Current sidebar style key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:76
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:80
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:80
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:73
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:77
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:77
 msgid "Human-readable sidebar style name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:80
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:77
 msgid "Sidebar width percentage."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:84
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:81
 msgid "Available blog layout options."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:88
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:104
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:112
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:85
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:101
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:109
 msgid "Available sidebar layout options."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:92
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:108
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:116
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:89
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:105
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:113
 msgid "Available sidebar style options."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:174
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-blog-archive.php:171
 #, php-format
 msgid "Your blog archive is using the \"%1$s\" layout with %2$d posts per page. Sidebar is set to \"%3$s\" (%4$s style, %5$d%% width)."
 msgstr ""
@@ -9253,52 +9883,52 @@ msgstr ""
 msgid "Retrieves the current Astra theme single page settings including container layout, container style, sidebar layout, sidebar style, and content width."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:52
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:52
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:49
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:49
 msgid "Current container layout key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:56
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:56
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:53
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:53
 msgid "Human-readable container layout name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:60
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:60
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:57
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:57
 msgid "Current container style key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:64
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:64
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:61
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:61
 msgid "Human-readable container style name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:84
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:84
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:81
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:81
 msgid "Content width setting key."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:88
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:88
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:85
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:85
 msgid "Human-readable content width name."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:92
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:92
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:89
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:89
 msgid "Custom content max width in pixels."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:96
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:104
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:93
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:101
 msgid "Available container layout options."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:100
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:108
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:97
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:105
 msgid "Available container style options."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:189
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-page.php:186
 msgid "Retrieved single page settings successfully."
 msgstr ""
 
@@ -9310,15 +9940,15 @@ msgstr ""
 msgid "Retrieves the current Astra theme single post settings including container layout, container style, sidebar layout, sidebar style, content width, and related posts settings."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:96
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:93
 msgid "Whether related posts are enabled."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:100
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:97
 msgid "Number of related posts to display."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:204
+#: inc/abilities/customizer/posttypes/blog/class-astra-get-single-post.php:201
 msgid "Retrieved single post settings successfully."
 msgstr ""
 
@@ -9378,20 +10008,12 @@ msgstr ""
 msgid "Invalid sidebar_layout: %s."
 msgstr ""
 
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:163
-msgid "Valid options: no-sidebar, left-sidebar, right-sidebar"
-msgstr ""
-
 #. translators: %s: sidebar style value
 #: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:184
 #: inc/abilities/customizer/posttypes/blog/class-astra-update-single-page.php:197
 #: inc/abilities/customizer/posttypes/blog/class-astra-update-single-post.php:205
 #, php-format
 msgid "Invalid sidebar_style: %s."
-msgstr ""
-
-#: inc/abilities/customizer/posttypes/blog/class-astra-update-blog-archive.php:185
-msgid "Valid options: unboxed, boxed"
 msgstr ""
 
 #. translators: %d: sidebar width value
@@ -9542,56 +10164,56 @@ msgstr ""
 msgid "Retrieves the current Astra theme site title, tagline, logo, and related visibility settings."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:52
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:49
 msgid "Current site title."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:56
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:53
 msgid "Current site tagline/description."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:60
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:57
 msgid "Logo attachment ID."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:64
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:61
 #: inc/abilities/customizer/siteidentity/class-astra-update-site-title-logo.php:62
 msgid "Logo image URL."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:68
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:65
 msgid "Retina logo URL."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:72
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:69
 msgid "Mobile logo URL."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:76
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:73
 msgid "Responsive logo width settings."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:80
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:77
 msgid "Site title visibility per device."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:84
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:81
 msgid "Tagline visibility per device."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:88
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:85
 msgid "Whether logo and title are displayed inline."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:92
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:89
 msgid "Whether a different retina logo is enabled."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:96
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:93
 msgid "Whether a different mobile logo is enabled."
 msgstr ""
 
-#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:158
+#: inc/abilities/customizer/siteidentity/class-astra-get-site-title-logo.php:155
 msgid "Retrieved site title and logo settings successfully."
 msgstr ""
 
@@ -9748,44 +10370,44 @@ msgstr ""
 msgid "Week %s"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:874
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:885
 msgctxt "minute and hour archives time format"
 msgid "g:i a"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:891
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:902
 msgctxt "minute archives time format"
 msgid "i"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:908
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:919
 msgctxt "hour archives time format"
 msgid "g a"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:924
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:953
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:981
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1008
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1355
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:935
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:964
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:992
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1019
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1366
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:925
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:982
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1359
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:936
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:993
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1370
 msgctxt "monthly archives date format"
 msgid "F"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:926
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1363
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:937
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:1374
 msgctxt "daily archives date format"
 msgid "j"
 msgstr ""
 
-#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:954
+#: inc/addons/breadcrumbs/class-astra-breadcrumb-trail.php:965
 msgctxt "weekly archives date format"
 msgid "W"
 msgstr ""
@@ -11892,7 +12514,7 @@ msgstr ""
 msgid "Membership Columns"
 msgstr ""
 
-#: inc/compatibility/starter-content/home.php:236
+#: inc/compatibility/starter-content/home.php:240
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr ""
@@ -12857,55 +13479,55 @@ msgstr ""
 msgid "Details &#187;"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:79
+#: inc/core/class-astra-command-palette.php:84
 msgid "Search everything: from site settings to pages and design tools"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:158
+#: inc/core/class-astra-command-palette.php:163
 msgid "Customizer: Global"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:159
+#: inc/core/class-astra-command-palette.php:164
 msgid "Global, Container, Layout, Colors, Color, Background, Base Colors, Typography, Font, Fonts, Headings, Text, Buttons, Button, Style, Base Typography"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:165
+#: inc/core/class-astra-command-palette.php:170
 msgid "Customizer: Header"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:166
+#: inc/core/class-astra-command-palette.php:171
 msgid "Header, Site Identity, Logo, Site Title, Tagline, Primary Header, Primary Menu, Menu, Navigation, Above Header, Below Header, Mobile Header, Mobile Menu, Search, Button, Social, Account, Cart, Widget, HTML, Off Canvas, Mobile Trigger"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:172
+#: inc/core/class-astra-command-palette.php:177
 msgid "Customizer: Footer"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:173
+#: inc/core/class-astra-command-palette.php:178
 msgid "Footer, Footer Widgets, Footer Bar, Copyright, Primary Footer, Above Footer, Below Footer, Menu, Social, HTML, Widget"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:179
+#: inc/core/class-astra-command-palette.php:184
 msgid "Customizer: Blog"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:180
+#: inc/core/class-astra-command-palette.php:185
 msgid "Blog, Archive, Single Post, Post, Single Page, Page, Content, Excerpt, Featured Image, Meta, Author, Date, Categories, Tags, Comments"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:186
+#: inc/core/class-astra-command-palette.php:191
 msgid "Customizer: General"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:187
+#: inc/core/class-astra-command-palette.php:192
 msgid "General, Sidebar, Accessibility, Skip to Content, Block Editor, Gutenberg, Misc, Scroll To Top, Back to Top"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:197
+#: inc/core/class-astra-command-palette.php:202
 msgid "Customizer: WooCommerce"
 msgstr ""
 
-#: inc/core/class-astra-command-palette.php:198
+#: inc/core/class-astra-command-palette.php:203
 msgid "WooCommerce, Shop, Store, Products, Single Product, Cart, Checkout, Account, My Account, Orders, Sidebar"
 msgstr ""
 
@@ -15099,53 +15721,49 @@ msgstr ""
 msgid "Full Size"
 msgstr ""
 
-#: inc/lib/astra-notices/class-astra-notices.php:150
-msgid "Invalid notice ID."
-msgstr ""
-
 #. translators: %d: Minutes interval
 #: inc/lib/batch-processing/class-astra-wp-background-process.php:414
 #, php-format
 msgid "Every %d Minutes"
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:242
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:270
 #, php-format
-msgid "Help us improve %1$s and our other products!<br><br>With your permission, we'd like to collect <strong>non-sensitive information</strong> from your website — like your PHP version and which features you use — so we can fix bugs faster, make smarter decisions, and build features that actually matter to you. <em>No personal info. Ever.</em>"
+msgid "Help shape the future of %1$s!<br><br>Become a contributor by sharing how you use %1$s — so we can build features that matter to you, fix issues faster, and make smarter decisions. We only collect <strong>non-sensitive</strong> information like your PHP version and which features you use."
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:249
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:278
 msgid "This will be applicable for all sites from the network."
 msgstr ""
 
 #. translators: %s usage doc link
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:273
-msgid " Know More."
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:302
+msgid "Learn more."
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:283
-msgid "Yes! Allow it"
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:312
+msgid "Sure, count me in!"
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:294
-msgid "No Thanks"
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:323
+msgid "No, thanks"
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:468
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:501
 msgid "Usage Tracking"
 msgstr ""
 
 #. translators: %s Product title
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:513
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:546
 #, php-format
-msgid "Allow %s products to track non-sensitive usage tracking data."
+msgid "Help improve %s by sharing non-sensitive usage data — like PHP version and features used."
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:516
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:549
 msgid " This will be applicable for all sites from the network."
 msgstr ""
 
-#: inc/lib/bsf-analytics/class-bsf-analytics.php:521
+#: inc/lib/bsf-analytics/class-bsf-analytics.php:554
 msgid "Learn More."
 msgstr ""
 
@@ -15221,6 +15839,15 @@ msgstr ""
 
 #: inc/lib/class-astra-nps-notice.php:126
 msgid "We value your input. How can we improve your experience?"
+msgstr ""
+
+#: inc/lib/nps-survey/classes/nps-survey-script.php:333
+msgid "Sorry, you are not allowed to do that."
+msgstr ""
+
+#: inc/lib/nps-survey/classes/nps-survey-script.php:387
+#: inc/lib/nps-survey/classes/nps-survey-script.php:505
+msgid "Nonce verification failed."
 msgstr ""
 
 #: inc/markup-extras.php:526

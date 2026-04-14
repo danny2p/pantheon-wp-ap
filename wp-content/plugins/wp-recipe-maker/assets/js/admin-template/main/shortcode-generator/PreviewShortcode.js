@@ -45,10 +45,10 @@ const PreviewShortcode = (props) => {
                         }}
                     >
                         <button
-                            className="button button-primary"
+                            className="button button-primary button-compact"
                         >Copy to Clipboard</button>
                     </CopyToClipboard> <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={() => {
                             props.onChangeShortcode(false);
                         }}

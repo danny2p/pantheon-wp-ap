@@ -120,30 +120,141 @@
     }
 }
 
+#wprm-settings-menu.wprm-settings-menu-search {
+    .wprm-settings-search-summary,
+    .wprm-settings-search-footer {
+        padding: 0 10px 10px 10px;
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+    }
+
+    .wprm-settings-search-footer {
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+
+    .wprm-settings-search-footer a {
+        color: #2271b1;
+        text-decoration: none;
+
+        &:hover {
+            color: #135e96;
+            text-decoration: underline;
+        }
+    }
+
+    .wprm-settings-search-group + .wprm-settings-search-group {
+        border-top: 1px solid #ddd;
+    }
+
+    .wprm-settings-search-group-button,
+    .wprm-settings-search-subgroup-button,
+    .wprm-settings-search-item {
+        display: flex;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        color: #444;
+    }
+
+    .wprm-settings-search-group-button,
+    .wprm-settings-search-subgroup-button {
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        padding: 10px;
+
+        &:hover {
+            background-color: #f6f7f7;
+        }
+    }
+
+    .wprm-settings-search-group-button {
+        .wprm-settings-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        svg {
+            fill: #ddd;
+        }
+    }
+
+    .wprm-settings-search-subgroups,
+    .wprm-settings-search-items {
+        border-top: 1px solid #eee;
+    }
+
+    .wprm-settings-search-subgroup {
+        background-color: #fafafa;
+    }
+
+    .wprm-settings-search-subgroup + .wprm-settings-search-subgroup {
+        border-top: 1px solid #eee;
+    }
+
+    .wprm-settings-search-subgroup-button {
+        padding-left: 20px;
+        font-weight: 500;
+    }
+
+    .wprm-settings-search-item {
+        padding: 8px 10px 8px 28px;
+        font-size: 13px;
+
+        &:hover {
+            background-color: #f0f6fc;
+            color: #135e96;
+        }
+    }
+
+    #wprm-settings-menu-search-message {
+        border-radius: 0;
+        padding-top: 0;
+    }
+}
+
 #wprm-settings-buttons {
 
     background-color: white;
     border-radius: 5px;
+    padding-bottom: 6px;
 
     .wprm-settings-changes-wrapper {
         display: flex;
-        flex-wrap: wrap;
-        padding: 10px 6px;
+        flex-wrap: nowrap;
+        padding: 6px;
         gap: 6px;
-    }
 
-    button {
-        flex: 1;
+        > * {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .wprm-settings-changes-save-wrapper,
+        .wprm-settings-changes-summary-wrapper {
+            display: flex;
+
+            > button {
+                width: 100%;
+                margin: 0;
+            }
+        }
     }
 
     .wprm-settings-search-wrapper {
         position: relative;
-        margin: 0 6px 10px 6px;
+        margin: 0 6px;
     }
 
     #wprm-settings-search {
+        display: block;
         width: 100%;
-        padding: 4px 6px;
+        margin: 0;
         padding-right: 30px;
         border: 1px solid #ddd;
         border-radius: 3px;
@@ -189,6 +300,135 @@
         color: #856404;
         font-size: 12px;
         text-align: center;
+    }
+}
+
+#wprm-settings-menu.wprm-settings-menu-changed {
+    .wprm-settings-changed-back {
+        padding: 10px 10px 0 10px;
+        font-size: 12px;
+
+        a {
+            color: #2271b1;
+            text-decoration: none;
+
+            &:hover {
+                color: #135e96;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .wprm-settings-changed-actions {
+        padding: 0 10px 10px 10px;
+        border-bottom: 1px solid #ddd;
+
+        .button {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    .wprm-settings-changed-actions-bottom {
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+        border-bottom: none;
+    }
+
+    .wprm-settings-changed-list {
+        .wprm-settings-changed-item-row:last-child {
+            border-bottom: none;
+        }
+    }
+
+    .wprm-settings-changed-item-row {
+        display: flex;
+        gap: 6px;
+        align-items: flex-start;
+        padding: 8px 10px;
+        border-bottom: 1px solid #ddd;
+
+        &:hover {
+            background-color: #f6f7f7;
+        }
+    }
+
+    .wprm-settings-changed-item {
+        display: block;
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 0;
+        background: transparent;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .wprm-settings-changed-item-cancel {
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #666;
+
+        &:hover {
+            color: #2271b1;
+        }
+    }
+
+    .wprm-settings-changed-item-cancel-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+
+        .wprm-settings-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        svg g,
+        svg path,
+        svg polyline,
+        svg line,
+        svg circle {
+            fill: none;
+            stroke: currentColor;
+        }
+    }
+
+    .wprm-settings-changed-item-name,
+    .wprm-settings-changed-item-context,
+    .wprm-settings-changed-item-badge {
+        display: block;
+    }
+
+    .wprm-settings-changed-item-name {
+        color: #444;
+        font-weight: 600;
+    }
+
+    .wprm-settings-changed-item-context {
+        margin-top: 2px;
+        color: #666;
+        font-size: 12px;
+    }
+
+    .wprm-settings-changed-item-badge {
+        margin-top: 6px;
+        color: #856404;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
     }
 }
 

@@ -974,8 +974,15 @@ module.exports = elementorModules.Module.extend({
         }
       },
       button: {
-        tag: 'div'
+        tag: 'button'
       }
+    });
+
+    // Add role="status" and aria-live for screen reader announcement
+    toast.getElements('widget').attr({
+      role: 'status',
+      'aria-live': 'polite',
+      'aria-atomic': 'true'
     });
     this.getToast = function () {
       return toast;
@@ -985,6 +992,8 @@ module.exports = elementorModules.Module.extend({
     var toast = this.getToast();
     toast.setMessage(options.message);
     toast.getElements('buttonsWrapper').empty();
+    toast.focusedButton = null;
+    toast.buttons = [];
     var isPositionValid = this.isPositionValid(options === null || options === void 0 ? void 0 : options.position);
     if (!isPositionValid) {
       this.positionToWindow();
@@ -2145,7 +2154,9 @@ var eventsConfig = {
     aiGenerate: 'ai_generate',
     resultsUpdated: 'results_updated',
     noResults: 'no_results',
-    selected: 'selected'
+    selected: 'selected',
+    promotionViewed: 'promotion_viewed',
+    upgradeNow: 'upgrade_now'
   },
   targetNames: {
     publishDropdown: {
@@ -2192,7 +2203,10 @@ var eventsConfig = {
     structurePanel: 'Structure Panel',
     canvas: 'Canvas',
     leftPanel: 'Left Panel',
-    elementorLibrary: 'Elementor Library'
+    elementorLibrary: 'Elementor Library',
+    components: {
+      instanceEditingPanel: 'Instance Editing Panel'
+    }
   },
   secondaryLocations: {
     layout: 'Layout Section',
@@ -2341,7 +2355,8 @@ var eventsConfig = {
       save: 'save_new_variable',
       openManager: 'open_variables_manager',
       saveChanges: 'save_variables_changes',
-      delete: 'delete_variable'
+      delete: 'delete_variable',
+      variableSyncToV3: 'variable_sync_to_v3'
     },
     components: {
       createClicked: 'component_create_clicked',
@@ -2352,7 +2367,8 @@ var eventsConfig = {
       propertiesPanelOpened: 'component_properties_panel_opened',
       propertiesGroupCreated: 'component_properties_group_created',
       propertyExposed: 'component_property_exposed',
-      propertyRemoved: 'component_property_removed'
+      propertyRemoved: 'component_property_removed',
+      detached: 'component_detached'
     },
     global_classes: {
       classApplied: 'class_applied',
@@ -2372,7 +2388,10 @@ var eventsConfig = {
       classStyled: 'class_styled',
       classStateClicked: 'class_state_clicked',
       classUsageClicked: 'class_usage_clicked',
-      classDuplicate: 'class_duplicate'
+      classDuplicate: 'class_duplicate',
+      classSyncToV3PopupShown: 'class_sync_to_v3_popup_shown',
+      classSyncToV3: 'class_sync_to_v3',
+      classSyncToV3PopupClick: 'class_sync_to_v3_popup_click'
     },
     editorOne: {
       topBarPublishDropdown: 'top_bar_publish_dropdown',
@@ -2386,6 +2405,13 @@ var eventsConfig = {
       finderResultSelect: 'finder_result_select',
       canvasEmptyBoxAction: 'canvas_empty_box_action',
       widgetPanelSearch: 'widget_panel_search'
+    },
+    interactions: {
+      created: 'interactions_created'
+    },
+    promotions: {
+      viewPromotion: 'view_promotion',
+      upgradePromotionClick: 'upgrade_promotion_click'
     }
   }
 };
@@ -2422,12 +2448,6 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0, _defineProperty2.default)(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2.default)(o), (0, _possibleConstructorReturn2.default)(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2.default)(t).constructor) : o.apply(t, e)); }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _classPrivateFieldInitSpec(e, t, a) { _checkPrivateRedeclaration(e, t), t.set(e, a); }
-function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
-function _classPrivateFieldGet(s, a) { return s.get(_assertClassBrand(s, a)); }
-function _classPrivateFieldSet(s, a, r) { return s.set(_assertClassBrand(s, a), r), r; }
-function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
-var _sessionRecordingInProgress = /*#__PURE__*/new WeakMap();
 var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod) {
   function _default() {
     var _this;
@@ -2437,7 +2457,6 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
     }
     _this = _callSuper(this, _default, [].concat(args));
     (0, _defineProperty2.default)(_this, "trackingEnabled", false);
-    _classPrivateFieldInitSpec(_this, _sessionRecordingInProgress, false);
     return _this;
   }
   (0, _inherits2.default)(_default, _elementorModules$Mod);
@@ -2460,10 +2479,6 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
       _mixpanelBrowser.default.init((_elementorCommon$conf = elementorCommon.config.editor_events) === null || _elementorCommon$conf === void 0 ? void 0 : _elementorCommon$conf.token, {
         persistence: 'localStorage',
         autocapture: false,
-        record_sessions_percent: 0,
-        record_idle_timeout_ms: 60000,
-        record_max_ms: 300000,
-        record_mask_text_selector: '',
         flags: true,
         api_hosts: {
           flags: 'https://api-eu.mixpanel.com'
@@ -2516,40 +2531,6 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
         site_language: (_elementorCommon$conf10 = elementorCommon.config.editor_events) === null || _elementorCommon$conf10 === void 0 ? void 0 : _elementorCommon$conf10.site_language
       }, data);
       _mixpanelBrowser.default.track(name, eventData, options);
-    }
-  }, {
-    key: "startSessionRecording",
-    value: function startSessionRecording() {
-      if (!this.canSendEvents() || this.isSessionRecordingInProgress()) {
-        return;
-      }
-      if (!this.trackingEnabled) {
-        this.enableTracking();
-      }
-      _mixpanelBrowser.default.start_session_recording();
-      this.setSessionRecordingInProgress(true);
-    }
-  }, {
-    key: "stopSessionRecording",
-    value: function stopSessionRecording() {
-      if (!this.canSendEvents() || !this.isSessionRecordingInProgress()) {
-        return;
-      }
-      _mixpanelBrowser.default.stop_session_recording();
-      this.setSessionRecordingInProgress(false);
-    }
-  }, {
-    key: "setSessionRecordingInProgress",
-    value: function setSessionRecordingInProgress(value) {
-      if ('boolean' !== typeof value) {
-        return;
-      }
-      _classPrivateFieldSet(_sessionRecordingInProgress, this, value);
-    }
-  }, {
-    key: "isSessionRecordingInProgress",
-    value: function isSessionRecordingInProgress() {
-      return _classPrivateFieldGet(_sessionRecordingInProgress, this);
     }
   }, {
     key: "featureFlagIsActive",
@@ -2687,6 +2668,11 @@ var _default = exports["default"] = /*#__PURE__*/function (_elementorModules$Mod
     value: function canSendEvents() {
       var _elementorCommon;
       return !!((_elementorCommon = elementorCommon) !== null && _elementorCommon !== void 0 && (_elementorCommon = _elementorCommon.config) !== null && _elementorCommon !== void 0 && (_elementorCommon = _elementorCommon.editor_events) !== null && _elementorCommon !== void 0 && _elementorCommon.can_send_events);
+    }
+  }, {
+    key: "getMixpanelInstance",
+    value: function getMixpanelInstance() {
+      return this.isMixpanelReady() ? _mixpanelBrowser.default : undefined;
     }
   }]);
 }(elementorModules.Module);

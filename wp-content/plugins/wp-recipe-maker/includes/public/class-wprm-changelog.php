@@ -40,7 +40,7 @@ class WPRM_Changelog {
 		if ( WPRM_Settings::get( 'changelog_enabled' ) ) {
 
 			// Get object.
-			$object_meta = self::get_object_meta( $object_id );
+			$object_meta = isset( $data['object_meta'] ) && is_array( $data['object_meta'] ) ? self::sanitize_object_meta( $data['object_meta'] ) : self::get_object_meta( $object_id );
 
 			// Add/sanitize meta.
 			$sanitized_meta = array();
@@ -50,6 +50,11 @@ class WPRM_Changelog {
 					if ( isset( $data['previous_status'] ) ) {
 						$sanitized_meta['previous_status'] = $data['previous_status'];
 					}
+					break;
+				case 'settings_updated':
+					$sanitized_meta['changes'] = self::sanitize_settings_changes(
+						isset( $data['changes'] ) && is_array( $data['changes'] ) ? $data['changes'] : array()
+					);
 					break;
 			}
 
@@ -120,6 +125,64 @@ class WPRM_Changelog {
 		}
 
 		return $meta;
+	}
+
+	/**
+	 * Sanitize object meta before logging it.
+	 *
+	 * @since    10.6.0
+	 * @param    array $object_meta Object meta to sanitize.
+	 */
+	public static function sanitize_object_meta( $object_meta ) {
+		$sanitized = array();
+
+		if ( isset( $object_meta['type'] ) ) {
+			$sanitized['type'] = sanitize_key( $object_meta['type'] );
+		}
+
+		if ( isset( $object_meta['name'] ) ) {
+			$sanitized['name'] = sanitize_text_field( $object_meta['name'] );
+		}
+
+		if ( isset( $object_meta['size'] ) ) {
+			$sanitized['size'] = intval( $object_meta['size'] );
+		}
+
+		if ( isset( $object_meta['source'] ) ) {
+			$sanitized['source'] = sanitize_key( $object_meta['source'] );
+		}
+
+		if ( isset( $object_meta['changed_count'] ) ) {
+			$sanitized['changed_count'] = intval( $object_meta['changed_count'] );
+		}
+
+		return $sanitized;
+	}
+
+	/**
+	 * Sanitize settings changes before logging them.
+	 *
+	 * @since    10.6.0
+	 * @param    array $changes Settings changes.
+	 */
+	public static function sanitize_settings_changes( $changes ) {
+		$sanitized_changes = array();
+
+		foreach ( $changes as $change ) {
+			if ( ! is_array( $change ) ) {
+				continue;
+			}
+
+			$sanitized_changes[] = array(
+				'id' => isset( $change['id'] ) ? sanitize_key( $change['id'] ) : '',
+				'label' => isset( $change['label'] ) ? sanitize_text_field( $change['label'] ) : '',
+				'before' => isset( $change['before'] ) ? sanitize_text_field( $change['before'] ) : '',
+				'after' => isset( $change['after'] ) ? sanitize_text_field( $change['after'] ) : '',
+				'masked' => ! empty( $change['masked'] ),
+			);
+		}
+
+		return $sanitized_changes;
 	}
 
 	/**

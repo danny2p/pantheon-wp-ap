@@ -123,6 +123,15 @@
     }
 }
 
+// Override secondary button styles. Their transparant background doesn't work well with the dark footer.
+.wprm-admin-modal-footer {
+    button.button-secondary {
+        background-color: white !important;
+        color: #444;
+        border-color: white;
+    }
+}
+
 @media screen and (min-width: 782px) {
     .wprm-admin-modal {
         .wprm-admin-modal-footer {

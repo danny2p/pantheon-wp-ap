@@ -8,6 +8,11 @@ const FieldTextarea = (props) => {
             onChange={(e) => {
                 props.onChange(e.target.value);
             }}
+            onBlur={(e) => {
+                if ( props.onBlur ) {
+                    props.onBlur(e.target.value);
+                }
+            }}
         />
     );
 }

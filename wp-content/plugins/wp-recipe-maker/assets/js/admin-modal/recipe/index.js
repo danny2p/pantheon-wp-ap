@@ -475,52 +475,56 @@ export default class Recipe extends Component {
 
     saveRecipe( closeAfter = false ) {
         if ( ! this.state.savingChanges ) {
-            const savingTimeout = setTimeout(() => {
+            this.blurActiveElement();
+
+            setTimeout(() => {
+                const savingTimeout = setTimeout(() => {
+                    this.setState({
+                        saveResult: 'waiting',
+                    });
+                }, 5000 );
+
                 this.setState({
-                    saveResult: 'waiting',
-                });
-            }, 5000 );
+                    savingChanges: true,
+                    saveResult: false,
+                }, () => {
+                    Api.recipe.save(this.state.recipe).then((data) => {
+                        clearTimeout( savingTimeout );
 
-            this.setState({
-                savingChanges: true,
-                saveResult: false,
-            }, () => {    
-                Api.recipe.save(this.state.recipe).then((data) => {
-                    clearTimeout( savingTimeout );
-
-                    if ( data && data.recipe ) {
-                        const recipe = JSON.parse( JSON.stringify( data.recipe ) );
-                        this.setState((prevState) => ({
-                            recipe,
-                            originalRecipe: JSON.parse( JSON.stringify( recipe ) ),
-                            savingChanges: false,
-                            saveResult: 'ok',
-                            forceRerender: prevState.forceRerender + 1,
-                        }), () => {
-                            if ( 'function' === typeof this.props.args.saveCallback ) {
-                                this.props.args.saveCallback( recipe );
-                            }
-                            if ( closeAfter ) {
-                                this.props.maybeCloseModal();
-                            }
-                            
-                            // Show save OK message for 3 seconds.
-                            setTimeout(() => {
-                                if ( 'ok' === this.state.saveResult ) {
-                                    this.setState({
-                                        saveResult: false,
-                                    });
+                        if ( data && data.recipe ) {
+                            const recipe = JSON.parse( JSON.stringify( data.recipe ) );
+                            this.setState((prevState) => ({
+                                recipe,
+                                originalRecipe: JSON.parse( JSON.stringify( recipe ) ),
+                                savingChanges: false,
+                                saveResult: 'ok',
+                                forceRerender: prevState.forceRerender + 1,
+                            }), () => {
+                                if ( 'function' === typeof this.props.args.saveCallback ) {
+                                    this.props.args.saveCallback( recipe );
                                 }
-                            }, 3000);
-                        });
-                    } else {
-                        this.setState({
-                            savingChanges: false,
-                            saveResult: 'failed',
-                        });
-                    }
+                                if ( closeAfter ) {
+                                    this.props.maybeCloseModal();
+                                }
+
+                                // Show save OK message for 3 seconds.
+                                setTimeout(() => {
+                                    if ( 'ok' === this.state.saveResult ) {
+                                        this.setState({
+                                            saveResult: false,
+                                        });
+                                    }
+                                }, 3000);
+                            });
+                        } else {
+                            this.setState({
+                                savingChanges: false,
+                                saveResult: 'failed',
+                            });
+                        }
+                    });
                 });
-            });
+            }, 0);
         }
     }
 

@@ -188,9 +188,16 @@ export default class RecipeIngredients extends Component {
                 mode = (
                     <Content
                         ingredients={ this.props.ingredients }
-                        onIngredientsChange={ ( ingredients_flat ) => {                            
-                            this.props.onRecipeChange({
-                                ingredients_flat,
+                        onIngredientsChange={ ( ingredientsUpdate ) => {
+                            this.props.onRecipeChange((recipe) => {
+                                const currentIngredients = recipe && recipe.ingredients_flat ? recipe.ingredients_flat : [];
+                                const ingredients_flat = 'function' === typeof ingredientsUpdate
+                                    ? ingredientsUpdate( currentIngredients )
+                                    : ingredientsUpdate;
+
+                                return {
+                                    ingredients_flat,
+                                };
                             }, {
                                 historyMode: 'immediate',
                                 historyBoundary: true,

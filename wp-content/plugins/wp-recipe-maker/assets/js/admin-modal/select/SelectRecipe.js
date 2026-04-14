@@ -41,7 +41,7 @@ export default class SelectRecipe extends Component {
                 defaultOptions={this.props.options.concat(wprm_admin.latest_recipes)}
                 loadOptions={this.getOptions.bind(this)}
                 noOptionsMessage={() => __wprm( 'No recipes found' ) }
-                clearable={false}
+                isClearable={ this.props.hasOwnProperty( 'isClearable' ) ? this.props.isClearable : false }
             />
         );
     }

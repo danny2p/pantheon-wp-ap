@@ -49,12 +49,13 @@ require_once( 'group-nutrition-calculation.php' );
 require_once( 'group-translate.php' );
 require_once( 'group-unit-conversion.php' );
 require_once( 'group-recipe-submission.php' );
+require_once( 'group-favorites.php' );
 require_once( 'group-recipe-collections.php' );
-require_once( 'group-analytics.php' );
 
 // Backend.
 require_once( 'group-recipe-defaults.php' );
 require_once( 'group-ai-assistant.php' );
+require_once( 'group-analytics.php' );
 require_once( 'group-import.php' );
 require_once( 'group-changelog.php' );
 
@@ -101,11 +102,12 @@ $settings_structure = array(
 	$translate,
 	$unit_conversion,
 	$recipe_submission,
-	$analytics,
+	$favorites,
 	$recipe_collections,
 	array( 'header' => __( 'Backend', 'wp-recipe-maker' ) ),
 	$recipe_defaults,
 	$ai_assistant,
+	$analytics,
 	$import,
 	$changelog,
 	array( 'header' => __( 'Advanced', 'wp-recipe-maker' ) ),

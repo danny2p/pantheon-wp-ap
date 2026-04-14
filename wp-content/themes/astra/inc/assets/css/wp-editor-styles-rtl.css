@@ -308,7 +308,7 @@ html .edit-widgets-main-block-list :where(.wp-block) {
   background: #0073aa;
   color: #fff;
   border-color: rgb(0, 63.25, 93.5);
-  box-shadow: inset 0 2px 5px -3px black;
+  box-shadow: inset 0 2px 5px -3px hsl(199.4117647059, 100%, -16.6666666667%);
 }
 #elementor-editor-button {
   font-size: 14px;

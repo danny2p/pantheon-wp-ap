@@ -1,0 +1,85 @@
+@keyframes wprm-progress-shine {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.wprm-progress-container {
+	position: relative;
+	width: 100%;
+	max-width: 400px;
+	height: 28px;
+	margin: 12px 0;
+	background: #e2e8f0;
+	border-radius: 14px;
+	border: 1px solid #dcdcde;
+	overflow: hidden;
+}
+
+.wprm-progress-fill {
+	width: 0%;
+	height: 100%;
+	border-radius: 14px;
+	transition: width 0.4s ease;
+	background-size: 200% 100%;
+	animation: wprm-progress-shine 2s ease-in-out infinite;
+	background-image:
+		linear-gradient(
+			90deg,
+			var(--wp-admin-theme-color, #3858e9) 0%,
+			color-mix(in srgb, var(--wp-admin-theme-color, #3858e9), white 25%) 50%,
+			var(--wp-admin-theme-color, #3858e9) 100%
+		);
+
+	&.wprm-progress-complete {
+		animation: none;
+		background-image: none;
+		background-color: #16a34a;
+	}
+}
+
+.wprm-progress-container .wprm-admin-loader {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid rgba(200, 200, 200, 0.3);
+	border-radius: 50%;
+	border-top-color: #444;
+	animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}
+
+.wprm-progress-percentage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #1e293b;
+	pointer-events: none;
+	transition: color 0.3s ease;
+
+	&.wprm-progress-percentage-light {
+		color: #fff;
+	}
+
+	&.wprm-progress-percentage-dark {
+		color: #1e293b;
+	}
+
+	&.wprm-progress-percentage-complete {
+		color: #fff;
+	}
+}

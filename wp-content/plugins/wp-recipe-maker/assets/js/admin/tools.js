@@ -4,6 +4,7 @@ let action = false;
 let args = {};
 let posts = [];
 let posts_total = 0;
+let reportData = false;
 
 async function postJSON(data) {
 	const body = new URLSearchParams(data).toString();
@@ -40,11 +41,15 @@ async function handle_posts() {
 
 		if (out.success) {
 			posts = out.data.posts_left;
+			if (out.data && out.data.report) {
+				mergeReportData(out.data.report);
+			}
 			update_progress_bar();
 
 			if (posts.length > 0) {
 				await handle_posts();
 			} else {
+				render_report();
 				const finished = document.querySelector('#wprm-tools-finished');
 				if (finished) {
 					finished.style.display = 'block';
@@ -59,12 +64,246 @@ async function handle_posts() {
 	}
 }
 
+function getContrastClass(color) {
+	const ctx = document.createElement('canvas').getContext('2d');
+	ctx.fillStyle = color;
+	const hex = ctx.fillStyle;
+	const r = parseInt(hex.slice(1, 3), 16);
+	const g = parseInt(hex.slice(3, 5), 16);
+	const b = parseInt(hex.slice(5, 7), 16);
+	const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+	return luminance > 0.5 ? 'wprm-progress-percentage-dark' : 'wprm-progress-percentage-light';
+}
+
 function update_progress_bar() {
 	const percentage = (1.0 - posts.length / posts_total) * 100;
+	const isComplete = percentage >= 100;
 	const bar = document.querySelector('#wprm-tools-progress-bar');
 	if (bar) {
 		bar.style.width = `${percentage}%`;
+		bar.classList.toggle('wprm-progress-complete', isComplete);
 	}
+
+	const label = document.querySelector('#wprm-tools-progress-container .wprm-progress-percentage');
+	if (label) {
+		label.textContent = isComplete ? '100%' : `${percentage.toFixed(1)}%`;
+		label.classList.remove('wprm-progress-percentage-light', 'wprm-progress-percentage-dark', 'wprm-progress-percentage-complete');
+
+		if (isComplete) {
+			label.classList.add('wprm-progress-percentage-complete');
+		} else if (percentage >= 50) {
+			const color = getComputedStyle(document.documentElement).getPropertyValue('--wp-admin-theme-color').trim() || '#3858e9';
+			label.classList.add(getContrastClass(color));
+		}
+	}
+}
+
+function getOrCreateReportContainer() {
+	let reportContainer = document.querySelector('#wprm-tools-report');
+	if (reportContainer) {
+		return reportContainer;
+	}
+
+	const wrap = document.querySelector('.wrap.wprm-tools');
+	if (!wrap) {
+		return null;
+	}
+
+	reportContainer = document.createElement('div');
+	reportContainer.id = 'wprm-tools-report';
+
+	const finished = document.querySelector('#wprm-tools-finished');
+	if (finished && finished.parentNode) {
+		finished.parentNode.insertBefore(reportContainer, finished.nextSibling);
+	} else {
+		wrap.appendChild(reportContainer);
+	}
+
+	return reportContainer;
+}
+
+function normalizeReport(report) {
+	if (Array.isArray(report)) {
+		return {
+			toggle: 'Detailed Report',
+			title: '',
+			columns: [],
+			entries: report,
+			json_label: 'Full Report JSON',
+		};
+	}
+
+	if (!report || 'object' !== typeof report) {
+		return false;
+	}
+
+	return {
+		toggle: report.toggle || 'Detailed Report',
+		title: report.title || '',
+		summary: report.summary || '',
+		columns: Array.isArray(report.columns) ? report.columns : [],
+		entries: Array.isArray(report.entries) ? report.entries : [],
+		json_label: report.json_label || 'Full Report JSON',
+	};
+}
+
+function mergeReportData(report) {
+	const normalized = normalizeReport(report);
+	if (!normalized) {
+		return;
+	}
+
+	if (!reportData) {
+		reportData = normalized;
+		return;
+	}
+
+	if (normalized.title) {
+		reportData.title = normalized.title;
+	}
+
+	if (normalized.summary) {
+		reportData.summary = normalized.summary;
+	}
+
+	if (normalized.toggle) {
+		reportData.toggle = normalized.toggle;
+	}
+
+	if (normalized.json_label) {
+		reportData.json_label = normalized.json_label;
+	}
+
+	if (normalized.columns.length) {
+		reportData.columns = normalized.columns;
+	}
+
+	reportData.entries = reportData.entries.concat(normalized.entries);
+}
+
+function stringifyReportValue(value) {
+	if (Array.isArray(value)) {
+		if (!value.length) {
+			return '-';
+		}
+
+		const allSimpleValues = value.every((item) => 'object' !== typeof item || null === item);
+		return allSimpleValues ? value.join(', ') : JSON.stringify(value);
+	}
+
+	if ('object' === typeof value && null !== value) {
+		return JSON.stringify(value);
+	}
+
+	if (false === value || null === value || 'undefined' === typeof value || '' === value) {
+		return '-';
+	}
+
+	return `${value}`;
+}
+
+function getReportColumns(entries, configuredColumns) {
+	if (Array.isArray(configuredColumns) && configuredColumns.length) {
+		return configuredColumns.map((column) => {
+			if ('string' === typeof column) {
+				return {
+					key: column,
+					label: column,
+				};
+			}
+
+			return column;
+		});
+	}
+
+	if (!Array.isArray(entries) || !entries.length || 'object' !== typeof entries[0]) {
+		return [];
+	}
+
+	return Object.keys(entries[0]).map((key) => ({
+		key,
+		label: key,
+	}));
+}
+
+function renderReportTable(reportContainer, entries, columns) {
+	if (!entries.length || !columns.length) {
+		return;
+	}
+
+	const table = document.createElement('table');
+	table.className = 'widefat striped';
+
+	const thead = document.createElement('thead');
+	const headRow = document.createElement('tr');
+	columns.forEach((column) => {
+		const th = document.createElement('th');
+		th.textContent = column.label || column.key;
+		headRow.appendChild(th);
+	});
+	thead.appendChild(headRow);
+	table.appendChild(thead);
+
+	const tbody = document.createElement('tbody');
+	entries.forEach((entry) => {
+		const row = document.createElement('tr');
+
+		columns.forEach((column) => {
+			const td = document.createElement('td');
+			td.textContent = stringifyReportValue(entry[column.key]);
+			row.appendChild(td);
+		});
+
+		tbody.appendChild(row);
+	});
+
+	table.appendChild(tbody);
+	reportContainer.appendChild(table);
+}
+
+function render_report() {
+	if (!reportData || !Array.isArray(reportData.entries) || !reportData.entries.length) {
+		return;
+	}
+
+	const reportContainer = getOrCreateReportContainer();
+	if (!reportContainer) {
+		return;
+	}
+
+	reportContainer.textContent = '';
+
+	const details = document.createElement('details');
+
+	const toggle = document.createElement('summary');
+	toggle.textContent = reportData.toggle || 'Detailed Report';
+	details.appendChild(toggle);
+
+	if (reportData.title) {
+		const heading = document.createElement('h3');
+		heading.textContent = reportData.title;
+		details.appendChild(heading);
+	}
+
+	if (reportData.summary) {
+		const summary = document.createElement('p');
+		summary.textContent = reportData.summary;
+		details.appendChild(summary);
+	}
+
+	renderReportTable(details, reportData.entries, getReportColumns(reportData.entries, reportData.columns));
+
+	const jsonDetails = document.createElement('details');
+	const jsonSummary = document.createElement('summary');
+	jsonSummary.textContent = reportData.json_label || 'Full Report JSON';
+	jsonDetails.appendChild(jsonSummary);
+
+	const pre = document.createElement('pre');
+	pre.textContent = JSON.stringify(reportData, null, 2);
+	jsonDetails.appendChild(pre);
+	details.appendChild(jsonDetails);
+
+	reportContainer.appendChild(details);
 }
 
 function getFilenameFromHeader(header) {
@@ -83,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		args = wprm_tools.args;
 		posts = wprm_tools.posts;
 		posts_total = wprm_tools.posts.length;
+		reportData = false;
 		handle_posts();
 	}
 

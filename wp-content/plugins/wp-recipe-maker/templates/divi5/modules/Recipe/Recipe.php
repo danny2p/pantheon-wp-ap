@@ -20,6 +20,13 @@ use ET\Builder\Packages\Module\Options\Element\ElementComponents;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;
 
 class Recipe implements DependencyInterface {
+	/**
+	 * Track whether the Divi 5 recipe module has been registered.
+	 *
+	 * @var bool
+	 */
+	private static $registered = false;
+
     /**
      * Sanitizer that passes through content unchanged (for already-sanitized shortcode output).
      *
@@ -34,23 +41,20 @@ class Recipe implements DependencyInterface {
      * Bootstrap the module registration.
      */
     public function load() {
-        $module_json_folder_path = trailingslashit( WPRM_DIVI5_JSON_PATH ) . 'wprm-recipe/';
+		if ( self::$registered || ! defined( 'WPRM_DIVI5_MODULES_PATH' ) || ! class_exists( ModuleRegistration::class ) ) {
+			return;
+		}
 
-        add_action(
-            'init',
-            function () use ( $module_json_folder_path ) {
-                if ( ! class_exists( ModuleRegistration::class ) ) {
-                    return;
-                }
+		$module_path = trailingslashit( WPRM_DIVI5_MODULES_PATH ) . 'wprm-recipe/';
 
-                ModuleRegistration::register_module(
-                    $module_json_folder_path,
-                    [
-                        'render_callback' => [ self::class, 'render_callback' ],
-                    ]
-                );
-            }
-        );
+		ModuleRegistration::register_module(
+			$module_path,
+			array(
+				'render_callback' => array( self::class, 'render_callback' ),
+			)
+		);
+
+		self::$registered = true;
     }
 
     /**

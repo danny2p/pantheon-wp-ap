@@ -26,7 +26,7 @@ class WPRM_SC_Counter extends WPRM_Template_Shortcode {
 				'default' => '0',
 			),
 			'text' => array(
-				'help' => 'Potential placeholders: %count%, %recipe_name%',
+				'help' => 'Potential placeholders: %count%, %recipe_name%, %parent_post_name%, %parent_post_or_recipe_name%',
 				'default' => '%count%. %recipe_name%',
 				'type' => 'text',
 			),

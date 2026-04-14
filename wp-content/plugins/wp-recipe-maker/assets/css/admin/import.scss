@@ -1,3 +1,42 @@
+@use 'progress-bar';
+
+.wprm-import-warning {
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+	margin-top: 16px;
+	padding: 16px 20px;
+	background: #fef8ee;
+	border: 1px solid #f0c33c;
+	border-radius: 12px;
+	box-sizing: border-box;
+
+	> .dashicons {
+		color: #9d6e00;
+		font-size: 22px;
+		width: 22px;
+		height: 22px;
+		flex-shrink: 0;
+		margin-top: 1px;
+	}
+
+	strong {
+		display: block;
+		margin-bottom: 4px;
+		color: #6e4600;
+	}
+
+	p {
+		margin: 4px 0 0 0;
+		color: #6e4600;
+		font-size: 13px;
+	}
+
+	> div > .button {
+		margin-top: 12px;
+	}
+}
+
 .wprm-import {
 	p {
 		max-width: 600px;
@@ -33,21 +72,6 @@
 				width: 30%;
 			}
 		}
-	}
-
-	#wprm-import-progress-container {
-		width: 100%;
-		max-width: 300px;
-		height: 20px;
-		margin: 10px 0;
-		border: 1px solid black;
-		background-color: white;
-	}
-
-	#wprm-import-progress-bar {
-		width: 0%;
-		height: 100%;
-		background-color: #4484ce;
 	}
 
 	#wprm-import-finished {

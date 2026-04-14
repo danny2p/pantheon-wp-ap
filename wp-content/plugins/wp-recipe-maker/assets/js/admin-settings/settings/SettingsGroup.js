@@ -7,9 +7,6 @@ import SettingsSubGroup from './SettingsSubGroup';
 import RequiredLabel from './RequiredLabel';
 
 const SettingsGroup = (props) => {
-    // Check if the group itself (name/description) matches the search
-    const groupMatches = props.normalizedSearchQuery ? Helpers.groupNameOrDescriptionMatches(props.group, props.normalizedSearchQuery) : false;
-    
     return (
         <div id={`wprm-settings-group-${props.group.id}`} className="wprm-settings-group">
             <RequiredLabel object={props.group}/>
@@ -41,8 +38,6 @@ const SettingsGroup = (props) => {
                     onSettingChange={props.onSettingChange}
                     settingsChanged={props.settingsChanged}
                     searchQuery={props.searchQuery}
-                    normalizedSearchQuery={props.normalizedSearchQuery}
-                    parentMatched={groupMatches}
                 />
                 :
                 null
@@ -54,20 +49,15 @@ const SettingsGroup = (props) => {
                     if ( ! Helpers.dependencyMet(subgroup, props.settings ) ) {
                         return null;
                     }
-                    
-                    // If group matches, show all subgroups. Otherwise, filter by search query
-                    if (!groupMatches && props.normalizedSearchQuery && !Helpers.subgroupMatchesSearch(subgroup, props.normalizedSearchQuery)) {
-                        return null;
-                    }
-                    
+
                     return <SettingsSubGroup
+                        group={props.group}
+                        subgroupIndex={i}
                         settings={props.settings}
                         onSettingChange={props.onSettingChange}
                         settingsChanged={props.settingsChanged}
                         subgroup={subgroup}
                         searchQuery={props.searchQuery}
-                        normalizedSearchQuery={props.normalizedSearchQuery}
-                        parentMatched={groupMatches}
                         key={i}
                     />
                 })
@@ -84,7 +74,6 @@ SettingsGroup.propTypes = {
     settingsChanged: PropTypes.bool.isRequired,
     onSettingChange: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
-    normalizedSearchQuery: PropTypes.string.isRequired,
 }
 
 export default SettingsGroup;

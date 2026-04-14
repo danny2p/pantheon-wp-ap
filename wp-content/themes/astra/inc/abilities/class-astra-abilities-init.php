@@ -106,6 +106,15 @@ class Astra_Abilities_Init {
 		$abilities_dir = ASTRA_THEME_DIR . 'inc/abilities/';
 
 		$ability_files = array(
+			// Performance abilities.
+			'admin/settings/performance/class-astra-get-performance',
+			'admin/settings/performance/class-astra-update-performance',
+			'admin/settings/performance/class-astra-flush-local-fonts',
+			'admin/settings/performance/class-astra-get-load-google-fonts-locally',
+			'admin/settings/performance/class-astra-get-preload-local-fonts',
+			'admin/settings/performance/class-astra-update-load-google-fonts-locally',
+			'admin/settings/performance/class-astra-update-preload-local-fonts',
+
 			// Typography abilities.
 			'customizer/globals/typography/class-astra-get-body-font',
 			'customizer/globals/typography/class-astra-update-body-font',
@@ -137,6 +146,20 @@ class Astra_Abilities_Init {
 			'customizer/globals/buttons/class-astra-get-global-buttons',
 			'customizer/globals/buttons/class-astra-update-global-buttons',
 
+			// Header Builder abilities.
+			'customizer/header/class-astra-get-header-builder',
+			'customizer/header/class-astra-get-header-builder-design',
+			'customizer/header/class-astra-update-header-builder',
+			'customizer/header/class-astra-update-header-builder-design',
+			'customizer/header/class-astra-migrate-header-components',
+			'customizer/header/builder/class-astra-list-header-builder-settings',
+
+			// Footer Builder abilities.
+			'customizer/footer/class-astra-get-footer-builder',
+			'customizer/footer/class-astra-get-footer-builder-design',
+			'customizer/footer/class-astra-update-footer-builder',
+			'customizer/footer/class-astra-update-footer-builder-design',
+
 			// Blogs / Post Types abilities.
 			'customizer/posttypes/blog/class-astra-get-blog-archive',
 			'customizer/posttypes/blog/class-astra-update-blog-archive',
@@ -156,6 +179,18 @@ class Astra_Abilities_Init {
 			// Post Meta abilities.
 			'admin/postmeta/class-astra-get-postmeta',
 			'admin/postmeta/class-astra-update-postmeta',
+
+			// Sidebar abilities.
+			'customizer/general/sidebar/class-astra-get-sidebar',
+			'customizer/general/sidebar/class-astra-get-sidebar-layout',
+			'customizer/general/sidebar/class-astra-get-sidebar-style',
+			'customizer/general/sidebar/class-astra-get-sidebar-width',
+			'customizer/general/sidebar/class-astra-get-sticky-sidebar',
+			'customizer/general/sidebar/class-astra-update-sidebar',
+			'customizer/general/sidebar/class-astra-update-sidebar-layout',
+			'customizer/general/sidebar/class-astra-update-sidebar-style',
+			'customizer/general/sidebar/class-astra-update-sidebar-width',
+			'customizer/general/sidebar/class-astra-update-sticky-sidebar',
 		);
 
 		foreach ( $ability_files as $file ) {

@@ -1780,7 +1780,7 @@ class WPRM_SC_Instructions extends WPRM_Template_Shortcode {
 
 						// Output.
 						$output .= '<' . $tag . ' class="'. esc_attr( implode( ' ', $classes ) ) . '" data-separator="' . esc_attr( $separator ) . '"' . $data_keep_notes . $both_units_data_attr . $split_data_attr . $style . '>';
-						$output .= wp_strip_all_tags( $text );
+						$output .= wp_kses_post( $text );
 						$output .= $separator;
 
 					$output .= '</' . $tag . '>';

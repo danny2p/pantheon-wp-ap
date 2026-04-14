@@ -1,4 +1,7 @@
 export default {
+    stripAdjustableShortcodes( text = '' ) {
+        return String( text ).replace( /\[\/?adjustable]/ig, '' ).trim();
+    },
     getIngredientString( ingredient, includeNotes = true ) {
         let ingredientString = '';
 
@@ -15,10 +18,7 @@ export default {
             ingredientString = ingredientString.replace( /(<([^>]+)>)/ig, '' );
 
             // Remove adjustable shortcodes.
-            ingredientString = ingredientString.replace( /\[\/?adjustable]/ig, '' );
-
-            // Trim.
-            ingredientString = ingredientString.trim();
+            ingredientString = this.stripAdjustableShortcodes( ingredientString );
         }
 
         return ingredientString;

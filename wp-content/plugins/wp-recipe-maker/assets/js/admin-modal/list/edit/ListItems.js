@@ -192,14 +192,14 @@ export default class ListItems extends Component {
                     className="wprm-admin-modal-field-items-actions"
                 >
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.addField( 'roundup' );
                         } }
                     >{ __wprm( 'Add Roundup Item' ) }</button>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.addField( 'text' );

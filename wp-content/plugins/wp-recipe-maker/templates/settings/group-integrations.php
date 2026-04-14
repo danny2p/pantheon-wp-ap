@@ -222,6 +222,20 @@ $integrations = array(
 			),
 		),
 		array(
+			'name' => __( 'CookPal', 'wp-recipe-maker' ),
+			'description' => __( 'Let your visitors open the CookPal assistant directly from your recipe card with a customizable button.', 'wp-recipe-maker' ),
+			'documentation' => 'https://bootstrapped.ventures/recommends/cookpal',
+			'settings' => array(
+				array(
+					'id' => 'integration_cookpal_add',
+					'name' => __( 'Automatically add CookPal Button', 'wp-recipe-maker' ),
+					'description' => __( 'Enable to automatically output the CookPal button after the ingredients section. Alternatively, add the button wherever you want in the Template Editor.', 'wp-recipe-maker' ),
+					'type' => 'toggle',
+					'default' => false,
+				),
+			),
+		),
+		array(
 			'name' => __( 'Your own Recipe App with NAKKO Recipe to App', 'wp-recipe-maker' ),
 			'description' => 'Provide your users with a dedicated app to increase traffic and foster loyalty. Our native apps, available for both iOS and Android, seamlessly integrate with your WP Recipe Maker backend, offering an outstanding mobile experience for your visitors. Additionally, an app store presence enhances your brand visibility and you can take advantage of the profitable monetization opportunities available within the app. Ensure your website is optimized and compatible with our services for converting your recipe site into a mobile app by performing a free preliminary compatibility scan.',
 			'documentation' => 'https://recipetoapp.com',

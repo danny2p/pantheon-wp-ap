@@ -9600,7 +9600,9 @@ var wp;
           roomState.processAwarenessUpdate(room.awareness);
           if (roomState.isPrimaryRoom && Object.keys(room.awareness).length > 1) {
             hasCollaborators = true;
-            roomState.updateQueue.resume();
+            roomStates.forEach((state) => {
+              state.updateQueue.resume();
+            });
           }
           const responseUpdates = room.updates.map((update) => roomState.processDocUpdate(update)).filter(
             (update) => Boolean(update)
@@ -9638,7 +9640,12 @@ var wp;
             continue;
           }
           const state = roomStates.get(room.room);
-          state.updateQueue.restore(room.updates);
+          if (room.updates.length > 0 && state.endCursor > 0) {
+            state.updateQueue.clear();
+            state.updateQueue.add(state.createCompactionUpdate());
+          } else if (room.updates.length > 0) {
+            state.updateQueue.restore(room.updates);
+          }
           state.log(
             "Error posting sync update, will retry with backoff",
             {

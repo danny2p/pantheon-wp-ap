@@ -20,6 +20,14 @@
     }
 }
 
+#wprm-template {
+    input[type="text"], input[type="number"], select {
+        line-height: 2;
+        min-height: 30px;
+        padding: 0 5px;
+    }
+}
+
 #wprm-template-menu,
 .wprm-template-properties,
 .wprm-main-container {

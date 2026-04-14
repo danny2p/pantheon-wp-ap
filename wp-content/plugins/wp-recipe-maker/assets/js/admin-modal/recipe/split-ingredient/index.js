@@ -361,7 +361,7 @@ export default class SplitIngredient extends Component {
                             </Fragment>
                         )}
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={this.addSplit}
                         >
                             { __wprm( 'Add Split' ) }
@@ -373,14 +373,14 @@ export default class SplitIngredient extends Component {
                 </div>
                 <Footer>
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={this.save}
                         disabled={!this.hasValidSplits()}
                     >
                         { __wprm( 'Save' ) }
                     </button>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={this.props.maybeCloseModal}
                     >
                         { __wprm( 'Cancel' ) }

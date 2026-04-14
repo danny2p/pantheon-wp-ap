@@ -87,10 +87,14 @@ window.WPRMPrint = {
         }
     },
     removeLinks() {
-        const links = document.querySelector( '#wprm-print-content' ).querySelectorAll( 'a:not(.wprm-recipe-link)' );
+        const recipeCards = document.querySelectorAll( '#wprm-print-content .wprm-print-recipe' );
 
-        for ( let link of links ) {
-            link.outerHTML = '<span>' + link.innerHTML + '</span>';
+        for ( let recipeCard of recipeCards ) {
+            const links = recipeCard.querySelectorAll( 'a:not(.wprm-recipe-link)' );
+
+            for ( let link of links ) {
+                link.outerHTML = '<span>' + link.innerHTML + '</span>';
+            }
         }
     },
     checkToggles() {

@@ -26,6 +26,7 @@ const FEATURE_EXPLORER_TEMPLATE = {
       [wprm-recipe-print style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold" icon="printer-3" text="Print"]    
       [wprm-recipe-download-pdf style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold" icon="article" text="PDF"]
       [wprm-recipe-add-to-collection style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold" icon="bookmark" text="Save"]
+      [wprm-recipe-favorite style="inline-button" horizontal_padding="15px" border_radius="50px" text_style="semi-bold" icon="heart-empty" icon_active="heart-full" text="Favorite" text_active="Favorited"]
       [wprm-recipe-cook-mode style="inline-button" text_style="semi-bold" horizontal_padding="15px" border_radius="50px" icon="chef-hat-2"]
     </div>
     <div class="wprm-layout-column wprm-column-width-66 wprm-align-rows-center">

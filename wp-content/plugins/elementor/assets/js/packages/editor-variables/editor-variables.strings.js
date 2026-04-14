@@ -1,5 +1,7 @@
 __( 'Unexpected response from server', 'elementor' );
 __( 'Unexpected response from server', 'elementor' );
+__( 'Stop syncing to Global Colors', 'elementor' );
+__( 'Sync to Global Colors', 'elementor' );
 __( 'Give your variable a name.', 'elementor' );
 __( 'Add a value to complete your variable.', 'elementor' );
 __( 'Use letters, numbers, dashes (-), or underscores (_) for the name.', 'elementor' );
@@ -65,6 +67,14 @@ __( 'You have unsaved changes', 'elementor' );
 __( 'To avoid losing your updates, save your changes before leaving.', 'elementor' );
 __( 'Discard', 'elementor' );
 __( 'Save', 'elementor' );
+__( 'Stop syncing variable color', 'elementor' );
+__(
+						'This will disconnect the variable color from Global Colors. Existing uses on your site will automatically switch to a default color.',
+						'elementor'
+					);
+__( 'Cancel', 'elementor' );
+__( 'Got it', 'elementor' );
+__( "Don't show again", 'elementor' );
 __( 'Add variable', 'elementor' );
 /* translators: %s: Variable Type. */
 __( '%s variables', 'elementor' );

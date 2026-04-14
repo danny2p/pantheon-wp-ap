@@ -1261,171 +1261,6 @@ var _default = exports["default"] = ScreenViewTracking;
 
 /***/ }),
 
-/***/ "../app/assets/js/event-track/dashboard/top-bar.js":
-/*!*********************************************************!*\
-  !*** ../app/assets/js/event-track/dashboard/top-bar.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "../node_modules/@babel/runtime/helpers/inherits.js"));
-var _wpDashboardTracking = _interopRequireWildcard(__webpack_require__(/*! ../wp-dashboard-tracking */ "../app/assets/js/event-track/wp-dashboard-tracking.js"));
-var _baseTracking = _interopRequireDefault(__webpack_require__(/*! ./base-tracking */ "../app/assets/js/event-track/dashboard/base-tracking.js"));
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
-function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2.default)(o), (0, _possibleConstructorReturn2.default)(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2.default)(t).constructor) : o.apply(t, e)); }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-var TOP_BAR_SELECTORS = {
-  TOP_BAR_ROOT: '.e-admin-top-bar',
-  BAR_BUTTON: '.e-admin-top-bar__bar-button',
-  BUTTON_TITLE: '.e-admin-top-bar__bar-button-title',
-  MAIN_AREA: '.e-admin-top-bar__main-area',
-  SECONDARY_AREA: '.e-admin-top-bar__secondary-area'
-};
-var TopBarTracking = /*#__PURE__*/function (_BaseTracking) {
-  function TopBarTracking() {
-    (0, _classCallCheck2.default)(this, TopBarTracking);
-    return _callSuper(this, TopBarTracking, arguments);
-  }
-  (0, _inherits2.default)(TopBarTracking, _BaseTracking);
-  return (0, _createClass2.default)(TopBarTracking, null, [{
-    key: "init",
-    value: function init() {
-      this.waitForTopBar();
-    }
-  }, {
-    key: "waitForTopBar",
-    value: function waitForTopBar() {
-      var _this = this;
-      var topBar = document.querySelector(TOP_BAR_SELECTORS.TOP_BAR_ROOT);
-      if (topBar) {
-        this.attachTopBarTracking(topBar);
-        return;
-      }
-      var observer = this.addObserver(document.body, {
-        childList: true,
-        subtree: true
-      }, function () {
-        var foundTopBar = document.querySelector(TOP_BAR_SELECTORS.TOP_BAR_ROOT);
-        if (foundTopBar) {
-          _this.attachTopBarTracking(foundTopBar);
-          observer.disconnect();
-          clearTimeout(timeoutId);
-        }
-      });
-      var timeoutId = setTimeout(function () {
-        observer.disconnect();
-      }, 10000);
-    }
-  }, {
-    key: "attachTopBarTracking",
-    value: function attachTopBarTracking(topBar) {
-      var _this2 = this;
-      var buttons = topBar.querySelectorAll(TOP_BAR_SELECTORS.BAR_BUTTON);
-      buttons.forEach(function (button) {
-        _this2.addEventListenerTracked(button, 'click', function (event) {
-          _this2.handleTopBarClick(event);
-        });
-      });
-      this.observeTopBarChanges(topBar);
-    }
-  }, {
-    key: "observeTopBarChanges",
-    value: function observeTopBarChanges(topBar) {
-      var _this3 = this;
-      this.addObserver(topBar, {
-        childList: true,
-        subtree: true
-      }, function (mutations) {
-        mutations.forEach(function (mutation) {
-          if ('childList' === mutation.type) {
-            mutation.addedNodes.forEach(function (node) {
-              if (1 === node.nodeType) {
-                if (node.matches && node.matches(TOP_BAR_SELECTORS.BAR_BUTTON)) {
-                  _this3.addEventListenerTracked(node, 'click', function (event) {
-                    _this3.handleTopBarClick(event);
-                  });
-                } else {
-                  var buttons = node.querySelectorAll ? node.querySelectorAll(TOP_BAR_SELECTORS.BAR_BUTTON) : [];
-                  buttons.forEach(function (button) {
-                    _this3.addEventListenerTracked(button, 'click', function (event) {
-                      _this3.handleTopBarClick(event);
-                    });
-                  });
-                }
-              }
-            });
-          }
-        });
-      });
-    }
-  }, {
-    key: "handleTopBarClick",
-    value: function handleTopBarClick(event) {
-      var button = event.currentTarget;
-      var itemId = this.extractItemId(button);
-      _wpDashboardTracking.default.trackNavClicked(itemId, null, _wpDashboardTracking.NAV_AREAS.TOP_BAR);
-    }
-  }, {
-    key: "extractItemId",
-    value: function extractItemId(button) {
-      var titleElement = button.querySelector(TOP_BAR_SELECTORS.BUTTON_TITLE);
-      if (titleElement && titleElement.textContent.trim()) {
-        return titleElement.textContent.trim();
-      }
-      var textContent = button.textContent.trim();
-      if (textContent) {
-        return textContent;
-      }
-      var href = button.getAttribute('href');
-      if (href) {
-        var urlParams = new URLSearchParams(href.split('?')[1] || '');
-        var page = urlParams.get('page');
-        if (page) {
-          return page;
-        }
-        if (href.includes('/wp-admin/')) {
-          var pathParts = href.split('/wp-admin/')[1];
-          if (pathParts) {
-            return pathParts.split('?')[0];
-          }
-        }
-        try {
-          var url = new URL(href, window.location.origin);
-          return url.pathname.split('/').filter(Boolean).pop() || url.hostname;
-        } catch (error) {
-          return href;
-        }
-      }
-      var dataInfo = button.getAttribute('data-info');
-      if (dataInfo) {
-        return dataInfo;
-      }
-      var classes = button.className.split(' ').filter(function (cls) {
-        return cls && 'e-admin-top-bar__bar-button' !== cls;
-      });
-      if (classes.length > 0) {
-        return classes.join('-');
-      }
-      return 'unknown-top-bar-button';
-    }
-  }]);
-}(_baseTracking.default);
-var _default = exports["default"] = TopBarTracking;
-
-/***/ }),
-
 /***/ "../app/assets/js/event-track/dashboard/utils.js":
 /*!*******************************************************!*\
   !*** ../app/assets/js/event-track/dashboard/utils.js ***!
@@ -1483,7 +1318,6 @@ var _promotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/prom
 var _screenView = _interopRequireDefault(__webpack_require__(/*! ./dashboard/screen-view */ "../app/assets/js/event-track/dashboard/screen-view.js"));
 var _menuPromotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/menu-promotion */ "../app/assets/js/event-track/dashboard/menu-promotion.js"));
 var _actionControls = _interopRequireDefault(__webpack_require__(/*! ./dashboard/action-controls */ "../app/assets/js/event-track/dashboard/action-controls.js"));
-var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 var SESSION_TIMEOUT_MINUTES = 30;
 var MINUTE_MS = 60 * 1000;
 var SESSION_TIMEOUT = SESSION_TIMEOUT_MINUTES * MINUTE_MS;
@@ -1670,7 +1504,7 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
         var page = params.get('page');
         var postType = params.get('post_type');
         var action = params.get('action');
-        var elementorPages = ['elementor', 'go_knowledge_base_site', 'e-form-submissions'];
+        var elementorPages = ['elementor-home', 'e-form-submissions'];
         var elementorPostTypes = ['elementor_library', 'e-floating-buttons'];
         return page && elementorPages.some(function (p) {
           return page.includes(p);
@@ -1871,9 +1705,6 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
       _promotion.default.destroy();
       _menuPromotion.default.destroy();
       _actionControls.default.destroy();
-      if (!WpDashboardTracking.isEditorOneActive()) {
-        _topBar.default.destroy();
-      }
       this.initialized = false;
     }
   }]);
@@ -1900,9 +1731,6 @@ window.addEventListener('elementor/admin/init', function () {
     _promotion.default.init();
     _menuPromotion.default.init();
     _actionControls.default.init();
-    if (!WpDashboardTracking.isEditorOneActive()) {
-      _topBar.default.init();
-    }
   }
 });
 window.addEventListener('beforeunload', function () {
@@ -3982,7 +3810,6 @@ __webpack_require__(/*! elementor-app/event-track/wp-dashboard-tracking */ "../a
         $importFormFileInput: $('#elementor-import-template-form input[type="file"]'),
         $settingsForm: $('#elementor-settings-form'),
         $settingsTabsWrapper: $('#elementor-settings-tabs-wrapper'),
-        $menuGetHelpLink: $('a[href="admin.php?page=go_knowledge_base_site"]'),
         $menuGoProLink: $('a[href="admin.php?page=go_elementor_pro"]'),
         $reMigrateGlobalsButton: $('.elementor-re-migrate-globals-button')
       };
@@ -4275,7 +4102,7 @@ __webpack_require__(/*! elementor-app/event-track/wp-dashboard-tracking */ "../a
      * @since 3.6.0
      */
     openLinksInNewTab: function openLinksInNewTab() {
-      var elements = [this.elements.$menuGetHelpLink, this.elements.$menuGoProLink];
+      var elements = [this.elements.$menuGoProLink];
       elements.forEach(function ($element) {
         // Only add the attribute if the element is found.
         if ($element.length) {

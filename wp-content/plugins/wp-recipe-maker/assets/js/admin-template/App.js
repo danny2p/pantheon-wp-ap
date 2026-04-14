@@ -124,7 +124,7 @@ class App extends Component {
             
             if (path.startsWith('/manage/')) {
                 const pathParts = path.replace('/manage/', '').split('/');
-                const validTypes = ['recipe', 'snippet', 'roundup', 'import'];
+                const validTypes = ['recipe', 'snippet', 'roundup', 'favorites', 'import'];
                 if (pathParts[0] && validTypes.includes(pathParts[0])) {
                     manageType = pathParts[0];
                     if (pathParts[1]) {

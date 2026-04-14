@@ -559,28 +559,28 @@ export default class RecipeInstructions extends Component {
                         className="wprm-admin-modal-field-instruction-actions"
                     >
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={(e) => {
                                 e.preventDefault();
                                 this.addField( 'instruction' );
                             } }
                         >{ __wprm( 'Add Instruction' ) }</button>
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={(e) => {
                                 e.preventDefault();
                                 this.addField( 'group' );
                             } }
                         >{ __wprm( 'Add Instruction Group' ) }</button>
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={(e) => {
                                 e.preventDefault();
                                 this.addField( 'tip' );
                             } }
                         >{ __wprm( 'Add Tip' ) }</button>
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={(e) => {
                                 e.preventDefault();
                                 this.props.openSecondaryModal('bulk-add-instructions', {

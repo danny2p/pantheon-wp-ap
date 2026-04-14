@@ -1,10 +1,10 @@
-=== WP Fastest Cache ===
+=== WP Fastest Cache - WordPress Cache Plugin ===
 Contributors: emrevona
 Donate link: https://profiles.wordpress.org/emrevona/
 Tags: cache, Optimize, performance, PageSpeed, core web vitals
-Requires at least: 5.3
+Requires at least: 5.7
 Tested up to: 6.9
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,10 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 18. Database Cleanup
 
 == Changelog ==
+
+= 1.4.7 =
+* to fix E_WARNING: scandir(): No such file or directory in wpFastestCache.php  on line 2208 and 2227
+* <strong>[Improvement]</strong> Enhanced exclude rules processing with safe regex support, added protection against regex injection, proper HTML entity decoding, and more precise matching in generated .htaccess rules
 
 = 1.4.6 =
 * <strong>[Improvement]</strong> Elementor element cache and CSS Print Method detection logic [<a target="_blank" href="https://www.wpfastestcache.com/tutorial/elementor-plugin-settings/">Details</a>]

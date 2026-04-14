@@ -17,8 +17,9 @@
 	// translators: %d: number of lists left to search through.
 	printf( esc_html( _n( 'Searching %d Create List', 'Searching %d Create Lists', count( $mv_lists ), 'wp-recipe-maker' ) ), count( $mv_lists ) );
 	?>.
-	<div id="wprm-tools-progress-container">
-		<div id="wprm-tools-progress-bar"></div>
-	</div>
+	<?php
+	$progress_bar_type = 'tools';
+	include WPRM_DIR . 'templates/admin/progress-bar.php';
+	?>
 	<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_manage#lists' ) ); ?>" id="wprm-tools-finished"><?php esc_html_e( 'Finished succesfully. Click here to continue.', 'wp-recipe-maker' ); ?></a>
 </div>

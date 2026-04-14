@@ -10,7 +10,7 @@ const Block = (props) => {
                     &&
                     <div className="wprm-admin-dashboard-block-header-button">
                         <button
-                            className="button button-primary"
+                            className="button button-primary button-compact"
                             onClick={ () => { props.buttonAction(); } }
                         >{ props.button }</button>
                     </div>

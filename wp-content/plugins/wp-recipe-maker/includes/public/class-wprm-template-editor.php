@@ -277,6 +277,12 @@ class WPRM_Template_Editor {
 			self::add_template_usage_by_type( $usages, $modern_templates, 'print-collection', 'other', __( 'Recipe Collections Print Template (Other)', 'wp-recipe-maker' ) );
 		}
 
+		if ( WPRM_Addons::is_active( 'premium' ) ) {
+			self::add_template_usage_by_type( $usages, $modern_templates, 'favorites-list', 'food', __( 'Favorites Template (Food)', 'wp-recipe-maker' ) );
+			self::add_template_usage_by_type( $usages, $modern_templates, 'favorites-list', 'howto', __( 'Favorites Template (How-to)', 'wp-recipe-maker' ) );
+			self::add_template_usage_by_type( $usages, $modern_templates, 'favorites-list', 'other', __( 'Favorites Template (Other)', 'wp-recipe-maker' ) );
+		}
+
 		// Contexts resolved directly from setting values.
 		$manual_contexts = array(
 			array(
@@ -311,6 +317,29 @@ class WPRM_Template_Editor {
 			$manual_contexts[] = array(
 				'setting' => 'recipe_collections_other_template_modern',
 				'label' => __( 'Recipe Collections Template (Other)', 'wp-recipe-maker' ),
+				'aliases' => array(
+					'default_recipe_template' => 'default_other_recipe_template_modern',
+				),
+			);
+		}
+		if ( WPRM_Addons::is_active( 'premium' ) ) {
+			$manual_contexts[] = array(
+				'setting' => 'favorite_recipes_template_modern',
+				'label' => __( 'Favorites Template (Food)', 'wp-recipe-maker' ),
+				'aliases' => array(
+					'default_recipe_template' => 'default_recipe_template_modern',
+				),
+			);
+			$manual_contexts[] = array(
+				'setting' => 'favorite_recipes_howto_template_modern',
+				'label' => __( 'Favorites Template (How-to)', 'wp-recipe-maker' ),
+				'aliases' => array(
+					'default_recipe_template' => 'default_howto_recipe_template_modern',
+				),
+			);
+			$manual_contexts[] = array(
+				'setting' => 'favorite_recipes_other_template_modern',
+				'label' => __( 'Favorites Template (Other)', 'wp-recipe-maker' ),
 				'aliases' => array(
 					'default_recipe_template' => 'default_other_recipe_template_modern',
 				),

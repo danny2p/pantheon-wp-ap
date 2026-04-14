@@ -37,6 +37,9 @@ const newShortcodes = [
     'wprm-hubbub-action-buttons',
     'wprm-recipe-download-pdf', 
     'wprm-recipe-my-shopping-help',
+    // New in 10.5.0
+    'wprm-recipe-cookpal',
+    'wprm-recipe-favorite',
 ];
 
 // Sort shortcodes for "Add Blocks" section.
@@ -120,6 +123,7 @@ const shortcodeGroups = {
         shortcodes: [
             { id: 'wprm-recipe-add-to-collection', description: 'Button to add recipe to the Recipe Collections feature' },
             { id: 'wprm-recipe-add-to-shopping-list', description: 'Button to add ingredients to the Quick Access Shopping List feature' },
+            { id: 'wprm-recipe-favorite', description: 'Button to add or remove a recipe from the visitor favorites list' },
             { id: 'wprm-recipe-add-products-to-cart', description: 'Button to add products to a shopping cart, when running an eCommerce store on your own site' },
             { id: 'wprm-recipe-adjustable-servings', description: 'Allow users to adjust serving size' },
             { id: 'wprm-recipe-advanced-adjustable-servings', description: 'Advanced serving size adjustment for baking' },
@@ -160,6 +164,7 @@ const shortcodeGroups = {
             { id: 'wprm-recipe-chicory', name: 'Chicory', description: 'A button to shop ingredients on Chicory' },
             { id: 'wprm-recipe-slickstream-favorites', name: 'Slickstream', description: 'A button to add the recipe to Slickstream favorites' },
             { id: 'wprm-recipe-smart-with-food', name: 'Smart with Food', description: 'A button to shop ingredients through Smart with Food' },
+            { id: 'wprm-recipe-cookpal', name: 'CookPal', description: 'A button to open the CookPal assistant' },
             { id: 'wprm-recipe-my-shopping-help', name: 'My Shopping Help', description: 'A button to add the recipe to My Shopping Help' },
             { id: 'wprm-hubbub-save-this', name: 'Hubbub Save This', description: 'Display the Hubbub "Save This" form' },
             { id: 'wprm-hubbub-action-buttons', name: 'Hubbub Action Buttons', description: 'Display Hubbub Action Buttons' },

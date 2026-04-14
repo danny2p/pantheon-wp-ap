@@ -10,6 +10,7 @@ import ColumnsTaxonomies from './taxonomies/Columns';
 import ColumnsTrash from './trash/Columns';
 import ColumnsUnits from './units/Columns';
 import ColumnsGlossary from './glossary/Columns';
+import ColumnsIdeas from './ideas/Columns';
 import ColumnsAnalytics from './analytics/Columns';
 import ColumnsChangelog from './changelog/Columns';
 
@@ -86,6 +87,32 @@ if ( wprm_admin_manage.revisions ) {
         columns: ColumnsRevision,
     };
 }
+
+datatables.idea = {
+    parent: __wprm( 'Recipes' ),
+    title: __wprm( 'Ideas' ),
+    id: 'idea',
+    route: 'idea',
+    label: {
+        singular: __wprm( 'Idea' ),
+        plural: __wprm( 'Ideas' ),
+    },
+    bulkEdit: {
+        route: 'idea',
+        type: 'idea',
+    },
+    createButton: (datatable) => {
+        WPRM_Modal.open( 'idea', {
+            saveCallback: () => datatable.refreshData(),
+        } );
+    },
+    defaultSort: [{
+        id: 'last_updated',
+        desc: true,
+    }],
+    selectedColumns: ['name','type','summary','status','last_updated'],
+    columns: ColumnsIdeas,
+};
 
 datatables.trash = {
     parent: __wprm( 'Recipes' ),

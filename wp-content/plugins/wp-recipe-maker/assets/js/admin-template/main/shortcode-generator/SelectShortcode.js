@@ -153,7 +153,7 @@ export default class SelectShortcode extends Component {
                     ' '
                 }</div>
                 <button
-                    className="button button-primary"
+                    className="button button-primary button-compact"
                     onClick={() => {
                         if ( this.state.shortcode ) {
                             this.props.onChangeShortcode( this.state.shortcode );

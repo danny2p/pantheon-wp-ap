@@ -109,7 +109,7 @@ export default class Select extends Component {
                     savingChanges={ false }
                 >
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => {
                             let data = {};
 

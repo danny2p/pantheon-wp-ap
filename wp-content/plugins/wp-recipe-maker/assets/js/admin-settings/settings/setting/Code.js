@@ -18,8 +18,21 @@ export default class SettingCode extends Component {
         this.updateParent = this.updateParent.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
-        return false;
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.value !== this.props.value
+            || nextState.value !== this.state.value
+            || nextState.indicatedChange !== this.state.indicatedChange
+            || nextState.initialValue !== this.state.initialValue;
+    }
+
+    componentDidUpdate(prevProps) {
+        if ( prevProps.value !== this.props.value && this.props.value !== this.state.value ) {
+            this.setState({
+                initialValue: this.props.value,
+                value: this.props.value,
+                indicatedChange: false,
+            });
+        }
     }
 
     onChange( value ) {

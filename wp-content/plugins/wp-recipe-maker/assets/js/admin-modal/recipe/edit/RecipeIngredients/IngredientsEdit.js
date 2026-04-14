@@ -295,21 +295,21 @@ export default class IngredientsEdit extends Component {
                     className="wprm-admin-modal-field-ingredient-actions"
                 >
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.addField( 'ingredient' );
                         } }
                     >{ 'howto' === this.props.type ? __wprm( 'Add Material' ) : __wprm( 'Add Ingredient' ) }</button>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.addField( 'group' );
                         } }
                     >{ 'howto' === this.props.type ? __wprm( 'Add Material Group' ) : __wprm( 'Add Ingredient Group' ) }</button>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.props.openSecondaryModal('bulk-add-ingredients', {

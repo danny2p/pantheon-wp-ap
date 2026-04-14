@@ -10,4 +10,11 @@ export default {
 
         return ApiWrapper.call( `${modalEndpoint}/ingredient/parse`, 'POST', data );
     },
+    aiImportRecipe(text) {
+        const data = {
+            text,
+        };
+
+        return ApiWrapper.call( `${modalEndpoint}/ai-recipe-import`, 'POST', data );
+    },
 };

@@ -31,7 +31,7 @@
 			<li>...and more!</li>
 		</ul>
 		<div class="wprm-addons-button-container">
-			<a class="button button-primary" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
+			<a class="button button-primary button-compact" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
 		</div>
 		<?php endif; // Premium active. ?>
 	</div>
@@ -48,7 +48,7 @@
 			<li>Define and calculate a <strong>second unit system</strong> for your ingredients</li>
 		</ul>
 		<div class="wprm-addons-button-container">
-			<a class="button button-primary" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
+			<a class="button button-primary button-compact" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
 		</div>
 		<?php endif; // Pro Bundle active. ?>
 	</div>
@@ -62,7 +62,7 @@
 			<li>Have your <strong>visitors submit recipes</strong> through your website</li>
 		</ul>
 		<div class="wprm-addons-button-container">
-			<a class="button button-primary" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
+			<a class="button button-primary button-compact" href="https://bootstrapped.ventures/wp-recipe-maker/get-the-plugin/" target="_blank">Learn More</a>
 		</div>
 	</div>
 </div>

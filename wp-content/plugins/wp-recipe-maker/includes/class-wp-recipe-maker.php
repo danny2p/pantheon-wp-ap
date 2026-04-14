@@ -31,10 +31,11 @@ class WP_Recipe_Maker {
 	 * @since    1.0.0
 	 */
 	private function define_constants() {
-		define( 'WPRM_VERSION', '10.4.0' );
-		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '10.3.0' );
+		define( 'WPRM_VERSION', '10.5.0' );
+		define( 'WPRM_PREMIUM_VERSION_RECOMMENDED', '10.5.0' );
 		define( 'WPRM_PREMIUM_VERSION_REQUIRED', '7.0.0' );
 		define( 'WPRM_POST_TYPE', 'wprm_recipe' );
+		define( 'WPRM_IDEA_POST_TYPE', 'wprm_idea' );
 		define( 'WPRM_LIST_POST_TYPE', 'wprm_list' );
 		define( 'WPRM_DIR', plugin_dir_path( dirname( __FILE__ ) ) );
 		define( 'WPRM_URL', plugin_dir_url( dirname( __FILE__ ) ) );
@@ -84,9 +85,11 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-ingredient-units.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-ingredients.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-integrations.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-idea.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-list.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-analytics.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-changelog.php' );
+		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-ideas.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-lists.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-ratings.php' );
 		require_once( WPRM_DIR . 'includes/public/api/class-wprm-api-manage-recipes.php' );
@@ -118,12 +121,18 @@ class WP_Recipe_Maker {
 		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-moderation.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-rating.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-comment-review.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-compatibility-divi.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-compatibility-elementor.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-compatibility.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-context.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-cron.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-custom-hash.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-fallback-recipe.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-icon.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-idea-manager.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-idea-post-type.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-idea-saver.php' );
+		require_once( WPRM_DIR . 'includes/public/class-wprm-idea.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-instacart.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-list-manager.php' );
 		require_once( WPRM_DIR . 'includes/public/class-wprm-list-post-type.php' );
@@ -202,12 +211,14 @@ class WP_Recipe_Maker {
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-settings-transfer.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-templates-transfer.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-sync-recipe-language.php' );
+			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-sync-recipe-term-language.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-ingredients.php' );
 			require_once( WPRM_DIR . 'includes/admin/tools/class-wprm-tools-wpurp-nutrition.php' );
 
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-dashboard.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-feedback.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-health-check.php' );
+			require_once( WPRM_DIR . 'includes/admin/class-wprm-ai-assistant.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-import-helper.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-import-manager.php' );
 			require_once( WPRM_DIR . 'includes/admin/class-wprm-marketing.php' );

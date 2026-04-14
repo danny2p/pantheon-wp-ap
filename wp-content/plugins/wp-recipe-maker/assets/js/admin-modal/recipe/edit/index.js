@@ -39,7 +39,7 @@ const EditRecipe = (props) => {
         <div className="wprm-admin-modal-recipe-history-controls">
             <button
                 type="button"
-                className="button"
+                className="button button-secondary button-compact"
                 disabled={ historyDisabled || ! props.canUndo }
                 aria-label={ __wprm( 'Undo last recipe change' ) }
                 onClick={ () => {
@@ -50,7 +50,7 @@ const EditRecipe = (props) => {
             >{ __wprm( 'Undo' ) } ({ props.undoCount || 0 })</button>
             <button
                 type="button"
-                className="button"
+                className="button button-secondary button-compact"
                 disabled={ historyDisabled || ! props.canRedo }
                 aria-label={ __wprm( 'Redo recipe change' ) }
                 onClick={ () => {
@@ -414,7 +414,7 @@ const EditRecipe = (props) => {
                         null
                     }
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ () => {
                             Api.utilities.previewRecipe( JSON.stringify( props.recipe ) ).then((previewUrl) => {
                                 if ( previewUrl ) {
@@ -428,7 +428,7 @@ const EditRecipe = (props) => {
                         { __wprm( 'Preview' ) }
                     </button>
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => {
                             if ( nutritionWarning ) {
                                 const confirmed = confirm(
@@ -445,7 +445,7 @@ const EditRecipe = (props) => {
                         { __wprm( 'Save' ) }
                     </button>
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => {
                             if ( props.changesMade ) {
                                 if ( nutritionWarning ) {

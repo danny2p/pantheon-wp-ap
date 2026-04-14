@@ -27,42 +27,23 @@ const SettingsContainer = (props) => {
                         if ( ! Helpers.dependencyMet(group, props.settings ) ) {
                             return null;
                         }
-                        
-                        // Filter by search query
-                        if (props.normalizedSearchQuery && !Helpers.groupMatchesSearch(group, props.normalizedSearchQuery)) {
-                            return null;
-                        }
-                        
+
                         return <SettingsGroup
                             settings={props.settings}
                             onSettingChange={props.onSettingChange}
                             settingsChanged={props.settingsChanged}
                             group={group}
                             searchQuery={props.searchQuery}
-                            normalizedSearchQuery={props.normalizedSearchQuery}
                             key={i}
                         />
                     }
 
                     if('settingsTools' === group.id) {
-                        // Check if settingsTools matches the search query
-                        const toolsMatches = props.normalizedSearchQuery ? (
-                            Helpers.groupNameOrDescriptionMatches(group, props.normalizedSearchQuery) ||
-                            Helpers.matchesSearch('Reset to defaults', props.normalizedSearchQuery) ||
-                            Helpers.matchesSearch('Reset all settings to their default values.', props.normalizedSearchQuery)
-                        ) : true;
-                        
-                        // Filter by search query
-                        if (props.normalizedSearchQuery && !toolsMatches) {
-                            return null;
-                        }
-                        
                         return <SettingsTools
                             settings={props.settings}
                             onResetDefaults={props.onResetDefaults}
                             group={group}
                             searchQuery={props.searchQuery}
-                            normalizedSearchQuery={props.normalizedSearchQuery}
                             key={i}
                         />
                     }
@@ -80,7 +61,6 @@ SettingsContainer.propTypes = {
     onSettingChange: PropTypes.func.isRequired,
     onResetDefaults: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
-    normalizedSearchQuery: PropTypes.string.isRequired,
 }
 
 export default SettingsContainer;

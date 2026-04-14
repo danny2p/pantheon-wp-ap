@@ -35,6 +35,8 @@ class WPRM_Admin_Menu {
 	public static function init() {
 		add_action( 'admin_menu', array( __CLASS__, 'add_menu_page' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_taxonomy_menu_page' ) );
+		add_action( 'admin_menu', array( __CLASS__, 'reorder_submenu_items' ), 999 );
+		add_action( 'admin_head', array( __CLASS__, 'add_submenu_separators_css' ) );
 
 		add_filter( 'parent_file', array( __CLASS__, 'set_taxonomy_menu_parent_file' ) );
 		add_filter( 'submenu_file', array( __CLASS__, 'set_taxonomy_menu_submenu_file' ) );
@@ -74,6 +76,79 @@ class WPRM_Admin_Menu {
 				add_menu_page( 'WPRM ' . __( 'Taxonomies', 'wp-recipe-maker' ), __( 'Taxonomies', 'wp-recipe-maker' ), WPRM_Settings::get( 'features_manage_access' ), 'wprm_taxonomies', $first_taxonomy_showing, 'dashicons-food', '57.91' );
 			}
 		}
+	}
+
+	/**
+	 * Reorder WPRM submenu items into logical groups.
+	 *
+	 * @since    10.0.0
+	 */
+	public static function reorder_submenu_items() {
+		global $submenu;
+
+		if ( ! isset( $submenu['wprecipemaker'] ) || ! is_array( $submenu['wprecipemaker'] ) ) {
+			return;
+		}
+
+		$desired_order = array(
+			'wprecipemaker',
+			'wprm_manage',
+			'wprm_ai_assistant',
+			'wprm_import_overview',
+			'wprm_settings',
+			'wprm_template_editor',
+			'wprm_reports',
+			'wprm_tools',
+			'wprm_faq',
+			'wprm_addons',
+			'wprm_preview',
+			'wprm_marketing',
+		);
+
+		$menu_items_by_slug = array();
+
+		foreach ( $submenu['wprecipemaker'] as $menu_item ) {
+			if ( isset( $menu_item[2] ) ) {
+				$menu_items_by_slug[ $menu_item[2] ] = $menu_item;
+			}
+		}
+
+		$reordered_menu_items = array();
+
+		foreach ( $desired_order as $slug ) {
+			if ( isset( $menu_items_by_slug[ $slug ] ) ) {
+				$reordered_menu_items[] = $menu_items_by_slug[ $slug ];
+				unset( $menu_items_by_slug[ $slug ] );
+			}
+		}
+
+		foreach ( $submenu['wprecipemaker'] as $menu_item ) {
+			if ( isset( $menu_item[2] ) && isset( $menu_items_by_slug[ $menu_item[2] ] ) ) {
+				$reordered_menu_items[] = $menu_item;
+				unset( $menu_items_by_slug[ $menu_item[2] ] );
+			}
+		}
+
+		$submenu['wprecipemaker'] = $reordered_menu_items;
+	}
+
+	/**
+	 * Add CSS to visually separate WPRM submenu groups.
+	 *
+	 * @since    10.0.0
+	 */
+	public static function add_submenu_separators_css() {
+		?>
+		<style>
+			#adminmenu .toplevel_page_wprecipemaker .wp-submenu a[href="admin.php?page=wprm_settings"],
+			#adminmenu .toplevel_page_wprecipemaker .wp-submenu a[href="admin.php?page=wprm_reports"],
+			#adminmenu .toplevel_page_wprecipemaker .wp-submenu a[href="admin.php?page=wprm_faq"] {
+				border-top: 1px solid rgba(255, 255, 255, 0.16);
+				margin-top: 6px;
+				padding-top: 9px;
+			}
+		</style>
+		<?php
 	}
 
 	/**

@@ -49,11 +49,19 @@ var require_url = __commonJS({
   }
 });
 
+// package-external:@wordpress/i18n
+var require_i18n = __commonJS({
+  "package-external:@wordpress/i18n"(exports, module) {
+    module.exports = window.wp.i18n;
+  }
+});
+
+// routes/forms/route.tsx
+var import_data5 = __toESM(require_data());
+import { redirect } from "@wordpress/route";
+
 // src/dashboard/wp-build/utils/preload.ts
 var import_data3 = __toESM(require_data(), 1);
-
-// src/dashboard/constants.ts
-var NON_TRASH_FORM_STATUSES = "publish,draft,pending,future,private";
 
 // src/dashboard/store/index.js
 var import_data2 = __toESM(require_data(), 1);
@@ -66,11 +74,13 @@ __export(actions_exports, {
   doBulkAction: () => doBulkAction,
   invalidateCounts: () => invalidateCounts,
   invalidateFilters: () => invalidateFilters,
+  invalidateFormStatusCounts: () => invalidateFormStatusCounts,
   markRecordsAsInvalid: () => markRecordsAsInvalid,
   receiveFilters: () => receiveFilters,
   removePendingAction: () => removePendingAction,
   setCounts: () => setCounts,
   setCurrentQuery: () => setCurrentQuery,
+  setFormStatusCounts: () => setFormStatusCounts,
   setSelectedResponses: () => setSelectedResponses,
   updateCountsOptimistically: () => updateCountsOptimistically
 });
@@ -88,6 +98,8 @@ var MARK_RECORDS_AS_INVALID = "MARK_RECORDS_AS_INVALID";
 var CLEAR_INVALID_RECORDS = "CLEAR_INVALID_RECORDS";
 var ADD_PENDING_ACTION = "ADD_PENDING_ACTION";
 var REMOVE_PENDING_ACTION = "REMOVE_PENDING_ACTION";
+var SET_FORM_STATUS_COUNTS = "SET_FORM_STATUS_COUNTS";
+var INVALIDATE_FORM_STATUS_COUNTS = "INVALIDATE_FORM_STATUS_COUNTS";
 
 // src/dashboard/store/actions.js
 function receiveFilters(filters2) {
@@ -165,6 +177,15 @@ function removePendingAction(actionId) {
     actionId
   };
 }
+function setFormStatusCounts(formStatusCounts2) {
+  return {
+    type: SET_FORM_STATUS_COUNTS,
+    formStatusCounts: formStatusCounts2
+  };
+}
+var invalidateFormStatusCounts = () => {
+  return { type: INVALIDATE_FORM_STATUS_COUNTS };
+};
 var doBulkAction = (ids, action) => async () => {
   try {
     await (0, import_api_fetch.default)({
@@ -274,20 +295,28 @@ var pendingActions = (state = /* @__PURE__ */ new Set(), action) => {
   }
   return state;
 };
+var formStatusCounts = (state = null, action) => {
+  if (action.type === SET_FORM_STATUS_COUNTS) {
+    return action.formStatusCounts;
+  }
+  return state;
+};
 var reducer_default = (0, import_data.combineReducers)({
   selectedResponsesFromCurrentDataset,
   filters,
   currentQuery,
   counts,
   invalidRecords,
-  pendingActions
+  pendingActions,
+  formStatusCounts
 });
 
 // src/dashboard/store/resolvers.js
 var resolvers_exports = {};
 __export(resolvers_exports, {
   getCounts: () => getCounts,
-  getFilters: () => getFilters
+  getFilters: () => getFilters,
+  getFormStatusCounts: () => getFormStatusCounts
 });
 var import_api_fetch2 = __toESM(require_api_fetch(), 1);
 var import_url = __toESM(require_url(), 1);
@@ -320,6 +349,11 @@ var getCounts = (queryParams = {}) => async ({ dispatch }) => {
   dispatch.setCounts(response, queryParams);
 };
 getCounts.shouldInvalidate = (action) => action.type === INVALIDATE_COUNTS;
+var getFormStatusCounts = () => async ({ dispatch }) => {
+  const response = await (0, import_api_fetch2.default)({ path: "/wp/v2/jetpack-forms/status-counts" });
+  dispatch.setFormStatusCounts(response);
+};
+getFormStatusCounts.shouldInvalidate = (action) => action.type === INVALIDATE_FORM_STATUS_COUNTS;
 
 // src/dashboard/store/selectors.js
 var selectors_exports = {};
@@ -328,6 +362,7 @@ __export(selectors_exports, {
   getCurrentQuery: () => getCurrentQuery,
   getCurrentStatus: () => getCurrentStatus,
   getFilters: () => getFilters2,
+  getFormStatusCounts: () => getFormStatusCounts2,
   getInboxCount: () => getInboxCount,
   getInvalidRecords: () => getInvalidRecords,
   getPendingActions: () => getPendingActions,
@@ -371,6 +406,9 @@ var getPendingActions = (state) => {
 var hasPendingActions = (state) => {
   return (state.pendingActions?.size ?? 0) > 0;
 };
+var getFormStatusCounts2 = (state) => {
+  return state.formStatusCounts;
+};
 
 // src/dashboard/store/index.js
 var STORE_NAME = "FORM_RESPONSES";
@@ -384,25 +422,174 @@ var store = (0, import_data2.createReduxStore)(STORE_NAME, {
 
 // src/dashboard/wp-build/utils/preload.ts
 async function preloadGlobalInboxCounts() {
-  await (0, import_data3.resolveSelect)(STORE_NAME).getCounts();
-}
-async function preloadGlobalNonTrashFormsCount() {
-  await (0, import_data3.resolveSelect)("core").getEntityRecords("postType", "jetpack_form", {
-    context: "edit",
-    jetpack_forms_context: "dashboard",
-    order: "desc",
-    orderby: "modified",
-    page: 1,
-    per_page: 1,
-    status: NON_TRASH_FORM_STATUSES
-  });
+  await (0, import_data3.resolveSelect)(STORE_NAME).getCounts({});
 }
 async function preloadGlobalTabCounts() {
-  await Promise.all([preloadGlobalInboxCounts(), preloadGlobalNonTrashFormsCount()]);
+  await preloadGlobalInboxCounts();
 }
+
+// src/store/config/index.ts
+var import_data4 = __toESM(require_data(), 1);
+
+// src/store/config/actions.ts
+var actions_exports2 = {};
+__export(actions_exports2, {
+  invalidateConfig: () => invalidateConfig,
+  receiveConfig: () => receiveConfig,
+  receiveConfigValue: () => receiveConfigValue,
+  refreshConfig: () => refreshConfig,
+  setConfigError: () => setConfigError,
+  setConfigLoading: () => setConfigLoading
+});
+
+// src/store/config/action-types.ts
+var RECEIVE_CONFIG = "RECEIVE_CONFIG";
+var RECEIVE_CONFIG_VALUE = "RECEIVE_CONFIG_VALUE";
+var INVALIDATE_CONFIG = "INVALIDATE_CONFIG";
+var SET_CONFIG_LOADING = "SET_CONFIG_LOADING";
+var SET_CONFIG_ERROR = "SET_CONFIG_ERROR";
+
+// src/store/config/resolvers.ts
+var resolvers_exports2 = {};
+__export(resolvers_exports2, {
+  getConfig: () => getConfig
+});
+var import_api_fetch3 = __toESM(require_api_fetch(), 1);
+
+// src/store/constants.ts
+var import_i18n = __toESM(require_i18n(), 1);
+var UNKNOWN_ERROR_MESSAGE = (0, import_i18n.__)("Unknown error", "jetpack-forms");
+
+// src/store/config/resolvers.ts
+var fetchConfigData = async (dispatch) => {
+  dispatch(setConfigLoading(true));
+  try {
+    const result = await (0, import_api_fetch3.default)({
+      path: "/wp/v2/feedback/config"
+    });
+    dispatch(receiveConfig(result));
+  } catch (e) {
+    const message = e instanceof Error ? e.message : UNKNOWN_ERROR_MESSAGE;
+    dispatch(setConfigError(message));
+  } finally {
+    dispatch(setConfigLoading(false));
+  }
+};
+function getConfig() {
+  return async ({ dispatch }) => {
+    await fetchConfigData(dispatch);
+  };
+}
+getConfig.isFulfilled = (state) => {
+  return state.config !== null || state.isLoading;
+};
+getConfig.shouldInvalidate = (action) => {
+  return action.type === INVALIDATE_CONFIG;
+};
+
+// src/store/config/actions.ts
+var receiveConfig = (config) => ({
+  type: RECEIVE_CONFIG,
+  config
+});
+var receiveConfigValue = (key, value) => ({
+  type: RECEIVE_CONFIG_VALUE,
+  key,
+  value
+});
+var invalidateConfig = () => ({
+  type: INVALIDATE_CONFIG
+});
+var setConfigLoading = (isLoading) => ({
+  type: SET_CONFIG_LOADING,
+  isLoading
+});
+var setConfigError = (error) => ({
+  type: SET_CONFIG_ERROR,
+  error
+});
+var refreshConfig = () => getConfig();
+
+// src/store/config/reducer.ts
+var DEFAULT_STATE = {
+  config: null,
+  isLoading: false,
+  error: null
+};
+function reducer(state = DEFAULT_STATE, action) {
+  switch (action.type) {
+    case SET_CONFIG_LOADING:
+      return {
+        ...state,
+        isLoading: !!action.isLoading,
+        error: action.isLoading ? null : state.error
+      };
+    case SET_CONFIG_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error ?? UNKNOWN_ERROR_MESSAGE
+      };
+    case RECEIVE_CONFIG:
+      return {
+        ...state,
+        config: action.config ?? null,
+        isLoading: false,
+        error: null
+      };
+    case RECEIVE_CONFIG_VALUE:
+      return {
+        ...state,
+        config: {
+          ...state.config ?? {},
+          [action.key]: action.value
+        }
+      };
+    case INVALIDATE_CONFIG:
+      return {
+        ...state,
+        config: null,
+        isLoading: false
+      };
+    default:
+      return state;
+  }
+}
+
+// src/store/config/selectors.ts
+var selectors_exports2 = {};
+__export(selectors_exports2, {
+  getConfig: () => getConfig2,
+  getConfigError: () => getConfigError,
+  getConfigValue: () => getConfigValue,
+  isConfigLoading: () => isConfigLoading
+});
+var getConfig2 = (state) => state.config;
+var getConfigValue = (state, key) => state.config?.[key];
+var isConfigLoading = (state) => state.isLoading;
+var getConfigError = (state) => state.error;
+
+// src/store/config/index.ts
+var CONFIG_STORE = "jetpack/forms/config";
+var store2 = (0, import_data4.createReduxStore)(CONFIG_STORE, {
+  reducer,
+  actions: actions_exports2,
+  selectors: selectors_exports2,
+  resolvers: resolvers_exports2
+});
+(0, import_data4.register)(store2);
 
 // routes/forms/route.tsx
 var route = {
+  /**
+   * Redirect to responses when Central Form Management is disabled.
+   */
+  beforeLoad: async () => {
+    const config = await (0, import_data5.resolveSelect)(CONFIG_STORE).getConfig();
+    if (!config?.isCentralFormManagementEnabled) {
+      throw redirect({ href: "/responses/inbox" });
+    }
+  },
   /**
    * Preload data before the route renders.
    */

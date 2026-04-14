@@ -18,7 +18,7 @@ const PropertyAccordion = (props) => {
             return true;
         }
         // Check dependency for other properties
-        return Helpers.dependencyMet(property, props.properties);
+        return Helpers.dependencyMet(property, props.properties) && ! Helpers.shouldHideColorProperty(property, props.properties);
     });
 
     // Group properties by headers

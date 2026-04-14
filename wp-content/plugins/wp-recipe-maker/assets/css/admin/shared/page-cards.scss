@@ -1,0 +1,149 @@
+// Shared card layout for overview-style admin pages like Tools, Import,
+// AI Assistant, and Reports.
+.wprm-admin-page-cards {
+    .wprm-tools-hero,
+    .wprm-ai-assistant-hero {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 24px;
+        margin-top: 20px;
+        background: #fff;
+        border: 1px solid #dcdcde;
+        border-radius: 12px;
+        box-sizing: border-box;
+
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        p {
+            margin: 0 0 4px 0;
+            max-width: 880px;
+        }
+    }
+
+    .wprm-tools-section-title {
+        margin: 24px 0 0 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .wprm-tools-grid,
+    .wprm-ai-assistant-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .wprm-tools-panel,
+    .wprm-ai-assistant-panel {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background: #fff;
+        border: 1px solid #dcdcde;
+        border-radius: 12px;
+        box-sizing: border-box;
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 15px;
+        }
+
+        p {
+            margin: 0 0 14px 0;
+            color: #50575e;
+            font-size: 13px;
+        }
+
+        form {
+            margin: 0;
+        }
+    }
+
+    .wprm-tools-tag,
+    .wprm-ai-assistant-tag {
+        align-self: flex-start;
+        display: inline-block;
+        padding: 4px 10px;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #f0f6fc;
+        color: #0a4b78;
+
+        &.is-admin {
+            background: #fef8ee;
+            color: #6e4600;
+        }
+
+        &.is-migration {
+            background: #f0faf0;
+            color: #1a5c1a;
+        }
+
+        &.is-locked {
+            background: #fcf0f1;
+            color: #8a2424;
+        }
+    }
+
+    .wprm-tools-actions,
+    .wprm-ai-assistant-actions,
+    .wprm-ai-assistant-tool-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 14px;
+    }
+
+    .wprm-tools-docs-link,
+    .wprm-ai-assistant-docs-link {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        min-width: 22px;
+        min-height: 22px;
+        color: #50575e;
+        text-decoration: none;
+        transition: color 0.15s ease;
+
+        .dashicons {
+            width: 22px;
+            height: 22px;
+            font-size: 22px;
+            line-height: 22px;
+        }
+
+        &:hover,
+        &:focus {
+            color: #0a4b78;
+            text-decoration: none;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #2271b1;
+            outline-offset: 1px;
+        }
+    }
+
+    @media (max-width: 782px) {
+        .wprm-tools-hero,
+        .wprm-ai-assistant-hero {
+            padding: 20px;
+        }
+    }
+}

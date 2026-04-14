@@ -69,6 +69,14 @@ const FEATURE_CATEGORIES = [
                 docsUrl: 'https://help.bootstrapped.ventures/docs/wp-recipe-maker/add-to-recipe-collection-button/',
             },
             {
+                id: 'favorite-recipes',
+                name: 'Favorite Recipes',
+                explanation: 'Visitors can favorite recipes directly from the recipe card and return to them later in their dedicated favorites view.',
+                highlightSelector: '.wprm-recipe-favorite-wrapper',
+                docsUrl: 'https://help.bootstrapped.ventures/docs/wp-recipe-maker/favorite-recipes/',
+                isNew: true,
+            },
+            {
                 id: 'private-notes',
                 name: 'Private Notes',
                 explanation: 'Private Notes let visitors save personal notes on a recipe, like substitutions or reminders for next time, while keeping them hidden from other visitors.',

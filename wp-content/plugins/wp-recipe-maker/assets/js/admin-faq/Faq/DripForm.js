@@ -29,7 +29,7 @@ const DripForm = (props) => {
                     </div>
                 </div>
                 <div>
-                    <input type="submit" name="submit" value={ __wprm( 'Help me get the most out of WP Recipe Maker!' ) } className="button button-primary" data-drip-attribute="sign-up-button" />
+                    <input type="submit" name="submit" value={ __wprm( 'Help me get the most out of WP Recipe Maker!' ) } className="button button-primary button-compact" data-drip-attribute="sign-up-button" />
                 </div>
             </form>
         </div>

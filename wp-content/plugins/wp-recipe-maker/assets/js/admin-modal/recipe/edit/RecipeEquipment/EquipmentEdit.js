@@ -182,7 +182,7 @@ export default class EquipmentEdit extends Component {
                     className="wprm-admin-modal-field-equipment-actions"
                 >
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={(e) => {
                             e.preventDefault();
                             this.addField();

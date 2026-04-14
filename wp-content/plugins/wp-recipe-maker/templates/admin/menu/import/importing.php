@@ -17,8 +17,9 @@
 	// translators: %d: number of recipes left to import.
 	printf( esc_html( _n( 'Importing %d recipe', 'Importing %d recipes', count( $recipes ), 'wp-recipe-maker' ) ), count( $recipes ) );
 	?>.
-	<div id="wprm-import-progress-container">
-		<div id="wprm-import-progress-bar"></div>
-	</div>
+	<?php
+	$progress_bar_type = 'import';
+	include WPRM_DIR . 'templates/admin/progress-bar.php';
+	?>
 	<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprm_import_overview' ) ); ?>" id="wprm-import-finished"><?php esc_html_e( 'Import finished succesfully. Click here to continue.', 'wp-recipe-maker' ); ?></a>
 </div>
