@@ -4,6 +4,7 @@ namespace ElementorOne\Connect;
 
 use ElementorOne\Connect\Classes\Data;
 use ElementorOne\Connect\Classes\Utils;
+use ElementorOne\Connect\Classes\HomeUrl;
 use ElementorOne\Connect\Classes\Service;
 use ElementorOne\Logger;
 
@@ -43,6 +44,11 @@ class Facade {
 	 * @var Service Service instance
 	 */
 	private Service $service;
+
+	/**
+	 * @var HomeUrl HomeUrl instance
+	 */
+	private HomeUrl $home_url;
 
 	/**
 	 * @var Logger Logger instance
@@ -217,19 +223,22 @@ class Facade {
 		// Create Service instance
 		$this->service = new Service( $this );
 
+		// Create HomeUrl instance
+		$this->home_url = new HomeUrl( $this );
+
 		// Create Logger instance with app name
 		$this->logger = new Logger( $this->config['app_name'] );
 	}
 
 	/**
-	 * Initialize routes and handlers
+	 * Initialize routes and components
 	 * Called automatically by constructor
 	 *
 	 * @return void
 	 */
 	private function init(): void {
 		$this->init_routes();
-		$this->init_handler();
+		$this->init_components();
 	}
 
 	/**
@@ -257,6 +266,15 @@ class Facade {
 	 */
 	public function service(): Service {
 		return $this->service;
+	}
+
+	/**
+	 * Get HomeUrl instance
+	 *
+	 * @return HomeUrl
+	 */
+	public function home_url(): HomeUrl {
+		return $this->home_url;
 	}
 
 	/**
@@ -299,11 +317,12 @@ class Facade {
 	}
 
 	/**
-	 * Initialize auth handler
+	 * Initialize components
 	 *
 	 * @return void
 	 */
-	private function init_handler(): void {
+	private function init_components(): void {
 		new \ElementorOne\Connect\Components\Handler( $this );
+		new \ElementorOne\Connect\Components\License( $this );
 	}
 }

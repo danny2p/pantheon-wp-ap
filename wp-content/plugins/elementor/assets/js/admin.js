@@ -4048,31 +4048,29 @@ __webpack_require__(/*! elementor-app/event-track/wp-dashboard-tracking */ "../a
           });
         });
       });
-      $('.e-notice--cta.e-notice--dismissible[data-notice_id="plugin_image_optimization"] a.e-button--cta').on('click', function () {
-        var $notice = $(this).closest('.e-notice');
-        var source = $notice.data('source') || 'io-wp-media-library-install';
-        elementorCommon.ajax.addRequest('elementor_image_optimization_campaign', {
-          data: {
-            source: source
-          }
+      var campaignNotices = {
+        plugin_image_optimization: 'elementor_image_optimization_campaign',
+        site_mailer_promotion: 'elementor_core_site_mailer_campaign'
+      };
+      Object.keys(campaignNotices).forEach(function (noticeId) {
+        $(".e-notice--cta.e-notice--dismissible[data-notice_id=\"".concat(noticeId, "\"] a.e-button--cta")).on('click', function () {
+          var $button = $(this);
+          elementorCommon.ajax.addRequest(campaignNotices[noticeId], {
+            data: {
+              campaign: ($button === null || $button === void 0 ? void 0 : $button.data('campaign')) || '',
+              source: ($button === null || $button === void 0 ? void 0 : $button.data('source')) || '',
+              medium: ($button === null || $button === void 0 ? void 0 : $button.data('medium')) || ''
+            }
+          });
         });
       });
       $('.e-a-apps .e-a-item[data-plugin="image-optimization/image-optimization.php"] a.e-btn').on('click', function () {
-        var $item = $(this).closest('.e-a-item');
-        var source = $item.data('source') || 'io-esetting-addons-install';
+        var $button = $(this);
         elementorCommon.ajax.addRequest('elementor_image_optimization_campaign', {
           data: {
-            source: source
-          }
-        });
-      });
-      $('.e-notice--cta.e-notice--dismissible[data-notice_id="site_mailer_promotion"] a.e-button--cta').on('click', function () {
-        var $button = $(this);
-        var $notice = $button.closest('.e-notice');
-        var source = $button.data('source') || $notice.data('source') || ($notice.hasClass('sm-notice-wc') ? 'sm-core-woo-install' : 'sm-core-form-install');
-        elementorCommon.ajax.addRequest('elementor_core_site_mailer_campaign', {
-          data: {
-            source: source
+            campaign: ($button === null || $button === void 0 ? void 0 : $button.data('campaign')) || '',
+            source: ($button === null || $button === void 0 ? void 0 : $button.data('source')) || '',
+            medium: ($button === null || $button === void 0 ? void 0 : $button.data('medium')) || ''
           }
         });
       });

@@ -1986,7 +1986,6 @@ var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! 
 var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
 var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
 var _Card = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Card */ "@elementor/ui/Card"));
 var _CardActions = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardActions */ "@elementor/ui/CardActions"));
@@ -1995,7 +1994,6 @@ var _CardMedia = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Ca
 var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
 var Addons = function Addons(_ref) {
   var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  var domain = props.adminUrl.replace('wp-admin/', '');
   var addonsArray = props.addonsData.repeater;
   var cardsPerRow = 3 === addonsArray.length ? 3 : 2;
   var handleAddonClick = function handleAddonClick(title, url) {
@@ -2074,12 +2072,7 @@ var Addons = function Addons(_ref) {
         return handleAddonClick(item.title, item.url);
       }
     }, item.button_label))));
-  })), /*#__PURE__*/_react.default.createElement(_Link.default, {
-    variant: "body2",
-    color: "info.main",
-    underline: "none",
-    href: "".concat(domain).concat(props.addonsData.footer.file_path)
-  }, props.addonsData.footer.label));
+  })));
 };
 var _default = exports["default"] = Addons;
 Addons.propTypes = {

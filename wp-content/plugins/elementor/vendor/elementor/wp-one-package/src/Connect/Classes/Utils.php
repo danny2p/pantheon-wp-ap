@@ -29,10 +29,19 @@ class Utils {
 
 	/**
 	 * Get clients URL
+	 * @param string $client_id
 	 * @return string
 	 */
-	public function get_clients_url(): string {
-		return $this->get_base_url() . '/api/v1/clients';
+	public function get_clients_url( string $client_id = '' ): string {
+		return $this->get_base_url() . '/api/v1/clients' . ( $client_id ? "/{$client_id}" : '' );
+	}
+
+	/**
+	 * Get license info URL
+	 * @return string
+	 */
+	public function get_license_info_url(): string {
+		return $this->get_base_url() . '/api/v1/license/info';
 	}
 
 	/**
@@ -126,14 +135,14 @@ class Utils {
 	}
 
 	/**
-	 * Get clients URL
+	 * Patch clients URL
 	 *
 	 * @param string $client_id
 	 *
 	 * @return string
 	 */
 	public function get_clients_patch_url( string $client_id ): string {
-		return $this->get_base_url() . "/api/v1/clients/{$client_id}";
+		return $this->get_clients_url( $client_id );
 	}
 
 	/**
@@ -150,11 +159,7 @@ class Utils {
 	 * @return bool
 	 */
 	public function is_valid_home_url(): bool {
-		$data = $this->facade->data();
-		if ( empty( $data->get_home_url() ) ) {
-			return true;
-		}
-		return $data->get_home_url() === home_url();
+		return $this->facade->home_url()->is_valid();
 	}
 
 	/**

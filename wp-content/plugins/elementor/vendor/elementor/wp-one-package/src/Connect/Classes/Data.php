@@ -226,7 +226,7 @@ class Data {
 	 * @return bool
 	 */
 	public function set_home_url( ?string $home_url = null ): bool {
-		$home_url = $home_url ?? home_url();
+		$home_url = $home_url ?? $this->facade->home_url()->get_current();
 		return $this->set_connect_mode_data( self::HOME_URL, base64_encode( $home_url ) );
 	}
 

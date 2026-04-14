@@ -206,6 +206,8 @@ __( 'Don’t apply', 'elementor' );
 __( 'Icon Library', 'elementor' );
 __( 'Insert', 'elementor' );
 __( 'Keyboard Shortcuts', 'elementor' );
+__( 'Cannot load editor', 'elementor' );
+__( 'Server Error', 'elementor' );
 __( 'Dynamic Content', 'elementor' );
 __(
 					'Create more personalized and dynamic sites by populating data from various sources with dozens of dynamic tags to choose from.',
@@ -222,8 +224,6 @@ __(
 					text: hasProAndNotConnected
 						? __( 'Connect & Activate', 'elementor' );
 __( 'Upgrade', 'elementor' );
-__( 'Cannot load editor', 'elementor' );
-__( 'Server Error', 'elementor' );
 __( 'Type Here', 'elementor' );
 __( 'Structure', 'elementor' );
 __( 'Link copied!', 'elementor' );

@@ -58,22 +58,29 @@ class Feedback {
 	 * @param string $subject
 	 * @param string $title
 	 * @param string $description
+	 * @param string|null $country_code
 	 * @return void
 	 * @throws \ElementorOne\Admin\Exceptions\ClientException
 	 */
-	public function send_product_feedback( string $product, string $subject, string $title, string $description ): void {
+	public function send_product_feedback( string $product, string $subject, string $title, string $description, ?string $country_code = null ): void {
 		try {
+			$body = [
+				'product' => $product,
+				'subject' => $subject,
+				'title' => $title,
+				'description' => $description,
+				'referrerUrl' => wp_get_referer(),
+			];
+
+			if ( ! empty( $country_code ) ) {
+				$body['countryCode'] = $country_code;
+			}
+
 			Utils::get_api_client()->request(
 				$this->get_product_feedback_url(),
 				[
 					'method' => 'POST',
-					'body' => wp_json_encode( [
-						'product' => $product,
-						'subject' => $subject,
-						'title' => $title,
-						'description' => $description,
-						'referrerUrl' => wp_get_referer(),
-					] ),
+					'body' => wp_json_encode( $body ),
 				]
 			);
 		} catch ( \Throwable $th ) {
