@@ -85,6 +85,11 @@ export default class ManageTemplates extends Component {
                                     name: 'Roundup Templates',
                                     description: 'Used for the layout of the recipe roundup items that can be added to posts with lists of recipes.',
                                 },
+                                {
+                                    id: 'favorites',
+                                    name: 'Favorites Templates',
+                                    description: 'Used for the layout of the favorite recipe cards shown in the visitor favorites view.',
+                                },
                             ].map( ( templateType, index ) => (
                                 <div
                                     className={ `wprm-manage-templates-type${ templateType.id === type ? ' wprm-manage-templates-type-selected' : '' }` }

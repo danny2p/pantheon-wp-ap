@@ -215,7 +215,7 @@ export default class Menu extends Component {
                     savingChanges={ this.state.savingChanges }
                 >
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ this.saveChanges }
                         disabled={ ! this.changesMade() }
                     >

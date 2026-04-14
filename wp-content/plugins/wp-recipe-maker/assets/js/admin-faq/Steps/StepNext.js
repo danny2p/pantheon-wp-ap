@@ -15,7 +15,7 @@ const StepNext = (props) => {
             <div className="footer-buttons">
                     <a
                         href={ wprm_admin.manage_url + '&skip_onboarding=1' }
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                     >{ __wprm( 'Continue to the Manage page' ) }</a>
                 </div>
         </div>

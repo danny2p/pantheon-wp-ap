@@ -121,7 +121,13 @@ class WPRM_Tools_Settings_Transfer {
 
 		list( $settings, $warnings ) = self::validate_template_settings( $settings );
 
-		WPRM_Settings::update_settings( $settings );
+		WPRM_Settings::update_settings(
+			$settings,
+			array(
+				'log_change' => true,
+				'source' => 'settings_import',
+			)
+		);
 
 		$has_warnings = ! empty( $warnings );
 		$response = array(
@@ -335,4 +341,3 @@ class WPRM_Tools_Settings_Transfer {
 }
 
 WPRM_Tools_Settings_Transfer::init();
-

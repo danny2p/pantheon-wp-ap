@@ -44,7 +44,7 @@ export default class Notices extends Component {
                                         notice.dismissable
                                         &&
                                         <a
-                                            className="button"
+                                            className="button button-secondary button-compact"
                                             href="#"
                                             onClick={ dismissNotice }
                                         >{ __wprm( 'Remove Notice' ) }</a>

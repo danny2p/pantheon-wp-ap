@@ -134,7 +134,7 @@ export default class Modal extends Component {
                     }}
                 >
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ this.handleExport }
                     >
                         { __wprm( 'Export to CSV' ) }

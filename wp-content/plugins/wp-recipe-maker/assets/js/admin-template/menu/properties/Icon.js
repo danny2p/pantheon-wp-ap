@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import SVG from 'react-inlinesvg';
 
+import IconPickerModal from './IconPickerModal';
+
 export default class PropertyIcon extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            selectingIcon: false,
+            modalOpen: false,
         }
     }
 
@@ -16,75 +18,31 @@ export default class PropertyIcon extends Component {
 
         return (
             <Fragment>
-                {
-                    ! this.state.selectingIcon
-                    ?
-                    <span className="wprm-template-property-icon-selected-container">
-                        {
-                            iconUrl
-                            &&
-                            <SVG
-                                src={iconUrl}
-                                className="wprm-template-property-icon-select"
-                            />
+                <span className="wprm-template-property-icon-selected-container">
+                    {
+                        iconUrl
+                        &&
+                        <SVG
+                            src={iconUrl}
+                            className="wprm-template-property-icon-select"
+                        />
+                    }
+                    <a href="#" onClick={(e) => {
+                        e.preventDefault();
+                        this.setState({ modalOpen: true });
+                    }}>{ iconUrl ? 'Change...' : 'Select...' }</a>
+                </span>
+                <IconPickerModal
+                    isOpen={ this.state.modalOpen }
+                    onClose={ () => this.setState({ modalOpen: false }) }
+                    currentValue={ this.props.value }
+                    onSelect={ ( value ) => {
+                        this.setState({ modalOpen: false });
+                        if ( value !== this.props.value ) {
+                            this.props.onValueChange( value );
                         }
-                        <a href="#" onClick={(e) => {
-                            e.preventDefault();
-                            this.setState({
-                                selectingIcon: true,
-                            });
-                        }}>{ iconUrl ? 'Change...' : 'Select...' }</a>
-                    </span>
-                    :
-                    <div className="wprm-template-property-icon-select-container">
-                        <a href="#" onClick={(e) => {
-                                e.preventDefault();
-                                this.setState({
-                                    selectingIcon: false,
-                                });
-
-                                return this.props.onValueChange('');
-                        }}>Clear icon</a> | <a href="#" onClick={(e) => {
-                                e.preventDefault();
-
-                                const url = prompt('Set a custom URL for the icon');
-
-                                if ( url ) {
-                                    this.setState({
-                                        selectingIcon: false,
-                                    });
-    
-                                    return this.props.onValueChange(url);
-                                }
-                        }}>Set custom URL</a> | Select:
-                        <div className="wprm-template-property-icon-select-container-icons">
-                            {
-                                Object.keys( wprm_admin_template.icons ).sort().map((id, index) => {
-                                    let icon = wprm_admin_template.icons[id];
-                                    return (
-                                        <span href="#"
-                                            onClick={() => {
-                                                this.setState({
-                                                    selectingIcon: false,
-                                                });
-
-                                                if ( icon.id !== this.props.value ) {
-                                                    return this.props.onValueChange(icon.id);
-                                                }
-                                            }}
-                                            key={index}
-                                        >
-                                            <SVG
-                                                src={icon.url}
-                                                className={ icon.id === this.props.value ? 'wprm-template-property-icon-select wprm-template-property-icon-selected' : 'wprm-template-property-icon-select' }
-                                            />
-                                        </span>
-                                    );
-                                })
-                            }
-                        </div>
-                    </div>
-                }
+                    } }
+                />
             </Fragment>
         );
     }

@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.4.6
+Version: 1.4.7
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -2135,48 +2135,99 @@ GNU General Public License for more details.
 			return $rule;
 		}
 
-		public function excludeRules(){
-			$htaccess_page_rules = "";
-			$htaccess_page_useragent = "";
-			$htaccess_page_cookie = "";
 
-			if($rules_json = get_option("WpFastestCacheExclude")){
-				if($rules_json != "null"){
-					$rules_std = json_decode($rules_json);
 
-					foreach ($rules_std as $key => $value) {
-						$value->type = isset($value->type) ? $value->type : "page";
 
-						// escape the chars
-						$value->content = str_replace("?", "\?", $value->content);
 
-						if($value->type == "page"){
-							if($value->prefix == "startwith"){
-								$value->content = ltrim($value->content, "/");
+        public function excludeRules(){
+            $htaccess_page_rules = "";
+            $htaccess_page_useragent = "";
+            $htaccess_page_cookie = "";
 
-								$htaccess_page_rules = $htaccess_page_rules."RewriteCond %{REQUEST_URI} !^/".$value->content." [NC]\n";
-							}
+            $rules_json = get_option("WpFastestCacheExclude");
 
-							if($value->prefix == "contain"){
-								$htaccess_page_rules = $htaccess_page_rules."RewriteCond %{REQUEST_URI} !".$value->content." [NC]\n";
-							}
+            if(!empty($rules_json) && $rules_json !== "null"){
+                $rules_std = json_decode($rules_json);
 
-							if($value->prefix == "exact"){
-								$value->content = trim($value->content, "/");
-								
-								$htaccess_page_rules = $htaccess_page_rules."RewriteCond %{REQUEST_URI} !\/".$value->content." [NC]\n";
-							}
-						}else if($value->type == "useragent"){
-							$htaccess_page_useragent = $htaccess_page_useragent."RewriteCond %{HTTP_USER_AGENT} !".$value->content." [NC]\n";
-						}else if($value->type == "cookie"){
-							$htaccess_page_cookie = $htaccess_page_cookie."RewriteCond %{HTTP:Cookie} !".$value->content." [NC]\n";
-						}
-					}
-				}
-			}
+                // JSON hatalıysa çık
+                if (json_last_error() !== JSON_ERROR_NONE || !is_array($rules_std)) {
+                    return "";
+                }
 
-			return "# Start WPFC Exclude\n".$htaccess_page_rules.$htaccess_page_useragent.$htaccess_page_cookie."# End WPFC Exclude\n";
-		}
+                foreach ($rules_std as $value) {
+
+                    // default type
+                    $value->type = isset($value->type) ? $value->type : "page";
+
+                    // content yoksa skip
+                    if(empty($value->content)){
+                        continue;
+                    }
+
+                    // HTML entity decode (örn: &lt; &gt;)
+                    $content = html_entity_decode($value->content, ENT_QUOTES, 'UTF-8');
+
+                    // ---------- PAGE RULES ----------
+                    if($value->type == "page"){
+
+                        // REGEX (escape yok!)
+                        if(isset($value->prefix) && $value->prefix == "regex"){
+
+                            // basit regex validation (çok kırılmayı önler)
+                            if(@preg_match("/".$content."/", null) === false){
+                                continue; // hatalı regex skip
+                            }
+
+                            $htaccess_page_rules .= "RewriteCond %{REQUEST_URI} !".$content." [NC]\n";
+                        }
+
+                        // NORMAL RULES (escape var)
+                        else{
+
+                            // regex injection önleme
+                            $safe_content = preg_quote($content, "/");
+
+                            if($value->prefix == "startwith"){
+                                $safe_content = ltrim($safe_content, "/");
+                                $htaccess_page_rules .= "RewriteCond %{REQUEST_URI} !^/".$safe_content." [NC]\n";
+                            }
+
+                            if($value->prefix == "contain"){
+                                $htaccess_page_rules .= "RewriteCond %{REQUEST_URI} !".$safe_content." [NC]\n";
+                            }
+
+                            if($value->prefix == "exact"){
+                                $safe_content = trim($safe_content, "/");
+                                $htaccess_page_rules .= "RewriteCond %{REQUEST_URI} !^/".$safe_content."$ [NC]\n";
+                            }
+                        }
+                    }
+
+                    // ---------- USER AGENT ----------
+                    else if($value->type == "useragent"){
+                        $safe_content = preg_quote($content, "/");
+                        $htaccess_page_useragent .= "RewriteCond %{HTTP_USER_AGENT} !".$safe_content." [NC]\n";
+                    }
+
+                    // ---------- COOKIE ----------
+                    else if($value->type == "cookie"){
+                        $safe_content = preg_quote($content, "/");
+                        $htaccess_page_cookie .= "RewriteCond %{HTTP:Cookie} !".$safe_content." [NC]\n";
+                    }
+                }
+            }
+
+            return "# Start WPFC Exclude\n"
+                .$htaccess_page_rules
+                .$htaccess_page_useragent
+                .$htaccess_page_cookie
+                ."# End WPFC Exclude\n";
+        }
+
+
+
+
+
 
 		public function getABSPATH(){
 
@@ -2204,31 +2255,44 @@ GNU General Public License for more details.
 		}
 
 		public function rm_folder_recursively($dir, $i = 1) {
-			if(is_dir($dir)){
-				$files = @scandir($dir);
-			    foreach((array)$files as $file) {
-			    	if($i > 50 && !preg_match("/wp-fastest-cache-premium/i", $dir)){
-			    		return true;
-			    	}else{
-			    		$i++;
-			    	}
-			        if ('.' === $file || '..' === $file) continue;
-			        if (is_dir("$dir/$file")){
-			        	$this->rm_folder_recursively("$dir/$file", $i);
-			        }else{
-			        	if(file_exists("$dir/$file")){
-			        		@unlink("$dir/$file");
-			        	}
-			        }
-			    }
-			}
-	
-		    if(is_dir($dir)){
-			    $files_tmp = @scandir($dir);
-			    
-			    if(!isset($files_tmp[2])){
-			    	@rmdir($dir);
-			    }
+
+		    if (!is_dir($dir)) {
+		        return true;
+		    }
+
+		    $files = scandir($dir);
+		    
+		    if ($files === false) {
+		        return true;
+		    }
+
+		    foreach ($files as $file) {
+
+		        if ($file === '.' || $file === '..') {
+		            continue;
+		        }
+
+		        if ($i > 50 && !preg_match("/wp-fastest-cache-premium/i", $dir)) {
+		            return true;
+		        }
+
+		        $path = $dir . '/' . $file;
+
+		        if (is_dir($path)) {
+		            $this->rm_folder_recursively($path, $i + 1);
+		        } else {
+		            if (file_exists($path)) {
+		                unlink($path);
+		            }
+		        }
+		    }
+
+		    if (is_dir($dir)) {
+		        $files_tmp = scandir($dir);
+
+		        if ($files_tmp !== false && count($files_tmp) <= 2) {
+		            rmdir($dir);
+		        }
 		    }
 
 		    return true;

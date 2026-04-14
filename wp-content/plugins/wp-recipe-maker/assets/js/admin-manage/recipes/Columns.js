@@ -89,7 +89,7 @@ export default {
                                 title={ __wprm( 'Edit Recipe' ) }
                                 onClick={() => {
                                     WPRM_Modal.open( 'recipe', {
-                                        recipe: row.original,
+                                        recipeId: row.original.id,
                                         saveCallback: () => recipes.refreshData(),
                                     } );
                                 }}

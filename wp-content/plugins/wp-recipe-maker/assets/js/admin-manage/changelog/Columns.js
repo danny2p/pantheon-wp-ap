@@ -4,6 +4,29 @@ import he from 'he';
 import TextFilter from '../general/TextFilter';
 import { __wprm } from 'Shared/Translations';
 
+const SETTINGS_SOURCE_LABELS = {
+    settings_page: __wprm( 'Settings Page' ),
+    settings_import: __wprm( 'Settings Import' ),
+};
+
+const formatSettingsChangeValue = ( value ) => {
+    if ( undefined === value || null === value || '' === value ) {
+        return __wprm( 'Empty' );
+    }
+
+    return value.toString();
+};
+
+const renderObjectMeta = ( value ) => {
+    if ( ! value || 'object' !== typeof value ) {
+        return null;
+    }
+
+    return Object.keys( value ).map( ( field, index ) => (
+        <div key={ index }><strong>{ field }:</strong> { value[ field ].toString() }</div>
+    ));
+};
+
 export default {
     getColumns( datatable ) {
         let columns = [
@@ -27,19 +50,35 @@ export default {
                 width: 200,
                 sortable: false,
                 filterable: false,
-                Cell: row => (
-                    <div>
-                        {
-                            typeof row.value === 'object'
-                            ?
-                            Object.keys( row.value ).map( ( field, index ) => (
-                                <div key={ index }><strong>{ field }:</strong> { row.value[ field ].toString() }</div>
-                            ))
-                            :
-                            null
-                        }
-                    </div>
-                ),
+                Cell: row => {
+                    const settingsChanges = row.value && Array.isArray( row.value.changes ) ? row.value.changes : false;
+
+                    if ( 'settings_updated' === row.original.type && settingsChanges ) {
+                        return (
+                            <div>
+                                {
+                                    settingsChanges.map( ( change, index ) => (
+                                        <div key={ index }>
+                                            <strong>{ change.label ? change.label : change.id }:</strong> { formatSettingsChangeValue( change.before ) } &rarr; { formatSettingsChangeValue( change.after ) }
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <div>
+                            {
+                                'object' === typeof row.value
+                                ?
+                                renderObjectMeta( row.value )
+                                :
+                                null
+                            }
+                        </div>
+                    );
+                },
             },{
                 Header: __wprm( 'Object ID' ),
                 id: 'object_id',
@@ -47,6 +86,12 @@ export default {
                 width: 300,
                 Filter: (props) => (<TextFilter {...props}/>),
                 Cell: row => {
+                    if ( row.original.object_meta && 'settings' === row.original.object_meta.type ) {
+                        return (
+                            <div>{ row.original.object_meta.name ? row.original.object_meta.name : __wprm( 'Plugin Settings' ) }</div>
+                        );
+                    }
+
                     if ( ! row.value || '0' === row.value ) {
                         return (<div></div>);
                     }
@@ -80,19 +125,32 @@ export default {
                 width: 300,
                 sortable: false,
                 filterable: false,
-                Cell: row => (
-                    <div>
-                        {
-                            typeof row.value === 'object'
-                            ?
-                            Object.keys( row.value ).map( ( field, index ) => (
-                                <div key={ index }><strong>{ field }:</strong> { row.value[ field ].toString() }</div>
-                            ))
-                            :
-                            null
-                        }
-                    </div>
-                ),
+                Cell: row => {
+                    if ( row.value && 'settings' === row.value.type ) {
+                        const source = row.value.source && SETTINGS_SOURCE_LABELS[ row.value.source ]
+                            ? SETTINGS_SOURCE_LABELS[ row.value.source ]
+                            : row.value.source;
+
+                        return (
+                            <div>
+                                <div><strong>{ __wprm( 'Source' ) }:</strong> { source ? source : __wprm( 'n/a' ) }</div>
+                                <div><strong>{ __wprm( 'Changed Settings' ) }:</strong> { row.value.changed_count ? row.value.changed_count : 0 }</div>
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <div>
+                            {
+                                'object' === typeof row.value
+                                ?
+                                renderObjectMeta( row.value )
+                                :
+                                null
+                            }
+                        </div>
+                    );
+                },
             },{
                 Header: __wprm( 'User ID' ),
                 id: 'user_id',

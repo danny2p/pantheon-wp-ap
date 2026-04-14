@@ -184,6 +184,16 @@ class WPRM_Modal {
 		$empty_list = new WPRM_List_Shell();
 
 		$localize_data = apply_filters( 'wprm_admin_modal_localize', array(
+			'idea' => array(
+				'name'              => '',
+				'summary'           => '',
+				'type'              => 'recipe',
+				'status'            => 'idea',
+				'source'            => 'manual',
+				'notes'             => '',
+				'ai_prompt_summary' => '',
+				'ai_generated_at'   => '',
+			),
 			'list' => $empty_list->get_data(),
 			'recipe' => $empty_recipe->get_data(),
 			'editor_uid' => 0,

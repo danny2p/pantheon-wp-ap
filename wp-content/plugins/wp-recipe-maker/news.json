@@ -1,6 +1,30 @@
 {
     "news": [
         {
+            "date": "2026-04-02",
+            "label": "Release",
+            "title": "WP Recipe Maker 10.5.0",
+            "url": "https://bootstrapped.ventures/wp-recipe-maker-10-5-0/"
+        },
+        {
+            "date": "2026-03-24",
+            "label": "Blog",
+            "title": "How Much Do Food Bloggers Earn at Different Traffic Levels",
+            "url": "https://bootstrapped.ventures/how-much-do-food-bloggers-earn/"
+        },
+        {
+            "date": "2026-03-13",
+            "label": "Blog",
+            "title": "Translate Recipes and Convert Measurements Without Losing Clarity",
+            "url": "https://bootstrapped.ventures/translate-recipes/"
+        },
+        {
+            "date": "2026-03-06",
+            "label": "Blog",
+            "title": "What the Best Food Blogs Have in Common and How to Build Yours",
+            "url": "https://bootstrapped.ventures/food-blog-examples/"
+        },
+        {
             "date": "2026-02-25",
             "label": "Release",
             "title": "WP Recipe Maker 10.4.0",

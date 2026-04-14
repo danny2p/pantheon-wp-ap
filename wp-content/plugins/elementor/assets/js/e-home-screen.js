@@ -1261,171 +1261,6 @@ var _default = exports["default"] = ScreenViewTracking;
 
 /***/ }),
 
-/***/ "../app/assets/js/event-track/dashboard/top-bar.js":
-/*!*********************************************************!*\
-  !*** ../app/assets/js/event-track/dashboard/top-bar.js ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "../node_modules/@babel/runtime/helpers/classCallCheck.js"));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ "../node_modules/@babel/runtime/helpers/createClass.js"));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ "../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js"));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ "../node_modules/@babel/runtime/helpers/getPrototypeOf.js"));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ "../node_modules/@babel/runtime/helpers/inherits.js"));
-var _wpDashboardTracking = _interopRequireWildcard(__webpack_require__(/*! ../wp-dashboard-tracking */ "../app/assets/js/event-track/wp-dashboard-tracking.js"));
-var _baseTracking = _interopRequireDefault(__webpack_require__(/*! ./base-tracking */ "../app/assets/js/event-track/dashboard/base-tracking.js"));
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
-function _callSuper(t, o, e) { return o = (0, _getPrototypeOf2.default)(o), (0, _possibleConstructorReturn2.default)(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], (0, _getPrototypeOf2.default)(t).constructor) : o.apply(t, e)); }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-var TOP_BAR_SELECTORS = {
-  TOP_BAR_ROOT: '.e-admin-top-bar',
-  BAR_BUTTON: '.e-admin-top-bar__bar-button',
-  BUTTON_TITLE: '.e-admin-top-bar__bar-button-title',
-  MAIN_AREA: '.e-admin-top-bar__main-area',
-  SECONDARY_AREA: '.e-admin-top-bar__secondary-area'
-};
-var TopBarTracking = /*#__PURE__*/function (_BaseTracking) {
-  function TopBarTracking() {
-    (0, _classCallCheck2.default)(this, TopBarTracking);
-    return _callSuper(this, TopBarTracking, arguments);
-  }
-  (0, _inherits2.default)(TopBarTracking, _BaseTracking);
-  return (0, _createClass2.default)(TopBarTracking, null, [{
-    key: "init",
-    value: function init() {
-      this.waitForTopBar();
-    }
-  }, {
-    key: "waitForTopBar",
-    value: function waitForTopBar() {
-      var _this = this;
-      var topBar = document.querySelector(TOP_BAR_SELECTORS.TOP_BAR_ROOT);
-      if (topBar) {
-        this.attachTopBarTracking(topBar);
-        return;
-      }
-      var observer = this.addObserver(document.body, {
-        childList: true,
-        subtree: true
-      }, function () {
-        var foundTopBar = document.querySelector(TOP_BAR_SELECTORS.TOP_BAR_ROOT);
-        if (foundTopBar) {
-          _this.attachTopBarTracking(foundTopBar);
-          observer.disconnect();
-          clearTimeout(timeoutId);
-        }
-      });
-      var timeoutId = setTimeout(function () {
-        observer.disconnect();
-      }, 10000);
-    }
-  }, {
-    key: "attachTopBarTracking",
-    value: function attachTopBarTracking(topBar) {
-      var _this2 = this;
-      var buttons = topBar.querySelectorAll(TOP_BAR_SELECTORS.BAR_BUTTON);
-      buttons.forEach(function (button) {
-        _this2.addEventListenerTracked(button, 'click', function (event) {
-          _this2.handleTopBarClick(event);
-        });
-      });
-      this.observeTopBarChanges(topBar);
-    }
-  }, {
-    key: "observeTopBarChanges",
-    value: function observeTopBarChanges(topBar) {
-      var _this3 = this;
-      this.addObserver(topBar, {
-        childList: true,
-        subtree: true
-      }, function (mutations) {
-        mutations.forEach(function (mutation) {
-          if ('childList' === mutation.type) {
-            mutation.addedNodes.forEach(function (node) {
-              if (1 === node.nodeType) {
-                if (node.matches && node.matches(TOP_BAR_SELECTORS.BAR_BUTTON)) {
-                  _this3.addEventListenerTracked(node, 'click', function (event) {
-                    _this3.handleTopBarClick(event);
-                  });
-                } else {
-                  var buttons = node.querySelectorAll ? node.querySelectorAll(TOP_BAR_SELECTORS.BAR_BUTTON) : [];
-                  buttons.forEach(function (button) {
-                    _this3.addEventListenerTracked(button, 'click', function (event) {
-                      _this3.handleTopBarClick(event);
-                    });
-                  });
-                }
-              }
-            });
-          }
-        });
-      });
-    }
-  }, {
-    key: "handleTopBarClick",
-    value: function handleTopBarClick(event) {
-      var button = event.currentTarget;
-      var itemId = this.extractItemId(button);
-      _wpDashboardTracking.default.trackNavClicked(itemId, null, _wpDashboardTracking.NAV_AREAS.TOP_BAR);
-    }
-  }, {
-    key: "extractItemId",
-    value: function extractItemId(button) {
-      var titleElement = button.querySelector(TOP_BAR_SELECTORS.BUTTON_TITLE);
-      if (titleElement && titleElement.textContent.trim()) {
-        return titleElement.textContent.trim();
-      }
-      var textContent = button.textContent.trim();
-      if (textContent) {
-        return textContent;
-      }
-      var href = button.getAttribute('href');
-      if (href) {
-        var urlParams = new URLSearchParams(href.split('?')[1] || '');
-        var page = urlParams.get('page');
-        if (page) {
-          return page;
-        }
-        if (href.includes('/wp-admin/')) {
-          var pathParts = href.split('/wp-admin/')[1];
-          if (pathParts) {
-            return pathParts.split('?')[0];
-          }
-        }
-        try {
-          var url = new URL(href, window.location.origin);
-          return url.pathname.split('/').filter(Boolean).pop() || url.hostname;
-        } catch (error) {
-          return href;
-        }
-      }
-      var dataInfo = button.getAttribute('data-info');
-      if (dataInfo) {
-        return dataInfo;
-      }
-      var classes = button.className.split(' ').filter(function (cls) {
-        return cls && 'e-admin-top-bar__bar-button' !== cls;
-      });
-      if (classes.length > 0) {
-        return classes.join('-');
-      }
-      return 'unknown-top-bar-button';
-    }
-  }]);
-}(_baseTracking.default);
-var _default = exports["default"] = TopBarTracking;
-
-/***/ }),
-
 /***/ "../app/assets/js/event-track/dashboard/utils.js":
 /*!*******************************************************!*\
   !*** ../app/assets/js/event-track/dashboard/utils.js ***!
@@ -1483,7 +1318,6 @@ var _promotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/prom
 var _screenView = _interopRequireDefault(__webpack_require__(/*! ./dashboard/screen-view */ "../app/assets/js/event-track/dashboard/screen-view.js"));
 var _menuPromotion = _interopRequireDefault(__webpack_require__(/*! ./dashboard/menu-promotion */ "../app/assets/js/event-track/dashboard/menu-promotion.js"));
 var _actionControls = _interopRequireDefault(__webpack_require__(/*! ./dashboard/action-controls */ "../app/assets/js/event-track/dashboard/action-controls.js"));
-var _topBar = _interopRequireDefault(__webpack_require__(/*! ./dashboard/top-bar */ "../app/assets/js/event-track/dashboard/top-bar.js"));
 var SESSION_TIMEOUT_MINUTES = 30;
 var MINUTE_MS = 60 * 1000;
 var SESSION_TIMEOUT = SESSION_TIMEOUT_MINUTES * MINUTE_MS;
@@ -1670,7 +1504,7 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
         var page = params.get('page');
         var postType = params.get('post_type');
         var action = params.get('action');
-        var elementorPages = ['elementor', 'go_knowledge_base_site', 'e-form-submissions'];
+        var elementorPages = ['elementor-home', 'e-form-submissions'];
         var elementorPostTypes = ['elementor_library', 'e-floating-buttons'];
         return page && elementorPages.some(function (p) {
           return page.includes(p);
@@ -1871,9 +1705,6 @@ var WpDashboardTracking = exports["default"] = /*#__PURE__*/function () {
       _promotion.default.destroy();
       _menuPromotion.default.destroy();
       _actionControls.default.destroy();
-      if (!WpDashboardTracking.isEditorOneActive()) {
-        _topBar.default.destroy();
-      }
       this.initialized = false;
     }
   }]);
@@ -1900,9 +1731,6 @@ window.addEventListener('elementor/admin/init', function () {
     _promotion.default.init();
     _menuPromotion.default.init();
     _actionControls.default.init();
-    if (!WpDashboardTracking.isEditorOneActive()) {
-      _topBar.default.init();
-    }
   }
 });
 window.addEventListener('beforeunload', function () {
@@ -1966,126 +1794,10 @@ var _default = exports["default"] = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/addons-section.js":
-/*!****************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/addons-section.js ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _Card = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Card */ "@elementor/ui/Card"));
-var _CardActions = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardActions */ "@elementor/ui/CardActions"));
-var _CardContent = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardContent */ "@elementor/ui/CardContent"));
-var _CardMedia = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardMedia */ "@elementor/ui/CardMedia"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-var Addons = function Addons(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  var addonsArray = props.addonsData.repeater;
-  var cardsPerRow = 3 === addonsArray.length ? 3 : 2;
-  var handleAddonClick = function handleAddonClick(title, url) {
-    (0, _promoTracking.trackPromoClick)(title, url, (0, _promoTracking.getHomeScreenPath)('addons'));
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      py: 3,
-      px: {
-        xs: 3,
-        md: 4
-      },
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2,
-      borderRadius: 2,
-      border: '1px solid rgba(0, 0, 0, 0.12)'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "h6"
-  }, props.addonsData.header.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "body2",
-    color: "text.secondary"
-  }, props.addonsData.header.description)), /*#__PURE__*/_react.default.createElement(_List.default, {
-    sx: {
-      display: 'grid',
-      gridTemplateColumns: {
-        md: "repeat(".concat(cardsPerRow, ", 1fr)"),
-        xs: 'repeat(1, 1fr)'
-      },
-      gap: 2
-    }
-  }, addonsArray.map(function (item) {
-    var linkTarget = item.hasOwnProperty('target') ? item.target : '_blank';
-    return /*#__PURE__*/_react.default.createElement(_Card.default, {
-      key: item.title,
-      elevation: 0,
-      sx: {
-        display: 'flex',
-        border: 1,
-        borderRadius: 1,
-        borderColor: 'action.focus'
-      }
-    }, /*#__PURE__*/_react.default.createElement(_CardContent.default, {
-      sx: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        gap: 3,
-        p: 3
-      }
-    }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
-      image: item.image,
-      sx: {
-        height: '58px',
-        width: '58px',
-        mb: 2
-      }
-    }), /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-      variant: "subtitle2"
-    }, item.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-      variant: "body2",
-      color: "text.secondary"
-    }, item.description))), /*#__PURE__*/_react.default.createElement(_CardActions.default, {
-      sx: {
-        p: 0
-      }
-    }, /*#__PURE__*/_react.default.createElement(_Button.default, {
-      variant: "outlined",
-      size: "small",
-      color: "promotion",
-      href: item.url,
-      target: linkTarget,
-      onClick: function onClick() {
-        return handleAddonClick(item.title, item.url);
-      }
-    }, item.button_label))));
-  })));
-};
-var _default = exports["default"] = Addons;
-Addons.propTypes = {
-  addonsData: PropTypes.object.isRequired,
-  adminUrl: PropTypes.string.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/editor-screen/create-new-page-dialog.js":
-/*!************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/create-new-page-dialog.js ***!
-  \************************************************************************************/
+/***/ "../modules/home/assets/js/components/create-new-page-dialog.js":
+/*!**********************************************************************!*\
+  !*** ../modules/home/assets/js/components/create-new-page-dialog.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2169,10 +1881,10 @@ CreateNewPageDialog.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/create-with-ai-banner.js":
-/*!***********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/create-with-ai-banner.js ***!
-  \***********************************************************************************/
+/***/ "../modules/home/assets/js/components/create-with-ai-banner.js":
+/*!*********************************************************************!*\
+  !*** ../modules/home/assets/js/components/create-with-ai-banner.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2192,7 +1904,7 @@ var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/he
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _Typography = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Typography */ "@elementor/ui/Typography"));
 var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
+var _promoTracking = __webpack_require__(/*! ../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 var CreateWithAIBanner = function CreateWithAIBanner(_ref) {
   var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
@@ -2307,10 +2019,10 @@ var _default = exports["default"] = CreateWithAIBanner;
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/external-links-section.js":
-/*!************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/external-links-section.js ***!
-  \************************************************************************************/
+/***/ "../modules/home/assets/js/components/external-links-section.js":
+/*!**********************************************************************!*\
+  !*** ../modules/home/assets/js/components/external-links-section.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2392,10 +2104,10 @@ ExternalLinksSection.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/get-started-list-item.js":
-/*!***********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/get-started-list-item.js ***!
-  \***********************************************************************************/
+/***/ "../modules/home/assets/js/components/get-started-list-item.js":
+/*!*********************************************************************!*\
+  !*** ../modules/home/assets/js/components/get-started-list-item.js ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2413,7 +2125,7 @@ var _ListItem = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Lis
 var _ListItemText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemText */ "@elementor/ui/ListItemText"));
 var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
 var _Box = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Box */ "@elementor/ui/Box"));
-var _createNewPageDialog = _interopRequireDefault(__webpack_require__(/*! ./create-new-page-dialog */ "../modules/home/assets/js/components/editor-screen/create-new-page-dialog.js"));
+var _createNewPageDialog = _interopRequireDefault(__webpack_require__(/*! ./create-new-page-dialog */ "../modules/home/assets/js/components/create-new-page-dialog.js"));
 var GetStartedListItem = function GetStartedListItem(_ref) {
   var item = _ref.item,
     image = _ref.image,
@@ -2479,10 +2191,10 @@ GetStartedListItem.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/get-started-section.js":
-/*!*********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/get-started-section.js ***!
-  \*********************************************************************************/
+/***/ "../modules/home/assets/js/components/get-started-section.js":
+/*!*******************************************************************!*\
+  !*** ../modules/home/assets/js/components/get-started-section.js ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2499,7 +2211,7 @@ var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/he
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
 var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
-var _getStartedListItem = _interopRequireDefault(__webpack_require__(/*! ./get-started-list-item */ "../modules/home/assets/js/components/editor-screen/get-started-list-item.js"));
+var _getStartedListItem = _interopRequireDefault(__webpack_require__(/*! ./get-started-list-item */ "../modules/home/assets/js/components/get-started-list-item.js"));
 var GetStarted = function GetStarted(_ref) {
   var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
   var hasSidebarPromotion = props.homeScreenData.hasOwnProperty('sidebar_promotion_variants');
@@ -2555,10 +2267,10 @@ GetStarted.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/header-section.js":
-/*!****************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/header-section.js ***!
-  \****************************************************************************/
+/***/ "../modules/home/assets/js/components/header-section.js":
+/*!**************************************************************!*\
+  !*** ../modules/home/assets/js/components/header-section.js ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2603,10 +2315,10 @@ var _default = exports["default"] = HeaderSection;
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/home-screen.js":
-/*!*************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/home-screen.js ***!
-  \*************************************************************************/
+/***/ "../modules/home/assets/js/components/home-screen.js":
+/*!***********************************************************!*\
+  !*** ../modules/home/assets/js/components/home-screen.js ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2620,14 +2332,18 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _headerSection = _interopRequireDefault(__webpack_require__(/*! ./header-section */ "../modules/home/assets/js/components/editor-screen/header-section.js"));
-var _topSection = _interopRequireDefault(__webpack_require__(/*! ./top-section */ "../modules/home/assets/js/components/editor-screen/top-section.js"));
-var _sidebarPromotion = _interopRequireDefault(__webpack_require__(/*! ./sidebar-promotion */ "../modules/home/assets/js/components/editor-screen/sidebar-promotion.js"));
-var _addonsSection = _interopRequireDefault(__webpack_require__(/*! ./addons-section */ "../modules/home/assets/js/components/editor-screen/addons-section.js"));
-var _externalLinksSection = _interopRequireDefault(__webpack_require__(/*! ./external-links-section */ "../modules/home/assets/js/components/editor-screen/external-links-section.js"));
-var _getStartedSection = _interopRequireDefault(__webpack_require__(/*! ./get-started-section */ "../modules/home/assets/js/components/editor-screen/get-started-section.js"));
-var _createWithAiBanner = _interopRequireDefault(__webpack_require__(/*! ./create-with-ai-banner */ "../modules/home/assets/js/components/editor-screen/create-with-ai-banner.js"));
+var _headerSection = _interopRequireDefault(__webpack_require__(/*! ./header-section */ "../modules/home/assets/js/components/header-section.js"));
+var _topSection = _interopRequireDefault(__webpack_require__(/*! ./top-section */ "../modules/home/assets/js/components/top-section.js"));
+var _sidebarPromotion = _interopRequireDefault(__webpack_require__(/*! ./sidebar-promotion */ "../modules/home/assets/js/components/sidebar-promotion.js"));
+var _externalLinksSection = _interopRequireDefault(__webpack_require__(/*! ./external-links-section */ "../modules/home/assets/js/components/external-links-section.js"));
+var _getStartedSection = _interopRequireDefault(__webpack_require__(/*! ./get-started-section */ "../modules/home/assets/js/components/get-started-section.js"));
+var _createWithAiBanner = _interopRequireDefault(__webpack_require__(/*! ./create-with-ai-banner */ "../modules/home/assets/js/components/create-with-ai-banner.js"));
+var _loadFallbackMessage = _interopRequireDefault(__webpack_require__(/*! ./load-fallback-message */ "../modules/home/assets/js/components/load-fallback-message.js"));
 var EditorScreen = function EditorScreen(props) {
+  var _props$homeScreenData;
+  if (!((_props$homeScreenData = props.homeScreenData) !== null && _props$homeScreenData !== void 0 && _props$homeScreenData.get_started)) {
+    return /*#__PURE__*/_react.default.createElement(_loadFallbackMessage.default, null);
+  }
   var hasSidebarPromotion = props.homeScreenData.hasOwnProperty('sidebar_promotion_variants');
   return /*#__PURE__*/ /*  Box wrapper around the Container is needed to neutralize wp-content area left-padding */_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Container, {
     disableGutters: true,
@@ -2667,9 +2383,6 @@ var EditorScreen = function EditorScreen(props) {
     getStartedData: props.homeScreenData.get_started,
     adminUrl: props.adminUrl,
     homeScreenData: props.homeScreenData
-  }), props.homeScreenData.add_ons && /*#__PURE__*/_react.default.createElement(_addonsSection.default, {
-    addonsData: props.homeScreenData.add_ons,
-    adminUrl: props.adminUrl
   }), /*#__PURE__*/_react.default.createElement(_externalLinksSection.default, {
     externalLinksData: props.homeScreenData.external_links
   })), hasSidebarPromotion && /*#__PURE__*/_react.default.createElement(_ui.Container, {
@@ -2695,10 +2408,54 @@ var _default = exports["default"] = EditorScreen;
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/promotions/sidebar-banner.js":
-/*!***************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/promotions/sidebar-banner.js ***!
-  \***************************************************************************************/
+/***/ "../modules/home/assets/js/components/load-fallback-message.js":
+/*!*********************************************************************!*\
+  !*** ../modules/home/assets/js/components/load-fallback-message.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var LoadFallbackMessage = function LoadFallbackMessage() {
+  return /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Container, {
+    disableGutters: true,
+    maxWidth: "lg",
+    sx: {
+      px: 4,
+      pt: 4
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Paper, {
+    elevation: 0,
+    sx: {
+      py: 4,
+      px: 4,
+      borderRadius: 1,
+      border: 1,
+      borderColor: 'divider',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "body1",
+    color: "text.secondary"
+  }, (0, _i18n.__)("We couldn't load this content right now. Please try again later.", 'elementor')))));
+};
+var _default = exports["default"] = LoadFallbackMessage;
+
+/***/ }),
+
+/***/ "../modules/home/assets/js/components/promotions/sidebar-banner.js":
+/*!*************************************************************************!*\
+  !*** ../modules/home/assets/js/components/promotions/sidebar-banner.js ***!
+  \*************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2713,7 +2470,7 @@ exports["default"] = void 0;
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
-var _promoTracking = __webpack_require__(/*! ../../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
+var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
 var SidebarBanner = function SidebarBanner(_ref) {
   var image = _ref.image,
     link = _ref.link;
@@ -2760,10 +2517,10 @@ SidebarBanner.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/promotions/sidebar-default.js":
-/*!****************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/promotions/sidebar-default.js ***!
-  \****************************************************************************************/
+/***/ "../modules/home/assets/js/components/promotions/sidebar-default.js":
+/*!**************************************************************************!*\
+  !*** ../modules/home/assets/js/components/promotions/sidebar-default.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2780,9 +2537,9 @@ var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
 var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
 var _ListItem = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItem */ "@elementor/ui/ListItem"));
-var _sideBarCheckIcon = _interopRequireDefault(__webpack_require__(/*! ../../../icons/side-bar-check-icon */ "../modules/home/assets/js/icons/side-bar-check-icon.js"));
+var _sideBarCheckIcon = _interopRequireDefault(__webpack_require__(/*! ../../icons/side-bar-check-icon */ "../modules/home/assets/js/icons/side-bar-check-icon.js"));
 var _ListItemText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemText */ "@elementor/ui/ListItemText"));
-var _promoTracking = __webpack_require__(/*! ../../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
+var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
 var SidebarDefault = function SidebarDefault(_ref) {
   var header = _ref.header,
     cta = _ref.cta,
@@ -2856,10 +2613,10 @@ SidebarDefault.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/sidebar-promotion.js":
-/*!*******************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/sidebar-promotion.js ***!
-  \*******************************************************************************/
+/***/ "../modules/home/assets/js/components/sidebar-promotion.js":
+/*!*****************************************************************!*\
+  !*** ../modules/home/assets/js/components/sidebar-promotion.js ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2872,8 +2629,8 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports["default"] = void 0;
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _sidebarBanner = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-banner */ "../modules/home/assets/js/components/editor-screen/promotions/sidebar-banner.js"));
-var _sidebarDefault = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-default */ "../modules/home/assets/js/components/editor-screen/promotions/sidebar-default.js"));
+var _sidebarBanner = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-banner */ "../modules/home/assets/js/components/promotions/sidebar-banner.js"));
+var _sidebarDefault = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-default */ "../modules/home/assets/js/components/promotions/sidebar-default.js"));
 var SideBarPromotion = function SideBarPromotion(_ref) {
   var sideData = _ref.sideData;
   if ('banner' === sideData.type) {
@@ -2888,10 +2645,10 @@ SideBarPromotion.propTypes = {
 
 /***/ }),
 
-/***/ "../modules/home/assets/js/components/editor-screen/top-section.js":
-/*!*************************************************************************!*\
-  !*** ../modules/home/assets/js/components/editor-screen/top-section.js ***!
-  \*************************************************************************/
+/***/ "../modules/home/assets/js/components/top-section.js":
+/*!***********************************************************!*\
+  !*** ../modules/home/assets/js/components/top-section.js ***!
+  \***********************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -2909,8 +2666,8 @@ var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/he
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
 var _Typography = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Typography */ "@elementor/ui/Typography"));
 var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _youtubeIcon = _interopRequireDefault(__webpack_require__(/*! ../../icons/youtube-icon */ "../modules/home/assets/js/icons/youtube-icon.js"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
+var _youtubeIcon = _interopRequireDefault(__webpack_require__(/*! ../icons/youtube-icon */ "../modules/home/assets/js/icons/youtube-icon.js"));
+var _promoTracking = __webpack_require__(/*! ../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
 var TopSection = function TopSection(_ref) {
   var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
   var topData = props.topData,
@@ -2954,963 +2711,6 @@ var TopSection = function TopSection(_ref) {
       },
       borderRadius: 1,
       border: '1px solid rgba(0, 0, 0, 0.12)'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
-    gap: 3,
-    justifyContent: "center"
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_Typography.default, {
-    variant: "h6"
-  }, title), /*#__PURE__*/_react.default.createElement(_Typography.default, {
-    variant: "body2",
-    color: "secondary"
-  }, description)), /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    sx: {
-      display: 'flex',
-      gap: 1
-    }
-  }, /*#__PURE__*/_react.default.createElement(_Button.default, {
-    "data-testid": "e-create-button",
-    variant: "contained",
-    size: "small",
-    href: buttonCtaUrl,
-    target: "_blank",
-    onClick: handleCtaClick
-  }, ctaButtonTitle), /*#__PURE__*/_react.default.createElement(_Button.default, {
-    variant: "outlined",
-    color: "secondary",
-    size: "small",
-    startIcon: /*#__PURE__*/_react.default.createElement(_youtubeIcon.default, null),
-    href: buttonWatchURL,
-    target: "_blank",
-    onClick: handleWatchClick
-  }, buttonWatchTitle))), /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    component: "iframe",
-    src: "https://www.youtube.com/embed/".concat(youtubeEmbeddedId),
-    title: "YouTube video player",
-    frameBorder: "0",
-    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-    allowFullScreen: true,
-    sx: {
-      aspectRatio: '16/9',
-      borderRadius: 1,
-      display: 'flex',
-      width: '100%',
-      maxWidth: '365px'
-    }
-  }));
-};
-TopSection.propTypes = {
-  topData: PropTypes.object.isRequired,
-  buttonCtaUrl: PropTypes.string.isRequired
-};
-var _default = exports["default"] = TopSection;
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/addons-section.js":
-/*!**************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/addons-section.js ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _Card = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Card */ "@elementor/ui/Card"));
-var _CardActions = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardActions */ "@elementor/ui/CardActions"));
-var _CardContent = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardContent */ "@elementor/ui/CardContent"));
-var _CardMedia = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/CardMedia */ "@elementor/ui/CardMedia"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-var Addons = function Addons(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  var domain = props.adminUrl.replace('wp-admin/', '');
-  var addonsArray = props.addonsData.repeater;
-  var cardsPerRow = 3 === addonsArray.length ? 3 : 2;
-  var handleAddonClick = function handleAddonClick(title, url) {
-    (0, _promoTracking.trackPromoClick)(title, url, (0, _promoTracking.getHomeScreenPath)('addons'));
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      p: 3,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "h6"
-  }, props.addonsData.header.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "body2",
-    color: "text.secondary"
-  }, props.addonsData.header.description)), /*#__PURE__*/_react.default.createElement(_List.default, {
-    sx: {
-      display: 'grid',
-      gridTemplateColumns: {
-        md: "repeat(".concat(cardsPerRow, ", 1fr)"),
-        xs: 'repeat(1, 1fr)'
-      },
-      gap: 2
-    }
-  }, addonsArray.map(function (item) {
-    var linkTarget = item.hasOwnProperty('target') ? item.target : '_blank';
-    return /*#__PURE__*/_react.default.createElement(_Card.default, {
-      key: item.title,
-      elevation: 0,
-      sx: {
-        display: 'flex',
-        border: 1,
-        borderRadius: 1,
-        borderColor: 'action.focus'
-      }
-    }, /*#__PURE__*/_react.default.createElement(_CardContent.default, {
-      sx: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        gap: 3,
-        p: 3
-      }
-    }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_CardMedia.default, {
-      image: item.image,
-      sx: {
-        height: '58px',
-        width: '58px',
-        mb: 2
-      }
-    }), /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-      variant: "subtitle2"
-    }, item.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-      variant: "body2",
-      color: "text.secondary"
-    }, item.description))), /*#__PURE__*/_react.default.createElement(_CardActions.default, {
-      sx: {
-        p: 0
-      }
-    }, /*#__PURE__*/_react.default.createElement(_Button.default, {
-      variant: "outlined",
-      size: "small",
-      color: "promotion",
-      href: item.url,
-      target: linkTarget,
-      onClick: function onClick() {
-        return handleAddonClick(item.title, item.url);
-      }
-    }, item.button_label))));
-  })), /*#__PURE__*/_react.default.createElement(_Link.default, {
-    variant: "body2",
-    color: "info.main",
-    underline: "none",
-    href: "".concat(domain).concat(props.addonsData.footer.file_path)
-  }, props.addonsData.footer.label));
-};
-var _default = exports["default"] = Addons;
-Addons.propTypes = {
-  addonsData: PropTypes.object.isRequired,
-  adminUrl: PropTypes.string.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/create-new-page-dialog.js":
-/*!**********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/create-new-page-dialog.js ***!
-  \**********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
-var _DialogHeader = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogHeader */ "@elementor/ui/DialogHeader"));
-var _DialogHeaderGroup = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogHeaderGroup */ "@elementor/ui/DialogHeaderGroup"));
-var _DialogTitle = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogTitle */ "@elementor/ui/DialogTitle"));
-var _DialogContent = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogContent */ "@elementor/ui/DialogContent"));
-var _DialogContentText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogContentText */ "@elementor/ui/DialogContentText"));
-var _TextField = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/TextField */ "@elementor/ui/TextField"));
-var _DialogActions = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/DialogActions */ "@elementor/ui/DialogActions"));
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _Dialog = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Dialog */ "@elementor/ui/Dialog"));
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
-var CreateNewPageDialog = function CreateNewPageDialog(_ref) {
-  var url = _ref.url,
-    isOpen = _ref.isOpen,
-    closedDialogCallback = _ref.closedDialogCallback;
-  var _React$useState = _react.default.useState(false),
-    _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
-    open = _React$useState2[0],
-    setOpen = _React$useState2[1];
-  var _React$useState3 = _react.default.useState(''),
-    _React$useState4 = (0, _slicedToArray2.default)(_React$useState3, 2),
-    pageName = _React$useState4[0],
-    setPageName = _React$useState4[1];
-  (0, _react.useEffect)(function () {
-    setOpen(isOpen);
-  }, [isOpen]);
-  var handleDialogClose = function handleDialogClose() {
-    setOpen(false);
-    closedDialogCallback();
-  };
-  var handleChange = function handleChange(event) {
-    var urlParams = new URLSearchParams();
-    urlParams.append('post_data[post_title]', event.target.value);
-    setPageName(urlParams.toString());
-  };
-  return /*#__PURE__*/_react.default.createElement(_Dialog.default, {
-    open: open,
-    onClose: handleDialogClose,
-    maxWidth: "xs",
-    width: "xs",
-    fullWidth: true
-  }, /*#__PURE__*/_react.default.createElement(_DialogHeader.default, null, /*#__PURE__*/_react.default.createElement(_DialogHeaderGroup.default, null, /*#__PURE__*/_react.default.createElement(_DialogTitle.default, null, __('Name your page', 'elementor')))), /*#__PURE__*/_react.default.createElement(_DialogContent.default, {
-    dividers: true
-  }, /*#__PURE__*/_react.default.createElement(_DialogContentText.default, {
-    sx: {
-      mb: 2
-    }
-  }, __('To proceed, please name your first page,', 'elementor'), /*#__PURE__*/_react.default.createElement("br", null), __('or rename it later.', 'elementor')), /*#__PURE__*/_react.default.createElement(_TextField.default, {
-    onChange: handleChange,
-    fullWidth: true,
-    placeholder: __('New Page', 'elementor')
-  })), /*#__PURE__*/_react.default.createElement(_DialogActions.default, null, /*#__PURE__*/_react.default.createElement(_Button.default, {
-    onClick: handleDialogClose,
-    color: "secondary"
-  }, __('Cancel', 'elementor')), /*#__PURE__*/_react.default.createElement(_Button.default, {
-    variant: "contained",
-    href: pageName ? url + '&' + pageName : url,
-    target: "_blank"
-  }, __('Save', 'elementor'))));
-};
-var _default = exports["default"] = CreateNewPageDialog;
-CreateNewPageDialog.propTypes = {
-  url: PropTypes.string.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  closedDialogCallback: PropTypes.func.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/create-with-ai-banner.js":
-/*!*********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/create-with-ai-banner.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "../node_modules/@babel/runtime/helpers/typeof.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
-var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _Typography = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Typography */ "@elementor/ui/Typography"));
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
-var CreateWithAIBanner = function CreateWithAIBanner(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  var createWithAIData = props.createWithAIData;
-  var _useState = (0, _react.useState)(''),
-    _useState2 = (0, _slicedToArray2.default)(_useState, 2),
-    inputValue = _useState2[0],
-    setInputValue = _useState2[1];
-  if (!createWithAIData) {
-    return null;
-  }
-  var title = createWithAIData.title,
-    description = createWithAIData.description,
-    inputPlaceholder = createWithAIData.input_placeholder,
-    buttonTitle = createWithAIData.button_title,
-    buttonCtaUrl = createWithAIData.button_cta_url,
-    backgroundImage = createWithAIData.background_image,
-    utmSource = createWithAIData.utm_source,
-    utmMedium = createWithAIData.utm_medium,
-    utmCampaign = createWithAIData.utm_campaign;
-  var handleInputChange = function handleInputChange(event) {
-    setInputValue(event.target.value);
-  };
-  var getButtonHref = function getButtonHref() {
-    if (!inputValue) {
-      return buttonCtaUrl;
-    }
-    var url = new URL(buttonCtaUrl);
-    url.searchParams.append('prompt', inputValue);
-    url.searchParams.append('utm_source', utmSource);
-    url.searchParams.append('utm_medium', utmMedium);
-    url.searchParams.append('utm_campaign', utmCampaign);
-    return url.toString();
-  };
-  var handleNavigation = function handleNavigation() {
-    if (!inputValue) {
-      return;
-    }
-    var destination = getButtonHref();
-    (0, _promoTracking.trackPromoClick)(title, destination, (0, _promoTracking.getHomeScreenPath)('ai_banner'));
-    window.open(destination, '_blank');
-    setInputValue('');
-  };
-  var handleKeyDown = function handleKeyDown(event) {
-    if ('Enter' === event.key) {
-      event.preventDefault();
-      handleNavigation();
-    }
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      display: 'flex',
-      flexDirection: 'column',
-      py: 3,
-      px: 4,
-      gap: 2,
-      backgroundImage: "url(".concat(backgroundImage, ")"),
-      backgroundSize: 'cover',
-      backgroundPosition: 'right center',
-      backgroundRepeat: 'no-repeat'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
-    gap: 1,
-    justifyContent: "center"
-  }, /*#__PURE__*/_react.default.createElement(_Typography.default, {
-    variant: "h6"
-  }, title), /*#__PURE__*/_react.default.createElement(_Typography.default, {
-    variant: "body2",
-    color: "secondary"
-  }, description)), /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    sx: {
-      display: 'flex',
-      flexDirection: {
-        xs: 'column',
-        sm: 'row'
-      },
-      gap: 2,
-      mt: 1
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.TextField, {
-    fullWidth: true,
-    placeholder: inputPlaceholder,
-    variant: "outlined",
-    color: "secondary",
-    size: "small",
-    sx: {
-      flex: 1
-    },
-    value: inputValue,
-    onChange: handleInputChange,
-    onKeyDown: handleKeyDown
-  }), /*#__PURE__*/_react.default.createElement(_Button.default, {
-    variant: "outlined",
-    size: "small",
-    color: "secondary",
-    startIcon: /*#__PURE__*/_react.default.createElement("span", {
-      className: "eicon-ai"
-    }),
-    onClick: handleNavigation
-  }, buttonTitle)));
-};
-CreateWithAIBanner.propTypes = {
-  createWithAIData: PropTypes.object
-};
-var _default = exports["default"] = CreateWithAIBanner;
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/external-links-section.js":
-/*!**********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/external-links-section.js ***!
-  \**********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _ListItemButton = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemButton */ "@elementor/ui/ListItemButton"));
-var _ListItemText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemText */ "@elementor/ui/ListItemText"));
-var _Divider = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Divider */ "@elementor/ui/Divider"));
-var ExternalLinksSection = function ExternalLinksSection(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      px: 3
-    }
-  }, /*#__PURE__*/_react.default.createElement(_List.default, null, props.externalLinksData.map(function (item, index) {
-    return /*#__PURE__*/_react.default.createElement(_ui.Box, {
-      key: item.label
-    }, /*#__PURE__*/_react.default.createElement(_ListItemButton.default, {
-      href: item.url,
-      target: "_blank",
-      sx: {
-        '&:hover': {
-          backgroundColor: 'initial'
-        },
-        gap: 2,
-        px: 0,
-        py: 2
-      }
-    }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
-      component: "img",
-      src: item.image,
-      sx: {
-        width: '38px'
-      }
-    }), /*#__PURE__*/_react.default.createElement(_ListItemText.default, {
-      sx: {
-        color: 'text.secondary'
-      },
-      primary: item.label
-    })), index < props.externalLinksData.length - 1 && /*#__PURE__*/_react.default.createElement(_Divider.default, null));
-  })));
-};
-var _default = exports["default"] = ExternalLinksSection;
-ExternalLinksSection.propTypes = {
-  externalLinksData: PropTypes.array.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/get-started-list-item.js":
-/*!*********************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/get-started-list-item.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
-var _ListItem = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItem */ "@elementor/ui/ListItem"));
-var _ListItemText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemText */ "@elementor/ui/ListItemText"));
-var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
-var _Box = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Box */ "@elementor/ui/Box"));
-var _createNewPageDialog = _interopRequireDefault(__webpack_require__(/*! ./create-new-page-dialog */ "../modules/home/assets/js/components/home-screen/create-new-page-dialog.js"));
-var GetStartedListItem = function GetStartedListItem(_ref) {
-  var item = _ref.item,
-    image = _ref.image,
-    adminUrl = _ref.adminUrl;
-  var url = item.is_relative_url ? adminUrl + item.url : item.url;
-  var _React$useState = _react.default.useState(false),
-    _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
-    isOpen = _React$useState2[0],
-    openDialog = _React$useState2[1];
-  var handleLinkClick = function handleLinkClick(event) {
-    if (!item.new_page) {
-      return;
-    }
-    event.preventDefault();
-    openDialog(true);
-  };
-  return /*#__PURE__*/_react.default.createElement(_ListItem.default, {
-    alignItems: "flex-start",
-    sx: {
-      gap: 1,
-      p: 0,
-      maxWidth: '150px'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_Box.default, {
-    component: "img",
-    src: image
-  }), /*#__PURE__*/_react.default.createElement(_Box.default, null, /*#__PURE__*/_react.default.createElement(_ListItemText.default, {
-    primary: item.title,
-    primaryTypographyProps: {
-      variant: 'subtitle1'
-    },
-    sx: {
-      my: 0
-    }
-  }), /*#__PURE__*/_react.default.createElement(_Link.default, {
-    variant: "body2",
-    color: item.title_small_color ? item.title_small_color : 'text.tertiary',
-    underline: "hover",
-    href: url,
-    target: "_blank",
-    onClick: handleLinkClick
-  }, item.title_small)), item.new_page && /*#__PURE__*/_react.default.createElement(_createNewPageDialog.default, {
-    url: url,
-    isOpen: isOpen,
-    closedDialogCallback: function closedDialogCallback() {
-      return openDialog(false);
-    }
-  }));
-};
-var _default = exports["default"] = GetStartedListItem;
-GetStartedListItem.propTypes = {
-  item: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    title_small: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    new_page: PropTypes.bool,
-    is_relative_url: PropTypes.bool,
-    title_small_color: PropTypes.string
-  }).isRequired,
-  adminUrl: PropTypes.string.isRequired,
-  image: PropTypes.string
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/get-started-section.js":
-/*!*******************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/get-started-section.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _getStartedListItem = _interopRequireDefault(__webpack_require__(/*! ./get-started-list-item */ "../modules/home/assets/js/components/home-screen/get-started-list-item.js"));
-var GetStarted = function GetStarted(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      p: 3,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 2
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "h6"
-  }, props.getStartedData.header.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "body2",
-    color: "text.secondary"
-  }, props.getStartedData.header.description)), /*#__PURE__*/_react.default.createElement(_List.default, {
-    sx: {
-      display: 'grid',
-      gridTemplateColumns: {
-        md: 'repeat(4, 1fr)',
-        xs: 'repeat(2, 1fr)'
-      },
-      columnGap: {
-        md: 9,
-        xs: 7
-      },
-      rowGap: 3
-    }
-  }, props.getStartedData.repeater.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement(_getStartedListItem.default, {
-      key: item.title,
-      item: item,
-      image: item.image,
-      adminUrl: props.adminUrl
-    });
-  })));
-};
-var _default = exports["default"] = GetStarted;
-GetStarted.propTypes = {
-  getStartedData: PropTypes.object.isRequired,
-  adminUrl: PropTypes.string.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/home-screen.js":
-/*!***********************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/home-screen.js ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _topSection = _interopRequireDefault(__webpack_require__(/*! ./top-section */ "../modules/home/assets/js/components/home-screen/top-section.js"));
-var _sidebarPromotion = _interopRequireDefault(__webpack_require__(/*! ./sidebar-promotion */ "../modules/home/assets/js/components/home-screen/sidebar-promotion.js"));
-var _addonsSection = _interopRequireDefault(__webpack_require__(/*! ./addons-section */ "../modules/home/assets/js/components/home-screen/addons-section.js"));
-var _externalLinksSection = _interopRequireDefault(__webpack_require__(/*! ./external-links-section */ "../modules/home/assets/js/components/home-screen/external-links-section.js"));
-var _getStartedSection = _interopRequireDefault(__webpack_require__(/*! ./get-started-section */ "../modules/home/assets/js/components/home-screen/get-started-section.js"));
-var _createWithAiBanner = _interopRequireDefault(__webpack_require__(/*! ./create-with-ai-banner */ "../modules/home/assets/js/components/home-screen/create-with-ai-banner.js"));
-var HomeScreen = function HomeScreen(props) {
-  var hasSidebarPromotion = props.homeScreenData.hasOwnProperty('sidebar_promotion_variants');
-  return /*#__PURE__*/ /*  Box wrapper around the Container is needed to neutralize wp-content area left-padding */_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Container, {
-    disableGutters: true,
-    maxWidth: "lg",
-    sx: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: {
-        xs: 1,
-        md: 3
-      },
-      pt: {
-        xs: 2,
-        md: 6
-      },
-      pb: 2
-    }
-  }, props.homeScreenData.top_with_licences && /*#__PURE__*/_react.default.createElement(_topSection.default, {
-    topData: props.homeScreenData.top_with_licences,
-    buttonCtaUrl: props.homeScreenData.button_cta_url
-  }), /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    sx: {
-      display: 'flex',
-      flexDirection: {
-        xs: 'column',
-        sm: 'row'
-      },
-      justifyContent: 'space-between',
-      gap: 3
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
-    sx: {
-      flex: 1,
-      gap: 3
-    }
-  }, props.homeScreenData.create_with_ai && /*#__PURE__*/_react.default.createElement(_createWithAiBanner.default, {
-    createWithAIData: props.homeScreenData.create_with_ai
-  }), /*#__PURE__*/_react.default.createElement(_getStartedSection.default, {
-    getStartedData: props.homeScreenData.get_started,
-    adminUrl: props.adminUrl
-  }), props.homeScreenData.add_ons && /*#__PURE__*/_react.default.createElement(_addonsSection.default, {
-    addonsData: props.homeScreenData.add_ons,
-    adminUrl: props.adminUrl
-  })), /*#__PURE__*/_react.default.createElement(_ui.Container, {
-    maxWidth: "xs",
-    disableGutters: true,
-    sx: {
-      width: {
-        sm: '305px'
-      },
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 3
-    }
-  }, hasSidebarPromotion && /*#__PURE__*/_react.default.createElement(_sidebarPromotion.default, {
-    sideData: props.homeScreenData.sidebar_promotion_variants
-  }), /*#__PURE__*/_react.default.createElement(_externalLinksSection.default, {
-    externalLinksData: props.homeScreenData.external_links
-  })))));
-};
-HomeScreen.propTypes = {
-  homeScreenData: PropTypes.object,
-  adminUrl: PropTypes.string
-};
-var _default = exports["default"] = HomeScreen;
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/promotions/sidebar-banner.js":
-/*!*************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/promotions/sidebar-banner.js ***!
-  \*************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _Link = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Link */ "@elementor/ui/Link"));
-var _promoTracking = __webpack_require__(/*! ../../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-var SidebarBanner = function SidebarBanner(_ref) {
-  var image = _ref.image,
-    link = _ref.link;
-  var handleClick = function handleClick() {
-    (0, _promoTracking.trackPromoClick)('Sidebar Banner', link, (0, _promoTracking.getHomeScreenPath)('sidebar'));
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      overflow: 'hidden'
-    }
-  }, /*#__PURE__*/_react.default.createElement(_Link.default, {
-    target: "_blank",
-    href: link,
-    onClick: handleClick,
-    sx: {
-      lineHeight: 0,
-      display: 'block',
-      width: '100%',
-      height: '100%',
-      boxShadow: 'none',
-      '&:focus': {
-        boxShadow: 'none'
-      },
-      '&:active': {
-        boxShadow: 'none'
-      }
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    component: 'img',
-    src: image,
-    sx: {
-      width: '100%',
-      height: '100%'
-    }
-  })));
-};
-var _default = exports["default"] = SidebarBanner;
-SidebarBanner.propTypes = {
-  image: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/promotions/sidebar-default.js":
-/*!**************************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/promotions/sidebar-default.js ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _List = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/List */ "@elementor/ui/List"));
-var _ListItem = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItem */ "@elementor/ui/ListItem"));
-var _sideBarCheckIcon = _interopRequireDefault(__webpack_require__(/*! ../../../icons/side-bar-check-icon */ "../modules/home/assets/js/icons/side-bar-check-icon.js"));
-var _ListItemText = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/ListItemText */ "@elementor/ui/ListItemText"));
-var _promoTracking = __webpack_require__(/*! ../../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-var SidebarDefault = function SidebarDefault(_ref) {
-  var header = _ref.header,
-    cta = _ref.cta,
-    repeater = _ref.repeater;
-  var handleCtaClick = function handleCtaClick() {
-    (0, _promoTracking.trackPromoClick)(header.title, cta.url, (0, _promoTracking.getHomeScreenPath)('sidebar'));
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      p: 3
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
-    gap: 1.5,
-    alignItems: "center",
-    textAlign: "center",
-    sx: {
-      pb: 4
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
-    component: "img",
-    src: header.image
-  }), /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "h6"
-  }, header.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
-    variant: "body2",
-    color: "text.secondary"
-  }, header.description)), /*#__PURE__*/_react.default.createElement(_Button.default, {
-    variant: "contained",
-    size: "medium",
-    color: "promotion",
-    href: cta.url,
-    onClick: handleCtaClick,
-    startIcon: /*#__PURE__*/_react.default.createElement(_ui.Box, {
-      component: "img",
-      src: cta.image,
-      sx: {
-        width: '16px'
-      }
-    }),
-    target: "_blank",
-    sx: {
-      maxWidth: 'fit-content'
-    }
-  }, cta.label)), /*#__PURE__*/_react.default.createElement(_List.default, {
-    sx: {
-      p: 0
-    }
-  }, repeater.map(function (item, index) {
-    return /*#__PURE__*/_react.default.createElement(_ListItem.default, {
-      key: index,
-      sx: {
-        p: 0,
-        gap: 1
-      }
-    }, /*#__PURE__*/_react.default.createElement(_sideBarCheckIcon.default, null), /*#__PURE__*/_react.default.createElement(_ListItemText.default, {
-      primaryTypographyProps: {
-        variant: 'body2'
-      },
-      primary: item.title
-    }));
-  })));
-};
-var _default = exports["default"] = SidebarDefault;
-SidebarDefault.propTypes = {
-  header: PropTypes.object.isRequired,
-  cta: PropTypes.object.isRequired,
-  repeater: PropTypes.array
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/sidebar-promotion.js":
-/*!*****************************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/sidebar-promotion.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _sidebarBanner = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-banner */ "../modules/home/assets/js/components/home-screen/promotions/sidebar-banner.js"));
-var _sidebarDefault = _interopRequireDefault(__webpack_require__(/*! ./promotions/sidebar-default */ "../modules/home/assets/js/components/home-screen/promotions/sidebar-default.js"));
-var SideBarPromotion = function SideBarPromotion(_ref) {
-  var sideData = _ref.sideData;
-  if ('banner' === sideData.type) {
-    return /*#__PURE__*/_react.default.createElement(_sidebarBanner.default, sideData.data);
-  }
-  return /*#__PURE__*/_react.default.createElement(_sidebarDefault.default, sideData.data);
-};
-var _default = exports["default"] = SideBarPromotion;
-SideBarPromotion.propTypes = {
-  sideData: PropTypes.object.isRequired
-};
-
-/***/ }),
-
-/***/ "../modules/home/assets/js/components/home-screen/top-section.js":
-/*!***********************************************************************!*\
-  !*** ../modules/home/assets/js/components/home-screen/top-section.js ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-/* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports["default"] = void 0;
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
-var _objectDestructuringEmpty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "../node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js"));
-var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
-var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _Typography = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Typography */ "@elementor/ui/Typography"));
-var _Button = _interopRequireDefault(__webpack_require__(/*! @elementor/ui/Button */ "@elementor/ui/Button"));
-var _youtubeIcon = _interopRequireDefault(__webpack_require__(/*! ../../icons/youtube-icon */ "../modules/home/assets/js/icons/youtube-icon.js"));
-var _promoTracking = __webpack_require__(/*! ../../utils/promo-tracking */ "../modules/home/assets/js/utils/promo-tracking.js");
-var TopSection = function TopSection(_ref) {
-  var props = (0, _extends2.default)({}, ((0, _objectDestructuringEmpty2.default)(_ref), _ref));
-  var topData = props.topData,
-    buttonCtaUrl = props.buttonCtaUrl;
-  if (!topData) {
-    return null;
-  }
-  var title = topData.title,
-    description = topData.description,
-    buttonCtaTitle = topData.button_cta_text,
-    buttonCreatePageTitle = topData.button_create_page_title,
-    youtubeEmbeddedId = topData.youtube_embed_id,
-    buttonWatchURL = topData.button_watch_url,
-    buttonWatchTitle = topData.button_watch_title;
-  var ctaButtonTitle = buttonCtaTitle !== null && buttonCtaTitle !== void 0 ? buttonCtaTitle : buttonCreatePageTitle;
-  var handleCtaClick = function handleCtaClick() {
-    (0, _promoTracking.trackPromoClick)(ctaButtonTitle, buttonCtaUrl, (0, _promoTracking.getHomeScreenPath)('top_section'));
-  };
-  var handleWatchClick = function handleWatchClick() {
-    (0, _promoTracking.trackPromoClick)(buttonWatchTitle, buttonWatchURL, (0, _promoTracking.getHomeScreenPath)('top_section'));
-  };
-  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
-    elevation: 0,
-    sx: {
-      display: 'flex',
-      flexDirection: {
-        xs: 'column',
-        sm: 'row'
-      },
-      justifyContent: 'space-between',
-      py: {
-        xs: 3,
-        md: 3
-      },
-      px: {
-        xs: 3,
-        md: 4
-      },
-      gap: {
-        xs: 2,
-        sm: 3,
-        lg: 22
-      }
     }
   }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
     gap: 3,
@@ -5621,50 +4421,6 @@ module.exports = elementorV2.ui['Button'];
 
 /***/ }),
 
-/***/ "@elementor/ui/Card":
-/*!*****************************************!*\
-  !*** external "elementorV2.ui['Card']" ***!
-  \*****************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = elementorV2.ui['Card'];
-
-/***/ }),
-
-/***/ "@elementor/ui/CardActions":
-/*!************************************************!*\
-  !*** external "elementorV2.ui['CardActions']" ***!
-  \************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = elementorV2.ui['CardActions'];
-
-/***/ }),
-
-/***/ "@elementor/ui/CardContent":
-/*!************************************************!*\
-  !*** external "elementorV2.ui['CardContent']" ***!
-  \************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = elementorV2.ui['CardContent'];
-
-/***/ }),
-
-/***/ "@elementor/ui/CardMedia":
-/*!**********************************************!*\
-  !*** external "elementorV2.ui['CardMedia']" ***!
-  \**********************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = elementorV2.ui['CardMedia'];
-
-/***/ }),
-
 /***/ "@elementor/ui/Dialog":
 /*!*******************************************!*\
   !*** external "elementorV2.ui['Dialog']" ***!
@@ -5739,17 +4495,6 @@ module.exports = elementorV2.ui['DialogHeaderGroup'];
 
 "use strict";
 module.exports = elementorV2.ui['DialogTitle'];
-
-/***/ }),
-
-/***/ "@elementor/ui/Divider":
-/*!********************************************!*\
-  !*** external "elementorV2.ui['Divider']" ***!
-  \********************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = elementorV2.ui['Divider'];
 
 /***/ }),
 
@@ -5904,16 +4649,13 @@ var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/inte
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 var _react2 = _interopRequireDefault(__webpack_require__(/*! elementor-utils/react */ "../assets/dev/js/utils/react.js"));
 var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
-var _homeScreen = _interopRequireDefault(__webpack_require__(/*! ./components/home-screen/home-screen */ "../modules/home/assets/js/components/home-screen/home-screen.js"));
-var _homeScreen2 = _interopRequireDefault(__webpack_require__(/*! ./components/editor-screen/home-screen */ "../modules/home/assets/js/components/editor-screen/home-screen.js"));
+var _homeScreen = _interopRequireDefault(__webpack_require__(/*! ./components/home-screen */ "../modules/home/assets/js/components/home-screen.js"));
 var App = function App(props) {
-  var _props$homeScreenData;
-  var ScreenComponent = !!((_props$homeScreenData = props.homeScreenData) !== null && _props$homeScreenData !== void 0 && _props$homeScreenData.isEditorOneActive) ? _homeScreen2.default : _homeScreen.default;
   return /*#__PURE__*/_react.default.createElement(_ui.DirectionProvider, {
     rtl: props.isRTL
   }, /*#__PURE__*/_react.default.createElement(_ui.LocalizationProvider, null, /*#__PURE__*/_react.default.createElement(_ui.ThemeProvider, {
     colorScheme: 'light'
-  }, /*#__PURE__*/_react.default.createElement(ScreenComponent, {
+  }, /*#__PURE__*/_react.default.createElement(_homeScreen.default, {
     homeScreenData: props.homeScreenData,
     adminUrl: props.adminUrl
   }))));

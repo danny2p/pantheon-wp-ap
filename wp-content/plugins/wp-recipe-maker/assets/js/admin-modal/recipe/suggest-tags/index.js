@@ -10,6 +10,90 @@ import { __wprm } from 'Shared/Translations';
 
 import '../../../../css/admin/modal/recipe/suggest-tags.scss';
 
+const MAX_POPULAR_TERMS_PER_CATEGORY = 10;
+
+function normalizeTermName(term) {
+    const termName = 'string' === typeof term?.name
+        ? term.name
+        : undefined !== term?.term_id && null !== term?.term_id
+            ? String(term.term_id)
+            : '';
+
+    if ('string' !== typeof termName) {
+        return '';
+    }
+
+    return termName.trim();
+}
+
+function getExistingTermsByCategory(tags = {}) {
+    const existingTerms = {};
+
+    Object.keys(tags).forEach((categoryKey) => {
+        const termNames = [];
+        const seenTerms = new Set();
+
+        (tags[categoryKey] || []).forEach((term) => {
+            const termName = normalizeTermName(term);
+            const normalizedTermName = termName.toLowerCase();
+
+            if (!termName || seenTerms.has(normalizedTermName)) {
+                return;
+            }
+
+            seenTerms.add(normalizedTermName);
+            termNames.push(termName);
+        });
+
+        if (termNames.length) {
+            existingTerms[categoryKey] = termNames;
+        }
+    });
+
+    return existingTerms;
+}
+
+function getPopularTermsByCategory(categories, existingTerms = {}) {
+    const popularTerms = {};
+
+    Object.keys(wprm_admin_modal.categories).forEach((categoryKey) => {
+        if ('suitablefordiet' === categoryKey) {
+            return;
+        }
+
+        const categoryRequested = categories.some((category) => category.key === categoryKey);
+        if (!categoryRequested) {
+            return;
+        }
+
+        const assignedTerms = new Set(
+            (existingTerms[categoryKey] || []).map((termName) => termName.toLowerCase())
+        );
+        const popularNames = [];
+
+        (wprm_admin_modal.categories[categoryKey]?.terms || []).forEach((term) => {
+            const termName = normalizeTermName(term);
+
+            if (!termName) {
+                return;
+            }
+
+            const normalizedTermName = termName.toLowerCase();
+            if (assignedTerms.has(normalizedTermName) || popularNames.some((name) => name.toLowerCase() === normalizedTermName)) {
+                return;
+            }
+
+            popularNames.push(termName);
+        });
+
+        if (popularNames.length) {
+            popularTerms[categoryKey] = popularNames.slice(0, MAX_POPULAR_TERMS_PER_CATEGORY);
+        }
+    });
+
+    return popularTerms;
+}
+
 export default class SuggestTags extends Component {
     constructor(props) {
         super(props);
@@ -47,12 +131,20 @@ export default class SuggestTags extends Component {
                 name: category.label || categoryKey,
             };
         });
+        const existingTerms = getExistingTermsByCategory(this.props.tags || {});
+        const popularTerms = getPopularTermsByCategory(categories, existingTerms);
 
         // Prepare data for API
         const data = {
             recipe: recipe,
             categories: categories,
         };
+        if (Object.keys(existingTerms).length) {
+            data.existingTerms = existingTerms;
+        }
+        if (Object.keys(popularTerms).length) {
+            data.popularTerms = popularTerms;
+        }
 
         // Get modal endpoint
         const modalEndpoint = wprm_admin.endpoints.modal;
@@ -344,14 +436,14 @@ export default class SuggestTags extends Component {
                 </div>
                 <Footer>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ this.props.maybeCloseModal }
                     >
                         { __wprm( 'Close' ) }
                     </button>
                     { !loading && !error && Object.keys(suggestions).length > 0 && (
                         <button
-                            className="button button-primary"
+                            className="button button-primary button-compact"
                             onClick={ (e) => {
                                 e.preventDefault();
                                 this.handleSave();
@@ -367,4 +459,3 @@ export default class SuggestTags extends Component {
         );
     }
 }
-

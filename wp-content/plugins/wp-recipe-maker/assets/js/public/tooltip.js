@@ -9,8 +9,16 @@ window.WPRecipeMaker.tooltip = {
 	init() {
 		WPRecipeMaker.tooltip.addTooltips();
 	},
-	addTooltips() {
-        const containers = document.querySelectorAll('.wprm-tooltip');
+	addTooltips( root = document ) {
+        let containers = [];
+
+        if ( root && root.classList && root.classList.contains( 'wprm-tooltip' ) ) {
+            containers.push( root );
+        }
+
+        if ( root && 'function' === typeof root.querySelectorAll ) {
+            containers = containers.concat( [ ...root.querySelectorAll( '.wprm-tooltip' ) ] );
+        }
 
         for ( let container of containers ) {
             // Remove any existing tippy.

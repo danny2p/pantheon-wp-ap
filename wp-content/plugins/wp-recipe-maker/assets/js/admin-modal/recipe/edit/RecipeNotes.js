@@ -100,7 +100,7 @@ const RecipeNotes = (props) => {
                 &&
                 <div className="wprm-admin-modal-field-notes-actions">
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ (e) => {
                             e.preventDefault();
                             onInsertTip();

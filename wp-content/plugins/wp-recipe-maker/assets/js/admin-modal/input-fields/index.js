@@ -70,7 +70,7 @@ export default class InputFields extends Component {
                     savingChanges={ false }
                 >
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => {
                             if ( 'function' === typeof this.props.args.insertCallback ) {
                                 this.props.args.insertCallback( this.state );

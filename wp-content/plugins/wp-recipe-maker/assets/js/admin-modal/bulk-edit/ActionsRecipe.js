@@ -70,6 +70,8 @@ const ActionsRecipe = (props) => {
     if ( wprm_admin.addons.premium ) {
         actionOptions.push(      
             { value: 'custom-nutrition-ingredient', label: __wprm( 'Create Custom Nutrition Ingredient' ), default: false },
+            { value: 'ai-nutrition-review', label: __wprm( 'Run AI Nutrition Review' ), default: false, required: 'elite' },
+            { value: 'ai-unit-conversion-review', label: __wprm( 'Run AI Unit Conversion Review' ), default: false, required: 'elite' },
         );
     }
     if ( wprm_admin.addons.pro ) {

@@ -5,6 +5,120 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [7.16.0] - 2026-04-06
+### Changed
+- Clean up old About page images. [#47897]
+- Forms: Allow browsers to lazy-load avatars in responses. [#47900]
+- Update package dependencies. [#47889] [#47892] [#47899]
+
+### Fixed
+- Fix missing margin prop in SelectControl component. [#47904]
+
+## [7.15.0] - 2026-03-30
+### Security
+- Gravatar: Do not include email or IP address in Gravatar image URL. [#47779]
+- Improve form submission validation. [#47795]
+
+### Added
+- Add WordPress Playground blueprint for Forms development. [#47758]
+- Dashboard: Add tracking events for form-level actions (preview, copy embed, copy shortcode, duplicate, trash, restore, delete, rename, publish/unpublish, edit, view responses). [#47646]
+
+### Changed
+- Exclude blueprints directory from production builds. [#47821]
+- Gravatar: Show initials derived from email prefix instead of mystery person avatar when no name is provided. [#47807]
+- Remove reduntant de-registration of Jetpack collection in forms editor. [#47614]
+- Update DataViews dependency. [#46973]
+- Update legacy Node calls. [#47770]
+- Update package dependencies. [#47686] [#47799] [#47818]
+
+### Fixed
+- Ensure form rename modal does not close when save fails, so users can retry without losing their input. [#47796]
+- Fix phone field initialization failure when script module loads after DOMContentLoaded. [#47657]
+- Fix undo restoring wrong form status for non-standard statuses in dashboard header actions. [#47798]
+- Prevent Forms dashboard black screen when The Events Calendar is active by replacing fragile import() in inline script with a proper script module. [#47823]
+- Set ref attribute instead of clearing it during synced form conversion. [#47794]
+
+## [7.14.0] - 2026-03-23
+### Added
+- Add logged-in user display name and ID to form submission emails and response sidebar. [#47652]
+- Add "rename" and "trash" actions to the single form dashboard dropdown menu, and reorder menu items. [#47589]
+- Form Editor: Show a post-publish modal guiding users to add their form to a page. [#47539]
+
+### Changed
+- Clean up old .png files. [#47678]
+- Dashboard: Adjust empty state copy and behavior. [#47464]
+- Dashboard: Restore trashed forms as draft instead of publish. [#47591]
+- Forms Dashboard: Show name modal when creating a new form instead of navigating directly to the editor. [#47702]
+- Improve string handling in legacy classic editor form builder. [#47514]
+- Remove greeting text from form response notification emails. [#47649]
+- Remove the root route in favor of PHP redirect. [#47573]
+- Send blog_lang and permalink to Akismet for improved spam detection on contact form submissions. [#47599]
+- Update package dependencies. [#47684] [#47685]
+
+### Removed
+- Remove legacy form builder script that is no longer loaded or used. [#47608]
+
+### Fixed
+- Add padding to the form editor visual editor area. [#47706]
+- Add polyfills for wp-build unbundled dependencies. [#47367]
+- Ensure dashboard URL points to `/responses/inbox` instead of `/`. [#47648]
+- Prevent blocks from disappearing after navigating back from form editor when page has multiple form blocks. [#47667]
+- Fix 404 error on the route-based dashboard. [#47592]
+- Fix header spacing for wp-build dashboard on mobile viewport. [#47644]
+- Force block editor for jetpack_form post type when Classic Editor plugin is active. [#47621]
+- Form Editor: Insert new blocks into the active step in multistep forms instead of the form root. [#47669]
+- Gravatar hovercard: Add translation string for private profile error state. [#47594]
+- Remove tabs from the wp-build dashboard when CFM is disabled. [#47670]
+- Remove unnecessary post_type parameter from form edit URLs that caused incorrect redirects. [#47596]
+- Set duplicated form status to draft when the original form is published, preserving the original status otherwise. [#47590]
+- Show distinct error message when user lacks permission to edit a form block vs. when the form does not exist. [#47622]
+
+## [7.13.0] - 2026-03-16
+### Added
+- Add entries filter to filter forms by whether they have responses. [#47523]
+- Add form name modal to the wp-build forms dashboard, prompting users to name their form before entering the editor. [#47395]
+- Add per-status form counts REST endpoint and display counts in Forms dashboard status filters. [#47475]
+- Forms: Add publish/unpublish actions. [#47325]
+
+### Changed
+- Editor: Hide word count and reading time panel. [#47528]
+- Dashboard: Remove modified date filter. [#47523]
+- Hide "Browse form patterns" button in the form placeholder when central form management is enabled. [#47527]
+- Update "View form responses" button to link to the specific form's responses when the form has a ref. [#47530]
+- Update dependencies. [#47472]
+
+### Fixed
+- Create synced form when inserting form variations via the block inserter. [#47335]
+- Ensure forms list entries count updates after trashing responses. [#47526]
+- Ensure HTML entities are decoded in form title on pre-publish panel. [#47531]
+- Ensure number field min and max values display in the UI after page reload. [#47511]
+- Fix aria-label attribute by passing a string value to the Page component. [#47481]
+- Purge edge cache when a jetpack_form post is published, updated, or unpublished. [#47532]
+- Show "No results found" empty state when search or filters are active in the forms list view instead of the onboarding empty state. [#47525]
+
+## [7.12.0] - 2026-03-09
+### Added
+- Form Editor: Show form embed code. [#47238]
+
+### Changed
+- Form Editor: Auto-open the block inserter on load so form field blocks are immediately discoverable. [#47413]
+- Hide the Jetpack block collection from the form editor block inserter. [#47390]
+- Forms dashboard: Use title header on top-level pages for consistency with other Jetpack pages. [#47446]
+- Switch to Native TypeScript compiler based on Go. [#47375]
+- Update package dependencies. [#47496] [#47499]
+
+### Removed
+- Remove the form title modal from the form editor. [#47458]
+
+### Fixed
+- Add missing 'Trash' status label in stage component. [#47450]
+- Contact Form: Show synced forms as read-only preview in widget editor with Edit Form button. [#47235]
+- Dashboard: Fix admin page header CSS specificity to prevent style conflicts. [#47313]
+- Decode HTML entities in form dropdown titles in the variation picker. [#47474]
+- Extract `WidgetEditorReadonlyView` into its own component to scope `useBlockEditingMode` to widget editor context only. [#47452]
+- Fix TypeScipt type errors detected by `tsgo`. [#47423]
+- Update submit button handling to support core/button blocks as part of the jetpack/button to core/button migration. [#47438]
+
 ## [7.11.0] - 2026-03-02
 ### Added
 - Auto-create synced form when AI generates form fields with central form management enabled. [#47267]
@@ -2291,6 +2405,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added a new jetpack/forms package [#28409]
 - Added a public load_contact_form method for initializing the contact form module. [#28416]
 
+[7.16.0]: https://github.com/automattic/jetpack-forms/compare/v7.15.0...v7.16.0
+[7.15.0]: https://github.com/automattic/jetpack-forms/compare/v7.14.0...v7.15.0
+[7.14.0]: https://github.com/automattic/jetpack-forms/compare/v7.13.0...v7.14.0
+[7.13.0]: https://github.com/automattic/jetpack-forms/compare/v7.12.0...v7.13.0
+[7.12.0]: https://github.com/automattic/jetpack-forms/compare/v7.11.0...v7.12.0
 [7.11.0]: https://github.com/automattic/jetpack-forms/compare/v7.10.0...v7.11.0
 [7.10.0]: https://github.com/automattic/jetpack-forms/compare/v7.9.0...v7.10.0
 [7.9.0]: https://github.com/automattic/jetpack-forms/compare/v7.8.0...v7.9.0

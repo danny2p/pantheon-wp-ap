@@ -139,7 +139,7 @@ export default class App extends Component {
                 <div className="wprm-report-table-export-container">
                     <button
                         type="button"
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={() => {
                             const rows = data
                                 .slice()

@@ -381,13 +381,13 @@ export default class TextImport extends Component {
                     savingChanges={ this.state.isParsing }
                 >
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ this.props.maybeCloseModal }
                     >
                         { __wprm( 'Cancel' ) }
                     </button>
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ this.useValues }
                         disabled={ ! changesMade }
                     >

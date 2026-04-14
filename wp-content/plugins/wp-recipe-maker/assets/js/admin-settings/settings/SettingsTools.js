@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Element } from 'react-scroll';
 
 import Helpers from '../general/Helpers';
 
@@ -10,7 +11,7 @@ const SettingsTools = (props) => {
                 {props.searchQuery ? Helpers.highlightText(props.group.name, props.searchQuery) : props.group.name}
             </h2>
             <div className="wprm-settings-group-container">
-                <div className="wprm-setting-container">
+                <Element className="wprm-setting-container" name={Helpers.getSettingsToolsResetAnchor()}>
                     <div className="wprm-setting-label-container">
                         <span className="wprm-setting-label">
                             {props.searchQuery ? Helpers.highlightText('Reset to defaults', props.searchQuery) : 'Reset to defaults'}
@@ -21,11 +22,11 @@ const SettingsTools = (props) => {
                     </div>
                     <div className="wprm-setting-input-container">
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={props.onResetDefaults}
                         >Reset to Defaults</button>
                     </div>
-                </div>
+                </Element>
             </div>
         </div>
     );

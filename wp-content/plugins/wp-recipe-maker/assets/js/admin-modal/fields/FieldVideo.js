@@ -62,11 +62,11 @@ const FieldVideo = (props) => {
                 :
                 <Fragment>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ selectVideo }
                     >{ __wprm( 'Upload Video' ) }</button>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={ (e) => {
                             e.preventDefault();
                             props.onChange( -1, '' );

@@ -20,8 +20,10 @@ export default class FieldTinymce extends Component {
         this.initTinyMCE = this.initTinyMCE.bind(this);
         this.notifyReady = this.notifyReady.bind(this);
         this.insertContent = this.insertContent.bind(this);
+        this.syncValueFromProps = this.syncValueFromProps.bind(this);
 
         this.textareaEventsAttached = false;
+        this.isSyncingValue = false;
     }
 
     componentDidMount() {
@@ -41,6 +43,11 @@ export default class FieldTinymce extends Component {
     componentDidUpdate( prevProps, prevState ) {
         if ( this.state.editorHtml && ! prevState.editorHtml ) {
             this.initEditor();
+            return;
+        }
+
+        if ( prevProps.value !== this.props.value ) {
+            this.syncValueFromProps();
         }
     }
 
@@ -64,11 +71,15 @@ export default class FieldTinymce extends Component {
         }
 
         if ( textarea ) {
-            textarea.value = this.props.value;
+            textarea.value = this.getNormalizedValue();
 
             if ( ! this.textareaEventsAttached ) {
                 [ 'input', 'blur' ].forEach( ( event ) => {
                     textarea.addEventListener( event, () => {
+                        if ( this.isSyncingValue ) {
+                            return;
+                        }
+
                         this.props.onChange( textarea.value );
 
                         if ( 'blur' === event && 'function' === typeof this.props.onBlur ) {
@@ -123,10 +134,18 @@ export default class FieldTinymce extends Component {
 
         if ( editor ) {
             editor.on('change', () => {
+                if ( this.isSyncingValue ) {
+                    return;
+                }
+
                 this.props.onChange( editor.getContent() );
             });
 
             editor.on('blur', () => {
+                if ( this.isSyncingValue ) {
+                    return;
+                }
+
                 if ( 'function' === typeof this.props.onBlur ) {
                     this.props.onBlur( editor.getContent() );
                 }
@@ -149,6 +168,32 @@ export default class FieldTinymce extends Component {
         }
 
         return false;
+    }
+
+    getNormalizedValue() {
+        return 'string' === typeof this.props.value ? this.props.value : '';
+    }
+
+    syncValueFromProps() {
+        const value = this.getNormalizedValue();
+        const textarea = this.getTextarea();
+
+        if ( textarea && textarea.value !== value ) {
+            textarea.value = value;
+        }
+
+        const editor = this.getEditor();
+
+        if ( editor && editor.getContent() !== value ) {
+            this.isSyncingValue = true;
+
+            editor.setContent( value );
+            editor.save();
+
+            window.setTimeout( () => {
+                this.isSyncingValue = false;
+            }, 0 );
+        }
     }
 
     notifyReady() {

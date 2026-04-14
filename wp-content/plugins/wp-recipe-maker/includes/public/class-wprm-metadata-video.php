@@ -590,6 +590,7 @@ class WPRM_MetadataVideo {
 	 */
 	private static function get_youtube_metadata( $url ) {
 		$metadata = array();
+		$video_id = false;
 
 		// Get video ID.
 		preg_match( "/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $video_parts );
@@ -600,8 +601,13 @@ class WPRM_MetadataVideo {
 		if ( $video_id && WPRM_Settings::get( 'metadata_youtube_agree_terms' ) ) {
 			$api_key = self::get_youtube_api_key();
 			$api_url = 'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&part=contentDetails&id=' . urlencode( $video_id ) . '&key=' . urlencode( $api_key );
+			$request_args = apply_filters( 'wprm_youtube_metadata_request_args', array(
+				'headers' => array(
+					'Referer' => home_url( '/' ),
+				),
+			), $api_url, $video_id );
 
-			$response = wp_remote_get( $api_url );
+			$response = wp_remote_get( $api_url, $request_args );
 			$body = ! is_wp_error( $response ) && isset( $response['body'] ) ? json_decode( $response['body'] ) : false;
 
 			if ( $body ) {

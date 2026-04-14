@@ -122,16 +122,19 @@ class WPRM_Instacart {
 
 			if ( $name && $quantity ) {
 				$unit = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $ingredient['unit'] ) ) ) );
-
-				$api_data['ingredients'][] = array(
+				$item = array(
 					'name' => $name,
 					'measurements' => array(
 						'quantity' => $quantity,
 						'unit' => $unit ? $unit : 'each',
 					),
 				);
+
+				$api_data['ingredients'][] = self::filter_recipe_ingredient_payload( $item, $ingredient, $data, $recipe_id );
 			}
 		}
+
+		$api_data = self::filter_recipe_payload( $api_data, $data, $recipe_id );
 
 		// Call Instacart API.
 		$instacart_response = self::call_instacart_api( 'recipe', $api_data );
@@ -212,16 +215,19 @@ class WPRM_Instacart {
 
 					if ( $name && $quantity ) {
 						$unit = trim( strip_tags( html_entity_decode( self::do_shortcode_safe( $variation_unit ) ) ) );
-		
-						$api_data['line_items'][] = array(
+						$line_item = array(
 							'name' => $name,
 							'quantity' => $quantity,
 							'unit' => $unit ? $unit : 'each',
 						);
+
+						$api_data['line_items'][] = self::filter_shopping_list_item_payload( $line_item, $variation, $ingredient, $group, $data );
 					}
 				}
 			}
 		}
+
+		$api_data = self::filter_shopping_list_payload( $api_data, $data );
 
 		// Call Instacart API and get link.
 		$instacart_response = self::call_instacart_api( 'shopping_list', $api_data );
@@ -286,6 +292,121 @@ class WPRM_Instacart {
 		}
 
 		return $link;
+	}
+
+	/**
+	 * Filter a single Instacart recipe ingredient payload item.
+	 *
+	 * Add per-item Instacart filters through code, for example:
+	 * array(
+	 * 	'filters' => array(
+	 * 		'brand_filters' => array(
+	 * 			array(
+	 * 				'type' => 'include',
+	 * 				'brand' => 'Instacart',
+	 * 			),
+	 * 		),
+	 * 		'health_filters' => array(
+	 * 			array(
+	 * 				'type' => 'include',
+	 * 				'health_attribute' => 'GLUTEN_FREE',
+	 * 			),
+	 * 		),
+	 * 	),
+	 * )
+	 *
+	 * brand_filters values are case-sensitive. health_filters should use
+	 * Instacart's documented health attribute constants.
+	 *
+	 * @since	10.1.1
+	 * @param	array $item Instacart ingredient payload item.
+	 * @param	array $ingredient Original recipe ingredient data.
+	 * @param	array $data Original recipe request data.
+	 * @param	int   $recipe_id Recipe post ID.
+	 * @return	array
+	 */
+	public static function filter_recipe_ingredient_payload( $item, $ingredient, $data, $recipe_id ) {
+		return self::apply_array_filter( 'wprm_instacart_recipe_ingredient', $item, $ingredient, $data, $recipe_id );
+	}
+
+	/**
+	 * Filter the Instacart recipe payload before sending it to the proxy.
+	 *
+	 * Use this hook to add or adjust filters across multiple ingredients.
+	 *
+	 * @since	10.1.1
+	 * @param	array $api_data Instacart recipe payload.
+	 * @param	array $data Original recipe request data.
+	 * @param	int   $recipe_id Recipe post ID.
+	 * @return	array
+	 */
+	public static function filter_recipe_payload( $api_data, $data, $recipe_id ) {
+		return self::apply_array_filter( 'wprm_instacart_recipe_payload', $api_data, $data, $recipe_id );
+	}
+
+	/**
+	 * Filter a single Instacart shopping list line item payload item.
+	 *
+	 * Add per-item Instacart filters through code, for example:
+	 * array(
+	 * 	'filters' => array(
+	 * 		'brand_filters' => array(
+	 * 			array(
+	 * 				'type' => 'exclude',
+	 * 				'brand' => 'Example Brand',
+	 * 			),
+	 * 		),
+	 * 		'health_filters' => array(
+	 * 			array(
+	 * 				'type' => 'include',
+	 * 				'health_attribute' => 'VEGAN',
+	 * 			),
+	 * 		),
+	 * 	),
+	 * )
+	 *
+	 * brand_filters values are case-sensitive. health_filters should use
+	 * Instacart's documented health attribute constants.
+	 *
+	 * @since	10.1.1
+	 * @param	array $line_item Instacart shopping list line item payload item.
+	 * @param	array $variation Original shopping list variation data.
+	 * @param	array $ingredient Original shopping list ingredient data.
+	 * @param	array $group Original shopping list group data.
+	 * @param	array $data Original shopping list data.
+	 * @return	array
+	 */
+	public static function filter_shopping_list_item_payload( $line_item, $variation, $ingredient, $group, $data ) {
+		return self::apply_array_filter( 'wprm_instacart_shopping_list_item', $line_item, $variation, $ingredient, $group, $data );
+	}
+
+	/**
+	 * Filter the Instacart shopping list payload before sending it to the proxy.
+	 *
+	 * Use this hook to add or adjust filters across multiple line items.
+	 *
+	 * @since	10.1.1
+	 * @param	array $api_data Instacart shopping list payload.
+	 * @param	array $data Original shopping list data.
+	 * @return	array
+	 */
+	public static function filter_shopping_list_payload( $api_data, $data ) {
+		return self::apply_array_filter( 'wprm_instacart_shopping_list_payload', $api_data, $data );
+	}
+
+	/**
+	 * Apply a filter and only accept array results.
+	 *
+	 * @since	10.1.1
+	 * @return	array
+	 */
+	public static function apply_array_filter() {
+		$args = func_get_args();
+		$hook = array_shift( $args );
+		$default = isset( $args[0] ) && is_array( $args[0] ) ? $args[0] : array();
+		$filtered = apply_filters_ref_array( $hook, $args );
+
+		return is_array( $filtered ) ? $filtered : $default;
 	}
 
 	/**

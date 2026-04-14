@@ -28,6 +28,7 @@ class WPRM_Icon {
 	 */
 	public static function get( $keyword_or_url, $color = false ) {
 		$icon = false;
+		$resolved_by_keyword = false;
 
 		if ( ! $keyword_or_url ) {
 			return $icon;
@@ -40,6 +41,7 @@ class WPRM_Icon {
 			if ( file_exists( $source['dir'] . '/' . $keyword . '.svg' ) ) {
 				// Use file_get_contents instead of include as include breaks when the svg file starts with <?xml.
 				$icon = file_get_contents( $source['dir'] . '/' . $keyword . '.svg' );
+				$resolved_by_keyword = true;
 				break;
 			}
 		}
@@ -49,7 +51,9 @@ class WPRM_Icon {
 			$icon = '<img src="' . esc_attr( $keyword_or_url ) . '" alt="" data-pin-nopin="true"/>';
 		}
 
-		if ( $color ) {
+		$preserve_icon_color = $resolved_by_keyword && preg_match( '/-color$/i', $keyword );
+
+		if ( $color && ! $preserve_icon_color ) {
 			$color = esc_attr( $color ); // Prevent misuse of color attribute.
 			$icon = preg_replace( '/#[0-9a-f]{3,6}/mi', $color, $icon );
 		}

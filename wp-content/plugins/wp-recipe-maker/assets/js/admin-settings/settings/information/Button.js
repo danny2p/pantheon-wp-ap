@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const InformationButton = (props) => {
     return (
         <button
-            className="button"
+            className="button button-secondary button-compact"
             onClick={(e) => {
                 e.preventDefault();
                 if ( props.settingsChanged ) {

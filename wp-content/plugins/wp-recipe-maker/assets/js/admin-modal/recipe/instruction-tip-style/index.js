@@ -244,13 +244,13 @@ const InstructionTipStyle = (props) => {
             </div>
             <Footer>
                 <button
-                    className="button button-primary"
+                    className="button button-primary button-compact"
                     onClick={ save }
                 >
                     { saveLabel }
                 </button>
                 <button
-                    className="button"
+                    className="button button-secondary button-compact"
                     onClick={ props.maybeCloseModal }
                 >
                     { __wprm( 'Cancel' ) }

@@ -210,6 +210,8 @@ class WPRM_Assets {
 			'nonce' => wp_create_nonce( 'wprm' ),
 			'api_nonce' => wp_create_nonce( 'wp_rest' ),
 			'endpoints' => array(
+				'idea' => rtrim( get_rest_url( null, 'wp/v2/' . WPRM_IDEA_POST_TYPE ), '/' ),
+				'idea_import' => rtrim( get_rest_url( null, 'wp-recipe-maker/v1/idea/import' ), '/' ),
 				'recipe' => rtrim( get_rest_url( null, 'wp/v2/' . WPRM_POST_TYPE ), '/' ),
 				'list' => rtrim( get_rest_url( null, 'wp/v2/' . WPRM_LIST_POST_TYPE ), '/' ),
 				'taxonomy' => rtrim( get_rest_url( null, 'wp/v2/wprm_' ), '/' ),

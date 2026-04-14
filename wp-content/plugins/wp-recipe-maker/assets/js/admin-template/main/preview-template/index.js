@@ -1054,6 +1054,15 @@ export default class PreviewTemplate extends Component {
                         &&
                         <div className={`wprm-recipe wprm-recipe-roundup-item wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
                     }
+                    {
+                        'favorites' === this.props.template.type
+                        &&
+                        <div className="wprm-favorite-recipes-list">
+                            <div className="wprm-recipe-container wprm-favorite-recipes-item">
+                                <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                            </div>
+                        </div>
+                    }
                 </Fragment>
                 </PreviewInteractionsContext.Provider>
             );
@@ -1138,6 +1147,23 @@ export default class PreviewTemplate extends Component {
                                                 <h2>Our second recipe</h2>
                                                 <p>A roundup would have multiple recipes, so here is another one with some more demo text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend vitae nisl et pharetra. Sed euismod nisi convallis arcu lobortis commodo.</p>
                                                 <p>...</p>
+                                            </Fragment>
+                                        }
+                                        {
+                                            'favorites' === this.props.template.type
+                                            &&
+                                            <Fragment>
+                                                <p>This is what a favorite recipe card could look like when visitors view their saved recipes. This preview shows a single item in the favorites list.</p>
+                                                <div className="wprm-favorite-recipes-list">
+                                                    <div
+                                                        id={ `wprm-recipe-container-${this.state.recipe.id}` }
+                                                        className="wprm-recipe-container wprm-favorite-recipes-item"
+                                                        data-recipe-id={ this.state.recipe.id }
+                                                        data-servings={ this.state.recipe.servings }
+                                                    >
+                                                        <div className={`wprm-recipe wprm-recipe-template-${this.props.template.slug}`}>{ parsedHtml }</div>
+                                                    </div>
+                                                </div>
                                             </Fragment>
                                         }
                                         {

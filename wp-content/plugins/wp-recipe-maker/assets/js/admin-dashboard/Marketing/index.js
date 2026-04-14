@@ -27,7 +27,7 @@ export default class Marketing extends Component {
                     />
                     <div class="wprm-admin-dashboard-marketing-actions">
                         <a
-                            className="button button-primary"
+                            className="button button-primary button-compact"
                             href={ campaign.url }
                             target="_blank"
                         >{ __wprm( 'Learn more about the sale' ) } 🎉</a>

@@ -6,13 +6,11 @@ import RequiredLabel from './RequiredLabel';
 import Settings from './Settings';
 
 const SettingsSubGroup = (props) => {
-    // Check if the subgroup itself (name/description) matches the search
-    const subgroupMatches = props.normalizedSearchQuery ? Helpers.subgroupNameOrDescriptionMatches(props.subgroup, props.normalizedSearchQuery) : false;
-    // If either the parent group matched OR this subgroup matches, show all settings
-    const showAllSettings = props.parentMatched || subgroupMatches;
-    
     return (
-        <div className="wprm-settings-subgroup">
+        <div
+            id={Helpers.getSubgroupAnchor(props.group, props.subgroup, props.subgroupIndex)}
+            className="wprm-settings-subgroup"
+        >
             <h3 className="wprm-settings-subgroup-name">
                 <RequiredLabel object={props.subgroup}/>
                 {props.subgroup.name && (props.searchQuery ? Helpers.highlightText(props.subgroup.name, props.searchQuery) : props.subgroup.name)}
@@ -42,8 +40,6 @@ const SettingsSubGroup = (props) => {
                     onSettingChange={props.onSettingChange}
                     settingsChanged={props.settingsChanged}
                     searchQuery={props.searchQuery}
-                    normalizedSearchQuery={props.normalizedSearchQuery}
-                    parentMatched={showAllSettings}
                 />
                 :
                 null
@@ -53,13 +49,13 @@ const SettingsSubGroup = (props) => {
 }
 
 SettingsSubGroup.propTypes = {
+    group: PropTypes.object.isRequired,
     subgroup: PropTypes.object.isRequired,
+    subgroupIndex: PropTypes.number.isRequired,
     settings: PropTypes.object.isRequired,
     onSettingChange: PropTypes.func.isRequired,
     settingsChanged: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string.isRequired,
-    normalizedSearchQuery: PropTypes.string.isRequired,
-    parentMatched: PropTypes.bool,
 }
 
 export default SettingsSubGroup;

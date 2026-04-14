@@ -156,7 +156,11 @@ class WPRM_Recipe_Sanitizer {
 					// Product amount.
 					if ( isset( $equipment['product_amount'] ) && $equipment['product_amount'] !== '' ) {
 						$product_amount = floatval( $equipment['product_amount'] );
-						if ( $product_amount > 0 ) {
+						$is_default_product_amount = ! empty( $equipment['product_amount_default'] );
+
+						if ( 0.0 === $product_amount ) {
+							$sanitized_equipment['product_amount'] = 0;
+						} elseif ( $product_amount > 0 && ! $is_default_product_amount ) {
 							$sanitized_equipment['product_amount'] = $product_amount;
 						}
 					}
@@ -235,7 +239,11 @@ class WPRM_Recipe_Sanitizer {
 						// Product amount.
 						if ( isset( $ingredient['product_amount'] ) && $ingredient['product_amount'] !== '' ) {
 							$product_amount = floatval( $ingredient['product_amount'] );
-							if ( $product_amount > 0 ) {
+							$is_default_product_amount = ! empty( $ingredient['product_amount_default'] );
+
+							if ( 0.0 === $product_amount ) {
+								$sanitized_ingredient['product_amount'] = 0;
+							} elseif ( $product_amount > 0 && ! $is_default_product_amount ) {
 								$sanitized_ingredient['product_amount'] = $product_amount;
 							}
 						}

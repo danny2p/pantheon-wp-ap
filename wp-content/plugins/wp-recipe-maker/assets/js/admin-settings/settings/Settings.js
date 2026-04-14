@@ -14,12 +14,6 @@ const Settings = (props) => {
                         return null;
                     }
 
-                    // Only filter by search query if parent (group/subgroup) didn't match
-                    // If parent matched, show all settings for context
-                    if (!props.parentMatched && props.normalizedSearchQuery && !Helpers.settingMatchesSearch(setting, props.normalizedSearchQuery)) {
-                        return null;
-                    }
-
                     return (
                         <ErrorBoundary key={i}>
                             <Setting
@@ -29,7 +23,6 @@ const Settings = (props) => {
                                 onSettingChange={props.onSettingChange}
                                 value={props.settings[setting.id]}
                                 searchQuery={props.searchQuery}
-                                normalizedSearchQuery={props.normalizedSearchQuery}
                                 key={i}
                             />
                         </ErrorBoundary>
@@ -46,8 +39,6 @@ Settings.propTypes = {
     onSettingChange: PropTypes.func.isRequired,
     settingsChanged: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string.isRequired,
-    normalizedSearchQuery: PropTypes.string.isRequired,
-    parentMatched: PropTypes.bool,
 }
 
 export default Settings;

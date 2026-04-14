@@ -20,20 +20,6 @@
 class WPRM_Compatibility {
 
 	/**
-	 * Track whether the Divi 5 integration has been initialized.
-	 *
-	 * @var bool
-	 */
-	private static $divi5_initialized = false;
-
-	/**
-	 * Track whether we've localized Divi 5 builder data.
-	 *
-	 * @var bool
-	 */
-	private static $divi5_builder_data_localized = false;
-
-	/**
 	 * Track the language newly created WPRM terms should use.
 	 *
 	 * @var false|string
@@ -82,19 +68,9 @@ class WPRM_Compatibility {
 		// My Shopping Help.
 		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'myshoppinghelp_after_ingredients' ), 9 );
 
-		// Divi.
-		add_action( 'divi_extensions_init', array( __CLASS__, 'divi' ) );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi_assets' ) );
-		add_action( 'init', array( __CLASS__, 'divi5_init' ) );
-		add_action( 'divi_visual_builder_assets_before_enqueue_scripts', array( __CLASS__, 'divi5_vb_assets' ) );
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'divi5_frontend_assets' ) );
+		// CookPal.
+		add_filter( 'wprm_recipe_ingredients_shortcode', array( __CLASS__, 'cookpal_after_ingredients' ), 9 );
 
-		// Elementor.
-		add_action( 'elementor/editor/before_enqueue_scripts', array( __CLASS__, 'elementor_assets' ) );
-		add_action( 'elementor/controls/register', array( __CLASS__, 'elementor_controls' ) );
-		add_action( 'elementor/preview/enqueue_styles', array( __CLASS__, 'elementor_styles' ) );
-		add_action( 'elementor/widgets/register', array( __CLASS__, 'elementor_widgets' ) );
-		add_action( 'elementor/elements/categories_registered', array( __CLASS__, 'elementor_categories' ) );
 		add_action( 'ECS_after_render_post_footer', array( __CLASS__, 'wpupg_unset_recipe_id' ) );
 
 		// WP Ultimate Post Grid.
@@ -206,227 +182,6 @@ class WPRM_Compatibility {
 	 */
 	public static function rank_math() {
 		// wp_enqueue_script( 'wprm-rank-math-compatibility', WPRM_URL . 'assets/js/other/rank-math-compatibility.js', array( 'wp-hooks', 'rank-math-analyzer' ), WPRM_VERSION, true );
-	}
-
-	/**
-	 * Divi Builder Compatibility.
-	 *
-	 * @since	5.1.0
-	 */
-	public static function divi() {
-		require_once( WPRM_DIR . 'templates/divi/includes/extension.php' );
-	}
-
-	/**
-	 * Divi Builder assets.
-	 *
-	 * @since	9.7.0
-	 */
-	public static function divi_assets() {
-		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['et_fb'] ) {
-			WPRM_Assets::load();
-		}
-	}
-
-	/**
-	 * Determine if Divi 5 is active.
-	 *
-	 * @return bool
-	 */
-	private static function is_divi5_enabled() {
-		return function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled();
-	}
-
-	/**
-	 * Bootstrap Divi 5 module registration.
-	 */
-	public static function divi5_init() {
-		if ( self::$divi5_initialized || ! self::is_divi5_enabled() ) {
-			return;
-		}
-
-		if ( ! defined( 'WPRM_DIVI5_PATH' ) ) {
-			define( 'WPRM_DIVI5_PATH', WPRM_DIR . 'templates/divi5/' );
-			define( 'WPRM_DIVI5_URL', WPRM_URL . 'templates/divi5/' );
-			define( 'WPRM_DIVI5_JSON_PATH', WPRM_DIVI5_PATH . 'modules-json/' );
-		}
-
-		$modules_bootstrap = WPRM_DIVI5_PATH . 'modules/Modules.php';
-
-		if ( file_exists( $modules_bootstrap ) ) {
-			require_once $modules_bootstrap;
-		}
-
-		self::$divi5_initialized = true;
-	}
-
-	/**
-	 * Enqueue Divi 5 Visual Builder assets.
-	 */
-	public static function divi5_vb_assets() {
-		if ( ! self::is_divi5_enabled() || ! function_exists( 'et_core_is_fb_enabled' ) || ! et_core_is_fb_enabled() ) {
-			return;
-		}
-
-		if ( ! class_exists( '\\ET\\Builder\\VisualBuilder\\Assets\\PackageBuildManager' ) ) {
-			return;
-		}
-
-		self::divi5_init();
-
-		// Ensure the recipe selection modal assets are available inside the builder iframe.
-		if ( ! class_exists( 'WPRM_Modal' ) ) {
-			require_once WPRM_DIR . 'includes/admin/class-wprm-modal.php';
-		}
-
-		if ( ! class_exists( 'WPRM_Assets' ) ) {
-			require_once WPRM_DIR . 'includes/class-wprm-assets.php';
-		}
-
-		// Force admin assets to load for Divi 5.
-		add_filter( 'wprm_should_load_admin_assets', '__return_true' );
-
-		$GLOBALS['wprm_divi5_context'] = true;
-		WPRM_Modal::add_modal_content();
-		unset( $GLOBALS['wprm_divi5_context'] );
-		
-		WPRM_Assets::enqueue_admin();
-		WPRM_Modal::enqueue();
-
-		if ( ! class_exists( 'WPRMP_Assets' ) && defined( 'WPRMP_DIR' ) && file_exists( WPRMP_DIR . 'includes/class-wprmp-assets.php' ) ) {
-			require_once WPRMP_DIR . 'includes/class-wprmp-assets.php';
-		}
-
-		if ( class_exists( 'WPRMP_Assets' ) ) {
-			WPRMP_Assets::enqueue_admin();
-		}
-
-		remove_filter( 'wprm_should_load_admin_assets', '__return_true' );
-
-		$base_url = defined( 'WPRM_DIVI5_URL' ) ? WPRM_DIVI5_URL : WPRM_URL . 'templates/divi5/';
-
-		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
-			array(
-				'name'    => 'wprm-divi5-builder-bundle-script',
-				'version' => class_exists( 'WPRM_Debug' ) && WPRM_Debug::debugging() ? time() : WPRM_VERSION,
-				'script'  => array(
-					'src'                => $base_url . 'scripts/bundle.js',
-					'deps'               => array(
-						'divi-module-library',
-						'divi-vendor-wp-hooks',
-					),
-					'enqueue_top_window' => false,
-					'enqueue_app_window' => true,
-				),
-			)
-		);
-
-		\ET\Builder\VisualBuilder\Assets\PackageBuildManager::register_package_build(
-			array(
-				'name'   => 'wprm-divi5-builder-style',
-				'version'=> class_exists( 'WPRM_Debug' ) && WPRM_Debug::debugging() ? time() : WPRM_VERSION,
-				'style'  => array(
-					'src'                => $base_url . 'styles/vb-bundle.css',
-					'deps'               => array(),
-					'enqueue_top_window' => false,
-					'enqueue_app_window' => true,
-				),
-			)
-		);
-
-		if ( ! self::$divi5_builder_data_localized ) {
-			$builder_data = array(
-				'nonce'     => wp_create_nonce( 'wp_rest' ),
-				'endpoints' => array(
-					'preview' => trailingslashit( rest_url( 'wp-recipe-maker/v1/utilities/preview' ) ),
-				),
-				'latestRecipes' => WPRM_Recipe_Manager::get_latest_recipes( 20, 'id' ),
-			);
-
-			$inline_script = 'window.WPRMDivi5Data = ' . wp_json_encode( $builder_data ) . ';';
-
-			wp_add_inline_script(
-				'divi-module-library',
-				$inline_script,
-				'before'
-			);
-
-			wp_add_inline_script(
-				'divi-module-library',
-				"(function() { if (typeof window !== 'undefined' && !window.WPRMDivi5Data) { " . $inline_script . " } })();",
-				'after'
-			);
-
-			self::$divi5_builder_data_localized = true;
-		}
-	}
-
-	/**
-	 * Load Divi 5 front-end styles.
-	 */
-	public static function divi5_frontend_assets() {
-		if ( ! self::is_divi5_enabled() ) {
-			return;
-		}
-
-		self::divi5_init();
-
-		$style_url = defined( 'WPRM_DIVI5_URL' ) ? WPRM_DIVI5_URL : WPRM_URL . 'templates/divi5/';
-
-		wp_enqueue_style( 'wprm-divi5-modules', $style_url . 'styles/bundle.css', array(), WPRM_VERSION );
-	}
-
-
-	/**
-	 * Elementor Compatibility.
-	 *
-	 * @since	5.0.0
-	 */
-	public static function elementor_assets() {
-		WPRM_Modal::add_modal_content();
-		WPRM_Assets::enqueue_admin();
-		WPRM_Modal::enqueue();
-
-		if ( class_exists( 'WPRMP_Assets' ) ) {
-			WPRMP_Assets::enqueue_admin();
-		}
-
-		wp_enqueue_script( 'wprm-admin-elementor', WPRM_URL . 'assets/js/other/elementor.js', array( 'wprm-admin', 'wprm-admin-modal' ), WPRM_VERSION, true );
-	}
-	public static function elementor_controls( $controls_manager ) {
-		include( WPRM_DIR . 'templates/elementor/control.php' );
-		include( WPRM_DIR . 'templates/elementor/control-list.php' );
-
-		$controls_manager->register( new WPRM_Elementor_Control() );
-		$controls_manager->register( new WPRM_Elementor_Control_List() );
-	}
-	public static function elementor_styles() {
-		// Make sure default assets load.
-		WPRM_Assets::load();
-	}
-	public static function elementor_widgets( $widgets_manager ) {
-		include( WPRM_DIR . 'templates/elementor/widget-recipe.php' );
-		include( WPRM_DIR . 'templates/elementor/widget-list.php' );
-		include( WPRM_DIR . 'templates/elementor/widget-roundup.php' );
-
-		$widgets_manager->register( new WPRM_Elementor_Recipe_Widget() );
-		$widgets_manager->register( new WPRM_Elementor_List_Widget() );
-		$widgets_manager->register( new WPRM_Elementor_Roundup_Widget() );
-	}
-
-	/**
-	 * Add custom widget categories to Elementor.
-	 *
-	 * @since 8.6.0
-	 */
-	public static function elementor_categories( $elements_manager ) {
-		$elements_manager->add_category(
-			'wp-recipe-maker',
-			array(
-				'title' => __( 'WP Recipe Maker', 'wp-recipe-maker' ),
-				'icon'  => 'fa fa-plug',
-			)
-		);
 	}
 
 	/**
@@ -680,6 +435,20 @@ class WPRM_Compatibility {
 	}
 
 	/**
+	 * Add CookPal button after the ingredients.
+	 *
+	 * @since	10.5.0
+	 * @param	mixed $output Current ingredients output.
+	 */
+	public static function cookpal_after_ingredients( $output ) {
+		if ( WPRM_Settings::get( 'integration_cookpal_add' ) ) {
+			$output = $output . do_shortcode( '[wprm-spacer][wprm-recipe-cookpal]' );
+		}
+
+		return $output;
+	}
+
+	/**
 	 * Check if and what multilingual plugin is getting used.
 	 *
 	 * @since	6.9.0
@@ -906,6 +675,45 @@ class WPRM_Compatibility {
 	}
 
 	/**
+	 * Get translated term ID for a specific language.
+	 *
+	 * @since	10.4.0
+	 * @param	int    $term_id  Term ID to translate.
+	 * @param	string $taxonomy Taxonomy for the term.
+	 * @param	string $language Language code to get translation for.
+	 */
+	public static function get_translated_term_for_language( $term_id, $taxonomy, $language ) {
+		$multilingual = self::multilingual();
+
+		if ( ! $term_id || ! $taxonomy || ! $language || ! $multilingual ) {
+			return false;
+		}
+
+		$term_id = intval( $term_id );
+		$language = sanitize_key( $language );
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			$translated_term = apply_filters( 'wpml_object_id', $term_id, $taxonomy, false, $language );
+
+			if ( $translated_term ) {
+				return intval( $translated_term );
+			}
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_get_term_translations' ) ) {
+			$translations = pll_get_term_translations( $term_id );
+
+			if ( is_array( $translations ) && isset( $translations[ $language ] ) && $translations[ $language ] ) {
+				return intval( $translations[ $language ] );
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Get the current admin language.
 	 *
 	 * @since	10.8.0
@@ -932,6 +740,67 @@ class WPRM_Compatibility {
 		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_current_language' ) ) {
 			$current = pll_current_language( 'slug' );
 			return $current ? sanitize_key( $current ) : false;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Switch the active language context temporarily.
+	 *
+	 * @since	10.8.1
+	 * @param	false|string $language Language to switch to.
+	 */
+	public static function switch_language_context( $language ) {
+		$multilingual = self::multilingual();
+
+		if ( ! $multilingual || ! $language ) {
+			return false;
+		}
+
+		$language = sanitize_key( $language );
+		$previous_language = self::get_current_admin_language();
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			do_action( 'wpml_switch_language', $language );
+			return $previous_language;
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_switch_language' ) ) {
+			pll_switch_language( $language );
+			return $previous_language;
+		}
+
+		return $previous_language;
+	}
+
+	/**
+	 * Restore the active language context after a temporary switch.
+	 *
+	 * @since	10.8.1
+	 * @param	false|string $language Language to restore.
+	 */
+	public static function restore_language_context( $language ) {
+		$multilingual = self::multilingual();
+
+		if ( ! $multilingual || ! $language ) {
+			return false;
+		}
+
+		$language = sanitize_key( $language );
+
+		// WPML.
+		if ( 'wpml' === $multilingual['plugin'] ) {
+			do_action( 'wpml_switch_language', $language );
+			return true;
+		}
+
+		// Polylang.
+		if ( 'polylang' === $multilingual['plugin'] && function_exists( 'pll_switch_language' ) ) {
+			pll_switch_language( $language );
+			return true;
 		}
 
 		return false;

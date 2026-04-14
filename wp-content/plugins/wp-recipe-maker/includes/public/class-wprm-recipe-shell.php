@@ -349,6 +349,25 @@ class WPRM_Recipe_Shell {
 	}
 
 	/**
+	 * Get the parent post name.
+	 *
+	 * @since    10.2.0
+	 */
+	public function parent_post_name() {
+		return $this->meta( 'parent_post_name', '' );
+	}
+
+	/**
+	 * Get the parent post name, or fall back to the recipe name.
+	 *
+	 * @since    10.2.0
+	 */
+	public function parent_post_or_recipe_name() {
+		$parent_post_name = $this->parent_post_name();
+		return $parent_post_name ? $parent_post_name : $this->name();
+	}
+
+	/**
 	 * Replace placeholders in text with details from this recipe.
 	 *
 	 * @since	8.0.0
@@ -358,6 +377,8 @@ class WPRM_Recipe_Shell {
 		$text = str_ireplace( '%recipe_id%', $this->id(), $text );
 		$text = str_ireplace( '%recipe_url%', $this->permalink(), $text );
 		$text = str_ireplace( '%recipe_name%', $this->name(), $text );
+		$text = str_ireplace( '%parent_post_name%', $this->parent_post_name(), $text );
+		$text = str_ireplace( '%parent_post_or_recipe_name%', $this->parent_post_or_recipe_name(), $text );
 		$text = str_ireplace( '%recipe_date%', date( get_option( 'date_format' ), strtotime( $this->date() ) ), $text );
 		$text = str_ireplace( '%recipe_date_modified%', date( get_option( 'date_format' ), strtotime( $this->date_modified() ) ), $text );
 		$text = str_ireplace( '%recipe_summary%', $this->summary(), $text );

@@ -10,6 +10,7 @@ const SettingDropdownTemplateModern = (props) => {
         'recipe': [],
         'snippet': [],
         'roundup': [],
+        'favorites': [],
     };
 
     // Put templates in correct categories.
@@ -24,6 +25,8 @@ const SettingDropdownTemplateModern = (props) => {
                 templateGroups.snippet.push(templateOption);
             } else if ( 'roundup' === template.type ) {
                 templateGroups.roundup.push(templateOption);
+            } else if ( 'favorites' === template.type ) {
+                templateGroups.favorites.push(templateOption);
             } else {
                 templateGroups.recipe.push(templateOption);
             }
@@ -46,6 +49,10 @@ const SettingDropdownTemplateModern = (props) => {
         roundup: {
             label: 'Roundup Templates',
             options: templateGroups.roundup,
+        },
+        favorites: {
+            label: 'Favorites Templates',
+            options: templateGroups.favorites,
         },
     };
 

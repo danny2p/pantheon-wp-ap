@@ -18,6 +18,7 @@ import IconEdit from '../../../icons/settings/edit.svg';
 import IconFiles from '../../../icons/settings/files.svg';
 import IconFloppyDisk from '../../../icons/settings/floppy-disk.svg';
 import IconHealth from '../../../icons/settings/health.svg';
+import IconHeart from '../../../icons/settings/heart.svg';
 import IconImport from '../../../icons/settings/import.svg';
 import IconKey from '../../../icons/settings/key.svg';
 import IconKnife from '../../../icons/settings/knife.svg';
@@ -68,6 +69,7 @@ const icons = {
     files: IconFiles,
     'floppy-disk': IconFloppyDisk,
     health: IconHealth,
+    heart: IconHeart,
     import: IconImport,
     key: IconKey,
     knife: IconKnife,

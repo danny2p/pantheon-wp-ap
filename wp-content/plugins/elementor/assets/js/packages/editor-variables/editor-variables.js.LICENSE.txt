@@ -116,6 +116,12 @@
 
 /*! ./components/fields/font-field */
 
+/*! ./components/global-styles-import-listener */
+
+/*! ./components/open-panel-from-event */
+
+/*! ./components/open-panel-from-url */
+
 /*! ./components/ui/color-indicator */
 
 /*! ./components/variables-manager/variables-manager-panel */
@@ -135,6 +141,8 @@
 /*! ./hooks/use-error-navigation */
 
 /*! ./hooks/use-prop-variable-action */
+
+/*! ./hooks/use-prop-variables */
 
 /*! ./hooks/use-variables-manager-state */
 
@@ -163,8 +171,6 @@
 /*! ./storage */
 
 /*! ./style-variables-repository */
-
-/*! ./sync/enqueue-font */
 
 /*! ./transformers/empty-transformer */
 
@@ -222,8 +228,6 @@
 
 /*! @elementor/editor-current-user */
 
-/*! @elementor/editor-editing-panel */
-
 /*! @elementor/editor-mcp */
 
 /*! @elementor/editor-panels */
@@ -239,6 +243,8 @@
 /*! @elementor/http-client */
 
 /*! @elementor/icons */
+
+/*! @elementor/menus */
 
 /*! @elementor/schema */
 
@@ -264,6 +270,10 @@
 
 /*!****************************************!*\
   !*** external ["elementorV2","icons"] ***!
+  \****************************************/
+
+/*!****************************************!*\
+  !*** external ["elementorV2","menus"] ***!
   \****************************************/
 
 /*!****************************************!*\
@@ -318,10 +328,6 @@
   !*** external ["elementorV2","editorCurrentUser"] ***!
   \****************************************************/
 
-/*!*****************************************************!*\
-  !*** external ["elementorV2","editorEditingPanel"] ***!
-  \*****************************************************/
-
 /*!************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/api.ts ***!
   \************************************************************/
@@ -353,10 +359,6 @@
 /*!*************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/batch-operations.ts ***!
   \*************************************************************************/
-
-/*!**************************************************************************!*\
-  !*** ./packages/packages/core/editor-variables/src/sync/enqueue-font.ts ***!
-  \**************************************************************************/
 
 /*!**************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/utils/validations.ts ***!
@@ -459,6 +461,10 @@
   \***************************************************************************************/
 
 /*!****************************************************************************************!*\
+  !*** ./packages/packages/core/editor-variables/src/components/open-panel-from-url.tsx ***!
+  \****************************************************************************************/
+
+/*!****************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/ui/styled-menu-list.tsx ***!
   \****************************************************************************************/
 
@@ -485,6 +491,10 @@
 /*!*****************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/ui/tags/assigned-tag.tsx ***!
   \*****************************************************************************************/
+
+/*!******************************************************************************************!*\
+  !*** ./packages/packages/core/editor-variables/src/components/open-panel-from-event.tsx ***!
+  \******************************************************************************************/
 
 /*!******************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/create-style-variables-repository.ts ***!
@@ -561,6 +571,10 @@
 /*!*************************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/variables-repeater-item-slot.tsx ***!
   \*************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./packages/packages/core/editor-variables/src/components/global-styles-import-listener.tsx ***!
+  \**************************************************************************************************/
 
 /*!**************************************************************************************************!*\
   !*** ./packages/packages/core/editor-variables/src/components/ui/delete-confirmation-dialog.tsx ***!

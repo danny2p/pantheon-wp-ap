@@ -14,6 +14,14 @@
         box-sizing: border-box;
         min-height: 350px;
     }
+
+    .wp-media-buttons {
+        button#insert-media-button {
+            line-height: 2.30769231;
+            min-height: 32px;
+            padding: 0 12px;
+        }
+    }
 }
 
 .wprm-admin-modal-field-notes-actions {

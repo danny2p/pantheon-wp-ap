@@ -8,6 +8,7 @@ export default class FieldDropdown extends Component {
 
     render() {
         let selectedOption = false;
+        const menuPortalTarget = 'undefined' !== typeof document ? document.body : null;
 
         if ( this.props.options ) {
             const allOptions = this.props.options.reduce((acc, cur) => {
@@ -31,6 +32,8 @@ export default class FieldDropdown extends Component {
                 options={this.props.options}
                 value={selectedOption}
                 placeholder={this.props.placeholder}
+                menuPortalTarget={ menuPortalTarget }
+                menuPosition="fixed"
                 onChange={(option) => {
                     this.props.onChange(option.value);
                 }}
@@ -43,6 +46,14 @@ export default class FieldDropdown extends Component {
                         ...provided,
                         width: '100%',
                         maxWidth: this.props.width ? this.props.width : '100%',
+                    }),
+                    menuPortal: (provided) => ({
+                        ...provided,
+                        zIndex: 100001,
+                    }),
+                    menu: (provided) => ({
+                        ...provided,
+                        zIndex: 100001,
                     }),
                 }}
                 { ...customProps }

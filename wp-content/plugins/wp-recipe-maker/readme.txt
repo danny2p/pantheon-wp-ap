@@ -3,9 +3,9 @@ Contributors: BrechtVds, BirtheVdm
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QG7KZMGFU325Y
 Tags: recipe, recipes, food, cooking, schema
 Requires at least: 4.4
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.2
-Stable tag: 10.4.0
+Stable tag: 10.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,21 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 7. Our Template Editor allows you to completely customize the look and feel.
 
 == Changelog ==
+= 10.5.0 =
+* Feature: Cookpal integration
+* Feature: Tracking of individual changes on the settings page
+* Feature: New icon picker modal for the template editor
+* Feature: Track ideas for new recipes on Manage page
+* Feature: Parent post name placeholder
+* Feature: Sync taxonomy term tool for multilingual plugins
+* Improvement: Automatically replace Divi 4 recipe module with Divi 5 one
+* Improvement: Extra icons for the template editor
+* Improvement: Track settings changes in changelog
+* Improved: Keep context when using search on settings page
+* Fix: Include referrer in YouTube data API request
+* Fix: "Remove Links" setting affecting print credit
+* Fix: Video poster image not looking correct in Cook Mode Modal
+
 = 10.4.0 =
 * Feature: Add optional tips in between instruction steps
 * Feature: Undo/Redo history for the recipe edit modal
@@ -523,6 +538,9 @@ Please report security bugs found in the source code of the WP Recipe Maker plug
 For earlier versions, please refer to [our full changelog](https://help.bootstrapped.ventures/article/124-wp-recipe-maker-changelog).
 
 == Upgrade notice ==
+= 10.5.0 =
+Some great new features and improvements
+
 = 10.4.0 =
 Some great new features and improvements
 

@@ -14,6 +14,7 @@ import { __wprm } from 'Shared/Translations';
 const { hooks } = WPRecipeMakerAdmin['wp-recipe-maker/dist/shared'];
 
 import BulkEdit from './bulk-edit';
+import Idea from './idea';
 import InputFields from './input-fields';
 import List from './list';
 import Menu from './menu';
@@ -23,6 +24,7 @@ import Select from './select';
 import Taxonomy from './taxonomy';
 import BulkAdd from './recipe/bulk-add';
 import BulkAddCategories from './recipe/bulk-add-categories';
+import AITextImport from './recipe/ai-text-import';
 import TextImport from './recipe/text-import';
 import SuggestTags from './recipe/suggest-tags';
 import SplitIngredient from './recipe/split-ingredient';
@@ -31,9 +33,11 @@ import AddRecipeToPost from './add-recipe-to-post';
 
 const contentBlocks = {
     'bulk-edit': BulkEdit,
+    idea: Idea,
     'bulk-add-ingredients': BulkAdd,
     'bulk-add-instructions': BulkAdd,
     'bulk-add-categories': BulkAddCategories,
+    'ai-text-import': AITextImport,
     'input-fields': InputFields,
     list: List,
     menu: Menu,

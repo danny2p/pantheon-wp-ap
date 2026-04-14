@@ -5,6 +5,26 @@
       "fromType": "string",
       "toType": "html",
       "path": "operations/string-to-html.json"
+    },
+    "number-to-size": {
+      "fromType": "number",
+      "toType": "size",
+      "path": "operations/number-to-size.json"
+    },
+    "html-to-html-v2": {
+      "fromType": "html",
+      "toType": "html-v2",
+      "path": "operations/html-to-html-v2.json"
+    },
+    "html-v2-to-html-v3": {
+      "fromType": "html-v2",
+      "toType": "html-v3",
+      "path": "operations/html-v2-to-html-v3.json"
+    },
+    "image-src-to-svg-src": {
+      "fromType": "image-src",
+      "toType": "svg-src",
+      "path": "operations/image-src-to-svg-src.json"
     }
   }
 }

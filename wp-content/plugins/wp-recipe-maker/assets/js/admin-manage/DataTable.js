@@ -151,6 +151,10 @@ export default class DataTable extends Component {
     }
 
     getDefaultSort() {
+        if ( this.props.options.defaultSort ) {
+            return this.props.options.defaultSort;
+        }
+
         return [{
             id: 'rating' === this.props.type ? 'date' : 'id',
             desc: true,
@@ -712,7 +716,7 @@ export default class DataTable extends Component {
                             ( false === this.state.selectedColumns || this.state.selectedColumns.includes( 'bulk_edit' ) )
                             && this.props.options.bulkEdit
                             && <button
-                                className="button"
+                                className="button button-secondary button-compact"
                                 onClick={ () => {
                                     WPRM_Modal.open( 'bulk-edit', {
                                         route: this.props.options.bulkEdit.route,
@@ -725,7 +729,7 @@ export default class DataTable extends Component {
                             >{ __wprm( 'Bulk Edit' ) } { this.getSelectedRows().length } { 1 === this.getSelectedRows().length ? this.props.options.label.singular : this.props.options.label.plural }...</button>
                         }
                         <button
-                            className="button"
+                            className="button button-secondary button-compact"
                             onClick={ this.openExportModal }
                             disabled={ loading || exporting || 0 === exportColumns.length }
                         >{ __wprm( 'Export to CSV' ) }</button>
@@ -733,7 +737,7 @@ export default class DataTable extends Component {
                             this.props.options.createButton
                             ?
                             <button
-                                className="button button-primary"
+                                className="button button-primary button-compact"
                                 onClick={ () => this.props.options.createButton( this ) }
                             >{ `${__wprm( 'Create' )} ${ this.props.options.label.singular }` }</button>
                             :

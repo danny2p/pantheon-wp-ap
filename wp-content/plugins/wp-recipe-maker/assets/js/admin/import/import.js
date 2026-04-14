@@ -26,9 +26,32 @@ function import_recipes() {
 	}, 'json');
 }
 
+function getContrastClass(color) {
+	var ctx = document.createElement('canvas').getContext('2d');
+	ctx.fillStyle = color;
+	var hex = ctx.fillStyle;
+	var r = parseInt(hex.slice(1, 3), 16);
+	var g = parseInt(hex.slice(3, 5), 16);
+	var b = parseInt(hex.slice(5, 7), 16);
+	var luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+	return luminance > 0.5 ? 'wprm-progress-percentage-dark' : 'wprm-progress-percentage-light';
+}
+
 function update_progress_bar() {
 	var percentage = ( 1.0 - ( importing_recipes.length / importing_recipes_total ) ) * 100;
-	jQuery('#wprm-import-progress-bar').css('width', percentage + '%');
+	var isComplete = percentage >= 100;
+	jQuery('#wprm-import-progress-bar').css('width', percentage + '%').toggleClass('wprm-progress-complete', isComplete);
+
+	var label = jQuery('#wprm-import-progress-container .wprm-progress-percentage');
+	label.text(isComplete ? '100%' : percentage.toFixed(1) + '%');
+	label.removeClass('wprm-progress-percentage-light wprm-progress-percentage-dark wprm-progress-percentage-complete');
+
+	if (isComplete) {
+		label.addClass('wprm-progress-percentage-complete');
+	} else if (percentage >= 50) {
+		var color = getComputedStyle(document.documentElement).getPropertyValue('--wp-admin-theme-color').trim() || '#3858e9';
+		label.addClass(getContrastClass(color));
+	}
 };
 
 jQuery(document).ready(function($) {

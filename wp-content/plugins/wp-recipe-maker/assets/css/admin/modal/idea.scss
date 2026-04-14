@@ -1,0 +1,37 @@
+.wprm-admin-modal-idea {
+    max-width: 1000px;
+
+    .wprm-admin-modal-field-container-idea-name,
+    .wprm-admin-modal-field-container-idea-summary {
+        .wprm-admin-modal-field {
+            max-width: 650px;
+        }
+    }
+
+    .wprm-admin-modal-field-container-idea-status,
+    .wprm-admin-modal-field-container-idea-type {
+        .wprm-admin-modal-field {
+            max-width: 200px;
+        }
+    }
+}
+
+.wprm-admin-modal-idea-content {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.wprm-admin-modal-idea-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wprm-admin-modal-idea-readonly {
+    min-height: 38px;
+    padding: 9px 12px;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    color: #1d2327;
+}

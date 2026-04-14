@@ -8,7 +8,7 @@ import '../../css/admin/shared/button.scss';
 const Button = (props) => {
     let buttonDisabled = false;
     let tooltipContent = props.help ? props.help : false;
-    let className = 'button';
+    let className = 'button button-compact';
     const isExplicitlyDisabled = props.disabled === true;
 
     // Check if explicitly disabled via prop

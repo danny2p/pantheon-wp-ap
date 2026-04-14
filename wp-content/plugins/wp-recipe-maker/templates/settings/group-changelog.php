@@ -13,7 +13,7 @@ $changelog = array(
 	'id' => 'changelog',
 	'icon' => 'timeline',
 	'name' => __( 'Changelog', 'wp-recipe-maker' ),
-	'description' => __( 'Keep track of recipe related changes.', 'wp-recipe-maker' ),
+	'description' => __( 'Keep track of recipe and plugin settings changes.', 'wp-recipe-maker' ),
 	'documentation' => 'https://help.bootstrapped.ventures/article/337-recipe-changelog',
 	'settings' => array(
 		array(
@@ -39,6 +39,7 @@ $changelog = array(
 				'recipe_edited' => __( 'Recipe Edited', 'wp-recipe-maker' ),
 				'recipe_trashed' => __( 'Recipe Trashed', 'wp-recipe-maker' ),
 				'recipe_deleted' => __( 'Recipe Deleted', 'wp-recipe-maker' ),
+				'settings_updated' => __( 'Settings Updated', 'wp-recipe-maker' ),
 			),
 			'default' => array( 'recipe_trashed', 'recipe_deleted' ),
 			'dependency' => array(

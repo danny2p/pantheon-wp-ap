@@ -49,6 +49,10 @@ const Property = (props) => {
         return null;
     }
 
+    if ( Helpers.shouldHideColorProperty(props.property, props.properties) ) {
+        return null;
+    }
+
     let helpIcon = null;
     if ( props.property.hasOwnProperty( 'help' ) ) {
         helpIcon = (

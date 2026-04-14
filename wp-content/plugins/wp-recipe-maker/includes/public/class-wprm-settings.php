@@ -235,7 +235,7 @@ class WPRM_Settings {
 	 * @since    1.5.0
 	 * @param		 array $settings_to_update Settings to update.
 	 */
-	public static function update_settings( $settings_to_update ) {
+	public static function update_settings( $settings_to_update, $context = array() ) {
 		$old_settings = self::get_settings();
 
 		if ( is_array( $settings_to_update ) ) {
@@ -246,9 +246,304 @@ class WPRM_Settings {
 
 			update_option( 'wprm_settings', $new_settings );
 			self::$settings = $new_settings;
+
+			if ( self::should_log_settings_change( $context ) ) {
+				self::maybe_log_settings_change( $old_settings, $new_settings, $context );
+			}
 		}
 
 		return self::get_settings();
+	}
+
+	/**
+	 * Check if a settings update should be logged to the changelog.
+	 *
+	 * @since	10.6.0
+	 * @param	array $context Optional context for the settings update.
+	 */
+	private static function should_log_settings_change( $context ) {
+		return is_array( $context ) && ! empty( $context['log_change'] );
+	}
+
+	/**
+	 * Maybe log a settings update to the changelog.
+	 *
+	 * @since	10.6.0
+	 * @param	array $old_settings Settings before the update.
+	 * @param	array $new_settings Settings after the update.
+	 * @param	array $context      Optional context for the settings update.
+	 */
+	private static function maybe_log_settings_change( $old_settings, $new_settings, $context ) {
+		$changes = self::get_settings_change_log_entries( $old_settings, $new_settings );
+
+		if ( ! $changes ) {
+			return;
+		}
+
+		$source = isset( $context['source'] ) ? sanitize_key( $context['source'] ) : 'unknown';
+
+		WPRM_Changelog::log(
+			'settings_updated',
+			0,
+			array(
+				'changes' => $changes,
+				'object_meta' => array(
+					'type' => 'settings',
+					'name' => __( 'Plugin Settings', 'wp-recipe-maker' ),
+					'source' => $source,
+					'changed_count' => count( $changes ),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Get change log entries for changed settings.
+	 *
+	 * @since	10.6.0
+	 * @param	array $old_settings Settings before the update.
+	 * @param	array $new_settings Settings after the update.
+	 */
+	private static function get_settings_change_log_entries( $old_settings, $new_settings ) {
+		$changes = array();
+		$details = self::get_details();
+
+		$keys = array_unique(
+			array_merge(
+				array_keys( $details ),
+				array_keys( $old_settings ),
+				array_keys( $new_settings )
+			)
+		);
+
+		foreach ( $keys as $setting_id ) {
+			$old_exists = array_key_exists( $setting_id, $old_settings );
+			$new_exists = array_key_exists( $setting_id, $new_settings );
+
+			if ( ! $old_exists && ! $new_exists ) {
+				continue;
+			}
+
+			$old_value = $old_exists ? $old_settings[ $setting_id ] : null;
+			$new_value = $new_exists ? $new_settings[ $setting_id ] : null;
+
+			if ( maybe_serialize( $old_value ) === maybe_serialize( $new_value ) ) {
+				continue;
+			}
+
+			$setting_details = isset( $details[ $setting_id ] ) ? $details[ $setting_id ] : array();
+			$masked = self::is_sensitive_setting( $setting_id );
+
+			$changes[] = array(
+				'id' => $setting_id,
+				'label' => self::get_setting_change_label( $setting_id, $setting_details ),
+				'before' => self::summarize_setting_value( $setting_id, $old_value, $setting_details, $masked ),
+				'after' => self::summarize_setting_value( $setting_id, $new_value, $setting_details, $masked ),
+				'masked' => $masked,
+			);
+		}
+
+		return $changes;
+	}
+
+	/**
+	 * Get a human-readable label for a setting.
+	 *
+	 * @since	10.6.0
+	 * @param	string $setting_id      Setting ID.
+	 * @param	array  $setting_details Setting details.
+	 */
+	private static function get_setting_change_label( $setting_id, $setting_details ) {
+		if ( isset( $setting_details['name'] ) && $setting_details['name'] ) {
+			return wp_strip_all_tags( $setting_details['name'] );
+		}
+
+		return sanitize_text_field( $setting_id );
+	}
+
+	/**
+	 * Check if a setting contains sensitive information.
+	 *
+	 * @since	10.6.0
+	 * @param	string $setting_id Setting ID.
+	 */
+	private static function is_sensitive_setting( $setting_id ) {
+		return (bool) preg_match( '/license|token|secret|key|password|email/i', $setting_id );
+	}
+
+	/**
+	 * Prepare a setting value for display.
+	 *
+	 * @since	10.6.0
+	 * @param	string $setting_id Setting ID.
+	 * @param	mixed  $value      Value to prepare.
+	 */
+	private static function prepare_setting_value_for_display( $setting_id, $value ) {
+		if ( 'import_units' === $setting_id && is_array( $value ) ) {
+			return implode( "\n", $value );
+		}
+
+		if ( 'unit_conversion_units' === $setting_id && is_array( $value ) ) {
+			$prepared = array();
+
+			foreach ( $value as $unit => $details ) {
+				$prepared[ $unit ] = $details;
+
+				if ( isset( $details['aliases'] ) && is_array( $details['aliases'] ) ) {
+					$prepared[ $unit ]['aliases'] = implode( ';', $details['aliases'] );
+				}
+			}
+
+			return $prepared;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Get the label for a setting option.
+	 *
+	 * @since	10.6.0
+	 * @param	array $setting_details Setting details.
+	 * @param	mixed $value           Setting value.
+	 */
+	private static function get_setting_option_label( $setting_details, $value ) {
+		if ( ! isset( $setting_details['options'] ) || ! is_array( $setting_details['options'] ) ) {
+			return false;
+		}
+
+		$option_key = (string) $value;
+
+		if ( array_key_exists( $option_key, $setting_details['options'] ) ) {
+			return wp_strip_all_tags( $setting_details['options'][ $option_key ] );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Shorten a text value for display.
+	 *
+	 * @since	10.6.0
+	 * @param	string $text       Text to shorten.
+	 * @param	int    $max_length Maximum text length.
+	 */
+	private static function truncate_setting_text( $text, $max_length = 36 ) {
+		$text = (string) $text;
+
+		if ( strlen( $text ) <= $max_length ) {
+			return $text;
+		}
+
+		return substr( $text, 0, $max_length - 1 ) . '...';
+	}
+
+	/**
+	 * Summarize a setting value for changelog storage.
+	 *
+	 * @since	10.6.0
+	 * @param	string $setting_id      Setting ID.
+	 * @param	mixed  $value           Setting value.
+	 * @param	array  $setting_details Setting details.
+	 * @param	bool   $masked          Whether this value should be masked.
+	 */
+	private static function summarize_setting_value( $setting_id, $value, $setting_details, $masked = false ) {
+		if ( $masked ) {
+			return __( 'Redacted', 'wp-recipe-maker' );
+		}
+
+		$value = self::prepare_setting_value_for_display( $setting_id, $value );
+		$type = isset( $setting_details['type'] ) ? $setting_details['type'] : '';
+
+		if ( 'toggle' === $type || is_bool( $value ) ) {
+			return $value ? __( 'On', 'wp-recipe-maker' ) : __( 'Off', 'wp-recipe-maker' );
+		}
+
+		if ( 'dropdownRecipe' === $type && is_array( $value ) ) {
+			$recipe_text = isset( $value['text'] ) ? sanitize_text_field( $value['text'] ) : '';
+
+			if ( $recipe_text ) {
+				return '"' . self::truncate_setting_text( $recipe_text ) . '"';
+			}
+
+			$recipe_id = isset( $value['id'] ) ? $value['id'] : '';
+			if ( $recipe_id ) {
+				return sprintf( __( 'Recipe #%s', 'wp-recipe-maker' ), sanitize_text_field( $recipe_id ) );
+			}
+
+			return __( 'Empty', 'wp-recipe-maker' );
+		}
+
+		if ( is_array( $value ) ) {
+			if ( ! $value ) {
+				return __( 'None', 'wp-recipe-maker' );
+			}
+
+			if ( isset( $setting_details['options'] ) && is_array( $setting_details['options'] ) ) {
+				$items = array();
+
+				foreach ( $value as $item ) {
+					$item_label = self::get_setting_option_label( $setting_details, $item );
+					$items[] = $item_label ? $item_label : self::truncate_setting_text( sanitize_text_field( (string) $item ), 20 );
+				}
+
+				if ( count( $items ) > 3 ) {
+					return implode( ', ', array_slice( $items, 0, 3 ) ) . sprintf( ' +%d more', count( $items ) - 3 );
+				}
+
+				return implode( ', ', $items );
+			}
+
+			return sprintf(
+				/* translators: %d: number of items. */
+				_n( '%d item', '%d items', count( $value ), 'wp-recipe-maker' ),
+				count( $value )
+			);
+		}
+
+		if ( is_object( $value ) ) {
+			$value = (array) $value;
+
+			if ( ! $value ) {
+				return __( 'Empty', 'wp-recipe-maker' );
+			}
+
+			return sprintf(
+				/* translators: %d: number of items. */
+				_n( '%d item', '%d items', count( $value ), 'wp-recipe-maker' ),
+				count( $value )
+			);
+		}
+
+		$option_label = self::get_setting_option_label( $setting_details, $value );
+		if ( $option_label ) {
+			return $option_label;
+		}
+
+		if ( null === $value ) {
+			return __( 'Empty', 'wp-recipe-maker' );
+		}
+
+		if ( in_array( $type, array( 'code', 'textarea', 'richTextarea' ), true ) ) {
+			$normalized = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( (string) $value ) ) );
+			return $normalized ? __( 'Content updated', 'wp-recipe-maker' ) : __( 'Empty', 'wp-recipe-maker' );
+		}
+
+		if ( is_string( $value ) ) {
+			$normalized = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $value ) ) );
+
+			if ( ! strlen( $normalized ) ) {
+				return __( 'Empty', 'wp-recipe-maker' );
+			}
+
+			return '"' . self::truncate_setting_text( $normalized ) . '"';
+		}
+
+		if ( is_scalar( $value ) ) {
+			return sanitize_text_field( (string) $value );
+		}
+
+		return __( 'Updated', 'wp-recipe-maker' );
 	}
 
 	/**

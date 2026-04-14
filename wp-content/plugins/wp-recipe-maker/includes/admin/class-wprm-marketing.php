@@ -134,7 +134,7 @@ class WPRM_Marketing {
 		echo ' left.</p>';
 
 		// CTA.
-		echo '<a href="' . esc_url( self::$campaign['url'] ) . '" target="_blank" class="button button-primary" style="font-size: 14px;">Learn more about the sale!</a>';
+		echo '<a href="' . esc_url( self::$campaign['url'] ) . '" target="_blank" class="button button-primary button-compact" style="font-size: 14px;">Learn more about the sale!</a>';
 
 		// Dismiss notice.
 		echo '<br/><br/><a href="' . esc_url( admin_url( 'admin.php?page=wprecipemaker&wprm_dismiss=menu_' . esc_attr( self::$campaign['id'] ) ) ) . '" style="font-size: 12px;">Not interested right now, remove this page from my menu...</a>';

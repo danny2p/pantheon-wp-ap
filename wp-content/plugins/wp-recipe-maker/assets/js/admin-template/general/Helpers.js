@@ -2,6 +2,16 @@ import Shortcodes from './shortcodes';
 
 const { shortcodeGroups, getShortcodeId } = Shortcodes;
 
+const colorPropertyToIconPropertyMap = {
+    icon_color: [ 'icon' ],
+    header_icon_color: [ 'header_icon' ],
+    link_icon_color: [ 'link_icon' ],
+    cook_mode_icon_color: [ 'cook_mode_icon' ],
+    products_icon_color: [ 'products_icon' ],
+    header_collapsible_icon_color: [ 'header_icon_collapsed', 'header_icon_expanded' ],
+    container_icon_color: [ 'container_icon_collapsed', 'container_icon_expanded' ],
+};
+
 export default {
     parseCSS(template) {
         // Handle case where template doesn't have style property yet (new blank templates)
@@ -161,5 +171,34 @@ export default {
         }
 
         return dependencyMet;
+    },
+    isKeywordColorIcon(icon) {
+        if ( ! icon || 'string' !== typeof icon ) {
+            return false;
+        }
+
+        return !! (
+            wprm_admin_template.icons.hasOwnProperty(icon)
+            && icon.toLowerCase().endsWith('-color')
+        );
+    },
+    shouldHideColorProperty(property, properties) {
+        if ( ! property || 'color' !== property.type || ! properties ) {
+            return false;
+        }
+
+        const linkedIconProperties = colorPropertyToIconPropertyMap[ property.id ];
+
+        if ( ! linkedIconProperties ) {
+            return false;
+        }
+
+        return linkedIconProperties.every((iconPropertyId) => {
+            if ( ! properties.hasOwnProperty(iconPropertyId) ) {
+                return false;
+            }
+
+            return this.isKeywordColorIcon(properties[iconPropertyId].value);
+        });
     },
 };

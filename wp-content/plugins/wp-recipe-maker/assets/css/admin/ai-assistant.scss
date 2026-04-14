@@ -1,0 +1,73 @@
+#adminmenu .toplevel_page_wprecipemaker .wp-submenu .wprm-admin-submenu-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#adminmenu .toplevel_page_wprecipemaker .wp-submenu .wprm-admin-submenu-icon-ai-assistant,
+.wprm-ai-assistant-icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: currentColor;
+    -webkit-mask: url('../../icons/admin/sparks.svg') center/contain no-repeat;
+    mask: url('../../icons/admin/sparks.svg') center/contain no-repeat;
+}
+
+.wprm-ai-assistant-page .wprm-ai-assistant-icon {
+    width: 28px;
+    height: 28px;
+    color: #2271b1;
+    flex: 0 0 28px;
+}
+
+.wprm-ai-assistant-page .wprm-ai-assistant-tool-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wprm-ai-assistant-page .wprm-ai-assistant-tool-button .wprm-ai-assistant-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    color: currentColor;
+}
+
+.wprm-ai-assistant-page .wprm-import-warning {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: #fef8ee;
+    border: 1px solid #f0c33c;
+    border-radius: 12px;
+    box-sizing: border-box;
+
+    > .dashicons {
+        color: #9d6e00;
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #6e4600;
+    }
+
+    p {
+        margin: 4px 0 0 0;
+        color: #6e4600;
+        font-size: 13px;
+        max-width: 680px;
+    }
+
+    a {
+        color: inherit;
+    }
+}

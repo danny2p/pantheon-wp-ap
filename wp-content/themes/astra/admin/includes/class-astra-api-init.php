@@ -221,6 +221,14 @@ class Astra_API_Init extends WP_REST_Controller {
 		// Save to user meta.
 		update_user_meta( $user_id, 'astra_learn_progress', $saved_progress );
 
+		/**
+		 * Fires after learn progress is saved.
+		 *
+		 * @param array $saved_progress Full progress data for the user.
+		 * @since 4.12.7
+		 */
+		do_action( 'astra_learn_progress_saved', $saved_progress );
+
 		return new WP_REST_Response(
 			array(
 				'success' => true,

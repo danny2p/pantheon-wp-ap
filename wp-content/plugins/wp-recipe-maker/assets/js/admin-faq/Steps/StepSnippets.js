@@ -88,7 +88,7 @@ export default class StepSnippets extends Component {
                 <div className="footer-buttons">
                     <button
                         type="button"
-                        className="button"
+                        className="button button-secondary button-compact"
                         id="prev-button"
                         onClick={() => {
                             this.props.jumpToStep(2);
@@ -96,7 +96,7 @@ export default class StepSnippets extends Component {
                     >{ __wprm( 'Previous' ) }</button>
                     <button
                         type="button"
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         id="skip-button"
                         onClick={() => {
                             this.props.jumpToStep(4);
@@ -104,7 +104,7 @@ export default class StepSnippets extends Component {
                     >{ __wprm( 'Do not enable snippets right now' ) }</button>
                     <button
                         type="button"
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         id="next-button"
                         onClick={() => {
                             if ( ! this.state.template ) {

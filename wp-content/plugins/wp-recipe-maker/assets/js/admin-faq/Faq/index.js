@@ -17,7 +17,7 @@ const Faq = () => {
             <p>
                 { __wprm( 'Join our email course for practical setup tips, feature walkthroughs, and proven ways to get more out of WP Recipe Maker.' ) }
             </p>
-            <a href={ `#${formAnchorId}` } className="button button-primary">
+            <a href={ `#${formAnchorId}` } className="button button-primary button-compact">
                 { __wprm( 'Sign up for the email course' ) }
             </a>
         </div>
@@ -46,14 +46,14 @@ const Faq = () => {
                 {
                     showFeatureExplorer
                     &&
-                    <a href={ wprm_faq.template_editor_feature_explorer_url } className="button button-primary">
+                    <a href={ wprm_faq.template_editor_feature_explorer_url } className="button button-primary button-compact">
                         { __wprm( 'Open Feature Explorer' ) }
                     </a>
                 }
-                <a href="https://demo.wprecipemaker.com" target="_blank" rel="noopener noreferrer" className="button">
+                <a href="https://demo.wprecipemaker.com" target="_blank" rel="noopener noreferrer" className="button button-secondary button-compact">
                     { __wprm( 'Visit the demo site' ) }
                 </a>
-                <a href="https://help.bootstrapped.ventures/docs/wp-recipe-maker/" target="_blank" rel="noopener noreferrer" className="button">
+                <a href="https://help.bootstrapped.ventures/docs/wp-recipe-maker/" target="_blank" rel="noopener noreferrer" className="button button-secondary button-compact">
                     { __wprm( 'Browse documentation' ) }
                 </a>
             </div>

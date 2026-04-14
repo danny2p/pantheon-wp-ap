@@ -13,6 +13,12 @@ window.WPRecipeMaker.modal = {
             this.close( this.currentOpenUid );
         }
 
+        const modalId = `wprm-popup-modal-${ uid }`;
+        if ( ! document.getElementById( modalId ) ) {
+            console.warn( `WPRM modal "${ modalId }" could not be found in the DOM.` );
+            return;
+        }
+
         // Prevent body scroll by fixing it in place
         this.savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
         
@@ -28,7 +34,7 @@ window.WPRecipeMaker.modal = {
         // Adjust body top position to account for html margin-top
         document.body.style.top = `-${this.savedScrollPosition - htmlMarginTopValue}px`;
         
-        MicroModal.show('wprm-popup-modal-' + uid, {
+        MicroModal.show( modalId, {
             onShow: modal => {
                 // Track this as the currently open modal
                 this.currentOpenUid = uid;

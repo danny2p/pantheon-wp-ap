@@ -1,5 +1,13 @@
 #wprm-admin-modal-fields-group-import {
     textarea {
+        min-height: 40px;
         height: 40px;
+    }
+
+    .wprm-admin-modal-recipe-import-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
     }
 }

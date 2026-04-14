@@ -76,7 +76,15 @@ class WPRM_Api_Settings {
 	public static function api_update_settings( $request ) {
 		$params = $request->get_params();
 		$settings = isset( $params['settings'] ) ? $params['settings'] : array();
-		return rest_ensure_response( WPRM_Settings::update_settings( $settings ) );
+		return rest_ensure_response(
+			WPRM_Settings::update_settings(
+				$settings,
+				array(
+					'log_change' => true,
+					'source' => 'settings_page',
+				)
+			)
+		);
 	}
 }
 

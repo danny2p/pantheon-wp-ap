@@ -335,6 +335,14 @@ class WPRM_Api_Manage_Taxonomies {
 							);
 						}
 						break;
+					case 'product':
+						if ( 'all' !== $value && in_array( $type, array( 'ingredient', 'equipment' ), true ) ) {
+							$args['meta_query'][] = array(
+								'key' => 'wprmp_product',
+								'compare' => 'yes' === $value ? 'EXISTS' : 'NOT EXISTS',
+							);
+						}
+						break;
 					case 'wpupg_custom_link':
 						if ( '' !== $value ) {
 							$args['meta_query'][] = array(

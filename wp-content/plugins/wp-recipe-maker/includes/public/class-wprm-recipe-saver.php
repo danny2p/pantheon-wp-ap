@@ -108,7 +108,11 @@ class WPRM_Recipe_Saver {
 
 			foreach ( $taxonomies as $taxonomy => $options ) {
 				$key = substr( $taxonomy, 5 ); // Get rid of wprm_.
-				wp_set_object_terms( $id, $recipe['tags'][ $key ], $taxonomy, false );
+				$terms = isset( $recipe['tags'][ $key ] ) ? $recipe['tags'][ $key ] : array();
+				$terms = is_array( $terms ) ? $terms : array( $terms );
+				$terms = array_map( array( 'WPRM_Recipe_Sanitizer', 'sanitize_tags' ), $terms );
+
+				wp_set_object_terms( $id, $terms, $taxonomy, false );
 			}
 
 			WPRM_Compatibility::clear_new_term_language_context();
@@ -277,6 +281,10 @@ class WPRM_Recipe_Saver {
 		WPRM_Recipe_Manager::invalidate_recipe( $id );
 		wp_update_post( $post );
 
+		// Keep translated taxonomy terms in sync with the recipe language.
+		$term_language = $language_is_set && isset( $recipe['language'] ) ? $recipe['language'] : WPRM_Compatibility::get_language_for( $id );
+		self::sync_recipe_term_languages( $id, $term_language );
+
 		if ( ! $ignore_log ) {
 			WPRM_Changelog::log( 'recipe_edited', $id );
 		}
@@ -286,6 +294,250 @@ class WPRM_Recipe_Saver {
 
 		// Remove cached Instacart data.
 		delete_post_meta( $id, 'wprm_instacart_combinations' );
+	}
+
+	/**
+	 * Sync recipe taxonomy terms to translated terms for a specific language.
+	 *
+	 * Non-destructive: when no translated term exists, the original term remains assigned.
+	 *
+	 * @since	10.4.0
+	 * @param	int          $recipe_id Recipe ID to sync terms for.
+	 * @param	false|string $language  Language code to sync to.
+	 */
+	public static function sync_recipe_term_languages( $recipe_id, $language = false ) {
+		$recipe_id = intval( $recipe_id );
+
+		if ( ! $recipe_id ) {
+			return;
+		}
+
+		if ( ! $language ) {
+			$language = WPRM_Compatibility::get_language_for( $recipe_id );
+		}
+
+		if ( ! $language ) {
+			return;
+		}
+
+		$taxonomies = WPRM_Taxonomies::get_taxonomies();
+
+		foreach ( array_keys( $taxonomies ) as $taxonomy ) {
+			if ( ! taxonomy_exists( $taxonomy ) ) {
+				continue;
+			}
+
+			$term_ids = self::get_assigned_term_ids_from_database( $recipe_id, $taxonomy );
+
+			if ( empty( $term_ids ) ) {
+				continue;
+			}
+
+			$current_term_ids = $term_ids;
+			$new_term_ids = array();
+			$translated_term_replacements = array();
+
+			foreach ( $term_ids as $term_id ) {
+				$term_id = intval( $term_id );
+				$translated_term_id = WPRM_Compatibility::get_translated_term_for_language( $term_id, $taxonomy, $language );
+
+				if ( $translated_term_id && $translated_term_id !== $term_id ) {
+					$new_term_ids[] = $translated_term_id;
+					$translated_term_replacements[ $term_id ] = $translated_term_id;
+				} else {
+					$new_term_ids[] = $term_id;
+				}
+			}
+
+			$new_term_ids = array_values( array_unique( $new_term_ids ) );
+			sort( $current_term_ids );
+			sort( $new_term_ids );
+
+			if ( $current_term_ids !== $new_term_ids && ! empty( $translated_term_replacements ) ) {
+				self::replace_translated_term_relationships( $recipe_id, $taxonomy, $translated_term_replacements );
+			}
+		}
+	}
+
+	/**
+	 * Get assigned term IDs directly from the database.
+	 *
+	 * @since	10.8.1
+	 * @param	int    $recipe_id Recipe ID.
+	 * @param	string $taxonomy  Taxonomy to inspect.
+	 */
+	private static function get_assigned_term_ids_from_database( $recipe_id, $taxonomy ) {
+		global $wpdb;
+
+		$query = $wpdb->prepare(
+			"SELECT DISTINCT tt.term_id
+			FROM {$wpdb->term_relationships} tr
+			INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+			WHERE tr.object_id = %d AND tt.taxonomy = %s
+			ORDER BY tt.term_id ASC",
+			$recipe_id,
+			$taxonomy
+		);
+
+		$term_ids = $wpdb->get_col( $query );
+
+		return is_array( $term_ids ) ? array_values( array_map( 'intval', $term_ids ) ) : array();
+	}
+
+	/**
+	 * Replace translated term relationships without clearing unrelated assignments.
+	 *
+	 * This uses direct relationship updates because multilingual plugins can hide
+	 * some term links from the standard replacement flow, which risks leaving old
+	 * translated terms behind or wiping untranslated fallback terms.
+	 *
+	 * @since	10.8.1
+	 * @param	int    $recipe_id    Recipe ID.
+	 * @param	string $taxonomy     Taxonomy to update.
+	 * @param	array  $replacements Map of source term IDs to translated term IDs.
+	 */
+	private static function replace_translated_term_relationships( $recipe_id, $taxonomy, $replacements ) {
+		global $wpdb;
+
+		if ( ! $recipe_id || ! $taxonomy || ! is_array( $replacements ) || empty( $replacements ) ) {
+			return;
+		}
+
+		$current_relationships = self::get_assigned_term_taxonomy_ids_from_database( $recipe_id, $taxonomy );
+		if ( empty( $current_relationships ) ) {
+			return;
+		}
+
+		$translated_term_ids = array_values( array_unique( array_map( 'intval', $replacements ) ) );
+		$translated_term_taxonomy_ids = self::get_term_taxonomy_ids_from_database( $translated_term_ids, $taxonomy );
+
+		$term_taxonomy_ids_to_remove = array();
+		$term_taxonomy_ids_to_add = array();
+
+		foreach ( $replacements as $source_term_id => $translated_term_id ) {
+			$source_term_id = intval( $source_term_id );
+			$translated_term_id = intval( $translated_term_id );
+
+			if ( ! isset( $current_relationships[ $source_term_id ] ) || ! isset( $translated_term_taxonomy_ids[ $translated_term_id ] ) ) {
+				continue;
+			}
+
+			$term_taxonomy_ids_to_remove[] = intval( $current_relationships[ $source_term_id ] );
+			$term_taxonomy_ids_to_add[] = intval( $translated_term_taxonomy_ids[ $translated_term_id ] );
+		}
+
+		$term_taxonomy_ids_to_remove = array_values( array_unique( array_filter( $term_taxonomy_ids_to_remove ) ) );
+		$term_taxonomy_ids_to_add = array_values( array_unique( array_filter( $term_taxonomy_ids_to_add ) ) );
+
+		if ( empty( $term_taxonomy_ids_to_remove ) && empty( $term_taxonomy_ids_to_add ) ) {
+			return;
+		}
+
+		if ( ! empty( $term_taxonomy_ids_to_remove ) ) {
+			$delete_placeholders = implode( ', ', array_fill( 0, count( $term_taxonomy_ids_to_remove ), '%d' ) );
+			$delete_arguments = array_merge(
+				array( $recipe_id ),
+				$term_taxonomy_ids_to_remove
+			);
+
+			$wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->term_relationships}
+					WHERE object_id = %d AND term_taxonomy_id IN ({$delete_placeholders})",
+					$delete_arguments
+				)
+			);
+		}
+
+		if ( ! empty( $term_taxonomy_ids_to_add ) ) {
+			foreach ( $term_taxonomy_ids_to_add as $term_taxonomy_id ) {
+				$wpdb->replace(
+					$wpdb->term_relationships,
+					array(
+						'object_id'        => $recipe_id,
+						'term_taxonomy_id' => $term_taxonomy_id,
+					),
+					array(
+						'%d',
+						'%d',
+					)
+				);
+			}
+		}
+
+		$affected_term_taxonomy_ids = array_values( array_unique( array_merge( $term_taxonomy_ids_to_remove, $term_taxonomy_ids_to_add ) ) );
+		if ( ! empty( $affected_term_taxonomy_ids ) ) {
+			wp_update_term_count( $affected_term_taxonomy_ids, $taxonomy );
+		}
+
+		clean_object_term_cache( $recipe_id, WPRM_POST_TYPE );
+	}
+
+	/**
+	 * Get assigned term taxonomy IDs directly from the database.
+	 *
+	 * @since	10.8.1
+	 * @param	int    $recipe_id Recipe ID.
+	 * @param	string $taxonomy  Taxonomy to inspect.
+	 */
+	private static function get_assigned_term_taxonomy_ids_from_database( $recipe_id, $taxonomy ) {
+		global $wpdb;
+
+		$query = $wpdb->prepare(
+			"SELECT DISTINCT tt.term_id, tt.term_taxonomy_id
+			FROM {$wpdb->term_relationships} tr
+			INNER JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+			WHERE tr.object_id = %d AND tt.taxonomy = %s",
+			$recipe_id,
+			$taxonomy
+		);
+
+		$rows = $wpdb->get_results( $query );
+		$relationships = array();
+
+		if ( is_array( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$relationships[ intval( $row->term_id ) ] = intval( $row->term_taxonomy_id );
+			}
+		}
+
+		return $relationships;
+	}
+
+	/**
+	 * Get term taxonomy IDs for specific term IDs directly from the database.
+	 *
+	 * @since	10.8.1
+	 * @param	array  $term_ids  Term IDs to look up.
+	 * @param	string $taxonomy  Taxonomy to inspect.
+	 */
+	private static function get_term_taxonomy_ids_from_database( $term_ids, $taxonomy ) {
+		global $wpdb;
+
+		$term_ids = array_values( array_unique( array_filter( array_map( 'intval', $term_ids ) ) ) );
+		if ( empty( $term_ids ) || ! $taxonomy ) {
+			return array();
+		}
+
+		$placeholders = implode( ', ', array_fill( 0, count( $term_ids ), '%d' ) );
+		$arguments = array_merge( array( $taxonomy ), $term_ids );
+		$query = $wpdb->prepare(
+			"SELECT term_id, term_taxonomy_id
+			FROM {$wpdb->term_taxonomy}
+			WHERE taxonomy = %s AND term_id IN ({$placeholders})",
+			$arguments
+		);
+
+		$rows = $wpdb->get_results( $query );
+		$term_taxonomy_ids = array();
+
+		if ( is_array( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$term_taxonomy_ids[ intval( $row->term_id ) ] = intval( $row->term_taxonomy_id );
+			}
+		}
+
+		return $term_taxonomy_ids;
 	}
 
 	/**
@@ -484,6 +736,7 @@ class WPRM_Recipe_Saver {
 				if ( 'public' !== WPRM_Settings::get( 'post_type_structure' ) ) {
 					if ( false !== $parent_language ) {
 						WPRM_Compatibility::set_language_for( $recipe_id, $parent_language );
+						self::sync_recipe_term_languages( $recipe_id, $parent_language );
 					}
 				}
 

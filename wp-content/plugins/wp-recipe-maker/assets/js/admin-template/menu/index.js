@@ -39,7 +39,7 @@ const Menu = (props) => {
                         <Fragment>
                             <button
                                 type="button"
-                                className="button button-primary"
+                                className="button button-primary button-compact"
                                 disabled={ ! props.changesMade }
                                 onClick={() => {
                                     if ( confirm( 'Are you sure you want to save your changes?' ) ) {
@@ -51,7 +51,7 @@ const Menu = (props) => {
                             >{ props.savingTemplate ? '...' : 'Save Changes' }</button>
                             <button
                                 type="button"
-                                className="button"
+                                className="button button-secondary button-compact"  
                                 onClick={() => {
                                     if ( ! props.changesMade || confirm( 'Are you sure you want to cancel your changes?' ) ) {
                                         props.onChangeEditing(false);
@@ -78,14 +78,14 @@ const Menu = (props) => {
                                 <div className="wprm-template-history-controls">
                                     <button
                                         type="button"
-                                        className="button"
+                                        className="button button-secondary button-compact"
                                         disabled={ ! props.canUndo }
                                         aria-label="Undo last template change"
                                         onClick={() => props.onUndo()}
                                     >{ props.undoAtMax ? 'Undo (max)' : `Undo (${ props.undoCount })` }</button>
                                     <button
                                         type="button"
-                                        className="button"
+                                        className="button button-secondary button-compact"
                                         disabled={ ! props.canRedo }
                                         aria-label="Redo template change"
                                         onClick={() => props.onRedo()}

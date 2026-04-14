@@ -303,14 +303,14 @@ export default class List extends Component {
                         null
                     }
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => { this.saveList( false ) } }
                         disabled={ ! this.changesMade() }
                     >
                         { __wprm( 'Save' ) }
                     </button>
                     <button
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         onClick={ () => {
                             if ( this.changesMade() ) {
                                 this.saveList( true );

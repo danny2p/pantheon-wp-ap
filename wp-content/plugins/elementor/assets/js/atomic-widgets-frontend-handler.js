@@ -9,19 +9,31 @@
 
 
 
+__webpack_require__(/*! core-js/modules/es.array.push.js */ "../node_modules/core-js/modules/es.array.push.js");
 __webpack_require__(/*! core-js/modules/esnext.iterator.constructor.js */ "../node_modules/core-js/modules/esnext.iterator.constructor.js");
 __webpack_require__(/*! core-js/modules/esnext.iterator.find.js */ "../node_modules/core-js/modules/esnext.iterator.find.js");
+__webpack_require__(/*! core-js/modules/esnext.iterator.for-each.js */ "../node_modules/core-js/modules/esnext.iterator.for-each.js");
 var _frontendHandlers = __webpack_require__(/*! @elementor/frontend-handlers */ "@elementor/frontend-handlers");
+var _alpinejs = __webpack_require__(/*! @elementor/alpinejs */ "@elementor/alpinejs");
 const LINK_ACTIONS_EDITOR_WHITELIST = ['off_canvas', 'lightbox'];
 const WHITELIST_FILTER = 'frontend/handlers/atomic-widgets/link-actions-whitelist';
 const ACTION_LINK_SELECTOR = '[data-action-link]';
 const REGISTRATION_SELECTOR = `${ACTION_LINK_SELECTOR}, :has(> ${ACTION_LINK_SELECTOR})`;
+const ATOMIC_FORM_SELECTOR = '[data-element_type="e-form"]';
+const ATOMIC_FORM_FIELD_SELECTOR = 'input[data-interaction-id], textarea[data-interaction-id]';
 (0, _frontendHandlers.registerBySelector)({
   id: 'atomic-link-action-handler',
   selector: REGISTRATION_SELECTOR,
   callback: ({
     element
   }) => handleLinkActions(element)
+});
+(0, _frontendHandlers.registerBySelector)({
+  id: 'atomic-form-submit-handler',
+  selector: ATOMIC_FORM_SELECTOR,
+  callback: ({
+    element
+  }) => handleAtomicFormSubmit(element)
 });
 function handleLinkActions(element) {
   const actionLinkElement = element.matches(ACTION_LINK_SELECTOR) ? element : element.querySelector(ACTION_LINK_SELECTOR);
@@ -44,6 +56,177 @@ function handleLinkActions(element) {
   };
   element.addEventListener('click', handler);
   return () => element.removeEventListener('click', handler);
+}
+function handleAtomicFormSubmit(element) {
+  const form = element;
+  if (!form || !_alpinejs.Alpine?.data) {
+    return;
+  }
+  const alpineId = getFormAlpineId(form);
+  _alpinejs.Alpine.data(alpineId, () => ({
+    async submit(event) {
+      if (isEditorContext()) {
+        return;
+      }
+      event.preventDefault();
+      if (form.dataset.atomicFormSubmitting) {
+        return;
+      }
+      form.dataset.atomicFormSubmitting = 'true';
+      const submitButtons = form.querySelectorAll('button[type="submit"], input[type="submit"]');
+      submitButtons.forEach(button => {
+        button.disabled = true;
+      });
+      const payload = buildAtomicFormPayload(form);
+      if (payload) {
+        try {
+          const response = await submitAtomicForm(payload);
+          const state = response?.success ? 'success' : 'error';
+          setFormState(element, state);
+          if (response?.success) {
+            form.reset();
+            form.addEventListener('input', () => {
+              setFormState(element, 'default');
+            }, {
+              once: true
+            });
+          }
+        } catch (error) {
+          setFormState(element, 'error');
+        } finally {
+          clearAtomicFormSubmittingState(form, submitButtons);
+        }
+      } else {
+        setFormState(element, 'error');
+        clearAtomicFormSubmittingState(form, submitButtons);
+      }
+    }
+  }));
+  return () => {
+    _alpinejs.Alpine.destroyTree(form);
+  };
+}
+function getFormAlpineId(form) {
+  return form.getAttribute('x-data');
+}
+function clearAtomicFormSubmittingState(form, submitButtons) {
+  delete form.dataset.atomicFormSubmitting;
+  submitButtons.forEach(button => {
+    button.disabled = false;
+  });
+}
+function buildAtomicFormPayload(form) {
+  const postId = getPostId();
+  const formId = form.dataset.id;
+  const formName = form.dataset.formName || '';
+  const formFields = getAtomicFormFields(form);
+  if (!postId || !formFields.length) {
+    return null;
+  }
+  return {
+    postId,
+    formId,
+    formName,
+    formFields
+  };
+}
+function getAtomicFormFields(form) {
+  const fields = [];
+  const inputs = form.querySelectorAll(ATOMIC_FORM_FIELD_SELECTOR);
+  inputs.forEach(input => {
+    const id = input.dataset.interactionId;
+    if (!id) {
+      return;
+    }
+    const label = getAtomicFormFieldLabel(input, form);
+    const type = getAtomicFormFieldType(input);
+    const value = getAtomicFormFieldValue(input, type);
+    fields.push({
+      id,
+      type,
+      label,
+      value
+    });
+  });
+  return fields;
+}
+function getAtomicFormFieldLabel(field, form) {
+  const ariaLabel = field.getAttribute('aria-label');
+  if (ariaLabel) {
+    return ariaLabel;
+  }
+  const fieldId = field.getAttribute('id');
+  if (fieldId) {
+    const labelElement = form.querySelector(`label[for="${fieldId}"]`);
+    const labelText = labelElement?.textContent?.trim();
+    if (labelText) {
+      return labelText;
+    }
+  }
+  const parentLabelText = field.closest('label')?.textContent?.trim();
+  if (parentLabelText) {
+    return parentLabelText;
+  }
+  const placeholder = field.getAttribute('placeholder');
+  return placeholder || '';
+}
+function getAtomicFormFieldValue(input, type) {
+  if ('checkbox' !== type) {
+    return input.value;
+  }
+  return input.checked ? input.value || 'on' : '';
+}
+function getAtomicFormFieldType(field) {
+  if (field.matches('textarea')) {
+    return 'textarea';
+  }
+  return field.getAttribute('type') || 'text';
+}
+async function submitAtomicForm(payload) {
+  const ajaxUrl = elementorFrontendConfig?.urls?.ajaxurl;
+  if (!ajaxUrl) {
+    return {
+      success: false
+    };
+  }
+  const formData = new FormData();
+  formData.append('action', 'elementor_pro_atomic_forms_send_form');
+  formData.append('_nonce', elementorFrontendConfig?.nonces?.atomicFormsSendForm);
+  formData.append('post_id', payload.postId);
+  formData.append('form_id', payload.formId);
+  formData.append('form_name', payload.formName);
+  payload.formFields.forEach((field, index) => {
+    formData.append(`form_fields[${index}][id]`, field.id);
+    formData.append(`form_fields[${index}][type]`, field.type);
+    formData.append(`form_fields[${index}][label]`, field.label);
+    if (Array.isArray(field.value)) {
+      field.value.forEach((value, valueIndex) => {
+        formData.append(`form_fields[${index}][value][${valueIndex}]`, value);
+      });
+    } else {
+      formData.append(`form_fields[${index}][value]`, field.value);
+    }
+  });
+  const response = await fetch(ajaxUrl, {
+    method: 'POST',
+    body: formData
+  });
+  if (!response.ok) {
+    return {
+      success: false
+    };
+  }
+  return response.json();
+}
+function setFormState(element, state) {
+  if (!state) {
+    return;
+  }
+  element.classList.remove('form-state-default', 'form-state-success', 'form-state-error');
+  element.classList.add(`form-state-${state}`);
+}
+function getPostId() {
+  return elementorFrontend?.config?.post?.id || null;
 }
 function shouldFireLinkActionHandler(url) {
   if (!isEditorContext()) {
@@ -165,6 +348,43 @@ module.exports = {
   // `Array.prototype.indexOf` method
   // https://tc39.es/ecma262/#sec-array.prototype.indexof
   indexOf: createMethod(false)
+};
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/internals/array-set-length.js":
+/*!*************************************************************!*\
+  !*** ../node_modules/core-js/internals/array-set-length.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "../node_modules/core-js/internals/descriptors.js");
+var isArray = __webpack_require__(/*! ../internals/is-array */ "../node_modules/core-js/internals/is-array.js");
+
+var $TypeError = TypeError;
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Safari < 13 does not throw an error in this case
+var SILENT_ON_NON_WRITABLE_LENGTH_SET = DESCRIPTORS && !function () {
+  // makes no sense without proper strict mode support
+  if (this !== undefined) return true;
+  try {
+    // eslint-disable-next-line es/no-object-defineproperty -- safe
+    Object.defineProperty([], 'length', { writable: false }).length = 1;
+  } catch (error) {
+    return error instanceof TypeError;
+  }
+}();
+
+module.exports = SILENT_ON_NON_WRITABLE_LENGTH_SET ? function (O, length) {
+  if (isArray(O) && !getOwnPropertyDescriptor(O, 'length').writable) {
+    throw new $TypeError('Cannot set read only .length');
+  } return O.length = length;
+} : function (O, length) {
+  return O.length = length;
 };
 
 
@@ -448,6 +668,24 @@ var EXISTS = isObject(document) && isObject(document.createElement);
 
 module.exports = function (it) {
   return EXISTS ? document.createElement(it) : {};
+};
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/internals/does-not-exceed-safe-integer.js":
+/*!*************************************************************************!*\
+  !*** ../node_modules/core-js/internals/does-not-exceed-safe-integer.js ***!
+  \*************************************************************************/
+/***/ ((module) => {
+
+
+var $TypeError = TypeError;
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
+
+module.exports = function (it) {
+  if (it > MAX_SAFE_INTEGER) throw $TypeError('Maximum allowed index exceeded');
+  return it;
 };
 
 
@@ -1097,6 +1335,25 @@ var ArrayPrototype = Array.prototype;
 // check on default Array iterator
 module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
+};
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/internals/is-array.js":
+/*!*****************************************************!*\
+  !*** ../node_modules/core-js/internals/is-array.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var classof = __webpack_require__(/*! ../internals/classof-raw */ "../node_modules/core-js/internals/classof-raw.js");
+
+// `IsArray` abstract operation
+// https://tc39.es/ecma262/#sec-isarray
+// eslint-disable-next-line es/no-array-isarray -- safe
+module.exports = Array.isArray || function isArray(argument) {
+  return classof(argument) === 'Array';
 };
 
 
@@ -2379,6 +2636,58 @@ module.exports = function (name) {
 
 /***/ }),
 
+/***/ "../node_modules/core-js/modules/es.array.push.js":
+/*!********************************************************!*\
+  !*** ../node_modules/core-js/modules/es.array.push.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var $ = __webpack_require__(/*! ../internals/export */ "../node_modules/core-js/internals/export.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "../node_modules/core-js/internals/to-object.js");
+var lengthOfArrayLike = __webpack_require__(/*! ../internals/length-of-array-like */ "../node_modules/core-js/internals/length-of-array-like.js");
+var setArrayLength = __webpack_require__(/*! ../internals/array-set-length */ "../node_modules/core-js/internals/array-set-length.js");
+var doesNotExceedSafeInteger = __webpack_require__(/*! ../internals/does-not-exceed-safe-integer */ "../node_modules/core-js/internals/does-not-exceed-safe-integer.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "../node_modules/core-js/internals/fails.js");
+
+var INCORRECT_TO_LENGTH = fails(function () {
+  return [].push.call({ length: 0x100000000 }, 1) !== 4294967297;
+});
+
+// V8 <= 121 and Safari <= 15.4; FF < 23 throws InternalError
+// https://bugs.chromium.org/p/v8/issues/detail?id=12681
+var properErrorOnNonWritableLength = function () {
+  try {
+    // eslint-disable-next-line es/no-object-defineproperty -- safe
+    Object.defineProperty([], 'length', { writable: false }).push();
+  } catch (error) {
+    return error instanceof TypeError;
+  }
+};
+
+var FORCED = INCORRECT_TO_LENGTH || !properErrorOnNonWritableLength();
+
+// `Array.prototype.push` method
+// https://tc39.es/ecma262/#sec-array.prototype.push
+$({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
+  // eslint-disable-next-line no-unused-vars -- required for `.length`
+  push: function push(item) {
+    var O = toObject(this);
+    var len = lengthOfArrayLike(O);
+    var argCount = arguments.length;
+    doesNotExceedSafeInteger(len + argCount);
+    for (var i = 0; i < argCount; i++) {
+      O[len] = arguments[i];
+      len++;
+    }
+    setArrayLength(O, len);
+    return len;
+  }
+});
+
+
+/***/ }),
+
 /***/ "../node_modules/core-js/modules/es.iterator.constructor.js":
 /*!******************************************************************!*\
   !*** ../node_modules/core-js/modules/es.iterator.constructor.js ***!
@@ -2496,6 +2805,48 @@ $({ target: 'Iterator', proto: true, real: true, forced: findWithoutClosingOnEar
 
 /***/ }),
 
+/***/ "../node_modules/core-js/modules/es.iterator.for-each.js":
+/*!***************************************************************!*\
+  !*** ../node_modules/core-js/modules/es.iterator.for-each.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+
+var $ = __webpack_require__(/*! ../internals/export */ "../node_modules/core-js/internals/export.js");
+var call = __webpack_require__(/*! ../internals/function-call */ "../node_modules/core-js/internals/function-call.js");
+var iterate = __webpack_require__(/*! ../internals/iterate */ "../node_modules/core-js/internals/iterate.js");
+var aCallable = __webpack_require__(/*! ../internals/a-callable */ "../node_modules/core-js/internals/a-callable.js");
+var anObject = __webpack_require__(/*! ../internals/an-object */ "../node_modules/core-js/internals/an-object.js");
+var getIteratorDirect = __webpack_require__(/*! ../internals/get-iterator-direct */ "../node_modules/core-js/internals/get-iterator-direct.js");
+var iteratorClose = __webpack_require__(/*! ../internals/iterator-close */ "../node_modules/core-js/internals/iterator-close.js");
+var iteratorHelperWithoutClosingOnEarlyError = __webpack_require__(/*! ../internals/iterator-helper-without-closing-on-early-error */ "../node_modules/core-js/internals/iterator-helper-without-closing-on-early-error.js");
+
+var forEachWithoutClosingOnEarlyError = iteratorHelperWithoutClosingOnEarlyError('forEach', TypeError);
+
+// `Iterator.prototype.forEach` method
+// https://tc39.es/ecma262/#sec-iterator.prototype.foreach
+$({ target: 'Iterator', proto: true, real: true, forced: forEachWithoutClosingOnEarlyError }, {
+  forEach: function forEach(fn) {
+    anObject(this);
+    try {
+      aCallable(fn);
+    } catch (error) {
+      iteratorClose(this, 'throw', error);
+    }
+
+    if (forEachWithoutClosingOnEarlyError) return call(forEachWithoutClosingOnEarlyError, this, fn);
+
+    var record = getIteratorDirect(this);
+    var counter = 0;
+    iterate(record, function (value) {
+      fn(value, counter++);
+    }, { IS_RECORD: true });
+  }
+});
+
+
+/***/ }),
+
 /***/ "../node_modules/core-js/modules/esnext.iterator.constructor.js":
 /*!**********************************************************************!*\
   !*** ../node_modules/core-js/modules/esnext.iterator.constructor.js ***!
@@ -2519,6 +2870,29 @@ __webpack_require__(/*! ../modules/es.iterator.constructor */ "../node_modules/c
 // TODO: Remove from `core-js@4`
 __webpack_require__(/*! ../modules/es.iterator.find */ "../node_modules/core-js/modules/es.iterator.find.js");
 
+
+/***/ }),
+
+/***/ "../node_modules/core-js/modules/esnext.iterator.for-each.js":
+/*!*******************************************************************!*\
+  !*** ../node_modules/core-js/modules/esnext.iterator.for-each.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+
+// TODO: Remove from `core-js@4`
+__webpack_require__(/*! ../modules/es.iterator.for-each */ "../node_modules/core-js/modules/es.iterator.for-each.js");
+
+
+/***/ }),
+
+/***/ "@elementor/alpinejs":
+/*!***************************************!*\
+  !*** external "elementorV2.alpinejs" ***!
+  \***************************************/
+/***/ ((module) => {
+
+module.exports = elementorV2.alpinejs;
 
 /***/ }),
 

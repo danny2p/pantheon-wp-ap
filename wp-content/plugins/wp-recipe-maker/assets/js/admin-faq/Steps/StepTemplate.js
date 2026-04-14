@@ -84,7 +84,7 @@ export default class StepTemplate extends Component {
                 <div className="footer-buttons">
                     <button
                         type="button"
-                        className="button"
+                        className="button button-secondary button-compact"
                         id="prev-button"
                         onClick={() => {
                             this.props.jumpToStep(1);
@@ -92,7 +92,7 @@ export default class StepTemplate extends Component {
                     >{ __wprm( 'Previous' ) }</button>
                     <button
                         type="button"
-                        className="button button-primary"
+                        className="button button-primary button-compact"
                         id="next-button"
                         onClick={() => {
                             if ( ! this.state.template ) {

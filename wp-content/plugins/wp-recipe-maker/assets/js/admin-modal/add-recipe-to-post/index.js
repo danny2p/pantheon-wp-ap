@@ -99,14 +99,14 @@ export default class AddRecipeToPost extends Component {
                             <h3>{__wprm('Add recipe to a new post')}</h3>
                             <div className="wprm-admin-modal-add-recipe-to-post-buttons">
                                 <button
-                                    className="button button-primary"
+                                    className="button button-primary button-compact"
                                     onClick={() => this.handleCreateNewPost(true)}
                                     disabled={this.state.creatingPost || this.state.addingToPost}
                                 >
                                     {this.state.creatingPost ? __wprm('Creating...') : __wprm('Create new post and edit')}
                                 </button>
                                 <button
-                                    className="button button-secondary"
+                                    className="button button-secondary button-compact"
                                     onClick={() => this.handleCreateNewPost(false)}
                                     disabled={this.state.creatingPost || this.state.addingToPost}
                                 >
@@ -125,7 +125,7 @@ export default class AddRecipeToPost extends Component {
                                     }}
                                 />
                                 <button
-                                    className="button button-secondary"
+                                    className="button button-secondary button-compact"
                                     onClick={this.handleAddToExistingPost}
                                     disabled={!this.state.selectedPost || this.state.addingToPost || this.state.creatingPost}
                                 >
@@ -137,7 +137,7 @@ export default class AddRecipeToPost extends Component {
                 </div>
                 <Footer savingChanges={this.state.creatingPost || this.state.addingToPost}>
                     <button
-                        className="button"
+                        className="button button-secondary button-compact"
                         onClick={this.handleDoNothing}
                         disabled={this.state.creatingPost || this.state.addingToPost}
                     >

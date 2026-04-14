@@ -146,10 +146,7 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 	public static function shortcode( $atts ) {
 		$atts = parent::get_attributes( $atts );
 
-		$link = esc_url_raw( $atts['link'] );
-		if ( ! $link ) {
-			return apply_filters( parent::get_hook(), '', $atts );
-		}
+		$link = $atts['link'];
 
 		// Get optional icon.
 		$icon = '';
@@ -173,6 +170,11 @@ class WPRM_SC_Link extends WPRM_Template_Shortcode {
 		if ( $recipe ) {
 			$link = $recipe->replace_placeholders( $link );
 			$text = $recipe->replace_placeholders( $text );
+		}
+
+		$link = esc_url_raw( $link );
+		if ( ! $link ) {
+			return apply_filters( parent::get_hook(), '', $atts );
 		}
 
 		// Output.

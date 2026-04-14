@@ -12,7 +12,7 @@ const StepWelcome = (props) => {
             </p>
             <div className="wprm-admin-onboarding-step-welcome-buttons">
                 <button
-                    className="button button-primary"
+                    className="button button-primary button-compact"
                     onClick={() => {
                         props.jumpToStep(1);
                     }}
