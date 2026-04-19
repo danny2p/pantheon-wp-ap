@@ -6863,6 +6863,12 @@ a.ast-upgrade-trigger:active {
 	margin: 0;
 }
 
+.ast-upgrade-list-items .ast-upgrade-list-items-subtitle {
+	font-size: 12px;
+	line-height: 16px;
+	margin: 8px 0 0;
+}
+
 .ast-brand-logo img{
 	width:100% !important;
 }

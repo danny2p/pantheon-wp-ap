@@ -1,5 +1,10 @@
 *** Astra Changelog ***
 
+TBD - version 4.13.0
+* New: Introduced MCP (Model Context Protocol) settings and Abilities API for AI-powered theme management. (https://wpastra.com/docs/astra-mcp/)
+* Improvement: Customizer performance overhaul — faster load times, smoother live preview, and fewer HTTP requests for a lighter, more responsive editing experience.
+* Improvement: Disabled Astra command palette search icon in admin bar for WordPress 7.0+ as it ships a built-in command palette.
+
 2026-04-08 - version 4.12.7
 * Fix: Astra global button styles not applying to Spectra v2 Infobox buttons in the Gutenberg editor.
 * Fix: Product Catalog Add to Cart action affecting Single Product Add to Cart behavior.
