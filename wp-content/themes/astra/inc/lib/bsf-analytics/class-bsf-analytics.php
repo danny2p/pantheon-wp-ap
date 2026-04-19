@@ -268,10 +268,10 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 				/* translators: %s product name */
 				$notice_string = sprintf(
 					__(
-						'Help shape the future of %1$s!<br><br>Become a contributor by sharing how you use %1$s — so we can build features that matter to you, fix issues faster, and make smarter decisions. We only collect <strong>non-sensitive</strong> information like your PHP version and which features you use.',
+						'<strong>Help shape the future of %1$s.</strong><br><br>Share how you use the plugin so we can build features that matter, fix issues faster, and make smarter decisions.',
 						'astra'
 					),
-					'<strong>' . esc_html( $data['product_name'] ) . '</strong>'
+					esc_html( $data['product_name'] )
 				);
 				
 				if ( is_multisite() ) {
@@ -280,7 +280,7 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 
 				$language_dir = is_rtl() ? 'rtl' : 'ltr';
 
-				Astra_Notices::add_notice(
+				BSF_Admin_Notices::add_notice(
 					array(
 						'id'                         => $key . '-optin-notice',
 						'type'                       => '',
@@ -309,7 +309,7 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 									)
 								)
 							),
-							__( 'Sure, count me in!', 'astra' ),
+							__( 'Happy to help!', 'astra' ),
 							esc_url(
 								add_query_arg(
 									array(
@@ -320,7 +320,7 @@ if ( ! class_exists( 'BSF_Analytics' ) ) {
 								)
 							),
 							MONTH_IN_SECONDS,
-							__( 'No, thanks', 'astra' )
+							__( 'Skip', 'astra' )
 						),
 						'show_if'                    => true,
 						'repeat-notice-after'        => false,

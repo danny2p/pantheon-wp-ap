@@ -1934,6 +1934,7 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 				'has_block_editor_support'             => Astra_Dynamic_CSS::is_block_editor_support_enabled(),
 				'updated_gb_outline_button_patterns'   => astra_button_default_padding_updated(),
 				'apply_content_bg_fullwidth_layouts'   => astra_get_option( 'apply-content-background-fullwidth-layouts', true ),
+				'is_woo_active'                        => class_exists( 'WooCommerce' ),
 				'astra_woo_btn_global_compatibility'   => is_callable( 'Astra_Dynamic_CSS::astra_woo_support_global_settings' ) ? Astra_Dynamic_CSS::astra_woo_support_global_settings() : false,
 				'v4_2_2_core_form_btns_styling'        => true === Astra_Dynamic_CSS::astra_core_form_btns_styling() ? ', #comments .submit, .search .search-submit' : '',
 				'isLifterLMS'                          => class_exists( 'LifterLMS' ),
@@ -2109,9 +2110,17 @@ if ( ! class_exists( 'Astra_Customizer' ) ) {
 }
 
 /**
- *  Kicking this off by calling 'get_instance()' method
+ * Kicking this off by calling 'get_instance()' method.
+ *
+ * All hooks registered in the constructor target admin, customizer, or AJAX contexts
+ * (customize_*, wp_ajax_*, astra_style_guide_site_icon). None fire on pure frontend
+ * requests, so skip instantiation there. Static utilities on the class (e.g.
+ * generate_logo_by_width(), is_astra_customizer(), logo_image_sizes()) remain
+ * available because they don't require the instance.
  */
-Astra_Customizer::get_instance();
+if ( is_admin() || is_customize_preview() ) {
+	Astra_Customizer::get_instance();
+}
 
 /**
  * Customizer save configs.

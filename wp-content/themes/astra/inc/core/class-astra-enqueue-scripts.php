@@ -767,13 +767,20 @@ if ( ! class_exists( 'Astra_Enqueue_Scripts' ) ) {
 		 * @return void
 		 */
 		public function gutenberg_assets() {
+			// Skip block editor assets in the customizer — none of the JS/CSS targets customizer DOM.
+			if ( is_customize_preview() ) {
+				return;
+			}
+
 			/* Directory and Extension */
 			$rtl = '';
 			if ( is_rtl() ) {
 				$rtl = '-rtl';
 			}
 
-			$js_uri = ASTRA_THEME_URI . 'inc/assets/js/block-editor-script.js';
+			$js_prefix = SCRIPT_DEBUG ? '' : 'minified/';
+			$js_suffix = SCRIPT_DEBUG ? '' : '.min';
+			$js_uri    = ASTRA_THEME_URI . 'inc/assets/js/' . $js_prefix . 'block-editor-script' . $js_suffix . '.js';
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			wp_enqueue_script( 'astra-block-editor-script', $js_uri, false, ASTRA_THEME_VERSION, 'all' );
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort

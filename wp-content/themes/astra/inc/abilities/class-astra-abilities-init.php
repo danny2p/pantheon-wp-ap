@@ -62,6 +62,11 @@ class Astra_Abilities_Init {
 
 		add_action( 'abilities_api_init', array( $this, 'register_abilities' ) );
 		add_action( 'wp_abilities_api_init', array( $this, 'register_abilities' ) );
+
+		// Register dedicated Astra MCP server when enabled and the MCP Adapter is active.
+		if ( Astra_API_Init::get_admin_settings_option( 'enable_mcp_server', false ) && function_exists( 'wp_register_ability' ) && class_exists( 'WP\MCP\Plugin' ) ) {
+			add_action( 'mcp_adapter_init', array( $this, 'register_mcp_server' ) );
+		}
 	}
 
 	/**
@@ -154,6 +159,10 @@ class Astra_Abilities_Init {
 			'customizer/header/class-astra-migrate-header-components',
 			'customizer/header/builder/class-astra-list-header-builder-settings',
 
+			// Transparent Header abilities.
+			'customizer/header/transparent/class-astra-get-transparent-header',
+			'customizer/header/transparent/class-astra-update-transparent-header',
+
 			// Footer Builder abilities.
 			'customizer/footer/class-astra-get-footer-builder',
 			'customizer/footer/class-astra-get-footer-builder-design',
@@ -191,6 +200,10 @@ class Astra_Abilities_Init {
 			'customizer/general/sidebar/class-astra-update-sidebar-style',
 			'customizer/general/sidebar/class-astra-update-sidebar-width',
 			'customizer/general/sidebar/class-astra-update-sticky-sidebar',
+
+			// Scroll to Top abilities.
+			'customizer/general/scroll-to-top/class-astra-get-scroll-to-top',
+			'customizer/general/scroll-to-top/class-astra-update-scroll-to-top',
 		);
 
 		foreach ( $ability_files as $file ) {
@@ -198,5 +211,45 @@ class Astra_Abilities_Init {
 		}
 
 		$this->registered = true;
+	}
+
+	/**
+	 * Register a dedicated Astra MCP server.
+	 *
+	 * Creates an MCP server endpoint at /wp-json/astra/v1/mcp
+	 * that only includes astra/ prefixed abilities.
+	 *
+	 * @param object $adapter The MCP adapter instance.
+	 * @return void
+	 * @since 4.13.0
+	 */
+	public function register_mcp_server( $adapter ) {
+		$abilities = wp_get_abilities();
+		$tools     = array();
+
+		foreach ( $abilities as $ability ) {
+			if ( 0 === strpos( $ability->get_name(), 'astra/' ) ) {
+				$tools[] = $ability->get_name();
+			}
+		}
+
+		$transport_class = class_exists( '\WP\MCP\Transport\HttpTransport' )
+			? \WP\MCP\Transport\HttpTransport::class
+			: \WP\MCP\Transport\Http\RestTransport::class;
+
+		$adapter->create_server(
+			'astra',
+			'astra/v1',
+			'mcp',
+			__( 'Astra MCP Server', 'astra' ),
+			__( 'Astra MCP Server for theme customization and design settings.', 'astra' ),
+			ASTRA_THEME_VERSION,
+			array( $transport_class ),
+			\WP\MCP\Infrastructure\ErrorHandling\ErrorLogMcpErrorHandler::class,
+			\WP\MCP\Infrastructure\Observability\NullMcpObservabilityHandler::class,
+			$tools,
+			array(),
+			array()
+		);
 	}
 }

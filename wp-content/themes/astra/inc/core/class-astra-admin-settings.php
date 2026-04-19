@@ -284,7 +284,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 					'show_if'                    => class_exists( 'Astra_Ext_White_Label_Markup' ) ? Astra_Ext_White_Label_Markup::show_branding() : true,
 				);
 
-				Astra_Notices::add_notice(
+				BSF_Admin_Notices::add_notice(
 					$astra_sites_notice_args
 				);
 			}
@@ -331,7 +331,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 					'display-with-other-notices' => false,
 				);
 
-				Astra_Notices::add_notice(
+				BSF_Admin_Notices::add_notice(
 					$astra_sites_notice_args
 				);
 			}
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 					'display-with-other-notices' => true,
 				);
 
-				Astra_Notices::add_notice( $notice_args );
+				BSF_Admin_Notices::add_notice( $notice_args );
 			}
 		}
 
@@ -460,7 +460,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 				'display-with-other-notices' => false,
 			);
 
-			Astra_Notices::add_notice( $notice_args );
+			BSF_Admin_Notices::add_notice( $notice_args );
 		}
 
 		/**

@@ -380,6 +380,11 @@ class Astra_Menu {
 			/** @psalm-suppress TypeDoesNotContainType */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			'plugin_configuring_text' => esc_html__( 'Configuring', 'astra' ),
 			'bsfUsageTrackingUrl'     => 'https://store.brainstormforce.com/usage-tracking/?utm_source=astra&utm_medium=dashboard&utm_campaign=usage_tracking',
+			'rest_url'                => rest_url(),
+			'current_username'        => wp_get_current_user()->user_login,
+			'application_passwords_url' => admin_url( 'user-edit.php?user_id=' . get_current_user_id() . '#application-passwords-section' ),
+			'is_mcp_adapter_active'   => class_exists( 'WP\MCP\Plugin' ),
+			'site_builder_url'        => esc_url( admin_url( 'admin.php?page=theme-builder-free' ) ),
 		);
 
 		$this->settings_app_scripts( apply_filters( 'astra_react_admin_localize', $localize ) );

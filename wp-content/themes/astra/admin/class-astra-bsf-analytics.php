@@ -633,9 +633,7 @@ class Astra_BSF_Analytics {
 		$selected_addons               = isset( $completion_data['selected_addons'] ) && is_array( $completion_data['selected_addons'] ) ? $completion_data['selected_addons'] : array();
 		$properties['selected_addons'] = array_map( 'sanitize_text_field', $selected_addons );
 
-		// Completion supersedes any previous skip — clear stale skip data from both pushed and pending.
-		self::clear_event( 'onboarding_skipped' );
-		self::retrack_event( 'onboarding_completed', ASTRA_THEME_VERSION, $properties );
+		self::$events->track( 'onboarding_completed', ASTRA_THEME_VERSION, $properties, true );
 	}
 
 	/**
@@ -658,11 +656,11 @@ class Astra_BSF_Analytics {
 		$properties['exit_screen'] = isset( $state_data['exit_screen'] ) ? sanitize_text_field( $state_data['exit_screen'] ) : '';
 
 		// Allow re-tracking so the funnel reflects the user's latest exit point.
-		self::retrack_event( 'onboarding_skipped', ASTRA_THEME_VERSION, $properties );
+		self::$events->track( 'onboarding_skipped', ASTRA_THEME_VERSION, $properties, true );
 	}
 
 	/**
-	 * Track admin settings changes for learn tab and local fonts toggles.
+	 * Track admin settings changes for learn tab, local fonts, and abilities toggles.
 	 *
 	 * Fired by `update_option_astra_admin_settings` hook. Re-trackable since
 	 * users can toggle these settings multiple times.
@@ -677,10 +675,11 @@ class Astra_BSF_Analytics {
 		$is_learn_tab_enabled  = ! empty( $new_value['show_learn_tab'] );
 
 		if ( $was_learn_tab_enabled !== $is_learn_tab_enabled ) {
-			self::retrack_event(
+			self::$events->track(
 				'learn_tab_toggled',
 				ASTRA_THEME_VERSION,
-				array( 'enabled' => $is_learn_tab_enabled ? 'yes' : 'no' )
+				array( 'enabled' => $is_learn_tab_enabled ? 'yes' : 'no' ),
+				true
 			);
 		}
 
@@ -690,13 +689,53 @@ class Astra_BSF_Analytics {
 		$is_preload_enabled       = ! empty( $new_value['preload_local_fonts'] );
 
 		if ( $was_local_fonts_enabled !== $is_local_fonts_enabled || $was_preload_enabled !== $is_preload_enabled ) {
-			self::retrack_event(
+			self::$events->track(
 				'local_fonts_toggled',
 				ASTRA_THEME_VERSION,
 				array(
 					'enabled'          => $is_local_fonts_enabled ? 'yes' : 'no',
 					'preload_enabled'  => $is_preload_enabled ? 'yes' : 'no',
-				)
+				),
+				true
+			);
+		}
+
+		// Abilities API master switch.
+		$was_abilities_enabled = ! empty( $old_value['enable_abilities'] );
+		$is_abilities_enabled  = ! empty( $new_value['enable_abilities'] );
+
+		if ( $was_abilities_enabled !== $is_abilities_enabled ) {
+			self::$events->track(
+				'abilities_toggled',
+				ASTRA_THEME_VERSION,
+				array( 'enabled' => $is_abilities_enabled ? 'yes' : 'no' ),
+				true
+			);
+		}
+
+		// Edit (write) abilities toggle.
+		$was_edit_abilities_enabled = ! empty( $old_value['enable_edit_abilities'] );
+		$is_edit_abilities_enabled  = ! empty( $new_value['enable_edit_abilities'] );
+
+		if ( $was_edit_abilities_enabled !== $is_edit_abilities_enabled ) {
+			self::$events->track(
+				'edit_abilities_toggled',
+				ASTRA_THEME_VERSION,
+				array( 'enabled' => $is_edit_abilities_enabled ? 'yes' : 'no' ),
+				true
+			);
+		}
+
+		// MCP server toggle.
+		$was_mcp_server_enabled = ! empty( $old_value['enable_mcp_server'] );
+		$is_mcp_server_enabled  = ! empty( $new_value['enable_mcp_server'] );
+
+		if ( $was_mcp_server_enabled !== $is_mcp_server_enabled ) {
+			self::$events->track(
+				'mcp_server_toggled',
+				ASTRA_THEME_VERSION,
+				array( 'enabled' => $is_mcp_server_enabled ? 'yes' : 'no' ),
+				true
 			);
 		}
 	}
@@ -751,54 +790,7 @@ class Astra_BSF_Analytics {
 
 		$event_value = $all_complete ? 'completed' : 'in_progress';
 
-		self::retrack_event( 'learn_chapter_progress', $event_value, $properties );
-	}
-
-	/**
-	 * Refresh a state-based event with the latest cumulative data.
-	 *
-	 * Removes the event from both pushed and pending queues, then tracks it
-	 * fresh. This ensures only one entry exists per event_name.
-	 *
-	 * @param string               $event_name  Event identifier.
-	 * @param string               $event_value Primary value (version, etc.).
-	 * @param array<string, mixed> $properties  Cumulative state as key-value pairs.
-	 * @since 4.12.7
-	 * @return void
-	 */
-	private static function retrack_event( $event_name, $event_value = '', $properties = array() ) {
-		// Clear from both pushed and pending queues.
-		self::clear_event( $event_name );
-
-		// Track fresh with updated state.
-		self::$events->track( $event_name, $event_value, $properties );
-	}
-
-	/**
-	 * Remove an event from both pushed and pending queues without re-tracking.
-	 *
-	 * Use this when an event should be invalidated (e.g., clearing a stale skip
-	 * when onboarding is completed).
-	 *
-	 * @param string $event_name Event identifier to clear.
-	 * @since 4.12.7
-	 * @return void
-	 */
-	private static function clear_event( $event_name ) {
-		self::$events->flush_pushed( array( $event_name ) );
-
-		$option_key = 'astra_usage_events_pending';
-		$pending    = get_option( $option_key, array() );
-		$pending    = is_array( $pending ) ? $pending : array();
-		$pending    = array_values(
-			array_filter(
-				$pending,
-				static function ( $event ) use ( $event_name ) {
-					return $event['event_name'] !== $event_name;
-				}
-			)
-		);
-		update_option( $option_key, $pending );
+		self::$events->track( 'learn_chapter_progress', $event_value, $properties, true );
 	}
 
 	/**
@@ -844,10 +836,11 @@ class Astra_BSF_Analytics {
 			return;
 		}
 
-		self::retrack_event(
+		self::$events->track(
 			'theme_updated',
 			ASTRA_THEME_VERSION,
-			array( 'from_version' => $previous_version )
+			array( 'from_version' => $previous_version ),
+			true
 		);
 	}
 

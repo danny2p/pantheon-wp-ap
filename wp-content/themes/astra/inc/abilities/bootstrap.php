@@ -24,6 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return void
  */
 function astra_abilities_init() {
+	// Check if abilities are enabled in the dashboard settings.
+	if ( ! Astra_API_Init::get_admin_settings_option( 'enable_abilities', false ) ) {
+		return;
+	}
+
 	$abilities_dir = ASTRA_THEME_DIR . 'inc/abilities/';
 
 	// Load base classes.
